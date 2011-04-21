@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<DeletedItem>
+  <id>1c6bce6d-573e-4140-8834-886b24489257</id>
+  <url>\Entity Model\Relationships\Contract.ContractItem.1c6bce6d573e41408834886b24489257.relationship.xml</url>
+  <caption>Contract.Items 1:M ContractItem.Contract</caption>
+  <extension>.relationship.xml</extension>
+  <modelId>a7bdd2d9-93b0-499d-9fd4-c3f7a5f94e28</modelId>
+  <dateDeleted>2007-12-31T18:01:28.4726412Z</dateDeleted>
+  <image>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALEwAACxMBAJqcGAAAATxJREFUOE9j/P//PwMxoGf16//ff/1n+Pz9P8PHbyD8D8j+x8AAMoAY3L3q1f9Fh/7/n7rz7/+W1T//F8379t8w9SxxmkEWgAxoWvLyf+nsF//TJj77H9b+9L9LxX3iDVi+7QzQHAT48evff1PPZHSTn/8PB5rsVfcYpBLstYCiDdxBJVtTYQbsOX7j/7KNh/+//vQXYQA2v0XWH2cFag4Irdz7zyas/svcNYf+//n7D6jxz/8bT379P3LjOzYXIPwW3njln2140zP3tDnWIJdMX7YbrAEdM+Dym0f6PDtiYgduALrffPNWisEMQI0B1HBiwOU3l4QJ//wL10XDohBbOIETIS6/eWbMcwur3g8MwIY/uNIA2AB8/nRNnsrnl7/aE1c4ETQAZjiuNEC0AbjCiWgDcIUT0QbgCycAcqfO4aJXkyUAAAAASUVORK5CYII=</image>
+  <restoreDataType>System.String, mscorlib</restoreDataType>
+  <restoreData>
+    <string>&lt;?xml version="1.0"?&gt;
+&lt;relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="1c6bce6d-573e-4140-8834-886b24489257" lastModifiedUtc="2007-12-31T16:56:54.8769336Z" cardinality="1:M" parentEntityId="3521b9b3-7701-4714-b257-197697f94f85" childEntityId="d0827b30-4d85-4547-b531-84ce0da302f6" cascadeOption="SaveUpdateDelete"&gt;
+  &lt;extendedMetaData /&gt;
+  &lt;ExtendedPropertiesCollection&gt;
+    &lt;extendee type="Sage.Platform.Orm.Entities.OrmRelationship" /&gt;
+  &lt;/ExtendedPropertiesCollection&gt;
+  &lt;parentProperty id="f905dd70-8a0f-4be1-bdd7-85444dc767fb" lastModifiedUtc="2007-12-31T16:56:19.0021632Z" name="Items" audited="false" displayCategory="Intermediate" isNullable="true" include="true"&gt;
+    &lt;ExtendedPropertiesCollection&gt;
+      &lt;extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" /&gt;
+    &lt;/ExtendedPropertiesCollection&gt;
+    &lt;SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7"&gt;
+      &lt;RelationshipDataType /&gt;
+    &lt;/SystemDataType&gt;
+  &lt;/parentProperty&gt;
+  &lt;childProperty id="fff0e365-66a1-41fd-a619-de7baeaff725" lastModifiedUtc="2007-12-31T16:56:54.8769336Z" name="Contract" audited="false" displayCategory="Intermediate" isNullable="false" include="true"&gt;
+    &lt;ExtendedPropertiesCollection&gt;
+      &lt;extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" /&gt;
+    &lt;/ExtendedPropertiesCollection&gt;
+    &lt;SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7"&gt;
+      &lt;RelationshipDataType /&gt;
+    &lt;/SystemDataType&gt;
+  &lt;/childProperty&gt;
+  &lt;column&gt;
+    &lt;OrmRelationshipColumn id="d9073d04-de45-4c0b-a2b9-dd88e20a2e4f" parentPropertyId="b43021d8-a0bc-47e6-a2df-57691b6c29b7" childPropertyId="3697021f-9d9b-4bb2-9584-d32fece284ba" ordinal="0" /&gt;
+  &lt;/column&gt;
+&lt;/relationship&gt;</string>
+  </restoreData>
+</DeletedItem>

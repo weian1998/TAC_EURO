@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="fa0f3704-7684-4c72-a467-0df12677b835" lastModifiedUtc="2010-02-18T17:31:24.842455Z" name="GetOwnerSecurityProfile" returnType="IOwnerSecurityProfile" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="1b4bc4fe-1030-44c0-997e-0e7927a553d9" paramName="child" sequence="0" paramType="IOwner" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="e5acad7d-fcd2-42c4-990c-5b9bc06b6116" lastModifiedUtc="2010-02-18T17:31:07.413455Z" targetType="Sage.SalesLogix.Owner.Rules, Sage.SalesLogix.BusinessRules" targetMethod="GetOwnerSecurityProfile" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

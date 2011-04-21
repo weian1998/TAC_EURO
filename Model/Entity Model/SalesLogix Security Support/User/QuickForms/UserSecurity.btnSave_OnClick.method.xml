@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="a1e85ba8-2f80-4024-9b18-78fffcb13de7" lastModifiedUtc="2010-04-27T21:53:26.3069701Z" name="btnSave_OnClick" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="UserSecurity">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="1029e6da-be3a-4993-89e8-154e3726c1ac" paramName="form" sequence="0" paramType="IUserSecurity" />
+    <OrmEntityMethodParam id="e1504567-64f7-424c-a294-5cf08e41c56f" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="a83c55fd-772d-40f0-8a1a-4bce2ae0b6c0" lastModifiedUtc="2010-04-27T21:54:56.957155Z" targetType="Sage.BusinessRules.CodeSnippets.UserSecurityEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="btnSave_OnClickStep" active="true" codeSnippetId="27e39f3f-0c3c-41d3-9389-edc89cdd4d8c">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

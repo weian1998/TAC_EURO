@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="46844862-9fbc-4e8c-a623-b4794f2d62b3" lastModifiedUtc="2010-04-23T21:43:16.169883Z" name="AddMemberWithSecurityProfile" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="9909b926-0c81-4d3b-9c7b-76126a5741c7" paramName="member" sequence="0" paramType="IOwner" />
+    <OrmEntityMethodParam id="d513f741-66a7-4f88-9eec-cb4bbcc2542a" paramName="securityProfile" sequence="0" paramType="IOwnerSecurityProfile" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="88e7d298-6393-4271-b0f9-597db6063755" lastModifiedUtc="2010-04-23T21:40:29.0963269Z" targetType="Sage.SalesLogix.Department.Rules, Sage.SalesLogix.BusinessRules" targetMethod="AddMemberWithSecurityProfile" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

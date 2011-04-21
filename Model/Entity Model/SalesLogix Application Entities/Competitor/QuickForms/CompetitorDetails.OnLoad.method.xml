@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="fec2d427-f1cd-4018-96b7-c0529fb3add9" lastModifiedUtc="2010-01-21T21:34:33.1184932Z" name="OnLoad" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="CompetitorDetails">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="4a890d89-d37e-4193-9bea-3ac77c8d9bc8" paramName="form" sequence="0" paramType="ICompetitorDetails" />
+    <OrmEntityMethodParam id="9344f15a-dec6-44bd-8aa5-08c1bc2bcab8" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="0a3e6e28-f25c-488e-b0a7-40b88ca455a4" lastModifiedUtc="2010-05-25T20:21:59.0875246Z" targetType="Sage.BusinessRules.CodeSnippets.CompetitorDetailsEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="OnLoadCompetitorForm" active="true" codeSnippetId="9587739e-4f75-475b-89c3-9b0a3e1c3454">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

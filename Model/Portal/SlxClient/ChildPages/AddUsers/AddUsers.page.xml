@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PortalPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="37c5499b-6c3e-44a0-b0fc-677ffa4c4c0a">
+  <PageAlias>AddUsers</PageAlias>
+  <SmallImage>[Localization!Global_Images:users_16x16_new]</SmallImage>
+  <LargeImage>[Localization!Global_Images:users_24x24_new]</LargeImage>
+  <TemplateUrl>Masters\base.master</TemplateUrl>
+  <InheritTemplate>false</InheritTemplate>
+  <InheritsFrom>Sage.Platform.WebPortal.WebPortalPage, Sage.Platform.WebPortal</InheritsFrom>
+  <Properties />
+  <TemplateProperties>
+    <Property Name="MainContentWorkspace_IncludeCollapseButton" TypeConverter="">False</Property>
+    <Property Name="IncludeTaskPane" TypeConverter="">False</Property>
+  </TemplateProperties>
+  <IsDefaultPage>false</IsDefaultPage>
+  <ExcludedGlobalModules />
+  <AppliedSecurity>Administration/View</AppliedSecurity>
+</PortalPage>

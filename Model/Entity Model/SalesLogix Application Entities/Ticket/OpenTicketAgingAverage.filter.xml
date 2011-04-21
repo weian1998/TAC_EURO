@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmAnalyticsDateDiffMetricFilter" id="690ab49c-b7db-4379-a36a-40e2f9d93881" lastModifiedUtc="2010-05-11T21:44:40.2700734Z" filterName="OpenTicketAgingAverage" analyticsAvailable="true" aggregation="AVG" fromPropertyName="CreateDate" toPropertyName=":today">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmAnalyticsDateDiffMetricFilter" />
+  </ExtendedPropertiesCollection>
+</entityFilter>

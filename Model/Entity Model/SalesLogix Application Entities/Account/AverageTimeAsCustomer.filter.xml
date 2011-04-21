@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmAnalyticsDateDiffMetricFilter" id="c2ce1f4b-a170-4124-850f-3c981ba0d224" lastModifiedUtc="2010-04-15T23:18:34.6491761Z" filterName="AverageTimeAsCustomer" analyticsAvailable="true" aggregation="AVG" fromPropertyName="CreateDate" toPropertyName=":today">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmAnalyticsDateDiffMetricFilter" />
+  </ExtendedPropertiesCollection>
+</entityFilter>

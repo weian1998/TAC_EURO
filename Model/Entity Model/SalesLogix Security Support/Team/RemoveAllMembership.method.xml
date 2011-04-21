@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="2c46e9ee-624c-42cd-be6f-ca752131ce1c" lastModifiedUtc="2010-03-15T21:16:18.3811576Z" name="RemoveAllMembership" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="14cbfd37-3137-4606-a765-4a45147e7c5e" lastModifiedUtc="2010-03-15T21:16:09.0021576Z" targetType="Sage.SalesLogix.Team.Rules, Sage.SalesLogix.BusinessRules" targetMethod="RemoveAllMembership" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

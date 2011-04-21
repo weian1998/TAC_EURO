@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="4a59a5f8-435b-4f33-bed3-84796113c81c" lastModifiedUtc="2010-04-13T22:46:44.9401388Z" name="dgUserAccessToOthersCal_OnRowSelected" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="UserAccessToOthersCal">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="ca36491e-2051-4c37-b1cc-b1e4b7380cce" paramName="form" sequence="0" paramType="IUserAccessToOthersCal" />
+    <OrmEntityMethodParam id="4bc61609-2243-4426-9812-e133a48a6683" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="322c0d54-9d2e-47f7-b5bd-3f073548668f" lastModifiedUtc="2010-04-13T23:48:26.1688369Z" targetType="Sage.BusinessRules.CodeSnippets.UserAccessToOthersCalEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="dgUserAccessToOthersCal_OnRowSelectedStep" active="true" codeSnippetId="2b1886e6-82ac-4356-b1a2-5b8561b11da7">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

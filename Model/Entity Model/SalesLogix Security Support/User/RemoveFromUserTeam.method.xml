@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="f31dab18-93ea-4449-bbb3-833607f8f0e9" lastModifiedUtc="2010-02-26T18:03:35.5783363Z" name="RemoveFromUserTeam" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="634a6a0a-1a9b-44fb-9a61-f4ed247f5028" paramName="userTeam" sequence="0" paramType="IOwnerJoin" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="dcc43ac8-eba6-4d3f-86c7-a4873201f4d2" lastModifiedUtc="2010-02-26T18:03:11.5593363Z" targetType="Sage.SalesLogix.User.Rules, Sage.SalesLogix.BusinessRules" targetMethod="RemoveFromUserTeam" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

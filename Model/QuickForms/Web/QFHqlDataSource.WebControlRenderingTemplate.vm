@@ -1,0 +1,54 @@
+private Sage.Platform.WebPortal.Binding.WebHqlListBindingSource _${qfcontrol.ControlId};
+public Sage.Platform.WebPortal.Binding.WebHqlListBindingSource ${qfcontrol.ControlId}
+{
+    get
+    {
+        if (_${qfcontrol.ControlId} == null)
+        {
+            _${qfcontrol.ControlId} = new Sage.Platform.WebPortal.Binding.WebHqlListBindingSource();
+#if($qfcontrol.Distinct)
+            _${qfcontrol.ControlId}.Distinct = true;
+#end
+            var selectFieldList = new System.Collections.Generic.List<Sage.Platform.WebPortal.Binding.HqlSelectField>();
+#foreach($column in $qfcontrol.Columns)
+            selectFieldList.Add(new Sage.Platform.WebPortal.Binding.HqlSelectField("$column.DataField", "$column.Alias"));
+#end
+            _${qfcontrol.ControlId}.Select = selectFieldList;
+            var parameterList = new System.Collections.Generic.List<Sage.Platform.WebPortal.Binding.HqlParameter>();
+#foreach($parameter in $qfcontrol.Parameters)
+            parameterList.Add(new Sage.Platform.WebPortal.Binding.HqlParameter("$parameter.Name", "$parameter.Expression"));
+#end
+            _${qfcontrol.ControlId}.Parameters = parameterList;
+            _${qfcontrol.ControlId}.From = "${qfcontrol.From}";
+#if($qfcontrol.Where != "")
+            _${qfcontrol.ControlId}.Where = "${qfcontrol.Where}";
+#end
+#if($qfcontrol.OrderBy != "")
+            _${qfcontrol.ControlId}.OrderBy = "${qfcontrol.OrderBy}";
+#end
+        }
+        return _${qfcontrol.ControlId};
+    }
+}
+
+void ${qfcontrol.ControlId}_OnCurrentEntitySet(object sender, EventArgs e)
+{
+    if (Visible)
+    {
+        if (BindingSource.Current != null)
+        {
+            ${qfcontrol.ControlId}.SourceObject = BindingSource.Current;
+        }
+        else
+        {
+            var entityContextService = PageWorkItem.Services.Get<Sage.Platform.Application.IEntityContextService>();
+            if (entityContextService != null)
+            {
+                ${qfcontrol.ControlId}.SourceObject = entityContextService;
+            }
+        }
+		$generator.addFormLoadCode(" ${qfcontrol.GetAssociatedControlId()}.DataBind(); ")
+		$generator.addFormLoadCode(" RegisterBindingsWithClient(${qfcontrol.ControlId}); ")
+        _${qfcontrol.ControlId}.BoundGrid = ${qfcontrol.GetAssociatedControlId()};
+    }
+}

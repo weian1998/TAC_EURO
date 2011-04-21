@@ -1,0 +1,574 @@
+.list-item-selected
+{
+    background-color: #D5EFFA;
+}
+
+.list-item-selected .list-item-selector
+{
+    background-image: url(../images/icons/OK_24.png) !important;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/* defect view */
+.defect-text-row
+{
+    position: relative;
+    min-height: inherit;
+    padding: 1em;
+}
+
+.defect-text-more
+{
+    visibility: hidden;
+    border-style: none solid solid solid;
+    border-color: #024731;
+    border-width: 2px 0 0 2px;
+    background: #024731;
+    z-index: 1;
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    line-height: 1.5em;
+    height: 1.5em;
+    color: white;
+    display: inline-block;
+    padding: 0 8px 0 8px;
+    text-align: center;
+    -moz-border-radius-topleft: 8px;
+    -moz-border-radius-bottomright: 8px;
+    -webkit-border-top-left-radius: 8px;
+    -webkit-border-bottom-right-radius: 8px;
+}
+
+.defect-text-wrap
+{
+    overflow: hidden;
+    max-height: 3.5em;
+}
+
+.defect-text-more a[target="_related"]
+{
+    color: white;
+    display:block;
+    text-decoration:none;
+    background:url('') !important;
+}
+
+/* login view */
+#login
+{
+    padding: 24px 12px;
+}
+
+#login .panel-content
+{
+    background-color: transparent;
+    border-bottom: none 0px black;
+}
+
+#login .button
+{
+    margin: 12px 0 12px 0;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+    font-size: .9em;
+}
+
+#login h2
+{
+    display: none;
+}
+
+#login fieldset
+{
+    padding: 0;    
+    background: #fff;
+    
+    border-width: 1px;
+    border-color: #b3b3b3;
+    border-style: solid;
+
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px; 
+
+    background-clip: padding-box;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding-box;
+}
+
+/* note view */
+#note_related .list-content > li
+{
+    padding-left: 8px;
+}
+
+.note-text
+{
+    height: 4.5em;
+    overflow:hidden;
+    padding-left: 110px;
+    padding-right: 34px;
+}
+
+.note-text-row
+{
+    max-height:4em;
+    overflow:hidden;
+}
+
+.note-text-wrap
+{
+    font-size:0.8em;
+    font-weight:normal;
+    line-height:1.25em;
+    margin-top:0;
+}
+
+.note-text-more
+{
+    visibility: hidden;
+    height: 24px;
+    width: 24px;
+    background-image: url(../images/icons/Note_More_24x24.png) !important;
+    background-repeat: no-repeat;
+    background-position: center center;
+    z-index: 1;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    display: inline-block;
+}
+
+/* context dialog */
+#context_dialog .list-content
+{
+    background-color: transparent;
+}
+
+#context_dialog .list-content
+{
+    padding-left: 0;
+}
+
+#context_dialog .list-content > li
+{
+    font-size: 20px;
+    font-weight: bold;
+    list-style: none outside none;
+    margin: 0;
+    padding: 8px 0;
+    position: relative;
+    border-bottom: none 0 black;
+}
+
+#context_dialog .list-content > li > .button
+{
+    position: static;
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    line-height: 40px;
+    height: auto;
+    padding: 0 3px;
+}
+
+#configure > .list-content > li > .resource
+{
+    display: block;
+    margin: -8px 0 -8px -10px;
+    padding: 8px 32px 8px 36px;
+}
+
+#configure > .list-content > li > h3 > [data-action="moveUp"],
+#configure > .list-content > li > h3 > [data-action="moveDown"]
+{
+    float: right;
+    display: block;
+    width: 48px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
+}
+
+#configure > .list-content > li:first-child > h3 > [data-action="moveUp"],
+#configure > .list-content > li:last-child > h3 > [data-action="moveDown"] {
+    visibility: hidden;
+}
+
+#configure > .list-content > li > h3 > [data-action="moveUp"]
+{
+    background-image: url(../images/icons/Sort_Down_24.png);
+}
+
+#configure > .list-content > li > h3 > [data-action="moveDown"]
+{
+    background-image: url(../images/icons/Sort_Up_24.png);
+}
+
+#configure > .list-content > li
+{
+    color: #aaa;
+}
+
+#configure > .list-content > li > h3 > .icon
+{
+    opacity: 0.5;
+}
+
+#configure > .list-content > li.list-item-selected
+{
+    color: #000;
+    background: none;
+}
+
+#configure > .list-content > li.list-item-selected > h3 > .icon
+{
+    opacity: 1.0;
+}
+
+#configure > .list-content > li.list-item-selected .list-item-selector
+{
+    background: url(../images/icons/OK_24.png) !important;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#note_edit .row label,
+#note_detail .row label
+{
+    display: none
+}
+
+#text_edit textarea,
+#note_edit textarea
+{
+    height: 200px;
+    padding-left: 10px !important;  
+}
+
+#note_detail .row span {
+    padding: 0;
+}
+
+#help a > div
+{    
+    line-height: 24px;
+    margin-left: 32px;
+    vertical-align: middle;
+}
+
+#activity_edit div[data-field="Alarm"]
+{
+    border-bottom: none 0px black;
+}
+
+.note-text-wrap .p-username
+{
+    font-style:italic;
+}
+
+.note-text-wrap .p-time,
+.note-text-wrap .p-meridiem
+{
+    font-weight:bold;
+}
+
+#ticket_list > .list-content > li > h3
+{
+    font-size: 0.75em;
+    font-weight:bold;
+}
+
+#ticket_list > .list-content > li > h3 > .p-ticket-subject
+{
+    font-weight: normal;
+}
+
+.p-meridiem
+{
+    font-size: 0.75em;
+}
+
+li[data-activity-type] .list-item-selector,
+li[data-opportunity-status] .list-item-selector,
+li[data-ticket-status] .list-item-selector
+{
+    visibility: visible;
+}
+
+li[data-activity-type="atToDo"] .list-item-selector
+{
+    background: url(../images/icons/Schedule_ToDo_24x24.png);
+}
+
+li[data-activity-type="atPhoneCall"] .list-item-selector
+{
+    background: url(../images/icons/Schedule_Call_24x24.png);
+}
+
+li[data-activity-type="atAppointment"] .list-item-selector
+{
+    background: url(../images/icons/Schedule_Meeting_24x24.png);
+}
+
+li[data-activity-type="atLiterature"] .list-item-selector
+{
+    background: url(../images/icons/Schedule_Literature_Request_24x24.gif);
+}
+
+li[data-activity-type="atPersonal"] .list-item-selector
+{
+    background: url(../images/icons/Personal_24x24.png);
+}
+
+li[data-activity-type="atEMail"] .list-item-selector
+{
+    background: url(../images/icons/letters_24.png);
+}
+
+li[data-activity-type="atQuestion"] .list-item-selector
+{
+    background: url(../images/icons/help_24.png);
+}
+
+li[data-opportunity-status] .list-item-selector
+{
+    background: url(../images/icons/opportunity_24.png);
+}
+
+li[data-opportunity-status="Closed - Won"] .list-item-selector
+{
+    background: url(../images/icons/Opportunity_Won_24.png);
+}
+
+li[data-opportunity-status="Closed - Lost"] .list-item-selector
+{
+    background: url(../images/icons/Opportunity_Lost_24.png);
+}
+
+.row-edit[data-field-type="lookup"] .button
+{
+    background-image: url(../images/icons/srch_24.png), -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		color-stop(0, #e6e6e6),
+		color-stop(1, #cccccc)
+	);
+	background-image: url(../images/icons/srch_24.png), -moz-linear-gradient(top, #e6e6e6, #cccccc);
+    background-repeat: no-repeat, repeat;
+    background-position: center;
+}
+
+.row-edit[data-field-type="lookup"] .button:active
+{
+    background-image: url(../images/icons/srch_24.png), -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, #e6e6e6),
+		color-stop(1, #cccccc)
+	);
+	background-image: url(../images/icons/srch_24.png), -moz-linear-gradient(bottom, #e6e6e6, #cccccc);
+    background-repeat: no-repeat, repeat;
+    background-position: center;
+}
+
+.row-edit[data-field-type="lookup"] .button span
+{
+    visibility: hidden;
+}
+
+.row-edit[data-field-type="date"] .button
+{
+    background-image: url(../images/icons/Calendar_24x24.png), -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		color-stop(0, #e6e6e6),
+		color-stop(1, #cccccc)
+	);
+	background-image: url(../images/icons/Calendar_24x24.png), -moz-linear-gradient(top, #e6e6e6, #cccccc);
+    background-repeat: no-repeat, repeat;
+    background-position: center;
+}
+
+.row-edit[data-field-type="date"] .button:active
+{
+    background-image: url(../images/icons/Calendar_24x24.png), -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, #e6e6e6),
+		color-stop(1, #cccccc)
+	);
+	background-image: url(../images/icons/Calendar_24x24.png), -moz-linear-gradient(bottom, #e6e6e6, #cccccc);
+    background-repeat: no-repeat, repeat;
+    background-position: center;
+}
+
+.row-edit[data-field-type="date"] .button span
+{
+    visibility: hidden;
+}
+
+.row-edit[data-field-type="name"] .button,
+.row-edit[data-field-type="address"] .button,
+.row-edit[data-field-type="note"] .button
+{
+    background-image: url(../images/icons/edit_24.png), -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		color-stop(0, #e6e6e6),
+		color-stop(1, #cccccc)
+	);
+	background-image: url(../images/icons/edit_24.png), -moz-linear-gradient(top, #e6e6e6, #cccccc);
+    background-repeat: no-repeat, repeat;
+    background-position: center;
+}
+
+.row-edit[data-field-type="name"] .button:active,
+.row-edit[data-field-type="address"] .button:active,
+.row-edit[data-field-type="note"] .button:active
+{
+    background-image: url(../images/icons/edit_24.png), -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, #e6e6e6),
+		color-stop(1, #cccccc)
+	);
+	background-image: url(../images/icons/edit_24.png), -moz-linear-gradient(bottom, #e6e6e6, #cccccc);
+    background-repeat: no-repeat, repeat;
+    background-position: center;
+}
+
+.row-edit[data-field-type="name"] .button span,
+.row-edit[data-field-type="address"] .button span,
+.row-edit[data-field-type="note"] .button span
+{
+    visibility: hidden;
+}
+
+.calendar-prev-month > a
+{
+    background-image: url(../images/icons/Browse_Previous_24.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    display: block;
+    height: 30px;
+}
+
+.calendar-prev-month > a > span
+{
+    display: none;
+}
+
+.calendar-next-month > a
+{
+    background-image: url(../images/icons/Browse_Next_24.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+    display: block;
+    height: 30px;
+}
+
+.calendar-next-month > a > span
+{
+    display: none;
+}
+
+.collapsed-indicator
+{
+    background-color: transparent;
+    background-image: url(../images/icons/Hide_Details_active_24.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    border: none;
+}
+
+.collapsed > .collapsed-indicator
+{
+    background-image: url(../images/icons/Show_Details_active_24.png);
+}
+
+.toolButton[data-tool="back"] > span { background-image: url(../images/icons/Back_24.png); }
+.toolButton[data-tool="home"] > span { background-image: url(../images/icons/home_24.png); }
+.toolButton[data-tool="edit"] > span { background-image: url(../images/icons/edit_24.png); }
+.toolButton[data-tool="new"] > span { background-image: url(../images/icons/add_24.png); }
+.toolButton[data-tool="save"] > span { background-image: url(../images/icons/save_24.png); }
+.toolButton[data-tool="help"] > span { background-image: url(../images/icons/help_24.png); }
+.toolButton[data-tool="cancel"] > span { background-image: url(../images/icons/cancl_24.png); }
+.toolButton[data-tool="complete"] > span { background-image: url(../images/icons/OK_24.png); }
+.toolButton[data-tool="configure"] > span { background-image: url(../images/icons/Tools_24x24.png); }
+.toolButton[data-tool="settings"] > span { background-image: url(../images/icons/settings_24.png); }
+.toolButton[data-tool="logout"] > span { background-image: url(../images/icons/login_24.png); }
+.toolButton[data-tool="top"] > span { background-image: url(../images/icons/Hide_Details_active_24.png); }
+
+body.transition > .footer-toolbar
+{
+    display: none;
+}
+
+.footer-toolbar
+{
+    display: block;
+    height: 40px;
+    position: relative;
+}
+
+.footer-toolbar > hr
+{
+    position: relative;
+    top: -4px;
+    height: 4px;
+    margin: 0 0 4px 0;
+    border: none;
+    box-shadow: rgba(0,0,0,0.5) 0px 2px 3px;
+    -moz-box-shadow: rgba(0,0,0,0.5) 0px 2px 3px;
+    -webkit-box-shadow: rgba(0,0,0,0.5) 0px 2px 3px;
+}
+
+.footer-toolbar > .toolButton
+{
+    background: transparent;
+    width: auto;
+    height: auto;
+    border: none;
+    font-weight: normal;
+}
+
+.footer-toolbar > .toolButton-left
+{
+    margin: 0 0 0 10px;
+}
+
+.footer-toolbar > .toolButton-right
+{
+    margin: 0 10px 0 0;
+}
+
+.footer-toolbar > .toolButton > span
+{
+    width: auto;
+    height: 36px;
+    line-height: 36px;
+    background-position: left center;
+    padding: 0 0 0 30px;
+    margin: 0;
+}
+
+.copyright
+{
+    display: block;
+    text-align: center;
+    clear: both;
+    font-size: .6em;
+    color: #888;
+}

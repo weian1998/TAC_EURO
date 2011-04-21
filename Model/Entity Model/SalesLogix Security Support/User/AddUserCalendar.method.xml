@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="de8c824f-00da-413a-9d37-f1b273f199fe" lastModifiedUtc="2010-02-08T23:41:36.3771586Z" name="AddUserCalendar" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="92c4c460-2059-4c5b-bce8-081f80451286" paramName="userWantingAccessToCalendar" sequence="0" paramType="IUser" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="1e252bae-7022-4624-ab92-2f6f3f4f6215" lastModifiedUtc="2010-02-08T23:40:58.7053918Z" targetType="Sage.SalesLogix.User.Rules, Sage.SalesLogix.BusinessRules" targetMethod="AddUserCalendar" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

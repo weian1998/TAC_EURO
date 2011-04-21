@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="c1770f9e-61d9-4dfd-910c-8ded16d5d43f" lastModifiedUtc="2010-04-13T22:46:44.9121372Z" name="grdOthersAccessToUserCal_OnRowSelected" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="OthersAccessToUserCal">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="afa14e2c-4505-4372-a82c-0f3592033a79" paramName="form" sequence="0" paramType="IOthersAccessToUserCal" />
+    <OrmEntityMethodParam id="140c7671-9d17-482a-8da1-707389c16b50" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="a02fd16a-26df-4364-9816-a9bc719e14e5" lastModifiedUtc="2010-04-13T23:48:11.3629901Z" targetType="Sage.BusinessRules.CodeSnippets.OthersAccessToUserCalEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="grdOthersAccessToUserCal_OnRowSelectedStep" active="true" codeSnippetId="bc4ea8b9-5a31-43ed-b79a-f65227a1e1b8">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

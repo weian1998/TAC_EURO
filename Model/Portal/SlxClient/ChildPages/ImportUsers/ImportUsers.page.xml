@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<PortalPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="34fcf136-7b46-477c-8f10-125c729516b8">
+  <PageAlias>ImportUsers</PageAlias>
+  <SmallImage>[Localization!Global_Images:user_16]</SmallImage>
+  <LargeImage>[Localization!Global_Images:user_32]</LargeImage>
+  <TemplateUrl>Masters\base.master</TemplateUrl>
+  <InheritsFrom>Sage.Platform.WebPortal.WebPortalPage, Sage.Platform.WebPortal</InheritsFrom>
+  <Properties />
+  <TemplateProperties>
+    <Property Name="IncludeTaskPane" TypeConverter="">False</Property>
+  </TemplateProperties>
+  <IsDefaultPage>false</IsDefaultPage>
+  <ExcludedGlobalModules />
+</PortalPage>

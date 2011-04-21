@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="84c290f9-cbb7-4a0e-8c89-4aac73965d7a" lastModifiedUtc="2010-04-28T15:25:58.9440944Z" name="CanDeleteDepartment" returnType="Boolean" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="367fc827-1b30-47a8-9e85-6c9a95f9d6b3" lastModifiedUtc="2010-04-28T15:25:47.0014113Z" targetType="Sage.SalesLogix.Department.Rules, Sage.SalesLogix.BusinessRules" targetMethod="CanDeleteDepartment" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="92db52ab-7598-4b3e-99ba-987ef3d93118" lastModifiedUtc="2010-05-27T06:58:24.5497531Z" filterName="Stage" propertyName="Stage" analyticsAvailable="true" characters="0">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRangeEntityFilter" />
+  </ExtendedPropertiesCollection>
+  <ranges id="6f2d8773-5a0f-4f1e-ae4d-5f47ea6d78c4" rangeName="Decision" lower="6-Decision" upper="6-Decision" />
+  <ranges id="7e019219-75ad-4de7-b532-e02bca515e86" rangeName="Negotiation" lower="5-Negotiation" upper="5-Negotiation" />
+  <ranges id="ce08c976-2aca-4f36-b6c8-586aedff994f" rangeName="Demonstration" lower="4-Demonstration" upper="4-Demonstration" />
+  <ranges id="67fccf3f-f26e-44b9-b5e5-12874cfc3eb0" rangeName="Needs Analysis" lower="3-Needs Analysis" upper="3-Needs Analysis" />
+  <ranges id="6f004d36-ba62-4222-9dba-2a84e9fe8242" rangeName="Qualification" lower="2-Qualification" upper="2-Qualification" />
+  <ranges id="15569b43-d2fc-4f69-9e40-ce29b8a9c104" rangeName="Prospect" lower="1-Prospect" upper="1-Prospect" />
+  <ranges id="59889f2c-ecce-41d8-99eb-e1b07c31651f" rangeName="empty" />
+</entityFilter>

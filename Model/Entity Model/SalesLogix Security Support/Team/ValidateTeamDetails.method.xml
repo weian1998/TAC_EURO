@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="2932f3c8-1541-4ced-994d-d1bb5b295973" lastModifiedUtc="2010-04-28T16:06:04.2006672Z" name="ValidateTeamDetails" returnType="Boolean" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="dd72f802-f1c7-4dc5-97f9-cf960dc93ec5" lastModifiedUtc="2010-04-28T16:05:55.4281654Z" targetType="Sage.SalesLogix.Team.Rules, Sage.SalesLogix.BusinessRules" targetMethod="ValidateTeamDetails" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

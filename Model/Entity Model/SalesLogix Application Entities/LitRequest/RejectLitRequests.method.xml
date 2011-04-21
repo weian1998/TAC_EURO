@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="da0b8e96-2560-4996-afc0-d52efa7ed837" lastModifiedUtc="2009-12-11T21:48:52.8739646Z" name="RejectLitRequests" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="40d65662-2061-4a50-9dfe-36f3e407b050" lastModifiedUtc="2009-12-11T21:47:38.5099646Z" targetType="Sage.SalesLogix.LitRequest.Rules, Sage.SalesLogix.BusinessRules" targetMethod="RejectLitRequests" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

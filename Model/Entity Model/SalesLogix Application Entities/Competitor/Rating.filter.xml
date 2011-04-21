@@ -1,0 +1,17 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="12c86303-ca45-410b-a90b-b61c34828a16" lastModifiedUtc="2010-05-10T21:08:02.0477512Z" filterName="Rating" propertyName="Rating" characters="1">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRangeEntityFilter" />
+  </ExtendedPropertiesCollection>
+  <ranges id="52afa357-4496-43ed-b910-cb67ee6353fb" rangeName="0-10" lower="0" upper="10" />
+  <ranges id="1f1629d9-826c-4ca7-a35f-425c7c238748" rangeName="11-20" lower="11" upper="20" />
+  <ranges id="471ac184-598b-4552-8b88-ac3a568e48d4" rangeName="21-30" lower="21" upper="30" />
+  <ranges id="f4760717-7e64-424e-aa7e-432b1ce94240" rangeName="31-40" lower="31" upper="40" />
+  <ranges id="ce6b868e-b9e6-4e05-83ff-d34b679b5be7" rangeName="41-50" lower="41" upper="50" />
+  <ranges id="1323e2b5-cc43-4fa1-a769-5bd61cd3552b" rangeName="51-60" lower="51" upper="60" />
+  <ranges id="2df6685c-879d-4311-90b3-26b758b55786" rangeName="61-70" lower="61" upper="70" />
+  <ranges id="b940e53c-ee5c-4b82-b910-aea259098075" rangeName="71-80" lower="71" upper="80" />
+  <ranges id="42ad4689-4c2b-4238-9ebe-63319d960613" rangeName="81-90" lower="81" upper="90" />
+  <ranges id="c246e62b-c121-44c8-a154-df20c4446f22" rangeName="91-100" lower="91" />
+</entityFilter>

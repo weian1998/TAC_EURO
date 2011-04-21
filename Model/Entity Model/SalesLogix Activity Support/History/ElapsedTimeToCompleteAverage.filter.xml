@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmAnalyticsDateDiffMetricFilter" id="be5d7884-1928-4b0a-a3be-b6c5b1eb6f0c" lastModifiedUtc="2010-04-16T17:26:49.7190497Z" filterName="ElapsedTimeToCompleteAverage" analyticsAvailable="true" aggregation="AVG" fromPropertyName="StartDate" toPropertyName="CompletedDate">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmAnalyticsDateDiffMetricFilter" />
+  </ExtendedPropertiesCollection>
+</entityFilter>

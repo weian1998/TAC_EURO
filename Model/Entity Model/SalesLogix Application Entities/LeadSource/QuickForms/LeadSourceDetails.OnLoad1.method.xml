@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="f338b2fd-1aff-4f95-8556-c58156017f56" lastModifiedUtc="2010-01-26T21:38:45.524759Z" name="OnLoad1" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="LeadSourceDetails">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="618483bc-4be6-45a5-bc10-7f8a56e0087f" paramName="form" sequence="0" paramType="ILeadSourceDetails" />
+    <OrmEntityMethodParam id="039d2c8e-b887-4b5e-8c71-7605a6321539" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="f8058f86-608f-44a0-ae3e-70522cbc7af3" lastModifiedUtc="2010-06-18T23:47:59.7832248Z" targetType="Sage.BusinessRules.CodeSnippets.LeadSourceDetailsEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="OnLoad1Step" active="true" codeSnippetId="42715615-a12c-4297-b150-a26d0daead63">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

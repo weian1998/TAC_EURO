@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="724ede28-ae0b-4b1d-bf37-7aeae890c9de" lastModifiedUtc="2010-01-21T20:40:06.8427885Z" name="Copy" returnType="IAddress" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="d2dff3b9-95d2-4a3f-ba89-9aafd6b7b1e0" paramName="targetEntityId" sequence="0" paramType="String" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="c94bd653-cdf0-472a-96af-30e502fc4cdc" lastModifiedUtc="2010-01-21T20:38:17.5707885Z" targetType="Sage.SalesLogix.Address.Rules, Sage.SalesLogix.BusinessRules" targetMethod="Copy" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

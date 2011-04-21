@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<BundleManifest id="0f365389-6fc5-4458-87dc-fdfcea6261eb">
+  <bundleProperties>
+    <name>Sage SalesLogix v7.5.3 HF07 VFS Upgrade</name>
+    <description><![CDATA[Sage SalesLogix v7.5.3 HF07 VFS Upgrade (4285)]]></description>
+    <address><![CDATA[8800 N. Gainey Center Drive,
+Suite 200 Scottsdale, AZ 85258]]></address>
+    <company>Sage Software, Inc.</company>
+    <copyright><![CDATA[(c)1997-2010 Sage Software, Inc.]]></copyright>
+    <majorVersion>0</majorVersion>
+    <minorVersion>0</minorVersion>
+    <revision>0</revision>
+    <build>1</build>
+    <autoIncrement>false</autoIncrement>
+    <installDate>2011-01-13T19:43:48.364061Z</installDate>
+    <installPassword />
+  </bundleProperties>
+  <bundleItemHierarchy>
+    <bundleItem modelId="af988c91-97c8-4527-b072-e021c9e2cb1a" itemTypeName="Sage.Platform.BundleModel.BundleManifestItem, Sage.Platform.BundleModel">
+      <BundleManifestItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <ItemId>0f365389-6fc5-4458-87dc-fdfcea6261eb</ItemId>
+        <Url>\</Url>
+        <BundleItemType>Container</BundleItemType>
+        <Caption>Sage SalesLogix v7.5.3 HF07 VFS Upgrade</Caption>
+      </BundleManifestItem>
+      <children>
+        <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.ManagerBundleItem, Sage.Platform.WebPortal.Design">
+          <ManagerBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <ItemId>\Portal</ItemId>
+            <Url>\Portal</Url>
+            <BundleItemType>Container</BundleItemType>
+            <Caption>Portals</Caption>
+          </ManagerBundleItem>
+          <children>
+            <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.ModelItemBundleItem, Sage.Platform.WebPortal.Design">
+              <ModelItemBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                <ItemId>5525430a-60f9-481b-b4b5-cc89045cf9e9</ItemId>
+                <Url>\Portal\SlxIntellisync\SlxIntellisync.portal.xml</Url>
+                <BundleItemType>Context</BundleItemType>
+                <Caption>Intellisync For SalesLogix</Caption>
+              </ModelItemBundleItem>
+              <children>
+                <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.LinkedFolderBundleItem, Sage.Platform.WebPortal.Design">
+                  <LinkedFolderBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                    <ItemId>\Portal\SlxIntellisync\SlxIntellisync.portal.xml\SupportFiles</ItemId>
+                    <Url>\Portal\SlxIntellisync\SlxIntellisync.portal.xml\SupportFiles</Url>
+                    <BundleItemType>Context</BundleItemType>
+                    <Caption>SupportFiles</Caption>
+                    <InstallOptions>SkipItemAndChildren</InstallOptions>
+                  </LinkedFolderBundleItem>
+                  <children>
+                    <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.LinkedFolderBundleItem, Sage.Platform.WebPortal.Design">
+                      <LinkedFolderBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                        <ItemId>\Portal\SlxIntellisync\SlxIntellisync.portal.xml\SupportFiles\Bin</ItemId>
+                        <Url>\Portal\SlxIntellisync\SlxIntellisync.portal.xml\SupportFiles\Bin</Url>
+                        <BundleItemType>Context</BundleItemType>
+                        <Caption>Bin</Caption>
+                        <InstallOptions>SkipItemAndChildren</InstallOptions>
+                      </LinkedFolderBundleItem>
+                      <children>
+                        <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.LinkedFileBundleItem, Sage.Platform.WebPortal.Design">
+                          <LinkedFileBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                            <ItemId>\Portal\SlxIntellisync\SupportFiles\Bin\Sage.SalesLogix.Intellisync.SyncModule.dll</ItemId>
+                            <Url>\Portal\SlxIntellisync\SupportFiles\Bin\Sage.SalesLogix.Intellisync.SyncModule.dll</Url>
+                            <BundleItemType>Other</BundleItemType>
+                            <Caption>Sage.SalesLogix.Intellisync.SyncModule.dll</Caption>
+                            <InstallOptions>SkipItemAndChildren</InstallOptions>
+                            <IsLinkedFile>false</IsLinkedFile>
+                            <SourcePath>D:\Model753\Model\Portal\SlxIntellisync\SupportFiles\Bin\Sage.SalesLogix.Intellisync.SyncModule.dll</SourcePath>
+                            <ParentModelItemUrl>\Portal\SlxIntellisync\SlxIntellisync.portal.xml</ParentModelItemUrl>
+                            <ProjectPath>SupportFiles\Bin\Sage.SalesLogix.Intellisync.SyncModule.dll</ProjectPath>
+                          </LinkedFileBundleItem>
+                        </bundleItem>
+                      </children>
+                    </bundleItem>
+                  </children>
+                </bundleItem>
+              </children>
+            </bundleItem>
+          </children>
+        </bundleItem>
+      </children>
+    </bundleItem>
+  </bundleItemHierarchy>
+  <bundleActionHierarchy>
+    <bundleItem modelId="af988c91-97c8-4527-b072-e021c9e2cb1a" itemTypeName="Sage.Platform.BundleModel.RootBundleAction, Sage.Platform.BundleModel">
+      <RootBundleAction xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <ItemId>\Actions</ItemId>
+        <Url>\Actions</Url>
+        <BundleItemType>Container</BundleItemType>
+        <Caption>Bundle Actions</Caption>
+      </RootBundleAction>
+    </bundleItem>
+  </bundleActionHierarchy>
+  <itemsToDelete />
+  <globalResources />
+</BundleManifest>

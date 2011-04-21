@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:comment="4/30/02 JHI: Changed Workgroup to SLX Admin. 3/6/02 Katie Carver: Added topic based on info from Training's Administrators Guide (see Task 1-19787)." MadCap:timeEstimate="0" MadCap:priority="0" MadCap:status="Ready for Review" MadCap:conditions="Output.WebClient" MadCap:lastBlockDepth="5" MadCap:lastHeight="782" MadCap:lastWidth="733" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Administration|Administrative Checklists" MadCap:InPreviewMode="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>A User Returns From Extended Leave</title>
+        <meta name="copyright" />
+        <link href="../SALESLOGIX.CSS" rel="stylesheet" type="text/css" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1 value="Workgroup Administrator Help (03-19-02) for v5.2.2 © 2002 Interact Commerce Corporation"><a name="kanchor18"></a>A User Returns From Extended Leave </h1>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <tr>
+                <td style="width: 10%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="10%">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/adminonly.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p>Only the system administrator and users with an administrator role can access these features.</p>
+                </td>
+            </tr>
+        </table>
+        <p>When a user returns from an extended leave, use this checklist to reverse 
+ the actions you completed following the <a href="A_User_Takes_Extended_Leave.htm">User 
+ Takes Extended Leave</a> checklist.</p>
+        <p>This checklist uses the same scenarios. However, this time, complete 
+ the All Scenarios items first, and then continue with any additional items 
+ for the appropriate scenario that fits your organization.</p>
+        <p class="subheading"><span style="font-weight: bold;">All Scenarios</span>
+        </p>
+        <table>
+            <col style="width: 19px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top;padding-right: 6px;">
+                        <img src="../Resources/Images/checkbox.bmp" />
+                    </td>
+                    <td class="Table2" style="padding-bottom: 6px;vertical-align: top;">If 
+ you prevented the user who took leave from logging on during his or her 
+ absence, open the <a href="../Admin_useradmin/User_Detail_View.htm" target="_self">User Detail</a>  view and 
+ select the <span style="font-weight: bold;">Login Enabled</span>  check box.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;">SCENARIO A</span> - Teams own accounts 
+ and both the user taking leave and the replacement user are on the same 
+ team(s).</p>
+        <p>No special steps are necessary for this scenario. The user who took 
+ leave should continue to have access to the same accounts as the replacement 
+ user since they are on the same team.</p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;">SCENARIO B - </span>Teams own accounts, 
+ but the user taking leave and the replacement user are not on the same 
+ team(s).</p>
+        <table>
+            <col />
+            <col style="width: 550px;" />
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top;padding-right: 6px;">
+                        <img src="../Resources/Images/checkbox.bmp" />
+                    </td>
+                    <td style="padding-bottom: 6px;vertical-align: top;" class="Table2">Referring to your notes from when you added the replacement user to the necessary team(s), <a href="../Admin_TeamsDepts/Removing_or_Replacing_Team_Members.htm" target="_self">remove</a>  the replacement user from the appropriate team(s).</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;">SCENARIO C</span> - Individual users 
+ own accounts.</p>
+        <table>
+            <col />
+            <col style="width: 550px;" />
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top;padding-right: 6px;">
+                        <img src="../Resources/Images/checkbox.bmp" />
+                    </td>
+                    <td class="Table2" style="padding-left: 0pt;padding-right: 0pt;padding-top: 0pt;padding-bottom: 6pt;">Open the <a href="../Admin_useradmin/User_Detail_View.htm" target="_self">User Detail</a> view for the user who took leave.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;padding-right: 6px;">
+                        <img src="../Resources/Images/checkbox.bmp" />
+                    </td>
+                    <td class="Table2" style="padding-left: 0pt;padding-right: 0pt;padding-top: 0pt;padding-bottom: 6pt;">
+                        <p>Click the <a href="../Admin_useradmin/User_Detail_View_User_Team_Members_Tab.htm" target="_self">User Team Members</a> tab. Click the <b>Remove</b> hyperlink for the replacement user.</p>
+                        <p>Removing this person from the profile prevents him or her from continuing to access the accounts owned by the user who took leave.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="Topic-Text-Indent" style="margin-left: 18.0pt;">&#160;</p>
+        <p><span style="font-weight: bold;">SCENARIO D</span> - Your organization 
+ uses the system group &#160;“Everyone” 
+ for account ownership.</p>
+        <p style="margin-bottom: 0;">No special steps are necessary for this scenario. 
+ The user who took leave should continue to have access to all accounts 
+ since your company uses the system group Everyone for account ownership. </p>
+        <div style="width: 100%;position: relative;">
+            <p>
+            </p>
+            <p style="border-top-style: Groove;border-top-color: #c0c0c0;border-top-width: 1px;">&#160;</p>
+            <p><![CDATA[ ]]><a href="../General/feedback.htm" target="_blank">Tell us how we can make the Help better.</a></p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

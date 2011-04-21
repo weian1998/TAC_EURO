@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmUserLookupEntityFilter" id="98c462d6-d50a-4834-bc04-01be2a8ba24e" lastModifiedUtc="2010-01-15T02:09:56.7214755Z" filterName="Department" propertyName="UserInfo.Department">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmUserLookupEntityFilter" />
+  </ExtendedPropertiesCollection>
+  <operators>
+    <operator>Contains</operator>
+  </operators>
+</entityFilter>

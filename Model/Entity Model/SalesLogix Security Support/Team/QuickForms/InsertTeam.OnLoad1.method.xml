@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="1a9c9f67-be88-474a-b5de-c0a4dba632af" lastModifiedUtc="2010-04-09T00:11:02.7894422Z" name="OnLoad1" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="InsertTeam">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="9f785945-45a9-449b-990e-16e1b9370af2" paramName="form" sequence="0" paramType="IInsertTeam" />
+    <OrmEntityMethodParam id="377356ac-1353-4a45-b208-5cf4fa385fe5" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="f10f3069-f376-4fa7-9b17-3e62455a9bd7" lastModifiedUtc="2010-06-02T22:14:52.5002676Z" targetType="Sage.BusinessRules.CodeSnippets.InsertTeamEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="OnLoad1Step" active="true" codeSnippetId="96324b47-2a42-4286-b848-77e9db9b1458">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

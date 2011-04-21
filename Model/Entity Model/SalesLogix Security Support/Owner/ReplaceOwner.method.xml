@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="a421a1b9-d60a-4d33-862e-f93f6c95a075" lastModifiedUtc="2010-03-01T20:42:52.1310863Z" name="ReplaceOwner" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="5d7443cc-b538-43c4-b24a-6f88d3ef7047" paramName="replaceWithOwner" sequence="0" paramType="IOwner">
+      <description>The owner object that will replace the replaceOwner</description>
+    </OrmEntityMethodParam>
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="2dec691c-581d-43ee-b502-c67e8a1861f2" lastModifiedUtc="2010-03-01T20:42:49.0040863Z" targetType="Sage.SalesLogix.Owner.Rules, Sage.SalesLogix.BusinessRules" targetMethod="ReplaceOwner" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

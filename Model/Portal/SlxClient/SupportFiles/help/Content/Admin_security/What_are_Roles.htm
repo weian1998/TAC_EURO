@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="5" MadCap:lastHeight="708" MadCap:lastWidth="569" MadCap:conditions="Output.WebClient" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Administration|Security" MadCap:InPreviewMode="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" /><title>What are Roles?</title>
+        <link href="../SALESLOGIX.CSS" rel="stylesheet" type="text/css" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1><a name="kanchor37"></a>What are Roles?</h1>
+        <p>A role is a collection of actions. An action identifies what functionality a user can access such as pages, menus, menu items, toolbars,and buttons. Secured actions are attributed to UI elements  in the Application Architect and assigned to roles  in the Web Client. Users are also assigned to roles, giving the user access to the role's actions. <a href="javascript:void(0);" class="MCToggler" onclick="FMCToggler( this ); return false;" MadCap:targets="example;roles steps">Tell me more... </a></p>
+        <p MadCap:targetName="example" style="display: none;">Elements are secured in the Application Architect by assigning an action to them, or applying security. The value of the Applied Security property is the action name. To secure an element in the UI and allow users access to that element you must:</p>
+        <ol MadCap:targetName="roles steps" style="display: none;">
+            <li class="Topic-Text-Numbered" value="1">Add an action to the Applied Security property for the element in the Application Architect. See the "Understanding Secured Actions" topic in the Application Architect Help for more information.</li>
+            <li class="Topic-Text-Numbered" value="2">Add the action for that element to a role in the Web Client.</li>
+            <li class="Topic-Text-Numbered" value="3">Assign users to the role.</li>
+        </ol>
+        <p class="subheading">Default Roles</p>
+        <p><a name="DefaultRoles"></a>By default, new users are assigned the Standard User role. This allows access to all non-administrative functions in the Web Client. If you remove a user from this role, the user will not have access to any items that are secured unless you assign a new role. Current secured entities are accounts, contacts, and opportunities.</p>
+        <p>The default roles are:</p>
+        <ul>
+            <li class="Bullets" value="1"><b>Administrator</b> - Allows add, edit, and delete permissions to administration functions such as users, teams, departments, pick lists, products, and packages. Also includes the permission to <a href="../General/mergerecordslistview.htm" target="_self">merge records</a>.</li>
+            <li class="Bullets" value="2"><b>Standard User</b> - Allows add, edit, and delete permissions to Web Client non-administrative entities such as accounts, contacts, and opportunities.</li>
+            <li class="Bullets" value="3"><b>Account Management</b> - Allows add, edit, and delete permissions to accounts.</li>
+            <li class="Bullets" value="4"><b>Contact Management</b> - Allows add, edit, and delete permissions to contacts.</li>
+            <li class="Bullets" value="5"><b>Opportunity Management</b> - Allows add, edit, and delete permissions to opportunities.</li>
+        </ul>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <tr>
+                <td style="width: 10%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="10%">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p class="Tip-Note-Text" style="margin-bottom: 0;">Security in the Network Client is defined using feature security, function security, and administrative roles. Web security combines all Network elements into one security model - a role. You cannot use the Network security model for a user who is logged into the Web Client or the Web security model for a user who is logged into the Network Client.</p>
+                </td>
+            </tr>
+        </table>
+        <p class="RelatedTopics">How do I?</p>
+        <p><a href="Creating_a_Role.htm" target="_self">Create a Role</a>
+        </p>
+        <p><a href="Editing_or_Deleting_a_Role.htm" target="_self">Edit or Delete a Role</a>
+        </p>
+        <p><a href="Role_Users_Tab.htm" target="_self">Assign a Role to Users</a>
+        </p>
+        <p><a href="Role_Actions_Tab.htm" target="_self">Add or Edit Role Actions</a>
+        </p>
+        <p><a href="Assigning_Users_To_Standard_Role.htm" target="_self">Assigning All Users to the Standard User Role</a>
+        </p>
+        <div style="width: 100%;position: relative;">
+            <p>
+            </p>
+            <p style="border-top-style: Groove;border-top-color: #c0c0c0;border-top-width: 1px;">&#160;</p>
+            <p><![CDATA[ ]]><a href="../General/feedback.htm" target="_blank">Tell us how we can make the Help better.</a></p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

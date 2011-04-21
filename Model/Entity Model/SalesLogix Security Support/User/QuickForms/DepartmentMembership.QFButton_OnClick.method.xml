@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="c00ca37a-b7f3-4368-babe-0531e6a84770" lastModifiedUtc="2010-04-19T23:09:14.9561392Z" name="QFButton_OnClick" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="DepartmentMembership">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="36766d11-b7cd-482f-b2a5-e3f2d1e95e3d" paramName="form" sequence="0" paramType="IDepartmentMembership" />
+    <OrmEntityMethodParam id="b2748817-1044-47d8-8959-20bc2cea6abc" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="b6501d95-2afe-4d29-9d9b-312c19fb1e28" lastModifiedUtc="2010-04-19T23:09:12.3789918Z" targetType="Sage.BusinessRules.CodeSnippets.DepartmentMembershipEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="QFButton_OnClickStep" active="true" codeSnippetId="a550b030-e756-45e5-8be9-e388d984bdfa">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

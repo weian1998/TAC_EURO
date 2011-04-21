@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="cd6f0282-b023-4a67-b57c-a760deda4277" lastModifiedUtc="2010-03-12T17:04:39.1002308Z" name="OnLoadRoleDetails" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="RoleDetails">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="8b877ae4-2077-4bbe-970e-263f378e2794" paramName="form" sequence="0" paramType="IRoleDetails" />
+    <OrmEntityMethodParam id="7993694a-8c65-44ee-8d52-512dba94ebac" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="4eb69223-d716-45ca-9f7c-8812b2e4f1c8" lastModifiedUtc="2010-05-03T16:01:37.573775Z" targetType="Sage.BusinessRules.CodeSnippets.RoleDetailsEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="ToggleDetailInsert" active="true" codeSnippetId="d938e19f-dde6-479b-851e-32a09546fe09">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="ae7f6248-0e68-46d9-8c7a-34cc8f09ad7a" lastModifiedUtc="2010-10-11T22:26:15.4593723Z" filterName="UserType" propertyName="Type" dataPath="USERSECURITY:TYPE" characters="0">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRangeEntityFilter" />
+  </ExtendedPropertiesCollection>
+  <ranges id="b312963a-b8ae-4ff7-86c3-c6072d6ba607" rangeName="Administrator" lower="W" upper="W" />
+  <ranges id="d6e7b5ab-4e5a-4fc9-8241-55b9684ecd88" rangeName="Template" lower="P" upper="P" />
+  <ranges id="34f17ff0-b91f-4b0c-bc8b-da23b55a5d3a" rangeName="Remote" lower="M" upper="M" />
+  <ranges id="a13f4b95-f4e3-4a2a-ae6a-b61ef226eca7" rangeName="Web Only" lower="T" upper="T" />
+  <ranges id="3ecda307-6f7a-4b6c-bd8c-810b87b06d4b" rangeName="Retired" lower="R" upper="R" />
+  <ranges id="8c8c8352-00bc-4083-bb02-e39613b023be" rangeName="Concurrent" lower="C" upper="C" />
+  <ranges id="7eb1e1bc-d31b-42de-a591-309098d51635" rangeName="Web Viewer" lower="V" upper="V" />
+  <ranges id="579673d3-96d1-4e8b-8763-6c2ee55b24d1" rangeName="Network" lower="N" upper="N" />
+  <ranges id="7678acbe-fb79-4899-9251-981b983d9f77" rangeName="AddOn" lower="A" upper="A" />
+</entityFilter>

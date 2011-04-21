@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="5f69e8d9-a9e6-4a24-b30b-107d69edd71d" lastModifiedUtc="2010-03-24T00:14:31.2872572Z" name="OnAfterUpdate" methodType="CrudEvent" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <description>Clears the Role Security Cache</description>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="e96069ea-adbd-4849-9923-4b9e3ab55ce1" lastModifiedUtc="2010-03-24T00:12:36.8098106Z" targetType="Sage.SalesLogix.API.MySlx, Sage.SalesLogix.API" targetMethod="ClearRoleSecurityCache" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

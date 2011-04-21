@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PortalPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="926dac66-c61f-4d05-aa47-4c84fbeb2102">
+  <PageAlias>TicketSolutionType</PageAlias>
+  <SmallImage>[Localization!Global_Images:StandardResolution_16]</SmallImage>
+  <LargeImage>[Localization!Global_Images:StandardResolution_32]</LargeImage>
+  <TemplateUrl>Masters\base.master</TemplateUrl>
+  <InheritTemplate>false</InheritTemplate>
+  <InheritsFrom>Sage.Platform.WebPortal.EntityPage, Sage.Platform.WebPortal</InheritsFrom>
+  <Properties>
+    <Property Name="EntityTypeName" TypeConverter="">Sage.Entity.Interfaces.ITicketSolutionType, Sage.Entity.Interfaces</Property>
+  </Properties>
+  <TemplateProperties>
+    <Property Name="IncludeMoreTabsTab" TypeConverter="">false</Property>
+  </TemplateProperties>
+  <IsDefaultPage>false</IsDefaultPage>
+  <ExcludedGlobalModules />
+  <AppliedSecurity />
+</PortalPage>

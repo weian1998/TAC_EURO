@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="160284da-7493-48dd-a1e2-7603399124d9" lastModifiedUtc="2010-02-24T19:41:08.8127054Z" name="OkButton_OnClick" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="EditSecurityProfile">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="a2a921bd-6718-49ee-bd73-72db68922188" paramName="form" sequence="0" paramType="IEditSecurityProfile" />
+    <OrmEntityMethodParam id="45d61fef-ac4b-4929-b9d6-c64c7edfe8ba" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="70d19b06-6560-4f59-a890-367806898b30" lastModifiedUtc="2010-02-24T21:14:27.3102054Z" targetType="Sage.BusinessRules.CodeSnippets.EditSecurityProfileEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="OkButton_OnClickStep" active="true" codeSnippetId="6d52933f-707d-4eaa-a9d4-5c59c45f4269">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

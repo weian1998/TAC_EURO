@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmAnalyticsMetricEntityFilter" id="d24d072b-6fb2-43d8-bc88-2949ff0ac24c" lastModifiedUtc="2010-04-15T21:04:37.9274849Z" filterName="BudgetedExpenses" propertyName="ExpensesBudget" analyticsAvailable="true" aggregation="SUM">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmAnalyticsMetricEntityFilter" />
+  </ExtendedPropertiesCollection>
+</entityFilter>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QuickFormDefinition Id="ce7b71ce-65c4-449f-8f47-9426785a0b62" name="UserAccessToOthersCal">
+  <Properties>
+    <Property name="EntityTypeName" type="System.String">IUser</Property>
+    <Property name="DefaultNamespace" type="System.String">Sage.Entity.Interfaces</Property>
+    <Property name="AssemblyName" type="System.String">Sage.Entity.Interfaces</Property>
+    <Property name="UseEntityNameAsTitle" type="System.Boolean">False</Property>
+    <Property name="ImagePath" type="System.String"></Property>
+    <Property name="DefinitionType" type="System.String">Sage.Platform.QuickForms.QuickFormMainDetailViewDefinition, Sage.Platform.QuickForms</Property>
+    <Property name="Columns" type="System.ComponentModel.BindingList`1[[System.Windows.Forms.ColumnStyle, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><ArrayOfColumnStyle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ColumnStyle><SizeType>Percent</SizeType><Width>100</Width></ColumnStyle></ArrayOfColumnStyle></Property>
+    <Property name="Rows" type="System.ComponentModel.BindingList`1[[System.Windows.Forms.RowStyle, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><ArrayOfRowStyle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle></ArrayOfRowStyle></Property>
+    <Property name="GeneratePrintView" type="System.Boolean">False</Property>
+    <Property name="Description" type="System.String"></Property>
+    <Property name="ActiveControl" type="System.String"></Property>
+  </Properties>
+  <LoadActions />
+  <QuickFormElements>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFDataGrid, Sage.SalesLogix.QuickForms.QFControls"><QFDataGrid xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>dgUserAccessToOthersCal</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><DataSource>dsUserAccessToOthersCal</DataSource><DataKeyNames>UserId,CalUserId</DataKeyNames><EnablePaging>true</EnablePaging><EnableSorting>true</EnableSorting><PageSize>10</PageSize><Columns><QFLinkCol><StyleScheme /><DataField>CalUser.UserInfo.UserName</DataField><ColumnId>b2231dc0-8ecc-46b0-8b27-4cfde56a1235</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>CalUser.UserInfo.UserName</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><Destination /><Image /><EntityIdField>CalUser.Id</EntityIdField><EntityTypeName>User</EntityTypeName><Target /><AppliedSecurity /></QFLinkCol><QFDataGridCol><StyleScheme /><DataField>CalUser.UserInfo.Title</DataField><ColumnId>ff3ee19f-68e5-4697-b21b-14f41573b2aa</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>CalUser.UserInfo.Title</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent></QFDataGridCol><QFDataGridCol><StyleScheme /><DataField>CalUser.Type</DataField><ColumnId>54360a25-e3f0-4107-9c01-6b1b33807087</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>CalUser.Type</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent></QFDataGridCol><QFCheckBoxCol><StyleScheme /><DataField>AllowAdd</DataField><ColumnId>d1ed6797-afe8-486c-8e13-551e3683f780</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>AllowAdd</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent></QFCheckBoxCol><QFCheckBoxCol><StyleScheme /><DataField>AllowEdit</DataField><ColumnId>bebdf843-0a40-4c6b-8b88-7ecb1c98770b</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>AllowEdit</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent></QFCheckBoxCol><QFCheckBoxCol><StyleScheme /><DataField>AllowDelete</DataField><ColumnId>fb65a91a-ef1f-4c41-8ae0-37d3e81bf639</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>AllowDelete</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent></QFCheckBoxCol><QFCheckBoxCol><StyleScheme /><DataField>AllowSync</DataField><ColumnId>3651781c-1d05-419a-82a3-354a0d106189</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>AllowSync</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent></QFCheckBoxCol><QFEditCol><StyleScheme /><DataField /><ColumnId>fb9d7cfd-3957-4c38-8b72-dafa76129dd0</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>false</IsSortable><MultiCurrencyDependent>false</MultiCurrencyDependent><DialogSpecs><SmartPart>EditCalPermissions</SmartPart><Height>235</Height><Width>420</Width><Top>0</Top><Left>0</Left><EntityType>UserCalendar</EntityType><ResourceKey>eb3e144c-7c53-4db5-b8fd-666ec228e40e</ResourceKey><CenterDialog>True</CenterDialog></DialogSpecs><AppliedSecurity /></QFEditCol><QFDeleteCol><StyleScheme /><DataField /><ColumnId>238fd737-b385-4b5e-8dfa-3f5c55d3f6c2</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>false</IsSortable><MultiCurrencyDependent>false</MultiCurrencyDependent><BusinessRule>RemoveAccessToOthersCalendar</BusinessRule><BusinessRuleObjectName>User</BusinessRuleObjectName><BusinessRuleParameters /><AppliedSecurity /></QFDeleteCol></Columns><RenderVertical>false</RenderVertical><OnRowSelectedAction><ResourceKey>QFDataGrid</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /></OnRowSelectedAction></QFDataGrid></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.QFControls.QFDataSource, Sage.Platform.QuickForms.QFControls"><QFDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>1</Row><IsReadOnly>false</IsReadOnly><Visible>false</Visible><HotKey>48</HotKey><TabIndex>0</TabIndex><ControlId>dsUserAccessToOthersCal</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><EntityTypeName>UserCalendar</EntityTypeName><GetByMethod>GetCalendarAccessList</GetByMethod><GetByProperty /><UseSmartSelection>true</UseSmartSelection><DataOptional>false</DataOptional></QFDataSource></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+  </QuickFormElements>
+  <QuickFormToolElements>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.QFControls.QFLabel, Sage.Platform.QuickForms.QFControls"><QFLabel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>lblTabDescription</ControlId><DataBindings /><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><AssociatedControlID /></QFLabel></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFElementSpacer, Sage.Platform.QuickForms"><QFElementSpacer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId /><DataBindings /><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /></QFElementSpacer></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFElementSpacer, Sage.Platform.QuickForms"><QFElementSpacer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId /><DataBindings /><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /></QFElementSpacer></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXLookup, Sage.SalesLogix.QuickForms.QFControls"><QFSLXLookup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>lueAddUser</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>lueAddUser</ResourceKey><RootActionName>CodeSnippetAction</RootActionName><Action><CodeSnippetAction methodId="e78b80e3-5617-4988-8748-ddaf8d9f5527" /></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /></OnChangeAction><LookupImage>[Localization!Global_Images:plus_16x16]</LookupImage><LookupDialogWidth xsi:nil="true" /><LookupDialogHeight xsi:nil="true" /><LookupDisplayMode>ButtonOnly</LookupDisplayMode><LookupBindingMode>Object</LookupBindingMode><LookupResultValue xsi:type="xsd:string" /><SeedProperty /><SeedValue /><Required>false</Required><DropDownDisplayProperty /><AllowClearingResult>false</AllowClearingResult><OverrideSeedOnSearch>false</OverrideSeedOnSearch><LookupEntityName>User</LookupEntityName><LookupEntityTypeName>Sage.Entity.Interfaces.IUser, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</LookupEntityTypeName><AutoPostBack>false</AutoPostBack><EnableHyperLinking>false</EnableHyperLinking><InitializeLookup>true</InitializeLookup><LookupProperties><LookupProperty><PropertyName>UserInfo.UserName</PropertyName><PropertyType>System.String</PropertyType><PropertyHeader>Name</PropertyHeader><PropertyFormat>None</PropertyFormat><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters></LookupProperty><LookupProperty><PropertyName>UserInfo.Title</PropertyName><PropertyType>System.String</PropertyType><PropertyHeader>Title</PropertyHeader><PropertyFormat>None</PropertyFormat><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters></LookupProperty><LookupProperty><PropertyName>UserInfo.Department</PropertyName><PropertyType>System.String</PropertyType><PropertyHeader>Department</PropertyHeader><PropertyFormat>None</PropertyFormat><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters></LookupProperty><LookupProperty><PropertyName>UserInfo.Region</PropertyName><PropertyType>System.String</PropertyType><PropertyHeader>Region</PropertyHeader><PropertyFormat>None</PropertyFormat><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters></LookupProperty></LookupProperties><LookupPreFilters><LookupPreFilter><LookupEntityName>IUser</LookupEntityName><PropertyType>System.String</PropertyType><OperatorCode>!=</OperatorCode><PickListName /><PropertyName>Type</PropertyName><FilterValue>W</FilterValue></LookupPreFilter><LookupPreFilter><LookupEntityName>IUser</LookupEntityName><PropertyType>System.String</PropertyType><OperatorCode>!=</OperatorCode><PickListName /><PropertyName>Type</PropertyName><FilterValue>P</FilterValue></LookupPreFilter><LookupPreFilter><LookupEntityName>IUser</LookupEntityName><PropertyType>System.String</PropertyType><OperatorCode>!=</OperatorCode><PickListName /><PropertyName>Type</PropertyName><FilterValue>R</FilterValue></LookupPreFilter><LookupPreFilter><LookupEntityName>IUser</LookupEntityName><PropertyType>System.String</PropertyType><OperatorCode>!=</OperatorCode><PickListName /><PropertyName>Type</PropertyName><FilterValue>A</FilterValue></LookupPreFilter></LookupPreFilters></QFSLXLookup></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+  </QuickFormToolElements>
+</QuickFormDefinition>

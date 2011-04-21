@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="b6d4b649-c071-4285-9dba-f6fe275524f1" lastModifiedUtc="2010-03-12T21:38:07.5841576Z" name="UpdateWithExistingProfile" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="2cc561e3-7796-43da-801a-5c2a075d23c8" paramName="targetUser" sequence="0" paramType="IUser">
+      <description>user to receive the values from the source user's profile</description>
+    </OrmEntityMethodParam>
+    <OrmEntityMethodParam id="9e25efd2-ace3-4154-949a-4064296c97fd" paramName="options" sequence="0" paramType="Object">
+      <description>what parts of the profile to copy</description>
+    </OrmEntityMethodParam>
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="95c29057-bb05-41ad-9ce0-b0c27bcfbe2e" lastModifiedUtc="2010-03-12T21:36:29.1931576Z" targetType="Sage.SalesLogix.User.Rules, Sage.SalesLogix.BusinessRules" targetMethod="UpdateWithExistingProfile" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

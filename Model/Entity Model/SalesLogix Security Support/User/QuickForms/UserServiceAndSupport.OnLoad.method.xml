@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="b54690dc-ff4e-4384-8c2e-64a1eae7eccf" lastModifiedUtc="2010-01-29T21:39:37.1892987Z" name="OnLoad" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="UserServiceAndSupport">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="b4b2a129-f864-4cd3-a802-b51ac24c4885" paramName="form" sequence="0" paramType="IUserServiceAndSupport" />
+    <OrmEntityMethodParam id="75da5e8b-e831-4adc-92ef-45a54963f081" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="3980f8c3-80e2-48f6-8b2e-07808b08e7bb" lastModifiedUtc="2010-04-14T22:23:39.9327182Z" targetType="Sage.BusinessRules.CodeSnippets.UserServiceAndSupportEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="OnServiceSupportLoad" active="true" codeSnippetId="7c2f1d21-dd64-490c-8c9f-cd6a297d023f">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="5665d686-fdcd-4199-8dc9-db88b1d84250" lastModifiedUtc="2009-12-08T16:54:06.6698006Z" name="OnLoad1" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="InsertLiteratureItem">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="12d51851-bd12-4f35-8e64-d0ce43eb6057" paramName="form" sequence="0" paramType="IInsertLiteratureItem" />
+    <OrmEntityMethodParam id="b494ceeb-437f-423f-9910-d6797cab5188" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="cf834b49-eeda-4d20-b716-b91ee48717dc" lastModifiedUtc="2009-12-08T16:57:52.1658006Z" targetType="Sage.BusinessRules.CodeSnippets.InsertLiteratureItemEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="SetDefaultFormValues" active="true" codeSnippetId="b21b89a8-6e4a-4501-8b3f-099acb3b43e9">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

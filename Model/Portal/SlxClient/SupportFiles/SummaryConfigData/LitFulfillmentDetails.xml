@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WebSummaryViewConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EntityType TypeName="Sage.Entity.Interfaces.ILitRequest, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Properties />
+  </EntityType>
+  <Query id="76abf323-eb11-4ff6-99d3-2c8efeeb8b6a" expires="0" name="LitFulfillmentDetails_query">
+    <columnAliases>
+      <alias>id</alias>
+      <alias>whereclauseid</alias>
+      <alias>literatureitem_itemname</alias>
+      <alias>literatureitem_itemfamily</alias>
+      <alias>qty</alias>
+    </columnAliases>
+    <Parameters />
+    <hql>select litRequestItem_.id, litRequestItem_.LitRequest.id, litRequestItem_.LiteratureItem.Itemname, litRequestItem_.LiteratureItem.Itemfamily, litRequestItem_.Qty from LitRequest mainentity left join mainentity.LitRequestItems litRequestItem_ </hql>
+  </Query>
+  <CollectionProperties></CollectionProperties>
+  <Template>
+    <![CDATA[
+<div id="{id}" >
+		<table style="width:100%;" class="datagrid">  
+    <col style="width:33%" />
+		<col style="width:33%" />
+    <col style="width:33%" />
+    <thead><tr>
+      <th style="font-weight:bold;">{LitFulfillmentDetails_Captions.ColumnHeading_ItemName}</th>
+      <th style="font-weight:bold;">{LitFulfillmentDetails_Captions.ColumnHeading_Family}</th>
+      <th style="font-weight:bold;">{LitFulfillmentDetails_Captions.ColumnHeading_Quantity}</th>
+    </tr></thead>
+	<tpl for="items">	    
+			<tr>
+				<td>{literatureitem_itemname}</td>
+				<td>{literatureitem_itemfamily}</td>
+				<td>{qty}</td>      
+			</tr>
+      </tpl>
+		</table>
+	
+</div>
+]]></Template>
+  <WhereFormatString> mainentity.id eq '{0}'</WhereFormatString>
+</WebSummaryViewConfiguration>

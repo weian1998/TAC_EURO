@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="3d63dfac-7934-4a54-ada6-42a3ae4ec54f" lastModifiedUtc="2010-04-19T23:09:14.9841408Z" name="lueAddDepartment_OnChange" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="DepartmentMembership">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="2311b756-319f-45cd-a6a3-2e27bf38ee1d" paramName="form" sequence="0" paramType="IDepartmentMembership" />
+    <OrmEntityMethodParam id="387f607c-1c79-4bc9-bf28-618b3b0752f8" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="300a8ef2-595b-4ea9-b86c-40e0025d0a73" lastModifiedUtc="2010-04-19T23:17:13.9665371Z" targetType="Sage.BusinessRules.CodeSnippets.DepartmentMembershipEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="lueAddDepartment_OnChangeStep" active="true" codeSnippetId="c5794a9a-99ad-4b2d-8250-e5a889fd9530">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="6c422b5a-06c3-42ea-b85d-d773138ffeec" lastModifiedUtc="2010-01-28T23:47:30.9159717Z" parentEntityId="6ab738f6-21b0-4fe2-8df5-6f192281423c" childEntityId="a7752f54-e7a9-4f72-a91a-9766f94904eb" cascadeOption="SaveUpdateDelete">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="ae6d1672-d9b7-4e25-96e2-7fc24bb735b9" lastModifiedUtc="2010-01-28T23:47:30.9159717Z" name="UserAccessToOtherCal" description="A list of Users that have calendar access to this User’s calendar." audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="8f0ea341-53cb-40a9-908e-aaf2591f19ae" lastModifiedUtc="2010-01-28T23:47:26.237031Z" name="CalUser" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="0a955ca1-915d-4c3f-b1d8-6e488f908a20" parentPropertyId="ff93a248-20ab-407a-899d-40b1435ca5c3" childPropertyId="396183db-ae3a-4779-9c5f-afaee7fbd6e9" ordinal="0" />
+  </column>
+</relationship>

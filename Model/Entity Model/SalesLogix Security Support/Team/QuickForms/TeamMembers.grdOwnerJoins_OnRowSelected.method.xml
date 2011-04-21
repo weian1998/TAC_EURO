@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="d26ac454-6cee-485e-b745-2038f0f9c8e2" lastModifiedUtc="2010-04-21T23:27:39.2078935Z" name="grdOwnerJoins_OnRowSelected" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="TeamMembers">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="f5a503bd-9b34-4c89-8108-1951914ae10a" paramName="form" sequence="0" paramType="ITeamMembers" />
+    <OrmEntityMethodParam id="ac6b9771-04c6-478b-aa01-7977a3fa2080" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets />
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

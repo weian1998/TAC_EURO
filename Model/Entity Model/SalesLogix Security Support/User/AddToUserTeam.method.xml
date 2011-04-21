@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="e540fc7c-5dbf-4324-b5f9-b71ceb145b42" lastModifiedUtc="2010-03-18T16:04:23.0907762Z" name="AddToUserTeam" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="ed8f6a7c-4959-4f39-80d5-25eeefcc9e0e" paramName="userTeam" sequence="0" paramType="IUser" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="d4840df0-e559-42e4-be5e-91722f3ad0a2" lastModifiedUtc="2010-03-18T16:03:33.0967762Z" targetType="Sage.SalesLogix.User.Rules, Sage.SalesLogix.BusinessRules" targetMethod="AddToUserTeam" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

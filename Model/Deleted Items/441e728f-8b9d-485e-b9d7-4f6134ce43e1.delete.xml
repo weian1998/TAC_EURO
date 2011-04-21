@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<DeletedItem>
+  <id>441e728f-8b9d-485e-b9d7-4f6134ce43e1</id>
+  <url>\Entity Model\Relationships\SalesProcesses.SalesProcessesId.SalesProcessAudits.OneToMany.SalesProcessAudit.SalesProcessId.relationship.xml</url>
+  <caption>Sales Processes.SalesProcessAudits 1:M Sales Processes Audit</caption>
+  <extension>.relationship.xml</extension>
+  <modelId>a7bdd2d9-93b0-499d-9fd4-c3f7a5f94e28</modelId>
+  <dateDeleted>2007-12-14T22:40:00.1788242Z</dateDeleted>
+  <image>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALEwAACxMBAJqcGAAAATxJREFUOE9j/P//PwMxoGf16//ff/1n+Pz9P8PHbyD8D8j+x8AAMoAY3L3q1f9Fh/7/n7rz7/+W1T//F8379t8w9SxxmkEWgAxoWvLyf+nsF//TJj77H9b+9L9LxX3iDVi+7QzQHAT48evff1PPZHSTn/8PB5rsVfcYpBLstYCiDdxBJVtTYQbsOX7j/7KNh/+//vQXYQA2v0XWH2cFag4Irdz7zyas/svcNYf+//n7D6jxz/8bT379P3LjOzYXIPwW3njln2140zP3tDnWIJdMX7YbrAEdM+Dym0f6PDtiYgduALrffPNWisEMQI0B1HBiwOU3l4QJ//wL10XDohBbOIETIS6/eWbMcwur3g8MwIY/uNIA2AB8/nRNnsrnl7/aE1c4ETQAZjiuNEC0AbjCiWgDcIUT0QbgCycAcqfO4aJXkyUAAAAASUVORK5CYII=</image>
+  <restoreDataType>System.String, mscorlib</restoreDataType>
+  <restoreData>
+    <string>&lt;?xml version="1.0"?&gt;
+&lt;relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="441e728f-8b9d-485e-b9d7-4f6134ce43e1" cardinality="1:M" parentEntityId="869e93a3-1bb8-4c68-bdf8-b439e6e64a36" childEntityId="747376db-b6b7-4d74-9f52-a22b6212585e"&gt;
+  &lt;ExtendedPropertiesCollection&gt;
+    &lt;extendee type="Sage.Platform.Orm.Entities.OrmRelationship" /&gt;
+  &lt;/ExtendedPropertiesCollection&gt;
+  &lt;column&gt;
+    &lt;OrmRelationshipColumn parentPropertyId="6870e821-3ef3-4b3c-98fa-d636275e2445" childPropertyId="cb6312cb-716b-488b-82e1-0a60fbd344f6" ordinal="0" /&gt;
+  &lt;/column&gt;
+  &lt;parentProperty xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRelationProperty" id="84909bf7-f25a-470e-ba59-c198ac38ec34" name="SalesProcessAudits" displayCategory="Intermediate" displayName="SalesProcessAudits" cultureName="en-US" isNullable="true" include="true"&gt;
+    &lt;ExtendedPropertiesCollection&gt;
+      &lt;extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty"&gt;
+        &lt;extender guid="4fc827e6-aa9d-4b12-b836-d0871bc288b8"&gt;
+          &lt;OrmPropertyExtension&gt;
+            &lt;GenerateGetBy&gt;false&lt;/GenerateGetBy&gt;
+          &lt;/OrmPropertyExtension&gt;
+        &lt;/extender&gt;
+      &lt;/extendee&gt;
+    &lt;/ExtendedPropertiesCollection&gt;
+    &lt;SystemDataType guid="ee1eb00b-6fba-362c-bdbf-f6b422710f0a"&gt;
+      &lt;SystemDataTypeBase /&gt;
+    &lt;/SystemDataType&gt;
+  &lt;/parentProperty&gt;
+  &lt;childProperty xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRelationProperty" id="f8b25611-da84-435b-9698-3cda377f11cb" name="Property1" displayCategory="Intermediate" displayName="Property1" cultureName="en-US" isNullable="true" include="false"&gt;
+    &lt;ExtendedPropertiesCollection&gt;
+      &lt;extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty"&gt;
+        &lt;extender guid="4fc827e6-aa9d-4b12-b836-d0871bc288b8"&gt;
+          &lt;OrmPropertyExtension&gt;
+            &lt;GenerateGetBy&gt;false&lt;/GenerateGetBy&gt;
+          &lt;/OrmPropertyExtension&gt;
+        &lt;/extender&gt;
+      &lt;/extendee&gt;
+    &lt;/ExtendedPropertiesCollection&gt;
+    &lt;SystemDataType guid="ee1eb00b-6fba-362c-bdbf-f6b422710f0a"&gt;
+      &lt;SystemDataTypeBase /&gt;
+    &lt;/SystemDataType&gt;
+  &lt;/childProperty&gt;
+&lt;/relationship&gt;</string>
+  </restoreData>
+</DeletedItem>

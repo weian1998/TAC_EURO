@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="f33a6cf5-95a8-4bc6-80e4-9a9ffb98a20f" lastModifiedUtc="2010-03-22T20:58:26.2369258Z" name="GetAccountAccess" returnType="IList&lt;IAccount&gt;" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="99f498d1-6ee7-422e-b904-b07532940008" lastModifiedUtc="2010-03-22T20:57:58.0113114Z" targetType="Sage.SalesLogix.Team.Rules, Sage.SalesLogix.BusinessRules" targetMethod="GetAccountAccess" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

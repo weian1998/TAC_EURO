@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmAnalyticsDateDiffMetricFilter" id="b51fe980-e074-4797-8d16-61658f57356d" lastModifiedUtc="2010-04-15T21:07:18.4208289Z" filterName="CampaignDuration" analyticsAvailable="true" aggregation="SUM" fromPropertyName="ActualLaunchDate" toPropertyName="EndDate">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmAnalyticsDateDiffMetricFilter" />
+  </ExtendedPropertiesCollection>
+</entityFilter>

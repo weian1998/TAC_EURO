@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="6bd57f68-0a4b-46aa-bb9e-9c30ab77459d" lastModifiedUtc="2010-03-24T16:08:53.642865Z" name="AddDefaultRights" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="c8ec7c46-8c22-4695-936c-3cebcac95d2c" lastModifiedUtc="2010-03-24T16:08:38.8770204Z" targetType="Sage.SalesLogix.OwnerRights.Rules, Sage.SalesLogix.BusinessRules" targetMethod="AddDefaultRights" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

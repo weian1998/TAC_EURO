@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmAnalyticsMetricEntityFilter" id="7be22abc-bf9b-4f91-af0b-b4d06a10937a" lastModifiedUtc="2010-03-04T17:45:53.2920178Z" filterName="SumActualAmount" propertyName="ActualAmount" analyticsAvailable="true" aggregation="SUM">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmAnalyticsMetricEntityFilter" />
+  </ExtendedPropertiesCollection>
+</entityFilter>

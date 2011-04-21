@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="7dc2221b-0015-470c-8cf2-bb65930565f4" lastModifiedUtc="2009-12-10T18:55:14.186Z" name="ContactCanReceiveLiterature" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="31fc9d66-f4d1-484d-ab07-4063b918469c" lastModifiedUtc="2009-12-10T18:55:03.515Z" targetType="Sage.SalesLogix.LitRequest.Rules, Sage.SalesLogix.BusinessRules" targetMethod="ContactCanReceiveLiterature" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

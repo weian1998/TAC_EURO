@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="1460551a-069d-4e4d-9beb-14935667442a" lastModifiedUtc="2010-05-28T00:52:32.1835466Z" name="lueAccount_OnChange" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="CompetitorDetails">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="54350826-1ae6-4b25-a517-f80281b81b06" paramName="form" sequence="0" paramType="ICompetitorDetails" />
+    <OrmEntityMethodParam id="a40d5cad-1815-4e9a-95b6-3c475dd9901b" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets />
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

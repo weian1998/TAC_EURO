@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="5" MadCap:lastHeight="860" MadCap:lastWidth="699" MadCap:conditions="Output.WebClient,Primary.Accelerator,Output.IntegrationContract" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Administration|Security" MadCap:InPreviewMode="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" /><title>What are Roles and Secured Actions?</title>
+        <link href="../SALESLOGIX.CSS" rel="stylesheet" type="text/css" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1><a name="kanchor41"></a>What are Roles and Secured Actions?</h1>
+        <p>A role determines what functionality a user can access in the Web Client. Roles use secured actions to control access to user interface elements such as pages, menus, menu items, toolbars, and buttons. When you control access to individual user interface elements, you can control access to actions such as editing, deleting, or printing. Current secured elements are all user interface elements giving access to accounts, contacts, and opportunities.</p>
+        <p>You secure a user interface element by assigning a secured action to its Applied Secured property in the Application Architect. Once a secured action is applied to a user interface element, only users who are assigned a role that includes the secured action can see and use the element. For example, Entities/Account/Save is the secured action assigned to the Applied Security property for the Save button action on the Account Detail view. When the button loads at runtime, the display value changes depending on whether the user has permission to perform the action.</p>
+        <p>A user interface element in the Web Client that is secured restricts access from all users until a role is assigned which gives access to the user. To secure elements in the Web Client using roles you must add secured actions to elements, add the secured action to a role, and assign users to the role.    <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler" MadCap:targets="example;roles steps">Tell me more... </a></p>
+        <p MadCap:targetName="example" style="display: none;">Elements are secured in the Application Architect by assigning a secured action to them, or applying security. The value of the Applied Security property is the secured action name. To secure an element in the UI and allow users access to that element you must:</p>
+        <ol MadCap:targetName="roles steps" style="display: none;">
+            <li class="Topic-Text-Numbered" value="1">Determine what secured action you want to use to secure the element. If necessary, you can create a new secured action in the Web Client.</li>
+            <li class="Topic-Text-Numbered" value="2">Add a secured action to the Applied Security property for the element in the Application Architect. See the "Understanding Secured Actions" topic in the Application Architect Help for more information.</li>
+            <li class="Topic-Text-Numbered" value="3">Add the secured action for that element to a role in the Web Client.</li>
+            <li class="Topic-Text-Numbered" value="4">Assign users to the role.</li>
+        </ol>
+        <p class="subheading">Default Roles</p>
+        <p><a name="DefaultRoles"></a>By default, new users are assigned the Standard User role. This allows access to all non-administrative functions in the Web Client. If you remove a user from this role, the user will not have access to any items that are secured unless you assign a new role. </p>
+        <p>The default roles are:</p>
+        <ul>
+            <li class="Bullets" value="1"><b>Administrator</b> - Allows add, edit, and delete permissions to administration functions such as users, teams, departments, pick lists, products, and packages. Also includes the permission to <a href="../General/mergerecordslistview.htm" target="_self">merge records</a>.</li>
+            <li class="Bullets" value="2"><b>Standard User</b> - Allows add, edit, and delete permissions to Web Client non-administrative entities such as accounts, contacts, and opportunities.</li>
+            <li class="Bullets" value="3"><b>Account Management</b> - Allows add, edit, and delete permissions to accounts.</li>
+            <li class="Bullets" value="4"><b>Contact Management</b> - Allows add, edit, and delete permissions to contacts.</li>
+            <li class="Bullets" value="5"><b>Opportunity Management</b> - Allows add, edit, and delete permissions to opportunities.</li>
+        </ul>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <tr>
+                <td style="width: 10%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="10%">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <ul>
+                        <li class="Bullets" value="1">Security in the Network Client is defined using feature security, function security, and administrative roles. Web security combines all Network elements into one security model - a role. You cannot use the Network security model for a user who is logged into the Web Client or the Web security model for a user who is logged into the Network Client.</li>
+                        <li class="Bullets" value="2">The admin login can access all user interface elements, regardless of secured actions.</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <p class="RelatedTopics">How do I?</p>
+        <p><a href="Creating_a_Role.htm" target="_self">Create a Role</a>
+        </p>
+        <p><a href="CreatingASecuredAction.htm" target="_self">Create a Secured Action</a>
+        </p>
+        <p><a href="Role_Users_Tab.htm" target="_self">Assign a Role to Users</a>
+        </p>
+        <p><a href="EditingOrDeletingASecuredAction.htm" target="_self">Edit or Delete a Secured Action</a>
+        </p>
+        <p><a href="Assigning_Users_To_Standard_Role.htm" target="_self">Assign All Users to the Standard User Role</a>
+        </p>
+        <div style="width: 100%;position: relative;">
+            <p>
+            </p>
+            <p style="border-top-style: Groove;border-top-color: #c0c0c0;border-top-width: 1px;">&#160;</p>
+            <p><![CDATA[ ]]><a href="../General/feedback.htm" target="_blank">Tell us how we can make the Help better.</a></p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

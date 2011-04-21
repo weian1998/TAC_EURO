@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="32b7752d-2391-4611-a398-030bf7add786" lastModifiedUtc="2010-07-19T17:01:43.2963491Z" name="OnLoad1" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="QualificationCategoryDetail">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="eab590f7-dc40-4f49-bbba-c19689f1f351" paramName="form" sequence="0" paramType="IQualificationCategoryDetail" />
+    <OrmEntityMethodParam id="1646e105-fbdf-4b5a-aaa3-30b2d4372ce3" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="14b966d6-6b61-48bf-826a-d464e89758ca" lastModifiedUtc="2010-07-23T16:14:06.3025991Z" targetType="Sage.BusinessRules.CodeSnippets.QualificationCategoryDetailEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="OnLoad1Step" active="true" codeSnippetId="bfc5f815-7117-4bc4-a9c1-9ce11494d85c">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

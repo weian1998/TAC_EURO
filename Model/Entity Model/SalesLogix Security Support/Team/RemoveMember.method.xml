@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="41b4c270-5259-4f52-9a23-9197f81d4a50" lastModifiedUtc="2010-02-25T21:13:43.1176934Z" name="RemoveMember" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="88cfd724-483e-453b-b6e8-55f1cfc039c0" paramName="member" sequence="0" paramType="IOwnerJoin" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="33fdfc84-b3a2-4a15-b11f-0b9351a46737" lastModifiedUtc="2010-02-25T21:13:23.5216934Z" targetType="Sage.SalesLogix.Team.Rules, Sage.SalesLogix.BusinessRules" targetMethod="RemoveMember" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

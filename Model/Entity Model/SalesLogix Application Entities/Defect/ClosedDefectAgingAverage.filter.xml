@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmAnalyticsDateDiffMetricFilter" id="82f43d1d-71c9-4947-8795-3573d89a02da" lastModifiedUtc="2010-04-15T22:09:34.887248Z" filterName="ClosedDefectAgingAverage" analyticsAvailable="true" aggregation="AVG" fromPropertyName="CreateDate" toPropertyName="ClosedDate">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmAnalyticsDateDiffMetricFilter" />
+  </ExtendedPropertiesCollection>
+</entityFilter>

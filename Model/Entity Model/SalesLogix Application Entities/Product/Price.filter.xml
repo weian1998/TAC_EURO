@@ -1,0 +1,13 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="7643fb33-5d7c-4863-b768-84d304997774" lastModifiedUtc="2010-06-18T22:01:03.1713421Z" filterName="Price" propertyName="ProductProgram.Price" analyticsAvailable="true" dataPath="PRODUCT:PRODUCTID&gt;PRODUCTID.PRODUCTPROGRAM!PRICE" characters="1">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRangeEntityFilter" />
+  </ExtendedPropertiesCollection>
+  <ranges id="43ef3e58-9a34-4256-8f1a-f689e0c8ec13" rangeName="$0 to $999" upper="999" />
+  <ranges id="64e2341d-d0b8-4986-ae79-b8d1fa0f9b2f" rangeName="$1000 to $9999" lower="1000" upper="9999" />
+  <ranges id="7928f58b-ebc4-4110-a90e-5412735d5b96" rangeName="$10,000 to $99,999" lower="10000" upper="99999" />
+  <ranges id="cba88305-da35-4757-b16d-3ef651572548" rangeName="$100,000 to $499,999" lower="100000" upper="499999" />
+  <ranges id="45965c68-6c26-45ff-aa53-b853bf2e4486" rangeName="$500,000 to $999,999" lower="500000" upper="999999" />
+  <ranges id="a505febd-f0e9-4791-92f4-2751a5060c9b" rangeName="$1,000,000 and higher" lower="1000000" />
+</entityFilter>

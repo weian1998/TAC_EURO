@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="cc27caff-0894-4b62-a93f-6691d38dd39d" lastModifiedUtc="2010-08-05T21:37:11.704456Z" name="OnBeforeUpdate" methodType="CrudEvent" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets>
+    <methodTarget id="310e8add-0bfd-4119-951e-6f5a2b8887cf" lastModifiedUtc="2010-12-28T23:59:12.8754084Z" targetType="Sage.SalesLogix.Accelerator.QualificationCategory.Rules, Sage.SalesLogix.AdminAccelerator.BusinessRules" targetMethod="ValidateItemCount" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </preExecuteTargets>
+  <methodTargets>
+    <methodTarget id="faf01ee5-942a-406e-8bf2-d54751d3ab20" lastModifiedUtc="2010-12-28T23:50:33.3950846Z" targetType="Sage.SalesLogix.Accelerator.QualificationCategory.Rules, Sage.SalesLogix.AdminAccelerator.BusinessRules" targetMethod="OnBeforeUpdate" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

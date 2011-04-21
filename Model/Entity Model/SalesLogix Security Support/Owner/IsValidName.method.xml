@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="853670e3-6c41-49dd-aa3d-9273a76a2419" lastModifiedUtc="2010-04-23T17:55:31.4126835Z" name="IsValidName" returnType="Boolean" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="4ae2f016-26e4-4dc1-884d-255b7749aada" paramName="name" sequence="0" paramType="String" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="9e5b11cb-4d5e-42d5-b2c4-b712dafd5110" lastModifiedUtc="2010-04-23T17:55:14.5057164Z" targetType="Sage.SalesLogix.Owner.Rules, Sage.SalesLogix.BusinessRules" targetMethod="IsValidName" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

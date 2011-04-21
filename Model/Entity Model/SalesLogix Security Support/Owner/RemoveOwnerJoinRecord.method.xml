@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="7af31150-8662-4079-9822-7bed517d3da8" lastModifiedUtc="2010-03-09T17:36:07.6429987Z" name="RemoveOwnerJoinRecord" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="3a5599ad-68fa-4199-9ad8-5b965a8e1baa" paramName="child" sequence="0" paramType="IOwner" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="56786923-9083-4c45-b1bf-9e6c9daabf5f" lastModifiedUtc="2010-03-09T17:35:44.3369987Z" targetType="Sage.SalesLogix.Owner.Rules, Sage.SalesLogix.BusinessRules" targetMethod="RemoveOwnerJoinRecord" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

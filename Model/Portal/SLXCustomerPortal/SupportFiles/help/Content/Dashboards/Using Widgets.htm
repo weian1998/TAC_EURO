@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="8" MadCap:lastHeight="1511" MadCap:lastWidth="1401" MadCap:conditions="" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebCustomerPortal.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" /><title>Using Widgets</title>
+        <link href="../SALESLOGIX.CSS" rel="stylesheet" type="text/css" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>Using Widgets</h1>
+        <p>Sage SalesLogix provides several <a href="Introducing Widgets.htm#Charting_Widgets">out-of-the-box widgets</a>. You can add, edit, and remove widgets from the dashboard, and you can rearrange widgets on the page with drag-and-drop. </p>
+        <p>Using pre-defined filters, you can display metrics for your data across ranges or from distinct values and display this data in one of the charting widgets. <a name="kanchor34"></a>For example, you can configure a column chart widget to display all the opportunities closed and won, by owner and the total amount of the sale, or a pie chart depicting sales&#160;won by a team. </p>
+        <p>However, when using distinct filters all charting widgets, except the pie chart, are limited to 10 data points at a time; the first ten in the selection. The pie chart widget allows you to select a +1 option which depicts the balance (over the 5 or 10 selected) rolled into an Other category. When using range filters, a data point for each defined data range is returned. This can result in a chart displaying far more than 10 slices or columns, but this setting can be edited by your system administrator.</p>
+        <p class="RelatedTopics">How Do I?</p>
+        <div class="MCDropDown">
+            <div class="MCDropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot" id="MCDropDownHotSpot_2088317972_0" onclick="FMCDropDown( this ); return false;" name="AddContent">Add a widget</a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_2088317972_0" style="display: none;">
+                <ol>
+                    <li value="1">Right-click the <b>My Dashboard</b> tab, and click <b>Add Content</b>.</li>
+                    <li value="2">On the Add New Content dialog box, click the <b>Add</b> button for the widget you want to add<b></b>.<br />For example, to add a pie chart widget, click Add under Pie Chart.<br />The blank widget appears on the dashboard and the widget editor opens.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="MCDropDown">
+            <div class="MCDropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot" id="MCDropDownHotSpot_2088317972_1" onclick="FMCDropDown( this ); return false;" name="Edit_an_existing_widget">Edit an existing widget</a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_2088317972_1" style="display: none;">
+                <ol>
+                    <li value="1">On the toolbar for the widget, click <b>Edit</b>.</li>
+                    <li value="2">Make the changes necessary.</li>
+                    <li value="3">Click <b>OK</b>.<br />The widget displays the changes.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="MCDropDown">
+            <div class="MCDropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot" id="MCDropDownHotSpot_2088317972_2" onclick="FMCDropDown( this ); return false;">Configure a charting widget</a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_2088317972_2" style="display: none;">
+                <ol>
+                    <li value="1">On the Edit dialog box, <a name="kanchor37"></a>configure the settings that are common to all charting widgets:</li>
+                    <ul>
+                        <li class="Bullets" value="1"><b>Entity</b> - The entity from which you want to pull the data. For example, <i>Opportunities</i>. All entities with list views are available to view in charts and lists.</li>
+                        <li class="Bullets" value="2"><b>Group</b> - The group for which you want to view data. For example, <i>All Opportunities</i>. All groups available to a user are available to use in charts and lists.</li>
+                        <li class="Bullets" value="3"><b>Dimension</b> - The data you want to view. For example, <i>Probability</i>. All current Range and Distinct filters are available as dimensions.</li>
+                    </ul>
+                    <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+                        <col style="width: 45px;">
+                        </col>
+                        <col>
+                        </col>
+                        <tr>
+                            <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                                <p style="text-align: center;margin-bottom: 0;" align="center">
+                                    <img src="../image/note.gif">
+                                    </img>
+                                </p>
+                            </td>
+                            <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">The available dimensions are dependent on the available entity filters and other configuration settings. See your system administrator for more information.
+
+ 
+
+</td>
+                        </tr>
+                    </table>
+                </ol>
+                <ol>
+                    <ul>
+                        <li class="Bullets" value="1"><b>Metric</b> - The way you want to calculate the data. For example,<i>&#160;Total Actual Amount</i>. All entities with list views have an associated count metric, for example, CountLeads and CountAccounts. There are additional metrics for Opportunities and History.</li>
+                    </ul>
+                    <p>&#160;</p>
+                    <li value="2">Configure the settings specific to each widget:<ul><li class="Bullets" value="1"><b>Bar Chart</b>: Type a title, a caption, labels for the X- and Y-axes, and then select Yes or No to display names for each bar.</li><li class="Bullets" value="2"><b>Column Chart</b>: Type a title, a caption, labels for the X- and Y-axes, a goal, and then select Yes or No to display names for each column.</li><li class="Bullets" value="3"><b>Funnel</b>: Type a title for the chart, and then select Yes or No to display names for each segment.</li><li class="Bullets" value="4"><b>Line Chart</b>: Type a title, a caption, labels for the X- and Y-axes, and then select Yes or No to display names for each data point.</li><li class="Bullets" value="5"><b>Pie Chart</b>: Type a title, select how many slices to display, select Yes or No to add a slice for "Other", and choose whether to display a legend and names for each slice.</li></ul></li>
+                    <li value="3">Click <b>OK</b>.<br />The widget displays the data as configured.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="MCDropDown">
+            <div class="MCDropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot" id="MCDropDownHotSpot_2088317972_3" onclick="FMCDropDown( this ); return false;">Configure the Group List widget</a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_2088317972_3" style="display: none;">
+                <ol>
+                    <li value="1">On the Edit dialog box, select an <b>Entity</b> and a <b>Group</b> from the drop-down lists. For example, <i>Opportunities</i>, and <i>Closed Won</i>.</li>
+                    <li value="2">Type the <b>Number of Records </b>you want in the list. For example, <i>10</i>,<i></i> <![CDATA[ ]]><i>25,</i> or <i>50</i>. </li>
+                    <li value="3">Type the number of records you want visible in the <b>Visible Records</b> box; 10, 25 or 50. <br />For example, if you typed 50 records in step 2, but only want to see ten at a time in the list, type 10. The widget resizes to accommodate the number of visible records.</li>
+                    <li value="4">Click <b>OK</b>.<br />The widget displays the list.</li>
+                    <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+                        <col style="width: 45px;" />
+                        <col />
+                        <tr>
+                            <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                                <p style="text-align: center;margin-bottom: 0;" align="center">
+                                    <img src="../image/note.gif" />
+                                </p>
+                            </td>
+                            <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                                <p class="Tip-Note-Text" style="margin-bottom: 0;">You can use any number between 1 and the maximum number of records configured to display. The default maximum is 50.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </ol>
+            </div>
+        </div>
+        <div class="MCDropDown">
+            <div class="MCDropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot" id="MCDropDownHotSpot_2088317972_4" onclick="FMCDropDown( this ); return false;">Configure the Links List widget</a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_2088317972_4" style="display: none;">
+                <ol>
+                    <li value="1">On the Edit dialog box, type a title for the widget.</li>
+                    <li value="2">Click <b>Add Link</b>.</li>
+                    <li value="3">Double-click the <b>Icon URL</b>&#160;box, and type the path to the icon you want to display for the link. For example, <i>/google.jpg</i>.</li>
+                    <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+                        <col style="width: 45px;" />
+                        <col />
+                        <tr>
+                            <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                                <p style="text-align: center;margin-bottom: 0;" align="center">
+                                    <img src="../image/note.gif" />
+                                </p>
+                            </td>
+                            <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                                <p class="Tip-Note-Text" style="margin-bottom: 0;">This URL&#160;must be a relative path to an image on the Web server.</p>
+                            </td>
+                        </tr>
+                    </table>
+                    <p>&#160;</p>
+                    <li value="4">Double-click the <b>Link URL</b>&#160;box, and type the URL for the link you want to display. For example, <i>http://localhost/SlxClient/Account.aspx</i>. </li>
+                    <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+                        <col style="width: 45px;" />
+                        <col />
+                        <tr>
+                            <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                                <p style="text-align: center;margin-bottom: 0;" align="center">
+                                    <img src="../image/note.gif" />
+                                </p>
+                            </td>
+                            <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                                <p class="Tip-Note-Text" style="margin-bottom: 0;">This path can be a relative path within the SLXClient portal, or an absolute link to an external site. The URL for an external site must include the http:// designator. For example, to access www.google.com the URL must read <i>http://www.google.com</i>. Otherwise the browser will search for http://&lt;SLXClient site&gt;/www.google.com.</p>
+                            </td>
+                        </tr>
+                    </table>
+                    <p>&#160;</p>
+                    <li value="5">Double-click the <b>Link Text</b> box, and type the text you want to display as the link. For example, <i>Google Search Page</i>.</li>
+                    <li value="6">Double-click the <b>Target box</b>, and type an identifier for the target. For example, if you want the link to open in a new browser window, type <i>New Window</i>. When you click the link, a new browser window/tab opens.</li>
+                    <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+                        <col style="width: 45px;" />
+                        <col />
+                        <tr>
+                            <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                                <p style="text-align: center;margin-bottom: 0;" align="center">
+                                    <img src="../image/note.gif" />
+                                </p>
+                            </td>
+                            <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                                <p class="Tip-Note-Text" style="margin-bottom: 0;">If you leave this field blank, the link opens in the active browser window/tab when clicked. If several links have the same target designation, each link replaces the other as you click them.</p>
+                            </td>
+                        </tr>
+                    </table>
+                    <p>&#160;</p>
+                    <li value="7">Click <b>Add Link</b> to add another link, or click <b>OK</b> to close the editor.<br />When you click OK, the widget refreshes to display the links.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="MCDropDown">
+            <div class="MCDropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot" id="MCDropDownHotSpot_2088317972_5" onclick="FMCDropDown( this ); return false;">Refresh a widget</a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_2088317972_5" style="display: none;">
+                <ul>
+                    <li value="1">On the widget toolbar, click <b>Refresh</b>.<br />The widget displays any changes in the data.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="MCDropDown">
+            <div class="MCDropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot" id="MCDropDownHotSpot_2088317972_6" onclick="FMCDropDown( this ); return false;" name="kanchor38">Remove a widget</a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_2088317972_6" style="display: none;">
+                <ul>
+                    <li value="1">On the widget toolbar, click <b>Close</b>.<br />The widget is permanently removed from the dashboard.</li>
+                </ul>
+            </div>
+        </div>
+        <p class="RelatedTopics">Related Topics</p>
+        <p><a href="Working with the Dashboard.htm">Working with the Dashboard</a><a href="Working with the Dashboard.htm">&#160;</a>
+        </p>
+        <blockquote>
+        </blockquote>
+        <p>&#160;</p>
+        <div style="width: 100%;position: relative;">
+            <p>
+            </p>
+            <p style="border-top-style: Groove;border-top-color: #c0c0c0;border-top-width: 1px;">&#160;</p>
+            <p><![CDATA[ ]]><a href="../General/feedback.htm" target="_blank">Tell us how we can make the Help better.</a></p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

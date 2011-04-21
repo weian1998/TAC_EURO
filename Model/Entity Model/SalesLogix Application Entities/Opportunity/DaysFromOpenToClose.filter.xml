@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmAnalyticsDateDiffMetricFilter" id="fc2c8c5a-d982-4717-828f-4a8f25b2e13c" lastModifiedUtc="2010-04-14T22:35:01.7733761Z" filterName="DaysFromOpenToClose" analyticsAvailable="true" aggregation="AVG" fromPropertyName="DateOpened" toPropertyName="ActualClose">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmAnalyticsDateDiffMetricFilter" />
+  </ExtendedPropertiesCollection>
+</entityFilter>

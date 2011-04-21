@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="506eef35-6ead-4f7c-92b6-64fe609c2467" lastModifiedUtc="2011-01-12T19:15:51.3946165Z" name="IsDuplicate" returnType="Boolean" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="6d0df0ce-8050-43ae-a75f-d411b0163353" lastModifiedUtc="2011-01-12T19:15:24.7880947Z" targetType="Sage.SalesLogix.Accelerator.UserRole.Rules, Sage.SalesLogix.AdminAccelerator.BusinessRules" targetMethod="IsDuplicate" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

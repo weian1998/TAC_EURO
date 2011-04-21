@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="2ddaff21-29dd-4f07-9a29-e3a68a1803d0" lastModifiedUtc="2010-09-30T21:08:09.943935Z" name="ValidateResource" returnType="Boolean" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="0018f521-7d25-4116-b05b-8dbca449a945" lastModifiedUtc="2010-12-28T23:44:22.410833Z" targetType="Sage.SalesLogix.Accelerator.ResourceList.Rules, Sage.SalesLogix.AdminAccelerator.BusinessRules" targetMethod="ValidateResource" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

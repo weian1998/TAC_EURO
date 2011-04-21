@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="bc65ab5b-2236-4e09-b1f6-832c1d04cb89" lastModifiedUtc="2010-12-30T19:42:46.7509685Z" parentEntityId="6ab738f6-21b0-4fe2-8df5-6f192281423c" childEntityId="c3159cd5-daa2-4c23-b235-facc572f59f1">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="a42cb9d1-755c-49ca-b57c-00d368346558" lastModifiedUtc="2010-12-30T19:42:46.7509685Z" name="Resources" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="d8680bb4-f1a4-438d-bb5b-4216a51a8dce" lastModifiedUtc="2010-07-23T00:13:48.6984606Z" name="Coordinator" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="41e88f75-ed70-4333-9eb1-4d595e32127b" parentPropertyId="ff93a248-20ab-407a-899d-40b1435ca5c3" childPropertyId="02cf53ee-28ef-4262-a94a-a5010455c320" ordinal="0" />
+  </column>
+</relationship>

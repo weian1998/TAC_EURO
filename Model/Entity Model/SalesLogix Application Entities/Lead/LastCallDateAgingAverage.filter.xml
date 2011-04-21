@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmAnalyticsDateDiffMetricFilter" id="a129635c-a051-4998-930f-9259c4899c98" lastModifiedUtc="2010-04-16T21:22:50.5479439Z" filterName="LastCallDateAgingAverage" propertyName="LastCallDate" analyticsAvailable="true" aggregation="AVG" fromPropertyName="LastCallDate" toPropertyName=":today">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmAnalyticsDateDiffMetricFilter" />
+  </ExtendedPropertiesCollection>
+</entityFilter>

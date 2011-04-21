@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="72157f6d-0746-4ca9-a6ba-ea043ff2bbf7" lastModifiedUtc="2010-02-09T15:05:09.5823295Z" name="UpdateDefaultSecurityProfile" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="cc74ae8e-e9ff-4b03-b530-99ce47993a21" paramName="securityProfile" sequence="0" paramType="IOwnerSecurityProfile" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="2bbbd683-da83-43cd-b89e-c8a70249c532" lastModifiedUtc="2010-02-09T15:04:47.1093295Z" targetType="Sage.SalesLogix.User.Rules, Sage.SalesLogix.BusinessRules" targetMethod="UpdateDefaultSecurityProfile" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

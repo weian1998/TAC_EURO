@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="c12ae367-822c-4a2b-99a0-f66a62e5991a" lastModifiedUtc="2010-05-11T16:36:14.2460341Z" filterName="ReorderQty" propertyName="Reorderqty" characters="0">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRangeEntityFilter" />
+  </ExtendedPropertiesCollection>
+  <ranges id="fc864585-32c8-434c-82fa-5517c4dc05a8" rangeName="0 - 50" upper="50" />
+  <ranges id="1e486314-3ae3-448e-a1d8-e75a3cc07c81" rangeName="50 - 100" lower="51" upper="100" />
+  <ranges id="f22a2fc2-1dbc-459c-aac6-a70f66ded881" rangeName="100 - 200" lower="101" upper="200" />
+  <ranges id="af11fdcd-7732-4f9e-926f-26fee9184f9f" rangeName="200 - 500" lower="201" upper="500" />
+  <ranges id="0b648395-b066-427d-8bdc-150a119f68d8" rangeName="500 - 1000" lower="501" upper="1000" />
+  <ranges id="4bc7f43f-12d5-4b99-ab51-12bdf75b8cbb" rangeName="1000 - 10000" lower="1001" upper="10000" />
+  <ranges id="1fb411be-c7a9-4820-a7c3-e5e3a319f4ff" rangeName="10000 or greater" lower="10001" />
+</entityFilter>

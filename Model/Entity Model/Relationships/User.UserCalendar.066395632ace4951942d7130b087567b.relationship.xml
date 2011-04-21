@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="06639563-2ace-4951-942d-7130b087567b" lastModifiedUtc="2010-02-01T19:19:52.1361876Z" parentEntityId="6ab738f6-21b0-4fe2-8df5-6f192281423c" childEntityId="a7752f54-e7a9-4f72-a91a-9766f94904eb" cascadeOption="SaveUpdateDelete">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="733d2b70-dbb6-419f-a5d7-aa7dcd0ae66f" lastModifiedUtc="2010-01-29T00:28:50.9490265Z" name="OthersAccessToUserCal" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="45d7f5a5-45bd-4471-a397-693569f619ae" lastModifiedUtc="2010-02-01T19:19:52.1361876Z" name="OthersAccessToUserCal" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="d4a1696a-64da-4937-886f-7db4575640fe" parentPropertyId="ff93a248-20ab-407a-899d-40b1435ca5c3" childPropertyId="4bb458cf-cd05-4a7a-8e75-2fab20527d59" ordinal="0" />
+  </column>
+</relationship>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="a923eec2-ac2f-4d4c-8f2a-c039985e13a8" lastModifiedUtc="2010-03-08T16:20:36.066Z" name="lueAddTeam_OnChange" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="TeamMembership">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="81e02172-1b51-48b6-8111-6e0b3476e705" paramName="form" sequence="0" paramType="ITeamMembership" />
+    <OrmEntityMethodParam id="e1fc5ea9-2401-4e94-98e3-c75c98a86ada" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="f4b182c5-0a40-4a37-a7e8-c2bda00c4fea" lastModifiedUtc="2010-03-18T20:13:01.2497762Z" targetType="Sage.BusinessRules.CodeSnippets.TeamMembershipEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="lueAddTeam_OnChangeStep" active="true" codeSnippetId="e5b37f8c-a079-49c7-9d06-4d7eef872cb1">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

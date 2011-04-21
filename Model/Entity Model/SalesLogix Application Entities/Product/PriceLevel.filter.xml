@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmDistinctEntityFilter" id="c77f5f79-bb32-4cbb-b739-9aae00280e12" lastModifiedUtc="2010-06-18T22:00:38.9839969Z" filterName="PriceLevel" propertyName="ProductProgram.Program" analyticsAvailable="true" dataPath="PRODUCT:PRODUCTID&gt;PRODUCTID.PRODUCTPROGRAM!PROGRAM" characters="0">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmDistinctEntityFilter" />
+  </ExtendedPropertiesCollection>
+</entityFilter>

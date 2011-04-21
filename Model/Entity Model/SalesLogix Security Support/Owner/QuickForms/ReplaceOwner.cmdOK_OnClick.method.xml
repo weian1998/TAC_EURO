@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="de12c48b-fdfb-4d15-8b2f-99b2a04264a4" lastModifiedUtc="2010-03-01T20:17:35.4160863Z" name="cmdOK_OnClick" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="ReplaceOwner">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="410e50f1-529e-4ea7-bf8a-057826b2b4f6" paramName="form" sequence="0" paramType="IReplaceOwner" />
+    <OrmEntityMethodParam id="c3f7a439-edb2-43c3-a39a-87f2222670c5" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="5ca4abc5-592d-42c7-a71f-1a64f880bed7" lastModifiedUtc="2010-03-01T20:17:04.3390863Z" targetType="Sage.BusinessRules.CodeSnippets.ReplaceOwnerEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="cmdOK_OnClickReplaceOwner" active="true" codeSnippetId="9b789132-a467-4ca0-8367-2379ff661968">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

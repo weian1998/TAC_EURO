@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="a65570ef-bdf2-4f7e-abb4-b628a46f4088" lastModifiedUtc="2010-02-09T15:32:03.8194881Z" name="AddToDepartment" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="b241526e-a9dd-4070-b5e7-8bbc6e2166a6" paramName="department" sequence="0" paramType="IDepartment" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="4fc401b7-aaf4-4896-96ba-93aaa0a65ccb" lastModifiedUtc="2010-02-09T15:31:30.6841749Z" targetType="Sage.SalesLogix.User.Rules, Sage.SalesLogix.BusinessRules" targetMethod="AddToDepartment" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

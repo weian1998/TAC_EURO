@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="89e62069-2475-48fb-ba31-8a72b09fba71" lastModifiedUtc="2010-12-22T00:02:21.3933584Z" name="OnBeforeUpdate" methodType="CrudEvent" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="ab834c1b-bb61-4839-ba61-4d7b92a1f690" lastModifiedUtc="2010-12-28T23:57:34.0604924Z" targetType="Sage.SalesLogix.TicketProblemType.Rules, Sage.SalesLogix.QandAAccelerator.BusinessRules" targetMethod="ValidateProblem" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

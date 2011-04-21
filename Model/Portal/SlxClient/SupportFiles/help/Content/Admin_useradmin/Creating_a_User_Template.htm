@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="Output.WebClient" MadCap:lastBlockDepth="5" MadCap:lastHeight="783" MadCap:lastWidth="717" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" /><title>Creating a User Template </title>
+        <link href="../SALESLOGIX.CSS" rel="stylesheet" type="text/css" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>Creating a User Template<a name="kanchor288"></a> <![CDATA[ ]]></h1>
+        <p>User templates define the settings you want to use when creating new users.  Templates are recommended because they significantly reduce administration time.</p>
+        <p>Sage SalesLogix includes several default user templates. You can customize the default user template, or create a new user template. <a href="javascript:void(0);" class="MCToggler" onclick="FMCToggler( this ); return false;" MadCap:targets="example">Tell me more...</a> <![CDATA[ ]]></p>
+        <p MadCap:targetName="example" style="display: none;">For example, you can create a user template named Manager which can function as the generic user profile for all managers in your company. Then, when you create the users and apply the template, the profile is already configured with the appropriate settings.</p>
+        <p>User templates do not consume a Sage SalesLogix user license and cannot log on to Sage SalesLogix.</p>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <tr>
+                <td style="width: 10%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="10%">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p valign="top" width="90%">If the template is not assigned to the <a href="../Admin_security/What_are_Roles.htm" target="_self">Standard User role</a>, any new users created from the template will not have access to some Web Client features.</p>
+                </td>
+            </tr>
+        </table>
+        <p class="Infinitive">To create</p>
+        <ol>
+            <li class="Topic-Text-Numbered" value="1">On the          <![CDATA[ ]]><b>Administration</b> menu, click <b>Add Users</b>.</li>
+            <li class="Topic-Text-Numbered" value="2">In the <b>Add</b> box, select <b>Template</b>.</li>
+            <li class="Topic-Text-Numbered" value="3">In the <b>Quantity</b> box, select the number of user templates that you want to add.</li>
+            <li class="Topic-Text-Numbered" value="4">If you want to manually modify each tab in 
+ the template's profile to configure the settings, proceed to Step 7.</li>
+            <li class="Topic-Text-Numbered" value="5">To create the template from an existing template or using the profile of an existing user, select the <b>Create From Profile</b> check box. Then, select one of the following.</li>
+        </ol>
+        <ul>
+            <li class="Topic-Text-Bulleted-2" value="1"><span style="font-weight: bold;">Template</span> adds a template based on an existing 
+ template. In the <span style="font-weight: bold;">Templates</span> 
+ box, select the name of the template.</li>
+            <li class="Topic-Text-Bulleted-2" value="2"><span style="font-weight: bold;">Existing User</span> adds a new user based 
+ on an existing user’s profile. In the <span style="font-weight: bold;">User</span> 
+ box, select the name of the existing user.</li>
+        </ul>
+        <ol>
+            <li class="Topic-Text-Numbered" value="6">Select the tabs to copy 
+ from the template or user profile. <a href="javascript:void(0);" class="MCToggler" onclick="FMCToggler( this ); return false;" MadCap:targets="Tabs">Tell me more...</a></li>
+        </ol>
+        <ul MadCap:targetName="Tabs" style="display: none;">
+            <li class="Topic-Text-Bulleted-2" value="1"><b>General</b> - General and department settings are copied. The Username, Name, Title, and E-Mail fields do not apply when
+copying information.</li>
+            <li class="Topic-Text-Bulleted-2" value="2"><b>Employee</b> - The Fax, Mobile, Pager, Direct, PIN#, Accounting, and all Personal fields
+do not apply when copying information.</li>
+            <li class="Topic-Text-Bulleted-2" value="3"><b>Security</b> - All security settings are copied. </li>
+            <li class="Topic-Text-Bulleted-2" value="4"><b>Teams</b> - All teams settings are copied.</li>
+            <li class="Topic-Text-Bulleted-2" value="5"><b>Calendar</b> - All calendar settings are copied.</li>
+            <li class="Topic-Text-Bulleted-2" value="6"><b>Service/Support</b> - All service and support settings are copied.</li>
+            <li class="Topic-Text-Bulleted-2" value="7"><b>Client Options (Client System)</b> - The default account owner and base template
+settings are copied.</li>
+        </ul>
+        <ol>
+            <li class="Topic-Text-Numbered" value="7">Click <b>OK</b>.</li>
+            <li class="Topic-Text-Numbered" value="8">Once the template is created, use the User Detail view to <a href="Changing_a_Users_Profile.htm" target="_self">modify the user's profile</a>.</li>
+            <p class="Topic-Text-Numbered">Some of the fields in the user profile do not apply to user templates and will be unavailable for modification.</p>
+        </ol>
+        <p class="RelatedTopics">Related Topics</p>
+        <p class="Topic-Text-Numbered"><a href="Adding_a_User.htm" target="_self">Adding a User</a>
+        </p>
+        <div style="width: 100%;position: relative;">
+            <p>
+            </p>
+            <p style="border-top-style: Groove;border-top-color: #c0c0c0;border-top-width: 1px;">&#160;</p>
+            <p><![CDATA[ ]]><a href="../General/feedback.htm" target="_blank">Tell us how we can make the Help better.</a></p>
+        </div>
+        <p>&#160;</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

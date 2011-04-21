@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="0b89f026-b6b6-4ee1-a5dd-515cda9a6d30" lastModifiedUtc="2010-04-27T18:01:05.4595993Z" parentEntityId="dfca3267-2f5b-4970-813b-5aeb9ea75649" childEntityId="0ade5197-07ac-498b-8b31-1fe657763b21" cascadeOption="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="69c76905-30be-4af0-8e42-fd909c239239" lastModifiedUtc="2010-04-27T18:01:05.4595993Z" name="OwnerJoinAsParent" audited="false" include="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="9c0bb1ce-2ae9-482d-9865-b5de502d9b77" lastModifiedUtc="2010-01-26T15:40:35.4706188Z" name="Parent" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="4ff458ad-29e1-4419-a0b3-269dc0284cb2" parentPropertyId="178ebc9c-d165-4d4c-af7d-0315701aa611" childPropertyId="11aeb918-2a8a-4486-8ad7-c1e5a039ae58" ordinal="0" />
+  </column>
+</relationship>

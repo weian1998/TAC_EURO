@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="bbee6748-a68e-444f-a9ef-5f785bf696fc" lastModifiedUtc="2010-02-22T19:28:32.7962556Z" name="SaveButton_OnClick" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="InsertDepartment">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="184ec19f-c921-4749-b66c-7d9e9e136ebb" paramName="form" sequence="0" paramType="IInsertDepartment" />
+    <OrmEntityMethodParam id="801376a9-43f3-4351-ab17-b6043778d61f" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="55b6ede2-1eae-414f-9604-e2cbf9260fb7" lastModifiedUtc="2010-05-05T15:55:37.0113753Z" targetType="Sage.BusinessRules.CodeSnippets.InsertDepartmentEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="SaveButton_OnClickStep" active="true" codeSnippetId="50773d47-cf3c-48e6-93bb-db3bc954ac07">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

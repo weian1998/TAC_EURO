@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="f34ecef7-9f58-4a82-a5d1-72aa30321aa6" lastModifiedUtc="2010-04-08T22:03:06.6963948Z" name="addManagerCheckBox_OnChange" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="InsertTeam">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="c3e0ce6f-a7f0-439b-a682-979fd595dd61" paramName="form" sequence="0" paramType="IInsertTeam" />
+    <OrmEntityMethodParam id="fc57bba5-93a6-4804-8696-a610a994061e" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="81083070-7cbc-4faf-ab09-406e2de0a9f3" lastModifiedUtc="2010-06-02T22:35:04.0435639Z" targetType="Sage.BusinessRules.CodeSnippets.InsertTeamEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="addManagerCheckBox_OnChangeStep" active="true" codeSnippetId="ddca11d6-f94b-4107-8d28-4972fe39eb55">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

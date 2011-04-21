@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="5" MadCap:lastHeight="1162" MadCap:lastWidth="729" MadCap:conditions="Output.WebClient" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Administration|User Administration" MadCap:InPreviewMode="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" /><title>Understanding Users</title>
+        <link href="../SALESLOGIX.CSS" rel="stylesheet" type="text/css" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>Understanding Users</h1>
+        <p><a name="kanchor20"></a>Users are the people that can access your Sage SalesLogix database. Each user has a profile that defines information such as the user name, title, manager, team membership, department membership, and security access.</p>
+        <p>You can add any of the following user types:</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" class="MCToggler" onclick="FMCToggler( this ); return false;" MadCap:targets="network">Network</a> <![CDATA[ ]]></li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="network" style="display: none;">A user who primarily accesses Sage SalesLogix via a direct network connection to the database.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" class="MCToggler" onclick="FMCToggler( this ); return false;" MadCap:targets="concurrent1;concurrent2;concurrent3;concurrent4">Concurrent</a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="concurrent1" style="display: none;"> These licenses enable access to Sage SalesLogix, but are not assigned to an individual user. The number of users accessing the software at any one time may not exceed the number of Concurrent User licenses granted. For example, if you have 100 Concurrent User licenses, you can create any number of concurrent users, but only 100 of those users can be logged on to Sage SalesLogix at the same time.</p>
+        <p class="Topic-Text-Indent" MadCap:targetName="concurrent2" style="display: none;">Concurrent users are able to log on to the Web Client, the Sage SalesLogix Client, the Administrator, Architect, SpeedSearch Client, Sync Client (Remote Office only) and a Remote Office.  Each logon will consume one Concurrent User license.  Concurrent users who log on to SpeedSearch Client will not consume a Concurrent User license, regardless of the access method.</p>
+        <p class="Topic-Text-Indent" MadCap:targetName="concurrent3" style="display: none;">Concurrent User licenses can be divided between the Host and any or all Remote Offices. This assignment can be changed at any time through the Administrator (Systems &gt; Offices &gt; Edit Remote Office &gt; Sync Options tab). When you assign Concurrent User licenses to a Remote Office, the Host assumes all Remote Office licenses are consumed at all times. For example, if you have a 30 Concurrent User license and you assign 10 licenses to one Remote Office, the Host automatically subtracts the 10 licenses and only allows 20 Concurrent Users to log on to applications at the main office.</p>
+        <p class="Topic-Text-Indent" MadCap:targetName="concurrent4" style="display: none;">The Concurrent User license type cannot be assigned to Remote users.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" class="MCToggler" onclick="FMCToggler( this ); return false;" MadCap:targets="remote1;remote2">Remote</a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="remote1" style="display: none;">Remote Clients keep a subset of the main office database on their local computer (a laptop, for example) and use synchronization to transfer changes between their system and the main office. Note that Remote users never connect with the Remote Office, always with the main office.</p>
+        <p class="Topic-Text-Indent" MadCap:targetName="remote2" style="display: none;">If you have less than five Remote users, and it is not important that they share or have immediate access to the same accounts, then each user can be set up as a Remote user. A sales person traveling or a lone regional representative at a remote location are both examples of Remote users.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" class="MCToggler" onclick="FMCToggler( this ); return false;" MadCap:targets="template1;template2;template3">Template</a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="template1" style="display: none;">User Templates can be created to define settings you want to use when creating new users. For example, you can create a user template that holds all options for Concurrent users. Then when you create a new user, you can use the Concurrent user template and the profile settings are predefined.</p>
+        <ul>
+            <li class="Topic-Text-Bulleted-2" MadCap:targetName="template2" value="1" style="display: none;">User Templates do not affect the license count or appear in the user's list.</li>
+            <li class="Topic-Text-Bulleted-2" MadCap:targetName="template3" value="2" style="display: none;">A User Template is not an active user and cannot log on to Sage SalesLogix.</li>
+            <li class="Bullets" value="3"><a href="javascript:void(0);" class="MCToggler" onclick="FMCToggler( this ); return false;" MadCap:targets="webOnly">Web Only</a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="webOnly" style="display: none;">Users who only have access to the Sage SalesLogix Web Client, and can view, add, delete, or modify information based on their access rights. This user type cannot log on to the Sage SalesLogix Client.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" class="MCToggler" onclick="FMCToggler( this ); return false;" MadCap:targets="add_on">Add-on User</a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="add_on" style="display: none;">The Add-on User enables you to create a user with access to the Sage SalesLogix OLE DB Provider for third-party client interfaces. This user cannot log on to any Sage SalesLogix applications.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" class="MCToggler" onclick="FMCToggler( this ); return false;" MadCap:targets="webViewer1;webViewer2;webViewer3">WebViewer</a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="webViewer1" style="display: none;">WebViewer users have read-only access to accounts, contacts, opportunities, and tickets. Depending on account and calendar security, WebViewer users can add, edit, and delete activities, notes, and history, but cannot use reporting or processes. This user type cannot log on to the Sage SalesLogix Client.</p>
+        <p class="Topic-Text-Indent" MadCap:targetName="webViewer2" style="display: none;">A WebViewer user cannot:</p>
+        <ul MadCap:targetName="webViewer3" style="display: none;">
+            <li class="Topic-Text-Bulleted-2" value="1">Be a manager.</li>
+            <li class="Topic-Text-Bulleted-2" value="2">Be the owner of any team.</li>
+            <li class="Topic-Text-Bulleted-2" value="3">List any other users on the User Team Members tab.</li>
+        </ul>
+        <p>In addition, Sage SalesLogix supports several special user types:</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" class="MCToggler" onclick="FMCToggler( this ); return false;" MadCap:targets="systemadmin">system administrator</a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="systemadmin" style="display: none;">A user with access to all features and functions in Sage SalesLogix. The system administrator logs on as "admin."</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" class="MCToggler" onclick="FMCToggler( this ); return false;" MadCap:targets="adminstrative">Administrative</a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="adminstrative" style="display: none;">A user who can perform tasks normally reserved for the system administrator. Users with access to administrative functions are defined using administrative roles in the Administrator or roles in the Web Client. Administrative users log on using their user name (for example, Lee or Dan). The system administrator remains the only user with full access to all features and functions in the system.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" class="MCToggler" onclick="FMCToggler( this ); return false;" MadCap:targets="retired">Retired</a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="retired" style="display: none;">A user type that provides a method to maintain the activity history of users who leave your organization. Retired users are treated like inactive users in that their contact activities are preserved in the database even though they are no longer able to access the system. However, inactive users use licenses while retired users do not.</p>
+        <p class="RelatedTopics">Related Topics</p>
+        <p><a href="Adding_a_User.htm" target="_self">Adding a User</a>
+        </p>
+        <p><a href="Creating_a_Copy_of_a_User.htm" target="_self">Copying a User</a>
+        </p>
+        <p><a href="User_Detail_View.htm" target="_self">User Detail View</a>
+        </p>
+        <div style="width: 100%;position: relative;">
+            <p>
+            </p>
+            <p style="border-top-style: Groove;border-top-color: #c0c0c0;border-top-width: 1px;">&#160;</p>
+            <p><![CDATA[ ]]><a href="../General/feedback.htm" target="_blank">Tell us how we can make the Help better.</a></p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

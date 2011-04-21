@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="e3b22f80-72a9-4f8e-9720-106d42a912be" lastModifiedUtc="2010-05-14T16:35:09.4111684Z" name="OnBeforeDelete" methodType="CrudEvent" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="6a2d1c10-dab1-41f0-be4c-94608ff5fbbc" lastModifiedUtc="2010-05-17T17:32:42.7671013Z" targetType="Sage.SalesLogix.Activity.BusinessRules.UserCalendarRules, Sage.SalesLogix.Activity" targetMethod="OnBeforeDelete" active="true" description="Validates that the relationship being removed is not a system relationship.">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

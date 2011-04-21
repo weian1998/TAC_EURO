@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="831983da-f9e1-4bb4-8e81-4eff14026f5d" lastModifiedUtc="2010-02-24T17:35:50.4017054Z" name="OnLoad1" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="EditSecurityProfile">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="32a71424-6531-406f-8775-695c198b3452" paramName="form" sequence="0" paramType="IEditSecurityProfile" />
+    <OrmEntityMethodParam id="006f96f6-8f35-4c0e-b719-101847d19f10" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="6bc1cecc-6e7b-47b3-ae53-21cda97b934b" lastModifiedUtc="2010-02-24T22:22:56.8731206Z" targetType="Sage.BusinessRules.CodeSnippets.EditSecurityProfileEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="OnLoad1Step" active="true" codeSnippetId="173a8858-50e7-45c6-a602-4dadf7f22c6a">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

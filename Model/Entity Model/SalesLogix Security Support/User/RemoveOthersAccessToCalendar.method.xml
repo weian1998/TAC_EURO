@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="44775207-f234-432e-a450-bfd0cb621835" lastModifiedUtc="2010-06-23T20:48:05.7635338Z" name="RemoveOthersAccessToCalendar" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="9e889039-ec06-42ba-b8c4-5d22974724ba" paramName="calendar" sequence="0" paramType="IUserCalendar" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="c09e0d8c-d2b2-4bf3-8d0b-4746d3c6e84d" lastModifiedUtc="2010-06-23T20:47:48.5405487Z" targetType="Sage.SalesLogix.User.Rules, Sage.SalesLogix.BusinessRules" targetMethod="RemoveOthersAccessToCalendar" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmUserLookupEntityFilter" id="400f31d6-be66-486b-874b-ce7a7e36fcba" lastModifiedUtc="2010-07-06T23:46:13.4336938Z" filterName="ModifiedBy" propertyName="ModifyUser" dataPath="PACKAGES:MODIFYUSER">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmUserLookupEntityFilter" />
+  </ExtendedPropertiesCollection>
+  <operators>
+    <operator>Equal</operator>
+    <operator>NotEqual</operator>
+    <operator>StartsWith</operator>
+  </operators>
+</entityFilter>

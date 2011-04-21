@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="e2db3981-c6f2-4986-a53a-2c44867cd976" lastModifiedUtc="2010-03-15T16:43:01.6491576Z" name="AddManagerCheckBox_OnChange" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="TeamMembers">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="c534ee83-c014-4232-9277-42a061603635" paramName="form" sequence="0" paramType="ITeamMembers" />
+    <OrmEntityMethodParam id="db552c68-3748-4f6d-b70d-09361b840c68" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="9f9ae7cf-4a99-4c2d-8fe5-36c061ffc795" lastModifiedUtc="2010-06-02T23:19:05.6046526Z" targetType="Sage.BusinessRules.CodeSnippets.TeamMembersEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="AddManagerCheckBox_OnChangeStep" active="true" codeSnippetId="2ecf513b-9d6e-4d67-8fe6-5da9606e0452">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

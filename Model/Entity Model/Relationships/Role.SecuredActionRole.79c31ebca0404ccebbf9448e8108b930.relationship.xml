@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="79c31ebc-a040-4cce-bbf9-448e8108b930" lastModifiedUtc="2010-03-08T20:34:28.1037695Z" parentEntityId="4e566442-7012-4c35-818c-8407c6e44292" childEntityId="55de656c-5c7c-444b-ad38-9eb78d6fbb65">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="a405e8a8-1a95-4a3d-86ac-428664289109" lastModifiedUtc="2010-03-08T20:33:55.4095004Z" name="SecuredActions" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="607b36f2-2140-4132-a811-a0a999f8adce" lastModifiedUtc="2010-03-08T20:33:34.0383635Z" name="Role" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="ff042adc-f0a8-4c9f-a89d-cc3f6cedcd40" parentPropertyId="8a01bdb3-539f-4f69-8657-1f1e2ccff392" childPropertyId="ac4068ee-01b0-4211-9a21-764ffba9c32f" ordinal="0" />
+  </column>
+</relationship>

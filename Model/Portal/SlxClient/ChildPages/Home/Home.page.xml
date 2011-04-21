@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<PortalPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="245e7959-27e3-46c0-8d99-a15d677e271a">
+  <PageAlias>Home</PageAlias>
+  <LargeImage>[Localization!Global_Images:welcome_32x32]</LargeImage>
+  <TemplateUrl>Masters\dashboard.master</TemplateUrl>
+  <InheritTemplate>false</InheritTemplate>
+  <InheritsFrom>Sage.Platform.WebPortal.WebPortalPage, Sage.Platform.WebPortal</InheritsFrom>
+  <Properties />
+  <TemplateProperties />
+  <IsDefaultPage>false</IsDefaultPage>
+  <ExcludedGlobalModules />
+  <AppliedSecurity />
+</PortalPage>

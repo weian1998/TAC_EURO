@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmAnalyticsMetricEntityFilter" id="58ce315c-6214-44b3-b974-c69b3b5bd6c4" lastModifiedUtc="2010-04-16T21:48:33.9877701Z" filterName="SalesOrderCount" propertyName="CreateUser" analyticsAvailable="true" aggregation="COUNT">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmAnalyticsMetricEntityFilter" />
+  </ExtendedPropertiesCollection>
+</entityFilter>

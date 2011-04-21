@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="Output.Comments,Output.WebClient" MadCap:lastBlockDepth="4" MadCap:lastHeight="361" MadCap:lastWidth="732" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>I Cannot Delete a User</title>
+        <link href="../SALESLOGIX.CSS" rel="stylesheet" type="text/css" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>I Cannot Delete a User</h1>
+        <p><b>Error message:</b> Other users report to this user. This user cannot be deleted.</p>
+        <p><b>Solution:</b> Clear the User is a Manager check box in the User Detail view of the user you want to delete.</p>
+        <p>&#160;</p>
+        <p><b>Error message:</b> This user currently owns records which must be reassigned before being deleted, or the user may be a Team Owner, and therefore must be removed from the team before being deleted.</p>
+        <p><b>Solution:</b> Run territory realignment. </p>
+        <ul>
+            <li class="Bullets" value="1">If the message appears after running a territory realignment, Integrity Checker may need to be run to change the SECCODEID field in various tables to the correct value. This can be done using the Integrity Checker with the following tests enabled: “Account Summary with wrong owner (Set to Account owner),” “Contacts with the wrong owner (Set to Account owner),” and “Opportunities with the wrong owner (Set to Account owner).”</li>
+            <li class="Bullets" value="2">The previous message may also display when the user is the owner of a team. In this case, another user must be selected as the team owner.</li>
+            <li class="Bullets" value="3">Another cause for this message is that territory realignment failed in a previous run and this user still owns records in either the CONTACT, ACCOUNT, ACCOUNTSUMMARY, or OPPORTUNITY table. The following SQL syntax showing users and their respective SECCODEID’s may prove useful: </li>
+        </ul>
+        <p class="Topic-Text-Indent">SELECT UI.USERID, UI.USERNAME, SR.SECCODEID, SC.SECCODEDESC</p>
+        <p class="Topic-Text-Indent">FROM SECRIGHTS SR, USERINFO UI, SECCODE SC</p>
+        <p class="Topic-Text-Indent">WHERE UI.USERID = SR.ACCESSID AND</p>
+        <p class="Topic-Text-Indent">SR.SECCODEID = SC.SECCODEID</p>
+        <p class="Topic-Text-Indent">ORDER BY ACCESSID</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

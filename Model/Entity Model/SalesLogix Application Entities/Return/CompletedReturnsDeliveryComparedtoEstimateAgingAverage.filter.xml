@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmAnalyticsDateDiffMetricFilter" id="292a07f1-0f33-41b9-b108-08ef81f35784" lastModifiedUtc="2010-04-15T22:58:14.0631461Z" filterName="CompletedReturnsDeliveryComparedtoEstimateAgingAverage" analyticsAvailable="true" aggregation="AVG" fromPropertyName="ClosedDate" toPropertyName="ExpectedDate">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmAnalyticsDateDiffMetricFilter" />
+  </ExtendedPropertiesCollection>
+</entityFilter>

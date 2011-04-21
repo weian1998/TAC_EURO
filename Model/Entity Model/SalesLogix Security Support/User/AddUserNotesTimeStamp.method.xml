@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="7e5bdf11-1ef1-497e-9ad5-2e98303c979e" lastModifiedUtc="2010-01-22T18:48:43.803272Z" name="AddUserNotesTimeStamp" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="2ab7e5a3-38cb-4055-8e72-0307321c9e95" lastModifiedUtc="2010-01-25T21:35:52.5073259Z" targetType="Sage.SalesLogix.UserProfile.Rules, Sage.SalesLogix.BusinessRules" targetMethod="AddUserNotesTimeStamp" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

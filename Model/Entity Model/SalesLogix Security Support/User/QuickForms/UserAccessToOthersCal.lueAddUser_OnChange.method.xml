@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="e78b80e3-5617-4988-8748-ddaf8d9f5527" lastModifiedUtc="2010-06-24T00:05:04.9935551Z" name="lueAddUser_OnChange" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="UserAccessToOthersCal">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="be656e7c-962f-4ac9-83d6-5e9a735dfec0" paramName="form" sequence="0" paramType="IUserAccessToOthersCal" />
+    <OrmEntityMethodParam id="7d2a01ad-e7b1-4598-b748-45adfd64a272" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="5715279d-d313-4e55-8396-e5e76cd505fa" lastModifiedUtc="2010-07-02T18:00:50.8664438Z" targetType="Sage.BusinessRules.CodeSnippets.UserAccessToOthersCalEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="lueAddUser_OnChangeStep" active="true" codeSnippetId="aeea5966-a26b-49f1-af61-94b925e0ab99">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

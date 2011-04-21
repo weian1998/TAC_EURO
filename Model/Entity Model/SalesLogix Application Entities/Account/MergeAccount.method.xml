@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="fa5a8f88-b40c-402f-a004-2f8c754bbe9a" lastModifiedUtc="2010-01-13T18:30:51.839Z" name="MergeAccount" returnType="Boolean" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="6b447c97-25b1-4111-98df-69d74bbd68d3" paramName="mergeProvider" sequence="0" paramType="Object" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="104d6bc8-d4fa-4e2f-bb85-013c9e6b1e07" lastModifiedUtc="2010-01-19T23:00:55.3980123Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeAccount" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets>
+    <methodTarget id="874705c4-1f73-41de-b966-0701db6b4fc5" lastModifiedUtc="2010-01-13T18:32:47.76Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeAccount_MoveContacts" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="4778566e-23c4-453b-b901-bdc9dd521691" lastModifiedUtc="2010-01-13T18:33:39.089Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeAccount_MoveTickets" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="947f97c1-d619-41ac-87f9-ab3e548bbc64" lastModifiedUtc="2010-01-13T18:33:51.767Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeAccount_MoveOpportunities" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="fa5f952b-3720-45b1-8994-6c3ecf52535a" lastModifiedUtc="2010-01-13T18:34:07.944Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeAccount_MoveContracts" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="34b0d089-489d-4c76-8785-963d8e66304f" lastModifiedUtc="2010-01-13T18:34:26.26Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeAccount_MoveReturns" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="88af9935-9f9e-4aad-8968-8f88803742d0" lastModifiedUtc="2010-01-13T18:35:10.509Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeAccount_MoveCompetitors" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="5fc90769-8d5b-4c25-a17e-2d279b5aedae" lastModifiedUtc="2010-01-13T18:35:28.732Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeAccount_MoveAccountProducts" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="d9f28e77-2d3c-450c-bc16-99ce7dd028f2" lastModifiedUtc="2010-01-13T18:35:47.264Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeAccount_MoveActivities" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="7f8d4e42-1d75-41db-8ba2-6d845fc0a085" lastModifiedUtc="2010-01-13T18:35:59.25Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeAccount_MoveHistory" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="9d941f74-f7b4-4b92-a51f-5b2c73ce5722" lastModifiedUtc="2010-01-13T18:36:25.711Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeAccount_MoveAddresses" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="7eab365e-c1e6-4ac1-9e3c-d231cf2115b7" lastModifiedUtc="2010-01-13T18:36:37.512Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeAccount_MoveAttachments" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </postExecuteTargets>
+  <postFlushTargets />
+</method>

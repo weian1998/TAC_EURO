@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="895ce115-0da7-4971-8d75-83dd296014d6" lastModifiedUtc="2010-08-06T23:42:49.6344813Z" name="AddUsers" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="da8d9191-c221-44b6-98cd-640b7f15f5d5" paramName="idList" sequence="0" paramType="IList&lt;string&gt;" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="74bc7eec-b786-4c0a-8b44-81d601f8b7c7" lastModifiedUtc="2010-12-29T00:02:47.1105847Z" targetType="Sage.SalesLogix.Accelerator.Role.Rules, Sage.SalesLogix.AdminAccelerator.BusinessRules" targetMethod="AddUsers" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

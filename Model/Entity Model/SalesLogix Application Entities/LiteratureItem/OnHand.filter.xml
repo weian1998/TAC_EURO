@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="fb38bec7-9d4c-48c0-94ee-28cb34a227a1" lastModifiedUtc="2010-05-11T16:36:24.3020396Z" filterName="OnHand" propertyName="Qtyonhand" characters="0">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRangeEntityFilter" />
+  </ExtendedPropertiesCollection>
+  <ranges id="e85b7172-e606-48ef-82eb-f03fd679fa5b" rangeName="0 - 50" upper="50" />
+  <ranges id="e040a7b2-ced8-4d9a-a5d1-43f3d39d0e80" rangeName="50 - 100" lower="51" upper="100" />
+  <ranges id="7370c9ff-4418-4990-b2c2-1ee70655dcc5" rangeName="100 - 200" lower="101" upper="200" />
+  <ranges id="1546ab96-73d8-4962-bc46-3eed1830b9e3" rangeName="200 - 500" lower="201" upper="500" />
+  <ranges id="d71e0941-d1c7-4685-b391-a81bdedc52dd" rangeName="500 - 1000" lower="501" upper="1000" />
+  <ranges id="64bdcab8-4cff-482f-8ad1-140bbc431d91" rangeName="1000 - 10000" lower="1001" upper="10000" />
+  <ranges id="d200b133-243a-4136-8f2a-3f1e4da84057" rangeName="10000 or greater" lower="10001" />
+</entityFilter>

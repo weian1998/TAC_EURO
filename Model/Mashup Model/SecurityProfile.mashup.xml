@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<mashup id="70358b2c-228e-4a40-967a-169a37bb3a00" name="SecurityProfile">
+  <processors>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor name="Query1" location="180, 40" expanded="True" width="200" continueOnError="False" query="from OwnerSecurityProfile">
+        <parameters />
+      </queryProcessor>
+    </processor>
+    <processor type="Sage.Platform.Mashups.Processors.SelectProcessor, Sage.Platform.Mashups">
+      <selectProcessor name="Select1" location="180, 160" expanded="True" width="200" continueOnError="False" type="Replace">
+        <properties>
+          <property id="d818ce1f-4670-486b-ba61-baf7bbb0b4d4" expression="Id" alias="Id" />
+          <property id="ff1619d1-e6b0-4c31-9cc1-6e7ba6ea4d59" expression="ProfileDescription" alias="ProfileDescription" />
+          <property id="c7a7f43b-3c0a-4b63-88fc-8c3c194a55e7" expression="ProfileType" alias="ProfileType" />
+        </properties>
+      </selectProcessor>
+    </processor>
+  </processors>
+  <parameters />
+  <links>
+    <link source="Query1" target="Select1" />
+  </links>
+</mashup>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="0543ee59-02f4-4665-8314-5e73f654bf59" lastModifiedUtc="2010-02-22T20:18:05.1924655Z" name="AddMember" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="369778ec-e842-436b-9b5b-8d0a15b67416" paramName="member" sequence="0" paramType="IOwner" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="e4d6449c-0b99-49da-a99c-f8aed716eb54" lastModifiedUtc="2010-02-22T20:16:04.7544229Z" targetType="Sage.SalesLogix.Team.Rules, Sage.SalesLogix.BusinessRules" targetMethod="AddMember" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

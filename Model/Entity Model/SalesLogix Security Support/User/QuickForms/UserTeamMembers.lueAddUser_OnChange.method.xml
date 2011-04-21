@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="2ab7f73d-fcae-4aa9-96dc-a0a4881aaeb8" lastModifiedUtc="2010-03-08T16:17:04.648Z" name="lueAddUser_OnChange" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="UserTeamMembers">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="36a687ab-ce51-4803-95e0-08a435452783" paramName="form" sequence="0" paramType="IUserTeamMembers" />
+    <OrmEntityMethodParam id="3d38752d-fd80-4c4b-b85e-4ae586f300ef" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="4862ef3b-710d-4f4b-9aa3-22d4394212e5" lastModifiedUtc="2010-03-23T17:29:57.022237Z" targetType="Sage.BusinessRules.CodeSnippets.UserTeamMembersEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="lueAddUser_OnChangeStep" active="true" codeSnippetId="6ac503f6-5360-4842-acea-0110a92fbce0">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

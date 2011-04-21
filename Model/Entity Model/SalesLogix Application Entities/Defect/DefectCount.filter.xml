@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmAnalyticsMetricEntityFilter" id="c15778b6-4903-471e-a9c1-ecce61fef65b" lastModifiedUtc="2010-04-16T21:14:20.9819924Z" filterName="DefectCount" propertyName="CreateUser" analyticsAvailable="true" aggregation="COUNT">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmAnalyticsMetricEntityFilter" />
+  </ExtendedPropertiesCollection>
+</entityFilter>

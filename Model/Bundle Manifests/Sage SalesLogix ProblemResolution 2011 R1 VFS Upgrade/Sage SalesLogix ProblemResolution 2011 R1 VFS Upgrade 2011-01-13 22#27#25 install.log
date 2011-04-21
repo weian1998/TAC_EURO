@@ -1,0 +1,182 @@
+1/13/2011 10:27:25 PM
+INFO  2011-01-13 14:25:51,597 - Installing bundle...
+INFO  2011-01-13 14:25:51,597 - Performing pre-install.
+INFO  2011-01-13 14:25:51,597 - Executing delete item actions
+INFO  2011-01-13 14:26:15,910 - Installing context item: SalesLogix Application Entities (\Entity Model\SalesLogix Application Entities\SalesLogix Application Entities.T.package.xml)
+INFO  2011-01-13 14:26:15,926 - Successfully installed SalesLogix Application Entities (\Entity Model\SalesLogix Application Entities\SalesLogix Application Entities.T.package.xml)
+INFO  2011-01-13 14:26:15,926 - Installing context item: Ticket (\Entity Model\SalesLogix Application Entities\Ticket\Ticket.TICKET.entity.xml)
+INFO  2011-01-13 14:26:22,207 - Successfully installed Ticket (\Entity Model\SalesLogix Application Entities\Ticket\Ticket.TICKET.entity.xml)
+INFO  2011-01-13 14:26:22,207 - Installing model item: TicketExtendedDetails (\Entity Model\SalesLogix Application Entities\Ticket\QuickForms\TicketExtendedDetails.main.quickform.xml)
+INFO  2011-01-13 14:26:22,738 - Successfully installed TicketExtendedDetails (\Entity Model\SalesLogix Application Entities\Ticket\QuickForms\TicketExtendedDetails.main.quickform.xml)
+INFO  2011-01-13 14:26:22,738 - Installing model item: InsertTicket (\Entity Model\SalesLogix Application Entities\Ticket\QuickForms\InsertTicket.main.quickform.xml)
+INFO  2011-01-13 14:26:22,863 - Successfully installed InsertTicket (\Entity Model\SalesLogix Application Entities\Ticket\QuickForms\InsertTicket.main.quickform.xml)
+INFO  2011-01-13 14:26:22,863 - Installing model item: TicketProblemType (\Entity Model\SalesLogix Application Entities\TicketProblemType\TicketProblemType.TICKETPROBLEMTYPE.entity.xml)
+INFO  2011-01-13 14:26:22,879 - Successfully installed TicketProblemType (\Entity Model\SalesLogix Application Entities\TicketProblemType\TicketProblemType.TICKETPROBLEMTYPE.entity.xml)
+INFO  2011-01-13 14:26:22,879 - Installing model item: OnAfterDelete (\Entity Model\SalesLogix Application Entities\TicketProblemType\OnAfterDelete.method.xml)
+INFO  2011-01-13 14:26:22,895 - Successfully installed OnAfterDelete (\Entity Model\SalesLogix Application Entities\TicketProblemType\OnAfterDelete.method.xml)
+INFO  2011-01-13 14:26:22,895 - Installing model item: OnAfterInsert (\Entity Model\SalesLogix Application Entities\TicketProblemType\OnAfterInsert.method.xml)
+INFO  2011-01-13 14:26:22,910 - Successfully installed OnAfterInsert (\Entity Model\SalesLogix Application Entities\TicketProblemType\OnAfterInsert.method.xml)
+INFO  2011-01-13 14:26:22,910 - Installing model item: OnAfterUpdate (\Entity Model\SalesLogix Application Entities\TicketProblemType\OnAfterUpdate.method.xml)
+INFO  2011-01-13 14:26:23,020 - Successfully installed OnAfterUpdate (\Entity Model\SalesLogix Application Entities\TicketProblemType\OnAfterUpdate.method.xml)
+INFO  2011-01-13 14:26:23,020 - Installing model item: OnBeforeDelete (\Entity Model\SalesLogix Application Entities\TicketProblemType\OnBeforeDelete.method.xml)
+INFO  2011-01-13 14:26:23,098 - Successfully installed OnBeforeDelete (\Entity Model\SalesLogix Application Entities\TicketProblemType\OnBeforeDelete.method.xml)
+INFO  2011-01-13 14:26:23,098 - Installing model item: OnBeforeInsert (\Entity Model\SalesLogix Application Entities\TicketProblemType\OnBeforeInsert.method.xml)
+INFO  2011-01-13 14:26:23,113 - Successfully installed OnBeforeInsert (\Entity Model\SalesLogix Application Entities\TicketProblemType\OnBeforeInsert.method.xml)
+INFO  2011-01-13 14:26:23,113 - Installing item: ValidateProblem (\Entity Model\SalesLogix Application Entities\TicketProblemType\OnBeforeInsert.method.xml::Primary Steps::ValidateProblem)
+INFO  2011-01-13 14:26:23,363 - Successfully installed ValidateProblem (\Entity Model\SalesLogix Application Entities\TicketProblemType\OnBeforeInsert.method.xml::Primary Steps::ValidateProblem)
+INFO  2011-01-13 14:26:23,363 - Installing model item: OnBeforeUpdate (\Entity Model\SalesLogix Application Entities\TicketProblemType\OnBeforeUpdate.method.xml)
+INFO  2011-01-13 14:26:23,379 - Successfully installed OnBeforeUpdate (\Entity Model\SalesLogix Application Entities\TicketProblemType\OnBeforeUpdate.method.xml)
+INFO  2011-01-13 14:26:23,379 - Installing item: ValidateProblem (\Entity Model\SalesLogix Application Entities\TicketProblemType\OnBeforeUpdate.method.xml::Primary Steps::ValidateProblem)
+INFO  2011-01-13 14:26:23,379 - Successfully installed ValidateProblem (\Entity Model\SalesLogix Application Entities\TicketProblemType\OnBeforeUpdate.method.xml::Primary Steps::ValidateProblem)
+INFO  2011-01-13 14:26:23,738 - Installing model item: OnCreate (\Entity Model\SalesLogix Application Entities\TicketProblemType\OnCreate.method.xml)
+INFO  2011-01-13 14:26:23,754 - Successfully installed OnCreate (\Entity Model\SalesLogix Application Entities\TicketProblemType\OnCreate.method.xml)
+INFO  2011-01-13 14:26:23,770 - Installing model item: Area (\Entity Model\SalesLogix Application Entities\TicketProblemType\Area.filter.xml)
+INFO  2011-01-13 14:26:25,410 - Successfully installed Area (\Entity Model\SalesLogix Application Entities\TicketProblemType\Area.filter.xml)
+INFO  2011-01-13 14:26:25,410 - Installing model item: Description (\Entity Model\SalesLogix Application Entities\TicketProblemType\Description.filter.xml)
+INFO  2011-01-13 14:26:25,504 - Successfully installed Description (\Entity Model\SalesLogix Application Entities\TicketProblemType\Description.filter.xml)
+INFO  2011-01-13 14:26:25,504 - Installing model item: StandardProblemDetail (\Entity Model\SalesLogix Application Entities\TicketProblemType\QuickForms\StandardProblemDetail.main.quickform.xml)
+INFO  2011-01-13 14:26:25,660 - Successfully installed StandardProblemDetail (\Entity Model\SalesLogix Application Entities\TicketProblemType\QuickForms\StandardProblemDetail.main.quickform.xml)
+INFO  2011-01-13 14:26:25,660 - Installing model item: StandardResolutions (\Entity Model\SalesLogix Application Entities\TicketProblemType\QuickForms\StandardResolutions.main.quickform.xml)
+INFO  2011-01-13 14:26:25,785 - Successfully installed StandardResolutions (\Entity Model\SalesLogix Application Entities\TicketProblemType\QuickForms\StandardResolutions.main.quickform.xml)
+INFO  2011-01-13 14:26:25,785 - Installing model item: TicketSolutionType (\Entity Model\SalesLogix Application Entities\TicketSolutionType\TicketSolutionType.TICKETSOLUTIONTYPE.entity.xml)
+INFO  2011-01-13 14:26:25,895 - Successfully installed TicketSolutionType (\Entity Model\SalesLogix Application Entities\TicketSolutionType\TicketSolutionType.TICKETSOLUTIONTYPE.entity.xml)
+INFO  2011-01-13 14:26:25,895 - Installing model item: OnAfterDelete (\Entity Model\SalesLogix Application Entities\TicketSolutionType\OnAfterDelete.method.xml)
+INFO  2011-01-13 14:26:25,910 - Successfully installed OnAfterDelete (\Entity Model\SalesLogix Application Entities\TicketSolutionType\OnAfterDelete.method.xml)
+INFO  2011-01-13 14:26:25,973 - Installing model item: OnAfterInsert (\Entity Model\SalesLogix Application Entities\TicketSolutionType\OnAfterInsert.method.xml)
+INFO  2011-01-13 14:26:25,988 - Successfully installed OnAfterInsert (\Entity Model\SalesLogix Application Entities\TicketSolutionType\OnAfterInsert.method.xml)
+INFO  2011-01-13 14:26:25,988 - Installing model item: OnAfterUpdate (\Entity Model\SalesLogix Application Entities\TicketSolutionType\OnAfterUpdate.method.xml)
+INFO  2011-01-13 14:26:26,004 - Successfully installed OnAfterUpdate (\Entity Model\SalesLogix Application Entities\TicketSolutionType\OnAfterUpdate.method.xml)
+INFO  2011-01-13 14:26:26,004 - Installing model item: OnBeforeDelete (\Entity Model\SalesLogix Application Entities\TicketSolutionType\OnBeforeDelete.method.xml)
+INFO  2011-01-13 14:26:26,020 - Successfully installed OnBeforeDelete (\Entity Model\SalesLogix Application Entities\TicketSolutionType\OnBeforeDelete.method.xml)
+INFO  2011-01-13 14:26:26,020 - Installing model item: OnBeforeInsert (\Entity Model\SalesLogix Application Entities\TicketSolutionType\OnBeforeInsert.method.xml)
+INFO  2011-01-13 14:26:26,035 - Successfully installed OnBeforeInsert (\Entity Model\SalesLogix Application Entities\TicketSolutionType\OnBeforeInsert.method.xml)
+INFO  2011-01-13 14:26:26,051 - Installing item: ValidateResolution (\Entity Model\SalesLogix Application Entities\TicketSolutionType\OnBeforeInsert.method.xml::Primary Steps::ValidateResolution)
+INFO  2011-01-13 14:26:26,051 - Successfully installed ValidateResolution (\Entity Model\SalesLogix Application Entities\TicketSolutionType\OnBeforeInsert.method.xml::Primary Steps::ValidateResolution)
+INFO  2011-01-13 14:26:26,051 - Installing model item: OnBeforeUpdate (\Entity Model\SalesLogix Application Entities\TicketSolutionType\OnBeforeUpdate.method.xml)
+INFO  2011-01-13 14:26:26,129 - Successfully installed OnBeforeUpdate (\Entity Model\SalesLogix Application Entities\TicketSolutionType\OnBeforeUpdate.method.xml)
+INFO  2011-01-13 14:26:26,129 - Installing item: ValidateResolution (\Entity Model\SalesLogix Application Entities\TicketSolutionType\OnBeforeUpdate.method.xml::Primary Steps::ValidateResolution)
+INFO  2011-01-13 14:26:26,129 - Successfully installed ValidateResolution (\Entity Model\SalesLogix Application Entities\TicketSolutionType\OnBeforeUpdate.method.xml::Primary Steps::ValidateResolution)
+INFO  2011-01-13 14:26:26,145 - Installing model item: OnCreate (\Entity Model\SalesLogix Application Entities\TicketSolutionType\OnCreate.method.xml)
+INFO  2011-01-13 14:26:26,160 - Successfully installed OnCreate (\Entity Model\SalesLogix Application Entities\TicketSolutionType\OnCreate.method.xml)
+INFO  2011-01-13 14:26:26,160 - Installing model item: CreateUser (\Entity Model\SalesLogix Application Entities\TicketSolutionType\CreateUser.filter.xml)
+INFO  2011-01-13 14:26:26,254 - Successfully installed CreateUser (\Entity Model\SalesLogix Application Entities\TicketSolutionType\CreateUser.filter.xml)
+INFO  2011-01-13 14:26:26,254 - Installing model item: Description (\Entity Model\SalesLogix Application Entities\TicketSolutionType\Description.filter.xml)
+INFO  2011-01-13 14:26:26,285 - Successfully installed Description (\Entity Model\SalesLogix Application Entities\TicketSolutionType\Description.filter.xml)
+INFO  2011-01-13 14:26:26,285 - Installing model item: StandardProblems (\Entity Model\SalesLogix Application Entities\TicketSolutionType\QuickForms\StandardProblems.main.quickform.xml)
+INFO  2011-01-13 14:26:26,676 - Successfully installed StandardProblems (\Entity Model\SalesLogix Application Entities\TicketSolutionType\QuickForms\StandardProblems.main.quickform.xml)
+INFO  2011-01-13 14:26:26,676 - Installing model item: StandardResolutionDetail (\Entity Model\SalesLogix Application Entities\TicketSolutionType\QuickForms\StandardResolutionDetail.main.quickform.xml)
+INFO  2011-01-13 14:26:27,035 - Successfully installed StandardResolutionDetail (\Entity Model\SalesLogix Application Entities\TicketSolutionType\QuickForms\StandardResolutionDetail.main.quickform.xml)
+INFO  2011-01-13 14:26:27,035 - Installing model item: TicketProblemSolutionType (\Entity Model\SalesLogix Application Entities\TicketProblemSolutionType\TicketProblemSolutionType.TICKETPROBLEMSOLUTIONTYPE.entity.xml)
+INFO  2011-01-13 14:26:27,051 - Successfully installed TicketProblemSolutionType (\Entity Model\SalesLogix Application Entities\TicketProblemSolutionType\TicketProblemSolutionType.TICKETPROBLEMSOLUTIONTYPE.entity.xml)
+INFO  2011-01-13 14:26:27,067 - Installing model item: Standard Problem.TicketProblemSolutionTypes 1:M TicketProblem Solution Type.TicketProblemType (\Entity Model\Relationships\TicketProblemType.TicketProblemSolutionType.02fed71984c74394ad232f0134043f88.relationship.xml)
+INFO  2011-01-13 14:26:27,192 - Successfully installed Standard Problem.TicketProblemSolutionTypes 1:M TicketProblem Solution Type.TicketProblemType (\Entity Model\Relationships\TicketProblemType.TicketProblemSolutionType.02fed71984c74394ad232f0134043f88.relationship.xml)
+INFO  2011-01-13 14:26:27,207 - Installing model item: Standard Resolution.TicketProblemSolutionTypes 1:M TicketProblem Solution Type.TicketSolutionType (\Entity Model\Relationships\TicketSolutionType.TicketProblemSolutionType.87e92255efba46968f9362c8f432b4c5.relationship.xml)
+INFO  2011-01-13 14:26:27,301 - Successfully installed Standard Resolution.TicketProblemSolutionTypes 1:M TicketProblem Solution Type.TicketSolutionType (\Entity Model\Relationships\TicketSolutionType.TicketProblemSolutionType.87e92255efba46968f9362c8f432b4c5.relationship.xml)
+INFO  2011-01-13 14:26:27,301 - Installing model item: Sage SalesLogix (\Portal\SlxClient\SlxClient.portal.xml)
+INFO  2011-01-13 14:26:31,739 - Successfully installed Sage SalesLogix (\Portal\SlxClient\SlxClient.portal.xml)
+INFO  2011-01-13 14:26:31,739 - Installing context item: Service (\Portal\SlxClient\NavGroups\navService\navService.navgroup.xml)
+INFO  2011-01-13 14:26:31,739 - Successfully installed Service (\Portal\SlxClient\NavGroups\navService\navService.navgroup.xml)
+INFO  2011-01-13 14:26:31,754 - Installing model item: Standard Problems (\Portal\SlxClient\NavGroups\navService\NavItems\StandardProblem.navitem.xml)
+INFO  2011-01-13 14:26:32,785 - Successfully installed Standard Problems (\Portal\SlxClient\NavGroups\navService\NavItems\StandardProblem.navitem.xml)
+INFO  2011-01-13 14:26:32,785 - Installing model item: Standard Resolutions (\Portal\SlxClient\NavGroups\navService\NavItems\navStandardResolutions.navitem.xml)
+INFO  2011-01-13 14:26:33,442 - Successfully installed Standard Resolutions (\Portal\SlxClient\NavGroups\navService\NavItems\navStandardResolutions.navitem.xml)
+INFO  2011-01-13 14:26:33,442 - Installing context item: New (\Portal\SlxClient\MenuItems\mnuNew\mnuNew.menu.xml)
+INFO  2011-01-13 14:26:33,442 - Successfully installed New (\Portal\SlxClient\MenuItems\mnuNew\mnuNew.menu.xml)
+INFO  2011-01-13 14:26:33,457 - Installing model item: Standard Problem... (\Portal\SlxClient\MenuItems\mnuNew\MenuItems\new_standardproblemtype\new_standardproblemtype.menu.xml)
+INFO  2011-01-13 14:26:34,098 - Successfully installed Standard Problem... (\Portal\SlxClient\MenuItems\mnuNew\MenuItems\new_standardproblemtype\new_standardproblemtype.menu.xml)
+INFO  2011-01-13 14:26:34,098 - Installing model item: Standard Resolution... (\Portal\SlxClient\MenuItems\mnuNew\MenuItems\new_StandardResolution\new_StandardResolution.menu.xml)
+INFO  2011-01-13 14:26:34,864 - Successfully installed Standard Resolution... (\Portal\SlxClient\MenuItems\mnuNew\MenuItems\new_StandardResolution\new_StandardResolution.menu.xml)
+INFO  2011-01-13 14:26:34,879 - Installing model item: Standard Problem (\Portal\SlxClient\ContextMenuItems\contextStandardProblem\contextStandardProblem.contextmenu.xml)
+INFO  2011-01-13 14:26:35,082 - Successfully installed Standard Problem (\Portal\SlxClient\ContextMenuItems\contextStandardProblem\contextStandardProblem.contextmenu.xml)
+INFO  2011-01-13 14:26:35,082 - Installing model item: Lookup Standard Problem... (\Portal\SlxClient\ContextMenuItems\contextStandardProblem\ContextMenuItems\menuItemLookupStandardProblem\menuItemLookupStandardProblem.contextmenu.xml)
+INFO  2011-01-13 14:26:35,254 - Successfully installed Lookup Standard Problem... (\Portal\SlxClient\ContextMenuItems\contextStandardProblem\ContextMenuItems\menuItemLookupStandardProblem\menuItemLookupStandardProblem.contextmenu.xml)
+INFO  2011-01-13 14:26:35,254 - Installing model item: New Standard Problem (\Portal\SlxClient\ContextMenuItems\contextStandardProblem\ContextMenuItems\mnuNewStandardProblem\mnuNewStandardProblem.contextmenu.xml)
+INFO  2011-01-13 14:26:35,754 - Successfully installed New Standard Problem (\Portal\SlxClient\ContextMenuItems\contextStandardProblem\ContextMenuItems\mnuNewStandardProblem\mnuNewStandardProblem.contextmenu.xml)
+INFO  2011-01-13 14:26:35,770 - Installing model item: Create New Group... (\Portal\SlxClient\ContextMenuItems\contextStandardProblem\ContextMenuItems\menuItemCreateNewGroup\menuItemCreateNewGroup.contextmenu.xml)
+INFO  2011-01-13 14:26:35,942 - Successfully installed Create New Group... (\Portal\SlxClient\ContextMenuItems\contextStandardProblem\ContextMenuItems\menuItemCreateNewGroup\menuItemCreateNewGroup.contextmenu.xml)
+INFO  2011-01-13 14:26:35,942 - Installing model item: Standard Resolution (\Portal\SlxClient\ContextMenuItems\contextStandardResolution\contextStandardResolution.contextmenu.xml)
+INFO  2011-01-13 14:26:36,692 - Successfully installed Standard Resolution (\Portal\SlxClient\ContextMenuItems\contextStandardResolution\contextStandardResolution.contextmenu.xml)
+INFO  2011-01-13 14:26:36,707 - Installing model item: Lookup Standard Resolution... (\Portal\SlxClient\ContextMenuItems\contextStandardResolution\ContextMenuItems\menuItemLookupStandardResolution\menuItemLookupStandardResolution.contextmenu.xml)
+INFO  2011-01-13 14:26:36,926 - Successfully installed Lookup Standard Resolution... (\Portal\SlxClient\ContextMenuItems\contextStandardResolution\ContextMenuItems\menuItemLookupStandardResolution\menuItemLookupStandardResolution.contextmenu.xml)
+INFO  2011-01-13 14:26:36,942 - Installing model item: New Standard Resolution... (\Portal\SlxClient\ContextMenuItems\contextStandardResolution\ContextMenuItems\menuItemNewStandardResolution\menuItemNewStandardResolution.contextmenu.xml)
+INFO  2011-01-13 14:26:37,192 - Successfully installed New Standard Resolution... (\Portal\SlxClient\ContextMenuItems\contextStandardResolution\ContextMenuItems\menuItemNewStandardResolution\menuItemNewStandardResolution.contextmenu.xml)
+INFO  2011-01-13 14:26:37,208 - Installing model item: Create New Group... (\Portal\SlxClient\ContextMenuItems\contextStandardResolution\ContextMenuItems\mnuNewStandardResolutionGroup\mnuNewStandardResolutionGroup.contextmenu.xml)
+INFO  2011-01-13 14:26:37,348 - Successfully installed Create New Group... (\Portal\SlxClient\ContextMenuItems\contextStandardResolution\ContextMenuItems\mnuNewStandardResolutionGroup\mnuNewStandardResolutionGroup.contextmenu.xml)
+INFO  2011-01-13 14:26:37,442 - Installing context item: Ticket Detail (\Portal\SlxClient\ChildPages\Ticket\Ticket.page.xml)
+INFO  2011-01-13 14:26:37,442 - Successfully installed Ticket Detail (\Portal\SlxClient\ChildPages\Ticket\Ticket.page.xml)
+INFO  2011-01-13 14:26:37,442 - Installing model item: TicketExtendedDetails (\Portal\SlxClient\ChildPages\Ticket\SmartParts\TicketExtendedDetails.smartpart.xml)
+INFO  2011-01-13 14:26:37,598 - Successfully installed TicketExtendedDetails (\Portal\SlxClient\ChildPages\Ticket\SmartParts\TicketExtendedDetails.smartpart.xml)
+INFO  2011-01-13 14:26:37,598 - Installing context item: Insert Ticket (\Portal\SlxClient\ChildPages\InsertTicket\InsertTicket.page.xml)
+INFO  2011-01-13 14:26:37,598 - Successfully installed Insert Ticket (\Portal\SlxClient\ChildPages\InsertTicket\InsertTicket.page.xml)
+INFO  2011-01-13 14:26:37,598 - Installing model item: InsertTicket (\Portal\SlxClient\ChildPages\InsertTicket\SmartParts\InsertTicket.smartpart.xml)
+INFO  2011-01-13 14:26:37,754 - Successfully installed InsertTicket (\Portal\SlxClient\ChildPages\InsertTicket\SmartParts\InsertTicket.smartpart.xml)
+INFO  2011-01-13 14:26:37,754 - Installing model item: Insert Standard Resolution (\Portal\SlxClient\ChildPages\InsertStandardResolution\InsertStandardResolution.page.xml)
+INFO  2011-01-13 14:26:38,239 - Successfully installed Insert Standard Resolution (\Portal\SlxClient\ChildPages\InsertStandardResolution\InsertStandardResolution.page.xml)
+INFO  2011-01-13 14:26:38,254 - Installing model item: StandardResolutionDetail (\Portal\SlxClient\ChildPages\InsertStandardResolution\SmartParts\StandardResolutionDetail.smartpart.xml)
+INFO  2011-01-13 14:26:38,614 - Successfully installed StandardResolutionDetail (\Portal\SlxClient\ChildPages\InsertStandardResolution\SmartParts\StandardResolutionDetail.smartpart.xml)
+INFO  2011-01-13 14:26:38,629 - Installing model item: Insert Standard Problem (\Portal\SlxClient\ChildPages\InsertStandardProblem\InsertStandardProblem.page.xml)
+INFO  2011-01-13 14:26:38,911 - Successfully installed Insert Standard Problem (\Portal\SlxClient\ChildPages\InsertStandardProblem\InsertStandardProblem.page.xml)
+INFO  2011-01-13 14:26:38,911 - Installing model item: StandardProblemDetail (\Portal\SlxClient\ChildPages\InsertStandardProblem\SmartParts\StandardProblemDetail.smartpart.xml)
+INFO  2011-01-13 14:26:39,145 - Successfully installed StandardProblemDetail (\Portal\SlxClient\ChildPages\InsertStandardProblem\SmartParts\StandardProblemDetail.smartpart.xml)
+INFO  2011-01-13 14:26:39,161 - Installing model item: Standard Problem (\Portal\SlxClient\ChildPages\TicketProblemType\TicketProblemType.page.xml)
+INFO  2011-01-13 14:26:39,348 - Successfully installed Standard Problem (\Portal\SlxClient\ChildPages\TicketProblemType\TicketProblemType.page.xml)
+INFO  2011-01-13 14:26:39,348 - Installing model item: LiveGroupViewer (Custom) (\Portal\SlxClient\ChildPages\TicketProblemType\SmartParts\LiveGroupViewer.smartpart.xml)
+INFO  2011-01-13 14:26:39,520 - Successfully installed LiveGroupViewer (Custom) (\Portal\SlxClient\ChildPages\TicketProblemType\SmartParts\LiveGroupViewer.smartpart.xml)
+INFO  2011-01-13 14:26:39,520 - Installing model item: StandardProblemDetail (\Portal\SlxClient\ChildPages\TicketProblemType\SmartParts\StandardProblemDetail.smartpart.xml)
+INFO  2011-01-13 14:26:39,692 - Successfully installed StandardProblemDetail (\Portal\SlxClient\ChildPages\TicketProblemType\SmartParts\StandardProblemDetail.smartpart.xml)
+INFO  2011-01-13 14:26:39,708 - Installing model item: StandardResolutions (\Portal\SlxClient\ChildPages\TicketProblemType\SmartParts\StandardResolutions.smartpart.xml)
+INFO  2011-01-13 14:26:39,926 - Successfully installed StandardResolutions (\Portal\SlxClient\ChildPages\TicketProblemType\SmartParts\StandardResolutions.smartpart.xml)
+INFO  2011-01-13 14:26:39,926 - Installing model item: Sage.SalesLogix.Client.GroupBuilder.Modules.GroupViewerModule (\Portal\SlxClient\ChildPages\TicketProblemType\Modules\Sage.SalesLogix.Client.GroupBuilder.Modules.GroupViewerModule.module.xml)
+INFO  2011-01-13 14:26:40,036 - Successfully installed Sage.SalesLogix.Client.GroupBuilder.Modules.GroupViewerModule (\Portal\SlxClient\ChildPages\TicketProblemType\Modules\Sage.SalesLogix.Client.GroupBuilder.Modules.GroupViewerModule.module.xml)
+INFO  2011-01-13 14:26:40,051 - Installing model item: Standard Resolution (\Portal\SlxClient\ChildPages\TicketSolutionType\TicketSolutionType.page.xml)
+INFO  2011-01-13 14:26:40,270 - Successfully installed Standard Resolution (\Portal\SlxClient\ChildPages\TicketSolutionType\TicketSolutionType.page.xml)
+INFO  2011-01-13 14:26:40,286 - Installing model item: LiveGroupViewer (Custom) (\Portal\SlxClient\ChildPages\TicketSolutionType\SmartParts\LiveGroupViewer.smartpart.xml)
+INFO  2011-01-13 14:26:40,504 - Successfully installed LiveGroupViewer (Custom) (\Portal\SlxClient\ChildPages\TicketSolutionType\SmartParts\LiveGroupViewer.smartpart.xml)
+INFO  2011-01-13 14:26:40,520 - Installing model item: StandardResolutionDetail (\Portal\SlxClient\ChildPages\TicketSolutionType\SmartParts\StandardResolutionDetail.smartpart.xml)
+INFO  2011-01-13 14:26:40,723 - Successfully installed StandardResolutionDetail (\Portal\SlxClient\ChildPages\TicketSolutionType\SmartParts\StandardResolutionDetail.smartpart.xml)
+INFO  2011-01-13 14:26:40,723 - Installing model item: StandardProblems (\Portal\SlxClient\ChildPages\TicketSolutionType\SmartParts\StandardProblems.smartpart.xml)
+INFO  2011-01-13 14:26:40,848 - Successfully installed StandardProblems (\Portal\SlxClient\ChildPages\TicketSolutionType\SmartParts\StandardProblems.smartpart.xml)
+INFO  2011-01-13 14:26:40,848 - Installing model item: Sage.SalesLogix.Client.GroupBuilder.Modules.GroupViewerModule (\Portal\SlxClient\ChildPages\TicketSolutionType\Modules\Sage.SalesLogix.Client.GroupBuilder.Modules.GroupViewerModule.module.xml)
+INFO  2011-01-13 14:26:40,989 - Successfully installed Sage.SalesLogix.Client.GroupBuilder.Modules.GroupViewerModule (\Portal\SlxClient\ChildPages\TicketSolutionType\Modules\Sage.SalesLogix.Client.GroupBuilder.Modules.GroupViewerModule.module.xml)
+INFO  2011-01-13 14:26:40,989 - Installing model item: Sage.SalesLogix.Web.AcceleratorsModule.ScriptSetup (\Portal\SlxClient\Modules\Sage.SalesLogix.Web.AcceleratorsModule.ScriptSetup.module.xml)
+INFO  2011-01-13 14:26:41,098 - Successfully installed Sage.SalesLogix.Web.AcceleratorsModule.ScriptSetup (\Portal\SlxClient\Modules\Sage.SalesLogix.Web.AcceleratorsModule.ScriptSetup.module.xml)
+INFO  2011-01-13 14:26:41,098 - Configuring installed items.
+INFO  2011-01-13 14:26:41,114 - Configuring Sage SalesLogix...
+INFO  2011-01-13 14:26:41,192 - Configuring Service...
+INFO  2011-01-13 14:26:44,036 - Configuring Standard Problems...
+INFO  2011-01-13 14:26:45,036 - Configuring Standard Resolutions...
+INFO  2011-01-13 14:26:45,036 - Configuring New...
+INFO  2011-01-13 14:26:46,239 - Configuring Standard Problem......
+INFO  2011-01-13 14:26:46,473 - Configuring Standard Resolution......
+INFO  2011-01-13 14:26:46,489 - Configuring Standard Problem...
+INFO  2011-01-13 14:26:46,677 - Configuring Lookup Standard Problem......
+INFO  2011-01-13 14:26:46,895 - Configuring New Standard Problem...
+INFO  2011-01-13 14:26:46,895 - Configuring Create New Group......
+INFO  2011-01-13 14:26:46,895 - Configuring Standard Resolution...
+INFO  2011-01-13 14:26:46,895 - Configuring Lookup Standard Resolution......
+INFO  2011-01-13 14:26:47,052 - Configuring New Standard Resolution......
+INFO  2011-01-13 14:26:47,052 - Configuring Create New Group......
+INFO  2011-01-13 14:26:47,052 - Configuring Ticket Detail...
+INFO  2011-01-13 14:26:57,552 - Configuring TicketExtendedDetails...
+INFO  2011-01-13 14:26:57,568 - Configuring Insert Ticket...
+INFO  2011-01-13 14:26:57,568 - Configuring InsertTicket...
+INFO  2011-01-13 14:26:57,630 - Configuring Insert Standard Resolution...
+INFO  2011-01-13 14:26:57,630 - Configuring StandardResolutionDetail...
+INFO  2011-01-13 14:26:57,646 - Configuring Insert Standard Problem...
+INFO  2011-01-13 14:26:57,646 - Configuring StandardProblemDetail...
+INFO  2011-01-13 14:26:57,646 - Configuring Standard Problem...
+INFO  2011-01-13 14:26:57,646 - Configuring LiveGroupViewer (Custom)...
+INFO  2011-01-13 14:26:57,661 - Configuring StandardProblemDetail...
+INFO  2011-01-13 14:26:57,661 - Configuring StandardResolutions...
+INFO  2011-01-13 14:26:57,661 - Configuring Sage.SalesLogix.Client.GroupBuilder.Modules.GroupViewerModule...
+INFO  2011-01-13 14:26:59,036 - Configuring Standard Resolution...
+INFO  2011-01-13 14:26:59,036 - Configuring LiveGroupViewer (Custom)...
+INFO  2011-01-13 14:26:59,036 - Configuring StandardResolutionDetail...
+INFO  2011-01-13 14:26:59,052 - Configuring StandardProblems...
+INFO  2011-01-13 14:26:59,052 - Configuring Sage.SalesLogix.Client.GroupBuilder.Modules.GroupViewerModule...
+INFO  2011-01-13 14:26:59,161 - Configuring Sage.SalesLogix.Web.AcceleratorsModule.ScriptSetup...
+INFO  2011-01-13 14:26:59,255 - Performing pre-commit to target project.
+INFO  2011-01-13 14:27:00,990 - Committing items to target project...
+INFO  2011-01-13 14:27:21,959 - Committing transactions...
+INFO  2011-01-13 14:27:24,990 - Copying bundle manifest to project.
+INFO  2011-01-13 14:27:33,819 - Install complete.

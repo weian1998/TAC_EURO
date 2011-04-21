@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="a4c383d2-1e98-42b1-9c77-c695e7547099" lastModifiedUtc="2010-03-24T16:10:59.4930632Z" name="AddOwnerRight" returnType="IOwnerRights" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="0134c3c2-f35c-4621-909a-03cf02ed22ba" paramName="owner" sequence="0" paramType="IOwner" />
+    <OrmEntityMethodParam id="fe387e45-21e0-4114-8c11-c0f0efb95047" paramName="securityProfile" sequence="0" paramType="IOwnerSecurityProfile" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="db7574a0-25c0-455c-9cb6-cc8c1d8fb8bb" lastModifiedUtc="2010-03-24T16:09:39.6294952Z" targetType="Sage.SalesLogix.OwnerRights.Rules, Sage.SalesLogix.BusinessRules" targetMethod="AddOwnerRight" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

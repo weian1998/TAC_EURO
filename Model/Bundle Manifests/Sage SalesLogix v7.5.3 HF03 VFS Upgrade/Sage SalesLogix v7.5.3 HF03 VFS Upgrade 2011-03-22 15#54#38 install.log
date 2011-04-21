@@ -1,0 +1,38 @@
+3/22/2011 3:54:38 PM
+INFO  2011-03-22 09:54:28,109 - Installing bundle...
+INFO  2011-03-22 09:54:28,109 - Performing pre-install.
+INFO  2011-03-22 09:54:28,125 - Installing context item: SalesLogix Application Entities (\Entity Model\SalesLogix Application Entities\SalesLogix Application Entities.T.package.xml)
+INFO  2011-03-22 09:54:28,156 - Successfully installed SalesLogix Application Entities (\Entity Model\SalesLogix Application Entities\SalesLogix Application Entities.T.package.xml)
+INFO  2011-03-22 09:54:28,171 - Installing model item: OpportunityContact (\Entity Model\SalesLogix Application Entities\OpportunityContact\OpportunityContact.OPPORTUNITY_CONTACT.entity.xml)
+INFO  2011-03-22 09:54:28,734 - Successfully installed OpportunityContact (\Entity Model\SalesLogix Application Entities\OpportunityContact\OpportunityContact.OPPORTUNITY_CONTACT.entity.xml)
+INFO  2011-03-22 09:54:28,734 - Installing model item: Default-Mapping-SalesLogix (\Entity Model\CodeTemplates\Entity\Default-Mapping-SalesLogix.Mapping.codetemplate.xml)
+INFO  2011-03-22 09:54:28,765 - Successfully installed Default-Mapping-SalesLogix (\Entity Model\CodeTemplates\Entity\Default-Mapping-SalesLogix.Mapping.codetemplate.xml)
+INFO  2011-03-22 09:54:28,781 - Installing model item: Default-SData-SalesLogix (\Entity Model\CodeTemplates\Entity\Default-SData-SalesLogix.sdata.codetemplate.xml)
+INFO  2011-03-22 09:54:28,812 - Successfully installed Default-SData-SalesLogix (\Entity Model\CodeTemplates\Entity\Default-SData-SalesLogix.sdata.codetemplate.xml)
+INFO  2011-03-22 09:54:28,828 - Installing context item: Web Reporting Portal (\Portal\slxwebrpt\slxwebrpt.portal.xml)
+INFO  2011-03-22 09:54:29,390 - Successfully installed Web Reporting Portal (\Portal\slxwebrpt\slxwebrpt.portal.xml)
+INFO  2011-03-22 09:54:29,390 - Installing context item: SalesLogix Lead Capture (\Portal\SlxLeadCapture\SlxLeadCapture.portal.xml)
+INFO  2011-03-22 09:54:30,437 - Successfully installed SalesLogix Lead Capture (\Portal\SlxLeadCapture\SlxLeadCapture.portal.xml)
+INFO  2011-03-22 09:54:30,453 - Installing context item: Intellisync For SalesLogix (\Portal\SlxIntellisync\SlxIntellisync.portal.xml)
+INFO  2011-03-22 09:54:30,937 - Successfully installed Intellisync For SalesLogix (\Portal\SlxIntellisync\SlxIntellisync.portal.xml)
+INFO  2011-03-22 09:54:30,953 - Installing context item: Sage SalesLogix Customer Portal (\Portal\SLXCustomerPortal\SLXCustomerPortal.portal.xml)
+INFO  2011-03-22 09:54:31,625 - Successfully installed Sage SalesLogix Customer Portal (\Portal\SLXCustomerPortal\SLXCustomerPortal.portal.xml)
+INFO  2011-03-22 09:54:31,640 - Installing context item: Sage SalesLogix (\Portal\SlxClient\SlxClient.portal.xml)
+INFO  2011-03-22 09:54:33,625 - Successfully installed Sage SalesLogix (\Portal\SlxClient\SlxClient.portal.xml)
+INFO  2011-03-22 09:54:33,640 - Installing context item: SData Integration Host (\Portal\sdata\sdata.portal.xml)
+INFO  2011-03-22 09:54:35,093 - Successfully installed SData Integration Host (\Portal\sdata\sdata.portal.xml)
+INFO  2011-03-22 09:54:35,109 - Installing context item: Process Host Portal (\Portal\ProcessHost\ProcessHost.portal.xml)
+INFO  2011-03-22 09:54:35,718 - Successfully installed Process Host Portal (\Portal\ProcessHost\ProcessHost.portal.xml)
+INFO  2011-03-22 09:54:35,750 - Configuring installed items.
+INFO  2011-03-22 09:54:35,765 - Configuring Web Reporting Portal...
+INFO  2011-03-22 09:54:35,796 - Configuring SalesLogix Lead Capture...
+INFO  2011-03-22 09:54:35,812 - Configuring Intellisync For SalesLogix...
+INFO  2011-03-22 09:54:35,828 - Configuring Sage SalesLogix Customer Portal...
+INFO  2011-03-22 09:54:35,843 - Configuring Sage SalesLogix...
+INFO  2011-03-22 09:54:35,859 - Configuring SData Integration Host...
+INFO  2011-03-22 09:54:35,875 - Configuring Process Host Portal...
+INFO  2011-03-22 09:54:35,875 - Performing pre-commit to target project.
+INFO  2011-03-22 09:54:36,171 - Committing items to target project...
+INFO  2011-03-22 09:54:37,015 - Committing transactions...
+INFO  2011-03-22 09:54:37,968 - Copying bundle manifest to project.
+INFO  2011-03-22 09:54:45,125 - Install complete.

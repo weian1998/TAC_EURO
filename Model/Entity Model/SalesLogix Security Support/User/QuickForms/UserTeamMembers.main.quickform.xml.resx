@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="OwnerDescription.Caption" xml:space="preserve">
+    <value>Owner Description</value>
+  </data>
+  <data name="ProfileDescription.Caption" xml:space="preserve">
+    <value>Profile Description</value>
+  </data>
+  <data name="CreateDate.Caption" xml:space="preserve">
+    <value>Create Date</value>
+  </data>
+  <data name="ModifyDate.Caption" xml:space="preserve">
+    <value>Modify Date</value>
+  </data>
+  <data name="ModifyUser.Caption" xml:space="preserve">
+    <value>Modify User</value>
+  </data>
+  <data name="grdOwnerJoins.f33bfc1a-c0a6-437c-9299-98dcad2f8aa0.ColumnHeading" xml:space="preserve">
+    <value>Owner Description</value>
+  </data>
+  <data name="grdOwnerJoins.020d88d7-a230-4199-bfd6-8cfc31304631.ColumnHeading" xml:space="preserve">
+    <value>Profile Description</value>
+  </data>
+  <data name="grdOwnerJoins.24a6a429-16f7-493a-b72f-76fb97b49729.ColumnHeading" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="grdOwnerJoins.8b8b773d-4fb0-4800-9acf-b8fe24c4a7b1.ColumnHeading" xml:space="preserve">
+    <value>Last Modified</value>
+  </data>
+  <data name="grdOwnerJoins.76e5fabb-310e-47a2-a565-d3efacf82350.ColumnHeading" xml:space="preserve">
+    <value>Modified By</value>
+  </data>
+  <data name="grdOwnerJoins.a55f0c89-1a93-4664-b0dc-09928fd3c5b8.ColumnHeading" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="grdOwnerJoins.fc314406-1177-41b9-9276-3ec602e71bd1.ColumnHeading" xml:space="preserve">
+    <value>Security Profile</value>
+  </data>
+  <data name="grdOwnerJoins.EmptyTableRowText" xml:space="preserve">
+    <value>No user team members found.</value>
+  </data>
+  <data name="lueAddUser.LookupProperties..PropertyHeader" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lueAddUser.LookupProperties.OwnerDescription.PropertyHeader" xml:space="preserve">
+    <value>Member</value>
+  </data>
+  <data name="grdOwnerJoins.fc0dd482-c468-48a0-be7e-feb4995084a4.Text" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="grdOwnerJoins.a55f0c89-1a93-4664-b0dc-09928fd3c5b8.DestinationFormatString" xml:space="preserve">
+    <value />
+  </data>
+  <data name="grdOwnerJoins.fc314406-1177-41b9-9276-3ec602e71bd1.DestinationFormatString" xml:space="preserve">
+    <value>javascript:Link.editSecurityProfile('{0}','{1}','{2}');</value>
+  </data>
+  <data name="lueAddUser.LookupProperties.UserInfo.UserName.PropertyHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="lueAddUser.LookupProperties.UserInfo.Title.PropertyHeader" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="lueAddUser.LookupProperties.UserInfo.Department.PropertyHeader" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="lueAddUser.LookupProperties.UserInfo.Region.PropertyHeader" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="QFLabel.Text" xml:space="preserve">
+    <value>The following users can access the accounts owned by this user:</value>
+  </data>
+  <data name="QFLabel.ToolTip" xml:space="preserve">
+    <value>The following users can access the accounts owned by this user</value>
+  </data>
+  <data name="grdOwnerJoins.24a6a429-16f7-493a-b72f-76fb97b49729.FormatString" xml:space="preserve">
+    <value>{0:d}</value>
+  </data>
+  <data name="grdOwnerJoins.8b8b773d-4fb0-4800-9acf-b8fe24c4a7b1.FormatString" xml:space="preserve">
+    <value>{0:g}</value>
+  </data>
+  <data name="grdOwnerJoins.af0bb980-70a7-427f-a9c8-4e7486a6fbaf.ConfirmationMessage" xml:space="preserve">
+    <value>Are you sure you want to remove this member from the user team?</value>
+  </data>
+  <data name="grdOwnerJoins.af0bb980-70a7-427f-a9c8-4e7486a6fbaf.Text" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="lueAddUser.ButtonToolTip" xml:space="preserve">
+    <value>Add another user to this user's user team</value>
+  </data>
+  <data name="grdOwnerJoins.e74c0ee5-5b87-4598-8487-487ffaf9e6c9.ColumnHeading" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="grdOwnerJoins.d79914ed-af89-4d0c-a9b3-11c8a8a77afe.ColumnHeading" xml:space="preserve">
+    <value>Last Modified</value>
+  </data>
+  <data name="grdOwnerJoins.aca10129-ab60-444e-83ff-b40df5239f0b.ColumnHeading" xml:space="preserve">
+    <value>Modified By</value>
+  </data>
+  <data name="lueAddUser.LookupDialogTitle" xml:space="preserve">
+    <value>Lookup User</value>
+  </data>
+</root>

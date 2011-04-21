@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="13b62ff4-0567-4ab4-8747-fc0fc6b59ebd" lastModifiedUtc="2010-08-06T23:42:48.4294124Z" name="AddSecuredActions" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="6db3e8cb-d8f5-4cee-896a-0e39f822bc10" paramName="idList" sequence="0" paramType="IList&lt;string&gt;" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="a0467356-f8c6-4e57-8bfc-cc172f01671b" lastModifiedUtc="2010-12-29T00:02:12.4941239Z" targetType="Sage.SalesLogix.Accelerator.Role.Rules, Sage.SalesLogix.AdminAccelerator.BusinessRules" targetMethod="AddSecuredActions" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

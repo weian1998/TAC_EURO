@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="322a6b5a-7a17-44c1-9a0b-cca57350a61e" lastModifiedUtc="2010-02-10T04:08:24.3260874Z" name="OnLoadPackageForm" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="PackageDetails">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="8698eca2-9ca9-40de-be30-6d477db52264" paramName="form" sequence="0" paramType="IPackageDetails" />
+    <OrmEntityMethodParam id="eb869972-e0dd-4956-987d-0eec7bc8c567" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="e4849219-3806-42a2-b1ec-a873f80a2bd9" lastModifiedUtc="2010-05-25T20:22:56.912832Z" targetType="Sage.BusinessRules.CodeSnippets.PackageDetailsEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="OnLoadPackageForm" active="true" codeSnippetId="72744a7b-3d08-4db9-8356-7c0024b3bbbd">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

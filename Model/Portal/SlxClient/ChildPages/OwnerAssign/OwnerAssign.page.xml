@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<PortalPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="8e8e8ba5-f0fb-4c7b-9340-49415bbc8adc">
+  <PageAlias>OwnerAssign</PageAlias>
+  <SmallImage>[Localization!Global_Images:users_16x16]</SmallImage>
+  <LargeImage>[Localization!Global_Images:users_24x24]</LargeImage>
+  <TemplateUrl>Masters\Dialog.master</TemplateUrl>
+  <InheritTemplate>false</InheritTemplate>
+  <InheritsFrom>Sage.Platform.WebPortal.WebPortalPage, Sage.Platform.WebPortal</InheritsFrom>
+  <Properties />
+  <TemplateProperties />
+  <IsDefaultPage>false</IsDefaultPage>
+  <ExcludedGlobalModules />
+  <AppliedSecurity />
+</PortalPage>

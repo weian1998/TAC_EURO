@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="521b7325-c2ec-44ef-8c7f-2092ff65e3b9" lastModifiedUtc="2009-12-15T22:43:19.2805512Z" parentEntityId="2a1b2551-8ecf-4950-b748-ec1f427ce833" childEntityId="8556c77c-14da-4b12-958b-99ce4670a273">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="f092ce21-c1e0-475b-a249-752bb36ec7d8" lastModifiedUtc="2009-12-15T22:43:12.6575512Z" name="LitRequestItems" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="1d5b23b4-54e1-4a23-ae32-d0fd074388c0" lastModifiedUtc="2009-12-15T22:43:12.6585512Z" name="LiteratureItem" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="04479358-d55f-4747-b691-d1727bad1ab6" parentPropertyId="b1dcacb9-e5bc-4d46-a7b4-b61f18611251" childPropertyId="22509fcd-0144-4321-bfc0-31be9a97d3a9" ordinal="0" />
+  </column>
+</relationship>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QuickFormDefinition Id="570bcfa2-8f54-4c80-a54f-505b231be087" name="SelectRole">
+  <Properties>
+    <Property name="EntityTypeName" type="System.String">IRole</Property>
+    <Property name="DefaultNamespace" type="System.String">Sage.Entity.Interfaces</Property>
+    <Property name="AssemblyName" type="System.String">Sage.Entity.Interfaces</Property>
+    <Property name="UseEntityNameAsTitle" type="System.Boolean">True</Property>
+    <Property name="ImagePath" type="System.String"></Property>
+    <Property name="DefinitionType" type="System.String">Sage.Platform.QuickForms.QuickFormMainDetailViewDefinition, Sage.Platform.QuickForms</Property>
+    <Property name="Columns" type="System.ComponentModel.BindingList`1[[System.Windows.Forms.ColumnStyle, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><ArrayOfColumnStyle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ColumnStyle><SizeType>Percent</SizeType><Width>100</Width></ColumnStyle></ArrayOfColumnStyle></Property>
+    <Property name="Rows" type="System.ComponentModel.BindingList`1[[System.Windows.Forms.RowStyle, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><ArrayOfRowStyle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle></ArrayOfRowStyle></Property>
+    <Property name="GeneratePrintView" type="System.Boolean">False</Property>
+    <Property name="Description" type="System.String"></Property>
+    <Property name="ActiveControl" type="System.String"></Property>
+  </Properties>
+  <LoadActions>
+    <ActionDefinition>
+      <ResourceKey>b9c44902-0ea8-444c-ab87-59063ba9c036</ResourceKey>
+      <RootActionName>CSharpSnippetAction</RootActionName>
+      <Action>
+        <CSharpCodeSnippet><![CDATA[Button btnOk = this.FindControl("btnOk") as Button;
+btnOk.Enabled = false;
+	
+this.lueRole.Text="";
+this.lueRole.LookupResultValue = null;
+
+System.Collections.Generic.IList<string> ids = DialogService.DialogParameters["selectedIds"] as System.Collections.Generic.IList<string>;
+Type targetEntityType = DialogService.DialogParameters["targetEntityType"] as Type;
+
+Label headerLabel = this.FindControl("lblHeader") as Label;
+string entityName = targetEntityType.Name.StartsWith("I") ? targetEntityType.Name.Substring(1) : targetEntityType.Name;
+if(entityName.Contains("User")) 
+	entityName="user";
+else
+	entityName="secured action";
+
+headerLabel.Text = string.Format(GetLocalResourceObject("lblHeader.Text").ToString(), ids.Count, entityName);
+
+this.lueRole.InitializeLookup = true;
+
+// these settings are to appease QA who decided what the style
+// should be for these dialog boxes.
+ScriptManager.RegisterStartupScript(this, GetType(), "stylefix", string.Format("$('#{0}').parents('.formtable').css('margin','0')", lblHeader.ClientID), true);
+lblHeader.Style.Add("Border", "Solid 1px #99bbe8");
+lblHeader.Style.Add("Background-color", "#dfe8f6");
+lblHeader.Style.Add("font-weight", "normal");
+lblHeader.Height = Unit.Pixel(28);
+lblHeader.Width = Unit.Pixel(326);
+lblHeader.Style.Add("margin", "0");
+lblHeader.Style.Add("position", "absolute");
+lblHeader.Style.Add("top", "0px");
+lblHeader.Style.Add("left", "0px");
+lblHeader.Style.Add("padding-top", "15px");
+lblHeader.Style.Add("padding-left", "6px");
+lueRole.Style.Add("position", "absolute");
+lueRole.Style.Add("top", "60px");
+lueRole.Style.Add("width", "160px");
+lueRole_lbl.Style.Add("position", "absolute");
+lueRole_lbl.Style.Add("top", "60px");
+QFControlsList.Style.Add("position", "absolute");
+QFControlsList.Style.Add("top", "80px");]]></CSharpCodeSnippet>
+      </Action>
+      <IsDialogCloseAction>False</IsDialogCloseAction>
+      <RunOnEveryRePaint>False</RunOnEveryRePaint>
+      <DialogActionResult>NoResult</DialogActionResult>
+      <PerformsUpdate>False</PerformsUpdate>
+      <AppliedSecurity />
+    </ActionDefinition>
+  </LoadActions>
+  <QuickFormElements>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.QFControls.QFLabel, Sage.Platform.QuickForms.QFControls"><QFLabel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>lblHeader</ControlId><DataBindings /><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><AssociatedControlID /></QFLabel></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXLookup, Sage.SalesLogix.QuickForms.QFControls"><QFSLXLookup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>1</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>lueRole</ControlId><DataBindings /><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>lueRole</ResourceKey><RootActionName>CSharpSnippetAction</RootActionName><Action><CSharpCodeSnippet><![CDATA[Button btnOk = this.FindControl("btnOk") as Button;
+btnOk.Enabled = this.lueRole.LookupResultValue != null;]]></CSharpCodeSnippet></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /></OnChangeAction><LookupImage /><LookupDialogWidth xsi:nil="true" /><LookupDialogHeight xsi:nil="true" /><LookupBindingMode>Object</LookupBindingMode><LookupResultValue xsi:type="xsd:string" /><SeedProperty /><SeedValue /><Required>false</Required><DropDownDisplayProperty /><AllowClearingResult>false</AllowClearingResult><OverrideSeedOnSearch>false</OverrideSeedOnSearch><LookupEntityName>Role</LookupEntityName><LookupEntityTypeName>Sage.Entity.Interfaces.IRole, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</LookupEntityTypeName><AutoPostBack>false</AutoPostBack><EnableHyperLinking>false</EnableHyperLinking><InitializeLookup>true</InitializeLookup><LookupProperties><LookupProperty><PropertyName>RoleName</PropertyName><PropertyType>System.String</PropertyType><PropertyHeader>Name</PropertyHeader><PropertyFormat>None</PropertyFormat><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters></LookupProperty><LookupProperty><PropertyName>RoleDescription</PropertyName><PropertyType>System.String</PropertyType><PropertyHeader>Description</PropertyHeader><PropertyFormat>None</PropertyFormat><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters></LookupProperty></LookupProperties><LookupPreFilters /></QFSLXLookup></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.QFControls.QFControlsList, Sage.Platform.QuickForms.QFControls"><QFControlsList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>2</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>QFControlsList</ControlId><DataBindings /><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme>qfActionContainer</StyleScheme><Caption /><Controls><ControlsCollection><Control TypeName="Sage.Platform.QuickForms.Controls.QFButton, Sage.Platform.QuickForms"><QFButton><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>btnOk</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme>slxbutton</StyleScheme><ButtonType>StandardButton</ButtonType><Image /><OnClientClick /><OnClickAction><ResourceKey>btnOk</ResourceKey><RootActionName>CSharpSnippetAction</RootActionName><Action><CSharpCodeSnippet><![CDATA[    Type targetEntityType = DialogService.DialogParameters["targetEntityType"] as Type;
+    Sage.Entity.Interfaces.IRole role = lueRole.LookupResultValue as Sage.Entity.Interfaces.IRole;
+    System.Collections.Generic.IList<string> ids = DialogService.DialogParameters["selectedIds"] as System.Collections.Generic.IList<string>;
+
+    if(targetEntityType.IsAssignableFrom(typeof (Sage.Entity.Interfaces.IUser)))
+    {
+        role.AddUsers(ids);
+    }
+    else if(targetEntityType.IsAssignableFrom(typeof (Sage.Entity.Interfaces.ISecuredAction)))
+    {
+        role.AddSecuredActions(ids);
+    }
+    
+   DialogService.CloseEventHappened(this, null);
+	
+   Response.Redirect(string.Format("Role.aspx?entityid={0}", role.Id));]]></CSharpCodeSnippet></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>DialogOK</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /></OnClickAction></QFButton></Control><Control TypeName="Sage.Platform.QuickForms.Controls.QFButton, Sage.Platform.QuickForms"><QFButton><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>btnCancel</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme>slxbutton</StyleScheme><ButtonType>StandardButton</ButtonType><Image /><OnClientClick /><OnClickAction><ResourceKey>btnCancel</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>DialogCancel</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /></OnClickAction></QFButton></Control></ControlsCollection></Controls></QFControlsList></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+  </QuickFormElements>
+  <QuickFormToolElements />
+</QuickFormDefinition>

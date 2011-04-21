@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="89cfa366-55be-41ad-bdae-b3403601be3a" lastModifiedUtc="2009-12-10T18:53:48.346Z" name="CompleteLitRequest" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="d5d6fc3e-e3ae-4a1f-8936-54af1456b50a" lastModifiedUtc="2009-12-10T18:53:28.075Z" targetType="Sage.SalesLogix.LitRequest.Rules, Sage.SalesLogix.BusinessRules" targetMethod="CompleteLitRequest" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>
