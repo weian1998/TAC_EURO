@@ -211,6 +211,41 @@ else
       <PerformsUpdate>False</PerformsUpdate>
       <AppliedSecurity />
     </ActionDefinition>
+    <ActionDefinition>
+      <ResourceKey>2daf52ee-b71b-4a9f-8577-46191572db16</ResourceKey>
+      <RootActionName>CSharpSnippetAction</RootActionName>
+      <Action>
+        <CSharpCodeSnippet><![CDATA[// TAC Onload to Mark Private or Not
+    Sage.SalesLogix.Activity.History history = BindingSource.Current as Sage.SalesLogix.Activity.History;
+    // Only Leader of and Activity can change the Privacy Information or ADMIN 
+    // get the current user as a User (not IUser)
+    Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+    Sage.Entity.Interfaces.IUser user = usersvc.GetUser();
+    if (history.UserId == user.Id || user.Type.ToString() == "Admin")
+    {
+        //Can Edit the 
+        		
+        chkPrivate.Enabled = true;
+    }
+    else
+    {
+        chkPrivate.Enabled = false;
+    }
+    if (history.SeccodeId == "SYST00000001")
+    {
+        chkPrivate.Checked = false; // Not Private
+    }
+    else
+    {
+        chkPrivate.Checked = true;
+    }]]></CSharpCodeSnippet>
+      </Action>
+      <IsDialogCloseAction>False</IsDialogCloseAction>
+      <RunOnEveryRePaint>False</RunOnEveryRePaint>
+      <DialogActionResult>NoResult</DialogActionResult>
+      <PerformsUpdate>False</PerformsUpdate>
+      <AppliedSecurity />
+    </ActionDefinition>
   </LoadActions>
   <QuickFormElements>
     <QuickFormElement>
@@ -534,6 +569,54 @@ else
       <ControlDefinition>
         <Properties>
           <Property name="Control" type="Sage.Platform.QuickForms.QFControls.QFLabel, Sage.Platform.QuickForms.QFControls"><QFLabel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>1</Column><Row>12</Row><IsReadOnly>false</IsReadOnly><Visible>false</Visible><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>lblUser</ControlId><DataBindings /><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><AssociatedControlID /></QFLabel></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.QFControls.QFCheckBox, Sage.Platform.QuickForms.QFControls"><QFCheckBox xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>1</Column><Row>15</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>chkPrivate</ControlId><DataBindings /><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><Checked>false</Checked><OnChangeAction><ResourceKey>chkPrivate</ResourceKey><RootActionName>CSharpSnippetAction</RootActionName><Action><CSharpCodeSnippet><![CDATA[//===========================================================
+    // TAC Code to mark Private and Save the Item
+    //===========================================================
+    Sage.SalesLogix.Activity.History history = BindingSource.Current as Sage.SalesLogix.Activity.History;
+    if (chkPrivate.Checked == true )
+    {
+        //Mark Private
+        // Only Leader of and Activity can change the Privacy Information or ADMIN 
+        // get the current user as a User (not IUser)
+       // Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+        //Sage.Entity.Interfaces.IUser user = usersvc.GetUser();
+        // get the DataService to get a connection string to the database
+        Sage.Platform.Data.IDataService datasvc = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Data.IDataService>();
+        string UserPrivateMap = string.Empty;
+        using (System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection(datasvc.GetConnectionString()))
+        {
+            conn.Open();
+            using (System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand("Select  privateseccodeid from EUROUSERPRIVATEMAP where userid ='" + history.UserId.ToString()  + "'", conn))
+            {
+                object o = cmd.ExecuteScalar();
+                if (o != null) UserPrivateMap = o.ToString();
+            }
+        }
+        if (UserPrivateMap != string.Empty)
+        {
+            history.SeccodeId = UserPrivateMap;
+        }
+        else
+        {
+            //Mark for Everyone
+            history.SeccodeId = "SYST00000001";
+        }
+   
+    }
+    else
+    {
+        //Mark for Everyone
+        history.SeccodeId = "SYST00000001";
+    }]]></CSharpCodeSnippet></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /></OnChangeAction></QFCheckBox></Property>
         </Properties>
       </ControlDefinition>
     </QuickFormElement>
