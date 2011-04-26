@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="7c24b394-1277-4c01-81d0-e3cdae66f467" lastModifiedUtc="2011-04-26T14:01:24.49175Z" parentEntityId="a47562f6-b967-480c-9c73-87de00f4093e" childEntityId="a772b5f4-2280-4463-b81b-0cf397c23d3a">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="0a605c3a-82d5-401f-aaad-d813fed3d597" lastModifiedUtc="2011-04-26T14:01:03.648Z" name="FulFilmentTemplateItems" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="d0a2bf4c-44cd-4968-b4ba-dbf81fc5a37b" lastModifiedUtc="2011-04-26T14:01:03.648Z" name="FulFilmentTemplate" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="6f45caa5-71e7-4a04-8cb5-5c1ab55d32f7" parentPropertyId="6362e47e-68bd-46e0-9a18-066b2d19f763" childPropertyId="ac1bf22b-e653-4b25-ac1a-0002769e46ce" ordinal="0" />
+  </column>
+</relationship>
