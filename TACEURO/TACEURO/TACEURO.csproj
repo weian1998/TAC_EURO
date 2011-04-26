@@ -43,6 +43,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Program Files\SalesLogix\ReferenceAssemblies\sage.platform.dll</HintPath>
     </Reference>
+    <Reference Include="Sage.Platform.Application, Version=7.5.3.4343, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files\SalesLogix\ReferenceAssemblies\Sage.Platform.Application.dll</HintPath>
+    </Reference>
     <Reference Include="Sage.SalesLogix, Version=7.5.3.4343, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Program Files\SalesLogix\ReferenceAssemblies\Sage.SalesLogix.dll</HintPath>
