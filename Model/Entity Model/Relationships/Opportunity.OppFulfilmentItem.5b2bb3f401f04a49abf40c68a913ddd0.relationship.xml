@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="5b2bb3f4-01f0-4a49-abf4-0c68a913ddd0" lastModifiedUtc="2011-04-26T22:05:05.319875Z" parentEntityId="3172551b-f476-45ea-98de-2bb04ddba687" childEntityId="9f765111-0f18-4177-859f-cd8665d73de2">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="6a9ac750-faeb-463a-8fe4-becc71d3dc05" lastModifiedUtc="2011-04-26T22:04:51.86675Z" name="OppFulfilmentItems" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="bc6961ed-2029-4e77-9a97-887f40f25ef9" lastModifiedUtc="2011-04-26T22:04:51.86675Z" name="Opportunity" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="afabfb27-37e1-45c9-83f0-b4d23c103a2f" parentPropertyId="3e3db591-f7de-435b-a421-ef2c5e72aa2b" childPropertyId="c2eb0844-81db-4e1b-a990-b2d61d599317" ordinal="0" />
+  </column>
+</relationship>
