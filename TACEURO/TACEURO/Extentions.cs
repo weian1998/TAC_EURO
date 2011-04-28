@@ -5,6 +5,7 @@ using System.Text;
 using Sage.Entity.Interfaces;
 using Sage.Platform;
 using System.Data.OleDb;
+using System.Text.RegularExpressions;
 
 namespace TACEURO
 {
@@ -32,6 +33,7 @@ namespace TACEURO
             String histSeccodeID = String.Empty;
             int i = 0;
             DateTime histArchiveDate = DateTime.Now ;
+            String ReProcessNote = String.Empty;
 
             //Get All Email That do not have an Email Address in the Exclude and are not History Linked
             // get the DataService to get a connection string to the database
@@ -61,10 +63,10 @@ namespace TACEURO
                             //==================================================================================
                             // Get Contact Information
                             //==================================================================================
-                            if (IsContactFound(reader["TOADDRESS"].ToString(),out histContactID,out histContactName ,out histAccountID ,out histAccountName ,out histContactType  ))
+                            if (IsContactFound(reader["TOADDRESS"].ToString(), out histContactID, out histContactName, out histAccountID, out histAccountName, out histContactType))
                             {
-                                 // Create History Record
-                                Sage.Entity.Interfaces.IHistory  history = Sage.Platform.EntityFactory.Create<Sage.Entity.Interfaces.IHistory >();
+                                // Create History Record
+                                Sage.Entity.Interfaces.IHistory history = Sage.Platform.EntityFactory.Create<Sage.Entity.Interfaces.IHistory>();
                                 history.AccountId = histAccountID;
                                 history.AccountName = histAccountName;
                                 history.ContactId = histContactID;
@@ -78,14 +80,14 @@ namespace TACEURO
                                 history.OriginalDate = histArchiveDate;
                                 history.CompletedDate = histArchiveDate;
                                 history.CompletedUser = UserID;
-                                history.Timeless = false ;
+                                history.Timeless = false;
                                 history.Result = "Complete";
                                 history.Description = reader["SUBJECT"].ToString();
-                                history.Notes  = reader["SHORTNOTES"].ToString();
+                                history.Notes = reader["SHORTNOTES"].ToString();
                                 history.LongNotes = reader["MESSAGEBODY"].ToString();
-                                
+
                                 history.EMAILARCHIVEID = EmailArchiveID;
-                                
+
                                 // Set the SeccodeID
                                 if (histContactType == "EMPL")
                                 {
@@ -94,14 +96,14 @@ namespace TACEURO
                                     if (histSeccodeID != String.Empty)
                                     {
                                         history.SeccodeId = histSeccodeID;
-                                        
-                                        
+
+
                                     }
                                     else
                                     {
                                         histSeccodeID = "SYST00000001";
-                                        
-                                      
+
+
                                     }
                                 }
                                 else
@@ -113,16 +115,22 @@ namespace TACEURO
                                 try
                                 {
                                     history.Save();
-                                    UpdateEmailArchiveLinked(EmailArchiveID);
+                                    UpdateEmailArchiveLinked(EmailArchiveID,String.Empty ,true  );
                                 }
                                 catch (Exception)
                                 {
-                                    
+
                                     //Exception But Continue
                                 }
-                               
-                               
-  
+
+
+
+                            }
+                            else
+                            {
+                                // Contact Not Found
+                                ReProcessNote = "Contact Not Found";
+                                UpdateEmailArchiveLinked(EmailArchiveID, ReProcessNote, false);
                             }
                         }
                         else
@@ -154,7 +162,7 @@ namespace TACEURO
                                     history.Timeless = false;
                                     history.Result = "Complete";
                                     history.Description = reader["SUBJECT"].ToString();
-                                    history.LongNotes  = reader["MESSAGEBODY"].ToString();
+                                    history.LongNotes = reader["MESSAGEBODY"].ToString();
                                     history.Notes = reader["SHORTNOTES"].ToString();
                                     history.EMAILARCHIVEID = EmailArchiveID;
                                     // Set the SeccodeID
@@ -184,7 +192,7 @@ namespace TACEURO
                                     try
                                     {
                                         history.Save();
-                                        UpdateEmailArchiveLinked(EmailArchiveID);
+                                        UpdateEmailArchiveLinked(EmailArchiveID,String.Empty,true  );
                                     }
                                     catch (Exception)
                                     {
@@ -192,6 +200,18 @@ namespace TACEURO
                                         //Exception But Continue
                                     }
                                 }
+                                else
+                                {
+                                    // Contact Not Found
+                                    ReProcessNote = "Contact Not Found";
+                                    UpdateEmailArchiveLinked(EmailArchiveID, ReProcessNote, false);
+                                }
+                            }
+                            else
+                            {
+                                // User Not Found In FromAddress or ToAddress
+                                ReProcessNote = "User Not Found";
+                                UpdateEmailArchiveLinked(EmailArchiveID, ReProcessNote,false );
                             }
                         }
 
@@ -210,10 +230,11 @@ namespace TACEURO
            
 
         }
-        private static void UpdateEmailArchiveLinked(String EmailArchiveID)
+        private static void UpdateEmailArchiveLinked(String EmailArchiveID, String ReProcessNote, Boolean IsLinkedHistory)
         {
             Sage.Entity.Interfaces.IEmailArchive  EmailArchive = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IEmailArchive>(EmailArchiveID );
-            EmailArchive.IsLinkedHistory = true;
+            EmailArchive.IsLinkedHistory = IsLinkedHistory;
+            EmailArchive.ReprocessNote = ReProcessNote;
             EmailArchive.Save();
         }
 
@@ -261,6 +282,14 @@ namespace TACEURO
 
             return returnValue;
         }
+        public static bool IsValidEmail(string strIn)
+        {
+            // Return true if strIn is in valid e-mail format.
+            return Regex.IsMatch(strIn,
+                   @"^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))" +
+                   @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$");
+        }
+
         private static Boolean IsContactFound(String Emailaddress, out String ContactID, out String ContactName, out String AccountID, out String Account, out String ContactType)
         {
             Boolean returnValue = false; // Initialize
@@ -269,13 +298,24 @@ namespace TACEURO
             AccountID = String.Empty;
             Account = String.Empty;
             ContactType = String.Empty;
-
+            //================================================
+            // Validate the Email Address
+            //================================================
+            if (IsValidEmail(Emailaddress ) )
+            {
+                //Valid So Continue
+            }
+            else 
+            {
+                // Invalid
+                return false; // Failed
+            }
             // get the DataService to get a connection string to the database
             Sage.Platform.Data.IDataService datasvc = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Data.IDataService>();
             using (System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection(datasvc.GetConnectionString()))
             {
                 conn.Open();
-                using (System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand("Select TYPE,ACCOUNTID,ACCOUNT,CONTACTID, ISNULL(FIRSTNAME,'') + ', ' + ISNULL(LASTNAME,'') AS CNAME, TYPE  from CONTACT where EMAIL = '" + Emailaddress + "'", conn))
+                using (System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand("Select TYPE,ACCOUNTID,ACCOUNT,CONTACTID, ISNULL(FIRSTNAME,'') + ', ' + ISNULL(LASTNAME,'') AS CNAME  from CONTACT where EMAIL = '" + Emailaddress + "'", conn))
                 {
                     OleDbDataReader reader = cmd.ExecuteReader();
                     //loop through the reader

@@ -131,5 +131,15 @@
         </TextDataType>
       </SystemDataType>
     </property>
+    <property xsi:type="OrmFieldProperty" id="05379771-2cb5-4195-9673-6023c0572b9e" lastModifiedUtc="2011-04-27T16:35:25.882375Z" name="ReprocessNote" audited="false" columnName="REPROCESSNOTE" maxLength="64" precision="0" scale="0" ordinal="13" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>64</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
   </properties>
 </entity>
