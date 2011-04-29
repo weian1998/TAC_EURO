@@ -6,8 +6,9 @@ Module Module1
 
     Sub Main()
         CleanOppNotes()
-        CleanAddress()
+        'CleanAddress()
 
+        'AddContactEmails()
     End Sub
     'Public Function ConvertHtml(ByVal html As String) As String
     '    Dim doc As New HtmlDocument()
@@ -18,6 +19,168 @@ Module Module1
     '    sw.Flush()
     '    Return sw.ToString()
     'End Function
+    Public Sub AddContactEmails()
+        Dim objConn As New ADODB.Connection()
+        Dim objRS As New ADODB.Recordset
+        Dim strSQL As String = "SELECT     CONTACT_2.CONTACTID, sysdba.GOLDEMAIL.EMAIL"
+        strSQL = strSQL & " FROM         sysdba.CONTACT AS CONTACT_2 INNER JOIN"
+        strSQL = strSQL & "              sysdba.GOLDEMAIL ON CONTACT_2.ACCOUNTID = sysdba.GOLDEMAIL.ACCOUNTID"
+        strSQL = strSQL & " WHERE     (CONTACT_2.ACCOUNTID IN"
+        strSQL = strSQL & "                  (SELECT     ACCOUNTID"
+        strSQL = strSQL & "                    FROM          sysdba.CONTACT AS CONTACT_1"
+        strSQL = strSQL & "                    GROUP BY ACCOUNTID"
+        strSQL = strSQL & "                    HAVING      (COUNT(*) = 1)))"
+        strSQL = strSQL & " ORDER BY CONTACT_2.CONTACTID"
+        '============================================================================================
+        ' Use Native provider Connection as SLX Provider Cant handle the Query with SubQuieries
+        '============================================================================================
+        Dim strConstring As String = "Provider=SQLOLEDB.1;Password=masterkey;Persist Security Info=True;User ID=sysdba;Initial Catalog=EurOptimumSLX;Data Source=TACWEB" 'Extended Properties=""PORT=1706;LOG=ON;CASEINSENSITIVEFIND=ON;AUTOINCBATCHSIZE=1;SVRCERT=;"""
+
+        Dim i As Integer = 0
+        Dim iEmailcount As Integer = 0
+        Dim strTempContactid As String = ""
+        Try
+            objConn.Open(strConstring)
+            With objRS
+                .CursorLocation = ADODB.CursorLocationEnum.adUseClient
+                .CursorType = ADODB.CursorTypeEnum.adOpenDynamic
+                .LockType = ADODB.LockTypeEnum.adLockOptimistic
+                .Open(strSQL, objConn)
+                For i = 0 To objRS.RecordCount - 1
+
+
+                    If .EOF Then
+                        'adding
+                       
+                    Else
+                        If .Fields("CONTACTID").Value <> strTempContactid Then
+                            'Intialzie Email Counter
+                            iEmailcount = 0
+                            strTempContactid = .Fields("CONTACTID").Value
+
+                        Else
+
+                        End If
+                        If iEmailcount = 0 Then
+                            Update_CONTACT_Field("EMAIL", .Fields("EMAIL").Value, strTempContactid)
+                        End If
+                        If iEmailcount = 1 Then
+                            Update_CONTACT_Field("SECONDARYEMAIL", .Fields("EMAIL").Value, strTempContactid)
+                        End If
+                        If iEmailcount = 2 Then
+                            Update_CONTACT_Field("EMAIL3", .Fields("EMAIL").Value, strTempContactid)
+                        End If
+                        If iEmailcount > 2 Then
+                            InsertContactEmailExtra(.Fields("EMAIL").Value, strTempContactid)
+                        End If
+
+                        ''===========================================
+                        ' Increment Counter
+                        '=============================================
+                        iEmailcount = iEmailcount + 1
+                        Console.WriteLine(strTempContactid & "  " & .Fields("EMAIL").Value)
+
+                        
+
+                    End If
+
+                    '.Update()
+                    .MoveNext()
+                Next
+            End With
+            objConn.Close()
+            objRS = Nothing
+            objConn = Nothing
+
+        Catch ex As Exception
+            'MsgBox(ex.Message)
+            'Dim ErrorMessage As String = ""
+            'ErrorMessage = " SubjectID =" & SubjectID & " RecordID=" & ID & "  Error Updating " & Field & " Value= " & Value & "....." & ex.Message & " " & Now
+            'WriteErrorLog(SubjectID, ID, Field, Value, ex.Message)
+
+        End Try
+        Console.WriteLine("Complete")
+    End Sub
+    Public Sub Update_CONTACT_Field(ByVal Field As String, ByVal Value As String, ByVal ID As String)
+        Dim objConn As New ADODB.Connection()
+        Dim objRS As New ADODB.Recordset
+        Dim strSQL As String = "SELECT * FROM CONTACT WHERE CONTACTID ='" & ID & "'" 'Get A Blank Recordset
+        Dim strConstring As String = "Provider=SLXOLEDB.1;Password=;Persist Security Info=True;User ID=admin;Initial Catalog=EUROSLX;Data Source=TACWEB" 'Extended Properties=""PORT=1706;LOG=ON;CASEINSENSITIVEFIND=ON;AUTOINCBATCHSIZE=1;SVRCERT=;"""
+        Try
+            objConn.Open(strConstring)
+            With objRS
+                .CursorLocation = ADODB.CursorLocationEnum.adUseClient
+                .CursorType = ADODB.CursorTypeEnum.adOpenDynamic
+                .LockType = ADODB.LockTypeEnum.adLockOptimistic
+                .Open(strSQL, objConn)
+                If .EOF Then
+                    'adding
+
+                    '.Fields("HRVStudyGroup_2006").Value = True
+                Else
+                    'updating
+                    .Fields(Field).Value = Value
+                End If
+
+                .Update()
+                .Close()
+            End With
+            objConn.Close()
+            objRS = Nothing
+            objConn = Nothing
+
+        Catch ex As Exception
+            'MsgBox(ex.Message)
+            'Dim ErrorMessage As String = ""
+            'ErrorMessage = " SubjectID =" & SubjectID & " RecordID=" & ID & "  Error Updating " & Field & " Value= " & Value & "....." & ex.Message & " " & Now
+            'WriteErrorLog(SubjectID, ID, Field, Value, ex.Message)
+            Console.WriteLine(ex.Message)
+        End Try
+    End Sub
+   
+    Public Sub InsertContactEmailExtra(ByVal Value As String, ByVal ID As String)
+        Dim objConn As New ADODB.Connection()
+        Dim objRS As New ADODB.Recordset
+        Dim strSQL As String = "SELECT * FROM EMAILEXTRA WHERE 1=2" 'Get A Blank Recordset"
+        Dim strConstring As String = "Provider=SLXOLEDB.1;Password=;Persist Security Info=True;User ID=admin;Initial Catalog=EUROSLX;Data Source=TACWEB" 'Extended Properties=""PORT=1706;LOG=ON;CASEINSENSITIVEFIND=ON;AUTOINCBATCHSIZE=1;SVRCERT=;"""
+        Try
+            objConn.Open(strConstring)
+            With objRS
+                .CursorLocation = ADODB.CursorLocationEnum.adUseClient
+                .CursorType = ADODB.CursorTypeEnum.adOpenDynamic
+                .LockType = ADODB.LockTypeEnum.adLockOptimistic
+                .Open(strSQL, objConn)
+                If .EOF Then
+                    .AddNew()
+                    'adding
+                    '.Fields("EMAILEXTRAID").Value = Application.BasicFunctions.GetIDFor("EMAILEXTRA")
+                    .Fields("CONTACTID").Value = ID
+                    '.Fields("CREATEUSER").Value = ""
+                    '.Fields("CREATEDATE").Value = ""
+                    '.Fields("MODIFYUSER").Value = ""
+                    '.Fields("MODIFYDATE").Value = ""
+                    .Fields("EMAIL").Value = Value
+                    '.Fields("HRVStudyGroup_2006").Value = True
+                Else
+                    'updating
+                    '.Fields(Field).Value = Value
+                End If
+
+                .Update()
+                .Close()
+            End With
+            objConn.Close()
+            objRS = Nothing
+            objConn = Nothing
+
+        Catch ex As Exception
+            'MsgBox(ex.Message)
+            'Dim ErrorMessage As String = ""
+            'ErrorMessage = " SubjectID =" & SubjectID & " RecordID=" & ID & "  Error Updating " & Field & " Value= " & Value & "....." & ex.Message & " " & Now
+            'WriteErrorLog(SubjectID, ID, Field, Value, ex.Message)
+            Console.WriteLine(ex.Message)
+        End Try
+    End Sub
     Public Sub CleanOppNotes()
         Dim objConn As New ADODB.Connection()
         Dim objRS As New ADODB.Recordset
@@ -67,6 +230,7 @@ Module Module1
         End Try
         Console.WriteLine("Complete")
     End Sub
+
     Public Sub CleanAddress()
         Dim objConn As New ADODB.Connection()
         Dim objRS As New ADODB.Recordset
