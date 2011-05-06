@@ -129,6 +129,9 @@ public partial class SmartParts_History_HistoryList : EntityBoundSmartPartInfoPr
                 if (leadField != null)
                     leadField.Visible = false;
                 break;
+            case "Emailarchive":
+                keyId = "EMAILARCHIVEID";
+                break;
         }
         
         HqlBindingSource.OrderBy = "h.CompletedDate desc";

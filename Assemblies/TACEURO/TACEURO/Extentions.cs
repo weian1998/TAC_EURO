@@ -122,7 +122,8 @@ namespace TACEURO
                                 {
                                     //Get User Private Team
                                     histSeccodeID = GetUserPrivateSeccode(UserID);
-                                    CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID); 
+                                    CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
+                                    UpdateEmailArchiveLinked(EmailArchiveID, "", true);
                                     //======================================================
                                     // Create Accompanying History record Employee Contact
                                     //======================================================
@@ -130,7 +131,8 @@ namespace TACEURO
                                         if (IsContactFound(reader["FROMADDRESS"].ToString(), out histContactID, out histContactName, out histAccountID, out histAccountName, out histContactType))
                                         {
                                             histSeccodeID = GetUserPrivateSeccode(UserID);
-                                            CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID); 
+                                            CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
+                                            UpdateEmailArchiveLinked(EmailArchiveID, "", true);
                                         }
                                                                         
                                    
@@ -139,8 +141,8 @@ namespace TACEURO
                                 {
                                     // Not an Employee so Default Everyone
                                     histSeccodeID = "SYST00000001";
-                                    CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID); 
-                                   
+                                    CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
+                                    UpdateEmailArchiveLinked(EmailArchiveID, "", true);
                                 }
   
                             }
@@ -179,6 +181,7 @@ namespace TACEURO
                                     //Get User Private Team
                                     histSeccodeID = GetUserPrivateSeccode(UserID);
                                     CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
+                                    UpdateEmailArchiveLinked(EmailArchiveID, "", true);
                                     //======================================================
                                     // Create Accompanying History record Employee Contact
                                     //======================================================
@@ -187,6 +190,7 @@ namespace TACEURO
                                         {
                                             histSeccodeID = GetUserPrivateSeccode(UserID);
                                             CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
+                                            UpdateEmailArchiveLinked(EmailArchiveID, "", true);
                                         }
                                     
 
@@ -197,6 +201,7 @@ namespace TACEURO
                                     // Not an Employee so Default Everyone
                                     histSeccodeID = "SYST00000001";
                                     CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
+                                    UpdateEmailArchiveLinked(EmailArchiveID, "", true);
 
                                 }
 
