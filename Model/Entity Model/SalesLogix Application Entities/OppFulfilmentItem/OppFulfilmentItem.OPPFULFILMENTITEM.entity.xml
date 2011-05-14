@@ -123,24 +123,20 @@
         <DateTimeDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="3e175d6a-8d4e-4a1f-82cf-91cd734e6c5b" lastModifiedUtc="2011-04-26T21:54:03.0855Z" name="IsDate" audited="false" columnName="ISDATE" maxLength="1" precision="0" scale="0" ordinal="13" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="3e175d6a-8d4e-4a1f-82cf-91cd734e6c5b" lastModifiedUtc="2011-05-11T23:07:40.18625Z" name="IsDate" audited="false" columnName="ISDATE" maxLength="1" precision="0" scale="0" ordinal="13" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
-      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
-        <TextDataType>
-          <Length>1</Length>
-        </TextDataType>
+      <SystemDataType guid="92432b4d-8206-4a96-ba7b-e4cbd374f148">
+        <TrueFalseDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="858f4350-f3ed-4a62-bf05-0c9144bf3348" lastModifiedUtc="2011-04-26T21:54:03.101125Z" name="IsText" audited="false" columnName="ISTEXT" maxLength="1" precision="0" scale="0" ordinal="14" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="858f4350-f3ed-4a62-bf05-0c9144bf3348" lastModifiedUtc="2011-05-11T23:07:48.37375Z" name="IsText" audited="false" columnName="ISTEXT" maxLength="1" precision="0" scale="0" ordinal="14" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
-      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
-        <TextDataType>
-          <Length>1</Length>
-        </TextDataType>
+      <SystemDataType guid="92432b4d-8206-4a96-ba7b-e4cbd374f148">
+        <TrueFalseDataType />
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="ff02e39a-7c2d-4726-8fc5-e5c496f323ed" lastModifiedUtc="2011-04-26T21:54:03.101125Z" name="ItemDateLabel" audited="false" columnName="ITEMDATELABEL" maxLength="64" precision="0" scale="0" ordinal="15" isReadOnly="false">
