@@ -374,10 +374,10 @@ public partial class SmartParts_FulFilmentTemplate_FulfilmentTemplateStageTask :
             {
                 if (result[1] == "S")
                 {
-                    DialogService.SetSpecs(200, 200, 550, 700, "AddEditStage", "Edit Stage", true);
-                    DialogService.EntityType = typeof(ICampaignStage);
+                    // QFDataGrid
+                    DialogService.SetSpecs(400, 400, "AddEditFulilmentTemplateStage", "Edit Stage");
+                    DialogService.EntityType = typeof(Sage.Entity.Interfaces.IFulFilTemplateStage);
                     DialogService.EntityID = result[0];
-                    DialogService.DialogParameters.Add("Mode", "Edit");
                     DialogService.ShowDialog();
                 }
                 else if (result[1] == "T")

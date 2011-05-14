@@ -13,7 +13,49 @@
     <Property name="Description" type="System.String"></Property>
     <Property name="ActiveControl" type="System.String"></Property>
   </Properties>
-  <LoadActions />
+  <LoadActions>
+    <ActionDefinition>
+      <ResourceKey>ef9cf415-6af8-446f-ba97-006b06a60714</ResourceKey>
+      <RootActionName>CSharpSnippetAction</RootActionName>
+      <Action>
+        <CSharpCodeSnippet><![CDATA[try
+        {
+
+            //TAC Load Action for Stages 
+            Sage.Entity.Interfaces.IFulFilTemplateStage _entity = BindingSource.Current as Sage.Entity.Interfaces.IFulFilTemplateStage;
+            Sage.Entity.Interfaces.IFulFilmentTemplate parent = (Sage.Entity.Interfaces.IFulFilmentTemplate)GetParentEntity();
+            int MaxStageSequence = 0;
+            if (_entity.StageSequence == null)
+            {
+                foreach (Sage.Entity.Interfaces.IFulFilTemplateStage tmpStage in parent.FulFilTemplateStages)
+                {
+                    if (tmpStage.StageSequence != null)
+                    {
+                        if (tmpStage.StageSequence > MaxStageSequence)
+                        {
+                            MaxStageSequence = (int)tmpStage.StageSequence;
+                        }
+                    }
+                }
+                MaxStageSequence += 10; // Add 10 to the Max
+                _entity.StageSequence = MaxStageSequence;
+                StageSequence.Text = MaxStageSequence.ToString();  // Set the Interface
+            }
+           
+        }
+        catch (Exception)
+        {
+
+
+        }]]></CSharpCodeSnippet>
+      </Action>
+      <IsDialogCloseAction>False</IsDialogCloseAction>
+      <RunOnEveryRePaint>False</RunOnEveryRePaint>
+      <DialogActionResult>NoResult</DialogActionResult>
+      <PerformsUpdate>False</PerformsUpdate>
+      <AppliedSecurity />
+    </ActionDefinition>
+  </LoadActions>
   <QuickFormElements>
     <QuickFormElement>
       <Properties>
