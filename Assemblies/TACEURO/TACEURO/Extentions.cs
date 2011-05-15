@@ -6,25 +6,42 @@ using Sage.Entity.Interfaces;
 using Sage.Platform;
 using System.Data.OleDb;
 using System.Text.RegularExpressions;
+using NHibernate;
+using Sage.Platform.ChangeManagement;
+
 
 namespace TACEURO
 {
     public class Extentions
-       
     {
-         // Example of target method signature
+         //Example of target method signature
+        public static void OnBeforeInsert(IFulFilTemplateTask FulFilTemplateTask, ISession session)
+        {
+             // TODO: Complete business rule implementation
+            Sage.Entity.Interfaces.IFulFilTemplateStage ParentStage = FulFilTemplateTask.FulFilTemplateStage;
+			Sage.Entity.Interfaces.IFulFilmentTemplate  Template = ParentStage.FulFilmentTemplate ;
+			 // Set the Template
+            FulFilTemplateTask.FulFilmentTemplate = Template;
+			//fulfiltemplatetask.Save();
+        }
+
+
+        #region ReProcess Email Archives
+
+
+        // Example of target method signature
         public static void ReProcess(IEmailArchive emailarchive, out String result)
         {
             EmailArchiveProcess("ALL", "");
-            result = "Completed Message";   
+            result = "Completed Message";
         }
         // Example of target method signature
         public static void ReprocessSingle(IEmailArchive emailarchive)
         {
-            EmailArchiveProcess("Single", emailarchive.Id.ToString()); 
+            EmailArchiveProcess("Single", emailarchive.Id.ToString());
         }
 
-        #region Private methods
+
 
         private static void EmailArchiveProcess(String Type, String Value)
         {
@@ -44,9 +61,9 @@ namespace TACEURO
             String histContactType = String.Empty;
             String histCategory = String.Empty;
             String histSeccodeID = String.Empty;
-            String histLongNotes = String.Empty ;
-            String histNotes = String.Empty ;
-            String histDescription = String.Empty ;
+            String histLongNotes = String.Empty;
+            String histNotes = String.Empty;
+            String histDescription = String.Empty;
             int i = 0;
             DateTime histArchiveDate = DateTime.Now;
             String ReProcessNote = String.Empty;
@@ -54,7 +71,7 @@ namespace TACEURO
 
             //Get All Email That do not have an Email Address in the Exclude and are not History Linked
             // get the DataService to get a connection string to the database
-            switch (Type )
+            switch (Type)
             {
                 case "Single":
                     SQL = "SELECT     EMAILARCHIVEID, CREATEUSER, CREATEDATE, MODIFYUSER, MODIFYDATE, FROMADDRESS, TOADDRESS, MESSAGEBODY, SUBJECT, " +
@@ -70,7 +87,7 @@ namespace TACEURO
                     break;
                 case "ALL":
                     SQL = "Select * from EMAILARCHIVE  where ISLINKEDHISTORY = 'F' and TOADDRESS not in (Select EMAILADDRESS  from EMAILEXCLUDELIST )and FROMADDRESS  not in (Select EMAILADDRESS  from EMAILEXCLUDELIST )";
-                   
+
                     break;
                 default:
                     break;
@@ -94,7 +111,7 @@ namespace TACEURO
                         //===========================================================================
                         // Special Case for Now all Single reprocess will Clear out existing History
                         //===========================================================================
-                       
+
                         histArchiveDate = (DateTime)reader["CREATEDATE"];
                         //===========================================
                         // Check to See if the User Is Found
@@ -113,10 +130,10 @@ namespace TACEURO
                                 //=========================================================
                                 histDescription = reader["SUBJECT"].ToString();
                                 histLongNotes = reader["MESSAGEBODY"].ToString();
-                                histNotes  = reader["SHORTNOTES"].ToString();
+                                histNotes = reader["SHORTNOTES"].ToString();
 
-                               //=====================================
-                               // Is Contact Employee
+                                //=====================================
+                                // Is Contact Employee
                                 //===================================
                                 if (histContactType == "EMPL")
                                 {
@@ -127,15 +144,15 @@ namespace TACEURO
                                     //======================================================
                                     // Create Accompanying History record Employee Contact
                                     //======================================================
-                                    
-                                        if (IsContactFound(reader["FROMADDRESS"].ToString(), out histContactID, out histContactName, out histAccountID, out histAccountName, out histContactType))
-                                        {
-                                            histSeccodeID = GetUserPrivateSeccode(UserID);
-                                            CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
-                                            UpdateEmailArchiveLinked(EmailArchiveID, "", true);
-                                        }
-                                                                        
-                                   
+
+                                    if (IsContactFound(reader["FROMADDRESS"].ToString(), out histContactID, out histContactName, out histAccountID, out histAccountName, out histContactType))
+                                    {
+                                        histSeccodeID = GetUserPrivateSeccode(UserID);
+                                        CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
+                                        UpdateEmailArchiveLinked(EmailArchiveID, "", true);
+                                    }
+
+
                                 }
                                 else
                                 {
@@ -144,7 +161,7 @@ namespace TACEURO
                                     CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
                                     UpdateEmailArchiveLinked(EmailArchiveID, "", true);
                                 }
-  
+
                             }
                             else
                             {
@@ -153,7 +170,7 @@ namespace TACEURO
                                 UpdateEmailArchiveLinked(EmailArchiveID, ReProcessNote, false);
                             }
                         }
-                        
+
                         //=======================================================================================
                         // Process Both user in To And From
                         //=======================================================================================
@@ -185,14 +202,14 @@ namespace TACEURO
                                     //======================================================
                                     // Create Accompanying History record Employee Contact
                                     //======================================================
-                                    
-                                        if (IsContactFound(reader["TOADDRESS"].ToString(), out histContactID, out histContactName, out histAccountID, out histAccountName, out histContactType))
-                                        {
-                                            histSeccodeID = GetUserPrivateSeccode(UserID);
-                                            CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
-                                            UpdateEmailArchiveLinked(EmailArchiveID, "", true);
-                                        }
-                                    
+
+                                    if (IsContactFound(reader["TOADDRESS"].ToString(), out histContactID, out histContactName, out histAccountID, out histAccountName, out histContactType))
+                                    {
+                                        histSeccodeID = GetUserPrivateSeccode(UserID);
+                                        CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
+                                        UpdateEmailArchiveLinked(EmailArchiveID, "", true);
+                                    }
+
 
 
                                 }
@@ -212,8 +229,8 @@ namespace TACEURO
                                 ReProcessNote = "Contact Not Found";
                                 UpdateEmailArchiveLinked(EmailArchiveID, ReProcessNote, false);
                             }
-                        }  
-                        
+                        }
+
 
 
 
@@ -225,9 +242,9 @@ namespace TACEURO
 
                 }
             }
-            
-            throw new Exception("Completed Reprocess " + i + " Records"); 
-           
+
+            throw new Exception("Completed Reprocess " + i + " Records");
+
 
         }
         private static Boolean IsContactEmployee(String contact, out String SeccodeId)
@@ -235,12 +252,12 @@ namespace TACEURO
             SeccodeId = "";
             return false;
         }
-        private static void CreateHistoryRecord(String histAccountID, String histAccountName, 
+        private static void CreateHistoryRecord(String histAccountID, String histAccountName,
                                                 String histContactID, String histContactName,
                                                 String histCategory, String UserID,
                                                 String UserName, DateTime histArchiveDate,
-                                                String Description, 
-                                                    String LongNotes, String ShortNotes, 
+                                                String Description,
+                                                    String LongNotes, String ShortNotes,
                                                 String EmailArchiveID, String SeccodeId)
         {
             // Create History Record
@@ -260,9 +277,9 @@ namespace TACEURO
             history.CompletedUser = UserID;
             history.Timeless = false;
             history.Result = "Complete";
-            history.Description = Description ;
-            history.LongNotes = LongNotes ;
-            history.Notes = ShortNotes ;
+            history.Description = Description;
+            history.LongNotes = LongNotes;
+            history.Notes = ShortNotes;
             history.EMAILARCHIVEID = EmailArchiveID;
             history.SeccodeId = SeccodeId;
             try
@@ -346,14 +363,14 @@ namespace TACEURO
             ContactType = String.Empty;
             String SQL = "SELECT     CONTACT.TYPE, CONTACT.ACCOUNTID, CONTACT.ACCOUNT, CONTACT.CONTACTID, " +
                                      "ISNULL(CONTACT.FIRSTNAME, '') + ', ' + ISNULL(CONTACT.LASTNAME, '') AS CNAME" +
-                        " FROM         CONTACT LEFT OUTER JOIN"+
+                        " FROM         CONTACT LEFT OUTER JOIN" +
                         "                EMAILEXTRA ON CONTACT.CONTACTID = EMAILEXTRA.CONTACTID" +
-                        " WHERE     (CONTACT.EMAIL = '"+ Emailaddress + "') OR" +
+                        " WHERE     (CONTACT.EMAIL = '" + Emailaddress + "') OR" +
                         "           (CONTACT.SECONDARYEMAIL = '" + Emailaddress + "') OR" +
                         "           (CONTACT.EMAIL3 = '" + Emailaddress + "') OR" +
                         "           (EMAILEXTRA.EMAIL = '" + Emailaddress + "')";
-                //"Select TYPE,ACCOUNTID,ACCOUNT,CONTACTID, ISNULL(FIRSTNAME,'') + ', ' + ISNULL(LASTNAME,'') AS CNAME  from CONTACT where EMAIL = '" + Emailaddress + "'";
-            
+            //"Select TYPE,ACCOUNTID,ACCOUNT,CONTACTID, ISNULL(FIRSTNAME,'') + ', ' + ISNULL(LASTNAME,'') AS CNAME  from CONTACT where EMAIL = '" + Emailaddress + "'";
+
             //================================================
             // Validate the Email Address
             //================================================
@@ -414,7 +431,7 @@ namespace TACEURO
 
             return returnValue;
         }
-        private static void  RemoveHistoryLinkedtoEmailArchive(String EmailArchiveid)
+        private static void RemoveHistoryLinkedtoEmailArchive(String EmailArchiveid)
         {
             String returnValue = String.Empty;  // Initialize
             // get the DataService to get a connection string to the database
@@ -422,16 +439,17 @@ namespace TACEURO
             using (System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection(datasvc.GetConnectionString()))
             {
                 conn.Open();
-                using (System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand("Delete from HISTORY where EMAILARCHIVEID ='" + EmailArchiveid  + "'", conn))
+                using (System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand("Delete from HISTORY where EMAILARCHIVEID ='" + EmailArchiveid + "'", conn))
                 {
-                    object o = cmd.ExecuteNonQuery ();
+                    object o = cmd.ExecuteNonQuery();
                     //if (o != null) returnValue = o.ToString(); //
                 }
             }
 
-            
+
         }
-    }
         #endregion
-       
+    }
+
+
 }

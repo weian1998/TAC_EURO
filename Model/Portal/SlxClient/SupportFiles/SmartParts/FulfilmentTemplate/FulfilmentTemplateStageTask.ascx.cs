@@ -215,7 +215,7 @@ public partial class SmartParts_FulFilmentTemplate_FulfilmentTemplateStageTask :
             row4["id"] = tmpRow["id"];
             row4["Type"] = tmpRow["Type"];
             row4["Description"] = tmpRow["Description"];
-            row4["Status"] = tmpRow["Priority"];
+            row4["Status"] = tmpRow["Status"];
             row4["Priority"] = tmpRow["Priority"];
             row4["StageSequence"] = tmpRow["StageSequence"];
             row4["TaskSequence"] = tmpRow["TaskSequence"];
@@ -244,7 +244,7 @@ public partial class SmartParts_FulFilmentTemplate_FulfilmentTemplateStageTask :
         if (DialogService != null)
         {
             // InsertChildDialogActionItem
-            DialogService.SetSpecs(600, 600, "AddEditFulilmentTemplateStage", "Add Stage");
+            DialogService.SetSpecs(400, 400, "AddEditFulilmentTemplateStage", "Add Stage");
             DialogService.EntityType = typeof(Sage.Entity.Interfaces.IFulFilTemplateStage);
             DialogService.SetChildIsertInfo(
               typeof(Sage.Entity.Interfaces.IFulFilTemplateStage),
@@ -355,10 +355,20 @@ public partial class SmartParts_FulFilmentTemplate_FulfilmentTemplateStageTask :
             {
                 if (result[1] == "S")
                 {
-                    DialogService.SetSpecs(200, 200, 550, 700, "AddEditTask", "Add Task", true);
-                    DialogService.EntityType = typeof(ICampaignTask);
+                    //DialogService.SetSpecs(200, 200, 550, 700, "AddEditTask", "Add Task", true);
+                    //DialogService.EntityType = typeof(ICampaignTask);
+                    //DialogService.DialogParameters.Add("StageId", result[0]);
+                    //DialogService.DialogParameters.Add("Mode", "Add");
+                    //DialogService.ShowDialog();
+                    // InsertChildDialogActionItem
+                    DialogService.SetSpecs(400, 600, "AddEditFulFilmentTemplateTask", "Add Task");
+                    DialogService.EntityType = typeof(Sage.Entity.Interfaces.IFulFilTemplateTask);
+                    //DialogService.SetChildIsertInfo(
+                    //  typeof(Sage.Entity.Interfaces.IFulFilTemplateTask),
+                    //  typeof(Sage.Entity.Interfaces.IFulFilTemplateStage),
+                    //  typeof(Sage.Entity.Interfaces.IFulFilTemplateStage).GetProperty("FulFilmentTemplateStage"),
+                    //  typeof(Sage.Entity.Interfaces.IFulFilTemplateStage).GetProperty("FulFilTemplateTasks"));
                     DialogService.DialogParameters.Add("StageId", result[0]);
-                    DialogService.DialogParameters.Add("Mode", "Add");
                     DialogService.ShowDialog();
                 }
             }
@@ -382,10 +392,10 @@ public partial class SmartParts_FulFilmentTemplate_FulfilmentTemplateStageTask :
                 }
                 else if (result[1] == "T")
                 {
-                    DialogService.SetSpecs(200, 200, 550, 700, "AddEditTask", "Edit", true);
-                    DialogService.EntityType = typeof(ICampaignTask);
+                    // QFDataGrid
+                    DialogService.SetSpecs(400, 700, "AddEditFulFilmentTemplateTask", "Edit Task");
+                    DialogService.EntityType = typeof(Sage.Entity.Interfaces.IFulFilTemplateTask);
                     DialogService.EntityID = result[0];
-                    DialogService.DialogParameters.Add("Mode", "Edit");
                     DialogService.ShowDialog();
                 }
             }
