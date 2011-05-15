@@ -234,17 +234,11 @@ public partial class SmartParts_FulFilmentTemplate_FulfilmentTemplateStageTask :
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void btnAddStage_ClickAction(object sender, EventArgs e)
     {
-        //if (DialogService != null)
-        //{
-        //    DialogService.SetSpecs(200, 200, 550, 700, "AddEditStage", GetLocalResourceObject("DialogCaption_AddStage").ToString(), true);
-        //    DialogService.EntityType = typeof(ICampaignStage);
-        //    DialogService.DialogParameters.Add("Mode", "Add");
-        //    DialogService.ShowDialog();
-        //}
+       
         if (DialogService != null)
         {
             // InsertChildDialogActionItem
-            DialogService.SetSpecs(400, 400, "AddEditFulilmentTemplateStage", "Add Stage");
+            DialogService.SetSpecs(400, 600, "AddEditFulilmentTemplateStage", "Add Stage");
             DialogService.EntityType = typeof(Sage.Entity.Interfaces.IFulFilTemplateStage);
             DialogService.SetChildIsertInfo(
               typeof(Sage.Entity.Interfaces.IFulFilTemplateStage),
@@ -310,7 +304,8 @@ public partial class SmartParts_FulFilmentTemplate_FulfilmentTemplateStageTask :
             {
                 e.Row.Cells[0].ColumnSpan = 5;
                 e.Row.Cells[0].HorizontalAlign = HorizontalAlign.Left;
-                e.Row.Cells[0].Font.Bold = false;
+                //e.Row.Cells[0].Font.Bold = false;
+                e.Row.Cells[0].Font.Bold = true;
                 e.Row.BackColor = Color.FromArgb(220, 233, 247);
                 e.Row.Cells[0].Text = string.Format("{0}: {1}", "Stage", dr["Description"].ToString());
                 e.Row.Cells.RemoveAt(1);
@@ -361,7 +356,7 @@ public partial class SmartParts_FulFilmentTemplate_FulfilmentTemplateStageTask :
                     //DialogService.DialogParameters.Add("Mode", "Add");
                     //DialogService.ShowDialog();
                     // InsertChildDialogActionItem
-                    DialogService.SetSpecs(400, 600, "AddEditFulFilmentTemplateTask", "Add Task");
+                    DialogService.SetSpecs(400, 700, "AddEditFulFilmentTemplateTask", "Add Task");
                     DialogService.EntityType = typeof(Sage.Entity.Interfaces.IFulFilTemplateTask);
                     //DialogService.SetChildIsertInfo(
                     //  typeof(Sage.Entity.Interfaces.IFulFilTemplateTask),
@@ -385,7 +380,7 @@ public partial class SmartParts_FulFilmentTemplate_FulfilmentTemplateStageTask :
                 if (result[1] == "S")
                 {
                     // QFDataGrid
-                    DialogService.SetSpecs(400, 400, "AddEditFulilmentTemplateStage", "Edit Stage");
+                    DialogService.SetSpecs(400, 600, "AddEditFulilmentTemplateStage", "Edit Stage");
                     DialogService.EntityType = typeof(Sage.Entity.Interfaces.IFulFilTemplateStage);
                     DialogService.EntityID = result[0];
                     DialogService.ShowDialog();
@@ -402,29 +397,32 @@ public partial class SmartParts_FulFilmentTemplate_FulfilmentTemplateStageTask :
         }
         if (e.CommandName.Equals("Complete"))
         {
-            int rowIndex = Convert.ToInt32(e.CommandArgument);
-            string id = grdStages.DataKeys[rowIndex].Value.ToString();
-            string[] result = id.Split(':');
+            //================================================================
+            //  Templates are Not Completed
+            //================================================================
+            //int rowIndex = Convert.ToInt32(e.CommandArgument);
+            //string id = grdStages.DataKeys[rowIndex].Value.ToString();
+            //string[] result = id.Split(':');
 
-            if (DialogService != null)
-            {
-                if (result[1] == "S")
-                {
-                    DialogService.SetSpecs(200, 200, 550, 700, "AddEditStage", "Complete Stage", true);
-                    DialogService.EntityType = typeof(ICampaignStage);
-                    DialogService.EntityID = result[0];
-                    DialogService.DialogParameters.Add("Mode", "Complete");
-                    DialogService.ShowDialog();
-                }
-                else if (result[1] == "T")
-                {
-                    DialogService.SetSpecs(200, 200, 550, 700, "AddEditTask", "Complete Task", true);
-                    DialogService.EntityType = typeof(ICampaignTask);
-                    DialogService.EntityID = result[0];
-                    DialogService.DialogParameters.Add("Mode", "Complete");
-                    DialogService.ShowDialog();
-                }
-            }
+            //if (DialogService != null)
+            //{
+            //    if (result[1] == "S")
+            //    {
+            //        DialogService.SetSpecs(200, 200, 550, 700, "AddEditStage", "Complete Stage", true);
+            //        DialogService.EntityType = typeof(ICampaignStage);
+            //        DialogService.EntityID = result[0];
+            //        DialogService.DialogParameters.Add("Mode", "Complete");
+            //        DialogService.ShowDialog();
+            //    }
+            //    else if (result[1] == "T")
+            //    {
+            //        DialogService.SetSpecs(200, 200, 550, 700, "AddEditTask", "Complete Task", true);
+            //        DialogService.EntityType = typeof(ICampaignTask);
+            //        DialogService.EntityID = result[0];
+            //        DialogService.DialogParameters.Add("Mode", "Complete");
+            //        DialogService.ShowDialog();
+            //    }
+            //}
         }
 
         if (e.CommandName.Equals("Delete"))
