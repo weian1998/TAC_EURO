@@ -25,6 +25,20 @@ namespace TACEURO
 			//fulfiltemplatetask.Save();
         }
 
+        #region Task Stage Area
+        // Example of target method signature
+        public static void CompleteTask(IOppFulFilTask oppfulfiltask)
+        {
+                //Custom Code Here
+
+        }
+        // Example of target method signature
+        public static void CompleteStage(IOppFulFilStage oppfulfilstage)
+        {
+            //Custom Code Here
+        }
+        #endregion
+
 
         #region ReProcess Email Archives
 

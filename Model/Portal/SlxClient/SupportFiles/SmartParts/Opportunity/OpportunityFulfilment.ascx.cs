@@ -281,12 +281,13 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
             //  typeof(Sage.Entity.Interfaces.IOpportunity),
             //  typeof(Sage.Entity.Interfaces.IOppFulFilStage).GetProperty("Opportunity"),
             //  typeof(Sage.Entity.Interfaces.IOpportunity).GetProperty("OppFulFilStages"));
-            DialogService.DialogParameters.Add("OpportunityId", CurrentOpportunity.Id );
+            DialogService.DialogParameters.Add("OpportunityId", CurrentOpportunity.Id);
             DialogService.ShowDialog();
         }
     }
 
-    protected void cmdAddTemplate_Click(object sender, EventArgs e)
+
+    protected void cmdAddTemplate_Click1(object sender, EventArgs e)
     {
         IOpportunity CurrentOpportunity = this.BindingSource.Current as IOpportunity;
         String MytemplateID = ddlTemplates.SelectedValue;
@@ -326,6 +327,8 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                 }
 
             }
+            this.Refresh();
+
             if (PageWorkItem != null)
             {
                 IPanelRefreshService refresher = PageWorkItem.Services.Get<IPanelRefreshService>();
@@ -488,29 +491,61 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
             //================================================================
             //  Templates are Not Completed
             //================================================================
-            //int rowIndex = Convert.ToInt32(e.CommandArgument);
-            //string id = grdStages.DataKeys[rowIndex].Value.ToString();
-            //string[] result = id.Split(':');
+            int rowIndex = Convert.ToInt32(e.CommandArgument);
+            string id = grdStages.DataKeys[rowIndex].Value.ToString();
+            string[] result = id.Split(':');
 
-            //if (DialogService != null)
-            //{
-            //    if (result[1] == "S")
-            //    {
-            //        DialogService.SetSpecs(200, 200, 550, 700, "AddEditStage", "Complete Stage", true);
-            //        DialogService.EntityType = typeof(ICampaignStage);
-            //        DialogService.EntityID = result[0];
-            //        DialogService.DialogParameters.Add("Mode", "Complete");
-            //        DialogService.ShowDialog();
-            //    }
-            //    else if (result[1] == "T")
-            //    {
-            //        DialogService.SetSpecs(200, 200, 550, 700, "AddEditTask", "Complete Task", true);
-            //        DialogService.EntityType = typeof(ICampaignTask);
-            //        DialogService.EntityID = result[0];
-            //        DialogService.DialogParameters.Add("Mode", "Complete");
-            //        DialogService.ShowDialog();
-            //    }
-            //}
+            if (DialogService != null)
+            {
+                if (result[1] == "S")
+                {
+                    IOppFulFilStage stage = EntityFactory.GetById<IOppFulFilStage>(result[0]);
+                    foreach (IOppFulFilTask tmpTSK in stage.OppFulFilTasks)
+                    {
+                        if (tmpTSK.Completed == "T")
+                        {
+                            // Do Nothing as it is allready completed
+                        }
+                        else
+                        {
+                            Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+                            Sage.Entity.Interfaces.IUser user = usersvc.GetUser();
+                            tmpTSK.Completed = "T";
+                            tmpTSK.CompletedBy = usersvc.UserId.ToString();
+                            tmpTSK.CompletedDate = System.DateTime.Now.ToUniversalTime();
+                            tmpTSK.Status = "Completed";
+                            tmpTSK.PercentageComplete = 1;
+                            tmpTSK.Save();
+                        }
+                    }
+
+                    // Run Complete Stage Business Rule
+                    //DialogService.SetSpecs(200, 200, 550, 700, "AddEditStage", "Complete Stage", true);
+                    //DialogService.EntityType = typeof(ICampaignStage);
+                    //DialogService.EntityID = result[0];
+                    //DialogService.DialogParameters.Add("Mode", "Complete");
+                    //DialogService.ShowDialog();
+                }
+                else if (result[1] == "T")
+                {
+                    IOppFulFilTask Task = EntityFactory.GetById<IOppFulFilTask>(result[0]);
+                    Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+                    Sage.Entity.Interfaces.IUser user = usersvc.GetUser();
+                    Task.Completed = "T";
+                    Task.CompletedBy = usersvc.UserId.ToString();
+                    Task.CompletedDate = System.DateTime.Now.ToUniversalTime();
+                    Task.Status = "Completed";
+                    Task.PercentageComplete = 1;
+                    Task.Save();
+
+
+                    //DialogService.SetSpecs(200, 200, 550, 700, "AddEditTask", "Complete Task", true);
+                    //DialogService.EntityType = typeof(ICampaignTask);
+                    //DialogService.EntityID = result[0];
+                    //DialogService.DialogParameters.Add("Mode", "Complete");
+                    //DialogService.ShowDialog();
+                }
+            }
         }
 
         if (e.CommandName.Equals("Delete"))
@@ -642,6 +677,7 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
     /// </summary>
 
     #endregion
+
 
 
 }
