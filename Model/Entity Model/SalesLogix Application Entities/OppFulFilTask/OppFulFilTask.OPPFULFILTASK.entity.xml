@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="47d94288-0fff-42f0-997d-685652fbe3f8" lastModifiedUtc="2011-05-16T22:55:34.5445021Z" manageSchema="false" tableName="OPPFULFILTASK" name="OppFulFilTask" isExtension="false" audited="false" lastUpdatedPropertyId="07a229de-1d79-404c-b4cf-3362f9f46796" onBeforeInsertMethodId="e4d248cb-b372-4f73-9afa-ff65a1818532" onAfterInsertMethodId="b5e04cf9-cf9b-4a8f-83a7-0b75c6e7c75e" onBeforeUpdateMethodId="11435bc7-adf6-4ef7-a626-7e9418b553ca" onAfterUpdateMethodId="d52d3f3c-b4e1-4869-bc0b-120b383078d0" onBeforeDeleteMethodId="97f1f343-fbee-4083-9726-65aaa3753072" onAfterDeleteMethodId="42837406-cdf9-4db3-8baf-d7469e036fe6" onCreateId="fdf7be0d-d10d-45c4-855a-6531a1ef11f4">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="47d94288-0fff-42f0-997d-685652fbe3f8" lastModifiedUtc="2011-05-17T19:46:55.984375Z" manageSchema="false" tableName="OPPFULFILTASK" name="OppFulFilTask" isExtension="false" audited="false" lastUpdatedPropertyId="07a229de-1d79-404c-b4cf-3362f9f46796" onBeforeInsertMethodId="e4d248cb-b372-4f73-9afa-ff65a1818532" onAfterInsertMethodId="b5e04cf9-cf9b-4a8f-83a7-0b75c6e7c75e" onBeforeUpdateMethodId="11435bc7-adf6-4ef7-a626-7e9418b553ca" onAfterUpdateMethodId="d52d3f3c-b4e1-4869-bc0b-120b383078d0" onBeforeDeleteMethodId="97f1f343-fbee-4083-9726-65aaa3753072" onAfterDeleteMethodId="42837406-cdf9-4db3-8baf-d7469e036fe6" onCreateId="fdf7be0d-d10d-45c4-855a-6531a1ef11f4">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
       <extender guid="1589723d-0536-4bf3-bdd7-3f6f7fe165d0">
         <OrmEntityMetadataExtension>
+          <StringExpression>${Description}</StringExpression>
           <IsHistoryTable>false</IsHistoryTable>
         </OrmEntityMetadataExtension>
       </extender>

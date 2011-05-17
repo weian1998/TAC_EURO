@@ -486,5 +486,13 @@
         <IntegerDataType />
       </SystemDataType>
     </property>
+    <property xsi:type="OrmFieldProperty" id="565f93fc-a0f9-45a0-a304-c2b2d6e3301e" lastModifiedUtc="2011-05-17T18:51:24.484375Z" name="FulfilmentTaskID" audited="false" columnName="FULFILMENTTASKID" maxLength="12" precision="0" scale="0" ordinal="48" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
   </properties>
 </entity>
