@@ -113,14 +113,12 @@
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="d4539224-9dd3-4ed0-881d-6a5d2a62b624" lastModifiedUtc="2011-05-13T13:00:42.219375Z" name="Completed" audited="false" columnName="COMPLETED" maxLength="1" precision="0" scale="0" ordinal="12" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="d4539224-9dd3-4ed0-881d-6a5d2a62b624" lastModifiedUtc="2011-05-16T23:12:54.8280613Z" name="Completed" audited="false" columnName="COMPLETED" maxLength="1" precision="0" scale="0" ordinal="12" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
-      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
-        <TextDataType>
-          <Length>1</Length>
-        </TextDataType>
+      <SystemDataType guid="92432b4d-8206-4a96-ba7b-e4cbd374f148">
+        <TrueFalseDataType />
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="b487c19f-325c-4287-a420-ca1e883cb24c" lastModifiedUtc="2011-05-13T13:00:42.281875Z" name="Status" audited="false" columnName="STATUS" maxLength="64" precision="0" scale="0" ordinal="13" isReadOnly="false">
