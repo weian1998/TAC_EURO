@@ -51,6 +51,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Program Files\SalesLogix\ReferenceAssemblies\Sage.SalesLogix.dll</HintPath>
     </Reference>
+    <Reference Include="Sage.SalesLogix.Security, Version=7.5.3.4343, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\SalesLogix\ReferenceAssemblies\Sage.SalesLogix.Security.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>

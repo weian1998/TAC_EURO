@@ -12,6 +12,11 @@
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>
     </methodTarget>
+    <methodTarget id="c25ef0bf-ece9-4da4-b723-d373c1dbd29f" lastModifiedUtc="2011-05-24T18:06:41.91275Z" targetType="TACEURO.Extentions, TACEURO" targetMethod="OnAfterInsert" active="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
   </methodTargets>
   <postExecuteTargets />
   <postFlushTargets />

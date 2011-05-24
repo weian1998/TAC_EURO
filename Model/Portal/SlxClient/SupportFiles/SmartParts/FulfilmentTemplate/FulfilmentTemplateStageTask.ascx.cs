@@ -99,7 +99,7 @@ public partial class SmartParts_FulFilmentTemplate_FulfilmentTemplateStageTask :
         column.DataType = typeof(DateTime);
         column.AllowDBNull = true;
         column = table.Columns.Add();
-        column.ColumnName = "PercentComplete";
+        column.ColumnName = "WeightedPercentage";
         column.DataType = typeof(double);
         column.AllowDBNull = true;
         column = table.Columns.Add();
@@ -194,11 +194,11 @@ public partial class SmartParts_FulFilmentTemplate_FulfilmentTemplateStageTask :
                     }
                     try
                     {
-                        row3["PercentComplete"] = task.PercentageComplete ;
+                        row3["WeightedPercentage"] = task.WeightedPercentage ;
                     }
                     catch
                     {
-                        row3["PercentComplete"] = 0;
+                        row3["WeightedPercentage"] = 0;
                     }
                     table.Rows.Add(row3);
                 }
@@ -220,7 +220,7 @@ public partial class SmartParts_FulFilmentTemplate_FulfilmentTemplateStageTask :
             row4["StageSequence"] = tmpRow["StageSequence"];
             row4["TaskSequence"] = tmpRow["TaskSequence"];
             row4["NeededDate"] = tmpRow["NeededDate"];
-            row4["PercentComplete"] = tmpRow["PercentComplete"];
+            row4["WeightedPercentage"] = tmpRow["WeightedPercentage"];
 
             returntable.Rows.Add(row4);  
         }
@@ -272,14 +272,14 @@ public partial class SmartParts_FulFilmentTemplate_FulfilmentTemplateStageTask :
                 deleteCommnad.Text = "Delete Task";
                 deleteCommnad.Attributes.Add("onclick", string.Format("javascript: return confirm('{0}');", PortalUtil.JavaScriptEncode("Are you sure you want to Delete")));
 
-                if (dr["PercentComplete"] != null)
+                if (dr["WeightedPercentage"] != null)
                 {
                     Label lblPercent = ((Label)e.Row.FindControl("lblPercent"));
                     if (lblPercent != null)
                     {
                         try
                         {
-                            lblPercent.Text = string.Format("{0}%", ((double)dr["PercentComplete"]) * 100);
+                            lblPercent.Text = string.Format("{0}%", ((double)dr["WeightedPercentage"]) * 100);
                         }
                         catch
                         {

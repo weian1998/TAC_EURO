@@ -604,5 +604,13 @@
         <TrueFalseDataType />
       </SystemDataType>
     </property>
+    <property xsi:type="OrmFieldProperty" id="5d93fdc0-3157-4f14-925f-d4a3ac662f1a" lastModifiedUtc="2011-05-24T03:31:36.584625Z" name="DeliveryDate" audited="false" columnName="DELIVERYDATE" maxLength="0" precision="0" scale="0" ordinal="56" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
+        <DateTimeDataType />
+      </SystemDataType>
+    </property>
   </properties>
 </entity>

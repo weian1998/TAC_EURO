@@ -37,7 +37,7 @@
                     </SalesLogix:DateTimePicker>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Percentage Complete">
+            <asp:TemplateField HeaderText="Weighted Percentage">
                 <ItemTemplate>
                     <asp:Label ID="lblPercent" runat="server"></asp:Label>
                 </ItemTemplate>

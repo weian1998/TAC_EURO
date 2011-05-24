@@ -126,7 +126,7 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
         column.DataType = typeof(DateTime);
         column.AllowDBNull = true;
         column = table.Columns.Add();
-        column.ColumnName = "PercentComplete";
+        column.ColumnName = "WeightedPercentage";
         column.DataType = typeof(double);
         column.AllowDBNull = true;
         column = table.Columns.Add();
@@ -221,11 +221,11 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                     }
                     try
                     {
-                        row3["PercentComplete"] = task.PercentageComplete;
+                        row3["WeightedPercentage"] = task.WeightedPercentage;
                     }
                     catch
                     {
-                        row3["PercentComplete"] = 0;
+                        row3["WeightedPercentage"] = 0;
                     }
                     table.Rows.Add(row3);
                 }
@@ -247,7 +247,7 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
             row4["StageSequence"] = tmpRow["StageSequence"];
             row4["TaskSequence"] = tmpRow["TaskSequence"];
             row4["NeededDate"] = tmpRow["NeededDate"];
-            row4["PercentComplete"] = tmpRow["PercentComplete"];
+            row4["WeightedPercentage"] = tmpRow["WeightedPercentage"];
 
             returntable.Rows.Add(row4);
         }
@@ -290,51 +290,59 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
     protected void cmdAddTemplate_Click1(object sender, EventArgs e)
     {
         IOpportunity CurrentOpportunity = this.BindingSource.Current as IOpportunity;
+        CurrentOpportunity.Save();
         String MytemplateID = ddlTemplates.SelectedValue;
-
-        if (MytemplateID != "NONE")
+        if (dtDeliveryDate.DateTimeValue == null)
         {
-            IFulFilmentTemplate MyTemplate = EntityFactory.GetById<IFulFilmentTemplate>(MytemplateID);
-            foreach (IFulFilTemplateStage tmpStage in MyTemplate.FulFilTemplateStages)
+            throw new Sage.Platform.Application.ValidationException("Must have Deliverydate Selected");
+        }
+        else
+        {
+            if (MytemplateID != "NONE")
             {
-                //====================================================
-                // Add the Stages
-                //=====================================================
-                IOppFulFilStage MyStage = EntityFactory.Create<IOppFulFilStage>();
-                MyStage.Description = tmpStage.Description;
-                MyStage.Notes = tmpStage.Notes;
-                MyStage.StageSequence = tmpStage.StageSequence;
-                MyStage.Status = tmpStage.Status;
-                MyStage.Opportunity = CurrentOpportunity;
-                MyStage.Save();
-                foreach (IFulFilTemplateTask tmpTask in tmpStage.FulFilTemplateTasks)
+                IFulFilmentTemplate MyTemplate = EntityFactory.GetById<IFulFilmentTemplate>(MytemplateID);
+                foreach (IFulFilTemplateStage tmpStage in MyTemplate.FulFilTemplateStages)
                 {
                     //====================================================
-                    // Add the Tasks
+                    // Add the Stages
                     //=====================================================
-                    IOppFulFilTask MyTask = EntityFactory.Create<IOppFulFilTask>();
-                    MyTask.Description = tmpTask.Description;
-                    MyTask.Status = tmpTask.Status;
-                    MyTask.TaskSequence = tmpTask.TaskSequence;
-                    MyTask.Priority = tmpTask.Priority;
+                    IOppFulFilStage MyStage = EntityFactory.Create<IOppFulFilStage>();
+                    MyStage.Description = tmpStage.Description;
+                    MyStage.Notes = tmpStage.Notes;
+                    MyStage.StageSequence = tmpStage.StageSequence;
+                    MyStage.Status = tmpStage.Status;
+                    MyStage.Opportunity = CurrentOpportunity;
+                    MyStage.Save();
+                    foreach (IFulFilTemplateTask tmpTask in tmpStage.FulFilTemplateTasks)
+                    {
+                        //====================================================
+                        // Add the Tasks
+                        //=====================================================
+                        IOppFulFilTask MyTask = EntityFactory.Create<IOppFulFilTask>();
+                        MyTask.Description = tmpTask.Description;
+                        MyTask.Status = tmpTask.Status;
+                        MyTask.TaskSequence = tmpTask.TaskSequence;
+                        MyTask.Priority = tmpTask.Priority;
 
-                    MyTask.Notes = tmpTask.Notes;
+                        MyTask.Notes = tmpTask.Notes;
+                        MyTask.DueDate = CurrentOpportunity.DeliveryDate.Value.AddDays((double)tmpTask.DaysFromDeliveryDate);
+                        MyTask.WeightedPercentage = tmpTask.WeightedPercentage;
+                        MyTask.Opportunity = CurrentOpportunity;
+                        MyTask.OppFulFilStage = MyStage;
+                        MyTask.Save();
 
-                    MyTask.Opportunity = CurrentOpportunity;
-                    MyTask.OppFulFilStage = MyStage;
-                    MyTask.Save();
+                    }
 
                 }
+                this.grdStages.DataBind(); // Try to refresh
 
-            }
-            this.Refresh();
-
-            if (PageWorkItem != null)
-            {
-                IPanelRefreshService refresher = PageWorkItem.Services.Get<IPanelRefreshService>();
-                if (refresher != null)
+                if (PageWorkItem != null)
                 {
-                    refresher.RefreshAll();
+                    IPanelRefreshService refresher = PageWorkItem.Services.Get<IPanelRefreshService>();
+                    if (refresher != null)
+                    {
+                        refresher.RefreshAll();
+                    }
                 }
             }
         }
@@ -363,14 +371,14 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                 deleteCommnad.Text = "Delete Task";
                 deleteCommnad.Attributes.Add("onclick", string.Format("javascript: return confirm('{0}');", PortalUtil.JavaScriptEncode("Are you sure you want to Delete")));
 
-                if (dr["PercentComplete"] != null)
+                if (dr["WeightedPercentage"] != null)
                 {
                     Label lblPercent = ((Label)e.Row.FindControl("lblPercent"));
                     if (lblPercent != null)
                     {
                         try
                         {
-                            lblPercent.Text = string.Format("{0}%", ((double)dr["PercentComplete"]) * 100);
+                            lblPercent.Text = string.Format("{0}%", ((double)dr["WeightedPercentage"]) * 100);
                         }
                         catch
                         {
@@ -514,7 +522,7 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                             tmpTSK.CompletedBy = usersvc.UserId.ToString();
                             tmpTSK.CompletedDate = System.DateTime.Now.ToUniversalTime();
                             tmpTSK.Status = "Completed";
-                            tmpTSK.PercentageComplete = 1;
+                            //tmpTSK.WeightedPercentage  = 1;
                             tmpTSK.Save();
                         }
                     }
@@ -535,7 +543,7 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                     Task.CompletedBy = usersvc.UserId.ToString();
                     Task.CompletedDate = System.DateTime.Now.ToUniversalTime();
                     Task.Status = "Completed";
-                    Task.PercentageComplete = 1;
+                    //Task.PercentageComplete = 1;
                     Task.Save();
 
 
@@ -670,6 +678,8 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
 
     protected override void OnAddEntityBindings()
     {
+        BindingSource.Bindings.Add(new Sage.Platform.WebPortal.Binding.WebEntityBinding("DeliveryDate", dtDeliveryDate, "DateTimeValue", "", null));
+        //throw new NotImplementedException();
         //throw new NotImplementedException();
     }
     /// <summary>

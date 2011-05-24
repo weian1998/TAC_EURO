@@ -18,7 +18,7 @@
 Templates<asp:DropDownList ID="ddlTemplates" runat="server">
     </asp:DropDownList>  
     <asp:Button ID="cmdAddTemplate" runat="server" Text="Add Template Items" 
-        onclick="cmdAddTemplate_Click1" />
+        onclick="cmdAddTemplate_Click1" />  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Delivery Date:  <SalesLogix:DateTimePicker runat="server" ID="dtDeliveryDate" DisplayDate="true" DisplayTime="false" Timeless="True" Enabled="true"/>
 </div>
 
 
@@ -42,7 +42,7 @@ Templates<asp:DropDownList ID="ddlTemplates" runat="server">
                     </SalesLogix:DateTimePicker>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Percentage Complete">
+            <asp:TemplateField HeaderText="Weighted">
                 <ItemTemplate>
                     <asp:Label ID="lblPercent" runat="server"></asp:Label>
                 </ItemTemplate>

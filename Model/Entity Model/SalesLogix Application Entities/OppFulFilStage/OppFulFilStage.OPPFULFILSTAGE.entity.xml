@@ -80,14 +80,6 @@
         <LongTextDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="f5abe848-5f4d-4ed2-9d83-c52bf1d1ec06" lastModifiedUtc="2011-05-16T22:55:25.4664933Z" name="StartDate" audited="false" columnName="STARTDATE" maxLength="0" precision="0" scale="0" ordinal="8" isReadOnly="false">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
-        <DateTimeDataType />
-      </SystemDataType>
-    </property>
     <property xsi:type="OrmFieldProperty" id="64ba6156-a848-4b17-8f09-f1e135e88891" lastModifiedUtc="2011-05-16T22:55:25.5289925Z" name="EndDate" audited="false" columnName="ENDDATE" maxLength="0" precision="0" scale="0" ordinal="9" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />

@@ -8,6 +8,7 @@ using System.Data.OleDb;
 using System.Text.RegularExpressions;
 using NHibernate;
 using Sage.Platform.ChangeManagement;
+using Sage.Platform.Security;
 
 
 namespace TACEURO
@@ -25,11 +26,38 @@ namespace TACEURO
 			//fulfiltemplatetask.Save();
         }
 
+        // Example of target method signature
+        public static void OnAfterInsert(IOppFulFilTask oppfulfiltask)
+        {
+            //TAC Code Here
+        }
+        // Example of target method signature
+        public static void OnAfterUpdate(IOppFulFilTask oppfulfiltask)
+        {
+                //TAC Code here
+        }
+
+        // Example of target method signature
+        public static void OnBeforeUpdate(IActivity Activity, ISession session)
+        {
+            //TAC Code Here
+        }
+
         #region Task Stage Area
         // Example of target method signature
         public static void CompleteTask(IOppFulFilTask oppfulfiltask)
         {
+             Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+                            Sage.Entity.Interfaces.IUser user = usersvc.GetUser();
                 //Custom Code Here
+            oppfulfiltask.Completed = "T";
+            oppfulfiltask.CompletedBy = user.Id.ToString();
+            oppfulfiltask.CompletedDate = System.DateTime.Now.ToUniversalTime();
+
+            //=========================================================
+            // Complete Activiy (ToDo) that May be linked to this Task
+            //=========================================================
+
 
         }
         // Example of target method signature

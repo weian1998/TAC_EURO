@@ -81,14 +81,6 @@
         </TextDataType>
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="03eacf28-bcc6-42a8-a0cf-9813c714224e" lastModifiedUtc="2011-05-13T13:00:42.094375Z" name="StartDate" audited="false" columnName="STARTDATE" maxLength="0" precision="0" scale="0" ordinal="8" isReadOnly="false">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
-        <DateTimeDataType />
-      </SystemDataType>
-    </property>
     <property xsi:type="OrmFieldProperty" id="75806b6d-30ac-4db3-b377-fde3edc19f4c" lastModifiedUtc="2011-05-13T13:00:42.11Z" name="DueDate" audited="false" columnName="DUEDATE" maxLength="0" precision="0" scale="0" ordinal="9" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
@@ -141,14 +133,6 @@
         </TextDataType>
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="633ff4d1-3a6e-4eb7-a8d4-2839bda00d4a" lastModifiedUtc="2011-05-13T13:00:42.82875Z" name="PercentageComplete" audited="false" columnName="PERCENTAGECOMPLETE" maxLength="0" precision="53" scale="0" ordinal="15" isReadOnly="false">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="f37c635c-9fbf-40d8-98d5-750a54a3cca1">
-        <DoubleDataType />
-      </SystemDataType>
-    </property>
     <property xsi:type="OrmFieldProperty" id="85a2d3b2-ff56-4aaa-8c0b-02efa837f7fa" lastModifiedUtc="2011-05-13T13:00:42.906875Z" name="Notes" audited="false" columnName="NOTES" maxLength="2147483647" precision="0" scale="0" ordinal="16" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
@@ -163,6 +147,22 @@
       </ExtendedPropertiesCollection>
       <SystemDataType guid="47f90249-e4c8-4564-9ae6-e1fa9904f8b8">
         <IntegerDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="52e443e9-74f3-4a47-8657-d1676a10e1e4" lastModifiedUtc="2011-05-24T03:36:26.584625Z" name="DaysFromDeliveryDate" audited="false" columnName="DAYSFROMDELIVERYDATE" maxLength="0" precision="10" scale="0" ordinal="17" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="47f90249-e4c8-4564-9ae6-e1fa9904f8b8">
+        <IntegerDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="a11ab39b-e088-4fc0-bb27-61de39743a35" lastModifiedUtc="2011-05-24T03:36:26.584625Z" name="WeightedPercentage" audited="false" columnName="WEIGHTEDPERCENTAGE" maxLength="0" precision="53" scale="0" ordinal="16" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="f37c635c-9fbf-40d8-98d5-750a54a3cca1">
+        <DoubleDataType />
       </SystemDataType>
     </property>
   </properties>

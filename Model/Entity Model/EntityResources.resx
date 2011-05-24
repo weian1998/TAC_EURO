@@ -10308,9 +10308,6 @@
   <data name="FulFilTemplateStage.Notes.DisplayName" xml:space="preserve">
     <value>Notes</value>
   </data>
-  <data name="FulFilTemplateStage.StartDate.DisplayName" xml:space="preserve">
-    <value>StartDate</value>
-  </data>
   <data name="FulFilTemplateStage.EndDate.DisplayName" xml:space="preserve">
     <value>EndDate</value>
   </data>
@@ -10344,9 +10341,6 @@
   <data name="FulFilTemplateTask.Description.DisplayName" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="FulFilTemplateTask.StartDate.DisplayName" xml:space="preserve">
-    <value>StartDate</value>
-  </data>
   <data name="FulFilTemplateTask.DueDate.DisplayName" xml:space="preserve">
     <value>DueDate</value>
   </data>
@@ -10364,9 +10358,6 @@
   </data>
   <data name="FulFilTemplateTask.Priority.DisplayName" xml:space="preserve">
     <value>Priority</value>
-  </data>
-  <data name="FulFilTemplateTask.PercentageComplete.DisplayName" xml:space="preserve">
-    <value>PercentageComplete</value>
   </data>
   <data name="FulFilTemplateTask.Notes.DisplayName" xml:space="preserve">
     <value>Notes</value>
@@ -10419,8 +10410,8 @@
   <data name="OppFulFilStage.Notes.DisplayName" xml:space="preserve">
     <value>Notes</value>
   </data>
-  <data name="OppFulFilStage.StartDate.DisplayName" xml:space="preserve">
-    <value>StartDate</value>
+  <data name="OppFulFilTask.WeightedPercentage.DisplayName" xml:space="preserve">
+    <value>WeightedPercentage</value>
   </data>
   <data name="OppFulFilStage.EndDate.DisplayName" xml:space="preserve">
     <value>EndDate</value>
@@ -10458,8 +10449,8 @@
   <data name="OppFulFilTask.Description.DisplayName" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="OppFulFilTask.StartDate.DisplayName" xml:space="preserve">
-    <value>StartDate</value>
+  <data name="FulFilTemplateTask.WeightedPercentage.DisplayName" xml:space="preserve">
+    <value>WeightedPercentage</value>
   </data>
   <data name="OppFulFilTask.DueDate.DisplayName" xml:space="preserve">
     <value>DueDate</value>
@@ -10479,8 +10470,8 @@
   <data name="OppFulFilTask.Priority.DisplayName" xml:space="preserve">
     <value>Priority</value>
   </data>
-  <data name="OppFulFilTask.PercentageComplete.DisplayName" xml:space="preserve">
-    <value>PercentageComplete</value>
+  <data name="FulFilTemplateTask.DaysFromDeliveryDate.DisplayName" xml:space="preserve">
+    <value>DaysFromDeliveryDate</value>
   </data>
   <data name="OppFulFilTask.Notes.DisplayName" xml:space="preserve">
     <value>Notes</value>
@@ -10514,5 +10505,8 @@
   </data>
   <data name="OppFulFilTask.DisplayNamePlural" xml:space="preserve">
     <value>Fulilment Tasks</value>
+  </data>
+  <data name="Opportunity.DeliveryDate.DisplayName" xml:space="preserve">
+    <value>DeliveryDate</value>
   </data>
 </root>
