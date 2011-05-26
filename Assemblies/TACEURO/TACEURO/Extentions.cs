@@ -15,44 +15,200 @@ namespace TACEURO
 {
     public class Extentions
     {
-         //Example of target method signature
-        public static void OnBeforeInsert(IFulFilTemplateTask FulFilTemplateTask, ISession session)
+        #region Tasks and Activity Entity Events
+
+        public static T GetField<T>(string Field, string Table, string Where)
         {
-             // TODO: Complete business rule implementation
-            Sage.Entity.Interfaces.IFulFilTemplateStage ParentStage = FulFilTemplateTask.FulFilTemplateStage;
-			Sage.Entity.Interfaces.IFulFilmentTemplate  Template = ParentStage.FulFilmentTemplate ;
-			 // Set the Template
-            FulFilTemplateTask.FulFilmentTemplate = Template;
-			//fulfiltemplatetask.Save();
+            string sql = string.Format("select {0} from {1} where {2}", Field, Table, (Where.Equals(string.Empty) ? "1=1" : Where));
+
+            //get the DataService to get a connection string to the database
+            Sage.Platform.Data.IDataService datasvc = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Data.IDataService>();
+            using (System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection(datasvc.GetConnectionString()))
+            {
+                conn.Open();
+                using (OleDbCommand cmd = new OleDbCommand(sql, conn))
+                {
+                    object fieldval = cmd.ExecuteScalar();
+                    return fieldval == DBNull.Value ? default(T) : (T)fieldval;
+                }
+            }
         }
+        private static DateTime Timelessize(DateTime dt)
+        {
+            DateTime timelessized = new DateTime(dt.Year, dt.Month, dt.Day, 00, 00, 05);
+            return timelessized;
+        }
+
 
         // Example of target method signature
         public static void OnAfterInsert(IOppFulFilTask oppfulfiltask)
         {
-            //TAC Code Here
-        }
-        // Example of target method signature
-        public static void OnAfterUpdate(IOppFulFilTask oppfulfiltask)
-        {
-                //TAC Code here
+            //TAC Code Here to Create the Linked Activity.
+            // Create Activity Record
+            Sage.Entity.Interfaces.IActivity todo = Sage.Platform.EntityFactory.Create<Sage.Entity.Interfaces.IActivity>();
+            todo.AccountId = oppfulfiltask.Opportunity.Account.Id.ToString();
+            todo.AccountName = oppfulfiltask.Opportunity.Account.AccountName;
+            todo.OpportunityId = oppfulfiltask.Opportunity.Id.ToString();
+            todo.OpportunityName = oppfulfiltask.Opportunity.Description;
+            //todo.ContactId = histContactID;
+            //todo.ContactName = histContactName;
+            todo.Type = ActivityType.atToDo;
+            //todo.Category = histCategory;
+            todo.UserId = oppfulfiltask.Opportunity.AccountManager.Id.ToString();
+
+            todo.Duration = 15;
+            todo.StartDate = (System.DateTime)oppfulfiltask.DueDate;
+            //todo.OriginalDate = histArchiveDate;
+            //todo.CompletedDate = histArchiveDate;
+            //todo.CompletedUser = UserID;
+            todo.AlarmTime = oppfulfiltask.DueDate.Value.AddMinutes(-15);
+            todo.Timeless = true;
+            //todo.Result = "Complete";
+            todo.Description = "Stage: " + oppfulfiltask.OppFulFilStage.Description + " :Task: " + oppfulfiltask.Description;
+            todo.LongNotes = oppfulfiltask.Notes;
+            todo.Notes = oppfulfiltask.Notes;
+            todo.FulfilmentTaskID = oppfulfiltask.Id.ToString();
+
+            try
+            {
+                todo.Save();
+
+            }
+            catch (Exception)
+            {
+
+                //Exception But Continue
+            }
+
+
         }
 
         // Example of target method signature
-        public static void OnBeforeUpdate(IActivity Activity, ISession session)
+        public static void OnBeforeUpdate(IOppFulFilTask OppFulFilTask, ISession session)
         {
-            //TAC Code Here
+            ////TAC Code here
+            
+            IChangedState state = OppFulFilTask as IChangedState;
+
+            if (state != null)
+            {
+
+                PropertyChange chgDueDate = state.GetChangedState().FindPropertyChange("DueDate");
+                if (chgDueDate != null)
+                {
+                    //DateTime oldValue = (DateTime)chgDueDate.OldValue;
+                    //DateTime newValue = (DateTime)chgDueDate.NewValue;
+                    OppFulFilTask.DueDate = Timelessize ((DateTime )OppFulFilTask.DueDate );
+                    //Update the Linked Activity if there is one.
+                    string ToDoID = GetField<string>("ACTIVITYID", "ACTIVITY", "FULFILMENTTASKID = '" + OppFulFilTask.Id.ToString() + "'");
+
+
+                    Sage.Entity.Interfaces.IActivity ToDo = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IActivity>(ToDoID);
+                    if (ToDo != null)
+                    {
+                        if (ToDo.StartDate != OppFulFilTask.DueDate )
+                        {
+                            // Set the Linked Activity Start Date If it exists.
+
+                            ToDo.StartDate = (DateTime)OppFulFilTask.DueDate;
+                            ToDo.AlarmTime = (DateTime)OppFulFilTask.DueDate;
+                            ToDo.Save();
+                        }
+                    }
+
+                    // do something to compare oldValue with newValue...
+                }
+
+            }
+
         }
+
+        // Example of target method signature
+        // Example of target method signature
+        public static void CompleteLinkedOppFulfilTask(IActivity activity, string userId, string result, string resultCode, DateTime completeDate, ref IHistory hresult)
+        {
+            Sage.Entity.Interfaces.IOppFulFilTask Task = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOppFulFilTask>(activity.FulfilmentTaskID);
+            if (Task != null)
+            {
+                if (Task.Completed  != "T")
+                {
+                    // Complete the Linked Activity.
+                    Task.CompleteTask();
+                }
+            }
+
+        }
+        // Example of target method signature
+        public static void TACOnBeforeUpdate(IActivity Activity, ISession session)
+        {
+            ////TAC Code here
+            IChangedState state = Activity as IChangedState;
+
+            if (state != null)
+            {
+
+                PropertyChange chgDueDate = state.GetChangedState().FindPropertyChange("StartDate");
+                if (chgDueDate != null)
+                {
+                    DateTime oldValue = (DateTime)chgDueDate.OldValue;
+                    DateTime newValue = (DateTime)chgDueDate.NewValue;
+
+                    //Update the Linked Task if there is one.
+
+
+
+                    Sage.Entity.Interfaces.IOppFulFilTask  Task = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOppFulFilTask>(Activity.FulfilmentTaskID);
+                    if (Task != null)
+                    {
+                        if (Task.DueDate  != newValue)
+                        {
+                            // Set the Linked Activity Start Date If it exists.
+                            Task.DueDate  = newValue;
+                            
+                            Task.Save();
+                        }
+                    }
+
+                    // do something to compare oldValue with newValue...
+                }
+
+            }
+
+        }
+
+
+        #endregion
+
+        
 
         #region Task Stage Area
         // Example of target method signature
         public static void CompleteTask(IOppFulFilTask oppfulfiltask)
         {
-             Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
-                            Sage.Entity.Interfaces.IUser user = usersvc.GetUser();
+            if (oppfulfiltask.Completed == "T")
+            {
+                //Do Nothing because the Task is Allready Completed
+            }
+            else
+            {
+                Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+                Sage.Entity.Interfaces.IUser user = usersvc.GetUser();
                 //Custom Code Here
-            oppfulfiltask.Completed = "T";
-            oppfulfiltask.CompletedBy = user.Id.ToString();
-            oppfulfiltask.CompletedDate = System.DateTime.Now.ToUniversalTime();
+                oppfulfiltask.Completed = "T";
+                oppfulfiltask.CompletedBy = user.Id.ToString();
+                oppfulfiltask.CompletedDate = System.DateTime.Now.ToUniversalTime();
+                oppfulfiltask.Status = "Completed";
+               
+                // complete corresponding Activity if needed
+                //Update the Linked Activity if there is one.
+                string ToDoID = GetField<string>("ACTIVITYID", "ACTIVITY", "FULFILMENTTASKID = '" + oppfulfiltask.Id.ToString() + "'");
+                Sage.Entity.Interfaces.IActivity ToDo = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IActivity>(ToDoID);
+                if (ToDo != null)
+                {
+
+                    ToDo.Complete(user.Id.ToString(), "Complete", "", (DateTime)oppfulfiltask.CompletedDate);
+                }
+            }
 
             //=========================================================
             // Complete Activiy (ToDo) that May be linked to this Task

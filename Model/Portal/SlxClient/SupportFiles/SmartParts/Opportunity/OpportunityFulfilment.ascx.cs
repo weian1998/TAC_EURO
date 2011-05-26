@@ -286,6 +286,12 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
         }
     }
 
+    private static DateTime Timelessize(DateTime dt)
+    {
+        DateTime timelessized = new DateTime(dt.Year, dt.Month, dt.Day, 00, 00, 05);
+        return timelessized;
+    }
+
 
     protected void cmdAddTemplate_Click1(object sender, EventArgs e)
     {
@@ -325,7 +331,7 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                         MyTask.Priority = tmpTask.Priority;
 
                         MyTask.Notes = tmpTask.Notes;
-                        MyTask.DueDate = CurrentOpportunity.DeliveryDate.Value.AddDays((double)tmpTask.DaysFromDeliveryDate);
+                        MyTask.DueDate = Timelessize(CurrentOpportunity.DeliveryDate.Value.AddDays(-(double)tmpTask.DaysFromDeliveryDate));
                         MyTask.WeightedPercentage = tmpTask.WeightedPercentage;
                         MyTask.Opportunity = CurrentOpportunity;
                         MyTask.OppFulFilStage = MyStage;
@@ -334,7 +340,7 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                     }
 
                 }
-                this.grdStages.DataBind(); // Try to refresh
+                
 
                 if (PageWorkItem != null)
                 {
@@ -344,6 +350,7 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                         refresher.RefreshAll();
                     }
                 }
+                LoadView();
             }
         }
     }
@@ -516,14 +523,16 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                         }
                         else
                         {
-                            Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
-                            Sage.Entity.Interfaces.IUser user = usersvc.GetUser();
-                            tmpTSK.Completed = "T";
-                            tmpTSK.CompletedBy = usersvc.UserId.ToString();
-                            tmpTSK.CompletedDate = System.DateTime.Now.ToUniversalTime();
-                            tmpTSK.Status = "Completed";
-                            //tmpTSK.WeightedPercentage  = 1;
-                            tmpTSK.Save();
+                            //Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+                            //Sage.Entity.Interfaces.IUser user = usersvc.GetUser();
+                            //tmpTSK.Completed = "T";
+                            //tmpTSK.CompletedBy = usersvc.UserId.ToString();
+                            //tmpTSK.CompletedDate = System.DateTime.Now.ToUniversalTime();
+                            //tmpTSK.Status = "Completed";
+                            ////tmpTSK.WeightedPercentage  = 1;
+                            //tmpTSK.Save();
+                            tmpTSK.CompleteTask();
+                            
                         }
                     }
 
@@ -537,14 +546,16 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                 else if (result[1] == "T")
                 {
                     IOppFulFilTask Task = EntityFactory.GetById<IOppFulFilTask>(result[0]);
-                    Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
-                    Sage.Entity.Interfaces.IUser user = usersvc.GetUser();
-                    Task.Completed = "T";
-                    Task.CompletedBy = usersvc.UserId.ToString();
-                    Task.CompletedDate = System.DateTime.Now.ToUniversalTime();
-                    Task.Status = "Completed";
-                    //Task.PercentageComplete = 1;
-                    Task.Save();
+                    //Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+                    //Sage.Entity.Interfaces.IUser user = usersvc.GetUser();
+                    //Task.Completed = "T";
+                    //Task.CompletedBy = usersvc.UserId.ToString();
+                    //Task.CompletedDate = System.DateTime.Now.ToUniversalTime();
+                    //Task.Status = "Completed";
+                    ////Task.PercentageComplete = 1;
+                    //Task.Save();
+                    Task.CompleteTask();
+                   
 
 
                     //DialogService.SetSpecs(200, 200, 550, 700, "AddEditTask", "Complete Task", true);
@@ -590,6 +601,7 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                 refresher.RefreshAll();
             }
         }
+        LoadView();
     }
 
     /// <summary>
