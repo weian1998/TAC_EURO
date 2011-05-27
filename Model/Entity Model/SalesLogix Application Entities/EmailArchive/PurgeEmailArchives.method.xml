@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="58b5a0fc-e44e-4778-ab74-7c1e953ce51c" lastModifiedUtc="2011-05-27T14:17:32.236375Z" name="PurgeEmailArchives" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="d58ce535-704d-479d-955d-c8090f8857cc" paramName="ReprocessNoteCondition" sequence="0" paramType="String">
+      <description>EG. UserNotFound</description>
+    </OrmEntityMethodParam>
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="51c08f5d-6500-49cc-a851-1aa2581fdfc4" lastModifiedUtc="2011-05-27T14:17:28.65825Z" targetType="TACEURO.Extentions, TACEURO" targetMethod="PurgeEmailArchives" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

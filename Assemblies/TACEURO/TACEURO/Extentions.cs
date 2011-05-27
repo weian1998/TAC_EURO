@@ -54,8 +54,8 @@ namespace TACEURO
         }
         #endregion
 
-        #region Tasks and Activity Entity Events
 
+        #region Utility
         public static T GetField<T>(string Field, string Table, string Where)
         {
             string sql = string.Format("select {0} from {1} where {2}", Field, Table, (Where.Equals(string.Empty) ? "1=1" : Where));
@@ -77,6 +77,32 @@ namespace TACEURO
             DateTime timelessized = new DateTime(dt.Year, dt.Month, dt.Day, 00, 00, 05);
             return timelessized;
         }
+        public static string Left(string text, int length)
+        {
+            if (text != null)
+            {
+
+                if (length < 0)
+                    throw new ArgumentOutOfRangeException("length", length, "length must be > 0");
+                else if (length == 0 || text.Length == 0)
+                    return "";
+                else if (text.Length <= length)
+                    return text;
+                else
+                    return text.Substring(0, length);
+            }
+            else
+            { 
+                //Null String entered
+                return string.Empty;
+            }
+        }
+        #endregion
+
+
+        #region Tasks and Activity Entity Events
+
+        
 
 
         // Example of target method signature
@@ -103,9 +129,10 @@ namespace TACEURO
             todo.AlarmTime = oppfulfiltask.DueDate.Value.AddMinutes(-15);
             todo.Timeless = true;
             //todo.Result = "Complete";
-            todo.Description = "Stage: " + oppfulfiltask.OppFulFilStage.Description + " :Task: " + oppfulfiltask.Description;
+            String Description = "Stage: " + oppfulfiltask.OppFulFilStage.Description + " :Task: " + oppfulfiltask.Description;
+            todo.Description = Left(Description, 64);
             todo.LongNotes = oppfulfiltask.Notes;
-            todo.Notes = oppfulfiltask.Notes;
+            todo.Notes = Left(oppfulfiltask.Notes,255);
             todo.FulfilmentTaskID = oppfulfiltask.Id.ToString();
 
             try
@@ -173,6 +200,7 @@ namespace TACEURO
                 {
                     // Complete the Linked Activity.
                     Task.CompleteTask();
+                    Task.Save();
                 }
             }
 
@@ -265,22 +293,83 @@ namespace TACEURO
 
         #region ReProcess Email Archives
 
+        public static void PurgeEmailArchives(IEmailArchive emailarchive, String ReprocessNoteCondition)
+        {
+            String EmailArchiveID = String.Empty;
+            // get the DataService to get a connection string to the database
+            Sage.Platform.Data.IDataService datasvc = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Data.IDataService>();
+            using (System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection(datasvc.GetConnectionString()))
+            {
+                conn.Open();
+                using (System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand("Select *  from EMAILARCHIVE where ISLINKEDHISTORY = 'F' AND REPROCESSNOTE ='" + ReprocessNoteCondition + "'", conn))
+                {
+                    OleDbDataReader reader = cmd.ExecuteReader();
+                    //loop through the reader
+                    while (reader.Read())
+                    {
+                        EmailArchiveID = reader["EMAILARCHIVEID"].ToString();
+                        Sage.Entity.Interfaces.IEmailArchive _entity = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IEmailArchive>(EmailArchiveID);
+                        _entity.Delete();
+                        
+                    }
+                    reader.Close();
+                }
+            }
 
+        }
+
+        public static void ReprocessContactEmails(IEmailArchive emailarchive)
+        {
+            String   UserName = String.Empty ;
+            String  UserID = String.Empty ;
+            String   ContactID = String.Empty;
+            String ContactName = String.Empty;
+            String AccountID = String.Empty;
+            String AccountName = String.Empty;
+            String ContactType = String.Empty;
+
+            if (IsUserFound(emailarchive.ToAddress.ToString(), out UserName, out UserID))
+            {
+                if (IsContactFound(emailarchive.FromAddress.ToString(), out ContactID, out ContactName, out AccountID, out AccountName, out ContactType))
+                {
+                    // ReProcess by Email Address 
+                    EmailArchiveProcess("Email", "", emailarchive.FromAddress.ToString());
+                }
+            }
+            else
+            {
+                if (IsUserFound(emailarchive.FromAddress.ToString(), out UserName, out UserID))
+                {
+                    if (IsContactFound(emailarchive.ToAddress.ToString(), out ContactID, out ContactName, out AccountID, out AccountName, out ContactType))
+                    {
+                        // ReProcess by Email Address 
+                        EmailArchiveProcess("Email", "", emailarchive.ToAddress.ToString());
+                    }
+                }
+            }
+
+
+        }
+
+        private static bool IsUserFound(string p, string UserName, string UserID)
+        {
+            throw new NotImplementedException();
+        }
         // Example of target method signature
         public static void ReProcess(IEmailArchive emailarchive, out String result)
         {
-            EmailArchiveProcess("ALL", "");
+            EmailArchiveProcess("ALL", "","");
             result = "Completed Message";
         }
         // Example of target method signature
         public static void ReprocessSingle(IEmailArchive emailarchive)
         {
-            EmailArchiveProcess("Single", emailarchive.Id.ToString());
+            EmailArchiveProcess("Single", emailarchive.Id.ToString(),"");
         }
 
 
 
-        private static void EmailArchiveProcess(String Type, String Value)
+        private static void EmailArchiveProcess(String Type, String Value,String EmailAddress)
         {
             //====================================
             // Variables
@@ -319,11 +408,24 @@ namespace TACEURO
                           "               FROM          sysdba.EMAILEXCLUDELIST)) AND (FROMADDRESS NOT IN" +
                           "             (SELECT     EMAILADDRESS" +
                           "  FROM          sysdba.EMAILEXCLUDELIST AS EMAILEXCLUDELIST_1)) AND (EMAILARCHIVEID = '" + Value + "')";
-                    // Clean Out the History items Linked to this EmailArchive
-                    //RemoveHistoryLinkedtoEmailArchive(Value);
+
                     break;
                 case "ALL":
                     SQL = "Select * from EMAILARCHIVE  where ISLINKEDHISTORY = 'F' and TOADDRESS not in (Select EMAILADDRESS  from EMAILEXCLUDELIST )and FROMADDRESS  not in (Select EMAILADDRESS  from EMAILEXCLUDELIST )";
+
+                    break;
+                case "Email":
+                    SQL = "SELECT     EMAILARCHIVEID, CREATEUSER, CREATEDATE, MODIFYUSER, MODIFYDATE, FROMADDRESS, TOADDRESS, MESSAGEBODY, SUBJECT, " +
+                          "                      ISLINKEDHISTORY, ORIGTOADDRESS, ORIGFROMADDRESS, SHORTNOTES, REPROCESSNOTE " +
+                          " FROM         sysdba.EMAILARCHIVE " +
+                          " WHERE     (ISLINKEDHISTORY = 'F') AND (TOADDRESS NOT IN" +
+                          "           (SELECT     EMAILADDRESS" +
+                          "                FROM          sysdba.EMAILEXCLUDELIST)) AND (FROMADDRESS NOT IN" +
+                          "           (SELECT     EMAILADDRESS" +
+                          "             FROM          sysdba.EMAILEXCLUDELIST AS EMAILEXCLUDELIST_1))" +
+                          " AND (TOADDRESS = '" + EmailAddress + "')" +
+                          " OR " +
+                          "(FROMADDRESS = '" + EmailAddress + "')";
 
                     break;
                 default:
