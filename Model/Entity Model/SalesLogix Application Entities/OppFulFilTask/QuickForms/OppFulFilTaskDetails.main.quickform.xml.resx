@@ -123,8 +123,8 @@
   <data name="Description.Caption" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="StartDate.Caption" xml:space="preserve">
-    <value>StartDate</value>
+  <data name="QFButton2.Caption" xml:space="preserve">
+    <value>Complete Task</value>
   </data>
   <data name="pklPriority.Caption" xml:space="preserve">
     <value>Priority</value>
@@ -133,7 +133,7 @@
     <value>DueDate</value>
   </data>
   <data name="PercentageComplete.Caption" xml:space="preserve">
-    <value>PercentageComplete</value>
+    <value>WeightedPercentage</value>
   </data>
   <data name="CompletedDate.Caption" xml:space="preserve">
     <value>CompletedDate</value>
@@ -167,5 +167,8 @@
   </data>
   <data name="QFSLXLookup2.Caption" xml:space="preserve">
     <value>Account</value>
+  </data>
+  <data name="DaysFromDeliveryDate.Caption" xml:space="preserve">
+    <value>DaysFromDeliveryDate</value>
   </data>
 </root>

@@ -15,6 +15,45 @@ namespace TACEURO
 {
     public class Extentions
     {
+        #region Opportunity Events
+        // Example of target method signature
+        public static void TACOpportunityOnBeforeUpdate(IOpportunity Opportunity, ISession session)
+        {
+            ////TAC Code here
+
+            IChangedState state = Opportunity as IChangedState;
+
+            if (state != null)
+            {
+
+                PropertyChange chgDeliveryDate = state.GetChangedState().FindPropertyChange("DeliveryDate");
+                if (chgDeliveryDate != null)
+                {
+                    //DateTime oldValue = (DateTime)chgDueDate.OldValue;
+                    //DateTime newValue = (DateTime)chgDueDate.NewValue;
+
+                    //Update the Linked Activity if there is one.
+                    string StageID = GetField<string>("OPPFULFILSTAGEID", "OPPFULFILSTAGE", "OPPORTUNITYID = '" + Opportunity.Id.ToString() + "'");
+
+
+                    Sage.Entity.Interfaces.IOppFulFilStage Stage = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOppFulFilStage>(StageID);
+                    if (Stage != null)
+                    {
+                        foreach (IOppFulFilTask tmpTask in Stage.OppFulFilTasks)
+                        {
+                            tmpTask.DueDate = Opportunity.DeliveryDate.Value.AddDays(-(double)tmpTask.DaysFromDeliveryDate);
+                            tmpTask.Save();
+                        }
+                    }
+
+                    // do something to compare oldValue with newValue...
+                }
+
+
+            }
+        }
+        #endregion
+
         #region Tasks and Activity Entity Events
 
         public static T GetField<T>(string Field, string Table, string Where)
@@ -181,7 +220,7 @@ namespace TACEURO
 
         
 
-        #region Task Stage Area
+        #region Task Stage Complete Methods
         // Example of target method signature
         public static void CompleteTask(IOppFulFilTask oppfulfiltask)
         {

@@ -159,5 +159,13 @@
         <DoubleDataType />
       </SystemDataType>
     </property>
+    <property xsi:type="OrmFieldProperty" id="20c3edbf-8fdd-4aab-bffa-43e348b7bcfc" lastModifiedUtc="2011-05-26T23:21:57.517625Z" name="DaysFromDeliveryDate" audited="false" columnName="DAYSFROMDELIVERYDATE" maxLength="0" precision="10" scale="0" ordinal="17" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="47f90249-e4c8-4564-9ae6-e1fa9904f8b8">
+        <IntegerDataType />
+      </SystemDataType>
+    </property>
   </properties>
 </entity>

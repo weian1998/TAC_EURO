@@ -15,7 +15,7 @@ public partial class SmartParts_ActivityList : EntityBoundSmartPartInfoProvider
     /// Gets or sets the entity service.
     /// </summary>
     /// <value>The entity service.</value>
-    [ServiceDependency(Type = typeof (IEntityContextService), Required = true)]
+    [ServiceDependency(Type = typeof(IEntityContextService), Required = true)]
     public IEntityContextService EntityService { get; set; }
 
     private Sage.Platform.TimeZone _timeZone;
@@ -65,7 +65,7 @@ public partial class SmartParts_ActivityList : EntityBoundSmartPartInfoProvider
                 sel.Add(new HqlSelectField("a.OpportunityName", "OpportunityName"));
                 sel.Add(new HqlSelectField("a.Notes", "Notes"));
                 sel.Add(new HqlSelectField("ui.UserName", "Leader"));
-                
+
                 _hqlBindingSource = new WebHqlListBindingSource(sel, "Activity a, UserInfo ui");
             }
             return _hqlBindingSource;
@@ -129,6 +129,20 @@ public partial class SmartParts_ActivityList : EntityBoundSmartPartInfoProvider
                         if (((BoundField)(col)).DataField.Equals("OpportunityName"))
                             col.Visible = false;
                     }
+                    //=============================================================
+                    // TAC Customized below this line 26-05-2010
+                    //=============================================================
+                    if (entityName.Equals("Oppfulfiltask"))
+                    {
+                        if (((BoundField)(col)).DataField.Equals("ContactName"))
+                            col.Visible = false;
+                        if (((BoundField)(col)).DataField.Equals("OpportunityName"))
+                            col.Visible = true;
+                        keyId = "FulfilmentTaskID";
+                    }
+                    //=============================================================
+                    // TAC Customized Above this line 26-05-2010
+                    //=============================================================
                 }
             }
 
@@ -231,7 +245,7 @@ public partial class SmartParts_ActivityList : EntityBoundSmartPartInfoProvider
 
     protected string GetToolTip(object activityType)
     {
-        
+
         string toolTip = GetLocalResourceObject("Activity_Meeting_Name").ToString();
         switch (activityType.ToString())
         {

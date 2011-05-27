@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using Sage.SalesLogix.Web.Controls;
 using Sage.Platform.WebPortal;
 using System.Drawing;
+using Sage.Platform.Application.UI.Web;
 
 public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundSmartPartInfoProvider
 {
@@ -221,6 +222,13 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                     }
                     try
                     {
+                        row3["CompletedDate"] = task.CompletedDate ;
+                    }
+                    catch
+                    {
+                    }
+                    try
+                    {
                         row3["WeightedPercentage"] = task.WeightedPercentage;
                     }
                     catch
@@ -247,6 +255,9 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
             row4["StageSequence"] = tmpRow["StageSequence"];
             row4["TaskSequence"] = tmpRow["TaskSequence"];
             row4["NeededDate"] = tmpRow["NeededDate"];
+
+            row4["CompletedDate"] = tmpRow["CompletedDate"];
+            
             row4["WeightedPercentage"] = tmpRow["WeightedPercentage"];
 
             returntable.Rows.Add(row4);
@@ -335,6 +346,15 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                         MyTask.WeightedPercentage = tmpTask.WeightedPercentage;
                         MyTask.Opportunity = CurrentOpportunity;
                         MyTask.OppFulFilStage = MyStage;
+                        if (tmpTask.DaysFromDeliveryDate == null)
+                        {
+                            MyTask.DaysFromDeliveryDate = 0;
+                        }
+                        else
+                        {
+                            MyTask.DaysFromDeliveryDate = tmpTask.DaysFromDeliveryDate; 
+                        }
+                        
                         MyTask.Save();
 
                     }
@@ -342,16 +362,26 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                 }
                 
 
-                if (PageWorkItem != null)
-                {
-                    IPanelRefreshService refresher = PageWorkItem.Services.Get<IPanelRefreshService>();
-                    if (refresher != null)
-                    {
-                        refresher.RefreshAll();
-                    }
-                }
-                LoadView();
+                
+               
             }
+        }
+        //RefreshPage();
+        Response.Redirect(Request.Url.ToString());
+    }
+    public void RefreshPage()
+    {
+        if (PageWorkItem != null)
+        {
+            IPanelRefreshService refresher = PageWorkItem.Services.Get<IPanelRefreshService>();
+            if (refresher != null)
+            {
+                refresher.RefreshAll();
+            }
+        }
+        else
+        {
+            Response.Redirect(Request.Url.ToString());
         }
     }
 
@@ -369,12 +399,12 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
             if (dr["Type"].ToString() == "TASK")
             {
                 e.Row.Cells[0].Style.Value = "margin-left:20px";
-                e.Row.Cells[5].Text = String.Empty;
-                LinkButton editTask = (LinkButton)e.Row.Cells[6].Controls[0];
+                e.Row.Cells[6].Text = String.Empty;
+                LinkButton editTask = (LinkButton)e.Row.Cells[7].Controls[0];
                 editTask.Text = "Edit Task";
-                LinkButton completeTask = (LinkButton)e.Row.Cells[7].Controls[0];
+                LinkButton completeTask = (LinkButton)e.Row.Cells[8].Controls[0];
                 completeTask.Text = "Complete Task";
-                LinkButton deleteCommnad = (LinkButton)e.Row.Cells[8].Controls[0];
+                LinkButton deleteCommnad = (LinkButton)e.Row.Cells[9].Controls[0];
                 deleteCommnad.Text = "Delete Task";
                 deleteCommnad.Attributes.Add("onclick", string.Format("javascript: return confirm('{0}');", PortalUtil.JavaScriptEncode("Are you sure you want to Delete")));
 
@@ -405,6 +435,18 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                         dtpNeededDate.Text = string.Empty;
                     }
                 }
+                DateTimePicker dtpCompletedDate = (DateTimePicker)e.Row.FindControl("dtpCompleted");
+                if (dtpCompletedDate != null)
+                {
+                    try
+                    {
+                        dtpCompletedDate.DateTimeValue = (DateTime)dr["CompletedDate"];
+                    }
+                    catch
+                    {
+                        dtpCompletedDate.Text = string.Empty;
+                    }
+                }
             }
             if (dr["Type"].ToString() == "STAGE")
             {
@@ -418,12 +460,13 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                 e.Row.Cells.RemoveAt(1);
                 e.Row.Cells.RemoveAt(1);
                 e.Row.Cells.RemoveAt(1);
-                LinkButton deleteCommnad = (LinkButton)e.Row.Cells[4].Controls[0];
+                //e.Row.Cells.RemoveAt(1);
+                LinkButton deleteCommnad = (LinkButton)e.Row.Cells[5].Controls[0];
                 deleteCommnad.Attributes.Add("onclick", string.Format("javascript: return confirm('{0}');", PortalUtil.JavaScriptEncode("Are You Sure you want to Delete")));
             }
             if (dr["Type"].ToString() == "PLACE_HOLDER")
             {
-                e.Row.Cells[0].ColumnSpan = 9;
+                e.Row.Cells[0].ColumnSpan = 10;
                 e.Row.Cells[0].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Cells[0].Font.Bold = false;
                 e.Row.Cells[0].Style.Value = "margin-left:20px";
@@ -435,6 +478,7 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                 e.Row.Cells.RemoveAt(1);
                 e.Row.Cells.RemoveAt(1);
                 e.Row.Cells.RemoveAt(1);
+                //e.Row.Cells.RemoveAt(1);
             }
         }
     }

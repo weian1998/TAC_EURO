@@ -42,6 +42,13 @@ Templates<asp:DropDownList ID="ddlTemplates" runat="server">
                     </SalesLogix:DateTimePicker>
                 </ItemTemplate>
             </asp:TemplateField>
+            <asp:TemplateField HeaderText="CompletedDate">
+                <ItemTemplate>
+                    <SalesLogix:DateTimePicker runat="server" ID="dtpCompleted" Enabled="true" DisplayDate="true"
+                        DisplayTime="false" Timeless="True" DisplayMode="AsText" AutoPostBack="false">
+                    </SalesLogix:DateTimePicker>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:TemplateField HeaderText="Weighted">
                 <ItemTemplate>
                     <asp:Label ID="lblPercent" runat="server"></asp:Label>
