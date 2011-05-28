@@ -117,100 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="btnSaveAccount.Caption" xml:space="preserve">
-    <value>Save</value>
+  <data name="Description.Caption" xml:space="preserve">
+    <value>Description</value>
   </data>
-  <data name="btnSaveAccount.ToolTip" xml:space="preserve">
-    <value>Save</value>
+  <data name="CreateDate.Caption" xml:space="preserve">
+    <value>Createdate</value>
   </data>
-  <data name="btnDelete.Caption" xml:space="preserve">
-    <value>Delete</value>
+  <data name="grdAccountLeadSources.744b43dd-3342-468e-a7c4-6fae8337d05f.ColumnHeading" xml:space="preserve">
+    <value>Description</value>
   </data>
-  <data name="btnDelete.ToolTip" xml:space="preserve">
-    <value>Delete</value>
+  <data name="grdAccountLeadSources.b85621cd-6582-4fa6-83bd-450422bbc120.ColumnHeading" xml:space="preserve">
+    <value>Createdate</value>
   </data>
-  <data name="btnDelete.ActionConfirmationMessage" xml:space="preserve">
-    <value>You are about to permanently delete this Account. Doing so will also remove all associated contacts, opportunities and history.</value>
-  </data>
-  <data name="AccountName.Caption" xml:space="preserve">
-    <value>Account:</value>
-  </data>
-  <data name="Division.Caption" xml:space="preserve">
-    <value>Division:</value>
-  </data>
-  <data name="BusinessDescription.Caption" xml:space="preserve">
-    <value>Desc. of Business:</value>
-  </data>
-  <data name="Address.Caption" xml:space="preserve">
-    <value>Address:</value>
-  </data>
-  <data name="Owner.Caption" xml:space="preserve">
-    <value>Owner:</value>
-  </data>
-  <data name="MainPhone.Caption" xml:space="preserve">
-    <value>Main:</value>
-  </data>
-  <data name="Fax.Caption" xml:space="preserve">
-    <value>Fax:</value>
-  </data>
-  <data name="TollFree.Caption" xml:space="preserve">
-    <value>Toll Free:</value>
-  </data>
-  <data name="pklType.Caption" xml:space="preserve">
-    <value>Type:</value>
-  </data>
-  <data name="pklSubType.Caption" xml:space="preserve">
-    <value>Sub Type:</value>
-  </data>
-  <data name="Status.Caption" xml:space="preserve">
-    <value>Status:</value>
-  </data>
-  <data name="Industry.Caption" xml:space="preserve">
-    <value>Industry:</value>
-  </data>
-  <data name="WebAddress.Caption" xml:space="preserve">
-    <value>Web URL:</value>
-  </data>
-  <data name="AccManager.Caption" xml:space="preserve">
-    <value>Acc Manager:</value>
-  </data>
-  <data name="cmdCopyAccount.Caption" xml:space="preserve">
-    <value>Copy</value>
-  </data>
-  <data name="cmdCopyAccount.ToolTip" xml:space="preserve">
-    <value>Copy Account Information to Clipboard</value>
-  </data>
-  <data name="Owner.ButtonToolTip" xml:space="preserve">
-    <value>Find</value>
-  </data>
-  <data name="AccManager.ButtonToolTip" xml:space="preserve">
-    <value>Find</value>
-  </data>
-  <data name="Address.AddressToolTip" xml:space="preserve">
-    <value>MapQuest</value>
-  </data>
-  <data name="Address.ButtonToolTip" xml:space="preserve">
+  <data name="grdAccountLeadSources.5484b9c4-b2a7-46ca-a6bf-6338f972f4fc.Text" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="WebAddress.ButtonToolTip" xml:space="preserve">
-    <value>WWW</value>
+  <data name="991d99f2-21b4-41e2-92de-6bd75305ed9f.DialogTitleOverride" xml:space="preserve">
+    <value>Edit LeadSource</value>
   </data>
-  <data name="TaxExempt.Caption" xml:space="preserve">
-    <value>TaxExempt</value>
+  <data name="grdAccountLeadSources.0ccf5af7-8615-47d7-a972-cc9fe7c4ac4f.ConfirmationMessage" xml:space="preserve">
+    <value>Are you sure you want to delete?</value>
   </data>
-  <data name="TaxID.Caption" xml:space="preserve">
-    <value>TaxID</value>
+  <data name="grdAccountLeadSources.0ccf5af7-8615-47d7-a972-cc9fe7c4ac4f.Text" xml:space="preserve">
+    <value>Delete</value>
   </data>
-  <data name="MergeCode.Caption" xml:space="preserve">
-    <value>MergeCode</value>
+  <data name="QFButton.Caption" xml:space="preserve">
+    <value>Add LeadSource</value>
   </data>
-  <data name="Rating.Caption" xml:space="preserve">
-    <value>Rating</value>
+  <data name="QFButton.ToolTip" xml:space="preserve">
+    <value>Add LeadSource</value>
   </data>
-  <data name="Specialty.Caption" xml:space="preserve">
-    <value>Specialty</value>
-  </data>
-  <data name="NumDesigners.Caption" xml:space="preserve">
-    <value>#Designers</value>
+  <data name="02d778d4-d15d-440c-8468-a70455fc3980.DialogTitleOverride" xml:space="preserve">
+    <value>Add LeadSource</value>
   </data>
 </root>

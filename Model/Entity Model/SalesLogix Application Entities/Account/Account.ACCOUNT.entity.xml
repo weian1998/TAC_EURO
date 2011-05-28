@@ -1148,6 +1148,66 @@
         </TextDataType>
       </SystemDataType>
     </property>
+    <property xsi:type="OrmFieldProperty" id="514bea39-2ea5-41a9-b64c-db4148cb28ba" lastModifiedUtc="2011-05-28T19:44:44.9365Z" name="MergeCode" audited="false" columnName="MERGECODE" maxLength="64" precision="0" scale="0" ordinal="77" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>64</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="cc613e61-7317-47f5-8416-324205849483" lastModifiedUtc="2011-05-28T19:44:44.952125Z" name="Rating" audited="false" columnName="RATING" maxLength="32" precision="0" scale="0" ordinal="78" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>32</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="f0e4b2d0-d26d-4ed5-b15d-fe24559c82e9" lastModifiedUtc="2011-05-28T19:44:44.952125Z" name="TaxID" audited="false" columnName="TAXID" maxLength="32" precision="0" scale="0" ordinal="79" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>32</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="256d5018-34dd-446a-97d4-659bd6a30f3c" lastModifiedUtc="2011-05-28T19:44:44.952125Z" name="TaxExempt" audited="false" columnName="TAXEXEMPT" maxLength="32" precision="0" scale="0" ordinal="80" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>32</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="7c1c5312-5bca-4beb-b74e-b2e5a0455d3a" lastModifiedUtc="2011-05-28T19:44:44.952125Z" name="NumDesigners" audited="false" columnName="NUMDESIGNERS" maxLength="32" precision="0" scale="0" ordinal="81" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>32</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="ef9db502-2266-4871-8d20-b51dfe9a3bbd" lastModifiedUtc="2011-05-28T19:44:44.952125Z" name="Specialty" audited="false" columnName="SPECIALTY" maxLength="64" precision="0" scale="0" ordinal="82" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>64</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
   </properties>
   <interfaceTemplateId>5e8b7df7-0ec3-46b3-b8f4-f7bde7d5a6a3</interfaceTemplateId>
 </entity>
