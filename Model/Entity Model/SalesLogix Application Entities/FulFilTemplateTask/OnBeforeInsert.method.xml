@@ -6,13 +6,7 @@
   </ExtendedPropertiesCollection>
   <parameter />
   <preExecuteTargets />
-  <methodTargets>
-    <methodTarget id="f2159fd2-4055-4e8b-bd9f-be4ef99ce01a" lastModifiedUtc="2011-05-15T14:30:47.641875Z" targetType="TACEURO.Extentions, TACEURO" targetMethod="OnBeforeInsert" active="true">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
-      </ExtendedPropertiesCollection>
-    </methodTarget>
-  </methodTargets>
+  <methodTargets />
   <postExecuteTargets />
   <postFlushTargets />
 </method>
