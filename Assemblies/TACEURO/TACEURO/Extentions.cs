@@ -189,8 +189,7 @@ namespace TACEURO
 
         }
 
-        // Example of target method signature
-        // Example of target method signature
+
         public static void CompleteLinkedOppFulfilTask(IActivity activity, string userId, string result, string resultCode, DateTime completeDate, ref IHistory hresult)
         {
             Sage.Entity.Interfaces.IOppFulFilTask Task = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOppFulFilTask>(activity.FulfilmentTaskID);
@@ -632,6 +631,8 @@ namespace TACEURO
                 //Exception But Continue
             }
         }
+
+
         private static void UpdateEmailArchiveLinked(String EmailArchiveID, String ReProcessNote, Boolean IsLinkedHistory)
         {
             Sage.Entity.Interfaces.IEmailArchive EmailArchive = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IEmailArchive>(EmailArchiveID);

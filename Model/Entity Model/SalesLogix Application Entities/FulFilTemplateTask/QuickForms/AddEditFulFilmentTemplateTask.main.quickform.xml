@@ -27,6 +27,7 @@
         if (DialogService.DialogParameters.TryGetValue("StageId", out stageId))
             _entity.FulFilTemplateStage = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IFulFilTemplateStage>(stageId.ToString());
         Sage.Entity.Interfaces.IFulFilTemplateStage  parent = _entity.FulFilTemplateStage;
+        _entity.FulFilmentTemplate = parent.FulFilmentTemplate; 
    
     
         int MaxTaskSequence = 0;
@@ -39,6 +40,10 @@
 			pklStatus.PickListValue  = "Open";
             //_entity.PercentageComplete = 0;
 			//PercentageComplete.Text = "0";
+            _entity.DaysFromDeliveryDate = 0;
+            _entity.DueDate = System.DateTime.Now.ToUniversalTime();
+
+           
             foreach (Sage.Entity.Interfaces.IFulFilTemplateTask tmpTask in parent.FulFilTemplateTasks)
             {
                 if (tmpTask.TaskSequence  != null)
