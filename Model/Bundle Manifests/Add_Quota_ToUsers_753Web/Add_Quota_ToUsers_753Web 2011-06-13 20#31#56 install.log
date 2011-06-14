@@ -1,0 +1,61 @@
+6/13/2011 8:31:56 PM
+INFO  2011-06-13 14:31:46,658 - Installing bundle...
+INFO  2011-06-13 14:31:46,689 - Performing pre-install.
+INFO  2011-06-13 14:31:46,689 - Installing context item: SalesLogix Security Support (\Entity Model\SalesLogix Security Support\SalesLogix Security Support.T.package.xml)
+INFO  2011-06-13 14:31:46,705 - Successfully installed SalesLogix Security Support (\Entity Model\SalesLogix Security Support\SalesLogix Security Support.T.package.xml)
+INFO  2011-06-13 14:31:46,721 - Installing context item: User (\Entity Model\SalesLogix Security Support\User\User.USERSECURITY.entity.xml)
+INFO  2011-06-13 14:31:46,986 - Successfully installed User (\Entity Model\SalesLogix Security Support\User\User.USERSECURITY.entity.xml)
+INFO  2011-06-13 14:31:47,002 - Installing model item: Quotas (\Entity Model\SalesLogix Security Support\User\QuickForms\Quotas.main.quickform.xml)
+INFO  2011-06-13 14:31:47,236 - Successfully installed Quotas (\Entity Model\SalesLogix Security Support\User\QuickForms\Quotas.main.quickform.xml)
+INFO  2011-06-13 14:31:47,252 - Installing context item: SalesLogix Application Entities (\Entity Model\SalesLogix Application Entities\SalesLogix Application Entities.T.package.xml)
+INFO  2011-06-13 14:31:47,267 - Successfully installed SalesLogix Application Entities (\Entity Model\SalesLogix Application Entities\SalesLogix Application Entities.T.package.xml)
+INFO  2011-06-13 14:31:47,299 - Installing model item: QUOTA (\Entity Model\SalesLogix Application Entities\QUOTA\QUOTA.QUOTA.entity.xml)
+INFO  2011-06-13 14:31:47,924 - Successfully installed QUOTA (\Entity Model\SalesLogix Application Entities\QUOTA\QUOTA.QUOTA.entity.xml)
+INFO  2011-06-13 14:31:47,939 - Installing model item: OnAfterDelete (\Entity Model\SalesLogix Application Entities\QUOTA\OnAfterDelete.method.xml)
+INFO  2011-06-13 14:31:47,986 - Successfully installed OnAfterDelete (\Entity Model\SalesLogix Application Entities\QUOTA\OnAfterDelete.method.xml)
+INFO  2011-06-13 14:31:47,986 - Installing item: OnAfterDelete (\Entity Model\SalesLogix Application Entities\QUOTA\OnAfterDelete.method.xml::Primary Steps::OnAfterDelete)
+INFO  2011-06-13 14:31:48,017 - Successfully installed OnAfterDelete (\Entity Model\SalesLogix Application Entities\QUOTA\OnAfterDelete.method.xml::Primary Steps::OnAfterDelete)
+INFO  2011-06-13 14:31:48,064 - Installing model item: OnAfterInsert (\Entity Model\SalesLogix Application Entities\QUOTA\OnAfterInsert.method.xml)
+INFO  2011-06-13 14:31:48,111 - Successfully installed OnAfterInsert (\Entity Model\SalesLogix Application Entities\QUOTA\OnAfterInsert.method.xml)
+INFO  2011-06-13 14:31:48,127 - Installing item: OnAfterInsert (\Entity Model\SalesLogix Application Entities\QUOTA\OnAfterInsert.method.xml::Primary Steps::OnAfterInsert)
+INFO  2011-06-13 14:31:48,142 - Successfully installed OnAfterInsert (\Entity Model\SalesLogix Application Entities\QUOTA\OnAfterInsert.method.xml::Primary Steps::OnAfterInsert)
+INFO  2011-06-13 14:31:48,221 - Installing model item: OnAfterUpdate (\Entity Model\SalesLogix Application Entities\QUOTA\OnAfterUpdate.method.xml)
+INFO  2011-06-13 14:31:48,361 - Successfully installed OnAfterUpdate (\Entity Model\SalesLogix Application Entities\QUOTA\OnAfterUpdate.method.xml)
+INFO  2011-06-13 14:31:48,408 - Installing item: OnAfterUpdate (\Entity Model\SalesLogix Application Entities\QUOTA\OnAfterUpdate.method.xml::Primary Steps::OnAfterUpdate)
+INFO  2011-06-13 14:31:48,502 - Successfully installed OnAfterUpdate (\Entity Model\SalesLogix Application Entities\QUOTA\OnAfterUpdate.method.xml::Primary Steps::OnAfterUpdate)
+INFO  2011-06-13 14:31:48,564 - Installing model item: OnBeforeDelete (\Entity Model\SalesLogix Application Entities\QUOTA\OnBeforeDelete.method.xml)
+INFO  2011-06-13 14:31:48,689 - Successfully installed OnBeforeDelete (\Entity Model\SalesLogix Application Entities\QUOTA\OnBeforeDelete.method.xml)
+INFO  2011-06-13 14:31:48,799 - Installing item: OnBeforeDelete (\Entity Model\SalesLogix Application Entities\QUOTA\OnBeforeDelete.method.xml::Primary Steps::OnBeforeDelete)
+INFO  2011-06-13 14:31:48,814 - Successfully installed OnBeforeDelete (\Entity Model\SalesLogix Application Entities\QUOTA\OnBeforeDelete.method.xml::Primary Steps::OnBeforeDelete)
+INFO  2011-06-13 14:31:48,830 - Installing model item: OnBeforeInsert (\Entity Model\SalesLogix Application Entities\QUOTA\OnBeforeInsert.method.xml)
+INFO  2011-06-13 14:31:48,877 - Successfully installed OnBeforeInsert (\Entity Model\SalesLogix Application Entities\QUOTA\OnBeforeInsert.method.xml)
+INFO  2011-06-13 14:31:48,892 - Installing item: OnBeforeInsert (\Entity Model\SalesLogix Application Entities\QUOTA\OnBeforeInsert.method.xml::Primary Steps::OnBeforeInsert)
+INFO  2011-06-13 14:31:48,924 - Successfully installed OnBeforeInsert (\Entity Model\SalesLogix Application Entities\QUOTA\OnBeforeInsert.method.xml::Primary Steps::OnBeforeInsert)
+INFO  2011-06-13 14:31:48,955 - Installing model item: OnBeforeUpdate (\Entity Model\SalesLogix Application Entities\QUOTA\OnBeforeUpdate.method.xml)
+INFO  2011-06-13 14:31:49,002 - Successfully installed OnBeforeUpdate (\Entity Model\SalesLogix Application Entities\QUOTA\OnBeforeUpdate.method.xml)
+INFO  2011-06-13 14:31:49,017 - Installing item: OnBeforeUpdate (\Entity Model\SalesLogix Application Entities\QUOTA\OnBeforeUpdate.method.xml::Primary Steps::OnBeforeUpdate)
+INFO  2011-06-13 14:31:49,064 - Successfully installed OnBeforeUpdate (\Entity Model\SalesLogix Application Entities\QUOTA\OnBeforeUpdate.method.xml::Primary Steps::OnBeforeUpdate)
+INFO  2011-06-13 14:31:49,080 - Installing model item: OnCreate (\Entity Model\SalesLogix Application Entities\QUOTA\OnCreate.method.xml)
+INFO  2011-06-13 14:31:49,127 - Successfully installed OnCreate (\Entity Model\SalesLogix Application Entities\QUOTA\OnCreate.method.xml)
+INFO  2011-06-13 14:31:49,142 - Installing item: OnCreate (\Entity Model\SalesLogix Application Entities\QUOTA\OnCreate.method.xml::Primary Steps::OnCreate)
+INFO  2011-06-13 14:31:49,158 - Successfully installed OnCreate (\Entity Model\SalesLogix Application Entities\QUOTA\OnCreate.method.xml::Primary Steps::OnCreate)
+INFO  2011-06-13 14:31:49,205 - Installing model item: QuotaDetail (\Entity Model\SalesLogix Application Entities\QUOTA\QuickForms\QuotaDetail.main.quickform.xml)
+INFO  2011-06-13 14:31:49,267 - Successfully installed QuotaDetail (\Entity Model\SalesLogix Application Entities\QUOTA\QuickForms\QuotaDetail.main.quickform.xml)
+INFO  2011-06-13 14:31:49,299 - Installing context item: Sage SalesLogix (\Portal\SlxClient\SlxClient.portal.xml)
+INFO  2011-06-13 14:31:49,330 - Successfully installed Sage SalesLogix (\Portal\SlxClient\SlxClient.portal.xml)
+INFO  2011-06-13 14:31:49,377 - Installing context item: User Detail (\Portal\SlxClient\ChildPages\User\User.page.xml)
+INFO  2011-06-13 14:31:49,392 - Successfully installed User Detail (\Portal\SlxClient\ChildPages\User\User.page.xml)
+INFO  2011-06-13 14:31:49,455 - Installing model item: Quotas (\Portal\SlxClient\ChildPages\User\SmartParts\Quotas.smartpart.xml)
+INFO  2011-06-13 14:31:49,830 - Successfully installed Quotas (\Portal\SlxClient\ChildPages\User\SmartParts\Quotas.smartpart.xml)
+INFO  2011-06-13 14:31:49,846 - Installing model item: QuotaDetail (\Portal\SlxClient\ChildPages\User\SmartParts\QuotaDetail.smartpart.xml)
+INFO  2011-06-13 14:31:49,908 - Successfully installed QuotaDetail (\Portal\SlxClient\ChildPages\User\SmartParts\QuotaDetail.smartpart.xml)
+INFO  2011-06-13 14:31:49,939 - Configuring installed items.
+INFO  2011-06-13 14:31:49,939 - Configuring Sage SalesLogix...
+INFO  2011-06-13 14:31:49,986 - Configuring User Detail...
+INFO  2011-06-13 14:31:55,174 - Configuring Quotas...
+INFO  2011-06-13 14:31:55,189 - Configuring QuotaDetail...
+INFO  2011-06-13 14:31:55,205 - Performing pre-commit to target project.
+INFO  2011-06-13 14:31:55,283 - Committing items to target project...
+INFO  2011-06-13 14:31:55,439 - Committing transactions...
+INFO  2011-06-13 14:31:55,971 - Copying bundle manifest to project.
+INFO  2011-06-13 14:32:02,721 - Install complete.
