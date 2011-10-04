@@ -5,6 +5,8 @@
   <SmartPart>\Entity Model\SalesLogix Application Entities\Opportunity\QuickForms\InsertOpportunity.main.quickform.xml</SmartPart>
   <TargetWorkspace>MainContent</TargetWorkspace>
   <ShowInMode>Insert</ShowInMode>
-  <Properties />
+  <Properties>
+    <Property Name="HelpTopic" TypeConverter="">InsertOpportunity</Property>
+  </Properties>
   <AllowRoles />
 </SmartPartMapping>

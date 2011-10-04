@@ -71,7 +71,8 @@ strMeridian="PM";}
 result+=str12Hour+timeDivStr+strMin+" "+strMeridian;}
 else{result+=this.CalendarDateTime.toLocaleTimeString();}}
 if(this.OnChangeFN!="")
-{hidden.fireEvent("onchange");}
+{if(document.createEvent){var evObj=document.createEvent('HTMLEvents');evObj.initEvent('change',true,true);hidden.dispatchEvent(evObj);}
+else{hidden.fireEvent('onchange');}}
 return result;};SLXDateTimePicker.prototype.ParseDateTime=function()
 {var error=false;try
 {var strDateTime=document.getElementById(this.TextBoxID).value;if(strDateTime==""&&this.Required!=true)

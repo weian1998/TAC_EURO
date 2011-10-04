@@ -1,22 +1,14 @@
 using System;
-using System.Collections;
-using System.Data;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Sage.Entity.Interfaces;
-using Sage.Platform;
 using Sage.Platform.Application;
-using Sage.Platform.WebPortal.Services;
-using log4net;
-using Sage.Platform.WebPortal.SmartParts;
-using System.Text;
-using NHibernate;
-using Sage.Platform.Framework;
 using Sage.Platform.Application.UI;
-using System.Collections.Generic;
-using Sage.SalesLogix.Accelerator.SecuredAction;
-using System.IO;
-using System.Reflection;
+using Sage.Platform.Security;
+using Sage.Platform.WebPortal.SmartParts;
+using Sage.SalesLogix.SecuredAction;
 
 /// <summary>
 /// Summary description for SecuredActionLocations
@@ -25,10 +17,6 @@ public partial class SecuredActionLocations : EntityBoundSmartPartInfoProvider
 {
     SortDirection _sortDir = SortDirection.Ascending;
     string _sortExpr = "FileName";
-
-	public SecuredActionLocations()
-	{
-	}
 
     protected void GridPageIndexChanging(object sender, GridViewPageEventArgs e)
     {
@@ -49,6 +37,7 @@ public partial class SecuredActionLocations : EntityBoundSmartPartInfoProvider
 
         grdSecuredActionLocations.DataBind();
     }
+
     private int DoSort(SecuredActionLocation location1, SecuredActionLocation location2)
     {
         object val1 = location1.GetType().GetProperty(_sortExpr).GetValue(location1, BindingFlags.Public, null, null, null);
@@ -65,9 +54,10 @@ public partial class SecuredActionLocations : EntityBoundSmartPartInfoProvider
 
     List<SecuredActionLocation> GetData()
     {
-        Sage.Entity.Interfaces.ISecuredAction entity = (Sage.Entity.Interfaces.ISecuredAction)this.BindingSource.Current;
-        return Rules.GetSecuredActionUsage(entity.Name, System.AppDomain.CurrentDomain.BaseDirectory);
+        ISecuredAction entity = (ISecuredAction) BindingSource.Current;
+        return Rules.GetSecuredActionUsage(entity.Name, AppDomain.CurrentDomain.BaseDirectory);
     }
+
     void Page_Load(object sender, EventArgs e)
     {
         grdSecuredActionLocations.CurrentSortDirection = _sortDir.ToString();
@@ -77,8 +67,6 @@ public partial class SecuredActionLocations : EntityBoundSmartPartInfoProvider
 
         grdSecuredActionLocations.DataSource = usage;
         grdSecuredActionLocations.DataBind();
-
-
     }
 
     /// <summary>
@@ -87,6 +75,7 @@ public partial class SecuredActionLocations : EntityBoundSmartPartInfoProvider
     protected override void OnAddEntityBindings()
     {
     }
+
     /// <summary>
     /// Called when the smartpart has been bound.  Derived components should override this method to run code that depends on entity context being set and it not changing.
     /// </summary>
@@ -94,9 +83,9 @@ public partial class SecuredActionLocations : EntityBoundSmartPartInfoProvider
     {
         if (Page.Visible)
         {
-            
         }
     }
+
     /// <summary>
     /// Gets the <see cref="T:Sage.Platform.Application.IEntityContextService"/> instance
     /// </summary>
@@ -113,24 +102,12 @@ public partial class SecuredActionLocations : EntityBoundSmartPartInfoProvider
         get { return typeof(ISecuredAction); }
     }
 
-    private Sage.Platform.Security.IRoleSecurityService _roleSecurityService;
     /// <summary>
     /// Gets or sets the role security service.
     /// </summary>
     /// <value>The role security service.</value>
-    [Sage.Platform.Application.ServiceDependency]
-    public Sage.Platform.Security.IRoleSecurityService RoleSecurityService
-    {
-        set
-        {
-            _roleSecurityService = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IRoleSecurityService>(true);
-        }
-        get
-        {
-            return _roleSecurityService;
-        }
-    }
-
+    [ServiceDependency]
+    public IRoleSecurityService RoleSecurityService { get; set; }
 
     #region ISmartPartInfoProvider Members
 

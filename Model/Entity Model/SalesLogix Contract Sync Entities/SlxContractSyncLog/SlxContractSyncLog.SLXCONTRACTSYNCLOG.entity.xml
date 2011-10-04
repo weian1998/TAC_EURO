@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="6b600fc9-ca02-4906-aba2-ab00633404ed" lastModifiedUtc="2010-06-10T09:01:22.961538Z" manageSchema="false" tableName="SLXCONTRACTSYNCLOG" name="SlxContractSyncLog" isExtension="false" audited="false" uniqueIdentifierPropertyId="263c00f5-0f29-4630-a476-95cb6f19e178" lastUpdatedPropertyId="1f98abd3-f487-433b-8d4b-01f70e44fd5f" onBeforeInsertMethodId="5603b664-bb19-4596-8244-44a02e248657" onAfterInsertMethodId="d3872cba-85aa-4db3-b8dc-447a4cee7d73" onBeforeUpdateMethodId="58e0719d-a196-41ef-ae47-99f83882932d" onAfterUpdateMethodId="a49173e7-70a8-4791-b341-5b7615f2e91c" onBeforeDeleteMethodId="fdb41f8f-faaa-4f4f-809a-a731140c1d0a" onAfterDeleteMethodId="2875264b-896a-4104-9598-bf1f6ebd62f1" onCreateId="01433863-9671-46e6-a851-b5512689c85e">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
+      <extender guid="1589723d-0536-4bf3-bdd7-3f6f7fe165d0">
+        <OrmEntityMetadataExtension>
+          <IsHistoryTable>false</IsHistoryTable>
+        </OrmEntityMetadataExtension>
+      </extender>
+    </extendee>
+  </ExtendedPropertiesCollection>
+  <keyProperties>
+    <keyReference id="7bb60356-e790-4fd2-94f9-2c2ac7a06b21" ordinalPosition="1" />
+  </keyProperties>
+  <properties>
+    <property xsi:type="OrmFieldProperty" id="7bb60356-e790-4fd2-94f9-2c2ac7a06b21" lastModifiedUtc="2010-06-10T09:04:22.395801Z" name="SlxContractSyncLogId" description="Primary key for this table.  Key value is a GUID" audited="false" isNullable="false" include="false" columnName="SLXCONTRACTSYNCLOGID" maxLength="38" precision="0" scale="0" ordinal="0" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>38</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="5a336f9a-b604-4f75-bf97-4b0651e48da0" lastModifiedUtc="2010-01-21T20:46:49.4485993Z" name="CreateUser" description="User who Inserted or deleted the record" audited="false" columnName="CREATEUSER" maxLength="12" precision="0" scale="0" ordinal="1" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="4c664a5c-a999-4285-bde0-749b04ab8e32" lastModifiedUtc="2010-01-21T20:47:11.8555993Z" name="CreateDate" description="Date transaction occurred" audited="false" columnName="CREATEDATE" maxLength="0" precision="0" scale="0" ordinal="2" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
+        <DateTimeDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="fa8dbaeb-a1d9-4826-9a73-9cd814ef3740" lastModifiedUtc="2010-01-26T19:36:13.0881158Z" name="ResourceType" description="The name of the table being Inserted into or Deleted from." audited="false" isNullable="false" columnName="RESOURCETYPE" maxLength="64" precision="0" scale="0" ordinal="3" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>64</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="bd53959e-2337-471e-aa32-89272937243f" lastModifiedUtc="2010-01-26T19:36:13.9071158Z" name="KeyValue1" description="The primary key for the record inserted or deleted." audited="false" isNullable="false" columnName="KEYVALUE1" maxLength="12" precision="0" scale="0" ordinal="4" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>12</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="8126a5cf-3983-415e-bc7e-61715577ac0a" lastModifiedUtc="2010-01-21T20:45:29.3735993Z" name="KeyValue2" description="Secondary key value for tables with composite keys" audited="false" columnName="KEYVALUE2" maxLength="12" precision="0" scale="0" ordinal="5" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>12</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="d9648436-877a-499f-a7d8-ce0c0070d481" lastModifiedUtc="2010-01-26T19:36:23.3231158Z" name="ActionType" description="0 - Insert  1 - Delete" audited="false" isNullable="false" columnName="ACTIONTYPE" maxLength="0" precision="5" scale="0" ordinal="6" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="6b0b3d51-0728-4b67-9473-52836a81da53">
+        <ShortIntegerDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="2f03a869-1804-45f8-a923-673413c4bebd" lastModifiedUtc="2010-01-21T20:42:33.5875993Z" name="ModifyUser" audited="false" columnName="MODIFYUSER" maxLength="12" precision="0" scale="0" ordinal="7" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="1f98abd3-f487-433b-8d4b-01f70e44fd5f" lastModifiedUtc="2010-01-21T20:42:33.5965993Z" name="ModifyDate" audited="false" columnName="MODIFYDATE" maxLength="0" precision="0" scale="0" ordinal="8" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
+        <DateTimeDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="263c00f5-0f29-4630-a476-95cb6f19e178" lastModifiedUtc="2010-06-10T09:01:19.1893222Z" name="GlobalSyncId" audited="false" columnName="GLOBALSYNCID" maxLength="36" precision="0" scale="0" ordinal="9" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="3ca925e1-4b76-4621-a39c-a0d4cb7327d5">
+        <GuidDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="e515a227-998d-4bcd-9252-d74b386437bf" lastModifiedUtc="2010-01-27T21:51:49.8233106Z" name="AppId" audited="false" columnName="APPID" maxLength="12" precision="0" scale="0" ordinal="10" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+  </properties>
+</entity>

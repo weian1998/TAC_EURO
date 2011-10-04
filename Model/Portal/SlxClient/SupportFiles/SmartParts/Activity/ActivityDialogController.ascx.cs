@@ -73,17 +73,21 @@ public partial class SmartParts_Activity_ActivityDialogController
     {
         string script = string.Format(@"
 function resizeFrame() {{
-    var w = Sage.DialogWorkspace.__instances['ctl00_DialogWorkspace']._dialog.getInnerWidth() - 8;
-    var h = Sage.DialogWorkspace.__instances['ctl00_DialogWorkspace']._dialog.getInnerHeight() - 10;
+    var instance = (Sage.DialogWorkspace.__instances['ctl00_DialogWorkspace']) ? Sage.DialogWorkspace.__instances['ctl00_DialogWorkspace'] : Sage.DialogWorkspace.__instances['DialogWorkspace'];
+    if (!instance) {{ return; }}
+    var w = instance._dialog.getInnerWidth() - 8;
+    var h = instance._dialog.getInnerHeight() - 10;
     $('#{0}').css('height', h + 'px').css('width', w + 'px');
 }}
-Sage.DialogWorkspace.__instances['ctl00_DialogWorkspace']._dialog.on('resize', function(win, w, h) {{ 
-    resizeFrame();
-}});
-Sage.DialogWorkspace.__instances['ctl00_DialogWorkspace']._dialog.on('show', function(win, w, h) {{ 
-    resizeFrame();
-}});
-
+var instance = (Sage.DialogWorkspace.__instances['ctl00_DialogWorkspace']) ? Sage.DialogWorkspace.__instances['ctl00_DialogWorkspace'] : Sage.DialogWorkspace.__instances['DialogWorkspace'];
+if (instance) {{
+    instance._dialog.on('resize', function(win, w, h) {{ 
+        resizeFrame();
+    }});
+    instance._dialog.on('show', function(win, w, h) {{ 
+        resizeFrame();
+    }});
+}}
 function ensureScreenEnabled() {{
     if (window.Sage.DialogWorkspace) {{
         for (var id in window.Sage.DialogWorkspace.__instances) {{

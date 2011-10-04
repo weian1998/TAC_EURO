@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="bfc9de28-0aa1-4b55-8204-919c5165b27a" lastModifiedUtc="2008-04-23T11:50:08.7359995Z" manageSchema="false" tableName="SYNCSERVER" name="SyncServer" isExtension="false" audited="false" lastUpdatedPropertyId="4c66aebc-2829-4573-9d50-7c7492b87fab" onBeforeInsertMethodId="6c4def3a-dc51-456d-a1d6-f6ab59ef2269" onAfterInsertMethodId="93e98bf8-ed13-44af-ba9d-838c13b624bf" onBeforeUpdateMethodId="4dc4cae4-0e15-409f-9bbc-15c76f21a177" onAfterUpdateMethodId="dbd880fc-3719-4a5b-b24d-6e2106c91277" onBeforeDeleteMethodId="e6318f6f-211c-4940-a8a4-021ac202dbc3" onAfterDeleteMethodId="415c4f30-0bae-4732-8f3b-c459833b1f68" onCreateId="7579a7db-77aa-409d-bb3c-181d14671e66">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="bfc9de28-0aa1-4b55-8204-919c5165b27a" lastModifiedUtc="2010-08-25T07:00:21.5461854Z" manageSchema="false" tableName="SYNCSERVER" name="SyncServer" displayPropertyId="24c61604-589c-4d90-a5d0-417ffb6fb3c2" isExtension="false" audited="false" lastUpdatedPropertyId="4c66aebc-2829-4573-9d50-7c7492b87fab" onBeforeInsertMethodId="6c4def3a-dc51-456d-a1d6-f6ab59ef2269" onAfterInsertMethodId="93e98bf8-ed13-44af-ba9d-838c13b624bf" onBeforeUpdateMethodId="4dc4cae4-0e15-409f-9bbc-15c76f21a177" onAfterUpdateMethodId="dbd880fc-3719-4a5b-b24d-6e2106c91277" onBeforeDeleteMethodId="e6318f6f-211c-4940-a8a4-021ac202dbc3" onAfterDeleteMethodId="415c4f30-0bae-4732-8f3b-c459833b1f68" onCreateId="7579a7db-77aa-409d-bb3c-181d14671e66">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
       <extender guid="1589723d-0536-4bf3-bdd7-3f6f7fe165d0">
         <OrmEntityMetadataExtension>
           <StringExpression>${SiteCode}</StringExpression>
+          <HistoryTypeName />
           <IsHistoryTable>false</IsHistoryTable>
         </OrmEntityMetadataExtension>
       </extender>
@@ -31,7 +32,7 @@
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="d10b6df2-6502-4ddb-9f69-c00e630d1c0d" lastModifiedUtc="2008-04-23T11:47:23.9391245Z" name="Data" audited="false" columnName="DATA" maxLength="2147483647" precision="0" scale="0" ordinal="3" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="d10b6df2-6502-4ddb-9f69-c00e630d1c0d" lastModifiedUtc="2010-08-25T06:51:16.1089882Z" name="Data" audited="false" include="false" columnName="DATA" maxLength="2147483647" precision="0" scale="0" ordinal="3" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>

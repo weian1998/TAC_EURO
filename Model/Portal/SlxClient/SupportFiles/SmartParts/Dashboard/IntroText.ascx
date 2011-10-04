@@ -11,6 +11,6 @@
         meta:resourcekey="Label2Resource1"></asp:label>
 <p style="margin-top:11px">
     <SalesLogix:PageLink ID="MainHelp" runat="server" LinkType="HelpFileName"
-    ToolTip="<%$ resources:Portal, Help_ToolTip %>" Target="Help" NavigateUrl="slxoverview.aspx"
+    ToolTip="<%$ resources:Portal, Help_ToolTip %>" Target="Help" NavigateUrl="slxgetstarted"
     Text="Click here to learn how to use this system" meta:resourcekey="MainHelpResource1"></SalesLogix:PageLink>
 </p></div>

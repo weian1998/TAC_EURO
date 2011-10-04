@@ -63,7 +63,7 @@ public class ClosingOpportunityAdapter
         result.numberToDisplay = numberToDisplay;
 
         request.Response.ContentType = MediaType.JSON;
-        request.Response.Html = JavaScriptConvert.SerializeObject(result);
+        request.Response.Html = JsonConvert.SerializeObject(result);
 
     }
 

@@ -5,5 +5,10 @@
   </ExtendedPropertiesCollection>
   <parameter />
   <methodTargets>
+    <methodTarget id="25f0ddc2-f2e7-4166-a404-7995d17b6347" lastModifiedUtc="2007-11-02T21:49:47.7088091Z" targetType="Sage.SalesLogix.Activity.BusinessRules.EventRules, Sage.SalesLogix.Activity" targetMethod="OnBeforeInsert" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>  
   </methodTargets>
 </method>

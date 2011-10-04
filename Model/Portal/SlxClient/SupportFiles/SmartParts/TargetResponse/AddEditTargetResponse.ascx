@@ -249,7 +249,7 @@
                 </asp:Label>
             </div>
             <div class="textcontrol lookup">
-                <SalesLogix:LookupControl runat="server" ID="lueTargetLeadSource" LookupEntityName="LeadSource" LookupBindingMode="String" ReturnPrimaryKey="false" 
+                <SalesLogix:LookupControl runat="server" ID="lueTargetLeadSource" LookupEntityName="LeadSource" LookupBindingMode="String" ReturnPrimaryKey="false"
                     LookupEntityTypeName="Sage.Entity.Interfaces.ILeadSource, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
                     <LookupProperties>
                         <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueLeadSource.LookupProperties.Type.PropertyHeader %>"

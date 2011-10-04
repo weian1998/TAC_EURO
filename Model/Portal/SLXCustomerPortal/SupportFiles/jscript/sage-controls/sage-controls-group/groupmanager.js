@@ -102,16 +102,20 @@ function groupmanager_DeleteGroup(strGroupID) {
 	    strGroupID = getCurrentGroupInfo().Id;
 	var d = new Date();
     var time = d.getTime(); //prevent url caching
-    
-	if (confirm(this.ConfirmDeleteMessage)) {
-	    getFromServer(this.GMUrl + 'DeleteGroup&gid=' + strGroupID + "&time=" + time);
-        var url = document.location.href.replace("#", "");
-        if (url.indexOf("?") > -1) {
-            var halves = url.split("?");
-            url = halves[0];
+
+    Ext.Msg.confirm("", this.ConfirmDeleteMessage,
+        function (btn) {
+            if (btn == 'yes') {
+                getFromServer((this.GMUrl || this.groupManager.GMUrl) + 'DeleteGroup&gid=' + strGroupID + "&time=" + time);
+                var url = document.location.href.replace("#", "");
+                if (url.indexOf("?") > -1) {
+                    var halves = url.split("?");
+                    url = halves[0];
+                }
+                document.location = url;
+            }
         }
-        document.location = url;
-	}
+    );
 }
 
 function groupmanager_EditGroup(strGroupID) {
@@ -140,7 +144,7 @@ function groupmanager_ListGroupsAsSelect(strFamily) {
 	if (strFamily == '')
 	    strFamily = getCurrentGroupInfo().Family;
 		
-	var vURL = this.GMUrl + "GetGroupList&entity=" + strFamily;
+	var vURL = (this.GMUrl || this.groupManager.GMUrl) + "GetGroupList&entity=" + strFamily;
 	var response = getFromServer(vURL);	  
 	
 	var htmlOption;
@@ -160,13 +164,13 @@ function groupmanager_ListGroupsAsSelect(strFamily) {
 function groupmanager_HideGroup(strGroupID) {
 	if (strGroupID == '')
 	    strGroupID = getCurrentGroupInfo().Id;
-	postToServer(this.GMUrl + 'HideGroup&gid=' + strGroupID, '');
+	postToServer((this.GMUrl || this.groupManager.GMUrl) + 'HideGroup&gid=' + strGroupID, '');
 }
 
 function groupmanager_UnHideGroup(strGroupID) {
 	if (strGroupID == '')
 	    strGroupID = getCurrentGroupInfo().Id;
-	getFromServer(this.GMUrl + 'UnHideGroup&gid=' + strGroupID);
+	getFromServer((this.GMUrl || this.groupManager.GMUrl) + 'UnHideGroup&gid=' + strGroupID);
 }
 
 function groupmanager_ShowGroups(strTableName) {
@@ -186,11 +190,11 @@ function groupmanager_ShowGroupInViewer(strGroupID) {
 function groupmanager_Count(strGroupID) {
 	if (strGroupID == '')
 	    strGroupID = getCurrentGroupInfo().Id;
-	return getFromServer(this.GMUrl + 'Count&gid=' + strGroupID);
+	return getFromServer((this.GMUrl || this.groupManager.GMUrl) + 'Count&gid=' + strGroupID);
 }
 
 function groupmanager_CreateAdHocGroup(strGroups, strName, strFamily, strLayoutId) {
-	var vURL = this.GMUrl + 'CreateAdHocGroup';
+	var vURL = (this.GMUrl || this.groupManager.GMUrl) + 'CreateAdHocGroup';
 	vURL += '&name=' + encodeURIComponent(strName);
 	vURL += '&family=' + strFamily;
 	vURL += '&layoutid=' + encodeURIComponent(strLayoutId);
@@ -201,7 +205,7 @@ function groupmanager_GetGroupSQL(strGroupID, strUseAliases, strParts)
 {
 	if (strGroupID == '')
 	    strGroupID = getCurrentGroupInfo().Id;
-    var vURL = this.GMUrl + 'GetGroupSQL';
+    var vURL = (this.GMUrl || this.groupManager.GMUrl) + 'GetGroupSQL';
     vURL += '&gid=' + strGroupID;
     
     if (strUseAliases != null) {
@@ -221,14 +225,14 @@ function groupmanager_EditAdHocGroupAddMember(strGroupID, strItem) {
 	if (strGroupID == '')
 	    strGroupID = getCurrentGroupInfo().Id;
 	// no return value expected;
-	var x = getFromServer(this.GMUrl + 'EditAdHocGroupAddMember&groupid=' + strGroupID + '&entityid=' + strItem);
+	var x = getFromServer((this.GMUrl || this.groupManager.GMUrl) + 'EditAdHocGroupAddMember&groupid=' + strGroupID + '&entityid=' + strItem);
 	//return x;
 }
 function groupmanager_EditAdHocGroupDeleteMember(strGroupID, strItem) {
 	if (strGroupID == '')
 	    strGroupID = getCurrentGroupInfo().Id;
 	// no return value expected;
-	var x = getFromServer(this.GMUrl + 'EditAdHocGroupDeleteMember&groupid=' + strGroupID + '&entityid=' + strItem);
+	var x = getFromServer((this.GMUrl || this.groupManager.GMUrl) + 'EditAdHocGroupDeleteMember&groupid=' + strGroupID + '&entityid=' + strItem);
 	//return x;
 }
 
@@ -240,7 +244,7 @@ function groupmanager_IsAdHoc(strGroupID) {
     if (this.adHocGroupDictionary.hasOwnProperty(strGroupID)) {
 		return this.adHocGroupDictionary[strGroupID];
 	} else {
-		var isAH = getFromServer(this.GMUrl + 'IsAdHoc&groupID=' + strGroupID);
+		var isAH = getFromServer((this.GMUrl || this.groupManager.GMUrl) + 'IsAdHoc&groupID=' + strGroupID);
 		this.adHocGroupDictionary[strGroupID] = isAH;
 		return isAH;
 	}
@@ -269,6 +273,8 @@ function groupmanager_SetDefaultGroupID(strMode, strValue) {
 
 function groupmanager_ExportGroup(strGroupID, strFileName) {
     try {
+        if (typeof (GetMailMergeService) === "undefined")
+            throw new Error((typeof (DesktopErrors) != "undefined") ? DesktopErrors().ExcelNotInstalledError : 'Excel not installed.');
         var oService = GetMailMergeService();
         if (oService) {
             if (strGroupID == '')
@@ -280,13 +286,17 @@ function groupmanager_ExportGroup(strGroupID, strFileName) {
     }
     catch (err) {
         var sXtraMsg = "";
-        if (IsSageGearsObjectError(err)) {
+        if ((typeof (IsSageGearsObjectError) != "undefined") && IsSageGearsObjectError(err)) {
             sXtraMsg = DesktopErrors().SageGearsObjectError;
         }
-        var sError = (Ext.isFunction(err.toMessage)) ? err.toMessage(sXtraMsg, MailMergeInfoStore().ShowJavaScriptStack) : err.message;
+        var sError = err.toMessage();
+        if (typeof (MailMergeInfoStore) != "undefined") {
+            sError = (Ext.isFunction(err.toMessage)) ? err.toMessage(sXtraMsg, MailMergeInfoStore().ShowJavaScriptStack) : err.message;
+        }
+        var errFormat = (typeof (DesktopErrors) != "undefined") ? DesktopErrors().ExportToExcelError : "{0}";
         Ext.Msg.show({
             title: "Sage SalesLogix",
-            msg: String.format(DesktopErrors().ExportToExcelError, sError),
+            msg: String.format(errFormat, sError),
             buttons: Ext.Msg.OK,
             icon: Ext.MessageBox.ERROR
         });
@@ -527,7 +537,7 @@ function groupmanager_ShareGroup(strGroupID) {
 }
 
 function groupmanager_GetGroupId(strGroupName) {
-    return getFromServer(this.GMUrl + 'GetGroupId&name=' + strGroupName);
+    return getFromServer((this.GMUrl || this.groupManager.GMUrl) + 'GetGroupId&name=' + strGroupName);
 }
 
 groupmanager.prototype.CreateGroup = groupmanager_CreateGroup;

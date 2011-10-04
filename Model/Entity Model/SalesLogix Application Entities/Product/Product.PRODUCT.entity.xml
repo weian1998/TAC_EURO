@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="03da3a53-eab7-4bb2-bd1b-9c0c988b66d2" lastModifiedUtc="2010-03-22T14:50:59.9725098Z" manageSchema="false" tableName="PRODUCT" name="Product" displayPropertyId="8c98a0d2-c03f-49b0-a81e-36b701a66580" isExtension="false" audited="true" smallImage="[Localization!Global_Images:product_16]" largeImage="[Localization!Global_Images:product_24]" generateSDataFeed="true" sDataPathName="product" lastUpdatedPropertyId="a79f70ec-a806-41a5-aa77-d5150617b63e" onBeforeInsertMethodId="003081a0-57c1-4961-9dff-3b02f2e22ca4" onAfterInsertMethodId="9d75a13b-41fa-4f7f-ae80-8dd5fae6e713" onBeforeUpdateMethodId="8b7975a3-f9f4-40c1-a661-2f2bac04cf10" onAfterUpdateMethodId="29cc0fe4-17bb-4af0-96dd-896e74a603e7" onBeforeDeleteMethodId="ce06bede-811d-4379-9d3a-04f80e8ca5ef" onAfterDeleteMethodId="f6ae3b42-10f5-4464-921a-e4317262665d" onCreateId="bdf7c965-a20b-4c2e-9ebf-4260f869d6b4">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="03da3a53-eab7-4bb2-bd1b-9c0c988b66d2" lastModifiedUtc="2010-10-05T22:54:51.1873045Z" manageSchema="false" tableName="PRODUCT" name="Product" displayPropertyId="8c98a0d2-c03f-49b0-a81e-36b701a66580" isExtension="false" audited="true" smallImage="[Localization!Global_Images:product_16]" largeImage="[Localization!Global_Images:product_24]" generateSDataFeed="true" sDataPathName="products" uniqueIdentifierPropertyId="438a88ce-beaa-48ce-961e-53743b949e8c" lastUpdatedPropertyId="a79f70ec-a806-41a5-aa77-d5150617b63e" onBeforeInsertMethodId="003081a0-57c1-4961-9dff-3b02f2e22ca4" onAfterInsertMethodId="9d75a13b-41fa-4f7f-ae80-8dd5fae6e713" onBeforeUpdateMethodId="8b7975a3-f9f4-40c1-a661-2f2bac04cf10" onAfterUpdateMethodId="29cc0fe4-17bb-4af0-96dd-896e74a603e7" onBeforeDeleteMethodId="ce06bede-811d-4379-9d3a-04f80e8ca5ef" onAfterDeleteMethodId="f6ae3b42-10f5-4464-921a-e4317262665d" onCreateId="bdf7c965-a20b-4c2e-9ebf-4260f869d6b4">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
@@ -219,12 +219,15 @@
         <SingleDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="511bbd31-e2b4-4b7b-9420-35b5e41b5da0" lastModifiedUtc="2008-02-12T18:58:05.838852Z" name="StockWeight" audited="false" include="false" columnName="STOCKWEIGHT" maxLength="0" precision="24" scale="0" ordinal="14" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="511bbd31-e2b4-4b7b-9420-35b5e41b5da0" lastModifiedUtc="2010-07-12T15:37:47.8873383Z" name="StockWeight" audited="false" columnName="STOCKWEIGHT" maxLength="0" precision="24" scale="0" ordinal="14" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
-      <SystemDataType guid="a6bf2690-3477-4a18-9849-56abf8693934">
-        <SingleDataType />
+      <SystemDataType guid="2596d57d-89d6-4b72-9036-b18c64c5324c">
+        <DecimalDataType>
+          <Precision>17</Precision>
+          <Scale>4</Scale>
+        </DecimalDataType>
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="ac2a0039-4410-444c-a4af-8450d6308740" lastModifiedUtc="2008-02-12T18:58:00.1045137Z" name="Supplier" audited="false" include="false" columnName="SUPPLIER" maxLength="128" precision="0" scale="0" ordinal="17" isReadOnly="false">
@@ -293,6 +296,101 @@
         <CustomPropertyDataType />
       </SystemDataType>
       <code><![CDATA[]]></code>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="4ff241cc-4483-4af2-8d77-1196ccf3f698" lastModifiedUtc="2010-04-20T00:49:08.7637101Z" name="Classification" audited="false" columnName="CLASSIFICATION" maxLength="64" precision="0" scale="0" ordinal="37" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>64</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="9ce5c965-0e92-4554-86ed-9427819b3d08" lastModifiedUtc="2010-06-18T17:09:39.1163305Z" name="SellingUOMNumber" audited="false" columnName="SELLINGUOMNUMBER" maxLength="0" precision="53" scale="0" ordinal="36" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="2596d57d-89d6-4b72-9036-b18c64c5324c">
+        <DecimalDataType>
+          <Precision>17</Precision>
+          <Scale>4</Scale>
+        </DecimalDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="a325007d-f11e-49cc-882a-7fcbab828d9f" lastModifiedUtc="2010-04-20T17:53:18.3431311Z" name="SellingUOMId" audited="false" include="false" columnName="SELLINGUOMID" maxLength="12" precision="0" scale="0" ordinal="35" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="ca829495-ec1d-4230-bac5-8ed3f9f9323f" lastModifiedUtc="2010-04-20T17:53:28.754841Z" name="UnitOfMeasureId" audited="false" include="false" columnName="UNITOFMEASUREID" maxLength="12" precision="0" scale="0" ordinal="34" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="0df78724-2d93-44e6-8533-094441b646fc" lastModifiedUtc="2010-04-29T00:26:18.3843139Z" name="SellingAllowedFlag" audited="false" columnName="SELLINGALLOWEDFLAG" maxLength="1" precision="0" scale="0" ordinal="33" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="92432b4d-8206-4a96-ba7b-e4cbd374f148">
+        <TrueFalseDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="9f51cb38-1829-4ed1-8d83-fdf2147b6e5a" lastModifiedUtc="2010-04-20T17:48:28.5911923Z" name="ActiveFlag" audited="false" columnName="ACTIVEFLAG" maxLength="1" precision="0" scale="0" ordinal="32" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="92432b4d-8206-4a96-ba7b-e4cbd374f148">
+        <TrueFalseDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="9fc64ab7-e8e6-4976-8eb6-6a0c4f9de3e1" lastModifiedUtc="2010-04-20T00:49:08.7977067Z" name="Tick" audited="false" columnName="TICK" maxLength="0" precision="10" scale="0" ordinal="31" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="47f90249-e4c8-4564-9ae6-e1fa9904f8b8">
+        <IntegerDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="53fe3976-8b15-48c8-8139-28c3ad8dadcb" lastModifiedUtc="2010-04-29T00:25:52.3343139Z" name="AppId" audited="false" columnName="APPID" maxLength="12" precision="0" scale="0" ordinal="30" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="438a88ce-beaa-48ce-961e-53743b949e8c" lastModifiedUtc="2010-06-10T08:50:58.0697962Z" name="GlobalSyncId" audited="false" columnName="GLOBALSYNCID" maxLength="36" precision="0" scale="0" ordinal="29" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="3ca925e1-4b76-4621-a39c-a0d4cb7327d5">
+        <GuidDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="47185f21-d072-4aa4-9880-f6ea72be8e0b" lastModifiedUtc="2010-07-21T21:13:38.2930378Z" name="CommodityGroupId" description="Foreign Key to the Commodity Group Entity" audited="false" include="false" columnName="COMMODITYGROUPID" maxLength="12" precision="0" scale="0" ordinal="38" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="6e42b2ee-a8c5-4516-b5d8-9a8233feb7d8" lastModifiedUtc="2010-11-23T22:56:41.6584112Z" name="CommodityType" description="The Commodity type (e.g. product, service).   Default value should come from CommodityGroup. Product Stock (e.g. finished goods and/or raw materials) Product Non Stock (e.g. Misc or expense). Service (contracts). BillOfMaterial (Manufactured Item) (e.g. assembled Kit). (Built to Order) Kit. Subcontract Description (e.g. comment). User defined. Unknown. Default = “Unknown”   " audited="false" columnName="COMMODITYTYPE" maxLength="32" precision="0" scale="0" ordinal="39" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>32</Length>
+        </TextDataType>
+      </SystemDataType>
     </property>
   </properties>
 </entity>

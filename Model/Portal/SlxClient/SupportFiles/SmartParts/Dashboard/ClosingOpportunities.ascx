@@ -9,69 +9,69 @@
     function ClosingOpportunities_refresh() {
         $("#ClosingOppsDiv").html("");
 
-        var tplproc = new Ext.Template([
+    var tplproc = new Ext.Template([ 
         '<div style="margin:3px 0px"><a href="Opportunity.aspx?entityid={OppId}">{Description}</a></div>',
         '<div style="margin:0px 10px">', '<%= GetLocalResourceObject("Est__Close") %>', ': {EstClose}</div>',
         '<div style="margin:0px 10px">', '<%= GetLocalResourceObject("Next_Step") %>', ': {nextstep}</div>',
         '<div style="margin:0px 10px"><span style="display:block;float:left;width:200px">', '<%= GetLocalResourceObject("Stage") %>', ': {stage}</span><span>', '<%= GetLocalResourceObject("Days_in_Stage") %>', ': {daysinstage}</span></div>',
         '<div style="margin:0px 10px"><span style="display:block;float:left;width:200px">', '<%= GetLocalResourceObject("Sales_Potential") %>', ': {potential}</span><span>', '<%= GetLocalResourceObject("Probability") %>', ': {probability}%</span></div>'
         ].join(""));
-        tplproc.compile();
-        var tplnoproc = new Ext.Template([
+    tplproc.compile();
+    var tplnoproc = new Ext.Template([ 
         '<div style="margin:3px 0px"><a href="Opportunity.aspx?entityid={OppId}">{Description}</a></div>',
         '<div style="margin:0px 10px">', '<%= GetLocalResourceObject("Est__Close") %>', ': {EstClose}</div>',
         '<div style="margin:0px 10px">', '<%= GetLocalResourceObject("Next_Activity") %>', ': <a href="javascript:editActivity(\'{nextactid}\');">{nextactname}</a></div>',
         '<div style="margin:0px 10px">', '<%= GetLocalResourceObject("Days_since_Last_Activity") %>', ': {days}</div>',
         '<div style="margin:0px 10px"><span style="display:block;float:left;width:200px">', '<%= GetLocalResourceObject("Sales_Potential") %>', ': {potential}</span><span>', '<%= GetLocalResourceObject("Probability") %>', ': {probability}%</span></div>'
         ].join(""));
-        tplnoproc.compile();
-
+    tplnoproc.compile();
+    
         $.ajax({
             url: "slxdata.ashx/slx/crm/-/closingOpportunities/query",
             dataType: 'json',
             success: function (data) {
                 for (var i = 0; i < data.numberToDisplay; i++) {
-                    if (i < data.items.length) {
+        if (i < data.items.length) {
                         if ((data.items[i].stage == null) || (data.items[i].stage.length == 0)) {
-                            tplnoproc.append('ClosingOppsDiv', {
-                                OppId: data.items[i].id,
-                                Description: data.items[i].description,
-                                EstClose: formattedDate(data.items[i].estClose),
-                                potential: data.items[i].potential.toFixed(2),
-                                probability: data.items[i].probability,
-                                days: data.items[i].daysSinceLastActivity,
-                                nextactid: data.items[i].nextActivityId,
-                                nextactname: (data.items[i].nextActivityName.length == 0) ? "&lt;None&gt;" : data.items[i].nextActivityName
-                            });
-                        } else {
-                            tplproc.append('ClosingOppsDiv', {
-                                OppId: data.items[i].id,
-                                Description: data.items[i].description,
-                                EstClose: formattedDate(data.items[i].estClose),
-                                stage: data.items[i].stage,
-                                nextstep: data.items[i].nextStep,
-                                potential: data.items[i].potential.toFixed(2),
-                                probability: data.items[i].probability,
-                                daysinstage: data.items[i].daysInStage
-                            });
-                        }
-                    }
-                }
-                if (data.items.length == 0) {
-                    var noitems = new Ext.Template('<div>{NoItems}</div>');
-                    noitems.compile();
-                    noitems.append('ClosingOppsDiv', {
+                tplnoproc.append('ClosingOppsDiv', {
+                    OppId: data.items[i].id,
+                    Description: data.items[i].description,
+                    EstClose: formattedDate(data.items[i].estClose),
+                    potential: data.items[i].potential.toFixed(2),
+                    probability: data.items[i].probability,
+                    days: data.items[i].daysSinceLastActivity,
+                    nextactid: data.items[i].nextActivityId,
+                    nextactname: (data.items[i].nextActivityName.length == 0) ? "&lt;None&gt;" : data.items[i].nextActivityName
+                });
+            } else {
+                tplproc.append('ClosingOppsDiv', {
+                    OppId: data.items[i].id,
+                    Description: data.items[i].description,
+                    EstClose: formattedDate(data.items[i].estClose),
+                    stage: data.items[i].stage,
+                    nextstep: data.items[i].nextStep,
+                    potential: data.items[i].potential.toFixed(2),
+                    probability: data.items[i].probability,
+                    daysinstage: data.items[i].daysInStage
+                });
+            }
+        }
+    }
+    if (data.items.length == 0) {
+        var noitems = new Ext.Template('<div>{NoItems}</div>');
+        noitems.compile();
+        noitems.append('ClosingOppsDiv', {
                         NoItems: '<%= GetLocalResourceObject("NoItemsAvailable") %>'
                     });
-                }
-                var footer = new Ext.Template(["<div style='margin:5px 0px'><a href='javascript:myOpenOppsClick()' >",
-                    '<%= GetLocalResourceObject("View_all_my_open") %>',
-                    "</a> ({numopen})</div>"].join(""));
-                footer.compile();
-                footer.append('ClosingOppsDiv', {
+    }
+    var footer = new Ext.Template(["<div style='margin:5px 0px'><a href='javascript:myOpenOppsClick()' >", 
+        '<%= GetLocalResourceObject("View_all_my_open") %>', 
+        "</a> ({numopen})</div>"].join(""));
+    footer.compile();
+    footer.append('ClosingOppsDiv', {
                     numopen: data.openOppCount
                 });
-
+    
                 //refreshPortletData("ClosingOpportunities");
 
             },
@@ -82,7 +82,7 @@
                     NoItems: '<%= GetLocalResourceObject("NoItemsAvailable") %>'
                 });
             }
-        });
+});
 
     }
 

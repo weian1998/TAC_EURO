@@ -61,20 +61,23 @@
             SortExpression="ContactName">
             <ItemStyle Width="150px" />
         </asp:BoundField>
+
+        <asp:TemplateField HeaderText="<%$ resources: ActivityGrid.Columns.Description.HeaderText %>" SortExpression="Description">
+            <ItemTemplate><%# GetDisplay(Container.DataItem, "Description") %></ItemTemplate>
+        </asp:TemplateField>
         
-        <asp:BoundField DataField="Description" HeaderText="<%$ resources: ActivityGrid.Columns.Description.HeaderText %>" 
-            SortExpression="Description" />
-        
-        <asp:BoundField DataField="Category" HeaderText="<%$ resources: ActivityGrid.Columns.Category.HeaderText %>" 
-            SortExpression="Category" />
+        <asp:TemplateField HeaderText="<%$ resources: ActivityGrid.Columns.Category.HeaderText %>" SortExpression="Category" >
+        <ItemTemplate><%# GetDisplay(Container.DataItem, "Category") %></ItemTemplate>
+        </asp:TemplateField>
         
          <asp:BoundField DataField="OpportunityName" HeaderText="<%$ resources: ActivityGrid.Columns.OpportunityName.HeaderText %>" 
             SortExpression="OpportunityName" Visible="false" >
             <ItemStyle Width="150px" />
         </asp:BoundField>
         
-        <asp:BoundField DataField="Notes" HeaderText="<%$ resources: ActivityGrid.Columns.Notes.HeaderText %>" 
-            SortExpression="Notes" Visible="false" />
+        <asp:Templatefield HeaderText="<%$ resources: ActivityGrid.Columns.Notes.HeaderText %>" SortExpression="Notes" Visible="false" >
+            <ItemTemplate><%# GetDisplay(Container.DataItem, "Notes") %></ItemTemplate>
+        </asp:Templatefield>
         
     </Columns>
     <RowStyle CssClass="rowlt" />

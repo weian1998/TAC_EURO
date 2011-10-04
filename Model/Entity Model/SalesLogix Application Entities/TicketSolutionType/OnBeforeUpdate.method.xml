@@ -7,7 +7,7 @@
   <parameter />
   <preExecuteTargets />
   <methodTargets>
-    <methodTarget id="c4b3d939-8484-4964-9ca0-f805f5b4425a" lastModifiedUtc="2010-12-28T23:57:14.1080574Z" targetType="Sage.SalesLogix.TicketSolutionType.Rules, Sage.SalesLogix.QandAAccelerator.BusinessRules" targetMethod="ValidateResolution" active="true">
+    <methodTarget id="c4b3d939-8484-4964-9ca0-f805f5b4425a" lastModifiedUtc="2010-12-28T23:57:14.1080574Z" targetType="Sage.SalesLogix.TicketSolutionType.Rules, Sage.SalesLogix.BusinessRules" targetMethod="ValidateResolution" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>

@@ -20,7 +20,9 @@
     StartRowIndexParameterName="StartRecord"
     MaximumRowsParameterName="MaxRecords" 
     SelectMethod="GetData"
-    SelectCountMethod="GetRecordCount" >
+    SelectCountMethod="GetRecordCount"
+    SortParameterName="sortExpression" >
+    
 </asp:ObjectDataSource>
 
 <asp:ObjectDataSource
@@ -34,7 +36,8 @@
     StartRowIndexParameterName="StartRecord"
     MaximumRowsParameterName="MaxRecords" 
     SelectMethod="GetData"
-    SelectCountMethod="GetRecordCount" >
+    SelectCountMethod="GetRecordCount"
+    SortParameterName="sortExpression" >
 </asp:ObjectDataSource>
 
 <SalesLogix:SlxGridView Caption="<%$ resources : NewActivities_Caption %>" ID="grdNewActivities" CssClass="datagrid" OnSorting="Sorting"
@@ -63,12 +66,12 @@
         </asp:TemplateField>
         <asp:TemplateField HeaderText="<%$ resources: ScheduledFor_lz %>" SortExpression="StartDate">
             <ItemTemplate>
-                <SalesLogix:DateTimePicker id="dteStartDate" Runat="Server" DisplayMode="AsText" DisplayTime="False" DateTimeValue=<%# Eval("StartDate") %> />
+                <SalesLogix:DateTimePicker id="dteStartDate" Runat="Server" DisplayMode="AsText" DisplayTime=<%# !IsTimeless(Eval("Timeless")) %> Timeless=<%# IsTimeless(Eval("Timeless")) %> DateTimeValue=<%# Eval("StartDate") %> />
             </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="<%$ resources: Added_lz %>" SortExpression="CreateDate">
             <ItemTemplate>
-                <SalesLogix:DateTimePicker id="dteCreateDate" Runat="Server" DisplayMode="AsText" DisplayTime="False" DateTimeValue=<%# Eval("CreateDate") %> />
+                <SalesLogix:DateTimePicker id="dteCreateDate" Runat="Server" DisplayMode="AsText" DisplayTime="false" DateTimeValue=<%# Eval("CreateDate") %> />
             </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="<%$ resources: User_lz %>" SortExpression="CreateUser" >
@@ -110,7 +113,7 @@
         </asp:TemplateField>
         <asp:TemplateField HeaderText="<%$ resources: ScheduledFor_lz %>" SortExpression="StartDate">
             <ItemTemplate>
-                <SalesLogix:DateTimePicker id="dteModStartDate" Runat="Server" DisplayMode="AsText" DisplayTime="False" DateTimeValue=<%# Eval("StartDate") %> />
+                <SalesLogix:DateTimePicker id="dteModStartDate" Runat="Server" DisplayMode="AsText" DisplayTime=<%# !IsTimeless(Eval("Timeless")) %> Timeless=<%# IsTimeless(Eval("Timeless")) %> DateTimeValue=<%# Eval("StartDate") %> />
             </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="<%$ resources: Modified %>" SortExpression="ModifyDate">

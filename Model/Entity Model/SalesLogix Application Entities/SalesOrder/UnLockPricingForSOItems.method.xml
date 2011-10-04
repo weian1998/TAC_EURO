@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="88c0e9eb-6e70-46ec-8f56-c99f5e769b18" lastModifiedUtc="2010-07-30T19:04:38.9049038Z" name="UnLockPricingForSOItems" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="df11ca21-a342-4311-a349-0cb344318021" lastModifiedUtc="2010-07-30T19:04:37.2309038Z" targetType="Sage.SalesLogix.SalesOrder.SalesOrder, Sage.SalesLogix.BusinessRules" targetMethod="UnLockPricingForSOItems" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

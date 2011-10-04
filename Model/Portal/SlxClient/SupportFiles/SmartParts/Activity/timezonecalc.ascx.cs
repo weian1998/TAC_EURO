@@ -51,7 +51,11 @@ public partial class timezonecalc : EntityBoundSmartPartInfoProvider
         if (IsActivating)
         {
             Form.Reset(Controls);
+            CurrDateValue.Timeless = Activity.Timeless;
+            CurrDateValue.DisplayTime = !Activity.Timeless;
             CurrDateValue.DateTimeValue = Activity.StartDate;
+            CompDateValue.Timeless = Activity.Timeless;
+            CompDateValue.DisplayTime = !Activity.Timeless;
             CompDateValue.DateTimeValue = Activity.StartDate;
             GenerateGrid();
             Session[ACTSTARTDATEKEY] = null;
@@ -214,6 +218,20 @@ public partial class timezonecalc : EntityBoundSmartPartInfoProvider
     {
         DateTime newDateTime = (DateTime)(CurrDateValue.DateTimeValue);
         Activity.StartDate = newDateTime;
+        Sage.Platform.WebPortal.Workspaces.Tab.TabWorkspace ActivityTabs = PageWorkItem.Workspaces["TabControl"] as Sage.Platform.WebPortal.Workspaces.Tab.TabWorkspace;
+        if (ActivityTabs != null)
+        {
+            Sage.Platform.WebPortal.Workspaces.Tab.TabInfo detailsTab = ActivityTabs.GetTabByID("ActivityDetails");
+            if (detailsTab.WasUpdated)
+            {
+                detailsTab.Element.Panel.Update();
+            }
+            Sage.Platform.WebPortal.Workspaces.Tab.TabInfo recurTab = ActivityTabs.GetTabByID("RecurringActivity");
+            if (recurTab.WasUpdated)
+            {
+                recurTab.Element.Panel.Update();
+            }
+        }
     }
 
     static void chkCurrDltAdjust_ServerChange(object sender, EventArgs e)

@@ -49,6 +49,10 @@ namespace Sage.BusinessRules.CodeSnippets
 				IOpportunity opportunity = form.CurrentEntity as IOpportunity;
 			    opportunity.SetOppCompetitorReplacedFlag(competitor);
 			}
+			
+			Sage.Platform.WebPortal.Services.IPanelRefreshService panelRefresh = form.Services.Get<Sage.Platform.WebPortal.Services.IPanelRefreshService>();
+			if(panelRefresh != null)
+				panelRefresh.RefreshMainWorkspace();
         }
     }
 }

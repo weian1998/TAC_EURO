@@ -1,8 +1,18 @@
 <?xml version="1.0"?>
-<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="d3e6f6ef-9681-4ef1-bf3e-ee4b94e87efe" name="OnBeforeUpdate" returnType="void" methodType="CrudEvent" actionType="None" returnMode="BooleanOR" isInstance="true">
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="d3e6f6ef-9681-4ef1-bf3e-ee4b94e87efe" lastModifiedUtc="2010-07-22T04:56:02.3947694Z" name="OnBeforeUpdate" methodType="CrudEvent" actionType="None" returnMode="None">
+  <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
   </ExtendedPropertiesCollection>
   <parameter />
-  <methodTargets />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="f8ec43b5-e743-42ed-8a33-1377c021b51c" lastModifiedUtc="2010-10-29T08:40:06.6112703Z" targetType="Sage.SalesLogix.Library.DirectoryRules, Sage.SalesLogix.BusinessRules" targetMethod="OnBeforeUpdate" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
 </method>

@@ -243,6 +243,7 @@ public partial class SmartParts_Account_Responses : EntityBoundSmartPartInfoProv
                     targetResponse.Delete();
                     LoadResponses();
                 }
+                PanelRefresh.RefreshTabWorkspace();
                 break;
             case "SORT":
                 break;

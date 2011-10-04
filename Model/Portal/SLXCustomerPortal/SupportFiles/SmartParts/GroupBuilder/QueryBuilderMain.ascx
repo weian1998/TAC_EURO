@@ -125,7 +125,7 @@
 												</td>
 											</tr>
 											<tr>
-												<td><img height="200" src="images/groupbuilder/blank.gif" width="1"></td>
+												<td><img height="200" src="images/clear.gif" width="1" alt=""></td>
 												<td valign="top" >
 													<table id="grdConditions" >
 														<tr>
@@ -151,7 +151,7 @@
 												</td>
 											</tr>
 											<tr>
-												<td width="1"><img height="200" src="images/groupbuilder/blank.gif" width="1"></td>
+												<td width="1"><img height="200" src="images/clear.gif" width="1" alt=""></td>
 												<td vAlign="top" id="layoutContainer">
 													<table id="grdLayout" cellSpacing="0" cellPadding="0">
 														<tr>
@@ -169,7 +169,7 @@
 												</td>
 											</tr>
 											<tr>
-												<td width="1"><img height="200" src="images/groupbuilder/blank.gif" width="1"></td>
+												<td width="1"><img height="200" src="images/clear.gif" width="1" alt=""></td>
 												<td vAlign="top">
 													<table id="grdSorts">
 														<tr>
@@ -185,7 +185,7 @@
 									<div id="tabpage4" class="dispnone"> <!-- Defaults  -->
 										<table cellSpacing="0" cellPadding="2" width="500">
 											<tr>
-												<td><img id="tabpage4blank" runat="server" height="200" src="images/tabs/blank.gif" width="1"></td>
+												<td><img id="tabpage4blank" height="200" src="images/clear.gif" width="1" alt=""></td>
 												<td vAlign="top" align="left">
 													<input id="chkUseDistinct" type="checkbox" name="chkUseDistinct"> <label accessKey="D" for="chkUseDistinct">
 														<asp:Localize ID="localizeReturnDistinct" runat="server" Text="<%$ resources: localizeReturnDistinct.Text %>" /></label>

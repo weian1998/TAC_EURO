@@ -100,8 +100,21 @@ public partial class SmartParts_LitRequest_LiteratureRequest : UserControl, ISma
             SetPickListDefault(SendVia);
             SetPickListDefault(Priority);
             //Set focus on the top element in the form
-            RequestedFor.Focus();
+            SetFocus(RequestedFor.ClientID + "_LookupText");  
+
+
+           
         }
+    }
+
+    private void SetFocus(string clientId)
+    {
+        StringBuilder script = new StringBuilder();
+        script.Append(" $(document).ready(function(){\r\n");
+        script.AppendFormat(" document.getElementById('{0}').focus();", clientId);
+        script.Append("});\r\n");
+        Page.ClientScript.RegisterClientScriptBlock(GetType(), "LitSetFocus", script.ToString(), true);
+           
     }
 
     private string BuildLitRequestWarnings()
@@ -130,8 +143,8 @@ public partial class SmartParts_LitRequest_LiteratureRequest : UserControl, ISma
     {
         if (plc.PickListValue == "")
         {
-            PickList sv = PickList.GetPickListById(PickList.PickListIdFromName(plc.PickListName));
-            if (sv.Defaultindex.Value >= 0)
+            PickList sv = PickList.GetPickListByName(plc.PickListName);
+            if ((sv.Defaultindex ?? -1) >= 0)
             {
                 IList<PickList> vals = PickList.GetPickListItemsByName(plc.PickListName);
                 plc.PickListValue = vals[sv.Defaultindex.Value].Text;

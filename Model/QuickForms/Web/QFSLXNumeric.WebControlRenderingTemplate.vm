@@ -20,6 +20,8 @@
 #if($qfcontrol.StyleScheme != "")CssClass="$qfcontrol.StyleScheme" #end
 #if(!$qfcontrol.Visible)Visible="false" #end
 #if($qfcontrol.FormatType != "Number")FormatType="$qfcontrol.FormatType" #end
+#if($qfcontrol.DecimalDigits.DecimalDigits >= 0)DecimalDigits="$qfcontrol.DecimalDigits.DecimalDigits" #end
+Strict="${qfcontrol.DecimalDigits.Strict}" 
 #if($qfcontrol.HasActionCode)AutoPostBack="true" #end />
   </div>
 #if((${qfcontrol.Caption} != "") && ($qfcontrol.ControlLabelPlacement == "right"))

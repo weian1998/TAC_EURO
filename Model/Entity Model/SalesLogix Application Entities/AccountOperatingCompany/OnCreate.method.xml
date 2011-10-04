@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="8ed21d7a-e5f7-4f47-9cd2-c3c65299e843" lastModifiedUtc="2010-03-18T19:51:05.9103848Z" name="OnCreate" methodType="CrudEvent" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="b78f71f3-ee7c-40f9-9952-94c94a441892" lastModifiedUtc="2010-06-11T20:27:36.4862Z" targetType="Sage.SalesLogix.AccountOperatingCompany.Rules, Sage.SalesLogix.BusinessRules" targetMethod="OnCreate" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

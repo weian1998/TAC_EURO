@@ -5,6 +5,8 @@
   <SmartPart>\Entity Model\SalesLogix Application Entities\TicketProblemType\QuickForms\StandardProblemDetail.main.quickform.xml</SmartPart>
   <TargetWorkspace>MainContent</TargetWorkspace>
   <ShowInMode>Insert</ShowInMode>
-  <Properties />
+  <Properties>
+    <Property Name="HelpTopic" TypeConverter="">problemmanage</Property>
+  </Properties>
   <AllowRoles />
 </SmartPartMapping>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PortalPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="4066f23c-e657-4cd3-9a52-3a34867a8418">
+  <PageAlias>DeDupResult</PageAlias>
+  <SmallImage>[Localization!Global_Images:check_for_duplicate_history_16x16]</SmallImage>
+  <LargeImage>[Localization!Global_Images:check_for_duplicate_history_24x24]</LargeImage>
+  <TemplateUrl>Masters\base.master</TemplateUrl>
+  <InheritTemplate>false</InheritTemplate>
+  <InheritsFrom>Sage.Platform.WebPortal.EntityPage, Sage.Platform.WebPortal</InheritsFrom>
+  <Properties>
+    <Property Name="EntityTypeName" TypeConverter="">Sage.Entity.Interfaces.IDeDupResult, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</Property>
+  </Properties>
+  <TemplateProperties>
+    <Property Name="IncludeTaskPane" TypeConverter="">false</Property>
+    <Property Name="IncludeMoreTabsTab" TypeConverter="">false</Property>
+  </TemplateProperties>
+  <IsDefaultPage>false</IsDefaultPage>
+  <ExcludedGlobalModules />
+  <AppliedSecurity>Administration/Deduplication/ProcessDuplicates</AppliedSecurity>
+</PortalPage>

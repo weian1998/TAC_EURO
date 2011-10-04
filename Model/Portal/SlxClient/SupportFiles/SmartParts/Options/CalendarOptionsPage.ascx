@@ -53,6 +53,13 @@
 	</tr>
     <tr>
         <td>
+
+			<span class="lbl"><asp:Label ID="lblFisrtDayOfWeek" runat="server" Text="First day of the week:" meta:resourcekey="lblFirstDayOfWeek"></asp:Label></span>
+			<span class="textcontrol">
+				<asp:DropDownList id="_firstDayOfWeek" runat="server" CssClass="optionsInputClass" DataTextField="Key" DataValueField="Value" >				
+				</asp:DropDownList>
+			</span>
+        
         </td>
         <td>
 			<span class="lbl"><asp:Label ID="lblDayStart" runat="server" Text="Day Start:" meta:resourcekey="lblDayStartResource1"></asp:Label></span>

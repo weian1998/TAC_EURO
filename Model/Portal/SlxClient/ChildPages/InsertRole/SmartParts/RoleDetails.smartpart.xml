@@ -5,6 +5,8 @@
   <SmartPart>\Entity Model\SalesLogix Security Support\Role\QuickForms\RoleDetails.main.quickform.xml</SmartPart>
   <TargetWorkspace>MainContent</TargetWorkspace>
   <ShowInMode>Insert</ShowInMode>
-  <Properties />
+  <Properties>
+    <Property Name="HelpTopic" TypeConverter="">Creating_a_Role</Property>
+  </Properties>
   <AllowRoles />
 </SmartPartMapping>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Text;
 using System.Web;
 using Sage.Entity.Interfaces;
@@ -12,7 +11,9 @@ using Sage.SalesLogix.Activity;
 using Sage.Platform.Orm.Entities;
 using Sage.SalesLogix.Client.GroupBuilder;
 using Sage.SalesLogix.Security;
-using System.Linq;
+using Sage.SalesLogix.SelectionService;
+using Sage.SalesLogix.Services.PotentialMatch;
+using Sage.SalesLogix.Web.SelectionService;
 
 public class LinkHandler
 {
@@ -55,14 +56,7 @@ public class LinkHandler
     private IUserManagementService _ums;
     public IUserManagementService UserManagementService
     {
-        get
-        {
-            if (_ums == null)
-            {
-                _ums = ApplicationContext.Current.Services.Get<IUserManagementService>(true);
-            }
-            return _ums;
-        }
+        get { return _ums ?? (_ums = ApplicationContext.Current.Services.Get<IUserManagementService>(true)); }
     }
 
     public LinkHandler(System.Web.UI.Page page) : this((ApplicationPage)page) { }
@@ -83,7 +77,29 @@ public class LinkHandler
     public void MergeRecords(String selectionContextKey)
     {
         Dialog.SetSpecs(-1, -1, 750, 650, "MergeRecords");
-        Dialog.DialogParameters.Add("selectionContextKey", selectionContextKey);
+        IGroupContextService srv = ApplicationContext.Current.Services.Get<IGroupContextService>() as GroupContextService;
+        EntityGroupInfo currentEntityGroupInfo = srv.GetGroupContext().CurrentGroupInfo;
+        ISelectionService selectionService = (ISelectionService) SelectionServiceRequest.GetSelectionService();
+        ISelectionContext selectionContext = selectionService.GetSelectionContext(selectionContextKey);
+        IList<string> list = selectionContext.GetSelectedIds();
+        if (list != null)
+        {
+            MergeArguments mergeArguments = new MergeArguments(list[0], list[1], currentEntityGroupInfo.EntityType, currentEntityGroupInfo.EntityType);
+            Dialog.DialogParameters.Add("mergeArguments", mergeArguments);
+            Dialog.ShowDialog();
+        }
+        else
+        {
+            throw new ValidationException("The selection service does not contain any selected records.");
+        }
+    }
+
+    public void ShowDialog(String type, String smartPart, String entityId, String title, bool isCentered, int top, int left, int height, int width)
+    {
+        Type entityType = Type.GetType(type);
+        Dialog.SetSpecs(top, left, height, width, smartPart, title, isCentered);
+        Dialog.EntityID = entityId;
+        Dialog.EntityType = entityType;
         Dialog.ShowDialog();
     }
 
@@ -115,6 +131,7 @@ public class LinkHandler
         Dialog.SetSpecs(400, 600, "AddUsers", "Add New Users");
         Dialog.ShowDialog();
     }
+
     /// <summary>
     /// sets user status to "retired" for the selected list of users.
     /// </summary>
@@ -122,6 +139,7 @@ public class LinkHandler
     {
         // currently not implemented
     }
+
     public void ShowEditSecurityProfileDialog(string selectionInfoKey)
     {
         Dialog.DialogParameters.Clear();
@@ -130,11 +148,12 @@ public class LinkHandler
         string[] ids = selectionInfoKey.Split(',');
         Dialog.DialogParameters.Add("childId", ids[0]);
         Dialog.EntityID = ids[0];
-        Dialog.EntityType = typeof(Sage.Entity.Interfaces.IOwner);
+        Dialog.EntityType = typeof(IOwner);
         Dialog.DialogParameters.Add("parentId", ids[1]);
         Dialog.DialogParameters.Add("profileId", ids[2]);
         Dialog.ShowDialog();
     }
+
     /// <summary>
     /// 
     /// </summary>
@@ -149,6 +168,7 @@ public class LinkHandler
 
         FormHelper.RefreshMainListPanel(Page, GetType());
     }
+
     /// <summary>
     /// 
     /// </summary>
@@ -181,8 +201,8 @@ public class LinkHandler
             }
             break;
         }
-
     }
+
     /// <summary>
     /// Copies the selected teams and all members along with the appropriate security
     /// </summary>
@@ -202,9 +222,8 @@ public class LinkHandler
             }
             break;
         }
-
-
     }
+
     /// <summary>
     /// copies a user with no user interaction.  Assumes source user's profile.
     /// </summary>
@@ -215,7 +234,6 @@ public class LinkHandler
 		Dialog.SetSpecs(150, 300, "CopyUser", Resources.User.CopyUser_DialogTitle);
         Dialog.ShowDialog();
     }
-
 
     private AddUserOptions SetAddUserOptions(IUser existingUser)
     {
@@ -762,7 +780,7 @@ public class LinkHandler
         args.Add("recurdate", recurDate.ToString());
         AppContext["ActivityParameters"] = args;
 
-        Dialog.SetSpecs(-1, -1, 200, 330, "DeleteRecurrence");
+        Dialog.SetSpecs(-1, -1, 230, 330, "DeleteRecurrence");
         ShowActivityDialog(id);
     }
 
@@ -780,6 +798,7 @@ public class LinkHandler
 
     private void ShowSeriesOrOccurrenceDialog(string mappedId, string id)
     {
+        AppContext["ActivityParameters"] = new Dictionary<string, string>();
         Dialog.SetSpecs(200, 200, 230, 330, mappedId);
         ShowActivityDialog(id);
     }

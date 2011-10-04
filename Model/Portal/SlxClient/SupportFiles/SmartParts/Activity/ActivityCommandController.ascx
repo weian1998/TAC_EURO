@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ActivityCommandController.ascx.cs"
     Inherits="SmartParts_Activity_ActivityCommandController" %>
-<table cellpadding="4" cellspacing="0" border="0" class="formtable">
+<table cellpadding="4" cellspacing="0" border="0" class="bottomformtable">
     <tr>
         <td style="text-align: left;">
             <asp:Button ID="CompleteButton" runat="server" 
@@ -30,7 +30,7 @@
     </tr>
     <tr>
         <td>
-            <div style="margin: 10pt 0pt 0pt;">
+            <div style="margin: 5pt 0pt 0pt;">
                 <asp:Label runat="server" ID="CreateUser" CssClass="lblright" />
             </div>
         </td>

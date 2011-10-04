@@ -62,7 +62,7 @@
                 <asp:ListBox runat="server" ID="FollowUp"  SelectionMode="Single" Rows="1"   >
                     <asp:ListItem  Text="<%$ resources: FollowUp.ListItem.None %>" Value="None" meta:resourcekey="FollowUp_rsc_1" />
                     <asp:ListItem  Text="<%$ resources: FollowUp.ListItem.PhoneCall %>" Value="atPhoneCall" meta:resourcekey="FollowUp_rsc_2" />
-                    <asp:ListItem  Text="<%$ resources: FollowUp.ListItem.Meeting %>" Value="atMeeting" meta:resourcekey="FollowUp_rsc_3" />
+                    <asp:ListItem  Text="<%$ resources: FollowUp.ListItem.Meeting %>" Value="atAppointment" meta:resourcekey="FollowUp_rsc_3" />
                     <asp:ListItem  Text="<%$ resources: FollowUp.ListItem.ToDo %>" Value="atToDo" meta:resourcekey="FollowUp_rsc_4" />
                 </asp:ListBox>
             </span> 

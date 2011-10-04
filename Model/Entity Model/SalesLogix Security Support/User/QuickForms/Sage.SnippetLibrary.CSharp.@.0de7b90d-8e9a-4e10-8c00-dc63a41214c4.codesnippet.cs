@@ -71,6 +71,15 @@ namespace Sage.BusinessRules.CodeSnippets
 			{
 			     form.cbxIsUserManager.Enabled = false;	
 			}
+			 
+            if(user.Id.ToString().TrimEnd() != "ADMIN")
+            {
+                if (form.lbxUserType.Items.Count == 9)
+                {
+                    // removes the Administrator type
+					form.lbxUserType.Items.RemoveAt(8);
+                }
+            }
         }
 		
 		public static bool EnablePassword(IUser user)

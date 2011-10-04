@@ -91,14 +91,8 @@ public partial class SmartParts_Activity_EditRecurrence : EntityBoundSmartPartIn
     {
         if (RecurrenceType.SelectedValue == "series")
             Link.EditActivity(Activity.ActivityId);
-        if (RecurrenceType.SelectedValue == "occurrence")
+        else
             Link.EditActivityOccurrence(Activity.ActivityId, GetStartDate());
-        if (RecurrenceType.SelectedValue == "delete")
-        {
-            Activity occurrence = Activity.RecurrencePattern.GetOccurrence(GetStartDate());
-            occurrence.Delete();
-            FormHelper.RefreshMainListPanel(Page, GetType());
-        }
     }
 
     private DateTime GetStartDate()

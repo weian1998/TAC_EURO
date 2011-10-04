@@ -1543,6 +1543,9 @@ Sage.MailMergeService.prototype.ExcelInstalled = function() {
 Sage.MailMergeService.prototype.ExportToExcel = function(groupId, useGroupContext) {
     try {
         this.CloseMenus();
+        if (!this.ExcelInstalled()) {
+            throw new Error(DesktopErrors().ExcelNotInstalled || "Excel not installed.");
+        }
         var oExcelExport = new Sage.ExcelExport(groupId, useGroupContext);
         oExcelExport.Execute();
     }
@@ -3220,9 +3223,7 @@ Sage.CustomGroupExport.prototype.Execute = function() {
     if (Ext.isEmpty(this.GroupId)) {
         throw new Error(DesktopErrors().InvalidGroupId);
     }
-    if (String(this.GroupId).toUpperCase() == "LOOKUPRESULTS") { 
-        throw new Error(DesktopErrors().LookupResultsError);
-    }
+   
 };
 
 Sage.CustomGroupExport.prototype.GetGroupDatasetNodeText = function(path, node) {
@@ -3434,6 +3435,11 @@ Sage.ExcelExport.prototype.ExportGroup = function() {
     
     var xlCalculationAutomatic = 4294963191;
 
+    
+    var xlYearCode = 19;
+    var xlMonthCode = 20;
+    var xlDayCode = 21;
+
     try {
         try {
 
@@ -3525,8 +3531,12 @@ Sage.ExcelExport.prototype.ExportGroup = function() {
                                     }
                                 }
                                 
-                                this.GroupSheet.Cells.Item(this.EndingRow + 1, i).FormulaR1C1 = "=SUM(R[-" + this.EndingRow + "]C:R[-1]C)"; 
-                                bCreatePivot = true;
+                                try {
+                                    this.GroupSheet.Cells.Item(this.EndingRow + 1, i).FormulaR1C1 = "=SUM(R[-" + this.EndingRow + "]C:R[-1]C)"; 
+                                    bCreatePivot = true;
+                                } catch (e) {
+                                    if (window.console) console.log(e.message);
+                                }
                             }
                             break;
                         case "INTEGER": 
@@ -3546,9 +3556,21 @@ Sage.ExcelExport.prototype.ExportGroup = function() {
                                 this.GroupSheet.Range(this.GroupSheet.Cells.Item(this.StartingRow, i), this.GroupSheet.Cells.Item(this.EndingRow, i)).NumberFormat = "[<=9999999]###-####;(###) ###-####";
                             }
                             break;
-
                         case "DATETIME": 
-                            this.GroupSheet.Range(this.GroupSheet.Cells.Item(this.StartingRow, i), this.GroupSheet.Cells.Item(this.EndingRow, i)).NumberFormat = this.Service.MailMergeGUI().GetFormatSetting(7);
+                            try {
+                                var format = this.Service.MailMergeGUI().GetFormatSetting(7);
+                                var sYearCode = this.Service.MailMergeGUI().GetExcelInternationalValue(this.ExcelApp, xlYearCode);
+                                var sMonthCode = this.Service.MailMergeGUI().GetExcelInternationalValue(this.ExcelApp, xlMonthCode);
+                                var sDayCode = this.Service.MailMergeGUI().GetExcelInternationalValue(this.ExcelApp, xlDayCode);
+                                format = format.replace(/y/g, sYearCode || "y");
+                                format = format.replace(/M/g, sMonthCode || "M");
+                                format = format.replace(/d/g, sDayCode || "d");
+                                this.GroupSheet.Range(this.GroupSheet.Cells.Item(this.StartingRow, i), this.GroupSheet.Cells.Item(this.EndingRow, i)).NumberFormatLocal = format;
+                            } catch (e) {
+                                if (window.console) {
+                                    console.log(e.message);
+                                }
+                            }
                             break;
                     }
                 }
@@ -3891,6 +3913,7 @@ function ShowMailMergeUrl(url) {
 }
 
 InitMailMergeService();
+
 
 
 Sage.MailMergeContextService = function() {

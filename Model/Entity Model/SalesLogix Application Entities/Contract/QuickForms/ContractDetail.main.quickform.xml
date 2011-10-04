@@ -20,7 +20,7 @@
       <Action>
         <CSharpCodeSnippet><![CDATA[Sage.Entity.Interfaces.IContract contract = this.BindingSource.Current as Sage.Entity.Interfaces.IContract;
 if (String.IsNullOrEmpty(contract.TypeCode)) return;
-Sage.SalesLogix.PickLists.PickList picklist = Sage.SalesLogix.PickLists.PickList.GetPickListByItemId(contract.TypeCode);
+Sage.SalesLogix.PickLists.PickList picklist = Sage.SalesLogix.PickLists.PickList.GetPickListById(contract.TypeCode);
 if (picklist != null)
 {
     string value = picklist.Text.ToUpper();

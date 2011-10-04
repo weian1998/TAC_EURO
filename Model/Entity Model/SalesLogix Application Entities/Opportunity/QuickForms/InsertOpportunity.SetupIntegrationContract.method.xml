@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="a71a2817-b680-4d1b-81e3-852691dd7692" lastModifiedUtc="2011-03-03T20:24:31.5191911Z" name="SetupIntegrationContract" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="InsertOpportunity">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="55c13494-e460-47a9-b478-2e0e79674758" paramName="form" sequence="0" paramType="IInsertOpportunity" />
+    <OrmEntityMethodParam id="0d9e7a67-f81d-469e-b2fe-d011013ce129" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="d21c1952-d8aa-4d5a-9e47-41c486aa4862" lastModifiedUtc="2011-03-07T19:50:07.5340698Z" targetType="Sage.BusinessRules.CodeSnippets.InsertOpportunityEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="SetupIntegrationContractStep" active="true" codeSnippetId="fc85cd74-f321-4f99-99be-5b953de1637d">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

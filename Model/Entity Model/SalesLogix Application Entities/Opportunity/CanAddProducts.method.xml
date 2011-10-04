@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="f4bc16d5-803e-43ff-a4ed-ec5affc49bc0" lastModifiedUtc="2011-03-03T21:05:33.9108424Z" name="CanAddProducts" returnType="Boolean" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="05f4eac0-5188-47e4-b502-7f6c1bcb8952" lastModifiedUtc="2011-03-03T21:05:31.6316145Z" targetType="Sage.SalesLogix.Opportunity.Rules, Sage.SalesLogix.BusinessRules" targetMethod="CanAddProducts" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

@@ -1,5 +1,6 @@
 using System;
 using System.Web.UI;
+using System.Collections.Generic;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.Entity.Interfaces;
 using Sage.Platform.Orm.Interfaces;
@@ -216,7 +217,25 @@ public partial class SmartParts_Address_AddEditAddress : EntityBoundSmartPartInf
                 persistentEntity.Save();
             }
         }
+        UpdateFlags();
         btnSave_ClickActionBRC(sender, e);
+    }
+
+    private void UpdateFlags()
+    {
+        var thisaddress = BindingSource.Current as IAddress;
+        var pi = _parentEntityReference.GetType().GetProperty("Addresses");
+        if (pi != null)
+        {
+            foreach (var adr in (pi.GetValue(_parentEntityReference, null) as ICollection<IAddress>))
+            {
+                if (adr != thisaddress)
+                {
+                    adr.IsMailing = System.Convert.ToBoolean(thisaddress.IsMailing) ? false : adr.IsMailing;
+                    adr.IsPrimary = System.Convert.ToBoolean(thisaddress.IsPrimary) ? false : adr.IsPrimary;
+                }
+            }
+        }
     }
 
     /// <summary>

@@ -46,7 +46,7 @@
           <!-- join to User -->
           <condition>a.UserId = au.id</condition>
           <!-- select only meeting, phone, todo and personal activities... -->
-          <condition>a.Type in (262145, 262146, 262147, 262162)</condition>
+          <condition>(a.Type in (262145, 262146, 262147, 262162))</condition>
           <!-- ...that user has calendar access to with at least one attendee confirmed -->
           <condition>
             <![CDATA[
@@ -66,8 +66,8 @@
                   where 
                       uc.CalUser.Id = u.Id 
                       and uc.OthersAccessToUserCal.Id = :userId 
-                      and u.Type not in ('R', 'P') 
-  					          and ((u.Type <> 'W') or (:userId = 'ADMIN'))
+                      and u.Type not in ('P') 
+  					          and ((u.Type not in ('R', 'W')) or (:userId = 'ADMIN'))
               )
             )
             ]]>
@@ -177,7 +177,7 @@
           <!-- join to User -->
           <condition>a.UserId = au.id</condition>
           <!-- select only meeting, phone, todo and personal activities... -->
-          <condition>a.Type in (262145, 262146, 262147, 262162)</condition>
+          <condition>(a.Type in (262145, 262146, 262147, 262162))</condition>
           <!-- ...that user has calendar access to with at least one attendee confirmed -->
           <condition>
             <![CDATA[
@@ -318,9 +318,11 @@
           <item dataIndex="type" width="100" header="EventColumn_Type" />
           <item dataIndex="description" width="100" header="EventColumn_Description" />
           <item dataIndex="startDate" width="100" header="EventColumn_StartDate">
-            <![CDATA[ <a href="Event.aspx?entityid={[values.row.data.id]}">{[formatDate(values.value)]}</a> ]]>
+            <![CDATA[ <a href="Event.aspx?entityid={[values.row.data.id]}">{[formatDate(convertTimelessDate(values.value))]}</a> ]]>
           </item>
-          <item dataIndex="endDate" format="DateFormat" width="100" header="EventColumn_EndDate"></item>
+          <item dataIndex="endDate" width="100" header="EventColumn_EndDate">
+            <![CDATA[ {[ formatDate(convertTimelessDate(values.value)) ]} ]]>
+          </item>
           <item dataIndex="lastName" width="100" header="EventColumn_User">
             <![CDATA[ {values.row.data.lastName}, {values.row.data.firstName} ]]>
           </item>
@@ -375,7 +377,7 @@
       <layout>
         <items>
           <item dataIndex="type" width="50" header="ConfColumn_Notification">
-            <![CDATA[ <a href="{[getNotificationLink(values.row.data)]}">{value}</a> ]]>
+            <![CDATA[ <a href="{[getNotificationLink(values.row.data)]}">{[LocalizedActivityStrings[values.value] || values.value]}</a> ]]>
           </item>
           <item dataIndex="startDate" width="100" header="ConfColumn_DateTime">
             <![CDATA[ {[formatDateTime(values.value, values.row.data.timeless)]} ]]>

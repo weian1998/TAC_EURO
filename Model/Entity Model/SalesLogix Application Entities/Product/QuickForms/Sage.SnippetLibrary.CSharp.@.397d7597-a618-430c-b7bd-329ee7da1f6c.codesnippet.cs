@@ -49,11 +49,30 @@ namespace Sage.BusinessRules.CodeSnippets
             Sage.Platform.WebPortal.EntityPage page = (Sage.Platform.WebPortal.EntityPage)smartpart.Page;
 			if (page != null)
 			{
-				bool bInsertMode = page.ModeId.ToUpper().Equals("INSERT");
-				form.btnDelete.Visible = !bInsertMode;
-				form.btnSave.Visible = !bInsertMode;
-				form.btnInsertSave.Visible = bInsertMode;
-				
+				Sage.Platform.SData.IAppIdMappingService mappingService = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.SData.IAppIdMappingService>(true);
+				if (mappingService.IsIntegrationEnabled())
+				{
+					form.clIntegrationContract.Visible = true;
+					form.curCost.Enabled = false;					
+					form.txtDescription.Enabled = false;
+					form.txtName.Enabled = false;
+					form.txtSKU.Enabled = false;
+					form.pklFamily.Enabled = false;
+					form.pklStatus.Enabled = false;
+					form.pklType.Enabled = false;
+					form.lueUnitOfMeasure.Enabled = false;
+					form.btnDelete.Visible = false;
+					form.btnSave.Visible = false;
+					form.btnInsertSave.Visible = false;
+				}
+				else
+				{
+					form.clIntegrationContract.Visible = false;
+					bool bInsertMode = page.ModeId.ToUpper().Equals("INSERT");
+					form.btnDelete.Visible = !bInsertMode;
+					form.btnSave.Visible = !bInsertMode;
+					form.btnInsertSave.Visible = bInsertMode;	
+				}
 			}
         }
     }

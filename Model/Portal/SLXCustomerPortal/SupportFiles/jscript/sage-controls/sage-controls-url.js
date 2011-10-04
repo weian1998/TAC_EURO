@@ -60,7 +60,7 @@ function LaunchWebSite(ID)
     {
 	    url = startURL + url;
     }     
-    winH = window.open(url, '', 'dependent=no,directories=yes,location=yes,menubar=yes,resizeable=yes,pageXOffset=0px,pageYOffset=0px,scrollbars=yes,status=yes,titlebar=yes,toolbar=yes');
+    winH = window.open(url, '', 'dependent=no,directories=yes,location=yes,menubar=yes,resizable=yes,pageXOffset=0px,pageYOffset=0px,scrollbars=yes,status=yes,titlebar=yes,toolbar=yes');
 }
 
 URL.prototype.FormatURL = URL_FormatURL;

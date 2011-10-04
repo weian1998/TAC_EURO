@@ -98,6 +98,7 @@ public partial class SmartParts_Activity_ActivityDetails : EntityBoundSmartPartI
 	                if (Activity.RecurrenceState != RecurrenceState.rstOccurrence)
 	                    Activity.Type = Params.Type;
 	            }
+                ClientBindingMgr.SetFocusTo(Description); 
             }
         }
 
@@ -121,6 +122,7 @@ public partial class SmartParts_Activity_ActivityDetails : EntityBoundSmartPartI
             if (LeadId.Text == string.Empty)
                 Company.Text = string.Empty;
             Form.Secure(Controls);
+
         }
     }
 
@@ -322,7 +324,16 @@ public partial class SmartParts_Activity_ActivityDetails : EntityBoundSmartPartI
             SetTACODefaults();
             SetUserOptionDefaults();
         }
-
+        if (IsActivating && Activity.IsOccurrence && Form.IsInsert)
+        {
+            var origAct = EntityFactory.GetById<Sage.Entity.Interfaces.IActivity>(Activity.ActivityId) as Sage.SalesLogix.Activity.Activity;
+            if (origAct != null)
+            {
+                Activity.ReminderDuration = origAct.ReminderDuration;
+                Activity.AlarmTime = Activity.StartDate.AddMinutes(-1 * Activity.ReminderDuration);
+                ReminderDuration.Value = Activity.ReminderDuration;
+            }
+        }
         SetPickListsByType();
         SetUIDefaults();
 
@@ -418,8 +429,12 @@ public partial class SmartParts_Activity_ActivityDetails : EntityBoundSmartPartI
     private void SetTACODefaults()
     {
         SetDivVisible(VisibleDiv.Contact);
+        if (GetParam("leadname") != null) //have to pass leadname around or it won't get populated unless the lead value is changed
+        {
+            Activity.LeadName = GetParam("leadname");
+        }
 
-        if (GetParam("aid") != null)
+        if (GetParam("aid") != null || GetParam("lid") != null)
         {
             SetTACODefaultsFromParameters();
         }

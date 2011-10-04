@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="2df4fb4b-481e-43b8-b044-922682fabb09" lastModifiedUtc="2011-01-25T16:59:47.7699919Z" parentEntityId="9b47425f-3b70-4f38-a4cf-574c64d46086" childEntityId="e640237e-5595-47eb-880c-646a173b9a5f" cascadeOption="SaveUpdateDelete">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="1d475bbd-3791-4c1c-8a95-7cd25df21705" lastModifiedUtc="2011-01-25T16:59:47.7699919Z" name="SalesOrderAddresses" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="ea6083f1-2f9b-4169-a294-b64366e1cc58" lastModifiedUtc="2010-07-09T22:16:26.7155637Z" name="SalesOrder" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="7d89aa76-e619-4646-b0fa-92c88a7717b2" parentPropertyId="17935caf-63d3-493c-a723-467cd86393d3" childPropertyId="4f3df597-0c35-484a-a737-304fe7ca5444" ordinal="0" />
+  </column>
+</relationship>

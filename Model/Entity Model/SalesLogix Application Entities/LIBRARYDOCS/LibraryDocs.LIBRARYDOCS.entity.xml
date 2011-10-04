@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="97f4cf7c-7074-4f7d-94ae-f1fdc06b5b38" lastModifiedUtc="2009-12-02T00:15:57.4463149Z" manageSchema="false" tableName="LIBRARYDOCS" name="LibraryDocs" isExtension="false" audited="true" onBeforeInsertMethodId="102a77aa-fa95-42a7-b370-83aac7b1a7a9" onAfterInsertMethodId="a331818a-cf45-42c8-8489-4e272be32f04" onBeforeUpdateMethodId="795cccb2-0905-4fe0-8455-f6bded1d39d3" onAfterUpdateMethodId="10d5c975-3dca-4fe4-a015-00e132d690a2" onBeforeDeleteMethodId="c80f7820-1ab7-49e5-95bf-af29b0925aa2" onAfterDeleteMethodId="e72b4f53-0b86-4eeb-a15a-76f9341315f1" onCreateId="60fb6ebd-a0af-46ba-adca-e6e722f14842">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="97f4cf7c-7074-4f7d-94ae-f1fdc06b5b38" lastModifiedUtc="2011-04-12T16:50:41.3863265Z" manageSchema="false" tableName="LIBRARYDOCS" name="LibraryDocs" displayPropertyId="4d8aa384-da6b-484b-9741-9840b90cad79" isExtension="false" audited="true" secure="false" sDataPathName="" lastUpdatedPropertyId="1269cb4f-a656-404b-bd11-9c8083a10370" onBeforeInsertMethodId="102a77aa-fa95-42a7-b370-83aac7b1a7a9" onAfterInsertMethodId="a331818a-cf45-42c8-8489-4e272be32f04" onBeforeUpdateMethodId="795cccb2-0905-4fe0-8455-f6bded1d39d3" onAfterUpdateMethodId="10d5c975-3dca-4fe4-a015-00e132d690a2" onBeforeDeleteMethodId="c80f7820-1ab7-49e5-95bf-af29b0925aa2" onAfterDeleteMethodId="e72b4f53-0b86-4eeb-a15a-76f9341315f1" onCreateId="60fb6ebd-a0af-46ba-adca-e6e722f14842">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
       <extender guid="1589723d-0536-4bf3-bdd7-3f6f7fe165d0">
         <OrmEntityMetadataExtension>
+          <StringExpression>${FileName}</StringExpression>
           <IsHistoryTable>false</IsHistoryTable>
         </OrmEntityMetadataExtension>
       </extender>

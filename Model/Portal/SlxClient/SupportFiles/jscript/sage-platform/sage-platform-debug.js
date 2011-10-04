@@ -7,8 +7,30 @@
 window.Sage = window.Sage || {};
 window.Sage.__namespace = true; //allows child namespaces to be registered via Type.registerNamespace(...)
 
+Sage.apply = function(a, b, c) {
+    var n,o;
+    if (a && c) {for(n in c) {a[n] = c[n];}}
+    if (a && b) {for(o in b) {a[o] = b[o];}}
+    return a;
+};
 
-Sage.namespace = function(ns) {
+Sage.count = 1;
+ //so that dynamically generated elements can get a 
+ //unique number appended to their name, ie 'wgt1', 'wgt2'...
+ //@param str a string passed in to which a number will be appended
+Sage.guid = function(str) {
+    return this.stringBuild(str, this.count++);
+};
+
+// <n> number of string arguments pushed into
+// an array and returned joined with no delimiting.
+Sage.stringBuild = function() {
+    return Array.prototype.slice.call(arguments, 0).join('');
+};
+
+
+ 
+Sage.ns = Sage.namespace = function(ns) {
     if (!ns || !ns.length) {
         return null;
     }
@@ -24,6 +46,7 @@ Sage.namespace = function(ns) {
 
     return nsobj;
 };
+
 
 Sage.createNamespace = function(ns) {
     if (!ns || !ns.length) {
@@ -53,6 +76,342 @@ Sage.extend = function(subclass, superclass) {
         superclass.prototype.constructor = superclass;
     }
 };
+
+(function(S) {
+    var INITIALIZING = false,
+    OVERRIDE = /xyz/.test(function(){xyz;}) ? /\bbase\b/ : /.*/;
+    // The base Class placeholder
+    S.Class = function(){};
+    // Create a new Class that inherits from this class
+    S.Class.define = function(prop) {
+        var base = this.prototype;
+        // Instantiate a base class (but only create the instance)
+        INITIALIZING = true;
+        var prototype = new this();
+        INITIALIZING = false;
+
+        var wrap = function(name, fn) {
+            return function() {
+                var tmp = this.base;
+                // Add a new .base() method that is the same method
+                // but on the base class
+                this.base = base[name];
+                // The method only need to be bound temporarily, so we
+                // remove it when we're done executing
+                var ret = fn.apply(this, arguments);
+                this.base = tmp;
+                return ret;
+            };
+        };
+
+        // Copy the properties over onto the new prototype
+        var hidden = ['constructor'],
+            i = 0,
+            name;
+
+        for (name in prop) {
+            // Check if we're overwriting an existing function
+            prototype[name] = typeof prop[name] === "function" &&
+            typeof base[name] === "function" &&
+            OVERRIDE.test(prop[name]) ? wrap(name, prop[name]) : prop[name];
+        }
+
+        while (name = hidden[i++])
+            if (prop[name] != base[name])
+                prototype[name] = typeof prop[name] === "function" &&
+                    typeof base[name] === "function" &&
+                    OVERRIDE.test(prop[name]) ? wrap(name, prop[name]) : prop[name];
+
+        // The dummy class constructor
+        function Class() {
+            // All construction is actually done in the initialize method
+            if ( !INITIALIZING && this.constructor ) {
+                this.constructor.apply(this, arguments);
+            }
+        }
+        // Populate the constructed prototype object
+        Class.prototype = prototype;
+        // Enforce the constructor to be what we expect
+        Class.constructor = Class;
+        // And make this class 'define-able'
+        Class.define = arguments.callee;
+        Class.extend = Class.define; // sounds better for inherited classes
+        return Class;
+    };
+        
+    var SLICE = Array.prototype.slice,
+        TRUE = true, FALSE = false,
+        //WIN = S.config.win,
+        WIN = window,
+        FILTER = /^(?:scope|delay|buffer|single)$/,
+        EACH = S.each;
+        TARGETED = function(f,o,scope) {
+            return function() {
+                if(o.target === arguments[0]){
+                    f.apply(scope, SLICE.call(arguments, 0));
+                }
+            };
+        },
+        BUFFERED = function(f,o,l,scope) {
+            l.task = new S.Utility.Deferred();
+            return function(){
+                l.task.delay(o.buffer, f, scope, SLICE.call(arguments, 0));
+            };
+        },
+        SINGLE = function(f,ev,fn,scope) {
+            return function(){
+                ev.removeListener(fn, scope);
+                return f.apply(scope, arguments);
+            };
+        },
+        DELAYED = function(f,o,l,scope) {
+            return function() {
+                var task = new S.Utility.Deferred();
+                if(!l.tasks) {
+                    l.tasks = [];
+                }
+                l.tasks.push(task);
+                task.delay(o.delay || 10, f, scope, SLICE.call(arguments, 0));
+            };
+        };        
+        
+        
+        
+        
+        
+    // place the Event class in Utility
+    S.namespace('Utility');
+    
+    S.Utility.Event = Sage.Class.define({
+        constructor: function(obj, name) {
+            this.name = name;
+            this.obj = obj;
+            this.listeners = [];
+        },
+        addListener: function(fn, scope, options){
+            var that = this,l;
+            scope = scope || that.obj;
+            if(!that.isListening(fn, scope)) {
+                l = that.createListener(fn, scope, options);
+                if(that.firing) {
+                    that.listeners = that.listeners.slice(0);
+                }
+                that.listeners.push(l);
+            }
+        },
+        createListener: function(fn, scope, o) {
+            o = o || {}; 
+            scope = scope || this.obj;
+            var l = {
+                fn: fn,
+                scope: scope,
+                options: o
+            }, h = fn;
+            if(o.target){
+                h = TARGETED(h, o, scope);
+            }
+            if(o.delay){
+                h = DELAYED(h, o, l, scope);
+            }
+            if(o.single){
+                h = SINGLE(h, this, fn, scope);
+            }
+            if(o.buffer){
+                h = BUFFERED(h, o, l, scope);
+            }
+            l.fireFn = h;
+            return l;
+        },
+        findListener: function(fn, scope){
+            var list = this.listeners,
+            i = list.length,l;
+            scope = scope || this.obj;
+            while(i--) {
+                l = list[i];
+                if(l) {
+                    if(l.fn === fn && l.scope === scope){
+                        return i;
+                    }
+                }
+            }
+            return -1;
+        },
+        isListening: function(fn, scope){
+            return this.findListener(fn, scope) !== -1;
+        },
+        removeListener: function(fn, scope){
+            var that = this, index, l, k,
+            result = FALSE;
+            if((index = that.findListener(fn, scope)) !== -1) {
+                if (that.firing) {
+                    that.listeners = that.listeners.slice(0);
+                }
+                l = that.listeners[index];
+                if(l.task) {
+                    l.task.cancel();
+                    delete l.task;
+                }
+                k = l.tasks && l.tasks.length;
+                if(k) {
+                    while(k--) {
+                        l.tasks[k].cancel();
+                    }
+                    delete l.tasks;
+                }
+                that.listeners.splice(index, 1);
+                result = TRUE;
+            }
+            return result;
+        },
+        // Iterate to stop any buffered/delayed events
+        clearListeners: function() {
+            var that = this,
+            l = that.listeners,
+            i = l.length;
+            while(i--) {
+                that.removeListener(l[i].fn, l[i].scope);
+            }
+        },
+        fire: function(){
+            var that = this,
+            listeners = that.listeners,
+            len = listeners.length,
+            i = 0, l, args;
+            if(len > 0) {
+                that.firing = TRUE;
+                args = SLICE.call(arguments, 0);
+                for (; i < len; i++) {
+                    l = listeners[i];
+                    if(l && l.fireFn.apply(l.scope || that.obj || 
+                        WIN, args) === FALSE) {
+                        return (that.firing = FALSE);
+                    }
+                }
+            }
+            that.firing = FALSE;
+            return TRUE;
+        }
+    }); // end S.Event class   
+     
+    S.Evented = S.Class.define({
+        constructor: function(config) {
+            var that = this,
+            e = that.events;
+            if(config && config.listeners) {
+                that.addListener(config.listeners);
+            }
+            that.events = e || {};
+        },
+        fireEvent: function() {
+            var that = this,
+            args = SLICE.call(arguments, 0),
+            eventName = args[0].toLowerCase(),
+            result = TRUE,
+            current = this.events[eventName],
+            b,c,
+            q = that.eventQueue || [];
+            // TODO: evaluate use of deferring events
+            if (that.eventsSuspended === TRUE) {
+                q.push(args);
+            }
+            if (typeof current === 'object') {
+                if(current.bubble) {
+                    if(current.fire.apply(current, args.slice(1)) === FALSE) {
+                        return FALSE;
+                    }
+                    b = that.getBubbleTarget && that.getBubbleTarget();
+                    if(b && b.enableBubble) {
+                        c = b.events[eventName];
+                        if(!c || typeof c !== 'object' || !c.bubble) {
+                            b.enableBubble(eventName);
+                        }
+                        return b.fireEvent.apply(b, args);
+                    }
+                } else {
+                    // remove the event name
+                    args.shift();
+                    result = current.fire.apply(current, args);
+                }
+            }
+            return result;
+        },
+        addListener : function(eventName, fn, scope, o){
+            var that = this, e, oe, ce;
+            if (typeof eventName === 'object') {
+                o = eventName;
+                for (e in o){
+                    oe = o[e];
+                    if (!FILTER.test(e)) {
+                        that.addListener(e, oe.fn || oe, oe.scope ||
+                            o.scope, oe.fn ? oe : o);
+                    }
+                }
+            } else {
+                eventName = eventName.toLowerCase();
+                ce = that.events[eventName] || TRUE;
+                if (typeof ce === 'boolean') {
+                    that.events[eventName] = ce = new S.Utility.Event(that, eventName);
+                }
+                ce.addListener(fn, scope, typeof o === 'object' ? o : {});
+            }
+        },
+        removeListener : function(eventName, fn, scope) {
+            var ce = this.events[eventName.toLowerCase()];
+            if (typeof ce === 'object') {
+                ce.removeListener(fn, scope);
+            }
+        },
+        purgeListeners : function(){
+            var events = this.events,evt,key;
+            for(key in events) {
+                evt = events[key];
+                if(typeof evt === 'object') {
+                    evt.clearListeners();
+                }
+            }
+        },
+        addEvents : function(o){
+            var that = this, arg, i;
+            that.events = that.events || {};
+            if (typeof o === 'string') {
+                arg = arguments;
+                i = arg.length;
+                while(i--) {
+                    that.events[arg[i]] = that.events[arg[i]] || TRUE;
+                }
+            } else {
+                Sage.apply(that.events, o);
+            }
+        },
+        hasListener : function(eventName){
+            var e = this.events[eventName.toLowerCase()];
+            return typeof e === 'object' && e.listeners.length > 0;
+        },
+        suspendEvents : function(queueSuspended){
+            this.eventsSuspended = TRUE;
+            if(queueSuspended && !this.eventQueue){
+                this.eventQueue = [];
+            }
+        },
+        resumeEvents : function(){
+            var that = this,
+            queued = that.eventQueue || [];
+            that.eventsSuspended = FALSE;
+            delete that.eventQueue;
+            // use jquery's each method
+            EACH(queued, function(e) {
+                that.fireEvent.apply(that, e);
+            });
+        }
+    }); //end S.Evented
+
+    S.Evented.prototype.on = S.Evented.prototype.addListener;
+    S.Evented.prototype.un = S.Evented.prototype.removeListener; 
+    
+    S.isArray = function(arr) {
+        return Object.prototype.toString.call(arr) === "[object Array]";
+    };
+}(Sage));
 
 Sage.ServiceContainer = function(){
     _services = [];
@@ -206,19 +565,25 @@ function initGears() {
 }//)();
 
 // class used for watching bound data fields and notifying the user that they have dirty data
-ClientBindingManagerService = function() {
+ClientBindingManagerService = function () {
     this._WatchChanges = true;
     this._PageExitWarningMessage = "";
     this._ShowWarningOnPageExit = false;
     this._SkipCheck = false;
+    //this flag tracks the dirty status of controls that were databound on the server
     this._CurrentEntityIsDirty = false;
     this._SaveBtnID = "";
     this._MsgDisplayID = "";
     this._entityTransactionID = "";
     this._IgnoreDirtyFlag = false;
-    
+    //this keeps track of any Ajax controls that also may have dirty data in them...
+    this._DirtyAjaxItems = [];
+    this._listeners = {};
+    this._listeners[ClientBindingManagerService.ON_SAVE] = [];
     positionDirtyDataMessage();
 };
+
+ClientBindingManagerService.ON_SAVE = 'onsave';
 
 $(document).ready(function() {
     Sys.WebForms.PageRequestManager.getInstance().add_endRequest(positionDirtyDataMessage);
@@ -229,6 +594,31 @@ function positionDirtyDataMessage() {
         $('#PageTitle').after($('.dirtyDataMessage').replaceWith(''))
         $('.dirtyDataMessage').css('top', $('#PageTitle').position().top);
         $('.dirtyDataMessage').css('left', $('#PageTitle').outerWidth());
+    }
+}
+
+
+ClientBindingManagerService.prototype.addListener = function (event, listener, scope) {
+    this._listeners[event] = this._listeners[event] || [];
+    this._listeners[event].push({ listener: listener, scope: scope });
+};
+
+ClientBindingManagerService.prototype.removeListener = function (event, listener) {
+    this._listeners[event] = this._listeners[event] || [];
+    for (var i = 0; i < this._listeners[event].length; i++)
+        if (this._listeners[event][i].listener == listener)
+            break;
+
+    this._listeners[event].splice(i, 1);
+};
+
+ClientBindingManagerService.prototype.onSave = function () {
+    for (var i = 0; i < this._listeners[ClientBindingManagerService.ON_SAVE].length; i++) {
+        var fn = this._listeners[ClientBindingManagerService.ON_SAVE][i].listener;
+        var scope = this._listeners[ClientBindingManagerService.ON_SAVE][i].scope || this;
+        if (typeof fn === "function") {
+            fn.call(scope);
+        }
     }
 }
 
@@ -247,7 +637,8 @@ ClientBindingManagerService.prototype.onExit = function(e) {
                 //_SkipCheck = false;
                 return;
             }
-            if ((mgr._CurrentEntityIsDirty)&&(mgr._IgnoreDirtyFlag == false)) {
+            var hdd = mgr.hasDirtyData();
+            if (hdd && (mgr._IgnoreDirtyFlag == false)) {
                 window.setTimeout(function() {
                     hideRequestIndicator(null, { });
                 }, 1000);
@@ -264,7 +655,7 @@ ClientBindingManagerService.prototype.onExit = function(e) {
 
 
 ClientBindingManagerService.prototype.canChangeEntityContext = function() {
-    if ((this._WatchChanges) && (this._CurrentEntityIsDirty) && (this._ShowWarningOnPageExit)) {
+    if ((this._WatchChanges) && (this.hasDirtyData()) && (this._ShowWarningOnPageExit)) {
         if (confirm(this._PageExitWarningMessage)) {
             this.clearDirtyStatus();
             return true;
@@ -274,6 +665,10 @@ ClientBindingManagerService.prototype.canChangeEntityContext = function() {
     }
     return true;
 };
+
+ClientBindingManagerService.prototype.hasDirtyData = function () {
+    return (this._CurrentEntityIsDirty || (this._DirtyAjaxItems && this._DirtyAjaxItems.length > 0));
+}
 
 ClientBindingManagerService.prototype.markDirty = function(e) {
     var mgr = Sage.Services.getService("ClientBindingManagerService");
@@ -288,6 +683,37 @@ ClientBindingManagerService.prototype.markDirty = function(e) {
     }
 };
 
+ClientBindingManagerService.prototype.addDirtyAjaxItem = function (itemId) {
+    //make sure we don't already know about this one...
+    var len = this._DirtyAjaxItems.length;
+    for (var i = 0; i < len; i++) {
+        if (this._DirtyAjaxItems[i] === itemId) {
+            return;
+        }
+    }
+    this._DirtyAjaxItems.push(itemId);
+    //show the message without marking _CurrentEntityIsDirty so it can be tracked separately.
+    if (this._WatchChanges) {
+        positionDirtyDataMessage();
+        if (this._IgnoreDirtyFlag == false) {
+            $("#" + this._MsgDisplayID).show();
+        }
+    }
+}
+
+ClientBindingManagerService.prototype.clearDirtyAjaxItem = function (itemId) {
+    var len = this._DirtyAjaxItems.length;
+    for (var i = 0; i < len; i++) {
+        if (this._DirtyAjaxItems[i] === itemId) {
+            this._DirtyAjaxItems.splice(i, 1);
+            //return;
+        }
+    }
+    if (!this.hasDirtyData()) {
+        $("#" + this._MsgDisplayID).hide();
+    }
+}
+
 ClientBindingManagerService.prototype.clearDirtyStatus = function() {
     var mgr = Sage.Services.getService("ClientBindingManagerService");
     if (mgr) {
@@ -301,6 +727,7 @@ function notifyIsSaving() {
     var mgr = Sage.Services.getService("ClientBindingManagerService");
     if (mgr) {
         mgr.clearDirtyStatus();
+        mgr.onSave();
     }
 };
 
@@ -736,6 +1163,11 @@ Sage.ClientContextService.prototype = {
             alert("can't find context data field");
         }
     },
+    updateFromServer: function (newContext) {
+        if (newContext) {
+            this.fromString(newContext);
+        }
+    },
     load: function() {
         var data = document.getElementById(this.contextDataFieldId);
         if (data) {
@@ -773,19 +1205,80 @@ Sage.ClientContextService.prototype = {
 //Sage.Services.addService("ClientContextService", new Sage.ClientContextService());
 
 
-Sage.ClientEntityContextService = function() {
-	this.emptyContext = { "EntityId" : "", "EntityType" : "", "Description" : "", "EntityTableName" : "" };
+Sage.ClientEntityContextService = function () {
+    this.emptyContext = { "EntityId": "", "EntityType": "", "Description": "", "EntityTableName": "" };
+    this._context = false;
+    this.hasClearListener = false;
 }
 
-Sage.ClientEntityContextService.prototype.getContext = function() {
-	var dataelem = $get("__EntityContext");
-	if (dataelem) {
-		if (dataelem.value != "") {
-		    var obj = dataelem.value.replace(/\n/g, " ").replace(/\r/g, " ");
-		    return eval(obj);
-		}
-	}
-	return this.emptyContext;
+Sage.ClientEntityContextService.prototype.getContext = function () {
+    if ((Sage.Data) && (Sage.Data.EntityContextStore)) {
+        return Sage.Data.EntityContextStore;
+    }
+    return this.emptyContext;
+}
+
+Sage.ClientEntityContextService.prototype.setContext = function (obj) {
+    if (typeof dojo !== 'undefined') {
+        Sage.Data.EntityContextStore = dojo.mixin(this.emptyContext, obj);
+    } else {
+        Sage.Data.EntityContextStore.EntityId = obj.EntityId || '';
+        Sage.Data.EntityContextStore.EntityType = obj.EntityType || '';
+        Sage.Data.EntityContextStore.Description = obj.Description || '';
+        Sage.Data.EntityContextStore.EntityTableName = obj.EntityTableName || '';
+    }
+}
+
+//function setCurentEntityContext(entityid, previousEntityid, clientPosition) {
+Sage.ClientEntityContextService.prototype.navigateSLXGroupEntity = function (toEntityId, previousEntityid, clientPosition) {
+    if (Sage.Services) {
+        var mgr = Sage.Services.getService("ClientBindingManagerService");
+        if ((mgr) && (!mgr.canChangeEntityContext())) { return false; }
+
+        var contextservice = Sage.Services.getService("ClientContextService");
+        if (contextservice.containsKey("ClientEntityId")) {
+            contextservice.setValue("ClientEntityId", toEntityId);
+        } else {
+            contextservice.add("ClientEntityId", toEntityId);
+        }
+        previousEntityid = (previousEntityid) ? previousEntityid : Sage.Data.EntityContextStore.EntityId;
+        if (contextservice.containsKey("PreviousEntityId")) {
+            contextservice.setValue("PreviousEntityId", previousEntityid);
+        } else {
+            contextservice.add("PreviousEntityId", previousEntityid);
+        }
+        if (clientPosition) {
+            if (contextservice.containsKey("ClientEntityPosition")) {
+                contextservice.setValue("ClientEntityPosition", clientPosition);
+            } else {
+                contextservice.add("ClientEntityPosition", clientPosition);
+            }
+        }
+        //wire up cleanup service...
+        if (!this.hasClearListener) {
+            Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function () {
+                if (Sage.Services) {
+                    var contextservice = Sage.Services.getService("ClientContextService");
+                    if (contextservice.containsKey("PreviousEntityId")) {
+                        contextservice.remove("PreviousEntityId");
+                    }
+                }
+            });
+            this.hasClearListener = true;
+        }
+        //set current state for things that load earlier in the response than the new full context.
+        Sage.Data.EntityContextStore.EntityId = toEntityId;
+        Sage.Data.EntityContextStore.Description = '';
+
+    }
+    if (window.TabControl) {
+        var tState = TabControl.getState();
+        if (tState) {
+            tState.clearUpdatedTabs();
+            TabControl.updateStateProxy();
+        }
+    }
+    return true;
 }
 
 Sage.Services.addService("ClientEntityContext", new Sage.ClientEntityContextService());
@@ -809,7 +1302,23 @@ Sage.WebClientMessageService.prototype.showClientMessage = function(title, msg, 
 	    scope: scope
 	};
 	
-    Ext.Msg.show(o);	
+    Ext.Msg.show(o);
+};
+
+Sage.WebClientMessageService.prototype.showClientError = function (title, msg, fn, scope) {
+    if (typeof title === "object")
+        return Ext.Msg.alert(title);
+
+    var o = {
+        title: (typeof msg === "string") ? title : Sage.WebClientMessageService.Resources.DefaultDialogMessageTitle,
+        msg: (typeof msg === "string") ? msg : title,
+        buttons: Ext.Msg.OK,
+        icon: Ext.MessageBox.ERROR,
+        fn: fn,
+        scope: scope
+    };
+
+    Ext.Msg.show(o);
 };
 
 Sage.Services.addService("WebClientMessageService", new Sage.WebClientMessageService());
@@ -919,14 +1428,9 @@ Sage.SalesLogix.Dashboard.prototype.updateUserOptions = function() {
     if (this._options.dirty) {
         this._options.dirty = false;
         $.ajax({
-            type: "POST",
+            type: "PUT",
             contentType: "application/json; charset=utf-8",
-            url: "DashboardService.asmx/UpdateUserOption",
-            data: Ext.util.JSON.encode({
-                name: "Options",
-                category: "Dashboard",
-                data: Ext.util.JSON.encode(this._options)
-            }),
+            url: String.format("slxdata.ashx/slx/crm/-/dashboard/useroption?name=Options&category=Dashboard&data={0}", Ext.util.JSON.encode(this._options)),
             dataType: "json",
             error: function(request, status, error) {
             },
@@ -1087,25 +1591,25 @@ function promoteGroupToDashboard() {
                     var cgi = getCurrentGroupInfo();
                     var page = Ext.getCmp('PagesGrid').getSelectionModel().getSelected();
                     if (page) {
-                        var widgetstring = String.format(template, cgi.Name, "Sage.Entity.Interfaces.I" + cgi.Family, cgi.Name, cgi.Id, 10,
-                        $('<div/>').text(cgi.Family).html(), $('<div/>').text(cgi.Name).html(), 10, cgi.Entity);
+                        var widgetstring = String.format(template, cgi.DisplayName, "Sage.Entity.Interfaces.I" + cgi.Family, cgi.Name, cgi.Id, 10,
+                            $('<div/>').text(cgi.Family).html(), $('<div/>').text(cgi.Name).html(), 10, cgi.Entity);
                         $.ajax({
                             type: "POST",
-                            url: "DashboardService.asmx/AddWidgetToPage",
-                            data: { name: page.data.Name,
-                                family: page.data.Family,
-                                widget: widgetstring
-                            },
+                            url: String.format("slxdata.ashx/slx/crm/-/dashboard/page?action=addwidget&name={0}&family={1}",
+                                page.data.Name,
+                                page.data.Family
+                            ),
+                            data: widgetstring,
+                            processData: false,
                             error: function (request, status, error) {
-                                var res = data.lastChild.textContent || data.lastChild.text;
-                                if (res != "Success") {
-                                    Ext.Msg.alert(MasterPageLinks.Warning, res);
-                                    return;
-                                }
                                 Ext.Msg.alert(MasterPageLinks.Warning, request.responseText);
                             },
                             success: function (data, status) {
-                                Sage.SalesLogix.userNotify(String.format(MasterPageLinks.PromotionNotification, page.data.Name, cgi.Name));
+                            if (data != "Success") {
+                                Ext.Msg.alert(MasterPageLinks.Warning, data);
+                                return;
+                            }
+                                Sage.SalesLogix.userNotify(String.format(MasterPageLinks.PromotionNotification, page.data.Name, cgi.DisplayName));
                                 if (typeof callback === "function") callback(data, status);
                             }
                         });
@@ -1131,15 +1635,15 @@ function promoteGroupToDashboard() {
     });
 
     $.ajax({
-        type: "POST",
-        url: "DashboardService.asmx/GetPagesForUser",
+        type: "GET",
+        url: "slxdata.ashx/slx/crm/-/dashboard/page",
+        cache: false,
         error: function(request, status, error) {
             Ext.Msg.alert(MasterPageLinks.Warning, request.responseText);
         },
         success: function(data, status) {
             var storedata = {};
-            var datastring = Ext.DomQuery.select("string", data)[0].text || Ext.DomQuery.select("string", data)[0].textContent;
-            storedata.items = Sys.Serialization.JavaScriptSerializer.deserialize(datastring);
+            storedata.items = Sys.Serialization.JavaScriptSerializer.deserialize(data);
             var grid = new Ext.grid.GridPanel({
                 store: new Ext.data.JsonStore({
                     autoDestroy: true,
@@ -1447,7 +1951,7 @@ Sage.DialogWorkspace.prototype.initDialog = function() {
         return out;
     };
 
-    Sage.DialogWorkspace.prototype.handleEvents = function() {
+    Sage.DialogWorkspace.prototype.handleEvents = function () {
         //alert($("#" + this._stateClientId).val());   
 
         var value = $("#" + this._stateClientId).val();
@@ -1477,9 +1981,11 @@ Sage.DialogWorkspace.prototype.initDialog = function() {
                     this._dialog.doLayout();
                     this._dialog.show();
 
-                    if (evt.centerDialog)
+                    if (evt.centerDialog) {
                         this._dialog.center();
-                    else
+                        if (this._dialog.getPosition()[1] < 0)
+                            this._dialog.setPosition(this._dialog.getPosition()[0], 20);
+                    } else
                         this._dialog.setPosition(evt.left, evt.top);
                 }
                 break;
@@ -1718,7 +2224,17 @@ Sage.TabWorkspaceState.prototype.addToMiddleTabs = function(target, at, step) {
 };
 
 Sage.TabWorkspaceState.prototype.isMainTab = function(target) { 
-    return this._isTab(Sage.TabWorkspaceState.MAIN_TABS, target); 
+    return this._isTab(Sage.TabWorkspaceState.MAIN_TABS, target);
+};
+
+Sage.TabWorkspaceState.prototype.isTabVisible = function (tabId) {
+    if (this.isMiddleTab(tabId)) {
+        return true;
+    } else if (this.isMainTab(tabId)) {
+        return (this._state.ActiveMainTab === tabId);
+    } else if (this.isMoreTab(tabId)) {
+        return (this._state.ActiveMoreTab === tabId && (this.isMiddleTab(Sage.TabWorkspace.MORE_TAB_ID) || (this._state.ActiveMainTab === Sage.TabWorkspace.MORE_TAB_ID)));
+    }
 };
 
 Sage.TabWorkspaceState.prototype.removeFromMainTabs = function(target) { 
@@ -2003,6 +2519,7 @@ Sage.TabWorkspace.prototype.hideTab = function(tab) {
     if (typeof tab === "string")
         tab = this.getInfoFor(tab);
        
+    if(tab == null){return;}
             
     switch (this.getState().getSectionFor(tab.Id))
     {
@@ -2029,6 +2546,8 @@ Sage.TabWorkspace.prototype.unHideTab = function(tab) {
     this.logDebug("[enter] hideTab");
     if (typeof tab === "string")
         tab = this.getInfoFor(tab);
+    
+    if(tab == null){return;}
        
     switch (this.getState().getSectionFor(tab.Id))
     {
@@ -3274,7 +3793,7 @@ Sage.Analytics = {
                                 }
                             }
                             break;
-                        //radioNames should set disabled state of truncate fields   
+                        //radioNames should set disabled state of truncate fields  
                         case 'radioNames':
                             $items.push(this[prop](editorFields[prop], editorFields.radioTruncate,
                                 editorFields.truncField, scope));
@@ -3343,11 +3862,11 @@ Sage.Analytics = {
 
                             //assemble the url ['datasource'] to call for the data
                             uri.push('slxdata.ashx/slx/crm/-/analytics?');
-                            if (scope.config.entity) { uri.push('entity=', scope.config.entity, '&'); }
-                            if (scope.config.groupname) { uri.push('groupname=', scope.config.groupname, '&'); }
-                            if (scope.config.dimension) { uri.push('dimension=', scope.config.dimension, '&'); }
-                            if (scope.config.metric) { uri.push('metric=', scope.config.metric, '&'); }
-                            if (scope.config.limit) { uri.push('limit=', scope.config.limit, '&'); }
+                            if (scope.config.entity) { uri.push('entity=', encodeURI(scope.config.entity), '&'); }
+                            if (scope.config.groupname) { uri.push('groupname=', encodeURI(scope.config.groupname), '&'); }
+                            if (scope.config.dimension) { uri.push('dimension=', encodeURI(scope.config.dimension), '&'); }
+                            if (scope.config.metric) { uri.push('metric=', encodeURI(scope.config.metric), '&'); }
+                            if (scope.config.limit) { uri.push('limit=', encodeURI(scope.config.limit), '&'); }
                             //for pie...
                             if (scope.config.combineother === 'true') {
                                 uri.push('combineother=true');
@@ -3355,7 +3874,7 @@ Sage.Analytics = {
                             //check for user overrides here
                             for (prop in scope.definition.qsParams) {
                                 if (scope.definition.qsParams.hasOwnProperty(prop)) {
-                                    uri.push('&', prop, '=', scope.definition.qsParams[prop]);
+                                    uri.push('&', prop, '=', encodeURI(scope.definition.qsParams[prop]));
                                 }
                             }
                             //join the finished datasource
@@ -3387,7 +3906,7 @@ Sage.Analytics = {
                         scope: scope
                     },
                     {
-                        text: 'Cancel',
+                        text: Sage.Analytics.WidgetResource.cancel,
                         handler: function () {
                             var win = Ext.getCmp(scope.config.editorWindow),
                             callWidget = Ext.getCmp(scope.config.panel);
@@ -3557,7 +4076,7 @@ Sage.Analytics = {
                     'select': {
                         fn: function (combo, record, index) {
                             //the VALUES will be stored not the display names
-                            scope.config.groupname = record.get(combo.valueField);
+                            scope.config.groupname = Ext.util.Format.htmlEncode(record.get(combo.valueField));
                             scope.config.groupid = record.get('groupId');
                         },
                         scope: scope
@@ -3999,7 +4518,7 @@ Sage.Analytics = {
     }, //end localize
     //stored definitions of widgets 
     WidgetDefinitions: {}
-};   //end Sage.Analytics
+};  //end Sage.Analytics
 
 Sage.TaskPaneItem = function(workspace, options) {
     this._workspace = workspace;
@@ -4457,18 +4976,15 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
             }
             $.ajax({
                 type: "POST",
-                url: "DashboardService.asmx/UpdatePage",
-                data: { name: this.name,
-                    family: this.family,
-                    data: thisPageSerialized
-                },
+                    url: String.format("slxdata.ashx/slx/crm/-/dashboard/page?name={0}&family={1}", this.name, this.family),
+                    data: thisPageSerialized,
+                    processData: false,
                 error: function (request, status, error) {
                     Ext.Msg.alert(DashboardResource.Warning, request.responseText);
                 },
                 success: function (data, status) {
-                    var res = data.lastChild.textContent || data.lastChild.text;
-                    if (res != "Success") {
-                        Ext.Msg.confirm(DashboardResource.Warning, res + "<br>" + DashboardResource.PersonalCopy,
+                        if (data != "Success") {
+                            Ext.Msg.confirm(DashboardResource.Warning, data + "<br>" + DashboardResource.PersonalCopy,
                             function (btn) {
                                 if (btn == 'yes') {
                                     self.createCopy();
@@ -4488,6 +5004,7 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                 var win = new Ext.Window({ title: DashboardResource.Share,
                     width: parseInt(DashboardResource.Popup_Width),
                     height: parseInt(DashboardResource.Popup_Height),
+                    layout: 'fit',
                     autoScroll: true,
                     tools: [{ id: 'help',
                         handler: function (evt, toolEl, panel) {
@@ -4506,20 +5023,19 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                                         if (ownerarray.length == 0) ownerarray.push("unrelease");
                                         $.ajax({
                                             type: "POST",
-                                            url: "DashboardService.asmx/ReleasePage",
-                                            data: { name: self.name,
-                                                family: self.family,
-                                                owners: ownerarray
-                                            },
+                                            url: String.format("slxdata.ashx/slx/crm/-/dashboard/release?name={0}&family={1}",
+                                                self.name,
+                                                self.family),
+                                            data: Sys.Serialization.JavaScriptSerializer.serialize(ownerarray),
+                                            processData: false,
                                             error: function (request, status, error) {
-                                                var res = data.lastChild.textContent || data.lastChild.text;
-                                                if (res != "Success") {
-                                                    Ext.Msg.alert(DashboardResource.Warning, res);
-                                                    return;
-                                                }
                                                 Ext.Msg.alert(DashboardResource.Warning, request.responseText);
                                             },
                                             success: function (data, status) {
+                                                if (data != "Success") {
+                                                    Ext.Msg.alert(DashboardResource.Warning, data);
+                                                    return;
+                                                }
                                                 if (typeof callback === "function") callback(data, status);
                                             }
                                         });
@@ -4535,8 +5051,9 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                 });
 
                 $.ajax({
-                    type: "POST",
-                    url: "DashboardService.asmx/GetPluginReleases",
+                    type: "GET",
+                    url: "slxdata.ashx/slx/crm/-/dashboard/release",
+                    cache: false,
                     data: { name: self.name,
                         family: self.family
                     },
@@ -4545,9 +5062,10 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                     },
                     success: function (data, status) {
                         var storedata = {};
-                        var res = Ext.DomQuery.select("string", data)[0].textContent || Ext.DomQuery.select("string", data)[0].text;
-                        storedata.items = Sys.Serialization.JavaScriptSerializer.deserialize(res);
+                        //var res = Ext.DomQuery.select("string", data)[0].textContent || Ext.DomQuery.select("string", data)[0].text;
+                        storedata.items = Sys.Serialization.JavaScriptSerializer.deserialize(data);
                         var grid = new Ext.grid.GridPanel({
+                            buttonAlign: 'center',
                             store: new Ext.data.JsonStore({
                                 autoDestroy: true,
                                 fields: ['Id', 'Text'],
@@ -4556,7 +5074,7 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                             }),
                             colModel: new Ext.grid.ColumnModel({
                                 defaults: {
-                                    width: 120,
+                                    //width: 120,
                                     sortable: false
                                 },
                                 columns: [
@@ -4564,42 +5082,47 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                                 ]
                             }),
                             sm: new Ext.grid.RowSelectionModel({ singleSelect: false }),
-                            width: 140,
-                            height: 250,
+                            //width: 140,
+                            //height: 250,
                             frame: true,
-                            id: 'ReleasedGrid'
+                            id: 'ReleasedGrid',
+                            buttons: [{
+                                text: 'Everyone',
+                                handler: function () {
+                                    var grid = Ext.getCmp('ReleasedGrid');
+                                    var found = false;
+                                    for (var i = 0; i < grid.store.data.items.length; i++) {
+                                        if (grid.store.data.items[i].data.Id === "SYST00000001") found = true;
+                                    }
+                                    if (!found) {
+                                        var rec = new grid.store.recordType({ "Id": "SYST00000001", "Text": "Everyone" });
+                                        grid.store.add(rec);
+                                    }
+                                }
+                            },
+                                {
+                                    text: 'Add',
+                                    handler: function () {
+                                        var vURL = 'OwnerAssign.aspx';
+                                        window.open(vURL, "OwnerAssign", "resizable=yes,centerscreen=yes,width=500,height=450,status=no,toolbar=no,scrollbars=yes");
+                                    }
+                                },
+                                {
+                                    text: 'Remove',
+                                    handler: function () {
+                                        var grid = Ext.getCmp('ReleasedGrid');
+                                        var selected = grid.getSelectionModel().getSelections();
+                                        for (var i = 0; i < selected.length; i++) {
+                                            grid.store.remove(selected[i]);
+                                        }
+                                    }
+                                }
+                            ]
                         });
                         win.add(grid);
-                        win.add(new Ext.Button({ text: 'Everyone', handler: function () {
-                            var grid = Ext.getCmp('ReleasedGrid');
-                            var found = false;
-                            for (var i = 0; i < grid.store.data.items.length; i++) {
-                                if (grid.store.data.items[i].data.Id === "SYST00000001")
-                                    found = true;
-                            }
-                            if (!found) {
-                                var rec = new grid.store.recordType({ "Id": "SYST00000001", "Text": "Everyone" });
-                                grid.store.add(rec);
-                            }
-                        }
-                        }));
-                        win.add(new Ext.Button({ text: 'Add', handler: function () {
-                            var vURL = 'OwnerAssign.aspx';
-                            window.open(vURL, "OwnerAssign", "resizable=yes,centerscreen=yes,width=500,height=450,status=no,toolbar=no,scrollbars=yes");
-                        }
-                        }));
-                        win.add(new Ext.Button({ text: 'Remove', handler: function () {
-                            var grid = Ext.getCmp('ReleasedGrid');
-                            var selected = grid.getSelectionModel().getSelections();
-                            for (var i = 0; i < selected.length; i++) {
-                                grid.store.remove(selected[i]);
-                            }
-                        }
-                        }));
                         win.show();
                     }
                 });
-
             });
         },
 
@@ -4774,18 +5297,16 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                         var confirm = Ext.Msg.confirm(DashboardResource.Delete_Tab, DashboardResource.ConfirmDelete, function (result) {
                             if (result == "yes") {
                                 $.ajax({
-                                    type: "POST",
-                                    url: "DashboardService.asmx/DeletePage",
-                                    data: { name: currentDashboardPage.name,
-                                        family: currentDashboardPage.family
-                                    },
+                                    type: "DELETE",
+                                    url: String.format("slxdata.ashx/slx/crm/-/dashboard/page?name={0}&family={1}",
+                                        currentDashboardPage.name,
+                                        currentDashboardPage.family),
                                     error: function (request, status, error) {
                                         Ext.Msg.alert(DashboardResource.Warning, request.responseText);
                                     },
                                     success: function (data, status) {
-                                        var res = data.lastChild.textContent || data.lastChild.text;
-                                        if (res != "Success") {
-                                            Ext.Msg.alert(DashboardResource.Warning, res);
+                                        if (data != "Success") {
+                                            Ext.Msg.alert(DashboardResource.Warning, data);
                                             return;
                                         }
                                         currentDashboardPage.dashboard.deletePortal(portalNum);
@@ -5181,7 +5702,7 @@ Sage.Analytics.DashboardWidget = Ext.extend(Ext.util.Observable, {
         var that = this;
         $.ajax({
             type: "GET",
-            url: "DashboardService.asmx/GetWidgetByName",
+            url: "slxdata.ashx/slx/crm/-/dashboard/widget",
             data: { name: this.config.name,
                 family: this.config.family
             },
@@ -5343,3 +5864,84 @@ Sage.UserOptionsService = {
         });
     }
 };
+Sage.RoleSecurityService = function (actionList) {
+    this._actionList = actionList;
+    // Implement callback when SData call is finished
+    //this._consumerCallback = {};
+    this._userID = "";
+    this._actionName = "";
+}
+
+Sage.RoleSecurityService.prototype.hasAccess = function (actionName) { // callback
+    // this._consumerCallback = callback;
+    this._actionName = actionName;
+    this._userID = Sage.Utility.getClientContextByKey('userID');
+    var rval = false;
+
+    //If the current user is Administrator, then return true always.
+    if (dojo.trim(this._userID.toUpperCase()) === 'ADMIN') {
+        rval = true;
+    }
+    else {
+        var aLen = this._actionList.length;
+        for (var i = 0; i < aLen; i++) {
+            if (this._actionList[i].toUpperCase() === this._actionName.toUpperCase()) {
+                rval = true;
+                break;
+            }
+        }
+    }
+    //this._consumerCallback(rval);  
+    return rval;
+}
+
+Sage.IntegrationContractService = function () {
+    this.isIntegrationEnabled = false;
+    this.localAppId = "";
+    var data = document.getElementById("__IntegrationContractService");
+    if (typeof data !== "undefined" && data != null) {
+        var obj = dojo.fromJson(data.value);
+        this.isIntegrationEnabled = obj.IsIntegrationEnabled;
+        this.localAppId = obj.LocalAppId;
+        this.isMultiCurrencyEnabled = obj.IsMultiCurrencyEnabled;
+    }
+}
+
+Sage.IntegrationContractService.prototype.getCurrentOperatingCompanyId = function () {
+    var service = Sage.Services.getService("ClientEntityContext");
+    if (typeof service !== "undefined" && service != null) {
+        var context = service.getContext();
+        var dtNow = new Date();
+        var sUrl = dojo.replace("slxdata.ashx/slx/crm/-/context/getcurrentoperatingcompanyid?time={0}&entityType={1}&entityId={2}",
+            [encodeURIComponent(dtNow.getTime().toString()), encodeURIComponent(context.EntityType), encodeURIComponent(context.EntityId)]);
+        var response = $.ajax({
+            async: false,
+            url: sUrl,
+            dataType: 'json',
+            error: function (error) {
+                Ext.Msg.show({ title: "Sage SalesLogix", msg: error.StatusText, buttons: Ext.Msg.OK, icon: Ext.MessageBox.ERROR });
+                return "";
+            }
+        });
+        var obj = dojo.fromJson(response.responseText);
+        return obj.id;
+    }
+    return "";
+}
+
+function isIntegrationContractEnabled() {
+    var service = Sage.Services.getService("IntegrationContractService");
+    if (service != null && typeof service !== "undefined") {
+        return service.isIntegrationEnabled;
+    }
+    return false;
+}
+
+function isMultiCurrencyEnabled() {
+    var service = Sage.Services.getService("IntegrationContractService");
+    if (service != null && typeof service !== "undefined") {
+        return service.isMultiCurrencyEnabled;
+    }
+    return false; 
+}
+

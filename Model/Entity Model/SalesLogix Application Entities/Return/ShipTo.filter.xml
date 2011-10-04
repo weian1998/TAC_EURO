@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmDistinctEntityFilter" id="40d46324-37e8-43d1-a89c-4ee6dd1f1e3c" lastModifiedUtc="2010-06-18T23:38:38.1597398Z" filterName="ShipTo" propertyName="ShipTo.NameLF" dataPath="RMA:SHIPTOCONTACTID=CONTACTID.CONTACT!NameLF" characters="0">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmDistinctEntityFilter" />
+  </ExtendedPropertiesCollection>
+</entityFilter>

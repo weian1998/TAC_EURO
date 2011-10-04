@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="e0b25bf5-1859-48e2-9626-5f42d3df2aa3" lastModifiedUtc="2010-11-17T17:38:06.4711188Z" name="IsContractIntegrationEnabled" returnType="Boolean" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="210140a9-4848-4c95-8dd3-6b0154ba4a3d" lastModifiedUtc="2010-11-17T17:38:25.5200235Z" targetType="Sage.SalesLogix.SalesOrder.SalesOrder, Sage.SalesLogix.BusinessRules" targetMethod="IsContractIntegrationEnabled" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

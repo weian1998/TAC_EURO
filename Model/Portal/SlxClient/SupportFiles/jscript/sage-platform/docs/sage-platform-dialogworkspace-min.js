@@ -26,8 +26,8 @@ if(out.width>win.width){out.width=win.width;out.left=0;}
 return out;};Sage.DialogWorkspace.prototype.handleEvents=function(){var value=$("#"+this._stateClientId).val();var evt={};if(value)
 evt=eval("("+value+")");$("#"+this._stateClientId).val("");switch(evt.event){case"open":if(this._dialog){this._dialogInfo=evt;this._dialog.setTitle(this._dialogInfo.title);var size=this.fitToViewport({width:evt.width,height:evt.height});this._dialog.setSize(size.width,size.height);if(size.scroll)
 this._dialog.addClass("dialog-workspace-scroll");else
-this._dialog.removeClass("dialog-workspace-scroll");this._dialog.doLayout();this._dialog.show();if(evt.centerDialog)
-this._dialog.center();else
+this._dialog.removeClass("dialog-workspace-scroll");this._dialog.doLayout();this._dialog.show();if(evt.centerDialog){this._dialog.center();if(this._dialog.getPosition()[1]<0)
+this._dialog.setPosition(this._dialog.getPosition()[0],20);}else
 this._dialog.setPosition(evt.left,evt.top);}
 break;case"close":if(this._dialog){this._closedOnServerSide=true;if(this._dialog.rendered)this._dialog.hide();this._dialogInfo={};this._closedOnServerSide=false;}
 if(this.onClose){for(var i=0;i<this.onClose.length;i++){this.onClose[i]();}}

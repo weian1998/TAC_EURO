@@ -9,7 +9,7 @@
       </snippetProcessor>
     </processor>
     <processor type="Sage.Platform.Mashups.Processors.SelectProcessor, Sage.Platform.Mashups">
-      <selectProcessor name="ActivityPreSelect" location="40, 240" expanded="True" width="240" continueOnError="False" type="Append">
+      <selectProcessor name="ActivityPreSelect" location="40, 260" expanded="True" width="240" continueOnError="False" type="Append">
         <properties>
           <property id="424838df-1629-4c53-98b3-f5c63d2c9590" expression="IIF(Timeless, TimelessStart(StartDate), StartDate)" alias="Start" />
           <property id="c170031f-3620-404a-89e3-e3d739cb208f" expression="IIF(Timeless, TimelessEnd(StartDate), EndDate)" alias="End" />
@@ -32,14 +32,14 @@
       </selectProcessor>
     </processor>
     <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
-      <queryProcessor name="HistoryQuery" location="320, 40" expanded="True" width="240" continueOnError="False" query="from History h&#xD;&#xA;where h.AccountId = :AccountId&#xD;&#xA;and h.Type &lt;&gt; 262156&#xD;&#xA;order by h.CompletedDate Desc" maximumResults="800">
+      <queryProcessor name="HistoryQuery" location="320, 40" expanded="True" width="240" continueOnError="False" query="from History h&#xD;&#xA;where h.AccountId = :AccountId&#xD;&#xA;and h.Type &lt;&gt; 262156&#xD;&#xA;order by h.CompletedDate desc" maximumResults="800">
         <parameters>
           <parameter id="82b5ca7b-7b55-4a61-8ef3-e907445fbeb2" name="AccountId" expression="EntityId" />
         </parameters>
       </queryProcessor>
     </processor>
     <processor type="Sage.Platform.Mashups.Processors.SelectProcessor, Sage.Platform.Mashups">
-      <selectProcessor name="HistoryPreSelect" location="320, 240" expanded="True" width="240" continueOnError="False" type="Append">
+      <selectProcessor name="HistoryPreSelect" location="320, 260" expanded="True" width="240" continueOnError="False" type="Append">
         <properties>
           <property id="7fcabbfb-b8d4-4ca8-a03b-f4cefe24b2f1" expression="IIF(Timeless, TimelessStart(CompletedDate), AddMinutes(CompletedDate, -1*Duration))" alias="Start" />
           <property id="662f7312-406c-47a2-be38-397ac1149255" expression="IIF(Timeless, TimelessEnd(CompletedDate), CompletedDate)" alias="End" />
@@ -62,14 +62,14 @@
       </selectProcessor>
     </processor>
     <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
-      <queryProcessor name="OpportunityQuery" location="600, 40" expanded="True" width="240" continueOnError="False" query="select DateOpened, CreateDate, ActualClose, EstimatedClose, Description, Notes, Closed, Id&#xD;&#xA;from Opportunity o&#xD;&#xA;where o.Account.Id = :AccountId&#xD;&#xA;order by o.CreateDate Desc" maximumResults="800">
+      <queryProcessor name="OpportunityQuery" location="600, 40" expanded="True" width="240" continueOnError="False" query="select o.DateOpened as DateOpened, o.CreateDate as CreateDate, o.ActualClose as ActualClose,&#xD;&#xA;o.EstimatedClose as EstimatedClose, o.Description as Description, o.Notes as Notes, o.Closed as Closed, o.Id as Id&#xD;&#xA;from Opportunity o&#xD;&#xA;left join o.Account a&#xD;&#xA;where a.Id = :AccountId&#xD;&#xA;order by o.CreateDate desc" maximumResults="800">
         <parameters>
           <parameter id="510bc4ef-a874-4bc5-b812-695eb17335c4" name="AccountId" expression="EntityId" />
         </parameters>
       </queryProcessor>
     </processor>
     <processor type="Sage.Platform.Mashups.Processors.SelectProcessor, Sage.Platform.Mashups">
-      <selectProcessor name="OpportunityPreSelect" location="600, 240" expanded="True" width="240" continueOnError="False" type="Append">
+      <selectProcessor name="OpportunityPreSelect" location="600, 260" expanded="True" width="240" continueOnError="False" type="Append">
         <properties>
           <property id="7fcabbfb-b8d4-4ca8-a03b-f4cefe24b2f1" expression="Coalesce(DateOpened, CreateDate)" alias="Start" />
           <property id="662f7312-406c-47a2-be38-397ac1149255" expression="Coalesce(ActualClose, EstimatedClose)" alias="End" />
@@ -92,14 +92,14 @@
       </selectProcessor>
     </processor>
     <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
-      <queryProcessor name="TicketQuery" location="880, 40" expanded="True" width="240" continueOnError="False" query="select ReceivedDate, CompletedDate, NeededByDate, AlternateKeyPrefix, AlternateKeySuffix, Subject, Notes, StatusCode, Id&#xD;&#xA;from Ticket t&#xD;&#xA;where t.Account.Id = :AccountId&#xD;&#xA;order by t.CreateDate Desc" maximumResults="800">
+      <queryProcessor name="TicketQuery" location="880, 40" expanded="True" width="240" continueOnError="False" query="select ReceivedDate, CompletedDate, NeededByDate, AlternateKeyPrefix, AlternateKeySuffix, Subject, Notes, StatusCode, Id&#xD;&#xA;from Ticket t&#xD;&#xA;where t.Account.Id = :AccountId&#xD;&#xA;order by t.CreateDate desc" maximumResults="800">
         <parameters>
           <parameter id="2c47002a-6942-4fe8-9264-7f5573d9cf56" name="AccountId" expression="EntityId" />
         </parameters>
       </queryProcessor>
     </processor>
     <processor type="Sage.Platform.Mashups.Processors.SelectProcessor, Sage.Platform.Mashups">
-      <selectProcessor name="TicketPreSelect" location="880, 240" expanded="True" width="240" continueOnError="False" type="Append">
+      <selectProcessor name="TicketPreSelect" location="880, 260" expanded="True" width="240" continueOnError="False" type="Append">
         <properties>
           <property id="7fcabbfb-b8d4-4ca8-a03b-f4cefe24b2f1" expression="ReceivedDate" alias="Start" />
           <property id="662f7312-406c-47a2-be38-397ac1149255" expression="Coalesce(CompletedDate, NeededByDate)" alias="End" />
@@ -122,7 +122,7 @@
       </selectProcessor>
     </processor>
     <processor type="Sage.Platform.Mashups.Processors.SelectProcessor, Sage.Platform.Mashups">
-      <selectProcessor name="AllResults" location="460, 640" expanded="True" width="240" continueOnError="False" type="Append">
+      <selectProcessor name="AllResults" location="460, 620" expanded="True" width="240" continueOnError="False" type="Append">
         <properties />
       </selectProcessor>
     </processor>

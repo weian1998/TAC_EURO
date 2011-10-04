@@ -21,6 +21,7 @@
 #if($qfcontrol.StyleScheme != "")CssClass="$qfcontrol.StyleScheme" #end
 #if($IsPrintView)DisplayMode="AsText" #elseif($qfcontrol.DisplayMode != "AsControl")DisplayMode="$qfcontrol.DisplayMode" #end
 #if(!$qfcontrol.Visible)Visible="false" #end
+#if($qfcontrol.BoundFieldType == "DateTimeWithTimelessValues") BoundFieldType="DateTimeWithTimelessValues" #end
 #if($qfcontrol.HasActionCode || $qfcontrol.AutoPostBack)AutoPostBack="true" #end/>
   </div>
 #if((${qfcontrol.Caption} != "") && ($qfcontrol.ControlLabelPlacement == "right"))

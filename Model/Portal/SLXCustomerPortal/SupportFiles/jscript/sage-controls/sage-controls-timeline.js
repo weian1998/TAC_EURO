@@ -36,7 +36,12 @@ function Timeline_init(timeline_object, tab) {
             window.setTimeout(method, delay);
         }
     }
-    $(document).ready(function(){ Sage.DialogWorkspace.__instances['ctl00_DialogWorkspace'].on('open', closeTimelineBubble);});
+    $(document).ready(function () {
+        var instance = (Sage.DialogWorkspace.__instances['ctl00_DialogWorkspace']) ? Sage.DialogWorkspace.__instances['ctl00_DialogWorkspace'] : Sage.DialogWorkspace.__instances['DialogWorkspace'];
+        if (instance) {
+            instance._dialog.on('open', closeTimelineBubble);
+        }
+    });
 }
 
 function closeTimelineBubble() {

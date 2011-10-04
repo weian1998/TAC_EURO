@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<SmartPartMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="287a97df-e87c-4f72-87df-838d3d048c38">
+  <SmartPartId>NotesHistoryList</SmartPartId>
+  <ReferencedModelId>00000000-0000-0000-0000-000000000000</ReferencedModelId>
+  <SmartPart>SmartParts\History\NotesHistoryList.ascx</SmartPart>
+  <TargetWorkspace>TabControl</TargetWorkspace>
+  <ShowInMode>Detail</ShowInMode>
+  <Properties>
+    <Property Name="HelpTopic" TypeConverter="">noteshistory</Property>
+  </Properties>
+  <AllowRoles />
+</SmartPartMapping>

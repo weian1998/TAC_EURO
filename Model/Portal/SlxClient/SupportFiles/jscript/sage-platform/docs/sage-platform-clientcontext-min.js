@@ -23,7 +23,7 @@ else{return null;}},keyAt:function(index){this.load();if(_items[index])
 return _items[index].itemKey;else
 return null;},getValues:function(){var valRes=[];for(i=0;i<_items.length;i++){valRes.push(_items[i].itemVal);}
 return valRes;},save:function(hours){var data=document.getElementById(this.contextDataFieldId);if(data){data.value=this.toString();}
-else{alert("can't find context data field");}},load:function(){var data=document.getElementById(this.contextDataFieldId);if(data){if(data.value){this.fromString(data.value);}}
+else{alert("can't find context data field");}},updateFromServer:function(newContext){if(newContext){this.fromString(newContext);}},load:function(){var data=document.getElementById(this.contextDataFieldId);if(data){if(data.value){this.fromString(data.value);}}
 else{alert("can't find context data field");}},toString:function(){var str="";for(i=0;i<_items.length;i++){str+=_items[i].itemKey+"="+escape(_items[i].itemVal);if(i!==_items.length-1)
 str+="&";}
 return str;},fromString:function(qString){_items=[];if(qString!=""){var items=qString.split("&");for(i=0;i<items.length;i++){var pair=items[i].split("=");_items.push(_toItemLiteral(pair[0],unescape(pair[1])));}}

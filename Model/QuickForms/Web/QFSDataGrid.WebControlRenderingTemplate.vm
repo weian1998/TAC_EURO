@@ -1,0 +1,126 @@
+#macro(getColumnSpecificResources $col)
+#if($col.ColumnType == "Edit")
+    <SalesLogix:ResourceKeyName Key="${column.getColResourceKey("Text")}" />
+#if($col.DialogSpecs.SmartPart != "")<SalesLogix:ResourceKeyName Key="${col.DialogSpecs.ResourceKey}.DialogTitleOverride" />#end
+#end ##edit
+#end ##macro getColumnSpecificResources
+<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.ScriptResourceProvider" TagPrefix="SalesLogix" %>
+  <%--Grid style overrides for quickform configurations and textbox compatibility with IE7.--%>
+<style 
+type="text/css">     
+    .alignleft { text-align : left; }
+    .alignright { text-align : right; }
+    .aligncenter { text-align : center; }
+	.dijitTextBox { width: auto; }
+	.ISOSpace {width: 75% !important; }
+</style>
+
+#foreach($tool in $qfcontrol.Tools)
+	#if($tool.Name == "Relate")
+		$pagegenerator.parseControl($tool.LookupButton)
+	#end  ##button types
+#end ##foreach
+
+
+<SalesLogix:ScriptResourceProvider ID="${pagegenerator.FormName}${qfcontrol.ControlId}_Strings" runat="server">
+    <Keys>
+        #if($qfcontrol.EmptyTableRowText != "")<SalesLogix:ResourceKeyName Key="${qfcontrol.ControlId}.EmptyTableRowText" />#end
+##write column header strings...
+#foreach($column in $qfcontrol.Columns)
+  <SalesLogix:ResourceKeyName Key="${column.getColResourceKey("ColumnHeading")}" />
+  #if($column.TextFormatString != "")<SalesLogix:ResourceKeyName Key="${column.getColResourceKey("FormatString")}" />#end
+  #getColumnSpecificResources($column)
+#end  ##foreach column
+#foreach($tool in $qfcontrol.Tools)
+    <SalesLogix:ResourceKeyName Key="${tool.getResourceKey("ToolTip")}" />
+#end ##foreach tool
+    </Keys>
+</SalesLogix:ScriptResourceProvider>
+
+## Add currencyCodeFieldName to ClientEntityContext
+#set ($contextSet = "N")
+#set ($entityRateSet = "N")
+#set($quote = '"')
+#foreach($column in $qfcontrol.Columns)
+	#if($column.ColumnType == "Currency")
+		#if ($contextSet == "N")
+		#set ($contextSet = "Y")
+		$pagegenerator.addToFormLoadCode(" var systemInfo = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.SalesLogix.Services.ISystemOptionsService>(true);  ")
+		$pagegenerator.addToFormLoadCode(" if (systemInfo.MultiCurrency) ")
+		$pagegenerator.addToFormLoadCode(" { ")
+		$pagegenerator.addToFormLoadCode("    FormHelper.AddBaseUserCurrencyRatesToClientContext(PageWorkItem); ")
+		$pagegenerator.addToFormLoadCode(" } ")
+
+	#end
+	#if($column.ExchangeRateType == "EntityRate")
+		#if ($entityRateSet == "N")
+			#set ($entityRateSet = "Y")
+			#set ($exchangeRateCode = $pagegenerator.GetEntityRateLocFromResourcePath($qfcontrol.ParentRelationshipPropertyName, $column.CurrentCode))
+			#set ($exchangeRate = $pagegenerator.GetEntityRateLocFromResourcePath($qfcontrol.ParentRelationshipPropertyName, $column.ExchangeRate))
+			#if ($exchangeRateCode != "" && $exchangeRate != "")
+			$pagegenerator.addToFormLoadCode(" var entityRateEntity = BindingSource.Current as Sage.Entity.Interfaces.I${qfcontrol.ParentRelationshipPropertyName}; ")
+			$pagegenerator.addToFormLoadCode("	if (systemInfo.MultiCurrency && this.PageWorkItem.State[${quote}ModeId${quote}].ToString() == ${quote}Insert${quote}) ")
+			$pagegenerator.addToFormLoadCode("	//Set Entity Rate and Code on the service since there is no entity to query from. ")
+			$pagegenerator.addToFormLoadCode("	{ ")
+			$pagegenerator.addToFormLoadCode("		var ccs = PageWorkItem.Services.Get<Sage.Platform.WebPortal.Services.ClientContextService>(); ")
+			$pagegenerator.addToFormLoadCode("	if (ccs.CurrentContext.ContainsKey(${quote}EntityRateCode${quote})) ")
+			$pagegenerator.addToFormLoadCode("		{ ccs.CurrentContext[${quote}EntityRateCode${quote}].Equals(entityRateEntity.${exchangeRateCode}); } ")
+			$pagegenerator.addToFormLoadCode("	else ")
+			$pagegenerator.addToFormLoadCode("		{ ccs.CurrentContext.Add(${quote}EntityRateCode${quote}, entityRateEntity.${exchangeRateCode}); } ")
+			$pagegenerator.addToFormLoadCode("	if (ccs.CurrentContext.ContainsKey(${quote}EntityRate${quote})) ")
+			$pagegenerator.addToFormLoadCode("		{ ccs.CurrentContext[${quote}EntityRate${quote}].Equals(entityRateEntity.${exchangeRate}); } ")
+			$pagegenerator.addToFormLoadCode("	else ")
+			$pagegenerator.addToFormLoadCode("		{ ccs.CurrentContext.Add(${quote}EntityRate${quote}, entityRateEntity.${exchangeRate}.ToString()); } ")
+			$pagegenerator.addToFormLoadCode("	} ")
+			#end
+		#end
+		#end
+	#end
+#end ##foreach
+
+## Insert support for items. Also for default items, i.e. Create Sales Order from Opportunities 
+#if ($qfcontrol.FeedCategory == "InternalAppEntities" && ${qfcontrol.ChildRelationshipPropertyName} != "" )
+#set( $childEntityName =  $generator.GetEntityNameFromSDataPath(${qfcontrol.ResourceKind.Name}) )
+$pagegenerator.addToFormLoadCode(" var entity = BindingSource.Current as Sage.Entity.Interfaces.I${qfcontrol.ParentRelationshipPropertyName}; ")
+$pagegenerator.addToFormLoadCode(" if (this.PageWorkItem.State[${quote}ModeId${quote}].ToString() == ${quote}Insert${quote}) ")
+$pagegenerator.addToFormLoadCode(" { ")
+$pagegenerator.addToFormLoadCode(" var feed = new Sage.Integration.Entity.Feeds.${childEntityName}Feed(); ")
+$pagegenerator.addToFormLoadCode(" if (entity != null) ")
+$pagegenerator.addToFormLoadCode("      if (entity.${qfcontrol.RelateToPropertyName}.Count > 0) ")
+$pagegenerator.addToFormLoadCode("      { ")
+$pagegenerator.addToFormLoadCode("			var include = Sage.Common.Syndication.InclusionNode.CreateInclusionTree(${quote}${qfcontrol.ChildRelationshipPropertyName}${quote}, null, null, null); ")
+$pagegenerator.addToFormLoadCode("          var transformer = ")
+$pagegenerator.addToFormLoadCode("              Sage.Platform.Application.ApplicationContext.Current.Services.Get ")
+$pagegenerator.addToFormLoadCode("                  <Sage.Platform.SData.IAtomEntryToEntityTransformationService>(); ")
+$pagegenerator.addToFormLoadCode("          foreach (Sage.Entity.Interfaces.I${childEntityName} item in entity.${qfcontrol.RelateToPropertyName}) ")
+$pagegenerator.addToFormLoadCode("          { ")
+$pagegenerator.addToFormLoadCode("              var transItem = transformer.ConvertEntity(item, include) as Sage.Integration.Entity.Feeds.${childEntityName}Entry; ")
+$pagegenerator.addToFormLoadCode("              if (transItem != null) ")
+$pagegenerator.addToFormLoadCode("              { ")
+$pagegenerator.addToFormLoadCode("                  feed.Entries.Add(transItem); ")
+$pagegenerator.addToFormLoadCode("              } ")
+$pagegenerator.addToFormLoadCode("          } ")
+$pagegenerator.addToFormLoadCode("          string text; ")
+$pagegenerator.addToFormLoadCode("          using (var stream = new System.IO.MemoryStream()) ")
+$pagegenerator.addToFormLoadCode("          { ")
+$pagegenerator.addToFormLoadCode("          	          	new Sage.Common.Syndication.JsonSerializer().SaveToStream((Sage.Common.Syndication.IFeed)feed, stream, null, include); ")
+$pagegenerator.addToFormLoadCode("          	text = Encoding.UTF8.GetString(stream.ToArray()); ")
+$pagegenerator.addToFormLoadCode("          } ")
+$pagegenerator.addToFormLoadCode("          ${pagegenerator.FormName}${qfcontrol.ControlId}_DataCarrier.Text = text; ")
+$pagegenerator.addToFormLoadCode("          entity.${qfcontrol.RelateToPropertyName}.Clear(); ")
+$pagegenerator.addToFormLoadCode("      } ")
+$pagegenerator.addToFormLoadCode(" } ")
+<div style="display:none;">
+  <asp:TextBox runat="server" ID="${pagegenerator.FormName}${qfcontrol.ControlId}_DataCarrier" class="${pagegenerator.FormName}${qfcontrol.ControlId}_DataCarrier" ></asp:TextBox>
+</div>
+#end
+##
+  #if ($qfcontrol.Caption != "")
+    <div class="mainContentHeader" style="text-align:${qfcontrol.CaptionAlignment};#if($qfcontrol.Visible == "False")visibility:hidden;#end "><asp:Label ID="${pagegenerator.FormName}${qfcontrol.ControlId}_lbl" runat="server" Text="<%$ resources: ${qfcontrol.ControlId}.Caption %>" ></asp:Label></div>
+	#end
+## Editable Grid container
+<div id="${pagegenerator.FormName}${qfcontrol.ControlId}" style="width:100%;#if($qfcontrol.Visible == "False")visibility:hidden;#end" class="${qfcontrol.StyleScheme}">
+    <div id="${pagegenerator.FormName}${qfcontrol.ControlId}_Grid" style="width:100%;height:25px;"></div>
+</div>
+
+

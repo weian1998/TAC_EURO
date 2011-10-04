@@ -107,6 +107,7 @@ public partial class SmartParts_AddressList : EntityBoundSmartPartInfoProvider
             DialogService.SetSpecs(200, 200, 318, 600, "AddEditAddress", "", true);
             DialogService.EntityType = typeof(IAddress);
             DialogService.ShowDialog();
+            LoadGrid();
         }
     }
 

@@ -547,20 +547,15 @@ public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInf
     private static void LoadPicklistItems(String picklistName, DropDownList list)
     {
         list.Items.Clear();
-        string picklistId = PickList.PickListIdFromName(picklistName);
-        if (!String.IsNullOrEmpty(picklistId))
+        IList<PickList> items = PickList.GetPickListItemsByName(picklistName, true);
+        if (items != null)
         {
-            IList<PickList> items = PickList.GetPickListItems(picklistId, true);
-            if (items != null)
+            foreach (PickList picklistItem in items)
             {
-                ListItem item;
-                foreach (PickList picklistItem in items)
-                {
-                    item = new ListItem();
-                    item.Text = picklistItem.Text;
-                    item.Value = picklistItem.Text;
-                    list.Items.Add(item);
-                }
+                var item = new ListItem();
+                item.Text = picklistItem.Text;
+                item.Value = picklistItem.Text;
+                list.Items.Add(item);
             }
         }
     }

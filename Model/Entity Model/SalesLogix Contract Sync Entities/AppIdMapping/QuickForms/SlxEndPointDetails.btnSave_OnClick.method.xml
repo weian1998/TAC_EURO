@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="f13e3999-5f94-4b07-ad95-e9925cc4acb3" lastModifiedUtc="2011-04-07T23:24:41.6088907Z" name="btnSave_OnClick" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="SlxEndPointDetails">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="32f4d6ea-be4e-45c3-b3ac-627f596a1b33" paramName="form" sequence="0" paramType="ISlxEndPointDetails" />
+    <OrmEntityMethodParam id="77b00782-6014-49e3-8e4f-32dd8d237ebf" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="7b9d5984-0a50-4b88-8080-23cc8adebbd0" lastModifiedUtc="2011-04-07T23:24:31.8698907Z" targetType="Sage.BusinessRules.CodeSnippets.SlxEndPointDetailsEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="btnSave_OnClickStep" active="true" codeSnippetId="9cf68f6b-e657-4280-a31d-609fb82ddd37">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

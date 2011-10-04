@@ -22,7 +22,7 @@ Sage.Analytics.DashboardWidget = Ext.extend(Ext.util.Observable, {
         var that = this;
         $.ajax({
             type: "GET",
-            url: "DashboardService.asmx/GetWidgetByName",
+            url: "slxdata.ashx/slx/crm/-/dashboard/widget",
             data: { name: this.config.name,
                 family: this.config.family
             },

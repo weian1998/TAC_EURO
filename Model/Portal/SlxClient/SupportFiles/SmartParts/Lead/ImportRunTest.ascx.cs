@@ -1,30 +1,17 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Collections.Generic;
-using System.Web;
-using System.Web.Security;
+using System.Text;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
-using Sage.Platform.Application.UI;
-using Sage.Platform.WebPortal.SmartParts;
 using Sage.Entity.Interfaces;
+using Sage.Platform.Application;
+using Sage.Platform.Application.UI;
+using Sage.Platform.Application.UI.Web.Threading;
+using Sage.Platform.Orm;
+using Sage.Platform.WebPortal.SmartParts;
 using Sage.SalesLogix.Services.Import;
 using Telerik.WebControls;
-using System.Text;
-using Sage.Platform.Orm;
-using Sage.Platform.Application.UI.Web.Threading;
-using System.Threading;
-using Sage.Platform.Application;
 
 public partial class ImportRunTest : EntityBoundSmartPartInfoProvider
 {
-    //private ImportProgressArgs _testResults = null;
-    private IContextService _Context;
-
     #region Public Methods
 
     /// <summary>
@@ -44,7 +31,7 @@ public partial class ImportRunTest : EntityBoundSmartPartInfoProvider
     public override ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
     {
         ToolsSmartPartInfo tinfo = new ToolsSmartPartInfo();
-        foreach (Control c in this.ImportRunTest_RTools.Controls)
+        foreach (Control c in ImportRunTest_RTools.Controls)
         {
             tinfo.RightTools.Add(c);
         }
@@ -57,17 +44,7 @@ public partial class ImportRunTest : EntityBoundSmartPartInfoProvider
     /// <value>The entity context.</value>
     /// <returns>The specified <see cref="T:System.Web.HttpContext"></see> object associated with the current request.</returns>
     [ServiceDependency]
-    public IContextService ContextService
-    {
-        set
-        {
-            _Context = ApplicationContext.Current.Services.Get<IContextService>();
-        }
-        get
-        {
-            return _Context;
-        }
-    }
+    public IContextService ContextService { get; set; }
 
     #endregion
 
@@ -94,7 +71,6 @@ public partial class ImportRunTest : EntityBoundSmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void Page_Init(object sender, EventArgs e)
     {
-        
     }
 
     /// <summary>
@@ -112,10 +88,10 @@ public partial class ImportRunTest : EntityBoundSmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected override void OnPreRender(EventArgs e)
     {
-        
         IntRegisterClientSctipts();
         Loadview();
     }
+
     /// <summary>
     /// Ints the register client sctipts.
     /// </summary>
@@ -131,7 +107,6 @@ public partial class ImportRunTest : EntityBoundSmartPartInfoProvider
             ScriptManager.RegisterStartupScript(Page, typeof(Page), "ImportRunTest_ClientScript", sb.ToString(), false);
     }
 
-
     /// <summary>
     /// Handles the Load event of the Page control.
     /// </summary>
@@ -139,7 +114,6 @@ public partial class ImportRunTest : EntityBoundSmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void Page_Load(object sender, EventArgs e)
     {
-        
     }
 
     /// <summary>
@@ -148,8 +122,6 @@ public partial class ImportRunTest : EntityBoundSmartPartInfoProvider
     protected override void OnFormBound()
     {
         base.OnFormBound();
-        
-        
     }
 
     /// <summary>
@@ -157,7 +129,7 @@ public partial class ImportRunTest : EntityBoundSmartPartInfoProvider
     /// </summary>
     private void Loadview()
     {
-        if (this.Page.IsPostBack)
+        if (Page.IsPostBack)
         {
             if (DialogService.DialogParameters.Count > 0 && (DialogService.DialogParameters.ContainsKey("startTest")))
             {
@@ -170,23 +142,18 @@ public partial class ImportRunTest : EntityBoundSmartPartInfoProvider
             else
             {
                 hdStartTest.Value = "false";
-                
             }
-            if(hdCompetedTest.Value == "true")
+            if (hdCompetedTest.Value == "true")
             {
-               LoadResults();
-               pnlProgressArea.Visible = false; 
+                LoadResults();
+                pnlProgressArea.Visible = false;
             }
             else
             {
-                ClearResults();                 
+                ClearResults();
             }
-
-           
         }
-    
     }
-
 
     /// <summary>
     /// Handles the OnClick event of the StartProcess control.
@@ -195,10 +162,9 @@ public partial class ImportRunTest : EntityBoundSmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void StartImportTest_OnClick(object sender, EventArgs e)
     {
-        
         using (new SessionScopeWrapper(true))
         {
-            ThreadPoolHelper.QueueTask(new WaitCallback(StartTestImport));
+            ThreadPoolHelper.QueueTask(StartTestImport);
         }
     }
 
@@ -233,13 +199,12 @@ public partial class ImportRunTest : EntityBoundSmartPartInfoProvider
     /// <param name="args">The args.</param>
     private void ImportHandler(ImportProgressArgs args)
     {
-
         //ImportManager importManager = Page.Session["testimportManager"] as ImportManager;
         TestResultsInfo testResultInfo = GetTestResultInfo();
         RadProgressContext importProgress = RadProgressContext.Current;
         importProgress["PrimaryPercent"] = Convert.ToString(Math.Round(Decimal.Divide(args.ProcessedCount, args.RecordCount) * 100));
-        importProgress["PrimaryValue"] = String.Format("({0})", args.ProcessedCount.ToString());
-        importProgress["PrimaryTotal"] = String.Format("({0})", args.RecordCount.ToString());
+        importProgress["PrimaryValue"] = String.Format("({0})", args.ProcessedCount);
+        importProgress["PrimaryTotal"] = String.Format("({0})", args.RecordCount);
         //importProgress["SecondaryTotal"] = String.Format("{0}   Duplicates:{1}", args.ErrorCount, args.DuplicateCount);
         importProgress["ProcessCompleted"] = "False";
         testResultInfo.TotalRecords = args.RecordCount.ToString();
@@ -254,14 +219,13 @@ public partial class ImportRunTest : EntityBoundSmartPartInfoProvider
             {
                 testResultInfo.ProjectedDuplicateRate = string.Format("{0:P}", 0);
             }
-            else 
+            else
             {
                 testResultInfo.ProjectedDuplicateRate = string.Format("{0:P}", Decimal.Divide(args.DuplicateCount, args.RecordCount));
             }
-           
         }
         catch (Exception)
-        { 
+        {
         }
         SaveTestResultInfo(testResultInfo);
         LoadResults();
@@ -291,7 +255,7 @@ public partial class ImportRunTest : EntityBoundSmartPartInfoProvider
     {
         txtTotalRecordsProcessed.Text = GetLocalResourceObject("MSG.Calculating").ToString();
         txtTotalDuplicates.Text = GetLocalResourceObject("MSG.Calculating").ToString();
-        txtProjectedDuplicates.Text = GetLocalResourceObject("MSG.Calculating").ToString();    
+        txtProjectedDuplicates.Text = GetLocalResourceObject("MSG.Calculating").ToString();
     }
 
     /// <summary>
@@ -331,21 +295,18 @@ public partial class ImportRunTest : EntityBoundSmartPartInfoProvider
 
     private TestResultsInfo GetTestResultInfo()
     {
-       TestResultsInfo testInfo = ContextService.GetContext("TestResultsInfo") as TestResultsInfo;
-       if (testInfo == null)
-       {
-           testInfo = new TestResultsInfo();
-                   
-       }
-       return testInfo;
-
+        TestResultsInfo testInfo = ContextService.GetContext("TestResultsInfo") as TestResultsInfo;
+        if (testInfo == null)
+        {
+            testInfo = new TestResultsInfo();
+        }
+        return testInfo;
     }
-    private void SaveTestResultInfo(TestResultsInfo  testResultInfo)
+
+    private void SaveTestResultInfo(TestResultsInfo testResultInfo)
     {
         ContextService.SetContext("TestResultsInfo", testResultInfo);
     }
-
-    
 }
 
 public class TestResultsInfo

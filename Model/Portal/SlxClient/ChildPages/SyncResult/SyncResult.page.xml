@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<PortalPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="1af4653a-9e99-4160-8a8e-f3161a3809c1">
+  <PageAlias>SyncResult</PageAlias>
+  <SmallImage>[Localization!Global_Images:sync_results_16x16]</SmallImage>
+  <LargeImage>[Localization!Global_Images:sync_results_24x24]</LargeImage>
+  <TemplateUrl>Masters\base.master</TemplateUrl>
+  <InheritTemplate>false</InheritTemplate>
+  <InheritsFrom>Sage.Platform.WebPortal.EntityPage, Sage.Platform.WebPortal</InheritsFrom>
+  <Properties>
+    <Property Name="EntityTypeName" TypeConverter="">Sage.Entity.Interfaces.ISyncResult, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</Property>
+  </Properties>
+  <TemplateProperties />
+  <IsDefaultPage>false</IsDefaultPage>
+  <ExcludedGlobalModules />
+  <AppliedSecurity />
+</PortalPage>

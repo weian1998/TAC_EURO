@@ -60,10 +60,10 @@ public partial class SmartParts_Lead_LeadResponses : EntityBoundSmartPartInfoPro
         ILead lead = EntityFactory.GetRepository<ILead>().Get(EntityContext.EntityID);
         if (lead != null)
         {
-            IList<ITargetResponse> responses = EntityFactory.GetRepository<ITargetResponse>().FindByProperty("Lead.Id", lead.Id);
-            grdLeadResponses.DataSource = responses;
-            grdLeadResponses.DataBind();
-        }
+        IList<ITargetResponse> responses = EntityFactory.GetRepository<ITargetResponse>().FindByProperty("Lead.Id", lead.Id);
+        grdLeadResponses.DataSource = responses;
+        grdLeadResponses.DataBind();
+    }
     }
 
     /// <summary>

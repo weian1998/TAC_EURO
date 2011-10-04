@@ -82,7 +82,7 @@
 
 .leadConvertSection
 {
-	padding: 10px 10px 10px 10px;
+	padding: 3px 3px 3px 3px;
 }
 
 .leadConvertSection .formtable 
@@ -92,7 +92,7 @@
 
 .resultTableContainer
 {
-	padding: 0 10px 0 10px;
+	padding: 0 3px 0 3px;
 }
 
 .resultArea
@@ -108,7 +108,7 @@
    padding-right:10px; 
    */
    overflow:auto; 
-   height:300px; 
+   height:210px; 
    /* width:95%; */
 }
 
@@ -128,7 +128,7 @@
    margin-right:20px;
    */
    overflow:auto;  
-   height:625px; 
+   height:470px; 
          
 }
 
@@ -220,7 +220,6 @@
     </table>
     </div>
     </div>
-    
     <div class="leadConvertSection">
     <div id="tabStripArea">
         <asp:Panel id="tabFilters" runat="server" CssClass="activeTab">

@@ -14,6 +14,7 @@
   <file name="jscript\timeobjs.js" path="" />
   <file name="jscript\timezone.js" path="" />
   <file name="jscript\XMLSupport.js" path="" />
+  <file name="sage-common\sharedtasks.js" path="" />
   <target name="Sage common" file="sage-common\sage-common.js" debug="True" shorthand="False" shorthand-list="YAHOO.util.Dom.setStyle&#xD;&#xA;YAHOO.util.Dom.getStyle&#xD;&#xA;YAHOO.util.Dom.getRegion&#xD;&#xA;YAHOO.util.Dom.getViewportHeight&#xD;&#xA;YAHOO.util.Dom.getViewportWidth&#xD;&#xA;YAHOO.util.Dom.get&#xD;&#xA;YAHOO.util.Dom.getXY&#xD;&#xA;YAHOO.util.Dom.setXY&#xD;&#xA;YAHOO.util.CustomEvent&#xD;&#xA;YAHOO.util.Event.addListener&#xD;&#xA;YAHOO.util.Event.getEvent&#xD;&#xA;YAHOO.util.Event.getTarget&#xD;&#xA;YAHOO.util.Event.preventDefault&#xD;&#xA;YAHOO.util.Event.stopEvent&#xD;&#xA;YAHOO.util.Event.stopPropagation&#xD;&#xA;YAHOO.util.Event.stopEvent&#xD;&#xA;YAHOO.util.Anim&#xD;&#xA;YAHOO.util.Motion&#xD;&#xA;YAHOO.util.Connect.asyncRequest&#xD;&#xA;YAHOO.util.Connect.setForm&#xD;&#xA;YAHOO.util.Dom&#xD;&#xA;YAHOO.util.Event">
     <include name="sage-common\cookiesobj.js" />
     <include name="sage-common\FormViewPort.js" />
@@ -29,6 +30,7 @@
     <include name="sage-common\Attachments.js" />
     <include name="XMLSupport.js" />
     <include name="sage-common\SimpleXmlReader.js" />
+    <include name="sage-common\sharedtasks.js" />
   </target>
   <directory name="" />
   <file name="sage-common\baselayout.js" path="sage-common" />

@@ -105,7 +105,7 @@ public partial class SmartParts_Ticket_SendTicketEmail : EntityBoundSmartPartInf
         string ticketStatus = String.Empty;
         if (!String.IsNullOrEmpty(ticket.StatusCode))
         {
-            PickList picklist = PickList.GetPickListByItemId(ticket.StatusCode);
+            PickList picklist = PickList.GetPickListById(ticket.StatusCode);
             if (picklist != null)
                 ticketStatus = picklist.Text;
         }

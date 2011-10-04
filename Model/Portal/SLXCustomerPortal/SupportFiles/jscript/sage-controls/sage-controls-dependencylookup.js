@@ -150,7 +150,7 @@ dependControl = function (baseId, listId, textId, type, displayProperty, seedPro
 };
 
 dependControl.prototype.LoadList = function (seedValue) {
-    var vURL = "SLXDependencyHandler.aspx?cacheid=" + this.BaseId + "&type=" + this.Type + "&displayprop=" + this.DisplayProperty + "&seeds=" + seedValue + "&currentval=" + this.CurrentValue;
+    var vURL = "SLXDependencyHandler.aspx?cacheid=" + this.BaseId + "&type=" + this.Type + "&displayprop=" + this.DisplayProperty + "&seeds=" + encodeURIComponent(seedValue) + "&currentval=" + encodeURIComponent(this.CurrentValue);
     Ext.Ajax.request({
         url: vURL,
         callback: this.HandleHttpResponse,

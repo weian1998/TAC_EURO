@@ -173,7 +173,7 @@ public partial class SmartParts_OpportunitySalesProcess_SalesProcess : EntityBou
         spCtrlIDs.accountManagerIdCtrlId = accountManagerId.ClientID;
         spCtrlIDs.currentUserIdCtrlId = currentUserId.ClientID;
 
-        string script = string.Format("var spCtrlIDs = {0};", JavaScriptConvert.SerializeObject(spCtrlIDs));
+        string script = string.Format("var spCtrlIDs = {0};", JsonConvert.SerializeObject(spCtrlIDs));
         ScriptManager.RegisterStartupScript(Page, GetType(), "OppSPCtrlIDs", script, true);
 
         //string jvScript = "<script src='SmartParts/OpportunitySalesProcess/OpportunitySalesProcess_ClientScript.js' type='text/javascript'></script>";

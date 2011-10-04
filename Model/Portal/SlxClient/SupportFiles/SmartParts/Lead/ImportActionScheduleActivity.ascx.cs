@@ -247,7 +247,8 @@ public partial class ImportActionScheduleActivity : EntityBoundSmartPartInfoProv
         Action.Activity.Rollover = chkRollover.Checked;
         try
         {
-           Action.Activity.StartDate = (DateTime)dtpStartDate.DateTimeValue;
+            dtpStartDate.Timeless = chkTimeless.Checked;
+            Action.Activity.StartDate = (DateTime)dtpStartDate.DateTimeValue;
         }
         catch(Exception)
         {

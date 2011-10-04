@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="1d8aad60-021f-4be0-843f-5ceac9548f27" lastModifiedUtc="2010-01-25T20:15:23.3010531Z" name="SalesLogix Contract Sync Entities">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmPackage">
+      <extender guid="77e6083e-e756-4ab9-a116-8db03cdc593f">
+        <OrmPackageMetadataExtension>
+          <DefaultNamespace>Sage.SalesLogix.ContractSync.Entities</DefaultNamespace>
+          <AssemblyName>Sage.SalesLogix.ContractSync.Entities</AssemblyName>
+          <InterfaceProjectGuid>de2ba884-77fd-4d13-b2b0-d424dd84dd60</InterfaceProjectGuid>
+          <PersistenceProjectGuid>35ede813-32a8-4cce-8d77-0cd9fb9369b3</PersistenceProjectGuid>
+        </OrmPackageMetadataExtension>
+      </extender>
+    </extendee>
+  </ExtendedPropertiesCollection>
+  <defaultInterfaceTemplateId>5e8b7df7-0ec3-46b3-b8f4-f7bde7d5a6a3</defaultInterfaceTemplateId>
+  <defaultClassTemplateId>4040a9aa-f9bf-4204-83d8-d5eb4da3e475</defaultClassTemplateId>
+  <defaultMappingTemplateId>b9ab7051-97ec-4b2d-9932-77ac29099ac7</defaultMappingTemplateId>
+  <defaultResxTemplateId>99be1b14-a8f6-4b61-8d33-b5f7592b011b</defaultResxTemplateId>
+  <defaultResxClassTemplateId>7067c649-cd9a-4498-9e87-c5851ae8a8b3</defaultResxClassTemplateId>
+</package>

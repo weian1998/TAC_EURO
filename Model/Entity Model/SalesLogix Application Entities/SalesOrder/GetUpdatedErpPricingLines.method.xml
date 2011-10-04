@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="f2763781-b6eb-4c3a-9c05-d27f7f99b0cb" lastModifiedUtc="2010-06-28T20:53:01.3046846Z" name="GetUpdatedErpPricingLines" returnType="IList&lt;ComponentView&gt;" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="5bc4db2c-eda3-4ff7-8cf4-bf798c287c55" lastModifiedUtc="2010-06-28T20:55:04.3876846Z" targetType="Sage.SalesLogix.SalesOrder.SalesOrder, Sage.SalesLogix.BusinessRules" targetMethod="GetUpdatedErpPricingLines" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

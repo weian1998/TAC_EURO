@@ -69,6 +69,16 @@ public partial class SmartParts_Activity_CompleteActivityCommandController : Ent
         };
     }
 
+    protected override void OnLoad(EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            // clean old temporary attachments
+            ClearTempAttachments();
+        }
+        base.OnLoad(e);
+    }
+
     protected override void OnFormBound()
     {
         // TODO: Need to research and fix the cause of the double post back that attempts to fire a second 
@@ -172,12 +182,20 @@ public partial class SmartParts_Activity_CompleteActivityCommandController : Ent
         RadioButton rbCon = FindCompActControl("rbContact") as RadioButton;
         if (rbCon != null)
             useCon = rbCon.Checked;
+
         DateTimePicker dtpScheduled = FindCompActControl("Scheduled") as DateTimePicker;
         if (dtpScheduled != null)
         {
             if (dtpScheduled.DateTimeValue.HasValue)
             {
-                compdt = dtpScheduled.DateTimeValue.Value.AddMinutes(Activity.Duration);
+                if (Activity.Timeless)
+                {
+                    compdt = dtpScheduled.DateTimeValue.Value.Date.AddSeconds(5);
+                }
+                else
+                {                    
+                    compdt = dtpScheduled.DateTimeValue.Value.AddMinutes(Activity.Duration);
+                }
             }
         }
         CompleteActivity(compdt, useCon);
@@ -197,6 +215,7 @@ public partial class SmartParts_Activity_CompleteActivityCommandController : Ent
         return null;
     }
 
+
     protected void CompleteNow_ClickAction(object sender, EventArgs e)
     {
         DateTime _now = DateTime.UtcNow;
@@ -204,11 +223,14 @@ public partial class SmartParts_Activity_CompleteActivityCommandController : Ent
 
         RadioButton rbCon = FindCompActControl("rbContact") as RadioButton;
         if (rbCon != null)
+        {
             useCon = rbCon.Checked;
+        }
         DateTimePicker dtpCompleted = FindCompActControl("Completed") as DateTimePicker;
         if (dtpCompleted != null)
+        {
             _now = dtpCompleted.DateTimeValue ?? _now;
-
+        }
         CompleteActivity(_now, useCon);
 
         CloseParentDialog(true);
@@ -276,8 +298,6 @@ public partial class SmartParts_Activity_CompleteActivityCommandController : Ent
 
     private void UpdateTempAttachments(IHistory history)
     {
-        if (!Form.IsInsert) return;
-
         WorkItem workItem = PageWorkItem;
         if (workItem == null) return;
 
@@ -292,12 +312,37 @@ public partial class SmartParts_Activity_CompleteActivityCommandController : Ent
             foreach (IAttachment attachment in attachments)
             {
                 attachment.HistoryId = history.Id.ToString();
+                attachment.ActivityId = history.ActivityId;
+                attachment.AccountId = history.AccountId;
+                attachment.ContactId = history.ContactId;
                 attachment.Save();
                 /* Move the attachment from the \Attachment\_temporary path to the \Attachment path. */
                 Rules.MoveTempAttachment(attachment);
             }
         }
         workItem.State.Remove("TempAssociationID");
+    }
+
+    private void ClearTempAttachments()
+    {
+        /* Update any attachment records that were created in Insert mode, but not as part of the carry over. */
+        WorkItem workItem = PageWorkItem;
+        if (workItem == null) return;
+
+        object oStrTempAssociationID = workItem.State["TempAssociationID"] ?? ApplicationContext.Current.Services.Get<IUserService>(true).UserId;
+        if (oStrTempAssociationID != null)
+        {
+            string strTempAssociationID = oStrTempAssociationID.ToString();
+            IList<IAttachment> attachments = Rules.GetAttachmentsFor(EntityContext.EntityType, strTempAssociationID);
+            if (attachments != null)
+            {
+                foreach (IAttachment attach in attachments)
+                {
+                    attach.Delete();
+                }
+            }
+            workItem.State.Remove("TempAssociationID");
+        }
     }
 
     private void LinkToNextDialog(IHistory hist)
@@ -359,6 +404,7 @@ public partial class SmartParts_Activity_CompleteActivityCommandController : Ent
         args.Add("oid", hist.OpportunityId);
         args.Add("tid", hist.TicketId);
         args.Add("lid", hist.LeadId);
+        args.Add("leadname", hist.LeadName);
         args.Add("description", hist.Description);
 
         // if we're in batch mode (multiple complete from ActivityReminders)

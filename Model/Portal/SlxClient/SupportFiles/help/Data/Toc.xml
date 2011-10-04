@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<CatapultToc Version="1" DescendantCount="208">
+<CatapultToc Version="1" DescendantCount="213">
     <!-- saved from url=(0014)about:internet -->
     <TocEntry Title="Introducing SalesLogix" Link="/Content/Common/slxoverview.htm" ComputedResetPageLayout="true" ComputedFirstTopic="true" DescendantCount="8">
         <TocEntry Title="Introducing Sage SalesLogix" Link="/Content/Common/slxoverview.htm" ComputedResetPageLayout="true" ComputedFirstTopic="true" DescendantCount="0" />
@@ -19,8 +19,7 @@
         <TocEntry Title="Related Documentation" Link="/Content/Common/relateddocs.htm" ComputedFirstTopic="false" DescendantCount="0" />
         <TocEntry Title="Sage SalesLogix Web Workspace " Link="/Content/Getting Started/webbuttons.htm" ComputedFirstTopic="false" DescendantCount="0" />
     </TocEntry>
-    <TocEntry Title="Administration" conditions="Output.WebClient" ComputedFirstTopic="false" DescendantCount="29">
-        <TocEntry Title="Integration" Link="/../../../Augusta/IntegrationContract Output/Output/IntegrationContract/Integration.mcwebhelp" ReplaceMergeNode="false" StartSection="false" StartChapter="false" VolumeNumberReset="same" SectionNumberReset="continue" ChapterNumberReset="continue" AbsoluteLink="file:///G:/Documentation/SalesLogix/SLX Web Client Online Help/Augusta/IntegrationContract Output/Output/IntegrationContract/Integration.mcwebhelp" MergeHint="0" ComputedFirstTopic="false" DescendantCount="0" />
+    <TocEntry Title="Administration" conditions="Output.WebClient" ComputedFirstTopic="false" DescendantCount="34">
         <TocEntry Title="Manage Resources and Qualifications" ComputedFirstTopic="false" DescendantCount="4">
             <TocEntry Title="Adding a Resource to a List" Link="/Content/Resource Mgt/resourcelistmanage.htm" ComputedFirstTopic="false" DescendantCount="0" />
             <TocEntry Title="Using the Resource Detail View" Link="/Content/Resource Mgt/resourcedetailview.htm" ComputedFirstTopic="false" DescendantCount="0" />
@@ -59,6 +58,12 @@
             <TocEntry Title="What are Roles and Secured Actions?" Link="/Content/Admin_security/What_are_Roles_and_Secured_Actions.htm" ComputedFirstTopic="false" DescendantCount="0" />
             <TocEntry Title="Creating a Role" Link="/Content/Admin_security/Creating_a_Role.htm" ComputedFirstTopic="false" DescendantCount="0" />
         </TocEntry>
+        <TocEntry Title="Accounting Integration" Link="/Content/Integration Contract/Using_Sage_SalesLogix_Integration.htm" ReplaceMergeNode="false" StartSection="false" StartChapter="false" VolumeNumberReset="same" SectionNumberReset="continue" ChapterNumberReset="continue" ComputedFirstTopic="false" DescendantCount="3">
+            <TocEntry Title="Configuring Accounting Integration" Link="/Content/Integration Contract/Accounting_Integration_Detail_View.htm" ComputedFirstTopic="false" DescendantCount="0" />
+            <TocEntry Title="Linking Records with your Accounting System" Link="/Content/Integration Contract/Linking_Records.htm" ComputedFirstTopic="false" DescendantCount="0" />
+            <TocEntry Title="Submitting a Sales Order" Link="/Content/Integration Contract/Submitting_a_Sales_Order.htm" ComputedFirstTopic="false" DescendantCount="0" />
+        </TocEntry>
+        <TocEntry Title="Checking for Duplicates" Link="/Content/Manage/DedupWizard.htm" ComputedFirstTopic="false" DescendantCount="0" />
     </TocEntry>
     <TocEntry Title="Contacts" Link="/Content/Contacts/contactoverview.htm" ComputedFirstTopic="false" DescendantCount="7">
         <TocEntry Title="What Are Contacts?" Link="/Content/Contacts/contactoverview.htm" ComputedFirstTopic="false" DescendantCount="0" />
@@ -197,15 +202,15 @@
             <TocEntry Title="Adding/Editing/Completing Campaign Tasks" Link="/Content/Campaigns/campaignaddeditcomptasks.htm" ComputedFirstTopic="false" DescendantCount="0" />
         </TocEntry>
     </TocEntry>
-    <TocEntry Title="Mail Merge" Link="/Content/Mail Merge/usemailmerge.htm" ComputedFirstTopic="false" DescendantCount="8">
-        <TocEntry Title="Using Mail Merge" Link="/Content/Mail Merge/usemailmerge.htm" ComputedFirstTopic="false" DescendantCount="0" />
-        <TocEntry Title="Templates Overview" Link="/Content/Mail Merge/templatesoverview.htm" ComputedFirstTopic="false" DescendantCount="0" />
-        <TocEntry Title="About the Write Menu" Link="/Content/Mail Merge/mergeinfo.htm" ComputedFirstTopic="false" DescendantCount="0" />
-        <TocEntry Title="Writing and Sending an E-mail Message" Link="/Content/Mail Merge/writeemail.htm" ComputedFirstTopic="false" DescendantCount="0" />
-        <TocEntry Title="Writing and Sending a Fax Message" Link="/Content/Mail Merge/writefax.htm" ComputedFirstTopic="false" DescendantCount="0" />
-        <TocEntry Title="Writing and Sending a Letter" Link="/Content/Mail Merge/writeletter.htm" ComputedFirstTopic="false" DescendantCount="0" />
-        <TocEntry Title="Printing Address Labels or Envelopes" Link="/Content/Mail Merge/printlabels.htm" ComputedFirstTopic="false" DescendantCount="0" />
-        <TocEntry Title="Viewing Invalid or Failed Merge Information" Link="/Content/Mail Merge/failedmerge.htm" ComputedFirstTopic="false" DescendantCount="0" />
+    <TocEntry Title="Mail Merge" Link="/Content/Mail_Merge/Using_Mail_Merge.htm" ComputedFirstTopic="false" DescendantCount="8">
+        <TocEntry Title="Using Mail Merge" Link="/Content/Mail_Merge/Using_Mail_Merge.htm" ComputedFirstTopic="false" DescendantCount="0" />
+        <TocEntry Title="Templates Overview" Link="/Content/Templates/Templates_Overview.htm" ComputedFirstTopic="false" DescendantCount="0" />
+        <TocEntry Title="About the Write Menu" Link="/Content/Mail_Merge/About_the_Write_Menu.htm" ComputedFirstTopic="false" DescendantCount="0" />
+        <TocEntry Title="Writing and Sending an E-mail Message" Link="/Content/Mail_Merge/Writing_and_Sending_an_E-mail_Message.htm" ComputedFirstTopic="false" DescendantCount="0" />
+        <TocEntry Title="Writing and Sending a Fax Message" Link="/Content/Mail_Merge/Writing_and_Sending_a_Fax_Message.htm" ComputedFirstTopic="false" DescendantCount="0" />
+        <TocEntry Title="Writing and Sending a Letter" Link="/Content/Mail_Merge/Writing_a_Letter.htm" ComputedFirstTopic="false" DescendantCount="0" />
+        <TocEntry Title="Printing Address Labels or Envelopes" Link="/Content/Mail_Merge/Printing_Address_Labels_or_Envelopes.htm" ComputedFirstTopic="false" DescendantCount="0" />
+        <TocEntry Title="Viewing Invalid or Failed Merge Information" Link="/Content/Mail_Merge/Viewing_Invalid_or_Failed_Merge_Information.htm" ComputedFirstTopic="false" DescendantCount="0" />
     </TocEntry>
     <TocEntry Title="Reports" Link="/Content/Reporting/reportoverview.htm" ComputedFirstTopic="false" DescendantCount="4">
         <TocEntry Title="What are Reports?" Link="/Content/Reporting/reportoverview.htm" ComputedFirstTopic="false" DescendantCount="0" />
@@ -227,37 +232,46 @@
         <TocEntry Title="Exporting a Group to a File" Link="/Content/Groups/exportgroup.htm" ComputedFirstTopic="false" DescendantCount="0" />
         <TocEntry Title="Adding a Group Using Query Builder" Link="/Content/Groups/advancedquery.htm" ComputedFirstTopic="false" DescendantCount="0" />
     </TocEntry>
-    <TocEntry Title="Using Query Builder" Link="/Content/Query Builder/querybuilderoverview.htm" ComputedFirstTopic="false" DescendantCount="16">
-        <TocEntry Title="Using Query Builder" Link="/Content/Query Builder/querybuilderoverview.htm" ComputedFirstTopic="false" DescendantCount="0" />
-        <TocEntry Title="Opening Query Builder" Link="/Content/Query Builder/openquerybuilder.htm" ComputedFirstTopic="false" DescendantCount="0" />
-        <TocEntry Title="Viewing the SQL Version of a Query" Link="/Content/Query Builder/viewquerysql.htm" ComputedFirstTopic="false" DescendantCount="0" />
+    <TocEntry Title="Using Query Builder" Link="/Content/QueryBuilder/Using_SalesLogix_Query_Builder.htm" ComputedFirstTopic="false" DescendantCount="16">
+        <TocEntry Title="Using Query Builder" Link="/Content/QueryBuilder/Using_SalesLogix_Query_Builder.htm" ComputedFirstTopic="false" DescendantCount="0" />
+        <TocEntry Title="Opening Query Builder" Link="/Content/QueryBuilder/Opening_Query_Builder.htm" ComputedFirstTopic="false" DescendantCount="0" />
+        <TocEntry Title="Viewing the SQL Version of a Query" Link="/Content/QueryBuilder/View_the_SQL_Version_of_a_Query.htm" ComputedFirstTopic="false" DescendantCount="0" />
         <TocEntry Title="Query Builder Tabs" ComputedFirstTopic="false" DescendantCount="5">
-            <TocEntry Title="Query Builder Properties" Link="/Content/Query Builder/querybuilderproperties.htm" ComputedFirstTopic="false" DescendantCount="0" />
-            <TocEntry Title="Query Builder Conditions" Link="/Content/Query Builder/querybuilderconditions.htm" ComputedFirstTopic="false" DescendantCount="0" />
-            <TocEntry Title="Query Builder Layout" Link="/Content/Query Builder/querybuilderlayout.htm" ComputedFirstTopic="false" DescendantCount="0" />
-            <TocEntry Title="Query Builder Sorting" Link="/Content/Query Builder/querybuildersorting.htm" ComputedFirstTopic="false" DescendantCount="0" />
-            <TocEntry Title="Query Builder Defaults" Link="/Content/Query Builder/querybuilderdefaults.htm" ComputedFirstTopic="false" DescendantCount="0" />
+            <TocEntry Title="Query Builder Properties" Link="/Content/QueryBuilder/Query_Builder_Properties.htm" ComputedFirstTopic="false" DescendantCount="0" />
+            <TocEntry Title="Query Builder Conditions" Link="/Content/QueryBuilder/Query_Builder_Conditions.htm" ComputedFirstTopic="false" DescendantCount="0" />
+            <TocEntry Title="Query Builder Layout" Link="/Content/QueryBuilder/Query_Builder_Layout.htm" ComputedFirstTopic="false" DescendantCount="0" />
+            <TocEntry Title="Query Builder Sorting" Link="/Content/QueryBuilder/Query_Builder_Sorting.htm" ComputedFirstTopic="false" DescendantCount="0" />
+            <TocEntry Title="Query Builder Defaults" Link="/Content/QueryBuilder/Query_Builder_Defaults.htm" ComputedFirstTopic="false" DescendantCount="0" />
         </TocEntry>
-        <TocEntry Title="Using Joins" Link="/Content/Query Builder/queryjointables.htm" ComputedFirstTopic="false" DescendantCount="3">
-            <TocEntry Title="Joining Tables" Link="/Content/Query Builder/queryjointables.htm" ComputedFirstTopic="false" DescendantCount="0" />
-            <TocEntry Title="Guidelines for Using Joins" Link="/Content/Query Builder/queryjoinguidelines.htm" ComputedFirstTopic="false" DescendantCount="0" />
-            <TocEntry Title="Global Join Manager" Link="/Content/Query Builder/queryglobaljoinmanager.htm" ComputedFirstTopic="false" DescendantCount="0" />
+        <TocEntry Title="Using Joins" Link="/Content/QueryBuilderAdv/Joining_Tables.htm" ComputedFirstTopic="false" DescendantCount="3">
+            <TocEntry Title="Joining Tables" Link="/Content/QueryBuilderAdv/Joining_Tables.htm" ComputedFirstTopic="false" DescendantCount="0" />
+            <TocEntry Title="Guidelines for Using Joins" Link="/Content/QueryBuilderAdv/Guidelines_for_Using_Joins.htm" ComputedFirstTopic="false" DescendantCount="0" />
+            <TocEntry Title="Global Join Manager" Link="/Content/QueryBuilderAdv/Global_Join_Manager.htm" ComputedFirstTopic="false" DescendantCount="0" />
         </TocEntry>
-        <TocEntry Title="Using Calculated Fields" Link="/Content/Query Builder/querycalcfields.htm" ComputedFirstTopic="false" DescendantCount="3">
-            <TocEntry Title="Using Calculated Fields" Link="/Content/Query Builder/querycalcfields.htm" ComputedFirstTopic="false" DescendantCount="0" />
-            <TocEntry Title="Add/Edit a Calculated Field" Link="/Content/Query Builder/queryaddeditcalcfields.htm" ComputedFirstTopic="false" DescendantCount="0" />
-            <TocEntry Title="Delete a Calculated Field" Link="/Content/Query Builder/querydeletecalcfields.htm" ComputedFirstTopic="false" DescendantCount="0" />
+        <TocEntry Title="Using Calculated Fields" Link="/Content/QueryBuilderAdv/Calculated_Fields.htm" ComputedFirstTopic="false" DescendantCount="3">
+            <TocEntry Title="Using Calculated Fields" Link="/Content/QueryBuilderAdv/Calculated_Fields.htm" ComputedFirstTopic="false" DescendantCount="0" />
+            <TocEntry Title="Add/Edit a Calculated Field" Link="/Content/QueryBuilderAdv/Add_Edit_a_Calculated_Field.htm" ComputedFirstTopic="false" DescendantCount="0" />
+            <TocEntry Title="Delete a Calculated Field" Link="/Content/QueryBuilderAdv/Delete_a_Calculated_Field.htm" ComputedFirstTopic="false" DescendantCount="0" />
         </TocEntry>
     </TocEntry>
-    <TocEntry Title="Intellisync" Link="/Content/Intellisync/slxintellisync.htm" ComputedFirstTopic="false" DescendantCount="4">
-        <TocEntry Title="Intellisync for SalesLogix" Link="/Content/Intellisync/slxintellisync.htm" ComputedFirstTopic="false" DescendantCount="0" />
-        <TocEntry Title="Configuring Intellisync for SalesLogix" Link="/Content/Intellisync/slxintellisyncconfigure.htm" ComputedFirstTopic="false" DescendantCount="0" />
-        <TocEntry Title="Using Intellisync" Link="/Content/Intellisync/slxintellisyncuse.htm" ComputedFirstTopic="false" DescendantCount="0" />
-        <TocEntry Title="Administering Intellisync for SalesLogix" Link="/Content/Intellisync/slxintellisyncadmin.htm" ComputedFirstTopic="false" DescendantCount="0" />
+    <TocEntry Title="Intellisync" Link="/Content/Intellisync/Intellisync_for_SalesLogix.htm" ComputedFirstTopic="false" DescendantCount="4">
+        <TocEntry Title="Intellisync for SalesLogix" Link="/Content/Intellisync/Intellisync_for_SalesLogix.htm" ComputedFirstTopic="false" DescendantCount="0" />
+        <TocEntry Title="Configuring Intellisync for SalesLogix" Link="/Content/Intellisync/configuring_intellisync_for_Saleslogix.htm" ComputedFirstTopic="false" DescendantCount="0" />
+        <TocEntry Title="Using Intellisync" Link="/Content/Intellisync/using_intellisync.htm" ComputedFirstTopic="false" DescendantCount="0" />
+        <TocEntry Title="Administering Intellisync for SalesLogix" Link="/Content/Intellisync/administering_intellisync.htm" ComputedFirstTopic="false" DescendantCount="0" />
+    </TocEntry>
+    <TocEntry Title="Child 1" ReplaceMergeNode="true" Link="/../../../../Child files/Child1/WebClient1.mcwebhelp" AbsoluteLink="file:///G:/Documentation/SalesLogix/SLX Clients/Output/Child files/Child1/WebClient1.mcwebhelp" MergeHint="0" ComputedFirstTopic="false" DescendantCount="0" />
+    <TocEntry Title="Child 2" ReplaceMergeNode="true" Link="/../../../../Child files/Child2/Output/Child2/WebClient2.mcwebhelp" AbsoluteLink="file:///G:/Documentation/SalesLogix/SLX Clients/Output/Child files/Child2/Output/Child2/WebClient2.mcwebhelp" MergeHint="1" ComputedFirstTopic="false" DescendantCount="0">
+    </TocEntry>
+    <TocEntry Title="Child3" ReplaceMergeNode="true" Link="/../../../../Child files/Child3/Output/Child3/WebClient3.mcwebhelp" AbsoluteLink="file:///G:/Documentation/SalesLogix/SLX Clients/Output/Child files/Child3/Output/Child3/WebClient3.mcwebhelp" MergeHint="2" ComputedFirstTopic="false" DescendantCount="0">
+    </TocEntry>
+    <TocEntry Title="Child4" ReplaceMergeNode="true" Link="/../../../../Child files/Child4/Output/Child4/WebClient4.mcwebhelp" AbsoluteLink="file:///G:/Documentation/SalesLogix/SLX Clients/Output/Child files/Child4/Output/Child4/WebClient4.mcwebhelp" MergeHint="3" ComputedFirstTopic="false" DescendantCount="0">
+    </TocEntry>
+    <TocEntry Title="Child5" ReplaceMergeNode="true" Link="/../../../../Child files/Child5/Output/Child5/WebClient5.mcwebhelp" AbsoluteLink="file:///G:/Documentation/SalesLogix/SLX Clients/Output/Child files/Child5/Output/Child5/WebClient5.mcwebhelp" MergeHint="4" ComputedFirstTopic="false" DescendantCount="0">
     </TocEntry>
     <TocEntry Title="Troubleshooting" Link="/Content/Common/slxtroubleshooting.htm" ComputedFirstTopic="false" DescendantCount="3">
         <TocEntry Title="Troubleshooting Common Issues" Link="/Content/Common/slxtroubleshooting.htm" ComputedFirstTopic="false" DescendantCount="0" />
-        <TocEntry Title="Troubleshooting Desktop Integration - Mail Merge" Link="/Content/Mail Merge/mailmergetroubleshooting.htm" ComputedFirstTopic="false" DescendantCount="0" />
+        <TocEntry Title="Troubleshooting Desktop Integration - Mail Merge" Link="/Content/Mail_Merge/mailmergetroubleshooting.htm" ComputedFirstTopic="false" DescendantCount="0" />
         <TocEntry Title="Troubleshooting Desktop Integration - Send SLX&#160;and Record to History" Link="/Content/Outlook/emailtroubleshooting.htm" ComputedFirstTopic="false" DescendantCount="0" />
     </TocEntry>
     <TocEntry Title="Glossary of Terms" Link="/Content/Getting Started/slxglossary.htm" ComputedFirstTopic="false" DescendantCount="0" />

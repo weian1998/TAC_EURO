@@ -9,7 +9,10 @@
         <SalesLogix:PageLink ID="lnkLeadImportDetailHelp" runat="server" LinkType="HelpFileName"
             ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="leadimporthistorydupetab.aspx"
             ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16">
-        </SalesLogix:PageLink>
+        </SalesLogix:PageLink>        
+    </SalesLogix:SmartPartToolsContainer>
+     <SalesLogix:SmartPartToolsContainer runat="server" ID="ImportHistory_LTools" ToolbarLocation="left">
+         <asp:CheckBox ID="chkShowDuplicates" runat="server" Checked="true" Text =" <%$ resources: chkShowResults.Text %> " TextAlign="right" AutoPostBack="true" />
     </SalesLogix:SmartPartToolsContainer>
 </div>
 

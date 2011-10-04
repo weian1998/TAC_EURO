@@ -344,14 +344,16 @@
                 menuData.splice(i, 1);
         }
         return menuData;
-     }
+    }
     
     function buildHeader(obj) {
         // Hide details for Personal Activities of other users.
         // Note: this should display details for others when current user has edit calendar access, but
         // this logic is not implemented.
         // 262162 = PersonalActivity
-        var isVisible = obj.type != 262162 || (obj.userid == getContextByKey('userID') && obj.type == 262162);
+
+        //var isVisible = obj.type != 262162 || (obj.userid == getContextByKey('userID') && obj.type == 262162);
+        var isVisible = obj.type != 'atPersonal' || (obj.userid == getContextByKey('userID') && obj.type == 'atPersonal');      
         var description = getActivityType(obj.type);
         if (obj.description != null && isVisible)
             description = obj.description;
@@ -386,15 +388,19 @@
     function getImage(type) {
         switch (type) {
             case 262145: //Meeting
+            case 'atAppointment':
                 return 'images/icons/Schedule_Meeting_24x24.gif';
                 break;
             case 262146: //Phone Call
+            case 'atPhoneCall':
                 return 'images/icons/Schedule_Call_24x24.gif';
                 break;
             case 262147: //ToDo:
+            case 'atToDo':
                 return 'images/icons/Schedule_To_Do_24x24.gif';
                 break;
             case 262162: //Personal Activity
+            case 'atPersonal':
                 return 'images/icons/Schedule_Personal_Activity_24x24.gif';
                 break;
         }
@@ -406,15 +412,19 @@
 
         switch (obj.value) {
             case 262145: //Meeting
+            case 'atAppointment':
                 return '<img src="images/icons/Schedule_Meeting_16x16.gif" />&nbsp;<a href="' + dialogUrl + '" > ' + SR.ActivityType_Meeting + '</a>';
                 break;
             case 262146: //Phone Call
+            case 'atPhoneCall':
                 return '<img src="images/icons/Schedule_Call_16x16.gif" />&nbsp;<a href="' + dialogUrl + '" > ' + SR.ActivityType_PhoneCall + '</a>';
                 break;
             case 262147: //ToDo:
+            case 'atToDo':
                 return '<img src="images/icons/Schedule_To_Do_16x16.gif" />&nbsp;<a href="' + dialogUrl + '" > ' + SR.ActivityType_ToDo + '</a>';
                 break;
             case 262162: //Personal Activity
+            case 'atPersonal':
                 return '<img src="images/icons/Schedule_Personal_Activity_16x16.gif" />&nbsp;<a href="' + dialogUrl + '" > ' + SR.ActivityTypeGrid_PersonalActivity + '</a>';
                 break;
         }
@@ -467,8 +477,9 @@
             {
                 objId = objId + '_ActivityContactSummary';
             }
-            var isVisible = cardObj.type != 262162 || (cardObj.userid == getContextByKey('userID') && cardObj.type == 262162);
-
+            //var isVisible = cardObj.type != 262162 || (cardObj.userid == getContextByKey('userID') && cardObj.type == 262162);
+            var isVisible = cardObj.type != 'atPersonal' || (cardObj.userid == getContextByKey('userID') && cardObj.type == 'atPersonal');
+            
             // Show Priority
             if (!isNullOrEmpty(cardObj.priority) && isVisible)
                 $('#' + objId + '_txtPriority').removeClass('x-hide-display').show();
@@ -518,8 +529,11 @@
             
             //setup notes tooltip
             var notesEl = $("#" + cardObj.id).find(".SummaryFooter").get(0);
-            if (notesEl)
-            {
+            if (notesEl) {
+                //hide notes in Summary mode?
+                if (!isVisible) {
+                    $("#" + cardObj.id).find(".SummaryFooter").hide();
+                }
                 new Ext.ToolTip({
                     target: notesEl,
                     html: notesEl.innerHTML
@@ -527,9 +541,9 @@
             }
 
             //Show Notes
-            if (!isNullOrEmpty(cardObj.notes) && isVisible)
+            if (!isNullOrEmpty(cardObj.notes) && isVisible) {
                 $('#' + objId + '_txtNotes').removeClass('x-hide-display').show();
-
+            }
         }
 
     function getEmailImageLink(emailAddress) {
@@ -550,8 +564,9 @@
         if (isNaN(date))
             date = data.startdate;
             
-        var timeless = data.timeless;
-        
+        var timeless = data.timeless || data.txttimeless;
+        if (timeless) date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+
         var dateString = formatDate(date);
         var timeString;
         if (!timeless)
@@ -615,12 +630,16 @@
         if (!type) return "";
         switch (type) {
             case 262145: //Meeting
+            case 'atAppointment':
                 return SR.ActivityType_Meeting;
             case 262146: //Phone Call
+            case 'atPhoneCall':
                 return SR.ActivityType_PhoneCall;
             case 262147: //To-Do
+            case 'atToDo':
                 return SR.ActivityType_ToDo;
             case 262162: //Personal Activity
+            case 'atPersonal':
                 return SR.ActivityType_PersonalActivity;
         }
         return ""; 
@@ -629,12 +648,16 @@
     function getActivityTypeImageSmall(type) {
         switch (type) {
             case 262145: //Meeting
+            case 'atAppointment':
                 return "images/icons/Schedule_Meeting_16x16.gif";
             case 262146: //Phone Call
+            case 'atPhoneCall':
                 return "images/icons/Schedule_Call_16x16.gif";
             case 262147: //To-Do
+            case 'atToDo':
                 return "images/icons/Schedule_To_Do_16x16.gif";
             case 262162: //Personal Activity
+            case 'atPersonal':
                 return "images/icons/Schedule_Personal_Activity_16x16.gif";
         }
         return "images/icons/Schedule_Meeting_16x16.gif";

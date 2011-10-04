@@ -5,6 +5,8 @@
   <SmartPart>\Entity Model\SalesLogix Application Entities\Competitor\QuickForms\CompetitorDetails.main.quickform.xml</SmartPart>
   <TargetWorkspace>MainContent</TargetWorkspace>
   <ShowInMode>Detail</ShowInMode>
-  <Properties />
+  <Properties>
+    <Property Name="HelpTopic" TypeConverter="">CompetitorDetails</Property>
+  </Properties>
   <AllowRoles />
 </SmartPartMapping>

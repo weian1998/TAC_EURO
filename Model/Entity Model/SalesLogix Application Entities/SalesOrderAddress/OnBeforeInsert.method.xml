@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="fc7c2cc2-3335-42ad-a531-dceec93d7542" lastModifiedUtc="2008-01-15T20:28:09.3754477Z" name="OnBeforeInsert" returnType="void" methodType="CrudEvent" actionType="None" returnMode="None" isInstance="true">
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="fc7c2cc2-3335-42ad-a531-dceec93d7542" lastModifiedUtc="2008-01-15T20:28:09.3754477Z" name="OnBeforeInsert" methodType="CrudEvent" actionType="None" returnMode="None">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
@@ -7,7 +7,7 @@
   <parameter />
   <preExecuteTargets />
   <methodTargets>
-    <methodTarget id="94b7347d-f1ab-4882-a48c-369fa34cb0b7" lastModifiedUtc="2008-01-15T20:28:08.5316545Z" targetType="Sage.Platform.Orm.DefaultCRUDEventHandler, Sage.Platform" targetMethod="OnBeforeInsert" active="true">
+    <methodTarget id="9e87e8cf-8929-455b-a7eb-9853ad2fde44" lastModifiedUtc="2011-05-03T19:21:50.252566Z" targetType="Sage.SalesLogix.SalesOrderAddress.SalesOrderAddress, Sage.SalesLogix.BusinessRules" targetMethod="OnBeforeInsert" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>

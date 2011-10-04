@@ -1,0 +1,13 @@
+
+
+<SalesLogix:ScriptResourceProvider ID="${pagegenerator.FormName}${qfcontrol.ControlId}_Strings" runat="server">
+    <Keys>
+        <SalesLogix:ResourceKeyName Key="${qfcontrol.ControlId}.ButtonTooltip" />
+        <SalesLogix:ResourceKeyName Key="${qfcontrol.ControlId}.LookupDialogTitle" />
+        <SalesLogix:ResourceKeyName Key="${qfcontrol.ControlId}.DialogButtonText" />
+		##write column header strings...
+		#foreach($lprop in $qfcontrol.LookupProperties)
+		<SalesLogix:ResourceKeyName Key="${qfcontrol.ControlId}.LookupProperties.${lprop.PropertyHeader}.PropertyHeader" />
+		 #end  ##foreach
+    </Keys>
+</SalesLogix:ScriptResourceProvider>

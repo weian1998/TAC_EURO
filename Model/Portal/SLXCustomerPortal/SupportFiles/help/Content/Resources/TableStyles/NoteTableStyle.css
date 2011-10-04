@@ -1,0 +1,227 @@
+/* MadCap Table Style: */
+
+/*<meta />*/
+
+mcTableStyle {
+	name: NoteTableStyle; 
+	border-collapse: collapse; 
+	border-left-style: none; 
+	border-left-width: 1px; 
+	border-left-color: #000000; 
+	border-right-style: none; 
+	border-right-width: 1px; 
+	border-right-color: #000000; 
+	border-top-style: none; 
+	border-top-width: 1px; 
+	border-top-color: #000000; 
+	border-bottom-style: none; 
+	border-bottom-width: 1px; 
+	border-bottom-color: #000000; 
+	cell-padding-left: 1px; 
+	cell-padding-right: 1px; 
+	cell-padding-top: 1px; 
+	cell-padding-bottom: 1px; 
+	margin-left: 1px; 
+	margin-right: 1px; 
+	margin-top: 1px; 
+	margin-bottom: 1px; 
+}
+
+mcTableColumnStyle {
+	span: 1; 
+	separator-style: none; 
+	separator-width: 1px; 
+	separator-color: #000000; 
+	text-align: left; 
+}
+
+mcTableBodyStyle {
+	span: 1; 
+	font-weight: normal; 
+	separator-style: none; 
+	separator-width: 1px; 
+	separator-color: #000000; 
+	text-align: left; 
+}
+
+ 
+ 
+/* Cell Styles: */
+ 
+.TableStyle_NoteTableStyle
+{
+	border-left-style: none;
+	border-left-color: #000000;
+	border-left-width: 1px;
+	border-right-style: none;
+	border-right-color: #000000;
+	border-right-width: 1px;
+	border-top-style: none;
+	border-top-color: #000000;
+	border-top-width: 1px;
+	border-bottom-style: none;
+	border-bottom-color: #000000;
+	border-bottom-width: 1px;
+	margin-left: 1px;
+	margin-right: 1px;
+	margin-top: 1px;
+	margin-bottom: 1px;
+	border-collapse: collapse;
+	border-spacing: 0px 0px;
+	mc-cell-padding: 1px 1px 1px 1px;
+}
+
+.TableStyle_NoteTableStyle_Body_0_0
+{
+	font-weight: normal;
+	text-align: left;
+	padding-left: 1px;
+	padding-right: 1px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.TableStyle_NoteTableStyle_Body_0_0 p
+{
+	font-weight: normal;
+}
+
+.TableStyle_NoteTableStyle_Body_0_0_RowSep_ColSep
+{
+	font-weight: normal;
+	border-bottom-width: 1px;
+	border-bottom-color: #000000;
+	border-bottom-style: none;
+	text-align: left;
+	padding-left: 1px;
+	padding-right: 1px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	border-right-width: 1px;
+	border-right-color: #000000;
+	border-right-style: none;
+}
+
+.TableStyle_NoteTableStyle_Body_0_0_RowSep_ColSep p
+{
+	font-weight: normal;
+}
+
+.TableStyle_NoteTableStyle_Body_0_0_RowSep
+{
+	font-weight: normal;
+	border-bottom-width: 1px;
+	border-bottom-color: #000000;
+	border-bottom-style: none;
+	text-align: left;
+	padding-left: 1px;
+	padding-right: 1px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.TableStyle_NoteTableStyle_Body_0_0_RowSep p
+{
+	font-weight: normal;
+}
+
+.TableStyle_NoteTableStyle_Body_0_0_ColSep
+{
+	font-weight: normal;
+	text-align: left;
+	padding-left: 1px;
+	padding-right: 1px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	border-right-width: 1px;
+	border-right-color: #000000;
+	border-right-style: none;
+}
+
+.TableStyle_NoteTableStyle_Body_0_0_ColSep p
+{
+	font-weight: normal;
+}
+
+.TableStyle_NoteTableStyle_Body_0_0_RowSep_ColEnd
+{
+	font-weight: normal;
+	border-bottom-width: 1px;
+	border-bottom-color: #000000;
+	border-bottom-style: none;
+	text-align: left;
+	padding-left: 1px;
+	padding-right: 1px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.TableStyle_NoteTableStyle_Body_0_0_RowSep_ColEnd p
+{
+	font-weight: normal;
+}
+
+.TableStyle_NoteTableStyle_Body_0_0_RowEnd
+{
+	font-weight: normal;
+	text-align: left;
+	padding-left: 1px;
+	padding-right: 1px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.TableStyle_NoteTableStyle_Body_0_0_RowEnd p
+{
+	font-weight: normal;
+}
+
+.TableStyle_NoteTableStyle_Body_0_0_RowEnd_ColSep
+{
+	font-weight: normal;
+	text-align: left;
+	padding-left: 1px;
+	padding-right: 1px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	border-right-width: 1px;
+	border-right-color: #000000;
+	border-right-style: none;
+}
+
+.TableStyle_NoteTableStyle_Body_0_0_RowEnd_ColSep p
+{
+	font-weight: normal;
+}
+
+.TableStyle_NoteTableStyle_Body_0_0_RowEnd_ColEnd
+{
+	font-weight: normal;
+	text-align: left;
+	padding-left: 1px;
+	padding-right: 1px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.TableStyle_NoteTableStyle_Body_0_0_RowEnd_ColEnd p
+{
+	font-weight: normal;
+}
+
+.TableStyle_NoteTableStyle_Body_0_0_ColEnd
+{
+	font-weight: normal;
+	text-align: left;
+	padding-left: 1px;
+	padding-right: 1px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.TableStyle_NoteTableStyle_Body_0_0_ColEnd p
+{
+	font-weight: normal;
+}
+
+

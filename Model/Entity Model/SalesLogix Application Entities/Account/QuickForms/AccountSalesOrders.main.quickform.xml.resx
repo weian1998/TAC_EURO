@@ -151,7 +151,7 @@
     <value>Status</value>
   </data>
   <data name="grdSalesOrders.Caption" xml:space="preserve">
-    <value>Sales Orders</value>
+    <value />
   </data>
   <data name="grdSalesOrders.e9313b46-2561-4fa5-95be-a8fc64b4ca6f.ConfirmationMessage" xml:space="preserve">
     <value>Are you sure you want to remove this item?</value>
@@ -173,5 +173,8 @@
   </data>
   <data name="grdSalesOrders.40c5884b-4484-49d9-9d1e-3ec31d589e08.ColumnHeading" xml:space="preserve">
     <value>Sales Order Number</value>
+  </data>
+  <data name="grdSalesOrders.EmptyTableRowText" xml:space="preserve">
+    <value>No records match the selection criteria.</value>
   </data>
 </root>

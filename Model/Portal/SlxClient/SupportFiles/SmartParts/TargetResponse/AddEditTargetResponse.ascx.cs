@@ -1,23 +1,19 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Reflection;
+using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Sage.Platform.Application;
-using Sage.Platform.WebPortal.SmartParts;
 using Sage.Entity.Interfaces;
-using Sage.Platform.WebPortal.Binding;
-using Sage.Platform.WebPortal.Services;
-using Sage.Platform.Application.UI;
 using Sage.Platform;
-using System.Text;
+using Sage.Platform.Application;
+using Sage.Platform.Application.UI;
+using Sage.Platform.ComponentModel;
 using Sage.Platform.Orm.Interfaces;
 using Sage.Platform.Repository;
-using Sage.Platform.ComponentModel;
-using System.Linq;
-
+using Sage.Platform.WebPortal.Binding;
+using Sage.Platform.WebPortal.Services;
+using Sage.Platform.WebPortal.SmartParts;
 
 /// <summary>
 /// Summary description for AddEditTargetResponse
@@ -58,7 +54,6 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
         }
     }
 
-    
     /// <summary>
     /// DataSource for the Marketing Service Open records.
     /// </summary>
@@ -113,18 +108,8 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
     /// <value><c>true</c> if this instance is lead; otherwise, <c>false</c>.</value>
     public Boolean IsLead
     {
-        get
-        {
-            return rdgTargetType.SelectedIndex > 0;
-            //if (!_IsLead.HasValue)
-            //    _IsLead = (DialogService.DialogParameters.Count > 0 && (DialogService.DialogParameters.ContainsKey("IsLead")));
-            //return Convert.ToBoolean(_IsLead);
-        }
-        set
-        {
-            rdgTargetType.SelectedIndex = 1;
-            //_IsLead = value;
-        }
+        get { return rdgTargetType.SelectedIndex > 0; }
+        set { rdgTargetType.SelectedIndex = value ? 1 : 0; }
     }
 
     /// <summary>
@@ -265,7 +250,7 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
     /// </summary>
     private void AssignCampaignTarget()
     {
-        ITargetResponse targetResponse = this.BindingSource.Current as ITargetResponse;
+        ITargetResponse targetResponse = BindingSource.Current as ITargetResponse;
         if (targetResponse.Campaign != null)
         {
             ICampaignTarget campaignTarget = targetResponse.CampaignTarget;
@@ -278,7 +263,7 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
                 else
                     entityId = targetResponse.Contact.Id;
                 IRepository<ICampaignTarget> repository = EntityFactory.GetRepository<ICampaignTarget>();
-                Sage.Platform.Repository.IQueryable query = (Sage.Platform.Repository.IQueryable)repository;
+                IQueryable query = (IQueryable) repository;
                 IExpressionFactory expFactory = query.GetExpressionFactory();
                 ICriteria criteria = query.CreateCriteria()
                     .Add(expFactory.And(
@@ -382,6 +367,10 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
             if (targetResponse.Contact != null)
             {
                 lueContact.SeedValue = targetResponse.Contact.Account.Id.ToString();
+            }
+            else
+            {
+                lueContact.SeedValue = string.Empty;
             }
         }
         else //Editing a response
@@ -490,14 +479,13 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
         ClientBindingMgr.RegisterDialogCancelButton(cmdCancel);
         ClientBindingMgr.RegisterSaveButton(cmdOK);
 
-        
         if (dtsOpens.SourceObject == null)
             dtsOpens.SourceObject = BindingSource.Current;
         if (dtsClicks.SourceObject == null)
             dtsClicks.SourceObject = BindingSource.Current;
         if (dtsUndeliverables.SourceObject == null)
             dtsUndeliverables.SourceObject = BindingSource.Current;
-       
+
         grdProducts.DataSource = dtsProducts2;
         grdProducts.DataBind();
         dtsOpens.Bind();
@@ -511,14 +499,13 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
     protected override void OnWireEventHandlers()
     {
         base.OnWireEventHandlers();
-        rdgTargetType.TextChanged += new EventHandler(rdgTargetType_ChangeAction);
-        cmdOK.Click += new EventHandler(cmdOK_ClickAction);
-        cmdOK.Click += new EventHandler(DialogService.CloseEventHappened);
-        cmdCancel.Click += new EventHandler(DialogService.CloseEventHappened);
-        lueAddProduct.LookupResultValueChanged += new EventHandler(lueAddProduct_ChangeAction);
+        rdgTargetType.TextChanged += rdgTargetType_ChangeAction;
+        cmdOK.Click += cmdOK_ClickAction;
+        cmdOK.Click += DialogService.CloseEventHappened;
+        cmdCancel.Click += DialogService.CloseEventHappened;
+        lueAddProduct.LookupResultValueChanged += lueAddProduct_ChangeAction;
     }
 
-    
     /// <summary>
     /// Called when [add entity bindings].
     /// </summary>
@@ -555,10 +542,10 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
         dtsUndeliverables.Bindings.Add(new WebEntityListBinding("MarketingServiceRecipient.MarketingServiceUndeliverables", grdUndeliverables));
         dtsUndeliverables.BindFieldNames = new String[] { "Id", "BounceDate", "BounceCampaignName", "BounceCount", "BounceReason" };
 
-        BindingSource.OnCurrentEntitySet += new EventHandler(dtsProducts_OnCurrentEntitySet);
-        BindingSource.OnCurrentEntitySet += new EventHandler(dtsOpens_OnCurrentEntitySet);
-        BindingSource.OnCurrentEntitySet += new EventHandler(dtsClicks_OnCurrentEntitySet);
-        BindingSource.OnCurrentEntitySet += new EventHandler(dtsUndeliverables_OnCurrentEntitySet);
+        BindingSource.OnCurrentEntitySet += dtsProducts_OnCurrentEntitySet;
+        BindingSource.OnCurrentEntitySet += dtsOpens_OnCurrentEntitySet;
+        BindingSource.OnCurrentEntitySet += dtsClicks_OnCurrentEntitySet;
+        BindingSource.OnCurrentEntitySet += dtsUndeliverables_OnCurrentEntitySet;
     }
 
     /// <summary>
@@ -615,12 +602,12 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
         }
         else
         {
-            if(lueLead.Text.Trim().Length == 0)
+            if (lueLead.Text.Trim().Length == 0)
                 throw new ValidationException("Please enter a Lead");
         }
 
         AssignCampaignTarget();
-        
+
         if (targetResponse.CampaignTarget != null && !targetResponse.CampaignTarget.PersistentState.Equals(PersistentState.New))
             targetResponse.CampaignTarget.Save();
 
@@ -778,7 +765,7 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
     private IList<ComponentView> _dtsProducts2;
 
     public IList<ComponentView> dtsProducts2
-    { 
+    {
         get
         {
             if (_dtsProducts2 == null)
@@ -788,7 +775,7 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
                 //sortedItems = (from k in targetResponse.ResponseProducts orderby k.Product.Name ascending select k).ToList();
                 var list1 = dtsProducts.GetData(0, 0, "Product.Name");
                 var list = new List<ComponentView>();
-                foreach ( ComponentView objpr in list1)
+                foreach (ComponentView objpr in list1)
                 {
                     IResponseProduct pr = objpr.Component as IResponseProduct;
                     if (pr.Id != null)
@@ -810,13 +797,11 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
                     }
                 }
 
-
                 _dtsProducts2 = list;
             }
             return _dtsProducts2;
         }
     }
-
 
     /// <summary>
     /// Handles the OnCurrentEntitySet event of the dtsproducts control.
@@ -831,7 +816,6 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
             if (dtsProducts.SourceObject == null)
                 dtsProducts.SourceObject = BindingSource.Current;
         }
-       
     }
 
     /// <summary>

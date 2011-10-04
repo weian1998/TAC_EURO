@@ -6,6 +6,8 @@ using Sage.Platform.Application;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.Entity.Interfaces;
 using Sage.Platform.WebPortal.Binding;
+using Sage.Platform.ComponentModel;
+using Sage.Platform.Security;
 
 public partial class SmartParts_ActivityList : EntityBoundSmartPartInfoProvider
 {
@@ -15,7 +17,7 @@ public partial class SmartParts_ActivityList : EntityBoundSmartPartInfoProvider
     /// Gets or sets the entity service.
     /// </summary>
     /// <value>The entity service.</value>
-    [ServiceDependency(Type = typeof(IEntityContextService), Required = true)]
+    [ServiceDependency(Type = typeof (IEntityContextService), Required = true)]
     public IEntityContextService EntityService { get; set; }
 
     private Sage.Platform.TimeZone _timeZone;
@@ -65,7 +67,7 @@ public partial class SmartParts_ActivityList : EntityBoundSmartPartInfoProvider
                 sel.Add(new HqlSelectField("a.OpportunityName", "OpportunityName"));
                 sel.Add(new HqlSelectField("a.Notes", "Notes"));
                 sel.Add(new HqlSelectField("ui.UserName", "Leader"));
-
+                
                 _hqlBindingSource = new WebHqlListBindingSource(sel, "Activity a, UserInfo ui");
             }
             return _hqlBindingSource;
@@ -129,20 +131,6 @@ public partial class SmartParts_ActivityList : EntityBoundSmartPartInfoProvider
                         if (((BoundField)(col)).DataField.Equals("OpportunityName"))
                             col.Visible = false;
                     }
-                    //=============================================================
-                    // TAC Customized below this line 26-05-2010
-                    //=============================================================
-                    if (entityName.Equals("Oppfulfiltask"))
-                    {
-                        if (((BoundField)(col)).DataField.Equals("ContactName"))
-                            col.Visible = false;
-                        if (((BoundField)(col)).DataField.Equals("OpportunityName"))
-                            col.Visible = true;
-                        keyId = "FulfilmentTaskID";
-                    }
-                    //=============================================================
-                    // TAC Customized Above this line 26-05-2010
-                    //=============================================================
                 }
             }
 
@@ -200,32 +188,30 @@ public partial class SmartParts_ActivityList : EntityBoundSmartPartInfoProvider
         const string personalURL = "images/icons/Personal_16x16.gif";
 
         string imageURL = meetingURL;
-        switch (activityType.ToString())
+        string dispalyName;
+
+        ActivityType actType = GetActivityType(activityType.ToString(), out dispalyName);
+
+
+        switch (actType)
         {
-            case "atMeeting":
-            case "Meeting":
+            case ActivityType.atAppointment:
                 imageURL = meetingURL;
                 break;
-            case "atAppointment":
-            case "Appointment":
-                imageURL = meetingURL;
-                break;
-            case "atPhoneCall":
-            case "Phone Call":
+            case ActivityType.atPhoneCall:
                 imageURL = phoneURL;
                 break;
-            case "atToDo":
-            case "To-Do":
+            case ActivityType.atToDo:
                 imageURL = todoURL;
                 break;
-            case "atPersonal":
-            case "Personal":
+            case ActivityType.atPersonal:         
                 imageURL = personalURL;
                 break;
             default:
                 imageURL = meetingURL;
                 break;
         }
+        
         return imageURL;
     }
 
@@ -246,37 +232,61 @@ public partial class SmartParts_ActivityList : EntityBoundSmartPartInfoProvider
     protected string GetToolTip(object activityType)
     {
 
-        string toolTip = GetLocalResourceObject("Activity_Meeting_Name").ToString();
-        switch (activityType.ToString())
-        {
-
-            case "atMeeting":
-            case "Meeting":
-                toolTip = GetLocalResourceObject("Activity_Meeting_Name").ToString();
-                break;
-            case "atAppointment":
-            case "Appointment":
-                toolTip = GetLocalResourceObject("Activity_Meeting_Name").ToString();
-                break;
-            case "atPhoneCall":
-            case "Phone Call":
-                toolTip = GetLocalResourceObject("Activity_PhoneCall_Name").ToString();
-                break;
-            case "atToDo":
-            case "To-Do":
-                toolTip = GetLocalResourceObject("Activity_ToDo_Name").ToString();
-                break;
-            case "atPersonal":
-            case "Personal":
-                toolTip = GetLocalResourceObject("Activity_Personal_Name").ToString();
-                break;
-            default:
-                toolTip = GetLocalResourceObject("Activity_Meeting_Name").ToString();
-                break;
-        }
+        string toolTip = string.Empty;
+        ActivityType actType = GetActivityType(activityType.ToString(), out toolTip);
         return toolTip;
     }
 
+    private ActivityType GetActivityType(string strActivityTypeName, out string dispalyName)
+    {
+
+        ActivityType actType = ActivityType.atAppointment;
+        string meetingName =  GetActivityTypeName("Activity_Meeting_Name", "Meeting");
+        string phoneName = GetActivityTypeName("Activity_PhoneCall_Name", "Phone Call");
+        string toDoName = GetActivityTypeName("Activity_ToDo_Name", "To-Do");
+        string personalName = GetActivityTypeName("Activity_Personal_Name", "Personal");
+        dispalyName =  meetingName;
+        if(string.Equals(strActivityTypeName, meetingName,StringComparison.InvariantCultureIgnoreCase))
+        {
+            actType =  ActivityType.atAppointment;
+            dispalyName =  meetingName;
+        }
+        else if (string.Equals(strActivityTypeName, phoneName,StringComparison.InvariantCultureIgnoreCase))
+        {
+           actType =  ActivityType.atPhoneCall;
+           dispalyName =  phoneName;
+        }
+        else if (string.Equals(strActivityTypeName, toDoName,StringComparison.InvariantCultureIgnoreCase))
+        {
+           actType =  ActivityType.atToDo;
+           dispalyName = toDoName;
+        }
+        else if (string.Equals(strActivityTypeName, personalName,StringComparison.InvariantCultureIgnoreCase))
+        {
+           actType =  ActivityType.atPersonal;
+           dispalyName = personalName;
+        }
+        else
+        {
+            actType = ActivityType.atAppointment; 
+            dispalyName =  meetingName;
+        } 
+        return actType;
+    }
+
+    private string GetActivityTypeName(string resouceName, string defaultValue)
+    {
+        string name = defaultValue;
+        try
+        {
+            name = GetLocalResourceObject(resouceName).ToString();
+        }
+        catch (Exception)
+        {
+
+        }
+        return name;
+    }
     protected static string BuildCompleteActivityNavigateURL(object ActivityID)
     {
         return string.Format("javascript:Link.completeActivity('{0}')", ActivityID);
@@ -285,6 +295,47 @@ public partial class SmartParts_ActivityList : EntityBoundSmartPartInfoProvider
     protected static string BuildActivityNavigateURL(object ActivityID)
     {
         return string.Format("javascript:Link.editActivity('{0}')", ActivityID);
+    }
+
+    private string CurUserId = "";
+
+    protected object GetDisplay(object dataItem, string propertyName)
+    {
+        if (string.IsNullOrEmpty(CurUserId)) {
+            var userServ = ApplicationContext.Current.Services.Get<IUserService>();
+            if (userServ != null) {
+                CurUserId = userServ.UserId;
+            }
+        }
+        var view = dataItem as ComponentView;
+        if (view != null)
+        {
+            if (view.IsVirtualComponent) {
+                object ActUserId;
+                object ActType;
+                object value;
+                if (view.VirtualComponentProperties.TryGetValue("UserId", out ActUserId) &&
+                    view.VirtualComponentProperties.TryGetValue("Type", out ActType))
+                {
+                    if (ActType.Equals(ActivityType.atPersonal) && ActUserId.ToString() != CurUserId) 
+                    {
+                        return (propertyName == "Description" || propertyName == "Category") 
+                             ? GetActivityTypeName("Activity_Personal_Name", "Personal")
+                             : string.Empty;
+                    }
+
+                    if (view.VirtualComponentProperties.TryGetValue(propertyName, out value)) 
+                    {
+                        return value;
+                    }
+                }
+            }
+            else 
+            {
+                return DataBinder.Eval(dataItem, propertyName);
+            }
+        }
+        return string.Empty;
     }
 
     private static String GetKeyId(String entityName)

@@ -191,7 +191,7 @@ public partial class SmartParts_DefaultOpportunityProduct : System.Web.UI.UserCo
         lblEnterCriteriaMessage.Visible = false;
 
         script.AppendFormat("SmartParts.Options.DefaultOpportunityProduct.create('{0}', {1})", ID,
-                            JavaScriptConvert.SerializeObject(treeConfig));
+                            JsonConvert.SerializeObject(treeConfig));
 
         if (ScriptManager.GetCurrent(Page).IsInAsyncPostBack)
             ScriptManager.RegisterStartupScript(Page, typeof(Page), "add-opportunity-product-init",

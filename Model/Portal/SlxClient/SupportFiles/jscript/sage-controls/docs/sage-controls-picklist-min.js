@@ -24,31 +24,24 @@ else
 {if(list.options[key].value==newVal)
 {text.value=list.options[key].text;code.value=newVal;list.options[key].selected=true;break;}}}}
 function PickList_getVal(){var text=document.getElementById(this.textId);var code=document.getElementById(this.codeId);if(this.storeValueAsText=="True"){return text.value;}else{return code.value;}}
-function PickList_HandleFocusLeave()
-{var self=this;var text=document.getElementById(this.textId);}
-function PickList_SetVisibility(visible)
-{var self=this;var listDiv=document.getElementById(this.listDivId);if(visible)
+function PickList_SetVisibility(visible){var self=this;var listDiv=document.getElementById(this.listDivId);if(visible)
 {listDiv.style.display="block";if(this.multiSelect!="True")
 {var pickListEl=document.getElementById(this.clientId);var pickListTextEl=document.getElementById(this.clientId+"_Text");var innerListEl=document.getElementById(this.clientId+"_InnerListDIV");var adjust=($(innerListEl).outerWidth()-$(innerListEl).width());$(innerListEl).width($(pickListTextEl).outerWidth()-adjust);}
 if(this._globalClickBound!==true)
-{this._globalClickBound=true;this._globalClickEl=Ext.isIE?document.body:document;var last=false;$(listDiv).parents().each(function(){var overflow=$(this).css("overflow");if(overflow=="auto"||overflow=="scroll")
-{self._globalClickEl=last||this;return false;}
-last=this;});Ext.get(this._globalClickEl).on("mousedown",this.MimicBlur,this,{delay:10});}
+{this._globalClickBound=true;this._globalClickEl=Ext.isIE?document.body:document;Ext.get(this._globalClickEl).on("click",this.MimicBlur,this,{delay:10});}
 this.isDroppedDown=true;}
 else
 {this.ResolveValue();listDiv.style.display="none";this.isDroppedDown=false;}}
-function PickList_ResolveValue()
-{if((this.CanEditText)&&(this.mustExistInList)&&(this.multiSelect=="False"))
+function PickList_ResolveValue(){if((this.CanEditText)&&(this.mustExistInList)&&(this.multiSelect=="False"))
 {var textELM=document.getElementById(this.textId);var codeELM=document.getElementById(this.codeId);var list=document.getElementById(this.listId);if(textELM.Value!="")
 {for(key=0;key<list.options.length;key++)
 {if(list.options[key].selected)
 {textELM.value=list.options[key].text;codeELM.value=list.options[key].value;break;}}}}}
-function PickList_MimicBlur(e)
-{var e=(e!==false)?(e||window.event):false;var target=(e)?e.currentTarget||(e.target||e.srcElement):false;var el=document.getElementById(this.clientId);var contains=function(a,b){if(!a||!b)
+function PickList_MimicBlur(e){var e=(e!==false)?(e||window.event):false;var target=(e)?e.currentTarget||(e.target||e.srcElement):false;var el=document.getElementById(this.clientId);var contains=function(a,b){if(!a||!b)
 return false;else
 return a.contains?(a!=b&&a.contains(b)):(!!(a.compareDocumentPosition(b)&16));};if(target&&contains(el,target))
 return;if(this._globalClickBound===true)
-{Ext.get(this._globalClickEl||(Ext.isIE?document.body:document)).un("mousedown",this.MimicBlur);this._globalClickBound=false;}
+{Ext.get(this._globalClickEl||(Ext.isIE?document.body:document)).un("click",this.MimicBlur);this._globalClickBound=false;}
 this.SetVisibility(false);};function PickList_ButtonClick(e){var e=e||window.event;var target=e.currentTarget||e.srcElement;var listDiv=document.getElementById(this.listDivId);var controlDiv=document.getElementById(this.clientId);var list=document.getElementById(this.listId);if(this.isDroppedDown){this.MimicBlur(false);controlDiv.style.zIndex=0;}else{this.GetList();var ua=navigator.userAgent.toLowerCase();var textbox=$get(this.textId);var bounds=Sys.UI.DomElement.getBounds(textbox);if(bounds.width!=0)
 {listDiv.style.width=bounds.width+"px";}
 controlDiv.style.zIndex=1;this.SetVisibility(true);if(this.multiSelect=="True")
@@ -56,11 +49,10 @@ controlDiv.style.zIndex=1;this.SetVisibility(true);if(this.multiSelect=="True")
 {var container=$("#"+this.clientId).find(".picklist-items");if(container.length>0)
 {var position=container.position();var size={width:container.width(),height:container.height()};$(frame).css({"top":position.top+"px","left":position.left+"px","width":size.width+"px","height":size.height+"px"});}}}
 list.focus();}
-e.cancelBubble=true;if(e.stopPropagation)e.stopPropagation();return false;}
-function PickList_GetList()
-{var list=document.getElementById(this.listId);if((this.multiSelect=="True")||(list.options.length==0))
+return false;}
+function PickList_GetList(){var list=document.getElementById(this.listId);if((this.multiSelect=="True")||(list.options.length==0))
 {if(typeof(xmlhttp)=="undefined"){xmlhttp=YAHOO.util.Connect.createXhrObject().conn;}
-var current=document.getElementById(this.textId);var encodeText=encodeURIComponent(current.value);var vURL="SLXPickListCache.aspx?picklist="+this.PickListName+"&multiselect="+this.multiSelect+"&alphasort="+this.AlphaSort+"&clientid="+this.clientId+"&current="+encodeText;xmlhttp.open("GET",vURL,false);xmlhttp.send(null);this.HandleHttpResponse(xmlhttp.responseText);}}
+var current=document.getElementById(this.textId);var encodeText=encodeURIComponent(current.value);var vURL="SLXPickListCache.aspx?picklist="+encodeURIComponent(this.PickListName)+"&multiselect="+this.multiSelect+"&alphasort="+this.AlphaSort+"&clientid="+this.clientId+"&current="+encodeText;xmlhttp.open("GET",vURL,false);xmlhttp.send(null);this.HandleHttpResponse(xmlhttp.responseText);}}
 function PickList_HandleHttpResponse(results){if(results=="NOTAUTHENTICATED")
 {window.location.reload(true);return;}
 if(this.multiSelect=="True")
@@ -73,20 +65,11 @@ else
 {var list=document.getElementById(this.listId);var items=results.split("|");for(var i=0;i<items.length;i++)
 {if(items[i]=="")continue;var parts=PickList_GetItemParts(items[i]);var oOption=document.createElement("OPTION");list.options.add(oOption);if(parts[0].charAt(0)=='@')
 {parts[0]=parts[0].substr(1);oOption.selected=true;}
-oOption.text=parts[1];oOption.value=parts[0];}}}
-function PickList_GetItemParts(item)
-{var parts=item.split("^");if(parts.length>2)
+oOption.text=parts[1];oOption.title=parts[1];oOption.value=parts[0];}}}
+function PickList_GetItemParts(item){var parts=item.split("^");if(parts.length>2)
 {for(var i=2;i<parts.length;i++)
 {parts[1]=parts[1]+"^"+parts[i];}}
 return parts;}
-function PickList_SetHint(e)
-{if(!e)var e=window.event;var list=document.getElementById(this.listId);if(e.target)
-{list.title=e.target.textContent;}
-else
-{var offset=e.y;var indexOffset=0;var scrollIndex=list.scrollTop;scrollIndex=scrollIndex/14;while(offset>=14)
-{offset=offset-14;indexOffset++;}
-if(scrollIndex+indexOffset<list.options.length)
-{list.title=list.options[scrollIndex+indexOffset].innerText;}}}
 function PickList_SelectionChanged(){var list=document.getElementById(this.listId);if(list.options!=undefined&&list.options.length>0)
 {var text=document.getElementById(this.textId);var code=document.getElementById(this.codeId);var hyperText=document.getElementById(this.HyperTextId);var oldText=text.value;if(list.selectedIndex!=-1)
 {var newText;if(list.options[list.selectedIndex].innerText)
@@ -125,8 +108,7 @@ if(this.CanEditText==false)
 {if(e.keyCode!=37&&e.keyCode!=38&&e.keyCode!=39&&e.keyCode!=40)
 {return false;}}
 return true;}
-function PickList_TextChange(e)
-{if(!e)var e=window.event;if(e.keyCode==13)
+function PickList_TextChange(e){if(!e)var e=window.event;if(e.keyCode==13)
 {return;}
 var text=document.getElementById(this.textId);var list=document.getElementById(this.listId);var items=list.options;if(items.length==0){this.GetList();}
 if(text.value=="")
@@ -148,14 +130,12 @@ if((this.mustExistInList)&&(!matchFound))
 {text.value=this.LastValidText;}
 if(list.selectedIndex==-1)
 {this.SetVisibility(false);this.isDroppedDown=false;}}
-function PickList_SetCheckedState(itemId,index,value)
-{var checkbox=document.getElementById(itemId);if(checkbox.checked)
+function PickList_SetCheckedState(itemId,index,value){var checkbox=document.getElementById(itemId);if(checkbox.checked)
 {checkbox.checked=false;this.multiSelectValues[checkbox.id]=undefined;}
 else
 {checkbox.checked=true;this.multiSelectValues[checkbox.id]=unescape(value);}}
-function PickList_InvokeChangeEvent(cntrl)
-{if(document.createEvent)
+function PickList_InvokeChangeEvent(cntrl){if(document.createEvent)
 {var evObj=document.createEvent('HTMLEvents');evObj.initEvent('change',true,true);cntrl.dispatchEvent(evObj);}
 else
 {cntrl.fireEvent('onchange');}}
-PickList.prototype.SetHint=PickList_SetHint;PickList.prototype.setVal=PickList_setVal;PickList.prototype.getVal=PickList_getVal;PickList.prototype.SetVisibility=PickList_SetVisibility;PickList.prototype.ButtonClick=PickList_ButtonClick;PickList.prototype.SelectionChanged=PickList_SelectionChanged;PickList.prototype.MultiSelect=PickList_MultiSelect;PickList.prototype.TextChange=PickList_TextChange;PickList.prototype.SetCheckedState=PickList_SetCheckedState;PickList.prototype.HandleFocusLeave=PickList_HandleFocusLeave;PickList.prototype.GetList=PickList_GetList;PickList.prototype.HandleHttpResponse=PickList_HandleHttpResponse;PickList.prototype.InvokeChangeEvent=PickList_InvokeChangeEvent;PickList.prototype.MimicBlur=PickList_MimicBlur;PickList.prototype.HandleKeyDown=Picklist_HandleKeyDown;PickList.prototype.ResolveValue=PickList_ResolveValue;
+PickList.prototype.setVal=PickList_setVal;PickList.prototype.getVal=PickList_getVal;PickList.prototype.SetVisibility=PickList_SetVisibility;PickList.prototype.ButtonClick=PickList_ButtonClick;PickList.prototype.SelectionChanged=PickList_SelectionChanged;PickList.prototype.MultiSelect=PickList_MultiSelect;PickList.prototype.TextChange=PickList_TextChange;PickList.prototype.SetCheckedState=PickList_SetCheckedState;PickList.prototype.GetList=PickList_GetList;PickList.prototype.HandleHttpResponse=PickList_HandleHttpResponse;PickList.prototype.InvokeChangeEvent=PickList_InvokeChangeEvent;PickList.prototype.MimicBlur=PickList_MimicBlur;PickList.prototype.HandleKeyDown=Picklist_HandleKeyDown;PickList.prototype.ResolveValue=PickList_ResolveValue;

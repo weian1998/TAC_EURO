@@ -5,6 +5,7 @@ using Sage.Platform;
 using Sage.Entity.Interfaces;
 using Sage.SalesLogix;
 using Sage.SalesLogix.Orm.Utility;
+using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
 
 public partial class SmartParts_UpdateOpportunityCurrency : EntityBoundSmartPartInfoProvider
@@ -38,35 +39,11 @@ public partial class SmartParts_UpdateOpportunityCurrency : EntityBoundSmartPart
             lveChangeRate.Text = entity.ExchangeRateCode;
             txtExchangeRate.Text = Convert.ToString(entity.ExchangeRate.GetValueOrDefault(1));
 
-            SystemInformation si = SystemInformationRules.GetSystemInfo();
-            DelphiStreamReader stream = new DelphiStreamReader(si.Data);
-            TValueType type;
-            if (stream.FindProperty("LockOpportunityRate", out type))
-            {
-                if (type.Equals(TValueType.vaTrue))
-                {
-                    chkLockRate.Enabled = true;
-                }
-                else
-                {
-                    chkLockRate.Enabled = false;
-                }
-            }
-
-            SystemInformation si2 = SystemInformationRules.GetSystemInfo();
-            DelphiStreamReader stream2 = new DelphiStreamReader(si2.Data);
-            TValueType type2;
-            if (stream2.FindProperty("ChangeOpportunityRate", out type2))
-            {
-                if (type2.Equals(TValueType.vaTrue))
-                {
-                    txtExchangeRate.Enabled = true;
-                }
-                else
-                {
-                    txtExchangeRate.Enabled = false;
-                }
-            }
+            var optionSvc = ApplicationContext.Current.Services.Get<Sage.SalesLogix.Services.ISystemOptionsService>(true);
+            bool lockOppRate = optionSvc.LockOpportunityRate;
+            chkLockRate.Enabled = lockOppRate;
+            bool changeOppRate = optionSvc.ChangeOpportunityRate;
+            txtExchangeRate.Enabled = changeOppRate;
             chkLockRate.Checked = entity.ExchangeRateLocked.Value;
 
             GetFromValues();

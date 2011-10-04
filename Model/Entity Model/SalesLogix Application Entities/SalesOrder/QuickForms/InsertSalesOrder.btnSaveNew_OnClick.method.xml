@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="7b97bb34-668a-45b6-8d5a-005cf97b454f" lastModifiedUtc="2011-02-21T15:41:17.4936815Z" name="btnSaveNew_OnClick" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="InsertSalesOrder">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="1fd7a75c-64a5-4fd8-a200-dd98b0d7a041" paramName="form" sequence="0" paramType="IInsertSalesOrder" />
+    <OrmEntityMethodParam id="d1623a28-8f98-4ef8-b8a3-fac2ac7d395a" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="f97d246c-514e-42bc-9216-5fd84c5ac3eb" lastModifiedUtc="2011-02-21T15:40:50.2586815Z" targetType="Sage.BusinessRules.CodeSnippets.InsertSalesOrderEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="btnSaveNew_OnClickStep" active="true" codeSnippetId="56477aeb-6066-4f9e-b62c-5c0c66f4efe5">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

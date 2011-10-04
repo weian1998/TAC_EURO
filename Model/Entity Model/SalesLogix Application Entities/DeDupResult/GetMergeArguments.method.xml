@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="537e4003-da89-4fab-9bea-22000f2b523a" lastModifiedUtc="2010-08-19T22:03:42.3822088Z" name="GetMergeArguments" returnType="object" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="7db42734-3065-4abf-a031-922fd88e67e2" paramName="SelectedTargetId" sequence="0" paramType="String" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="e06660c7-ada4-416c-b0f2-68107e942c72" lastModifiedUtc="2010-08-19T22:03:22.9690985Z" targetType="Sage.SalesLogix.DeDupReuslt.Rules, Sage.SalesLogix.BusinessRules" targetMethod="GetMergeArguments" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

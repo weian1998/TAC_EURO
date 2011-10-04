@@ -58,14 +58,9 @@ public partial class SmartParts_TaskPane_ActivityFilters : System.Web.UI.UserCon
         StringBuilder script = new StringBuilder();
         script.AppendFormat(
             "\nvar {0};$(document).ready(function(){{if (!{0} && (Sage.FilterManager))\n{{ {0} = new Sage.FilterManager({{id: \"{0}\",clientId: \"{1}\", allText: \"({2})\"}});{0}.init();Sage.PopulateFilterList();}}}});\n",
-            ID, ClientID, GetLocalResourceObject("All").ToString());
-        script.Append("var UserNameLookup={");
-        IRepository<IUser> users = EntityFactory.GetRepository<IUser>();
-        foreach (IUser u in users.FindAll())
-            script.AppendFormat("\"{0}\": \"{1}, {2}\", ", u.Id.ToString(), u.UserInfo.LastName, u.UserInfo.FirstName);
-        script.Append("\"null\": \"null\"};\n");
+            ID, ClientID, GetLocalResourceObject("All").ToString());        
         script.Append("var LocalizedActivityStrings={");
-        string[] ActivityTypes = new string[] { "atToDo", "atAppointment", "atPhoneCall", "atPersonal", "atLiterature" };
+        string[] ActivityTypes = new string[] { "atToDo", "atAppointment", "atPhoneCall", "atPersonal", "atLiterature", "Change", "Confirm", "Deleted", "Leader", "New" };
         foreach (string v in ActivityTypes)
             script.AppendFormat("\"{0}\": \"{1}\", ", v, GetLocalResourceObject(v).ToString());
         script.Append("\"null\": \"null\"};\n");

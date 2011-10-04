@@ -11,6 +11,7 @@ using Sage.Platform.Security;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.SalesLogix.LegacyBridge;
 using Sage.SalesLogix.Activity;
+using TimeZone = Sage.Platform.TimeZone;
 
 public partial class SmartParts_HisWhatsNew_HisWhatsNew : UserControl, ISmartPartInfoProvider
 {
@@ -58,6 +59,12 @@ public partial class SmartParts_HisWhatsNew_HisWhatsNew : UserControl, ISmartPar
     {
         get { return ApplicationContext.Current.Services.Get<IUserService>(true).UserId.Trim(); }
     }
+
+
+    [ContextDependency("TimeZone")]
+    public TimeZone TimeZone { get; set; }
+
+
 
     /// <summary>
     /// Handles the Load event of the Page control.
@@ -192,11 +199,22 @@ public partial class SmartParts_HisWhatsNew_HisWhatsNew : UserControl, ISmartPar
     /// <param name="contactId">The contact id.</param>
     /// <param name="leadId">The lead id.</param>
     /// <returns></returns>
-    protected string GetEntityType(object contactId)
+    protected string GetContactOrLeadType(object contactId, object leadId, bool localized)
     {
-        if (contactId != null)
-            return "Contact";
-        return "Lead";
+        if (!IsBlankOrNull(contactId))
+            return (localized) ? GetLocalResourceObject("Contact").ToString() : "Contact";
+        if (!IsBlankOrNull(leadId))
+            return (localized) ? GetLocalResourceObject("Lead").ToString() : "Lead";
+        return string.Empty;
+    }
+
+    protected string GetAccountOrLeadType(object accountId, object leadId)
+    {
+        if (!IsBlankOrNull(accountId))
+            return "Account";
+        if (!IsBlankOrNull(leadId))
+            return "Lead";
+        return string.Empty;
     }
 
     /// <summary>
@@ -208,22 +226,7 @@ public partial class SmartParts_HisWhatsNew_HisWhatsNew : UserControl, ISmartPar
     /// </returns>
     protected bool IsBlankOrNull(object Id)
     {
-        return (Id == null) || (Id.ToString().Trim() == String.Empty);
-    }
-
-    /// <summary>
-    /// Gets the type.
-    /// </summary>
-    /// <param name="Id">The id.</param>
-    /// <returns></returns>
-    protected string GetType(object Id)
-    {
-        IHistory hist = EntityFactory.GetById<IHistory>(Id.ToString());
-        if (hist == null)
-            return "";
-        if (IsBlankOrNull(hist.LeadId))
-            return GetLocalResourceObject("Contact").ToString();
-        return GetLocalResourceObject("Lead").ToString();
+        return (Id == null) || (string.IsNullOrEmpty(Id.ToString().Trim()));
     }
 
     /// <summary>
@@ -249,11 +252,15 @@ public partial class SmartParts_HisWhatsNew_HisWhatsNew : UserControl, ISmartPar
     /// <returns></returns>
     protected string GetEntityId(object contactId, object leadId)
     {
-        if (leadId != null)
-            return leadId.ToString();
-        else if (contactId != null)
+        if (!IsBlankOrNull(contactId)) 
+        {
             return contactId.ToString();
-        else return String.Empty;
+        }
+        if (!IsBlankOrNull(leadId)) 
+        {
+            return leadId.ToString();
+        }
+        return string.Empty;
     }
 
     /// <summary>
@@ -350,6 +357,23 @@ public partial class SmartParts_HisWhatsNew_HisWhatsNew : UserControl, ISmartPar
 
         // Cancel the event, so that the object will not be Disposed if it implements IDisposable.
         e.Cancel = true;
+    }
+
+    protected string GetLocalDateTime(object completedDate)
+    {
+        var cd = completedDate as DateTime?;
+        if (cd.HasValue)
+        {
+            if (cd.Value.Equals(cd.Value.Date.AddSeconds(5)))
+            {
+                return cd.Value.ToShortDateString();
+            }
+            else
+            {
+                return TimeZone.UTCDateTimeToLocalTime(cd.Value).ToString("g");
+            }
+        }
+        return string.Empty;
     }
 
     protected void Sorting(Object sender, GridViewSortEventArgs e)

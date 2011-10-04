@@ -182,7 +182,7 @@
             if (ss != null)
             {
                 Sage.SalesLogix.SelectionService.ISelectionContext groupSelectionContext = new Sage.SalesLogix.Client.GroupBuilder.GroupSelectionContext();
-                groupSelectionContext.key = listViewOptions.selectionContextKey;
+                groupSelectionContext.Key = listViewOptions.selectionContextKey;
                 groupSelectionContext.SelectionInfo = new Sage.SalesLogix.SelectionService.SelectionInfo();
                 ss.SetSelectionContext(listViewOptions.selectionContextKey, groupSelectionContext);
             }
@@ -197,82 +197,29 @@
         {
             PageLink pageLink = new PageLink();
             pageLink.LinkType = enumPageLinkType.HelpFileName;
-            
-            string entityname = page.EntityTypeName.Substring(0, page.EntityTypeName.IndexOf(","));
-            
-            switch (entityname)
-            {
-                case "Sage.Entity.Interfaces.IAccount" :
-                    pageLink.NavigateUrl = "accountstandardlookup";
-                    break;
-                case "Sage.Entity.Interfaces.IContact":
-                    pageLink.NavigateUrl = "contactstandardlookup";
-                    break;
-                case "Sage.Entity.Interfaces.ICampaign":
-                    pageLink.NavigateUrl = "campaignlistview";
-                    break;
-                case "Sage.Entity.Interfaces.IContract":
-                    pageLink.NavigateUrl = "contractlistview";
-                    break;
-                case "Sage.Entity.Interfaces.ITicket":
-                    WebPortalUserService vWebPortalUserService = ApplicationContext.Current.Services.Get<IUserService>() as WebPortalUserService;
-                    pageLink.NavigateUrl = vWebPortalUserService == null ? "csrticketlistview" : "custticktick";
-                    break;
-                case "Sage.Entity.Interfaces.IDefect":
-                    pageLink.NavigateUrl = "defectlistview";
-                    break;
-                case "Sage.Entity.Interfaces.ILead":
-                    pageLink.NavigateUrl = "leadlistview";
-                    break;
-                case "Sage.Entity.Interfaces.IOpportunity":
-                    pageLink.NavigateUrl = "oppstandardlookup";
-                    break;
-                case "Sage.Entity.Interfaces.IReturn":
-                    pageLink.NavigateUrl = "returnlistview";
-                    break;
-                case "Sage.Entity.Interfaces.IImportHistory":
-                    pageLink.NavigateUrl = "leadimporthistorylistview";
-                    break;
-                case "Sage.Entity.Interfaces.ISalesOrder":
-                    pageLink.NavigateUrl = "salesorderlistview";
-                    break;
-                case "Sage.Entity.Interfaces.IProduct":
-                    pageLink.NavigateUrl = "productlistview";
-                    break;
-                case "Sage.Entity.Interfaces.IPackage":
-                    pageLink.NavigateUrl = "packagelistview";
-                    break;
-                case "Sage.Entity.Interfaces.ICompetitor":
-                    pageLink.NavigateUrl = "competitorlistview";
-                    break;
-                case "Sage.Entity.Interfaces.ILeadSource":
-                    pageLink.NavigateUrl = "leadsourcelistview";
-                    break;
-                case "Sage.Entity.Interfaces.ILiteratureItem":
-                    pageLink.NavigateUrl = "literatureitemslistview";
-                    break;
-                case "Sage.Entity.Interfaces.ILitRequestItem":
-                    pageLink.NavigateUrl = "litreqmanage";
-                    break;
-                case "Sage.Entity.Interfaces.IUser":
-                    pageLink.NavigateUrl = "Users_List_View";
-                    break;
-                case "Sage.Entity.Interfaces.ITeam":
-                    pageLink.NavigateUrl = "Teams_List_View";
-                    break;
-                case "Sage.Entity.Interfaces.IDepartment":
-                    pageLink.NavigateUrl = "Departments_List_View";
-                    break;
-                case "Sage.Entity.Interfaces.IRole":
-                    pageLink.NavigateUrl = "Roles_List_View";
-                    break;
-                case "Sage.Entity.Interfaces.IPickListView":
-                    pageLink.NavigateUrl = "Pick_Lists_List_View";
-                    break;                    
-            }
+            pageLink.NavigateUrl = HelpTopic;
+
+            if (string.IsNullOrEmpty(HelpTopic))
+                pageLink.NavigateUrl = GetDefaultTopic();
+
             GroupList.HelpUrl = pageLink.GetWebHelpLink().Url;
-        }        
+        }
     }
+
+    private string GetDefaultTopic()
+    {
+        string defaultTopic = string.Empty;
+        try
+        {
+            Match pageName = Regex.Match(Page.AppRelativeVirtualPath, @"\/(?<topic>[^\.]*)\.[\w]*");
+            if (pageName.Groups.Count > 0)
+                defaultTopic = string.Concat(pageName.Groups["topic"].Value ?? string.Empty, "listview").ToLower();
+        }
+        catch { } // if the regular expression fails, just return an empty string
+
+        return defaultTopic;
+    }
+    public string HelpTopic { get; set; }
 
 </script>
     

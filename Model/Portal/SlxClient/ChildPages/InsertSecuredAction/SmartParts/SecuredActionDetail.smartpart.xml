@@ -5,6 +5,8 @@
   <SmartPart>\Entity Model\SalesLogix Security Support\SecuredAction\QuickForms\SecuredActionDetail.main.quickform.xml</SmartPart>
   <TargetWorkspace>MainContent</TargetWorkspace>
   <ShowInMode>Insert</ShowInMode>
-  <Properties />
+  <Properties>
+    <Property Name="HelpTopic" TypeConverter="">CreatingASecuredAction</Property>
+  </Properties>
   <AllowRoles />
 </SmartPartMapping>

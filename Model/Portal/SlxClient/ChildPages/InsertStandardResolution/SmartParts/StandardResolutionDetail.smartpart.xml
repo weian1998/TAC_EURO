@@ -5,6 +5,8 @@
   <SmartPart>\Entity Model\SalesLogix Application Entities\TicketSolutionType\QuickForms\StandardResolutionDetail.main.quickform.xml</SmartPart>
   <TargetWorkspace>MainContent</TargetWorkspace>
   <ShowInMode>Insert</ShowInMode>
-  <Properties />
+  <Properties>
+    <Property Name="HelpTopic" TypeConverter="">resolutionmanage</Property>
+  </Properties>
   <AllowRoles />
 </SmartPartMapping>

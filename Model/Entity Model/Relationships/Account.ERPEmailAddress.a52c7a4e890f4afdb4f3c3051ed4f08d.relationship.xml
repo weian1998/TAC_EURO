@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="a52c7a4e-890f-4afd-b4f3-c3051ed4f08d" lastModifiedUtc="2010-03-08T19:06:18.9203215Z" parentEntityId="ebfd715e-2b2f-4e5e-8c6d-cfc0d9b4ae52" childEntityId="4ef7b8ac-e632-4824-8052-4305fc2bdd53">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="0efc7841-2793-4d3a-8169-5308072bd8b0" lastModifiedUtc="2010-03-08T19:05:58.7763215Z" name="ERPEmailAddresses" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="8620afbc-f82f-4c84-8734-3a2a3dfbe7a6" lastModifiedUtc="2010-03-08T19:06:04.5273215Z" name="Account" audited="false" include="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="f98b5a1c-0bf5-4eca-8165-566455c29ae6" parentPropertyId="b24f58be-dd73-441a-a479-00e5f517b9e7" childPropertyId="a6b33264-83cb-4cb2-b6bf-ef41ae7b2fd6" ordinal="0" />
+  </column>
+</relationship>

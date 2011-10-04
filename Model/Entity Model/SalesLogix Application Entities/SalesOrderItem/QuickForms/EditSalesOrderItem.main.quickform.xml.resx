@@ -126,7 +126,7 @@
   <data name="curPrice.Caption" xml:space="preserve">
     <value>Price:</value>
   </data>
-  <data name="txtProduct.Caption" xml:space="preserve">
+  <data name="txtProductName.Caption" xml:space="preserve">
     <value>Product:</value>
   </data>
   <data name="txtProgram.Caption" xml:space="preserve">
@@ -146,5 +146,32 @@
   </data>
   <data name="curMCCalcPrice.Caption" xml:space="preserve">
     <value>Adjusted Price:</value>
+  </data>
+  <data name="txtProductName.Text" xml:space="preserve">
+    <value>Product:</value>
+  </data>
+  <data name="txtPriceLevel.Caption" xml:space="preserve">
+    <value>Price Level:</value>
+  </data>
+  <data name="pklFamily.Caption" xml:space="preserve">
+    <value>Family:</value>
+  </data>
+  <data name="txtSKU.Caption" xml:space="preserve">
+    <value>SKU:</value>
+  </data>
+  <data name="txtDescription.Caption" xml:space="preserve">
+    <value>Description:</value>
+  </data>
+  <data name="txtLineNumber.Caption" xml:space="preserve">
+    <value>Line:</value>
+  </data>
+  <data name="SalesOrderStatus_Closed" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="Closed_Caption" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="lstbxPriceLevel.Caption" xml:space="preserve">
+    <value>Price Level:</value>
   </data>
 </root>

@@ -39,7 +39,7 @@
         <asp:BoundField DataField="Status" HeaderText="<%$ resources: grdResponses.Status.Column %>" SortExpression="Status" />
         <asp:BoundField DataField="InterestLevel" HeaderText="<%$ resources: grdResponses.InterestLevel.Column %>" SortExpression="InterestLevel" />
         <asp:BoundField DataField="LeadSource" HeaderText="<%$ resources: grdResponses.LeadSource.Column %>" SortExpression="LeadSource" />
-        <asp:BoundField DataField="Campaign" HeaderText="<%$ resources: grdResponses.Campaign.Column %>" SortExpression="Campaign" />
+        <asp:BoundField DataField="Campaign" HeaderText="<%$ resources: grdResponses.Campaign.Column %>" SortExpression="CampaignId" />
     </Columns>
     <AlternatingRowStyle CssClass="rowdk" />
     <RowStyle CssClass="rowlt" />

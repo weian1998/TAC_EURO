@@ -27,7 +27,7 @@
 		    </itemtemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="<%$ resources: HistoryGrid.Columns.CompleteDate.HeaderText %>" SortExpression="CompletedDate">
-            <ItemTemplate><%# GetLocalDateTime(Eval("CompletedDate"), Eval("Timeless"))%></ItemTemplate>
+            <ItemTemplate><%# GetLocalDateTime(Eval("CompletedDate"))%></ItemTemplate>
         </asp:TemplateField>
         <asp:BoundField DataField="User" HeaderText="<%$ resources: HistoryGrid.Columns.Leader.HeaderText %>" SortExpression="User" />
         <asp:BoundField DataField="ContactName" HeaderText="<%$ resources: HistoryGrid.Columns.ContactName.HeaderText %>" SortExpression="ContactName"/>

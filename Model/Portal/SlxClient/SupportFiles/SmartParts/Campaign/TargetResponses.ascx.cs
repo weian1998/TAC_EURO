@@ -1,19 +1,18 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data;
+using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Sage.Platform.WebPortal.SmartParts;
-using Sage.Platform.Application.UI;
 using Sage.Entity.Interfaces;
-using Sage.SalesLogix.Campaign;
-using System.Text;
-using System.Collections;
 using Sage.Platform;
-using Sage.Platform.Repository;
-using log4net;
-using System.Collections.Generic;
-using Sage.SalesLogix.PickLists;
 using Sage.Platform.Application;
+using Sage.Platform.Application.UI;
+using Sage.Platform.Repository;
+using Sage.Platform.WebPortal.SmartParts;
+using Sage.SalesLogix.Campaign;
+using Sage.SalesLogix.PickLists;
 
 /// <summary>
 /// Summary description for TargetResponses
@@ -23,9 +22,7 @@ public partial class TargetResponses : EntityBoundSmartPartInfoProvider
     #region properties
 
     private int _grdResponseDeleteColIndex = -2;
-    private IContextService _Context;
     private ResponseFilterStateInfo _State;
-    
 
     #endregion
 
@@ -37,17 +34,7 @@ public partial class TargetResponses : EntityBoundSmartPartInfoProvider
     /// <value>The entity context.</value>
     /// <returns>The specified <see cref="T:System.Web.HttpContext"></see> object associated with the current request.</returns>
     [ServiceDependency]
-    public IContextService ContextService
-    {
-        set
-        {
-            _Context = ApplicationContext.Current.Services.Get<IContextService>();
-        }
-        get
-        {
-            return _Context;
-        }
-    }
+    public IContextService ContextService { get; set; }
 
     /// <summary>
     /// Gets the type of the entity.
@@ -115,9 +102,9 @@ public partial class TargetResponses : EntityBoundSmartPartInfoProvider
     {
         public bool showContacts = true;
         public bool showLeads = true;
-        public int leadSourceFilter = 0;
-        public int methodFilter = 0;
-        public int stageFilter = 0;
+        public int leadSourceFilter;
+        public int methodFilter;
+        public int stageFilter;
         public bool formOpen;
         public string nameFilter = String.Empty;
     }
@@ -138,7 +125,7 @@ public partial class TargetResponses : EntityBoundSmartPartInfoProvider
     {
         if (ScriptManager.GetCurrent(Page) != null)
         {
-            AddResponse.Click += new ImageClickEventHandler(AddResponse_Click);
+            AddResponse.Click += AddResponse_Click;
             cmdReset.Attributes.Add("onclick", "return false;");
             tr_lnkFilters.Attributes.Add("onclick", "return false;");
         }
@@ -256,21 +243,16 @@ public partial class TargetResponses : EntityBoundSmartPartInfoProvider
     private void PopulateResponseMethods()
     {
         lbxMethods.Items.Clear();
-        string picklistId = PickList.PickListIdFromName("Response Method");
         lbxMethods.Items.Add(String.Empty);
-        if (!String.IsNullOrEmpty(picklistId))
+        IList<PickList> items = PickList.GetPickListItemsByName("Response Method", true);
+        if (items != null)
         {
-            IList<PickList> items = PickList.GetPickListItems(picklistId, true);
-            if (items != null)
+            foreach (PickList picklistItem in items)
             {
-                ListItem item;
-                foreach (PickList picklistItem in items)
-                {
-                    item = new ListItem();
-                    item.Text = picklistItem.Text;
-                    item.Value = picklistItem.ItemId;
-                    lbxMethods.Items.Add(item);
-                }
+                var item = new ListItem();
+                item.Text = picklistItem.Text;
+                item.Value = picklistItem.ItemId;
+                lbxMethods.Items.Add(item);
             }
         }
     }
@@ -289,9 +271,8 @@ public partial class TargetResponses : EntityBoundSmartPartInfoProvider
         IProjections projections = query.GetProjectionsFactory();
         ICriteria criteria = query.CreateCriteria()
             .SetProjection(projections.Distinct(projections.Property("Description")))
-                .Add(expressions
-                    .And(expressions.Eq("Campaign.Id", EntityContext.EntityID), expressions.IsNotNull("Description")))
-                    .SetCacheable(true);
+            .Add(expressions.And(expressions.Eq("Campaign.Id", EntityContext.EntityID), expressions.IsNotNull("Description")))
+            .SetCacheable(true);
 
         IList<object> stages = criteria.List<object>();
         if (stages != null)
@@ -481,7 +462,7 @@ public partial class TargetResponses : EntityBoundSmartPartInfoProvider
     private ICriteria GetExpressions(ICriteria criteria, IExpressionFactory expressions)
     {
         if (chkLeadSource.Checked)
-            criteria.Add(expressions.Eq("response.LeadSource", lbxLeadSource.SelectedItem.Text.ToString()));
+            criteria.Add(expressions.Eq("response.LeadSource", lbxLeadSource.SelectedItem.Text));
         if (chkMethod.Checked)
             criteria.Add(expressions.Eq("response.ResponseMethod", lbxMethods.SelectedItem.Text));
         if (chkStage.Checked)
@@ -650,7 +631,7 @@ public partial class TargetResponses : EntityBoundSmartPartInfoProvider
                     LinkButton btn = c as LinkButton;
                     if (btn != null)
                     {
-                        btn.Attributes.Add("onclick", "javascript: return confirm('" + GetLocalResourceObject("grdResponses.ConfirmDelete_Msg").ToString() + "');");
+                        btn.Attributes.Add("onclick", "javascript: return confirm('" + GetLocalResourceObject("grdResponses.ConfirmDelete_Msg") + "');");
                         return;
                     }
                 }
@@ -751,5 +732,4 @@ public partial class TargetResponses : EntityBoundSmartPartInfoProvider
     }
 
     #endregion
-
 }

@@ -131,7 +131,7 @@ Sage.Analytics = {
                                 }
                             }
                             break;
-                        //radioNames should set disabled state of truncate fields   
+                        //radioNames should set disabled state of truncate fields  
                         case 'radioNames':
                             $items.push(this[prop](editorFields[prop], editorFields.radioTruncate,
                                 editorFields.truncField, scope));
@@ -200,11 +200,11 @@ Sage.Analytics = {
 
                             //assemble the url ['datasource'] to call for the data
                             uri.push('slxdata.ashx/slx/crm/-/analytics?');
-                            if (scope.config.entity) { uri.push('entity=', scope.config.entity, '&'); }
-                            if (scope.config.groupname) { uri.push('groupname=', scope.config.groupname, '&'); }
-                            if (scope.config.dimension) { uri.push('dimension=', scope.config.dimension, '&'); }
-                            if (scope.config.metric) { uri.push('metric=', scope.config.metric, '&'); }
-                            if (scope.config.limit) { uri.push('limit=', scope.config.limit, '&'); }
+                            if (scope.config.entity) { uri.push('entity=', encodeURI(scope.config.entity), '&'); }
+                            if (scope.config.groupname) { uri.push('groupname=', encodeURI(scope.config.groupname), '&'); }
+                            if (scope.config.dimension) { uri.push('dimension=', encodeURI(scope.config.dimension), '&'); }
+                            if (scope.config.metric) { uri.push('metric=', encodeURI(scope.config.metric), '&'); }
+                            if (scope.config.limit) { uri.push('limit=', encodeURI(scope.config.limit), '&'); }
                             //for pie...
                             if (scope.config.combineother === 'true') {
                                 uri.push('combineother=true');
@@ -212,7 +212,7 @@ Sage.Analytics = {
                             //check for user overrides here
                             for (prop in scope.definition.qsParams) {
                                 if (scope.definition.qsParams.hasOwnProperty(prop)) {
-                                    uri.push('&', prop, '=', scope.definition.qsParams[prop]);
+                                    uri.push('&', prop, '=', encodeURI(scope.definition.qsParams[prop]));
                                 }
                             }
                             //join the finished datasource
@@ -244,7 +244,7 @@ Sage.Analytics = {
                         scope: scope
                     },
                     {
-                        text: 'Cancel',
+                        text: Sage.Analytics.WidgetResource.cancel,
                         handler: function () {
                             var win = Ext.getCmp(scope.config.editorWindow),
                             callWidget = Ext.getCmp(scope.config.panel);
@@ -414,7 +414,7 @@ Sage.Analytics = {
                     'select': {
                         fn: function (combo, record, index) {
                             //the VALUES will be stored not the display names
-                            scope.config.groupname = record.get(combo.valueField);
+                            scope.config.groupname = Ext.util.Format.htmlEncode(record.get(combo.valueField));
                             scope.config.groupid = record.get('groupId');
                         },
                         scope: scope
@@ -856,4 +856,4 @@ Sage.Analytics = {
     }, //end localize
     //stored definitions of widgets 
     WidgetDefinitions: {}
-};   //end Sage.Analytics
+};  //end Sage.Analytics

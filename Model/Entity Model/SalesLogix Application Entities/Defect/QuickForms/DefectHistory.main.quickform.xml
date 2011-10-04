@@ -74,7 +74,7 @@
 		switch (fieldChanged.ToString().ToUpper())
         {
             case "STATUSCODE": case "PRIORITYCODE": case "SEVERITYCODE": case "RESOLUTIONCODE":
-                Sage.SalesLogix.PickLists.PickList picklist = Sage.SalesLogix.PickLists.PickList.GetPickListByItemId(result);
+                Sage.SalesLogix.PickLists.PickList picklist = Sage.SalesLogix.PickLists.PickList.GetPickListById(result);
                 if (picklist != null)
                 {
                     result = picklist.Text;
@@ -103,7 +103,7 @@
 		switch (fieldChanged.ToString().ToUpper())
         {
             case "STATUSCODE": case "PRIORITYCODE": case "SEVERITYCODE": case "RESOLUTIONCODE":
-                Sage.SalesLogix.PickLists.PickList picklist = Sage.SalesLogix.PickLists.PickList.GetPickListByItemId(result);
+                Sage.SalesLogix.PickLists.PickList picklist = Sage.SalesLogix.PickLists.PickList.GetPickListById(result);
                 if (picklist != null)
                 {
                     result = picklist.Text;

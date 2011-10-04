@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QuickFormDefinition Id="2d413bc6-28a2-4292-a0d0-9ac01f06deb9" name="QuickInsertAccountContact">
+  <Properties>
+    <Property name="EntityTypeName" type="System.String">IContact</Property>
+    <Property name="DefaultNamespace" type="System.String">Sage.Entity.Interfaces</Property>
+    <Property name="AssemblyName" type="System.String">Sage.Entity.Interfaces</Property>
+    <Property name="UseEntityNameAsTitle" type="System.Boolean">False</Property>
+    <Property name="ImagePath" type="System.String"></Property>
+    <Property name="DefinitionType" type="System.String">Sage.Platform.QuickForms.QuickFormMainDetailViewDefinition, Sage.Platform.QuickForms</Property>
+    <Property name="Columns" type="System.ComponentModel.BindingList`1[[System.Windows.Forms.ColumnStyle, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><ArrayOfColumnStyle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ColumnStyle><SizeType>Percent</SizeType><Width>50</Width></ColumnStyle><ColumnStyle><SizeType>Percent</SizeType><Width>50</Width></ColumnStyle></ArrayOfColumnStyle></Property>
+    <Property name="Rows" type="System.ComponentModel.BindingList`1[[System.Windows.Forms.RowStyle, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><ArrayOfRowStyle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle></ArrayOfRowStyle></Property>
+    <Property name="GeneratePrintView" type="System.Boolean">False</Property>
+    <Property name="Description" type="System.String"></Property>
+    <Property name="ActiveControl" type="System.String"></Property>
+  </Properties>
+  <LoadActions />
+  <QuickFormElements>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFTextBox, Sage.Platform.QuickForms"><QFTextBox xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>txtAccount</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Account.AccountName</DataItemName><ControlItemName>Text</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>txtAccount</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction></QFTextBox></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXPickList, Sage.SalesLogix.QuickForms.QFControls"><QFSLXPickList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>1</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>pklType</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Account.Type</DataItemName><ControlItemName>PickListValue</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>pklType</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction><Required>false</Required><AutoPostBack>false</AutoPostBack><PickListName>Account Type</PickListName><StorageMode>Text</StorageMode><NameFormatString /><AllowMultiples>false</AllowMultiples><AlphaSort>false</AlphaSort><MustExistInList>false</MustExistInList><NoneEditable>false</NoneEditable><PickListId /><ValueStoredAsText>true</ValueStoredAsText></QFSLXPickList></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXPhone, Sage.SalesLogix.QuickForms.QFControls"><QFSLXPhone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>2</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>phAccountMain</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Account.MainPhone</DataItemName><ControlItemName>Text</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>phAccountMain</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction><Required>false</Required></QFSLXPhone></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXAddress, Sage.SalesLogix.QuickForms.QFControls"><QFSLXAddress xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><RowSpan>2</RowSpan><Column>0</Column><Row>3</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>addressMain</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Address.City</DataItemName><ControlItemName>AddressCity</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Address.Country</DataItemName><ControlItemName>AddressCountry</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Address.County</DataItemName><ControlItemName>AddressCounty</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Address.Address1</DataItemName><ControlItemName>AddressDesc1</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Address.Address2</DataItemName><ControlItemName>AddressDesc2</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Address.Address3</DataItemName><ControlItemName>AddressDesc3</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Address.Description</DataItemName><ControlItemName>AddressDescription</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Address.PostalCode</DataItemName><ControlItemName>AddressPostalCode</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Address.State</DataItemName><ControlItemName>AddressState</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><AddressDescriptionPickListId>kSYST0000014</AddressDescriptionPickListId><AddressDescriptionPickListName>Address Description (Account)</AddressDescriptionPickListName><IsPrimaryVisible>false</IsPrimaryVisible><IsMailingVisible>false</IsMailingVisible><AddressDisplay /><AddressDescription /><AddressIsPrimary>false</AddressIsPrimary><AddressIsMailing>false</AddressIsMailing><AddressDesc1 /><AddressDesc2 /><AddressDesc3 /><AddressCity /><AddressState /><AddressPostalCode /><AddressCountry /><AddressCounty /><AddressSalutation /><OnChangeAction><ResourceKey>addressMain</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction></QFSLXAddress></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXPersonName, Sage.SalesLogix.QuickForms.QFControls"><QFSLXPersonName xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>1</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>nameContact</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>FirstName</DataItemName><ControlItemName>NameFirst</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>LastName</DataItemName><ControlItemName>NameLast</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>MiddleName</DataItemName><ControlItemName>NameMiddle</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Prefix</DataItemName><ControlItemName>NamePrefix</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Suffix</DataItemName><ControlItemName>NameSuffix</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><NamePrefix /><NameFirst /><NameMiddle /><NameLast /><NameSuffix /><OnChangeAction><ResourceKey>nameContact</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction></QFSLXPersonName></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXPickList, Sage.SalesLogix.QuickForms.QFControls"><QFSLXPickList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>1</Column><Row>1</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>pklTitle</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Title</DataItemName><ControlItemName>PickListValue</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>pklTitle</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction><Required>false</Required><AutoPostBack>false</AutoPostBack><PickListName>Title</PickListName><StorageMode>Text</StorageMode><NameFormatString /><AllowMultiples>false</AllowMultiples><AlphaSort>false</AlphaSort><MustExistInList>false</MustExistInList><NoneEditable>false</NoneEditable><PickListId /><ValueStoredAsText>true</ValueStoredAsText></QFSLXPickList></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXPhone, Sage.SalesLogix.QuickForms.QFControls"><QFSLXPhone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>1</Column><Row>2</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>pContactMain</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>WorkPhone</DataItemName><ControlItemName>Text</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>pContactMain</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction><Required>false</Required></QFSLXPhone></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXPhone, Sage.SalesLogix.QuickForms.QFControls"><QFSLXPhone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>1</Column><Row>3</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>phMoble</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Mobile</DataItemName><ControlItemName>Text</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>phMoble</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction><Required>false</Required></QFSLXPhone></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXEmail, Sage.SalesLogix.QuickForms.QFControls"><QFSLXEmail xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>1</Column><Row>4</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>email</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Email</DataItemName><ControlItemName>Text</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>email</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction><Required>false</Required></QFSLXEmail></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.QFControls.QFControlsList, Sage.Platform.QuickForms.QFControls"><QFControlsList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>1</Column><Row>5</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>QFControlsList</ControlId><DataBindings /><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme>qfActionContainer</StyleScheme><Caption /><Controls><ControlsCollection><Control TypeName="Sage.Platform.QuickForms.Controls.QFButton, Sage.Platform.QuickForms"><QFButton><Column>1</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>btnOK</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme>slxbutton</StyleScheme><ButtonType>StandardButton</ButtonType><Image /><OnClientClick /><OnClickAction><ResourceKey>btnOK</ResourceKey><RootActionName>CodeSnippetAction</RootActionName><Action><CodeSnippetAction methodId="fa4891bf-deaa-44ac-8374-ba4c41938e82" /></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>DialogOK</DialogActionResult><PerformsUpdate>True</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnClickAction></QFButton></Control><Control TypeName="Sage.Platform.QuickForms.Controls.QFButton, Sage.Platform.QuickForms"><QFButton><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>btnCancel</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme>slxbutton</StyleScheme><ButtonType>StandardButton</ButtonType><Image /><OnClientClick /><OnClickAction><ResourceKey>btnCancel</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>DialogCancel</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnClickAction></QFButton></Control></ControlsCollection></Controls></QFControlsList></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+  </QuickFormElements>
+  <QuickFormToolElements />
+</QuickFormDefinition>

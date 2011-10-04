@@ -99,6 +99,7 @@ public partial class SmartParts_AddSalesOrderProduct : EntityBoundSmartPartInfoP
         public string FamilyFilter = string.Empty;
         public string StatusFilter = string.Empty;
         public string SKUFilter = string.Empty;
+        public string APPIDFilter = string.Empty;
         public int NameCond;
         public int DescCond;
         public int SKUCond;
@@ -165,7 +166,7 @@ public partial class SmartParts_AddSalesOrderProduct : EntityBoundSmartPartInfoP
         
         StringBuilder script = new StringBuilder();
         script.AppendFormat("SmartParts.SalesOrder.AddSalesOrderProduct.create('{0}', {1})", ID,
-                            JavaScriptConvert.SerializeObject(treeConfig));
+                            JsonConvert.SerializeObject(treeConfig));
 
         if (ScriptManager.GetCurrent(Page).IsInAsyncPostBack)
             ScriptManager.RegisterStartupScript(Page, typeof(Page), "add-salesorder-product-init",
@@ -179,9 +180,24 @@ public partial class SmartParts_AddSalesOrderProduct : EntityBoundSmartPartInfoP
             _State.Packages,_State.NameFilter,_State.FamilyFilter,_State.NameCond);
         queryStringState.AppendFormat("&StatusFilter={0}&SKUFilter={1}&SKUCond={2}",
             _State.StatusFilter,_State.SKUFilter,_State.SKUCond);
+        queryStringState.AppendFormat("&APPIDFilter={0}",GetAppId());
         
         return queryStringState.ToString();
     }
+
+    private string GetAppId()
+    { 
+        ISalesOrder salesOrder = BindingSource.Current as ISalesOrder;
+        if (salesOrder != null)
+        {
+            if (salesOrder.OperatingCompany != null)
+            {
+                return salesOrder.OperatingCompany.Id.ToString();
+            }
+        }
+        return string.Empty;
+    }
+
 
     /// <summary>
     /// Raises the <see cref="E:PreRender"/> event.
@@ -236,17 +252,22 @@ public partial class SmartParts_AddSalesOrderProduct : EntityBoundSmartPartInfoP
                 salesOrderItem.ProductName = salesOrderItem.Product.Name;
                 salesOrderItem.SalesOrder = salesOrder;
                 salesOrderItem.Family = product.Family;
+                salesOrderItem.ActualID = product.ActualId;
+                salesOrderItem.Description = product.Description;
 
                 bool isInList = false;
                 if (salesOrder != null)
                 {
                     foreach (ISalesOrderItem so in salesOrder.SalesOrderItems)
                     {
-                        if (string.Compare(Convert.ToString(so.Product.Id), Convert.ToString(salesOrderItem.Product.Id)) == 0)
+                        if (so.Product != null)
                         {
-                            so.Quantity++;
-                            isInList = true;
-                            break;
+                            if (string.Compare(Convert.ToString(so.Product.Id), Convert.ToString(salesOrderItem.Product.Id)) == 0)
+                            {
+                                so.Quantity++;
+                                isInList = true;
+                                break;
+                            }
                         }
                     }
 
@@ -443,11 +464,14 @@ public partial class SmartParts_AddSalesOrderProduct : EntityBoundSmartPartInfoP
         if (salesOrder != null)
             foreach (ISalesOrderItem item in salesOrder.SalesOrderItems)
             {
-                if (item.Product.Id.ToString().Equals(productId))
+                if (item.Product != null)
                 {
-                    item.Program = program;
-                    Sage.SalesLogix.SalesOrder.SalesOrderItem.CalcPriceFromProgramPrice(item);
-                    break;
+                    if (item.Product.Id.ToString().Equals(productId))
+                    {
+                        item.Program = program;
+                        Sage.SalesLogix.SalesOrder.SalesOrderItem.CalcPriceFromProgramPrice(item);
+                        break;
+                    }
                 }
             }
     }

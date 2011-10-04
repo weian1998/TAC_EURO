@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="0a6196bf-58d7-4de3-8fd0-1ac37c9cfe0f" lastModifiedUtc="2010-09-15T15:59:45.3738952Z" parentEntityId="1d244d2a-99c6-4235-ac38-caaa73eef74e" childEntityId="3849fe99-3ee0-49f5-84ab-b6f716219687" cascadeOption="SaveUpdateDelete">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="e4eb9106-e502-421b-8db3-80e587775906" lastModifiedUtc="2010-01-27T21:36:38.1651539Z" name="SyncDigests" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="1c173999-4a1c-406a-a3be-e87325442592" lastModifiedUtc="2010-01-27T21:36:38.2271601Z" name="AppIdMapping" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="cd7b8af7-3002-4f5b-963a-ab68996738c8" parentPropertyId="6a77ae6e-4046-43cf-851c-90094f32b47b" childPropertyId="622363aa-8d07-4952-bf39-b21a90871a02" ordinal="0" />
+  </column>
+</relationship>

@@ -69,7 +69,48 @@ public partial class SmartParts_OpportunitySummary : EntityBoundSmartPartInfoPro
          bool bFoundHistoryFax = false;
          bool bFoundHistoryUpdate = false;
 
-         string EntityID = EntityService.EntityID.ToString();
+
+         NextCallDate.Text = string.Empty;
+         NextCallUser.Text = string.Empty;
+         NextCallRegarding.Text = string.Empty;
+         
+         NextMeetDate.Text = string.Empty;
+         NextMeetUser.Text = string.Empty;
+         NextMeetRegarding.Text = string.Empty;
+         
+         NextToDoDate.Text = string.Empty;
+         NextToDoUser.Text = string.Empty;
+         NextToDoRegarding.Text = string.Empty;
+         
+         LastCallDate.Text = string.Empty;
+         LastCallUser.Text = string.Empty;
+         LastCallRegarding.Text = string.Empty;
+         
+         LastMeetDate.Text = string.Empty;
+         LastMeetUser.Text = string.Empty;
+         LastMeetRegarding.Text = string.Empty;
+         
+         LastToDoDate.Text = string.Empty;
+         LastToDoUser.Text = string.Empty;
+         LastToDoRegarding.Text = string.Empty;
+         
+         LastLetterDate.Text = string.Empty;
+         LastLetterUser.Text = string.Empty;
+         LastLetterRegarding.Text = string.Empty;
+         
+         LastEmailDate.Text = string.Empty;
+         LastEmailUser.Text = string.Empty;
+         LastEmailRegarding.Text = string.Empty;
+         
+         LastFaxDate.Text = string.Empty;
+         LastFaxUser.Text = string.Empty;
+         LastFaxRegarding.Text = string.Empty;
+
+         LastUpdateDate.Text = string.Empty;
+         LastUpdateUser.Text = string.Empty;
+
+         IOpportunity opportunity = BindingSource.Current as IOpportunity;
+         string EntityID = opportunity.Id.ToString(); 
 
          IRepository<Activity> actRep = EntityFactory.GetRepository<Activity>();
          IQueryable qryableAct = (IQueryable)actRep;
@@ -208,7 +249,7 @@ public partial class SmartParts_OpportunitySummary : EntityBoundSmartPartInfoPro
                  }
              }
          }
-         IOpportunity opportunity = EntityFactory.GetRepository<IOpportunity>().Get(EntityID);
+       
          DateTime md = new DateTime();
          if (opportunity.ModifyDate.HasValue)
          {

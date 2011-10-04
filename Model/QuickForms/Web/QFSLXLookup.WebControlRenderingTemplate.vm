@@ -31,16 +31,16 @@
 #if($qfcontrol.TabIndex > 0)TabIndex="$qfcontrol.TabIndex" #end
 #if(!$qfcontrol.AddEmptyListItem)AddEmptyListItem="false" #end
 #if($qfcontrol.AllowClearingResult)AllowClearingResult="true" #end
-#if($qfcontrol.StyleScheme != "")CssClass="$qfcontrol.StyleScheme" #end 
-#if(!$qfcontrol.Visible)Visible="false" #end 
-#if($qfcontrol.LookupDialogHeight)DialogHeight="$qfcontrol.LookupDialogHeight" #end 
-#if($qfcontrol.LookupDialogWidth)DialogWidth="$qfcontrol.LookupDialogWidth" #end 
-#if($qfcontrol.LookupDialogTitle != "")DialogTitle="<%$ resources: ${qfcontrol.ControlId}.LookupDialogTitle %>" #end 
+#if($qfcontrol.StyleScheme != "")CssClass="$qfcontrol.StyleScheme" #end
+#if(!$qfcontrol.Visible)Visible="false" #end
+#if($qfcontrol.LookupDialogHeight)DialogHeight="$qfcontrol.LookupDialogHeight" #end
+#if($qfcontrol.LookupDialogWidth)DialogWidth="$qfcontrol.LookupDialogWidth" #end
+#if($qfcontrol.LookupDialogTitle != "")DialogTitle="<%$ resources: ${qfcontrol.ControlId}.LookupDialogTitle %>" #end
 #if($qfcontrol.OverrideSeedOnSearch)OverrideSeedOnSearch="true" #end
 #if(${qfcontrol.LookupImage} != "")LookupImageURL="$generator.getImageResourceURL( ${qfcontrol.LookupImage} )" #end >
 <LookupProperties>
 #foreach($lprop in $qfcontrol.LookupProperties)
-<SalesLogix:LookupProperty PropertyHeader="$qfcontrol.GetHeader($lprop.PropertyName)" PropertyName="$lprop.PropertyName" PropertyType="$lprop.PropertyType" PropertyFormat="$lprop.PropertyFormat"  UseAsResult="$lprop.UseAsResult" ExcludeFromFilters="$lprop.ExcludeFromFilters"></SalesLogix:LookupProperty>
+<SalesLogix:LookupProperty PropertyHeader="$qfcontrol.GetHeader($lprop.PropertyName)" PropertyName="$lprop.PropertyName" PropertyType="$lprop.PropertyType" PropertyFormat="$lprop.PropertyFormat" PropertyFormatString="$lprop.PropertyFormatString" UseAsResult="$lprop.UseAsResult" ExcludeFromFilters="$lprop.ExcludeFromFilters"></SalesLogix:LookupProperty>
 #end
 </LookupProperties>
 <LookupPreFilters>
@@ -61,5 +61,5 @@
  </div>   
 #end
 #if($qfcontrol.DataBindings.Count == 0)
- $generator.addFormLoadCode("ClientBindingMgr.RegisterBoundControl(${qfcontrol.ControlID});")                
+ $generator.addFormLoadCode("ClientBindingMgr.RegisterBoundControl(${qfcontrol.ControlID});")
 #end

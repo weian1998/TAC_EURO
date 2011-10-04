@@ -159,7 +159,7 @@
                         <asp:TemplateField HeaderText="<%$ resources: grdProducts.AdjustedPrice.ColumnHeader %>" ItemStyle-HorizontalAlign="Right">
                             <ItemTemplate>
                                 <SalesLogix:Currency ID="curCalcPriceMC" runat="server" ExchangeRate='<%# Eval("SalesOrder.ExchangeRate") %>' 
-                                    ExchangeRateType="SalesOrderRate" CurrentCode='<%# Eval("SalesOrder.CurrencyCode") %>' DisplayMode="AsText"
+                                    ExchangeRateType="EntityRate" CurrentCode='<%# Eval("SalesOrder.CurrencyCode") %>' DisplayMode="AsText"
                                     DisplayCurrencyCode="true" Text='<%# Eval("CalculatedPrice") %>' />
                             </ItemTemplate> 
                         </asp:TemplateField>
@@ -168,7 +168,7 @@
                         <asp:TemplateField HeaderText="<%$ resources: grdProducts.ExtendedPrice.ColumnHeader %>" ItemStyle-HorizontalAlign="Right">
                             <ItemTemplate>
                                 <SalesLogix:Currency ID="Currency2" runat="server" DisplayMode="AsText" ExchangeRate='<%# Eval("SalesOrder.ExchangeRate") %>'
-                                    ExchangeRateType="SalesOrderRate" CurrentCode='<%# Eval("SalesOrder.CurrencyCode") %>' DisplayCurrencyCode="true"
+                                    ExchangeRateType="EntityRate" CurrentCode='<%# Eval("SalesOrder.CurrencyCode") %>' DisplayCurrencyCode="true"
                                     Text='<%# Eval("ExtendedPrice") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>   

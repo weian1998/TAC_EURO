@@ -20,7 +20,6 @@
 </snippetHeader>
 */
 
-
 #region Usings
 using System;
 using Sage.Entity.Interfaces;

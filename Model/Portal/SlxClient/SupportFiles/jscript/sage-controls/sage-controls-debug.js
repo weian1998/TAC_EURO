@@ -22,8 +22,7 @@ else
 }
 
 
-if (typeof(Sage) != "undefined")
-{    
+if (typeof(Sage) != "undefined") {    
     Sage.SyncExec = function() {
         this._functionList = [];
         
@@ -50,8 +49,129 @@ if (typeof(Sage) != "undefined")
         if (typeof Sage.SyncExec._instance == "undefined")
             Sage.SyncExec._instance = new Sage.SyncExec();    
             
-        Sage.SyncExec._instance.tryCall(functionToCall);    
+        Sage.SyncExec._instance.tryCall(functionToCall);
     };
+
+    //ToDo:  This is a copy from Sage.Utility for - remove this version when possible...
+    Sage.SalesLogix.Controls.maximizeDecimalDigit = function (value, decimalDigits, decimalSeparator) {
+        var dif;
+        var retVal = value;
+        if (typeof decimalDigits === 'undefined') {
+            decimalDigits = Sys.CultureInfo.CurrentCulture.numberFormat.NumberDecimalDigits;
+        }
+
+        if (typeof decimalSeparator === 'undefined') {
+            decimalSeparator = Sys.CultureInfo.CurrentCulture.numberFormat.NumberDecimalSeparator;
+        }
+
+         var intDecimalDigits = parseInt(decimalDigits);
+
+        //If there isn't a seperator but we require a decimal digit position, place the seperator before adding digits.
+        if (intDecimalDigits > 0 && value.lastIndexOf(decimalSeparator) == -1 && value.length > 0) {
+            retVal = [value, decimalSeparator].join('');
+        }
+
+         var restriction = retVal.lastIndexOf(decimalSeparator) + 1 + intDecimalDigits;
+        if (retVal.lastIndexOf(decimalSeparator) > -1) {
+            diff = restriction - retVal.length;
+            if (diff > 0) {
+                for (var i = 0; i < diff; i++) {
+                    retVal += '0';
+                }
+            }
+        }
+        return retVal;
+    }
+
+    //ToDo:  This is a copy from Sage.Utility for - remove this version when possible...
+    Sage.SalesLogix.Controls.restrictDecimalDigit = function (value, decimalDigits, decimalSep) {
+        //this is a copy from Sage.Utility.restrictDecimalDigit;
+        var dif;
+        var retVal = value;
+        var intDecimalDigits = parseInt(decimalDigits);
+        var restriction = value.lastIndexOf(decimalSep) + 1 + intDecimalDigits;
+        if (intDecimalDigits == 0) {
+            restriction--;
+        }
+        if (value.lastIndexOf(decimalSep) > -1) {
+            retVal = value.substr(0, restriction);
+        }
+        return retVal;
+    }
+
+    Sage.SalesLogix.Controls.formatNumber = function (num, type, decimalDigits, warningMsg) {
+        //ToDo: remove this whole functionality and use Sage.Utility when it is available in all parts of the app.
+
+        warningMsg = (warningMsg) ? warningMsg : '';
+        var decSep, groupSep, negSign, groupDigits;
+        var cultureOptions = Sys.CultureInfo.CurrentCulture.numberFormat;
+        negSign = cultureOptions.NegativeSign;
+        switch (type) {
+            case 'currency':
+                groupSep = cultureOptions.CurrencyGroupSeparator;
+                decSep = cultureOptions.CurrencyDecimalSeparator;
+                decimalDigits = (typeof decimalDigits !== 'undefined') ? decimalDigits : cultureOptions.CurrencyDecimalDigits;
+                groupDigits = cultureOptions.CurrencyGroupSizes[0];
+                break;
+            case 'percent':
+                groupSep = cultureOptions.PercentGroupSeparator;
+                decSep = cultureOptions.PercentDecimalSeparator;
+                decimalDigits = (typeof decimalDigits !== 'undefined') ? decimalDigits : cultureOptions.PercentDecimalDigits;
+                groupDigits = cultureOptions.PercentGroupSizes[0];
+                break;
+            default:  //number
+                groupSep = cultureOptions.NumberGroupSeparator;
+                decSep = cultureOptions.NumberDecimalSeparator;
+                decimalDigits = (typeof decimalDigits !== 'undefined') ? decimalDigits : cultureOptions.NumberDecimalDigits;
+                groupDigits = cultureOptions.NumberGroupSizes[0];
+                break;
+        }
+        //do we have any group separators?  Normally these are gone by now, but just to be sure...
+        var x = new RegExp('[' + groupSep + ']', 'g');
+        num = num.replace(x, '');
+
+        //do we have more than one decimal?
+        if ((num.indexOf(decSep) > -1) && (num.indexOf(decSep) < num.lastIndexOf(decSep))) {
+            var firstHalf = num.substr(0, num.indexOf('.') + 1);
+            var lastHalf = num.substr(num.indexOf('.') + 1).replace(/\./g, '')
+            num = firstHalf + lastHalf;
+        }
+
+        //is everything on both sides of the decimal a number?
+        var parts = num.split(decSep);
+        for (i = 0; i < parts.length; i++) {
+            if (isNaN(parts[i])) {
+                alert(parts[i] + " " + warningMsg);
+                return false;
+            }
+        }
+        var result = "";
+        if (num != "") {
+            //hack off any extra digits past the accepted number of decimalDigits...
+            num = Sage.SalesLogix.Controls.restrictDecimalDigit(num, decimalDigits, decSep);
+            //where is the decimal?
+            var pos = num.indexOf(decSep) == -1 ? num.length : num.indexOf(decSep);
+            //get the decimal and everything after it - if there is one...
+            if ((decimalDigits > 0) && (num.indexOf(decSep) > -1)) {
+                result = num.substr(pos);
+            }
+            //now piece together the rest of the number with group separators added...
+            while (pos - groupDigits > 0) {
+                result = groupSep + num.substr(pos - groupDigits, groupDigits) + result;
+                pos = pos - groupDigits;
+            }
+            if (pos > 0) {
+                result = num.substr(0, pos) + result;
+            }
+        }
+
+        //Add the regional precent symbol if there is a value.
+        if (type == 'percent' && result) {
+            result = [result, ' ', cultureOptions.PercentSymbol].join("");
+        }
+
+        return result;
+    }
 }
 
 function IsAllowedNavigationKey(charCode) {
@@ -82,6 +202,341 @@ function GetResourceValue(resource, defval) {
     }
     return val;
 }
+
+
+//TODO: Remove this when SalesLogix no longer supports IE7
+//-------------------------------------------------------------------------
+
+
+
+
+
+
+
+// Create a JSON object only if one does not already exist. We create the
+// methods in a closure to avoid creating global variables.
+
+var JSON;
+if (!JSON) {
+    JSON = {};
+}
+
+(function () {
+    "use strict";
+
+    function f(n) {
+        // Format integers to have at least two digits.
+        return n < 10 ? '0' + n : n;
+    }
+
+    if (typeof Date.prototype.toJSON !== 'function') {
+
+        Date.prototype.toJSON = function (key) {
+
+            return isFinite(this.valueOf()) ?
+                this.getUTCFullYear() + '-' +
+                f(this.getUTCMonth() + 1) + '-' +
+                f(this.getUTCDate()) + 'T' +
+                f(this.getUTCHours()) + ':' +
+                f(this.getUTCMinutes()) + ':' +
+                f(this.getUTCSeconds()) + 'Z' : null;
+        };
+
+        String.prototype.toJSON =
+            Number.prototype.toJSON =
+            Boolean.prototype.toJSON = function (key) {
+                return this.valueOf();
+            };
+    }
+
+    var cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
+        escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
+        gap,
+        indent,
+        meta = {    // table of character substitutions
+            '\b': '\\b',
+            '\t': '\\t',
+            '\n': '\\n',
+            '\f': '\\f',
+            '\r': '\\r',
+            '"': '\\"',
+            '\\': '\\\\'
+        },
+        rep;
+
+
+    function quote(string) {
+
+        // If the string contains no control characters, no quote characters, and no
+        // backslash characters, then we can safely slap some quotes around it.
+        // Otherwise we must also replace the offending characters with safe escape
+        // sequences.
+
+        escapable.lastIndex = 0;
+        return escapable.test(string) ? '"' + string.replace(escapable, function (a) {
+            var c = meta[a];
+            return typeof c === 'string' ? c :
+                '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+        }) + '"' : '"' + string + '"';
+    }
+
+
+    function str(key, holder) {
+
+        // Produce a string from holder[key].
+
+        var i,          // The loop counter.
+            k,          // The member key.
+            v,          // The member value.
+            length,
+            mind = gap,
+            partial,
+            value = holder[key];
+
+        // If the value has a toJSON method, call it to obtain a replacement value.
+
+        if (value && typeof value === 'object' &&
+                typeof value.toJSON === 'function') {
+            value = value.toJSON(key);
+        }
+
+        // If we were called with a replacer function, then call the replacer to
+        // obtain a replacement value.
+
+        if (typeof rep === 'function') {
+            value = rep.call(holder, key, value);
+        }
+
+        // What happens next depends on the value's type.
+
+        switch (typeof value) {
+            case 'string':
+                return quote(value);
+
+            case 'number':
+
+                // JSON numbers must be finite. Encode non-finite numbers as null.
+
+                return isFinite(value) ? String(value) : 'null';
+
+            case 'boolean':
+            case 'null':
+
+                // If the value is a boolean or null, convert it to a string. Note:
+                // typeof null does not produce 'null'. The case is included here in
+                // the remote chance that this gets fixed someday.
+
+                return String(value);
+
+                // If the type is 'object', we might be dealing with an object or an array or
+                // null.
+
+            case 'object':
+
+                // Due to a specification blunder in ECMAScript, typeof null is 'object',
+                // so watch out for that case.
+
+                if (!value) {
+                    return 'null';
+                }
+
+                // Make an array to hold the partial results of stringifying this object value.
+
+                gap += indent;
+                partial = [];
+
+                // Is the value an array?
+
+                if (Object.prototype.toString.apply(value) === '[object Array]') {
+
+                    // The value is an array. Stringify every element. Use null as a placeholder
+                    // for non-JSON values.
+
+                    length = value.length;
+                    for (i = 0; i < length; i += 1) {
+                        partial[i] = str(i, value) || 'null';
+                    }
+
+                    // Join all of the elements together, separated with commas, and wrap them in
+                    // brackets.
+
+                    v = partial.length === 0 ? '[]' : gap ?
+                    '[\n' + gap + partial.join(',\n' + gap) + '\n' + mind + ']' :
+                    '[' + partial.join(',') + ']';
+                    gap = mind;
+                    return v;
+                }
+
+                // If the replacer is an array, use it to select the members to be stringified.
+
+                if (rep && typeof rep === 'object') {
+                    length = rep.length;
+                    for (i = 0; i < length; i += 1) {
+                        k = rep[i];
+                        if (typeof k === 'string') {
+                            v = str(k, value);
+                            if (v) {
+                                partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                            }
+                        }
+                    }
+                } else {
+
+                    // Otherwise, iterate through all of the keys in the object.
+
+                    for (k in value) {
+                        if (Object.hasOwnProperty.call(value, k)) {
+                            v = str(k, value);
+                            if (v) {
+                                partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                            }
+                        }
+                    }
+                }
+
+                // Join all of the member texts together, separated with commas,
+                // and wrap them in braces.
+
+                v = partial.length === 0 ? '{}' : gap ?
+                '{\n' + gap + partial.join(',\n' + gap) + '\n' + mind + '}' :
+                '{' + partial.join(',') + '}';
+                gap = mind;
+                return v;
+        }
+    }
+
+    // If the JSON object does not yet have a stringify method, give it one.
+
+    if (typeof JSON.stringify !== 'function') {
+        JSON.stringify = function (value, replacer, space) {
+
+            // The stringify method takes a value and an optional replacer, and an optional
+            // space parameter, and returns a JSON text. The replacer can be a function
+            // that can replace values, or an array of strings that will select the keys.
+            // A default replacer method can be provided. Use of the space parameter can
+            // produce text that is more easily readable.
+
+            var i;
+            gap = '';
+            indent = '';
+
+            // If the space parameter is a number, make an indent string containing that
+            // many spaces.
+
+            if (typeof space === 'number') {
+                for (i = 0; i < space; i += 1) {
+                    indent += ' ';
+                }
+
+                // If the space parameter is a string, it will be used as the indent string.
+
+            } else if (typeof space === 'string') {
+                indent = space;
+            }
+
+            // If there is a replacer, it must be a function or an array.
+            // Otherwise, throw an error.
+
+            rep = replacer;
+            if (replacer && typeof replacer !== 'function' &&
+                    (typeof replacer !== 'object' ||
+                    typeof replacer.length !== 'number')) {
+                throw new Error('JSON.stringify');
+            }
+
+            // Make a fake root object containing our value under the key of ''.
+            // Return the result of stringifying the value.
+
+            return str('', { '': value });
+        };
+    }
+
+
+    // If the JSON object does not yet have a parse method, give it one.
+
+    if (typeof JSON.parse !== 'function') {
+        JSON.parse = function (text, reviver) {
+
+            // The parse method takes a text and an optional reviver function, and returns
+            // a JavaScript value if the text is a valid JSON text.
+
+            var j;
+
+            function walk(holder, key) {
+
+                // The walk method is used to recursively walk the resulting structure so
+                // that modifications can be made.
+
+                var k, v, value = holder[key];
+                if (value && typeof value === 'object') {
+                    for (k in value) {
+                        if (Object.hasOwnProperty.call(value, k)) {
+                            v = walk(value, k);
+                            if (v !== undefined) {
+                                value[k] = v;
+                            } else {
+                                delete value[k];
+                            }
+                        }
+                    }
+                }
+                return reviver.call(holder, key, value);
+            }
+
+
+            // Parsing happens in four stages. In the first stage, we replace certain
+            // Unicode characters with escape sequences. JavaScript handles many characters
+            // incorrectly, either silently deleting them, or treating them as line endings.
+
+            text = String(text);
+            cx.lastIndex = 0;
+            if (cx.test(text)) {
+                text = text.replace(cx, function (a) {
+                    return '\\u' +
+                        ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+                });
+            }
+
+            // In the second stage, we run the text against regular expressions that look
+            // for non-JSON patterns. We are especially concerned with '()' and 'new'
+            // because they can cause invocation, and '=' because it can cause mutation.
+            // But just to be safe, we want to reject all unexpected forms.
+
+            // We split the second stage into 4 regexp operations in order to work around
+            // crippling inefficiencies in IE's and Safari's regexp engines. First we
+            // replace the JSON backslash pairs with '@' (a non-JSON character). Second, we
+            // replace all simple value tokens with ']' characters. Third, we delete all
+            // open brackets that follow a colon or comma or that begin the text. Finally,
+            // we look to see that the remaining characters are only whitespace or ']' or
+            // ',' or ':' or '{' or '}'. If that is so, then the text is safe for eval.
+
+            if (/^[\],:{}\s]*$/
+                    .test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@')
+                        .replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']')
+                        .replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+
+                // In the third stage we use the eval function to compile the text into a
+                // JavaScript structure. The '{' operator is subject to a syntactic ambiguity
+                // in JavaScript: it can begin a block or an object literal. We wrap the text
+                // in parens to eliminate the ambiguity.
+
+                j = eval('(' + text + ')');
+
+                // In the optional fourth stage, we recursively walk the new structure, passing
+                // each name/value pair to a reviver function for possible transformation.
+
+                return typeof reviver === 'function' ?
+                    walk({ '': j }, '') : j;
+            }
+
+            // If the text is not JSON parseable, then a SyntaxError is thrown.
+
+            throw new SyntaxError('JSON.parse');
+        };
+    }
+} ());
+// END TODO:
+//-------------------------------------------------------------------------
 
 Sage.ToolTipCombo = function (config) {
     Sage.ToolTipCombo.superclass.constructor.call(this, config);
@@ -222,56 +677,46 @@ function ActivityRollover(message, userId)
     this.UserId = userId;
 }
 
-ActivityRollover.prototype.DoRollovers = function()
-{
+ActivityRollover.prototype.DoRollovers = function () {
     var NumberToRoll = 20;
-    if (typeof(roxmlhttp) == "undefined") {
-        roxmlhttp = YAHOO.util.Connect.createXhrObject().conn;
-    }
     var vUrl = String.format("SLXReminderHandler.aspx?user={0}&Rollover=T&Count={1}", this.UserId, NumberToRoll);
-    roxmlhttp.open("GET", vUrl, true);
-    roxmlhttp.onreadystatechange = function() { RolloverObj.RolloverChild(vUrl, this.message);};
-    roxmlhttp.send(null);
+    $.get(
+        vUrl,
+        function (data, status) { RolloverObj.RolloverChild(vUrl, data); }
+    );
 }
 
-ActivityRollover.prototype.RolloverChild = function(vURL, msg)
+ActivityRollover.prototype.RolloverChild = function(vURL, data)
 {
-    if (roxmlhttp.readyState == 4)
+    if (data === "NOTAUTHENTICATED")
     {
-        if (roxmlhttp.responseText == "NOTAUTHENTICATED")
-        {
-            window.location.reload(true);
-            return;
-        }
-        var NumberLeft = parseInt(roxmlhttp.responseText);
-        if ( NumberLeft > 0) 
-        {
-            this.RollingOver = true;
-            self.setTimeout("SetWarning(" + NumberLeft + ", '" + this.message + "')", 100);
-            roxmlhttp.open("GET", vURL, true);
-            roxmlhttp.onreadystatechange = function() { RolloverObj.RolloverChild(vURL, this.message);};
-            roxmlhttp.send(null);
-        }
-        else
-        {
-            self.setTimeout("ClearWarning()", 500);
-        }
+        window.location.reload(true);
+        return;
+    }
+    var NumberLeft = parseInt(data, 10);
+    if (NumberLeft > 0) {
+        this.RollingOver = true;
+        self.setTimeout("SetWarning(" + NumberLeft + ", '" + this.message + "')", 100);
+        $.get(
+            String.format("SLXReminderHandler.aspx?user={0}&Rollover=T&Count={1}", this.UserId, NumberToRoll),
+            function (data, status) { RolloverObj.RolloverChild(vUrl, data); }
+        );
+    } else {
+        self.setTimeout("ClearWarning()", 500);
     }
 }
 
 function SetWarning(total, msg)
 {
     var msgService = Sage.Services.getService("WebClientMessageService");
-    if (msgService)
-    { 
+    if (msgService) { 
         msgService.showClientMessage(RolloverObj.message.replace("%d", total)); 
     } 
 }
 function ClearWarning()
 {
     var msgService = Sage.Services.getService("WebClientMessageService");
-    if (msgService)
-    { 
+    if (msgService) { 
         msgService.hideClientMessage();
     } 
     RolloverObj.RollingOver = false;
@@ -300,7 +745,14 @@ PickListComboBox = function(options) {
                 {name: "text"},
                 {name: "value", convert: function(v, rec) { return m[o.storageMode] ? rec[m[o.storageMode]] : rec["text"]; }}
             ]
-        })
+        }),
+        listeners: {
+            load: function () {
+                if (typeof idComboBoxItems === "function") {
+                    idComboBoxItems();
+                }
+            }
+        }
     });       
     
     o.mode = "remote";
@@ -315,30 +767,27 @@ PickListComboBox = function(options) {
     PickListComboBox.superclass.constructor.call(this, o);
 }
 
-Ext.extend(PickListComboBox, Ext.form.ComboBox, {    
-    initComponent : function()
-    {        
+Ext.extend(PickListComboBox, Ext.form.ComboBox, {
+    initComponent: function () {
         PickListComboBox.superclass.initComponent.call(this);
         this.bind();
-    },    
-    bind: function() {
+    },
+    bind: function () {
 
     },
-    unbind: function() {
-    
+    unbind: function () {
+
     },
-    setValue: function(v) {
-        if (typeof v === "object")  
-        {                   
+    setValue: function (v) {
+        if (typeof v === "object") {
             PickListComboBox.superclass.setValue.call(this, v.value); 
             Ext.form.ComboBox.superclass.setValue.call(this, v.text); 
         }
-        else
-        {
+        else {
             PickListComboBox.superclass.setValue.call(this, v);
         }
     },
-    getValue: function() {
+    getValue: function () {
         var v = {
             text: Ext.form.ComboBox.superclass.getValue.call(this),
             value: PickListComboBox.superclass.getValue.call(this)
@@ -427,7 +876,9 @@ AddressControl.prototype.createFormItems = function() {
             anchor: (this._fields[i].xtype != "checkbox") ? "100%" : false
         });
         if (f.maxLength > 0)
-            f.autoCreate = {tag: 'input', type: 'text', maxlength: this._fields[i].maxLength};
+            f.autoCreate = { tag: 'input', type: 'text', maxlength: this._fields[i].maxLength };
+        
+        f.tabIndex = i+1;
         items.push(f);
     }
     return items;    
@@ -564,29 +1015,29 @@ AddressControl.prototype.saveValues = function() {
     });
 };
 
-AddressControl.prototype.createDialog = function() {   
-    var self = this; 
-    
+AddressControl.prototype.createDialog = function () {
+    var self = this;
+
     var form = new AddressFormPanel({ //new Ext.form.FormPanel({
         id: this._clientId + "_form",
         baseCls: "x-plain",
-        labelWidth: 100,       
+        labelWidth: 100,
         layoutConfig: {
             labelSeparator: ""
         },
         defaultType: "textfield",
-        bodyStyle: "padding:5px;", 
+        bodyStyle: "padding:5px;",
         stateful: false,
         items: this.createFormItems()
     });
-    
+
     var panel = new Ext.Panel({
-        id: this._clientId + "_panel", 
-        autoScroll: true,  
-        border: false,             
+        id: this._clientId + "_panel",
+        autoScroll: true,
+        border: false,
         items: [form]
     });
-      
+
     var dialog = new Ext.Window({
         id: this._clientId + "_window",
         title: addressrsc.AddressControl_EditPanel_Header,
@@ -595,7 +1046,7 @@ AddressControl.prototype.createDialog = function() {
         height: (this._options.height > 0) ? this._options.height : 390,
         minWidth: (this._options.minWidth > 0) ? this._options.minWidth : 350,
         minHeight: (this._options.minHeight > 0) ? this._options.minHeight : 390,
-        layout: "fit",        
+        layout: "fit",
         closeAction: "hide",
         plain: true,
         stateful: false,
@@ -605,49 +1056,64 @@ AddressControl.prototype.createDialog = function() {
         buttonAlign: "right",
         buttons: [{
             id: this._clientId + "_ok",
+            tabIndex: 13,
             text: addressrsc.AddressControl_EditPanel_Ok,
-            handler: function() {
+            handler: function () {
                 self.saveValues();
                 self.close();
             }
-        },{
+        }, {
             id: this._clientId + "_cancel",
+            tabIndex: 14,
             text: addressrsc.AddressControl_EditPanel_Cancel,
-            handler: function() {
+            handler: function () {
                 self.close();
-            }   
+            }
         }],
         tools: [{
             id: "help",
-            handler: function(evt, toolEl, panel) {  
-                if (self._helpLink && self._helpLink.url) 
+            handler: function (evt, toolEl, panel) {
+                if (self._helpLink && self._helpLink.url)
                     window.open(self._helpLink.url, (self._helpLink.target || "help"));
             }
         }]
     });
-    
-    dialog.on("resize", function(dialog, width, height) {
+
+
+    dialog.on("resize", function (dialog, width, height) {
         panel.doLayout();
     });
-    
-    form.on("afterlayout", function(container, layout) {
+
+
+
+    form.on("afterlayout", function (container, layout) {
         
     });
-    
-    dialog.on("show", function(dialog) {
+
+    dialog.on("show", function (dialog) {
         self.restoreValues();
         if (typeof idLookup != "undefined") idLookup("address-dialog");
+
+        self.setTabBehavior(dialog);
     });
-    
+
+
     this._form = form;
     this._dialog = dialog;
 };
-
-AddressControl.prototype.show = function() {
+AddressControl.prototype.setTabBehavior = function (dialog) {
+    dojo.connect(dojo.byId(dialog.buttons[1].el.id), "onkeypress", function(evt) {
+        if (evt.which ==  dojo.keys.TAB || evt.keyCode == dojo.keys.TAB) {
+            dojo.query('input[tabIndex="1"]')[0].select();
+        }
+    });  
+};
+AddressControl.prototype.show = function () {
     this.ensureDialog();
-    
+
     this.getDialog().show();
     this.getDialog().center();
+
 };
 
 AddressControl.prototype.showMap = function() {
@@ -843,14 +1309,14 @@ function Address_HandleKeyEvent(evt)
 	if(!evt) {
 		evt = window.event;
 	}
-    if (evt.keyCode == 13) //Enter
-    {
-        this.Ok();
-    }
-    else if (evt.keyCode == 27) //Esc
-    {
-        this.Cancel();
-    }
+	if (evt.keyCode == 13) //Enter
+	{
+	    this.Ok();
+	}
+	else if (evt.keyCode == 27) //Esc
+	{
+	    this.Cancel();
+	}
 }
 
 Address.prototype.ButtonClick = Address_ButtonClick;
@@ -859,8 +1325,12 @@ Address.prototype.Show = Address_Show;
 Address.prototype.Cancel = Address_Cancel;
 Address.prototype.Ok = Address_Ok;
 Address.prototype.HandleKeyEvent = Address_HandleKeyEvent;
-Currency = function(currCode, cntrID, decimalSeparator, groupSeparator, symbol, groupDigits, decimalDigits, clearRegex, currVal, autoPostBack, warning, positivePattern, negativePattern, negativeSign) 
-{
+if (typeof dojo !== 'undefined') {
+    dojo.require("Sage.Utility");
+    //dojo.require("dojo.currency");
+}
+
+Currency = function (currCode, cntrID, decimalSeparator, groupSeparator, symbol, groupDigits, decimalDigits, clearRegex, currVal, autoPostBack, warning, positivePattern, negativePattern, negativeSign) {
     this.cntrID = cntrID;
     this.DecimalSeparator = decimalSeparator;
     this.GroupSeparator = groupSeparator;
@@ -875,109 +1345,64 @@ Currency = function(currCode, cntrID, decimalSeparator, groupSeparator, symbol, 
     this.PositivePattern = positivePattern;
     this.NegativePattern = negativePattern;
     this.NegativeSign = negativeSign;
+    this.justChanged = false;
 }
 
-function Currency_calculateCurrency(val) 
-{
+function Currency_calculateCurrency(val) {
     result = val * 1;
     var elem = document.getElementById(this.cntrID);
     elem.value = result;
 }
 
-function RestrictToCurrency(e) {
-    var code = e.charCode || e.keyCode;
-
-    // works in firefox.  IE won't even fire keypress event for special characters
-    if (navigator.userAgent.indexOf("Firefox") >= 0) {
-        if (e.keyCode && IsAllowedNavigationKey(e.keyCode)) return true;
-    }
-
-    return ((code >= 48 && code <= 57)  // 0-9
-        || code == this.GroupSeparator.charCodeAt(0)    // localized
-        || code == this.DecimalSeparator.charCodeAt(0)  // localized
-        || code == this.NegativeSign.charCodeAt(0));   
-
-}
-
-function Currency_FormatCurrency() 
-{
+function Currency_FormatCurrency() {
     var currency = document.getElementById(this.cntrID);
     var val;
     var isText = false;
-    if (this.cntrID.indexOf("_Text") > 0) 
-    {
+    if (this.cntrID.indexOf("_Text") > 0) {
         isText = true;
         val = currency.innerText;
-    }
-    else 
-    {
+    } else {
         val = currency.value;
     }
+
+    if (val != "") {
+        this.CurrVal = this.FormatLocalizedCurrency(val);
+        if (isText) {
+            currency.innerText = this.CurrVal;
+        } else {
+            currency.value = this.CurrVal;
+        }
+    }
+}
+
+function Currency_FormatLocalizedCurrency(valNum) {
+    var val = valNum.toString();
     var negativeCheck = new RegExp(String.format("[\{0}\(\)]", this.NegativeSign));
     var isNegative = negativeCheck.test(val);
 
     var reg = new RegExp(this.ClearRegex, "g");
     val = val.replace(reg, "");
-    if (this.DecimalSeparator != ".") 
-    {
-        if (val.indexOf(".") >= 0) 
-        {
+    if (this.DecimalSeparator != ".") {
+        if (val.indexOf(".") >= 0) {
             alert(val + " " + this.WarningMsg);
-            if (!isText) { currency.value = this.CurrVal; }
-            return;
+            //if (!isText) { currency.value = this.CurrVal; }
+            return this.CurrVal;
         }
     }
-    var parts = val.split(this.DecimalSeparator);
-    for (i = 0; i < parts.length; i++) 
-    {
-        if (isNaN(parts[i])) 
-        {
-            alert(parts[i] + " " + this.WarningMsg);
-            if (!isText) { currency.value = this.CurrVal; }
-            return;
-        }
-    }
+    //always force decimal places in currency control...
+    val = Sage.SalesLogix.Controls.maximizeDecimalDigit(val, this.DecimalDigits, Sys.CultureInfo.CurrentCulture.numberFormat.CurrencyDecimalSeparator);
+    var result = Sage.SalesLogix.Controls.formatNumber(val, 'currency', this.DecimalDigits, this.WarningMsg);
+    
 
-    var result = "";
-    if (val != "") 
-    {
-        var pos = val.indexOf(this.DecimalSeparator) == -1 ? val.length : val.indexOf(this.DecimalSeparator);
-        result = this.DecimalSeparator;
-        for (var i = 1; i <= this.DecimalDigits; i++) 
-        {
-            if (pos + i >= val.length) 
-            {
-                result += "0";
-            }
-            else 
-            {
-                result += val.substr(pos + i, 1);
-            }
-        }
-        while (pos - this.GroupDigits > 0) 
-        {
-            result = this.GroupSeparator + val.substr(pos - this.GroupDigits, this.GroupDigits) + result;
-            pos = pos - this.GroupDigits;
-        }
-        if (pos > 0) 
-        {
-            result = val.substr(0, pos) + result;
-        }
-    }
-
-    if (result != "") 
-    {
-        if (this.Code == this.Symbol) //multi-currency
-        {
+    if (result && result != "") {
+        if (this.Code == this.Symbol) { //multi-currency
             this.NegativePattern = 8;
             this.PositivePattern = 3;
         }
 
         var currencyValue = "";
-        if (isNegative) 
-        {
-            switch (this.NegativePattern) 
-            {
+        if (isNegative) {
+            switch (this.NegativePattern) {
                 case 0: // ($n) 
                     currencyValue = String.format("({0}{1})", this.Symbol, result);
                     break;
@@ -1028,11 +1453,8 @@ function Currency_FormatCurrency()
                     break;
 
             }
-        }
-        else 
-        {
-            switch (this.PositivePattern) 
-            {
+        } else {
+            switch (this.PositivePattern) {
                 case 0: // $n
                     currencyValue = String.format("{0}{1}", this.Symbol, result);
                     break;
@@ -1048,31 +1470,144 @@ function Currency_FormatCurrency()
             }
         }
 
-        if (isText)
-            currency.innerText = currencyValue;
-        else
-            currency.value = currencyValue;
-
-        this.CurrVal = currencyValue;
-
+        return currencyValue;
     }
+    return this.CurrVal;
+}
 
-    if (this.AutoPostBack) 
-    {
-        if (Sys) 
-        {
-            Sys.WebForms.PageRequestManager.getInstance()._doPostBack(this.cntrID, null);
+Currency.prototype.restrictDecimalDigitInput = function (e) {
+    //    var control = (typeof dojo !== 'undefined') ? dojo.byId(this.cntrID) : document.getElementById(this.cntrID);
+    //    control.value = Sage.Utility.restrictDecimalDigit(control.value, this.DecimalDigits);
+    var control = document.getElementById(this.cntrID);
+    var newVal = Sage.SalesLogix.Controls.restrictDecimalDigit(control.value, this.DecimalDigits, Sys.CultureInfo.CurrentCulture.numberFormat.CurrencyDecimalSeparator);
+    if (control.value != newVal)
+        control.value = newVal;
+}
+
+Currency.prototype.restrictToCurrencyInput = function (e) {
+    if (!Sage.Utility) {
+        return true;
+    }
+    if (!Sage.Utility.restrictToNumberOnKeyPress(e, 'currency')) {
+        if (e.cancelBubble) {
+            e.cancelBubble = true;
         }
-        else 
-        {
+        else if (e.stopPropogation) {
+            e.stopPropogation();
+        }
+        return false;
+    }
+    return true;
+}
+
+Currency.prototype.changed = function (e) {
+    this.justChanged = true;
+}
+
+Currency.prototype.isValid = function () {
+    this.FormatCurrency();
+    if (this.justChanged && this.AutoPostBack) {
+        this.justChanged = false;
+        if (Sys) {
+            Sys.WebForms.PageRequestManager.getInstance()._doPostBack(this.cntrID, null);
+        } else {
             document.forms(0).submit();
         }
     }
+    this.justChanged = false;
 }
 
 Currency.prototype.CalculateCurrency = Currency_calculateCurrency;
 Currency.prototype.FormatCurrency = Currency_FormatCurrency;
-Currency.prototype.RestrictCurrencyInput = RestrictToCurrency;
+Currency.prototype.FormatLocalizedCurrency = Currency_FormatLocalizedCurrency;
+
+if (typeof dojo !== 'undefined') {
+    dojo.require("Sage.Utility");
+    dojo.require("dojo.number");
+}
+Sage.namespace("UI");
+
+if (!Sage.UI.Numeric) {
+    Sage.UI.Numeric = function (controlId, decimalDigits, clearRegex, format, autoPostBack, strict) {
+        this.autoPostBack = autoPostBack;
+        this.clearRegex = clearRegex;
+        this.controlId = controlId;
+        this.decimalDigits = decimalDigits;
+        this.strict = strict;
+        this.format = format;
+        this.currValue = 0;
+        this.formatNumber();
+    };
+    Sage.UI.Numeric.prototype.getFormatType = function () {
+        //var type = "decimal";
+        var type = 'number';
+        if (this.format === "P") {
+            type = "percent";
+        }
+        else if (this.format === "E") {
+            type = "scientific";
+        }
+        return type;
+    };
+
+    Sage.UI.Numeric.prototype.restrictDecimalDigitInput = function (e) {
+        var control = dojo.byId(this.controlId);
+        var digits = (this.decimalDigits >= 0) ? this.decimalDigits : Sys.CultureInfo.CurrentCulture.numberFormat.NumberDecimalDigits;
+        var newVal = Sage.SalesLogix.Controls.restrictDecimalDigit(control.value, digits, Sys.CultureInfo.CurrentCulture.numberFormat.NumberDecimalSeparator);
+        if (control.value != newVal)
+            control.value = newVal;
+    };
+
+    Sage.UI.Numeric.prototype.restrictToNumericInput = function (e) {
+        //keypress event handler
+        if (!Sage.Utility) {
+            return true;
+        }
+        if (!Sage.Utility.restrictToNumberOnKeyPress(e, 'number')) {
+            if (e.cancelBubble) {
+                e.cancelBubble = true;
+            }
+            else if (e.stopPropogation) {
+                e.stopPropogation();
+            }
+            return false;
+        }
+        return true;
+    };
+    Sage.UI.Numeric.prototype.validate = function () {
+        this.formatNumber();
+        if (this.autoPostBack) {
+            if (Sys) {
+                Sys.WebForms.PageRequestManager.getInstance()._doPostBack(this.controlId, null);
+            }
+            else {
+                document.forms(0).submit();
+            }
+        }
+    };
+    Sage.UI.Numeric.prototype.formatNumber = function () {
+        var control = dojo.byId(this.controlId);
+        var value = control.value;
+        if (value === '') {
+            this.currValue = 0;
+            control.value = 0;
+            return;
+        }
+        if (this.decimalDigits > 0 && this.strict) {
+            var value = Sage.SalesLogix.Controls.maximizeDecimalDigit(value, this.decimalDigits);
+        }
+
+        var formatted = value.replace(new RegExp(this.clearRegex, 'g'), '');
+        var decDigits = (this.decimalDigits >= 0) ? this.decimalDigits : Sys.CultureInfo.CurrentCulture.numberFormat.NumberDecimalDigits;
+        formatted = Sage.SalesLogix.Controls.formatNumber(formatted, this.getFormatType(), decDigits, '');
+        if (!formatted || formatted === '') {
+            //revert if formatting fails.
+            formatted = this.currValue;
+        }
+        control.value = formatted;
+        this.currValue = formatted;
+    };
+}
 function SLXDateTimePicker(options)
 {
     if (typeof(window._datePickers) == 'undefined') {
@@ -1143,7 +1678,7 @@ function SLXDateTimePicker(options)
 //        monthYearText : _dateTimePickerConstants.MonthYearText,
 //        nextText : _dateTimePickerConstants.NextMonthText,
 //        prevText : _dateTimePickerConstants.PrevMonthText,
-        //        todayTip : _dateTimePickerConstants.TodayToolTip,
+//        todayTip : _dateTimePickerConstants.TodayToolTip,
         dayNames: _dateTimePickerConstants.DayNames,
         todayText: _dateTimePickerConstants.TodayText,
         okText : _dateTimePickerConstants.OKText,
@@ -1472,8 +2007,16 @@ SLXDateTimePicker.prototype.fmtDate = function()
     }
     if (this.OnChangeFN != "")
     {
-        hidden.fireEvent("onchange");
-        //this.OnChangeFN.call();
+      if (document.createEvent){
+         //FireFox
+         var evObj = document.createEvent('HTMLEvents'); 
+         evObj.initEvent ('change', true, true); 
+         hidden.dispatchEvent(evObj);
+       }
+       else{
+          //IE
+            hidden.fireEvent('onchange');
+       }
     }
     return result; 
 };
@@ -1849,7 +2392,7 @@ dependControl = function (baseId, listId, textId, type, displayProperty, seedPro
 };
 
 dependControl.prototype.LoadList = function (seedValue) {
-    var vURL = "SLXDependencyHandler.aspx?cacheid=" + this.BaseId + "&type=" + this.Type + "&displayprop=" + this.DisplayProperty + "&seeds=" + seedValue + "&currentval=" + this.CurrentValue;
+    var vURL = "SLXDependencyHandler.aspx?cacheid=" + this.BaseId + "&type=" + this.Type + "&displayprop=" + this.DisplayProperty + "&seeds=" + encodeURIComponent(seedValue) + "&currentval=" + encodeURIComponent(this.CurrentValue);
     Ext.Ajax.request({
         url: vURL,
         callback: this.HandleHttpResponse,
@@ -2030,7 +2573,7 @@ Sage.SalesLogix.Controls.BufferedGridView = Ext.extend(Ext.ux.grid.BufferedGridV
     adjustVisibleRows: function() {
         var rows = this.getRows();
         if (rows[0]) {
-            var rh = rows[0].offsetHeight + 0.5; // adjustment for incorrect rendering 
+            var rh = rows[0].offsetHeight + 0.0; // adjustment for incorrect rendering <- set to zero when subtracting one row
             if (rh < 1.0) {
                 this.rowHeight = -1;
                 return;
@@ -2073,7 +2616,7 @@ Sage.SalesLogix.Controls.BufferedGridView = Ext.extend(Ext.ux.grid.BufferedGridV
             return;
         }
 
-        this.visibleRows = visibleRows;
+        this.visibleRows = visibleRows - 1;
 
         // skip recalculating the row index if we are currently buffering.
         if (this.isBuffering) {
@@ -2281,8 +2824,7 @@ Sage.SalesLogix.Controls.ListPanel.prototype.present = function(viewport) {
 
     if (typeof this.addTo === "string") this.addTo = Ext.getCmp(this.addTo);
 
-    if (this.addTo)
-    {
+    if (this.addTo) {
         $(this.addTo.getEl().dom).find(".x-panel-body").children().hide();
 
         this.addTo.add(this);
@@ -2292,8 +2834,15 @@ Sage.SalesLogix.Controls.ListPanel.prototype.present = function(viewport) {
     this.fireEvent("present", this);
 
     this.presented = true;
-    if (this.createOnly)
+    if (this.createOnly) {
+        var grpLookupMgrSvc = Sage.Services.getService('GroupLookupManager');
+        if (grpLookupMgrSvc) {
+            if (grpLookupMgrSvc.lookupIsOpen) {
+                return;
+            }
+        }
         this.refresh();
+    }
 };
 
 Sage.SalesLogix.Controls.ListPanel.prototype.initToolbar = function() {
@@ -2520,8 +3069,7 @@ Sage.SalesLogix.Controls.ListPanel.prototype.refresh = function() {
 
     //validate current view, if it is not valid, switch to the list view
     var updateToolbar = true;
-    if (this.activeView && !(this.views[this.activeView] && this.connections[this.activeView]))
-    {
+    if (this.activeView && !(this.views[this.activeView] && this.connections[this.activeView])) {
         updateToolbar = false;
         this.switchView("list");
     }
@@ -3759,14 +4307,14 @@ Sage.OwnerTypeToDisplayName = function(value) {
 };
 
 Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Controls.MetaConverter, {
-    toBoolean: function(v) {
+    toBoolean: function (v) {
         if (typeof v === "boolean")
             return v;
         if (typeof v === "string" && v.match)
             return !!v.match(/T/i);
         return false;
     },
-    init: function() {
+    init: function () {
         try {
 
             this.layout = { entity: this.meta.layout.mainTable || this.meta.layout.entity, columns: [] };
@@ -3827,7 +4375,7 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
                     case (column.alias == "SECCODETYPE"):
                         column.renderer = this.createOwnerTypeRenderer(column);
                         break;
-                        
+
                     default:
                         column.renderer = this.createDefaultRenderer(column);
                         break;
@@ -3840,7 +4388,7 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
                 var r;
                 for (var j = 0; j < Sage.SalesLogix.Controls.GroupMetaConverter.renderers.length; j++)
                     if ((r = Sage.SalesLogix.Controls.GroupMetaConverter.renderers[j].call(this, column)) !== false)
-                    column.renderer = r;
+                        column.renderer = r;
             }
             this.fireEvent("init", this, this.layout);
         }
@@ -3848,7 +4396,7 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
             Ext.Msg.alert("Error Reading Meta Data", e.message || e.description);
         }
     },
-    toReaderConfig: function() {
+    toReaderConfig: function () {
         try {
             var fields = [];
             fields.push({ name: 'SLXRN', sortType: 'int' });
@@ -3887,7 +4435,7 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
             return { meta: this.meta, recordType: [] };
         }
     },
-    toColumnModel: function() {
+    toColumnModel: function () {
         try {
             var model = [];
             var cols = this.layout.columns;
@@ -3905,7 +4453,7 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
 
                     // compares each item's header to see if there is a matching localized version
                     // in the GroupMetaConverter.localization dictionary
-                    Ext.each(Sage.SalesLogix.Controls.GroupMetaConverter.localization, function(l) {
+                    Ext.each(Sage.SalesLogix.Controls.GroupMetaConverter.localization, function (l) {
                         if (l.hasOwnProperty(item["header"])) {
                             item["header"] = l[item["header"]];
                             return false;
@@ -3933,12 +4481,12 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
             return [];
         }
     },
-    createEntityLinkRenderer: function(column) {
+    createEntityLinkRenderer: function (column) {
         var entity;
         var valuerenderer;
         if (typeof column === "string") {
             entity = column;
-            valuerenderer = function(v, m, r, ro, c, s) { return Ext.util.Format.htmlEncode(v); };
+            valuerenderer = function (v, m, r, ro, c, s) { return Ext.util.Format.htmlEncode(v); };
         } else {
             entity = (column.dataPath.lastIndexOf("!") > -1)
                 ? column.dataPath.substring(0, column.dataPath.lastIndexOf("!")).substring(column.dataPath.lastIndexOf(".") + 1)
@@ -3954,11 +4502,14 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
                 keyField = grpService.getContext().CurrentTableKeyField;
             }
         }
-        return function(value, meta, record, rowIndex, columnIndex, store) {
+        return function (value, meta, record, rowIndex, columnIndex, store) {
             var id = record.data[keyField] || record.data[tableName + "_ID"];
             if (!id)
                 return value;
 
+            if ((value == '') || (value == null)) {
+                value = '----';
+            }
 
             if ((entity.toUpperCase() == 'HISTORY') || (entity.toUpperCase() == 'ACTIVITY')) {
                 var fmtstr = "<a href=\"javascript:Link.entityDetail('{2}', '{0}')\">{1}</a>";
@@ -3968,14 +4519,14 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
                 var mainKeyField = store.reader.meta && store.reader.meta.keyfield;
                 if (keyField.toUpperCase() === (mainKeyField && mainKeyField.toUpperCase())) {
                     groupid = store.reader.meta && store.reader.meta.groupid;
-                    groupid = (typeof(groupid) !== 'undefined') ? '&gid=' + groupid : '';
+                    groupid = (typeof (groupid) !== 'undefined') ? '&gid=' + groupid : '';
                 }
                 var fmtstr = "<a href={2}.aspx?entityid={0}{3}>{1}</a>";
                 return (value ? String.format(fmtstr, id, valuerenderer(value, meta, record, rowIndex, columnIndex, store), entity, groupid) : "");
             }
         };
     },
-    createFixedNumberRenderer: function(column) {
+    createFixedNumberRenderer: function (column) {
         var format = column.formatString.replace(/%.*[dnf]/, "{0}").replace("%%", "%");
         var useGroupingChar = (column.formatString.match(/%.*[dnf]/) == null) ?
             false : // is not a valid format string
@@ -3988,8 +4539,8 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
         var NumericGroupingChar = Sage.SalesLogix.Controls.GroupMetaConverter.numericGroupingChar;
         var rx = /(\d+)(\d{3})/;
         if (precision && !isNaN(precision)) {
-            return function(value, meta, record, rowIndex, columnIndex, store) {
-                if (value && !isNaN(value)) {
+            return function (value, meta, record, rowIndex, columnIndex, store) {
+                if ((value === 0) || (value && !isNaN(value))) {
                     var num = String.format(format, value.toFixed(precision));
                     if (useGroupingChar) {
                         while (rx.test(num)) {
@@ -4001,13 +4552,13 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
             };
         }
 
-        return function(value, meta, record, rowIndex, columnIndex, store) {
+        return function (value, meta, record, rowIndex, columnIndex, store) {
             return (value ? Ext.util.Format.htmlEncode(value) : "&nbsp;");
         };
     },
-    createDateTimeRenderer: function(column) {
+    createDateTimeRenderer: function (column) {
         var renderer = Ext.util.Format.dateRenderer(ConvertToPhpDateTimeFormat(column.formatString));
-        return function(value, meta, record, rowIndex, columnIndex, store) {
+        return function (value, meta, record, rowIndex, columnIndex, store) {
             if (value && value.getMinutes && value.getHours) {
                 var minutes = (value.getMinutes() + value.getHours() * 60);
                 if ((1440 - minutes == value.getTimezoneOffset()) && (column.formatString.indexOf('h') == -1) && (value.getTimezoneOffset() > 0))
@@ -4016,8 +4567,8 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
             return renderer(value);
         };
     },
-    createPhoneRenderer: function(column) {
-        return function(value, meta, record, rowIndex, columnIndex, store) {
+    createPhoneRenderer: function (column) {
+        return function (value, meta, record, rowIndex, columnIndex, store) {
             if ((value == null) || (value == "null")) return "&nbsp;";
             if (!value || value.length != 10)
                 return Ext.util.Format.htmlEncode(value);
@@ -4025,13 +4576,13 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
             return String.format("({0}) {1}-{2}", value.substring(0, 3), value.substring(3, 6), value.substring(6));
         };
     },
-    createEmailRenderer: function(column) {
-        return function(value, meta, record, rowIndex, columnIndex, store) {
+    createEmailRenderer: function (column) {
+        return function (value, meta, record, rowIndex, columnIndex, store) {
             return (value ? String.format("<a href=mailto:{0}>{0}</a>", Ext.util.Format.htmlEncode(value)) : "");
         }
     },
-    createBooleanRenderer: function(column) {
-        return function(value, meta, record, rowIndex, columnIndex, store) {
+    createBooleanRenderer: function (column) {
+        return function (value, meta, record, rowIndex, columnIndex, store) {
             
             if ((value == null) || (value == "")) return "&nbsp;";
             
@@ -4039,8 +4590,11 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
             var booleanValue = arrBooleans[String(value)];
 
             var strFmt = column.formatString;
-            var strYes = Ext.util.Format.htmlEncode(Sage.SalesLogix.Controls.Resources.ListPanel.YesText);
-            var strNo = Ext.util.Format.htmlEncode(Sage.SalesLogix.Controls.Resources.ListPanel.NoText);
+            var resourceObj = Sage.SalesLogix.Controls.Resources.ListPanel ? Sage.SalesLogix.Controls.Resources.ListPanel :
+                window.DashboardResource ? window.DashboardResource :
+                { YesText: 'Yes', NoText: 'No' };
+            var strYes = Ext.util.Format.htmlEncode(resourceObj.YesText);
+            var strNo = Ext.util.Format.htmlEncode(resourceObj.NoText);
             if ((strFmt == null) || (strFmt == "")) return (booleanValue == true) ? strYes : strNo;
             var iIndex = (String(strFmt).indexOf("/"));
             if (iIndex != -1) {
@@ -4058,18 +4612,22 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
             return (booleanValue == true) ? strYes : strNo;
         }
     },
-    createDefaultRenderer: function(column) {
-        return function(value, meta, record, rowIndex, columnIndex, store) {
-            return (value ? Ext.util.Format.htmlEncode(value) : "&nbsp;");
+    createDefaultRenderer: function (column) {
+        return function (value, meta, record, rowIndex, columnIndex, store) {
+            if (value === 0) {
+                return "0";
+            } else {
+                return (value ? Ext.util.Format.htmlEncode(value) : "&nbsp;");
+            }
         }
     },
-    createUserTypeRenderer: function(column) {
-        return function(value, meta, record, rowIndex, columnIndex, store) {
+    createUserTypeRenderer: function (column) {
+        return function (value, meta, record, rowIndex, columnIndex, store) {
             return Sage.UserTypeToDisplayName(value);
         }
     },
-    createOwnerTypeRenderer: function(column) {
-        return function(value, meta, record, rowIndex, columnIndex, store) {
+    createOwnerTypeRenderer: function (column) {
+        return function (value, meta, record, rowIndex, columnIndex, store) {
             return Sage.OwnerTypeToDisplayName(value);
         }
     }
@@ -4391,9 +4949,9 @@ LookupControl.__operators = {
         {name: "LookupControl_Operator_Equal", value: "eq"},
         {name: "LookupControl_Operator_NotEqual", value: "ne"},
         {name: "LookupControl_Operator_GT", value: "gt"},
-        {name: "LookupControl_Operator_GE", value: "gteq"},
+        {name: "LookupControl_Operator_GE", value: "ge"},
         {name: "LookupControl_Operator_LT", value: "lt"},
-        {name: "LookupControl_Operator_LE", value: "lteq"}        
+        {name: "LookupControl_Operator_LE", value: "le"}        
     ],
     "System.Boolean": [ 
         {name: "LookupControl_Operator_Equal", value: "eq"},
@@ -4412,9 +4970,9 @@ LookupControl.__defaultOperators = [
     {name: "LookupControl_Operator_Equal", value: "eq"},
     {name: "LookupControl_Operator_NotEqual", value: "ne"},
     {name: "LookupControl_Operator_GT", value: "gt"},
-    {name: "LookupControl_Operator_GE", value: "gteq"},
+    {name: "LookupControl_Operator_GE", value: "ge"},
     {name: "LookupControl_Operator_LT", value: "lt"},
-    {name: "LookupControl_Operator_LE", value: "lteq"}            
+    {name: "LookupControl_Operator_LE", value: "le"}            
 ];
 LookupControl.__transforms = {
     standard: {
@@ -4424,8 +4982,8 @@ LookupControl.__transforms = {
         ne: function(e,p,t,v) { return String.format("{0}.{1} ne {2}", e, p, this.escape(t,v,true)); },
         gt: function(e,p,t,v) { return String.format("{0}.{1} gt {2}", e, p, this.escape(t,v,true)); },
         lt: function(e,p,t,v) { return String.format("{0}.{1} lt {2}", e, p, this.escape(t,v,true)); },
-        gteq: function(e,p,t,v) { return String.format("{0}.{1} gteq {2}", e, p, this.escape(t,v,true)); },
-        lteq: function(e,p,t,v) { return String.format("{0}.{1} lteq {2}", e, p, this.escape(t,v,true)); }    
+        ge: function(e,p,t,v) { return String.format("{0}.{1} ge {2}", e, p, this.escape(t,v,true)); },
+        le: function(e,p,t,v) { return String.format("{0}.{1} le {2}", e, p, this.escape(t,v,true)); }    
     },
     upper: {
         sw: function(e,p,t,v) { return String.format("upper({0}.{1}) like upper({2})", e, p, this.escape(t,(v+"*"),true)); },
@@ -4434,8 +4992,8 @@ LookupControl.__transforms = {
         ne: function(e,p,t,v) { return String.format("upper({0}.{1}) ne upper({2})", e, p, this.escape(t,v,true)); },
         gt: function(e,p,t,v) { return String.format("upper({0}.{1}) gt upper({2})", e, p, this.escape(t,v,true)); },
         lt: function(e,p,t,v) { return String.format("upper({0}.{1}) lt upper({2})", e, p, this.escape(t,v,true)); },
-        gteq: function(e,p,t,v) { return String.format("upper({0}.{1}) gteq upper({2})", e, p, this.escape(t,v,true)); },
-        lteq: function(e,p,t,v) { return String.format("upper({0}.{1}) lteq upper({2})", e, p, this.escape(t,v,true)); }    
+        ge: function(e,p,t,v) { return String.format("upper({0}.{1}) ge upper({2})", e, p, this.escape(t,v,true)); },
+        le: function(e,p,t,v) { return String.format("upper({0}.{1}) le upper({2})", e, p, this.escape(t,v,true)); }    
     }
 };
 LookupControl.__instances = {};
@@ -4752,306 +5310,321 @@ LookupControl.prototype.clearResult = function() {
 };
 
 LookupControl.prototype.createDialog = function () {
-	var self = this;
-	var variables = {
-		lookupPropertiesId: this._clientId + "_lookup_properties",
-		lookupOperatorsId: this._clientId + "_lookup_operators",
-		lookupValuesSelectId: this._clientId + "_lookup_values_select",
-		lookupValuesInputId: this._clientId + "_lookup_values_input",
-		lookupLabel: LookupControlResources.LookupControl_Label_LookupByShort,
-		properties: this._properties
-	};
+    var self = this;
+    var variables = {
+        lookupPropertiesId: this._clientId + "_lookup_properties",
+        lookupOperatorsId: this._clientId + "_lookup_operators",
+        lookupValuesSelectId: this._clientId + "_lookup_values_select",
+        lookupValuesInputId: this._clientId + "_lookup_values_input",
+        lookupLabel: LookupControlResources.LookupControl_Label_LookupByShort,
+        properties: this._properties
+    };
 
-	var gridPanel = new Ext.Panel({
-		layout: "fit",
-		border: false,
-		items: this.getGrid().getNativeGrid()
-	});
+    var gridPanel = new Ext.Panel({
+        layout: "fit",
+        border: false,
+        items: this.getGrid().getNativeGrid()
+    });
 
-	var searchButton = new Ext.Button({
-		id: this._clientId + "_lookup_search",
-		text: LookupControlResources.LookupControl_Button_Search,
-		tabIndex: 4
-	});
+    var searchButton = new Ext.Button({
+        id: this._clientId + "_lookup_search",
+        text: LookupControlResources.LookupControl_Button_Search,
+        tabIndex: 4
+    });
 
-	var northPanel = new Ext.Panel({
-		region: "north",
-		margins: "5 5 5 5",
-		id: this._id + "_lookup_panel_north",
-		border: false,
-		autoHeight: true,
-		html: this._templates.lookup.apply(variables)
-	});
+    var northPanel = new Ext.Panel({
+        region: "north",
+        margins: "5 5 5 5",
+        id: this._id + "_lookup_panel_north",
+        border: false,
+        autoHeight: true,
+        html: this._templates.lookup.apply(variables)
+    });
 
-	var dialog = new Ext.Window({
-		id: this._id + "_lookup_dialog",
-		title: this._dialogTitle,
-		cls: "lookup-dialog",
-		layout: "border",
-		closeAction: "hide",
-		plain: true,
-		height: this._options.dialogHeight || 500,
-		width: this._options.dialogWidth || 680,
-		stateful: false,
-		modal: true,
-		items: [northPanel, {
-			region: "center",
-			margins: "0 0 0 0",
-			border: false,
-			layout: "fit",
-			id: this._id + "_lookup_panel_center",
-			items: gridPanel
-		}],
-		buttonAlign: "right",
-		buttons: [{
-			id: this._clientId + "_lookup_ok",
-			tabIndex: 5,
-			text: GetResourceValue(LookupControlResources.LookupControl_Button_Ok, "OK"),
-			handler: function () {
-				var grid = self.getGrid().getNativeGrid();
-				var selected;
-				if (grid.getStore().getTotalCount() > 1)
-					selected = grid.getSelectionModel().getSelected();
-				else if (grid.getStore().getTotalCount() == 1)
-					selected = grid.getStore().getAt(0);
+    var dialog = new Ext.Window({
+        id: this._id + "_lookup_dialog",
+        title: this._dialogTitle,
+        cls: "lookup-dialog",
+        layout: "border",
+        closeAction: "hide",
+        plain: true,
+        height: this._options.dialogHeight || 500,
+        width: this._options.dialogWidth || 680,
+        stateful: false,
+        modal: true,
+        items: [northPanel, {
+            region: "center",
+            margins: "0 0 0 0",
+            border: false,
+            layout: "fit",
+            id: this._id + "_lookup_panel_center",
+            items: gridPanel
+        }],
+        buttonAlign: "right",
+        buttons: [{
+            id: this._clientId + "_lookup_ok",
+            tabIndex: 5,
+            text: GetResourceValue(LookupControlResources.LookupControl_Button_Ok, "OK"),
+            handler: function () {
+                var grid = self.getGrid().getNativeGrid();
+                var selected;
+                if (grid.getStore().getTotalCount() > 1)
+                    selected = grid.getSelectionModel().getSelected();
+                else if (grid.getStore().getTotalCount() == 1)
+                    selected = grid.getStore().getAt(0);
 
-				if (selected) {
-					self.setResult(selected.data);
-					self.invokeChangeEvent($("#" + self._resultTextId).get(0));
-					self.fireEvent('change', this);
+                if (selected) {
+                    self.setResult(selected.data);
+                    self.invokeChangeEvent($("#" + self._resultTextId).get(0));
+                    self.fireEvent('change', this);
 
-					if (self._autoPostBack)
-						__doPostBack(self._clientId, '');
-				}
+                    if (self._autoPostBack)
+                        __doPostBack(self._clientId, '');
+                }
 
-				self.close();
-			}
-		}, {
-			id: this._clientId + "_lookup_cancel",
-			tabIndex: 6,
-			text: LookupControlResources.LookupControl_Button_Cancel,
-			handler: function () {
-				self.close();
-			}
-		}],
-		tools: [{
-			id: "help",
-			handler: function (evt, toolEl, panel) {
-				if (self._helpLink && self._helpLink.url)
-					window.open(self._helpLink.url, (self._helpLink.target || "help"));
-			}
-		}]
-	});
+                self.close();
+            }
+        }, {
+            id: this._clientId + "_lookup_cancel",
+            tabIndex: 6,
+            text: LookupControlResources.LookupControl_Button_Cancel,
+            handler: function () {
+                self.close();
+            }
+        }],
+        tools: [{
+            id: "help",
+            handler: function (evt, toolEl, panel) {
+                if (self._helpLink && self._helpLink.url)
+                    window.open(self._helpLink.url, (self._helpLink.target || "help"));
+            }
+        }]
+    });
 
-	searchButton.on('click', function () {
-		var context = dialog.getEl().dom;
-		var properties = $(".lookup-properties select", context).selectedValues();
-		var operators = $(".lookup-operators select", context).selectedValues();
-		var property = (properties.length > 0) ? properties[0] : null;
-		var operator = (operators.length > 0) ? operators[0] : null;
+    searchButton.on('click', function () {
+        var context = dialog.getEl().dom;
+        var properties = $(".lookup-properties select", context).selectedValues();
+        var operators = $(".lookup-operators select", context).selectedValues();
+        var property = (properties.length > 0) ? properties[0] : null;
+        var operator = (operators.length > 0) ? operators[0] : null;
 
-		
-		self.getGrid().clearMetaData();
+        
+        self.getGrid().clearMetaData();
 
-		if (!properties || !operator)
-			return;
+        if (!properties || !operator)
+            return;
 
-		var info = self._propertyLookup[property];
-		var value;
+        var info = self._propertyLookup[property];
+        var value;
+        var ISODateString = function (val) {
+            function pad(n) { return n < 10 ? '0' + n : n }
+            var d = Date.parse(val);
+            if (isNaN(d)) return val;
+            d = new Date(d);
+            return d.getUTCFullYear() +
+                pad(d.getUTCMonth() + 1) +
+                pad(d.getUTCDate())
+            //+ ' ' +
+            //pad(d.getUTCHours()) + ':' +
+            //pad(d.getUTCMinutes()) + ':' +
+            //pad(d.getUTCSeconds()) //+ 'Z'
+        }
+        switch (info.type) {
+            case "SalesLogix.PickList":
+            case "SalesLogix.MRCodePickList":
+            case "Sage.Entity.Interfaces.OwnerType":
+                var values = $(".lookup-values select", context).selectedValues();
+                value = (values.length > 0) ? values[0] : null;
+                break;
+            case "System.DateTime":
+                value = "'" + ISODateString($(".lookup-values input", context).val()) + "'";
+                break;
+            default:
+                value = $(".lookup-values input", context).val();
+                break;
+        }
 
-		switch (info.type) {
-			case "SalesLogix.PickList":
-			case "SalesLogix.MRCodePickList":
-			case "Sage.Entity.Interfaces.OwnerType":
-				var values = $(".lookup-values select", context).selectedValues();
-				value = (values.length > 0) ? values[0] : null;
-				break;
-			default:
-				value = $(".lookup-values input", context).val();
-				break;
-		}
+        var transform = self.getTransformFor(operator);
+        if (transform) {
+            if (value) {
+                var grid = self.getGrid();
+                grid.getNativeGrid().getStore().setDefaultSort(property, 'ASC');
+                var where = transform.call(self, self._entity, property, info.type, value);
+                if (!self._overrideSeedOnSearch) {
+                    var seedQuery = self.getSeedQueryExpression();
+                    if (seedQuery)
+                        where = where + " and " + seedQuery;
+                }
+                grid.getConnections()["data"].parameters["where"] = where;
+                grid.getNativeGrid().getStore().load();
+            }
+            else {
+                var grid = self.getGrid();
+                grid.getNativeGrid().getStore().setDefaultSort(property, 'ASC');
+                delete grid.getConnections()["data"].parameters["where"];
+                if (!self._overrideSeedOnSearch) {
+                    var seedQuery = self.getSeedQueryExpression();
+                    if (seedQuery)
+                        grid.getConnections()["data"].parameters["where"] = seedQuery;
+                }
+                grid.getNativeGrid().getStore().load();
+            }
+        }
+    });
 
-		var transform = self.getTransformFor(operator);
-		if (transform) {
-			if (value) {
-				var grid = self.getGrid();
-				grid.getNativeGrid().getStore().setDefaultSort(property, 'ASC');
-				var where = transform.call(self, self._entity, property, info.type, value);
-				if (!self._overrideSeedOnSearch) {
-					var seedQuery = self.getSeedQueryExpression();
-					if (seedQuery)
-						where = where + " and " + seedQuery;
-				}
-				grid.getConnections()["data"].parameters["where"] = where;
-				grid.getNativeGrid().getStore().load();
-			}
-			else {
-				var grid = self.getGrid();
-				grid.getNativeGrid().getStore().setDefaultSort(property, 'ASC');
-				delete grid.getConnections()["data"].parameters["where"];
-				if (!self._overrideSeedOnSearch) {
-					var seedQuery = self.getSeedQueryExpression();
-					if (seedQuery)
-						grid.getConnections()["data"].parameters["where"] = seedQuery;
-				}
-				grid.getNativeGrid().getStore().load();
-			}
-		}
-	});
+    dialog.on('hide', function () {
+        self.fireEvent('close', this);
+    }, dialog);
 
-	dialog.on('hide', function () {
-		self.fireEvent('close', this);
-	}, dialog);
+    dialog.on('show', function () {
+        var context = dialog.getEl().dom;
+        if (!this._initialized) {
+            searchButton.render($(".lookup-search", context).get(0));
 
-	dialog.on('show', function () {
-		var context = dialog.getEl().dom;
-		if (!this._initialized) {
-			searchButton.render($(".lookup-search", context).get(0));
+            var select = $(".lookup-properties select", context).addOption(self._propertyPairs).change(function (e) {
+                $("option:selected", this).each(function () {
+                    //change operators
+                    var property = self._propertyLookup[$(this).val()];
+                    if (property) {
+                        var operators = {};
+                        if (LookupControl.__operators[property.type])
+                            for (var i = 0; i < LookupControl.__operators[property.type].length; i++)
+                                operators[LookupControl.__operators[property.type][i].value] = LookupControlResources[LookupControl.__operators[property.type][i].name];
+                        else
+                            for (var i = 0; i < LookupControl.__defaultOperators.length; i++)
+                                operators[LookupControl.__defaultOperators[i].value] = LookupControlResources[LookupControl.__defaultOperators[i].name];
 
-			var select = $(".lookup-properties select", context).addOption(self._propertyPairs).change(function (e) {
-				$("option:selected", this).each(function () {
-					//change operators
-					var property = self._propertyLookup[$(this).val()];
-					if (property) {
-						var operators = {};
-						if (LookupControl.__operators[property.type])
-							for (var i = 0; i < LookupControl.__operators[property.type].length; i++)
-								operators[LookupControl.__operators[property.type][i].value] = LookupControlResources[LookupControl.__operators[property.type][i].name];
-						else
-							for (var i = 0; i < LookupControl.__defaultOperators.length; i++)
-								operators[LookupControl.__defaultOperators[i].value] = LookupControlResources[LookupControl.__defaultOperators[i].name];
+                        var select = $(".lookup-operators select", context).get(0);
+                        //var index = select.selectedIndex;
 
-						var select = $(".lookup-operators select", context).get(0);
-						//var index = select.selectedIndex;
+                        $(select).removeOption(/./).addOption(operators);
 
-						$(select).removeOption(/./).addOption(operators);
+                        //if (index >= 0 && index < select.options.length)
+                        //    select.selectedIndex = index;
 
-						//if (index >= 0 && index < select.options.length)
-						//    select.selectedIndex = index;
+                        select.selectedIndex = 0;
 
-						select.selectedIndex = 0;
+                        if (property.type == "SalesLogix.PickList") {
+                            $(".lookup-values input", context).val("").hide();
+                            $(".lookup-values select", context).removeOption(/./).show();
+                            $.ajax({
+                                url: String.format("slxdata.ashx/slx/crm/-/picklists/{0}", property.pickListName),
+                                data: {
+                                    format: "json"
+                                },
+                                dataType: "json",
+                                success: function (data) {
+                                    var options = {};
+                                    for (var i = 0; i < data.items.length; i++) {
+                                        var name = data.items[i].text;
+                                        var value = data.items[i].itemId || data.items[i].text;
+                                        options[value] = name;
+                                    }
+                                    $(".lookup-values select", context).addOption(options);
+                                },
+                                error: function (request, status, error) {
+                                }
+                            });
+                        }
+                        else if (property.type == "SalesLogix.MRCodePickList") {
+                            $(".lookup-values input", context).val("").hide();
+                            $(".lookup-values select", context).removeOption(/./).show();
+                            $.ajax({
+                                url: String.format("slxdata.ashx/slx/crm/-/CodePickLists({0})", property.pickListName),
+                                data: {
+                                    format: "json"
+                                },
+                                dataType: "json",
+                                success: function (data) {
+                                    var options = {};
+                                    for (var i = 0; i < data.items.length; i++) {
+                                        var name = data.items[i].displayValue;
+                                        var value = data.items[i].pickListItemPath || data.items[i].displayValue;
+                                        options[value] = name;
+                                    }
+                                    $(".lookup-values select", context).addOption(options);
+                                },
+                                error: function (request, status, error) {
+                                }
+                            });
+                        }
+                        else if (property.type == "Sage.Entity.Interfaces.OwnerType") {
+                            $(".lookup-values input", context).val("").hide();
+                            $(".lookup-values select", context).removeOption(/./).show();
+                            $.ajax({
+                                type: "GET",
+                                contentType: "application/json",
+                                url: "slxdata.ashx/slx/crm/-/ownertypes",
+                                data: {
+                                    format: "json"
+                                },
+                                dataType: "json",
+                                success: function (data) {
+                                    var options = {};
+                                    for (var i = 0; i < data.length; i++) {
+                                        if (data[i].code != "S") {
+                                            var name = data[i].name;
+                                            var value = "'" + data[i].code + "'";
+                                            options[value] = name;
+                                        }
+                                    }
+                                    $(".lookup-values select", context).addOption(options);
+                                },
+                                error: function (request, status, error) {
+                                }
+                            });
+                        }
+                        else if (property.type == "System.Boolean") {
+                            $(".lookup-values input", context).val("").hide();
+                            $(".lookup-values select", context).removeOption(/./), addOption({ "true": "true", "false": "false" }).show();
+                        }
+                        else {
+                            $(".lookup-values select", context).removeOption(/./).hide();
+                            $(".lookup-values input", context).show();
+                        }
+                    }
+                });
+            }).get(0);
 
-						if (property.type == "SalesLogix.PickList") {
-							$(".lookup-values input", context).val("").hide();
-							$(".lookup-values select", context).removeOption(/./).show();
-							$.ajax({
-								url: String.format("slxdata.ashx/slx/crm/-/picklists/{0}", property.pickListName),
-								data: {
-									format: "json"
-								},
-								dataType: "json",
-								success: function (data) {
-									var options = {};
-									for (var i = 0; i < data.items.length; i++) {
-										var name = data.items[i].text;
-										var value = data.items[i].itemId || data.items[i].text;
-										options[value] = name;
-									}
-									$(".lookup-values select", context).addOption(options);
-								},
-								error: function (request, status, error) {
-								}
-							});
-						}
-						else if (property.type == "SalesLogix.MRCodePickList") {
-							$(".lookup-values input", context).val("").hide();
-							$(".lookup-values select", context).removeOption(/./).show();
-							$.ajax({
-								url: String.format("slxdata.ashx/slx/crm/-/CodePickLists({0})", property.pickListName),
-								data: {
-									format: "json"
-								},
-								dataType: "json",
-								success: function (data) {
-									var options = {};
-									for (var i = 0; i < data.items.length; i++) {
-										var name = data.items[i].displayValue;
-										var value = data.items[i].pickListItemPath || data.items[i].displayValue;
-										options[value] = name;
-									}
-									$(".lookup-values select", context).addOption(options);
-								},
-								error: function (request, status, error) {
-								}
-							});
-						}
-						else if (property.type == "Sage.Entity.Interfaces.OwnerType") {
-							$(".lookup-values input", context).val("").hide();
-							$(".lookup-values select", context).removeOption(/./).show();
-							$.ajax({
-								type: "GET",
-								contentType: "application/json",
-								url: "slxdata.ashx/slx/crm/-/ownertypes",
-								data: {
-									format: "json"
-								},
-								dataType: "json",
-								success: function (data) {
-									var options = {};
-									for (var i = 0; i < data.length; i++) {
-										if (data[i].code != "S") {
-											var name = data[i].name;
-											var value = "'" + data[i].code + "'";
-											options[value] = name;
-										}
-									}
-									$(".lookup-values select", context).addOption(options);
-								},
-								error: function (request, status, error) {
-								}
-							});
-						}
-						else if (property.type == "System.Boolean") {
-							$(".lookup-values input", context).val("").hide();
-							$(".lookup-values select", context).removeOption(/./), addOption({ "true": "true", "false": "false" }).show();
-						}
-						else {
-							$(".lookup-values select", context).removeOption(/./).hide();
-							$(".lookup-values input", context).show();
-						}
-					}
-				});
-			}).get(0);
+            if (select && select.options.length > 0) {
+                select.selectedIndex = 0;
+                $(select).change();
+            }
 
-			if (select && select.options.length > 0) {
-				select.selectedIndex = 0;
-				$(select).change();
-			}
+            $(".lookup-values input, .lookup-values select", context).bind("keypress", function (e) {
+                if (e.which == 13) {
+                    //use document.createEvent here on firefox            
+                    if (document.createEvent) {
+                        var button = searchButton.getEl().dom;
+                        var evt = document.createEvent("MouseEvents");
+                        evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+                        button.dispatchEvent(evt);
+                    }
+                    else {
+                        $("#" + searchButton.getEl().dom.id).click();
+                    }
 
-			$(".lookup-values input, .lookup-values select", context).bind("keypress", function (e) {
-				if (e.which == 13) {
-					//use document.createEvent here on firefox            
-					if (document.createEvent) {
-						var button = searchButton.getEl().dom;
-						var evt = document.createEvent("MouseEvents");
-						evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-						button.dispatchEvent(evt);
-					}
-					else {
-						$("#" + searchButton.getEl().dom.id).click();
-					}
+                    e.cancelBubble = true;
+                    if (e.stopPropagation)
+                        e.stopPropagation();
 
-					e.cancelBubble = true;
-					if (e.stopPropagation)
-						e.stopPropagation();
+                    return false;
+                }
+            });
 
-					return false;
-				}
-			});
+            this._initialized = true;
+        }
+        if (typeof idLookup != "undefined") idLookup("lookup-dialog");
 
-			this._initialized = true;
-		}
-		if (typeof idLookup != "undefined") idLookup("lookup-dialog");
+        var focusEl = $(".lookup-properties select", context).get(0);
+        setTimeout(function () { focusEl.focus(); }, 50);
 
-		var focusEl = $(".lookup-properties select", context).get(0);
-		setTimeout(function () { focusEl.focus(); }, 50);
+        
+    }, dialog);
 
-		
-	}, dialog);
-
-	this._dialog = dialog;
-	this._searchButton = searchButton;
-	this._northPanel = northPanel;
+    this._dialog = dialog;
+    this._searchButton = searchButton;
+    this._northPanel = northPanel;
 };
 
 LookupControl.prototype.hasDialog = function() { return !!this._dialog; };
@@ -5096,13 +5669,12 @@ function NamePanel (clientId, prefix, first, middle, last, suffix, autoPostBack)
     this.panel = null;
 }
 
-function NamePanel_Show()
-{
+function NamePanel_Show() {
         if ((this.panel == null) || (this.panel.element.parentNode == null))
         {
             var dlgDiv = document.getElementById(this.nameDivId);
             dlgDiv.style.display = "block";
-            this.panel = new YAHOO.widget.Panel(this.nameDivId, { visible:false, width:"300px", height:"250px",  fixedcenter:true, constraintoviewport:true, underlay:"shadow", draggable:true });
+            this.panel = new YAHOO.widget.Panel(this.nameDivId, { visible:false, width:"300px", height:"210px",  fixedcenter:true, constraintoviewport:true, underlay:"shadow", draggable:true });
             this.panel.render();
         }
         this.panel.show();
@@ -6771,14 +7343,7 @@ function PickList_getVal() {
     }
 }
 
-function PickList_HandleFocusLeave()
-{
-    var self = this;
-    var text = document.getElementById(this.textId);
-}
-
-function PickList_SetVisibility(visible)
-{
+function PickList_SetVisibility(visible) {
     var self = this;
     var listDiv = document.getElementById(this.listDivId);
     if(visible)
@@ -6799,18 +7364,18 @@ function PickList_SetVisibility(visible)
             this._globalClickBound = true;
             this._globalClickEl = Ext.isIE ? document.body : document;
                         
-            var last = false;
-            $(listDiv).parents().each(function() {
-                var overflow = $(this).css("overflow");
-                if (overflow == "auto" || overflow == "scroll")
-                {
-                    self._globalClickEl = last || this; 
-                    return false;
-                }                
-                last = this;
-            });            
+//            var last = false;
+//            $(listDiv).parents().each(function() {
+//                var overflow = $(this).css("overflow");
+//                if (overflow == "auto" || overflow == "scroll")
+//                {
+//                    self._globalClickEl = last || this; 
+//                    return false;
+//                }                
+//                last = this;
+//            });
             
-            Ext.get(this._globalClickEl).on("mousedown", this.MimicBlur, this, {delay: 10});
+            Ext.get(this._globalClickEl).on("click", this.MimicBlur, this, {delay: 10});
         }
         this.isDroppedDown = true;
     } 
@@ -6821,8 +7386,7 @@ function PickList_SetVisibility(visible)
         this.isDroppedDown = false;
     }
 }
-function PickList_ResolveValue()
-{
+function PickList_ResolveValue() {
     if((this.CanEditText)&&(this.mustExistInList)&&(this.multiSelect == "False"))
     {
        var textELM = document.getElementById(this.textId);
@@ -6843,8 +7407,7 @@ function PickList_ResolveValue()
     }
 
 }
-function PickList_MimicBlur(e) 
-{
+function PickList_MimicBlur(e) {
     var e = (e !== false) ? (e || window.event) : false;    
     var target = (e) ? e.currentTarget || (e.target || e.srcElement) : false; 
     var el = document.getElementById(this.clientId); 
@@ -6861,7 +7424,7 @@ function PickList_MimicBlur(e)
        
     if (this._globalClickBound === true)
     {
-        Ext.get(this._globalClickEl || (Ext.isIE ? document.body : document)).un("mousedown", this.MimicBlur);
+        Ext.get(this._globalClickEl || (Ext.isIE ? document.body : document)).un("click", this.MimicBlur);
         this._globalClickBound = false;
     }
     
@@ -6917,14 +7480,13 @@ function PickList_ButtonClick(e) {
         list.focus();
     }
     
-    e.cancelBubble = true;
-	if (e.stopPropagation) e.stopPropagation();
+//    e.cancelBubble = true;
+//	if (e.stopPropagation) e.stopPropagation();
 	return false;
 }
 
 // this fills the selection list asynchronously
-function PickList_GetList()
-{
+function PickList_GetList() {
     var list = document.getElementById(this.listId);
     if ((this.multiSelect == "True") || (list.options.length == 0))
     {
@@ -6933,7 +7495,7 @@ function PickList_GetList()
         }
         var current = document.getElementById(this.textId);
         var encodeText =  encodeURIComponent(current.value);               
-        var vURL = "SLXPickListCache.aspx?picklist=" + this.PickListName + "&multiselect=" + this.multiSelect + "&alphasort=" + this.AlphaSort + "&clientid=" + this.clientId + "&current=" + encodeText;
+        var vURL = "SLXPickListCache.aspx?picklist=" + encodeURIComponent(this.PickListName) + "&multiselect=" + this.multiSelect + "&alphasort=" + this.AlphaSort + "&clientid=" + this.clientId + "&current=" + encodeText;
         xmlhttp.open("GET", vURL, false);
         xmlhttp.send(null);
         this.HandleHttpResponse(xmlhttp.responseText);
@@ -6979,15 +7541,14 @@ function PickList_HandleHttpResponse(results) {
                 parts[0] = parts[0].substr(1);
                 oOption.selected = true;
             }
-            //oOption.innerHTML = parts[1];
             oOption.text = parts[1];
+            oOption.title = parts[1];
             oOption.value = parts[0];
         }
     }
 }
 
-function PickList_GetItemParts(item)
-{
+function PickList_GetItemParts(item) {
     var parts = item.split("^");
     if(parts.length > 2)
     {
@@ -6997,32 +7558,6 @@ function PickList_GetItemParts(item)
        }
      }
     return parts;
-}
-
-function PickList_SetHint(e)
-{
-    if (!e) var e = window.event;
-    var list = document.getElementById(this.listId);
-    if (e.target)
-    {
-        list.title = e.target.textContent;
-    }
-    else
-    {
-        var offset = e.y;
-        var indexOffset = 0;
-        var scrollIndex = list.scrollTop;
-        scrollIndex = scrollIndex/14;
-        while (offset >= 14)
-        {
-            offset = offset - 14;
-            indexOffset++;
-        }
-        if (scrollIndex + indexOffset < list.options.length) 
-        {
-            list.title = list.options[scrollIndex + indexOffset].innerText;
-        }
-    }
 }
 
 function PickList_SelectionChanged() {
@@ -7162,8 +7697,7 @@ function Picklist_HandleKeyDown(e) {
     return true;
 }
 
-function PickList_TextChange(e)
-{
+function PickList_TextChange(e) {
     if (!e) var e = window.event;
     if (e.keyCode == 13) //Enter
     {
@@ -7227,8 +7761,7 @@ function PickList_TextChange(e)
         }
 }
 
-function PickList_SetCheckedState(itemId, index, value)
-{
+function PickList_SetCheckedState(itemId, index, value) {
     var checkbox = document.getElementById(itemId);
     if (checkbox.checked)
     {
@@ -7243,8 +7776,7 @@ function PickList_SetCheckedState(itemId, index, value)
     
 }
 
-function PickList_InvokeChangeEvent(cntrl)
-{
+function PickList_InvokeChangeEvent(cntrl) {
     if (document.createEvent)
     {
         //FireFox
@@ -7259,9 +7791,6 @@ function PickList_InvokeChangeEvent(cntrl)
     }
 }
 
-
-PickList.prototype.SetHint = PickList_SetHint;
-
 PickList.prototype.setVal = PickList_setVal;
 PickList.prototype.getVal = PickList_getVal;
 PickList.prototype.SetVisibility = PickList_SetVisibility;
@@ -7270,7 +7799,6 @@ PickList.prototype.SelectionChanged = PickList_SelectionChanged;
 PickList.prototype.MultiSelect = PickList_MultiSelect;
 PickList.prototype.TextChange = PickList_TextChange;
 PickList.prototype.SetCheckedState = PickList_SetCheckedState;
-PickList.prototype.HandleFocusLeave = PickList_HandleFocusLeave;
 PickList.prototype.GetList = PickList_GetList;
 PickList.prototype.HandleHttpResponse = PickList_HandleHttpResponse;
 PickList.prototype.InvokeChangeEvent = PickList_InvokeChangeEvent;
@@ -8870,7 +9398,12 @@ function Timeline_init(timeline_object, tab) {
             window.setTimeout(method, delay);
         }
     }
-    $(document).ready(function(){ Sage.DialogWorkspace.__instances['ctl00_DialogWorkspace'].on('open', closeTimelineBubble);});
+    $(document).ready(function () {
+        var instance = (Sage.DialogWorkspace.__instances['ctl00_DialogWorkspace']) ? Sage.DialogWorkspace.__instances['ctl00_DialogWorkspace'] : Sage.DialogWorkspace.__instances['DialogWorkspace'];
+        if (instance) {
+            instance._dialog.on('open', closeTimelineBubble);
+        }
+    });
 }
 
 function closeTimelineBubble() {
@@ -9041,16 +9574,20 @@ function groupmanager_DeleteGroup(strGroupID) {
 	    strGroupID = getCurrentGroupInfo().Id;
 	var d = new Date();
     var time = d.getTime(); //prevent url caching
-    
-	if (confirm(this.ConfirmDeleteMessage)) {
-	    getFromServer(this.GMUrl + 'DeleteGroup&gid=' + strGroupID + "&time=" + time);
-        var url = document.location.href.replace("#", "");
-        if (url.indexOf("?") > -1) {
-            var halves = url.split("?");
-            url = halves[0];
+
+    Ext.Msg.confirm("", this.ConfirmDeleteMessage,
+        function (btn) {
+            if (btn == 'yes') {
+                getFromServer((this.GMUrl || this.groupManager.GMUrl) + 'DeleteGroup&gid=' + strGroupID + "&time=" + time);
+                var url = document.location.href.replace("#", "");
+                if (url.indexOf("?") > -1) {
+                    var halves = url.split("?");
+                    url = halves[0];
+                }
+                document.location = url;
+            }
         }
-        document.location = url;
-	}
+    );
 }
 
 function groupmanager_EditGroup(strGroupID) {
@@ -9079,7 +9616,7 @@ function groupmanager_ListGroupsAsSelect(strFamily) {
 	if (strFamily == '')
 	    strFamily = getCurrentGroupInfo().Family;
 		
-	var vURL = this.GMUrl + "GetGroupList&entity=" + strFamily;
+	var vURL = (this.GMUrl || this.groupManager.GMUrl) + "GetGroupList&entity=" + strFamily;
 	var response = getFromServer(vURL);	  
 	
 	var htmlOption;
@@ -9099,13 +9636,13 @@ function groupmanager_ListGroupsAsSelect(strFamily) {
 function groupmanager_HideGroup(strGroupID) {
 	if (strGroupID == '')
 	    strGroupID = getCurrentGroupInfo().Id;
-	postToServer(this.GMUrl + 'HideGroup&gid=' + strGroupID, '');
+	postToServer((this.GMUrl || this.groupManager.GMUrl) + 'HideGroup&gid=' + strGroupID, '');
 }
 
 function groupmanager_UnHideGroup(strGroupID) {
 	if (strGroupID == '')
 	    strGroupID = getCurrentGroupInfo().Id;
-	getFromServer(this.GMUrl + 'UnHideGroup&gid=' + strGroupID);
+	getFromServer((this.GMUrl || this.groupManager.GMUrl) + 'UnHideGroup&gid=' + strGroupID);
 }
 
 function groupmanager_ShowGroups(strTableName) {
@@ -9125,11 +9662,11 @@ function groupmanager_ShowGroupInViewer(strGroupID) {
 function groupmanager_Count(strGroupID) {
 	if (strGroupID == '')
 	    strGroupID = getCurrentGroupInfo().Id;
-	return getFromServer(this.GMUrl + 'Count&gid=' + strGroupID);
+	return getFromServer((this.GMUrl || this.groupManager.GMUrl) + 'Count&gid=' + strGroupID);
 }
 
 function groupmanager_CreateAdHocGroup(strGroups, strName, strFamily, strLayoutId) {
-	var vURL = this.GMUrl + 'CreateAdHocGroup';
+	var vURL = (this.GMUrl || this.groupManager.GMUrl) + 'CreateAdHocGroup';
 	vURL += '&name=' + encodeURIComponent(strName);
 	vURL += '&family=' + strFamily;
 	vURL += '&layoutid=' + encodeURIComponent(strLayoutId);
@@ -9140,7 +9677,7 @@ function groupmanager_GetGroupSQL(strGroupID, strUseAliases, strParts)
 {
 	if (strGroupID == '')
 	    strGroupID = getCurrentGroupInfo().Id;
-    var vURL = this.GMUrl + 'GetGroupSQL';
+    var vURL = (this.GMUrl || this.groupManager.GMUrl) + 'GetGroupSQL';
     vURL += '&gid=' + strGroupID;
     
     if (strUseAliases != null) {
@@ -9160,14 +9697,14 @@ function groupmanager_EditAdHocGroupAddMember(strGroupID, strItem) {
 	if (strGroupID == '')
 	    strGroupID = getCurrentGroupInfo().Id;
 	// no return value expected;
-	var x = getFromServer(this.GMUrl + 'EditAdHocGroupAddMember&groupid=' + strGroupID + '&entityid=' + strItem);
+	var x = getFromServer((this.GMUrl || this.groupManager.GMUrl) + 'EditAdHocGroupAddMember&groupid=' + strGroupID + '&entityid=' + strItem);
 	//return x;
 }
 function groupmanager_EditAdHocGroupDeleteMember(strGroupID, strItem) {
 	if (strGroupID == '')
 	    strGroupID = getCurrentGroupInfo().Id;
 	// no return value expected;
-	var x = getFromServer(this.GMUrl + 'EditAdHocGroupDeleteMember&groupid=' + strGroupID + '&entityid=' + strItem);
+	var x = getFromServer((this.GMUrl || this.groupManager.GMUrl) + 'EditAdHocGroupDeleteMember&groupid=' + strGroupID + '&entityid=' + strItem);
 	//return x;
 }
 
@@ -9179,7 +9716,7 @@ function groupmanager_IsAdHoc(strGroupID) {
     if (this.adHocGroupDictionary.hasOwnProperty(strGroupID)) {
 		return this.adHocGroupDictionary[strGroupID];
 	} else {
-		var isAH = getFromServer(this.GMUrl + 'IsAdHoc&groupID=' + strGroupID);
+		var isAH = getFromServer((this.GMUrl || this.groupManager.GMUrl) + 'IsAdHoc&groupID=' + strGroupID);
 		this.adHocGroupDictionary[strGroupID] = isAH;
 		return isAH;
 	}
@@ -9208,6 +9745,8 @@ function groupmanager_SetDefaultGroupID(strMode, strValue) {
 
 function groupmanager_ExportGroup(strGroupID, strFileName) {
     try {
+        if (typeof (GetMailMergeService) === "undefined")
+            throw new Error((typeof (DesktopErrors) != "undefined") ? DesktopErrors().ExcelNotInstalledError : 'Excel not installed.');
         var oService = GetMailMergeService();
         if (oService) {
             if (strGroupID == '')
@@ -9219,13 +9758,17 @@ function groupmanager_ExportGroup(strGroupID, strFileName) {
     }
     catch (err) {
         var sXtraMsg = "";
-        if (IsSageGearsObjectError(err)) {
+        if ((typeof (IsSageGearsObjectError) != "undefined") && IsSageGearsObjectError(err)) {
             sXtraMsg = DesktopErrors().SageGearsObjectError;
         }
-        var sError = (Ext.isFunction(err.toMessage)) ? err.toMessage(sXtraMsg, MailMergeInfoStore().ShowJavaScriptStack) : err.message;
+        var sError = err.toMessage();
+        if (typeof (MailMergeInfoStore) != "undefined") {
+            sError = (Ext.isFunction(err.toMessage)) ? err.toMessage(sXtraMsg, MailMergeInfoStore().ShowJavaScriptStack) : err.message;
+        }
+        var errFormat = (typeof (DesktopErrors) != "undefined") ? DesktopErrors().ExportToExcelError : "{0}";
         Ext.Msg.show({
             title: "Sage SalesLogix",
-            msg: String.format(DesktopErrors().ExportToExcelError, sError),
+            msg: String.format(errFormat, sError),
             buttons: Ext.Msg.OK,
             icon: Ext.MessageBox.ERROR
         });
@@ -9466,7 +10009,7 @@ function groupmanager_ShareGroup(strGroupID) {
 }
 
 function groupmanager_GetGroupId(strGroupName) {
-    return getFromServer(this.GMUrl + 'GetGroupId&name=' + strGroupName);
+    return getFromServer((this.GMUrl || this.groupManager.GMUrl) + 'GetGroupId&name=' + strGroupName);
 }
 
 groupmanager.prototype.CreateGroup = groupmanager_CreateGroup;
@@ -9498,10 +10041,10 @@ Sage.ClientGroupContextService = function() {
 };
 
 Sage.ClientGroupContextService.prototype.getContext = function() {
-    if (window.__groupContext) {
-        if (!window.__groupContext.ContainsPositionState)
+    if ((Sage.Groups) && Sage.Groups._groupContext) {
+        if (!Sage.Groups._groupContext.ContainsPositionState)
             this.requestContext();
-        return window.__groupContext;
+        return Sage.Groups._groupContext;
     }
     this.requestContext();
     return this._emptyContext;
@@ -9532,7 +10075,8 @@ Sage.ClientGroupContextService.prototype.requestContext = function() {
 
 Sage.ClientGroupContextService.prototype.setContext = function(contextObj) {
     if (typeof contextObj === "object") {
-        window.__groupContext = contextObj;
+        if (!Sage.Groups) Sage.namespace('Groups');
+        Sage.Groups._groupContext = contextObj;
     }
     var svc = Sage.Services.getService("ClientGroupContext")
     svc.isRetrievingContext = false;
@@ -10116,14 +10660,15 @@ Sage.GroupManagerService.prototype.findGroupInfoById = function(groupId) {
 }
 
 Sage.Services.addService("GroupManagerService", new Sage.GroupManagerService());
-Sage.GroupLookupManager = function() {
+Sage.GroupLookupManager = function () {
     this.win = '';
     this.lookupIsOpen = false;
     this.withinGroup = false;
     this.conditions = [];
+    this.onLookupNavigateTo = false;
 
     this.lookupTpl = new Ext.XTemplate(
-        //'<div id="entitylookupdiv-container">',
+    //'<div id="entitylookupdiv-container">',
         '<div id="entitylookupdiv_{index}" class="lookup-condition-row">',
         '<label class="slxlabel" style="width:75px;clear:left;display:block;float:left;position:relative;padding:4px 0px 0px 0px"><tpl if="index &lt; 1">{addrowlabel}</tpl><tpl if="index &gt; 0">{hiderowlabel}</tpl></label>',
         '<div style="padding-left:75px;position:relative;">',
@@ -10134,7 +10679,7 @@ Sage.GroupLookupManager = function() {
         '<input type="button" id="lookupButton" onclick="var mgr = Sage.Services.getService(\'GroupLookupManager\');if (mgr) { mgr.doLookup(); }" value="{srchBtnCaption}" /></tpl>',
         '<tpl if="index &gt; 0"><img src="{hideimgurl}" alt="{hideimgalttext}" style="cursor:pointer;padding:0px 5px;" onclick="var mgr = Sage.Services.getService(\'GroupLookupManager\');if (mgr) { mgr.removeLookupCondition({index});}" /></tpl>',
         '</div></div>' //</div>
-    );  
+    );
 
     if (window.lookupSetupObject) {
         this.setupTemplateObj = window.lookupSetupObject;
@@ -10178,21 +10723,35 @@ Sage.GroupLookupManager.prototype.getTemplateObj = function() {
 
 }
 
-Sage.GroupLookupManager.prototype.showLookup = function() {
+Sage.GroupLookupManager.prototype.showLookup = function (opts) {
     var mgr = Sage.Services.getService("GroupLookupManager");
-    if (mgr) {    
-        if (mgr.lookupisopen) { return; }
-        mgr.lookupisopen = true;
+    if (mgr) {
+        if (mgr.lookupIsOpen) { return; }
+        mgr.lookupIsOpen = true;
         if (mgr.win == '') {
             mgr.setupLookupElements();
         }
         mgr.handleGroupChanged();
         var gMgrSvc = Sage.Services.getService("GroupManagerService");
-        var layout = gMgrSvc.getLookupFields(mgr.resetLookup);
+
+
+        if (typeof opts === 'undefined') {
+            var cSvc = Sage.Services.getService("ClientGroupContext");
+            if (cSvc) {
+                //opts = { family: cSvc.getContext().CurrentFamily, name: "LookupLayoutGroup" };
+                opts = { family: cSvc.getContext().CurrentFamily, name: cSvc.getContext().LookoutLayoutGroupName };
+            }
+        } else {
+            if (opts.hasOwnProperty('returnTo')) {
+                this.onLookupNavigateTo = opts['returnTo'];
+            }
+        }
+
+        var layout = gMgrSvc.getLookupFields(opts, mgr.resetLookup);
         mgr.win.show();
-        $(document).bind("keydown", mgr.checkKeys );
+        $(document).bind("keydown", mgr.checkKeys);
         $("#value_0").focus();
-        window.setTimeout(function() { $("#value_0").focus(); }, 500);
+        window.setTimeout(function () { $("#value_0").focus(); }, 500);
     }
 }
 
@@ -10268,9 +10827,9 @@ Sage.GroupLookupManager.prototype.removeLookupCondition = function(idx) {
     $(rowid).html('');
 }
 
-Sage.GroupLookupManager.prototype.onLookupHide = function() {
-    this.lookupisopen = false;
-    $(document).unbind("keydown", this.checkKeys );
+Sage.GroupLookupManager.prototype.onLookupHide = function () {
+    this.lookupIsOpen = false;
+    $(document).unbind("keydown", this.checkKeys);
 
 }
 
@@ -10329,7 +10888,7 @@ Sage.GroupLookupManager.prototype.operatorChange = function(index) {
     }
 }
 
-Sage.GroupLookupManager.prototype.reloadConditions = function() {
+Sage.GroupLookupManager.prototype.reloadConditions = function () {
     this.conditions = [];
     var filterRows = $('.lookup-condition-row');
     for (var i = 0; i < filterRows.length; i++) {
@@ -10342,13 +10901,22 @@ Sage.GroupLookupManager.prototype.reloadConditions = function() {
                 if ((!val[0].value) && ((operator[0].value != 'like') && (operator[0].value != 'sw'))) {
                     return false; //must have a value for numeric comparisons
                 }
+                var mgr = Sage.Services.getService("GroupLookupManager");
+                var fields = $('#fieldnames_' + i)[0];
+
+                var fieldNumeric = ((mgr) && (fields.selectedIndex >= 0) &&
+                    (fields.selectedIndex < mgr.setupTemplateObj.fields.length) &&
+                    (mgr.setupTemplateObj.fields[fields.selectedIndex].isNumeric) &&
+                    !mgr.setupTemplateObj.fields[fields.selectedIndex].isDate);
+                if (fieldNumeric && isNaN(val[0].value)) {
+                    return false; //numeric fields must have numbers to compare against
+                }
                 var condition = {
                     fieldname: fieldname[0].value,
                     operator: operator[0].value,
-                    val: val[0].value.replace(/%/g, '')
+                    val: (fieldNumeric) ? parseInt(val[0].value, 10) : val[0].value.replace(/%/g, '')
                 }
                 this.conditions.push(condition);
-                //conditions.push(fieldname[0].value + "'" + operator[0].value + "'" + val[0].value.replace(",", "").replace("'", ""));
                 this.operatorChange(0);
             }
         }
@@ -10395,7 +10963,7 @@ Sage.GroupLookupManager.prototype.getConditionsString = function() {
     return Sys.Serialization.JavaScriptSerializer.serialize(this.conditions);
 }
 
-Sage.GroupLookupManager.prototype.handleGroupChanged = function() {
+Sage.GroupLookupManager.prototype.handleGroupChanged = function () {
     var gMgrSvc = Sage.Services.getService("GroupManagerService");
     var mgr = Sage.Services.getService("GroupLookupManager");
     if ((!mgr) && (this.setupTemplateObj)) {
@@ -10406,6 +10974,13 @@ Sage.GroupLookupManager.prototype.handleGroupChanged = function() {
             mgr.win.hide();
         }
     }
+
+    if (mgr.onLookupNavigateTo) {
+        //supress any other handlers that refresh the page...
+        window.__doPostBack = function () { return; };
+        window.location = mgr.onLookupNavigateTo + "?modeid=list&gid=LOOKUPRESULTS";
+    }
+    //stop the rest of the event handlers from firing - the current group context gets reset...
 }
 
 
@@ -10415,11 +10990,12 @@ Sage.GroupLookupManager.prototype.setupTemplateFields = function(filters) {
     if (mgr) {
         mgr.setupTemplateObj.fields = [];
         for (var i = 0; i < filters.items.length; i++) {
-            if ((filters.items[i].visible == "T") && (filters.items[i].width != "0")) {
+            if (((filters.items[i].visible === "T") || (filters.items[i].visible === true)) && (filters.items[i].width != "0")) {
                 var itemIsNumber = filters.items[i].fieldType in  NumericFieldTypes;
                 mgr.setupTemplateObj.fields.push({ fieldname: filters.items[i].alias,
                     displayname: filters.items[i].caption,
-                    isNumeric: itemIsNumber
+                    isNumeric: itemIsNumber,
+                    isDate: filters.items[i].fieldType == "11"
                 });
             }
         }
@@ -10432,16 +11008,11 @@ Sage.Services.addService("GroupLookupManager", new Sage.GroupLookupManager() );
 
 Sage.Copy = function(config) {
     this.originalConfig = config;
-    this.hasContent = config.hasContent;  
 }
 
 Sage.Copy.prototype.copyClip = function() {
     this.copyTo = "Clipboard"
-	if (this.hasContent) {
-	    this.OnCopyContentReady();
-	} else {
-	    this.requestContent();
-	}
+    this.requestContent();
 }
 
 Sage.Copy.prototype.requestContent = function() {
@@ -10456,11 +11027,11 @@ Sage.Copy.prototype.requestContent = function() {
         $.ajax({
 	        url: url,
 	        dataType: "json",
+            cache: false,
 	        data: {},
 	        success: function(data) {
 		        var tpl = new Ext.XTemplate(self.originalConfig.template);
 		        tpl.overwrite(self.originalConfig.clientId, data);
-		        self.hasContent = true;
 		        if (self.copyTo == "Clipboard")
 		            self.OnCopyContentReady();
 		        else 
@@ -10486,17 +11057,17 @@ Sage.Copy.prototype.OnCopyContentReady = function() {
 		
 		if (window.clipboardData) {
 			window.clipboardData.setData("text", clipString);
-		} else {
-			try {
-			    return;
-				netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
-                var clipboardHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);
-                if (clipboardHelper) {			
-                    clipboardHelper.copyString(clipString);
-                }
-			} catch (e) {
-                alert(String.format("{0}. {1}", this.originalConfig.cannotAccessClipboard, e.message));
-			}
+//		} else {
+//			try {
+//			    return;
+//				netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+//                var clipboardHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);
+//                if (clipboardHelper) {			
+//                    clipboardHelper.copyString(clipString);
+//                }
+//			} catch (e) {
+//                alert(String.format("{0}. {1}", this.originalConfig.cannotAccessClipboard, e.message));
+//			}
 		}
 	}
 }
@@ -10507,57 +11078,32 @@ Sage.Copy.prototype.OnCopyContentReady = function() {
 
 Sage.Copy.prototype.copyToEmail = function() {
 	this.copyTo = "Email"
-	if (this.hasContent) {
-	    this.OnEmailContentReady();
-	} else {
-	    this.requestContent();
-	}
+    this.requestContent();
 }
 
-Sage.Copy.prototype.OnEmailContentReady = function() {
+Sage.Copy.prototype.OnEmailContentReady = function () {
     var baseControlId = this.originalConfig.clientId;
-	var elem = document.getElementById(baseControlId + "_to");
-	var vTo = (elem) ? elem.value : "";
-	elem = document.getElementById(baseControlId + "_cc");
-	var vCC = (elem) ? elem.value : "";
-	elem = document.getElementById(baseControlId + "_bcc");
-	var vBCC = (elem) ? elem.value : "";
-	elem = document.getElementById(baseControlId + "_subject");
-	var vSubject = (elem) ? elem.value : "";
-	elem = document.getElementById(baseControlId);
-	var vBody = (elem) ? getInnerText(elem) : "";
-	var isFirstParam = true;
-	var link = "mailto:" + vTo;
-	if (vSubject != "") {
-		link += getParamSeparatorChar(isFirstParam) + "subject=" + vSubject;
-		isFirstParam = false;
-	}
-	if (vCC != "") {
-		link += getParamSeparatorChar(isFirstParam) + "cc=" + vCC;
-		isFirstParam = false;
-	}
-	if (vBCC != "") {
-		link += getParamSeparatorChar(isFirstParam) + "bcc=" + vBCC;
-		isFirstParam = false;
-	}
-	if (vBody != "") {
-	    // added some cleanup of body because Firefox was not accepting the original value
-	    vBody = vBody.replace(/([\:])\n\s*\n/g, "$1");
-	    vBody = vBody.replace(/(\n)[\s*\n]+/g, "$1");
-	    vBody = vBody.replace(/     /g, " ");
-		link += getParamSeparatorChar(isFirstParam) + "body=" + encodeURIComponent(vBody);
-	}
-
-	document.location.href = link;
-}	
-
-function getParamSeparatorChar(isFirst) {
-	return (isFirst) ? "?" : "&";
-}
-
-function getInnerText(elem) {
-    var hasInnerText = (document.getElementsByTagName("body")[0].innerText != undefined) ? true : false;
-    return hasInnerText ? elem.innerText : elem.textContent;
+    var elem = document.getElementById(baseControlId + "_to");
+    var vTo = (elem) ? elem.value : "";
+    elem = document.getElementById(baseControlId + "_cc");
+    var vCC = (elem) ? elem.value : "";
+    elem = document.getElementById(baseControlId + "_bcc");
+    var vBCC = (elem) ? elem.value : "";
+    elem = document.getElementById(baseControlId + "_subject");
+    var vSubject = (elem) ? elem.value : "";
+    elem = document.getElementById(baseControlId);
+    var vBody = (elem) ? elem.innerHTML : '';
+    var recip = {};
+    if (vTo !== '') {
+        recip['to'] = vTo;
+    }
+    if (vCC !== '') {
+        recip['cc'] = vCC;
+    }
+    if (vBCC !== '') {
+        recip['bcc'] = vBCC;
+    }
+    Sage.Utility.writeEmail(recip, vSubject, vBody, true);
 }
 
 URL = function (urlID, url, autoPostBack)
@@ -10621,7 +11167,7 @@ function LaunchWebSite(ID)
     {
 	    url = startURL + url;
     }     
-    winH = window.open(url, '', 'dependent=no,directories=yes,location=yes,menubar=yes,resizeable=yes,pageXOffset=0px,pageYOffset=0px,scrollbars=yes,status=yes,titlebar=yes,toolbar=yes');
+    winH = window.open(url, '', 'dependent=no,directories=yes,location=yes,menubar=yes,resizable=yes,pageXOffset=0px,pageYOffset=0px,scrollbars=yes,status=yes,titlebar=yes,toolbar=yes');
 }
 
 URL.prototype.FormatURL = URL_FormatURL;
@@ -10730,7 +11276,7 @@ Sage.FilterManager.prototype.ApplyLookupFilter = function(options) { //filternam
             ops = $("#" + options.opsid)[0].value;
         }
         options.ops = ops;
-        options.value = value;
+        options.value = [ value ];
         options.filterType = 'Lookup';
         svc.setActiveFilter(options);
     }
@@ -10850,7 +11396,7 @@ Sage.SaveHiddenFilters = function(hiddenFilters, oncomplete) {
     }
 }
 
-Sage.FilterUpdateCounts = function() {
+Sage.FilterUpdateCounts = function () {
     function getCurrentType() {
         var tabPanel = Ext.ComponentMgr.get('activity_groups_tabs');
         if (typeof tabPanel === "undefined")
@@ -10881,8 +11427,8 @@ Sage.FilterUpdateCounts = function() {
     var svc = Sage.FilterManager.GetManagerService();
     if (Sage.FilterRangeCountRequest)
         clearTimeout(Sage.FilterRangeCountRequest);
-    Sage.FilterRangeCountRequest = setTimeout(function() {
-        svc.requestRangeCounts(function(args) {
+    Sage.FilterRangeCountRequest = setTimeout(function () {
+        svc.requestRangeCounts(function (args) {
             try {
                 for (var i = 0; i < args.length; i++) {
                     if (!args[i].Counts)
@@ -10907,7 +11453,7 @@ Sage.FilterUpdateCounts = function() {
                                     item.displayNameId = Sage.FiltersToJSId(Sage.FilterManager.nullString);
                                 }
                                 if (/^\s*$/.test(item.VALUE)) {
-                                    item.VALUE = Sage.FilterManager.blankString;
+                                    //item.VALUE = Sage.FilterManager.blankString;
                                     item.displayName = Sage.FilterManager.blankString;
                                     item.displayNameId = Sage.FiltersToJSId(Sage.FilterManager.blankString);
                                 }
@@ -10921,10 +11467,9 @@ Sage.FilterUpdateCounts = function() {
                             var html = [];
                             if (getCurrentType() != null) { // only for activity/conf/lit/event
                                 for (var key in args[i].Counts) {
-                                    if (key == "") key = Sage.FilterManager.blankString;
                                     var exists = false;
                                     for (var j = 0; j < values.length; j++) {
-                                        if (values[j].VALUE == key) {
+                                        if (values[j].VALUE === key) {
                                             exists = true;
                                             break;
                                         }
@@ -10941,17 +11486,41 @@ Sage.FilterUpdateCounts = function() {
                             var hiddenFilters = Sage.GetHiddenFilters();
                             var filterId = String.format("{0}_{1}", Sage.FiltersToJSId(data.family), Sage.FiltersToJSId((values[0]) ? values[0].alias : ''));
                             var csssearchstring = ((hiddenFilters[filterId]) && (hiddenFilters[filterId].items)) ? '|' + hiddenFilters[filterId].items.join('|').toLowerCase() + '|' : '';
+
+                            for (var item in args[i].Counts) { //add in any missing items
+                                if (args[i].Counts[item] == -1) continue;
+                                var idx = 0;
+                                var srchFor = (item !== Sage.FilterManager.blankString) ? item : '';
+                                for (var j = 0; j < values.length; j++) {
+                                    if (values[j].VALUE == srchFor) {
+                                        idx = -1;
+                                        break;
+                                    }
+                                    if (srchFor > values[j].VALUE) idx = j + 1;
+                                }
+                                if (idx > -1) {
+                                    values.splice(idx, 0, { VALUE: item,
+                                        entity: args[i].FilterEntity,
+                                        alias: item,
+                                        selected: false,
+                                        objname: args[i].FilterEntity,
+                                        count: args[i].Counts[item],
+                                        NAME: item
+                                    });
+                                }
+                            }
                             for (var j = 0; j < values.length; j++) {
                                 var item = values[j];
                                 var key = item.VALUE;
+                                if (key === '') { key = Sage.FilterManager.blankString; }
 
                                 item.selected = selected
-                                ? selected.hasOwnProperty(key)
-                                : false;
+                                    ? selected.hasOwnProperty(key)
+                                    : false;
 
                                 item.count = args[i].Counts.hasOwnProperty(key)
-                                ? args[i].Counts[key]
-                                : 0;
+                                    ? args[i].Counts[key]
+                                    : 0;
                                 item.count = item.count == -1 ? Sage.FilterManager.UnknownCount : item.count;
                                 item.displayName = GetDisplayName(data, key, GetFilterDisplayName(key, item.NAME));
                                 item.displayNameId = Sage.FiltersToJSId(GetFilterDisplayName(key, item.NAME));
@@ -10961,7 +11530,6 @@ Sage.FilterUpdateCounts = function() {
                                 html.push(String.format(Sage.FilterManager.valueItemFormat, item.entity, item.alias, j, item.VALUE,
                                     (item.selected) ? "checked=\"checked\"" : "", item.objname, Sage.FiltersToJSId(item.entity),
                                     Sage.FiltersToJSId(item.alias), item.valueWithSingleFixed, item.displayName, item.displayNameId, item.count, cssclass));
-
                             }
 
                             var fragment = document.createDocumentFragment();
@@ -10979,13 +11547,13 @@ Sage.FilterUpdateCounts = function() {
                             var hasItems = true;
                             var fragment = document.createDocumentFragment();
                             if ($.browser.mozilla && !fragment.querySelectorAll) { //ff pre3.1 has no mechanism to do selection in fragments
-                                $(".filter-value-count", context).each(function() {
+                                $(".filter-value-count", context).each(function () {
                                     this.firstChild.nodeValue = "(0)"; //need to zero the ones that won't come down
                                 });
                                 for (var filterval in thisFilterData.Counts) {
                                     hasItems = true;
                                     var filterIdVal = (filterval == null) ? Sage.FilterManager.nullIdString : filterval;
-                                    $(String.format("span.{0}_{1}_count", thisFilterData.FilterName, Sage.FiltersToJSId(filterIdVal)), context).each(function() {
+                                    $(String.format("span.{0}_{1}_count", thisFilterData.FilterName, Sage.FiltersToJSId(filterIdVal)), context).each(function () {
                                         this.firstChild.nodeValue = String.format("({0})", thisFilterData.Counts[filterval] == -1 ? Sage.FilterManager.UnknownCount : thisFilterData.Counts[filterval]);
                                     });
                                 }
@@ -11111,7 +11679,7 @@ Sage.FilterManager.prototype.ClearFilters = function() {
     }
 }
 
-Sage.FilterManager.prototype.ToggleShortList = function(filterId, forceOpen) {
+Sage.FilterManager.prototype.ToggleShortList = function (filterId, forceOpen) {
     var filterDiv = $("#" + filterId);
     var anchor = filterDiv.find("A").get(0);
     var itemsDiv = filterDiv.find(String.format("#{0}_items", filterId));
@@ -11123,6 +11691,15 @@ Sage.FilterManager.prototype.ToggleShortList = function(filterId, forceOpen) {
         var hiddenFilters = Sage.GetHiddenFilters();
         var oncomplete = null;
         var changed = false;
+        try {
+            if (!itemsDiv.parentNode) itemsDiv.parentNode = itemsDiv.parent();
+            if (itemsDiv.parentNode) {
+                itemsDiv.parentNode.find(".filterloading").remove();
+            }
+        } catch (ex) {
+            //don't throw an error if cant find parent node
+        }
+
         if (forceOpen || (anchor.innerHTML === "[+]")) {
             anchor.innerHTML = "[-]";
             itemsDiv.removeClass("display-none");
@@ -11131,13 +11708,8 @@ Sage.FilterManager.prototype.ToggleShortList = function(filterId, forceOpen) {
             }
             changed = !hiddenFilters[filterId].expanded;
             hiddenFilters[filterId].expanded = true;
-            try {
-                if (!itemsDiv.parentNode) itemsDiv.parentNode = itemsDiv.parent();
-                if ((itemsDiv.parentNode) && (!doNotUpdateCounts)) {
-                    itemsDiv.before('<div class="loading-indicator filterloading"><span>' + TaskPaneResources.Loading + '</span></div>');
-                }
-            } catch (ex) {
-                //don't throw an error if cant find prev node
+            if ((itemsDiv.parentNode) && (!doNotUpdateCounts)) {
+                itemsDiv.before('<div class="loading-indicator filterloading"><span>' + TaskPaneResources.Loading + '</span></div>');
             }
             svc.RangeCountCache = null;
             if (!doNotUpdateCounts) oncomplete = Sage.FilterUpdateCounts;
@@ -11156,7 +11728,7 @@ Sage.FilterManager.prototype.ToggleShortList = function(filterId, forceOpen) {
 
     if (filterDiv.hasClass("DistinctFilter") && (itemsDiv.length > 0) && (itemsDiv.get(0).childNodes.length <= 1)) {
         var notNeedToDoFullRefresh = this.GetAppliedFilters().length == 0; //(typeof Sage.FilterManager.FilterActivityManager === 'undefined') || 
-        this.LoadDistinctValues(entity, filterName, function() { ToggleList(notNeedToDoFullRefresh); });
+        this.LoadDistinctValues(entity, filterName, function () { ToggleList(notNeedToDoFullRefresh); });
         return;
     }
     ToggleList();
@@ -11380,7 +11952,7 @@ Sage.FilterManager.prototype.loadDistinctFilterValues = function(parent, contain
             item.displayNameId = Sage.FiltersToJSId(Sage.FilterManager.nullString);
         }
         if (/^\s*$/.test(item.VALUE)) {
-            item.VALUE = Sage.FilterManager.blankString;
+            //item.VALUE = Sage.FilterManager.blankString;
             item.displayName = Sage.FilterManager.blankString;
             item.displayNameId = Sage.FiltersToJSId(Sage.FilterManager.blankString);
         }
@@ -11734,8 +12306,9 @@ function GetFilterDisplayName(val, defname) {
     }
     if (val == null)
         return Sage.FilterManager.nullString;
-    if (val == "")
+    if (/^\s*$/.test(val)) {
         return Sage.FilterManager.blankString;
+    }
     return ((typeof (defname) != "undefined") && (defname)) ? defname : val;
 }
 
@@ -11850,4 +12423,206 @@ Sage.FilterActivityManager.prototype.buildRequestUrl = function(options) {
 
     return u.join("");
 }
+
+
+// ***** General Task Pane Functionality *****
+// to be used as base functionality for tasklets
+Sage.namespace('TaskPane');
+
+Sage.TaskPane.Tasklet = function (config) {
+    this.config = config || {};
+
+    this.linkContainer = config.linkContainer;
+    var that = this;
+
+    var svc = Sage.Services.getService("GroupManagerService");
+    if (svc) {
+        svc.addListener(Sage.GroupManagerService.CURRENT_GROUP_CHANGED, function () {
+            that.showLinks();
+        });
+    }
+};
+Sage.TaskPane.Tasklet.prototype.showLinks = function () {
+
+    if (!this.config) {
+        return;
+    }
+
+    // get current entity type
+    var entityType = Sage.TaskPane.Utility.getCurrentEntityType();
+
+    // hide panel if current entity type is not listed in config file
+    // or if there are no links defined.
+    if (this.config.entityType) {
+        var entitiesExpr = this.getEntitiesExpression(this.config.entityType);
+        if (entitiesExpr) {
+            if (!entitiesExpr.test(entityType) || !this.config.links) {
+                this.linkContainer.parents(".task-pane-item").css("display", "none");
+                this.linkContainer.css("display", "none");
+                this.linkContainer.find("li").css("display", "none");
+                this.linkContainer.find("a").css("display", "none");
+                return;
+            }
+        }
+    }
+    else {
+        this.linkContainer.parents(".task-pane-item").css("display", "none");
+        this.linkContainer.css("display", "none");
+        this.linkContainer.find("li").css("display", "none");
+        this.linkContainer.find("a").css("display", "none");
+        return;
+    }
+
+    // get current viewMode
+    var viewMode = Sage.TaskPane.Utility.getCurrentViewMode();
+
+    // check applied security and display mode for each link to determine
+    // if the link should be shown
+    var linkLen = this.config.links.length;
+    for (var i = 0; i < linkLen; i++) {
+        var link = this.config.links[i];
+        var canAccess = link.hasAccess;
+        var viewModesExpr = this.getViewModeExpression(link.viewModes);
+
+        if (canAccess && viewModesExpr && viewModesExpr.test(viewMode)) {
+            link.parent = this;
+            var anchor = new Sage.TaskPane.TaskPaneItem(link);
+        }
+        else {
+            $("#" + link.id).css("display", "none");
+        }
+    }
+    var hasVisibleChildren = this.linkContainer.find("a:visible").size() > 0;
+
+    if (!hasVisibleChildren) {
+        this.linkContainer.parents(".task-pane-item").css("display", "none");
+    }
+};
+Sage.TaskPane.Tasklet.prototype.getViewModeExpression = function (viewModes) {
+    var regex = new RegExp();
+    if (viewModes) {
+        var viewModesLen = viewModes.length;
+        var builder = [];
+        for (var i = 0; i < viewModesLen; i++) {
+            builder.push(viewModes[i]);
+        }
+        var expr = ['(', builder.join('|'), ')'];
+        regex = new RegExp(expr.join(''), "i");
+    }
+
+    return regex;
+};
+Sage.TaskPane.Tasklet.prototype.getEntitiesExpression = function (configEntityType) {
+    return new RegExp(configEntityType, "i");
+};
+// ***** End General Task Pane Functionality *****
+
+Sage.namespace('Sage.TaskPane');
+
+Sage.TaskPane.TaskPaneItem = function (config) {
+
+    this.config = config || {};
+    this.selectionInfo = {};
+    this.anchor = {};
+    this.parent = config.parent;
+
+    var that = this;
+    var id = config.id;
+
+    var link = $("#" + id);
+
+    if (link.size() > 0) {
+        this.anchor = link.get(0);
+    }
+
+    if (!this.anchor.href) {
+        var hrefattr = document.createAttribute('href');
+        hrefattr.nodeValue = "#";
+        this.anchor.setAttributeNode(hrefattr);
+    }
+    if (!this.anchor.getAttribute('onclick')) {
+        this.anchor.onclick = function () {
+            that.doClick();
+        };
+    }
+    return this.anchor;
+};
+Sage.TaskPane.TaskPaneItem.prototype.doClick = function () {
+    var link = this;
+    var confirmResp = true;
+    if (link.config.confirmMsg) {
+        confirmResp = confirm(link.config.confirmMsg);
+    }
+    if (confirmResp) {
+        if (link.config.jscommand) {
+            if (typeof link.config.jscommand === "function") {
+                link.config.jscommand.call();
+            }
+            else {
+                eval(link.config.jscommand);
+            }
+        }
+        if (link.config && link.config.serverCommand) {
+            // get selected items
+            link.selectionInfo = link.getSelectionInfo();
+
+            if (link.selectionInfo.selectionCount === 0) {
+                link.confirmSelectAllRecords();
+            }
+            else {
+                link.processSelectedRecords();
+            }
+        }
+    }
+};
+Sage.TaskPane.TaskPaneItem.prototype.confirmSelectAllRecords = function () {
+    var totalCount = Sage.Services.getService("ClientGroupContext").getContext().CurrentGroupCount;
+    var dialogBody = String.format(MasterPageLinks.AdHocDialog_NoneSelectedProcess, totalCount);
+    var that = this;
+    Ext.MessageBox.confirm("", dialogBody, function (btn) {
+        if (btn === 'yes') {
+            that.selectionInfo.key = "selectAll";
+            that.processSelectedRecords();
+        }
+        else {
+            that.selectionInfo.key = "cancel";
+        }
+    });
+};
+Sage.TaskPane.TaskPaneItem.prototype.getSelectionInfo = function () {
+    try {
+        var selectionInfo = "";
+        var panel = Sage.SalesLogix.Controls.ListPanel.find("MainList");
+        if (panel) {
+            selectionInfo = panel.getSelectionInfo();
+        }
+        return selectionInfo;
+    }
+    catch (e) {
+        Ext.Msg.alert(MasterPageLinks.AdHocDialog_NoData);
+    }
+};
+Sage.TaskPane.TaskPaneItem.prototype.processSelectedRecords = function () {
+    var svc = Sage.Services.getService("SelectionContextService");
+    if (svc !== undefined) {
+        var that = this;
+        svc.setSelectionContext(this.selectionInfo.key, this.selectionInfo,
+            function () {
+                var link = that;
+                if (that.selectionInfo.key) {
+                    var prm = Sys.WebForms.PageRequestManager.getInstance();
+                    prm.add_endRequest(function (sender, args) {
+
+                        link.parent.showLinks();
+                    });
+                    __doPostBack(that.anchor.id, that.config.serverCommand + ',' + that.selectionInfo.key);
+                }
+            });
+    }
+    else {
+        Ext.MessageBox.Alert(Sage.TaskPane.Resources.error_nosvc_title,
+            String.format(Sage.TaskPane.Resources.error_nosvc_msg, "SelectionContextService"));
+    }
+};
+
 

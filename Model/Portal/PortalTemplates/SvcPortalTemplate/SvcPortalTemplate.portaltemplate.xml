@@ -52,6 +52,7 @@
   </DeploymentActions>
   <TemplateUrl>Masters\default.master</TemplateUrl>
   <AuthenticationProvider>Sage.SalesLogix.Web.SLXWebAuthenticationProvider, Sage.SalesLogix.Web</AuthenticationProvider>
+  <StorageProvider>Sage.Platform.Application.UI.Web.UserCacheRootWorkItemStorageProvider, Sage.Platform.Application.UI.Web</StorageProvider>
   <LinkedFolderDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="SupportFiles" Source="\Portal\PortalTemplates\SvcPortalTemplate\SupportFiles">
     <Filters />
     <Files />

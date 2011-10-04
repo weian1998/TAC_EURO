@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <ModelItems xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Item Id="d788f158-3597-4a79-9bcf-f3bf4a3a5f61">LiveGroupViewer.smartpart.xml</Item>
   <Item Id="b160748c-699a-4073-89a9-623df46123e0">AccountDetails.smartpart.xml</Item>
   <Item Id="5e54df83-7f33-4633-9984-7c1c1d464d00">AccountExtendedDetails.smartpart.xml</Item>
   <Item Id="4b5d1b3b-8309-4389-b7ab-07ea47297bc2">AccountContacts.smartpart.xml</Item>
@@ -11,6 +10,7 @@
   <Item Id="2a50a0f8-54b0-45ab-8ccd-6636fff5c2a7">AccountAddresses.smartpart.xml</Item>
   <Item Id="622aa4ce-edfa-48af-be43-e375c5e495b3">AccountAssociations.smartpart.xml</Item>
   <Item Id="2c851136-59b3-4a90-9de3-2e1122a8eaf6">AddEditAccountAssociation.smartpart.xml</Item>
+  <Item Id="b5863f36-d409-4fb9-b38c-335d90fb8628">NotesHistoryList.smartpart.xml</Item>
   <Item Id="baf43b49-9778-4a9f-a554-e3b67b4cd8a9">NotesList.smartpart.xml</Item>
   <Item Id="5f465038-3ae1-40ba-b44f-63cdfccf8ad1">HistoryList.smartpart.xml</Item>
   <Item Id="d0becec6-e61a-4f23-8857-46feedfc281a">LitRequestsList.smartpart.xml</Item>
@@ -26,9 +26,17 @@
   <Item Id="1d8330ec-4d32-4822-8a84-bdf0418c4338">AccountAssets.smartpart.xml</Item>
   <Item Id="1cd644d9-f207-4ef2-8483-79538ef62daf">AccountReturns.smartpart.xml</Item>
   <Item Id="5230cabf-4ac8-4ab7-a856-95971d098bad">AddEditAccountProduct.smartpart.xml</Item>
+  <Item Id="d788f158-3597-4a79-9bcf-f3bf4a3a5f61">LiveGroupViewer.smartpart.xml</Item>
   <Item Id="3ce9eba4-5864-4f03-ae0f-4c3a4ee608f1">AccountTimeline.smartpart.xml</Item>
   <Item Id="263a2c6e-c1b7-47b9-889b-aab761f88a13">AccountSalesOrders.smartpart.xml</Item>
   <Item Id="d54cd193-a5f2-467c-a3b1-37ce889d82fd">MergeRecords.smartpart.xml</Item>
-  <Item Id="eb16c674-7932-46b9-a2ea-41660430427d">AccountLeadSources.smartpart.xml</Item>
-  <Item Id="373e303c-9746-4f96-ae60-694c4deb30b4">AddEditAccountLeadSource.smartpart.xml</Item>
+  <Item Id="2ac03d4f-6cab-4ffa-8dc0-9d5c3764698f">SearchResults.smartpart.xml</Item>
+  <Item Id="7befaafd-66fc-4b2e-8470-804458e79da4">LinkResults.smartpart.xml</Item>
+  <Item Id="11c8da9b-9837-4f50-98c9-ea22284391a6">SelectOperatingAccount.smartpart.xml</Item>
+  <Item Id="30a902bf-77b8-4bfd-ba78-9ca3e0f4fef2">ICAccounting.smartpart.xml</Item>
+  <Item Id="bcd6c49c-b87b-46e4-823d-ce176df8eddb">MergeChildren.smartpart.xml</Item>
+  <Item Id="6d110807-f181-4175-8bcd-3206665efa03">ICAccountExtendedDetails.smartpart.xml</Item>
+  <Item Id="5550dfad-2da8-41b2-8c58-c7f3ebf2264e">ICInvoices.smartpart.xml</Item>
+  <Item Id="1ab78354-caa7-4e91-bb7b-5c804d8339fb">ICCustomerPayments.smartpart.xml</Item>
+  <Item Id="4369e7b3-0315-4349-bef4-5f26e845be94">ICSalesOrders.smartpart.xml</Item>
 </ModelItems>

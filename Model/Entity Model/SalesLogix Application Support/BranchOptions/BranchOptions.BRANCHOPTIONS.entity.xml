@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="4c239853-0d9f-4902-a2e7-904c0a57b87b" lastModifiedUtc="0001-01-01T00:00:00" manageSchema="false" tableName="BRANCHOPTIONS" name="BranchOptions" isExtension="false" audited="true" lastUpdatedPropertyId="8d31f78b-389c-4250-bb53-085741d64546" onBeforeInsertMethodId="8788205a-9afe-4a81-9b4f-86d5fef8c8fb" onAfterInsertMethodId="837c9d8c-f6a2-47c7-a750-b236211300d6" onBeforeUpdateMethodId="e5825cd4-9857-4976-adbd-00faaafc878d" onAfterUpdateMethodId="d67be0d2-badd-41cd-a72d-fa2ac85e845b" onBeforeDeleteMethodId="789fc9ff-f75c-4868-bea7-8cf3f52b72ee" onAfterDeleteMethodId="3d330d7a-cc7b-4df1-964f-c5c2445372fd" onCreateId="8479476f-c04f-4c20-b793-733a93c249e5">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="4c239853-0d9f-4902-a2e7-904c0a57b87b" lastModifiedUtc="2010-08-25T06:56:27.1977814Z" manageSchema="false" tableName="BRANCHOPTIONS" name="BranchOptions" displayPropertyId="ad139895-f1a3-4177-b7f9-4b02f818ca7c" isExtension="false" audited="true" lastUpdatedPropertyId="8d31f78b-389c-4250-bb53-085741d64546" onBeforeInsertMethodId="8788205a-9afe-4a81-9b4f-86d5fef8c8fb" onAfterInsertMethodId="837c9d8c-f6a2-47c7-a750-b236211300d6" onBeforeUpdateMethodId="e5825cd4-9857-4976-adbd-00faaafc878d" onAfterUpdateMethodId="d67be0d2-badd-41cd-a72d-fa2ac85e845b" onBeforeDeleteMethodId="789fc9ff-f75c-4868-bea7-8cf3f52b72ee" onAfterDeleteMethodId="3d330d7a-cc7b-4df1-964f-c5c2445372fd" onCreateId="8479476f-c04f-4c20-b793-733a93c249e5">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
       <extender guid="1589723d-0536-4bf3-bdd7-3f6f7fe165d0">
         <OrmEntityMetadataExtension>
+          <StringExpression>${SiteCode}</StringExpression>
           <IsHistoryTable>false</IsHistoryTable>
         </OrmEntityMetadataExtension>
       </extender>
@@ -60,7 +61,7 @@
         </TextDataType>
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="11982413-8692-4504-a45b-07f61a84cc9f" lastModifiedUtc="0001-01-01T00:00:00" name="CoEmailattach" audited="false" columnName="COEMAILATTACH" maxLength="1" precision="0" scale="0" ordinal="14" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="11982413-8692-4504-a45b-07f61a84cc9f" lastModifiedUtc="2010-08-25T06:14:51.5670395Z" name="CoEmailAttach" audited="false" columnName="COEMAILATTACH" maxLength="1" precision="0" scale="0" ordinal="14" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
@@ -94,15 +95,17 @@
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="8e536174-8fae-4e46-8593-89ee430ea3cd" lastModifiedUtc="0001-01-01T00:00:00" name="Data" audited="false" include="false" columnName="DATA" maxLength="2147483647" precision="0" scale="0" ordinal="11" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="8e536174-8fae-4e46-8593-89ee430ea3cd" lastModifiedUtc="2010-08-25T06:43:42.7800592Z" name="Data" audited="false" include="false" columnName="DATA" maxLength="2147483647" precision="0" scale="0" ordinal="11" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
-      <SystemDataType guid="ea6f16f8-8df9-3aaf-ad32-b13df6b1a6f9">
-        <SystemDataTypeBase />
+      <SystemDataType guid="07370ef3-ad24-409f-86a8-ff2db5ee6d69">
+        <BinaryDataType>
+          <Length>8000</Length>
+        </BinaryDataType>
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="be63cec8-a7e4-4d54-b623-0afd42d1a025" lastModifiedUtc="0001-01-01T00:00:00" name="Defaultpublicaccess" audited="false" columnName="DEFAULTPUBLICACCESS" maxLength="12" precision="0" scale="0" ordinal="20" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="be63cec8-a7e4-4d54-b623-0afd42d1a025" lastModifiedUtc="2010-08-25T06:13:50.9275711Z" name="DefaultPublicAccess" audited="false" columnName="DEFAULTPUBLICACCESS" maxLength="12" precision="0" scale="0" ordinal="20" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
@@ -138,7 +141,7 @@
         </TextDataType>
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="ee99b78a-a357-4433-857a-49fd2bcf7787" lastModifiedUtc="0001-01-01T00:00:00" name="Licnum" audited="false" columnName="LICNUM" maxLength="32" precision="0" scale="0" ordinal="22" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="ee99b78a-a357-4433-857a-49fd2bcf7787" lastModifiedUtc="2010-08-25T06:13:27.8152492Z" name="LicenseNumber" audited="false" columnName="LICNUM" maxLength="32" precision="0" scale="0" ordinal="22" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>

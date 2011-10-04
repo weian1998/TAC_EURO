@@ -1,33 +1,19 @@
 using System;
-using System.Data;
-using System.Text;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
-using Telerik.WebControls;
-using Sage.Platform.WebPortal.SmartParts;
-using Sage.Platform.Application.UI;
-using Sage.Entity.Interfaces;
 using System.IO;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using Sage.Entity.Interfaces;
 using Sage.Platform.Application;
-using Sage.Platform.Application.UI.Web;
+using Sage.Platform.Application.UI;
 using Sage.Platform.Application.UI.Web.Threading;
-using System.Threading;
 using Sage.Platform.Orm;
-using Sage.SalesLogix.Services.Import;
-using Sage.SalesLogix.Services.Import.Actions;
-using Sage.SalesLogix.Services.PotentialMatch;
 using Sage.Platform.WebPortal.Services;
+using Sage.Platform.WebPortal.SmartParts;
+using Sage.SalesLogix.Services.Import;
 
 public partial class ImportLeadsWizard : EntityBoundSmartPartInfoProvider
 {
-    private IContextService _Context;
-
     #region Public Methods
 
     /// <summary>
@@ -45,17 +31,7 @@ public partial class ImportLeadsWizard : EntityBoundSmartPartInfoProvider
     /// <value>The entity context.</value>
     /// <returns>The specified <see cref="T:System.Web.HttpContext"></see> object associated with the current request.</returns>
     [ServiceDependency]
-    public IContextService ContextService
-    {
-        set
-        {
-            _Context = ApplicationContext.Current.Services.Get<IContextService>();
-        }
-        get
-        {
-            return _Context;
-        }
-    }
+    public IContextService ContextService { get; set; }
 
     /// <summary>
     /// Gets the smart part info.
@@ -71,7 +47,7 @@ public partial class ImportLeadsWizard : EntityBoundSmartPartInfoProvider
             tinfo.Title = String.Format(GetLocalResourceObject("dialog_StepSelectFile_Title").ToString(), Path.GetFileName(importManager.SourceFileName));
             tinfo.Description = importManager.SourceFileName;
         }
-        foreach (Control c in this.pnlImportLead_RTools.Controls)
+        foreach (Control c in pnlImportLead_RTools.Controls)
         {
             tinfo.RightTools.Add(c);
         }
@@ -111,7 +87,6 @@ public partial class ImportLeadsWizard : EntityBoundSmartPartInfoProvider
         {
             refresher.RefreshAll();
         }
-    
     }
 
     /// <summary>
@@ -125,12 +100,10 @@ public partial class ImportLeadsWizard : EntityBoundSmartPartInfoProvider
             SetStep(step);
         }
         Button startButton = wzdImportLeads.FindControl("StartNavigationTemplateContainerID").FindControl("cmdStartButton") as Button;
-        ScriptManager.GetCurrent(this.Page).RegisterPostBackControl(startButton);
+        ScriptManager.GetCurrent(Page).RegisterPostBackControl(startButton);
 
         radImportProcessArea2.Visible = true;
         radProcessProgressMgr.Visible = true;
-
-
     }
 
     /// <summary>
@@ -236,8 +209,10 @@ public partial class ImportLeadsWizard : EntityBoundSmartPartInfoProvider
             ImportManager importManager = Page.Session["importManager"] as ImportManager;
             if (importManager != null)
             {
-                importManager.ImportHistory.Save(); //Save the import history    
-                ThreadPoolHelper.QueueTask(new WaitCallback(frmProcessRequest.StartImportProcess));
+                importManager.ImportHistory.Save(); //Save the import history
+                Page.Session["importManager"] = importManager;
+                Page.Session["importHistoryId"] = importManager.ImportHistory.Id;
+                ThreadPoolHelper.QueueTask(frmProcessRequest.StartImportProcess);
             }
         }
     }
@@ -250,8 +225,7 @@ public partial class ImportLeadsWizard : EntityBoundSmartPartInfoProvider
     protected void wzdImportLeads_ActiveStepChanged(object sender, EventArgs e)
     {
         if (!frmSelectFile.ValidateRequiredFields())
-            wzdImportLeads.ActiveStepIndex = 0;      
-       
+            wzdImportLeads.ActiveStepIndex = 0;
     }
 
     /// <summary>

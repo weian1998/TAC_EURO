@@ -143,11 +143,11 @@ function AttachWriteMenuPopulator() {
                             }
                             return;
                         }
-                        }
                     }
                 }
             }
         }
+    }
     /* This may occur on the dashboard. Wait for it and try again. */
     if (AttachWriteMenuPopulator_Count == 0) {
         AttachWriteMenuPopulator_Count++;

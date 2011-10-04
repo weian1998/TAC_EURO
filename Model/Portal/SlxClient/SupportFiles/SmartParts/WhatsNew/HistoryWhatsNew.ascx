@@ -48,28 +48,26 @@
         </asp:TemplateField>
         <asp:TemplateField HeaderText="<%$ resources: Type_lz %>" >
             <ItemTemplate>
-                <asp:Label ID="lblNewType" Text='<%# GetEntityType(Eval("ContactId")) %>' runat="server"></asp:Label>
+                <asp:Label ID="lblNewType" Text='<%# GetContactOrLeadType(Eval("ContactId"), Eval("LeadId"), true) %>' runat="server"></asp:Label>
             </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField SortExpression="Name" HeaderText="<%$ resources: Name_lz %>">
             <ItemTemplate>
                 <SalesLogix:PageLink ID="lnkName" runat="server" LinkType="EntityAlias" Text='<%# GetDisplayName(Eval("ContactName"), Eval("LeadName")) %>'
-                    Target="_top" NavigateUrl='<%# GetEntityType(Eval("ContactId")) %>' EntityId='<%# GetEntityId(Eval("ContactId"), Eval("LeadId")) %>' />
+                    NavigateUrl='<%# GetContactOrLeadType(Eval("ContactId"), Eval("LeadId"), false) %>' EntityId='<%# GetEntityId(Eval("ContactId"), Eval("LeadId")) %>' />
             </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="<%$ resources: Account_Company %>" SortExpression="AccountName">
             <ItemTemplate>
-                <SalesLogix:PageLink ID="Link3" runat="server" Target="_top" LinkType="EntityAlias" Text='<%# Eval("AccountName") %>'
-                    NavigateUrl='<%# GetEntityType(Eval("ContactId")) %>' EntityId='<%# GetEntityId(Eval("ContactId"), Eval("LeadId")) %>' />
+                <SalesLogix:PageLink ID="Link3" runat="server" LinkType="EntityAlias" Text='<%# Eval("AccountName") %>'
+                    NavigateUrl='<%# GetAccountOrLeadType(Eval("AccountId"), Eval("LeadId")) %>' EntityId='<%# GetEntityId(Eval("AccountId"), Eval("LeadId")) %>' />
             </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="<%$ resources: Regarding_lz %>" SortExpression="Description">
             <ItemTemplate><%# Eval("Description") %></ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="<%$ resources: Completed_lz %>" HeaderStyle-Width="100px" SortExpression="CompletedDate">
-            <ItemTemplate>
-                <SalesLogix:DateTimePicker Timeless="true" DisplayTime='<%# Eval("TimeLess") %>' id="cmpdate" Runat="Server" DisplayMode="AsText" DateTimeValue=<%# Eval("CompletedDate") %> />
-            </ItemTemplate>
+            <ItemTemplate><%# GetLocalDateTime(Eval("CompletedDate"))%></ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="<%$ resources: CreateDate_lz %>" HeaderStyle-Width="100px" SortExpression="CreateDate">
             <ItemTemplate>
@@ -94,28 +92,26 @@
         </asp:TemplateField>
         <asp:TemplateField HeaderText="<%$ resources: Type_lz %>" >
             <ItemTemplate>
-                <asp:Label ID="lblNewType" Text='<%# GetEntityType(Eval("ContactId")) %>' runat="server"></asp:Label>
+                <asp:Label ID="lblNewType" Text='<%# GetContactOrLeadType(Eval("ContactId"), Eval("LeadId"), true) %>' runat="server"></asp:Label>
             </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField SortExpression="Name" HeaderText="<%$ resources: Name_lz %>">
             <ItemTemplate>
                 <SalesLogix:PageLink ID="lnkName" runat="server" LinkType="EntityAlias" Text='<%# GetDisplayName(Eval("ContactName"), Eval("LeadName")) %>'
-                    Target="_top" NavigateUrl='<%# GetEntityType(Eval("ContactId")) %>' EntityId='<%# GetEntityId(Eval("ContactId"), Eval("LeadId")) %>' />
+                    NavigateUrl='<%# GetContactOrLeadType(Eval("ContactId"), Eval("LeadId"), false) %>' EntityId='<%# GetEntityId(Eval("ContactId"), Eval("LeadId")) %>' />
             </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="<%$ resources: Account_Company %>" SortExpression="AccountName">
             <ItemTemplate>
-                <SalesLogix:PageLink ID="Link3" runat="server" Target="_top" LinkType="EntityAlias" Text='<%# Eval("AccountName") %>'
-                    NavigateUrl='<%# GetEntityType(Eval("ContactId")) %>' EntityId='<%# GetEntityId(Eval("ContactId"), Eval("LeadId")) %>' />
+                <SalesLogix:PageLink ID="Link3" runat="server" LinkType="EntityAlias" Text='<%# Eval("AccountName") %>'
+                    NavigateUrl='<%# GetAccountOrLeadType(Eval("AccountId"), Eval("LeadId")) %>' EntityId='<%# GetEntityId(Eval("AccountId"), Eval("LeadId")) %>' />
             </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="<%$ resources: Regarding_lz %>" SortExpression="Description">
             <ItemTemplate><%# Eval("Description") %></ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="<%$ resources: Completed_lz %>" HeaderStyle-Width="100px" SortExpression="CompletedDate">
-            <ItemTemplate>
-                <SalesLogix:DateTimePicker Timeless="true" DisplayTime='<%# Eval("TimeLess") %>' id="cmpdate" Runat="Server" DisplayMode="AsText" DateTimeValue=<%# Eval("CompletedDate") %> />
-            </ItemTemplate>
+            <ItemTemplate><%# GetLocalDateTime(Eval("CompletedDate"))%></ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="<%$ resources: ModifyDate_lz %>" HeaderStyle-Width="100px" SortExpression="ModifyDate">
             <ItemTemplate>

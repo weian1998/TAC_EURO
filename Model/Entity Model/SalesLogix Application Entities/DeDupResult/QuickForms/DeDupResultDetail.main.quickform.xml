@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QuickFormDefinition Id="a141924f-07e1-4c5f-b90c-963c036d7bda" name="DeDupResultDetail">
+  <Properties>
+    <Property name="EntityTypeName" type="System.String">IDeDupResult</Property>
+    <Property name="DefaultNamespace" type="System.String">Sage.Entity.Interfaces</Property>
+    <Property name="AssemblyName" type="System.String">Sage.Entity.Interfaces</Property>
+    <Property name="UseEntityNameAsTitle" type="System.Boolean">False</Property>
+    <Property name="ImagePath" type="System.String"></Property>
+    <Property name="DefinitionType" type="System.String">Sage.Platform.QuickForms.QuickFormMainDetailViewDefinition, Sage.Platform.QuickForms</Property>
+    <Property name="Columns" type="System.ComponentModel.BindingList`1[[System.Windows.Forms.ColumnStyle, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><ArrayOfColumnStyle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ColumnStyle><SizeType>Percent</SizeType><Width>50</Width></ColumnStyle><ColumnStyle><SizeType>Percent</SizeType><Width>50</Width></ColumnStyle></ArrayOfColumnStyle></Property>
+    <Property name="Rows" type="System.ComponentModel.BindingList`1[[System.Windows.Forms.RowStyle, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><ArrayOfRowStyle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle></ArrayOfRowStyle></Property>
+    <Property name="GeneratePrintView" type="System.Boolean">False</Property>
+    <Property name="Description" type="System.String"></Property>
+    <Property name="ActiveControl" type="System.String"></Property>
+  </Properties>
+  <LoadActions>
+    <ActionDefinition>
+      <ResourceKey>3c9afeeb-25c0-4863-86d1-b02bd8358abe</ResourceKey>
+      <RootActionName>CSharpSnippetAction</RootActionName>
+      <Action>
+        <CSharpCodeSnippet><![CDATA[// Handle if the smart part is hosted either as a main view or dialog and show
+// buttons as appropiate
+Sage.Platform.Application.UI.IWorkspace wkspace = getMyWorkspace();
+if (wkspace is Sage.Platform.WebPortal.Workspaces.MainContentWorkspace)
+{
+    btnCancel.Visible = false;
+    lnkDeDupResultDetailHelp.Visible = true;
+}
+else
+{
+    grpNavDeDupResults.Visible = false;
+    lnkDeDupResultDetailHelp.Visible = false;
+    
+}
+
+// If the record is merged we will hide some UI elements
+Sage.Entity.Interfaces.IDeDupResult deDupResult = BindingSource.Current as Sage.Entity.Interfaces.IDeDupResult;
+if (!String.IsNullOrEmpty(deDupResult.ResultStatus) && deDupResult.ResultStatus.Equals("Merged"))
+{
+    grdDupMatches.Columns[0].Visible = false;
+    btnNoDuplicate.Visible = false;
+}
+else
+{
+    btnNoDuplicate.Visible = true;
+}
+]]></CSharpCodeSnippet>
+      </Action>
+      <IsDialogCloseAction>False</IsDialogCloseAction>
+      <RunOnEveryRePaint>False</RunOnEveryRePaint>
+      <DialogActionResult>NoResult</DialogActionResult>
+      <PerformsUpdate>False</PerformsUpdate>
+      <AppliedSecurity />
+      <RefreshData>False</RefreshData>
+    </ActionDefinition>
+  </LoadActions>
+  <QuickFormElements>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.QFControls.QFLink, Sage.Platform.QuickForms.QFControls"><QFLink xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>lnkDeDupJob</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>DeDupJob.Id</DataItemName><ControlItemName>EntityId</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>DeDupJob.JobNumber</DataItemName><ControlItemName>Text</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><Destination /><Image /><EntityId /><EntityTypeName>DeDupJob</EntityTypeName><PageName /><Target /><AppliedSecurity /><DisplayMode>Normal</DisplayMode></QFLink></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFTextBox, Sage.Platform.QuickForms"><QFTextBox xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>1</Row><IsReadOnly>true</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>txtSource</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>SourceEntityDescription</DataItemName><ControlItemName>Text</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>txtSource</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction></QFTextBox></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFTextBox, Sage.Platform.QuickForms"><QFTextBox xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>2</Row><IsReadOnly>true</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>txtSourceType</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>SourceEntityTypeName</DataItemName><ControlItemName>Text</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>txtSourceType</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction></QFTextBox></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.QFControls.QFHorizontalSeparator, Sage.Platform.QuickForms.QFControls"><QFHorizontalSeparator xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ColumnSpan>2</ColumnSpan><Column>0</Column><Row>3</Row><IsReadOnly>false</IsReadOnly><HotKey>48</HotKey><TabIndex>0</TabIndex><ControlId>QFHorizontalSeparator2</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><DisplayAsTitleBar>true</DisplayAsTitleBar></QFHorizontalSeparator></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFDataGrid, Sage.SalesLogix.QuickForms.QFControls"><QFDataGrid xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ColumnSpan>2</ColumnSpan><Column>0</Column><Row>4</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>dgFilters</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><DataSource>dsFilters</DataSource><EnablePaging>false</EnablePaging><EnableSorting>false</EnableSorting><PageSize>5</PageSize><Columns><QFCheckBoxCol><StyleScheme /><DataField>Enabled</DataField><ColumnId>0aa6360b-3cda-461b-8131-e2a7ed7d3afd</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>false</IsSortable><MultiCurrencyDependent>false</MultiCurrencyDependent></QFCheckBoxCol><QFDataGridCol><StyleScheme /><DataField>FilterDisplayName</DataField><ColumnId>eaf9638a-d7cf-4804-a029-bd386082b353</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>false</IsSortable><MultiCurrencyDependent>false</MultiCurrencyDependent></QFDataGridCol><QFDataGridCol><StyleScheme /><DataField>FilterValue</DataField><ColumnId>cf498714-dc19-451d-971f-4c15f7b79bd6</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>false</IsSortable><MultiCurrencyDependent>false</MultiCurrencyDependent></QFDataGridCol></Columns><RenderVertical>false</RenderVertical><OnRowSelectedAction><ResourceKey>QFDataGrid</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnRowSelectedAction></QFDataGrid></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.QFControls.QFHorizontalSeparator, Sage.Platform.QuickForms.QFControls"><QFHorizontalSeparator xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ColumnSpan>2</ColumnSpan><Column>0</Column><Row>5</Row><IsReadOnly>false</IsReadOnly><HotKey>48</HotKey><TabIndex>0</TabIndex><ControlId>QFHorizontalSeparator</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><DisplayAsTitleBar>true</DisplayAsTitleBar></QFHorizontalSeparator></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFDataGrid, Sage.SalesLogix.QuickForms.QFControls"><QFDataGrid xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ColumnSpan>2</ColumnSpan><Column>0</Column><Row>6</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>grdDupMatches</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><DataSource>dsDupMatches</DataSource><DataKeyNames>EntityId</DataKeyNames><EnablePaging>false</EnablePaging><EnableSorting>false</EnableSorting><PageSize>10</PageSize><Columns><QFRowSelectionCol><StyleScheme /><DataField /><ColumnId>0cc2e5a5-e289-49d3-b885-2e565fafef20</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>false</IsSortable><MultiCurrencyDependent>false</MultiCurrencyDependent><Image /></QFRowSelectionCol><QFDataGridCol><StyleScheme /><DataField>Score</DataField><ColumnId>d61962df-7a76-42c1-b677-2a20f0b51367</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>false</IsSortable><MultiCurrencyDependent>false</MultiCurrencyDependent></QFDataGridCol><QFDataGridCol><StyleScheme /><DataField>EntityDescription</DataField><ColumnId>25547e45-355d-4ce2-a7cc-4cb200357891</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>false</IsSortable><MultiCurrencyDependent>false</MultiCurrencyDependent></QFDataGridCol><QFDataGridCol><StyleScheme /><DataField>EntityTypeName</DataField><ColumnId>1138735b-4440-4de2-ba40-218f4d6642a8</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>false</IsSortable><MultiCurrencyDependent>false</MultiCurrencyDependent></QFDataGridCol></Columns><RenderVertical>false</RenderVertical><OnRowSelectedAction><ResourceKey>QFDataGrid</ResourceKey><RootActionName>CSharpSnippetAction</RootActionName><Action><CSharpCodeSnippet><![CDATA[if (DialogService != null)
+{
+    DialogService.SetSpecs(20, 20, 750, 850, "MergeRecords", "", true);
+    Sage.Entity.Interfaces.IDeDupResult dupResult = BindingSource.Current as Sage.Entity.Interfaces.IDeDupResult;
+    	  	
+	Sage.SalesLogix.Web.Controls.SlxGridView grd = sender as Sage.SalesLogix.Web.Controls.SlxGridView;
+	string selectedTargetEntityId = grd.SelectedDataKey.Value.ToString();
+	object mergeAguments =  dupResult.GetMergeArguments(selectedTargetEntityId);
+    
+    if (DialogService.DialogParameters.ContainsKey("mergeArguments"))
+    {
+        DialogService.DialogParameters.Remove("mergeArguments");
+    }
+   
+    DialogService.DialogParameters.Add("mergeArguments", mergeAguments);
+    DialogService.ShowDialog();
+}	]]></CSharpCodeSnippet></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnRowSelectedAction></QFDataGrid></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFTextBox, Sage.Platform.QuickForms"><QFTextBox xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>1</Column><Row>0</Row><IsReadOnly>true</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>txtStatus</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>ResultDescription</DataItemName><ControlItemName>Text</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>txtStatus</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction></QFTextBox></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXOwner, Sage.SalesLogix.QuickForms.QFControls"><QFSLXOwner xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>1</Column><Row>1</Row><IsReadOnly>true</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>ownResolvedBy</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>ResolvedBy</DataItemName><ControlItemName>LookupResultValue</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>ownResolvedBy</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction><LookupResultValue xsi:type="xsd:string" /><AutoPostBack>false</AutoPostBack><Required>false</Required><MultiSelect>false</MultiSelect></QFSLXOwner></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFDateTimePicker, Sage.SalesLogix.QuickForms.QFControls"><QFDateTimePicker xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>1</Column><Row>2</Row><IsReadOnly>true</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>dtpResolvedDate</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>ResolvedDate</DataItemName><ControlItemName>DateTimeValue</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>dtpResolvedDate</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction><DateTimeValue xsi:nil="true" /><SelectedDateTime>0001-01-01T00:00:00</SelectedDateTime><DateOnly>true</DateOnly><DisplayTime>false</DisplayTime><AutoPostBack>false</AutoPostBack><Timeless>false</Timeless></QFDateTimePicker></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.QFControls.QFControlsList, Sage.Platform.QuickForms.QFControls"><QFControlsList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>1</Column><Row>7</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>ctrlstButtons</ControlId><DataBindings /><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme>qfActionContainer</StyleScheme><Caption /><Controls><ControlsCollection><Control TypeName="Sage.Platform.QuickForms.Controls.QFButton, Sage.Platform.QuickForms"><QFButton><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>btnNoDuplicate</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><ButtonType>StandardButton</ButtonType><Image /><OnClientClick /><OnClickAction><ResourceKey>btnNoDuplicate</ResourceKey><RootActionName>BusinessRuleAction</RootActionName><Action><BusinessRule>UpdateStatusNoDuplicate</BusinessRule><Object>DeDupResult</Object><Parameters /><PassResultsToNextAction>False</PassResultsToNextAction><OnCompleteActionName>NoActionAction</OnCompleteActionName><OnComplete /></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>DialogOK</DialogActionResult><PerformsUpdate>True</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnClickAction></QFButton></Control><Control TypeName="Sage.Platform.QuickForms.Controls.QFButton, Sage.Platform.QuickForms"><QFButton><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>btnCancel</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><ButtonType>StandardButton</ButtonType><Image /><OnClientClick /><OnClickAction><ResourceKey>btnCancel</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>DialogCancel</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnClickAction></QFButton></Control></ControlsCollection></Controls></QFControlsList></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.QFControls.QFDataSource, Sage.Platform.QuickForms.QFControls"><QFDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>8</Row><IsReadOnly>false</IsReadOnly><Visible>false</Visible><HotKey>48</HotKey><TabIndex>0</TabIndex><ControlId>dsDupMatches</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><EntityTypeName>Sage.Platform.ComponentModel.ComponentView</EntityTypeName><GetByMethod>GetMatchResults</GetByMethod><GetByProperty /><UseSmartSelection>false</UseSmartSelection><DataOptional>false</DataOptional></QFDataSource></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.QFControls.QFDataSource, Sage.Platform.QuickForms.QFControls"><QFDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>8</Row><IsReadOnly>false</IsReadOnly><Visible>false</Visible><HotKey>48</HotKey><TabIndex>0</TabIndex><ControlId>dsFilters</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><EntityTypeName>Sage.Platform.ComponentModel.ComponentView</EntityTypeName><GetByMethod>GetSearchFilters</GetByMethod><GetByProperty /><UseSmartSelection>false</UseSmartSelection><DataOptional>false</DataOptional></QFDataSource></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+  </QuickFormElements>
+  <QuickFormToolElements>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFElementSpacer, Sage.Platform.QuickForms"><QFElementSpacer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId /><DataBindings /><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /></QFElementSpacer></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFElementSpacer, Sage.Platform.QuickForms"><QFElementSpacer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId /><DataBindings /><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /></QFElementSpacer></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXGroupNavigator, Sage.SalesLogix.QuickForms.QFControls"><QFSLXGroupNavigator xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>48</HotKey><TabIndex>0</TabIndex><ControlId>grpNavDeDupResults</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /></QFSLXGroupNavigator></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+  </QuickFormToolElements>
+</QuickFormDefinition>

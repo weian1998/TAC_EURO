@@ -93,13 +93,13 @@ public partial class SmartParts_History_HistoryList : EntityBoundSmartPartInfoPr
                 sel.Add(new HqlSelectField("h.Result", "Result"));
                 sel.Add(new HqlSelectField("h.Notes", "Notes"));
                 sel.Add(new HqlSelectField("h.Category", "Category"));
-                sel.Add(new HqlSelectField("ui.UserName", "User"));
-                _hqlBindingSource = new WebHqlListBindingSource(sel, "History h, UserInfo ui");
+                sel.Add(new HqlSelectField("h.UserName", "User"));
+                _hqlBindingSource = new WebHqlListBindingSource(sel, "History h");
             }
             return _hqlBindingSource;
         }
     }
-
+     
     /// <summary>
     /// Called when the smartpart has been bound.  Derived components should override this method to run code that depends on entity context being set and it not changing.
     /// </summary>
@@ -129,27 +129,14 @@ public partial class SmartParts_History_HistoryList : EntityBoundSmartPartInfoPr
                 if (leadField != null)
                     leadField.Visible = false;
                 break;
-                //=============================================================
-                // TAC Customized below this line 26-05-2010
-                //=============================================================
-            case "Emailarchive":
-                keyId = "EMAILARCHIVEID";
-                break;
-            case "Oppfulfiltask":
-                keyId = "FulfilmentTaskID";
-                break;
-            //=============================================================
-            // TAC Customized Above this line 26-05-2010
-            //=============================================================
-            
         }
         
         HqlBindingSource.OrderBy = "h.CompletedDate desc";
-        HqlBindingSource.Where = string.Format("h.UserId = ui.id and h.Type != {0} and h.Type != {1} and h.{2} = '{3}'", (int)HistoryType.atNote,
-                                               (int) HistoryType.atDatabaseChange, keyId, entityID);
+        HqlBindingSource.Where = string.Format("h.Type != {0} and h.Type != {1} and h.{2} = '{3}'", (int)HistoryType.atNote,
+                                             (int)HistoryType.atDatabaseChange, keyId, entityID);
+
         HqlBindingSource.BoundGrid = HistoryGrid;
         HistoryGrid.DataBind();
-
     }
 
     /// <summary>
@@ -198,18 +185,35 @@ public partial class SmartParts_History_HistoryList : EntityBoundSmartPartInfoPr
         return tinfo;
     }
 
-    /// <summary>
-    /// Gets the local date time.
-    /// </summary>
-    /// <param name="StartDate">The start date.</param>
-    /// <param name="Timeless">The timeless.</param>
-    /// <returns></returns>
-    protected string GetLocalDateTime(object StartDate, object Timeless)
+    ///// <summary>
+    ///// Gets the local date time.
+    ///// </summary>
+    ///// <param name="StartDate">The start date.</param>
+    ///// <param name="Timeless">The timeless.</param>
+    ///// <returns></returns>
+    ////protected string GetLocalDateTime(object StartDate, object Timeless)
+    ////{
+    ////    if (Convert.ToBoolean(Timeless))
+    ////        return Convert.ToDateTime(StartDate).ToShortDateString();
+    ////    const string cLocalDateTime = "g";
+    ////    return _timeZone.UTCDateTimeToLocalTime(Convert.ToDateTime(StartDate)).ToString(cLocalDateTime);
+    ////}
+
+    protected string GetLocalDateTime(object completedDate)
     {
-        if (Convert.ToBoolean(Timeless))
-            return Convert.ToDateTime(StartDate).ToShortDateString();
-        const string cLocalDateTime = "g";
-        return _timeZone.UTCDateTimeToLocalTime(Convert.ToDateTime(StartDate)).ToString(cLocalDateTime);
+        var cd = completedDate as DateTime?;
+        if (cd.HasValue)
+        {
+            if (cd.Value.Equals(cd.Value.Date.AddSeconds(5)))
+            {
+                return cd.Value.ToShortDateString();
+            }
+            else
+            {
+                return _timeZone.UTCDateTimeToLocalTime(cd.Value).ToString("g");
+            }
+        }
+        return string.Empty;
     }
 
     protected static string GetImage(object activityType)

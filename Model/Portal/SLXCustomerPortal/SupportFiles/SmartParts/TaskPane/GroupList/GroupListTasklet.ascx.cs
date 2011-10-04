@@ -132,7 +132,7 @@ public partial class SmartParts_TaskPane_GroupList_GroupListTasklet : System.Web
         }
 
         StringBuilder resources = new StringBuilder();
-        resources.AppendFormat("Sage.TaskPane.GroupListTasklet.Resources = {0};", JavaScriptConvert.SerializeObject(new ClientResourcesRepresentation(this)));
+        resources.AppendFormat("Sage.TaskPane.GroupListTasklet.Resources = {0};", JsonConvert.SerializeObject(new ClientResourcesRepresentation(this)));
 
         ScriptManager.RegisterStartupScript(Page, typeof(Page), "taskpane-grouplist-resources", resources.ToString(), true);
 

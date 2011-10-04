@@ -46,8 +46,10 @@ public partial class GeneralSearchOptionsPage : UserControl, ISmartPartInfoProvi
         const string falseValues = "F,FALSE,N,NO,0";
         if (falseValues.IndexOf(options.LogToHistory.ToUpperInvariant()) > -1)
             Utility.SetSelectedValue(_logToHistory, "F");
-        _promptDuplicateContacts.Checked = options.PromptForDuplicateContacts;
-        _promptContactNotFound.Checked = options.PromptForContactNotFound;
+        //Defect 1-80914 
+        //  DThompson - "Please only hide the options for now.  We may re-enable them in Sawgrass depending on the direction we choose to take."
+        //_promptDuplicateContacts.Checked = options.PromptForDuplicateContacts;
+        //_promptContactNotFound.Checked = options.PromptForContactNotFound;
         _useActiveReporting.Checked = options.UseActiveReporting;
         _autoLogoff.Checked = options.AutoLogoff;
         _logoffDuration.Text = options.LogoffDuration.ToString();
@@ -63,7 +65,8 @@ public partial class GeneralSearchOptionsPage : UserControl, ISmartPartInfoProvi
         txtLetterBaseTemplate.Text = Utility.GetSingleValue("Name", "Plugin", "PluginId", txtLetterBaseTemplateId.Text);
         txtFaxBaseTemplate.Text = Utility.GetSingleValue("Name", "Plugin", "PluginId", txtFaxBaseTemplateId.Text);
 
-        if (FormHelper.GetSystemInfoOption("MultiCurrency"))
+        var systemInfo = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.SalesLogix.Services.ISystemOptionsService>(true);
+        if (systemInfo.MultiCurrency)
         {
             lblMyCurrency.Visible = true;
             luMyCurrency.Visible = true;
@@ -82,9 +85,10 @@ public partial class GeneralSearchOptionsPage : UserControl, ISmartPartInfoProvi
         txtFaxBaseTemplateId.Attributes.Add("style", "display:none");
         txtRecentTemplates.Attributes.Add("onchange", "javascript:checkMenuRange()");
 
-        SystemInformation systemInfo = SystemInformationRules.GetSystemInfo();
+        var optionSvc = ApplicationContext.Current.Services.Get<Sage.SalesLogix.Services.ISystemOptionsService>(true);
+        int dbType = optionSvc.DbType;
         const int dbRemote = 2;
-        if ((systemInfo != null && systemInfo.DatabaseType.HasValue && systemInfo.DatabaseType.Value != dbRemote))
+        if (dbType != dbRemote)
         {
             // If this is *not* a remote database then hide the "Use ActiveReporting" option.
             _useActiveReporting.Attributes.Add("style", "display:none");
@@ -297,8 +301,10 @@ function showSDIIsInstalledMsg() {
         options.ShowOnStartup = GetStartupUrl(_showOnStartup.SelectedValue);
         options.DefaultOwnerTeam = _defaultOwnerTeam.LookupResultValue.ToString();
         options.LogToHistory = _logToHistory.SelectedValue;
-        options.PromptForDuplicateContacts = _promptDuplicateContacts.Checked;
-        options.PromptForContactNotFound = _promptContactNotFound.Checked;
+        //Defect 1-80914 
+        //  DThompson - "Please only hide the options for now.  We may re-enable them in Sawgrass depending on the direction we choose to take."
+        //options.PromptForDuplicateContacts = _promptDuplicateContacts.Checked;
+        //options.PromptForContactNotFound = _promptContactNotFound.Checked;
         options.UseActiveReporting = _useActiveReporting.Checked;
         options.AutoLogoff = _autoLogoff.Checked;
         options.LogoffDuration = Convert.ToInt32(_logoffDuration.Text);

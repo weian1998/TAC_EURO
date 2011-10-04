@@ -90,7 +90,6 @@ public partial class SmartParts_History_HistoryCommandController : EntityBoundSm
             if (history.Timeless)
             {
                 startDate = history.StartDate.Date.ToShortDateString();
-                createdate = history.CreateDate.Date.ToShortDateString();
             }
 
             string userName;
@@ -166,6 +165,11 @@ public partial class SmartParts_History_HistoryCommandController : EntityBoundSm
                 args.Add("carryovernotes", "true");
             if (CarryOverAttachments.Checked)
                 args.Add("carryoverattachments", "true");
+            var hist = BindingSource.Current as IHistory;
+            if (hist != null) 
+            {
+                args.Add("leadname", hist.LeadName);
+            }
 
             new LinkHandler(Page).ScheduleActivity(args);
         }

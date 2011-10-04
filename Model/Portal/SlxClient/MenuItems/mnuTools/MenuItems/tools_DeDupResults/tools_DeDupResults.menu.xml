@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="f7e7e724-3b32-4c19-b670-af0ad2201448">
+  <ItemId>tools_DeDupResults</ItemId>
+  <NavUrl>DeDupResult.aspx</NavUrl>
+  <LargeImageUrl>[Localization!Global_Images:process_duplicate_records_24x24]</LargeImageUrl>
+  <SmallImageUrl>[Localization!Global_Images:process_duplicate_records_16x16]</SmallImageUrl>
+  <ContextMenuId />
+  <Target />
+  <AppliedSecurity>Administration/Deduplication/ProcessDuplicates</AppliedSecurity>
+</MenuDropDownItem>

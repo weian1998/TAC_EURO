@@ -1,4 +1,5 @@
-﻿<%@ Import Namespace="Sage.Platform.WebPortal"%>
+﻿<%@ Import Namespace="Sage.Platform.SData" %>
+<%@ Import Namespace="Sage.Platform.WebPortal"%>
 <%@ Import namespace="Sage.Platform.Application.UI.Web"%>
 <%@ Import namespace="Sage.Platform.Application.UI"%>
 <%@ Import namespace="Sage.SalesLogix"%>
@@ -121,6 +122,28 @@
     private bool _UseAutoLogoff = true;
     private int _AutoLogoffDuration = 30;
 
+    private void AddLocalizedScript(string filePattern, string langCode, string fallbackLangCode)
+    {
+        string[] langCodes = new string[] { langCode, fallbackLangCode };
+
+        foreach (string code in langCodes)
+        {
+            string path = string.Format(filePattern, code);
+            string physPath = path.StartsWith("~") ? HttpContext.Current.Server.MapPath(path) : HttpContext.Current.Server.MapPath(string.Concat("~/", path));
+
+            if (System.IO.File.Exists(physPath))
+            {
+                System.Web.UI.Page page = HttpContext.Current.Handler as System.Web.UI.Page;
+                page.Header.Controls.Add(new System.Web.UI.LiteralControl(
+                                             string.Format(
+                                                 @"<script pin=""pin"" type=""text/javascript"" src=""{0}""><" +
+                                                 @"/script>",
+                                                 path)
+                                             ));
+                break;
+            }
+        }
+    }
     protected void Page_Load(object sender, EventArgs e)
     {
         ClientGroupContextService clientGroupContext = new ClientGroupContextService();
@@ -136,6 +159,11 @@
         else if (currentCulture.Parent != null && System.IO.File.Exists(Server.MapPath(String.Format(extCulturePath, currentCulture.Parent.Name))))
             Page.Header.Controls.Add(new LiteralControl(String.Format(extCultureScript, currentCulture.Parent.Name)));
 
+        // used for common tasks created as part of the morpheus bundle
+        AddLocalizedScript(@"jscript/sage-common/sharedtasks.resources.{0}.js", currentCulture.TwoLetterISOLanguageName, "en");
+        AddLocalizedScript(@"jscript/sage-controls/sage-controls-tasklet.resources.{0}.js", currentCulture.TwoLetterISOLanguageName, "en");
+        // end morpheus bundle common task scripts
+        
         // Just used to create the Write menu now.
         Page.Header.Controls.Add(new Sage.SalesLogix.Client.MailMerge.MailMergeInitControl()); 
            
@@ -158,6 +186,7 @@
 
         Page.Header.Controls.Add(new Sage.SalesLogix.Client.Reports.Helper.ReportsControl());
         AddTimelineLibrary();
+        Page.Form.Controls.Add(new ClientAppIdMappingService());
     }
     private void AddSalesProcessScript()
     {
@@ -232,6 +261,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
 	<title>Sage SalesLogix</title>
+    <%--CSS--%>
     <link rel="stylesheet" type="text/css" href="~/css/YUI/fonts.css" />
     <link rel="stylesheet" type="text/css" href="~/css/YUI/reset.css" />
     <link rel="stylesheet" type="text/css" href="~/Libraries/ext/resources/css/ext-all.css" /> 
@@ -241,6 +271,10 @@
     <script pin="pin" type="text/javascript" src="Libraries/jQuery/jquery.js"></script>
     <script pin="pin" type="text/javascript" src="Libraries/jQuery/jquery.selectboxes.js"></script>
     <script pin="pin" type="text/javascript" src="Libraries/jQuery/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Libraries/dojo/1.5/dijit/themes/claro/claro.css" />
+    <link rel="stylesheet" type="text/css" href="~/Libraries/dojo/1.5/dojox/grid/resources/grid.css" />
+    <link rel="stylesheet" type="text/css" href="~/Libraries/dojo/1.5/dojox/grid/resources/claroGrid.css" />
+    <link rel="stylesheet" type="text/css" href="~/Libraries/dojo/1.5/dojox/grid/enhanced/resources/claroEnhancedGrid.css" />      
     <script pin="pin" type="text/javascript" src="Libraries/ext/adapter/jquery/ext-jquery-adapter.js"></script>
     <script pin="pin" type="text/javascript" src="Libraries/ext/ext-all.js"></script>
     <script pin="pin" type="text/javascript" src="Libraries/ext/ext-paging-tree-loader.js"></script>
@@ -249,17 +283,27 @@
     <script pin="pin" type="text/javascript" src="Libraries/ext/ext-overrides.js"></script>
 
     <script pin="pin" type="text/javascript" src="jscript/YUI/yui-combined-min.js"></script>
+    
+    <%-- DoJo Library --%>
+    <script pin="pin" type="text/javascript">
+        var djConfig = {
+            modulePaths: { 'Sage' : '../../../../jscript/Sage' }
+        }
+    </script>
+    <script pin="pin" type="text/javascript" src="Libraries/dojo/1.5/dojo/dojo.js"></script>
+
     <script pin="pin" type="text/javascript" src="jscript/sage-platform/sage-platform.js"></script>
     <script pin="pin" type="text/javascript" src="jscript/sage-controls/sage-controls.js"></script>
     <script pin="pin" type="text/javascript" src="jscript/sage-common/sage-common.js"></script>
     
-
-
-
-
+    <script src="Libraries/rml.js" type="text/javascript"></script>
+    <script src="Libraries/Simplate.js" type="text/javascript"></script>
+    <script pin="pin" language="JavaScript" src="Libraries/sdata/Base64.js" type="text/javascript"></script>
+    <script pin="pin" language="JavaScript" src="Libraries/sdata/ObjTree.js" type="text/javascript"></script>
+    <script pin="pin" language="JavaScript" src="Libraries/sdata/sdata-client.js" type="text/javascript"></script>    
     
 </head>
-<body>
+<body class="claro">
 
     <script pin="pin" type="text/javascript">   
     
@@ -344,7 +388,7 @@
                 <SalesLogix:ResourceKeyName Key="Warning" />
                 <SalesLogix:ResourceKeyName Key="PromoteTitle" />
                 <SalesLogix:ResourceKeyName Key="PromoteDescription" />
-                <SalesLogix:ResourceKeyName Key="PromotionNotification" />
+                <SalesLogix:ResourceKeyName Key="PromotionNotification" />                
                 <SalesLogix:ResourceKeyName Key="FindOutMore" />
                 <SalesLogix:ResourceKeyName Key="SDI_FeatureRequiresSDI" />
                 <SalesLogix:ResourceKeyName Key="SDI_InstallFeatureNow" />
@@ -467,29 +511,21 @@
     <script pin="pin" type="text/javascript" src="jscript/testcomplete.js"></script>
     -->    
     <script pin="pin" type="text/javascript">
-    String.format = Ext._stringFormat;
-    setUpPanels();
-    
-    ScriptQueue.run.dom();
-    
-    populateGroupTabs(); /* after merge */
-    
-    populateTitleBar();
-    createMainToolbar();
-    populateNavBar();    
-          
-    //window.setTimeout(populateTitleBar, 1);
-    //window.setTimeout(createMainToolbar, 1); 
-    //window.setTimeout(populateNavBar, 1);   
-    </script>
-    <script type="text/javascript">
-    createOptionsMenu();    
-    setNavState();
-    //populateGroupTabs(); /* before merge */
-    
-    //window.setTimeout(createOptionsMenu, 1);
-    //window.setTimeout(populateGroupTabs, 1);
-    //window.setTimeout(setNavState, 1);    
+        String.format = Ext._stringFormat;
+        $(document).ready(function () {
+            setUpPanels();
+
+            ScriptQueue.run.dom();
+
+            populateGroupTabs(); /* after merge */
+
+            populateTitleBar();
+            createMainToolbar();
+            populateNavBar();
+            createOptionsMenu();
+            setNavState();
+        });
+
     </script> 
     <script type="text/javascript">    
     window.setTimeout(function() {
@@ -501,15 +537,32 @@
     
      
     </script>
-    <script type="text/javascript">   
-    String.format = Ext._stringFormat;
-    $(document).ready(function() {
-        initGears();
-        if ((Sage) && (Sage.DragDropWatcher)) {
-            Sage.DragDropWatcher.init();
-            Sage.DefaultFileDropHandler.init();
-        }
-    });
+   <script type="text/javascript">
+       String.format = Ext._stringFormat;
+       $(document).ready(function () {
+           initGears();
+           if ((Sage) && (Sage.DragDropWatcher)) {
+               Sage.DragDropWatcher.init();
+               Sage.DefaultFileDropHandler.init();
+           }
+
+           // set focus when the page is first loaded
+           window.setTimeout(function () {
+               var selector = ".formtable input:not('input[type=hidden]')";
+               var elem = dojo.query(selector);
+               if (elem.length > 0 && elem[0].focus) {
+                   try {
+                       elem[0].focus();
+                   }
+                   catch (err) {
+                       // in IE 8, when a dialog is closing, the focus() function will throw an error 
+                       // even though client-side debuggers show elem[0] is a valid, visible control.
+                   }
+               }
+           }, 50);
+
+       });
+       
     </script>
 
     <input type="hidden" id="hidHelpLink" value='<%= HelpLink %>' />

@@ -15,13 +15,12 @@ function NamePanel (clientId, prefix, first, middle, last, suffix, autoPostBack)
     this.panel = null;
 }
 
-function NamePanel_Show()
-{
+function NamePanel_Show() {
         if ((this.panel == null) || (this.panel.element.parentNode == null))
         {
             var dlgDiv = document.getElementById(this.nameDivId);
             dlgDiv.style.display = "block";
-            this.panel = new YAHOO.widget.Panel(this.nameDivId, { visible:false, width:"300px", height:"250px", /*x:250, y:200,*/ fixedcenter:true, constraintoviewport:true, underlay:"shadow", draggable:true });
+            this.panel = new YAHOO.widget.Panel(this.nameDivId, { visible:false, width:"300px", height:"210px", /*x:250, y:200,*/ fixedcenter:true, constraintoviewport:true, underlay:"shadow", draggable:true });
             this.panel.render();
         }
         this.panel.show();

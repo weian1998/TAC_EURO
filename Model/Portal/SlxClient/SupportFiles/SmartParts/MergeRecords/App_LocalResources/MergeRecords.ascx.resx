@@ -118,19 +118,55 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="btnOK.Caption" xml:space="preserve">
-    <value>Merge</value>
+    <value>OK</value>
   </data>
-  <data name="cmdCancel.Caption" xml:space="preserve">
+  <data name="btnCancel.Caption" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="error_Security_NoAccess" xml:space="preserve">
     <value>You do not have the required security access for the selected records.</value>
   </data>
-  <data name="lblMergeText.Text" xml:space="preserve">
-    <value>Select a record to default all values. Specify what specific field values will be saved.</value>
+  <data name="lblMergeText_DifferencesFound.Text" xml:space="preserve">
+    <value>Merge Data - Differences Found</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="MergeRecords_ClientScript" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>MergeRecords_ClientScript.js;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="lblMergeDetailDifferences.Caption" xml:space="preserve">
+    <value>Select the data to keep in the merged record. By default, only fields with different values are shown in this list.</value>
+  </data>
+  <data name="btnBack.Caption" xml:space="preserve">
+    <value>&lt; Back</value>
+  </data>
+  <data name="btnNext.Caption" xml:space="preserve">
+    <value>Next &gt;</value>
+  </data>
+  <data name="lnkShowAll.Caption" xml:space="preserve">
+    <value>Show All</value>
+  </data>
+  <data name="lnkHideDups.Caption" xml:space="preserve">
+    <value>Hide Duplicates</value>
+  </data>
+  <data name="LinkToAccounting.Caption" xml:space="preserve">
+    <value>Link To Accounting - Merge Contacts</value>
+  </data>
+  <data name="Source.Caption" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="Target.Caption" xml:space="preserve">
+    <value>Target</value>
+  </data>
+  <data name="lblMergeDetailNoDifferences.Caption" xml:space="preserve">
+    <value>The records selected contain no conflicting data, and do not need to be reconciled.</value>
+  </data>
+  <data name="lblMergeText_NoDifferences.Text" xml:space="preserve">
+    <value>Merge Data - No Differences</value>
+  </data>
+  <data name="Header.Property.Caption" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="grdMerge.EmptyTableRowText" xml:space="preserve">
+    <value>The information for these records is identical. Click on 'Show All Fields' to see the values for each one.</value>
   </data>
 </root>

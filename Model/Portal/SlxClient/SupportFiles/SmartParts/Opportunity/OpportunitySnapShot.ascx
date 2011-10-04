@@ -71,23 +71,29 @@
         <tr runat="server" id="rowOpenSalesPotential">
             <td runat="server" id="colOpenSalesPotential" class="column-label">
                 <asp:Label ID="lblOpenSalesPotential" runat="server" Text="<%$ resources: lblOpenSalesPotential.Caption %>"
-                    AssociatedControlID="curOpenBaseSalesPotential">
+                    AssociatedControlID="lnkOpenBaseSalesPotential">
                 </asp:Label>
             </td>
             <td class="right-align">
-                <SalesLogix:Currency runat="server" ID="curOpenBaseSalesPotential" DisplayMode="AsText" ExchangeRateType="BaseRate"
-                    DisplayCurrencyCode="true">
-                </SalesLogix:Currency>
+                <asp:LinkButton ID="lnkOpenBaseSalesPotential" runat="server" OnClick="OnClickSalesPotentialBaseRate" Text="">
+                    <SalesLogix:Currency runat="server" ID="curOpenBaseSalesPotential" DisplayMode="AsText" ExchangeRateType="BaseRate"
+                        DisplayCurrencyCode="true">
+                    </SalesLogix:Currency>
+                </asp:LinkButton>
             </td>
             <td runat="server" class="right-align" id="colOppSalesPotential" visible="false">
-                <SalesLogix:Currency runat="server" ID="curOpenSalesPotential" DisplayMode="AsText" ExchangeRateType="OpportunityRate"
-                    DisplayCurrencyCode="true">
-                </SalesLogix:Currency>
+                <asp:LinkButton ID="lnkOpenSalesPotential" runat="server" OnClick="OnClickSalesPotentialEntityRate" Text="">
+                    <SalesLogix:Currency runat="server" ID="curOpenSalesPotential" DisplayMode="AsText" ExchangeRateType="EntityRate"
+                        DisplayCurrencyCode="true">
+                    </SalesLogix:Currency>
+                </asp:LinkButton>
             </td>
             <td runat="server" class="right-align" id="colMyCurSalesPotential" visible="false">
-                <SalesLogix:Currency runat="server" ID="curMyCurSalesPotential" DisplayMode="AsText" ExchangeRateType="MyRate"
-                    DisplayCurrencyCode="true">
-                </SalesLogix:Currency>
+                <asp:LinkButton ID="lnkMyCurSalesPotential" runat="server" OnClick="OnClickSalesPotentialMyRate" Text="">
+                    <SalesLogix:Currency runat="server" ID="curMyCurSalesPotential" DisplayMode="AsText" ExchangeRateType="MyRate"
+                        DisplayCurrencyCode="true">
+                    </SalesLogix:Currency>
+                </asp:LinkButton>
             </td>
         </tr>
         <tr runat="server" id="rowActualWon">
@@ -97,21 +103,21 @@
                 </asp:Label>
             </td>
             <td class="right-align">
-                <asp:LinkButton runat="server" OnClick="OnClickActualAmount" Text="">
+                <asp:LinkButton ID="lnkActualAmountBaseRate" runat="server" OnClick="OnClickActualAmountBaseRate" Text="">
                     <SalesLogix:Currency runat="server" ID="curBaseActualWon" DisplayMode="AsText" ExchangeRateType="BaseRate"
                         DisplayCurrencyCode="true">
                     </SalesLogix:Currency>
                 </asp:LinkButton>
             </td>
             <td runat="server" class="right-align" id="colOppActualWon" visible="false">
-                <asp:LinkButton runat="server" OnClick="OnClickActualAmount" Text="">
-                    <SalesLogix:Currency runat="server" ID="curActualWon" DisplayMode="AsText" ExchangeRateType="OpportunityRate"
+                <asp:LinkButton ID="lnkActualAmountEnityRate"  runat="server" OnClick="OnClickActualAmountEntityRate" Text="">
+                    <SalesLogix:Currency runat="server" ID="curActualWon" DisplayMode="AsText" ExchangeRateType="EntityRate"
                         DisplayCurrencyCode="true">
                     </SalesLogix:Currency>
                 </asp:LinkButton>
             </td>
             <td runat="server" class="right-align" id="colMyCurActualWon" visible="false">
-                <asp:LinkButton runat="server" OnClick="OnClickActualAmount" Text="">
+                <asp:LinkButton ID="lnkActualAmountMyRate"  runat="server" OnClick="OnClickActualAmountMyRate" Text="">
                     <SalesLogix:Currency runat="server" ID="curMyCurActualWon" DisplayMode="AsText" ExchangeRateType="MyRate"
                         DisplayCurrencyCode="true">
                     </SalesLogix:Currency>
@@ -125,21 +131,21 @@
                 </asp:Label>
             </td>
             <td class="right-align">
-                <asp:LinkButton runat="server" OnClick="OnClickActualAmount" Text="">
+                <asp:LinkButton ID="lnkActualAmountBaseRateLost" runat="server" OnClick="OnClickActualAmountBaseRate" Text="">
                     <SalesLogix:Currency runat="server" ID="curBasePotentialLost" DisplayMode="AsText" ExchangeRateType="BaseRate"
                         DisplayCurrencyCode="true">
                     </SalesLogix:Currency>
                 </asp:LinkButton>
             </td>
             <td runat="server" id="colOppPotentialLost" visible="false" class="right-align">
-                <asp:LinkButton runat="server" OnClick="OnClickActualAmount" Text="">
-                    <SalesLogix:Currency runat="server" ID="curPotentialLost" DisplayMode="AsText" ExchangeRateType="OpportunityRate"
+                <asp:LinkButton ID="lnkActualAmountEntityRateLost" runat="server" OnClick="OnClickActualAmountEntityRate" Text="">
+                    <SalesLogix:Currency runat="server" ID="curPotentialLost" DisplayMode="AsText" ExchangeRateType="EntityRate"
                         DisplayCurrencyCode="true">
                     </SalesLogix:Currency>
                 </asp:LinkButton>
             </td>
             <td runat="server" id="colMyCurPotentialLost" visible="false" class="right-align">
-                <asp:LinkButton runat="server" OnClick="OnClickActualAmount" Text="">
+                <asp:LinkButton ID="lnkActualAmountMyRateLost" runat="server" OnClick="OnClickActualAmountMyRate" Text="">
                     <SalesLogix:Currency runat="server" ID="curMyCurPotentialLost" DisplayMode="AsText" ExchangeRateType="MyRate"
                         DisplayCurrencyCode="true">
                     </SalesLogix:Currency>
@@ -158,7 +164,7 @@
                 </SalesLogix:Currency>
             </td>
             <td runat="server" id="colOppWeighted" visible="false" class="right-align">
-                <SalesLogix:Currency runat="server" ID="curWeighted" DisplayMode="AsText" ExchangeRateType="OpportunityRate"
+                <SalesLogix:Currency runat="server" ID="curWeighted" DisplayMode="AsText" ExchangeRateType="EntityRate"
                     DisplayCurrencyCode="true">
                 </SalesLogix:Currency>
             </td>
@@ -208,7 +214,7 @@
                     <asp:Label runat="server" ID="lblExchangeRateValue" Enabled="false"></asp:Label>
                 </div>
                 <div runat="server" id="divExchangeRateText" class="textcontrol" style="width:65px">
-                    <SalesLogix:NumericControl runat="server" ID="numExchangeRateValue" OnTextChanged="ExchangeRate_OnChange" AutoPostBack="true" />
+                    <SalesLogix:NumericControl runat="server" ID="numExchangeRateValue" Strict="false" OnTextChanged="ExchangeRate_OnChange" AutoPostBack="true" />
                 </div>
             </td>
         </tr>
@@ -247,7 +253,7 @@
             <td>
                 <asp:Label ID="lblSummary" runat="server" Text="<%$ resources: lblSummary.Caption %>"></asp:Label>
                 <SalesLogix:DateTimePicker ID="dtpDateOpened" Timeless="true" runat="server" DisplayMode="AsHyperlink"
-                    DisplayTime="False">
+                    DisplayTime="False" OnDateTimeValueChanged="dtpDateOpened_DateTimeValueChanged" AutoPostBack="true">
                 </SalesLogix:DateTimePicker>
                 <asp:Label ID="lblSummaryActivity" runat="server"></asp:Label>
             </td>

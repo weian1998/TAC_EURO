@@ -282,6 +282,23 @@ Sage.FileUploader = {
                             }
                             break;
                         }
+                        if (request.responseText != "") {
+                            var objResponse = Sys.Serialization.JavaScriptSerializer.deserialize(request.responseText);
+                            if (objResponse != null && typeof objResponse !== 'undefined') {
+                                if (typeof objResponse.success !== 'undefined' && typeof objResponse.error !== 'undefined') {
+                                    if (objResponse.success === false) {
+                                        if (typeof (error) === 'function') {
+                                            error(request);
+                                        }
+                                        else {
+                                            Ext.MessageBox.hide();
+                                            Ext.MessageBox.alert(MasterPageLinks.UploadAttachment || 'Upload Attachment', objResponse.error);
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        }
                         if (typeof(complete) === 'function') {
                             complete({ status : request.status, statusText : request.statusText });
                             files = [];
@@ -403,28 +420,27 @@ Sage.DefaultFileDropHandler = {
                     md.sentOnString  = d.getUTCFullYear() + '.' + (d.getUTCMonth() - 0 + 1) + '.' + d.getUTCDate() + '.' + d.getUTCHours() + '.' + d.getUTCMinutes();
                 }
                 var postoptions = {
-                    method : "POST",
-                    url : url,
-                    params : md,
-                    attachments : md.attachments,
-                    originalFile : file,
-                    isLast : i == files.length - 1,
-                    error : function(request, msg, errorThrown) {
+                    method: "POST",
+                    url: url,
+                    params: md,
+                    attachments: md.attachments,
+                    originalFile: file,
+                    isLast: i == files.length - 1,
+                    error: function (request, msg, errorThrown) {
                     },
-                    success : function(response, opts) {
-                        var histid = eval(response.responseText);
-                        if (typeof histid !== 'undefined') {
-                            //if (Sage.DefaultFileDropHandler.shouldSaveMsgFile()) {
-                            Sage.DefaultFileDropHandler.handleAttachmentFilesSilent([opts.originalFile], String.format("&entityid={0}&entitytype=IHistory&entityid2={1}&entitytype2={2}", histid, entinfo.id, entinfo.type), opts.refresh);
-//                            } else if (opts.attachments.length > 0) {
-//                                Sage.DefaultFileDropHandler.handleAttachmentFilesSilent(opts.attachments, String.format("&entityid={0}&entitytype=IHistory", histid), opts.refresh);
-//                            } else if (opts.refresh) {
-//                                Sage.DefaultFileDropHandler.CheckRefresh('history');
-                            //}
-                            Sage.DefaultFileDropHandler.queueHistoryHandling(histid, opts);
-                        }
-                        if (opts.isLast) {
-                            Sage.DefaultFileDropHandler.handleQueuedHistoryAttachments();
+                    success: function (response, opts) {
+                        var resp = Sys.Serialization.JavaScriptSerializer.deserialize(response.responseText);
+                        if (resp.success) {
+                            var histid = (resp.data && resp.data.HistoryId) ? resp.data.HistoryId : '';
+                            if (histid !== '') {
+                                Sage.DefaultFileDropHandler.handleAttachmentFilesSilent([opts.originalFile], String.format("&entityid={0}&entitytype=IHistory&entityid2={1}&entitytype2={2}", histid, entinfo.id, entinfo.type), opts.refresh);
+                                Sage.DefaultFileDropHandler.queueHistoryHandling(histid, opts);
+                            }
+                            if (opts.isLast) {
+                                Sage.DefaultFileDropHandler.handleQueuedHistoryAttachments();
+                            }
+                        } else {
+                            Ext.MessageBox.alert(resp.error || 'An unknown exception happened.  If this continues, please contact your administrator');
                         }
                     }
                 };
@@ -505,7 +521,11 @@ Sage.DefaultFileDropHandler = {
                     asScheduledClick: function() { 
                         Sage.DefaultFileDropHandler.handleCompleteAll(qcwin);
                     }
-            }});
+                }
+            });
+            if (typeof idPopupWindow != "undefined") {
+                qcwin.on("show", function () { idPopupWindow(); });
+            }
             qcwin.show();
         } else {
             Sage.DefaultFileDropHandler.historyQueue = [];

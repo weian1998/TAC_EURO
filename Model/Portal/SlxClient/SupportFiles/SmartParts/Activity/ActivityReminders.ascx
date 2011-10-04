@@ -95,7 +95,7 @@ function OnActionClick(action) {
     $('input[id$=_btnPerformAction]').click();
 }
 
-var SR = <%= JavaScriptConvert.SerializeObject(SR) %>;
+var SR = <%= JsonConvert.SerializeObject(SR) %>;
 
 var Reminders = {
 
@@ -162,11 +162,12 @@ var Reminders = {
 	    listeners: {
 		    beforeshow: function() {
 		        if (!document.getElementById('complete-text')) {
+                    Reminders.quickComplete.footer.setHeight(Reminders.quickComplete.footer.getHeight() + 16);
                     Ext.DomHelper.insertFirst(Reminders.quickComplete.footer.child('.x-panel-btns'), {
                         tag: 'div',
                         id: 'complete-text',
                         'class': 'x-form-item',
-                        style: 'margin-bottom:0;padding-bottom:0;',
+                        style: 'margin-bottom:0;padding-bottom:0;height:16px;',
                         html: '<label class="x-form-item-label" style="white-space: nowrap;font-size:11px;">' + 
                             SR.CompleteAllSelected + '</label>'
                     });
@@ -386,24 +387,15 @@ var Reminders = {
     },
     
     deleteSelected: function() {
-    Reminders.checkRecurring(Reminders.warnForDelete);        
+        Reminders.checkRecurring(Reminders.warnForDelete);        
     },
     warnForDelete: function()
     {
-     if (Reminders.getSelectedRecurringCount() == Reminders.getSelectedCount())
-       return;
-       
-      Ext.Msg.show({
-        title: SR.Warning, 
-        msg: SR.DeleteActivity_ConfirmationMessage, 
-        icon: Ext.Msg.WARNING,
-        buttons: Ext.Msg.OKCANCEL,
-        fn: function(btn, text) {
-            if (btn === 'ok') {
-                Reminders.doDeleteSelected();
-            }
+        if (Reminders.getSelectedRecurringCount() == Reminders.getSelectedCount())
+            return;
+        if (confirm(SR.DeleteActivity_ConfirmationMessage)) {
+            Reminders.doDeleteSelected();
         }
-    });
     },
     
     rescheduleSelected: function(ignoreConfirmations) {
@@ -510,6 +502,9 @@ var Reminders = {
 function onPageLoad() {
     $(document).ready(function() {
         Reminders.init();
+        if (typeof idPopupWindow != "undefined") {
+            Reminders.quickComplete.on("show", function () { idPopupWindow(); });
+        }
         
      //Check to see if the Reminder Timer is on the page.  If so, let it get the updated cached count.
      if (ReminderTimerObj)
@@ -588,7 +583,7 @@ Sys.Application.add_load(onPageLoad);
         OnRowDataBound="grdActivityReminders_RowDataBound" 
         >
         <Columns>
-            <asp:TemplateField HeaderText="">
+            <asp:TemplateField HeaderText=""> 
                 <itemtemplate>
                     <span id="ActivityId<%# DataBinder.Eval(Container, "RowIndex") %>" style="display:none"><%# DataBinder.Eval(Container.DataItem, "ActivityId") %></span>
                     <span id="ReminderTypeId<%# DataBinder.Eval(Container, "RowIndex") %>" style="display:none"><%# DataBinder.Eval(Container.DataItem, "ReminderType") %></span>
@@ -607,8 +602,8 @@ Sys.Application.add_load(onPageLoad);
                     />
                 </itemtemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="ReminderType" HeaderText="<%$ Resources:Reminders_Grid_Header_ActivityReminder.HeaderText %>" SortExpression="ReminderType" />
-            
+            <asp:BoundField DataField="ReminderType" HeaderText="<%$ Resources:Reminders_Grid_Header_ActivityReminder.HeaderText %>" SortExpression="Type" />
+
            <asp:TemplateField SortExpression="Recurring" HeaderText="<%$ Resources:Reminders_Grid_Header_Recur.HeaderText %>">
                 <itemtemplate>                    
 			            <img alt="Recurring" style="vertical-align:middle;" src='<%# DataBinder.Eval(Container.DataItem, "RecurImage") %>' />
@@ -639,7 +634,8 @@ Sys.Application.add_load(onPageLoad);
 			        </asp:HyperLink>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="Regarding" HeaderText="<%$ Resources:Reminders_Grid_Header_Regarding.HeaderText %>" SortExpression="Regarding" />
+            <asp:BoundField DataField="Regarding" HeaderText="<%$ Resources:Reminders_Grid_Header_Regarding.HeaderText %>" SortExpression="Regarding" />                     
+
         </Columns>
         <RowStyle CssClass="rowlt" />
         <AlternatingRowStyle CssClass="rowdk" />

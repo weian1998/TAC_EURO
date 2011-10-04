@@ -1,12 +1,12 @@
 ﻿using System;
-using Sage.Entity.Interfaces;
-using Sage.Platform.Application;
-using Sage.Platform.Application.Services;
-using Sage.Platform.Application.UI;
-using System.Xml;
 using System.Web.UI;
+using System.Xml;
+using Sage.Entity.Interfaces;
+using Sage.Platform.Application.UI;
 using Sage.Platform.WebPortal.SmartParts;
+using Sage.SalesLogix.BusinessRules;
 using Sage.SalesLogix.Security;
+using Sage.SalesLogix.Web;
 
 /// <summary>
 /// Summary description for UserClientSystem page.
@@ -56,7 +56,7 @@ public partial class UserClientSystem : EntityBoundSmartPartInfoProvider
     private void PopulateTree()
     {
         //ToDo: Refactor: Use Plugin manager to do this
-        XmlDocument xmlTemplates = Sage.SalesLogix.BusinessRules.BusinessRuleHelper.GetMailMergeTemplates(_userId);
+        XmlDocument xmlTemplates = BusinessRuleHelper.GetMailMergeTemplates(_userId);
         if (xmlTemplates != null)
         {
             //Todo: Refactor: Remove inline storage of template list.
@@ -68,8 +68,7 @@ public partial class UserClientSystem : EntityBoundSmartPartInfoProvider
     {
         IUser user = (IUser)BindingSource.Current;
         _userId = user.Id.ToString();
-        Sage.SalesLogix.Web.WebUserOptionsService userOptions = new Sage.SalesLogix.Web.WebUserOptionsService(_userId); // ApplicationContext.Current.Services.Get<IUserOptionsService>(true);
-        userOptions.LoadOptionsNow();
+        WebUserOptionsService userOptions = new WebUserOptionsService(_userId); // ApplicationContext.Current.Services.Get<IUserOptionsService>(true);
         userOptions.SetCommonOption("InsertSecCodeID", "General", ownAccount.LookupResultValue.ToString(), !chkbxAllowChange.Checked);
         userOptions.SetCommonOption("DefaultMemoTemplate", "General", txtEmailTemplateName.Value, !chkbxAllowChangeTemplates.Checked);
         userOptions.SetCommonOption("DefaultMemoTemplateID", "General", txtEmailTemplateId.Value, !chkbxAllowChangeTemplates.Checked);
@@ -77,7 +76,6 @@ public partial class UserClientSystem : EntityBoundSmartPartInfoProvider
         userOptions.SetCommonOption("DefaultLetterTemplateId", "General", txtLetterTemplateId.Value, !chkbxAllowChangeTemplates.Checked);
         userOptions.SetCommonOption("DefaultFaxTemplate", "General", txtFaxTemplateName.Value, !chkbxAllowChangeTemplates.Checked);
         userOptions.SetCommonOption("DefaultFaxTemplateId", "General", txtFaxTemplateId.Value, !chkbxAllowChangeTemplates.Checked);
-        
     }
 
     #region ISmartPartInfoProvider Members
@@ -114,14 +112,11 @@ public partial class UserClientSystem : EntityBoundSmartPartInfoProvider
     }
 
     #endregion
-    
+
     private void LoadView()
     {
-
-        Sage.SalesLogix.Web.WebUserOptionsService userOptions = new Sage.SalesLogix.Web.WebUserOptionsService(_userId);// ApplicationContext.Current.Services.Get<IUserOptionsService>();
-        userOptions.LoadOptionsNow();
-        ownAccount.LookupResultValue = userOptions.GetCommonOption("InsertSecCodeID", "General", false,
-                                                                   Owner.SystemEveryone, String.Empty);
+        WebUserOptionsService userOptions = new WebUserOptionsService(_userId); // ApplicationContext.Current.Services.Get<IUserOptionsService>();
+        ownAccount.LookupResultValue = userOptions.GetCommonOption("InsertSecCodeID", "General", false, Owner.SystemEveryone, String.Empty);
         chkbxAllowChange.Checked = !userOptions.GetCommonOptionLocked("InsertSecCodeID", "General");
         txtEmailTemplateName.Value = userOptions.GetCommonOption("DefaultMemoTemplate", "General");
         txtEmailTemplateId.Value = userOptions.GetCommonOption("DefaultMemoTemplateId", "General");
@@ -137,18 +132,16 @@ public partial class UserClientSystem : EntityBoundSmartPartInfoProvider
             txtFaxTemplateName.Attributes.Add("DISABLED", "");
             txtFaxTemplateName.Attributes["onclick"] = "";
             FaxTemplateFindIcon.Attributes["onclick"] = "";
-           
+
             txtLetterTemplateName.Attributes.Add("DISABLED", "");
             txtLetterTemplateName.Attributes["onclick"] = "";
-            LetterTemplateFindIcon.Attributes["onclick"]= "";
-            
+            LetterTemplateFindIcon.Attributes["onclick"] = "";
+
             txtEmailTemplateName.Attributes.Add("DISABLED", "");
             txtEmailTemplateName.Attributes["onclick"] = "";
             EmailTemplateFindIcon.Attributes["onclick"] = "";
-            
+
             chkbxAllowChangeTemplates.Enabled = false;
         }
-
-
     }
 }

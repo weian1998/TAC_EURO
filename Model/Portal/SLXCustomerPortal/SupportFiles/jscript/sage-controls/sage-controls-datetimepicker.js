@@ -68,7 +68,7 @@
 //        monthYearText : _dateTimePickerConstants.MonthYearText,
 //        nextText : _dateTimePickerConstants.NextMonthText,
 //        prevText : _dateTimePickerConstants.PrevMonthText,
-        //        todayTip : _dateTimePickerConstants.TodayToolTip,
+//        todayTip : _dateTimePickerConstants.TodayToolTip,
         dayNames: _dateTimePickerConstants.DayNames,
         todayText: _dateTimePickerConstants.TodayText,
         okText : _dateTimePickerConstants.OKText,
@@ -397,8 +397,16 @@ SLXDateTimePicker.prototype.fmtDate = function()
     }
     if (this.OnChangeFN != "")
     {
-        hidden.fireEvent("onchange");
-        //this.OnChangeFN.call();
+      if (document.createEvent){
+         //FireFox
+         var evObj = document.createEvent('HTMLEvents'); 
+         evObj.initEvent ('change', true, true); 
+         hidden.dispatchEvent(evObj);
+       }
+       else{
+          //IE
+            hidden.fireEvent('onchange');
+       }
     }
     return result; 
 };

@@ -186,9 +186,7 @@
                 </td>
                 <td id="row2col6">
                     <div class="textcontrol select">
-                        <asp:ListBox runat="server" ID="lbxStages" SelectionMode="Single" Width="175px" Rows="1"
-                            OnSelectedIndexChanged="lbxStages_OnSelectedIndexChanged" EnableViewState="true">
-                        </asp:ListBox>
+                        <asp:ListBox runat="server" ID="lbxStages" OnSelectedIndexChanged="lbxStages_OnSelectedIndexChanged" Width="175px" Rows="1" EnableViewState="true"></asp:ListBox>
                     </div>
                 </td>
                 <td id="row2col7">

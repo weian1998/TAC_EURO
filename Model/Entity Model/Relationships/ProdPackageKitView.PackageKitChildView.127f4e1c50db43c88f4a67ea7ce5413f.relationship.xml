@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="127f4e1c-50db-43c8-8f4a-67ea7ce5413f" lastModifiedUtc="2011-01-13T22:52:13.6230593Z" parentEntityId="b2841113-73b1-43b7-a08b-d41b4306b8c0" childEntityId="3d6d7b2a-cc8a-49e5-b5a7-3a0019983736">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="f543eec3-3024-40f0-9404-5af84ca9f5b9" lastModifiedUtc="2011-01-13T22:51:44.9921965Z" name="PackageKitChildViews" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="fca42451-f3dc-46c6-91a0-4ffb4553cedf" lastModifiedUtc="2011-01-13T22:51:44.9951968Z" name="ProdPackageKitView" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="20c94f5e-a400-4069-bd8f-87904b434b07" parentPropertyId="8caeb57a-6111-47cf-bc04-5f6d62cd8341" childPropertyId="1cb9da38-6a28-4ef3-9b64-09021e0bf329" ordinal="0" />
+  </column>
+</relationship>

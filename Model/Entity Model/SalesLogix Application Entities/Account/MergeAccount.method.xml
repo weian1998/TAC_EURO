@@ -71,6 +71,11 @@
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>
     </methodTarget>
+    <methodTarget id="a2c3466f-3f04-4a3d-bd5e-2a0763410f37" lastModifiedUtc="2011-05-18T17:52:13.7210237Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeAccount_MoveSalesOrders" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
   </postExecuteTargets>
   <postFlushTargets />
 </method>

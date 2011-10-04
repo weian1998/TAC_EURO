@@ -5,6 +5,8 @@
   <SmartPart>\Entity Model\SalesLogix Application Entities\SalesOrderItem\QuickForms\EditSalesOrderItem.main.quickform.xml</SmartPart>
   <TargetWorkspace>DialogWorkspace</TargetWorkspace>
   <ShowInMode>Insert</ShowInMode>
-  <Properties />
+  <Properties>
+    <Property Name="HelpTopic" TypeConverter="">salesorderadd</Property>
+  </Properties>
   <AllowRoles />
 </SmartPartMapping>

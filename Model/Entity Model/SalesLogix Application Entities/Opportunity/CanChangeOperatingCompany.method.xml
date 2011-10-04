@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="b49526ac-a382-4a94-85c0-2a14e27b57e5" lastModifiedUtc="2011-03-03T21:04:20.9675488Z" name="CanChangeOperatingCompany" returnType="Boolean" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="bad5a119-b3bf-4fae-9d63-3b3de59460b6" lastModifiedUtc="2011-03-03T21:04:04.4989021Z" targetType="Sage.SalesLogix.Opportunity.Rules, Sage.SalesLogix.BusinessRules" targetMethod="CanChangeOperatingCompany" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

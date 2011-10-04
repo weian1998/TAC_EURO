@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="5e3d3168-4909-485b-9ed9-f34ce1901b21">
+  <ItemId>tools_DeDupManager</ItemId>
+  <NavUrl>DeDupJob.aspx</NavUrl>
+  <LargeImageUrl>[Localization!Global_Images:check_for_duplicate_history_24x24]</LargeImageUrl>
+  <SmallImageUrl>[Localization!Global_Images:check_for_duplicate_history_16x16]</SmallImageUrl>
+  <ContextMenuId />
+  <Target />
+  <AppliedSecurity>Administration/Deduplication/CheckHistory</AppliedSecurity>
+</MenuDropDownItem>

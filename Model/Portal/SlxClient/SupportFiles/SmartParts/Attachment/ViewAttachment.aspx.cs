@@ -6,6 +6,8 @@ using System.Web;
 using Microsoft.Win32;
 using Sage.Entity.Interfaces;
 using Sage.Platform;
+using Sage.Platform.Application;
+using Sage.Platform.Application.Services;
 using Sage.SalesLogix;
 using Sage.SalesLogix.LegacyBridge.FileSync;
 using System.Text.RegularExpressions;
@@ -103,16 +105,11 @@ public partial class ViewAttachment : System.Web.UI.Page
         return Path.GetExtension(file);
     }
 
-   
-
     private bool IsRemote()
     {
-        var systemInfo = SystemInformationRules.GetSystemInfo();
-        if (systemInfo != null)
-        {
-            return (systemInfo.DatabaseType == 2);
-        }
-        return false;
+        var optionSvc = ApplicationContext.Current.Services.Get<Sage.SalesLogix.Services.ISystemOptionsService>(true);
+        int dbType = optionSvc.DbType;
+        return (dbType == 2);
     }
 
     private void RequestFileSync()
@@ -236,40 +233,40 @@ public partial class ViewAttachment : System.Web.UI.Page
                 }
                 fileName = fileName.Replace("..\\", "");
                 //':', ';', '?', '*', '\', '/', '>', '<', '|', '''', '"' : Result[i] := '_';  -- but '; not replaced in library
-                fileName = Regex.Replace(fileName, "[\\?=<>:;\\*\\|\"]", "_");
+                fileName = Regex.Replace(fileName, "[\\?=<>:;\\*\\|\"]", "");
             }
             else if (!string.IsNullOrEmpty(historyid))
             {
                 var history = EntityFactory.GetById<IHistory>(historyid);
-                if (history != null)
-                {
-                    IList<IAttachment> attachments =
-                        Sage.SalesLogix.Attachment.Rules.GetAttachmentsFor(typeof(IHistory), history.HistoryId);
-                    if (attachments != null)
+                    if (history != null)
                     {
-                        IAttachment attachment = null;
-                        foreach (IAttachment att in attachments)
+                        IList<IAttachment> attachments =
+                            Sage.SalesLogix.Attachment.Rules.GetAttachmentsFor(typeof(IHistory), history.HistoryId);
+                        if (attachments != null)
                         {
-                            if (att.FileName.ToUpper().EndsWith(".MSG"))
+                            IAttachment attachment = null;
+                            foreach (IAttachment att in attachments)
                             {
-                                fileName = att.FileName;
-                                attachment = att;
-                                break;
+                                if (att.FileName.ToUpper().EndsWith(".MSG"))
+                                {
+                                    fileName = att.FileName;
+                                    attachment = att;
+                                    break;
+                                }
+                            }
+                            if (attachment == null)
+                            {
+                            WriteErrorMessage(GetLocalResourceObject("Error_EmailMsgAttachment").ToString());
+                                return;
                             }
                         }
-                        if (attachment == null)
+                        else
                         {
-                            WriteErrorMessage(GetLocalResourceObject("Error_EmailMsgAttachment").ToString());
+                        WriteErrorMessage(GetLocalResourceObject("Error_EmailMsgAttachment").ToString());
                             return;
                         }
                     }
-                    else
-                    {
-                        WriteErrorMessage(GetLocalResourceObject("Error_EmailMsgAttachment").ToString());
-                        return;
-                    }
                 }
-            }
 
             string filePath = String.Empty;
             string DataType = GetAttachmentType(Request.QueryString["DataType"]);
@@ -304,7 +301,7 @@ public partial class ViewAttachment : System.Web.UI.Page
 
             string tempPath = Sage.SalesLogix.Attachment.Rules.GetTempAttachmentPath();
             if (File.Exists(tempPath + fileName))
-                filePath = tempPath;
+                    filePath = tempPath;
 
             if (File.Exists(filePath + fileName))
             {
@@ -313,13 +310,6 @@ public partial class ViewAttachment : System.Web.UI.Page
                 {
                     const int CHUNK_SIZE = 1024 * 10;
                     long iFileLength = fileStream.Length;
-
-                    if (iFileLength < 1)
-                    {
-                        WriteFileNotFound(fileName, Request.QueryString["fileId"]);
-                        return;
-                    }
-
 
                     BinaryReader binaryReader = new BinaryReader(fileStream);
                     try
@@ -578,6 +568,9 @@ public partial class ViewAttachment : System.Web.UI.Page
                         break;
                     case ".xps":
                         result = "application/vnd.ms-xpsdocument";
+                        break;
+                    case ".URL":
+                        result = "application/x-mswinurl";
                         break;
                     default:
                         result = "application/octet-stream";

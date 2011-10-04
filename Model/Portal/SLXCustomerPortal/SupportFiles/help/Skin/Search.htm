@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:TargetType="WebHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="WebCustomerPortal.xml" MadCap:RuntimeFileType="Search" MadCap:InPreviewMode="False">
-    <!-- saved from url=(0014)about:internet -->
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" MadCap:TargetType="WebHelp" MadCap:PathToHelpSystem="../" MadCap:RuntimeFileType="Search" MadCap:HelpSystemFileName="WebCustomerPortal.xml" MadCap:PathToSkinFolder="../Data/SkinWebHelp2/" MadCap:InPreviewMode="False">
     <head>
         <title>Search</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -52,6 +51,7 @@ table#searchResultsTable
   border-collapse: collapse;
   margin: 0px auto 0px auto;
   padding: 0px;
+  table-layout: fixed;
 }
 table#searchResultsTable th.columnHeading
 {
@@ -67,6 +67,8 @@ table#searchResultsTable td
 {
   border: dotted 1px #999999;
   white-space: nowrap;
+  overflow: hidden;
+  word-wrap: break-word;
 }
 table
 {
@@ -93,6 +95,15 @@ div#SearchResults
 form
 {
   margin: 2px;
+}
+button
+{
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
 }
 </style>
     </head>

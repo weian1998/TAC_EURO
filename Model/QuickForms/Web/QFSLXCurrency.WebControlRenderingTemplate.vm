@@ -9,13 +9,15 @@
  </div>
 #end #end
   <div #if(${qfcontrol.ColumnSpan} > 1 || ${qfcontrol.ControlLabelPlacement} == "top") class="twocoltextcontrol currency" #else class="textcontrol currency" #end >
-    <SalesLogix:Currency runat="server" ID="${qfcontrol.ControlId}" ExchangeRateType="${qfcontrol.ExchangeRateType}"
+    <SalesLogix:Currency runat="server" ID="${qfcontrol.ControlId}" 
+	ExchangeRateType="#if($qfcontrol.ExchangeRateType == "OpportunityRate"||$qfcontrol.ExchangeRateType=="SalesOrderRate")EntityRate#else ${qfcontrol.ExchangeRateType}#end"
 #if($qfcontrol.IsReadOnly)ReadOnly="true" #end
 #if(!$qfcontrol.Enabled)Enabled="false" #end
 #if($qfcontrol.Text != "")Text="<%$ resources: ${qfcontrol.ControlId}.Text %>" #end
 #if($qfcontrol.ToolTip != "") ToolTip="<%$ resources: ${qfcontrol.ControlId}.ToolTip %>" #end
 #if($qfcontrol.HotKey != "")AccessKey="$qfcontrol.HotKey" #end
 #if(!$qfcontrol.DisplayCurrencyCode)DisplayCurrencyCode="false" #end
+#if($qfControl.DecimalDigits != -1) DecimalDigits="${qfcontrol.DecimalDigits}" #else DecimalDigits=Sys.CultureInfo.CurrentCulture.numberFormat.CurrencyDecimalDigits #end
 #if($IsPrintView)DisplayMode="AsText" #elseif($qfcontrol.DisplayMode != "AsControl")DisplayMode="$qfcontrol.DisplayMode" #end
 #if($qfcontrol.MaxLength > 0)MaxLength="${qfcontrol.MaxLength}" #end
 #if($qfcontrol.TabIndex > 0)TabIndex="$qfcontrol.TabIndex" #end

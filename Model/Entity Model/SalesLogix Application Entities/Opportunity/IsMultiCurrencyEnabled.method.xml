@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="e8a34121-8ad1-4ac5-87a7-6d5a475cb123" lastModifiedUtc="2011-03-30T20:51:53.246Z" name="IsMultiCurrencyEnabled" returnType="Boolean" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="4c989a5d-2882-4aca-9948-ab742e1d0c41" lastModifiedUtc="2011-03-30T20:51:46.987Z" targetType="Sage.SalesLogix.Opportunity.Rules, Sage.SalesLogix.BusinessRules" targetMethod="IsMultiCurrencyEnabled" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

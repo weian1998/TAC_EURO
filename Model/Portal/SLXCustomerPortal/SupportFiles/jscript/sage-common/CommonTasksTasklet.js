@@ -1,4 +1,5 @@
-﻿if (typeof Sys !== "undefined") { Type.registerNamespace("Sage.TaskPane"); } else { Ext.namespace("Sage.TaskPane"); }
+﻿//if (typeof Sys !== "undefined") { Type.registerNamespace("Sage.TaskPane"); } else { Ext.namespace("Sage.TaskPane"); }
+Sage.namespace('Sage.TaskPane.CommonTasksTasklet');
 var contextSvc;
 var context;
 var strEntityId;
@@ -9,26 +10,19 @@ var arraySelections = new Array;
 var activeGrid;
 var postUrl = "";
 var totalCount;
-var clientID;
+//var Sage.TaskPane.CommonTasksTasklet.clientID = "";
 var sortExpression = '';
 var selectedRecordActionCallback;
 var selectionInfo;
 
 Sage.TaskPane.CommonTasksTasklet = function(options) {
     this._id = options.id;
-    clientID = options.clientId;
+    Sage.TaskPane.CommonTasksTasklet.clientID = options.clientId;
 };
 
-Sage.TaskPane.CommonTasksTasklet.prototype.init = function() {
-    var svc = Sage.Services.getService("GroupManagerService");
-    svc.addListener(Sage.GroupManagerService.CURRENT_GROUP_CHANGED, function(sender, evt) {
-        try {
-            this.__doPostBack(clientID, "");
-        } catch (e) { }
-    });
-
+Sage.TaskPane.CommonTasksTasklet.prototype.init = function () {
     var prm = Sys.WebForms.PageRequestManager.getInstance();
-    prm.add_pageLoaded(function(sender, args) {
+    prm.add_pageLoaded(function (sender, args) {
 
         var l = Sage.SalesLogix.Controls.ListPanel.find("MainList");
         if (l) {
@@ -36,9 +30,6 @@ Sage.TaskPane.CommonTasksTasklet.prototype.init = function() {
         }
 
     });
-
-
-
 };
 
 function GetCurrentEntity() {
@@ -51,7 +42,7 @@ function GetCurrentEntity() {
     }
 }
 
-removeCurrentFromGroup = function() {
+removeCurrentFromGroup = function () {
     try {
         GetCurrentEntity();
         var groupID = Sage.Services.getService("GroupManagerService")._contextService.getContext().CurrentGroupID;
@@ -68,8 +59,12 @@ removeCurrentFromGroup = function() {
             firstid = grpctxt.NextEntityID;
         }
         if (firstid != "") {
-            if (typeof (setCurentEntityContext) != "undefined") {
-                setCurentEntityContext(firstid, strEntityId);
+            //            if (typeof (setCurentEntityContext) != "undefined") {
+            //                setCurentEntityContext(firstid, strEntityId);
+            //            }
+            var cec = Sage.Services.getService('ClientEntityContext');
+            if (cec) {
+                cec.navigateSLXGroupEntity(firstid, strEntityId);
             }
         }
     }
@@ -83,10 +78,10 @@ removeCurrentFromGroup = function() {
             url: postUrl,
             data: {},
             datatype: "text",
-            error: function(request, status, error)
+            error: function (request, status, error)
             { alert(error) },
-            success: function(status) {
-                //Ext.Msg.alert( "Group Updated" );
+            success: function (status) {
+                __doPostBack("MainContent", "");
             }
         });
     }
@@ -139,12 +134,12 @@ function SetSelectionCount() {
 StoreAllSelectionsOrCancel = function(agree) {
     if (agree == "yes") {
         var selectionKey = "selectAll";
-        document.getElementById(clientID + '_hfSelections').value = selectionKey;
+        document.getElementById(Sage.TaskPane.CommonTasksTasklet.clientID + '_hfSelections').value = selectionKey;
         var svc = Sage.Services.getService("SelectionContextService");
         svc.setSelectionContext(selectionKey, selectionInfo, selectedRecordActionCallback);
     }
     else {
-        document.getElementById(clientID + '_hfSelections').value = "cancel";
+        document.getElementById(Sage.TaskPane.CommonTasksTasklet.clientID + '_hfSelections').value = "cancel";
     }
 
 }
@@ -160,7 +155,7 @@ FileFormatCheck = function(result) {
     var format = getCookie("format");
     //Check for cookie of file format type preference
     if (formatIsSaved == "true" && format.length > 0)
-    { document.getElementById(clientID + '_tskExportToExcel').click(); }
+    { document.getElementById(Sage.TaskPane.CommonTasksTasklet.clientID + '_tskExportToExcel').click(); }
     else
     { PromptForFileFormat(); }
 }
@@ -226,7 +221,7 @@ PromptForFileFormat = function() {
                 { document.cookie = "formatIsSaved=" + typeIsSaved + "; expires=1/01/2020"; }
                 document.cookie = "format=" + formatType + "; expires=1/01/2020";
                 //Call the click event for the hidden sumbit button.
-                document.getElementById(clientID + '_tskExportToExcel').click();
+                document.getElementById(Sage.TaskPane.CommonTasksTasklet.clientID + '_tskExportToExcel').click();
                 dialog.hide();
             } 
         },
@@ -242,30 +237,37 @@ PromptForFileFormat = function() {
 }
 function EmailSend() {
     GetCurrentEntity();
-    var url = "slxdata.ashx/slx/crm/-/namedqueries?columnaliases=email&format=json&hql="
-    url = url + GetURL(strEntityTableName);
+    var url = "slxdata.ashx/slx/crm/-/namedqueries?columnaliases=email&format=json&hql=";
+    var sHql = GetURL(strEntityTableName);
+    if (sHql == null) {
+        Ext.Msg.show({ title: "Sage SalesLogix", msg: MasterPageLinks.AdHocDialog_NoEmail, buttons: Ext.Msg.OK, icon: Ext.MessageBox.ERROR });
+        return;
+    }
+    url = url + sHql;
     $.ajax({
         url: url,
         dataType: 'json',
         success: Send,
         error: function(error) {
-            alert(error);
+            alert(error.StatusText);
         }
     });
 }
 
 function Send(email) {
-    var sEmail = email.items[0].email
-    if (email.count > 0 && sEmail) {
-        sEmail = email.items[0].email;
-
-        sEmail = "mailto:" + sEmail;
-        document.location.href = sEmail;
+    if (email.count > 0) {
+       var sEmail = email.items[0].email;
+       if (sEmail){
+         sEmail = "mailto:" + sEmail;
+         document.location.href = sEmail;
+         return;
+       }
     }
-    else Ext.Msg.alert(MasterPageLinks.AdHocDialog_NoEmail);
+    Ext.Msg.show({ title: "Sage SalesLogix", msg: MasterPageLinks.AdHocDialog_NoEmail, buttons: Ext.Msg.OK, icon: Ext.MessageBox.ERROR });
 }
 
 function GetURL(entity) {
+    var url = null;
     switch (entity) {
         // Example when using cached Named Query  
         //case 'CAMPAIGN': url = strEntityTableName +"EmailGet&where=cam.id eq '" + strEntityId + "'";      
@@ -285,7 +287,8 @@ function GetURL(entity) {
             break;
         case 'CONTRACT': url = "select con.Email from Contract as crt left join crt.Contact as con where crt.id like '" + strEntityId + "'";
             break;
-
+        case 'SALESORDER': url = "select so.ShippingContact.Email from SalesOrder as so where so.Id eq '" + strEntityId + "'";
+            break;
     }
     return url;
 }
@@ -316,7 +319,7 @@ function PrepareSelectedRecords(callback) {
         Ext.MessageBox.confirm("", dialogBody, StoreAllSelectionsOrCancel);
     }
     else {
-        document.getElementById(clientID + '_hfSelections').value = selectionInfo.key;
+        document.getElementById(Sage.TaskPane.CommonTasksTasklet.clientID + '_hfSelections').value = selectionInfo.key;
         var svc = Sage.Services.getService("SelectionContextService");
         svc.setSelectionContext(selectionInfo.key, selectionInfo, selectedRecordActionCallback);
     }
@@ -329,51 +332,51 @@ function PrepareSelectedRecords(callback) {
 // client selection service to get the selected records from the grid.  This callback method is defined in the
 // FillDictionaries method in CommonTasksTasklet.ascx.cs.
 function CopyUser() {
-    var selectionKey = document.getElementById(clientID + '_hfSelections').value
+    var selectionKey = document.getElementById(Sage.TaskPane.CommonTasksTasklet.clientID + '_hfSelections').value
     Link.copyUser(selectionKey);
 }
 function CopyUserProfile() {
-    var selectionKey = document.getElementById(clientID + '_hfSelections').value
+    var selectionKey = document.getElementById(Sage.TaskPane.CommonTasksTasklet.clientID + '_hfSelections').value
     Link.copyUserProfile(selectionKey);
 }
 function DeleteUsers() {
-    var selectionKey = document.getElementById(clientID + '_hfSelections').value
+    var selectionKey = document.getElementById(Sage.TaskPane.CommonTasksTasklet.clientID + '_hfSelections').value
     Link.deleteUsers(selectionKey);
 }
 function AddToTeam() {
-    var selectionKey = document.getElementById(clientID + '_hfSelections').value
+    var selectionKey = document.getElementById(Sage.TaskPane.CommonTasksTasklet.clientID + '_hfSelections').value
     Link.addToTeam(selectionKey);
 }
 function RemoveFromTeam() {
-    var selectionKey = document.getElementById(clientID + '_hfSelections').value
+    var selectionKey = document.getElementById(Sage.TaskPane.CommonTasksTasklet.clientID + '_hfSelections').value
     Link.removeFromTeam(selectionKey);
 }
 function RemoveFromAllTeams() {
-    var selectionKey = document.getElementById(clientID + '_hfSelections').value
+    var selectionKey = document.getElementById(Sage.TaskPane.CommonTasksTasklet.clientID + '_hfSelections').value
     Link.removeFromAllTeams(selectionKey);
 }
 function AssignRole() {
-    var selectionKey = document.getElementById(clientID + '_hfSelections').value
+    var selectionKey = document.getElementById(Sage.TaskPane.CommonTasksTasklet.clientID + '_hfSelections').value
     Link.assignRole(selectionKey);
 }
 function ReplaceTeamMember() {
-    var selectionKey = document.getElementById(clientID + '_hfSelections').value
+    var selectionKey = document.getElementById(Sage.TaskPane.CommonTasksTasklet.clientID + '_hfSelections').value
     Link.replaceTeamMember(selectionKey);
 }
 
 function DeleteTeam() {
-    var selectionKey = document.getElementById(clientID + '_hfSelections').value
+    var selectionKey = document.getElementById(Sage.TaskPane.CommonTasksTasklet.clientID + '_hfSelections').value
     Link.deleteTeam(selectionKey);
 }
 function DeleteDepartment() {
-    var selectionKey = document.getElementById(clientID + '_hfSelections').value
+    var selectionKey = document.getElementById(Sage.TaskPane.CommonTasksTasklet.clientID + '_hfSelections').value
     Link.deleteDepartment(selectionKey);
 }
 function CopyTeam() {
-    var selectionKey = document.getElementById(clientID + '_hfSelections').value
+    var selectionKey = document.getElementById(Sage.TaskPane.CommonTasksTasklet.clientID + '_hfSelections').value
     Link.copyTeam(selectionKey);
 }
 function CopyDepartment() {
-    var selectionKey = document.getElementById(clientID + '_hfSelections').value
+    var selectionKey = document.getElementById(Sage.TaskPane.CommonTasksTasklet.clientID + '_hfSelections').value
     Link.copyDepartment(selectionKey);
 }

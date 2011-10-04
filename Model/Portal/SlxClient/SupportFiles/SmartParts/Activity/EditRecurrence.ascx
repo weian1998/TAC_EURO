@@ -22,8 +22,8 @@
     <tr>
         <td colspan="2">
             <asp:RadioButtonList ID="RecurrenceType" runat="Server">
-                <asp:ListItem Text="<%$ resources: RecurrenceType.Series.Text %>" Value="series" Selected="true"/>
-                <asp:ListItem Text="<%$ resources: RecurrenceType.occurrence.Text %>" Value="occurrence"/>
+                <asp:ListItem Text="<%$ resources: RecurrenceType.Series.Text %>" Value="series" />
+                <asp:ListItem Text="<%$ resources: RecurrenceType.occurrence.Text %>" Value="occurrence" Selected="true"/>
             </asp:RadioButtonList>
         </td>
     </tr>

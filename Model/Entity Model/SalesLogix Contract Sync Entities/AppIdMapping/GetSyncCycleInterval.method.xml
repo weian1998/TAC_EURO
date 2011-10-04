@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="f6d09eb4-835f-40cb-89ff-3fca4b552661" lastModifiedUtc="2010-06-16T21:14:43.6762968Z" name="GetSyncCycleInterval" returnType="Int32" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="3c27e41a-1323-4f53-b414-cb7745aa54d0" lastModifiedUtc="2010-06-16T21:14:41.4022968Z" targetType="Sage.SalesLogix.AppIdMapping.Rules, Sage.SalesLogix.BusinessRules" targetMethod="GetSyncCycleInterval" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

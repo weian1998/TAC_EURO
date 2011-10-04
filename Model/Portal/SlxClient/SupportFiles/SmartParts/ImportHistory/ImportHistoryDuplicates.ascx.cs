@@ -44,8 +44,8 @@ public partial class ImportHistoryDuplicates : EntityBoundSmartPartInfoProvider
     protected override void OnFormBound()
     {
         base.OnFormBound();
-        
-        LoadForm();
+       
+         LoadForm();
         
     }
 
@@ -124,7 +124,10 @@ public partial class ImportHistoryDuplicates : EntityBoundSmartPartInfoProvider
     {
         try
         {
-            e.Row.Cells[2].Visible = false;
+            if (e.Row.Cells.Count > 2)
+            {
+                e.Row.Cells[2].Visible = false;
+            }
         }
         catch (Exception)
         { 
@@ -142,7 +145,7 @@ public partial class ImportHistoryDuplicates : EntityBoundSmartPartInfoProvider
         grdDuplicates.SelectedIndex = e.NewEditIndex;
     }
 
-
+   
     #region Private Methods
 
     /// <summary>
@@ -152,7 +155,7 @@ public partial class ImportHistoryDuplicates : EntityBoundSmartPartInfoProvider
     {
         try
         {
-            if (Page.Visible)
+            if ((Page.Visible) &&(chkShowDuplicates.Checked))
             {
                 IImportHistory importHistory = BindingSource.Current as IImportHistory;
                 if (importHistory != null)
@@ -178,18 +181,29 @@ public partial class ImportHistoryDuplicates : EntityBoundSmartPartInfoProvider
                         if (csvOptions.FirstRowColHeader)
                         {
                             string colheader = string.Empty;
+                            //bool AddIdcolumn = true;
                             colheader = string.Format("{0}{1}{2}{3}", sQualifier, "Id", sQualifier, csvOptions.Delimiter);
                             int lastColIndex = templateManager.SourceProperties.Count;
                             int index = 0;
                             foreach (ImportSourceProperty sp in templateManager.SourceProperties)
                             {
                                 index++;
-                                colheader = colheader + sQualifier + sp.FieldName + sQualifier;
+                                if (sp.FieldName.Equals("Id", StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    colheader = colheader + sQualifier + sp.FieldName + "_" + index + sQualifier;
+                                }
+                                else
+                                {
+                                    colheader = colheader + sQualifier + sp.FieldName + sQualifier;
+                                }
+                                                                
                                 if (lastColIndex != index)
                                 {
                                     colheader = colheader + Convert.ToString(csvOptions.Delimiter);
                                 }
+                               
                             }
+
                             sb.AppendLine(colheader);
                         }
 
@@ -240,19 +254,20 @@ public partial class ImportHistoryDuplicates : EntityBoundSmartPartInfoProvider
                 if (dupProvider != null)
                 {
                    
-                        DialogService.SetSpecs(200, 200, 800, 1000, "LeadSearchAndConvert", GetLocalResourceObject("Title.Resolve.Duplicate.ImportLead").ToString(), true);
+                        DialogService.SetSpecs(200, 200, 600, 800, "LeadSearchAndConvert", GetLocalResourceObject("Title.Resolve.Duplicate.ImportLead").ToString(), true);
                         DialogService.DialogParameters.Add("duplicateProvider", dupProvider);
                         DialogService.DialogParameters.Add("importHistoryItemId", itemId);
                         DialogService.EntityType = typeof(IImportHistory);
                         DialogService.EntityID = itemId;
                         DialogService.ShowDialog();
+                        chkShowDuplicates.Checked = false;
                     
                 }
             }
         }
         catch (Exception exp)
         {
-            throw new ApplicationException(string.Format(GetLocalResourceObject("LoadErrorMSG").ToString(), exp.Message));
+            throw new ApplicationException(string.Format(GetLocalResourceObject("LoadErrorMSG").ToString(), exp.Message), exp);
         }
                     
     }

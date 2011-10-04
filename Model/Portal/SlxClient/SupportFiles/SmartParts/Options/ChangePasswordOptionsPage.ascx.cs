@@ -5,7 +5,7 @@ using Sage.SalesLogix.Web;
 using Sage.SalesLogix.WebUserOptions;
 using Sage.Platform.Application.UI;
 using Sage.Entity.Interfaces;
-using Sage.SalesLogix.LegacyBridge.Delphi;
+using Sage.SalesLogix.DelphiBridge;
 using System.Text.RegularExpressions;
 
 public partial class ChangePasswordOptionsPage : System.Web.UI.UserControl, ISmartPartInfoProvider
@@ -49,17 +49,12 @@ public partial class ChangePasswordOptionsPage : System.Web.UI.UserControl, ISma
 
     protected void _changePassword_Click(object sender, EventArgs e)
     {
-        DelphiComponent dc = new DelphiComponent();
-        Sage.SalesLogix.SystemInformation si = Sage.SalesLogix.SystemInformationRules.GetSystemInfo();
-        
-        DelphiBinaryReader delphi = new DelphiBinaryReader(si.Data);
-        dc = delphi.ReadComponent(true);
+        var optionSvc = ApplicationContext.Current.Services.Get<Sage.SalesLogix.Services.ISystemOptionsService>(true);
+        SByte minPasswordLength = optionSvc.MinPasswordLength;
+        bool noBlankPassword = optionSvc.NoBlankPassword;
+        bool alphaNumPassword = optionSvc.AlphaNumPassword;
+        bool noNameInPassword = optionSvc.NoNameInPassword;
 
-        string minPasswordLength = dc.Properties["MinPasswordLength"].ToString();
-        bool noBlankPassword  = (bool)dc.Properties["NoBlankPassword"];
-        bool alphaNumPassword = (bool)dc.Properties["AlphaNumPassword"];
-        bool noNameInPassword = (bool)dc.Properties["NoNameInPassword"];
-        
         Regex objAlphaNumericPattern = new Regex("[a-zA-Z][0-9]");
         string changingUser = string.Empty;
         

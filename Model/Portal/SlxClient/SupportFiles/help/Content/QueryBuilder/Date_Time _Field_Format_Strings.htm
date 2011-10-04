@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="357" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Date/Time Field Format Strings</title>
+        <link href="../Resources/TableStyles/TableStyle.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilder/Date_Time _Field_Format_Strings.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor614"></a>Date/Time Field Format Strings</h1>
+        <p>The table below lists the format string options for date/time fields, 
+ but not <a href="Date_Time_Separators.htm">date/time separators</a>.</p>
+        <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle_TableStyle" cellspacing="0">
+            <thead>
+                <tr>
+                    <th class="TableStyle_TableStyle_Head_0_0_RowSep_ColSep">Option</th>
+                    <th class="TableStyle_TableStyle_Head_0_0_RowSep_ColEnd">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">c</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the date using the format given by the ShortDateFormat global variable,  followed by the time using the format given by the LongTimeFormat global  variable. The time is not displayed if the fractional part of the DateTime value  is zero.</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">d</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the day as a 
+ number without a leading zero (1-31).</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">dd</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the day as a 
+ number with a leading zero (01-31).</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">ddd</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the day as an 
+ abbreviation (Sun-Sat) using the strings given by the ShortDayNames global 
+ variable.</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">dddd</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the day as a 
+ full name (Sunday-Saturday) using the strings given by the LongDayNames 
+ global variable.</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">ddddd</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the date using 
+ the format given by the ShortDateFormat global variable.</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">m</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the month as 
+ a number without a leading zero (1-12). If the m specifier immediately 
+ follows an h or hh specifier, the minute rather than the month is displayed.</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">mm</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the month as 
+ a number with a leading zero (01-12). If the mm specifier immediately 
+ follows an h or hh specifier, the minute rather than the month is displayed.</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">mmm</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the month as 
+ an abbreviation (Jan-Dec) using the strings given by the ShortMonthNames 
+ global variable.</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">mmmm</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the month as 
+ a full name (January-December) using the strings given by the LongMonthNames 
+ global variable.</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">yy</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the year as a 
+ two-digit number (00-99).</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">yyyy</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the year as a 
+ four-digit number (0000-9999).</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">h</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the hour without 
+ a leading zero (0-23).</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">hh</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the hour with 
+ a leading zero (00-23).</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">n</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the minute without 
+ a leading zero (0-59).</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">nn</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the minute with 
+ a leading zero (00-59).</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">s</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the second without 
+ a leading zero (0-59).</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">ss</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the second with 
+ a leading zero (00-59).</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">t</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the time using 
+ the format given by the ShortTimeFormat global variable.</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">tt</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the time using 
+ the format given by the LongTimeFormat global variable.</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">am/pm</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Uses the 12-hour clock 
+ for the preceding h or hh specifier, and displays 'am' for any hour before 
+ noon, and 'pm' for any hour after noon. The am/pm specifier can use lower, 
+ upper, or mixed case, and the result is displayed accordingly.</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">a/p</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Uses the 12-hour clock 
+ for the preceding h or hh specifier, and displays 'a' for any hour before 
+ noon, and 'p' for any hour after noon. The a/p specifier can use lower, 
+ upper, or mixed case, and the result is displayed accordingly.</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowEnd_ColSep">ampm</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowEnd_ColEnd">Uses the 12-hour clock 
+ for the preceding h or hh specifier, and displays the contents of the 
+ TimeAMString global variable for any hour before noon, and the contents 
+ of the TimePMString global variable for any hour after noon.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="RelatedTopics">Related Topics</p>
+        <p><a href="../QueryBuilderAdv/assign_query_layout.htm" target="_self">Assigning a Query Layout</a>
+        </p>
+        <div style="width: 100%;position: relative;">
+            <p>&#160;</p>
+        </div>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="Output.WebClient,Output.Customer Portal">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

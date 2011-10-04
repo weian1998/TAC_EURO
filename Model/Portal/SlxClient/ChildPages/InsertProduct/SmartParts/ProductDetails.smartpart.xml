@@ -5,6 +5,8 @@
   <SmartPart>\Entity Model\SalesLogix Application Entities\Product\QuickForms\ProductDetails.main.quickform.xml</SmartPart>
   <TargetWorkspace>MainContent</TargetWorkspace>
   <ShowInMode>Insert</ShowInMode>
-  <Properties />
+  <Properties>
+    <Property Name="HelpTopic" TypeConverter="">productlistadd</Property>
+  </Properties>
   <AllowRoles />
 </SmartPartMapping>

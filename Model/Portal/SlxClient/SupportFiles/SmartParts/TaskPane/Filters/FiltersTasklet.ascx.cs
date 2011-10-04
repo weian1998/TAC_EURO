@@ -127,7 +127,7 @@ public partial class SmartParts_TaskPane_Filters_FiltersTasklet : System.Web.UI.
                 string name = info.GroupName.ToLower();
                 string data = service.GetTaskletState(ID, "hidden:" + family + "-" + name);
                 if (data != null)
-                    _hiddenFilters = new List<string>(JavaScriptConvert.DeserializeObject<string[]>(data));
+                    _hiddenFilters = new List<string>(JsonConvert.DeserializeObject<string[]>(data));
             }
         } 
         catch { }
@@ -180,7 +180,7 @@ public partial class SmartParts_TaskPane_Filters_FiltersTasklet : System.Web.UI.
         items.DataBind();
 
         StringBuilder resources = new StringBuilder();
-        resources.AppendFormat("Sage.TaskPane.FiltersTasklet.Resources = {0};", JavaScriptConvert.SerializeObject(new ClientResourcesRepresentation(this)));
+        resources.AppendFormat("Sage.TaskPane.FiltersTasklet.Resources = {0};", JsonConvert.SerializeObject(new ClientResourcesRepresentation(this)));
 
         ScriptManager.GetCurrent(Page).Scripts.Add(new ScriptReference("~/SmartParts/TaskPane/Filters/FiltersTasklet.js"));
         ScriptManager.RegisterStartupScript(Page, typeof(Page), "taskpane-filters-resources", resources.ToString(), true);

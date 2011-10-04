@@ -43,9 +43,14 @@ namespace Sage.BusinessRules.CodeSnippets
         public static void cmdCancel_OnClickStep1( IOpportunityClosedLost form,  EventArgs args)
         {
             IOpportunity opportunity = form.CurrentEntity as IOpportunity;
-            object resOpen = System.Web.HttpContext.GetGlobalResourceObject("Opportunity", "Opp_Status_Open");
-            if(resOpen != null)
-                opportunity.Status = resOpen.ToString(); //"Open";
+            if(!System.Convert.ToBoolean(opportunity.Closed))
+			{
+			    object resOpen = System.Web.HttpContext.GetGlobalResourceObject("Opportunity", "Opp_Status_Open");
+                if(resOpen != null)
+			    {
+                   opportunity.Status = resOpen.ToString(); //"Open";
+			    }
+			}
         }
     }
 }

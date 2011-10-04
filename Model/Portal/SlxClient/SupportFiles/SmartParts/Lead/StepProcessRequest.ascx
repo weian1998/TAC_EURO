@@ -18,7 +18,7 @@
    
 }
 </style>
-
+<asp:HiddenField runat="server" ID="ProcessStatus" EnableViewState="true" Value="" />
 		
 <div style="display:none">
     <asp:Panel ID="pnlProcessLeads_LTools" runat="server"></asp:Panel>

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="d81e2749-1135-4eea-bcfd-940805bffa2d" lastModifiedUtc="2008-01-15T20:28:11.6411887Z" name="OnAfterDelete" returnType="void" methodType="CrudEvent" actionType="None" returnMode="None" isInstance="true">
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="d81e2749-1135-4eea-bcfd-940805bffa2d" lastModifiedUtc="2008-01-15T20:28:11.6411887Z" name="OnAfterDelete" methodType="CrudEvent" actionType="None" returnMode="None">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
@@ -7,7 +7,7 @@
   <parameter />
   <preExecuteTargets />
   <methodTargets>
-    <methodTarget id="93f8683b-348b-4c3e-93db-589ecbe478f0" lastModifiedUtc="2008-01-15T20:28:10.6567633Z" targetType="Sage.Platform.Orm.DefaultCRUDEventHandler, Sage.Platform" targetMethod="OnAfterDelete" active="true">
+    <methodTarget id="7d3bc286-a04b-4eec-bf4c-c52ae44ae77b" lastModifiedUtc="2011-01-05T18:58:52.0793068Z" targetType="Sage.SalesLogix.SalesOrder.SalesOrderItem, Sage.SalesLogix.BusinessRules" targetMethod="OnAfterDelete" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>

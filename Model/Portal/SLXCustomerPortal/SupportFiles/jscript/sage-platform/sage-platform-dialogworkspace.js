@@ -303,7 +303,7 @@ Sage.DialogWorkspace.prototype.initDialog = function() {
         return out;
     };
 
-    Sage.DialogWorkspace.prototype.handleEvents = function() {
+    Sage.DialogWorkspace.prototype.handleEvents = function () {
         //alert($("#" + this._stateClientId).val());   
 
         var value = $("#" + this._stateClientId).val();
@@ -333,9 +333,11 @@ Sage.DialogWorkspace.prototype.initDialog = function() {
                     this._dialog.doLayout();
                     this._dialog.show();
 
-                    if (evt.centerDialog)
+                    if (evt.centerDialog) {
                         this._dialog.center();
-                    else
+                        if (this._dialog.getPosition()[1] < 0)
+                            this._dialog.setPosition(this._dialog.getPosition()[0], 20);
+                    } else
                         this._dialog.setPosition(evt.left, evt.top);
                 }
                 break;

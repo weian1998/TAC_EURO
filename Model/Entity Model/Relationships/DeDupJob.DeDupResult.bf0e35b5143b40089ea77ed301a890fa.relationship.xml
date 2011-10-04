@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="bf0e35b5-143b-4008-9ea7-7ed301a890fa" lastModifiedUtc="2010-08-10T22:33:20.0791836Z" parentEntityId="2654aa1f-f214-49c8-ad13-a794c33e5467" childEntityId="ed91ade9-d3d3-42a9-b2ca-bf7e6961e3c6" cascadeOption="SaveUpdateDelete">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="9ebbc372-7fa9-497f-9f53-05919e883a8f" lastModifiedUtc="2010-08-10T22:33:06.3113961Z" name="DeDupResults" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="0d85deb4-0701-4f61-b47a-0f1113492416" lastModifiedUtc="2010-08-10T22:33:06.3123962Z" name="DeDupJob" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="13c2de03-ec5e-4d2f-8bf6-3f15db141b43" parentPropertyId="a8f8f6de-cd41-488c-a2e9-82fa2c7bfca5" childPropertyId="b051a0e5-2a14-44a9-98ff-45090309277b" ordinal="0" />
+  </column>
+</relationship>

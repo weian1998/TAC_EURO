@@ -86,27 +86,26 @@ public partial class CopyUser : EntityBoundSmartPartInfoProvider
                     string nameFormat = " {0}, {1}";
                     if (string.IsNullOrEmpty(existingUser.UserInfo.FirstName))
                         nameFormat = " {0}{1}";
-
                     string fullNameFormat = string.Concat("<", GetLocalResourceObject("CopyOfNameTemplate").ToString(), nameFormat, ">");
                     string newName = string.Format(fullNameFormat, existingUser.UserInfo.LastName, existingUser.UserInfo.FirstName);
 
-                    /* the following could be used to improve the user experience, but it doesn't match the lan product */
-                    //string copyOfTemplate = GetLocalResourceObject("CopyOfNameTemplate").ToString();
-                    //string fullNameFormat = string.Concat("<", copyOfTemplate, nameFormat, ">");
-                    //string newLastName = existingUser.UserInfo.LastName;
-                    //if (newLastName.Contains(string.Concat("<", copyOfTemplate)))
-                    //{
-                    //    Match match = Regex.Match(newLastName, string.Concat("<", copyOfTemplate, "(.*)", ">"), RegexOptions.IgnoreCase);
-                    //    if (match.Groups.Count > 0)
-                    //        newLastName = match.Groups[1].Value;
-                    //}
-                    //string newName = string.Format(fullNameFormat, newLastName, existingUser.UserInfo.FirstName);
+					/* the following could be used to improve the user experience, but it doesn't match the lan product */
+					//string copyOfTemplate = GetLocalResourceObject("CopyOfNameTemplate").ToString();
+					//string fullNameFormat = string.Concat("<", copyOfTemplate, nameFormat, ">");
+					//string newLastName = existingUser.UserInfo.LastName;
+					//if (newLastName.Contains(string.Concat("<", copyOfTemplate)))
+					//{
+					//    Match match = Regex.Match(newLastName, string.Concat("<", copyOfTemplate, "(.*)", ">"), RegexOptions.IgnoreCase);
+					//    if (match.Groups.Count > 0)
+					//        newLastName = match.Groups[1].Value;
+					//}
+					//string newName = string.Format(fullNameFormat, newLastName, existingUser.UserInfo.FirstName);
 
-                    newUser.UserInfo.LastName = newName.Length > 32 ? newName.Substring(0, 32) : newName;
-                    newUser.UserInfo.UserName = newName.Length > 64 ? newName.Substring(0, 64) : newName;
+					newUser.UserInfo.LastName = newName.Length > 32 ? newName.Substring(0, 32) : newName;
+					newUser.UserInfo.UserName = newName.Length > 64 ? newName.Substring(0, 64) : newName;
 
-                    string userTemplate = existingUser.UserInfo.UserName;
-                    newUser.UserTemplate = userTemplate.Length > 30 ? userTemplate.Substring(0, 30) : userTemplate;
+					string userTemplate = existingUser.UserInfo.UserName;
+					newUser.UserTemplate = userTemplate.Length > 30 ? userTemplate.Substring(0, 30) : userTemplate;
 
                     newUser.Save();
 

@@ -1,11 +1,12 @@
-﻿Sage.GroupLookupManager = function() {
+﻿Sage.GroupLookupManager = function () {
     this.win = '';
     this.lookupIsOpen = false;
     this.withinGroup = false;
     this.conditions = [];
+    this.onLookupNavigateTo = false;
 
     this.lookupTpl = new Ext.XTemplate(
-        //'<div id="entitylookupdiv-container">',
+    //'<div id="entitylookupdiv-container">',
         '<div id="entitylookupdiv_{index}" class="lookup-condition-row">',
         '<label class="slxlabel" style="width:75px;clear:left;display:block;float:left;position:relative;padding:4px 0px 0px 0px"><tpl if="index &lt; 1">{addrowlabel}</tpl><tpl if="index &gt; 0">{hiderowlabel}</tpl></label>',
         '<div style="padding-left:75px;position:relative;">',
@@ -16,7 +17,7 @@
         '<input type="button" id="lookupButton" onclick="var mgr = Sage.Services.getService(\'GroupLookupManager\');if (mgr) { mgr.doLookup(); }" value="{srchBtnCaption}" /></tpl>',
         '<tpl if="index &gt; 0"><img src="{hideimgurl}" alt="{hideimgalttext}" style="cursor:pointer;padding:0px 5px;" onclick="var mgr = Sage.Services.getService(\'GroupLookupManager\');if (mgr) { mgr.removeLookupCondition({index});}" /></tpl>',
         '</div></div>' //</div>
-    );  
+    );
 
     if (window.lookupSetupObject) {
         this.setupTemplateObj = window.lookupSetupObject;
@@ -60,21 +61,35 @@ Sage.GroupLookupManager.prototype.getTemplateObj = function() {
 
 }
 
-Sage.GroupLookupManager.prototype.showLookup = function() {
+Sage.GroupLookupManager.prototype.showLookup = function (opts) {
     var mgr = Sage.Services.getService("GroupLookupManager");
-    if (mgr) {    
-        if (mgr.lookupisopen) { return; }
-        mgr.lookupisopen = true;
+    if (mgr) {
+        if (mgr.lookupIsOpen) { return; }
+        mgr.lookupIsOpen = true;
         if (mgr.win == '') {
             mgr.setupLookupElements();
         }
         mgr.handleGroupChanged();
         var gMgrSvc = Sage.Services.getService("GroupManagerService");
-        var layout = gMgrSvc.getLookupFields(mgr.resetLookup);
+
+
+        if (typeof opts === 'undefined') {
+            var cSvc = Sage.Services.getService("ClientGroupContext");
+            if (cSvc) {
+                //opts = { family: cSvc.getContext().CurrentFamily, name: "LookupLayoutGroup" };
+                opts = { family: cSvc.getContext().CurrentFamily, name: cSvc.getContext().LookoutLayoutGroupName };
+            }
+        } else {
+            if (opts.hasOwnProperty('returnTo')) {
+                this.onLookupNavigateTo = opts['returnTo'];
+            }
+        }
+
+        var layout = gMgrSvc.getLookupFields(opts, mgr.resetLookup);
         mgr.win.show();
-        $(document).bind("keydown", mgr.checkKeys );
+        $(document).bind("keydown", mgr.checkKeys);
         $("#value_0").focus();
-        window.setTimeout(function() { $("#value_0").focus(); }, 500);
+        window.setTimeout(function () { $("#value_0").focus(); }, 500);
     }
 }
 
@@ -150,9 +165,9 @@ Sage.GroupLookupManager.prototype.removeLookupCondition = function(idx) {
     $(rowid).html('');
 }
 
-Sage.GroupLookupManager.prototype.onLookupHide = function() {
-    this.lookupisopen = false;
-    $(document).unbind("keydown", this.checkKeys );
+Sage.GroupLookupManager.prototype.onLookupHide = function () {
+    this.lookupIsOpen = false;
+    $(document).unbind("keydown", this.checkKeys);
 
 }
 
@@ -211,7 +226,7 @@ Sage.GroupLookupManager.prototype.operatorChange = function(index) {
     }
 }
 
-Sage.GroupLookupManager.prototype.reloadConditions = function() {
+Sage.GroupLookupManager.prototype.reloadConditions = function () {
     this.conditions = [];
     var filterRows = $('.lookup-condition-row');
     for (var i = 0; i < filterRows.length; i++) {
@@ -224,13 +239,22 @@ Sage.GroupLookupManager.prototype.reloadConditions = function() {
                 if ((!val[0].value) && ((operator[0].value != 'like') && (operator[0].value != 'sw'))) {
                     return false; //must have a value for numeric comparisons
                 }
+                var mgr = Sage.Services.getService("GroupLookupManager");
+                var fields = $('#fieldnames_' + i)[0];
+
+                var fieldNumeric = ((mgr) && (fields.selectedIndex >= 0) &&
+                    (fields.selectedIndex < mgr.setupTemplateObj.fields.length) &&
+                    (mgr.setupTemplateObj.fields[fields.selectedIndex].isNumeric) &&
+                    !mgr.setupTemplateObj.fields[fields.selectedIndex].isDate);
+                if (fieldNumeric && isNaN(val[0].value)) {
+                    return false; //numeric fields must have numbers to compare against
+                }
                 var condition = {
                     fieldname: fieldname[0].value,
                     operator: operator[0].value,
-                    val: val[0].value.replace(/%/g, '')
+                    val: (fieldNumeric) ? parseInt(val[0].value, 10) : val[0].value.replace(/%/g, '')
                 }
                 this.conditions.push(condition);
-                //conditions.push(fieldname[0].value + "'" + operator[0].value + "'" + val[0].value.replace(",", "").replace("'", ""));
                 this.operatorChange(0);
             }
         }
@@ -277,7 +301,7 @@ Sage.GroupLookupManager.prototype.getConditionsString = function() {
     return Sys.Serialization.JavaScriptSerializer.serialize(this.conditions);
 }
 
-Sage.GroupLookupManager.prototype.handleGroupChanged = function() {
+Sage.GroupLookupManager.prototype.handleGroupChanged = function () {
     var gMgrSvc = Sage.Services.getService("GroupManagerService");
     var mgr = Sage.Services.getService("GroupLookupManager");
     if ((!mgr) && (this.setupTemplateObj)) {
@@ -288,6 +312,13 @@ Sage.GroupLookupManager.prototype.handleGroupChanged = function() {
             mgr.win.hide();
         }
     }
+
+    if (mgr.onLookupNavigateTo) {
+        //supress any other handlers that refresh the page...
+        window.__doPostBack = function () { return; };
+        window.location = mgr.onLookupNavigateTo + "?modeid=list&gid=LOOKUPRESULTS";
+    }
+    //stop the rest of the event handlers from firing - the current group context gets reset...
 }
 
 
@@ -297,11 +328,12 @@ Sage.GroupLookupManager.prototype.setupTemplateFields = function(filters) {
     if (mgr) {
         mgr.setupTemplateObj.fields = [];
         for (var i = 0; i < filters.items.length; i++) {
-            if ((filters.items[i].visible == "T") && (filters.items[i].width != "0")) {
+            if (((filters.items[i].visible === "T") || (filters.items[i].visible === true)) && (filters.items[i].width != "0")) {
                 var itemIsNumber = filters.items[i].fieldType in  NumericFieldTypes;
                 mgr.setupTemplateObj.fields.push({ fieldname: filters.items[i].alias,
                     displayname: filters.items[i].caption,
-                    isNumeric: itemIsNumber
+                    isNumeric: itemIsNumber,
+                    isDate: filters.items[i].fieldType == "11"
                 });
             }
         }

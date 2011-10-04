@@ -1,0 +1,396 @@
+#set($stringObjectName = "${pagegenerator.FormName}${qfcontrol.ControlId}_Strings")
+## -----------Column and Grid macros -----------------------------------------------
+#macro(doDefaultColParts $col)    
+	field: '$col.DataField',
+	#if($col.TextFormatString != "")
+    displayFields: ['$col.DataField'],
+    displayFormatString: ${stringObjectName}['$generator.ConvertResourceKeyToScriptReference($col.getColResourceKey("FormatString"))']  || '$col.TextFormatString',
+	#end
+	#doHideCondition($col)
+	name:  ${stringObjectName}['$generator.ConvertResourceKeyToScriptReference($col.getColResourceKey("ColumnHeading"))']  || '$col.ColumnHeading',
+	sortable: $generator.GetJavascriptBoolString($col.IsSortable),
+	#if($col.Width > -1) 
+	width: ${col.Width},
+	 #end
+	styles: 'width:auto;',
+    cellClasses: '${col.StyleScheme} #if (${col.Horizontalalignment} == "right") alignright #elseif (${col.Horizontalalignment} == "left") alignleft #elseif(${col.Horizontalalignment} == "center") aligncenter #end',
+	headerClasses: '#if (${col.Headeralignment} == "right") alignright #elseif (${col.Headeralignment} == "left") alignleft #elseif(${col.Headeralignment} == "center") aligncenter #end'
+#end
+#macro(doReadOnlyCondition $qfcontrol)
+	#if($qfcontrol.ReadOnlyCondition != "")
+	//Set to the value of the ReadOnlyCondition property
+		#if($qfcontrol.ReadOnlyCondition.ToLower() == "true" || $qfcontrol.ReadOnlyCondition.ToLower() == "false")
+          readOnly: ${qfcontrol.ReadOnlyCondition.ToLower()},
+		#else 
+          readOnly: ${qfcontrol.ReadOnlyCondition}(),
+		#end
+	#end
+#end
+#macro(doHideCondition $col)
+	#if($col.HideCondition != "")
+	    //Set to the value of the visibleCondition property
+	    hidden: ${col.HideCondition}(),
+	#end
+#end
+#macro(doEditableField $col)
+{
+	#doDefaultColParts($col), 
+	defaultValue: '', 
+	editable: $generator.GetJavascriptBoolString(${col.IsEditable})
+}
+#end
+#macro(doLookupCol $col)
+{
+	#doDefaultColParts($col),  
+	editable: $generator.GetJavascriptBoolString(${col.IsEditable}),
+	type: Sage.UI.Columns.Lookup,
+	lookupOptions: {
+		field: '$col.LookupDisplayProperty',
+		seedOnRowEntity: $generator.GetJavascriptBoolString(${col.SeedOnRowEntity}),
+		seedOnRelatedEntity: '$col.SeedOnRelatedEntity',
+		returnObject: #if($col.LookupBindingMode == "Object")true #else false #end,
+		displayMode: '$col.LookupDisplayMode'
+	},
+	lookupStructure: [{
+            cells: [{
+		     name: '$col.LookupDisplayProperty',
+		     field: '$col.LookupDisplayProperty'
+		 }]
+    }],
+	lookupStoreOptions: {		
+        resourceKind: #if ($col.ResourceKind == "")'$generator.GetSDataPathName(${col.DataField})' #else '$col.ResourceKind' #end
+     }
+}
+#end
+#macro(doCurrencyCol $col)
+{
+	#doDefaultColParts($col),
+	editable: $generator.GetJavascriptBoolString(${col.IsEditable}),
+	type: Sage.UI.Columns.Currency,
+	constraints: { #if($col.DecimalDigits != "-1") places: ${col.DecimalDigits} #else places: Sys.CultureInfo.CurrentCulture.numberFormat.CurrencyDecimalDigits #end },  
+
+	## TODO: Uncomment this after Exchange Rate Type enum has been updated
+	## exchangeRateType: #if ($col.ExchangeRateType == "") 'EntityRate' #else '$col.ExchangeRateType' #end,
+	exchangeRateType: #if ($col.ExchangeRateType == "OpportunityRate" || $col.ExchangeRateType == "SalesOrderRate") 'EntityRate' #else '$col.ExchangeRateType' #end,
+	displayCurrencyCode: $generator.GetJavascriptBoolString(${col.DisplayCurrencyCode}),
+	#if ($col.ExchangeRate != "") 
+    exchangeRateField: '$col.ExchangeRate', 
+	#end
+	#if ($col.CurrentCode != "") 
+    exchangeRateCodeField: '$col.CurrentCode', 
+	#end
+    displayMode: '$col.CurrencyDisplayMode',
+    multiCurrency: isMultiCurrencyEnabled()	 //TODO: Move this method to Sage.IntegrationContractService.isMultiCurrencyEnabled()
+}
+#end
+#macro(doLinkCol $col)
+{ 
+    #doDefaultColParts($col)  
+    ,type: Sage.UI.Columns.SlxLink
+    ,editable: false
+#if($col.AppliedSecurity != "")
+    ,appliedSecurity: '$col.AppliedSecurity'
+#end
+#if($col.Target != "")
+    ,target: '$col.Target'
+#end
+#if($col.EntityTypeName != "")
+    ,pageName: '$col.EntityTypeName'
+    ,idField: '$col.EntityIdField.Replace("Id", "$key")'
+#elseif($col.DestinationFormatString != "")
+    ,urlFields: [$col.DestinationBindFields]
+    ,urlFormatString: ${stringObjectName}['$generator.ConvertResourceKeyToScriptReference($col.getColResourceKey("DestinationFormatString"))']  || '$col.DestinationFormatString'
+#elseif($col.Destination != "")
+    ,urlFields: []
+    ,urlFormatString: '$col.Destination'
+#end ## different linking types...
+}
+#end
+#macro(doEditCol $col)
+{
+    #if($col.DialogSpecs.SmartPart != "")
+		#doDefaultColParts($col),
+	   	type: Sage.UI.Columns.SlxEdit,
+		cellValue: ${stringObjectName}['$generator.ConvertResourceKeyToScriptReference($col.getColResourceKey("Text"))']  || '$col.Text',
+		entityType: '${col.DialogSpecs.GetFullyQualifiedEntityType()}',
+		smartPart: '${col.DialogSpecs.SmartPart}',
+		dialogTitle: ${stringObjectName}['${col.DialogSpecs.ResourceKey}.DialogTitleOverride'] || '${col.DialogSpecs.TitleOverride}',
+		isCentered: #if($col.DialogSpecs.CenterDialog == "True")true #else false #end,
+		dialogTop: ${col.DialogSpecs.Top},
+		dialogLeft: ${col.DialogSpecs.Left},
+		dialogHeight: ${col.DialogSpecs.Height},
+		dialogWidth: ${col.DialogSpecs.Width},
+    	formObjectName: '${pagegenerator.FormScriptObjectName}'
+    	#if($col.AppliedSecurity != "")
+			,appliedSecurity: '$col.AppliedSecurity'
+    	#end
+    #end
+}
+#end
+#macro(doCheckBoxCol $col)
+{
+	#doDefaultColParts($col),
+	editable: $generator.GetJavascriptBoolString(${col.IsEditable}),
+	type: dojox.grid.cells.Bool,
+	//Formatter will be run if editable is false.
+	formatter: function (value, rowIdx, cel) {
+		var checkbox = (value === true) ? '<input type="checkbox" checked="checked" disabled="disabled" />'
+			: '<input type="checkbox" disabled="disabled" />';
+		return checkbox;
+    }
+}
+#end
+#macro(doNumericCol $col)
+{
+	#doDefaultColParts($col),
+	editable: $generator.GetJavascriptBoolString(${col.IsEditable}),
+	type: Sage.UI.Columns.Numeric,
+    constraints: { #if($col.DecimalDigits.Strict == "True") places: #else maxPlaces: #end #if($col.DecimalDigits.DecimalDigits != "-1") ${col.DecimalDigits.DecimalDigits} , #else Sys.CultureInfo.CurrentCulture.numberFormat.NumberDecimalDigits , #end round: -1 },  
+	formatType: '${col.FormatType}'
+}
+#end
+## ----------- Tool macros -----------------------------------------------
+#macro(doBaseTool $tool)
+  id : '$tool.Name',
+  icon : #if($tool.Image == "")'images/icons/no_Icon_16x16_x.gif',#else'$generator.getImageResourceURL( $tool.Image )',#end
+  'alternateText' : ${stringObjectName}['$generator.ConvertResourceKeyToScriptReference(${tool.getResourceKey("ToolTip")})'] || '$tool.ToolTip',
+  #if($tool.StyleScheme != "")'class': '$tool.StyleScheme',#end
+  #if($tool.AppliedSecurity != "") appliedSecurity : '$tool.AppliedSecurity',#end
+#end
+#macro(doCustomBtn $tool)
+{
+  #doBaseTool($tool)
+  'handler' : $tool.OnClick
+}
+#end
+#macro(doAddBtn $tool) 
+{
+  #doBaseTool($tool)
+  'handler' : function() { 
+       this.addNew({
+           scope: this,
+           onComplete: function(item) {
+#if ($tool.OnClick != "")
+               var customAction = ${tool.OnClick};
+               customAction(item);
+#end
+               this.store.saveNewEntity(item, function(entity) { grid._refresh(); }, function() { }, this );
+           }
+       }) }
+}
+#end
+#macro(doCancelBtn $tool)
+{
+  #doBaseTool($tool)
+  'handler' : function() { this.cancelChanges(); }
+}
+#end
+#macro(doDeleteBtn $tool)
+{
+  #doBaseTool($tool)
+  'handler' : function() { this.deleteSelected($tool.OnClick); }
+}
+#end
+#macro(doSaveBtn $tool)
+{
+  #doBaseTool($tool)
+ 'handler' : function() { this.saveChanges($tool.OnClick); }
+}
+#end
+#macro(doAddRelationBtn $tool)
+{
+  type : 'Sage.UI.SDataLookup',
+  controlConfig : $pagegenerator.parseControl($tool.LookupButton)
+}
+#end
+## ----------- Actual grid start -----------------------------------------------
+$pagegenerator.AddToInitializationScript("${pagegenerator.FormScriptObjectName}.makeGrid(runtimeConfig);")
+makeGrid : function(runtimeConfig) {
+    dojo.require('Sage.UI.SLXTabGrid');
+
+    if (typeof $stringObjectName === 'undefined') {
+        $stringObjectName = {};
+    }
+
+
+#if($qfcontrol.FeedCategory == "Proxy")
+    dojo.require('Sage.Data.ProxySDataStore');
+#end    
+    var options = {		
+		#if($qfcontrol.AppliedSecurity != "")
+        appliedSecurity : '${qfcontrol.AppliedSecurity}', 
+		#end
+        context: runtimeConfig,		
+		#if($qfcontrol.EmptyTableRowText != "") 
+        noDataMessage: ${stringObjectName}['$generator.ConvertResourceKeyToScriptReference("${qfcontrol.ControlId}.EmptyTableRowText")']  ||  '${qfcontrol.EmptyTableRowText}', 
+		#end
+        #doReadOnlyCondition($qfcontrol)
+        columns: [
+    {
+        field: '$key',
+        editable: false,
+        hidden: true,
+        id: 'id',
+        formatter: function (value, rowIdx, cel) {
+            var insertId = [cel.grid.id, '-row', rowIdx].join('');
+            var id = (Sage.Utility.getModeId() === 'insert') ? insertId : value;
+            var anchor = ['<div id=', id, ' >', id, '</ div>'].join('');
+            return anchor;
+        }
+    },
+#set ($comma = "")
+#foreach($column in $qfcontrol.Columns)
+$comma
+#if($column.ColumnType == "EditableField")#doEditableField($column)
+#elseif($column.ColumnType == "Link")#doLinkCol($column)
+#elseif($column.ColumnType == "Currency")#doCurrencyCol($column)
+#elseif($column.ColumnType == "Lookup")#doLookupCol($column)
+#elseif($column.ColumnType == "Edit")#doEditCol($column)
+#elseif($column.ColumnType == "CheckBox")#doCheckBoxCol($column)
+#elseif($column.ColumnType == "Numeric")#doNumericCol($column)
+#end  ##ColumnType checking
+#set ($comma = ",")
+	#if($column.ColumnType == "Currency")
+		## TODO: Uncomment this condition when the EntityRateType enum has been updated		
+		##$qfcontrol.SelectUtil.Clear()
+		## #if($column.ExchangeRateType == "EntityRate")
+		#if($column.ExchangeRate != "")
+			## The String Collection Add method returns the index.  Set to a garbage var so it doesn't write to the output.		
+			#if (!$qfcontrol.SelectUtil.Contains("$column.ExchangeRate")) #set ($garbage = $qfcontrol.SelectUtil.Add("$column.ExchangeRate")) #end
+			#if (!$qfcontrol.SelectUtil.Contains("$column.CurrentCode")) #set ($garbage = $qfcontrol.SelectUtil.Add("$column.CurrentCode")) #end
+		#end
+	#end
+#end  ## foreach
+        ],
+#if($qfcontrol.FeedCategory == "Proxy")
+        store : new Sage.Data.ProxySDataStore({
+            service : Sage.Utility.getSDataService('proxy', true),
+            resourceKind: '${qfcontrol.ResourceKind.Name}',
+#if($qfcontrol.ResourceKind.GetPredicate != "")
+            getResourcePredicate: ${qfcontrol.ResourceKind.GetPredicate},
+#end
+            getAppId: ${qfcontrol.OnGetMappingId},
+            include: [${qfcontrol.StringsToQuotedArray($qfcontrol.Include)}],
+            select: [${qfcontrol.StringsToQuotedArray($qfcontrol.Select)}],
+            pathSegments: [
+#set ($comma = "")
+#foreach($seg in $qfcontrol.PathSegments)
+                $comma {
+                    'text' : '$seg.Name'
+#if($seg.GetPredicate != "")
+                    ,'getPredicate' : $seg.GetPredicate
+#end ##if
+                }
+#set ($comma = ",")
+#end  ##foreach
+            ]
+        }),
+#else
+        storeOptions: {
+            resourceKind: '$qfcontrol.ResourceKind',
+#if (${qfcontrol.ParentRelationshipPropertyName} != "")
+            newItemParentReferenceProperty: '${qfcontrol.ParentRelationshipPropertyName}',
+#end
+            include: [${qfcontrol.StringsToQuotedArray($qfcontrol.Include)}],
+## Assemble the Select criteria from the Select property and any controls requiring additional fields			
+#if ($qfcontrol.Select.Count > 0)
+	#foreach($item in $qfcontrol.Select)
+## The String Collection Add method returns the index.  Set to a garbage var so it doesn't write to the output.
+#if (!$qfcontrol.SelectUtil.Contains("$item")) #set ($garbage = $qfcontrol.SelectUtil.Add("$item")) #end		
+	#end ##foreach
+#end 
+select: [${qfcontrol.StringsToQuotedArray($qfcontrol.SelectUtil)}],
+	    //The .net vehicle to store grid data on postback
+            dataCarrierId: '${pagegenerator.FormName}${qfcontrol.ControlId}_DataCarrier'
+        },
+#end
+        tools: [
+#set ($comma = "")
+#foreach($tool in $qfcontrol.Tools)
+$comma
+#if($tool.Name == "Add")#doAddBtn($tool)
+#elseif($tool.Name == "Delete")#doDeleteBtn($tool)
+#elseif($tool.Name == "Save")#doSaveBtn($tool)
+#elseif($tool.Name == "Cancel")#doCancelBtn($tool)
+#elseif($tool.Name == "Relate")#doAddRelationBtn($tool)
+#else #doCustomBtn($tool)
+#end  ##button types
+#set ($comma = ",")
+#end ##foreach
+        ],
+#if($qfcontrol.OnDataChange != "")      
+        onDataChange : ${qfcontrol.OnDataChange},
+#end
+#if($qfcontrol.ConditionalWhere != "")
+        contextualCondition: ${qfcontrol.ConditionalWhere},
+#elseif($qfcontrol.ParentRelationshipPropertyName != "")
+        contextualCondition: function() { return '${qfcontrol.ParentRelationshipPropertyName}.Id eq "' + Sage.Utility.getCurrentEntityId() + '"'; },
+#end
+        id : '${pagegenerator.FormName}${qfcontrol.ControlId}',
+        tabId : '${pagegenerator.FormName}',
+        gridNodeId: '${pagegenerator.FormName}${qfcontrol.ControlId}_Grid',
+        rowsPerPage: ${qfcontrol.PageSize},
+        singleClickEdit: true
+    };
+
+    var grid = new Sage.UI.SLXTabGrid(options);
+    window.setTimeout(function () { grid.startup(); }, 1);
+#if (${qfcontrol.OnAdd} != "")
+    grid.store.onNew = ${qfcontrol.OnAdd} ;
+#end
+## if it was a relate tool, we might need to add more script...
+#foreach($tool in $qfcontrol.Tools)
+#if($tool.Name == 'Relate')
+ #if(${tool.LookupButton.OnSelection} == "")
+    var lup = dijit.byId('${tool.LookupButton.ControlId}');
+    if (lup) {
+      lup.doSelected = function (items) {
+        var grid = dijit.byId('${pagegenerator.FormName}${qfcontrol.ControlId}');
+        if (grid && grid.store) {
+          grid.store.newItem({
+            onComplete: function (entityTemplate) {
+			  var arrItems = [];
+              var currentCount = 0;
+              for (var i = 0; i < items.length; i++) {
+                var newEntity = {};
+                var item = items[i];
+				
+                //Insert Mode check
+                if (Sage.Utility.getModeId() !== 'insert') {               
+					#if (${qfcontrol.ParentRelationshipPropertyName} != "")
+					entityTemplate.${qfcontrol.ParentRelationshipPropertyName}  = { $key: Sage.Utility.getCurrentEntityId() }; 
+                #end
+                }
+                //Set item before destroying the key
+				entityTemplate.${qfcontrol.ChildRelationshipPropertyName} = item;
+                //Clean up the item for any values not to be extended to the new entity.
+                var temp = {};
+                dojo.mixin(temp, item);
+                delete temp.$key;
+                delete temp.$name;
+                delete temp.$url;
+                Sage.Utility.extend(true, newEntity, entityTemplate, temp);
+
+				## -- TODO: A property should be added to allow code to be processed on each item --
+				## #if(${tool.LookupButton.OnSelection} != "")
+				##	 ${tool.LookupButton.OnSelection};
+				## #end
+
+                grid.store.onNew(newEntity);
+				arrItems.push(newEntity);
+                currentCount++;
+             }
+             if (currentCount === items.length) {
+				grid.createItems(arrItems, function () { });
+             }		  
+            },
+            scope: this
+          });
+        }
+      };
+    }
+ #end
+#end ##if tool is Relate
+#end ##foreach
+
+}

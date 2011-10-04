@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="5f254e84-b245-4a12-901f-0dd6ffeb9bb1" lastModifiedUtc="2010-09-27T20:21:05.1143518Z" manageSchema="false" tableName="SLXLOGITEM" name="SlxLogItem" displayPropertyId="7e89a194-0f5d-4ef5-a38f-172f5ebca7a7" isExtension="false" audited="false" generateSDataFeed="true" sDataPathName="slxLogItems" lastUpdatedPropertyId="c43b692c-73ca-4bec-94a8-fe64cf5dbccb" onBeforeInsertMethodId="c959f9da-1a11-4ca2-b8ad-96b7d77a265f" onAfterInsertMethodId="45525ab1-ea8c-43b6-9faa-05b59f299c5b" onBeforeUpdateMethodId="21206d6c-b10e-4525-a911-8f79526ba824" onAfterUpdateMethodId="dd218427-8f9b-4596-b89f-538893f0cf20" onBeforeDeleteMethodId="f9befc6c-34e8-4399-a5fc-955b90db5340" onAfterDeleteMethodId="3b9b8e64-f81f-469b-bdcf-ed34873da9ad" onCreateId="bab8daa5-4a35-4737-90ee-8276f732a419">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
+      <extender guid="1589723d-0536-4bf3-bdd7-3f6f7fe165d0">
+        <OrmEntityMetadataExtension>
+          <IsHistoryTable>false</IsHistoryTable>
+        </OrmEntityMetadataExtension>
+      </extender>
+    </extendee>
+  </ExtendedPropertiesCollection>
+  <description>A log table to hold log4net info, debug, and error messages.
+Is used by Sync to view all status and error message for a given sync.</description>
+  <keyProperties>
+    <keyReference id="22c6331f-5923-4184-b8f6-04b5ab1fea20" ordinalPosition="1" />
+  </keyProperties>
+  <properties>
+    <property xsi:type="OrmFieldProperty" id="22c6331f-5923-4184-b8f6-04b5ab1fea20" lastModifiedUtc="2010-10-01T16:53:45.0164912Z" name="SlxLogItemId" description="The primary key" audited="false" isNullable="false" include="false" columnName="SLXLOGITEMID" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="504f4733-0c22-4405-89af-23e88accded0" lastModifiedUtc="2010-08-02T15:20:41.8452948Z" name="EntityType" description="The reference type associated with the EntityId column." audited="false" columnName="ENTITYTYPE" maxLength="32" precision="0" scale="0" ordinal="1" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>32</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="24ad59f5-8d57-46c3-bbcc-9f1e428a2902" lastModifiedUtc="2010-08-02T15:20:44.8452948Z" name="EntityId" description="A foreign key value to the reference table specified by the EntityType column." audited="false" columnName="ENTITYID" maxLength="12" precision="0" scale="0" ordinal="2" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="d8d315d8-6809-4184-b2df-7d1d9b1942a0" lastModifiedUtc="2010-09-29T21:29:10.5626Z" name="LogLevel" description="Off = 2147483647, Emergency = 120000, Fatal = 110000, Alert = 100000, Critical = 90000, Severe = 80000, Error = 70000, Warn = 60000, Notice = 50000, Info = 40000, Debug = 30000, Fine = 30000, Trace = 20000, Finer = 20000, Verbose = 10000, Finest = 10000, All = -2147483648" audited="false" columnName="LOGLEVEL" maxLength="0" precision="10" scale="0" ordinal="3" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>24</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="7e89a194-0f5d-4ef5-a38f-172f5ebca7a7" lastModifiedUtc="2010-08-02T15:20:48.8032948Z" name="LogMessage" description="The status or error message represented by the log level." audited="false" columnName="LOGMESSAGE" maxLength="2000" precision="0" scale="0" ordinal="4" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>2000</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="b401425b-1241-4539-9931-ddb5c14de0d4" lastModifiedUtc="2010-08-02T15:20:51.4342948Z" name="CallStack" description="The current call stack for an error" audited="false" columnName="CALLSTACK" maxLength="2147483647" precision="0" scale="0" ordinal="5" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="f4ca6023-9f5f-4e41-8571-50ba94e8f233">
+        <LongTextDataType>
+          <Length>2147483647</Length>
+        </LongTextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="3dcb591a-5fd1-48a5-a7ea-d4d84ccb75e4" lastModifiedUtc="2010-08-02T15:20:57.2282948Z" name="CreateUser" audited="false" columnName="CREATEUSER" maxLength="12" precision="0" scale="0" ordinal="6" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="445f8cbd-0ccb-417a-8632-0d4b3eabccea" lastModifiedUtc="2010-08-02T15:21:00.8432948Z" name="CreateDate" audited="false" columnName="CREATEDATE" maxLength="0" precision="0" scale="0" ordinal="7" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
+        <DateTimeDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="9d440da4-1a5d-4800-90b6-9236fec2146d" lastModifiedUtc="2010-08-02T15:21:05.2762948Z" name="ModifyUser" audited="false" columnName="MODIFYUSER" maxLength="12" precision="0" scale="0" ordinal="8" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="c43b692c-73ca-4bec-94a8-fe64cf5dbccb" lastModifiedUtc="2010-08-02T15:21:09.7422948Z" name="ModifyDate" audited="false" columnName="MODIFYDATE" maxLength="0" precision="0" scale="0" ordinal="9" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
+        <DateTimeDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="72270296-1111-421a-bbcd-7bd1917b5692" lastModifiedUtc="2010-09-24T22:50:18.6829377Z" name="ResourceKind" description="Optional Property to hold the ResourceKind where appropriate" audited="false" columnName="RESOURCEKIND" maxLength="64" precision="0" scale="0" ordinal="10" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>64</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+  </properties>
+</entity>

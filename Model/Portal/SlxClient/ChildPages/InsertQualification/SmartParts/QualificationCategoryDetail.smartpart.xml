@@ -5,6 +5,8 @@
   <SmartPart>\Entity Model\SalesLogix Application Entities\QualificationCategory\QuickForms\QualificationCategoryDetail.main.quickform.xml</SmartPart>
   <TargetWorkspace>MainContent</TargetWorkspace>
   <ShowInMode>Insert</ShowInMode>
-  <Properties />
+  <Properties>
+    <Property Name="HelpTopic" TypeConverter="">qualificationcategorymanage</Property>
+  </Properties>
   <AllowRoles />
 </SmartPartMapping>

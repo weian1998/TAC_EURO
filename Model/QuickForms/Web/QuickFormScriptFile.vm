@@ -1,0 +1,14 @@
+Sage.namespace("Sage.UI.Forms");
+${generator.FormScriptObjectName} = {
+
+#foreach($control in $controls)
+  $generator.ParseControl($control)
+  ,
+#end
+
+    init : function(runtimeConfig) {
+        $generator.GetInitializationScript()
+    }
+}
+if (typeof Sys !== 'undefined')
+    Sys.Application.notifyScriptLoaded();

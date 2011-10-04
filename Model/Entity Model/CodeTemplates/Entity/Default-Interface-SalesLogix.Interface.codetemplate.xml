@@ -1,11 +1,13 @@
 <?xml version="1.0"?>
 <codeTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="5e8b7df7-0ec3-46b3-b8f4-f7bde7d5a6a3" name="Default-Interface-SalesLogix" templateType="Interface" templateEngineType="T4">
   <template><![CDATA[<#@ template language="C#v3.5" #>
+<#@ assembly name="System.Core.dll" #>
 <#@ assembly name="Microsoft.Unity.dll" #>
 <#@ assembly name="Sage.Platform.dll" #>
 <#@ assembly name="Sage.Platform.Orm.CodeGen.dll" #>
 <#@ assembly name="Sage.Platform.Projects.dll" #>
 <#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Linq" #>
 <#@ import namespace="Microsoft.Practices.Unity" #>
 <#@ import namespace="Sage.Platform.Orm.CodeGen" #>
 <#@ import namespace="Sage.Platform.Orm.DataTypes" #>
@@ -37,14 +39,20 @@ var entity = (OrmEntity) Context["entity"];
 var generator = (EntityInterfaceGenerator) Context["generator"];
 #>
 <#
+var parents = entity.ParentEntities.Where(relation => relation.ChildProperty.Include && IsEntityIncluded(relation.ParentEntity)).ToList();
+var children = entity.ChildEntities.Where(relation => relation.ParentProperty.Include && IsEntityIncluded(relation.ChildEntity)).ToList();
+var extenders = entity.ExtensionEntities.Where(extender => IsEntityIncluded(extender)).ToList();
+var properties = OrmEntity.GetIncludedProperties(entity, true).OfType<OrmFieldProperty>().ToList();
+var customProperties = generator.GetIncludedCustomProperties(entity).ToList();
+
 //capture some global variables of entity state
 var isHistory = (bool) tools.ExtendedProperty(entity, "{1589723D-0536-4BF3-BDD7-3F6F7FE165D0}", "IsHistoryTable");
 string foreignPropertyName = null;
 var isRelationProperty = false;
 if (isHistory) {
-	foreignPropertyName = (string) tools.ExtendedProperty(entity, "{1589723D-0536-4BF3-BDD7-3F6F7FE165D0}", "ForeignIdProperty");
-	var foreignProperty = entity.GetPropertyByPropertyName(foreignPropertyName);
-	isRelationProperty = (foreignProperty.GetType().Name == "OrmRelationProperty");
+    foreignPropertyName = (string) tools.ExtendedProperty(entity, "{1589723D-0536-4BF3-BDD7-3F6F7FE165D0}", "ForeignIdProperty");
+    var foreignProperty = entity.GetPropertyByPropertyName(foreignPropertyName);
+    isRelationProperty = (foreignProperty.GetType().Name == "OrmRelationProperty");
 }
 var historyTypeName = tools.ExtendedProperty(entity, "{1589723D-0536-4BF3-BDD7-3F6F7FE165D0}", "HistoryTypeName");
 var hasDisplayProperty = (entity.DisplayProperty != null);
@@ -103,60 +111,56 @@ namespace Sage.Entity.Interfaces
 <# } #>
         #endregion Key Properties
 
-<# foreach (var prop in generator.GetIncludedProperties(entity, true)) { #>
-<#  var fieldProp = prop as OrmFieldProperty; #>
-<#  if (fieldProp != null) { #>
+<# foreach (var prop in properties) { #>
         <#= generator.GetTypeConverterAttribute(prop) #>
-<#   if (entity.LocalResources.ContainsResource(prop.DisplayNameKey)) { #>
+<#  if (entity.LocalResources.ContainsResource(prop.DisplayNameKey)) { #>
         [Properties.SRDisplayName("<#= prop.DisplayNameKey #>")]
-<#   } #>
-        [Properties.ExtendedTypeInformationAttribute("<#= prop.Entity.Name #>_<#= prop.PropertyName #>", "<#= generator.GetDataTypeName(prop) #>")]
-        [Field("<#= fieldProp.ColumnName #>")]
-        <#= generator.ToClrType(prop) #> <#= prop.PropertyName #> { get;<# if (!fieldProp.IsReadOnly) { #> set;<# } #> }
 <#  } #>
+        [Properties.ExtendedTypeInformationAttribute("<#= prop.Entity.Name #>_<#= prop.PropertyName #>", "<#= generator.GetDataTypeName(prop) #>")]
+        [Field("<#= prop.ColumnName #>")]
+        <#= generator.ToClrType(prop) #> <#= prop.PropertyName #> { get;<# if (!prop.IsReadOnly) { #> set;<# } #> }
 <# } #>
 
+<# if (customProperties.Count > 0) { #>
         #region Custom Properties
-<# foreach (var prop in generator.GetIncludedCustomProperties(entity)) { #>
+<#  foreach (var prop in customProperties) { #>
         <#= prop.ReturnType #> <#= prop.PropertyName #> {<# if (prop.HasGet) { #> get;<# } #> <# if (prop.HasSet) { #> set;<# } #> }
-<# } #>
+<#  } #>
         #endregion Custom Properties
+<# } #>
 
+<# if (parents.Count > 0) { #>
         #region M:1 Relationships
-<# foreach (var relation in entity.ParentEntities) { #>
-<#  if (relation.ChildProperty.Include) { #>
+<#  foreach (var relation in parents) { #>
 <#   if (entity.LocalResources.ContainsResource(relation.ChildProperty.DisplayNameKey)) { #>
         [Properties.SRDisplayName("<#= relation.ChildProperty.DisplayNameKey #>")]
 <#   } #>
         [BelongsTo]
         <#= relation.ParentEntity.InterfaceName #> <#= relation.ChildProperty.PropertyName #> { get; set; }
-
 <#  } #>
-<# } #>
         #endregion M:1 Relationships
+<# } #>
 
-<# if (entity.ChildEntities.Count > 0) { #>
+<# if (children.Count > 0) { #>
         #region 1:M Relationships
-<#  foreach (var relation in entity.ChildEntities) { #>
-<#   if (relation.ParentProperty.Include) { #>
-<#    if (entity.LocalResources.ContainsResource(relation.ParentProperty.DisplayNameKey)) { #>
+<#  foreach (var relation in children) { #>
+<#   if (entity.LocalResources.ContainsResource(relation.ParentProperty.DisplayNameKey)) { #>
         [Properties.SRDisplayName("<#= relation.ParentProperty.DisplayNameKey #>")]
-<#    } #>
-<#    if (relation.Cardinality == "1:M") { #>
+<#   } #>
+<#   if (relation.Cardinality == "1:M") { #>
         ICollection<<#= relation.ChildEntity.InterfaceName #>> <#= relation.ParentProperty.PropertyName #> { get; }
-<#    } else if (relation.Cardinality == "M:1") { #>
+<#   } else if (relation.Cardinality == "M:1") { #>
         [BelongsTo]
-<#     if (relation.ParentProperty.IsNullable) { #>
+<#    if (relation.ParentProperty.IsNullable) { #>
         [IsNullable]
-<#     } #>
-        <#= relation.ChildEntity.InterfaceName #> <#= relation.ParentProperty.PropertyName #> { get; set; }
 <#    } #>
+        <#= relation.ChildEntity.InterfaceName #> <#= relation.ParentProperty.PropertyName #> { get; set; }
 <#   } #>
 <#  } #>
         #endregion 1:M Relationships
 <# } #>
 
-<# if (entity.IsExtension) { #>
+<# if (entity.IsExtension && IsEntityIncluded(entity.ExtendedEntity)) { #>
         #region 1:1 Parent Entity Extension
 
         [OneToOne]
@@ -165,9 +169,9 @@ namespace Sage.Entity.Interfaces
         #endregion 1:1 Parent Entity Extension
 <# } #>
 
-<# if (entity.ExtensionEntities.Count > 0) { #>
+<# if (extenders.Count > 0) { #>
         #region Child extensions
-<#  foreach (var child in entity.ExtensionEntities) { #>
+<#  foreach (var child in extenders) { #>
         [OneToOne]
         <#= child.InterfaceName #> <#= child.Name #> { get; set; }
 <#  } #>
@@ -209,6 +213,10 @@ namespace Sage.Entity.Interfaces
 <#+
 [Dependency]
 public IDictionary Context { get; set; }
-#>]]></template>
+#>
+<#+ private static bool IsEntityIncluded(OrmEntity entity)
+    {
+        return entity.Package.Include && entity.Generate && !entity.IsDynamic;
+    } #>]]></template>
   <description>Default SalesLogix entity interface template</description>
 </codeTemplate>

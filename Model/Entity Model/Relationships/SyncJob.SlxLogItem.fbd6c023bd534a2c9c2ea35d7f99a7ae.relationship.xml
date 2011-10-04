@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="fbd6c023-bd53-4a2c-9c2e-a35d7f99a7ae" lastModifiedUtc="2010-07-23T22:06:10.6264295Z" parentEntityId="f20cb75d-032b-46b4-a54c-970697216936" childEntityId="5f254e84-b245-4a12-901f-0dd6ffeb9bb1">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="d18c1c0a-184a-47d3-b433-81a971b1accb" lastModifiedUtc="2010-07-23T22:05:42.9964295Z" name="SlxLogItems" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="9ff1db5c-da22-4f42-aedf-3ae3e6818e80" lastModifiedUtc="2010-07-23T22:06:01.6624295Z" name="SyncJob" audited="false" include="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="923c0258-e6b8-4a6c-89c3-c883fceb2079" parentPropertyId="a74d67cd-eda4-4513-8746-045304d5296f" childPropertyId="24ad59f5-8d57-46c3-bbcc-9f1e428a2902" ordinal="0" />
+  </column>
+</relationship>

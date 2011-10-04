@@ -392,7 +392,7 @@ public partial class AddUsers : Sage.Platform.WebPortal.SmartParts.SmartPartInfo
         options.UseCalendarProfile = chkCalender.Checked;
         options.UseClientOptionsProfile = chkClientOptions.Checked;
         options.UseSecurityProfile = chkSecurity.Checked;
-        //options.ServiceAndSupport =  chkServiceAndSupport.Checked;
+        options.UseSupportProfile = chkServiceAndSupport.Checked;
         options.UseTeamsProfile = chkTeams.Checked;
         return options;
     }

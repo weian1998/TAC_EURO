@@ -2,8 +2,9 @@
 <MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="3920b10c-6fec-428a-918a-4cbd7bfb9265">
   <ItemId>menuItemNewproduct</ItemId>
   <NavUrl>InsertProduct.aspx?modeid=Insert</NavUrl>
-  <LargeImageUrl />
-  <SmallImageUrl />
+  <LargeImageUrl>[Localization!Global_Images:product_24x24_new]</LargeImageUrl>
+  <SmallImageUrl>[Localization!Global_Images:product_16x16_new]</SmallImageUrl>
   <ContextMenuId />
   <Target />
+  <AppliedSecurity>Entities/Product/Add</AppliedSecurity>
 </MenuDropDownItem>

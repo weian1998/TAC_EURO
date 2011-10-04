@@ -30,6 +30,9 @@ public partial class SmartParts_Activity_AddMembers : EntityBoundSmartPartInfoPr
 
     protected override void OnFormBound()
     {
+        AvailableMembers.Attributes.Add("ondblclick", string.Format("var btn = document.getElementById('{0}'); if (btn) {{ btn.click(); }}", Add.ClientID));
+        SelectedMembers.Attributes.Add("ondblclick", string.Format("var btn = document.getElementById('{0}'); if (btn) {{ btn.click(); }}", Remove.ClientID));
+
         base.OnFormBound();
 
         if (IsActivating)

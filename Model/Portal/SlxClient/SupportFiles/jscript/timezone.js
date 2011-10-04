@@ -46,7 +46,7 @@ function GetTimeZoneInfo()
 	var tzValues;
 
 	// start of routine
-	var iYear = new Date().getYear();
+	var iYear = new Date().getFullYear();
 	//var iYear = 2004;
 	var aDateTest1 = new Date(iYear, 0, 1);
 	var aDateTest2 = new Date(iYear, 7, 1);
@@ -189,7 +189,7 @@ function GetTimeZoneInfo()
 
 	function getLastDayofYear(aDate)
 	{
-		var aDate2 = new Date(aDate.getYear(), aDate.getMonth() < 5 ? 1 : 5, 1);
+		var aDate2 = new Date(aDate.getFullYear(), aDate.getMonth() < 5 ? 1 : 5, 1);
 
 		var iOldOfs = aDate2.getTimezoneOffset();
 

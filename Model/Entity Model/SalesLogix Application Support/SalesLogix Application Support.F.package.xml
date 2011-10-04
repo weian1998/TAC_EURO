@@ -1,13 +1,12 @@
 <?xml version="1.0"?>
-<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="cd0abf67-c139-4647-8783-b9d4a16d2a66" name="SalesLogix Application Support" include="false">
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="cd0abf67-c139-4647-8783-b9d4a16d2a66" lastModifiedUtc="2010-08-31T03:47:35.260132Z" name="SalesLogix Application Support" include="false">
+  <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmPackage">
       <extender guid="77e6083e-e756-4ab9-a116-8db03cdc593f">
         <OrmPackageMetadataExtension>
-          <DefaultNamespace>Sage.SalesLogix</DefaultNamespace>
-          <AssemblyName>Sage.SalesLogix</AssemblyName>
-          <GenerateAssembly>true</GenerateAssembly>
-          <GenerateInterfaces>true</GenerateInterfaces>
+          <DefaultNamespace>Sage.SalesLogix.System.Entities</DefaultNamespace>
+          <AssemblyName>Sage.SalesLogix.System.Entities</AssemblyName>
           <InterfaceProjectGuid>a43a19a8-6a98-42fe-b7a9-c8a685d8d09b</InterfaceProjectGuid>
           <PersistenceProjectGuid>f2956d98-c71b-48f4-8ae8-af8d391b1cd9</PersistenceProjectGuid>
         </OrmPackageMetadataExtension>

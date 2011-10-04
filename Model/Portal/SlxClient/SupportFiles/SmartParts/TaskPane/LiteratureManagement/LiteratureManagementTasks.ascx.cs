@@ -5,38 +5,32 @@ using System.Data.OleDb;
 using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Sage.Entity.Interfaces;
+using Sage.Platform;
 using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
 using Sage.Platform.Data;
 using Sage.Platform.Security;
 using Sage.Platform.WebPortal.Services;
+using Sage.Platform.WebPortal.SmartParts;
+using Sage.SalesLogix.Activity;
 using Sage.SalesLogix.SelectionService;
 using Sage.SalesLogix.Web.SelectionService;
-using Sage.SalesLogix.Activity;
 
 public partial class SmartParts_TaskPane_LiteratureManagementTasks : UserControl, ISmartPartInfoProvider
 {
     #region Initialize Items
 
-    private IRoleSecurityService _roleSecurityService;
-
     [ServiceDependency]
-    public IRoleSecurityService RoleSecurityService
-    {
-        get { return _roleSecurityService; }
-        set { _roleSecurityService = value; }
-    }
-    private IWebDialogService _WebDialogService;
+    public IRoleSecurityService RoleSecurityService { get; set; }
+
     /// <summary>
     /// Gets or sets the dialog service.
     /// </summary>
     /// <value>The dialog service.</value>
     [ServiceDependency]
-    public IWebDialogService DialogService
-    {
-        get { return _WebDialogService; }
-        set { _WebDialogService = value; }
-    }
+    public IWebDialogService DialogService { get; set; }
+
     #endregion
 
     protected void Page_Load(object sender, EventArgs e)
@@ -60,7 +54,7 @@ public partial class SmartParts_TaskPane_LiteratureManagementTasks : UserControl
         {
             if (hfLastFulfilledIds.Value.Contains(id))
             {
-                var lit = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.ILitRequest>(id);
+                var lit = EntityFactory.GetById<ILitRequest>(id);
                 if (lit != null)
                 {
                     labelIds.Append(string.Format("{0},", lit.Contact.Id));
@@ -72,11 +66,12 @@ public partial class SmartParts_TaskPane_LiteratureManagementTasks : UserControl
         {
             string sPluginId = LabelsDropdown.SelectedValue;
             if (labelIds.ToString().EndsWith(",")) labelIds = labelIds.Remove(labelIds.Length - 1, 1);
-            ScriptManager.RegisterStartupScript(this, typeof(SmartParts_TaskPane_LiteratureManagementTasks), "printLabels", string.Format("PrintLabels('{0}', '{1}');", sPluginId, labelIds.ToString()), true);
+            ScriptManager.RegisterStartupScript(this, typeof(SmartParts_TaskPane_LiteratureManagementTasks), "printLabels", string.Format("PrintLabels('{0}', '{1}');", sPluginId, labelIds), true);
         }
         // this has to occur after the fulfillment is completed.  The status needs to be updated before refresh is called.
         ScriptManager.RegisterStartupScript(this, typeof(SmartParts_TaskPane_LiteratureManagementTasks), "refreshList", "RefreshList();", true);
     }
+
     protected void btnComplete_Click(object sender, EventArgs e)
     {
         string key = hfSelections.Value;
@@ -86,7 +81,7 @@ public partial class SmartParts_TaskPane_LiteratureManagementTasks : UserControl
         List<string> ids = selectionContext.GetSelectedIds();
         foreach (string id in ids)
         {
-            Sage.Entity.Interfaces.ILitRequest lit = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.ILitRequest>(id);
+            ILitRequest lit = EntityFactory.GetById<ILitRequest>(id);
 
             if (UserCalendar.CurrentUserCanEdit(lit.CreateUser))
                 lit.CompleteLitRequest();
@@ -98,9 +93,8 @@ public partial class SmartParts_TaskPane_LiteratureManagementTasks : UserControl
 
         if (!completeAll)
             DialogService.ShowMessage(GetLocalResourceObject("Err_Complete").ToString(), 70, 400);
-            
-
     }
+
     protected void btnReject_Click(object sender, EventArgs e)
     {
         string key = hfSelections.Value;
@@ -110,7 +104,7 @@ public partial class SmartParts_TaskPane_LiteratureManagementTasks : UserControl
         List<string> ids = selectionContext.GetSelectedIds();
         foreach (string id in ids)
         {
-            Sage.Entity.Interfaces.ILitRequest lit = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.ILitRequest>(id);
+            ILitRequest lit = EntityFactory.GetById<ILitRequest>(id);
 
             if (UserCalendar.CurrentUserCanEdit(lit.CreateUser))
                 lit.RejectLitRequest();
@@ -118,15 +112,15 @@ public partial class SmartParts_TaskPane_LiteratureManagementTasks : UserControl
                 completeAll = false;
         }
         // this has to occur after the fulfillment is completed.  The status needs to be updated before refresh is called.
-        ScriptManager.RegisterStartupScript(this, typeof(SmartParts_TaskPane_LiteratureManagementTasks), "refreshList", "RefreshList();", true);
+        ScriptManager.RegisterStartupScript(this, typeof (SmartParts_TaskPane_LiteratureManagementTasks), "refreshList", "RefreshList();", true);
 
         if (!completeAll)
-            DialogService.ShowMessage(GetLocalResourceObject("Err_Reject").ToString(), 70, 400);            
+            DialogService.ShowMessage(GetLocalResourceObject("Err_Reject").ToString(), 70, 400);
     }
 
     public ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
     {
-        Sage.Platform.WebPortal.SmartParts.ToolsSmartPartInfo tinfo = new Sage.Platform.WebPortal.SmartParts.ToolsSmartPartInfo();
+        ToolsSmartPartInfo tinfo = new ToolsSmartPartInfo();
         return tinfo;
     }
 
@@ -135,7 +129,7 @@ public partial class SmartParts_TaskPane_LiteratureManagementTasks : UserControl
         StringBuilder hql = new StringBuilder();
         hql.Append("SELECT PLUGINID, NAME, FAMILY, TYPE, USERID, CREATEDATE, LOCKED, LOCKEDID, DATA, VERSION, SYSTEM, ISPUBLIC, DESCRIPTION, DATACODE, BASEDON, ");
         hql.Append("TEMPLATE, AUTHOR, COMPANY, COMPANYVERSION, BASEDONCOMPANY, BASEDONCOMPANYVERSION, RELEASED, DEV, READONLY, INSTALLATIONDATE, ");
-        hql.Append("RELEASEDDATE, DISPLAYNAME, MODIFYDATE, MODIFYUSER, CREATEUSER FROM sysdba.PLUGIN WHERE (TYPE = 19) AND (FAMILY = 'LABELS') AND (DATACODE = 'CONTACT') ");
+        hql.Append("RELEASEDDATE, DISPLAYNAME, MODIFYDATE, MODIFYUSER, CREATEUSER FROM sysdba.PLUGIN WHERE (TYPE = 19) AND (UPPER(FAMILY) = 'LABELS') AND (UPPER(DATACODE) = 'CONTACT') ");
         hql.Append("ORDER BY NAME ASC");
 
         using (new SparseQueryScope())

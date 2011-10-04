@@ -14,6 +14,7 @@ using Sage.Platform.WebPortal.SmartParts;
 using Sage.Platform.WebPortal.Workspaces;
 using Sage.Platform.WebPortal.Workspaces.Tab;
 using Sage.SalesLogix.Activity;
+using System.Collections.Generic;
 
 public partial class SmartParts_ActWhatsNew_ActWhatsNew : UserControl, ISmartPartInfoProvider
 {
@@ -364,10 +365,16 @@ public partial class SmartParts_ActWhatsNew_ActWhatsNew : UserControl, ISmartPar
                 IWebDialogService dialogService = GetdialogService();
                 if (dialogService != null)
                 {
-                    dialogService.SetSpecs(200, 200, 200, 330, "EditRecurrence", "", true);
+                    dialogService.SetSpecs(200, 200, 250, 330, "EditRecurrence", "", true);
                     dialogService.EntityType = typeof(IActivity);
                     dialogService.EntityID = activityID;
                     dialogService.DialogParameters.Add("recurdate", hOccurrenceDate.Value);
+                    var appContext = ApplicationContext.Current.Services.Get<IContextService>();
+                    if (appContext != null) {
+                        var actParams = new Dictionary<string, string>();
+                        actParams.Add("recurdate", hOccurrenceDate.Value);
+                        appContext["ActivityParameters"] = actParams;
+                    }
                     dialogService.ShowDialog();
                 }
                 else
@@ -449,6 +456,11 @@ public partial class SmartParts_ActWhatsNew_ActWhatsNew : UserControl, ISmartPar
         tinfo.ImagePath = Page.ResolveClientUrl("~/images/icons/To_Do_24x24.gif");
 
         return tinfo;
+    }
+
+    protected bool IsTimeless(object val)
+    {
+        return System.Convert.ToBoolean(val);
     }
 
     #endregion

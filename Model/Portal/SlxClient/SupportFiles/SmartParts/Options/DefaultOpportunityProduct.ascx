@@ -146,13 +146,13 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Price" meta:resourceKey="TFPrice_rsc">
                             <ItemTemplate>
-                                <SalesLogix:Currency ID="curCalcPriceMC" runat="server" Text='<%# Eval("CalculatedPrice") %>' DisplayMode="AsText" ExchangeRateType="OpportunityRate"  DisplayCurrencyCode="true" />
+                                <SalesLogix:Currency ID="curCalcPriceMC" runat="server" Text='<%# Eval("CalculatedPrice") %>' DisplayMode="AsText" ExchangeRateType="EntityRate"  DisplayCurrencyCode="true" />
                             </ItemTemplate> 
                         </asp:TemplateField>
                         <asp:BoundField DataField="Quantity" HtmlEncode="False" HeaderStyle-Width="70px" HeaderText="Quantity" SortExpression="Quantity" meta:resourceKey="BFQuantity_rsc" />
                         <asp:TemplateField HeaderText="Extended Price" meta:resourceKey="TFExtendedPrice_rsc">
                             <ItemTemplate>
-                                <SalesLogix:Currency ID="Currency2" runat="server" Text='<%# Eval("ExtendedPrice") %>' DisplayMode="AsText" ExchangeRateType="OpportunityRate"  DisplayCurrencyCode="true" />
+                                <SalesLogix:Currency ID="Currency2" runat="server" Text='<%# Eval("ExtendedPrice") %>' DisplayMode="AsText" ExchangeRateType="EntityRate"  DisplayCurrencyCode="true" />
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField>

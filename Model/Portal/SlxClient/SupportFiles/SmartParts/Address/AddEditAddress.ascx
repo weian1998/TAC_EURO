@@ -130,8 +130,8 @@
     <tr>
         <td align="right">
             <div style="padding: 10px 10px 0px 10px;">
-                <asp:Button runat="server" ID="btnSave" CssClass="slxbutton" ToolTip="Save" meta:resourcekey="btnSave" />  
-                <asp:Button runat="server" ID="btnCancel" CssClass="slxbutton" ToolTip="Cancel" meta:resourcekey="btnCancel" />  
+                <asp:Button runat="server" ID="btnSave" CssClass="slxbutton" ToolTip="btnSave" meta:resourcekey="btnSave" />  
+                <asp:Button runat="server" ID="btnCancel" CssClass="slxbutton" ToolTip="btnCancel" meta:resourcekey="btnCancel" />  
             </div>
         </td>
     </tr>

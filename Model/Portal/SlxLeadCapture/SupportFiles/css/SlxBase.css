@@ -6,6 +6,15 @@
 	height: 100%;
 }
 
+body.claro  /* overrides dojo claro style from chanigng the fontsizes; 1-78565 */
+{
+	font-family: Tahoma,"Arial Unicode MS",Arial,Helvetica,Sans-Serif; 	
+	font-size: 13px;
+	color: #000000;
+	background:  url(../images/blue/BodyBackground.gif) repeat top left;
+	height: 100%;
+}
+
 select, 
 input, 
 textarea 
@@ -1288,3 +1297,8 @@ body.x-body-masked .address-dialog .x-window-mc,
 .x-tree-paging-inline {display: inline;white-space:nowrap;}
 .x-tbar-page-number {height: 16px !important;text-align:center;}
 /* end of ~/Libraries/ext/resources/css/paging-tree-loader.css     */
+
+.leftoffset14 
+{
+	margin-left: 14px;
+}

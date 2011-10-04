@@ -173,6 +173,12 @@ SELECT
 	vertical-align :  middle;
 }
 
+.bottomformtable 
+{
+	margin : 5px 0px 0px;
+	width : 100%;
+}
+
 .formtable 
 {
 	margin : 15px 0px;
@@ -360,13 +366,37 @@ input[type="radio"], input[type="checkbox"]
 {
     margin-right:4px;
 }
-.padbottomlbl
+
+.wizardsectiontitle
 {
-    float : left;
-    text-align:left;
-    font-weight : bold;
-    padding-bottom : 1em;
-    font-size : 100%;
+    float: left;
+    text-align: left;
+    font-size: 115%;
 }
 
+.wizardsectiontext
+{
+    float: left;
+    text-align: left;
+    font-size: 100%;
+}
 
+.padBottom
+{
+    padding-bottom : 1em;
+}
+
+.padTop
+{
+    padding-top : 1em;
+}
+
+.boldtext
+{
+    font-weight : bold;
+}
+
+.italictext
+{
+    font-style : italic;
+}

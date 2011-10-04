@@ -11,8 +11,7 @@ using Sage.SalesLogix.Client.GroupBuilder;
 
 public partial class SmartParts_Options_OptionRedirector : System.Web.UI.UserControl, ISmartPartInfoProvider
 {
-    static readonly log4net.ILog log = log4net.LogManager.GetLogger(
-    System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+    static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -47,7 +46,6 @@ public partial class SmartParts_Options_OptionRedirector : System.Web.UI.UserCon
     protected void Page_PreRender(object sender, EventArgs e)
     {
         IUserOptionsService opts = Sage.Platform.Application.ApplicationContext.Current.Services.Get<IUserOptionsService>();
-        FilterManager.SetActivityUserOptions(opts);
         string defPage = opts.GetCommonOption("ShowOnStartup", "General");
         if (defPage != "")
         {

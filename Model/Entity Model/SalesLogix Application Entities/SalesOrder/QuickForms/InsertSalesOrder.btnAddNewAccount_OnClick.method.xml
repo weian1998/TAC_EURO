@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="e3284566-e1b4-45e7-ac7b-78a39bf656a8" lastModifiedUtc="2011-02-09T00:39:44.3127016Z" name="btnAddNewAccount_OnClick" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="InsertSalesOrder">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="56070bfd-3ce8-4a80-a142-3877672c8bd5" paramName="form" sequence="0" paramType="IInsertSalesOrder" />
+    <OrmEntityMethodParam id="d1c869da-c58f-463d-9446-2412162d00d7" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="d76adff6-443b-4881-b1a2-965acd810fb3" lastModifiedUtc="2011-02-09T00:39:26.2937016Z" targetType="Sage.BusinessRules.CodeSnippets.InsertSalesOrderEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="btnAddNewAccount_OnClickStep" active="true" codeSnippetId="5c9de628-c88e-4893-8c52-1a877f68a1e6">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

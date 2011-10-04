@@ -1,7 +1,7 @@
 // {{MadCap}} //////////////////////////////////////////////////////////////////
 // Copyright: MadCap Software, Inc - www.madcapsoftware.com ////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-// <version>5.0.0.0</version>
+// <version>7.0.0.0</version>
 ////////////////////////////////////////////////////////////////////////////////
 
 //    Syntax:
@@ -102,121 +102,135 @@ function FMCOpenHelp( id, skinName, searchQuery, firstPick, pathToHelpSystem )
 function FMCOpenHelp2( webHelpFileUrl, id, skinName, searchQuery, firstPick )
 {
 	var webHelpPath		= webHelpFileUrl.ToFolder().FullPath;
-	var helpSystemFile	= webHelpPath + gHelpSystemName.substring( 0, gHelpSystemName.lastIndexOf( "." ) ) + ".xml";
-	var helpSystem		= new CMCHelpSystem( null, webHelpPath, helpSystemFile, null, null );
-	var idInfo			= helpSystem.LookupCSHID( id );
-	var topic			= idInfo.Topic;
-	var skin			= idInfo.Skin;
-	
-	if ( skinName )
+	var helpSystemFile	= webHelpPath + "Data/HelpSystem.xml";
+	var helpSystem = new CMCHelpSystem(null, webHelpPath, helpSystemFile, null, null);
+
+	helpSystem.Load(function ()
 	{
-		skin = skinName;
-	}
+	    helpSystem.LookupCSHID(id, function (idInfo)
+	    {
+	        function OnGetSkinComplete()
+	        {
+	            var cshString = webHelpFileUrl.FullPath;
 
-	// Browser setup options
+	            if (searchQuery)
+	            {
+	                cshString += "?" + searchQuery;
 
-	var browserOptions	= "";
-	var size			= "";
+	                if (firstPick)
+	                {
+	                    cshString += "|FirstPick";
+	                }
+	            }
 
-	if ( skin )
-	{
-		xmlDoc = CMCXmlParser.GetXmlDoc( webHelpPath + "Data/Skin" + skin + "/Skin.xml", false, null, null );
+	            if (id)
+	            {
+	                cshString += "#CSHID=" + id;
+	            }
 
-		if ( xmlDoc )
-		{
-			var xmlHead		= xmlDoc.getElementsByTagName( "CatapultSkin" )[0];
-			var useDefault	= FMCGetAttributeBool( xmlHead, "UseDefaultBrowserSetup", false );
+	            if (topic)
+	            {
+	                if (cshString.indexOf("#") != -1)
+	                {
+	                    cshString += "|";
+	                }
+	                else
+	                {
+	                    cshString += "#";
+	                }
 
-			if ( !useDefault )
-			{
-				var toolbar		= "no";
-				var menu		= "no";
-				var locationBar	= "no";
-				var statusBar	= "no";
-				var resizable	= "no";
-				var setup		= xmlHead.getAttribute( "BrowserSetup" );
+	                cshString += "Topic=" + topic;
+	            }
 
-				if ( setup )
-				{
-					toolbar     = (setup.indexOf( "Toolbar" ) > -1)     ? "yes" : "no";
-					menu        = (setup.indexOf( "Menu" ) > -1)        ? "yes" : "no";
-					locationBar = (setup.indexOf( "LocationBar" ) > -1) ? "yes" : "no";
-					statusBar   = (setup.indexOf( "StatusBar" ) > -1)   ? "yes" : "no";
-					resizable   = (setup.indexOf( "Resizable" ) > -1)   ? "yes" : "no";
-				}
+	            if (skin)
+	            {
+	                if (cshString.indexOf("#") != -1)
+	                {
+	                    cshString += "|";
+	                }
+	                else
+	                {
+	                    cshString += "#";
+	                }
 
-				browserOptions = "toolbar=" + toolbar + ", menubar=" + menu + ", location=" + locationBar + ", status=" + statusBar + ", resizable=" + resizable;
-			}
+	                cshString += "Skin=" + skin;
+	            }
 
-			var windowSize	= FMCLoadSize( xmlDoc );
+	            if (cshString.indexOf("#") != -1)
+	            {
+	                cshString += "|";
+	            }
+	            else
+	            {
+	                cshString += "#";
+	            }
 
-			if ( windowSize )
-			{
-				size = ", top=" + windowSize.topPx + ", left=" + windowSize.leftPx + ", width=" + windowSize.widthPx + ", height=" + windowSize.heightPx;
-			}
-		}
-	}
+	            cshString += "OpenType=Javascript";
 
-	//
-	
-	var cshString	= webHelpFileUrl.FullPath;
-	
-	if ( searchQuery )
-	{
-		cshString += "?" + searchQuery;
+	            var win = window.open(cshString, "_MCWebHelpCSH", browserOptions + size);
 
-		if ( firstPick )
-		{
-			cshString += "|FirstPick";
-		}
-	}
-	
-	if ( id )
-	{
-		cshString += "#CSHID=" + id;
-	}
+	            // Bug 32051: Windows 7 64-bit is returning null from the call to window.open().
+	            if (win != null)
+	            {
+	                win.focus();
+	            }
+	        }
 
-	if ( topic )
-	{
-		if ( cshString.indexOf( "#" ) != -1 )
-		{
-			cshString += "|";
-		}
-		else
-		{
-			cshString += "#";
-		}
+	        var topic = idInfo.Topic;
+	        var skin = skinName || idInfo.Skin;
 
-		cshString += "Topic=" + topic;
-	}
+	        // Browser setup options
 
-	if ( skin )
-	{
-		if ( cshString.indexOf( "#" ) != -1 )
-		{
-			cshString += "|";
-		}
-		else
-		{
-			cshString += "#";
-		}
+	        var browserOptions = "";
+	        var size = "";
 
-		cshString += "Skin=" + skin;
-	}
-	
-	if ( cshString.indexOf( "#" ) != -1 )
-	{
-		cshString += "|";
-	}
-	else
-	{
-		cshString += "#";
-	}
-	
-	cshString += "OpenType=Javascript";
+	        if (skin)
+	        {
+	            CMCXmlParser.GetXmlDoc(webHelpPath + "Data/Skin" + skin + "/Skin.xml", true, function (xmlDoc)
+	            {
+	                if (xmlDoc)
+	                {
+	                    var xmlHead = xmlDoc.getElementsByTagName("CatapultSkin")[0];
+	                    var useDefault = FMCGetAttributeBool(xmlHead, "UseDefaultBrowserSetup", false);
 
-	var win = window.open( cshString, "_MCWebHelpCSH", browserOptions + size );
-	win.focus();
+	                    if (!useDefault)
+	                    {
+	                        var toolbar = "no";
+	                        var menu = "no";
+	                        var locationBar = "no";
+	                        var statusBar = "no";
+	                        var resizable = "no";
+	                        var setup = xmlHead.getAttribute("BrowserSetup");
+
+	                        if (setup)
+	                        {
+	                            toolbar = (setup.indexOf("Toolbar") > -1) ? "yes" : "no";
+	                            menu = (setup.indexOf("Menu") > -1) ? "yes" : "no";
+	                            locationBar = (setup.indexOf("LocationBar") > -1) ? "yes" : "no";
+	                            statusBar = (setup.indexOf("StatusBar") > -1) ? "yes" : "no";
+	                            resizable = (setup.indexOf("Resizable") > -1) ? "yes" : "no";
+	                        }
+
+	                        browserOptions = "toolbar=" + toolbar + ", menubar=" + menu + ", location=" + locationBar + ", status=" + statusBar + ", resizable=" + resizable;
+	                    }
+
+	                    var windowSize = FMCLoadSize(xmlDoc);
+
+	                    if (windowSize)
+	                    {
+	                        size = ", top=" + windowSize.topPx + ", left=" + windowSize.leftPx + ", width=" + windowSize.widthPx + ", height=" + windowSize.heightPx;
+	                    }
+	                }
+
+	                OnGetSkinComplete();
+	            }, null, null);
+	        }
+	        else
+	        {
+	            OnGetSkinComplete();
+	        }
+	    });
+	});
 }
 
 function FMCLoadSize( xmlDoc )
@@ -229,12 +243,12 @@ function FMCLoadSize( xmlDoc )
 		return null;
 	}
 
-	var topPx		= FMCConvertToPx( document, xmlHead.getAttribute( "Top" ), null, 0 );
-	var leftPx		= FMCConvertToPx( document, xmlHead.getAttribute( "Left" ), null, 0 );
-	var bottomPx	= FMCConvertToPx( document, xmlHead.getAttribute( "Bottom" ), null, 0 );
-	var rightPx		= FMCConvertToPx( document, xmlHead.getAttribute( "Right" ), null, 0 );
-	var widthPx		= FMCConvertToPx( document, xmlHead.getAttribute( "Width" ), "Width", 800 );
-	var heightPx	= FMCConvertToPx( document, xmlHead.getAttribute( "Height" ), "Height", 600 );
+    var topPx = FMCGetAttributeInt(xmlHead, "Top", 0);
+    var leftPx = FMCGetAttributeInt(xmlHead, "Left", 0);
+    var bottomPx = FMCGetAttributeInt(xmlHead, "Bottom", 0);
+    var rightPx = FMCGetAttributeInt(xmlHead, "Right", 0);
+    var widthPx = FMCGetAttributeInt(xmlHead, "Width", 800);
+    var heightPx = FMCGetAttributeInt(xmlHead, "Height", 600);
 
 	var anchors = xmlHead.getAttribute( "Anchors" );
 
@@ -291,7 +305,7 @@ function FMCLoadSize( xmlDoc )
 //    Class CMCAliasFile
 //
 
-function CMCAliasFile( xmlFile, helpSystem )
+function CMCAliasFile( xmlFile, helpSystem, OnLoadFunc )
 {
 	// Private member variables
 
@@ -306,10 +320,21 @@ function CMCAliasFile( xmlFile, helpSystem )
 
 	(function()
 	{
-		mXmlDoc = CMCXmlParser.GetXmlDoc( xmlFile, false, null, null );
 	})();
 
 	// Public member functions
+
+	this.Load = function (OnCompleteFunc)
+	{
+	    function OnLoad(xmlDoc)
+	    {
+	        mXmlDoc = xmlDoc;
+
+	        OnCompleteFunc();
+	    }
+
+	    CMCXmlParser.GetXmlDoc(xmlFile, true, OnLoad, null);
+	};
 	
 	this.GetIDs	= function()
 	{
@@ -484,7 +509,7 @@ function CMCHelpSystem( parentSubsystem, parentPath, xmlFile, tocPath, browseSeq
 	var mSelf				= this;
 	var mParentSubsystem	= parentSubsystem;
 	var mPath				= parentPath;
-	var mXmlFile			= xmlFile;
+	var mXmlDoc 			= null;
 	var mSubsystems			= new Array();
 	var mTocPath			= tocPath;
 	var mBrowseSequencePath	= browseSequencePath;
@@ -509,72 +534,101 @@ function CMCHelpSystem( parentSubsystem, parentPath, xmlFile, tocPath, browseSeq
 	this.ContentFolder					= null;
 	this.UseCustomTopicFileExtension	= false;
 	this.CustomTopicFileExtension		= null;
-	this.PreloadImages					= false;
 	
 	this.GlossaryUrl					= null;
+	this.SearchFilterSetUrl = null;
 
 	// Constructor
 
-	(function()
+	(function ()
 	{
-		var xmlDoc	= CMCXmlParser.GetXmlDoc( xmlFile, false, null, null );
-	    
-		mExists = xmlDoc != null;
-	    
-		if ( !mExists )
-		{
-			return;
-		}
-
-		if ( xmlDoc.getElementsByTagName( "Subsystems" ).length > 0 )
-		{
-			var urlNodes    = xmlDoc.getElementsByTagName( "Subsystems" )[0].getElementsByTagName( "Url" );
-	        
-			for ( var i = 0; i < urlNodes.length; i++ )
-			{
-				var urlNode	= urlNodes[i];
-				var url		= urlNode.getAttribute( "Source" );
-				var subPath	= url.substring( 0, url.lastIndexOf( "/" ) + 1 );
-				var tocPath	= urlNode.getAttribute( "TocPath" );
-				var browseSequencePath = urlNode.getAttribute( "BrowseSequencePath" );
-	            
-				mSubsystems.push( new CMCHelpSystem( mSelf, mPath + subPath, mPath + url.substring( 0, url.lastIndexOf( "." ) ) + ".xml", tocPath, browseSequencePath ) );
-			}
-		}
-		
-		mSelf.TargetType = xmlDoc.documentElement.getAttribute( "TargetType" );
-		mSelf.SkinFolder = new CMCUrl( xmlDoc.documentElement.getAttribute( "Skin" ) ).ToFolder().FullPath;
-		mSelf.SkinTemplateFolder = xmlDoc.documentElement.getAttribute( "SkinTemplateFolder" );
-		mSelf.DefaultStartTopic = xmlDoc.documentElement.getAttribute( "DefaultUrl" );
-		mSelf.InPreviewMode = FMCGetAttributeBool( xmlDoc.documentElement, "InPreviewMode", false );
-		mSelf.LiveHelpOutputId = xmlDoc.documentElement.getAttribute( "LiveHelpOutputId" );
-		mSelf.LiveHelpServer = xmlDoc.documentElement.getAttribute( "LiveHelpServer" );
-		mSelf.LiveHelpEnabled = mSelf.LiveHelpOutputId != null;
-		mSelf.IsWebHelpPlus = mSelf.TargetType == "WebHelpPlus" && document.location.protocol.StartsWith( "http", false );
-		
-		var moveOutputContentToRoot	= FMCGetAttributeBool( xmlDoc.documentElement, "MoveOutputContentToRoot", false );
-		var makeFileLowerCase		= FMCGetAttributeBool( xmlDoc.documentElement, "MakeFileLowerCase", false );
-		var contentFolder			= "";
-		
-		if ( !moveOutputContentToRoot )
-		{
-			contentFolder = "Content/";
-		}
-		
-		if ( makeFileLowerCase )
-		{
-			contentFolder = contentFolder.toLowerCase();
-		}
-		
-		mSelf.ContentFolder = contentFolder;
-		mSelf.UseCustomTopicFileExtension = FMCGetAttributeBool( xmlDoc.documentElement, "UseCustomTopicFileExtension", false );
-		mSelf.CustomTopicFileExtension = FMCGetAttribute( xmlDoc.documentElement, "CustomTopicFileExtension" );
-		mSelf.PreloadImages = FMCGetAttributeBool( xmlDoc.documentElement, "PreloadImages", false );
-
-		mSelf.GlossaryUrl = GetGlossaryUrl( xmlDoc );
 	})();
 
 	// Public member functions
+
+	this.Load = function (OnCompleteFunc)
+	{
+	    CMCXmlParser.GetXmlDoc(xmlFile, true, function (xmlDoc)
+	    {
+	        function OnLoadSubHelpSystemComplete()
+	        {
+	            completed++;
+
+	            if (completed == length)
+	            {
+	                OnCompleteFunc();
+	            }
+	        }
+
+	        mXmlDoc = xmlDoc;
+
+	        mExists = mXmlDoc != null;
+
+	        if (!mExists)
+	        {
+	            OnCompleteFunc();
+	            return;
+	        }
+
+	        mSelf.TargetType = mXmlDoc.documentElement.getAttribute("TargetType");
+	        mSelf.SkinFolder = new CMCUrl(mXmlDoc.documentElement.getAttribute("Skin")).ToFolder().FullPath;
+	        mSelf.SkinTemplateFolder = mXmlDoc.documentElement.getAttribute("SkinTemplateFolder");
+	        mSelf.DefaultStartTopic = mXmlDoc.documentElement.getAttribute("DefaultUrl");
+	        mSelf.InPreviewMode = FMCGetAttributeBool(mXmlDoc.documentElement, "InPreviewMode", false);
+	        mSelf.LiveHelpOutputId = mXmlDoc.documentElement.getAttribute("LiveHelpOutputId");
+	        mSelf.LiveHelpServer = mXmlDoc.documentElement.getAttribute("LiveHelpServer");
+	        mSelf.LiveHelpEnabled = mSelf.LiveHelpOutputId != null;
+	        mSelf.IsWebHelpPlus = mSelf.TargetType == "WebHelpPlus" && document.location.protocol.StartsWith("http", false);
+
+	        var moveOutputContentToRoot = FMCGetAttributeBool(mXmlDoc.documentElement, "MoveOutputContentToRoot", false);
+	        var makeFileLowerCase = FMCGetAttributeBool(mXmlDoc.documentElement, "MakeFileLowerCase", false);
+	        var contentFolder = "";
+
+	        if (!moveOutputContentToRoot)
+	        {
+	            contentFolder = "Content/";
+	        }
+
+	        if (makeFileLowerCase)
+	        {
+	            contentFolder = contentFolder.toLowerCase();
+	        }
+
+	        mSelf.ContentFolder = contentFolder;
+	        mSelf.UseCustomTopicFileExtension = FMCGetAttributeBool(mXmlDoc.documentElement, "UseCustomTopicFileExtension", false);
+	        mSelf.CustomTopicFileExtension = FMCGetAttribute(mXmlDoc.documentElement, "CustomTopicFileExtension");
+
+	        mSelf.GlossaryUrl = GetGlossaryUrl(mXmlDoc);
+	        mSelf.SearchFilterSetUrl = GetDataFileUrl(mXmlDoc, "SearchFilterSet");
+
+	        var subsystemsNodes = mXmlDoc.getElementsByTagName("Subsystems");
+
+	        if (subsystemsNodes.length > 0 && subsystemsNodes[0].getElementsByTagName("Url").length > 0)
+	        {
+	            var urlNodes = mXmlDoc.getElementsByTagName("Subsystems")[0].getElementsByTagName("Url");
+
+	            var completed = 0;
+	            var length = urlNodes.length;
+
+	            for (var i = 0; i < length; i++)
+	            {
+	                var urlNode = urlNodes[i];
+	                var url = urlNode.getAttribute("Source");
+	                var subPath = url.substring(0, url.lastIndexOf("/") + 1);
+	                var tocPath = urlNode.getAttribute("TocPath");
+	                var browseSequencePath = urlNode.getAttribute("BrowseSequencePath");
+
+	                var subHelpSystem = new CMCHelpSystem(mSelf, mPath + subPath, mPath + subPath + "Data/HelpSystem.xml", tocPath, browseSequencePath);
+	                mSubsystems.push(subHelpSystem);
+	                subHelpSystem.Load(OnLoadSubHelpSystemComplete);
+	            }
+	        }
+	        else
+	        {
+	            OnCompleteFunc();
+	        }
+	    }, null);
+	};
     
 	this.GetExists      = function()
 	{
@@ -648,73 +702,116 @@ function CMCHelpSystem( parentSubsystem, parentPath, xmlFile, tocPath, browseSeq
 	{
 		return mSubsystems[id];
 	};
-	
-	this.GetMergedAliasIDs	= function()
-	{
-		var ids	= mAliasFile.GetIDs();
-		
-		for ( var i = 0, length = mSubsystems.length; i < length; i++ )
-		{
-			var subsystem	= mSubsystems[i];
-			var subIDs		= subsystem.GetMergedAliasIDs();
-			
-			for ( var j = 0, length2 = subIDs.length; j < length2; j++ )
-			{
-				ids[ids.length] = subIDs[j];
-			}
-		}
-		
-		return ids;
-	};
-	
-	this.GetMergedAliasNames	= function()
-	{
-		var names	= mAliasFile.GetNames();
-		
-		for ( var i = 0, length = mSubsystems.length; i < length; i++ )
-		{
-			var subsystem	= mSubsystems[i];
-			var subNames	= subsystem.GetMergedAliasNames();
-			
-			for ( var j = 0, length2 = subNames.length; j < length2; j++ )
-			{
-				names[names.length] = subNames[j];
-			}
-		}
-		
-		return names;
-	};
-    
-	this.LookupCSHID	= function( id )
-	{
-		var idInfo	= mAliasFile.LookupID( id );
 
-		if ( !idInfo.Found )
-		{
-			var subIDInfo	= null;
-			
-			for ( var i = 0; i < mSubsystems.length; i++ )
-			{
-				var subsystem	= mSubsystems[i];
-				
-				subIDInfo = subsystem.LookupCSHID( id );
-				
-				if ( subIDInfo.Found )
-				{
-					idInfo = subIDInfo;
-					
-					var myPathUrl	= new CMCUrl( this.GetPath() );
-					var subPathUrl	= new CMCUrl( subsystem.GetPath() );
-					var relUrl		= subPathUrl.ToRelative( myPathUrl );
-					
-					idInfo.Topic = relUrl.FullPath + idInfo.Topic;
-					
-					break;
-				}
-			}
-		}
-		
-		return idInfo;
+	this.GetMergedAliasIDs = function (OnCompleteFunc)
+	{
+	    mAliasFile.Load(function ()
+	    {
+	        function OnGetIDs(ids)
+	        {
+	            for (var i = 0, length2 = ids.length; i < length2; i++)
+	            {
+	                mergedIDs[mergedIDs.length] = ids[i];
+	            }
+
+	            completed++;
+
+	            if (completed == length + 1)
+	            {
+	                OnCompleteFunc(mergedIDs);
+	            }
+	        }
+
+	        var mergedIDs = new Array();
+	        var length = mSubsystems.length;
+	        var completed = 0;
+	        var ids = mAliasFile.GetIDs();
+
+	        OnGetIDs(ids);
+
+	        for (var i = 0; i < length; i++)
+	        {
+	            mSubsystems[i].GetMergedAliasIDs(OnGetIDs);
+	        }
+	    });
+	};
+
+	this.GetMergedAliasNames = function (OnCompleteFunc)
+	{
+	    mAliasFile.Load(function ()
+	    {
+	        function OnGetNames(names)
+	        {
+	            for (var i = 0, length2 = names.length; i < length2; i++)
+	            {
+	                mergedNames[mergedNames.length] = names[i];
+	            }
+
+	            completed++;
+
+	            if (completed == length + 1)
+	            {
+	                OnCompleteFunc(mergedNames);
+	            }
+	        }
+
+	        var mergedNames = new Array();
+	        var length = mSubsystems.length;
+	        var completed = 0;
+	        var names = mAliasFile.GetNames();
+
+	        OnGetNames(names);
+
+	        for (var i = 0, length = mSubsystems.length; i < length; i++)
+	        {
+	            mSubsystems[i].GetMergedAliasNames(OnGetNames);
+	        }
+	    });
+	};
+
+	this.LookupCSHID = function (id, OnCompleteFunc)
+	{
+	    var mSelf = this;
+
+	    mAliasFile.Load(function ()
+	    {
+	        function OnLookupCSHID(idInfo)
+	        {
+	            if (idInfo.Found)
+	            {
+	                if (i > 0)
+	                {
+	                    var myPathUrl = new CMCUrl(mSelf.GetPath());
+	                    var subPathUrl = new CMCUrl(subsystem.GetPath());
+	                    var relUrl = subPathUrl.ToRelative(myPathUrl);
+
+	                    idInfo.Topic = relUrl.FullPath + idInfo.Topic;
+	                }
+
+	                OnCompleteFunc(idInfo);
+
+	                return;
+	            }
+
+	            if (i < length)
+	            {
+	                subsystem = mSubsystems[i];
+	                i++;
+	                subsystem.LookupCSHID(id, OnLookupCSHID);
+	            }
+	            else
+	            {
+	                OnCompleteFunc(cshIDInfo);
+	            }
+	        }
+
+	        var i = 0;
+	        var length = mSubsystems.length;
+	        var subsystem = null;
+	        var cshIDInfo = mAliasFile.LookupID(id);
+
+	        OnLookupCSHID(cshIDInfo);
+	    });
 	};
 	
 	this.GetTocFile = function()
@@ -726,262 +823,421 @@ function CMCHelpSystem( parentSubsystem, parentPath, xmlFile, tocPath, browseSeq
 	{
 		return mBrowseSequenceFile;
 	};
-    
-	this.GetIndex       = function( onCompleteFunc, onCompleteArgs )
-	{
-		if ( !this.IsWebHelpPlus )
-		{
-			var xmlDoc		= LoadFirstIndex();
-			var preMerged	= FMCGetAttributeBool( xmlDoc.documentElement, "PreMerged", false );
-	        
-			if ( !preMerged && mSubsystems.length != 0 )
-			{
-				xmlDoc = LoadEntireIndex();
-	            
-				for ( var i = 0; i < mSubsystems.length; i++ )
-				{
-					var subsystem	= mSubsystems[i];
-	                
-					if ( !subsystem.GetExists() )
-					{
-						continue;
-					}
-	                
-					var xmlDoc2	= subsystem.GetMergedIndex();
-	                
-					MergeIndexEntries( xmlDoc.getElementsByTagName( "IndexEntry" )[0], xmlDoc2.getElementsByTagName( "IndexEntry" )[0] );
-				}
-			}
-	        
-			onCompleteFunc( xmlDoc, onCompleteArgs );
-		}
-		else
-		{
-			function OnGetIndexComplete( xmlDoc, args )
-			{
-				onCompleteFunc( xmlDoc, onCompleteArgs );
-			}
 
-			var xmlDoc	= CMCXmlParser.CallWebService( MCGlobals.RootFolder + "Service/Service.asmx/GetIndex", true, OnGetIndexComplete, null );
-		}
-	};
-    
-	this.GetMergedIndex = function()
+	this.GetIndex = function (onCompleteFunc, onCompleteArgs)
 	{
-		var xmlDoc  = LoadEntireIndex();
-        
-		for ( var i = 0; i < mSubsystems.length; i++ )
-		{
-			var subsystem   = mSubsystems[i];
-            
-			if ( !subsystem.GetExists() )
-			{
-				continue;
-			}
-            
-			var xmlDoc2 = subsystem.GetMergedIndex();
-            
-			MergeIndexEntries( xmlDoc.getElementsByTagName( "IndexEntry" )[0], xmlDoc2.getElementsByTagName( "IndexEntry" )[0] );
-		}
-        
-		return xmlDoc;
+	    if (!this.IsWebHelpPlus)
+	    {
+	        LoadFirstIndex(function (xmlDoc)
+	        {
+	            var preMerged = FMCGetAttributeBool(xmlDoc.documentElement, "PreMerged", false);
+
+	            if (!preMerged && mSubsystems.length != 0)
+	            {
+	                LoadEntireIndex(function (xmlDoc)
+	                {
+	                    function OnGetMergedIndexComplete(xmlDoc2)
+	                    {
+	                        MergeIndexEntries(xmlDoc.getElementsByTagName("IndexEntry")[0], xmlDoc2.getElementsByTagName("IndexEntry")[0]);
+
+	                        completed++;
+
+	                        if (completed == length)
+	                        {
+	                            onCompleteFunc(xmlDoc, onCompleteArgs);
+	                        }
+	                    }
+
+	                    var completed = 0;
+	                    var length = 0;
+
+	                    // Calculate "length" first
+	                    for (var i = 0; i < mSubsystems.length; i++)
+	                    {
+	                        var subsystem = mSubsystems[i];
+
+	                        if (!subsystem.GetExists())
+	                        {
+	                            continue;
+	                        }
+
+	                        length++;
+	                    }
+
+	                    if (length == 0)
+	                    {
+	                        onCompleteFunc(xmlDoc, onCompleteArgs);
+	                        return;
+	                    }
+
+	                    for (var i = 0; i < mSubsystems.length; i++)
+	                    {
+	                        var subsystem = mSubsystems[i];
+
+	                        if (!subsystem.GetExists())
+	                        {
+	                            continue;
+	                        }
+
+	                        subsystem.GetMergedIndex(OnGetMergedIndexComplete);
+	                    }
+	                });
+
+	                return;
+	            }
+
+	            onCompleteFunc(xmlDoc, onCompleteArgs);
+	        });
+	    }
+	    else
+	    {
+	        function OnGetIndexComplete(xmlDoc, args)
+	        {
+	            onCompleteFunc(xmlDoc, onCompleteArgs);
+	        }
+
+	        var xmlDoc = CMCXmlParser.CallWebService(MCGlobals.RootFolder + "Service/Service.asmx/GetIndex", true, OnGetIndexComplete, null);
+	    }
+	};
+
+	this.GetMergedIndex = function (OnCompleteFunc)
+	{
+	    LoadEntireIndex(function (xmlDoc)
+	    {
+	        function OnGetMergedIndexComplete(xmlDoc2)
+	        {
+	            MergeIndexEntries(xmlDoc.getElementsByTagName("IndexEntry")[0], xmlDoc2.getElementsByTagName("IndexEntry")[0]);
+
+	            completed++;
+
+	            if (completed == length)
+	            {
+	                OnCompleteFunc(xmlDoc);
+	            }
+	        }
+
+	        var completed = 0;
+	        var length = 0;
+
+	        // Calculate "length" first
+	        for (var i = 0; i < mSubsystems.length; i++)
+	        {
+	            var subsystem = mSubsystems[i];
+
+	            if (!subsystem.GetExists())
+	            {
+	                continue;
+	            }
+
+	            length++;
+	        }
+
+	        if (length == 0)
+	        {
+	            OnCompleteFunc(xmlDoc);
+	            return;
+	        }
+
+	        for (var i = 0; i < mSubsystems.length; i++)
+	        {
+	            var subsystem = mSubsystems[i];
+
+	            if (!subsystem.GetExists())
+	            {
+	                continue;
+	            }
+
+	            subsystem.GetMergedIndex(OnGetMergedIndexComplete);
+	        }
+	    });
 	};
     
 	this.HasBrowseSequences	= function()
 	{
-		var xmlFile	= mXmlFile.substring( 0, mXmlFile.lastIndexOf( "." ) ) + ".xml";
-		var xmlDoc	= CMCXmlParser.GetXmlDoc( xmlFile, false, null, null );
-		
-		return xmlDoc.documentElement.getAttribute( "BrowseSequence" ) != null;
+		return mXmlDoc.documentElement.getAttribute("BrowseSequence") != null;
 	};
     
 	this.HasToc				= function()
 	{
-		var xmlFile	= mXmlFile.substring( 0, mXmlFile.lastIndexOf( "." ) ) + ".xml";
-		var xmlDoc	= CMCXmlParser.GetXmlDoc( xmlFile, false, null, null );
-		
-		return xmlDoc.documentElement.getAttribute( "Toc" ) != null;
+	    return mXmlDoc.documentElement.getAttribute("Toc") != null;
 	};
     
 	this.IsMerged       = function()
 	{
 		return (mSubsystems.length > 0);
 	};
-    
-	this.GetConceptsLinks	= function( conceptTerms, callbackFunc, callbackArgs )
-	{
-		if ( this.IsWebHelpPlus )
-		{
-			function OnGetTopicsForConceptsComplete( xmlDoc, args )
-			{
-				var links		= new Array();
-				var nodes		= xmlDoc.documentElement.getElementsByTagName( "Url" );
-				var nodeLength	= nodes.length;
-				
-				for ( var i = 0; i < nodeLength; i++ )
-				{
-					var node	= nodes[i];
-					var title	= node.getAttribute( "Title" );
-					var url		= node.getAttribute( "Source" );
-	                
-					url = mPath + ((url.charAt( 0 ) == "/") ? url.substring( 1, url.length ) : url);
-	                
-					links[links.length] = title + "|" + url;
-				}
-				
-				callbackFunc( links, callbackArgs );
-			}
-			
-			var xmlDoc	= CMCXmlParser.CallWebService( MCGlobals.RootFolder + "Service/Service.asmx/GetTopicsForConcepts?Concepts=" + conceptTerms, true, OnGetTopicsForConceptsComplete, null );
-		}
-		else
-		{
-			var links	= null;
 
-			conceptTerms = conceptTerms.replace( "\\;", "%%%%%" );
-			
-			if ( conceptTerms == "" )
-			{
-				links = new Array();
-				callbackFunc( links, callbackArgs );
-			}
-			
-			var concepts	= conceptTerms.split( ";" );
-			
-			links = this.GetConceptsLinksLocal( concepts );
-			
-			callbackFunc( links, callbackArgs );
-		}
-	};
-		
-	this.GetConceptsLinksLocal	= function( concepts )
+	this.GetConceptsLinks = function (conceptTerms, callbackFunc, callbackArgs)
 	{
-		var links	= new Array();
-		
-		for ( var i = 0; i < concepts.length; i++ )
-		{
-			var concept	= concepts[i];
-			
-			concept = concept.replace( "%%%%%", ";" );
-			concept = concept.toLowerCase();
-			
-			var currLinks	= this.GetConceptLinksLocal( concept );
-	        
-			for ( var j = 0; j < currLinks.length; j++ )
-			{
-				links[links.length] = currLinks[j];
-			}
-		}
-		
-		return links;
-	};
-    
-	this.GetConceptLinksLocal	= function( concept )
-	{
-		LoadConcepts();
-		
-		var links	= mViewedConceptMap.GetItem( concept );
-	        
-		if ( !links )
-		{
-			links = mConceptMap.GetItem( concept );
-            
-			if ( !links )
-			{
-				links = new Array( 0 );
-			}
-			
-			for ( var i = 0; i < mSubsystems.length; i++ )
-			{
-				var subsystem   = mSubsystems[i];
-	            
-				if ( !subsystem.GetExists() )
-				{
-					continue;
-				}
-	            
-				MergeConceptLinks( links, subsystem.GetConceptLinksLocal( concept ) );
-			}
+	    if (this.IsWebHelpPlus)
+	    {
+	        function OnGetTopicsForConceptsComplete(xmlDoc, args)
+	        {
+	            var links = new Array();
+	            var nodes = xmlDoc.documentElement.getElementsByTagName("Url");
+	            var nodeLength = nodes.length;
 
-			mViewedConceptMap.Add( concept, links );
-		}
-		
-		return links;
-	};
-    
-	this.LoadGlossary   = function( onCompleteFunc, onCompleteArgs )
-	{
-		if ( !this.IsWebHelpPlus )
-		{
-			if ( !this.IsMerged() )
-			{
-				return;
-			}
-	        
-			var xmlDoc	= this.GetGlossary();
-			
-			onCompleteFunc( xmlDoc, onCompleteArgs );
-		}
-		else
-		{
-			function OnGetGlossaryComplete( xmlDoc, args )
-			{
-				onCompleteFunc( xmlDoc, onCompleteArgs );
-			}
+	            for (var i = 0; i < nodeLength; i++)
+	            {
+	                var node = nodes[i];
+	                var title = node.getAttribute("Title");
+	                var url = node.getAttribute("Source");
 
-			var xmlDoc	= CMCXmlParser.CallWebService( MCGlobals.RootFolder + "Service/Service.asmx/GetGlossary", true, OnGetGlossaryComplete, null );
-		}
+	                url = mPath + ((url.charAt(0) == "/") ? url.substring(1, url.length) : url);
+
+	                links[links.length] = title + "|" + url;
+	            }
+
+	            callbackFunc(links, callbackArgs);
+	        }
+
+	        var xmlDoc = CMCXmlParser.CallWebService(MCGlobals.RootFolder + "Service/Service.asmx/GetTopicsForConcepts?Concepts=" + conceptTerms, true, OnGetTopicsForConceptsComplete, null);
+	    }
+	    else
+	    {
+	        var links = null;
+
+	        conceptTerms = conceptTerms.replace("\\;", "%%%%%");
+
+	        if (conceptTerms == "")
+	        {
+	            links = new Array();
+	            callbackFunc(links, callbackArgs);
+	        }
+
+	        var concepts = conceptTerms.split(";");
+
+	        this.GetConceptsLinksLocal(concepts, function (links)
+	        {
+	            callbackFunc(links, callbackArgs);
+	        });
+	    }
+	};
+
+	this.GetConceptsLinksLocal = function (concepts, OnCompleteFunc)
+	{
+	    function OnGetConceptLinksLocalComplete(currLinks)
+	    {
+	        for (var i = 0; i < currLinks.length; i++)
+	        {
+	            links[links.length] = currLinks[i];
+	        }
+
+	        completed++;
+
+	        if (completed == length)
+	        {
+	            OnCompleteFunc(links);
+	        }
+	    }
+
+	    var completed = 0;
+	    var length = concepts.length;
+
+	    //
+
+	    var links = new Array();
+
+	    for (var i = 0; i < concepts.length; i++)
+	    {
+	        var concept = concepts[i];
+
+	        concept = concept.replace("%%%%%", ";");
+	        concept = concept.toLowerCase();
+
+	        this.GetConceptLinksLocal(concept, OnGetConceptLinksLocalComplete);
+	    }
+	};
+
+	this.GetConceptLinksLocal = function (concept, OnCompleteFunc)
+	{
+	    LoadConcepts(function ()
+	    {
+	        function OnGetConceptLinksLocalComplete(subConcepts)
+	        {
+	            MergeConceptLinks(links, subConcepts);
+
+	            completed++;
+
+	            if (completed == length)
+	            {
+	                mViewedConceptMap.Add(concept, links);
+
+	                OnCompleteFunc(links);
+	            }
+	        }
+
+	        var links = mViewedConceptMap.GetItem(concept);
+
+	        if (links != null)
+	        {
+	            OnCompleteFunc(links);
+	            return;
+	        }
+
+	        links = mConceptMap.GetItem(concept);
+
+	        if (!links)
+	        {
+	            links = new Array(0);
+	        }
+
+	        var completed = 0;
+	        var length = 0;
+
+	        // Calculate "length" first
+	        for (var i = 0; i < mSubsystems.length; i++)
+	        {
+	            var subsystem = mSubsystems[i];
+
+	            if (!subsystem.GetExists()) { continue; }
+
+	            length++;
+	        }
+
+	        if (length == 0)
+	        {
+	            OnCompleteFunc(links);
+	            return;
+	        }
+
+	        for (var i = 0; i < mSubsystems.length; i++)
+	        {
+	            var subsystem = mSubsystems[i];
+
+	            if (!subsystem.GetExists()) { continue; }
+
+	            subsystem.GetConceptLinksLocal(concept, OnGetConceptLinksLocalComplete);
+	        }
+	    });
+	};
+
+	this.LoadGlossary = function (onCompleteFunc, onCompleteArgs)
+	{
+	    if (!this.IsWebHelpPlus)
+	    {
+	        if (!this.IsMerged())
+	        {
+	            onCompleteFunc(xmlDoc, onCompleteArgs);
+	        }
+
+	        this.GetGlossary(function (xmlDoc)
+	        {
+	            onCompleteFunc(xmlDoc, onCompleteArgs);
+	        });
+	    }
+	    else
+	    {
+	        function OnGetGlossaryComplete(xmlDoc, args)
+	        {
+	            onCompleteFunc(xmlDoc, onCompleteArgs);
+	        }
+
+	        var xmlDoc = CMCXmlParser.CallWebService(MCGlobals.RootFolder + "Service/Service.asmx/GetGlossary", true, OnGetGlossaryComplete, null);
+	    }
 	}
-    
-	this.GetGlossary    = function()
-	{
-		var xmlDoc	= CMCXmlParser.GetXmlDoc( this.GlossaryUrl, false, null, null );
-        
-		for ( var i = 0; i < mSubsystems.length; i++ )
-		{
-			var subsystem   = mSubsystems[i];
-            
-			if ( !subsystem.GetExists() )
-			{
-				continue;
-			}
-            
-			MergeGlossaries( xmlDoc, subsystem );
-		}
-        
-		return xmlDoc;
-	};
-    
-	this.GetSearchDBs   = function()
-	{
-		var searchDBs	= new Array();
-		var rootFrame	= FMCGetRootFrame();
-		var xmlDoc      = CMCXmlParser.GetXmlDoc( mPath + "Data/Search.xml", false, null, null );
-		var preMerged	= FMCGetAttributeBool( xmlDoc.documentElement, "PreMerged", false );
 
-		searchDBs[searchDBs.length] = new rootFrame.frames["navigation"].frames["search"].CMCSearchDB( "Data/Search.xml", this );
-        
-		if ( !preMerged )
-		{
-			for ( var i = 0; i < mSubsystems.length; i++ )
-			{
-				var subsystem   = mSubsystems[i];
-	            
-				if ( !subsystem.GetExists() )
-				{
-					continue;
-				}
-	            
-				var searchDBs2  = subsystem.GetSearchDBs();
-	            
-				for ( var j = 0; j < searchDBs2.length; j++ )
-				{
-					searchDBs[searchDBs.length] = searchDBs2[j];
-				}
-			}
-		}
-        
-		return searchDBs;
+	this.GetGlossary = function (OnCompleteFunc)
+	{
+	    CMCXmlParser.GetXmlDoc(this.GlossaryUrl, true, function (xmlDoc)
+	    {
+	        function OnMergeGlossariesComplete()
+	        {
+	            completed++;
+
+	            if (completed == length)
+	            {
+	                OnCompleteFunc(xmlDoc);
+	            }
+	        }
+
+	        var completed = 0;
+	        var length = 0;
+
+	        // Calculate "length" first
+	        for (var i = 0; i < mSubsystems.length; i++)
+	        {
+	            var subsystem = mSubsystems[i];
+
+	            if (!subsystem.GetExists()) { continue; }
+
+	            length++;
+	        }
+
+	        if (length == 0)
+	        {
+	            OnCompleteFunc(xmlDoc);
+	            return;
+	        }
+
+	        for (var i = 0; i < mSubsystems.length; i++)
+	        {
+	            var subsystem = mSubsystems[i];
+
+	            if (!subsystem.GetExists())
+	            {
+	                continue;
+	            }
+
+	            MergeGlossaries(xmlDoc, subsystem, OnMergeGlossariesComplete);
+	        }
+	    }, null);
+	};
+
+	this.GetSearchDBs = function (OnCompleteFunc)
+	{
+	    var searchDBs = new Array();
+
+	    CMCXmlParser.GetXmlDoc(mPath + "Data/Search.xml", true, function (xmlDoc)
+	    {
+	        function OnGetSearchDBsComplete(searchDBs2)
+	        {
+	            if (searchDBs2 != null)
+	            {
+	                for (var i = 0; i < searchDBs2.length; i++)
+	                {
+	                    searchDBs[searchDBs.length] = searchDBs2[i];
+	                }
+	            }
+
+	            completed++;
+
+	            if (completed == length)
+	            {
+	                OnCompleteFunc(searchDBs);
+	            }
+	        }
+
+	        var completed = 0;
+	        var length = mSubsystems.length;
+
+	        var searchDB = new CMCSearchDB(this);
+	        searchDBs[searchDBs.length] = searchDB;
+	        searchDB.Load("Data/Search.xml", function ()
+	        {
+	            var preMerged = FMCGetAttributeBool(xmlDoc.documentElement, "PreMerged", false);
+
+	            if (preMerged || length == 0)
+	            {
+	                OnCompleteFunc(searchDBs);
+	            }
+	            else
+	            {
+	                for (var i = 0; i < length; i++)
+	                {
+	                    var subsystem = mSubsystems[i];
+
+	                    if (!subsystem.GetExists())
+	                    {
+	                        OnGetSearchDBsComplete(null);
+	                        continue;
+	                    }
+
+	                    subsystem.GetSearchDBs(OnGetSearchDBsComplete);
+	                }
+	            }
+	        });
+	    }, null, this);
 	};
 	
 	this.AdvanceTopic = function( tocType, moveType, tocPath, href )
@@ -1004,74 +1260,109 @@ function CMCHelpSystem( parentSubsystem, parentPath, xmlFile, tocPath, browseSeq
     
 	function GetGlossaryUrl( xmlDoc )
 	{
-		var glossaryUrlRel = xmlDoc.documentElement.getAttribute( "Glossary" );
-		
-		if ( glossaryUrlRel == null )
-		{
-			return null;
-		}
-		
+	    var glossaryUrlRel = GetDataFileUrl(xmlDoc, "Glossary");
+
+	    if (glossaryUrlRel == null)
+	        return null;
+
 		var pos = glossaryUrlRel.lastIndexOf( "." );
 		
 		glossaryUrlRel = glossaryUrlRel.substring( 0, pos + 1 ) + "xml";
 		
-		return mPath + glossaryUrlRel;
+		return glossaryUrlRel;
+	}
+
+	function GetDataFileUrl(xmlDoc, att)
+	{
+	    var url = xmlDoc.documentElement.getAttribute(att);
+
+	    if (url == null)
+	    {
+	        return null;
+	    }
+
+	    return mPath + url;
 	}
     
-	function LoadFirstIndex()
+	function LoadFirstIndex(OnCompleteFunc)
 	{
-		var xmlDoc	= CMCXmlParser.GetXmlDoc( mPath + "Data/Index.xml", false, null, null );
-        
-		return xmlDoc;
+	    CMCXmlParser.GetXmlDoc(mPath + "Data/Index.xml", true, OnCompleteFunc, null);
 	}
-    
-	function LoadEntireIndex()
+
+	function LoadEntireIndex(OnCompleteFunc)
 	{
-		var xmlDoc      = LoadFirstIndex();
-		var head        = xmlDoc.documentElement;
-		var chunkNodes  = xmlDoc.getElementsByTagName( "Chunk" );
-        
-		if ( chunkNodes.length > 0 )
-		{
-			// Remove all attributes except "Count"
-            
-			var attributesClone = head.cloneNode( false ).attributes;
-            
-			for ( var i = 0; i < attributesClone.length; i++ )
-			{
-				if ( attributesClone[i].nodeName != "Count" && attributesClone[i].nodeName != "count" )
-				{
-					head.removeAttribute( attributesClone[i].nodeName );
-				}
-			}
-            
-			// Merge all chunks
-            
-			for ( var i = 0; i < chunkNodes.length; i++ )
-			{
-				var xmlDoc2 = CMCXmlParser.GetXmlDoc( mPath + "Data/" + FMCGetAttribute( chunkNodes[i], "Link" ), false, null, null );
-                
-				MergeIndexEntries( xmlDoc.getElementsByTagName( "IndexEntry" )[0], xmlDoc2.getElementsByTagName( "IndexEntry" )[0] );
-			}
-            
-			head.removeChild( chunkNodes[0].parentNode );
-		}
-        
-		// Make links absolute
-        
-		for ( var i = 0; i < xmlDoc.documentElement.childNodes.length; i++ )
-		{
-			if ( xmlDoc.documentElement.childNodes[i].nodeName == "IndexEntry" )
-			{
-				ConvertIndexLinksToAbsolute( xmlDoc.documentElement.childNodes[i] );
-                
-				break;
-			}
-		}
-        
-		//
-        
-		return xmlDoc;
+	    LoadFirstIndex(function (xmlDoc)
+	    {
+	        function OnGetChunkDoc(xmlDoc2)
+	        {
+	            MergeIndexEntries(xmlDoc.getElementsByTagName("IndexEntry")[0], xmlDoc2.getElementsByTagName("IndexEntry")[0]);
+
+	            completed++;
+
+	            if (completed == length)
+	            {
+	                OnMergeAllChunksComplete();
+	            }
+	        }
+
+	        function OnMergeAllChunksComplete()
+	        {
+	            // Make links absolute
+
+	            for (var i = 0; i < xmlDoc.documentElement.childNodes.length; i++)
+	            {
+	                if (xmlDoc.documentElement.childNodes[i].nodeName == "IndexEntry")
+	                {
+	                    ConvertIndexLinksToAbsolute(xmlDoc.documentElement.childNodes[i]);
+
+	                    break;
+	                }
+	            }
+
+	            OnCompleteFunc(xmlDoc);
+	        }
+
+	        var head = xmlDoc.documentElement;
+	        var chunkNodes = xmlDoc.getElementsByTagName("Chunk");
+
+	        if (chunkNodes.length > 0)
+	        {
+	            // Remove all attributes except "Count"
+
+	            var attributesClone = head.cloneNode(false).attributes;
+
+	            for (var i = 0; i < attributesClone.length; i++)
+	            {
+	                if (attributesClone[i].nodeName != "Count" && attributesClone[i].nodeName != "count")
+	                {
+	                    head.removeAttribute(attributesClone[i].nodeName);
+	                }
+	            }
+
+	            // Merge all chunks
+
+	            var completed = 0;
+	            var length = chunkNodes.length;
+
+	            var chunkLinks = new Array(length);
+
+	            for (var i = 0; i < length; i++)
+	            {
+	                chunkLinks[i] = FMCGetAttribute(chunkNodes[i], "Link");
+	            }
+
+	            head.removeChild(chunkNodes[0].parentNode);
+
+	            for (var i = 0; i < length; i++)
+	            {
+	                CMCXmlParser.GetXmlDoc(mPath + "Data/" + chunkLinks[i], true, OnGetChunkDoc, null);
+	            }
+	        }
+	        else
+	        {
+	            OnMergeAllChunksComplete();
+	        }
+	    });
 	}
     
 	function MergeIndexEntries( indexEntry1, indexEntry2 )
@@ -1220,43 +1511,48 @@ function CMCHelpSystem( parentSubsystem, parentPath, xmlFile, tocPath, browseSeq
 		}
 	}
     
-	function LoadConcepts()
+	function LoadConcepts(OnCompleteFunc)
 	{
 		if ( mConceptMap )
 		{
-			return;
+		    OnCompleteFunc();
+		    return;
 		}
         
 		mConceptMap = new CMCDictionary();
-        
-		var xmlDoc	= CMCXmlParser.GetXmlDoc( mPath + "Data/Concepts.xml", false, null, null );
-		var xmlHead	= xmlDoc.documentElement;
-        
-		for ( var i = 0; i < xmlHead.childNodes.length; i++ )
+
+		CMCXmlParser.GetXmlDoc(mPath + "Data/Concepts.xml", true, function (xmlDoc)
 		{
-			var entry   = xmlHead.childNodes[i];
-            
-			if ( entry.nodeType != 1 ) { continue; }
-            
-			var term    = entry.getAttribute( "Term" ).toLowerCase();
-			var links   = new Array();
-            
-			for ( var j = 0; j < entry.childNodes.length; j++ )
-			{
-				var link    = entry.childNodes[j];
-                
-				if ( link.nodeType != 1 ) { continue; }
-                
-				var title   = link.getAttribute( "Title" );
-				var url     = link.getAttribute( "Link" );
-                
-				url = mPath + ((url.charAt( 0 ) == "/") ? url.substring( 1, url.length ) : url);
-                
-				links[links.length] = title + "|" + url;
-			}
-            
-			mConceptMap.Add( term, links );
-		}
+		    var xmlHead = xmlDoc.documentElement;
+
+		    for (var i = 0; i < xmlHead.childNodes.length; i++)
+		    {
+		        var entry = xmlHead.childNodes[i];
+
+		        if (entry.nodeType != 1) { continue; }
+
+		        var term = entry.getAttribute("Term").toLowerCase();
+		        var links = new Array();
+
+		        for (var j = 0; j < entry.childNodes.length; j++)
+		        {
+		            var link = entry.childNodes[j];
+
+		            if (link.nodeType != 1) { continue; }
+
+		            var title = link.getAttribute("Title");
+		            var url = link.getAttribute("Link");
+
+		            url = mPath + ((url.charAt(0) == "/") ? url.substring(1, url.length) : url);
+
+		            links[links.length] = title + "|" + url;
+		        }
+
+		        mConceptMap.Add(term, links);
+		    }
+
+		    OnCompleteFunc();
+		}, null);
 	}
     
 	function MergeConceptLinks( links1, links2 )
@@ -1271,156 +1567,160 @@ function CMCHelpSystem( parentSubsystem, parentPath, xmlFile, tocPath, browseSeq
 			links1[links1.length] = links2[i];
 		}
 	}
-    
-	function MergeGlossaries( xmlDoc1, subsystem )
+
+	function MergeGlossaries(xmlDoc1, subsystem, OnCompleteFunc)
 	{
-		var xmlDoc2	= subsystem.GetGlossary();
-		var divs1   = xmlDoc1.getElementsByTagName( "div" );
-		var divs2   = xmlDoc2.getElementsByTagName( "div" );
-		var body1   = null;
-		var body2   = null;
-		var body    = xmlDoc1.createElement( "div" );
+	    var xmlDoc2 = subsystem.GetGlossary(function (xmlDoc2)
+	    {
+		    var divs1   = xmlDoc1.getElementsByTagName( "div" );
+		    var divs2   = xmlDoc2.getElementsByTagName( "div" );
+		    var body1   = null;
+		    var body2   = null;
+		    var body    = xmlDoc1.createElement( "div" );
         
-		body.setAttribute( "id", "GlossaryBody" );
+		    body.setAttribute( "id", "GlossaryBody" );
         
-		for ( var i = 0; i < divs1.length; i++ )
-		{
-			if ( divs1[i].getAttribute( "id" ) == "GlossaryBody" )
-			{
-				body1 = divs1[i];
-				break;
-			}
-		}
+		    for ( var i = 0; i < divs1.length; i++ )
+		    {
+			    if ( divs1[i].getAttribute( "id" ) == "GlossaryBody" )
+			    {
+				    body1 = divs1[i];
+				    break;
+			    }
+		    }
         
-		for ( var i = 0; i < divs2.length; i++ )
-		{
-			if ( divs2[i].getAttribute( "id" ) == "GlossaryBody" )
-			{
-				body2 = divs2[i];
-				break;
-			}
-		}
+		    for ( var i = 0; i < divs2.length; i++ )
+		    {
+			    if ( divs2[i].getAttribute( "id" ) == "GlossaryBody" )
+			    {
+				    body2 = divs2[i];
+				    break;
+			    }
+		    }
         
-		//
+		    //
         
-		var glossUrl	= subsystem.GlossaryUrl;
-		var pos			= glossUrl.lastIndexOf( "/" );
-		var subPath		= glossUrl.substring( 0, pos + 1 );
+		    var glossUrl	= subsystem.GlossaryUrl;
+		    var pos			= glossUrl.lastIndexOf( "/" );
+		    var subPath		= glossUrl.substring( 0, pos + 1 );
         
-		//
+		    //
         
-		if ( body1.getElementsByTagName( "div" ).length == 0 )
-		{
-			if ( typeof( xmlDoc1.importNode ) == "function" )
-			{
-				body = xmlDoc1.importNode( body2, true );
-			}
-			else
-			{
-				body = body2.cloneNode( true );
-			}
+		    if ( body1.getElementsByTagName( "div" ).length == 0 )
+		    {
+			    if ( typeof( xmlDoc1.importNode ) == "function" )
+			    {
+				    body = xmlDoc1.importNode( body2, true );
+			    }
+			    else
+			    {
+				    body = body2.cloneNode( true );
+			    }
             
-			for ( var i = 0; i < body.childNodes.length; i++ )
-			{
-				var currNode	= body.childNodes[i];
+			    for ( var i = 0; i < body.childNodes.length; i++ )
+			    {
+				    var currNode	= body.childNodes[i];
 				
-				if ( currNode.nodeType != 1 || currNode.nodeName != "div" )
-				{
-					continue;
-				}
+				    if ( currNode.nodeType != 1 || currNode.nodeName != "div" )
+				    {
+					    continue;
+				    }
 				
-				ConvertGlossaryPageEntryToAbsolute( currNode, subPath );
-			}
-		}
-		else if ( body2.getElementsByTagName( "div" ).length == 0 )
-		{
-			body = body1.cloneNode( true );
-		}
-		else
-		{
-			for ( var i = 0, j = 0; i < body1.childNodes.length && j < body2.childNodes.length; )
-			{
-				var currGlossaryPageEntry1  = body1.childNodes[i];
-				var currGlossaryPageEntry2  = body2.childNodes[j];
+				    ConvertGlossaryPageEntryToAbsolute( currNode, subPath );
+			    }
+		    }
+		    else if ( body2.getElementsByTagName( "div" ).length == 0 )
+		    {
+			    body = body1.cloneNode( true );
+		    }
+		    else
+		    {
+			    for ( var i = 0, j = 0; i < body1.childNodes.length && j < body2.childNodes.length; )
+			    {
+				    var currGlossaryPageEntry1  = body1.childNodes[i];
+				    var currGlossaryPageEntry2  = body2.childNodes[j];
                 
-				if ( currGlossaryPageEntry1.nodeType != 1 )
-				{
-					i++;
-					continue;
-				}
-				else if ( currGlossaryPageEntry2.nodeType != 1 )
-				{
-					j++;
-					continue;
-				}
+				    if ( currGlossaryPageEntry1.nodeType != 1 )
+				    {
+					    i++;
+					    continue;
+				    }
+				    else if ( currGlossaryPageEntry2.nodeType != 1 )
+				    {
+					    j++;
+					    continue;
+				    }
                 
-				var term1   = currGlossaryPageEntry1.getElementsByTagName( "div" )[0].getElementsByTagName( "a" )[0].firstChild.nodeValue;
-				var term2   = currGlossaryPageEntry2.getElementsByTagName( "div" )[0].getElementsByTagName( "a" )[0].firstChild.nodeValue;
+				    var term1   = currGlossaryPageEntry1.getElementsByTagName( "div" )[0].getElementsByTagName( "a" )[0].firstChild.nodeValue;
+				    var term2   = currGlossaryPageEntry2.getElementsByTagName( "div" )[0].getElementsByTagName( "a" )[0].firstChild.nodeValue;
                 
-				if ( term1.toLowerCase() == term2.toLowerCase() )
-				{
-					body.appendChild( currGlossaryPageEntry1.cloneNode( true ) );
-					i++;
-					j++;
-				}
-				else if ( term1.toLowerCase() > term2.toLowerCase() )
-				{
-					var newGlossaryPageEntry	= null;
+				    if ( term1.toLowerCase() == term2.toLowerCase() )
+				    {
+					    body.appendChild( currGlossaryPageEntry1.cloneNode( true ) );
+					    i++;
+					    j++;
+				    }
+				    else if ( term1.toLowerCase() > term2.toLowerCase() )
+				    {
+					    var newGlossaryPageEntry	= null;
 					
-					if ( typeof( xmlDoc1.importNode ) == "function" )
-					{
-						newGlossaryPageEntry = xmlDoc1.importNode( currGlossaryPageEntry2, true );
-					}
-					else
-					{
-						newGlossaryPageEntry = currGlossaryPageEntry2.cloneNode( true );
-					}
+					    if ( typeof( xmlDoc1.importNode ) == "function" )
+					    {
+						    newGlossaryPageEntry = xmlDoc1.importNode( currGlossaryPageEntry2, true );
+					    }
+					    else
+					    {
+						    newGlossaryPageEntry = currGlossaryPageEntry2.cloneNode( true );
+					    }
                     
-					ConvertGlossaryPageEntryToAbsolute( newGlossaryPageEntry, subPath );
-					body.appendChild( newGlossaryPageEntry )
+					    ConvertGlossaryPageEntryToAbsolute( newGlossaryPageEntry, subPath );
+					    body.appendChild( newGlossaryPageEntry )
                     
-					j++;
-				}
-				else
-				{
-					body.appendChild( currGlossaryPageEntry1.cloneNode( true ) );
-					i++;
-				}
-			}
+					    j++;
+				    }
+				    else
+				    {
+					    body.appendChild( currGlossaryPageEntry1.cloneNode( true ) );
+					    i++;
+				    }
+			    }
             
-			// Append remaining nodes. There should never be a case where BOTH entries1 AND entries2 have remaining nodes.
+			    // Append remaining nodes. There should never be a case where BOTH entries1 AND entries2 have remaining nodes.
             
-			for ( ; i < body1.childNodes.length; i++ )
-			{
-				body.appendChild( body1.childNodes[i].cloneNode( true ) );
-			}
+			    for ( ; i < body1.childNodes.length; i++ )
+			    {
+				    body.appendChild( body1.childNodes[i].cloneNode( true ) );
+			    }
             
-			for ( ; j < body2.childNodes.length; j++ )
-			{
-				var currNode	= body2.childNodes[j];
+			    for ( ; j < body2.childNodes.length; j++ )
+			    {
+				    var currNode	= body2.childNodes[j];
 				
-				if ( currNode.nodeType != 1 )
-				{
-					continue;
-				}
+				    if ( currNode.nodeType != 1 )
+				    {
+					    continue;
+				    }
 				
-				var newNode		= null;
+				    var newNode		= null;
 				
-				if ( typeof( xmlDoc1.importNode ) == "function" )
-				{
-					newNode = xmlDoc1.importNode( body2.childNodes[j], true );
-				}
-				else
-				{
-					newNode = body2.childNodes[j].cloneNode( true );
-				}
+				    if ( typeof( xmlDoc1.importNode ) == "function" )
+				    {
+					    newNode = xmlDoc1.importNode( body2.childNodes[j], true );
+				    }
+				    else
+				    {
+					    newNode = body2.childNodes[j].cloneNode( true );
+				    }
                 
-				ConvertGlossaryPageEntryToAbsolute( newNode, subPath );
-				body.appendChild( newNode );
-			}
-		}
-        
-		body1.parentNode.replaceChild( body, body1 );
+				    ConvertGlossaryPageEntryToAbsolute( newNode, subPath );
+				    body.appendChild( newNode );
+			    }
+		    }
+
+            body1.parentNode.replaceChild(body, body1);
+
+		    OnCompleteFunc();
+		});
 	}
 }
 
@@ -1757,10 +2057,13 @@ function CMCTocFile( helpSystem, tocType )
 					}
 					
 					var subsystem = GetOwnerHelpSystem( moveNode );
-					
+
 					href = subsystem.GetPath() + href;
-					
-					MCGlobals.BodyFrame.document.location.href = href;
+
+					FMCPostMessageRequest(MCGlobals.BodyFrame, "navigate", [href], null, function ()
+					{
+					    MCGlobals.BodyFrame.document.location.href = href;
+					});
 				}
 			}
 		}
@@ -2085,12 +2388,20 @@ function CMCTocFile( helpSystem, tocType )
 				
 				var linkUrl = new CMCUrl( link );
 				var ext = linkUrl.Extension.toLowerCase();
-				
-				if ( ext != "htm" && ext != "html" )
-				{
-					GetMoveTocTopicNode( moveType, moveNode, onCompleteFunc );
+				var masterHS = FMCGetMasterHelpSystem();
 
-					return;
+				if (masterHS.UseCustomTopicFileExtension)
+				{
+				    if (ext != masterHS.CustomTopicFileExtension)
+				    {
+				        GetMoveTocTopicNode(moveType, moveNode, onCompleteFunc);
+				        return;
+				    }
+				}
+				else if (ext != "htm" && ext != "html")
+				{
+				    GetMoveTocTopicNode(moveType, moveNode, onCompleteFunc);
+				    return;
 				}
 				
 				moveTopicNode = moveNode;
@@ -2384,8 +2695,25 @@ function CMCTocFile( helpSystem, tocType )
 //
 
 
+function FMCIsChrome()
+{
+    return Boolean(window.chrome);
+}
+
+
+function FMCIsChromeLocal()
+{
+    return FMCIsChrome() && document.location.protocol.StartsWith("file");
+}
+
+
 function FMCStringToBool( stringValue )
 {
+    if (typeof (stringValue) == "boolean")
+    {
+        return stringValue;
+    }
+
 	var boolValue		= false;
 	var stringValLower	= stringValue.toLowerCase();
 
@@ -2406,6 +2734,20 @@ function FMCGetAttributeBool( node, attributeName, defaultValue )
 	}
 	
 	return boolValue;
+}
+
+
+function FMCGetAttributeInt( node, attributeName, defaultValue )
+{
+	var intValue	= defaultValue;
+	var value		= FMCGetAttribute( node, attributeName );
+	
+	if ( value != null )
+	{
+		intValue = parseInt( value );
+	}
+	
+	return intValue;
 }
 
 
@@ -2462,76 +2804,11 @@ function FMCGetComputedStyle( node, style )
 }
 
 
-function FMCConvertToPx( doc, str, dimension, defaultValue )
-{
-    if ( !str || str.charAt( 0 ) == "-" )
-    {
-        return defaultValue;
-    }
-    
-    if ( str.charAt( str.length - 1 ) == "\%" )
-    {
-        switch (dimension)
-        {
-            case "Width":
-                return parseInt( str ) * screen.width / 100;
-                
-                break;
-            case "Height":
-                return parseInt( str ) * screen.height / 100;
-                
-                break;
-        }
-    }
-    else
-    {
-		if ( parseInt( str ).toString() == str )
-		{
-			str += "px";
-		}
-    }
-    
-    try
-    {
-        var div	= doc.createElement( "div" );
-    }
-    catch ( err )
-    {
-        return defaultValue;
-    }
-    
-    doc.body.appendChild( div );
-    
-    var value	= defaultValue;
-    
-    try
-    {
-        div.style.width = str;
-        
-        if ( div.currentStyle )
-		{
-			value = div.offsetWidth;
-		}
-		else if ( document.defaultView && document.defaultView.getComputedStyle )
-		{
-			value = parseInt( FMCGetComputedStyle( div, "width" ) );
-		}
-    }
-    catch ( err )
-    {
-    }
-    
-    doc.body.removeChild( div );
-    
-    return value;
-}
-
-
 //
 //    Class CMCXmlParser
 //
 
-function CMCXmlParser( args, LoadFunc )
+function CMCXmlParser( args, LoadFunc, loadContextObj )
 {
 	// Private member variables and functions
 	
@@ -2540,51 +2817,80 @@ function CMCXmlParser( args, LoadFunc )
     this.mXmlHttp	= null;
     this.mArgs		= args;
     this.mLoadFunc	= LoadFunc;
-    
-    this.OnreadystatechangeLocal	= function()
-	{
-		if ( mSelf.mXmlDoc.readyState == 4 )
-		{
-			mSelf.mLoadFunc( mSelf.mXmlDoc, mSelf.mArgs );
-		}
-	};
-	
-	this.OnreadystatechangeRemote	= function()
-	{
-		if ( mSelf.mXmlHttp.readyState == 4 )
-		{
-			mSelf.mLoadFunc( mSelf.mXmlHttp.responseXML, mSelf.mArgs );
-		}
-	};
+    this.mLoadContextObj = loadContextObj;
+
+    this.OnreadystatechangeLocal = function ()
+    {
+        if (mSelf.mXmlDoc.readyState == 4)
+        {
+            var xmlDoc = null;
+
+            if (mSelf.mXmlDoc.documentElement != null)
+            {
+                xmlDoc = mSelf.mXmlDoc;
+            }
+
+            if (mSelf.mLoadContextObj == null)
+            {
+                mSelf.mLoadFunc(xmlDoc, mSelf.mArgs);
+            }
+            else
+            {
+                mSelf.mLoadFunc.call(mSelf.mLoadContextObj, xmlDoc, mSelf.mArgs);
+            }
+        }
+    };
+
+    this.OnreadystatechangeRemote = function ()
+    {
+        if (mSelf.mXmlHttp.readyState == 4)
+        {
+            var xmlDoc = null;
+
+            if (mSelf.mXmlHttp.responseXML != null && mSelf.mXmlHttp.responseXML.documentElement != null)
+            {
+                xmlDoc = mSelf.mXmlHttp.responseXML;
+            }
+
+            if (mSelf.mLoadContextObj == null)
+            {
+                mSelf.mLoadFunc(xmlDoc, mSelf.mArgs);
+            }
+            else
+            {
+                mSelf.mLoadFunc.call(mSelf.mLoadContextObj, xmlDoc, mSelf.mArgs);
+            }
+        }
+    };
 }
 
-CMCXmlParser.prototype.LoadLocal	= function( xmlFile, async )
+CMCXmlParser.prototype.LoadLocal = function (xmlFile, async)
 {
-	if ( window.ActiveXObject )
+    if (window.ActiveXObject)
     {
         this.mXmlDoc = CMCXmlParser.GetMicrosoftXmlDomObject();
         this.mXmlDoc.async = async;
-        
-        if ( this.mLoadFunc )
+
+        if (this.mLoadFunc)
         {
-			this.mXmlDoc.onreadystatechange = this.OnreadystatechangeLocal;
+            this.mXmlDoc.onreadystatechange = this.OnreadystatechangeLocal;
         }
-        
+
         try
         {
-            if ( !this.mXmlDoc.load( xmlFile ) )
+            if (!this.mXmlDoc.load(xmlFile))
             {
                 this.mXmlDoc = null;
             }
         }
-        catch ( err )
+        catch (err)
         {
-			this.mXmlDoc = null;
+            this.mXmlDoc = null;
         }
     }
-    else if ( window.XMLHttpRequest )
+    else if (window.XMLHttpRequest)
     {
-        this.LoadRemote( xmlFile, async ); // window.XMLHttpRequest also works on local files
+        this.LoadRemote(xmlFile, async); // window.XMLHttpRequest also works on local files
     }
 
     return this.mXmlDoc;
@@ -2619,7 +2925,19 @@ CMCXmlParser.prototype.LoadRemote	= function( xmlFile, async )
     }
     catch ( err )
     {
-		this.mXmlHttp.abort();
+        this.mXmlHttp.abort();
+
+        if (this.mLoadFunc)
+        {
+            if (this.mLoadContextObj == null)
+            {
+                this.mLoadFunc(null, this.mArgs);
+            }
+            else
+            {
+                this.mLoadFunc.call(this.mLoadContextObj, null, this.mArgs);
+            }
+        }
     }
     
     return this.mXmlDoc;
@@ -2715,13 +3033,111 @@ CMCXmlParser.GetMicrosoftXmlHttpObject = function()
 	return obj;
 };
 
-CMCXmlParser.GetXmlDoc	= function( xmlFile, async, LoadFunc, args )
+CMCXmlParser._FilePathToXmlStringMap = new CMCDictionary();
+CMCXmlParser._LoadingFilesPathMap = new CMCDictionary();
+CMCXmlParser._LoadingFromQueue = false;
+
+CMCXmlParser.GetXmlDoc = function (xmlFile, async, LoadFunc, args, loadContextObj)
 {
-	var xmlParser	= new CMCXmlParser( args, LoadFunc );
-    var xmlDoc		= xmlParser.Load( xmlFile, async );
-    
+    function OnScriptLoaded()
+    {
+        CMCXmlParser._LoadingFilesPathMap.Remove(jsFileUrl.FullPath);
+
+        var xmlString = CMCXmlParser._FilePathToXmlStringMap.GetItem(jsFileUrl.Name);
+        CMCXmlParser._FilePathToXmlStringMap.Remove(jsFileUrl.FullPath);
+        xmlDoc = CMCXmlParser.LoadXmlString(xmlString);
+
+        // Check if there are any more in the queue. Do this before calling the callback function since the callback function might invoke another call to this same function.
+        CMCXmlParser._LoadingFilesPathMap.ForEach(function (key, value)
+        {
+            var loadingFileUrl = new CMCUrl(key);
+            var loadInfo = value;
+
+            if (loadingFileUrl.Name == fileName && loadingFileUrl.FullPath != jsFileUrl.FullPath)
+            {
+                CMCXmlParser._LoadingFilesPathMap.Remove(loadingFileUrl.FullPath);
+                CMCXmlParser._LoadingFromQueue = true;
+                CMCXmlParser.GetXmlDoc(loadingFileUrl.FullPath, loadInfo.async, loadInfo.LoadFunc, loadInfo.args, loadInfo.loadContextObj);
+
+                return false;
+            }
+
+            return true;
+        });
+
+        // Call the callback function
+        if (loadContextObj == null)
+        {
+            LoadFunc(xmlDoc, args);
+        }
+        else
+        {
+            LoadFunc.call(loadContextObj, xmlDoc, args);
+        }
+    }
+
+    var xmlDoc = null;
+
+    if (FMCIsChromeLocal())
+    {
+        var xmlFileUrl = new CMCUrl(xmlFile);
+        var jsFileUrl = xmlFileUrl.ToExtension("js");
+        var fileName = jsFileUrl.Name;
+
+        CMCXmlParser._LoadingFilesPathMap.Add(jsFileUrl.FullPath, { async: async, LoadFunc: LoadFunc, args: args, loadContextObj: loadContextObj });
+
+        var loadingFileWithSameName = false;
+
+        CMCXmlParser._LoadingFilesPathMap.ForEach(function (key, value)
+        {
+            var loadingFileUrl = new CMCUrl(key);
+            var loadInfo = value;
+
+            if (loadingFileUrl.Name == fileName && loadingFileUrl.FullPath != jsFileUrl.FullPath)
+            {
+                loadingFileWithSameName = true;
+
+                return false;
+            }
+
+            return true;
+        });
+
+        if (CMCXmlParser._LoadingFromQueue || !loadingFileWithSameName)
+        {
+            CMCXmlParser._LoadingFromQueue = false;
+
+            //
+
+            var scriptEl = document.createElement("script");
+            scriptEl.src = jsFileUrl.FullPath;
+            scriptEl.type = "text/javascript";
+
+            scriptEl.onreadystatechange = function ()
+            {
+                if (scriptEl.readyState == "loaded" || scriptEl.readyState == "complete")
+                {
+                    OnScriptLoaded();
+                }
+            };
+
+            scriptEl.onload = function ()
+            {
+                OnScriptLoaded();
+            };
+
+            document.getElementsByTagName("head")[0].appendChild(scriptEl);
+        }
+    }
+    else
+    {
+        var xmlParser = new CMCXmlParser(args, LoadFunc, loadContextObj);
+
+        xmlDoc = xmlParser.Load(xmlFile, async);
+    }
+
     return xmlDoc;
-}
+};
 
 CMCXmlParser.LoadXmlString	= function( xmlString )
 {
@@ -2771,7 +3187,7 @@ CMCXmlParser.GetOuterXml	= function( xmlDoc )
 
 CMCXmlParser.CallWebService	= function( webServiceUrl, async, onCompleteFunc, onCompleteArgs )
 {
-	var xmlParser	= new CMCXmlParser( onCompleteArgs, onCompleteFunc );
+	var xmlParser	= new CMCXmlParser( onCompleteArgs, onCompleteFunc, null );
 	var xmlDoc		= xmlParser.LoadRemote( webServiceUrl, async );
     
     return xmlDoc;

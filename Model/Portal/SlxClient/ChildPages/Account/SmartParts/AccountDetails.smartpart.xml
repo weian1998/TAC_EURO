@@ -5,6 +5,8 @@
   <SmartPart>\Entity Model\SalesLogix Application Entities\Account\QuickForms\AccountDetails.main.quickform.xml</SmartPart>
   <TargetWorkspace>MainContent</TargetWorkspace>
   <ShowInMode>Detail</ShowInMode>
-  <Properties />
+  <Properties>
+    <Property Name="HelpTopic" TypeConverter="">accountdetailview</Property>
+  </Properties>
   <AllowRoles />
 </SmartPartMapping>

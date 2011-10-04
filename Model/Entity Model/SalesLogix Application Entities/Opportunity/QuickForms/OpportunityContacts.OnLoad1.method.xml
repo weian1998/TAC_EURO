@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="d52a6380-b700-4314-bcd7-beec1f2ca653" lastModifiedUtc="2011-03-29T20:54:32.735897Z" name="OnLoad1" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="OpportunityContacts">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="dbaef566-762c-461c-8e3d-9291a76bba19" paramName="form" sequence="0" paramType="IOpportunityContacts" />
+    <OrmEntityMethodParam id="c3fb4228-89e4-4aca-b8e1-8f96bf4637fa" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="79baf204-2c7b-4e71-8fbf-81e0f6eb00d8" lastModifiedUtc="2011-03-29T20:54:50.6779232Z" targetType="Sage.BusinessRules.CodeSnippets.OpportunityContactsEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="OnLoad1Step" active="true" codeSnippetId="cc52639d-3953-4d39-881e-ef438f1a81f1">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

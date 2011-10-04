@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+
+  <!-- Remote based items -->
+  <item targets="remote" window="main" enabled="true">
+    <virtualPath>~/SmartParts/WhatsNew/RemoteMainWhatsNew.ascx</virtualPath>
+    <partId>RemoteMainWhatsNew</partId>
+    <title></title>
+    <description></description>
+  </item>
+  <item targets="remote" window="tabbed" enabled="true">
+    <virtualPath>~/SmartParts/WhatsNew/RemoteAccountsWhatsNew.ascx</virtualPath>
+    <partId>
+      RemoteAccountsWhatsNew
+    </partId>
+    <title>Accounts</title>
+    <description>Accounts</description>
+  </item>
+  <item targets="remote" window="tabbed" enabled="true">
+    <virtualPath>~/SmartParts/WhatsNew/RemoteContactsWhatsNew.ascx</virtualPath>
+    <partId>
+      RemoteContactsWhatsNew
+    </partId>
+    <title>
+      Contacts
+    </title>
+    <description>Contacts</description>
+  </item>
+  <item targets="remote" window="tabbed" enabled="true">
+    <virtualPath>~/SmartParts/WhatsNew/RemoteOpportunitiesWhatsNew.ascx</virtualPath>
+    <partId>
+      RemoteOpportunitiesWhatsNew
+    </partId>
+    <title>Opportunities</title>
+    <description>Opportunities</description>
+  </item>
+  <item targets="remote" window="tabbed" enabled="true">
+    <virtualPath>
+      ~/SmartParts/WhatsNew/RemoteActivitiesWhatsNew.ascx
+    </virtualPath>
+    <partId>
+      RemoteActivitiesWhatsNew
+    </partId>
+    <title>Activities</title>
+    <description>Activities</description>
+  </item>
+  <item targets="remote" window="tabbed" enabled="true">
+    <virtualPath>
+      ~/SmartParts/WhatsNew/RemoteNotesWhatsNew.ascx
+    </virtualPath>
+    <partId>
+      RemoteNotesWhatsNew
+    </partId>
+    <title>Notes</title>
+    <description>Notes</description>
+  </item>
+  <item targets="remote" window="tabbed" enabled="true">
+    <virtualPath>~/SmartParts/WhatsNew/RemoteHistoryWhatsNew.ascx</virtualPath>
+    <partId>
+      RemoteHistoryWhatsNew
+    </partId>
+    <title>History</title>
+    <description>History</description>
+  </item>
+  <item targets="remote" window="tabbed" enabled="true">
+    <virtualPath>~/SmartParts/WhatsNew/RemoteDocumentsWhatsNew.ascx</virtualPath>
+    <partId>
+      RemoteDocumentsWhatsNew
+    </partId>
+    <title>Documents</title>
+    <description>Documents</description>
+  </item>
+
+  <!-- Server based items -->
+
+  <item targets="server" window="main" enabled="true">
+    <virtualPath>
+      ~/SmartParts/WhatsNew/MainWhatsNew.ascx
+    </virtualPath>
+    <partId>MainWhatsNew</partId>
+    <title></title>
+    <description></description>
+  </item>
+
+  <item targets="server" window="tabbed" enabled="true">
+    <virtualPath>
+      ~/SmartParts/WhatsNew/AccountsWhatsNew.ascx
+    </virtualPath>
+    <partId>AccountsWhatsNew</partId>
+    <title>Accounts</title>
+    <description>Accounts</description>
+  </item>
+  <item targets="server" window="tabbed" enabled="true">
+    <virtualPath>
+      ~/SmartParts/WhatsNew/ContactsWhatsNew.ascx
+    </virtualPath>
+    <partId>ContactsWhatsNew</partId>
+    <title>Contacts</title>
+    <description>Contacts</description>
+  </item>
+  <item targets="server" window="tabbed" enabled="true">
+    <virtualPath>
+      ~/SmartParts/WhatsNew/LeadsWhatsNew.ascx
+    </virtualPath>
+    <partId>LeadsWhatsNew</partId>
+    <title>Leads</title>
+    <description>Leads</description>
+  </item>
+  <item targets="server" window="tabbed" enabled="true">
+    <virtualPath>
+      ~/SmartParts/WhatsNew/OpportunitiesWhatsNew.ascx
+    </virtualPath>
+    <partId>OpportunitiesWhatsNew</partId>
+    <title>Opportunities</title>
+    <description>Opportunities</description>
+  </item>
+  <item targets="server" window="tabbed" enabled="true">
+    <virtualPath>
+      ~/SmartParts/WhatsNew/ActivitiesWhatsNew.ascx
+    </virtualPath>
+    <partId>ActivitiesWhatsNew</partId>
+    <title>Activies</title>
+    <description>Activities</description>
+  </item>
+  <item targets="server" window="tabbed" enabled="true">
+    <virtualPath>
+      ~/SmartParts/WhatsNew/NotesWhatsNew.ascx
+    </virtualPath>
+    <partId>NotesWhatsNew</partId>
+    <title>Notes</title>
+    <description>Notes</description>
+  </item>
+  <item targets="server" window="tabbed" enabled="true">
+    <virtualPath>
+      ~/SmartParts/WhatsNew/HistoryWhatsNew.ascx
+    </virtualPath>
+    <partId>HistoryWhatsNew</partId>
+    <title>History</title>
+    <description>History</description>
+  </item>
+  <item targets="server" window="tabbed" enabled="false">
+    <virtualPath>
+      ~/SmartParts/WhatsNew/ContractsWhatsNew.ascx
+    </virtualPath>
+    <partId>ContractsWhatsNew</partId>
+    <title>Contracts</title>
+    <description>Contracts</description>
+  </item>
+  <item targets="server" window="tabbed" enabled="false">
+    <virtualPath>
+      ~/SmartParts/WhatsNew/DefectsWhatsNew.ascx
+    </virtualPath>
+    <partId>DefectsWhatsNew</partId>
+    <title>Defects</title>
+    <description>Defects</description>
+  </item>
+  <item targets="server" window="tabbed" enabled="false">
+    <virtualPath>~/SmartParts/WhatsNew/ReturnsWhatsNew.ascx</virtualPath>
+    <partId>ReturnsWhatsNew</partId>
+    <title>Returns</title>
+    <description>Returns</description>
+  </item>
+
+</config>

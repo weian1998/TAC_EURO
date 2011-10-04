@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="f0b8fe16-4c12-4190-ad45-abb12593367a" lastModifiedUtc="2010-09-27T20:59:54.9052806Z" name="UpdateStatusNoDuplicate" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="a025aa8c-7eed-437a-94e4-49095f6e9718" lastModifiedUtc="2010-09-27T20:59:53.4432806Z" targetType="Sage.SalesLogix.DeDupReuslt.Rules, Sage.SalesLogix.BusinessRules" targetMethod="UpdateStatusNoDuplicate" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

@@ -34,28 +34,30 @@ function createMainToolbar() {
         var menuitems = tbdata.items[i].items;
         if (menuitems) {
             for (var j = 0; j < menuitems.length; j++) {
-                if ((menuitems[j].isspacer == 'True') || (menuitems[j].text == '-')) {
-                    thismenu.addSeparator();
-                } else {
-                    var menuitem = thismenu.add({ text: menuitems[j].text,
-                        handler: makeLink(menuitems[j].href, (menuitems[j].target == 'MCWebHelp'), menuitems[j].target),
-                        cls: "x-btn-text-icon",
-                        icon: menuitems[j].img.replace(/&amp;/g, "&"),
-                        hrefTarget: menuitems[j].target,
-                        id: menuitems[j].id
-                    });
-                    if (menuitems[j].disabled)
-                        menuitem.disable();
-                    if (menuitems[j].submenu.length > 0) {
-                        menuitem.menu = new Ext.menu.Menu();
-                        for (var k = 0; k < menuitems[j].submenu.length; k++) {
-                            menuitem.menu.add({ text: menuitems[j].submenu[k].text,
-                                handler: makeLink(menuitems[j].submenu[k].href, false, menuitems[j].submenu[k].target),
-                                hrefTarget: menuitems[j].submenu[k].target
-                            });
-                        }
-                        if (typeof idMenuItems != "undefined") {
-                            menuitem.menu.on("show", function() { idMenuItems(); });
+                if (menuitems[j]) {
+                    if ((menuitems[j].isspacer == 'True') || (menuitems[j].text == '-')) {
+                        thismenu.addSeparator();
+                    } else {
+                        var menuitem = thismenu.add({ text: menuitems[j].text,
+                            handler: makeLink(menuitems[j].href, (menuitems[j].target == 'MCWebHelp'), menuitems[j].target),
+                            cls: "x-btn-text-icon",
+                            icon: menuitems[j].img.replace(/&amp;/g, "&"),
+                            hrefTarget: menuitems[j].target,
+                            id: menuitems[j].id
+                        });
+                        if (menuitems[j].disabled)
+                            menuitem.disable();
+                        if (menuitems[j].submenu.length > 0) {
+                            menuitem.menu = new Ext.menu.Menu();
+                            for (var k = 0; k < menuitems[j].submenu.length; k++) {
+                                menuitem.menu.add({ text: menuitems[j].submenu[k].text,
+                                    handler: makeLink(menuitems[j].submenu[k].href, false, menuitems[j].submenu[k].target),
+                                    hrefTarget: menuitems[j].submenu[k].target
+                                });
+                            }
+                            if (typeof idMenuItems != "undefined") {
+                                menuitem.menu.on("show", function () { idMenuItems(); });
+                            }
                         }
                     }
                 }
@@ -176,14 +178,14 @@ function populateGroupTabs() {
         GroupsMenu.destroy();
     }
     $("#GroupTabs").css({ left: (MasterPageLinks.LookupBtnWidth - 0 + 6) + "px" });
-    GroupsMenu = new Ext.menu.Menu({ id: 'GroupMenu', listeners: { show: assertMenuHeight } });
+    GroupsMenu = new Ext.menu.Menu({ id: 'GroupMenu', listeners: { show: assertMenuHeight} });
     if (typeof idMenuItems != "undefined") {
         GroupsMenu.on("show", function() { idMenuItems(); });
     }
 
     if (typeof groupMenuData != "undefined") {
         var menustring = Ext.util.JSON.encode(groupMenuData.menuitems);
-        var groupName = getCurrentGroupInfo().Name;
+        var groupName = getCurrentGroupInfo().DisplayName;
         if (groupName == null) { groupName = ""; };
         var newgmd = Ext.util.JSON.decode(
             menustring.replace(/%GROUPNAME%/g, groupName).replace(/%GROUPID%/g, getCurrentGroupInfo().Id).replace(/%GROUPFILENAME%/g, groupName.replace(/[^A-Z0-9a-z&]/g, "_")));

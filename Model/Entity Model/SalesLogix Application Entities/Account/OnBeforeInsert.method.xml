@@ -1,14 +1,24 @@
 <?xml version="1.0"?>
-<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="3160e6ee-9df3-4563-94bb-e2f7976f352b" name="OnBeforeInsert" returnType="void" methodType="CrudEvent" actionType="None" returnMode="BooleanOR" isInstance="false">
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="3160e6ee-9df3-4563-94bb-e2f7976f352b" lastModifiedUtc="2010-12-08T15:54:20.1112893Z" name="OnBeforeInsert" methodType="CrudEvent" actionType="None" returnMode="None">
+  <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
   </ExtendedPropertiesCollection>
   <parameter />
+  <preExecuteTargets />
   <methodTargets>
-    <methodTarget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="87da2239-c5cd-4983-bda5-302302731bb4" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" sequence="10" targetMethod="OnBeforeInsert" active="true">
+    <methodTarget id="87da2239-c5cd-4983-bda5-302302731bb4" lastModifiedUtc="0001-01-01T00:00:00" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="OnBeforeInsert" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>
     </methodTarget>
   </methodTargets>
+  <postExecuteTargets>
+    <methodTarget id="db5b1693-a65d-4d1c-92e8-cb79637a87f4" lastModifiedUtc="2011-01-19T01:28:34.3545061Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="PerformICRules" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </postExecuteTargets>
+  <postFlushTargets />
 </method>

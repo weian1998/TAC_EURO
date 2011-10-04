@@ -101,6 +101,7 @@ public partial class SmartParts_Calendar_ActivityCalendar : UserControl, ISmartP
     {
         bool shouldDataBind = true;
         shouldDataBind = postBackId == btnEditActivity.UniqueID // TODO: shouldn't need this
+            || postBackId == btnCompleteActivity.UniqueID
             || postBackId == DayViewBtn.UniqueID
             || postBackId == WeekViewBtn.UniqueID
             || postBackId == MonthViewBtn.UniqueID
@@ -114,7 +115,9 @@ public partial class SmartParts_Calendar_ActivityCalendar : UserControl, ISmartP
             shouldDataBind = true;
         if (postBackId == "ctl00$DialogWorkspace$DeleteRecurrence$btnContinue")
             shouldDataBind = true;
-        
+        if (postBackId == "ctl00$DialogWorkspace$CompleteRecurrence$btnContinue")
+            shouldDataBind = true;
+
         return shouldDataBind;
     }
 
@@ -175,7 +178,15 @@ public partial class SmartParts_Calendar_ActivityCalendar : UserControl, ISmartP
         }
         else
         {
-            activity.Delete();
+            var cal = UserCalendar.GetCurrentUserCalendarList().First<UserCalendar>(uc => uc.CalUserId == activity.UserId);
+            if (cal.AllowDelete == false)
+            {
+                throw new ValidationException(GetLocalResourceObject("DoNotHaveRightsToDeleteActivity").ToString());
+            } 
+            else 
+            {
+                activity.Delete();
+            }
         }
     }
 
@@ -234,6 +245,7 @@ public partial class SmartParts_Calendar_ActivityCalendar : UserControl, ISmartP
 
     private void InitCalendar()
     {
+
         InitWebScheduleInfo(SlxWebScheduleInfo);
         InitCalendarView(SlxWebCalendarView);
         InitDayView(SlxWebDayView);
@@ -257,6 +269,7 @@ public partial class SmartParts_Calendar_ActivityCalendar : UserControl, ISmartP
         info.LoggedOnUserName = UserService.UserName.ToUpper().Trim();
         info.WorkDayStartTime = Options.DayStartTime;
         info.WorkDayEndTime = Options.DayEndTime;
+        info.FirstDayOfWeek = Options.FirstDayOfWeek;
 
         info.ClientEvents.ActivityDialogOpening = "SlxWebScheduleInfo_ActivityDialogOpening";
         info.ClientEvents.ActivityUpdating = "SlxWebScheduleInfo_ActivityUpdating";
@@ -298,6 +311,9 @@ public partial class SmartParts_Calendar_ActivityCalendar : UserControl, ISmartP
         view.ClientEvents.MouseUp = "Calendar_MouseUp";
         view.ClientEvents.NavigateNext = "View_Navigate";
         view.ClientEvents.NavigatePrevious = "View_Navigate";
+
+        
+       
     }
 
     private void InitWeekView(WebWeekView view)
@@ -335,6 +351,8 @@ public partial class SmartParts_Calendar_ActivityCalendar : UserControl, ISmartP
         view.ClientEvents.NavigateNext = "View_Navigate";
         view.ClientEvents.NavigatePrevious = "View_Navigate";
     }
+
+   
 
     private TimeSpan GetTimeZoneOffset()
     {
@@ -452,6 +470,25 @@ public partial class SmartParts_Calendar_ActivityCalendar : UserControl, ISmartP
             OptionsService = userOptionsService;
         }
 
+        public Infragistics.WebUI.WebSchedule.FirstDayOfWeek FirstDayOfWeek
+        {
+           get
+            {
+                Infragistics.WebUI.WebSchedule.FirstDayOfWeek ifdw = Infragistics.WebUI.WebSchedule.FirstDayOfWeek.Monday;
+               try
+                {
+                    var sfdw = GetOption("FirstDayOfWeek");
+                    ifdw = (Infragistics.WebUI.WebSchedule.FirstDayOfWeek)System.Enum.Parse(typeof(Infragistics.WebUI.WebSchedule.FirstDayOfWeek), sfdw, true);
+                }
+                catch(Exception)
+                {
+                   return Infragistics.WebUI.WebSchedule.FirstDayOfWeek.Monday;
+                }
+               return ifdw;
+           }
+        }
+
+
         private static TimeSlotInterval ParseInterval(string interval)
         {
             int value;
@@ -477,6 +514,8 @@ public partial class SmartParts_Calendar_ActivityCalendar : UserControl, ISmartP
             var user = EntityFactory.GetById<IUser>(userId);
             return user != null ? user.UserName.ToUpper().Trim() : null;
         }
+
+        
     }
 
     public enum CalendarView

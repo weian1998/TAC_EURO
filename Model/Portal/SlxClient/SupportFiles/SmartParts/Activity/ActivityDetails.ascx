@@ -155,7 +155,7 @@
                 <asp:Label ID="Company_lz" AssociatedControlID="Company" runat="server" Text="<%$ resources: Company_lz.Text %>"></asp:Label>
             </div>
             <div class="textcontrol">
-                <asp:Textbox runat="server" enabled="false" id="Company" Text=""></asp:Textbox>
+                <asp:Textbox runat="server" enabled="false" ReadOnly="true" id="Company" Text=""></asp:Textbox>
             </div> 
         </td>
         <td></td>
@@ -262,7 +262,7 @@
         <td colspan="2">
             <div class="twocollbl"><asp:Label ID="Notes_lz" AssociatedControlID="Notes" runat="server" Text="<%$ resources: Notes_lz.Text %>"></asp:Label></div>
             <div class="twocoltextcontrol">
-                <asp:TextBox runat="server" ID="Notes" TextMode="MultiLine" Rows="6"  />
+                <asp:TextBox runat="server" ID="Notes" TextMode="MultiLine" Rows="9"  />
             </div> 
         </td>
     </tr>

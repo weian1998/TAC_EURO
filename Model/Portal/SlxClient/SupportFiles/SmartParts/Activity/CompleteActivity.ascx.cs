@@ -88,12 +88,17 @@ public partial class SmartParts_Activity_CompleteActivity : EntityBoundSmartPart
 	        OpportunityId.InitializeLookup = (OpportunityId.SeedValue.Length == 12);
 	        TicketId.InitializeLookup = (TicketId.SeedValue.Length == 12);
 	        LeadId.InitializeLookup = false;
-            LeadId.Text = string.IsNullOrEmpty(Activity.LeadId) ? string.Empty : Activity.LeadName;
+            LeadId.Text = IsNullOrWhiteSpace(Activity.LeadId) ? string.Empty : Activity.LeadName;
 	        Company.Text = LeadId.Text == string.Empty ? string.Empty : Activity.AccountName;
-            SetLeadDivVisible(!string.IsNullOrEmpty(Activity.LeadId));
-            if (!Activity.MemberOfAdminActivity)
+            SetLeadDivVisible(!IsNullOrWhiteSpace(Activity.LeadId));
+            if (!Activity.MemberOfAdminActivity) // put this back once memberofadminactivity is ported from reloaded
 	            Form.Secure(Controls);
 		}
+    }
+
+    private static bool IsNullOrWhiteSpace(string val)
+    {
+        return string.IsNullOrEmpty(val) || val.Trim().Length == 0;
     }
 
     protected override void OnWireEventHandlers()
@@ -322,23 +327,7 @@ public partial class SmartParts_Activity_CompleteActivity : EntityBoundSmartPart
         Completed.DateTimeValue = DateTime.UtcNow;
         Scheduled.DateTimeValue = Activity.StartDate;
 
-        Scheduled.Timeless = Activity.Timeless;
-        Scheduled.DisplayTime = !Activity.Timeless;
-
-        Completed.Timeless = Activity.Timeless;
-        Completed.DisplayTime = !Activity.Timeless;
-
         Duration.Enabled = !Activity.Timeless;
-
-        //handle timeless activities
-        if (Activity.Timeless)
-        {
-            Scheduled.DateTimeValue = Activity.StartDate;
-
-            IContextService context = Sage.Platform.Application.ApplicationContext.Current.Services.Get<IContextService>(true);
-            TimeZone tz = context["TimeZone"] as TimeZone;
-            if (tz != null) Completed.DateTimeValue = tz.UTCDateTimeToLocalTime(DateTime.UtcNow);
-        }
     }
 
     private void SetInsertDefaults()
@@ -514,9 +503,6 @@ public partial class SmartParts_Activity_CompleteActivity : EntityBoundSmartPart
         bs.Bindings.Add(new WebEntityBinding("StartDate", Scheduled, "DateTimeValue"));
         bs.Bindings.Add(new WebEntityBinding("!Timeless", Scheduled, "DisplayTime"));
         bs.Bindings.Add(new WebEntityBinding("Timeless", Scheduled, "Timeless"));
-
-        bs.Bindings.Add(new WebEntityBinding("!Timeless", Completed, "DisplayTime"));
-        bs.Bindings.Add(new WebEntityBinding("Timeless", Completed, "Timeless"));
     }
 
     public override Sage.Platform.Application.UI.ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="c7e4fd35-e26f-4876-9e5b-8177a7982e64" lastModifiedUtc="2011-02-28T19:12:33.29137Z" name="GetTicketStats" returnType="object" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="712ec8b3-40c9-4f86-af82-dfe80c9e090d" lastModifiedUtc="2011-02-28T19:12:19.8796029Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="GetTicketStats" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

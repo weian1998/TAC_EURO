@@ -121,7 +121,7 @@
     <value>Save</value>
   </data>
   <data name="cmdSave.ToolTip" xml:space="preserve">
-    <value>Update</value>
+    <value>Save</value>
   </data>
   <data name="cmdSaveNew.Caption" xml:space="preserve">
     <value>SaveNew</value>
@@ -134,9 +134,6 @@
   </data>
   <data name="dtpEstimatedClose.Caption" xml:space="preserve">
     <value>Est. Close:</value>
-  </data>
-  <data name="curSalesPotential.Caption" xml:space="preserve">
-    <value>Sales Potential:</value>
   </data>
   <data name="lueAccount.Caption" xml:space="preserve">
     <value>Account:</value>
@@ -251,5 +248,50 @@
   </data>
   <data name="lueLeadSource.ButtonToolTip" xml:space="preserve">
     <value>Find</value>
+  </data>
+  <data name="lueERPApplication.Caption" xml:space="preserve">
+    <value>Accounting System:</value>
+  </data>
+  <data name="lueERPApplication.LookupProperties.Name.PropertyHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="lueERPApplication.LookupProperties.EndPointURL.PropertyHeader" xml:space="preserve">
+    <value>End Point URL</value>
+  </data>
+  <data name="lueERPApplication.ButtonToolTip" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="lueERPApplication.LookupDialogTitle" xml:space="preserve">
+    <value>Lookup Accounting System</value>
+  </data>
+  <data name="luePriceList.LookupProperties.ActiveFlag.PropertyHeader" xml:space="preserve">
+    <value>ActiveFlag (Active Flag)</value>
+  </data>
+  <data name="luePriceList.LookupProperties.Currency.PropertyHeader" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="luePriceList.LookupProperties.Description.PropertyHeader" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="luePriceList.LookupProperties.EndDate.PropertyHeader" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="luePriceList.LookupProperties.Name.PropertyHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="luePriceList.LookupProperties.PriceListType.PropertyHeader" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="luePriceList.LookupProperties.StartDate.PropertyHeader" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="luePriceList.Caption" xml:space="preserve">
+    <value>Price List:</value>
+  </data>
+  <data name="luePriceList.ButtonToolTip" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="luePriceList.LookupDialogTitle" xml:space="preserve">
+    <value>Lookup Price List</value>
   </data>
 </root>

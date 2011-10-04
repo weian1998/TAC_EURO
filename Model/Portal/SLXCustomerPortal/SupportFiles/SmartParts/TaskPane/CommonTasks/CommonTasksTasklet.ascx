@@ -35,7 +35,12 @@ $(document).ready(function(){
             clientId: "<%= ClientID %>"        
         });
         <%= ID %>.init();  
-    }        
+    }      
+    var gMgrSvc = Sage.Services.getService("GroupManagerService");
+    if (gMgrSvc) gMgrSvc.addListener(Sage.GroupManagerService.CURRENT_GROUP_CHANGED, function (gMgrSvc, args) {
+        __doPostBack("<%= ClientID %>", "");
+    });
+  
 });
 
 <% if (!ScriptManager.GetCurrent(Page).IsInAsyncPostBack) { %>

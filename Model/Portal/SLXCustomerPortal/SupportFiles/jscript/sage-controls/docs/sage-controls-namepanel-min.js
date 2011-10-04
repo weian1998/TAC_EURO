@@ -6,9 +6,8 @@
 
 function NamePanel(clientId,prefix,first,middle,last,suffix,autoPostBack)
 {this.ClientId=clientId;this.nameDivId=clientId+"_outerDiv";this.displayID=clientId+"_displayText";this.returnValueId=clientId+"_nameResult";this.prefix=prefix;this.first=first;this.middle=middle;this.last=last;this.suffix=suffix;this.AutoPostBack=autoPostBack;this.TextChanged=false;this.panel=null;}
-function NamePanel_Show()
-{if((this.panel==null)||(this.panel.element.parentNode==null))
-{var dlgDiv=document.getElementById(this.nameDivId);dlgDiv.style.display="block";this.panel=new YAHOO.widget.Panel(this.nameDivId,{visible:false,width:"300px",height:"250px",fixedcenter:true,constraintoviewport:true,underlay:"shadow",draggable:true});this.panel.render();}
+function NamePanel_Show(){if((this.panel==null)||(this.panel.element.parentNode==null))
+{var dlgDiv=document.getElementById(this.nameDivId);dlgDiv.style.display="block";this.panel=new YAHOO.widget.Panel(this.nameDivId,{visible:false,width:"300px",height:"210px",fixedcenter:true,constraintoviewport:true,underlay:"shadow",draggable:true});this.panel.render();}
 this.panel.show();document.getElementById(this.ClientId+"_first").focus();}
 function NamePanel_Cancel()
 {this.panel.hide();document.getElementById(this.ClientId+"_prefix_Text").value=this.prefix;document.getElementById(this.ClientId+"_first").value=this.first;document.getElementById(this.ClientId+"_middle").value=this.middle;document.getElementById(this.ClientId+"_last").value=this.last;document.getElementById(this.ClientId+"_suffix_Text").value=this.suffix;}

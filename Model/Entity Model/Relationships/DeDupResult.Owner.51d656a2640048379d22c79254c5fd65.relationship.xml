@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="51d656a2-6400-4837-9d22-c79254c5fd65" lastModifiedUtc="2010-09-23T21:46:08.3270911Z" cardinality="M:1" parentEntityId="ed91ade9-d3d3-42a9-b2ca-bf7e6961e3c6" childEntityId="dfca3267-2f5b-4970-813b-5aeb9ea75649">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="e640c6d4-580d-4a4b-9929-14a7d1d9441b" lastModifiedUtc="2010-09-23T21:45:55.8980911Z" name="ResolvedBy" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="b4586753-75da-482e-ad12-56b03f048254" lastModifiedUtc="2010-09-23T21:45:22.7780911Z" name="DeDupResult" audited="false" include="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="b786e23d-aafd-4c3a-a8ee-062c884c7f20" parentPropertyId="bb5b367b-4e35-4587-a6da-543a86393c9a" childPropertyId="178ebc9c-d165-4d4c-af7d-0315701aa611" ordinal="0" />
+  </column>
+</relationship>

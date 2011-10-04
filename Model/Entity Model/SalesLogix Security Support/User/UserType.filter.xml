@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0"?>
-<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="ae7f6248-0e68-46d9-8c7a-34cc8f09ad7a" lastModifiedUtc="2010-10-11T22:26:15.4593723Z" filterName="UserType" propertyName="Type" dataPath="USERSECURITY:TYPE" characters="0">
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="ae7f6248-0e68-46d9-8c7a-34cc8f09ad7a" lastModifiedUtc="2010-01-21T00:30:25.0159696Z" filterName="UserType" propertyName="Type" characters="0">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRangeEntityFilter" />
@@ -12,5 +12,4 @@
   <ranges id="8c8c8352-00bc-4083-bb02-e39613b023be" rangeName="Concurrent" lower="C" upper="C" />
   <ranges id="7eb1e1bc-d31b-42de-a591-309098d51635" rangeName="Web Viewer" lower="V" upper="V" />
   <ranges id="579673d3-96d1-4e8b-8763-6c2ee55b24d1" rangeName="Network" lower="N" upper="N" />
-  <ranges id="7678acbe-fb79-4899-9251-981b983d9f77" rangeName="AddOn" lower="A" upper="A" />
 </entityFilter>

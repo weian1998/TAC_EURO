@@ -10,8 +10,10 @@
     <Property Name="EntityTypeName" TypeConverter="">Sage.Entity.Interfaces.IEvent, Sage.Entity.Interfaces</Property>
   </Properties>
   <TemplateProperties>
+    <Property Name="MainContentWorkspace_IncludeCollapseButton" TypeConverter="">False</Property>
     <Property Name="IncludeTaskPane" TypeConverter="">False</Property>
   </TemplateProperties>
   <IsDefaultPage>false</IsDefaultPage>
   <ExcludedGlobalModules />
+  <AppliedSecurity />
 </PortalPage>

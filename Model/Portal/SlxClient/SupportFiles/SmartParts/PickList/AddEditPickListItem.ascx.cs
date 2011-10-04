@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Collections.Generic;
 using System.Web.UI;
@@ -209,7 +209,7 @@ public partial class AddEditPickListItem : EntityBoundSmartPartInfoProvider
         else
         {
             
-            PickList pl = PickList.GetPickListItemByIds(hdPickListId.Value, hdPickListItemId.Value);
+            PickList pl = PickList.GetPickListItemById(hdPickListId.Value, hdPickListItemId.Value);
            
             pl.Shorttext = txtCode.Text;
             pl.Text = txtItemText.Text;
@@ -243,9 +243,7 @@ public partial class AddEditPickListItem : EntityBoundSmartPartInfoProvider
         {
             txtCode.Text = _pickListItemView.Code;
             txtItemText.Text = _pickListItemView.Text;
-
-            txtOrder.Text = _pickListItemView.OrderSeq.ToString();
-
+			txtOrder.Text = _pickListItemView.OrderSeq.ToString();
             SetDefaultFlag();
         }
         else 

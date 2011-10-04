@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="d51e1076-a61a-4e70-9c03-6f320b7465ea.Caption" xml:space="preserve">
+    <value>EndPointURL</value>
+  </data>
+  <data name="1992cb71-6bb5-4fba-baf2-ff4ee6f5e99f.Caption" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="grdEndPoints.642943ed-1e2b-423f-8d14-4d8e9e88a942.ColumnHeading" xml:space="preserve">
+    <value>EndPointURL</value>
+  </data>
+  <data name="grdEndPoints.9be3bc24-2862-4ff3-8725-bb5ed99f6a14.ColumnHeading" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="grdEndPoints.EmptyTableRowText" xml:space="preserve">
+    <value>No records match the selection criteria.</value>
+  </data>
+  <data name="grdEndPoints.ac37c91b-78f5-4453-958e-0e1da9fcc60b.ColumnHeading" xml:space="preserve">
+    <value>Display Name</value>
+  </data>
+  <data name="grdEndPoints.0beb5912-3fb6-4f76-b67c-4e1664856d9d.ColumnHeading" xml:space="preserve">
+    <value>Accounting Feed</value>
+  </data>
+  <data name="btnAdd.Caption" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="btnAdd.ToolTip" xml:space="preserve">
+    <value>Add End Point</value>
+  </data>
+  <data name="btnDelete.ToolTip" xml:space="preserve">
+    <value>Delete End Point</value>
+  </data>
+  <data name="btnDelete.Caption" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="grdEndPoints.ab66702f-d05d-4eab-b40f-593d3c267f9f.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="grdEndPoints.ab66702f-d05d-4eab-b40f-593d3c267f9f.ConfirmationMessage" xml:space="preserve">
+    <value>Are you sure you want to delete this record?</value>
+  </data>
+  <data name="grdEndPoints.403f2d07-3671-4fe0-bdbf-5b724f37372f.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="04e1a283-eabb-465b-bc09-6ae588f52cf9.DialogTitleOverride" xml:space="preserve">
+    <value>Setup Accounting Integration</value>
+  </data>
+  <data name="8ae5af82-3af5-4495-87b2-05fd8b565cb1.DialogTitleOverride" xml:space="preserve">
+    <value>Insert End Point</value>
+  </data>
+  <data name="cmdAdd.Caption" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="cmdAdd.ToolTip" xml:space="preserve">
+    <value>Add Part Deux</value>
+  </data>
+  <data name="btnInsert.Caption" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="btnInsert.ToolTip" xml:space="preserve">
+    <value>Setup Accounting Integration</value>
+  </data>
+  <data name="AddEndPoint_Caption" xml:space="preserve">
+    <value>Setup Accounting Integration</value>
+  </data>
+  <data name="grdEndPoints.dd9d353c-bd4d-498e-9840-1259991e08d7.ColumnHeading" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="grdEndPoints.d615c1d3-4bf1-41f6-bd23-5abcbd01689d.ColumnHeading" xml:space="preserve">
+    <value>Integration Status</value>
+  </data>
+  <data name="grdEndPoints.05b880f8-ecf9-4376-995f-627fa7d0b312.ColumnHeading" xml:space="preserve">
+    <value>Integration Enabled</value>
+  </data>
+  <data name="grdEndPoints.69783e94-6dd7-4716-8613-e556b0e912d4.ColumnHeading" xml:space="preserve">
+    <value>Integration</value>
+  </data>
+  <data name="lblEnabled.Caption" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="lblDisabled.Caption" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="grdEndPoints.dacac144-28d9-468f-9e96-d8205b85791b.ColumnHeading" xml:space="preserve">
+    <value />
+  </data>
+  <data name="grdEndPoints.dacac144-28d9-468f-9e96-d8205b85791b.Text" xml:space="preserve">
+    <value>Sync</value>
+  </data>
+  <data name="btnSyncAll.ActionConfirmationMessage" xml:space="preserve">
+    <value>Synchronization process has been started successfully.</value>
+  </data>
+  <data name="btnSyncAll.ToolTip" xml:space="preserve">
+    <value>Sync all accounting systems</value>
+  </data>
+</root>

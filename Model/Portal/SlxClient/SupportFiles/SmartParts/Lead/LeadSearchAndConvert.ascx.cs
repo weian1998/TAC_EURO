@@ -985,8 +985,31 @@ public partial class LeadSearchAndConvert : EntityBoundSmartPartInfoProvider
                 leadHistoryId = sourceLead.SaveLeadHistory();
 
                 sourceLead.ConvertLeadToContact(contact, account, "Add Contact to this Account");
-                sourceLead.ConvertLeadAddressToContactAddress(contact);
-                sourceLead.ConvertLeadAddressToAccountAddress(account);
+
+                if (mergeRule.ToUpper().Equals("LEADWINS"))
+                {
+                    sourceLead.ConvertLeadAddressToContactAddress(contact);
+                    //sourceLead.ConvertLeadAddressToAccountAddress(account);
+                }
+                else 
+                {
+
+                    contact.Address.Address1 = account.Address.Address1;
+                    contact.Address.Address2 = account.Address.Address2;
+                    contact.Address.Address3 = account.Address.Address3;
+                    contact.Address.Address4 = account.Address.Address4;
+                    contact.Address.City = account.Address.City;
+                    contact.Address.Country = account.Address.Country;
+                    contact.Address.County = account.Address.County;
+                    contact.Address.Description = account.Address.Description;
+                    contact.Address.PostalCode = account.Address.PostalCode;
+                    contact.Address.Salutation = account.Address.Salutation;
+                    contact.Address.State = account.Address.State;
+                    contact.Address.TimeZone = account.Address.TimeZone;
+                    contact.Address.Type = account.Address.Type;                
+                }
+                
+                
                 sourceLead.MergeLeadWithAccount(account, mergeRule, contact);
                 account.Save();
                 contact.Save();
@@ -1170,7 +1193,8 @@ public partial class LeadSearchAndConvert : EntityBoundSmartPartInfoProvider
                     if (targetLead != null)
                     {
                         SetResolveData(targetLead.Id.ToString(), "ILead", string.Format(GetLocalResourceObject("Resolved.MergedWithLead").ToString(), targetLead.LeadNameLastFirst));
-                        Response.Redirect(string.Format("Lead.aspx?entityId={0}", targetLead.Id));
+                        //Response.Redirect(string.Format("Lead.aspx?entityId={0}", targetLead.Id));
+                        GoToEntity(typeof(ILead), targetLead.Id.ToString()); 
                     }
 
                     if (targetContact != null)

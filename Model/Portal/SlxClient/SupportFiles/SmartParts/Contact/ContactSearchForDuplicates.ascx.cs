@@ -1,19 +1,13 @@
 using System;
-using System.Collections;
-using System.Reflection;
 using System.Web.UI;
-using System.Collections.Generic;
 using Sage.Entity.Interfaces;
 using Sage.Platform;
 using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
-using Sage.Platform.Repository;
-using Sage.Platform.WebPortal.Binding;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.SalesLogix.Services.PotentialMatch;
 using Sage.Platform.NamedQueries;
 using System.Web.UI.WebControls;
-using System.Web.UI.MobileControls;
 using System.Data;
 using Sage.Platform.Application.UI.Web;
 using System.Text;
@@ -81,9 +75,9 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
                     _duplicateProvider.EntitySource = new MatchEntitySource(typeof(IContact), contact);
                 }
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
-                throw new ApplicationException(GetLocalResourceObject("LoadErrorMSG").ToString());
+                throw new ApplicationException(GetLocalResourceObject("LoadErrorMSG").ToString(), exp);
             }
             return _duplicateProvider;
         }
@@ -495,7 +489,7 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
         }
         catch (Exception exp)
         {
-            throw new ApplicationException(GetLocalResourceObject("LoadErrorMSG").ToString());
+            throw new ApplicationException(GetLocalResourceObject("LoadErrorMSG").ToString(), exp);
         }
     }
 

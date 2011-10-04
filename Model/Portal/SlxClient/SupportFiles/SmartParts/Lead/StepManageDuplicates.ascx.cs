@@ -39,7 +39,7 @@ public partial class StepManageDuplicates : UserControl
         {
             if (Mode.Value == "")
             {
-                Mode.Value = "Intialized";
+                Mode.Value = "Initialized";
                 chkFindDupsInFile.Checked = importManager.Configuration.AdvancedOptions.IndexAfterInsert;
             }
             else 
@@ -96,7 +96,7 @@ public partial class StepManageDuplicates : UserControl
             importManager.Options.CheckForDuplicates = chkCheckForDups.Checked;
             if (Mode.Value == "")
             {
-                Mode.Value = "Intialized";
+                Mode.Value = "Initialized";
                 chkFindDupsInFile.Checked = importManager.Configuration.AdvancedOptions.IndexAfterInsert;
             }
             else

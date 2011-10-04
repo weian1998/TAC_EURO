@@ -83,9 +83,9 @@ LookupControl.__operators = {
         {name: "LookupControl_Operator_Equal", value: "eq"},
         {name: "LookupControl_Operator_NotEqual", value: "ne"},
         {name: "LookupControl_Operator_GT", value: "gt"},
-        {name: "LookupControl_Operator_GE", value: "gteq"},
+        {name: "LookupControl_Operator_GE", value: "ge"},
         {name: "LookupControl_Operator_LT", value: "lt"},
-        {name: "LookupControl_Operator_LE", value: "lteq"}        
+        {name: "LookupControl_Operator_LE", value: "le"}        
     ],
     "System.Boolean": [ 
         {name: "LookupControl_Operator_Equal", value: "eq"},
@@ -104,9 +104,9 @@ LookupControl.__defaultOperators = [
     {name: "LookupControl_Operator_Equal", value: "eq"},
     {name: "LookupControl_Operator_NotEqual", value: "ne"},
     {name: "LookupControl_Operator_GT", value: "gt"},
-    {name: "LookupControl_Operator_GE", value: "gteq"},
+    {name: "LookupControl_Operator_GE", value: "ge"},
     {name: "LookupControl_Operator_LT", value: "lt"},
-    {name: "LookupControl_Operator_LE", value: "lteq"}            
+    {name: "LookupControl_Operator_LE", value: "le"}            
 ];
 LookupControl.__transforms = {
     standard: {
@@ -116,8 +116,8 @@ LookupControl.__transforms = {
         ne: function(e,p,t,v) { return String.format("{0}.{1} ne {2}", e, p, this.escape(t,v,true)); },
         gt: function(e,p,t,v) { return String.format("{0}.{1} gt {2}", e, p, this.escape(t,v,true)); },
         lt: function(e,p,t,v) { return String.format("{0}.{1} lt {2}", e, p, this.escape(t,v,true)); },
-        gteq: function(e,p,t,v) { return String.format("{0}.{1} gteq {2}", e, p, this.escape(t,v,true)); },
-        lteq: function(e,p,t,v) { return String.format("{0}.{1} lteq {2}", e, p, this.escape(t,v,true)); }    
+        ge: function(e,p,t,v) { return String.format("{0}.{1} ge {2}", e, p, this.escape(t,v,true)); },
+        le: function(e,p,t,v) { return String.format("{0}.{1} le {2}", e, p, this.escape(t,v,true)); }    
     },
     upper: {
         sw: function(e,p,t,v) { return String.format("upper({0}.{1}) like upper({2})", e, p, this.escape(t,(v+"*"),true)); },
@@ -126,8 +126,8 @@ LookupControl.__transforms = {
         ne: function(e,p,t,v) { return String.format("upper({0}.{1}) ne upper({2})", e, p, this.escape(t,v,true)); },
         gt: function(e,p,t,v) { return String.format("upper({0}.{1}) gt upper({2})", e, p, this.escape(t,v,true)); },
         lt: function(e,p,t,v) { return String.format("upper({0}.{1}) lt upper({2})", e, p, this.escape(t,v,true)); },
-        gteq: function(e,p,t,v) { return String.format("upper({0}.{1}) gteq upper({2})", e, p, this.escape(t,v,true)); },
-        lteq: function(e,p,t,v) { return String.format("upper({0}.{1}) lteq upper({2})", e, p, this.escape(t,v,true)); }    
+        ge: function(e,p,t,v) { return String.format("upper({0}.{1}) ge upper({2})", e, p, this.escape(t,v,true)); },
+        le: function(e,p,t,v) { return String.format("upper({0}.{1}) le upper({2})", e, p, this.escape(t,v,true)); }    
     }
 };
 LookupControl.__instances = {};
@@ -444,306 +444,321 @@ LookupControl.prototype.clearResult = function() {
 };
 
 LookupControl.prototype.createDialog = function () {
-	var self = this;
-	var variables = {
-		lookupPropertiesId: this._clientId + "_lookup_properties",
-		lookupOperatorsId: this._clientId + "_lookup_operators",
-		lookupValuesSelectId: this._clientId + "_lookup_values_select",
-		lookupValuesInputId: this._clientId + "_lookup_values_input",
-		lookupLabel: LookupControlResources.LookupControl_Label_LookupByShort,
-		properties: this._properties
-	};
+    var self = this;
+    var variables = {
+        lookupPropertiesId: this._clientId + "_lookup_properties",
+        lookupOperatorsId: this._clientId + "_lookup_operators",
+        lookupValuesSelectId: this._clientId + "_lookup_values_select",
+        lookupValuesInputId: this._clientId + "_lookup_values_input",
+        lookupLabel: LookupControlResources.LookupControl_Label_LookupByShort,
+        properties: this._properties
+    };
 
-	var gridPanel = new Ext.Panel({
-		layout: "fit",
-		border: false,
-		items: this.getGrid().getNativeGrid()
-	});
+    var gridPanel = new Ext.Panel({
+        layout: "fit",
+        border: false,
+        items: this.getGrid().getNativeGrid()
+    });
 
-	var searchButton = new Ext.Button({
-		id: this._clientId + "_lookup_search",
-		text: LookupControlResources.LookupControl_Button_Search,
-		tabIndex: 4
-	});
+    var searchButton = new Ext.Button({
+        id: this._clientId + "_lookup_search",
+        text: LookupControlResources.LookupControl_Button_Search,
+        tabIndex: 4
+    });
 
-	var northPanel = new Ext.Panel({
-		region: "north",
-		margins: "5 5 5 5",
-		id: this._id + "_lookup_panel_north",
-		border: false,
-		autoHeight: true,
-		html: this._templates.lookup.apply(variables)
-	});
+    var northPanel = new Ext.Panel({
+        region: "north",
+        margins: "5 5 5 5",
+        id: this._id + "_lookup_panel_north",
+        border: false,
+        autoHeight: true,
+        html: this._templates.lookup.apply(variables)
+    });
 
-	var dialog = new Ext.Window({
-		id: this._id + "_lookup_dialog",
-		title: this._dialogTitle,
-		cls: "lookup-dialog",
-		layout: "border",
-		closeAction: "hide",
-		plain: true,
-		height: this._options.dialogHeight || 500,
-		width: this._options.dialogWidth || 680,
-		stateful: false,
-		modal: true,
-		items: [northPanel, {
-			region: "center",
-			margins: "0 0 0 0",
-			border: false,
-			layout: "fit",
-			id: this._id + "_lookup_panel_center",
-			items: gridPanel
-		}],
-		buttonAlign: "right",
-		buttons: [{
-			id: this._clientId + "_lookup_ok",
-			tabIndex: 5,
-			text: GetResourceValue(LookupControlResources.LookupControl_Button_Ok, "OK"),
-			handler: function () {
-				var grid = self.getGrid().getNativeGrid();
-				var selected;
-				if (grid.getStore().getTotalCount() > 1)
-					selected = grid.getSelectionModel().getSelected();
-				else if (grid.getStore().getTotalCount() == 1)
-					selected = grid.getStore().getAt(0);
+    var dialog = new Ext.Window({
+        id: this._id + "_lookup_dialog",
+        title: this._dialogTitle,
+        cls: "lookup-dialog",
+        layout: "border",
+        closeAction: "hide",
+        plain: true,
+        height: this._options.dialogHeight || 500,
+        width: this._options.dialogWidth || 680,
+        stateful: false,
+        modal: true,
+        items: [northPanel, {
+            region: "center",
+            margins: "0 0 0 0",
+            border: false,
+            layout: "fit",
+            id: this._id + "_lookup_panel_center",
+            items: gridPanel
+        }],
+        buttonAlign: "right",
+        buttons: [{
+            id: this._clientId + "_lookup_ok",
+            tabIndex: 5,
+            text: GetResourceValue(LookupControlResources.LookupControl_Button_Ok, "OK"),
+            handler: function () {
+                var grid = self.getGrid().getNativeGrid();
+                var selected;
+                if (grid.getStore().getTotalCount() > 1)
+                    selected = grid.getSelectionModel().getSelected();
+                else if (grid.getStore().getTotalCount() == 1)
+                    selected = grid.getStore().getAt(0);
 
-				if (selected) {
-					self.setResult(selected.data);
-					self.invokeChangeEvent($("#" + self._resultTextId).get(0));
-					self.fireEvent('change', this);
+                if (selected) {
+                    self.setResult(selected.data);
+                    self.invokeChangeEvent($("#" + self._resultTextId).get(0));
+                    self.fireEvent('change', this);
 
-					if (self._autoPostBack)
-						__doPostBack(self._clientId, '');
-				}
+                    if (self._autoPostBack)
+                        __doPostBack(self._clientId, '');
+                }
 
-				self.close();
-			}
-		}, {
-			id: this._clientId + "_lookup_cancel",
-			tabIndex: 6,
-			text: LookupControlResources.LookupControl_Button_Cancel,
-			handler: function () {
-				self.close();
-			}
-		}],
-		tools: [{
-			id: "help",
-			handler: function (evt, toolEl, panel) {
-				if (self._helpLink && self._helpLink.url)
-					window.open(self._helpLink.url, (self._helpLink.target || "help"));
-			}
-		}]
-	});
+                self.close();
+            }
+        }, {
+            id: this._clientId + "_lookup_cancel",
+            tabIndex: 6,
+            text: LookupControlResources.LookupControl_Button_Cancel,
+            handler: function () {
+                self.close();
+            }
+        }],
+        tools: [{
+            id: "help",
+            handler: function (evt, toolEl, panel) {
+                if (self._helpLink && self._helpLink.url)
+                    window.open(self._helpLink.url, (self._helpLink.target || "help"));
+            }
+        }]
+    });
 
-	searchButton.on('click', function () {
-		var context = dialog.getEl().dom;
-		var properties = $(".lookup-properties select", context).selectedValues();
-		var operators = $(".lookup-operators select", context).selectedValues();
-		var property = (properties.length > 0) ? properties[0] : null;
-		var operator = (operators.length > 0) ? operators[0] : null;
+    searchButton.on('click', function () {
+        var context = dialog.getEl().dom;
+        var properties = $(".lookup-properties select", context).selectedValues();
+        var operators = $(".lookup-operators select", context).selectedValues();
+        var property = (properties.length > 0) ? properties[0] : null;
+        var operator = (operators.length > 0) ? operators[0] : null;
 
-		/* always refresh meta data on search */
-		self.getGrid().clearMetaData();
+        /* always refresh meta data on search */
+        self.getGrid().clearMetaData();
 
-		if (!properties || !operator)
-			return;
+        if (!properties || !operator)
+            return;
 
-		var info = self._propertyLookup[property];
-		var value;
+        var info = self._propertyLookup[property];
+        var value;
+        var ISODateString = function (val) {
+            function pad(n) { return n < 10 ? '0' + n : n }
+            var d = Date.parse(val);
+            if (isNaN(d)) return val;
+            d = new Date(d);
+            return d.getUTCFullYear() +
+                pad(d.getUTCMonth() + 1) +
+                pad(d.getUTCDate())
+            //+ ' ' +
+            //pad(d.getUTCHours()) + ':' +
+            //pad(d.getUTCMinutes()) + ':' +
+            //pad(d.getUTCSeconds()) //+ 'Z'
+        }
+        switch (info.type) {
+            case "SalesLogix.PickList":
+            case "SalesLogix.MRCodePickList":
+            case "Sage.Entity.Interfaces.OwnerType":
+                var values = $(".lookup-values select", context).selectedValues();
+                value = (values.length > 0) ? values[0] : null;
+                break;
+            case "System.DateTime":
+                value = "'" + ISODateString($(".lookup-values input", context).val()) + "'";
+                break;
+            default:
+                value = $(".lookup-values input", context).val();
+                break;
+        }
 
-		switch (info.type) {
-			case "SalesLogix.PickList":
-			case "SalesLogix.MRCodePickList":
-			case "Sage.Entity.Interfaces.OwnerType":
-				var values = $(".lookup-values select", context).selectedValues();
-				value = (values.length > 0) ? values[0] : null;
-				break;
-			default:
-				value = $(".lookup-values input", context).val();
-				break;
-		}
+        var transform = self.getTransformFor(operator);
+        if (transform) {
+            if (value) {
+                var grid = self.getGrid();
+                grid.getNativeGrid().getStore().setDefaultSort(property, 'ASC');
+                var where = transform.call(self, self._entity, property, info.type, value);
+                if (!self._overrideSeedOnSearch) {
+                    var seedQuery = self.getSeedQueryExpression();
+                    if (seedQuery)
+                        where = where + " and " + seedQuery;
+                }
+                grid.getConnections()["data"].parameters["where"] = where;
+                grid.getNativeGrid().getStore().load();
+            }
+            else {
+                var grid = self.getGrid();
+                grid.getNativeGrid().getStore().setDefaultSort(property, 'ASC');
+                delete grid.getConnections()["data"].parameters["where"];
+                if (!self._overrideSeedOnSearch) {
+                    var seedQuery = self.getSeedQueryExpression();
+                    if (seedQuery)
+                        grid.getConnections()["data"].parameters["where"] = seedQuery;
+                }
+                grid.getNativeGrid().getStore().load();
+            }
+        }
+    });
 
-		var transform = self.getTransformFor(operator);
-		if (transform) {
-			if (value) {
-				var grid = self.getGrid();
-				grid.getNativeGrid().getStore().setDefaultSort(property, 'ASC');
-				var where = transform.call(self, self._entity, property, info.type, value);
-				if (!self._overrideSeedOnSearch) {
-					var seedQuery = self.getSeedQueryExpression();
-					if (seedQuery)
-						where = where + " and " + seedQuery;
-				}
-				grid.getConnections()["data"].parameters["where"] = where;
-				grid.getNativeGrid().getStore().load();
-			}
-			else {
-				var grid = self.getGrid();
-				grid.getNativeGrid().getStore().setDefaultSort(property, 'ASC');
-				delete grid.getConnections()["data"].parameters["where"];
-				if (!self._overrideSeedOnSearch) {
-					var seedQuery = self.getSeedQueryExpression();
-					if (seedQuery)
-						grid.getConnections()["data"].parameters["where"] = seedQuery;
-				}
-				grid.getNativeGrid().getStore().load();
-			}
-		}
-	});
+    dialog.on('hide', function () {
+        self.fireEvent('close', this);
+    }, dialog);
 
-	dialog.on('hide', function () {
-		self.fireEvent('close', this);
-	}, dialog);
+    dialog.on('show', function () {
+        var context = dialog.getEl().dom;
+        if (!this._initialized) {
+            searchButton.render($(".lookup-search", context).get(0));
 
-	dialog.on('show', function () {
-		var context = dialog.getEl().dom;
-		if (!this._initialized) {
-			searchButton.render($(".lookup-search", context).get(0));
+            var select = $(".lookup-properties select", context).addOption(self._propertyPairs).change(function (e) {
+                $("option:selected", this).each(function () {
+                    //change operators
+                    var property = self._propertyLookup[$(this).val()];
+                    if (property) {
+                        var operators = {};
+                        if (LookupControl.__operators[property.type])
+                            for (var i = 0; i < LookupControl.__operators[property.type].length; i++)
+                                operators[LookupControl.__operators[property.type][i].value] = LookupControlResources[LookupControl.__operators[property.type][i].name];
+                        else
+                            for (var i = 0; i < LookupControl.__defaultOperators.length; i++)
+                                operators[LookupControl.__defaultOperators[i].value] = LookupControlResources[LookupControl.__defaultOperators[i].name];
 
-			var select = $(".lookup-properties select", context).addOption(self._propertyPairs).change(function (e) {
-				$("option:selected", this).each(function () {
-					//change operators
-					var property = self._propertyLookup[$(this).val()];
-					if (property) {
-						var operators = {};
-						if (LookupControl.__operators[property.type])
-							for (var i = 0; i < LookupControl.__operators[property.type].length; i++)
-								operators[LookupControl.__operators[property.type][i].value] = LookupControlResources[LookupControl.__operators[property.type][i].name];
-						else
-							for (var i = 0; i < LookupControl.__defaultOperators.length; i++)
-								operators[LookupControl.__defaultOperators[i].value] = LookupControlResources[LookupControl.__defaultOperators[i].name];
+                        var select = $(".lookup-operators select", context).get(0);
+                        //var index = select.selectedIndex;
 
-						var select = $(".lookup-operators select", context).get(0);
-						//var index = select.selectedIndex;
+                        $(select).removeOption(/./).addOption(operators);
 
-						$(select).removeOption(/./).addOption(operators);
+                        //if (index >= 0 && index < select.options.length)
+                        //    select.selectedIndex = index;
 
-						//if (index >= 0 && index < select.options.length)
-						//    select.selectedIndex = index;
+                        select.selectedIndex = 0;
 
-						select.selectedIndex = 0;
+                        if (property.type == "SalesLogix.PickList") {
+                            $(".lookup-values input", context).val("").hide();
+                            $(".lookup-values select", context).removeOption(/./).show();
+                            $.ajax({
+                                url: String.format("slxdata.ashx/slx/crm/-/picklists/{0}", property.pickListName),
+                                data: {
+                                    format: "json"
+                                },
+                                dataType: "json",
+                                success: function (data) {
+                                    var options = {};
+                                    for (var i = 0; i < data.items.length; i++) {
+                                        var name = data.items[i].text;
+                                        var value = data.items[i].itemId || data.items[i].text;
+                                        options[value] = name;
+                                    }
+                                    $(".lookup-values select", context).addOption(options);
+                                },
+                                error: function (request, status, error) {
+                                }
+                            });
+                        }
+                        else if (property.type == "SalesLogix.MRCodePickList") {
+                            $(".lookup-values input", context).val("").hide();
+                            $(".lookup-values select", context).removeOption(/./).show();
+                            $.ajax({
+                                url: String.format("slxdata.ashx/slx/crm/-/CodePickLists({0})", property.pickListName),
+                                data: {
+                                    format: "json"
+                                },
+                                dataType: "json",
+                                success: function (data) {
+                                    var options = {};
+                                    for (var i = 0; i < data.items.length; i++) {
+                                        var name = data.items[i].displayValue;
+                                        var value = data.items[i].pickListItemPath || data.items[i].displayValue;
+                                        options[value] = name;
+                                    }
+                                    $(".lookup-values select", context).addOption(options);
+                                },
+                                error: function (request, status, error) {
+                                }
+                            });
+                        }
+                        else if (property.type == "Sage.Entity.Interfaces.OwnerType") {
+                            $(".lookup-values input", context).val("").hide();
+                            $(".lookup-values select", context).removeOption(/./).show();
+                            $.ajax({
+                                type: "GET",
+                                contentType: "application/json",
+                                url: "slxdata.ashx/slx/crm/-/ownertypes",
+                                data: {
+                                    format: "json"
+                                },
+                                dataType: "json",
+                                success: function (data) {
+                                    var options = {};
+                                    for (var i = 0; i < data.length; i++) {
+                                        if (data[i].code != "S") {
+                                            var name = data[i].name;
+                                            var value = "'" + data[i].code + "'";
+                                            options[value] = name;
+                                        }
+                                    }
+                                    $(".lookup-values select", context).addOption(options);
+                                },
+                                error: function (request, status, error) {
+                                }
+                            });
+                        }
+                        else if (property.type == "System.Boolean") {
+                            $(".lookup-values input", context).val("").hide();
+                            $(".lookup-values select", context).removeOption(/./), addOption({ "true": "true", "false": "false" }).show();
+                        }
+                        else {
+                            $(".lookup-values select", context).removeOption(/./).hide();
+                            $(".lookup-values input", context).show();
+                        }
+                    }
+                });
+            }).get(0);
 
-						if (property.type == "SalesLogix.PickList") {
-							$(".lookup-values input", context).val("").hide();
-							$(".lookup-values select", context).removeOption(/./).show();
-							$.ajax({
-								url: String.format("slxdata.ashx/slx/crm/-/picklists/{0}", property.pickListName),
-								data: {
-									format: "json"
-								},
-								dataType: "json",
-								success: function (data) {
-									var options = {};
-									for (var i = 0; i < data.items.length; i++) {
-										var name = data.items[i].text;
-										var value = data.items[i].itemId || data.items[i].text;
-										options[value] = name;
-									}
-									$(".lookup-values select", context).addOption(options);
-								},
-								error: function (request, status, error) {
-								}
-							});
-						}
-						else if (property.type == "SalesLogix.MRCodePickList") {
-							$(".lookup-values input", context).val("").hide();
-							$(".lookup-values select", context).removeOption(/./).show();
-							$.ajax({
-								url: String.format("slxdata.ashx/slx/crm/-/CodePickLists({0})", property.pickListName),
-								data: {
-									format: "json"
-								},
-								dataType: "json",
-								success: function (data) {
-									var options = {};
-									for (var i = 0; i < data.items.length; i++) {
-										var name = data.items[i].displayValue;
-										var value = data.items[i].pickListItemPath || data.items[i].displayValue;
-										options[value] = name;
-									}
-									$(".lookup-values select", context).addOption(options);
-								},
-								error: function (request, status, error) {
-								}
-							});
-						}
-						else if (property.type == "Sage.Entity.Interfaces.OwnerType") {
-							$(".lookup-values input", context).val("").hide();
-							$(".lookup-values select", context).removeOption(/./).show();
-							$.ajax({
-								type: "GET",
-								contentType: "application/json",
-								url: "slxdata.ashx/slx/crm/-/ownertypes",
-								data: {
-									format: "json"
-								},
-								dataType: "json",
-								success: function (data) {
-									var options = {};
-									for (var i = 0; i < data.length; i++) {
-										if (data[i].code != "S") {
-											var name = data[i].name;
-											var value = "'" + data[i].code + "'";
-											options[value] = name;
-										}
-									}
-									$(".lookup-values select", context).addOption(options);
-								},
-								error: function (request, status, error) {
-								}
-							});
-						}
-						else if (property.type == "System.Boolean") {
-							$(".lookup-values input", context).val("").hide();
-							$(".lookup-values select", context).removeOption(/./), addOption({ "true": "true", "false": "false" }).show();
-						}
-						else {
-							$(".lookup-values select", context).removeOption(/./).hide();
-							$(".lookup-values input", context).show();
-						}
-					}
-				});
-			}).get(0);
+            if (select && select.options.length > 0) {
+                select.selectedIndex = 0;
+                $(select).change();
+            }
 
-			if (select && select.options.length > 0) {
-				select.selectedIndex = 0;
-				$(select).change();
-			}
+            $(".lookup-values input, .lookup-values select", context).bind("keypress", function (e) {
+                if (e.which == 13) {
+                    //use document.createEvent here on firefox            
+                    if (document.createEvent) {
+                        var button = searchButton.getEl().dom;
+                        var evt = document.createEvent("MouseEvents");
+                        evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+                        button.dispatchEvent(evt);
+                    }
+                    else {
+                        $("#" + searchButton.getEl().dom.id).click();
+                    }
 
-			$(".lookup-values input, .lookup-values select", context).bind("keypress", function (e) {
-				if (e.which == 13) {
-					//use document.createEvent here on firefox            
-					if (document.createEvent) {
-						var button = searchButton.getEl().dom;
-						var evt = document.createEvent("MouseEvents");
-						evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-						button.dispatchEvent(evt);
-					}
-					else {
-						$("#" + searchButton.getEl().dom.id).click();
-					}
+                    e.cancelBubble = true;
+                    if (e.stopPropagation)
+                        e.stopPropagation();
 
-					e.cancelBubble = true;
-					if (e.stopPropagation)
-						e.stopPropagation();
+                    return false;
+                }
+            });
 
-					return false;
-				}
-			});
+            this._initialized = true;
+        }
+        if (typeof idLookup != "undefined") idLookup("lookup-dialog");
 
-			this._initialized = true;
-		}
-		if (typeof idLookup != "undefined") idLookup("lookup-dialog");
+        var focusEl = $(".lookup-properties select", context).get(0);
+        setTimeout(function () { focusEl.focus(); }, 50);
 
-		var focusEl = $(".lookup-properties select", context).get(0);
-		setTimeout(function () { focusEl.focus(); }, 50);
+        /* focusEl.focus.defer(50, focusEl); */
+    }, dialog);
 
-		/* focusEl.focus.defer(50, focusEl); */
-	}, dialog);
-
-	this._dialog = dialog;
-	this._searchButton = searchButton;
-	this._northPanel = northPanel;
+    this._dialog = dialog;
+    this._searchButton = searchButton;
+    this._northPanel = northPanel;
 };
 
 LookupControl.prototype.hasDialog = function() { return !!this._dialog; };

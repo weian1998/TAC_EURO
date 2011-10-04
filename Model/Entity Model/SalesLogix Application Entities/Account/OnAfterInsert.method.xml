@@ -8,12 +8,18 @@
   <parameter />
   <preExecuteTargets />
   <methodTargets>
-    <methodTarget id="980e70cb-8392-48e9-98f7-66f4668e5375" lastModifiedUtc="2008-11-21T19:55:13.006259Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="OnAfterInsert" active="true">
+    <methodTarget id="7ec486a1-4268-459a-bbac-b735d6669649" lastModifiedUtc="2011-01-21T21:00:14.916497Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="OnAfterInsert" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>
     </methodTarget>
   </methodTargets>
-  <postExecuteTargets />
+  <postExecuteTargets>
+    <methodTarget id="101bf44a-95fd-4fb7-a645-c1c2f59e1bfb" lastModifiedUtc="2011-01-19T01:28:13.9545061Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="CreateOperatingCompany" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </postExecuteTargets>
   <postFlushTargets />
 </method>

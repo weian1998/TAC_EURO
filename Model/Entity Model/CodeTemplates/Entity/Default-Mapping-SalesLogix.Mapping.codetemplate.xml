@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <codeTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="b9ab7051-97ec-4b2d-9932-77ac29099ac7" name="Default-Mapping-SalesLogix" templateType="Mapping" templateEngineType="T4">
   <template>
-              <![CDATA[<#@ template language="C#v3.5" #>
+    <![CDATA[<#@ template language="C#v3.5" #>
+<#@ assembly name="System.Core.dll" #>
 <#@ assembly name="System.Xml.dll" #>
 <#@ assembly name="Microsoft.Unity.dll" #>
 <#@ assembly name="NHibernate.dll" #>
@@ -9,6 +10,7 @@
 <#@ assembly name="Sage.Platform.Orm.CodeGen.dll" #>
 <#@ assembly name="Sage.Platform.Projects.dll" #>
 <#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Linq" #>
 <#@ import namespace="Microsoft.Practices.Unity" #>
 <#@ import namespace="NHibernate.SqlTypes" #>
 <#@ import namespace="Sage.Platform.Orm.CodeGen" #>
@@ -19,6 +21,12 @@ var entity = (OrmEntity) Context["entity"];
 var @namespace = (string) Context["namespace"];
 var assembly = (string) Context["assembly"];
 var generator = (HbmGenerator) Context["generator"];
+
+var parents = entity.ParentEntities.Where(relation => relation.ChildProperty.Include && IsEntityIncluded(relation.ParentEntity)).ToList();
+var children = entity.ChildEntities.Where(relation => relation.ParentProperty.Include && IsEntityIncluded(relation.ChildEntity)).ToList();
+var extenders = entity.ExtensionEntities.Where(extender => IsEntityIncluded(extender)).ToList();
+var properties = OrmEntity.GetIncludedProperties(entity).OfType<OrmFieldProperty>().ToList();
+var customProperties = generator.GetIncludedCustomProperties(entity).ToList();
 #>
 <# //Constants setup #>
 <# //composite key constants #>
@@ -38,9 +46,9 @@ var generator = (HbmGenerator) Context["generator"];
     <!-- Composite Key -->
     <composite-id>
 <#    foreach (var rel in entity.CompositeKeyRelationships) { #>
-<#    if (entity.KeyProperties.Contains(rel.Columns[0].ChildProperty)) { #>
+<#     if (rel.Columns[0].ChildProperty.IsKeyProperty) { #>
       <key-many-to-one name="<#= rel.ChildProperty.PropertyName #>" class="<#= generator.GetFullyQualifiedClassName(rel.ParentEntity) #>" access="field.pascalcase-underscore" column="<#= rel.Columns[0].ChildProperty.ColumnName #>" />
-<#    } #>
+<#     } #>
 <#    } #>
     </composite-id>
 <#   } #>
@@ -54,16 +62,14 @@ var generator = (HbmGenerator) Context["generator"];
     </composite-id>
 <#   } #>
 <#  } #>
-
 <# } else { #>
     <!-- Primary Key -->
     <id name="Id" column="<#= entity.KeyProperty.ColumnName #>" type="<#= generator.ToNHibernateType(entity.KeyProperty) #>" access="field.pascalcase-underscore">
-<#  if (entity.IsExtension) { #>
+<#  if (entity.IsExtension && IsEntityIncluded(entity.ExtendedEntity)) { #>
       <generator class="foreign">
         <param name="property"><#= entity.ExtendedEntity.Name #></param>
       </generator>
-<#  } else { #>
-<#  if( entity.TableName == "SECCODE" ) { #>
+<#  } else if (entity.TableName == "SECCODE") { #>
       <generator class="Sage.SalesLogix.Orm.IdGenerator.OwnerGenerator, Sage.SalesLogix">
         <param name="batch_size">1</param>
       </generator>
@@ -72,45 +78,43 @@ var generator = (HbmGenerator) Context["generator"];
         <param name="batch_size">10</param>
       </generator>
 <#  } #>
-<#  } #>
     </id>
 <# } #>
     <!-- Properties -->
 <# //Property section #>
 <# //columns is all the Columns in entity, minus any KeyColumns #>
-<# foreach (var property in generator.GetIncludedProperties(entity)) { #>
-<#  var fieldProp = property as OrmFieldProperty; #>
-<#  if (fieldProp != null && (!entity.KeyProperties.Contains(fieldProp) || ck_useRelationships)) { #>
-    <property name="<#= property.PropertyName #>" column="<#= fieldProp.ColumnName #>" type="<#= generator.ToNHibernateType(fieldProp) #>" access=<# if (fieldProp.DataType.SqlType == SqlTypeFactory.DateTime) { #> "Sage.SalesLogix.Orm.SlxDateTimePropertyAccessor, Sage.SalesLogix" <# } else { #> "field.pascalcase-underscore" <# } #> <#= Addlength(property) #> <# if (fieldProp.IsReadOnly || fieldProp.IsKeyProperty) { #> update="false" insert="false" <# } #> />
+<# foreach (var property in properties) { #>
+<#  if (!property.IsKeyProperty || ck_useRelationships) { #>
+    <property name="<#= property.PropertyName #>" column="<#= property.ColumnName #>" type="<#= generator.ToNHibernateType(property) #>" access=<# if (property.DataType.SqlType == SqlTypeFactory.DateTime) { #> "Sage.SalesLogix.Orm.SlxDateTimePropertyAccessor, Sage.SalesLogix" <# } else { #> "field.pascalcase-underscore" <# } #> <#= Addlength(property) #> <# if (property.IsReadOnly || property.IsKeyProperty) { #> update="false" insert="false" <# } #> />
 <#  } #>
 <# } #>
-<# if (entity.ChildEntities.Count > 0) { #>
+<# if (children.Count > 0) { #>
     <!-- Relationships -->
-<#  foreach (var relation in entity.ChildEntities) { #>
-<#   if (relation.ParentProperty.Include && relation.Cardinality == "1:M") { #>
+<#  foreach (var relation in children) { #>
+<#   if (relation.Cardinality == "1:M") { #>
     <set name="<#= relation.ParentProperty.PropertyName #>" cascade="<#= generator.ToCascadeString(relation) #>" lazy="true" batch-size="10" inverse="true" access="Sage.Platform.Collections.GenericAccessor, Sage.Platform">
       <key column="<#= relation.Columns[0].ChildProperty.ColumnName #>" />
       <one-to-many class="<#= generator.GetFullyQualifiedClassName(relation.ChildEntity) #>" />
     </set>
-<#   } else if (relation.ParentProperty.Include && relation.Cardinality == "M:1") { #>
-    <many-to-one name="<#= relation.ParentProperty.PropertyName #>" cascade="save-update" class="<#= generator.GetFullyQualifiedClassName(relation.ChildEntity) #>" access="field.pascalcase-underscore" column="<#= relation.Columns[0].ParentProperty.ColumnName #>" <# if (relation.Columns[0].ChildProperty != relation.Columns[0].ChildProperty.Entity.KeyProperty) { #> property-ref="<#= relation.Columns[0].ChildProperty.PropertyName #>" <# } #> not-null=<# if (relation.ParentProperty.IsNullable) { #> "false" <# } else { #> "true" <# } #> <# if (entity.HasCompositeKey && relation.Columns[0].ParentProperty.IsKeyProperty) { #> update="false" insert="false" <# } #> />
+<#   } else if (relation.Cardinality == "M:1") { #>
+    <many-to-one name="<#= relation.ParentProperty.PropertyName #>" cascade="save-update" class="<#= generator.GetFullyQualifiedClassName(relation.ChildEntity) #>" access="field.pascalcase-underscore" column="<#= relation.Columns[0].ParentProperty.ColumnName #>" <# if (!relation.Columns[0].ChildProperty.IsKeyProperty) { #> property-ref="<#= relation.Columns[0].ChildProperty.PropertyName #>" <# } #> not-null=<# if (relation.ParentProperty.IsNullable) { #> "false" <# } else { #> "true" <# } #> <# if (entity.HasCompositeKey && relation.Columns[0].ParentProperty.IsKeyProperty) { #> update="false" insert="false" <# } #> />
 <#   } #>
 <#  } #>
 <# } #>
-<# if (entity.ParentEntities.Count > 0) { #>
+<# if (parents.Count > 0) { #>
     <!-- Relationships -->
-<#  foreach (var relation in entity.ParentEntities) { #>
-<#   if ( relation.ChildProperty.Include && relation.Cardinality == "1:M") { #>
+<#  foreach (var relation in parents) { #>
+<#   if (relation.Cardinality == "1:M") { #>
     <many-to-one name="<#= relation.ChildProperty.PropertyName #>" class="<#= generator.GetFullyQualifiedClassName(relation.ParentEntity) #>" access="field.pascalcase-underscore" column="<#= relation.Columns[0].ChildProperty.ColumnName #>" not-null=<# if (relation.ChildProperty.IsNullable) { #> "false" <# } else { #> "true" <# } #> <# if (entity.HasCompositeKey && relation.Columns[0].ParentProperty.IsKeyProperty) { #> update="false" insert="false" <# } #> />
 <#   } #>
 <#  } #>
 <# } #>
 <# //Parent extension relationship #>
-<# if (entity.IsExtension) { #>
+<# if (entity.IsExtension && IsEntityIncluded(entity.ExtendedEntity)) { #>
     <one-to-one name="<#= entity.ExtendedEntity.Name #>" class="<#= generator.GetFullyQualifiedClassName(entity.ExtendedEntity) #>" constrained="true" access="field.pascalcase-underscore" />
 <# } #>
 <# //Child extensions #>
-<# foreach (var child in entity.ExtensionEntities) { #>
+<# foreach (var child in extenders) { #>
     <one-to-one name="<#= child.Name #>" class="<#= generator.GetFullyQualifiedClassName(child) #>" cascade="all" access="field.pascalcase-underscore" />
 <# } #>
   </class>
@@ -131,6 +135,11 @@ private static string Addlength(OrmEntityProperty property) {
         return "";
     }
 }
-#>]]></template>
+#>
+<#+ private static bool IsEntityIncluded(OrmEntity entity)
+    {
+        return entity.Package.Include && entity.Generate && !entity.IsDynamic;
+    } #>]]>
+  </template>
   <description>Default SalesLogix NHibernate mapping template</description>
 </codeTemplate>

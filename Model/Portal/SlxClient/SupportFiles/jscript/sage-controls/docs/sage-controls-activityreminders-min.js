@@ -38,21 +38,13 @@ else
 {Ext.get(this.ClientId).removeClass("ReminderNoAlert").addClass("ReminderAlert");}}}
 ReminderTimer.prototype.StartTimer=ReminderTimer_StartTimer;ReminderTimer.prototype.StopTimer=ReminderTimer_StopTimer;ReminderTimer.prototype.TimeOut=ReminderTimer_TimeOut;ReminderTimer.prototype.CheckTimeOut=ReminderTimer_CheckTimeOut;ReminderTimer.prototype.HandleHttpResponse=ReminderTimer_HandleHttpResponse;function ActivityRollover(message,userId)
 {this.RollingOver=false;this.message=message;this.UserId=userId;}
-ActivityRollover.prototype.DoRollovers=function()
-{var NumberToRoll=20;if(typeof(roxmlhttp)=="undefined"){roxmlhttp=YAHOO.util.Connect.createXhrObject().conn;}
-var vUrl=String.format("SLXReminderHandler.aspx?user={0}&Rollover=T&Count={1}",this.UserId,NumberToRoll);roxmlhttp.open("GET",vUrl,true);roxmlhttp.onreadystatechange=function(){RolloverObj.RolloverChild(vUrl,this.message);};roxmlhttp.send(null);}
-ActivityRollover.prototype.RolloverChild=function(vURL,msg)
-{if(roxmlhttp.readyState==4)
-{if(roxmlhttp.responseText=="NOTAUTHENTICATED")
+ActivityRollover.prototype.DoRollovers=function(){var NumberToRoll=20;var vUrl=String.format("SLXReminderHandler.aspx?user={0}&Rollover=T&Count={1}",this.UserId,NumberToRoll);$.get(vUrl,function(data,status){RolloverObj.RolloverChild(vUrl,data);});}
+ActivityRollover.prototype.RolloverChild=function(vURL,data)
+{if(data==="NOTAUTHENTICATED")
 {window.location.reload(true);return;}
-var NumberLeft=parseInt(roxmlhttp.responseText);if(NumberLeft>0)
-{this.RollingOver=true;self.setTimeout("SetWarning("+NumberLeft+", '"+this.message+"')",100);roxmlhttp.open("GET",vURL,true);roxmlhttp.onreadystatechange=function(){RolloverObj.RolloverChild(vURL,this.message);};roxmlhttp.send(null);}
-else
-{self.setTimeout("ClearWarning()",500);}}}
+var NumberLeft=parseInt(data,10);if(NumberLeft>0){this.RollingOver=true;self.setTimeout("SetWarning("+NumberLeft+", '"+this.message+"')",100);$.get(String.format("SLXReminderHandler.aspx?user={0}&Rollover=T&Count={1}",this.UserId,NumberToRoll),function(data,status){RolloverObj.RolloverChild(vUrl,data);});}else{self.setTimeout("ClearWarning()",500);}}
 function SetWarning(total,msg)
-{var msgService=Sage.Services.getService("WebClientMessageService");if(msgService)
-{msgService.showClientMessage(RolloverObj.message.replace("%d",total));}}
+{var msgService=Sage.Services.getService("WebClientMessageService");if(msgService){msgService.showClientMessage(RolloverObj.message.replace("%d",total));}}
 function ClearWarning()
-{var msgService=Sage.Services.getService("WebClientMessageService");if(msgService)
-{msgService.hideClientMessage();}
+{var msgService=Sage.Services.getService("WebClientMessageService");if(msgService){msgService.hideClientMessage();}
 RolloverObj.RollingOver=false;}

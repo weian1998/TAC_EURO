@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="e91b0771-07f0-4f71-833e-3f33f7d5321d" lastModifiedUtc="2011-04-12T18:30:24.0179132Z" name="UpdateSalesPotential" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="8b89880a-b971-43c5-a320-b8269cd6b213" lastModifiedUtc="2011-04-12T17:34:47.4929132Z" targetType="Sage.SalesLogix.OpportunityProduct.Rules, Sage.SalesLogix.BusinessRules" targetMethod="UpdateSalesPotential" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

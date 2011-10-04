@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="0c5c0d18-c5c8-4c0c-97cc-8feddceea66e" lastModifiedUtc="2010-07-30T22:15:23.031708Z" name="OnFormLoad" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="EditSalesOrderItem">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="db913bdd-9b78-45ab-947c-e3b11836cf28" paramName="form" sequence="0" paramType="IEditSalesOrderItem" />
+    <OrmEntityMethodParam id="783acfd0-2e23-4314-b445-c0062468a6e6" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="3e9d19a3-2d96-4f2e-91eb-e8eee3df832e" lastModifiedUtc="2011-03-04T20:23:33.7535104Z" targetType="Sage.BusinessRules.CodeSnippets.EditSalesOrderItemEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="OnFormLoadStep" active="true" codeSnippetId="4bf06cb0-2f4f-42d9-b023-7b48ba67a5fc">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

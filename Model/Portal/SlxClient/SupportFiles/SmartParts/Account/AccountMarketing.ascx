@@ -27,8 +27,8 @@
         <asp:ButtonField CommandName="Remove" Text="<%$ resources: AccountMarketing_Remove %>" />
         <asp:BoundField DataField="CampaignName" HeaderText="<%$ resources: AccountMarketing_Name.HeaderText %>" SortExpression="CampaignName" />
         <asp:BoundField DataField="CampaignCode" HeaderText="<%$ resources: AccountMarketing_Code.HeaderText %>" SortExpression="CampaignCode" />
-        <asp:BoundField DataField="Status" HeaderText="<%$ resources: AccountMarketing_Status.HeaderText %>" />
-        <asp:BoundField DataField="Stage" HeaderText="<%$ resources: AccountMarketing_Stage.HeaderText %>" />
+        <asp:BoundField DataField="Status" HeaderText="<%$ resources: AccountMarketing_Status.HeaderText %>" SortExpression="Status" />
+        <asp:BoundField DataField="Stage" HeaderText="<%$ resources: AccountMarketing_Stage.HeaderText %>" SortExpression="Stage" />
         <asp:TemplateField SortExpression="contact" HeaderText="<%$ resources: AccountMarketing_Contact.HeaderText %>" >
             <itemtemplate>
                 <SalesLogix:PageLink runat="server" EntityId='<%# Eval("ContactId") %>' LinkType="EntityAlias" Text='<%# Eval("Contact") %>' 

@@ -1,4 +1,4 @@
-<%@ Page Language="C#" MasterPageFile="~/Masters/Login.master" AutoEventWireup="true" Culture="auto" UICulture="auto" EnableEventValidation="false"%>
+﻿<%@ Page Language="C#" MasterPageFile="~/Masters/Login.master" AutoEventWireup="true" Culture="auto" UICulture="auto" EnableEventValidation="false"%>
 <%@ Import Namespace="Sage.Platform.Orm"%>
 <%@ Import Namespace="System.Collections.Generic"%>
 <%@ Import Namespace="NHibernate"%>
@@ -103,7 +103,7 @@
             Sage.Platform.Application.ApplicationContext.Current.State.Remove("AuthError");
             
             Literal FailureText = (Literal)slxLogin.FindControl("FailureText");
-            FailureText.Text = msg.ToString();
+            FailureText.Text = Server.HtmlEncode(msg.ToString());
             FailureText.Visible = true;
         }
     }
@@ -111,7 +111,7 @@
     {
         Version version = typeof(Sage.SalesLogix.Web.SLXMembershipProvider).Assembly.GetName().Version;
         Label lblVersion = (Label)slxLogin.FindControl("VersionLabel");
-        lblVersion.Text = String.Format("{0} {1}", GetLocalResourceObject("VersionLabelResource1.Text").ToString(), version.ToString());
+        lblVersion.Text = Server.HtmlEncode(String.Format("{0} {1}", GetLocalResourceObject("VersionLabelResource1.Text").ToString(), version.ToString()));
               
     }
     /// <summary>
@@ -126,7 +126,7 @@
 
         if (String.IsNullOrEmpty(userName.Text))
         {
-            HintText.Text = GetLocalResourceObject("PasswordHintUserNameRequired").ToString();
+            HintText.Text = Server.HtmlEncode(GetLocalResourceObject("PasswordHintUserNameRequired").ToString());
         }
         else
         {
@@ -139,7 +139,7 @@
             }
             if ((contacts != null) && (contacts.Count > 0))
             {
-                HintText.Text = string.Format("<span style=\"color:green;\">{0}</span>", contacts[0].WebPasswordHint);
+                HintText.Text = string.Format("<span style=\"color:green;\">{0}</span>", Server.HtmlEncode(contacts[0].WebPasswordHint));
             }
         }
         HintText.Visible = true;

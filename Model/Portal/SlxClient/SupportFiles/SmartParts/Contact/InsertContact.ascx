@@ -351,7 +351,7 @@
             case "Account.AccountManager":
                 return true;
             case "Account.Owner":
-                return true;
+                return true;  
             case "Account.LeadSource":
                 return true;                  
             case "Account.Address.FullAddress":
@@ -745,7 +745,7 @@
                 account = EntityFactory.Create<IAccount>();
             }
             contact.Account = account;
-            nmeContactName.Focus(); 
+            ClientBindingMgr.SetFocusTo(nmeContactName); 
         }
         else
         {

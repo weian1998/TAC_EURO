@@ -1,17 +1,23 @@
 ﻿// class used for watching bound data fields and notifying the user that they have dirty data
-ClientBindingManagerService = function() {
+ClientBindingManagerService = function () {
     this._WatchChanges = true;
     this._PageExitWarningMessage = "";
     this._ShowWarningOnPageExit = false;
     this._SkipCheck = false;
+    //this flag tracks the dirty status of controls that were databound on the server
     this._CurrentEntityIsDirty = false;
     this._SaveBtnID = "";
     this._MsgDisplayID = "";
     this._entityTransactionID = "";
     this._IgnoreDirtyFlag = false;
-    
+    //this keeps track of any Ajax controls that also may have dirty data in them...
+    this._DirtyAjaxItems = [];
+    this._listeners = {};
+    this._listeners[ClientBindingManagerService.ON_SAVE] = [];
     positionDirtyDataMessage();
 };
+
+ClientBindingManagerService.ON_SAVE = 'onsave';
 
 $(document).ready(function() {
     Sys.WebForms.PageRequestManager.getInstance().add_endRequest(positionDirtyDataMessage);
@@ -22,6 +28,31 @@ function positionDirtyDataMessage() {
         $('#PageTitle').after($('.dirtyDataMessage').replaceWith(''))
         $('.dirtyDataMessage').css('top', $('#PageTitle').position().top);
         $('.dirtyDataMessage').css('left', $('#PageTitle').outerWidth());
+    }
+}
+
+
+ClientBindingManagerService.prototype.addListener = function (event, listener, scope) {
+    this._listeners[event] = this._listeners[event] || [];
+    this._listeners[event].push({ listener: listener, scope: scope });
+};
+
+ClientBindingManagerService.prototype.removeListener = function (event, listener) {
+    this._listeners[event] = this._listeners[event] || [];
+    for (var i = 0; i < this._listeners[event].length; i++)
+        if (this._listeners[event][i].listener == listener)
+            break;
+
+    this._listeners[event].splice(i, 1);
+};
+
+ClientBindingManagerService.prototype.onSave = function () {
+    for (var i = 0; i < this._listeners[ClientBindingManagerService.ON_SAVE].length; i++) {
+        var fn = this._listeners[ClientBindingManagerService.ON_SAVE][i].listener;
+        var scope = this._listeners[ClientBindingManagerService.ON_SAVE][i].scope || this;
+        if (typeof fn === "function") {
+            fn.call(scope);
+        }
     }
 }
 
@@ -40,7 +71,8 @@ ClientBindingManagerService.prototype.onExit = function(e) {
                 //_SkipCheck = false;
                 return;
             }
-            if ((mgr._CurrentEntityIsDirty)&&(mgr._IgnoreDirtyFlag == false)) {
+            var hdd = mgr.hasDirtyData();
+            if (hdd && (mgr._IgnoreDirtyFlag == false)) {
                 window.setTimeout(function() {
                     hideRequestIndicator(null, { });
                 }, 1000);
@@ -57,7 +89,7 @@ ClientBindingManagerService.prototype.onExit = function(e) {
 
 
 ClientBindingManagerService.prototype.canChangeEntityContext = function() {
-    if ((this._WatchChanges) && (this._CurrentEntityIsDirty) && (this._ShowWarningOnPageExit)) {
+    if ((this._WatchChanges) && (this.hasDirtyData()) && (this._ShowWarningOnPageExit)) {
         if (confirm(this._PageExitWarningMessage)) {
             this.clearDirtyStatus();
             return true;
@@ -67,6 +99,10 @@ ClientBindingManagerService.prototype.canChangeEntityContext = function() {
     }
     return true;
 };
+
+ClientBindingManagerService.prototype.hasDirtyData = function () {
+    return (this._CurrentEntityIsDirty || (this._DirtyAjaxItems && this._DirtyAjaxItems.length > 0));
+}
 
 ClientBindingManagerService.prototype.markDirty = function(e) {
     var mgr = Sage.Services.getService("ClientBindingManagerService");
@@ -81,6 +117,37 @@ ClientBindingManagerService.prototype.markDirty = function(e) {
     }
 };
 
+ClientBindingManagerService.prototype.addDirtyAjaxItem = function (itemId) {
+    //make sure we don't already know about this one...
+    var len = this._DirtyAjaxItems.length;
+    for (var i = 0; i < len; i++) {
+        if (this._DirtyAjaxItems[i] === itemId) {
+            return;
+        }
+    }
+    this._DirtyAjaxItems.push(itemId);
+    //show the message without marking _CurrentEntityIsDirty so it can be tracked separately.
+    if (this._WatchChanges) {
+        positionDirtyDataMessage();
+        if (this._IgnoreDirtyFlag == false) {
+            $("#" + this._MsgDisplayID).show();
+        }
+    }
+}
+
+ClientBindingManagerService.prototype.clearDirtyAjaxItem = function (itemId) {
+    var len = this._DirtyAjaxItems.length;
+    for (var i = 0; i < len; i++) {
+        if (this._DirtyAjaxItems[i] === itemId) {
+            this._DirtyAjaxItems.splice(i, 1);
+            //return;
+        }
+    }
+    if (!this.hasDirtyData()) {
+        $("#" + this._MsgDisplayID).hide();
+    }
+}
+
 ClientBindingManagerService.prototype.clearDirtyStatus = function() {
     var mgr = Sage.Services.getService("ClientBindingManagerService");
     if (mgr) {
@@ -94,6 +161,7 @@ function notifyIsSaving() {
     var mgr = Sage.Services.getService("ClientBindingManagerService");
     if (mgr) {
         mgr.clearDirtyStatus();
+        mgr.onSave();
     }
 };
 

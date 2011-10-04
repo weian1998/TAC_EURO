@@ -9,6 +9,7 @@
 if(typeof Ext!="undefined"){Ext.onReady(function(){Ext.QuickTips.init();});}
 function showMoreInfo()
 {var address='ActivexInfo.aspx';var win=window.open(address,'AlarmMgrWin','width=425,height=425,directories=no,location=no,menubar=no,status=yes,scrollbars=yes,resizable=yes,titlebar=no,toolbar=no');}
+function convertTimelessDate(value){return new Date(value.getUTCFullYear(),value.getUTCMonth(),value.getUTCDate(),0,0,5,0);}
 function ConvertToPhpDateTimeFormat(formatstring){var conversions=[{"mm":"i"},{"m":"i"},{"ss":"s"},{"dddd":"l"},{"ddd":"D"},{"d":"j"},{"jj":"d"},{"MMMM":"F"},{"M":"n"},{"nnn":"M"},{"nn":"m"},{"yyyy":"Y"},{"yy":"y"},{"hh":"h"},{"h":"g"},{"HH":"H"},{"H":"G"},{"tt":"A"},{"t":"A"},{"fff":"u"},{"ff":"u"},{"f":"u"},{"zzz":"Z"},{"zz":"Z"},{"z":"Z"}];var result=formatstring;for(var i=0;i<conversions.length;i++)
 {for(var k in conversions[i])
 result=result.replace(new RegExp(k,"g"),conversions[i][k]);}
@@ -62,21 +63,22 @@ menu.add({text:navItems[i].text,handler:makeLink(navItems[i].href),id:navItems[i
 function GroupNameByID(id){return id;}
 var _ignoreChangeEvent=false;function handleGroupChange(gMgrSvc,args){if(GroupTabBar){_ignoreChangeEvent=true;GroupTabBar.setActiveTab(args.current.CurrentGroupID);populateGroupTabs()
 _ignoreChangeEvent=false;}}
-if(typeof Sage!='undefined')Sage.Lookupdisplayed=false;function showMainLookup(){Sage.Lookupdisplayed=true;var clContext=Sage.Services.getService("ClientContextService");var contextservice=Sage.Services.getService("ClientContextService");var modeid="List";if((contextservice)&&(contextservice.containsKey("modeid"))){modeid=contextservice.getValue("modeid");}
-if(modeid.toUpperCase()!="LIST"){var url=document.location.href;url=url.substring(0,url.indexOf("?"));url+="?modeid=list&showlookuponload=true";document.location=url;}else{var mgr=Sage.Services.getService("GroupLookupManager");if(mgr){mgr.showLookup();}else{mgr=new Sage.GroupLookupManager();Sage.Services.addService("GroupLookupManager",mgr);mgr.showLookup();}}}
+if(typeof Sage!='undefined')Sage.Lookupdisplayed=false;function showMainLookup(){Sage.Lookupdisplayed=true;var contextservice=Sage.Services.getService("ClientContextService");var modeid="List";if((contextservice)&&(contextservice.containsKey("modeid"))){modeid=contextservice.getValue("modeid");}
+if(!Sage.Services.hasService('GroupLookupManager')){Sage.Services.addService("GroupLookupManager",new Sage.GroupLookupManager());}
+var mgr=Sage.Services.getService("GroupLookupManager");if(modeid.toUpperCase()!="LIST"){var url=document.location.href;var endIndex=url.indexOf('?');endIndex=(endIndex>0)?endIndex:url.length;var page=url.substring(url.lastIndexOf('/')+1,endIndex);var grpInfo=getCurrentGroupInfo();mgr.showLookup({family:grpInfo.Family,name:'LookupLayoutGroup',returnTo:page});}else{mgr.showLookup();}}
 function showMainLookupFor(family,page){if(typeof family==="undefined"||typeof page==="undefined"){Ext.Msg.show({title:"Sage SalesLogix",msg:"The parameters are incorrectly defined for showMainLookupFor().",buttons:Ext.Msg.OK,icon:Ext.MessageBox.ERROR});return;}
 Sage.Lookupdisplayed=true;var clContext=Sage.Services.getService("ClientContextService");var contextservice=Sage.Services.getService("ClientContextService");var modeid="List";if((contextservice)&&(contextservice.containsKey("modeid"))){modeid=contextservice.getValue("modeid");}
 var bFamilyIsActive=false;var bIsList=false;var grpInfo=getCurrentGroupInfo();if(grpInfo!=""){if(grpInfo.Family!=null){if(grpInfo.Family.toUpperCase()==family.toUpperCase()){if((document.location.href.toUpperCase().indexOf(page.toUpperCase()))!=-1){bIsList=(modeid.toUpperCase()=="LIST");bFamilyIsActive=true;}}}}
-if(!bIsList||!bFamilyIsActive){var url=document.location.href;if(!bIsList&&bFamilyIsActive){url=url.substring(0,url.indexOf("?"));url+="?modeid=list&showlookuponload=true";}
-else{var iIndex=url.lastIndexOf("/");if(iIndex!=-1){url=url.substring(0,iIndex);url=String.format("{0}/{1}?modeid=list&showlookuponload=true",url,page);}}
+if(!bIsList&&bFamilyIsActive){var mgr=Sage.Services.getService("GroupLookupManager");if(mgr){mgr.showLookup({family:family,name:'LookupLayoutGroup',returnTo:page});}}else if(!bIsList&&!bFamilyIsActive){var url=document.location.href;var iIndex=url.lastIndexOf("/");if(iIndex!=-1){url=url.substring(0,iIndex);url=String.format("{0}/{1}?modeid=list&showlookuponload=true",url,page);}
 document.location=url;}
-else{var mgr=Sage.Services.getService("GroupLookupManager");if(mgr){mgr.showLookup();}else{mgr=new Sage.GroupLookupManager();Sage.Services.addService("GroupLookupManager",mgr);mgr.showLookup();}}}
+else{if(!Sage.Services.hasService('GroupLookupManager')){Sage.Services.addService("GroupLookupManager",new Sage.GroupLookupManager());}
+var mgr=Sage.Services.getService("GroupLookupManager");mgr.showLookup();}}
 function handleGroupTabChange(tabPanel,newTab,currentTab){if(_ignoreChangeEvent==true){return;}
-navToNewGroup(newTab.url);}
+window.setTimeout(function(){navToNewGroup(newTab.url);},1000);}
 function navToNewGroup(url){window.location=url;}
 function getCurrentGroupID(){var clGrpContextSvc=Sage.Services.getService("ClientGroupContext");if(clGrpContextSvc){var clGrpContext=clGrpContextSvc.getContext();return clGrpContext.CurrentGroupID;}else if(typeof(window.__groupContext)!="undefined"){return window.__groupContext.CurrentGroupID;}
 return"";}
-function getCurrentGroupInfo(){var clGrpContextSvc=Sage.Services.getService("ClientGroupContext");if(clGrpContextSvc){var clGrpContext=clGrpContextSvc.getContext();return{"Name":clGrpContext.CurrentName,"Family":clGrpContext.CurrentFamily,"Id":clGrpContext.CurrentGroupID,"isAdhoc":clGrpContext.isAdhoc,"Entity":clGrpContext.CurrentEntity};}else if(typeof(window.__groupContext)!="undefined"){return{"Name":window.__groupContext.CurrentName,"Family":window.__groupContext.CurrentFamily,"Id":window.__groupContext.CurrentGroupID,"isAdhoc":window.__groupContext.isAdhoc};}
+function getCurrentGroupInfo(){var clGrpContextSvc=Sage.Services.getService("ClientGroupContext");if(clGrpContextSvc){var clGrpContext=clGrpContextSvc.getContext();return{"Name":clGrpContext.CurrentName,"DisplayName":clGrpContext.CurrentDisplayName,"Family":clGrpContext.CurrentFamily,"Id":clGrpContext.CurrentGroupID,"isAdhoc":clGrpContext.isAdhoc,"Entity":clGrpContext.CurrentEntity};}else if(typeof(window.__groupContext)!="undefined"){return{"Name":window.__groupContext.CurrentName,"DisplayName":window.__groupContext.CurrentDisplayName,"Family":window.__groupContext.CurrentFamily,"Id":window.__groupContext.CurrentGroupID,"isAdhoc":window.__groupContext.isAdhoc};}
 return"";}
 function makeLink(dest,isHelpLink,target){if(!isHelpLink)
 isHelpLink=false;return function(){linkTo(dest,isHelpLink,target)};}
@@ -135,13 +137,13 @@ else{var selectionInfo;try{totalCount=Sage.Services.getService("ClientGroupConte
 catch(e){Ext.Msg.alert(MasterPageLinks.AdHocDialog_NoData);}
 if(selectionInfo.selectionCount==0){if(totalCount==0){Ext.Msg.alert(MasterPageLinks.AdHocDialog_NoneSelectedTitle,MasterPageLinks.AdHocDialog_GroupCountZero);}
 else{Ext.Msg.confirm(MasterPageLinks.AdHocDialog_NoneSelectedTitle,dialogBody,function(btn){if(btn=='yes'){addConfirmed(groupID);}});}}
-else{addConfirmed(groupID);}}};addConfirmed=function(groupID){var panel=Sage.SalesLogix.Controls.ListPanel.find("MainList");if(panel){panel.views.list.view.reset();}
+else{addConfirmed(groupID);}}};addConfirmed=function(groupID){if(Sage.Services.getService("GroupManagerService")._contextService.getContext().CurrentGroupID===groupID){var panel=Sage.SalesLogix.Controls.ListPanel.find("MainList");if(panel){panel.views.list.view.reset();}}
 var selectionInfo=GetSeletionInfo();postUrl="slxdata.ashx/slx/crm/-/groups/adhoc?action=EditAdHocGroupAddMembers&groupID="+groupID+"&selectionKey="+selectionInfo.key;if(selectionInfo.selectionCount==0){selectionInfo.mode='selectAll';}
 postAddToGroup(postUrl,selectionInfo);};postAddToGroup=function(postUrl,payLoad)
 {if(postUrl!="")
 {$.ajax({type:"POST",url:postUrl,contentType:"application/json",data:Ext.encode(payLoad),processData:false,error:function(request,status,error)
 {alert(error)},success:function(status)
-{}});Sage.Services.getService("GroupManagerService").setNewGroup(Sage.Services.getService("GroupManagerService")._contextService.getContext().CurrentGroupID);}}
+{}});}}
 function doTextBoxKeyUp(control)
 {maxLength=control.attributes["MultiLineMaxLength"].value;value=control.value;if(value.length>maxLength-1)
 control.value=value.substring(0,maxLength);}

@@ -5,6 +5,8 @@
   <SmartPart>SmartParts\GroupBuilder\LiveGroupViewer.ascx</SmartPart>
   <TargetWorkspace>MainContent</TargetWorkspace>
   <ShowInMode>List</ShowInMode>
-  <Properties />
+  <Properties>
+    <Property Name="HelpTopic" TypeConverter="">Teams_List_View</Property>
+  </Properties>
   <AllowRoles />
 </SmartPartMapping>

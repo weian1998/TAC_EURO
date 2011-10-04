@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="d2f80012-6a4c-4b1c-9d8a-a05b1eebf76f" lastModifiedUtc="2011-05-20T23:28:02.4526434Z" name="chkbxOverrideSalesPotential_OnChange" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="EditSalesPotential">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="f080c8f0-a759-416b-b364-c145fb52c0e9" paramName="form" sequence="0" paramType="IEditSalesPotential" />
+    <OrmEntityMethodParam id="8b4158a5-e935-4033-863d-9a8b37cefbef" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="dd1a087a-1c06-4a5d-bc8c-fecc8f950e80" lastModifiedUtc="2011-05-20T23:29:41.2792959Z" targetType="Sage.BusinessRules.CodeSnippets.EditSalesPotentialEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="chkbxOverrideSalesPotential_OnChangeStep" active="true" codeSnippetId="2aeba966-e549-4880-8d72-cd34282dea02">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

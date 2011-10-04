@@ -1,0 +1,37 @@
+private Sage.Platform.WebPortal.Binding.WebSDataBindingSource _${qfcontrol.ControlId};
+public Sage.Platform.WebPortal.Binding.WebSDataBindingSource ${qfcontrol.ControlId}
+{
+    get
+    {
+        if (_${qfcontrol.ControlId} == null)
+        {
+            _${qfcontrol.ControlId} = new Sage.Platform.WebPortal.Binding.WebSDataBindingSource
+                {
+#if($qfcontrol.BaseUrl && $qfcontrol.BaseUrl != "")
+                    BaseUrl = ${qfcontrol.BaseUrl.to_quote},
+#end
+#if($qfcontrol.EndPoint && $qfcontrol.EndPoint != "")
+                    EndPoint = ${qfcontrol.EndPoint.to_quote},
+#end
+#if($qfcontrol.UserName && $qfcontrol.UserName != "")
+                    UserName = ${qfcontrol.UserName.to_quote},
+#end
+#if($qfcontrol.Password && $qfcontrol.Password != "")
+                    Password = ${qfcontrol.Password.to_quote},
+#end
+                };
+        }
+        return _${qfcontrol.ControlId};
+    }
+}
+
+void ${qfcontrol.ControlId}_OnCurrentEntitySet(object sender, EventArgs e)
+{
+    if (Visible)
+    {
+        ${qfcontrol.ControlId}.Current = BindingSource.Current;
+        RegisterBindingsWithClient(${qfcontrol.ControlId});
+    }
+}
+
+$generator.addFormLoadCode("${qfcontrol.ControlId}.Bind();")

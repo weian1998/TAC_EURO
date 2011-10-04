@@ -1,12 +1,22 @@
 if (DialogService != null) {
-	// DialogActionItem
-#if(${action.CenterDialog} == true) 
-	DialogService.SetSpecs(${action.Height}, ${action.Width}, "${action.SmartPart}",#if($action.TitleOverride != "") GetLocalResourceObject("${action.ResourceKey}.DialogTitleOverride").ToString() #else string.Empty #end);
+  // DialogActionItem
+#if(${action.CenterDialog} == true)
+  DialogService.SetSpecs(${action.Height}, ${action.Width}, "${action.SmartPart}",#if($action.TitleOverride != "") GetLocalResourceObject("${action.ResourceKey}.DialogTitleOverride").ToString() #else string.Empty #end);
 #else
-	DialogService.SetSpecs(${action.Top}, ${action.Left}, ${action.Height}, ${action.Width}, "${action.SmartPart}",#if($action.TitleOverride != "") GetLocalResourceObject("${action.ResourceKey}.DialogTitleOverride").ToString() #else string.Empty #end, "false");
+  DialogService.SetSpecs(${action.Top}, ${action.Left}, ${action.Height}, ${action.Width}, "${action.SmartPart}",#if($action.TitleOverride != "") GetLocalResourceObject("${action.ResourceKey}.DialogTitleOverride").ToString() #else string.Empty #end, "false");
 #end
   #if($action.EntityType != "")
   DialogService.EntityType = typeof(${action.GetQualifiedEntityType}); 
   #end
   DialogService.ShowDialog();
 }
+#set ($refreshData = $generator.getControlRefreshData($qfcontrol))
+#if ($refreshData ==  true)
+  Sage.Platform.WebPortal.Services.IPanelRefreshService refresher = PageWorkItem.Services.Get<Sage.Platform.WebPortal.Services.IPanelRefreshService>();
+    if (refresher != null) {
+      refresher.RefreshAll();
+    }
+    else {  
+      Response.Redirect(Request.Url.ToString());
+    }
+#end

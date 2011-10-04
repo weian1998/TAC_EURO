@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QuickFormDefinition Id="073b414e-ebe2-466e-ad29-dd5e30a56b59" name="ICItemSalesHistory">
+  <Properties>
+    <Property name="EntityTypeName" type="System.String">IAccount</Property>
+    <Property name="DefaultNamespace" type="System.String">Sage.Entity.Interfaces</Property>
+    <Property name="AssemblyName" type="System.String">Sage.Entity.Interfaces</Property>
+    <Property name="UseEntityNameAsTitle" type="System.Boolean">True</Property>
+    <Property name="ImagePath" type="System.String"></Property>
+    <Property name="DefinitionType" type="System.String">Sage.Platform.QuickForms.QuickFormMainDetailViewDefinition, Sage.Platform.QuickForms</Property>
+    <Property name="Columns" type="System.ComponentModel.BindingList`1[[System.Windows.Forms.ColumnStyle, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><ArrayOfColumnStyle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ColumnStyle><SizeType>Percent</SizeType><Width>100</Width></ColumnStyle></ArrayOfColumnStyle></Property>
+    <Property name="Rows" type="System.ComponentModel.BindingList`1[[System.Windows.Forms.RowStyle, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><ArrayOfRowStyle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle></ArrayOfRowStyle></Property>
+    <Property name="GeneratePrintView" type="System.Boolean">False</Property>
+    <Property name="Description" type="System.String"></Property>
+    <Property name="ActiveControl" type="System.String"></Property>
+  </Properties>
+  <LoadActions>
+    <ActionDefinition>
+      <ResourceKey>e4ccf400-bcc6-42b7-a3b4-dcbfbe7e9a2b</ResourceKey>
+      <RootActionName>CSharpSnippetAction</RootActionName>
+      <Action>
+        <CSharpCodeSnippet><![CDATA[Sage.Entity.Interfaces.IAccount account = BindingSource.Current as Sage.Entity.Interfaces.IAccount;
+if (account != null && account.GlobalSyncId.HasValue)
+{
+    var clientContextService = PageWorkItem.Services.Get<Sage.Platform.WebPortal.Services.ClientContextService>();
+    if (clientContextService != null)
+    {
+        if (clientContextService.CurrentContext.ContainsKey("OperatingCompany"))
+        {
+            clientContextService.CurrentContext["OperatingCompany"].Equals(account.OperatingCompany.Id.ToString());
+        }
+        else
+        {
+            clientContextService.CurrentContext.Add("OperatingCompany", account.OperatingCompany.Id.ToString());
+        }
+        if (clientContextService.CurrentContext.ContainsKey("GlobalSyncId"))
+        {
+            clientContextService.CurrentContext["GlobalSyncId"].Equals(account.GlobalSyncId.ToString());
+        }
+        else
+        {
+            clientContextService.CurrentContext.Add("GlobalSyncId", account.GlobalSyncId.ToString());
+        }
+    }
+}]]></CSharpCodeSnippet>
+      </Action>
+      <IsDialogCloseAction>False</IsDialogCloseAction>
+      <RunOnEveryRePaint>False</RunOnEveryRePaint>
+      <DialogActionResult>NoResult</DialogActionResult>
+      <PerformsUpdate>False</PerformsUpdate>
+      <AppliedSecurity />
+      <RefreshData>False</RefreshData>
+    </ActionDefinition>
+  </LoadActions>
+  <QuickFormElements>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.SDataGrid.QFSDataGrid, Sage.SalesLogix.QuickForms.QFControls"><QFSDataGrid xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>sdgrdPurchases</ControlId><DataBindings /><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><GenerateMember>false</GenerateMember><ReadOnlyCondition>False</ReadOnlyCondition><AppliedSecurity /><RelateToPropertyName /><ResourceKind><Name>tradingAccounts</Name><GetPredicate>function() {
+     var clientContextService = Sage.Services.getService("ClientContextService");
+     if (clientContextService &amp;&amp; clientContextService.containsKey("GlobalSyncId"))
+     {
+          return String.format("$uuid eq '{0}'", clientContextService.getValue("GlobalSyncId"));
+     }
+}</GetPredicate></ResourceKind><PathSegments><PathSegment><Name>salesInvoiceLines</Name><GetPredicate /></PathSegment></PathSegments><Columns><QFEditableCol><StyleScheme /><DataField>reference</DataField><ColumnId>510c534c-946f-4247-a8bf-5a91529e983b</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>reference</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition /><Width>-1</Width></QFEditableCol><QFEditableCol><StyleScheme /><DataField>date</DataField><ColumnId>68d7d649-22fd-4272-9ad8-1b97e96336a5</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>date</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition /><Width>-1</Width></QFEditableCol><QFEditableCol><StyleScheme /><DataField>commodity</DataField><ColumnId>9ed1b391-7a61-4798-aa17-f223694e4bc5</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>commodity</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition /><Width>-1</Width></QFEditableCol><QFEditableCol><StyleScheme /><DataField>commodityVariant</DataField><ColumnId>f3e741ac-0b7d-4b49-bdc7-de70e9a422b1</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>commodityVariant</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition /><Width>-1</Width></QFEditableCol><QFEditableCol><StyleScheme /><DataField>commodityDimension</DataField><ColumnId>4a73515e-5689-42cf-b295-2e58e0875639</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>commodityDimension</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition /><Width>-1</Width></QFEditableCol><QFEditableCol><StyleScheme /><DataField>unitOfMeasure</DataField><ColumnId>a1970977-cf88-4915-a319-be9b2cf4003c</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>unitOfMeasure</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition /><Width>-1</Width></QFEditableCol><QFEditableCol><StyleScheme /><DataField>quantity</DataField><ColumnId>229ef66c-6676-4ccf-9ff3-d3e3c1aa406a</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>quantity</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition /><Width>-1</Width></QFEditableCol><QFEditableCol><StyleScheme /><DataField>actualPrice</DataField><ColumnId>53cd8c5c-f237-4a03-84b3-656b071997a6</ColumnId><HorizontalAlignment>right</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>actualPrice</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition /><Width>-1</Width></QFEditableCol></Columns><ConditionalWhere /><Select /><Include /><FeedCategory>Proxy</FeedCategory><OnGetMappingId>function() {
+     var clientContextService = Sage.Services.getService("ClientContextService");
+     if (clientContextService &amp;&amp; clientContextService.containsKey("OperatingCompany"))
+     {
+          return clientContextService.getValue("OperatingCompany");
+     }
+}</OnGetMappingId><ParentRelationshipPropertyName /><ChildRelationshipPropertyName /><OnDataChange /><OnAdd /><Tools /></QFSDataGrid></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+  </QuickFormElements>
+  <QuickFormToolElements />
+</QuickFormDefinition>

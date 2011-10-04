@@ -1,7 +1,7 @@
 ﻿
 function idTopLevelItems() {
     if ($("button.x-btn-text").length == 0) { //hasn't loaded yet
-        window.setTimeout(idTopLevelItems, 100);
+        window.setTimeout(idTopLevelItems, 500);
         return;
     }
     $("button.x-btn-text").map(function(index, elem) {
@@ -50,7 +50,19 @@ function idPopupWindow() {
         setElemId(elem, elem.nextSibling, "inputLabel_");
         return true;
     });
+    $(".x-window img").map(function (index, elem) {
+        setElemId(elem, elem.previousSibling, "image_");
+        return true;
+    });
     return true;
+}
+
+function idComboBoxItems() {
+    $(".x-combo-list-item").map(function (index, elem) {
+        setElemId(elem, elem, "comboItem_");
+        return true;
+    });
+
 }
 
 function idLookup(cssclass) {
@@ -92,10 +104,14 @@ function mapCloseAndRefreshFactory(prefix) {
 
 function setElemId(elem, idfrom, prefix) {
     if ((idfrom) && ((elem.id.indexOf("ext") == 0) || (elem.id == ""))) {
+        var value = "";
         if (Ext.isIE) {
-            elem.id = prefix + idfrom.innerText.replace(/ /g, "_").match(/^[a-zA-Z0-9_]+/);
+            value = idfrom.innerText || idfrom.id;
         } else {
-            elem.id = prefix + idfrom.textContent.replace(/ /g, "_").match(/^[a-zA-Z0-9_]+/);
+            value = idfrom.textContent || idfrom.id;
+        }
+        if (value) {
+            elem.id = prefix + value.replace(/ /g, "_").match(/^[a-zA-Z0-9_]+/);
         }
     }
 }

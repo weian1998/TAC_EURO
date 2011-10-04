@@ -592,6 +592,13 @@ Never is referenced in the script below as LibraryResources.Never -->
                                     //Ext.Msg.alert('Success', action.result.msg);
                                     Ext.getCmp('library-list').store.load();
                                     win.close();
+                                },
+                                failure: function(form, request) {
+                                    //request.result.error
+                                    if (request && typeof(request.result) !== 'undefined' && typeof request.result.error !== 'undefined') {
+                                        var msgService = Sage.Services.getService("WebClientMessageService");  
+                                        if (msgService) { msgService.showClientMessage(request.result.error); }
+                                    }
                                 }
                             });
                         }
@@ -648,7 +655,7 @@ Never is referenced in the script below as LibraryResources.Never -->
                                     if (data.success == true) {
                                         Sage.LibraryFileManager.refreshGrid();
                                     } else {
-                                        var msgService = Sage.Services.getService("WebClientMessageService");       
+                                        var msgService = Sage.Services.getService("WebClientMessageService");  
                                         if (msgService) { msgService.showClientMessage((typeof (data.error) !== 'undefined') ? data.error : LibraryResources.DefaultDeleteFileErrorMsg); }
                                     }
                                 }
@@ -741,32 +748,32 @@ Never is referenced in the script below as LibraryResources.Never -->
             });
         },
         handleAddFolderCallback : function(btn, text) {
-            if (btn == 'ok') {
-                var dirid = Sage.LibraryFolderManager.getOpenFolderId();
-                $.ajax({
+                if (btn == 'ok') {
+                    var dirid = Sage.LibraryFolderManager.getOpenFolderId();
+                    $.ajax({
                     url: String.format('SLXAttachments.ashx?type=newlibraryfolder&dirid={0}&dirname={1}', dirid, encodeURIComponent(text)),
-                    type: 'GET',
-                    cache:false,
-                    dataType: 'json',
-                    success: function(data) {
-                        if (data && typeof(data.success) !== 'undefined') {
-                            if (data.success == true) {
-                                var tree = Ext.getCmp('library-tree');
-                                var node = tree.getNodeById(dirid);
-                                var loader = tree.getLoader();
-                                loader.load(node, function(request, loadedNode) { loadedNode.expand(); });
-                            } else {
-                                var msgService = Sage.Services.getService("WebClientMessageService");       
-                                if (msgService) { msgService.showClientMessage((typeof (data.error) !== 'undefined') ? data.error : "An unknown error happened trying to create the new folder."); }
+                        type: 'GET',
+                        cache:false,
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data && typeof(data.success) !== 'undefined') {
+                                if (data.success == true) {
+                                    var tree = Ext.getCmp('library-tree');
+                                    var node = tree.getNodeById(dirid);
+                                    var loader = tree.getLoader();
+                                    loader.load(node, function(request, loadedNode) { loadedNode.expand(); });
+                                } else {
+                                    var msgService = Sage.Services.getService("WebClientMessageService");       
+                                    if (msgService) { msgService.showClientMessage((typeof (data.error) !== 'undefined') ? data.error : "An unknown error happened trying to create the new folder."); }
+                                }
                             }
+                        },
+                        error : function(request, status, error) {
+                            var msgService = Sage.Services.getService("WebClientMessageService");       
+                            if (msgService) { msgService.showClientMessage(error); }
                         }
-                    },
-                    error : function(request, status, error) {
-                        var msgService = Sage.Services.getService("WebClientMessageService");       
-                        if (msgService) { msgService.showClientMessage(error); }
-                    }
-                });
-            }
+                    });
+                }
         },
         handleEditFolderName : function(button, event) {
             if (Sage.LibraryFolderManager.getOpenFolderId() == "root") {
@@ -784,31 +791,31 @@ Never is referenced in the script below as LibraryResources.Never -->
             });
         },
         handleEditFolderNameCallback : function(btn, text) {
-            if (btn == 'ok') {
-                var dirid = Sage.LibraryFolderManager.getOpenFolderId();
-                $.ajax({
+                if (btn == 'ok') {
+                    var dirid = Sage.LibraryFolderManager.getOpenFolderId();
+                    $.ajax({
                     url: String.format('SLXAttachments.ashx?type=changelibfoldername&dirid={0}&dirname={1}', dirid, encodeURIComponent(text)),
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(data) {
-                        if (data && typeof(data.success) !== 'undefined') {
-                            if (data.success == true) {
-                                var tree = Ext.getCmp('library-tree');
-                                var node = tree.getNodeById(dirid);
-                                var loader = tree.getLoader();
-                                loader.load(node.parentNode, function(request, loadedNode) { loadedNode.expand(); });
-                            } else {
-                                var msgService = Sage.Services.getService("WebClientMessageService");       
-                                if (msgService) { msgService.showClientMessage((typeof (data.error) !== 'undefined') ? data.error : "An unknown error happened trying to change the folder name."); }
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data && typeof(data.success) !== 'undefined') {
+                                if (data.success == true) {
+                                    var tree = Ext.getCmp('library-tree');
+                                    var node = tree.getNodeById(dirid);
+                                    var loader = tree.getLoader();
+                                    loader.load(node.parentNode, function(request, loadedNode) { loadedNode.expand(); });
+                                } else {
+                                    var msgService = Sage.Services.getService("WebClientMessageService");       
+                                    if (msgService) { msgService.showClientMessage((typeof (data.error) !== 'undefined') ? data.error : "An unknown error happened trying to change the folder name."); }
+                                }
                             }
+                        },
+                        error : function(request, status, error) {
+                            var msgService = Sage.Services.getService("WebClientMessageService");       
+                            if (msgService) { msgService.showClientMessage(error); }
                         }
-                    },
-                    error : function(request, status, error) {
-                        var msgService = Sage.Services.getService("WebClientMessageService");       
-                        if (msgService) { msgService.showClientMessage(error); }
-                    }
-                });
-            }        
+                    });
+                }
         },
         handleFolderClicked: function(node, e) {
             var nodeid = (typeof node == 'undefined') ? Sage.LibraryFolderManager.getOpenFolderId() : node.id;

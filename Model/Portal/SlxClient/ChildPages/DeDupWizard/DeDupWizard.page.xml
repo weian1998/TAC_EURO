@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<PortalPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="4f7c6537-2cfc-4d99-ac12-0b92929d2148">
+  <PageAlias>DeDupWizard</PageAlias>
+  <SmallImage>[Localization!Global_Images:check_for_duplicates_16x16]</SmallImage>
+  <LargeImage>[Localization!Global_Images:check_for_duplicates_24x24]</LargeImage>
+  <TemplateUrl>Masters\base.master</TemplateUrl>
+  <InheritTemplate>false</InheritTemplate>
+  <InheritsFrom>Sage.Platform.WebPortal.WebPortalPage, Sage.Platform.WebPortal</InheritsFrom>
+  <Properties />
+  <TemplateProperties>
+    <Property Name="IncludeTaskPane" TypeConverter="">False</Property>
+  </TemplateProperties>
+  <IsDefaultPage>false</IsDefaultPage>
+  <ExcludedGlobalModules />
+  <AppliedSecurity>Administration/Deduplication/CheckDuplicates</AppliedSecurity>
+</PortalPage>

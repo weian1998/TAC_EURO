@@ -24,12 +24,13 @@
 		</td>
 	</tr>
     <tr>
-        <td rowspan="4">
-			<span class="lbl"><asp:Label ID="lblShowActivitiesFor" runat="server" Text="Show Activities for:" meta:resourcekey="lblShowActivitiesForResource1"></asp:Label></span>
+		<td>
+			<span class="lbl"><asp:Label ID="lblDefaultView" runat="server" Text="Default View:" meta:resourcekey="lblDefaultViewResource1"></asp:Label></span>
 			<span class="textcontrol">
-				<asp:ListBox Rows="6" runat="server" ID="_showActivitiesFor" meta:resourcekey="_showActivitiesForResource1" />
+	            <asp:DropDownList ID="_defaultView" runat="server" DataTextField="Key" DataValueField="Value" meta:resourcekey="_defaultViewResource1">
+			    </asp:DropDownList>
 			</span>
-		</td>
+        </td>
         <td>
 			<span class="lbl"><asp:Label ID="lblDisplayReminders" runat="server" Text="Display Activity Reminders:" meta:resourcekey="lblDisplayRemindersResource1"></asp:Label></span>
 			<span class="textcontrol">
@@ -41,7 +42,14 @@
         </td>		
     </tr>
     <tr>
-        <td>
+ 		<td>
+			<span class="lbl"><asp:Label ID="lblDefFollowActiv" runat="server" Text="Default Follow-up Activity:" meta:resourcekey="lblDefFollowActivResource1"></asp:Label></span>
+			<span class="textcontrol">
+				<asp:DropDownList ID="_defaultFollowupActivity" runat="server" DataTextField="Key" DataValueField="Value" meta:resourcekey="_defaultFollowupActivityResource1">
+				</asp:DropDownList>
+			</span>
+		</td>
+       <td>
 			<span class="lbl"><asp:Label ID="lblShowAlarms" runat="server" AssociatedControlID="_ShowAlarms" Text="Display Alarms:" meta:resourcekey="lblShowAlarmsResource1"></asp:Label></span>
 			<span class="textcontrol">
 				<asp:DropDownList ID="_ShowAlarms" runat="server" meta:resourcekey="_ShowAlarmsResource1">
@@ -52,7 +60,14 @@
         </td>
     </tr>
     <tr style="white-space: nowrap">
-        <td>
+ 		<td>
+			<span class="lbl"><asp:Label ID="lblCarryOver" runat="server" Text="Carry Over Notes:" meta:resourcekey="lblCarryOverResource1"></asp:Label></span>
+			<span class="textcontrol">
+				<asp:DropDownList ID="_carryOverNotes" runat="server" DataTextField="Key" DataValueField="Value" meta:resourcekey="_carryOverNotesResource1">
+				</asp:DropDownList>
+			</span>
+		</td>
+       <td>
 			<span class="lbl"><asp:Label ID="lblShowConfirms" runat="server" AssociatedControlID="_ShowConfirms" Text="Display Confirmations:" meta:resourcekey="lblShowConfirmsResource1"></asp:Label></span>
 			<span class="textcontrol">
 				<asp:DropDownList ID="_ShowConfirms" runat="server" meta:resourcekey="_ShowConfirmsResource1"> 
@@ -63,7 +78,14 @@
         </td>
     </tr>
     <tr style="white-space: nowrap">
-        <td>
+ 		<td>
+			<span class="lbl"><asp:Label ID="lblCarryOverAttachments" runat="server" Text="Carry Over Notes:" meta:resourcekey="lblCarryOverAttachmentsResource1"></asp:Label></span>
+			<span class="textcontrol">
+				<asp:DropDownList ID="_carryOverAttachments" runat="server" DataTextField="Key" DataValueField="Value" meta:resourcekey="_carryOverAttachmentsResource1">
+				</asp:DropDownList>
+			</span>
+		</td>
+       <td>
 			<span class="lbl"><asp:Label ID="lblShowPastDue" runat="server" AssociatedControlID="_ShowPastDue" Text="Display Past Due:" meta:resourcekey="lblShowPastDueResource1"></asp:Label></span>
 			<span class="textcontrol">
 	            <asp:DropDownList ID="_ShowPastDue" runat="server" meta:resourcekey="_ShowPastDueResource1">
@@ -73,55 +95,6 @@
 			</span>
         </td>
     </tr>
-	<tr>
-		<td><!-- that was the end of the rowspan  -->
-			<span class="lbl"><asp:Label ID="lblDefaultView" runat="server" Text="Default View:" meta:resourcekey="lblDefaultViewResource1"></asp:Label></span>
-			<span class="textcontrol">
-	            <asp:DropDownList ID="_defaultView" runat="server" DataTextField="Key" DataValueField="Value" meta:resourcekey="_defaultViewResource1">
-			    </asp:DropDownList>
-			</span>
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-		<td>
-			<span class="lbl"><asp:Label ID="lblTimeFrame" runat="server" Text="Time Frame:" meta:resourcekey="lblTimeFrameResource1"></asp:Label></span>
-			<span class="textcontrol">
-				<asp:DropDownList ID="_timeFrame" runat="server" DataTextField="Key" DataValueField="Value" meta:resourcekey="_timeFrameResource1"></asp:DropDownList>
-            </span>
-        </td>
-        <td></td>
-    </tr>
-	<tr>
-		<td>
-			<span class="lbl"><asp:Label ID="lblDefFollowActiv" runat="server" Text="Default Follow-up Activity:" meta:resourcekey="lblDefFollowActivResource1"></asp:Label></span>
-			<span class="textcontrol">
-				<asp:DropDownList ID="_defaultFollowupActivity" runat="server" DataTextField="Key" DataValueField="Value" meta:resourcekey="_defaultFollowupActivityResource1">
-				</asp:DropDownList>
-			</span>
-		</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>
-			<span class="lbl"><asp:Label ID="lblCarryOver" runat="server" Text="Carry Over Notes:" meta:resourcekey="lblCarryOverResource1"></asp:Label></span>
-			<span class="textcontrol">
-				<asp:DropDownList ID="_carryOverNotes" runat="server" DataTextField="Key" DataValueField="Value" meta:resourcekey="_carryOverNotesResource1">
-				</asp:DropDownList>
-			</span>
-		</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>
-			<span class="lbl"><asp:Label ID="lblCarryOverAttachments" runat="server" Text="Carry Over Notes:" meta:resourcekey="lblCarryOverAttachmentsResource1"></asp:Label></span>
-			<span class="textcontrol">
-				<asp:DropDownList ID="_carryOverAttachments" runat="server" DataTextField="Key" DataValueField="Value" meta:resourcekey="_carryOverAttachmentsResource1">
-				</asp:DropDownList>
-			</span>
-		</td>
-		<td></td>
-	</tr>	
 	<tr>
 		<td >
 			<span class="lbl"><asp:Label ID="lblAlarmLead" runat="server" Text="Alarm Default Lead:" meta:resourcekey="lblAlarmLeadResource1"></asp:Label></span>

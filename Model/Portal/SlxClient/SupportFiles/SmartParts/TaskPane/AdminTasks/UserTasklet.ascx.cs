@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Sage.Entity.Interfaces;
 using Sage.Platform;
-using Sage.SalesLogix.Web.Controls;
+using Sage.SalesLogix.Client.GroupBuilder.Controls;
 
 public partial class UserTaskletControl : TaskletControl
 {

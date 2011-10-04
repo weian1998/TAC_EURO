@@ -5,6 +5,8 @@
   <SmartPart>\Entity Model\SalesLogix Activity Support\ResourceList\QuickForms\ResourceDetail.main.quickform.xml</SmartPart>
   <TargetWorkspace>MainContent</TargetWorkspace>
   <ShowInMode>Insert</ShowInMode>
-  <Properties />
+  <Properties>
+    <Property Name="HelpTopic" TypeConverter="">resourcelistmanage</Property>
+  </Properties>
   <AllowRoles />
 </SmartPartMapping>

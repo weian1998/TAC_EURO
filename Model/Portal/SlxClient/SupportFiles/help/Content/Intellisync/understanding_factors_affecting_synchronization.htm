@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="357" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Understanding Factors Affecting Synchronization</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Intellisync/understanding_factors_affecting_synchronization.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor483"></a>Understanding Factors Affecting Synchronization</h1>
+        <p>The time it takes to synchronize data between Sage SalesLogix and  Microsoft 
+ Outlook    <![CDATA[ ]]><span MadCap:conditions="Primary.Lotus_Notes">or Lotus Notes </span>depends 
+ on several factors. The most important factor is the volume of data being 
+ passed between the systems. You can improve performance by controlling 
+ the volume of data transferred through Intellisync for SalesLogix. There 
+ are several ways to do this. </p>
+        <p class="Infinitive">Last Synchronization Date</p>
+        <p>When data exchange occurs, the date is recorded in a <a name="kanchor484"></a><span class="MCPopup"><a href="javascript:void(0);" MadCap:src="log_file.htm" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">log file</a></span>. 
+ Subsequent synchronizations use this date to check for modifications since 
+ the last sync date and only transfer data that has changed since that 
+ date. By synchronizing regularly, you can reduce the volume of data that 
+ needs to be transferred during any given cycle. &#160;</p>
+        <p class="Infinitive">Security</p>
+        <p>Synchronization is affected by the built-in data security associated 
+ with the user who is logged on to Sage SalesLogix. The amount of data 
+ available to transfer is limited by the security rights of the user logged 
+ in. </p>
+        <p class="Infinitive">Un-mapping Fields</p>
+        <p>Intellisync for SalesLogix allows a user to define how the data is mapped 
+ between applications. By removing mapping from a field, the translator 
+ ends data transfer in that field. Additionally, mapping a previously un-mapped 
+ field starts synchronizing the data in that field between applications. 
+ See <a href="understanding_intellisync_for_saleslogix_field_mapping.htm" target="_self">Understanding Intellisync for SalesLogix Field Mapping</a> for additional information.</p>
+        <p class="RelatedTopics">Related Topics</p>
+        <p><a href="Additional_Help_for_Application_Setup_and_Advanced_Settings.htm" target="_self">Configuring Advanced Settings</a>
+        </p>
+        <p><a href="Intellisync_for_SalesLogix.htm" target="_self">Intellisync for SalesLogix</a>
+        </p>
+        <p><a href="understanding_data_exchange.htm" target="_self">Understanding Data Exchange</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="Output.WebClient,Output.Customer Portal">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

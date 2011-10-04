@@ -151,7 +151,17 @@ Sage.TabWorkspaceState.prototype.addToMiddleTabs = function(target, at, step) {
 };
 
 Sage.TabWorkspaceState.prototype.isMainTab = function(target) { 
-    return this._isTab(Sage.TabWorkspaceState.MAIN_TABS, target); 
+    return this._isTab(Sage.TabWorkspaceState.MAIN_TABS, target);
+};
+
+Sage.TabWorkspaceState.prototype.isTabVisible = function (tabId) {
+    if (this.isMiddleTab(tabId)) {
+        return true;
+    } else if (this.isMainTab(tabId)) {
+        return (this._state.ActiveMainTab === tabId);
+    } else if (this.isMoreTab(tabId)) {
+        return (this._state.ActiveMoreTab === tabId && (this.isMiddleTab(Sage.TabWorkspace.MORE_TAB_ID) || (this._state.ActiveMainTab === Sage.TabWorkspace.MORE_TAB_ID)));
+    }
 };
 
 Sage.TabWorkspaceState.prototype.removeFromMainTabs = function(target) { 
@@ -436,6 +446,7 @@ Sage.TabWorkspace.prototype.hideTab = function(tab) {
     if (typeof tab === "string")
         tab = this.getInfoFor(tab);
        
+    if(tab == null){return;}
             
     switch (this.getState().getSectionFor(tab.Id))
     {
@@ -462,6 +473,8 @@ Sage.TabWorkspace.prototype.unHideTab = function(tab) {
     this.logDebug("[enter] hideTab");
     if (typeof tab === "string")
         tab = this.getInfoFor(tab);
+    
+    if(tab == null){return;}
        
     switch (this.getState().getSectionFor(tab.Id))
     {

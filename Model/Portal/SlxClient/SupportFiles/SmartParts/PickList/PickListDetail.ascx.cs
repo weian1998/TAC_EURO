@@ -198,7 +198,8 @@ public partial class PickListDetail : EntityBoundSmartPartInfoProvider
         pklTest.AllowMultiples = att.AllowMultiples;
         pklTest.AlphaSort = att.AlphaSorted;
         pklTest.CanEditText = !att.NoneEditable;
-        pklTest.MustExistInList = att.ValueMustExist;
+        pklTest.MustExistInList = att.ValueMustExist; 
+      
         if (pl.Id.Value == 1)
         {
             chkIsManaged.Checked = true;
@@ -207,7 +208,7 @@ public partial class PickListDetail : EntityBoundSmartPartInfoProvider
         {
             chkIsManaged.Checked = false;
         }
-        //pklTest.Required = att.Required;
+        pklTest.Required = false; //We can test required during test. or we then could not save the picklist because of validation.
        
     }
 

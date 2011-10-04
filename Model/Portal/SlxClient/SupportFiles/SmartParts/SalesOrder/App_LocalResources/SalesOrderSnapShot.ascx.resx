@@ -273,4 +273,19 @@
   <data name="SalesOrder_Status_Closed" xml:space="preserve">
     <value>Closed</value>
   </data>
+  <data name="SalesOrder_Status_OrderedConfirmed" xml:space="preserve">
+    <value>Ordered/Confirmed</value>
+  </data>
+  <data name="SalesOrderStatus_Closed" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="SalesOrderStatus_Transmitted" xml:space="preserve">
+    <value>Transmitted to Accounting</value>
+  </data>
+  <data name="ERPStatus_Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="ERPStatus_Rejected" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
 </root>

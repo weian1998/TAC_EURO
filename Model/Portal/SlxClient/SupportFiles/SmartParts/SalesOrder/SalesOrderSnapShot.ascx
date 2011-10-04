@@ -85,7 +85,7 @@
                 </SalesLogix:Currency>
             </td>
             <td id="rowSOSubTotal" runat="server" visible="false" class="right-align">
-                <SalesLogix:Currency runat="server" ID="curSubTotal" DisplayMode="AsText" ExchangeRateType="SalesOrderRate"
+                <SalesLogix:Currency runat="server" ID="curSubTotal" DisplayMode="AsText" ExchangeRateType="EntityRate"
                     DisplayCurrencyCode="true">
                 </SalesLogix:Currency>
             </td>
@@ -108,7 +108,7 @@
                 <asp:Label runat="server" ID="lblBaseDiscountPercentage" Enabled="false"></asp:Label>
             </td>
             <td id="rowSODiscount" runat="server" visible="false" class="right-align">
-                <SalesLogix:Currency runat="server" ID="curDiscount" DisplayMode="AsText" ExchangeRateType="SalesOrderRate"
+                <SalesLogix:Currency runat="server" ID="curDiscount" DisplayMode="AsText" ExchangeRateType="EntityRate"
                     DisplayCurrencyCode="true">
                 </SalesLogix:Currency>
             </td>
@@ -130,7 +130,7 @@
                 </SalesLogix:Currency>
             </td>
             <td id="rowSOShipping" runat="server" visible="false" class="right-align">
-                <SalesLogix:Currency runat="server" ID="curShipping" DisplayMode="AsText" ExchangeRateType="SalesOrderRate"
+                <SalesLogix:Currency runat="server" ID="curShipping" DisplayMode="AsText" ExchangeRateType="EntityRate"
                     DisplayCurrencyCode="true">
                 </SalesLogix:Currency>
             </td>
@@ -153,7 +153,7 @@
                 <asp:Label runat="server" ID="lblBaseRatePercentage" Enabled="false"></asp:Label>
             </td>
             <td id="rowSOTax" runat="server" visible="false" class="right-align">
-                <SalesLogix:Currency runat="server" ID="curTax" DisplayMode="AsText" ExchangeRateType="SalesOrderRate"
+                <SalesLogix:Currency runat="server" ID="curTax" DisplayMode="AsText" ExchangeRateType="EntityRate"
                     DisplayCurrencyCode="true">
                 </SalesLogix:Currency>
             </td>
@@ -175,7 +175,7 @@
                 </SalesLogix:Currency>
             </td>
             <td id="rowSOTotal" runat="server" visible="false" class="right-align-bold">
-                <SalesLogix:Currency runat="server" ID="curTotal" DisplayMode="AsText" ExchangeRateType="SalesOrderRate"
+                <SalesLogix:Currency runat="server" ID="curTotal" DisplayMode="AsText" ExchangeRateType="EntityRate"
                     DisplayCurrencyCode="true" Font-Bold="true">
                 </SalesLogix:Currency>
             </td>

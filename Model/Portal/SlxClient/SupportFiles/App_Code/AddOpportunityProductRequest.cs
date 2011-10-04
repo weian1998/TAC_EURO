@@ -176,7 +176,7 @@ namespace Sage.SalesLogix.Client.App_Code
                 else
                     request.Response.ContentType = MediaType.JSON;
 
-                request.Response.Html = JavaScriptConvert.SerializeObject(new
+                request.Response.Html = JsonConvert.SerializeObject(new
                 {
                     nodes,
                     total = productTotalCount
@@ -332,6 +332,12 @@ namespace Sage.SalesLogix.Client.App_Code
                 criteriaProduct.Add(GetExpression(expProduct, enumCondition, "Status", parameters["StatusFilter"]));
             }
 
+            if (parameters.ContainsKey("APPIDFilter") && parameters["APPIDFilter"] != string.Empty)
+            {
+                SearchParameter enumCondition = SearchParameter.EqualTo;
+                criteriaProduct.Add(GetExpression(expProduct, enumCondition, "AppId", parameters["APPIDFilter"]));
+            }
+
             List<IProduct> ProductList = criteriaProduct.List<IProduct>() as List<IProduct>;
             return ProductList;
         }
@@ -382,6 +388,12 @@ namespace Sage.SalesLogix.Client.App_Code
             {
                 SearchParameter enumCondition = SearchParameter.EqualTo;
                 criteriaProduct.Add(GetExpression(expProduct, enumCondition, "Status", parameters["StatusFilter"]));
+            }
+
+            if (parameters.ContainsKey("APPIDFilter") && parameters["APPIDFilter"] != string.Empty)
+            {
+                SearchParameter enumCondition = SearchParameter.EqualTo;
+                criteriaProduct.Add(GetExpression(expProduct, enumCondition, "AppId", parameters["APPIDFilter"]));
             }
 
             List<IProduct> ProductList = criteriaProduct.List<IProduct>() as List<IProduct>;

@@ -1,6 +1,7 @@
 ﻿<%@ Import Namespace="System.Xml"%>
 <%@ Import Namespace="Sage.Common.Syndication.Json"%>
 <%@ Import Namespace="System.Collections.Generic"%>
+<%@ Import Namespace="Sage.Platform.SData" %>
 <%@ Import Namespace="Sage.SalesLogix.Plugins"%>
 <%@ Import namespace="Sage.Platform.Application.UI.Web"%>
 <%@ Import namespace="Sage.Platform.Application.UI"%>
@@ -27,7 +28,7 @@
 <script runat="server">
     private bool _UseAutoLogoff = true;
     private int _AutoLogoffDuration = 30;
-
+    
 	protected void Page_Load(object sender, EventArgs e)
     {
         System.Globalization.CultureInfo currentCulture = System.Globalization.CultureInfo.CurrentUICulture;
@@ -36,8 +37,8 @@
         if (System.IO.File.Exists(Server.MapPath(String.Format(extCulturePath, currentCulture.Name.Replace("-", "_")))))
             Page.Header.Controls.Add(new LiteralControl(String.Format(extCultureScript, currentCulture.Name.Replace("-", "_"))));
         else if (currentCulture.Parent != null && System.IO.File.Exists(Server.MapPath(String.Format(extCulturePath, currentCulture.Parent.Name))))
-            Page.Header.Controls.Add(new LiteralControl(String.Format(extCultureScript, currentCulture.Parent.Name)));  
-        
+            Page.Header.Controls.Add(new LiteralControl(String.Format(extCultureScript, currentCulture.Parent.Name)));
+                        
         // Just used to create the Write menu now.
         Page.Header.Controls.Add(new Sage.SalesLogix.Client.MailMerge.MailMergeInitControl());
         
@@ -51,7 +52,7 @@
                 
         Sage.SalesLogix.WebUserOptions.GeneralSearchOptions options = Sage.SalesLogix.WebUserOptions.GeneralSearchOptions.Load(Server.MapPath(@"App_Data\LookupValues"));
         _UseAutoLogoff = options.AutoLogoff;
-        _AutoLogoffDuration = options.LogoffDuration;
+        _AutoLogoffDuration = options.LogoffDuration;     
     }
     
     protected void LoginName_Load(object sender, EventArgs e)
@@ -121,7 +122,7 @@
             }
             res.Add(p.Name, description);
         }
-        return JavaScriptConvert.SerializeObject(res);
+        return JsonConvert.SerializeObject(res);
     }    
     
     private static string GetDashboardPages()
@@ -138,7 +139,7 @@
             var enc = new System.Text.UTF8Encoding();
             res.Add(enc.GetString(p.Blob.Data));
         }
-        return JavaScriptConvert.SerializeObject(res);
+        return JsonConvert.SerializeObject(res);
     }
     
     public string HelpLink
@@ -216,6 +217,7 @@
     
     <script pin="pin" type="text/javascript" src="jscript/YUI/yui-combined-min.js"></script>     
     <script pin="pin" src="jscript/FusionCharts.js" type="text/javascript"></script>     
+
     <script pin="pin" type="text/javascript" src="jscript/sage-platform/sage-platform.js"></script>
     <script pin="pin" type="text/javascript" src="jscript/sage-controls/sage-controls.js"></script>
     <script pin="pin" type="text/javascript" src="jscript/sage-common/sage-common.js"></script>

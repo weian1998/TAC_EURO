@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="c24dab75-1531-40a0-9cbc-42f687e9fea3" lastModifiedUtc="2011-01-21T18:36:25.777803Z" name="luePriceList_OnChange" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="InsertSalesOrder">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="8ebca0a4-2df0-451e-bc87-f11da3551ee9" paramName="form" sequence="0" paramType="IInsertSalesOrder" />
+    <OrmEntityMethodParam id="1735ac3a-94ad-4f7e-ab79-c3dbcf81ef51" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets />
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

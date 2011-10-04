@@ -178,18 +178,15 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
             }
             $.ajax({
                 type: "POST",
-                url: "DashboardService.asmx/UpdatePage",
-                data: { name: this.name,
-                    family: this.family,
-                    data: thisPageSerialized
-                },
+                    url: String.format("slxdata.ashx/slx/crm/-/dashboard/page?name={0}&family={1}", this.name, this.family),
+                    data: thisPageSerialized,
+                    processData: false,
                 error: function (request, status, error) {
                     Ext.Msg.alert(DashboardResource.Warning, request.responseText);
                 },
                 success: function (data, status) {
-                    var res = data.lastChild.textContent || data.lastChild.text;
-                    if (res != "Success") {
-                        Ext.Msg.confirm(DashboardResource.Warning, res + "<br>" + DashboardResource.PersonalCopy,
+                        if (data != "Success") {
+                            Ext.Msg.confirm(DashboardResource.Warning, data + "<br>" + DashboardResource.PersonalCopy,
                             function (btn) {
                                 if (btn == 'yes') {
                                     self.createCopy();
@@ -209,6 +206,7 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                 var win = new Ext.Window({ title: DashboardResource.Share,
                     width: parseInt(DashboardResource.Popup_Width),
                     height: parseInt(DashboardResource.Popup_Height),
+                    layout: 'fit',
                     autoScroll: true,
                     tools: [{ id: 'help',
                         handler: function (evt, toolEl, panel) {
@@ -227,20 +225,19 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                                         if (ownerarray.length == 0) ownerarray.push("unrelease");
                                         $.ajax({
                                             type: "POST",
-                                            url: "DashboardService.asmx/ReleasePage",
-                                            data: { name: self.name,
-                                                family: self.family,
-                                                owners: ownerarray
-                                            },
+                                            url: String.format("slxdata.ashx/slx/crm/-/dashboard/release?name={0}&family={1}",
+                                                self.name,
+                                                self.family),
+                                            data: Sys.Serialization.JavaScriptSerializer.serialize(ownerarray),
+                                            processData: false,
                                             error: function (request, status, error) {
-                                                var res = data.lastChild.textContent || data.lastChild.text;
-                                                if (res != "Success") {
-                                                    Ext.Msg.alert(DashboardResource.Warning, res);
-                                                    return;
-                                                }
                                                 Ext.Msg.alert(DashboardResource.Warning, request.responseText);
                                             },
                                             success: function (data, status) {
+                                                if (data != "Success") {
+                                                    Ext.Msg.alert(DashboardResource.Warning, data);
+                                                    return;
+                                                }
                                                 if (typeof callback === "function") callback(data, status);
                                             }
                                         });
@@ -256,8 +253,9 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                 });
 
                 $.ajax({
-                    type: "POST",
-                    url: "DashboardService.asmx/GetPluginReleases",
+                    type: "GET",
+                    url: "slxdata.ashx/slx/crm/-/dashboard/release",
+                    cache: false,
                     data: { name: self.name,
                         family: self.family
                     },
@@ -266,9 +264,10 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                     },
                     success: function (data, status) {
                         var storedata = {};
-                        var res = Ext.DomQuery.select("string", data)[0].textContent || Ext.DomQuery.select("string", data)[0].text;
-                        storedata.items = Sys.Serialization.JavaScriptSerializer.deserialize(res);
+                        //var res = Ext.DomQuery.select("string", data)[0].textContent || Ext.DomQuery.select("string", data)[0].text;
+                        storedata.items = Sys.Serialization.JavaScriptSerializer.deserialize(data);
                         var grid = new Ext.grid.GridPanel({
+                            buttonAlign: 'center',
                             store: new Ext.data.JsonStore({
                                 autoDestroy: true,
                                 fields: ['Id', 'Text'],
@@ -277,7 +276,7 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                             }),
                             colModel: new Ext.grid.ColumnModel({
                                 defaults: {
-                                    width: 120,
+                                    //width: 120,
                                     sortable: false
                                 },
                                 columns: [
@@ -285,42 +284,47 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                                 ]
                             }),
                             sm: new Ext.grid.RowSelectionModel({ singleSelect: false }),
-                            width: 140,
-                            height: 250,
+                            //width: 140,
+                            //height: 250,
                             frame: true,
-                            id: 'ReleasedGrid'
+                            id: 'ReleasedGrid',
+                            buttons: [{
+                                text: 'Everyone',
+                                handler: function () {
+                                    var grid = Ext.getCmp('ReleasedGrid');
+                                    var found = false;
+                                    for (var i = 0; i < grid.store.data.items.length; i++) {
+                                        if (grid.store.data.items[i].data.Id === "SYST00000001") found = true;
+                                    }
+                                    if (!found) {
+                                        var rec = new grid.store.recordType({ "Id": "SYST00000001", "Text": "Everyone" });
+                                        grid.store.add(rec);
+                                    }
+                                }
+                            },
+                                {
+                                    text: 'Add',
+                                    handler: function () {
+                                        var vURL = 'OwnerAssign.aspx';
+                                        window.open(vURL, "OwnerAssign", "resizable=yes,centerscreen=yes,width=500,height=450,status=no,toolbar=no,scrollbars=yes");
+                                    }
+                                },
+                                {
+                                    text: 'Remove',
+                                    handler: function () {
+                                        var grid = Ext.getCmp('ReleasedGrid');
+                                        var selected = grid.getSelectionModel().getSelections();
+                                        for (var i = 0; i < selected.length; i++) {
+                                            grid.store.remove(selected[i]);
+                                        }
+                                    }
+                                }
+                            ]
                         });
                         win.add(grid);
-                        win.add(new Ext.Button({ text: 'Everyone', handler: function () {
-                            var grid = Ext.getCmp('ReleasedGrid');
-                            var found = false;
-                            for (var i = 0; i < grid.store.data.items.length; i++) {
-                                if (grid.store.data.items[i].data.Id === "SYST00000001")
-                                    found = true;
-                            }
-                            if (!found) {
-                                var rec = new grid.store.recordType({ "Id": "SYST00000001", "Text": "Everyone" });
-                                grid.store.add(rec);
-                            }
-                        }
-                        }));
-                        win.add(new Ext.Button({ text: 'Add', handler: function () {
-                            var vURL = 'OwnerAssign.aspx';
-                            window.open(vURL, "OwnerAssign", "resizable=yes,centerscreen=yes,width=500,height=450,status=no,toolbar=no,scrollbars=yes");
-                        }
-                        }));
-                        win.add(new Ext.Button({ text: 'Remove', handler: function () {
-                            var grid = Ext.getCmp('ReleasedGrid');
-                            var selected = grid.getSelectionModel().getSelections();
-                            for (var i = 0; i < selected.length; i++) {
-                                grid.store.remove(selected[i]);
-                            }
-                        }
-                        }));
                         win.show();
                     }
                 });
-
             });
         },
 
@@ -495,18 +499,16 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                         var confirm = Ext.Msg.confirm(DashboardResource.Delete_Tab, DashboardResource.ConfirmDelete, function (result) {
                             if (result == "yes") {
                                 $.ajax({
-                                    type: "POST",
-                                    url: "DashboardService.asmx/DeletePage",
-                                    data: { name: currentDashboardPage.name,
-                                        family: currentDashboardPage.family
-                                    },
+                                    type: "DELETE",
+                                    url: String.format("slxdata.ashx/slx/crm/-/dashboard/page?name={0}&family={1}",
+                                        currentDashboardPage.name,
+                                        currentDashboardPage.family),
                                     error: function (request, status, error) {
                                         Ext.Msg.alert(DashboardResource.Warning, request.responseText);
                                     },
                                     success: function (data, status) {
-                                        var res = data.lastChild.textContent || data.lastChild.text;
-                                        if (res != "Success") {
-                                            Ext.Msg.alert(DashboardResource.Warning, res);
+                                        if (data != "Success") {
+                                            Ext.Msg.alert(DashboardResource.Warning, data);
                                             return;
                                         }
                                         currentDashboardPage.dashboard.deletePortal(portalNum);

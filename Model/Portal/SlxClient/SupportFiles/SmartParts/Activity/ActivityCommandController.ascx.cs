@@ -16,6 +16,7 @@ using Sage.SalesLogix.Web.Controls;
 using Sage.SalesLogix.Activity;
 using Sage.SalesLogix.Attachment;
 using TimeZone = Sage.Platform.TimeZone;
+using Sage.Platform.Security;
 
 public partial class SmartParts_Activity_ActivityCommandController
     : EntityBoundSmartPartInfoProvider
@@ -58,6 +59,15 @@ public partial class SmartParts_Activity_ActivityCommandController
     }
 
     #endregion
+    protected override void OnLoad(EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            // clean old temporary attachments
+            ClearTempAttachments();
+        }
+        base.OnLoad(e);
+    }
 
     protected override void OnInit(EventArgs e)
     {
@@ -202,6 +212,7 @@ public partial class SmartParts_Activity_ActivityCommandController
 
     private void CloseParentDialog(bool doRefreshAll)
     {
+        ClearTempAttachments();
         var sb = new StringBuilder();
         var closeDialogId = "ctl00$DialogWorkspace$ActivityDialogController$btnCloseDialog";
         sb.AppendFormat("parent.__doPostBack('{0}','{1}');", closeDialogId, doRefreshAll);
@@ -299,9 +310,33 @@ public partial class SmartParts_Activity_ActivityCommandController
                 foreach (IAttachment attach in attachments)
                 {
                     attach.ActivityId = Activity.ActivityId;
+                    attach.AccountId = Activity.AccountId;
+                    attach.ContactId = Activity.ContactId;
                     attach.Save();
                     /* Move the attachment from the \Attachment\_temporary path to the \Attachment path. */
                     Rules.MoveTempAttachment(attach);
+                }
+            }
+            workItem.State.Remove("TempAssociationID");
+        }
+    }
+
+    private void ClearTempAttachments()
+    {
+        /* Update any attachment records that were created in Insert mode, but not as part of the carry over. */
+        WorkItem workItem = PageWorkItem;
+        if (workItem == null) return;
+
+        object oStrTempAssociationID = workItem.State["TempAssociationID"] ?? ApplicationContext.Current.Services.Get<IUserService>(true).UserId;
+        if (oStrTempAssociationID != null)
+        {
+            string strTempAssociationID = oStrTempAssociationID.ToString();
+            IList<IAttachment> attachments = Rules.GetAttachmentsFor(EntityContext.EntityType, strTempAssociationID);
+            if (attachments != null)
+            {
+                foreach (IAttachment attach in attachments)
+                {
+                     attach.Delete();
                 }
             }
             workItem.State.Remove("TempAssociationID");

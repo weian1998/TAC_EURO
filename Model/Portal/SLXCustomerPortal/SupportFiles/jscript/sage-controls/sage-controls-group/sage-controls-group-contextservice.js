@@ -4,10 +4,10 @@
 };
 
 Sage.ClientGroupContextService.prototype.getContext = function() {
-    if (window.__groupContext) {
-        if (!window.__groupContext.ContainsPositionState)
+    if ((Sage.Groups) && Sage.Groups._groupContext) {
+        if (!Sage.Groups._groupContext.ContainsPositionState)
             this.requestContext();
-        return window.__groupContext;
+        return Sage.Groups._groupContext;
     }
     this.requestContext();
     return this._emptyContext;
@@ -38,7 +38,8 @@ Sage.ClientGroupContextService.prototype.requestContext = function() {
 
 Sage.ClientGroupContextService.prototype.setContext = function(contextObj) {
     if (typeof contextObj === "object") {
-        window.__groupContext = contextObj;
+        if (!Sage.Groups) Sage.namespace('Groups');
+        Sage.Groups._groupContext = contextObj;
     }
     var svc = Sage.Services.getService("ClientGroupContext")
     svc.isRetrievingContext = false;

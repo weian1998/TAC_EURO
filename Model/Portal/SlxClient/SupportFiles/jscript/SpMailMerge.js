@@ -237,10 +237,10 @@ function sp_GetMailMergeInfo(xml, contactId, leaderId) {
             sBCC = oEmailXmlReader.selectSingleNodeText("/Email/BCC");
         }
 
-        if (sCC != "") {
+        if (!Ext.isEmpty(sCC)) {
             sMoCC = (Ext.isEmpty(sMoCC)) ? sCC : sMoCC + ";" + sCC;
         }
-        if (sBCC != "") {
+        if (!Ext.isEmpty(sBCC)) {
             sMoBCC = (Ext.isEmpty(sMoBCC)) ? sBCC : sMoBCC + ";" + sBCC;            
         }
         if (sContactId == "") {

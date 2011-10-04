@@ -4,7 +4,7 @@
 // {{MadCap}} //////////////////////////////////////////////////////////////////
 // Copyright: MadCap Software, Inc - www.madcapsoftware.com ////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-// <version>5.0.1.0</version>
+// <version>7.0.0.0</version>
 ////////////////////////////////////////////////////////////////////////////////
 */
 
@@ -122,7 +122,7 @@
 	
 }
 
-.MCPopupSpot
+a.MCPopupSpot
 {
 	
 }
@@ -270,252 +270,264 @@ footnoteBlock
 	display: block;
 }
 
-a.MCToggler
+a.MCToggler_0
 {
+	color: #0000ff;
+	margin-top: 3pt;
 	text-decoration: none;
-	color: #008b8b;
 }
 
-a.MCToggler:link
+a.MCToggler_0:link
 {
+	color: #0000ff;
+	margin-top: 3pt;
 	text-decoration: none;
-	color: #008b8b;
 }
 
-a.MCToggler:visited
+a.MCToggler_0:visited
 {
+	color: #0000ff;
+	margin-top: 3pt;
 	text-decoration: none;
-	color: #008b8b;
 }
 
-a.MCToggler:hover
+a.MCToggler_0:hover
 {
 	
 }
 
-a.MCToggler:focus
+a.MCToggler_0:focus
 {
 	
 }
 
-span.MCExpanding
+span.MCExpanding_0
 {
-	color: #008b8b;
+	color: #0000ff;
 }
 
-a.MCExpandingHead
-{
-	text-decoration: none;
-	color: #008b8b;
-}
-
-a.MCExpandingHead:link
+a.MCExpandingHead_0
 {
 	text-decoration: none;
-	color: #008b8b;
+	color: #0000ff;
 }
 
-a.MCExpandingHead:visited
+a.MCExpandingHead_0:link
 {
 	text-decoration: none;
-	color: #008b8b;
+	color: #0000ff;
 }
 
-a.MCExpandingHead:hover
+a.MCExpandingHead_0:visited
+{
+	text-decoration: none;
+	color: #0000ff;
+}
+
+a.MCExpandingHead_0:hover
 {
 	
 }
 
-a.MCExpandingHead:focus
+a.MCExpandingHead_0:focus
 {
 	
 }
 
-span.MCExpandingBody
+span.MCExpandingBody_0
 {
 	color: #000000;
 }
 
-a.MCDropDownHotSpot
+div.MCDropDown_0
+{
+	color: #0000ff;
+}
+
+a.MCDropDownHotSpot_0
 {
 	text-decoration: none;
-	font-size: xx-small;
-	color: #008b8b;
+	color: #0000ff;
+	font-size: inherit;
 	font-color: #008b8b;
 }
 
-a.MCDropDownHotSpot:link
+a.MCDropDownHotSpot_0:link
 {
 	text-decoration: none;
-	font-size: xx-small;
-	color: #008b8b;
+	color: #0000ff;
+	font-size: inherit;
 	font-color: #008b8b;
 }
 
-a.MCDropDownHotSpot:visited
+a.MCDropDownHotSpot_0:visited
 {
 	text-decoration: none;
-	font-size: xx-small;
-	color: #008b8b;
+	color: #0000ff;
+	font-size: inherit;
 	font-color: #008b8b;
 }
 
-a.MCDropDownHotSpot:hover
+a.MCDropDownHotSpot_0:hover
 {
 	
 }
 
-a.MCDropDownHotSpot:focus
+a.MCDropDownHotSpot_0:focus
 {
 	
 }
 
-div.MCDropDownHead
+div.MCDropDownHead_0
 {
 	text-decoration: none;
-	color: #008080;
+	color: #0000ff;
+	margin-top: 3pt;
 }
 
-a.expandingHead_0
-{
-	font-weight: normal;
-	text-decoration: none;
-	color: #008b8b;
-}
-
-a.expandingHead_0:link
+a.expandingHead_1
 {
 	font-weight: normal;
 	text-decoration: none;
-	color: #008b8b;
+	color: #0000ff;
 }
 
-a.expandingHead_0:visited
+a.expandingHead_1:link
 {
 	font-weight: normal;
 	text-decoration: none;
-	color: #008b8b;
+	color: #0000ff;
 }
 
-a.expandingHead_0:hover
+a.expandingHead_1:visited
+{
+	font-weight: normal;
+	text-decoration: none;
+	color: #0000ff;
+}
+
+a.expandingHead_1:hover
 {
 	
 }
 
-a.expandingHead_0:focus
+a.expandingHead_1:focus
 {
 	
 }
 
-a.toggler_0
+a.toggler_1
 {
 	font-weight: normal;
+	color: #0000ff;
+	margin-top: 3pt;
 	text-decoration: none;
-	color: #008b8b;
 }
 
-a.toggler_0:link
+a.toggler_1:link
 {
 	font-weight: normal;
+	color: #0000ff;
+	margin-top: 3pt;
 	text-decoration: none;
-	color: #008b8b;
 }
 
-a.toggler_0:visited
+a.toggler_1:visited
 {
 	font-weight: normal;
+	color: #0000ff;
+	margin-top: 3pt;
 	text-decoration: none;
-	color: #008b8b;
 }
 
-a.toggler_0:hover
+a.toggler_1:hover
 {
 	
 }
 
-a.toggler_0:focus
+a.toggler_1:focus
 {
 	
 }
 
-a.MCDropDownHotSpot_dropspot
+a.MCDropDownHotSpot_dropspot_0
 {
 	font-style: normal;
 	font-weight: normal;
-	font-family: Verdana, Tahoma, Arial;
+	font-family: inherit;
 	font-variant: normal;
 	x-text-box: blink;
 	cursor: Hand;
 	text-decoration: none;
-	font-size: xx-small;
 	color: #008080;
+	font-size: inherit;
 	font-color: #008b8b;
 }
 
-a.MCDropDownHotSpot_dropspot:link
+a.MCDropDownHotSpot_dropspot_0:link
 {
 	font-style: normal;
 	font-weight: normal;
-	font-family: Verdana, Tahoma, Arial;
+	font-family: inherit;
 	font-variant: normal;
 	x-text-box: blink;
 	cursor: Hand;
 	text-decoration: none;
-	font-size: xx-small;
 	color: #008080;
+	font-size: inherit;
 	font-color: #008b8b;
 }
 
-a.MCDropDownHotSpot_dropspot:visited
+a.MCDropDownHotSpot_dropspot_0:visited
 {
 	font-style: normal;
 	font-weight: normal;
-	font-family: Verdana, Tahoma, Arial;
+	font-family: inherit;
 	font-variant: normal;
 	x-text-box: blink;
 	cursor: Hand;
 	text-decoration: none;
-	font-size: xx-small;
 	color: #008080;
+	font-size: inherit;
 	font-color: #008b8b;
 }
 
-a.MCDropDownHotSpot_dropspot:hover
+a.MCDropDownHotSpot_dropspot_0:hover
 {
 	
 }
 
-a.MCDropDownHotSpot_dropspot:focus
+a.MCDropDownHotSpot_dropspot_0:focus
 {
 	
 }
 
-a.MCTextPopupSpot
+a.MCTextPopupSpot_0
 {
 	color: blue;
 }
 
-a.MCTextPopupSpot:link
+a.MCTextPopupSpot_0:link
 {
 	color: blue;
 }
 
-a.MCTextPopupSpot:visited
+a.MCTextPopupSpot_0:visited
 {
 	color: blue;
 }
 
-a.MCTextPopupSpot:hover
+a.MCTextPopupSpot_0:hover
 {
 	
 }
 
-a.MCTextPopupSpot:focus
+a.MCTextPopupSpot_0:focus
 {
 	
 }
 
-span.MCTextPopupBody
+span.MCTextPopupBody_0
 {
 	position: absolute;
 	overflow: auto;

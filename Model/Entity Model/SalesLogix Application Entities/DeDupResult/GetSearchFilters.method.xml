@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="8147af79-7292-4091-9bdb-e2a12077a423" lastModifiedUtc="2010-08-25T17:22:46.1280869Z" name="GetSearchFilters" returnType="IList&lt;Sage.Platform.ComponentModel.ComponentView&gt;" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="3d0a69ec-de54-40e2-9d09-449d2dc8fb7d" lastModifiedUtc="2010-08-25T17:17:53.6323571Z" targetType="Sage.SalesLogix.DeDupReuslt.Rules, Sage.SalesLogix.BusinessRules" targetMethod="GetSearchFilters" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
-<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="db064fd5-fb26-4b36-8723-e0862a58320c" lastModifiedUtc="2011-01-13T18:02:25.7067247Z" cardinality="M:1" parentEntityId="750a7f26-3604-467b-94fe-249370231df4" childEntityId="6ab738f6-21b0-4fe2-8df5-6f192281423c">
-  <extendedMetaData />
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="db064fd5-fb26-4b36-8723-e0862a58320c" cardinality="M:1" parentEntityId="750a7f26-3604-467b-94fe-249370231df4" childEntityId="6ab738f6-21b0-4fe2-8df5-6f192281423c">
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
   </ExtendedPropertiesCollection>
-  <parentProperty id="31258f7a-7982-4242-9fc0-7424102cd36e" lastModifiedUtc="0001-01-01T00:00:00" name="RegionalManager" audited="false">
+  <parentProperty id="31258f7a-7982-4242-9fc0-7424102cd36e" name="RegionalManager" audited="false" displayCategory="Intermediate" isNullable="true" include="true">
     <ExtendedPropertiesCollection>
       <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
     </ExtendedPropertiesCollection>
@@ -12,7 +11,7 @@
       <RelationshipDataType />
     </SystemDataType>
   </parentProperty>
-  <childProperty id="c2610e21-fb1f-45b0-bb12-e9034b3ebafb" lastModifiedUtc="0001-01-01T00:00:00" name="Property1" audited="false" include="false">
+  <childProperty id="c2610e21-fb1f-45b0-bb12-e9034b3ebafb" name="Property1" audited="false" displayCategory="Intermediate" isNullable="true" include="false">
     <ExtendedPropertiesCollection>
       <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
     </ExtendedPropertiesCollection>

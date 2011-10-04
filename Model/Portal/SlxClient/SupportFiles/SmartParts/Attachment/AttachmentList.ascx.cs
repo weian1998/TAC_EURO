@@ -368,12 +368,12 @@ public partial class AttachmentList : EntityBoundSmartPartInfoProvider
         jsonobj.gearsAddButtonID = cmdBrowseFiles.ClientID;
         jsonobj.cmdInsertFileID = cmdInsertFile.ClientID;
 
-        //string script = string.Concat("var slxattachmentstrings = ", JavaScriptConvert.SerializeObject(jsonobj), ";$(document).ready(function() {Sage.AttachmentsTab.init();});");
+        //string script = string.Concat("var slxattachmentstrings = ", JsonConvert.SerializeObject(jsonobj), ";$(document).ready(function() {Sage.AttachmentsTab.init();});");
 
         string script =
             string.Format(
                 "var slxattachmentstrings = {0};$(document).ready(function() {{ Sage.AttachmentsTab.init({1});}});",
-                JavaScriptConvert.SerializeObject(jsonobj), (IsActivityInsert() || IsHistoryInsert()) ? "true" : "false");
+                JsonConvert.SerializeObject(jsonobj), (IsActivityInsert() || IsHistoryInsert()) ? "true" : "false");
         
         ScriptManager.RegisterStartupScript(Page, GetType(), "AttachmentStrings", script, true);
     }
@@ -443,7 +443,8 @@ public partial class AttachmentList : EntityBoundSmartPartInfoProvider
 
                 string url = "URL=";
                 Random random = new Random();
-                string urlFile = random.Next(9999) + "-" + txtInsertDesc.Text + "-" + random.Next(9999) + ".URL";
+                //string urlFile = random.Next(9999) + "-" + txtInsertDesc.Text + "-" + random.Next(9999) + ".URL";
+                string urlFile = Guid.NewGuid().ToString() + ".URL";
                 string path = attachPath + "/" + urlFile;
                 if (!txtInsertURL.Text.Contains("://"))
                     url += "http:\\\\";
@@ -457,6 +458,7 @@ public partial class AttachmentList : EntityBoundSmartPartInfoProvider
 
                 IAttachment attachment = EntityFactory.Create<IAttachment>();
                 attachment.Description = txtInsertDesc.Text;
+                attachment.FileName = urlFile;
 
                 if (!bIsActivityInsert && !bIsHistoryInsert)
                 {
@@ -464,11 +466,15 @@ public partial class AttachmentList : EntityBoundSmartPartInfoProvider
                 }
                 else
                 {
-                    if (string.IsNullOrEmpty(strTempAssociationID))
+                    if (string.IsNullOrEmpty(strTempAssociationID) ||
+                            (workItem != null) && (System.Convert.ToString(workItem.State["TempAssociationID"]) == strTempAssociationID))
                     {
                         /* Save to get an ID used for temp purposes. */
-                        attachment.Save();
-                        strTempAssociationID = attachment.Id.ToString();
+                      
+                        IUserService userServ = ApplicationContext.Current.Services.Get<IUserService>();
+                        strTempAssociationID = userServ.UserId;
+                        //attachment.Save();
+                       
                         if (workItem != null)
                         {
                             workItem.State["TempAssociationID"] = strTempAssociationID;
@@ -496,11 +502,14 @@ public partial class AttachmentList : EntityBoundSmartPartInfoProvider
                     }
                     else
                     {
-                        if (string.IsNullOrEmpty(strTempAssociationID))
+                        if (string.IsNullOrEmpty(strTempAssociationID) ||
+                            (workItem != null) && (System.Convert.ToString(workItem.State["TempAssociationID"]) == strTempAssociationID))
                         {
+                            attachment.FileName = Path.GetFileName(file.FileName); //ie sends up the full path, ff sends up just the filename
                             /* Save to get an ID used for temp purposes. */
-                            attachment.Save();
-                            strTempAssociationID = attachment.Id.ToString();
+                            attachment.Save(); 
+                            IUserService userServ = ApplicationContext.Current.Services.Get<IUserService>();
+                            strTempAssociationID = userServ.UserId; // If we use the attachment id it fails when they try to insert an item with 2 attachments
                             if (workItem != null)
                             {
                                 workItem.State["TempAssociationID"] = strTempAssociationID;

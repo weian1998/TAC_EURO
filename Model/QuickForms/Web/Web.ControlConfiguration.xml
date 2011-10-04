@@ -3,6 +3,11 @@
   <FormProviders>
     <WebQuickFormRenderingProvider>
       <TemplateName>QuickForm2Web.vm</TemplateName>
+      <UsedFor>Default</UsedFor>
+    </WebQuickFormRenderingProvider>
+    <WebQuickFormRenderingProvider>
+      <TemplateName>QuickFormScriptFile.vm</TemplateName>
+      <UsedFor>JavaScript</UsedFor>
     </WebQuickFormRenderingProvider>
   </FormProviders>
   <ControlProviders>
@@ -72,7 +77,17 @@
       <QuickFormControlType TypeName="Sage.Platform.QuickForms.QFControls.QFHqlDataSource, Sage.Platform.QuickForms.QFControls, Version=7.2.0.1638, Culture=neutral, PublicKeyToken=null">
         <Properties />
       </QuickFormControlType>
-      <RenderedControlType TypeName="Sage.Platform.WebPortal.Binding.WebHqlBindingSource, Sage.Platform.WebPortal">
+      <RenderedControlType TypeName="Sage.Platform.WebPortal.Binding.WebHqlListBindingSource, Sage.Platform.WebPortal">
+        <Properties />
+      </RenderedControlType>
+    </WebControlRenderingProvider>
+    <WebControlRenderingProvider>
+      <TemplateName>QFSDataDataSource.WebControlRenderingTemplate.vm</TemplateName>
+      <PropertyMaps />
+      <QuickFormControlType TypeName="Sage.Platform.QuickForms.QFControls.QFSDataDataSource, Sage.Platform.QuickForms.QFControls, Version=7.2.0.1638, Culture=neutral, PublicKeyToken=null">
+        <Properties />
+      </QuickFormControlType>
+      <RenderedControlType TypeName="Sage.Platform.WebPortal.Binding.WebSDataBindingSource, Sage.Platform.WebPortal">
         <Properties />
       </RenderedControlType>
     </WebControlRenderingProvider>
@@ -393,6 +408,39 @@
         <Properties />
       </RenderedControlType>
     </WebControlRenderingProvider>
+    <!--BEGIN SLX SData Lookup-->
+    <WebControlRenderingProvider>
+      <TemplateName>QFSLXSDataLookup.WebControlRenderingTemplate.vm</TemplateName>
+      <JavaScriptTemplateName>QFSLXSDataLookup.WebControlScriptRenderingTemplate.vm</JavaScriptTemplateName>
+      <PropertyMaps>
+        <PropertyMappingInfo>
+          <QFControlProperty>IsReadOnly</QFControlProperty>
+          <RenderedProperty>ReadOnly</RenderedProperty>
+          <ReverseBooleanValues>false</ReverseBooleanValues>
+          <PropertyIsShared>false</PropertyIsShared>
+        </PropertyMappingInfo>
+        <PropertyMappingInfo>
+          <QFControlProperty>StyleScheme</QFControlProperty>
+          <RenderedProperty>CssClass</RenderedProperty>
+          <ReverseBooleanValues>false</ReverseBooleanValues>
+          <PropertyIsShared>true</PropertyIsShared>
+        </PropertyMappingInfo>
+        <PropertyMappingInfo>
+          <QFControlProperty>Visible</QFControlProperty>
+          <RenderedProperty>Visible</RenderedProperty>
+          <ReverseBooleanValues>false</ReverseBooleanValues>
+          <PropertyIsShared>true</PropertyIsShared>
+        </PropertyMappingInfo>
+      </PropertyMaps>
+      <QuickFormControlType TypeName="Sage.SalesLogix.QuickForms.QFControls.QFSLXSDataLookup, Sage.SalesLogix.QuickForms.QFControls, Version=7.2.0.1638, Culture=neutral, PublicKeyToken=null">
+        <Properties />
+      </QuickFormControlType>
+      <!--TODO: What is the control type while there is no server control?-->
+      <RenderedControlType TypeName="Sage.SalesLogix.Web.Controls.Lookup.LookupControl, Sage.SalesLogix.Web.Controls">
+        <Properties />
+      </RenderedControlType>
+    </WebControlRenderingProvider>
+    <!--END SLX SData Lookup-->
     <WebControlRenderingProvider>
       <TemplateName>QFHorizontalSeparator.WebControlRenderingTemplate.vm</TemplateName>
       <PropertyMaps />
@@ -899,6 +947,17 @@
       <TemplateName>QFSparkLine.WebControlRenderingTemplate.vm</TemplateName>
       <PropertyMaps />
       <QuickFormControlType TypeName="Sage.SalesLogix.QuickForms.QFControls.QFSparkLine, Sage.SalesLogix.QuickForms.QFControls">
+        <Properties />
+      </QuickFormControlType>
+      <RenderedControlType TypeName="System.Web.UI.LiteralControl, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+        <Properties />
+      </RenderedControlType>
+    </WebControlRenderingProvider>
+    <WebControlRenderingProvider>
+      <TemplateName>QFSDataGrid.WebControlRenderingTemplate.vm</TemplateName>
+      <JavaScriptTemplateName>QFSDataGrid.WebControlScriptRenderingTemplate.vm</JavaScriptTemplateName>
+      <PropertyMaps />
+      <QuickFormControlType TypeName="Sage.SalesLogix.QuickForms.QFControls.SDataGrid.QFSDataGrid, Sage.SalesLogix.QuickForms.QFControls">
         <Properties />
       </QuickFormControlType>
       <RenderedControlType TypeName="System.Web.UI.LiteralControl, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

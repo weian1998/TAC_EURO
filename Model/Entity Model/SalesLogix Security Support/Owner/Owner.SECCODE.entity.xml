@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="dfca3267-2f5b-4970-813b-5aeb9ea75649" lastModifiedUtc="2010-03-10T18:11:01.3519987Z" manageSchema="false" tableName="SECCODE" name="Owner" displayPropertyId="e84466f0-03a3-4c11-b896-7e469fdc850c" isExtension="false" audited="true" generateSDataFeed="true" sDataPathName="Owners" lastUpdatedPropertyId="b425c0da-e1f9-4b9c-abf3-366c1106ecb7" onBeforeInsertMethodId="78fc70bd-5190-4c48-8b10-92de9429465f" onAfterInsertMethodId="a17a8c50-070e-46d6-971d-bf408f8dc504" onBeforeUpdateMethodId="2eaede3c-b4cb-4f08-b624-de7e433be2b4" onAfterUpdateMethodId="2b524b23-75a9-4a7e-b7ef-cce09c30b766" onBeforeDeleteMethodId="26bd2bea-5279-40c7-b02d-6b13b9a30ba4" onAfterDeleteMethodId="f47e9257-e91b-446a-a487-9046d9447e65" onCreateId="0cd74f7b-5565-4d41-ab02-b9128c30ea52">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="dfca3267-2f5b-4970-813b-5aeb9ea75649" lastModifiedUtc="2011-05-05T13:51:41.5191813Z" manageSchema="false" tableName="SECCODE" name="Owner" displayPropertyId="e84466f0-03a3-4c11-b896-7e469fdc850c" isExtension="false" audited="true" onBeforeInsertMethodId="78fc70bd-5190-4c48-8b10-92de9429465f" onAfterInsertMethodId="a17a8c50-070e-46d6-971d-bf408f8dc504" onBeforeUpdateMethodId="2eaede3c-b4cb-4f08-b624-de7e433be2b4" onAfterUpdateMethodId="2b524b23-75a9-4a7e-b7ef-cce09c30b766" onBeforeDeleteMethodId="26bd2bea-5279-40c7-b02d-6b13b9a30ba4" onAfterDeleteMethodId="f47e9257-e91b-446a-a487-9046d9447e65" onCreateId="0cd74f7b-5565-4d41-ab02-b9128c30ea52">
   <extendedMetaData>
     <i>
       <n>NHibernate.Mapping.AlternateConcreteClass</n>
@@ -14,6 +14,9 @@
           <HistoryTypeName />
           <IsHistoryTable>false</IsHistoryTable>
         </OrmEntityMetadataExtension>
+      </extender>
+      <extender guid="76aa0e24-2c8f-3b71-a1f9-ca6db3db4459">
+        <OrmEntitySDataExtension generateFeed="true" pathName="owners" lastUpdatedPropertyId="b425c0da-e1f9-4b9c-abf3-366c1106ecb7" canPost="false" canPut="false" canDelete="false" />
       </extender>
     </extendee>
   </ExtendedPropertiesCollection>

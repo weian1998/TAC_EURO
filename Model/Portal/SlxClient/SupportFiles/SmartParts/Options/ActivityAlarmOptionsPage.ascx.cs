@@ -31,19 +31,7 @@ public partial class ActivityAlarmOptionsPage : System.Web.UI.UserControl, ISmar
         ActivityAlarmOptions options = null;
         options = ActivityAlarmOptions.Load(Server.MapPath(@"App_Data\LookupValues"));
         // set defaults
-        if (options.ShowActivitiesFor != "")
-        {
-            foreach (ListItem li in _showActivitiesFor.Items)
-                li.Selected = (options.ShowActivitiesFor.Contains(li.Value));
-        }
-        else
-        {
-            string curUserId =
-                ((SLXUserService)(ApplicationContext.Current.Services.Get<IUserService>())).GetUser().Id.ToString().Trim();
-            Utility.SetSelectedValue(_showActivitiesFor, curUserId);
-        }
         Utility.SetSelectedValue(_defaultView, options.DefaultView);
-        Utility.SetSelectedValue(_timeFrame, options.TimeFrame);
         Utility.SetSelectedValue(_defaultFollowupActivity, options.DefaultFollowupActivity);
         Utility.SetSelectedValue(_carryOverNotes, options.CarryOverNotes);
         Utility.SetSelectedValue(_carryOverAttachments, options.CarryOverAttachments);
@@ -125,9 +113,6 @@ public partial class ActivityAlarmOptionsPage : System.Web.UI.UserControl, ISmar
         _defaultView.DataSource = options.DefaultViewLookupList;
         _defaultView.DataTextField = options.DataTextField;
         _defaultView.DataValueField = options.DataValueField;
-        _timeFrame.DataSource = options.TimeFrameLookupList;
-        _timeFrame.DataTextField = options.DataTextField;
-        _timeFrame.DataValueField = options.DataValueField;
         _defaultFollowupActivity.DataSource = options.DefaultFollowupActivityLookupList;
         _defaultFollowupActivity.DataTextField = options.DataTextField;
         _defaultFollowupActivity.DataValueField = options.DataValueField;
@@ -141,22 +126,6 @@ public partial class ActivityAlarmOptionsPage : System.Web.UI.UserControl, ISmar
         _alarmDefaultLead.DataTextField = options.DataTextField;
         _alarmDefaultLead.DataValueField = options.DataValueField;
 
-
-        Sage.SalesLogix.Security.SLXUserService slxUserService = ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>() as Sage.SalesLogix.Security.SLXUserService;
-        string currentUserID = slxUserService.GetUser().Id.ToString();
-        IList<IUser> calUsers = UserCalendar.GetCalendarUsers(currentUserID);
-        SortedList sl = new SortedList();
-        foreach (IUser calUser in calUsers)
-        {
-            if ((calUser != null) && (!sl.Contains(calUser.ToString())))
-            {
-                sl.Add(calUser.ToString(), calUser.Id);
-            }
-        }
-        _showActivitiesFor.SelectionMode = ListSelectionMode.Multiple;
-        _showActivitiesFor.DataSource = sl;
-        _showActivitiesFor.DataValueField = "VALUE";
-        _showActivitiesFor.DataTextField = "KEY";
         Page.DataBind();
 
         //}
@@ -166,13 +135,7 @@ public partial class ActivityAlarmOptionsPage : System.Web.UI.UserControl, ISmar
     {
         // save values
         ActivityAlarmOptions options = new ActivityAlarmOptions(Server.MapPath(@"App_Data\LookupValues"));
-        foreach (ListItem li in _showActivitiesFor.Items)
-            if (li.Selected)
-                options.ShowActivitiesFor += "|" + li.Value;
-        if (options.ShowActivitiesFor.Length > 0)
-            options.ShowActivitiesFor = options.ShowActivitiesFor.Remove(0, 1);
         options.DefaultView = _defaultView.SelectedValue;
-        options.TimeFrame = _timeFrame.SelectedValue;
         options.DefaultFollowupActivity = _defaultFollowupActivity.SelectedValue;
         options.CarryOverNotes = _carryOverNotes.SelectedValue;
         options.CarryOverAttachments = _carryOverAttachments.SelectedValue;
@@ -194,7 +157,6 @@ public partial class ActivityAlarmOptionsPage : System.Web.UI.UserControl, ISmar
             _ShowPastDue.Items[0].Selected,
             _ShowConfirms.Items[0].Selected);
         context.SetContext("ActivityRemindersDisplay", value);
-        FilterManager.SetActivityUserOptions(userOption);
     }
 
     /// <summary>

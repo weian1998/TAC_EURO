@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="b077b377-3c66-48f4-ac87-a52540aafc9e" lastModifiedUtc="2011-03-04T18:16:34.757613Z" name="luePriceList_OnChange" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="OpportunityDetails">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="e7bf4c0f-0547-4ba4-bdd6-409b1f9c5f22" paramName="form" sequence="0" paramType="IOpportunityDetails" />
+    <OrmEntityMethodParam id="704d3827-5dfa-41c2-93a9-e713e17b38dd" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets />
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

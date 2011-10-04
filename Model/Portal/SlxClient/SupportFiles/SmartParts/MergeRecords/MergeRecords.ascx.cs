@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Web.UI;
 using NHibernate;
@@ -8,24 +7,63 @@ using Sage.Entity.Interfaces;
 using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
 using Sage.Platform.Framework;
-using Sage.Platform.Orm;
 using Sage.Platform.Orm.Interfaces;
-using Sage.Platform.Security;
+using Sage.Platform.WebPortal;
 using Sage.Platform.WebPortal.SmartParts;
-using Sage.SalesLogix.SelectionService;
+using Sage.SalesLogix.Services.Integration;
 using Sage.SalesLogix.Services.PotentialMatch;
-using Sage.SalesLogix.Web.SelectionService;
 using SmartPartInfoProvider=Sage.Platform.WebPortal.SmartParts.SmartPartInfoProvider;
 
 public partial class MergeRecords : SmartPartInfoProvider
 {
-    protected override void OnWireEventHandlers()
+    private IntegrationManager _integrationManager;
+    private MergeArguments _sessionMergeArguments;
+    private MergeOverwrite _recordOverwrite;
+    private bool _loadResults = true;
+
+    /// <summary>
+    /// Gets or sets the session merge provider.
+    /// </summary>
+    /// <value>The session merge provider.</value>
+    public MergeArguments SessionMergeArguments
     {
-        base.OnWireEventHandlers();
-        btnCancel.Click += new EventHandler(DialogService.CloseEventHappened);
+        get
+        {
+            if (_sessionMergeArguments == null)
+            {
+                if (DialogService.DialogParameters.ContainsKey("mergeArguments"))
+                {
+                    MergeArguments mergeArguments = DialogService.DialogParameters["mergeArguments"] as MergeArguments;
+                    if (mergeArguments.MergeProvider == null)
+                    {
+                        MergeArguments.GetMergeProvider(mergeArguments);
+                    }
+                    _sessionMergeArguments = mergeArguments;
+                }
+            }
+            return _sessionMergeArguments;
+        }
+        set { _sessionMergeArguments = value; }
     }
 
-    public MergeProvider SessionMergeProvider { get; set; }
+    /// <summary>
+    /// Gets the integration manager.
+    /// </summary>
+    /// <value>The integration manager.</value>
+    public IntegrationManager IntegrationManager
+    {
+        get
+        {
+            if (_integrationManager == null)
+            {
+                if (DialogService.DialogParameters.ContainsKey("IntegrationManager"))
+                {
+                    _integrationManager = (DialogService.DialogParameters["IntegrationManager"]) as IntegrationManager;
+                }
+            }
+            return _integrationManager;
+        }
+    }
 
     /// <summary>
     /// Gets or sets the entity service.
@@ -34,67 +72,17 @@ public partial class MergeRecords : SmartPartInfoProvider
     [ServiceDependency(Type = typeof (IEntityContextService), Required = true)]
     public IEntityContextService EntityService { get; set; }
 
-    protected void Page_Init(object sender, EventArgs e)
+    /// <summary>
+    /// Derived components should override this method to wire up event handlers for buttons and other controls in the form.
+    /// </summary>
+    protected override void OnWireEventHandlers()
     {
-        if (DialogService.DialogParameters.ContainsKey("selectionContextKey"))
-        {
-            if (!DialogService.DialogParameters.ContainsKey("MergeProvider"))
-            {
-                Type type = EntityService.EntityType;
-
-                string key = DialogService.DialogParameters["selectionContextKey"].ToString();
-                ISelectionService srv = SelectionServiceRequest.GetSelectionService();
-                ISelectionContext selectionContext = srv.GetSelectionContext(key);
-                IList<string> list = selectionContext.GetSelectedIds();
-                object source = GetEntity(type, list[0]);
-                object target = GetEntity(type, list[1]);
-
-                MergeProvider mergeProvider = new MergeProvider(type, type);
-                MatchEntitySource targetEntity = new MatchEntitySource(type, target, list[1]);
-                MatchEntitySource sourceEntity = new MatchEntitySource(type, source, list[0]);
-                mergeProvider.Source = sourceEntity;
-                mergeProvider.Target = targetEntity;
-                //Verify the user has read write permissions for every property in the configuration mappings.
-                ValidateUserSecurity(mergeProvider);
-                SessionMergeProvider = mergeProvider;
-
-                IList<MergeRecordView> mergeView = mergeProvider.GetMergeView();
-                grdMerge.DataSource = mergeView;
-                grdMerge.DataBind();
-                DialogService.DialogParameters.Remove("MergeProvider");
-                DialogService.DialogParameters.Add("MergeProvider", mergeProvider);
-            }
-            else
-            {
-                SessionMergeProvider = DialogService.DialogParameters["MergeProvider"] as MergeProvider;
-            }
-        }
-    }
-
-    private void ValidateUserSecurity(MergeProvider mergeProvider)
-    {
-        IFieldLevelSecurityService fieldLevelSecurityService =
-            ApplicationContext.Current.Services.Get<IFieldLevelSecurityService>(true);
-        if (fieldLevelSecurityService != null)
-        {
-            IList<string> sourceProperties = new List<string>();
-            IList<string> targetProperties = new List<string>();
-            foreach (MergePropertyMap mergePropertyMap in mergeProvider.MergeMaps)
-            {
-                if (mergePropertyMap != null)
-                {
-                    sourceProperties.Add(mergePropertyMap.SourceProperty);
-                    targetProperties.Add(mergePropertyMap.TargetProperty);
-                }
-            }
-            if ((fieldLevelSecurityService.GetAccessForProperties((IPersistentEntity) mergeProvider.Source.EntityData, sourceProperties).
-                    Values.Any(value => value < FieldAccess.ReadWrite)) ||
-                (fieldLevelSecurityService.GetAccessForProperties((IPersistentEntity) mergeProvider.Target.EntityData, targetProperties).
-                    Values.Any(value => value < FieldAccess.ReadWrite)))
-            {
-                throw new ValidationException(GetLocalResourceObject("error_Security_NoAccess").ToString());
-            }
-        }
+        base.OnWireEventHandlers();
+        btnOK.Click += new EventHandler(btnOK_OnClick);
+        btnNext.Click += new EventHandler(btnNext_OnClick);
+        btnBack.Click += new EventHandler(btnBack_OnClick);
+        btnCancel.Click += new EventHandler(DialogService.CloseEventHappened);
+        btnClose.Click += new EventHandler(DialogService.CloseEventHappened);
     }
 
     /// <summary>
@@ -112,12 +100,205 @@ public partial class MergeRecords : SmartPartInfoProvider
     }
 
     /// <summary>
+    /// Raises the <see cref="E:System.Web.UI.Control.PreRender"/> event.
+    /// </summary>
+    /// <param name="e">An <see cref="T:System.EventArgs"/> object that contains the event data.</param>
+    protected override void OnPreRender(EventArgs e)
+    {
+        if (!_loadResults) return;
+        if (DialogService.DialogParameters.ContainsKey("mergeArguments"))
+        {
+            grdMerge.Height = 450;
+            rowStandardButtons.Visible = true;
+            rowWizardButtons.Visible = false;
+
+            //Verify the user has read write permissions for every property in the configuration mappings.
+            //if (SessionMergeArguments.MergeProvider == null)
+            //{
+            //    MergeArguments.GetMergeProvider(SessionMergeArguments);
+            //}
+            if (!SessionMergeArguments.MergeProvider.ValidateUserSecurity())
+            {
+                throw new ValidationException(GetLocalResourceObject("error_Security_NoAccess").ToString());
+            }
+
+            grdMerge.DataSource = SessionMergeArguments.MergeProvider.GetMergeView(Convert.ToBoolean(txtShowAll.Value));
+            _recordOverwrite = SessionMergeArguments.MergeProvider.RecordOverwrite;
+        }
+        else
+        {
+            if (DialogService.DialogParameters.ContainsKey("IntegrationManager"))
+            {
+                lnkMergeRecordsHelp.NavigateUrl = "Merge_Data.htm";
+                rowStandardButtons.Visible = false;
+                rowWizardButtons.Visible = true;
+                grdMerge.Height = 275;
+                if (IntegrationManager.DataViewMappings == null)
+                {
+                    IntegrationManager.SetMergeDataMappings(Convert.ToBoolean(txtShowAll.Value));
+                }
+                grdMerge.DataSource = IntegrationManager.DataViewMappings;
+            }
+        }
+        grdMerge.DataBind();
+        if (grdMerge.Rows != null && grdMerge.Rows.Count <= 0)
+        {
+            lblMergeText.Text = GetLocalResourceObject("lblMergeText_NoDifferences.Text").ToString();
+            lblMergeDetailDifferences.Text = GetLocalResourceObject("lblMergeDetailNoDifferences.Caption").ToString();
+        }
+        else
+        {
+            lblMergeText.Text = GetLocalResourceObject("lblMergeText_DifferencesFound.Text").ToString();
+            lblMergeDetailDifferences.Text = GetLocalResourceObject("lblMergeDetailDifferences.Caption").ToString();
+        }
+        lnkShowAll.Text = Convert.ToBoolean(txtShowAll.Value)
+                              ? GetLocalResourceObject("lnkHideDups.Caption").ToString()
+                              : GetLocalResourceObject("lnkShowAll.Caption").ToString();
+        lnkShowAllWizard.Text = Convert.ToBoolean(txtShowAll.Value)
+                                    ? GetLocalResourceObject("lnkHideDups.Caption").ToString()
+                                    : GetLocalResourceObject("lnkShowAll.Caption").ToString();
+    }
+
+    /// <summary>
     /// Registers the client script.
     /// </summary>
     private void RegisterClientScript()
     {
         StringBuilder sb = new StringBuilder(GetLocalResourceObject("MergeRecords_ClientScript").ToString());
+        sb.Replace("@lnkShowAllId", lnkShowAll.ClientID);
+        sb.Replace("@lnkShowAllWizardId", lnkShowAllWizard.ClientID);
+        sb.Replace("@txtShowAllId", txtShowAll.ClientID);
+        sb.Replace("@lnkShowAllCaption", PortalUtil.JavaScriptEncode(GetLocalResourceObject("lnkShowAll.Caption").ToString()));
+        sb.Replace("@lnkHideDupsCaption", PortalUtil.JavaScriptEncode(GetLocalResourceObject("lnkHideDups.Caption").ToString()));
         ScriptManager.RegisterStartupScript(Page, GetType(), "MergeRecords", sb.ToString(), false);
+    }
+
+    /// <summary>
+    /// Creates the record radio button.
+    /// </summary>
+    /// <param name="context">The context.</param>
+    /// <returns></returns>
+    protected string CreateRecordRadioButton(string context)
+    {
+        string radioButton = String.Empty;
+        if (context.Equals("Source"))
+        {
+            string strChecked = String.Empty;
+            if (_recordOverwrite == MergeOverwrite.sourceWins)
+                strChecked = "checked";
+            radioButton =
+                String.Format(
+                    "<input type='radio' onclick='onSourceWins()' id='rdoSourceRecordWins' name='rdoRecordOverwrite' value='SourceWins' {0} />",
+                    strChecked);
+        }
+        if (context.Equals("Target"))
+        {
+            string strChecked = String.Empty;
+            if (_recordOverwrite == MergeOverwrite.targetWins)
+                strChecked = "checked";
+            radioButton =
+                String.Format(
+                    "<input type='radio' onclick='onTargetWins()' id='rdoTargetRecordWins' name='rdoRecordOverwrite' value='TargetWins' {0} />",
+                    strChecked);
+        }
+        return radioButton;
+    }
+
+    /// <summary>
+    /// Creates the radio button for each of the configuration properties.
+    /// </summary>
+    /// <param name="data">The data.</param>
+    /// <param name="context">The context.</param>
+    /// <returns></returns>
+    protected string CreatePropertyRadioButton(object data, string context)
+    {
+        string radioButton = String.Empty;
+        if (data != null)
+        {
+            MergeRecordView mergeRecordView = data as MergeRecordView;
+            if (mergeRecordView != null && !mergeRecordView.SourceValue.Equals(mergeRecordView.TargetValue))
+            {
+                if (!mergeRecordView.MergeDataOption.Equals(MergeDataOption.DisplayOnly))
+                {
+                    if (context.Equals("Source"))
+                    {
+                        string strChecked = String.Empty;
+                        if (mergeRecordView.PropertyOverwrite == MergeOverwrite.sourceWins)
+                            strChecked = "checked";
+                        radioButton =
+                            String.Format(
+                                "<input type='radio' class='rdoSourceWins' id='rdoSourceWins_{0}' name='rdoMergeOverwrite_{0}' value='SourceWins' {1} />",
+                                mergeRecordView.PropertyMapId, strChecked);
+                    }
+                    if (context.Equals("Target"))
+                    {
+                        string strChecked = String.Empty;
+                        if (mergeRecordView.PropertyOverwrite == MergeOverwrite.targetWins)
+                            strChecked = "checked";
+                        radioButton =
+                            String.Format(
+                                "<input type='radio' class='rdoTargetWins' id='rdoTargetWins_{0}' name='rdoMergeOverwrite_{0}' value='TargetWins' {1} />",
+                                mergeRecordView.PropertyMapId, strChecked);
+                    }
+                }
+            }
+        }
+        return radioButton;
+    }
+
+    protected string GetSourceHeaderCaption()
+    {
+        return SessionMergeArguments != null
+                   ? GetLocalResourceObject("Source.Caption").ToString()
+                   : IntegrationManager.SourceMapping.Name;
+    }
+
+    protected string GetTargetHeaderCaption()
+    {
+        return SessionMergeArguments != null
+                   ? GetLocalResourceObject("Target.Caption").ToString()
+                   : IntegrationManager.TargetMapping.Name;
+    }
+
+    /// <summary>
+    /// Handles the Click event of the btnOK control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+    protected void btnOK_OnClick(object sender, EventArgs e)
+    {
+        bool success = false;
+        UpdatePropertyMappings(SessionMergeArguments.MergeProvider.MergeMaps);
+
+        string recordOverWrite = Request.Form["rdoRecordOverwrite"];
+        if (recordOverWrite != null)
+        {
+            SessionMergeArguments.MergeProvider.RecordOverwrite = recordOverWrite.Equals("SourceWins")
+                                                                      ? MergeOverwrite.sourceWins
+                                                                      : MergeOverwrite.targetWins;
+        }
+
+        //object[] objarray = new object[] { SessionMergeProvider.Target.EntityData };
+        //Sage.Platform.EntityFactory.Execute<type>("Account.MergeAccount", objarray);
+        Type type = SessionMergeArguments.MergeProvider.Target.EntityType;
+        if (type.Equals(typeof (IAccount)))
+        {
+            IAccount account = (IAccount) SessionMergeArguments.MergeProvider.Target.EntityData;
+            success = account.MergeAccount(SessionMergeArguments.MergeProvider);
+        }
+        else if (type.Equals(typeof (IContact)))
+        {
+            IContact contact = (IContact) SessionMergeArguments.MergeProvider.Target.EntityData;
+            success = contact.MergeContact(SessionMergeArguments.MergeProvider);
+        }
+        if (success)
+        {
+            IPersistentEntity source =
+                (IPersistentEntity) GetEntity(type, SessionMergeArguments.MergeProvider.Source.EntityId);
+            source.Delete();
+            EntityService.RemoveEntityHistory(type, source);
+            Response.Redirect(String.Format("{0}.aspx", GetTableName(EntityService.EntityType)));
+        }
     }
 
     private static Object GetEntity(Type type, string entityId)
@@ -148,135 +329,80 @@ public partial class MergeRecords : SmartPartInfoProvider
     }
 
     /// <summary>
-    /// Creates the record radio button.
-    /// </summary>
-    /// <param name="context">The context.</param>
-    /// <returns></returns>
-    protected string CreateRecordRadioButton(string context)
-    {
-        string radioButton = String.Empty;
-        if (SessionMergeProvider != null)
-        {
-            if (context.Equals("Source"))
-            {
-                string strChecked = String.Empty;
-                if (SessionMergeProvider.RecordOverwrite == MergeOverwrite.sourceWins)
-                    strChecked = "checked";
-                radioButton =
-                    String.Format(
-                        "<input type='radio' onclick='onSourceWins()' id='rdoSourceRecordWins' name='rdoRecordOverwrite' value='SourceWins' {0} />",
-                        strChecked);
-            }
-            if (context.Equals("Target"))
-            {
-                string strChecked = String.Empty;
-                if (SessionMergeProvider.RecordOverwrite == MergeOverwrite.targetWins)
-                    strChecked = "checked";
-                radioButton =
-                    String.Format(
-                        "<input type='radio' onclick='onTargetWins()' id='rdoTargetRecordWins' name='rdoRecordOverwrite' value='TargetWins' {0} />",
-                        strChecked);
-            }
-        }
-        return radioButton;
-    }
-
-    /// <summary>
-    /// Creates the radio button for each of the configuration properties.
-    /// </summary>
-    /// <param name="data">The data.</param>
-    /// <param name="context">The context.</param>
-    /// <returns></returns>
-    protected string CreatePropertyRadioButton(object data, string context)
-    {
-        string radioButton = String.Empty;
-        if (data != null)
-        {
-            MergeRecordView mergeRecordView = data as MergeRecordView;
-            if (mergeRecordView != null)
-            {
-                if (!mergeRecordView.MergeDataOption.Equals(MergeDataOption.DisplayOnly))
-                {
-                    if (context.Equals("Source"))
-                    {
-                        string strChecked = String.Empty;
-                        if (mergeRecordView.PropertyOverwrite == MergeOverwrite.sourceWins)
-                            strChecked = "checked";
-                        radioButton =
-                            String.Format(
-                                "<input type='radio' class='rdoSourceWins' id='rdoSourceWins_{0}' name='rdoMergeOverwrite_{0}' value='SourceWins' {1} />",
-                                mergeRecordView.PropertyMapId, strChecked);
-                    }
-                    if (context.Equals("Target"))
-                    {
-                        string strChecked = String.Empty;
-                        if (mergeRecordView.PropertyOverwrite == MergeOverwrite.targetWins)
-                            strChecked = "checked";
-                        radioButton =
-                            String.Format(
-                                "<input type='radio' class='rdoTargetWins' id='rdoTargetWins_{0}' name='rdoMergeOverwrite_{0}' value='TargetWins' {1} />",
-                                mergeRecordView.PropertyMapId, strChecked);
-                    }
-                }
-            }
-        }
-        return radioButton;
-    }
-
-    /// <summary>
-    /// Handles the Click event of the btnOK control.
+    /// Handles the OnClick event of the btnNext control.
     /// </summary>
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-    protected void btnOK_Click(object sender, EventArgs e)
+    protected void btnNext_OnClick(object sender, EventArgs e)
     {
-        if (SessionMergeProvider != null)
+        UpdatePropertyMappings((IEnumerable<MergePropertyMap>) IntegrationManager.MergePropertyMaps);
+        ShowDialog("MergeChildren", GetLocalResourceObject("LinkToAccounting.Caption").ToString(), 600, 1200);
+    }
+
+    private void UpdatePropertyMappings(IEnumerable<MergePropertyMap> propertyMaps)
+    {
+        foreach (MergePropertyMap map in propertyMaps)
         {
-            bool success = false;
-            foreach (MergePropertyMap map in SessionMergeProvider.MergeMaps)
+            string overWrite = Request.Form[String.Format("rdoMergeOverwrite_{0}", map.Name)];
+            if (overWrite != null)
             {
-                string overWrite = Request.Form["rdoMergeOverwrite_" + map.Name];
-                if (overWrite != null)
-                {
-                    map.MergeOverwrite = overWrite.Equals("SourceWins") ? MergeOverwrite.sourceWins : MergeOverwrite.targetWins;
-                }
+                map.MergeOverwrite = overWrite.Equals("SourceWins")
+                                         ? MergeOverwrite.sourceWins
+                                         : MergeOverwrite.targetWins;
             }
-
-            string recordOverWrite = Request.Form["rdoRecordOverwrite"];
-            if (recordOverWrite != null)
-            {
-                SessionMergeProvider.RecordOverwrite = recordOverWrite.Equals("SourceWins")
-                                                           ? MergeOverwrite.sourceWins
-                                                           : MergeOverwrite.targetWins;
-            }
-
-            //object[] objarray = new object[] { SessionMergeProvider.Target.EntityData };
-            //Sage.Platform.EntityFactory.Execute<type>("Account.MergeAccount", objarray);
-            Type type = SessionMergeProvider.Target.EntityType;
-            if (type.Equals(typeof(IAccount)))
-            {
-                IAccount account = (IAccount)SessionMergeProvider.Target.EntityData;
-                success = account.MergeAccount(SessionMergeProvider);
-            }
-            else if (type.Equals(typeof(IContact)))
-            {
-                IContact contact = (IContact)SessionMergeProvider.Target.EntityData;
-                success = contact.MergeContact(SessionMergeProvider);
-            }
-            if (success)
-            {
-                using (var session = new SessionScopeWrapper())
-                {
-                    session.Merge(SessionMergeProvider.Source.EntityData);
-                }
-
-                IPersistentEntity source = (IPersistentEntity)GetEntity(type, SessionMergeProvider.Source.EntityId);
-                source.Delete();
-                EntityService.RemoveEntityHistory(type, source);
-                Response.Redirect(String.Format("{0}.aspx", GetTableName(EntityService.EntityType)));
-            }
-            DialogService.CloseEventHappened(this, null);
         }
+    }
+
+    /// <summary>
+    /// Handles the OnClick event of the btnBack control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+    protected void btnBack_OnClick(object sender, EventArgs e)
+    {
+        ShowDialog("SearchResults", GetLocalResourceObject("LinkToAccounting.Caption").ToString(), 375, 800);
+    }
+
+    /// <summary>
+    /// Shows a particular dialog setting the caption height and width.
+    /// </summary>
+    /// <param name="dialog">The name of the dialog to be displayed.</param>
+    /// <param name="caption">The caption of the dialog to be displayed.</param>
+    /// <param name="height">The height of the dialog to be displayed.</param>
+    /// <param name="width">The width of the dialog to be displayed.</param>
+    private void ShowDialog(string dialog, string caption, int height, int width)
+    {
+        DialogService.SetSpecs(200, 200, height, width, dialog, caption, true);
+        DialogService.ShowDialog();
+    }
+
+    /// <summary>
+    /// Handles the OnClick event of the lnkShowAll control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+    protected void lnkShowAll_OnClick(object sender, EventArgs e)
+    {
+        if (DialogService.DialogParameters.ContainsKey("mergeArguments"))
+        {
+            IList<MergeRecordView> mergeView = SessionMergeArguments.MergeProvider.GetMergeView(Convert.ToBoolean(txtShowAll.Value));
+            grdMerge.DataSource = mergeView;
+        }
+        else
+        {
+            IntegrationManager integrationManager = DialogService.DialogParameters["IntegrationManager"] as IntegrationManager;
+            integrationManager.SetMergeDataMappings(Convert.ToBoolean(txtShowAll.Value));
+            grdMerge.DataSource = integrationManager.DataViewMappings;
+        }
+        grdMerge.DataBind();
+    }
+
+    /// <summary>
+    /// Called when the dialog is closing.
+    /// </summary>
+    protected override void OnClosing()
+    {
+        _loadResults = false;
     }
 
     /// <summary>

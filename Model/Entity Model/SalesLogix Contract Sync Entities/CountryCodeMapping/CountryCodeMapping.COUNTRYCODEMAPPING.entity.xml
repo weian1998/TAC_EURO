@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="ce34051d-a35a-4c2c-85b5-813fc778f3ae" lastModifiedUtc="2011-04-28T04:14:43.0204697Z" manageSchema="false" tableName="COUNTRYCODEMAPPING" name="CountryCodeMapping" displayPropertyId="26b72df2-a5dc-4111-8c22-fdabe7cb6d58" isExtension="false" audited="false" secure="false" generateSDataFeed="true" sDataPathName="countryCodeMappings" lastUpdatedPropertyId="7135e6e5-ec83-4778-b626-a484733c032a" onBeforeInsertMethodId="e88ea078-1f76-4da5-a76b-e8a5b1b1dfba" onAfterInsertMethodId="d063ee57-b38a-49de-ab18-58f779dd9fa8" onBeforeUpdateMethodId="0bdb2acb-5cb6-4d71-b55d-610fc4b66c45" onAfterUpdateMethodId="78eed609-5132-4854-811e-c965c63e5177" onBeforeDeleteMethodId="28284b6a-16c4-4211-ab7e-cc61b2486b8c" onAfterDeleteMethodId="53ddcbb4-ad0f-4316-80d2-5a4ff57ad3ad" onCreateId="cf43699c-1275-465e-9a9e-32967e4d56ed">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
+      <extender guid="1589723d-0536-4bf3-bdd7-3f6f7fe165d0">
+        <OrmEntityMetadataExtension>
+          <StringExpression>${CountryName}</StringExpression>
+          <IsHistoryTable>false</IsHistoryTable>
+        </OrmEntityMetadataExtension>
+      </extender>
+    </extendee>
+  </ExtendedPropertiesCollection>
+  <description>A mapping between country names as stored in the Address entity and a two character ISO code for us by the Integration Contract.</description>
+  <keyProperties>
+    <keyReference id="53ee418c-20a7-4c5f-81ae-121ce37d6827" ordinalPosition="1" />
+  </keyProperties>
+  <properties>
+    <property xsi:type="OrmFieldProperty" id="53ee418c-20a7-4c5f-81ae-121ce37d6827" lastModifiedUtc="2011-04-28T04:14:05.348315Z" name="CountryCodeMappingId" description="Primary Key" audited="false" isNullable="false" columnName="COUNTRYCODEMAPPINGID" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="f335680a-be05-4265-8051-58c5560e8ec7" lastModifiedUtc="2011-04-12T21:16:49.9480668Z" name="CreateUser" description="User that created the record" audited="false" columnName="CREATEUSER" maxLength="12" precision="0" scale="0" ordinal="1" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="035e4af7-6df9-4790-bc03-1e6b65bc75e6" lastModifiedUtc="2011-04-12T21:16:36.7877509Z" name="CreateDate" description="Date the record was created" audited="false" columnName="CREATEDATE" maxLength="0" precision="0" scale="0" ordinal="2" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
+        <DateTimeDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="abd489c5-b59f-49c8-bbb3-c33745c45f97" lastModifiedUtc="2011-04-12T21:16:07.8188543Z" name="ModifyUser" description="User that lasted modified the record" audited="false" columnName="MODIFYUSER" maxLength="12" precision="0" scale="0" ordinal="3" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="7135e6e5-ec83-4778-b626-a484733c032a" lastModifiedUtc="2011-04-12T21:16:24.2995022Z" name="ModifyDate" description="Date the record was last modified" audited="false" columnName="MODIFYDATE" maxLength="0" precision="0" scale="0" ordinal="4" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
+        <DateTimeDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="26b72df2-a5dc-4111-8c22-fdabe7cb6d58" lastModifiedUtc="2011-04-12T21:15:00.3361067Z" name="CountryName" description="The long name of the country" audited="false" columnName="COUNTRYNAME" maxLength="64" precision="0" scale="0" ordinal="5" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>64</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="464e5398-b2e6-4011-9127-6104f37f75e0" lastModifiedUtc="2011-04-12T21:15:20.4081137Z" name="CountryCode" description="The two character ISO code" audited="false" columnName="COUNTRYCODE" maxLength="2" precision="0" scale="0" ordinal="6" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>2</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+  </properties>
+</entity>

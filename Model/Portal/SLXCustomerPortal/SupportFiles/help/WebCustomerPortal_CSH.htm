@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:TargetType="WebHelp" MadCap:PathToHelpSystem="./" MadCap:HelpSystemFileName="WebCustomerPortal.xml" MadCap:RuntimeFileType="DefaultCSH" MadCap:InPreviewMode="False">
-    <!-- saved from url=(0014)about:internet -->
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" MadCap:TargetType="WebHelp" MadCap:PathToHelpSystem="./" MadCap:RuntimeFileType="DefaultCSH" MadCap:HelpSystemFileName="WebCustomerPortal.xml" MadCap:PathToSkinFolder="Data/SkinWebHelp2/" MadCap:InPreviewMode="False">
     <head>
         <title>WebHelp</title>
         <script type="text/javascript" src="Content/SkinSupport/MadCapAll.js">
@@ -8,67 +7,73 @@
         <script type="text/javascript">
 /* <![CDATA[ */
 var gRootFolder	= FMCGetRootFolder( document.location );
-var gCSHData	= new Object();
 
 ProcessCSH();
 
 function ProcessCSH()
 {
-	CheckStartTopic();
+	CheckStartTopic(function(cshData)
+    {
+	    function OnCompleteGetSkinLayout(skinLayout)
+        {
+            var currLocation	= document.location;
+	        var href			= FMCGetHref( currLocation );
+	        var hash			= currLocation.hash;
+	        var search			= currLocation.search;
+	        var outputFile		= href.substring( href.lastIndexOf( "/" ) + 1, href.lastIndexOf( "." ) - "_CSH".length );
+	        var outputSuffix	= href.substring( href.lastIndexOf( "." ) );
 
-	var skinLayout		= null;
-	
-	if ( gCSHData.skinName )
-	{
-		skinLayout = GetSkinLayout( gCSHData.skinName );
-	}
-	
-	var currLocation	= document.location;
-	var href			= FMCGetHref( currLocation );
-	var hash			= currLocation.hash;
-	var search			= currLocation.search;
-	var outputFile		= href.substring( href.lastIndexOf( "/" ) + 1, href.lastIndexOf( "." ) - "_CSH".length );
-	var outputSuffix	= href.substring( href.lastIndexOf( "." ) );
+	        //
 
-	//
+	        var newHash	= search;
+	
+	        newHash += "#CSHID=" + encodeURIComponent( cshData.cshID );
+	
+	        if ( cshData.topic )
+	        {
+		        newHash += "|StartTopic=" + encodeURIComponent( cshData.topic );
+	        }
 
-	var newHash	= search;
+	        if ( cshData.skinName )
+	        {
+		        newHash += "|SkinName=" + cshData.skinName;
+	        }
 	
-	newHash += "#CSHID=" + encodeURIComponent( gCSHData.cshID );
-	
-	if ( gCSHData.topic )
-	{
-		newHash += "|StartTopic=" + encodeURIComponent( gCSHData.topic );
-	}
+	        if ( cshData.isJS )
+	        {
+		        newHash += "|OpenType=Javascript";
+	        }
 
-	if ( gCSHData.skinName )
-	{
-		newHash += "|SkinName=" + gCSHData.skinName;
-	}
-	
-	if ( gCSHData.isJS )
-	{
-		newHash += "|OpenType=Javascript";
-	}
+	        //
 
-	//
+	        var url	= gRootFolder + outputFile;
+	
+	        if ( skinLayout )
+	        {
+		        url = url + "_" + skinLayout;
+	        }
 
-	var url	= gRootFolder + outputFile;
+	        url = url + outputSuffix + newHash;
 	
-	if ( skinLayout )
-	{
-		url = url + "_" + skinLayout;
-	}
+	        document.location.replace( url );
+	
+	        window.focus();
+        }
+	
+	    if ( cshData.skinName )
+	    {
+		    GetSkinLayout(cshData.skinName, OnCompleteGetSkinLayout);
 
-	url = url + outputSuffix + newHash;
-	
-	document.location.replace( url );
-	
-	window.focus();
+            return;
+	    }
+
+        OnCompleteGetSkinLayout(null);
+    });
 }
 
-function CheckStartTopic()
+function CheckStartTopic(OnCompleteFunc)
 {
+    var cshData = new Object();
     var hash        = document.location.hash;
     var startTopic  = hash.substring( 1 );
     
@@ -86,10 +91,9 @@ function CheckStartTopic()
 			
 			startTopic = startTopic.substring( 0, pos );
 			
-			gCSHData = new Object();
-			gCSHData.topic = null;
-			gCSHData.skinName = null;
-			gCSHData.isJS = true;
+			cshData.topic = null;
+			cshData.skinName = null;
+			cshData.isJS = true;
 			
 			for ( var i = 0; i < parts.length; i++ )
 			{
@@ -97,63 +101,76 @@ function CheckStartTopic()
 				
 				if ( pair[0] == "CSHID" )
 				{
-					gCSHData.cshID = pair[1];
+					cshData.cshID = pair[1];
 				}
 				else if ( pair[0] == "Topic" )
 				{
-					gCSHData.topic = pair[1];
+					cshData.topic = pair[1];
 				}
 				else if ( pair[0] == "Skin" )
 				{
-					gCSHData.skinName = pair[1];
+					cshData.skinName = pair[1];
 				}
 			}
+
+            OnCompleteFunc(cshData);
 		}
 		else
 		{
-			gCSHData = LookupCSHDataFromMapID( parts[0] );
-			
-			if ( parts.length == 2 )
-			{
-				gCSHData.skinName = parts[1];
-			}
+			LookupCSHDataFromMapID( parts[0], function(cshData)
+            {
+			    if ( parts.length == 2 )
+			    {
+				    cshData.skinName = parts[1];
+			    }
+
+                OnCompleteFunc(cshData);
+            });
 		}
     }
-}
-
-function GetSkinLayout( skinName )
-{
-	var skinPath		= "Data/Skin" + skinName + "/";
-    var xmlDoc			= CMCXmlParser.GetXmlDoc( skinPath + "Skin.xml", false, null, null );
-    var webHelpOptions	= xmlDoc.getElementsByTagName( "WebHelpOptions" )[0];
-    var skinLayout		= "Left";
-    
-    if ( webHelpOptions )
+    else
     {
-        if ( webHelpOptions.getAttribute( "NavigationPanePosition" ) )
-        {
-            skinLayout = webHelpOptions.getAttribute( "NavigationPanePosition" );
-        }
+        OnCompleteFunc(cshData);
     }
-    
-    return skinLayout;
 }
 
-function LookupCSHDataFromMapID( id )
+function GetSkinLayout(skinName, OnCompleteFunc)
+{
+	var skinPath = "Data/Skin" + skinName + "/";
+
+    CMCXmlParser.GetXmlDoc(skinPath + "Skin.xml", true, function(xmlDoc)
+    {
+        var webHelpOptions = xmlDoc.getElementsByTagName( "WebHelpOptions" )[0];
+        var skinLayout = "Left";
+    
+        if (webHelpOptions)
+        {
+            if (webHelpOptions.getAttribute("NavigationPanePosition"))
+            {
+                skinLayout = webHelpOptions.getAttribute("NavigationPanePosition");
+            }
+        }
+    
+        OnCompleteFunc(skinLayout);
+    }, null);
+}
+
+function LookupCSHDataFromMapID( id, OnCompleteFunc )
 {
     var cshShortcutData = new Object();
-    var fileUrl			= new CMCUrl( document.location.href );
-    var fileName		= fileUrl.Name.toLowerCase();
-    var endPos			= fileName.lastIndexOf( "_CSH".toLowerCase() );
-    var newName			= fileUrl.Name.substring( 0, endPos );
-    var helpSystem		= new CMCHelpSystem( null, gRootFolder, gRootFolder + newName + ".xml", null, null );
-    var idInfo			= helpSystem.LookupCSHID( id );
-	
-	cshShortcutData.cshID = id;
-    cshShortcutData.topic = idInfo.Topic;
-    cshShortcutData.skinName = idInfo.Skin;
+    var helpSystem		= new CMCHelpSystem( null, gRootFolder, gRootFolder + "Data/HelpSystem.xml", null, null );
 
-	return cshShortcutData;
+    helpSystem.Load(function ()
+    {
+        helpSystem.LookupCSHID(id, function (idInfo)
+        {
+            cshShortcutData.cshID = id;
+            cshShortcutData.topic = idInfo.Topic;
+            cshShortcutData.skinName = idInfo.Skin;
+
+            OnCompleteFunc(cshShortcutData);
+        });
+    });
 }
 /* ]]> */
 </script>

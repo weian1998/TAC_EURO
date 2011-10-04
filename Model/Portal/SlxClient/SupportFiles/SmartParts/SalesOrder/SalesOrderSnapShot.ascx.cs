@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Web.UI;
 using Sage.Entity.Interfaces;
 using Sage.Platform.EntityBinding;
+using Sage.Platform.SData;
 using Sage.Platform.WebPortal;
 using Sage.Platform.WebPortal.Binding;
 using Sage.Platform.WebPortal.Services;
@@ -58,14 +59,32 @@ public partial class SalesOrderSnapShot : EntityBoundSmartPartInfoProvider
     /// </summary>
     private void SetDisplayValues()
     {
-        ISalesOrder salesOrder = (ISalesOrder)BindingSource.Current;
+        ISalesOrder salesOrder = (ISalesOrder) BindingSource.Current;
         if (salesOrder != null)
         {
-            bool closed = salesOrder.Status.Equals(GetLocalResourceObject("SalesOrder_Status_Closed"));
-            lnkDiscount.Enabled = !closed;
-            lnkShipping.Enabled = !closed;
-            lnkTaxRate.Enabled = !closed;
-            lueCurrencyCode.Enabled = !closed;
+            IAppIdMappingService mappingService = ApplicationContext.Current.Services.Get<IAppIdMappingService>(true);
+            bool closed = (salesOrder.Status.ToUpper().Equals(GetLocalResourceObject("SalesOrderStatus_Closed")) ||
+                salesOrder.Status.ToUpper().Equals(GetLocalResourceObject("SalesOrderStatus_Transmitted")));
+            //if this is a Sales Order that synced from the accounting system or the Sales Order has been submitted then we disable it
+            bool isOpen = false;
+            if (!String.IsNullOrEmpty(salesOrder.ERPSalesOrder.ERPStatus))
+            {
+                isOpen =
+                    (salesOrder.ERPSalesOrder.ERPStatus.Equals(
+                        GetLocalResourceObject("ERPStatus_Open").ToString()) ||
+                     salesOrder.ERPSalesOrder.ERPStatus.Equals(GetLocalResourceObject("ERPStatus_Rejected").ToString()));
+            }
+            bool erpSalesOrder = (mappingService.IsIntegrationEnabled() && (salesOrder.GlobalSyncId.HasValue && !isOpen));
+
+            if (mappingService.IsIntegrationEnabled())
+            {
+                lnkEmail.Visible = erpSalesOrder;
+            }
+            
+            lnkDiscount.Enabled = !closed && !erpSalesOrder;
+            lnkShipping.Enabled = !closed && !erpSalesOrder;
+            lnkTaxRate.Enabled = !closed && !erpSalesOrder;
+            lueCurrencyCode.Enabled = !closed && !erpSalesOrder;
 
             double subTotal = (salesOrder.OrderTotal.HasValue ? salesOrder.OrderTotal.Value : 0);
             double taxRate = salesOrder.Tax.HasValue ? salesOrder.Tax.Value : 0;
@@ -83,14 +102,14 @@ public partial class SalesOrderSnapShot : EntityBoundSmartPartInfoProvider
                 foreach (SalesOrderItem item in salesOrder.SalesOrderItems)
                 {
                     if (item.Discount != null)
-                        subTotal += item.Price.Value * (int)item.Quantity.Value * (1 - item.Discount.Value);
+                        subTotal += item.Price.Value*(int) item.Quantity.Value*(1 - item.Discount.Value);
                     else
                         subTotal += item.Price.Value;
                 }
                 if (subTotal > 0 && !salesOrder.OrderTotal.Equals(subTotal))
                     salesOrder.OrderTotal = subTotal;
             }
-            double discountAmount = subTotal * discount;
+            double discountAmount = subTotal*discount;
 
             curBaseSubTotal.Text = Convert.ToString(subTotal);
             curTax.Text = Convert.ToString(tax);
@@ -165,7 +184,8 @@ public partial class SalesOrderSnapShot : EntityBoundSmartPartInfoProvider
                 curShipping.Text = Convert.ToString(shipping);
             if (String.IsNullOrEmpty(curMyShipping.FormattedText))
                 curMyShipping.Text = Convert.ToString(shipping);
-            if (FormHelper.GetSystemInfoOption("ChangeSalesOrderRate"))
+            var systemInfo = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.SalesLogix.Services.ISystemOptionsService>(true);
+            if (systemInfo.ChangeSalesOrderRate)
             {
                 divExchangeRateLabel.Visible = false;
                 divExchangeRateText.Visible = true;

@@ -23,7 +23,7 @@ namespace Sage.SalesLogix.Client.MailMerge
         public string TicketId { get; set; }
         public string ToJson()
         {
-            return JavaScriptConvert.SerializeObject(this);
+            return JsonConvert.SerializeObject(this);
         }
     }
 

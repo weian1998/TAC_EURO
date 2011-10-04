@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="9b47425f-3b70-4f38-a4cf-574c64d46086" lastModifiedUtc="2009-06-29T16:39:46.9307731Z" manageSchema="false" tableName="SALESORDER" name="SalesOrder" displayPropertyId="f3853e2f-7d75-4e58-a8c2-cfff5c2ee114" isExtension="false" audited="false" smallImage="[Localization!Global_Images:Sales_Order_16x16]" largeImage="[Localization!Global_Images:Sales_Order_24x24]" generateSDataFeed="true" sDataPathName="salesorders" lastUpdatedPropertyId="cce1dcc8-96e5-41b3-b6d3-0d63d4a4e47c" onBeforeInsertMethodId="fcac4378-0fea-49c2-a806-8560cd52b9fd" onAfterInsertMethodId="032c8b0c-64f4-4077-bb8f-15270a298d16" onBeforeUpdateMethodId="f0bb849e-7d3d-4b6b-95c1-e873397de940" onAfterUpdateMethodId="0efa8d4e-2c10-48b8-ad85-aa62483c96e5" onBeforeDeleteMethodId="2817ab5a-965d-49f8-a17d-d4da75cee6f1" onAfterDeleteMethodId="2d4fdc67-7ba3-4940-b236-25db72afee6a" onCreateId="2060a7a0-b1de-4115-b5fe-5fb0a6358336">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="9b47425f-3b70-4f38-a4cf-574c64d46086" lastModifiedUtc="2010-10-05T22:53:18.7663045Z" manageSchema="false" tableName="SALESORDER" name="SalesOrder" displayPropertyId="f3853e2f-7d75-4e58-a8c2-cfff5c2ee114" isExtension="false" audited="false" smallImage="[Localization!Global_Images:Sales_Order_16x16]" largeImage="[Localization!Global_Images:Sales_Order_24x24]" generateSDataFeed="true" sDataPathName="salesOrders" uniqueIdentifierPropertyId="bcde5632-676b-4f23-8c9b-0f8ae8688ae0" lastUpdatedPropertyId="cce1dcc8-96e5-41b3-b6d3-0d63d4a4e47c" onBeforeInsertMethodId="fcac4378-0fea-49c2-a806-8560cd52b9fd" onAfterInsertMethodId="032c8b0c-64f4-4077-bb8f-15270a298d16" onBeforeUpdateMethodId="f0bb849e-7d3d-4b6b-95c1-e873397de940" onAfterUpdateMethodId="0efa8d4e-2c10-48b8-ad85-aa62483c96e5" onBeforeDeleteMethodId="2817ab5a-965d-49f8-a17d-d4da75cee6f1" onAfterDeleteMethodId="2d4fdc67-7ba3-4940-b236-25db72afee6a" onCreateId="2060a7a0-b1de-4115-b5fe-5fb0a6358336">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
@@ -47,7 +47,9 @@
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
       <SystemDataType guid="f4ca6023-9f5f-4e41-8571-50ba94e8f233">
-        <LongTextDataType />
+        <LongTextDataType>
+          <Length>2147483647</Length>
+        </LongTextDataType>
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="281bb3f8-e7a2-4ae8-a4a4-18a3ff61343c" lastModifiedUtc="2008-04-14T16:09:13.5799486Z" name="CreateDate" audited="false" columnName="CREATEDATE" maxLength="0" precision="0" scale="0" ordinal="4" isReadOnly="false">
@@ -450,6 +452,86 @@
       </ExtendedPropertiesCollection>
       <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
         <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="bcde5632-676b-4f23-8c9b-0f8ae8688ae0" lastModifiedUtc="2010-06-10T08:51:26.2524082Z" name="GlobalSyncId" description="The global unique identifier used to identify this record across applications during sync." audited="false" columnName="GLOBALSYNCID" maxLength="36" precision="0" scale="0" ordinal="47" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="3ca925e1-4b76-4621-a39c-a0d4cb7327d5">
+        <GuidDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="bcbb9436-16b8-4cf2-b932-de5e0fbe655e" lastModifiedUtc="2010-09-24T07:05:35.108593Z" name="AppId" description="Foreign key to AppIdMapping table.  Used to identify the endpoint that last updated this record." audited="false" columnName="APPID" maxLength="12" precision="0" scale="0" ordinal="48" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="b0b1aeb0-946f-4fe1-90af-8ea64f7989d1" lastModifiedUtc="2010-05-06T21:09:56.717259Z" name="Tick" description="Vector Clock Incrementor.  Used by Integration Contract synchronization to identify changes." audited="false" columnName="TICK" maxLength="0" precision="10" scale="0" ordinal="49" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="47f90249-e4c8-4564-9ae6-e1fa9904f8b8">
+        <IntegerDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="ba99a47a-9c8d-44b7-b796-882de0cf82bf" lastModifiedUtc="2010-07-08T16:58:36.9439832Z" name="ActiveFlag" description="Flag to indicate if the SalesOrder is an 'active' one .   Default = True" audited="false" columnName="ACTIVEFLAG" maxLength="1" precision="0" scale="0" ordinal="50" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="92432b4d-8206-4a96-ba7b-e4cbd374f148">
+        <TrueFalseDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="6802237a-72d2-4dd5-b691-f47ff67d8d7c" lastModifiedUtc="2010-05-26T15:13:12.0224617Z" name="PriceListId" description="Foreign key relationship to the SlxPriceList table." audited="false" include="false" columnName="PRICELISTID" maxLength="12" precision="0" scale="0" ordinal="51" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="6f131754-01c0-42c4-a204-ab321a13a008" lastModifiedUtc="2010-05-06T21:10:57.0242891Z" name="DueDate" description="Date the order is due by the Customer. W3C date time standard for XML (ISO 8601). The base timezone is UTC. The offset is included. UTC should be used See the reference here: http://www.w3.org/TR/xmlschema-2/#isoformats " audited="false" columnName="DUEDATE" maxLength="0" precision="0" scale="0" ordinal="52" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
+        <DateTimeDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="44ac1dfa-eb8f-47f1-becc-38e26093c288" lastModifiedUtc="2010-10-05T22:52:20.3803045Z" name="OperatingCompId" audited="false" include="false" columnName="OPERATINGCOMPID" maxLength="12" precision="0" scale="0" ordinal="53" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="5d36385b-9f15-4165-858a-bb1bd8d7e40c" lastModifiedUtc="2011-02-10T23:07:41.7291538Z" name="DiscountTotal" description="The total value of the discount applied to the order." audited="false" columnName="DISCOUNTTOTAL" maxLength="0" precision="53" scale="0" ordinal="54" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="f37c635c-9fbf-40d8-98d5-750a54a3cca1">
+        <DoubleDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="f7fc9901-4cd4-43e3-88a5-2378bae64a6f" lastModifiedUtc="2011-02-10T23:08:04.2651538Z" name="TaxTotal" description="The total value of the tax applied to the order." audited="false" columnName="TAXTOTAL" maxLength="0" precision="53" scale="0" ordinal="55" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="f37c635c-9fbf-40d8-98d5-750a54a3cca1">
+        <DoubleDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="f2064b8c-c9b1-45f3-a17e-321f74d7af67" lastModifiedUtc="2011-02-21T15:55:22.2496815Z" name="IsQuote" description="Flag to indicate if this is an Order or a Quote." audited="false" columnName="ISQUOTE" maxLength="1" precision="0" scale="0" ordinal="56" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="92432b4d-8206-4a96-ba7b-e4cbd374f148">
+        <TrueFalseDataType />
       </SystemDataType>
     </property>
   </properties>

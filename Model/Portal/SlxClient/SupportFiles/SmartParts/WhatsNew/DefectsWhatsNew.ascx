@@ -54,14 +54,14 @@
                 </SalesLogix:PickListControl>
             </ItemTemplate>
         </asp:TemplateField>
-        <asp:TemplateField SortExpression="Priority" HeaderText="<%$ resources: grdNewDefects.Priority.ColumnHeading %>">
+        <asp:TemplateField HeaderText="<%$ resources: grdNewDefects.Priority.ColumnHeading %>">
             <ItemTemplate>
                 <SalesLogix:PickListControl runat="server" ID="pklPriority" ValueStoredAsText="False" 
                     PickListName="Defect Priority" PickListValue='<%#  Eval("PriorityCode")  %>' DisplayMode="AsText" CssClass="">
                 </SalesLogix:PickListControl>
             </ItemTemplate>
         </asp:TemplateField>
-        <asp:TemplateField SortExpression="Severity" HeaderText="<%$ resources: grdNewDefects.Severity.ColumnHeading %>">
+        <asp:TemplateField HeaderText="<%$ resources: grdNewDefects.Severity.ColumnHeading %>">
             <ItemTemplate>
                 <SalesLogix:PickListControl runat="server" ID="pklSeverity" ValueStoredAsText="False" 
                     PickListName="Defect Severity" PickListValue='<%#  Eval("SeverityCode")  %>' DisplayMode="AsText" CssClass="">

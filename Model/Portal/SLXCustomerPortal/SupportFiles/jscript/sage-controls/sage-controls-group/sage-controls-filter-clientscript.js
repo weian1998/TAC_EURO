@@ -101,7 +101,7 @@ Sage.FilterManager.prototype.ApplyLookupFilter = function(options) { //filternam
             ops = $("#" + options.opsid)[0].value;
         }
         options.ops = ops;
-        options.value = value;
+        options.value = [ value ];
         options.filterType = 'Lookup';
         svc.setActiveFilter(options);
     }
@@ -221,7 +221,7 @@ Sage.SaveHiddenFilters = function(hiddenFilters, oncomplete) {
     }
 }
 
-Sage.FilterUpdateCounts = function() {
+Sage.FilterUpdateCounts = function () {
     function getCurrentType() {
         var tabPanel = Ext.ComponentMgr.get('activity_groups_tabs');
         if (typeof tabPanel === "undefined")
@@ -252,8 +252,8 @@ Sage.FilterUpdateCounts = function() {
     var svc = Sage.FilterManager.GetManagerService();
     if (Sage.FilterRangeCountRequest)
         clearTimeout(Sage.FilterRangeCountRequest);
-    Sage.FilterRangeCountRequest = setTimeout(function() {
-        svc.requestRangeCounts(function(args) {
+    Sage.FilterRangeCountRequest = setTimeout(function () {
+        svc.requestRangeCounts(function (args) {
             try {
                 for (var i = 0; i < args.length; i++) {
                     if (!args[i].Counts)
@@ -278,7 +278,7 @@ Sage.FilterUpdateCounts = function() {
                                     item.displayNameId = Sage.FiltersToJSId(Sage.FilterManager.nullString);
                                 }
                                 if (/^\s*$/.test(item.VALUE)) {
-                                    item.VALUE = Sage.FilterManager.blankString;
+                                    //item.VALUE = Sage.FilterManager.blankString;
                                     item.displayName = Sage.FilterManager.blankString;
                                     item.displayNameId = Sage.FiltersToJSId(Sage.FilterManager.blankString);
                                 }
@@ -292,10 +292,9 @@ Sage.FilterUpdateCounts = function() {
                             var html = [];
                             if (getCurrentType() != null) { // only for activity/conf/lit/event
                                 for (var key in args[i].Counts) {
-                                    if (key == "") key = Sage.FilterManager.blankString;
                                     var exists = false;
                                     for (var j = 0; j < values.length; j++) {
-                                        if (values[j].VALUE == key) {
+                                        if (values[j].VALUE === key) {
                                             exists = true;
                                             break;
                                         }
@@ -312,17 +311,41 @@ Sage.FilterUpdateCounts = function() {
                             var hiddenFilters = Sage.GetHiddenFilters();
                             var filterId = String.format("{0}_{1}", Sage.FiltersToJSId(data.family), Sage.FiltersToJSId((values[0]) ? values[0].alias : ''));
                             var csssearchstring = ((hiddenFilters[filterId]) && (hiddenFilters[filterId].items)) ? '|' + hiddenFilters[filterId].items.join('|').toLowerCase() + '|' : '';
+
+                            for (var item in args[i].Counts) { //add in any missing items
+                                if (args[i].Counts[item] == -1) continue;
+                                var idx = 0;
+                                var srchFor = (item !== Sage.FilterManager.blankString) ? item : '';
+                                for (var j = 0; j < values.length; j++) {
+                                    if (values[j].VALUE == srchFor) {
+                                        idx = -1;
+                                        break;
+                                    }
+                                    if (srchFor > values[j].VALUE) idx = j + 1;
+                                }
+                                if (idx > -1) {
+                                    values.splice(idx, 0, { VALUE: item,
+                                        entity: args[i].FilterEntity,
+                                        alias: item,
+                                        selected: false,
+                                        objname: args[i].FilterEntity,
+                                        count: args[i].Counts[item],
+                                        NAME: item
+                                    });
+                                }
+                            }
                             for (var j = 0; j < values.length; j++) {
                                 var item = values[j];
                                 var key = item.VALUE;
+                                if (key === '') { key = Sage.FilterManager.blankString; }
 
                                 item.selected = selected
-                                ? selected.hasOwnProperty(key)
-                                : false;
+                                    ? selected.hasOwnProperty(key)
+                                    : false;
 
                                 item.count = args[i].Counts.hasOwnProperty(key)
-                                ? args[i].Counts[key]
-                                : 0;
+                                    ? args[i].Counts[key]
+                                    : 0;
                                 item.count = item.count == -1 ? Sage.FilterManager.UnknownCount : item.count;
                                 item.displayName = GetDisplayName(data, key, GetFilterDisplayName(key, item.NAME));
                                 item.displayNameId = Sage.FiltersToJSId(GetFilterDisplayName(key, item.NAME));
@@ -332,7 +355,6 @@ Sage.FilterUpdateCounts = function() {
                                 html.push(String.format(Sage.FilterManager.valueItemFormat, item.entity, item.alias, j, item.VALUE,
                                     (item.selected) ? "checked=\"checked\"" : "", item.objname, Sage.FiltersToJSId(item.entity),
                                     Sage.FiltersToJSId(item.alias), item.valueWithSingleFixed, item.displayName, item.displayNameId, item.count, cssclass));
-
                             }
 
                             var fragment = document.createDocumentFragment();
@@ -350,13 +372,13 @@ Sage.FilterUpdateCounts = function() {
                             var hasItems = true;
                             var fragment = document.createDocumentFragment();
                             if ($.browser.mozilla && !fragment.querySelectorAll) { //ff pre3.1 has no mechanism to do selection in fragments
-                                $(".filter-value-count", context).each(function() {
+                                $(".filter-value-count", context).each(function () {
                                     this.firstChild.nodeValue = "(0)"; //need to zero the ones that won't come down
                                 });
                                 for (var filterval in thisFilterData.Counts) {
                                     hasItems = true;
                                     var filterIdVal = (filterval == null) ? Sage.FilterManager.nullIdString : filterval;
-                                    $(String.format("span.{0}_{1}_count", thisFilterData.FilterName, Sage.FiltersToJSId(filterIdVal)), context).each(function() {
+                                    $(String.format("span.{0}_{1}_count", thisFilterData.FilterName, Sage.FiltersToJSId(filterIdVal)), context).each(function () {
                                         this.firstChild.nodeValue = String.format("({0})", thisFilterData.Counts[filterval] == -1 ? Sage.FilterManager.UnknownCount : thisFilterData.Counts[filterval]);
                                     });
                                 }
@@ -482,7 +504,7 @@ Sage.FilterManager.prototype.ClearFilters = function() {
     }
 }
 
-Sage.FilterManager.prototype.ToggleShortList = function(filterId, forceOpen) {
+Sage.FilterManager.prototype.ToggleShortList = function (filterId, forceOpen) {
     var filterDiv = $("#" + filterId);
     var anchor = filterDiv.find("A").get(0);
     var itemsDiv = filterDiv.find(String.format("#{0}_items", filterId));
@@ -494,6 +516,15 @@ Sage.FilterManager.prototype.ToggleShortList = function(filterId, forceOpen) {
         var hiddenFilters = Sage.GetHiddenFilters();
         var oncomplete = null;
         var changed = false;
+        try {
+            if (!itemsDiv.parentNode) itemsDiv.parentNode = itemsDiv.parent();
+            if (itemsDiv.parentNode) {
+                itemsDiv.parentNode.find(".filterloading").remove();
+            }
+        } catch (ex) {
+            //don't throw an error if cant find parent node
+        }
+
         if (forceOpen || (anchor.innerHTML === "[+]")) {
             anchor.innerHTML = "[-]";
             itemsDiv.removeClass("display-none");
@@ -502,13 +533,8 @@ Sage.FilterManager.prototype.ToggleShortList = function(filterId, forceOpen) {
             }
             changed = !hiddenFilters[filterId].expanded;
             hiddenFilters[filterId].expanded = true;
-            try {
-                if (!itemsDiv.parentNode) itemsDiv.parentNode = itemsDiv.parent();
-                if ((itemsDiv.parentNode) && (!doNotUpdateCounts)) {
-                    itemsDiv.before('<div class="loading-indicator filterloading"><span>' + TaskPaneResources.Loading + '</span></div>');
-                }
-            } catch (ex) {
-                //don't throw an error if cant find prev node
+            if ((itemsDiv.parentNode) && (!doNotUpdateCounts)) {
+                itemsDiv.before('<div class="loading-indicator filterloading"><span>' + TaskPaneResources.Loading + '</span></div>');
             }
             svc.RangeCountCache = null;
             if (!doNotUpdateCounts) oncomplete = Sage.FilterUpdateCounts;
@@ -527,7 +553,7 @@ Sage.FilterManager.prototype.ToggleShortList = function(filterId, forceOpen) {
 
     if (filterDiv.hasClass("DistinctFilter") && (itemsDiv.length > 0) && (itemsDiv.get(0).childNodes.length <= 1)) {
         var notNeedToDoFullRefresh = this.GetAppliedFilters().length == 0; //(typeof Sage.FilterManager.FilterActivityManager === 'undefined') || 
-        this.LoadDistinctValues(entity, filterName, function() { ToggleList(notNeedToDoFullRefresh); });
+        this.LoadDistinctValues(entity, filterName, function () { ToggleList(notNeedToDoFullRefresh); });
         return;
     }
     ToggleList();
@@ -751,7 +777,7 @@ Sage.FilterManager.prototype.loadDistinctFilterValues = function(parent, contain
             item.displayNameId = Sage.FiltersToJSId(Sage.FilterManager.nullString);
         }
         if (/^\s*$/.test(item.VALUE)) {
-            item.VALUE = Sage.FilterManager.blankString;
+            //item.VALUE = Sage.FilterManager.blankString;
             item.displayName = Sage.FilterManager.blankString;
             item.displayNameId = Sage.FiltersToJSId(Sage.FilterManager.blankString);
         }
@@ -1105,8 +1131,9 @@ function GetFilterDisplayName(val, defname) {
     }
     if (val == null)
         return Sage.FilterManager.nullString;
-    if (val == "")
+    if (/^\s*$/.test(val)) {
         return Sage.FilterManager.blankString;
+    }
     return ((typeof (defname) != "undefined") && (defname)) ? defname : val;
 }
 

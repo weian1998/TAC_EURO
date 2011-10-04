@@ -57,8 +57,10 @@
                 </SalesLogix:OwnerControl></span>
 			</td>
 			<td class="slxlabel checkbox">
-				<asp:CheckBox ID="_promptDuplicateContacts" runat="server"
-                  Text="<span id='lblPromptForDup'>Prompt for Duplicate Contacts or Leads</span>" meta:resourcekey="_promptDuplicateContactsResource1" />
+            <%--Defect 1-80914 
+            DThompson - "Please only hide the options for now.  We may re-enable them in Sawgrass depending on the direction we choose to take."--%>
+				<%--<asp:CheckBox ID="_promptDuplicateContacts" runat="server"
+                  Text="<span id='lblPromptForDup'>Prompt for Duplicate Contacts or Leads</span>" meta:resourcekey="_promptDuplicateContactsResource1" />--%>
             </td>
 		</tr>
         <tr>
@@ -71,9 +73,11 @@
                 </span>
 			</td>
             <td class="style1">
-				<span class="slxlabel checkbox"><asp:CheckBox ID="_promptContactNotFound" runat="server"
+            <%--Defect 1-80914 
+            DThompson - "Please only hide the options for now.  We may re-enable them in Sawgrass depending on the direction we choose to take."--%>
+				<%--<span class="slxlabel checkbox"><asp:CheckBox ID="_promptContactNotFound" runat="server"
                       Text="<span id='lblPromptConNotFound'>Prompt for Contact or Lead not Found</span>" meta:resourcekey="_promptContactNotFoundResource1" />
-				</span>
+				</span>--%>
             </td>        
         </tr>		
 		<tr>

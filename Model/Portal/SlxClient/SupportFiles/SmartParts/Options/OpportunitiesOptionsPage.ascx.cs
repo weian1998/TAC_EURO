@@ -82,7 +82,8 @@ public partial class OpportunitiesOptionsPage : UserControl, ISmartPartInfoProvi
             _defaultContacts.SelectedIndex = Convert.ToInt32(options.DefaultContacts);
         _useDefaultNamingConventions.Checked = options.UseDefaultNamingConventions;
         _estimatedCloseToLastDayOfMonth.Checked = options.EstimatedCloseToLastDayOfMonth;
-        if (FormHelper.GetSystemInfoOption("MultiCurrency"))
+        var systemInfo = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.SalesLogix.Services.ISystemOptionsService>(true);
+        if (systemInfo.MultiCurrency)
         {
             lblDefCurrency.Visible = true;
             luDefCurrency.Visible = true;

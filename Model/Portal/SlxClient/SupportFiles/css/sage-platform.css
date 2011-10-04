@@ -369,12 +369,12 @@ div.task-pane-item-container
 
 .tws .tws-middle-section .tws-tab-element .tws-tab-view-header .tws-tab-view-title span
 {
-	display: block; 
+	display: inline; 
 }
 
 .tws .tws-main-section .tws-more-tab-element  .tws-tab-view-header .tws-tab-view-title span
 {
-	display: block;
+	display: inline;
 }
 
 .tws .tws-drop-target
@@ -796,4 +796,9 @@ div.tws-more-tab-element
     border: 1px solid #F4C180;
     background-color : #FDF5EA;
     color: #333333;
+}
+.tws-header-icon 
+{
+    padding: 0px 4px;
+    cursor: pointer !important;
 }

@@ -6,8 +6,7 @@ using Sage.SalesLogix.Web;
 
 public class Global : HttpApplication
 {
-    static readonly log4net.ILog Log = log4net.LogManager.GetLogger(
-        System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+    static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
     void Application_Start(object sender, EventArgs e)
     {
@@ -22,7 +21,7 @@ public class Global : HttpApplication
         // 1. Add a reference to HibernatingRhinos.NHibernate.Profiler.Appender.dll assembly
         //    (Do not overwrite log4net.dll if prompted.)
         // 2. Uncomment following line:
-        // HibernatingRhinos.NHibernate.Profiler.Appender.NHibernateProfiler.Initialize();
+        //HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
 
         Log.Info("SalesLogix Web Client started.");
     }
@@ -68,7 +67,6 @@ public class Global : HttpApplication
         // Note: The Session_End event is raised only when the sessionstate mode
         // is set to InProc in the Web.config file. If session mode is set to StateServer 
         // or SQLServer, the event is not raised.
-
         ProcessSessionEnd();
     }
     void ProcessSessionEnd()
@@ -87,6 +85,7 @@ public class Global : HttpApplication
             }
         }
     }
+
     void Application_BeginRequest(object sender, EventArgs e)
     {
         if (Request.HttpMethod == "GET")

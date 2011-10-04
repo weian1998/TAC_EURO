@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="33fd0c1a-7050-4e9d-9a54-6a869ffa8694" lastModifiedUtc="2011-01-06T19:56:10.0684953Z" name="CalculateSalesPotential" returnType="Double" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="9701883a-f478-4652-a592-8f2a7ec211ca" lastModifiedUtc="2011-01-06T19:56:06.8104953Z" targetType="Sage.SalesLogix.Opportunity.Rules, Sage.SalesLogix.BusinessRules" targetMethod="CalculateSalesPotential" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

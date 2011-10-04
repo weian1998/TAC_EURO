@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="530bee82-232e-4bb0-bb38-30f3288d4a5e" lastModifiedUtc="2011-03-03T17:47:24.5591513Z" cardinality="M:1" parentEntityId="3172551b-f476-45ea-98de-2bb04ddba687" childEntityId="7740d003-6202-4158-a96e-eb93dfa0493b">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="d43b37b1-c6aa-4f7a-9e41-e206cf4c6164" lastModifiedUtc="2011-03-03T17:46:52.0976603Z" name="SlxPriceList" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="5682dc7a-3fa8-46de-ad7d-2ea9defdecf9" lastModifiedUtc="2011-03-03T17:46:52.0986605Z" name="Opportunity" audited="false" include="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="2e04e2f6-316e-4309-8f5d-dd01648afa38" parentPropertyId="80dab43a-9aa4-4b5e-ad2d-001cc1f5a187" childPropertyId="06305abc-ea02-42c0-bf7a-a510558357d5" ordinal="0" />
+  </column>
+</relationship>

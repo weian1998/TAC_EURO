@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="078d70a9-536b-4b45-8dfc-5a4aaa1180d7" lastModifiedUtc="2008-07-15T23:47:15.3355343Z" manageSchema="false" tableName="AREACATEGORYISSUE" name="AreaCategoryIssue" displayPropertyId="b5d61fcb-e6a1-47db-8d90-c44d89d5b935" isExtension="false" audited="true" generateSDataFeed="true" sDataPathName="areacategoryissues" lastUpdatedPropertyId="46d35f9a-98c1-40ba-8235-ccf17d45623d" onBeforeInsertMethodId="dcb97386-53fc-466e-96dd-f2e524b3369f" onAfterInsertMethodId="0658a116-a3d0-4edf-bcb6-4e44440a2d61" onBeforeUpdateMethodId="4a5cdf94-c499-42a1-af29-b98afb590c04" onAfterUpdateMethodId="8fa23542-cb26-478e-bdee-f1948d9a324a" onBeforeDeleteMethodId="5d4d7f9d-45f9-4a9c-ad20-1e21de38354e" onAfterDeleteMethodId="0c99807f-43be-4d5c-9edd-041ef8185f9d" onCreateId="2d0af22d-aacf-46b8-b436-cf41a3359983">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="078d70a9-536b-4b45-8dfc-5a4aaa1180d7" lastModifiedUtc="2008-07-15T23:47:15.3355343Z" manageSchema="false" tableName="AREACATEGORYISSUE" name="AreaCategoryIssue" displayPropertyId="b5d61fcb-e6a1-47db-8d90-c44d89d5b935" isExtension="false" audited="true" generateSDataFeed="true" sDataPathName="areaCategoryIssues" lastUpdatedPropertyId="46d35f9a-98c1-40ba-8235-ccf17d45623d" onBeforeInsertMethodId="dcb97386-53fc-466e-96dd-f2e524b3369f" onAfterInsertMethodId="0658a116-a3d0-4edf-bcb6-4e44440a2d61" onBeforeUpdateMethodId="4a5cdf94-c499-42a1-af29-b98afb590c04" onAfterUpdateMethodId="8fa23542-cb26-478e-bdee-f1948d9a324a" onBeforeDeleteMethodId="5d4d7f9d-45f9-4a9c-ad20-1e21de38354e" onAfterDeleteMethodId="0c99807f-43be-4d5c-9edd-041ef8185f9d" onCreateId="2d0af22d-aacf-46b8-b436-cf41a3359983">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
@@ -25,7 +25,7 @@
         </TextDataType>
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="2d281d5e-819a-4bfe-95ae-5c98f1ab72e1" lastModifiedUtc="0001-01-01T00:00:00" name="AreaCategoryIssueId" audited="false" isNullable="false" columnName="AREACATEGORYISSUEID" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="2d281d5e-819a-4bfe-95ae-5c98f1ab72e1" lastModifiedUtc="2010-10-05T00:51:14.1532183Z" name="AreaCategoryIssueId" audited="false" isNullable="false" include="false" columnName="AREACATEGORYISSUEID" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>

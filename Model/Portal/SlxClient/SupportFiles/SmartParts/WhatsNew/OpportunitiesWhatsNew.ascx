@@ -64,7 +64,7 @@
 
         <asp:BoundField DataField="SalesPotential" HeaderText="<%$ resources: Potential_lz %>" SortExpression="SalesPotential" DataFormatString="{0:C}" HtmlEncode="false" itemstyle-horizontalalign="Right" />
 
-        <asp:TemplateField HeaderText="<%$ resources: Owner_lz %>" SortExpression="O.OwnerDescription">
+        <asp:TemplateField HeaderText="<%$ resources: Owner_lz %>" SortExpression="Owner">
             <ItemTemplate>
                 <asp:Label id="owner" Runat="Server" Text='<%# Eval("Owner.OwnerDescription") %>' />
             </ItemTemplate>
@@ -108,7 +108,7 @@
 
         <asp:BoundField DataField="SalesPotential" HeaderText="<%$ resources: Potential_lz %>" SortExpression="SalesPotential" DataFormatString="{0:C}" HtmlEncode="false" itemstyle-horizontalalign="Right" />
 
-        <asp:TemplateField HeaderText="<%$ resources: Owner_lz %>" SortExpression="O.OwnerDescription">
+        <asp:TemplateField HeaderText="<%$ resources: Owner_lz %>" SortExpression="Owner">
             <ItemTemplate>
                 <asp:Label id="owner2" Runat="Server" Text='<%# DataBinder.Eval(Container.DataItem, "Owner.OwnerDescription") %>' />
             </ItemTemplate>

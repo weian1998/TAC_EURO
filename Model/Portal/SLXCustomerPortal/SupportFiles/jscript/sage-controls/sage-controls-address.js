@@ -21,7 +21,14 @@ PickListComboBox = function(options) {
                 {name: "text"},
                 {name: "value", convert: function(v, rec) { return m[o.storageMode] ? rec[m[o.storageMode]] : rec["text"]; }}
             ]
-        })
+        }),
+        listeners: {
+            load: function () {
+                if (typeof idComboBoxItems === "function") {
+                    idComboBoxItems();
+                }
+            }
+        }
     });       
     
     o.mode = "remote";
@@ -36,30 +43,27 @@ PickListComboBox = function(options) {
     PickListComboBox.superclass.constructor.call(this, o);
 }
 
-Ext.extend(PickListComboBox, Ext.form.ComboBox, {    
-    initComponent : function()
-    {        
+Ext.extend(PickListComboBox, Ext.form.ComboBox, {
+    initComponent: function () {
         PickListComboBox.superclass.initComponent.call(this);
         this.bind();
-    },    
-    bind: function() {
+    },
+    bind: function () {
 
     },
-    unbind: function() {
-    
+    unbind: function () {
+
     },
-    setValue: function(v) {
-        if (typeof v === "object")  
-        {                   
+    setValue: function (v) {
+        if (typeof v === "object") {
             PickListComboBox.superclass.setValue.call(this, v.value); /* set the hidden value */
             Ext.form.ComboBox.superclass.setValue.call(this, v.text); /* set the displayed text */
         }
-        else
-        {
+        else {
             PickListComboBox.superclass.setValue.call(this, v);
         }
     },
-    getValue: function() {
+    getValue: function () {
         var v = {
             text: Ext.form.ComboBox.superclass.getValue.call(this),
             value: PickListComboBox.superclass.getValue.call(this)
@@ -148,7 +152,9 @@ AddressControl.prototype.createFormItems = function() {
             anchor: (this._fields[i].xtype != "checkbox") ? "100%" : false
         });
         if (f.maxLength > 0)
-            f.autoCreate = {tag: 'input', type: 'text', maxlength: this._fields[i].maxLength};
+            f.autoCreate = { tag: 'input', type: 'text', maxlength: this._fields[i].maxLength };
+        
+        f.tabIndex = i+1;
         items.push(f);
     }
     return items;    
@@ -285,29 +291,29 @@ AddressControl.prototype.saveValues = function() {
     });
 };
 
-AddressControl.prototype.createDialog = function() {   
-    var self = this; 
-    
+AddressControl.prototype.createDialog = function () {
+    var self = this;
+
     var form = new AddressFormPanel({ //new Ext.form.FormPanel({
         id: this._clientId + "_form",
         baseCls: "x-plain",
-        labelWidth: 100,       
+        labelWidth: 100,
         layoutConfig: {
             labelSeparator: ""
         },
         defaultType: "textfield",
-        bodyStyle: "padding:5px;", 
+        bodyStyle: "padding:5px;",
         stateful: false,
         items: this.createFormItems()
     });
-    
+
     var panel = new Ext.Panel({
-        id: this._clientId + "_panel", 
-        autoScroll: true,  
-        border: false,             
+        id: this._clientId + "_panel",
+        autoScroll: true,
+        border: false,
         items: [form]
     });
-      
+
     var dialog = new Ext.Window({
         id: this._clientId + "_window",
         title: addressrsc.AddressControl_EditPanel_Header,
@@ -316,7 +322,7 @@ AddressControl.prototype.createDialog = function() {
         height: (this._options.height > 0) ? this._options.height : 390,
         minWidth: (this._options.minWidth > 0) ? this._options.minWidth : 350,
         minHeight: (this._options.minHeight > 0) ? this._options.minHeight : 390,
-        layout: "fit",        
+        layout: "fit",
         closeAction: "hide",
         plain: true,
         stateful: false,
@@ -326,49 +332,64 @@ AddressControl.prototype.createDialog = function() {
         buttonAlign: "right",
         buttons: [{
             id: this._clientId + "_ok",
+            tabIndex: 13,
             text: addressrsc.AddressControl_EditPanel_Ok,
-            handler: function() {
+            handler: function () {
                 self.saveValues();
                 self.close();
             }
-        },{
+        }, {
             id: this._clientId + "_cancel",
+            tabIndex: 14,
             text: addressrsc.AddressControl_EditPanel_Cancel,
-            handler: function() {
+            handler: function () {
                 self.close();
-            }   
+            }
         }],
         tools: [{
             id: "help",
-            handler: function(evt, toolEl, panel) {  
-                if (self._helpLink && self._helpLink.url) 
+            handler: function (evt, toolEl, panel) {
+                if (self._helpLink && self._helpLink.url)
                     window.open(self._helpLink.url, (self._helpLink.target || "help"));
             }
         }]
     });
-    
-    dialog.on("resize", function(dialog, width, height) {
+
+
+    dialog.on("resize", function (dialog, width, height) {
         panel.doLayout();
     });
-    
-    form.on("afterlayout", function(container, layout) {
+
+
+
+    form.on("afterlayout", function (container, layout) {
         
     });
-    
-    dialog.on("show", function(dialog) {
+
+    dialog.on("show", function (dialog) {
         self.restoreValues();
         if (typeof idLookup != "undefined") idLookup("address-dialog");
+
+        self.setTabBehavior(dialog);
     });
-    
+
+
     this._form = form;
     this._dialog = dialog;
 };
-
-AddressControl.prototype.show = function() {
+AddressControl.prototype.setTabBehavior = function (dialog) {
+    dojo.connect(dojo.byId(dialog.buttons[1].el.id), "onkeypress", function(evt) {
+        if (evt.which ==  dojo.keys.TAB || evt.keyCode == dojo.keys.TAB) {
+            dojo.query('input[tabIndex="1"]')[0].select();
+        }
+    });  
+};
+AddressControl.prototype.show = function () {
     this.ensureDialog();
-    
+
     this.getDialog().show();
     this.getDialog().center();
+
 };
 
 AddressControl.prototype.showMap = function() {
@@ -564,14 +585,14 @@ function Address_HandleKeyEvent(evt)
 	if(!evt) {
 		evt = window.event;
 	}
-    if (evt.keyCode == 13) //Enter
-    {
-        this.Ok();
-    }
-    else if (evt.keyCode == 27) //Esc
-    {
-        this.Cancel();
-    }
+	if (evt.keyCode == 13) //Enter
+	{
+	    this.Ok();
+	}
+	else if (evt.keyCode == 27) //Esc
+	{
+	    this.Cancel();
+	}
 }
 
 Address.prototype.ButtonClick = Address_ButtonClick;

@@ -87,8 +87,8 @@ public partial class SmartParts_Activity_DeleteRecurrence : EntityBoundSmartPart
         {
             Activity occurrence = Activity.RecurrencePattern.GetOccurrence(GetStartDate());
             occurrence.Delete();
-            FormHelper.RefreshMainListPanel(Page, GetType());
         }
+        FormHelper.RefreshMainListPanel(Page, GetType());
         updateUpdatePanel();
     }
 

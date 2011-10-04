@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="749b0ef1-5d7b-45ea-bd26-1acf09063dce" lastModifiedUtc="2010-05-04T00:22:45.7824273Z" cardinality="M:1" parentEntityId="57c68abc-081a-4dd8-878d-bf1f51129739" childEntityId="750a7f26-3604-467b-94fe-249370231df4">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="f25e9173-fdc7-4a87-9ba8-4c5a8f6af1de" lastModifiedUtc="2010-05-04T00:22:36.1124273Z" name="Contact" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="fe882be9-5d58-4624-b429-d3e03bc90ca0" lastModifiedUtc="2010-05-04T00:22:36.2694273Z" name="ContactSyncView" audited="false" include="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="18a6bfa2-f9fb-4eb6-bc97-04abaca3b096" parentPropertyId="b0507d6b-5dc7-4523-b4e9-dee8b483a34a" childPropertyId="67fe9234-a814-4d79-a813-01046c1ae19d" ordinal="0" />
+  </column>
+</relationship>

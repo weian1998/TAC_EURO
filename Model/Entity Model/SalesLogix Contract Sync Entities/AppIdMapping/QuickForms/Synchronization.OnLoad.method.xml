@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="16b011be-9878-43cd-83d8-b5798f4b78c0" lastModifiedUtc="2010-06-16T21:19:26.1312968Z" name="OnLoad" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="Synchronization">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="76a47bd9-531a-4d23-be8b-b53626c51923" paramName="form" sequence="0" paramType="ISynchronization" />
+    <OrmEntityMethodParam id="fd349d20-dd67-4092-b60e-5d48b4e3451b" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="e403b7cd-3bdc-49b4-901b-383c2b140f3d" lastModifiedUtc="2010-06-16T21:19:05.0832968Z" targetType="Sage.BusinessRules.CodeSnippets.SynchronizationEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="OnLoadSynchronization" active="true" codeSnippetId="1d917232-0ebf-4cb3-852c-285a6ce17bde">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

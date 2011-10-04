@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<SmartPartMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="1c83ec9a-779e-4892-84cd-eac79c1afa5e">
+  <SmartPartId>MergeRecords</SmartPartId>
+  <ReferencedModelId>00000000-0000-0000-0000-000000000000</ReferencedModelId>
+  <SmartPart>SmartParts\MergeRecords\MergeRecords.ascx</SmartPart>
+  <TargetWorkspace>DialogWorkspace</TargetWorkspace>
+  <ShowInMode>Detail</ShowInMode>
+  <Properties>
+    <Property Name="HelpTopic" TypeConverter="">Merge_Data</Property>
+  </Properties>
+  <AllowRoles />
+</SmartPartMapping>

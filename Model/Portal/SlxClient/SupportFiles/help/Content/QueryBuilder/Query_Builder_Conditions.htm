@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="357" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Using Query Builder|Query Builder Tabs" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Query Builder Conditions</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilder/Query_Builder_Conditions.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor203"></a>Query Builder Conditions</h1>
+        <p>Use the Query Builder Conditions tab to add, edit, or delete conditional  statements that are applied against the database to select data. Conditions are  applied in the order they appear in the grid; however, you can use the Move Up  and Move Down <MadCap:conditionalText MadCap:conditions="Output.WebClient">buttons</MadCap:conditionalText> <![CDATA[ ]]>to change the order. You can also group the conditional  statements.</p>
+        <table wrapperparagraphselector="P" style="margin-top: 14pt;left: 0px;top: 156px;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col />
+            <col />
+            <tr valign="middle" MadCap:conditions="">
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;border-left-style: none;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <ul>
+                        <li class="Bullets" value="1">The Query Builder supports many features. The tabs you see depend on the feature you are using.</li>
+                        <li class="Bullets" value="2">All groups you create should contain at least one condition. Groups that include  all records may slow system performance, and a warning may appear when users  attempt to view the groups.</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_1431659776_0" onclick="FMCDropDown( this ); return false;">To add a conditional statement<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_1431659776_0" style="display: none;">
+                <ol>
+                    <li class="Topic-Text-Numbered" value="1">Open 
+ <a href="Opening_Query_Builder.htm">Query Builder</a>.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="2">In 
+ the <span class="SLXBold">Query Builder</span>, click the <span class="SLXBold">Conditions</span> 
+ tab.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="3">Select 
+ a table from the upper left side of the Query Builder. If necessary, click 
+ the plus sign to expand the list of tables.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="4">Select 
+ a field from the upper right side of the Query Builder. This box displays 
+ all fields that belong to the selected table. <MadCap:conditionalText MadCap:conditions="Output.WebClient">Double-click the field to add it to the grid at the bottom of the dialog box.
+</MadCap:conditionalText> <![CDATA[                    ]]></li>
+                </ol>
+                <p class="Topic-Text-Indent">The Assign Condition dialog box opens automatically. 
+ You can open this dialog box at any time by double-clicking a statement 
+ in the grid.</p>
+                <ol start="5">
+                    <li class="Topic-Text-Numbered" value="5">Select 
+ an <a href="Query_Builder_Statement_Operators.htm">Operator</a>.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="6">In 
+ the <span class="SLXBold">Value is</span> box, enter a value or click <span class="SLXBold">Browse</span> to select a value from all existing entries 
+ for that field.
+                    </li>
+                </ol>
+                <p class="Topic-Text-Indent">If you selected "In" as an operator, 
+ the values must have quotation marks around each entry.</p>
+                <ol start="7">
+                    <li class="Topic-Text-Numbered" value="7">Select 
+ <span class="SLXBold">Case Sensitive Compare</span> if you want the capitalization 
+ of the value used as part of the condition. By default this option is 
+ selected.
+                    </li>
+                </ol>
+                <p class="Topic-Text-Indent">If you are using MS SQL Server, the Case Sensitive 
+ Compare option is not applicable. All queries are case insensitive.</p>
+                <ol start="8">
+                    <li class="Topic-Text-Numbered" value="8">If 
+ necessary, select <a href="../QueryBuilderAdv/Use_Value_as_a_Literal.htm">Use 
+ Value as a Literal</a>.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="9">Click <span class="SLXBold">OK</span>.   <![CDATA[                    ]]></li>
+                    <li class="Topic-Text-Numbered" value="10">To 
+ add another condition statement, repeat steps 1–9, and then select the appropriate 
+ <a href="Query_Builder_Statement_Connectors.htm">connector</a>.
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_1431659776_1" onclick="FMCDropDown( this ); return false;">To edit a conditional statement<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_1431659776_1" style="display: none;">
+                <ol>
+                    <li class="Topic-Text-Numbered" value="1">Open 
+ <a href="Opening_Query_Builder.htm">Query Builder</a>.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="2">Click 
+ the <span class="SLXBold">Conditions</span> tab.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="3">Select 
+ a statement in the grid (bottom of the Query Builder dialog box).
+                    </li>
+                    <li class="Topic-Text-Numbered" value="4">Click 
+ <span class="SLXBold">Edit</span>.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="5">In 
+ the <a href="Assign_Condition.htm">Assign Condition</a> dialog box, make 
+ your changes.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="6">Click <span class="SLXBold">OK</span>.   <![CDATA[                    ]]></li>
+                </ol>
+            </div>
+        </div>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_1431659776_2" onclick="FMCDropDown( this ); return false;">To delete a conditional statement<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_1431659776_2" style="display: none;">
+                <ol>
+                    <li class="Topic-Text-Numbered" value="1">Open 
+ <a href="Opening_Query_Builder.htm">Query Builder</a>.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="2">Click 
+ the <span class="SLXBold">Conditions</span> tab.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="3">Select 
+ a statement in the grid.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="4">Click 
+ <span class="SLXBold">Delete</span>.
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <p class="RelatedTopics">Related Topics</p>
+        <p><a href="Group_Conditional_Statements.htm">Grouping Conditional Statements</a>
+        </p>
+        <p><a href="Change_the_order_of_a_Conditional_Statement.htm">Reordering a
+ Conditional Statement</a>
+        </p>
+        <p><a href="Use_Not_in_a_Conditional_Statement.htm">Using "Not" 
+ in a Conditional Statement</a>
+        </p>
+        <p><a href="Assign_Condition.htm">Assign Conditions</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="Output.WebClient,Output.Customer Portal">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

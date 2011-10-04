@@ -67,7 +67,7 @@ Sage.SalesLogix.Controls.BufferedGridView = Ext.extend(Ext.ux.grid.BufferedGridV
     adjustVisibleRows: function() {
         var rows = this.getRows();
         if (rows[0]) {
-            var rh = rows[0].offsetHeight + 0.5; // adjustment for incorrect rendering 
+            var rh = rows[0].offsetHeight + 0.0; // adjustment for incorrect rendering <- set to zero when subtracting one row
             if (rh < 1.0) {
                 this.rowHeight = -1;
                 return;
@@ -110,7 +110,7 @@ Sage.SalesLogix.Controls.BufferedGridView = Ext.extend(Ext.ux.grid.BufferedGridV
             return;
         }
 
-        this.visibleRows = visibleRows;
+        this.visibleRows = visibleRows - 1;
 
         // skip recalculating the row index if we are currently buffering.
         if (this.isBuffering) {
@@ -347,8 +347,7 @@ Sage.SalesLogix.Controls.ListPanel.prototype.present = function(viewport) {
 
     if (typeof this.addTo === "string") this.addTo = Ext.getCmp(this.addTo);
 
-    if (this.addTo)
-    {
+    if (this.addTo) {
         $(this.addTo.getEl().dom).find(".x-panel-body").children().hide();
 
         this.addTo.add(this);
@@ -358,8 +357,15 @@ Sage.SalesLogix.Controls.ListPanel.prototype.present = function(viewport) {
     this.fireEvent("present", this);
 
     this.presented = true;
-    if (this.createOnly)
+    if (this.createOnly) {
+        var grpLookupMgrSvc = Sage.Services.getService('GroupLookupManager');
+        if (grpLookupMgrSvc) {
+            if (grpLookupMgrSvc.lookupIsOpen) {
+                return;
+            }
+        }
         this.refresh();
+    }
 };
 
 Sage.SalesLogix.Controls.ListPanel.prototype.initToolbar = function() {
@@ -586,8 +592,7 @@ Sage.SalesLogix.Controls.ListPanel.prototype.refresh = function() {
 
     //validate current view, if it is not valid, switch to the list view
     var updateToolbar = true;
-    if (this.activeView && !(this.views[this.activeView] && this.connections[this.activeView]))
-    {
+    if (this.activeView && !(this.views[this.activeView] && this.connections[this.activeView])) {
         updateToolbar = false;
         this.switchView("list");
     }
@@ -1850,14 +1855,14 @@ Sage.OwnerTypeToDisplayName = function(value) {
 };
 
 Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Controls.MetaConverter, {
-    toBoolean: function(v) {
+    toBoolean: function (v) {
         if (typeof v === "boolean")
             return v;
         if (typeof v === "string" && v.match)
             return !!v.match(/T/i);
         return false;
     },
-    init: function() {
+    init: function () {
         try {
 
             this.layout = { entity: this.meta.layout.mainTable || this.meta.layout.entity, columns: [] };
@@ -1918,7 +1923,7 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
                     case (column.alias == "SECCODETYPE"):
                         column.renderer = this.createOwnerTypeRenderer(column);
                         break;
-                        
+
                     default:
                         column.renderer = this.createDefaultRenderer(column);
                         break;
@@ -1931,7 +1936,7 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
                 var r;
                 for (var j = 0; j < Sage.SalesLogix.Controls.GroupMetaConverter.renderers.length; j++)
                     if ((r = Sage.SalesLogix.Controls.GroupMetaConverter.renderers[j].call(this, column)) !== false)
-                    column.renderer = r;
+                        column.renderer = r;
             }
             this.fireEvent("init", this, this.layout);
         }
@@ -1939,7 +1944,7 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
             Ext.Msg.alert("Error Reading Meta Data", e.message || e.description);
         }
     },
-    toReaderConfig: function() {
+    toReaderConfig: function () {
         try {
             var fields = [];
             fields.push({ name: 'SLXRN', sortType: 'int' });
@@ -1978,7 +1983,7 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
             return { meta: this.meta, recordType: [] };
         }
     },
-    toColumnModel: function() {
+    toColumnModel: function () {
         try {
             var model = [];
             var cols = this.layout.columns;
@@ -1996,7 +2001,7 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
 
                     // compares each item's header to see if there is a matching localized version
                     // in the GroupMetaConverter.localization dictionary
-                    Ext.each(Sage.SalesLogix.Controls.GroupMetaConverter.localization, function(l) {
+                    Ext.each(Sage.SalesLogix.Controls.GroupMetaConverter.localization, function (l) {
                         if (l.hasOwnProperty(item["header"])) {
                             item["header"] = l[item["header"]];
                             return false;
@@ -2024,12 +2029,12 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
             return [];
         }
     },
-    createEntityLinkRenderer: function(column) {
+    createEntityLinkRenderer: function (column) {
         var entity;
         var valuerenderer;
         if (typeof column === "string") {
             entity = column;
-            valuerenderer = function(v, m, r, ro, c, s) { return Ext.util.Format.htmlEncode(v); };
+            valuerenderer = function (v, m, r, ro, c, s) { return Ext.util.Format.htmlEncode(v); };
         } else {
             entity = (column.dataPath.lastIndexOf("!") > -1)
                 ? column.dataPath.substring(0, column.dataPath.lastIndexOf("!")).substring(column.dataPath.lastIndexOf(".") + 1)
@@ -2045,11 +2050,14 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
                 keyField = grpService.getContext().CurrentTableKeyField;
             }
         }
-        return function(value, meta, record, rowIndex, columnIndex, store) {
+        return function (value, meta, record, rowIndex, columnIndex, store) {
             var id = record.data[keyField] || record.data[tableName + "_ID"];
             if (!id)
                 return value;
 
+            if ((value == '') || (value == null)) {
+                value = '----';
+            }
 
             if ((entity.toUpperCase() == 'HISTORY') || (entity.toUpperCase() == 'ACTIVITY')) {
                 var fmtstr = "<a href=\"javascript:Link.entityDetail('{2}', '{0}')\">{1}</a>";
@@ -2059,14 +2067,14 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
                 var mainKeyField = store.reader.meta && store.reader.meta.keyfield;
                 if (keyField.toUpperCase() === (mainKeyField && mainKeyField.toUpperCase())) {
                     groupid = store.reader.meta && store.reader.meta.groupid;
-                    groupid = (typeof(groupid) !== 'undefined') ? '&gid=' + groupid : '';
+                    groupid = (typeof (groupid) !== 'undefined') ? '&gid=' + groupid : '';
                 }
                 var fmtstr = "<a href={2}.aspx?entityid={0}{3}>{1}</a>";
                 return (value ? String.format(fmtstr, id, valuerenderer(value, meta, record, rowIndex, columnIndex, store), entity, groupid) : "");
             }
         };
     },
-    createFixedNumberRenderer: function(column) {
+    createFixedNumberRenderer: function (column) {
         var format = column.formatString.replace(/%.*[dnf]/, "{0}").replace("%%", "%");
         var useGroupingChar = (column.formatString.match(/%.*[dnf]/) == null) ?
             false : // is not a valid format string
@@ -2079,8 +2087,8 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
         var NumericGroupingChar = Sage.SalesLogix.Controls.GroupMetaConverter.numericGroupingChar;
         var rx = /(\d+)(\d{3})/;
         if (precision && !isNaN(precision)) {
-            return function(value, meta, record, rowIndex, columnIndex, store) {
-                if (value && !isNaN(value)) {
+            return function (value, meta, record, rowIndex, columnIndex, store) {
+                if ((value === 0) || (value && !isNaN(value))) {
                     var num = String.format(format, value.toFixed(precision));
                     if (useGroupingChar) {
                         while (rx.test(num)) {
@@ -2092,13 +2100,13 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
             };
         }
 
-        return function(value, meta, record, rowIndex, columnIndex, store) {
+        return function (value, meta, record, rowIndex, columnIndex, store) {
             return (value ? Ext.util.Format.htmlEncode(value) : "&nbsp;");
         };
     },
-    createDateTimeRenderer: function(column) {
+    createDateTimeRenderer: function (column) {
         var renderer = Ext.util.Format.dateRenderer(ConvertToPhpDateTimeFormat(column.formatString));
-        return function(value, meta, record, rowIndex, columnIndex, store) {
+        return function (value, meta, record, rowIndex, columnIndex, store) {
             if (value && value.getMinutes && value.getHours) {
                 var minutes = (value.getMinutes() + value.getHours() * 60);
                 if ((1440 - minutes == value.getTimezoneOffset()) && (column.formatString.indexOf('h') == -1) && (value.getTimezoneOffset() > 0))
@@ -2107,8 +2115,8 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
             return renderer(value);
         };
     },
-    createPhoneRenderer: function(column) {
-        return function(value, meta, record, rowIndex, columnIndex, store) {
+    createPhoneRenderer: function (column) {
+        return function (value, meta, record, rowIndex, columnIndex, store) {
             if ((value == null) || (value == "null")) return "&nbsp;";
             if (!value || value.length != 10)
                 return Ext.util.Format.htmlEncode(value);
@@ -2116,13 +2124,13 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
             return String.format("({0}) {1}-{2}", value.substring(0, 3), value.substring(3, 6), value.substring(6));
         };
     },
-    createEmailRenderer: function(column) {
-        return function(value, meta, record, rowIndex, columnIndex, store) {
+    createEmailRenderer: function (column) {
+        return function (value, meta, record, rowIndex, columnIndex, store) {
             return (value ? String.format("<a href=mailto:{0}>{0}</a>", Ext.util.Format.htmlEncode(value)) : "");
         }
     },
-    createBooleanRenderer: function(column) {
-        return function(value, meta, record, rowIndex, columnIndex, store) {
+    createBooleanRenderer: function (column) {
+        return function (value, meta, record, rowIndex, columnIndex, store) {
             /* Format the char value based on the SalesLogix business rule for Boolean fields. */
             if ((value == null) || (value == "")) return "&nbsp;";
             /*
@@ -2145,8 +2153,11 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
             var booleanValue = arrBooleans[String(value)];
 
             var strFmt = column.formatString;
-            var strYes = Ext.util.Format.htmlEncode(Sage.SalesLogix.Controls.Resources.ListPanel.YesText);
-            var strNo = Ext.util.Format.htmlEncode(Sage.SalesLogix.Controls.Resources.ListPanel.NoText);
+            var resourceObj = Sage.SalesLogix.Controls.Resources.ListPanel ? Sage.SalesLogix.Controls.Resources.ListPanel :
+                window.DashboardResource ? window.DashboardResource :
+                { YesText: 'Yes', NoText: 'No' };
+            var strYes = Ext.util.Format.htmlEncode(resourceObj.YesText);
+            var strNo = Ext.util.Format.htmlEncode(resourceObj.NoText);
             if ((strFmt == null) || (strFmt == "")) return (booleanValue == true) ? strYes : strNo;
             var iIndex = (String(strFmt).indexOf("/"));
             if (iIndex != -1) {
@@ -2164,18 +2175,22 @@ Sage.SalesLogix.Controls.GroupMetaConverter = Ext.extend(Sage.SalesLogix.Control
             return (booleanValue == true) ? strYes : strNo;
         }
     },
-    createDefaultRenderer: function(column) {
-        return function(value, meta, record, rowIndex, columnIndex, store) {
-            return (value ? Ext.util.Format.htmlEncode(value) : "&nbsp;");
+    createDefaultRenderer: function (column) {
+        return function (value, meta, record, rowIndex, columnIndex, store) {
+            if (value === 0) {
+                return "0";
+            } else {
+                return (value ? Ext.util.Format.htmlEncode(value) : "&nbsp;");
+            }
         }
     },
-    createUserTypeRenderer: function(column) {
-        return function(value, meta, record, rowIndex, columnIndex, store) {
+    createUserTypeRenderer: function (column) {
+        return function (value, meta, record, rowIndex, columnIndex, store) {
             return Sage.UserTypeToDisplayName(value);
         }
     },
-    createOwnerTypeRenderer: function(column) {
-        return function(value, meta, record, rowIndex, columnIndex, store) {
+    createOwnerTypeRenderer: function (column) {
+        return function (value, meta, record, rowIndex, columnIndex, store) {
             return Sage.OwnerTypeToDisplayName(value);
         }
     }

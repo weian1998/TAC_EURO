@@ -123,7 +123,7 @@ public partial class SmartParts_History_NotesList : EntityBoundSmartPartInfoProv
     /// <returns></returns>
     protected string GetHistoryDescription(object Description)
     {
-        return GetLocalResourceObject("grdNotes.Notes.PreText").ToString() + Description;
+        return GetLocalResourceObject("grdNotes.Notes.PreText").ToString() + Server.HtmlEncode(Description == null ? "" : Description.ToString());
     }
 
     /// <summary>

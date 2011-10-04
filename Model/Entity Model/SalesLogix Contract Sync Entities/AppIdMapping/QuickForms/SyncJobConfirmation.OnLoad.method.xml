@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="13c4d339-0dfd-40c3-81ca-bf9cbcaea261" lastModifiedUtc="2010-09-02T16:03:13.0822938Z" name="OnLoad" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="SyncJobConfirmation">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="3e603e82-28ab-4868-830b-0c228fa11d0a" paramName="form" sequence="0" paramType="ISyncJobConfirmation" />
+    <OrmEntityMethodParam id="21879875-3287-4ac8-b695-9d56ac159442" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="b4ba6b37-44b9-4aef-bfd8-e272e3adf35a" lastModifiedUtc="2010-09-02T18:07:03.0312938Z" targetType="Sage.BusinessRules.CodeSnippets.SyncConfirmationEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="OnLoadStep" active="true" codeSnippetId="fc615c1b-9171-4592-b323-c0bac151e46a">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

@@ -31,6 +31,9 @@ public partial class SmartParts_Activity_AddResources : EntityBoundSmartPartInfo
 
     protected override void OnFormBound()
     {
+        AvailableResources.Attributes.Add("ondblclick", string.Format("var btn = document.getElementById('{0}'); if (btn) {{ btn.click(); }}", Add.ClientID));
+        SelectedResources.Attributes.Add("ondblclick", string.Format("var btn = document.getElementById('{0}'); if (btn) {{ btn.click(); }}", Remove.ClientID));
+
         base.OnFormBound();
 
         if (IsActivating)

@@ -130,7 +130,7 @@
     <value>Timeless:</value>
   </data>
   <data name="StartDate.Caption" xml:space="preserve">
-    <value>Date:</value>
+    <value>Scheduled:</value>
   </data>
   <data name="Duration.Caption" xml:space="preserve">
     <value>Duration:</value>
@@ -314,5 +314,11 @@
   </data>
   <data name="ContactOrLead_item0.Text" xml:space="preserve">
     <value>Contact</value>
+  </data>
+  <data name="CompletedDate.Caption" xml:space="preserve">
+    <value>Completed:</value>
+  </data>
+  <data name="CompletedDate.ToolTip" xml:space="preserve">
+    <value>Calendar</value>
   </data>
 </root>

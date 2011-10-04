@@ -23,7 +23,7 @@
     <RowStyle BackColor="#F7F6F3" ForeColor="#333333" CssClass="rowdk" />
     <EditRowStyle BackColor="#999999" />
     <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+    <PagerStyle BackColor="#284775" ForeColor="#333333" HorizontalAlign="Center" />
     <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
     <AlternatingRowStyle BackColor="White" ForeColor="#284775" CssClass="rowlt" />
 </SalesLogix:SlxGridView>

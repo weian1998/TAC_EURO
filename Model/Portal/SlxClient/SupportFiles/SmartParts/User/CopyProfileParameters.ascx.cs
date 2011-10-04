@@ -23,6 +23,8 @@ public partial class CopyProfileParameters : UserControl
         else
         {
             userOption.Checked = true;
+            templateListContainer.Style[HtmlTextWriterStyle.Display] = "none";
+            userListContainer.Style[HtmlTextWriterStyle.Display] = "inline";
         }
 
         base.OnPreRender(e);

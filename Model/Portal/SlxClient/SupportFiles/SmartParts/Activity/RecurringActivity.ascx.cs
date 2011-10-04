@@ -416,6 +416,9 @@ public partial class SmartParts_Activity_RecurringActivity : EntityBoundSmartPar
             Activity.RecurrencePattern.Pattern.Yearly.Kind = YearlyOccurenceKind.yoDayOfMonth;
             if (Activity.RecurrencePattern.Range.Kind == RangeKind.rkNoEndDate)
                 Activity.RecurrencePattern.Range.Kind = RangeKind.rkEndAfterX;
+            Activity.RecurrencePattern.Pattern.Yearly.DayOfMonth.Day = GetTypedDayOfTheMonthFromDayInTheWeek(Convert.ToInt32(ddlYearlyWeekDay.SelectedValue));
+            Activity.RecurrencePattern.Pattern.Yearly.DayOfMonth.Modifier = GetModifierFromInt(Convert.ToInt32(ddlYearlyWeekOfMonth.SelectedValue));
+            Activity.RecurrencePattern.Pattern.Yearly.Month = GetMonthFromInt(Convert.ToInt32(ddlYearlyMonthOfYear.SelectedValue));
         }
         else if (rbYearlyEveryOnDayOfTheMonth.Checked)
         {

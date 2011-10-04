@@ -14,7 +14,6 @@
 #if($qfcontrol.ToolTip != "") ToolTip="<%$ resources: ${qfcontrol.ControlId}.ToolTip %>" #end
 #if($qfcontrol.ButtonToolTip != "")ButtonToolTip="<%$ resources: ${qfcontrol.ControlId}.ButtonToolTip %>" #end
 #if($qfcontrol.HotKey != "")AccessKey="$qfcontrol.HotKey" #end
-#if($qfcontrol.PickListId != "")PickListId="$qfcontrol.PickListId" #end
 #if($qfcontrol.PickListName != "")PickListName="$qfcontrol.PickListName" #end
 #if($qfcontrol.NameFormatString != "")NameFormatString="$qfcontrol.NameFormatString" #end
 #if($qfcontrol.HasActionCode || $qfcontrol.AutoPostBack)AutoPostBack="true" #end

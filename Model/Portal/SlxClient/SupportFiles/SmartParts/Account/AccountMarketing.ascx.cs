@@ -1,3 +1,4 @@
+using System.Data;
 using Sage.Platform.Application;
 using Sage.Platform;
 using Sage.Entity.Interfaces;
@@ -204,6 +205,7 @@ public partial class SmartParts_Account_AccountMarketing : EntityBoundSmartPartI
                 {
                     RemoveTargetAssociation(targetId);
                 }
+                PanelRefresh.RefreshTabWorkspace();
                 break;
             case "REMOVE":
                 RemoveTargetAssociation(targetId);
@@ -323,11 +325,22 @@ public partial class SmartParts_Account_AccountMarketing : EntityBoundSmartPartI
                     dt.Columns.Add("TargetId");
                     dt.Columns.Add("ResponseId");
                     if (result != null)
+                    {
                         foreach (object[] data in result)
                         {
-                            dt.Rows.Add(data[0], data[1], data[2], data[3], ((IContact) data[4]).Id, data[4], ConvertData(data[5]), ConvertData(data[6]), ConvertData(data[7]), data[8], data[9], data[10]);
+                            dt.Rows.Add(data[0], data[1], data[2], data[3], ((IContact)data[4]).Id, data[4], ConvertData(data[5]), ConvertData(data[6]), ConvertData(data[7]), data[8], data[9], data[10]);
                         }
-                    grdAccountMarketing.DataSource = dt;
+                    }
+
+                    // need to sort after data is loaded since target table, used for status and stage, may not
+                    // be included in the results since they are not part of a left join.
+                    DataView dv = new DataView(dt);
+                    dv.Sort = string.Format("{0} {1}", grdAccountMarketing.CurrentSortExpression,
+                                            grdAccountMarketing.CurrentSortDirection.ToUpper() == "ASCENDING"
+                                                ? "asc"
+                                                : "desc");
+
+                    grdAccountMarketing.DataSource = dv;
                     grdAccountMarketing.DataBind();
                 }
             }

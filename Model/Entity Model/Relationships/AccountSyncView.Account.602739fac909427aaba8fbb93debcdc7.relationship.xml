@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="602739fa-c909-427a-aba8-fbb93debcdc7" lastModifiedUtc="2010-05-03T20:33:30.6080244Z" cardinality="M:1" parentEntityId="a1b538a9-4ea7-4f04-9392-ef55502aea52" childEntityId="ebfd715e-2b2f-4e5e-8c6d-cfc0d9b4ae52">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="d0c67765-4455-4017-9e42-dac96477a028" lastModifiedUtc="2010-05-03T20:33:15.242488Z" name="Account" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="a4159422-c29e-4dc5-8831-ddf34952f1bc" lastModifiedUtc="2010-05-03T20:33:15.5405178Z" name="AccountSyncView" audited="false" include="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="e922933f-5d84-4e30-abe6-96026414f560" parentPropertyId="4a26cab1-b1d5-43b1-9418-38b98c2f1431" childPropertyId="b24f58be-dd73-441a-a479-00e5f517b9e7" ordinal="0" />
+  </column>
+</relationship>

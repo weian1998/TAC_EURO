@@ -222,7 +222,7 @@
                     </div>
                     <div class="textcontrol picklist" style="width:45%">
                         <SalesLogix:PickListControl runat="server" ID="pklIndustry" PickListName="Industry" MustExistInList="false"
-                            ValueStoredAsText="false" NoneEditable="true" AlphaSort="true" />
+                            ValueStoredAsText="true" NoneEditable="true" AlphaSort="true" />
                     </div>
                 </td>
                 <td id="row4col3"></td>

@@ -1,6 +1,6 @@
 #if($qfcontrol.DisplayMode != "AsControl")<div class="Clear">#end
 <SalesLogix:Copy ID="${qfcontrol.ControlId}" runat="server" CopyToDestination="${qfcontrol.CopyToDestination}"
- ContentConfig="~/SummaryConfigData/${qfcontrol.LayoutFormName}.xml" 
+ ContentConfig="~/SummaryConfigData/${qfcontrol.LayoutFormName}.xml"
 #if(($qfcontrol.IsReadOnly) || (!$qfcontrol.Enabled))Enabled="false" #end
 #if($qfcontrol.ToolTip != "") ToolTip="<%$ resources: ${qfcontrol.ControlId}.ToolTip %>" #end
 #if($qfcontrol.TabIndex > 0)TabIndex="$qfcontrol.TabIndex" #end

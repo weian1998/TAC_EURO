@@ -30,6 +30,8 @@
     <include name="sage-platform\sage-platform-dashboardportal.js" />
     <include name="sage-platform\sage-platform-dashboardwidget.js" />
     <include name="sage-platform\sage-platform-useroptionsservice.js" />
+    <include name="sage-platform\sage-platform-rolesecurityservice.js" />
+    <include name="sage-platform\sage-platform-integrationcontractservice.js" />
   </target>
   <file name="sage-platform\gears_init.js" path="" />
   <file name="sage-platform\sage-platform-dashboardwidget.js" path="" />
@@ -38,4 +40,6 @@
   <file name="sage-platform\sage-platform-dashboardpage.js" path="" />
   <file name="sage-platform\sage-platform-analytics.js" path="" />
   <file name="sage-platform\sage-platform-useroptionsservice.js" path="" />
+  <file name="sage-platform\sage-platform-rolesecurityservice.js" path="" />
+  <file name="sage-platform\sage-platform-integrationcontractservice.js" path="" />
 </project>

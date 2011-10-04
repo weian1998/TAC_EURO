@@ -369,7 +369,8 @@ _height: 18px; /* IE6 */
 /* end of filters tasklet styles     */
 
 /* Support for reminder toolbar button highlighting */
-.x-btn-highlight 
-{
-	background-color: #F2F763;
-}
+
+.x-btn-highlight .x-btn-left{background:url(../images/btn-sprite2.gif) no-repeat 0 -63px;}
+.x-btn-highlight .x-btn-right{background:url(../images/btn-sprite2.gif) no-repeat 0 -84px;}
+.x-btn-highlight .x-btn-center{background:url(../images/btn-sprite2.gif) repeat-x 0 -126px;}
+

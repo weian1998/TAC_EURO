@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<Tasklet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="75fd6f70-380f-4d2d-96e7-7ede062be9df">
+  <SmartPart>SmartParts\TaskPane\AccountingTasks\AccountingTasksTasklet.ascx</SmartPart>
+  <EntityNames>Account, SalesOrder</EntityNames>
+  <UseCustomRendering>false</UseCustomRendering>
+</Tasklet>

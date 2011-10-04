@@ -10,8 +10,12 @@ public Sage.Platform.WebPortal.Binding.WebHqlListBindingSource ${qfcontrol.Contr
             _${qfcontrol.ControlId}.Distinct = true;
 #end
             var selectFieldList = new System.Collections.Generic.List<Sage.Platform.WebPortal.Binding.HqlSelectField>();
-#foreach($column in $qfcontrol.Columns)
-            selectFieldList.Add(new Sage.Platform.WebPortal.Binding.HqlSelectField("$column.DataField", "$column.Alias"));
+#foreach($column in $qfcontrol.Columns)			
+    #if($column.Alias.Length > 0 && $column.DataField.CompareTo($column.Alias) != 0)
+		    selectFieldList.Add(new Sage.Platform.WebPortal.Binding.HqlSelectField("$column.DataField", "$column.Alias"));
+    #else
+		    selectFieldList.Add(new Sage.Platform.WebPortal.Binding.HqlSelectField("$column.DataField", "$column.DataField"));						
+    #end
 #end
             _${qfcontrol.ControlId}.Select = selectFieldList;
             var parameterList = new System.Collections.Generic.List<Sage.Platform.WebPortal.Binding.HqlParameter>();
@@ -47,6 +51,7 @@ void ${qfcontrol.ControlId}_OnCurrentEntitySet(object sender, EventArgs e)
                 ${qfcontrol.ControlId}.SourceObject = entityContextService;
             }
         }
+		$generator.addFormLoadCode("if (${qfcontrol.ControlId}.Current != null) { ${qfcontrol.ControlId}.Bind(); }")
 		$generator.addFormLoadCode(" ${qfcontrol.GetAssociatedControlId()}.DataBind(); ")
 		$generator.addFormLoadCode(" RegisterBindingsWithClient(${qfcontrol.ControlId}); ")
         _${qfcontrol.ControlId}.BoundGrid = ${qfcontrol.GetAssociatedControlId()};

@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="5" MadCap:lastHeight="719" MadCap:lastWidth="699" MadCap:conditions="Primary.Accelerator,Output.WebClient" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="357" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
     <!-- saved from url=(0014)about:internet -->
-    <head>
-        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" /><title>Editing or Deleting a Secured Action</title>
-        <link href="../SALESLOGIX.CSS" rel="stylesheet" type="text/css" />
-        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+    <head><title>Editing or Deleting a Secured Action</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
         </script>
     </head>
     <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Admin_security/EditingOrDeletingASecuredAction.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
         <h1>Editing or Deleting a Secured Action</h1>
         <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
             <col style="width: 38px;" />
@@ -20,11 +23,11 @@
                     </p>
                 </td>
                 <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
-                    <p>Only the system administrator can access this feature.</p>
+                    <p>Only the system administrator and users with an administrator role can access these features.</p>
                 </td>
             </tr>
         </table>
-        <p>If you rename or delete a secured action, the secured action is de-coupled from all elements it was assigned to in the Application Architect. Although the relationship no longer exists, the element is still secured until you manually remove the secured action from the Applied Security property of the control in the Application Architect.  <![CDATA[ ]]><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler" MadCap:targets="ActionExample">Tell me more...</a></p>
+        <p>If you rename or delete a secured action, the secured action is de-coupled from all elements it was assigned to in the Application Architect. Although the relationship no longer exists, the element is still secured until you manually remove the secured action from the Applied Security property of the control in the Application Architect.          <![CDATA[ ]]><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="ActionExample">Tell me more...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a></p>
         <p MadCap:targetName="ActionExample" style="display: none;">For example, you created a secured action named Print/Reports and added that action to the Print button on the Reports view.  If you delete the Print/Reports secured action, the Print button control still displays Print/Reports in the Applied Security property in the Application Architect although the action does not exist. When a user accesses the Reports view, he or she cannot access the Print button because they are not assigned to a role that contains the Print/Reports secured action. The admin login can access all user interface elements, regardless of secured actions.</p>
         <p>If you want to remove security from the element, delete the secured action and manually remove the action from the Applied Security property of the control in the Application Architect.</p>
         <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
@@ -41,35 +44,40 @@
                 </td>
             </tr>
         </table>
-        <p class="Infinitive">How Do I?  </p>
-        <p class="HowDoI"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler" MadCap:targets="edit">Edit a secured action</a>
+        <p class="RelatedTopics">How Do I?</p>
+        <p class="HowDoI"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="edit">Edit a secured action<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
         </p>
         <ol MadCap:targetName="edit" style="display: none;">
             <li class="Topic-Text-Numbered" value="1">Open the <a href="SecuredActionDetailView.htm" target="_self">Secured Action Detail</a> view for the action you want to edit.</li>
             <li class="Topic-Text-Numbered" value="2">Use the <a href="SecuredActionRolesTab.htm" target="_self">Roles</a> tab to add or remove the secured action from a role.</li>
-            <li class="Topic-Text-Numbered" value="3">Click <span class="MCExpanding"><a href="javascript:void(0);" class="MCExpandingHead" onclick="FMCExpand( this ); return false;">Save</a><span class="MCExpandingBody" style="display: none;"><img src="../image/update.gif" /></span></span>.</li>
+            <li class="Topic-Text-Numbered" value="3">Click <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Save<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>.</li>
         </ol>
-        <p class="HowDoI"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler" MadCap:targets="delete">Delete a secured action</a>
+        <p class="HowDoI"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="delete">Delete a secured action<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
         </p>
         <ol MadCap:targetName="delete" style="display: none;">
             <li class="Topic-Text-Numbered" value="1">Open the <a href="SecuredActionDetailView.htm" target="_self">Secured Action Detail</a> view for the action you want to delete.</li>
-            <li class="Topic-Text-Numbered" value="2">Click <b><span class="MCExpanding"><a href="javascript:void(0);" class="expandingHead_0" onclick="FMCExpand( this ); return false;">Delete</a><span class="MCExpandingBody" style="display: none;"><img src="../image/delete.gif" /></span></span></b>.</li>
+            <li class="Topic-Text-Numbered" value="2">Click <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Delete<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/delete.gif" /></span></span>.</li>
             <li class="Topic-Text-Numbered" value="3">Click <b>OK</b> to confirm.</li>
         </ol>
-        <p><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler" MadCap:targets="recover">Recover a secured action</a>
+        <p><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="recover">Recover a secured action<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
         </p>
         <p MadCap:targetName="recover" style="display: none;">If you accidentally delete (or rename) a secured action, you can create a new secured action with the same name which re-links the action to any controls that use the action in the Application Architect. If you manually removed the action from the Applied Security property on the control in the Application Architect, the action will not re-link to the control. The new secured action name must EXACTLY match the previous secured action name.</p>
-        <p class="RelatedTopics">&#160;Related Topics</p>
+        <p class="RelatedTopics">Related Topics</p>
         <p><a target="_self" href="What_are_Roles_and_Secured_Actions.htm">What are Roles and Secured Actions?</a>
         </p>
         <p><a href="CreatingASecuredAction.htm" target="_self">Creating a Secured Action</a>
         </p>
-        <div style="width: 100%;position: relative;">
-            <p>
-            </p>
-            <p style="border-top-style: Groove;border-top-color: #c0c0c0;border-top-width: 1px;">&#160;</p>
-            <p><![CDATA[ ]]><a href="../General/feedback.htm" target="_blank">Tell us how we can make the Help better.</a></p>
-        </div>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="Output.WebClient,Output.Customer Portal">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
         </script>
     </body>

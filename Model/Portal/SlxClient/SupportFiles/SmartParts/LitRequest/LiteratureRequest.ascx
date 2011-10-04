@@ -7,7 +7,6 @@
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.ScriptResourceProvider" TagPrefix="Saleslogix" %>
 
 <div style="display:none">
-    <asp:HiddenField ID="htxtErr_TotalCost" Value="<%$ resources: Err_TotalCost %>" runat="server" />
     <asp:Panel ID="LitRequest_LTools" runat="server" meta:resourcekey="LitRequest_LToolsResource1"></asp:Panel>
     <asp:Panel ID="LitRequest_CTools" runat="server" meta:resourcekey="LitRequest_CToolsResource1"></asp:Panel>
     <asp:Panel ID="LitRequest_RTools" runat="server" meta:resourcekey="LitRequest_RToolsResource1">
@@ -125,10 +124,7 @@
      </tr>
      <tr>
         <td colspan="2" align="right" style="padding-right: 60px;">
-        <label>Total:</label>&nbsp;
-        <SalesLogix:Currency Class="TotalCost" runat="server" ReadOnly="true" ID="TotalCost" Enabled="false" ExchangeRateType="BaseRate" DisplayCurrencyCode="true" AutoPostBack="False" CurrentCode="" DisplayMode="AsControl" ExchangeRate="1" FormattedText="" MaxLength="0">
-            <CurrencyStyle Width="30px" />
-        </SalesLogix:Currency>
+        <label>Total:</label>&nbsp;<label id="lblTotalCost" class="TotalCost"><%= string.Format("{0:C}", 0.00) %></label>
         </td>
      </tr>
      <tr>
@@ -157,13 +153,8 @@
                     <label id="lblCost"><%# string.Format("{0:C}", Eval("Cost")) %></label>
                     <input type="hidden" class="cost" value="<%# Eval("Cost") %>" />
                 </itemTemplate>    
-            </asp:TemplateField>       
-            <asp:BoundField DataField="LiteratureId" HeaderText="LiteratureID" SortExpression="LiteratureId" Visible="False" meta:resourcekey="BoundFieldResource3" />   
-            <asp:TemplateField HeaderText="LiteratureID" >
-                <itemTemplate>
-                    <input type="hidden" class="litid" value="<%# Eval("LiteratureId") %>" />   
-                </itemTemplate>
-            </asp:TemplateField>          
+            </asp:TemplateField>
+            <asp:BoundField DataField="LiteratureId" HeaderText="LiteratureID" SortExpression="LiteratureId" Visible="False" meta:resourcekey="BoundFieldResource3" />
         </Columns>
         <RowStyle CssClass="rowlt" />
         <AlternatingRowStyle CssClass="rowdk" />
@@ -181,11 +172,21 @@
     </Keys>
 </SalesLogix:ScriptResourceProvider>
 
+<input type="hidden" id="hidUSDecSep" value="<%= new System.Globalization.CultureInfo("en-US").NumberFormat.CurrencyDecimalSeparator %>" />
+<input type="hidden" id="hidDecSep" value="<%= System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator %>" />
+<input type="hidden" id="hidGroupSep" value="<%= System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyGroupSeparator %>" />
+<input type="hidden" id="hidDecDigits" value="<%= System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalDigits %>" />
+<input type="hidden" id="hidNegPattern" value="<%= System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyNegativePattern %>" />
+<input type="hidden" id="hidPosPattern" value="<%= System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyPositivePattern %>" />
+<input type="hidden" id="hidSymbol" value="<%= System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol %>" />
+<input type="hidden" id="hidNegSign" value="<%= System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NegativeSign %>" />
+
 <script type="text/javascript">
+
 function forceNumInput(event) {
     if (Ext.isIE) {
-        if ((event.keyCode < 48) || (event.keyCode > 57)) {
-            event.returnValue = false;		    
+	    if ((event.keyCode < 48) || (event.keyCode > 57)) {
+		    event.returnValue = false;
 	    }
 	} else {
 	    if (((event.which < 48) || (event.which > 57)) && (event.which != 8)) {
@@ -194,63 +195,46 @@ function forceNumInput(event) {
 	}
     return true;
 }
-
-function isValue(value) {
-    if (typeof value === 'undefined' || value == null || value == "") {
-        return false;
-    }
-    return true;
+function LocalizeCost(numText) {
+    var dec = $('#hidDecSep').val();
+    var decUS = $('#hidUSDecSep').val();
+    numText = numText.replace(decUS, dec);
+    return numText;
 }
-
+function deLocalizeCost(numText) {
+    var decUS = $('#hidUSDecSep').val();
+    var dec = $('#hidDecSep').val();
+    var group = $('#hidGroupSep').val();
+    numText = numText.replace(group, "");
+    numText = numText.replace(dec, decUS);
+    return numText;
+}
 function updateTotal(event) {
-    var arrLit = [];
-    $('#ctl00_MainContent_LiteratureRequest_LiteratureItems TR').each(function() {
+    var totalCost = 0;
+    $('#ctl00_MainContent_LiteratureRequest_LiteratureItems TR').each(function () {
         var quantity = $(this).find(".quantity").val();
-        var sLitertureId = $(this).find(".litid").val();
-        if (isValue(quantity) && isValue(sLitertureId)) {
-            arrLit.push(String.format("{0}={1}", sLitertureId, quantity));
+        if (quantity != undefined && quantity != "") {
+            var itemCost = $(this).find(".cost").val();
+            if (itemCost != undefined) {
+                itemCost = deLocalizeCost(itemCost);
+
+                totalCost = totalCost + (itemCost * quantity);
+            }
         }
     });
-    if (arrLit.length > 0)
-    {
-        var sLit = arrLit.join('|');
-        var sUrl = String.format("SlxLitRequest.aspx?method=GetTotalCost&literature={0}", encodeURIComponent(sLit));
-        getTotal(sUrl);
-    }
-}
+    var costControl = $("#lblTotalCost");
+    totalCost = LocalizeCost(totalCost.toString());
+    var curObj = new Currency('', "lblTotalCost", $("#hidDecSep").val(), $("#hidGroupSep").val(), $("#hidSymbol").val(), $("#hidGroupDigits").val(), 1 * $("#hidDecDigits").val(), "", totalCost, false, "", 1 * $("#hidPosPattern").val(), 1 * $("#hidNegPattern").val(), $("#hidNegSign").val());
 
-function displayError(request, status) {
-    if (typeof request !== 'undefined') {
-        Ext.Msg.show({
-            title: "Sage SalesLogix",
-            msg: "<%= htxtErr_TotalCost.Value %>" + " " + request.statusText,
-            buttons: Ext.Msg.OK,
-            icon: Ext.MessageBox.ERROR
-        });
-    }  
+    var formattedCost = curObj.FormatLocalizedCurrency(totalCost);
+    costControl.text(formattedCost);
+    
+    costControl.onchange();
 }
-
-function displayTotal(responseText, status) {
-    if (typeof responseText !== 'undefined') {
-        var costControl = document.getElementById('ctl00_MainContent_LiteratureRequest_TotalCost_InputCurrency');
-        costControl.value = responseText;
-        costControl.onchange();
-    }
+function SetLocaleInfo(decimalPoint, thousandsSep) {
+    _decimalPoint = decimalPoint;
+    _thousandsSep = thousandsSep;
 }
-
-function getTotal(url) {
-    /* Get a total cost that will work in internationalization scenarios when
-       calculating currency (e.g. whether the value is 1,50 or 1.50). */
-    $.ajax({
-        type: "POST",
-        url: url,
-        error: displayError,
-        success: displayTotal,
-        data: "",
-        dataType: "text"
-    });
-}
-
 function fulfillLitRequestLocally(litRequestId) {
     var bCanceled = false;
     var bSuccess = false;

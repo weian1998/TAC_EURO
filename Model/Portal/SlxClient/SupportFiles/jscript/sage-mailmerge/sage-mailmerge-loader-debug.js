@@ -138,11 +138,11 @@ function AttachWriteMenuPopulator() {
                             }
                             return;
                         }
-                        }
                     }
                 }
             }
         }
+    }
     
     if (AttachWriteMenuPopulator_Count == 0) {
         AttachWriteMenuPopulator_Count++;

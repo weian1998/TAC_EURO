@@ -1,32 +1,28 @@
 using System;
-using System.Data;
+using System.Collections;
+using System.Reflection;
+using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Collections;
-using System.IO;
-using System.Text;
-using Telerik.WebControls;
-using Sage.Platform.WebPortal.SmartParts;
-using Sage.Entity.Interfaces;
-using System.Collections.Generic;
-using Sage.Platform.Application;
 using log4net;
-using Sage.Platform.WebPortal.Services;
+using Sage.Entity.Interfaces;
+using Sage.Platform;
+using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
-using Sage.Platform.Application.UI.Web;
-using Sage.SalesLogix.Services.Import;
-using Sage.SalesLogix.Services.PotentialMatch;
+using Sage.Platform.WebPortal.Services;
+using Sage.Platform.WebPortal.SmartParts;
 using Sage.SalesLogix.Client.GroupBuilder;
+using Sage.SalesLogix.Services.Import;
 using Sage.SalesLogix.Services.Import.Actions;
+using Sage.SalesLogix.Services.PotentialMatch;
+using Telerik.WebControls;
 
 /// <summary>
 /// Summary description for Lead Imports Select a File step.
 /// </summary>
 public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
 {
-    private IWebDialogService _DialogService;
-    private IContextService _Context;
-    static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodInfo.GetCurrentMethod().DeclaringType);
+    private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
     #region Public Properties
 
@@ -35,17 +31,7 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
     /// </summary>
     /// <value>The dialog service.</value>
     [ServiceDependency]
-    public IWebDialogService DialogService
-    {
-        set
-        {
-            _DialogService = value;
-        }
-        get
-        {
-            return _DialogService;
-        }
-    }
+    public IWebDialogService DialogService { get; set; }
 
     /// <summary>
     /// Gets or sets the entity context.
@@ -53,17 +39,7 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
     /// <value>The entity context.</value>
     /// <returns>The specified <see cref="T:System.Web.HttpContext"></see> object associated with the current request.</returns>
     [ServiceDependency]
-    public IContextService ContextService
-    {
-        set
-        {
-            _Context = ApplicationContext.Current.Services.Get<IContextService>();
-        }
-        get
-        {
-            return _Context;
-        }
-    }
+    public IContextService ContextService { get; set; }
 
     #endregion
 
@@ -130,7 +106,7 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
     {
         if (uplFile.UploadedFiles.Count == 0)
             return;
-        
+
         lblFileRequired.Visible = false;
         lblRequiredMsg.Visible = false;
         try
@@ -161,7 +137,6 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
                     ImportManager importManager = Page.Session["importManager"] as ImportManager;
                     importManager.SourceFileName = file.FileName;
                     importManager.SourceReader = GetCSVReader(file, importManager.ToString());
-                    //importManager.SourceReader = GetCSVReader(file);
                     Page.Session["importManager"] = importManager;
                 }
             }
@@ -202,7 +177,7 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
         sb.Replace("@txtCreateGroupNameId", txtCreateGroupName.ClientID);
         sb.Replace("@lbxAddHocGroupsId", lbxAddHocGroups.ClientID);
         sb.Replace("@chkAddToGroupId", chkAddToGroup.ClientID);
-        ScriptManager.RegisterClientScriptBlock(Page, this.GetType(), "ImportLeadScript", sb.ToString(), false);
+        ScriptManager.RegisterClientScriptBlock(Page, GetType(), "ImportLeadScript", sb.ToString(), false);
 
         radUProgressArea.Localization["CancelButton"] = GetLocalResourceObject("radProgress_Cancel").ToString();
         radUProgressArea.Localization["Uploaded"] = GetLocalResourceObject("radProgress_Uploaded").ToString();
@@ -238,8 +213,13 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
             chkAddToGroup.Checked = importManager.Options.AddToGroup;
             SetDefaultTargetProperties(importManager);
             LoadAddHocGroups();
-            
+
             Page.Session["importManager"] = importManager;
+        }
+
+        if (!IsImportPathValid())
+        {
+            return;
         }
     }
 
@@ -286,10 +266,16 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
             ImportTargetProperty tpImportSource = importManager.EntityManager.GetEntityProperty("ImportSource");
             if (tpOwner != null)
             {
+                string ownwerId = "SYST00000001";
                 IOwner owner = ImportRules.GetDefaultOwner();
-                tpOwner.DefaultValue = owner.Id.ToString();
+                if (owner != null)
+                {
+                    ownwerId = owner.Id.ToString();
+                }
+
+                tpOwner.DefaultValue = ownwerId;
                 importManager.TargetPropertyDefaults.Add(tpOwner);
-                ownDefaultOwner.LookupResultValue = owner.Id;
+                ownDefaultOwner.LookupResultValue = ownwerId;
             }
             if (tpLeadSource != null)
             {
@@ -302,7 +288,7 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
             foreach (ImportTargetProperty tp in importManager.TargetPropertyDefaults)
             {
                 if (tp.PropertyId.Equals("Owner"))
-                    ownDefaultOwner.LookupResultValue = (object)Sage.Platform.EntityFactory.GetById<IOwner>(tp.DefaultValue);
+                    ownDefaultOwner.LookupResultValue = EntityFactory.GetById<IOwner>(tp.DefaultValue);
                 if (tp.PropertyId.Equals("LeadSource"))
                     lueLeadSource.LookupResultValue = tp.DefaultValue.ToString();
             }
@@ -358,7 +344,7 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
                 divError.Style.Add(HtmlTextWriterStyle.Display, "inline");
                 divMainContent.Style.Add(HtmlTextWriterStyle.Display, "none");
                 lblError.Text = (e.Message);
-                ((Button)Parent.Parent.FindControl("StartNavigationTemplateContainerID").FindControl("cmdStartButton")).Visible = false;
+                (Parent.Parent.FindControl("StartNavigationTemplateContainerID").FindControl("cmdStartButton")).Visible = false;
             }
         }
         return importManager;
@@ -378,7 +364,6 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
         return Data;
     }
 
-
     /// <summary>
     /// Gets the CSV reader.
     /// </summary>
@@ -387,15 +372,46 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
     /// <returns></returns>
     private ImportCSVReader GetCSVReader(UploadedFile file, string importId)
     {
-        
-        string fileName = importId + ".csv";
-        string path = ImportService.GetImportProcessPath() + fileName;
-        ImportService.DeleteImportFile(path);
-        file.MoveTo(path);
-        ImportCSVReader reader = new ImportCSVReader(path);
-        return reader;
-        
+        try
+        {
+            string fileName = importId + ".csv";
+            string path = ImportService.GetImportProcessPath() + fileName;
+            ImportService.DeleteImportFile(path);
+            file.MoveTo(path);
+            ImportCSVReader reader = new ImportCSVReader(path);
+            return reader;
+        }
+        catch (Exception exp)
+        {
+            lblError.Text = GetLocalResourceObject("error_InvalidImportPath").ToString();
+            divError.Style.Add(HtmlTextWriterStyle.Display, "inline");
+            divMainContent.Style.Add(HtmlTextWriterStyle.Display, "none");
+            (Parent.Parent.FindControl("StartNavigationTemplateContainerID").FindControl("cmdStartButton")).Visible = false;
+            throw new Exception(GetLocalResourceObject("error_InvalidImportPath").ToString(), exp.InnerException);
+        }
     }
+
+    private bool IsImportPathValid()
+    {
+        try
+        {
+            string fileName = importProcessId.Value + "_.test";
+            string path = ImportService.GetImportProcessPath() + fileName;
+            byte[] data = new byte[10];
+            data[0] = 0;
+            ImportService.WriteImportFile(fileName, data);
+        }
+        catch (Exception)
+        {
+            lblError.Text = GetLocalResourceObject("error_InvalidImportPath").ToString();
+            divError.Style.Add(HtmlTextWriterStyle.Display, "inline");
+            divMainContent.Style.Add(HtmlTextWriterStyle.Display, "none");
+            (Parent.Parent.FindControl("StartNavigationTemplateContainerID").FindControl("cmdStartButton")).Visible = false;
+        }
+
+        return false;
+    }
+
     /// <summary>
     /// Gets the CSV reader.
     /// </summary>
@@ -406,8 +422,8 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
         byte[] data = GetData(file);
         ImportCSVReader reader = new ImportCSVReader(data);
         return reader;
-
     }
+
     /// <summary>
     /// Loads the add hoc groups.
     /// </summary>
@@ -419,7 +435,7 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
             IList addHocGroups = GroupInfo.GetGroupList("LEAD");
             foreach (GroupInfo group in addHocGroups)
             {
-                if (group.IsAdHoc.HasValue && Convert.ToBoolean(group.IsAdHoc))
+                if (group.IsAdHoc)
                 {
                     ListItem item = new ListItem();
                     item.Text = group.GroupName;
@@ -438,5 +454,6 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
     {
         return null;
     }
+
     #endregion
 }

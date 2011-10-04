@@ -7,16 +7,13 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
-using Sage.Platform.Data;
-using Sage.SalesLogix.Web;
 
 /// <summary>
 /// Summary description for Global
 /// </summary>
 public class Global : System.Web.HttpApplication
 {
-    static readonly log4net.ILog log = log4net.LogManager.GetLogger(
-        System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+    static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
     void Application_Start(object sender, EventArgs e)
     {
@@ -38,24 +35,8 @@ public class Global : System.Web.HttpApplication
     void Application_End(object sender, EventArgs e)
     {
         log.Info("SalesLogix Customer Portal ended.");
-        ProcessSessionEnd();
     }
-    void ProcessSessionEnd()
-    {
-        if (Session[0] != null)
-        {
-            // assumes the work item is the first entry added to the session
-            Sage.Platform.Application.WorkItem workItem = Session[0] as Sage.Platform.Application.WorkItem;
-            if (workItem != null)
-            {
-                IDataService wds = workItem.Services.Get<IDataService>();
-                if (wds != null)
-                {
-                    ((SLXWebDataService)wds).CleanupSession();
-                }
-            }
-        }
-    }
+
     private const string _errorPageHtmlFmt = @"<html xmlns=""http://www.w3.org/1999/xhtml"">
 <head runat=""server"">
     <title>{0}</title>

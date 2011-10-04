@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="098d48b8-3653-49b6-821f-7a7060273205" lastModifiedUtc="2007-12-21T16:11:19.8022781Z" cardinality="1:M" parentEntityId="a450e01b-fe42-4ab0-bb06-292caa98f528" childEntityId="15982e80-4d94-4b2e-9cb3-e98a1ce75e84">
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="098d48b8-3653-49b6-821f-7a7060273205" lastModifiedUtc="2011-04-21T13:35:27.6616214Z" parentEntityId="a450e01b-fe42-4ab0-bb06-292caa98f528" childEntityId="15982e80-4d94-4b2e-9cb3-e98a1ce75e84">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
   </ExtendedPropertiesCollection>
-  <parentProperty id="9dd6f385-d016-40d2-a4df-643c07530626" lastModifiedUtc="2007-12-21T16:11:19.8022781Z" name="DefectReturns" audited="false" displayCategory="Intermediate" isNullable="true" include="true">
+  <parentProperty id="9dd6f385-d016-40d2-a4df-643c07530626" lastModifiedUtc="2007-12-21T16:11:19.8022781Z" name="DefectReturns" audited="false">
     <ExtendedPropertiesCollection>
       <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
     </ExtendedPropertiesCollection>
@@ -12,7 +12,7 @@
       <RelationshipDataType />
     </SystemDataType>
   </parentProperty>
-  <childProperty id="81cc36cb-5f87-44b8-863f-bb9260318254" lastModifiedUtc="2007-12-21T16:11:19.8022781Z" name="Property" audited="false" displayCategory="Intermediate" isNullable="true" include="false">
+  <childProperty id="81cc36cb-5f87-44b8-863f-bb9260318254" lastModifiedUtc="2011-04-21T13:35:27.6616214Z" name="Return" audited="false">
     <ExtendedPropertiesCollection>
       <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
     </ExtendedPropertiesCollection>

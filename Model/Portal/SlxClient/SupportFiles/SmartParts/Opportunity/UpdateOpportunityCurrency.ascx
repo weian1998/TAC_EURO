@@ -68,13 +68,13 @@
         <tr>
             <td style="padding-left:10px">
                 <asp:Label runat="server" ID="lblConvertedPotential" Text="convert potential - From: " meta:resourceKey="lblConvertedPotential_rsc"></asp:Label>
-                <SalesLogix:Currency runat="server" ID="curFrom" ExchangeRateType="OpportunityRate" DisplayCurrencyCode="true" DisplayMode="astext"></SalesLogix:Currency>                
+                <SalesLogix:Currency runat="server" ID="curFrom" ExchangeRateType="EntityRate" DisplayCurrencyCode="true" DisplayMode="astext"></SalesLogix:Currency>                
             </td>
         </tr>
         <tr>
             <td style="padding-left:132px">
                 <asp:Label runat="server" ID="lblTo" Text="To: " meta:resourceKey="lblTo_rsc"></asp:Label>
-                <SalesLogix:Currency runat="server" ID="curTo"  DisplayCurrencyCode="true" DisplayMode="astext" ExchangeRateType="opportunityRate"></SalesLogix:Currency>
+                <SalesLogix:Currency runat="server" ID="curTo"  DisplayCurrencyCode="true" DisplayMode="astext" ExchangeRateType="EntityRate"></SalesLogix:Currency>
             </td>
         </tr>
         <tr>

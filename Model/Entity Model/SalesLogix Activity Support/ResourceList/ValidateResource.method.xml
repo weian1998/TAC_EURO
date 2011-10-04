@@ -7,7 +7,7 @@
   <parameter />
   <preExecuteTargets />
   <methodTargets>
-    <methodTarget id="0018f521-7d25-4116-b05b-8dbca449a945" lastModifiedUtc="2010-12-28T23:44:22.410833Z" targetType="Sage.SalesLogix.Accelerator.ResourceList.Rules, Sage.SalesLogix.AdminAccelerator.BusinessRules" targetMethod="ValidateResource" active="true">
+    <methodTarget id="0018f521-7d25-4116-b05b-8dbca449a945" lastModifiedUtc="2010-12-28T23:44:22.410833Z" targetType="Sage.SalesLogix.ResourceList.Rules, Sage.SalesLogix.BusinessRules" targetMethod="ValidateResource" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>

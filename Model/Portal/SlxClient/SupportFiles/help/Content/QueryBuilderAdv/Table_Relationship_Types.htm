@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="357" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" class="" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Table Relationship Types</title>
+        <link href="../Resources/TableStyles/TableStyle.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilderAdv/Table_Relationship_Types.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor650"></a>Table Relationship Types</h1>
+        <table wrapperparagraphselector="P" style="margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col />
+            <col />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <ul style="list-style: disc;" type="disc">
+                        <li class="kadov-p-CBullets" value="1">The parent table determines the table relationship. For  example, when the CONTACT table is the parent table, it has a One to One  relationship with the Account table. However, when the ACCOUNT table is the  parent table, the relationship is One to Many. In the Example column, parent  table names are in italics.</li>
+                        <li class="SLXNote" value="2">You cannot work with tables that have a Many to Many  relationship directly. You must use a link table, an intermediary table whose  purpose is to resolve Many to Many relationships by creating a link between the  tables. If you need information from the USERINFO and ACTIVITY tables, use the  USER_ACTIVITY table to access these tables. The USER_ACTIVITY table is a link  table.</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <p style="font-weight: normal;">To express the types of relationships between 
+ tables, use these terms:</p>
+        <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle_TableStyle" cellspacing="0">
+            <thead>
+                <tr>
+                    <th class="TableStyle_TableStyle_Head_0_0_RowSep_ColSep">Term</th>
+                    <th class="TableStyle_TableStyle_Head_0_0_RowSep_ColSep">Symbol</th>
+                    <th class="TableStyle_TableStyle_Head_0_0_RowSep_ColSep">Description</th>
+                    <th class="TableStyle_TableStyle_Head_0_0_RowSep_ColEnd">Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">One to One</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">
+                        <img src="../image/ONETOONE.GIF" alt="image\onetoone.gif" style="width: 78px;height: 13px;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;border-style: none;border-style: none;" width="78" height="13" border="0" />
+                    </td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">For a single record in one table there is only one related record in  another table.</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">A contact is related to only one account; therefore, the relationship between  the <i>CONTACT</i> and ACCOUNT tables is One to One.</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">Zero to One</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">
+                        <img src="../image/ZEROTOONE.GIF" alt="image\zerotoone.gif" style="width: 76px;height: 13px;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;border-style: none;border-style: none;" width="76" height="13" border="0" />
+                    </td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">For a single record in one table there is none or one related record in another  table. A Zero to One relationship will occur after a table has been set up with  a One to One relationship to another table that does not have any records.</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">An activity might not be related to any opportunities. If it is related to an  opportunity it is only related to one opportunity; therefore, the relationship  between the <i>ACTIVITY</i> and OPPORTUNITY tables is Zero to One.</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">One to Many</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">
+                        <img src="../image/ONETOMANY.GIF" alt="image\onetomany.gif" style="width: 77px;height: 15px;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;border-style: none;border-style: none;" width="77" height="15" border="0" />
+                    </td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">For a single record in one table there is one or more related records in another  table.</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">More than one contact can be associated with an account, but at least one  account is always associated with a contact; therefore, the relationship between  the <i>ACCOUNT</i> and CONTACT tables is One to Many.</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">Zero to Many</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">
+                        <img src="../image/ZEROTOMANY.GIF" alt="image\zerotomany.gif" style="width: 76px;height: 14px;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;border-style: none;float: none;border-style: none;" width="76" height="14" border="0" />
+                    </td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">For a single record in one table, there may be zero or many records in another  table. A Zero to Many relationship will occur after a table has been set up with  a One to Many relationship to another table that does not have any records.</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">A contact may have zero or many activities; therefore, the relationship between  the <i>CONTACT</i> and ACTIVITY tables is Zero to Many.</td>
+                </tr>
+                <tr>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowEnd_ColSep">Many to Many</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowEnd_ColSep">
+                        <img src="../image/Manytomany.gif" />
+                    </td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowEnd_ColSep">There are many records in one table that relate to many records in another table.</td>
+                    <td class="TableStyle_TableStyle_Body_0_0_RowEnd_ColEnd">A user can have many activities and an activity can have many users; therefore,  the relationship between the <i>USERINFO</i> and ACTIVITY tables is Many to Many. </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="RelatedTopics">Related Topics</p>
+        <p class="Topic-Text-Numbered"><a href="Joining_Tables.htm">Joining Tables</a>
+        </p>
+        <p class="Topic-Text-Numbered"><a href="Join_Example.htm">Join Example</a>
+        </p>
+        <p class="Topic-Text-Numbered"><a href="ID_Fields_in_Tables.htm">ID Fields 
+ in Tables</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="Output.WebClient,Output.Customer Portal">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

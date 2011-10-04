@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<CatapultAliasFile Version="1" DefaultSkinName="main">
+<CatapultAliasFile Version="1" DefaultSkinName="WebHelp2">
     <!-- saved from url=(0014)about:internet -->
     <Map Name="campaignaddnew" Link="Campaigns/campaignaddnew.htm" ResolvedId="6312" />
     <Map Name="returnshippedproductinfo" Link="Returns/returnshippedproductinfo.htm" ResolvedId="7042" />
     <Map Name="defectlistview" Link="Defects/defectlistview.htm" ResolvedId="7036" />
-    <Map Name="csrticketlistview" Link="Tickets/csrticketlistview.htm" ResolvedId="1120" />
+    <Map Name="ticketlistview" Link="Tickets/csrticketlistview.htm" ResolvedId="1120" />
     <Map Name="accountaddresschange" Link="Common Tabs/accountaddresschange.htm" ResolvedId="2721" />
     <Map Name="csrticketsendemail" Link="Tickets/csrticketsendemail.htm" ResolvedId="1126" />
-    <Map Name="oppstandardlookup" Link="Opportunities/oppstandardlookup.htm" ResolvedId="1724" />
+    <Map Name="opportunitylistview" Link="Opportunities/oppstandardlookup.htm" ResolvedId="1724" />
     <Map Name="slxconflictresolution" Link="Remotes/slxconflictresolution.htm" ResolvedId="2279" />
     <Map Name="oppproductstab" Link="Opportunities/oppproductstab.htm" ResolvedId="2566" />
     <Map Name="whatsnewdisconnect" Link="Remotes/whatsnewdisconnect.htm" ResolvedId="2285" />
@@ -53,7 +53,7 @@
     <Map Name="oppclose" Link="Opportunities/oppclose.htm" ResolvedId="2723" />
     <Map Name="contactinfoboxes" Link="Contacts/contactinfoboxes.htm" ResolvedId="7521560" />
     <Map Name="contactdetailsview" Link="Contacts/contactdetailsview.htm" ResolvedId="1706" />
-    <Map Name="returnlistview" Link="Returns/returnlistview.htm" ResolvedId="7038" />
+    <Map Name="returnlistview" Link="Returns/returnlistview.htm" ResolvedId="8055" />
     <Map Name="campaigntargetoverview" Link="Campaigns/campaigntargetoverview.htm" ResolvedId="7521551" />
     <Map Name="slxsync" Link="Remotes/slxsync.htm" ResolvedId="2278" />
     <Map Name="oppsummarytab" Link="Opportunities/oppsummarytab.htm" ResolvedId="2364" />
@@ -83,13 +83,12 @@
     <Map Name="oppeditcompetitor" Link="Opportunities/oppeditcompetitor.htm" ResolvedId="2707" />
     <Map Name="leadimport" Link="Leads/leadimport.htm" ResolvedId="6325" />
     <Map Name="contactpotentialmatch" Link="Contacts/contactpotentialmatch.htm" ResolvedId="2711" />
-    <Map Name="contactstandardlookup" Link="Contacts/contactstandardlookup.htm" ResolvedId="1705" />
+    <Map Name="contactlistview" Link="Contacts/contactstandardlookup.htm" ResolvedId="1705" />
     <Map Name="litreqinfo" Link="Literature/litreqinfo.htm" ResolvedId="29255" />
     <Map Name="processstatus" Link="Contact Processes/processstatus.htm" ResolvedId="2260" />
     <Map Name="contactmove" Link="Contacts/contactmove.htm" ResolvedId="2172" />
     <Map Name="campaignopptab" Link="Campaigns/campaignopptab.htm" ResolvedId="75215022" />
     <Map Name="opportunityadd" Link="Opportunities/opportunityadd.htm" ResolvedId="2700" />
-    <Map Name="contractrefnumberdupe" Link="Contracts/contractrefnumberdupe.htm" ResolvedId="1133" />
     <Map Name="contractdetailview" Link="Contracts/contractdetailview.htm" ResolvedId="7033" />
     <Map Name="campaignaddleadsource" Link="Campaigns/campaignaddleadsource.htm" ResolvedId="6315" />
     <Map Name="contactadd1" Link="Contacts/contactadd1.htm" ResolvedId="1494" />
@@ -124,7 +123,7 @@
     <Map Name="campaignshowfilters" Link="Campaigns/campaignshowfilters.htm" ResolvedId="75215043" />
     <Map Name="Removing_or_Replacing_Team_Members" Link="Admin_TeamsDepts/Removing_or_Replacing_Team_Members.htm" ResolvedId="6000016" />
     <Map Name="campaignlistview" Link="Campaigns/campaignlistview.htm" ResolvedId="6326" />
-    <Map Name="accountassetstab" Link="Accounts/accountassetstab.htm" ResolvedId="7521500" />
+    <Map Name="accountassetstab" Link="Accounts/accountassetstab.htm" ResolvedId="1000" />
     <Map Name="accountcontactstab" Link="Accounts/accountcontactstab.htm" ResolvedId="7521501" />
     <Map Name="accountcontractstab" Link="Accounts/accountcontractstab.htm" ResolvedId="7521502" />
     <Map Name="accountdetailstab" Link="Accounts/accountdetailstab.htm" ResolvedId="7521504" />
@@ -133,11 +132,10 @@
     <Map Name="accountinfoboxes" Link="Accounts/accountinfoboxes.htm" ResolvedId="7521507" />
     <Map Name="accountoverview" Link="Accounts/accountoverview.htm" ResolvedId="1657" />
     <Map Name="accountresellertab" Link="Accounts/accountresellertab.htm" ResolvedId="7521509" />
-    <Map Name="accountstandardlookup" Link="Accounts/accountstandardlookup.htm" ResolvedId="1664" />
+    <Map Name="accountlistview" Link="Accounts/accountstandardlookup.htm" ResolvedId="1664" />
     <Map Name="addaccount" Link="Accounts/addaccount.htm" ResolvedId="7521511" />
     <Map Name="addressestab" Link="Common Tabs/addressestab.htm" ResolvedId="7521554" />
     <Map Name="newaccountinfoboxes" Link="Accounts/newaccountinfoboxes.htm" ResolvedId="7521513" />
-    <Map Name="accountdelete" Link="Accounts/accountdelete.htm" ResolvedId="1408" />
     <Map Name="contactedit" Link="Contacts/contactedit.htm" ResolvedId="7521559" />
     <Map Name="activitydetailview" Link="Activities/activitydetailview.htm" ResolvedId="1630" />
     <Map Name="activitylookup" Link="Activities/activitylookup.htm" ResolvedId="7521516" />
@@ -145,7 +143,7 @@
     <Map Name="activityshortcutmenu" Link="Activities/activityshortcutmenu.htm" ResolvedId="7521518" />
     <Map Name="addevent" Link="Activities/addevent.htm" ResolvedId="2608" />
     <Map Name="assignowner" Link="Leads/assignowner.htm" ResolvedId="7521503" />
-    <Map Name="alarmlist" Link="Activities/alarmlist.htm" ResolvedId="2562" />
+    <Map Name="alarmlist" Link="Activities/alarmlist.htm" ResolvedId="5556" />
     <Map Name="oppoverview" Link="Opportunities/oppoverview.htm" ResolvedId="1718" />
     <Map Name="alarmset" Link="Activities/alarmset.htm" ResolvedId="3503" />
     <Map Name="calshortcutmenu" Link="Activities/calshortcutmenu.htm" ResolvedId="7521524" />
@@ -219,9 +217,9 @@
     <Map Name="editattach" Link="Common Tabs/editattach.htm" ResolvedId="75215113" />
     <Map Name="editname" Link="General/editname.htm" ResolvedId="75215114" />
     <Map Name="email" Link="General/email.htm" ResolvedId="75215115" />
-    <Map Name="emailattach" Link="Mail Merge/emailattach.htm" ResolvedId="75215116" />
+    <Map Name="emailattach" Link="Mail_Merge/About_E-mail_Attachments.htm" ResolvedId="75215116" />
     <Map Name="deleteactivity" Link="Activities/deleteactivity.htm" ResolvedId="1671" />
-    <Map Name="failedmerge" Link="Mail Merge/failedmerge.htm" ResolvedId="75215117" />
+    <Map Name="failedmerge" Link="Mail_Merge/Viewing_Invalid_or_Failed_Merge_Information.htm" ResolvedId="75215117" />
     <Map Name="findlookup" Link="Lookups/findlookup.htm" ResolvedId="75215118" />
     <Map Name="findsalesprocess" Link="Sales Processes/findsalesprocess.htm" ResolvedId="75215119" />
     <Map Name="gridfeatures" Link="General/gridfeatures.htm" ResolvedId="75215120" />
@@ -263,9 +261,9 @@
     <Map Name="mapaddress" Link="Common Tabs/mapaddress.htm" ResolvedId="75215157" />
     <Map Name="marketingtab" Link="Campaigns/marketingtab.htm" ResolvedId="75215158" />
     <Map Name="memobox" Link="General/memobox.htm" ResolvedId="75215159" />
-    <Map Name="mergeinfo" Link="Mail Merge/mergeinfo.htm" ResolvedId="75215160" />
+    <Map Name="mergeinfo" Link="Mail_Merge/About_the_Write_Menu.htm" ResolvedId="75215160" />
     <Map Name="moretabs" Link="Common Tabs/moretabs.htm" ResolvedId="75215161" />
-    <Map Name="mrutemplates" Link="Mail Merge/mrutemplates.htm" ResolvedId="75215162" />
+    <Map Name="mrutemplates" Link="Mail_Merge/Most_Recently_Used_Templates.htm" ResolvedId="75215162" />
     <Map Name="multicurrency" Link="Opportunities/multicurrency.htm" ResolvedId="75215163" />
     <Map Name="navshortcutmenu" Link="General/navshortcutmenu.htm" ResolvedId="75215164" />
     <Map Name="newcontactinfoboxes" Link="Contacts/newcontactinfoboxes.htm" ResolvedId="75215165" />
@@ -273,7 +271,7 @@
     <Map Name="newsalesorderinfoboxes" Link="Sales Orders/newsalesorderinfoboxes.htm" ResolvedId="75215168" />
     <Map Name="notedelete" Link="Common Tabs/notedelete.htm" ResolvedId="75215169" />
     <Map Name="notestab" Link="Common Tabs/notestab.htm" ResolvedId="75215170" />
-    <Map Name="openquerybuilder" Link="Query Builder/openquerybuilder.htm" ResolvedId="75215171" />
+    <Map Name="openquerybuilder" Link="QueryBuilder/Opening_Query_Builder.htm" ResolvedId="8001" />
     <Map Name="oppcompetitordelete" Link="Opportunities/oppcompetitordelete.htm" ResolvedId="75215172" />
     <Map Name="oppcontactdelete" Link="Opportunities/oppcontactdelete.htm" ResolvedId="75215173" />
     <Map Name="oppedit" Link="Opportunities/oppedit.htm" ResolvedId="75215174" />
@@ -288,63 +286,62 @@
     <Map Name="prefsgen" Link="Getting Started/prefsgen.htm" ResolvedId="75215183" />
     <Map Name="prefsgroup" Link="Groups/prefsgroup.htm" ResolvedId="75215184" />
     <Map Name="prefspassadmin" Link="Client/prefspassadmin.htm" ResolvedId="75215185" />
-    <Map Name="printlabels" Link="Mail Merge/printlabels.htm" ResolvedId="75215186" />
     <Map Name="productfilter" Link="Opportunities/productfilter.htm" ResolvedId="75215187" />
-    <Map Name="queryaddeditcalcfields" Link="Query Builder/queryaddeditcalcfields.htm" ResolvedId="75215188" />
-    <Map Name="queryaddglobaljoin" Link="Query Builder/queryaddglobaljoin.htm" ResolvedId="75215189" />
-    <Map Name="queryaddlocaljoin" Link="Query Builder/queryaddlocaljoin.htm" ResolvedId="75215190" />
-    <Map Name="queryargumentindex" Link="Query Builder/queryargumentindex.htm" ResolvedId="75215191" />
-    <Map Name="queryassigncondition" Link="Query Builder/queryassigncondition.htm" ResolvedId="75215192" />
-    <Map Name="queryassignlayout" Link="Query Builder/queryassignlayout.htm" ResolvedId="75215193" />
-    <Map Name="queryboolean" Link="Query Builder/queryboolean.htm" ResolvedId="75215194" />
-    <Map Name="querybuilderconditions" Link="Query Builder/querybuilderconditions.htm" ResolvedId="75215195" />
-    <Map Name="querybuilderdefaults" Link="Query Builder/querybuilderdefaults.htm" ResolvedId="75215196" />
-    <Map Name="querybuildergroupexample" Link="Query Builder/querybuildergroupexample.htm" ResolvedId="75215197" />
-    <Map Name="querybuilderlayout" Link="Query Builder/querybuilderlayout.htm" ResolvedId="75215198" />
-    <Map Name="querybuilderoverview" Link="Query Builder/querybuilderoverview.htm" ResolvedId="75215199" />
-    <Map Name="querybuilderproperties" Link="Query Builder/querybuilderproperties.htm" ResolvedId="75215200" />
-    <Map Name="querybuildersorting" Link="Query Builder/querybuildersorting.htm" ResolvedId="75215201" />
-    <Map Name="querybuildertrouble" Link="Query Builder/querybuildertrouble.htm" ResolvedId="75215202" />
-    <Map Name="querycalcfields" Link="Query Builder/querycalcfields.htm" ResolvedId="75215203" />
-    <Map Name="querycalcfieldtypes" Link="Query Builder/querycalcfieldtypes.htm" ResolvedId="75215204" />
-    <Map Name="querycalculationalias" Link="Query Builder/querycalculationalias.htm" ResolvedId="75215205" />
-    <Map Name="querycascadeoptions" Link="Query Builder/querycascadeoptions.htm" ResolvedId="75215206" />
-    <Map Name="queryconditionvalue" Link="Query Builder/queryconditionvalue.htm" ResolvedId="75215207" />
-    <Map Name="queryconnectors" Link="Query Builder/queryconnectors.htm" ResolvedId="75215208" />
-    <Map Name="querycurrencyphone" Link="Query Builder/querycurrencyphone.htm" ResolvedId="75215209" />
-    <Map Name="querydatarelationships" Link="Query Builder/querydatarelationships.htm" ResolvedId="75215210" />
-    <Map Name="querydatetimeformat" Link="Query Builder/querydatetimeformat.htm" ResolvedId="75215211" />
-    <Map Name="querydatetimeseparators" Link="Query Builder/querydatetimeseparators.htm" ResolvedId="75215212" />
-    <Map Name="querydeletecalcfields" Link="Query Builder/querydeletecalcfields.htm" ResolvedId="75215213" />
-    <Map Name="querydeleteglobaljoin" Link="Query Builder/querydeleteglobaljoin.htm" ResolvedId="75215214" />
-    <Map Name="queryeditglobaljoin" Link="Query Builder/queryeditglobaljoin.htm" ResolvedId="75215215" />
-    <Map Name="queryfieldconventions" Link="Query Builder/queryfieldconventions.htm" ResolvedId="75215216" />
-    <Map Name="queryfixedstrings" Link="Query Builder/queryfixedstrings.htm" ResolvedId="75215217" />
-    <Map Name="queryformatstring" Link="Query Builder/queryformatstring.htm" ResolvedId="75215218" />
-    <Map Name="queryformattype" Link="Query Builder/queryformattype.htm" ResolvedId="75215219" />
-    <Map Name="queryglobaljoinmanager" Link="Query Builder/queryglobaljoinmanager.htm" ResolvedId="75215220" />
-    <Map Name="querygroupconditional" Link="Query Builder/querygroupconditional.htm" ResolvedId="75215221" />
-    <Map Name="queryidfields" Link="Query Builder/queryidfields.htm" ResolvedId="75215222" />
-    <Map Name="queryinnerjoins" Link="Query Builder/queryinnerjoins.htm" ResolvedId="75215223" />
-    <Map Name="queryinteger" Link="Query Builder/queryinteger.htm" ResolvedId="75215224" />
-    <Map Name="queryjoinexample" Link="Query Builder/queryjoinexample.htm" ResolvedId="75215225" />
-    <Map Name="queryjoinguidelines" Link="Query Builder/queryjoinguidelines.htm" ResolvedId="75215226" />
-    <Map Name="queryjointables" Link="Query Builder/queryjointables.htm" ResolvedId="75215227" />
-    <Map Name="queryjointypes" Link="Query Builder/queryjointypes.htm" ResolvedId="75215228" />
-    <Map Name="queryleftjoin" Link="Query Builder/queryleftjoin.htm" ResolvedId="75215229" />
-    <Map Name="queryleftjustification" Link="Query Builder/queryleftjustification.htm" ResolvedId="75215230" />
-    <Map Name="queryliteralvalue" Link="Query Builder/queryliteralvalue.htm" ResolvedId="75215231" />
-    <Map Name="querynotcondition" Link="Query Builder/querynotcondition.htm" ResolvedId="75215232" />
-    <Map Name="queryoperators" Link="Query Builder/queryoperators.htm" ResolvedId="75215233" />
-    <Map Name="queryprecisionspecifier" Link="Query Builder/queryprecisionspecifier.htm" ResolvedId="75215234" />
-    <Map Name="queryreordercondition" Link="Query Builder/queryreordercondition.htm" ResolvedId="75215235" />
-    <Map Name="queryrightjoin" Link="Query Builder/queryrightjoin.htm" ResolvedId="75215236" />
-    <Map Name="queryselecttablefield" Link="Query Builder/queryselecttablefield.htm" ResolvedId="75215237" />
-    <Map Name="queryshowglobaljoin" Link="Query Builder/queryshowglobaljoin.htm" ResolvedId="75215238" />
-    <Map Name="querystatementoperators" Link="Query Builder/querystatementoperators.htm" ResolvedId="75215239" />
-    <Map Name="querytablerelationships" Link="Query Builder/querytablerelationships.htm" ResolvedId="75215240" />
-    <Map Name="queryvisibility" Link="Query Builder/queryvisibility.htm" ResolvedId="75215241" />
-    <Map Name="querywidthspecifier" Link="Query Builder/querywidthspecifier.htm" ResolvedId="75215242" />
+    <Map Name="queryaddeditcalcfields" Link="QueryBuilderAdv/Add_Edit_a_Calculated_Field.htm" ResolvedId="2329" />
+    <Map Name="queryaddglobaljoin" Link="QueryBuilderAdv/Add_a_Global_Join.htm" ResolvedId="75215189" />
+    <Map Name="queryaddlocaljoin" Link="QueryBuilderAdv/Add_a_Local_Join.htm" ResolvedId="75215190" />
+    <Map Name="queryargumentindex" Link="QueryBuilderAdv/Argument_index_specifier.htm" ResolvedId="7017" />
+    <Map Name="queryassigncondition" Link="QueryBuilder/Assign_Condition.htm" ResolvedId="1118" />
+    <Map Name="queryassignlayout" Link="QueryBuilderAdv/assign_query_layout.htm" ResolvedId="7521301" />
+    <Map Name="queryboolean" Link="QueryBuilder/Boolean_Field_Format_Strings.htm" ResolvedId="75215194" />
+    <Map Name="querybuilderconditions" Link="QueryBuilder/Query_Builder_Conditions.htm" ResolvedId="2556" />
+    <Map Name="querybuilderdefaults" Link="QueryBuilder/Query_Builder_Defaults.htm" ResolvedId="34" />
+    <Map Name="querybuildergroupexample" Link="QueryBuilderAdv/Query_Builder_Group_Example(Web).htm" ResolvedId="75215197" />
+    <Map Name="querybuilderlayout" Link="QueryBuilder/Query_Builder_Layout.htm" ResolvedId="2551" />
+    <Map Name="Using_SalesLogix_Query_Builder" Link="QueryBuilder/Using_Query_Builder.htm" ResolvedId="2310" />
+    <Map Name="querybuilderproperties" Link="QueryBuilder/Query_Builder_Properties.htm" ResolvedId="2554" />
+    <Map Name="querybuildersorting" Link="QueryBuilder/Query_Builder_Sorting.htm" ResolvedId="2548" />
+    <Map Name="querybuildertrouble" Link="QueryBuilderAdv/Troubleshooting__Query_Builder_is_Slow_to_Respond.htm" ResolvedId="75215202" />
+    <Map Name="querycalcfields" Link="QueryBuilderAdv/Calculated_Fields.htm" ResolvedId="2322" />
+    <Map Name="querycalcfieldtypes" Link="QueryBuilderAdv/Calculation_Type.htm" ResolvedId="75215204" />
+    <Map Name="querycalculationalias" Link="QueryBuilderAdv/Calculation_Alias.htm" ResolvedId="2326" />
+    <Map Name="querycascadeoptions" Link="QueryBuilderAdv/Cascade_Options.htm" ResolvedId="2579" />
+    <Map Name="queryconditionvalue" Link="QueryBuilderAdv/Condition_value.htm" ResolvedId="75215207" />
+    <Map Name="queryconnectors" Link="QueryBuilder/Query_Builder_Statement_Connectors.htm" ResolvedId="2314" />
+    <Map Name="querycurrencyphone" Link="QueryBuilder/Currency_Field_Format_String.htm" ResolvedId="5512" />
+    <Map Name="querydatarelationships" Link="QueryBuilderAdv/Data_Relationships.htm" ResolvedId="2576" />
+    <Map Name="querydatetimeformat" Link="QueryBuilder/Date_Time _Field_Format_Strings.htm" ResolvedId="5513" />
+    <Map Name="querydatetimeseparators" Link="QueryBuilder/Date_Time_Separators.htm" ResolvedId="5514" />
+    <Map Name="querydeletecalcfields" Link="QueryBuilderAdv/Delete_a_Calculated_Field.htm" ResolvedId="2331" />
+    <Map Name="querydeleteglobaljoin" Link="QueryBuilderAdv/Delete_a_Global_Join.htm" ResolvedId="75215214" />
+    <Map Name="queryeditglobaljoin" Link="QueryBuilderAdv/Edit_a_Global_Join.htm" ResolvedId="75215215" />
+    <Map Name="queryfieldconventions" Link="QueryBuilder/Query_Builder_Field_Type_Conventions.htm" ResolvedId="2312" />
+    <Map Name="queryfixedstrings" Link="QueryBuilder/Fixed_Field_Format_Strings.htm" ResolvedId="5510" />
+    <Map Name="queryformatstring" Link="QueryBuilder/Format_String.htm" ResolvedId="2593" />
+    <Map Name="queryformattype" Link="QueryBuilder/Format_Type.htm" ResolvedId="2592" />
+    <Map Name="queryglobaljoinmanager" Link="QueryBuilderAdv/Global_Join_Manager.htm" ResolvedId="618" />
+    <Map Name="querygroupconditional" Link="QueryBuilder/Group_Conditional_Statements.htm" ResolvedId="7013" />
+    <Map Name="queryidfields" Link="QueryBuilderAdv/ID_Fields_in_Tables.htm" ResolvedId="75215222" />
+    <Map Name="queryinnerjoins" Link="QueryBuilderAdv/Inner_joins.htm" ResolvedId="7007" />
+    <Map Name="queryinteger" Link="QueryBuilder/Integer_Field_Format_Strings.htm" ResolvedId="5511" />
+    <Map Name="queryjoinexample" Link="QueryBuilderAdv/Join_Example.htm" ResolvedId="75215225" />
+    <Map Name="queryjoinguidelines" Link="QueryBuilderAdv/Guidelines_for_Using_Joins.htm" ResolvedId="75215226" />
+    <Map Name="queryjointables" Link="QueryBuilderAdv/Joining_Tables.htm" ResolvedId="2317" />
+    <Map Name="queryjointypes" Link="QueryBuilderAdv/Join_Types.htm" ResolvedId="2577" />
+    <Map Name="queryleftjoin" Link="QueryBuilderAdv/Left_joins.htm" ResolvedId="75215229" />
+    <Map Name="queryleftjustification" Link="QueryBuilderAdv/Left_justification_indicator.htm" ResolvedId="7019" />
+    <Map Name="queryliteralvalue" Link="QueryBuilderAdv/Use_Value_as_a_Literal.htm" ResolvedId="7001" />
+    <Map Name="querynotcondition" Link="QueryBuilder/Use_Not_in_a_Conditional_Statement.htm" ResolvedId="7014" />
+    <Map Name="queryoperators" Link="QueryBuilderAdv/Operators.htm" ResolvedId="2328" />
+    <Map Name="queryprecisionspecifier" Link="QueryBuilderAdv/Precision_specifier.htm" ResolvedId="7020" />
+    <Map Name="queryreordercondition" Link="QueryBuilder/Change_the_order_of_a_Conditional_Statement.htm" ResolvedId="2559" />
+    <Map Name="queryrightjoin" Link="QueryBuilderAdv/Right_joins.htm" ResolvedId="7009" />
+    <Map Name="queryselecttablefield" Link="QueryBuilderAdv/Query_Select_Table_Field.htm" ResolvedId="75215237" />
+    <Map Name="queryshowglobaljoin" Link="QueryBuilderAdv/Show_a_Global_Join.htm" ResolvedId="7015" />
+    <Map Name="querystatementoperators" Link="QueryBuilder/Query_Builder_Statement_Operators.htm" ResolvedId="2313" />
+    <Map Name="querytablerelationships" Link="QueryBuilderAdv/Table_Relationship_Types.htm" ResolvedId="7010" />
+    <Map Name="queryvisibility" Link="QueryBuilderAdv/Visibility_Options.htm" ResolvedId="2578" />
+    <Map Name="querywidthspecifier" Link="QueryBuilder/Width_specifier.htm" ResolvedId="75215242" />
     <Map Name="recordpersist" Link="General/recordpersist.htm" ResolvedId="75215244" />
     <Map Name="recurringactivity" Link="Activities/recurringactivity.htm" ResolvedId="1778" />
     <Map Name="relateddocs" Link="Common/relateddocs.htm" ResolvedId="75215245" />
@@ -391,22 +388,7 @@
     <Map Name="slxdashfeatures" Link="General/slxdashfeatures.htm" ResolvedId="75215287" />
     <Map Name="slxgetstarted" Link="Getting Started/slxgetstarted.htm" ResolvedId="75215288" />
     <Map Name="slxglossary" Link="Getting Started/slxglossary.htm" ResolvedId="75215289" />
-    <Map Name="slxintellisync" Link="Intellisync/slxintellisync.htm" ResolvedId="75215290" />
-    <Map Name="slxintellisyncaddcontact" Link="Intellisync/slxintellisyncaddcontact.htm" ResolvedId="75215291" />
-    <Map Name="slxintellisyncadmin" Link="Intellisync/slxintellisyncadmin.htm" ResolvedId="75215292" />
-    <Map Name="slxintellisyncadvanced" Link="Intellisync/slxintellisyncadvanced.htm" ResolvedId="75215293" />
-    <Map Name="slxintellisyncconfigure" Link="Intellisync/slxintellisyncconfigure.htm" ResolvedId="75215294" />
-    <Map Name="slxintellisyncconflict" Link="Intellisync/slxintellisyncconflict.htm" ResolvedId="75215295" />
-    <Map Name="slxintellisynccontactgroup" Link="Intellisync/slxintellisynccontactgroup.htm" ResolvedId="75215296" />
-    <Map Name="slxintellisyncdataexchange" Link="Intellisync/slxintellisyncdataexchange.htm" ResolvedId="75215297" />
-    <Map Name="slxintellisyncdelete" Link="Intellisync/slxintellisyncdelete.htm" ResolvedId="75215298" />
-    <Map Name="slxintellisyncfactors" Link="Intellisync/slxintellisyncfactors.htm" ResolvedId="75215299" />
-    <Map Name="slxintellisyncfieldmap" Link="Intellisync/slxintellisyncfieldmap.htm" ResolvedId="75215300" />
-    <Map Name="slxintellisynclogfile" Link="Intellisync/slxintellisynclogfile.htm" ResolvedId="75215301" />
-    <Map Name="slxintellisyncrun" Link="Intellisync/slxintellisyncrun.htm" ResolvedId="75215302" />
-    <Map Name="slxintellisyncstart" Link="Intellisync/slxintellisyncstart.htm" ResolvedId="75215303" />
-    <Map Name="slxintellisyncurl" Link="Intellisync/slxintellisyncurl.htm" ResolvedId="75215304" />
-    <Map Name="slxintellisyncuse" Link="Intellisync/slxintellisyncuse.htm" ResolvedId="75215305" />
+    <Map Name="slxintellisyncconflict" Link="Intellisync/Resolving_Conflicts.htm" ResolvedId="75215295" />
     <Map Name="slxlanding" Link="General/slxlanding.htm" ResolvedId="75215306" />
     <Map Name="slxlogin" Link="Getting Started/slxlogin.htm" ResolvedId="75215307" />
     <Map Name="slxremoteweb" Link="Remotes/slxremoteweb.htm" ResolvedId="75215308" />
@@ -426,16 +408,16 @@
     <Map Name="taskpane" Link="General/taskpane.htm" ResolvedId="75215322" />
     <Map Name="taskpanecommontasks" Link="General/taskpanecommontasks.htm" ResolvedId="75215323" />
     <Map Name="taskpanefilters" Link="General/taskpanefilters.htm" ResolvedId="75215324" />
-    <Map Name="templatesoverview" Link="Mail Merge/templatesoverview.htm" ResolvedId="75215325" />
+    <Map Name="templatesoverview" Link="Templates/Templates_Overview.htm" ResolvedId="75215325" />
     <Map Name="ticketstab" Link="Common Tabs/ticketstab.htm" ResolvedId="75215326" />
     <Map Name="timeline" Link="Common Tabs/timeline.htm" ResolvedId="75215327" />
     <Map Name="triggerslxevents" Link="Sales Processes/triggerslxevents.htm" ResolvedId="75215328" />
-    <Map Name="usemailmerge" Link="Mail Merge/usemailmerge.htm" ResolvedId="75215329" />
+    <Map Name="usemailmerge" Link="Mail_Merge/Using_Mail_Merge.htm" ResolvedId="842" />
     <Map Name="userlookup" Link="General/userlookup.htm" ResolvedId="75215330" />
-    <Map Name="viewquerysql" Link="Query Builder/viewquerysql.htm" ResolvedId="75215331" />
-    <Map Name="writeemail" Link="Mail Merge/writeemail.htm" ResolvedId="75215332" />
-    <Map Name="writefax" Link="Mail Merge/writefax.htm" ResolvedId="75215333" />
-    <Map Name="writeletter" Link="Mail Merge/writeletter.htm" ResolvedId="75215334" />
+    <Map Name="viewquerysql" Link="QueryBuilder/View_the_SQL_Version_of_a_Query.htm" ResolvedId="2316" />
+    <Map Name="Assigning_Template_Owner" Link="Templates/Selecting_a_Sage_SalesLogix_User.htm" ResolvedId="857" />
+    <Map Name="Setting_Merge_Field_Format" Link="Templates/Setting_Merge_Field_Format.htm" ResolvedId="851" />
+    <Map Name="Templates_Overview" Link="Templates/Templates_Overview.htm" ResolvedId="841" />
     <Map Name="addremoveactivitymembers" Link="Activities/addremoveactivitymembers.htm" ResolvedId="1753" />
     <Map Name="addremoveactivityresources" Link="Activities/addremoveactivityresources.htm" ResolvedId="1774" />
     <Map Name="lookup" Link="Lookups/lookup.htm" ResolvedId="75215335" />
@@ -447,11 +429,10 @@
     <Map Name="User_Detail_View_Notes_Tab" Link="Admin_useradmin/User_Detail_View_Notes_Tab.htm" ResolvedId="1005" />
     <Map Name="User_Detail_View_Employee_Tab" Link="Admin_useradmin/User_Detail_View_Employee_Tab.htm" ResolvedId="1006" />
     <Map Name="User_Detail_View_Client_System_Tab" Link="Admin_useradmin/User_Detail_View_Client_System_Tab.htm" ResolvedId="1008" />
-    <Map Name="User_Detail_View_Calendar_Tab" Link="Admin_useradmin/User_Detail_View_Calendar_Tab.htm" ResolvedId="1010" />
     <Map Name="User_Detail_View" Link="Admin_useradmin/User_Detail_View.htm" ResolvedId="1009" />
     <Map Name="literatureaddedititem" Link="Literature/literatureaddedititem.htm" ResolvedId="1011" />
     <Map Name="literatureitemdetailview" Link="Literature/literatureitemdetailview.htm" ResolvedId="1012" />
-    <Map Name="literatureitemslistview" Link="Literature/literatureitemslistview.htm" ResolvedId="1013" />
+    <Map Name="literatureitemlistview" Link="Literature/literatureitemslistview.htm" ResolvedId="1013" />
     <Map Name="litreqmanage" Link="Literature/litreqmanage.htm" ResolvedId="1014" />
     <Map Name="competitordetailview" Link="Manage/competitordetailview.htm" ResolvedId="1015" />
     <Map Name="competitorlistadd" Link="Manage/competitorlistadd.htm" ResolvedId="1016" />
@@ -468,8 +449,8 @@
     <Map Name="Copying_Profile_Information" Link="Admin_useradmin/Copying_Profile_Information.htm" ResolvedId="1027" />
     <Map Name="Creating_a_User_Template" Link="Admin_useradmin/Creating_a_User_Template.htm" ResolvedId="1028" />
     <Map Name="Managing_Calendar_Access_Rights" Link="Admin_useradmin/Managing_Calendar_Access_Rights.htm" ResolvedId="60001" />
-    <Map Name="packageadd" Link="Manage/packageadd.htm" ResolvedId="8000" />
-    <Map Name="packagedetailview" Link="Manage/packagedetailview.htm" ResolvedId="8001" />
+    <Map Name="packagetlistadd" Link="Manage/packageadd.htm" ResolvedId="8000" />
+    <Map Name="packagedetailview" Link="Manage/packagedetailview.htm" ResolvedId="8060" />
     <Map Name="packagelistview" Link="Manage/packagelistview.htm" ResolvedId="8002" />
     <Map Name="packageproductstab" Link="Manage/packageproductstab.htm" ResolvedId="8003" />
     <Map Name="productdetailview" Link="Manage/productdetailview.htm" ResolvedId="8005" />
@@ -482,17 +463,16 @@
     <Map Name="packageedit" Link="Manage/packageedit.htm" ResolvedId="8011" />
     <Map Name="productpriceaddedit" Link="Manage/productpriceaddedit.htm" ResolvedId="8012" />
     <Map Name="desktopintegration" Link="General/desktopintegration.htm" ResolvedId="8013" />
-    <Map Name="Pick_Lists_List_View" Link="Manage/Pick_Lists_List_View.htm" ResolvedId="60002" />
+    <Map Name="picklistlistview" Link="Manage/Pick_Lists_List_View.htm" ResolvedId="8056" />
     <Map Name="Pick_List_Detail_View" Link="Manage/Pick_List_Detail_View.htm" ResolvedId="60003" />
     <Map Name="Pick_List_Information_Boxes" Link="Manage/Pick_List_Information_Boxes.htm" ResolvedId="60004" />
     <Map Name="Pick_List_Items_Tab" Link="Manage/Pick_List_Items_Tab.htm" ResolvedId="60005" />
     <Map Name="Adding_a_Pick_List" Link="Manage/Adding_a_Pick_List.htm" ResolvedId="600006" />
     <Map Name="Editing_or_Deleting_a_Pick_List" Link="Manage/Editing_or_Deleting_a_Pick_List.htm" ResolvedId="600007" />
     <Map Name="Managing_Items_in_a_Pick_List" Link="Manage/Managing_Items_in_a_Pick_List.htm" ResolvedId="600008" />
-    <Map Name="Exporting_a_Pick_List" Link="Manage/Exporting_a_Pick_List.htm" ResolvedId="600008" />
-    <Map Name="Departments_List_View" Link="Admin_TeamsDepts/Departments_List_View.htm" ResolvedId="600024" />
+    <Map Name="departmentlistview" Link="Admin_TeamsDepts/Departments_List_View.htm" ResolvedId="600024" />
     <Map Name="Department_Detail_View" Link="Admin_TeamsDepts/Department_Detail_View.htm" ResolvedId="600025" />
-    <Map Name="Introducing_Dashboards" Link="Dashboards/Introducing Dashboards.htm" ResolvedId="7001" />
+    <Map Name="Introducing_Dashboards" Link="Dashboards/Introducing Dashboards.htm" ResolvedId="700001" />
     <Map Name="Using_Widgets" Link="Dashboards/Using Widgets.htm" ResolvedId="7002" />
     <Map Name="Working_with_the_Dashboard" Link="Dashboards/Working with the Dashboard.htm" ResolvedId="7003" />
     <Map Name="Creating_a_Role" Link="Admin_security/Creating_a_Role.htm" ResolvedId="600009" />
@@ -506,11 +486,10 @@
     <Map Name="Role_Actions_Tab" Link="Admin_security/Role_Actions_Tab.htm" ResolvedId="6000017" />
     <Map Name="Role_Detail_View" Link="Admin_security/Role_Detail_View.htm" ResolvedId="6000018" />
     <Map Name="Role_Users_Tab" Link="Admin_security/Role_Users_Tab.htm" ResolvedId="600020" />
-    <Map Name="Roles_List_View" Link="Admin_security/Roles_List_View.htm" ResolvedId="600021" />
     <Map Name="Team_Detail_View" Link="Admin_TeamsDepts/Team_Detail_View.htm" ResolvedId="600023" />
     <Map Name="Team_Owner_Profile" Link="Admin_TeamsDepts/Team_Owner_Profile.htm" ResolvedId="600024" />
     <Map Name="Teams_Account_Access_Tab" Link="Admin_TeamsDepts/Teams_Account_Access_Tab.htm" ResolvedId="600025" />
-    <Map Name="Teams_List_View" Link="Admin_TeamsDepts/Teams_List_View.htm" ResolvedId="600026" />
+    <Map Name="teamlistview" Link="Admin_TeamsDepts/Teams_List_View.htm" ResolvedId="600026" />
     <Map Name="Teams_Members_Tab" Link="Admin_TeamsDepts/Teams_Members_Tab.htm" ResolvedId="600026" />
     <Map Name="User_Detail_View_Other_Calendars_Tab" Link="Admin_useradmin/User_Detail_View_Other_Calendars_Tab.htm" ResolvedId="600027" />
     <Map Name="User_Detail_View_Users_Calendar_Tab" Link="Admin_useradmin/User_Detail_View_Users_Calendar_Tab.htm" ResolvedId="600028" />
@@ -519,58 +498,294 @@
     <Map Name="User_Detail_View_User_Team_Members_Tab" Link="Admin_useradmin/User_Detail_View_User_Team_Members_Tab.htm" ResolvedId="6000022" />
     <Map Name="packageproductedit" Link="Manage/packageproductedit.htm" ResolvedId="8018" />
     <Map Name="User_Detail_View_Department_Members_Tab" Link="Admin_useradmin/User_Detail_View_Department_Members_Tab.htm" ResolvedId="600030" />
-    <Map Name="Users_List_View" Link="Admin_useradmin/Users_List_View.htm" ResolvedId="6000030" />
+    <Map Name="userlistview" Link="Admin_useradmin/Users_List_View.htm" ResolvedId="6000030" />
     <Map Name="mergerecordslistview" Link="General/mergerecordslistview.htm" ResolvedId="8019" />
     <Map Name="resourcelistmanage" Link="Resource Mgt/resourcelistmanage.htm" ResolvedId="8021" />
     <Map Name="resourcedetailview" Link="Resource Mgt/resourcedetailview.htm" ResolvedId="8022" />
     <Map Name="qualificationcategorydetailview" Link="Qualifications/qualificationcategorydetailview.htm" ResolvedId="8023" />
-    <Map Name="IC_Accounting_Tab" Link="Integration Contract/Account_Accounting_Tab.htm" ResolvedId="800001" />
-    <Map Name="IC_Invoices_Tab" Link="Integration Contract/Account_Invoices_Tab.htm" ResolvedId="800002" />
-    <Map Name="IC_Accounting_Integration_Detail_View" Link="Integration Contract/Accounting_Integration_Detail_View.htm" ResolvedId="800003" />
+    <Map Name="Account_Accounting_Tab" Link="Integration Contract/Account_Accounting_Tab.htm" ResolvedId="800001" />
+    <Map Name="IC_Account_Invoices_Tab" Link="Integration Contract/Account_Invoices_Tab.htm" ResolvedId="800035" />
+    <Map Name="IC_Accounting_Integration_Detail_View" Link="Integration Contract/Accounting_Integration_Detail_View.htm" ResolvedId="1003" />
     <Map Name="IC_Accounting_Systems_Tab" Link="Integration Contract/Accounting_Systems_Tab.htm" ResolvedId="800004" />
     <Map Name="IC_Checking_Prices" Link="Integration Contract/Checking_Prices.htm" ResolvedId="800006" />
     <Map Name="Create_Quick_Account_Contact" Link="Integration Contract/Create_Quick_Account_Contact.htm" ResolvedId="800006" />
     <Map Name="IC_Linking_Records" Link="Integration Contract/Linking_Records.htm" ResolvedId="800007" />
     <Map Name="IC_Matching_Tab" Link="Integration Contract/Matching_Tab.htm" ResolvedId="800008" />
-    <Map Name="IC_Merge_Data" Link="Integration Contract/Merge_Data.htm" ResolvedId="800009" />
-    <Map Name="IC_Select_Accounting_System" Link="Integration Contract/Select_Accounting_System.htm" ResolvedId="800010" />
-    <Map Name="IC_Select_or_Create_Account" Link="Integration Contract/Select_or_Create_Account.htm" ResolvedId="800011" />
+    <Map Name="Merge_Data" Link="Integration Contract/Merge_Data.htm" ResolvedId="800009" />
+    <Map Name="Select_Accounting_System" Link="Integration Contract/Select_Accounting_System.htm" ResolvedId="800010" />
+    <Map Name="Select_or_Create_Account" Link="Integration Contract/Select_or_Create_Account.htm" ResolvedId="800011" />
     <Map Name="IC_Setup_Accounting_Integration" Link="Integration Contract/Setup_Accounting_Integration.htm" ResolvedId="800012" />
-    <Map Name="IC_Synchronization_Tab" Link="Integration Contract/Synchronization_Tab.htm" ResolvedId="800013" />
-    <Map Name="IC_Sync_Jobs_List_View" Link="Integration Contract/Sync_Jobs_List_View.htm" ResolvedId="800014" />
-    <Map Name="IC_Sync_Results_List" Link="Integration Contract/Sync_Results_List_View.htm" ResolvedId="800015" />
-    <Map Name="IC_Account_Extended_Details_Tab" Link="Integration Contract/Account_Accounting_Details_Tab.htm" ResolvedId="800016" />
-    <Map Name="IC_Contact_Extended_Details_Tab" Link="Integration Contract/Contact_Accounting_Details_Tab.htm" ResolvedId="800017" />
-    <Map Name="IC_Account_Payment_Status_Tab" Link="Integration Contract/Account_Payment_Status_Tab.htm" ResolvedId="800018" />
-    <Map Name="IC_Search_for_Matches" Link="Integration Contract/Search_for_Matches.htm" ResolvedId="800019" />
-    <Map Name="IC_Sync_Job_Detail_View" Link="Integration Contract/Sync_Job_Detail_View.htm" ResolvedId="800021" />
-    <Map Name="IC_Log_Items_Tab" Link="Integration Contract/Log_Items_Tab.htm" ResolvedId="800020" />
-    <Map Name="IC_DedupResults" Link="Manage/DedupResults.htm" ResolvedId="800023" />
-    <Map Name="IC_DedupWizard" Link="Manage/DedupWizard.htm" ResolvedId="800024" />
+    <Map Name="Synchronization_Tab" Link="Integration Contract/Synchronization_Tab.htm" ResolvedId="800013" />
+    <Map Name="Sync_Jobs_List_View" Link="Integration Contract/Sync_Jobs_List_View.htm" ResolvedId="-2147483648" />
+    <Map Name="Sync_Results_List_View" Link="Integration Contract/Sync_Results_List_View.htm" ResolvedId="-2147483648" />
+    <Map Name="Account_Accounting_Details_Tab" Link="Integration Contract/Account_Accounting_Details_Tab.htm" ResolvedId="800016" />
+    <Map Name="Account_Payments_Tab" Link="Integration Contract/Account_Payments_Tab.htm" ResolvedId="800018" />
+    <Map Name="Search_for_Matches" Link="Integration Contract/Search_for_Matches.htm" ResolvedId="800019" />
+    <Map Name="Sync_Job_Detail_View" Link="Integration Contract/Sync_Job_Detail_View.htm" ResolvedId="800021" />
+    <Map Name="Log_Items_Tab" Link="Integration Contract/Log_Items_Tab.htm" ResolvedId="800020" />
+    <Map Name="DedupResults" Link="Manage/ProcessDuplicateDetailView.htm" ResolvedId="800023" />
+    <Map Name="DedupWizard" Link="Manage/DedupWizard.htm" ResolvedId="800032" />
     <Map Name="EditingOrDeletingASecuredAction" Link="Admin_security/EditingOrDeletingASecuredAction.htm" ResolvedId="600031" />
     <Map Name="CreatingASecuredAction" Link="Admin_security/CreatingASecuredAction.htm" ResolvedId="600032" />
     <Map Name="SecuredActionDetailView" Link="Admin_security/SecuredActionDetailView.htm" ResolvedId="600033" />
     <Map Name="SecuredActionLocationsTab" Link="Admin_security/SecuredActionLocationsTab.htm" ResolvedId="600034" />
     <Map Name="SecuredActionRolesTab" Link="Admin_security/SecuredActionRolesTab.htm" ResolvedId="600035" />
-    <Map Name="SecuredActionsListview" Link="Admin_security/SecuredActionsListView.htm" ResolvedId="600036" />
+    <Map Name="securedactionlistview" Link="Admin_security/SecuredActionsListView.htm" ResolvedId="600036" />
     <Map Name="problemmanage" Link="Standard Problem/problemmanage.htm" ResolvedId="8024" />
     <Map Name="problemaddresolution" Link="Standard Problem/resolutionmanage.htm" ResolvedId="8025" />
     <Map Name="problemdetailview" Link="Standard Problem/problemdetailview.htm" ResolvedId="8027" />
     <Map Name="probleminfoboxes" Link="Standard Problem/probleminfoboxes.htm" ResolvedId="8028" />
-    <Map Name="problemlistview" Link="Standard Problem/problemlistview.htm" ResolvedId="8029" />
+    <Map Name="ticketproblemtypelistview" Link="Standard Problem/problemlistview.htm" ResolvedId="8029" />
     <Map Name="problemoverview" Link="Standard Problem/problemoverview.htm" ResolvedId="8032" />
     <Map Name="problemresolutiontab" Link="Standard Problem/problemresolutiontab.htm" ResolvedId="8030" />
     <Map Name="qualificationitemstab" Link="Qualifications/qualificationitemstab.htm" ResolvedId="8035" />
     <Map Name="qualificationlistadd" Link="Qualifications/qualificationlistadd.htm" ResolvedId="8036" />
-    <Map Name="qualificationlistview" Link="Qualifications/qualificationlistview.htm" ResolvedId="8037" />
+    <Map Name="qualificationcategorylistview" Link="Qualifications/qualificationlistview.htm" ResolvedId="8037" />
     <Map Name="qualificationcategorymanage" Link="Qualifications/qualificationcategorymanage.htm" ResolvedId="8040" />
     <Map Name="resourceinfoboxes" Link="Resource Mgt/resourceinfoboxes.htm" ResolvedId="8039" />
-    <Map Name="resourcelistview" Link="Resource Mgt/resourcelistview.htm" ResolvedId="8041" />
-    <Map Name="IC_Match_Options" Link="Manage/Match_Options.htm" ResolvedId="800024" />
+    <Map Name="resourcelistlistview" Link="Resource Mgt/resourcelistview.htm" ResolvedId="8041" />
+    <Map Name="Match_Options" Link="Manage/Match_Options.htm" ResolvedId="800024" />
     <Map Name="User_Detail_View_Roles_Tab" Link="Admin_useradmin/User_Detail_View_Roles_Tab.htm" ResolvedId="600037" />
     <Map Name="resolutionmanage" Link="Standard Problem/resolutionmanage.htm" ResolvedId="8042" />
     <Map Name="resolutiondetailview" Link="Standard Problem/resolutiondetailview.htm" ResolvedId="8043" />
-    <Map Name="resolutionlistview" Link="Standard Problem/resolutionlistview.htm" ResolvedId="8044" />
+    <Map Name="ticketsolutiontypelistview" Link="Standard Problem/resolutionlistview.htm" ResolvedId="8044" />
     <Map Name="resolutionproblemtab" Link="Standard Problem/resolutionproblemtab.htm" ResolvedId="8045" />
-    <Map Name="securitymanagerlistview" Link="Field Form Manager/securitymanagerlistview.htm" ResolvedId="8046" />
+    <Map Name="Account_Accounting_Sales_Orders" Link="Integration Contract/Account_Accounting_Sales_Orders.htm" ResolvedId="800025" />
+    <Map Name="Invoice_Detail_View" Link="Integration Contract/Invoice_Detail_View.htm" ResolvedId="800026" />
+    <Map Name="Merge_Contacts" Link="Integration Contract/Merge_Contacts.htm" ResolvedId="800028" />
+    <Map Name="PaymentDetailView" Link="Integration Contract/PaymentDetailView.htm" ResolvedId="800029" />
+    <Map Name="Sales_Order_Detail_View" Link="Integration Contract/Sales_Order_Detail_View.htm" ResolvedId="800030" />
+    <Map Name="Select_Role_Dialog" Link="Admin_security/Select_Role_Dialog.htm" ResolvedId="6000031" />
+    <Map Name="SyncResultsDetailView" Link="Integration Contract/SyncResultsDetailView.htm" ResolvedId="800031" />
+    <Map Name="ICUpdatePricing" Link="Integration Contract/Checking_Prices.htm" ResolvedId="800006" />
+    <Map Name="ICEditSalesOrderItem" Link="Sales Orders/salesorderaddeditcustomprod.htm" ResolvedId="1029" />
+    <Map Name="ICAccounting" Link="Integration Contract/Account_Accounting_Tab.htm" ResolvedId="800001" />
+    <Map Name="ICAccountExtendedDetails" Link="Integration Contract/Account_Accounting_Details_Tab.htm" ResolvedId="800016" />
+    <Map Name="AccountingSystems" Link="Integration Contract/Accounting_Systems_Tab.htm" ResolvedId="800004" />
+    <Map Name="Accounting_Integration_Detail_View" Link="Integration Contract/Accounting_Integration_Detail_View.htm" ResolvedId="800003" />
+    <Map Name="Accounting_Systems_Tab" Link="Integration Contract/Accounting_Systems_Tab.htm" ResolvedId="800004" />
+    <Map Name="Departments_List_View" Link="Admin_TeamsDepts/Departments_List_View.htm" ResolvedId="600024" />
+    <Map Name="EditSalesPotential" Link="Opportunities/EditSalesPotential.htm" ResolvedId="800034" />
+    <Map Name="Linking_Records" Link="Integration Contract/Linking_Records.htm" ResolvedId="800007" />
+    <Map Name="Matching_Tab" Link="Integration Contract/Matching_Tab.htm" ResolvedId="800008" />
+    <Map Name="Setup_Accounting_Integration" Link="Integration Contract/Setup_Accounting_Integration.htm" ResolvedId="800012" />
+    <Map Name="Account_Invoices_Tab" Link="Integration Contract/Account_Invoices_Tab.htm" ResolvedId="800035" />
+    <Map Name="DeDupJobDetail" Link="Manage/DedupResults.htm" ResolvedId="800036" />
+    <Map Name="DeDupResultDetail" Link="Manage/ProcessDuplicateDetailView.htm" ResolvedId="800037" />
+    <Map Name="DeDupResult" Link="Manage/ProcessDuplicateDetailView.htm" ResolvedId="800038" />
+    <Map Name="DeDupResultHistory" Link="Integration Contract/Merge_Data.htm" ResolvedId="800039" />
+    <Map Name="ActivityDetails" Link="Activities/activitydetailview.htm" ResolvedId="1630" />
+    <Map Name="AddEditTicketActivity" Link="Tickets/csrticketactivitiestab.htm" ResolvedId="7521577" />
+    <Map Name="AccountServiceInfo" Link="Tickets/csraccserviceinfo.htm" ResolvedId="7047" />
+    <Map Name="InsertTicket" Link="Tickets/csrticket.htm" ResolvedId="1122" />
+    <Map Name="TicketActivities" Link="Tickets/csrticketactivitiestab.htm" ResolvedId="7521577" />
+    <Map Name="TicketDefects" Link="Tickets/csrticketdefect.htm" ResolvedId="7521581" />
+    <Map Name="TicketDetails" Link="Tickets/csrticketinfo.htm" ResolvedId="1121" />
+    <Map Name="TicketExtendedDetails" Link="Tickets/csrtickdetailstab.htm" ResolvedId="7521576" />
+    <Map Name="TicketHistory" Link="Tickets/csrtickjournaltab.htm" ResolvedId="7521589" />
+    <Map Name="TicketReturns" Link="Tickets/csrticketrma.htm" ResolvedId="7521588" />
+    <Map Name="TargetResponseForm" Link="Common Tabs/campaignresponseedit.htm" ResolvedId="6322" />
+    <Map Name="OpportunityProductForm" Link="Opportunities/addoppproduct.htm" ResolvedId="2709" />
+    <Map Name="OpportunityContactForm" Link="Opportunities/oppeditcontact.htm" ResolvedId="2701" />
+    <Map Name="InsertOpportunity" Link="Opportunities/opportunityadd.htm" ResolvedId="2700" />
+    <Map Name="OpportunityClosedLost" Link="Opportunities/oppclose.htm" ResolvedId="2723" />
+    <Map Name="OpportunityClosedWon" Link="Opportunities/oppclose.htm" ResolvedId="2723" />
+    <Map Name="OpportunityContacts" Link="Opportunities/oppcontactstab.htm" ResolvedId="2363" />
+    <Map Name="OpportunityDetails" Link="Opportunities/oppdetailview.htm" ResolvedId="1725" />
+    <Map Name="OpportunityProducts" Link="Opportunities/addproduct.htm" ResolvedId="2703" />
+    <Map Name="ContactAddresses" Link="Common Tabs/addressestab.htm" ResolvedId="7521554" />
+    <Map Name="ContactDetails" Link="Contacts/contactdetailsview.htm" ResolvedId="1706" />
+    <Map Name="ContactExtendedDetails" Link="Contacts/contactdetailstab.htm" ResolvedId="7521558" />
+    <Map Name="ContactLiteratureRequests" Link="Literature/litrequesttab.htm" ResolvedId="75215155" />
+    <Map Name="ContactMarketing" Link="Campaigns/marketingtab.htm" ResolvedId="75215158" />
+    <Map Name="ContactOpportunities" Link="Contacts/contactopportunitiestab.htm" ResolvedId="7521561" />
+    <Map Name="ContactProcesses" Link="Contacts/contactprocessestab.htm" ResolvedId="2247" />
+    <Map Name="WebAccess" Link="Contacts/csrconwebaccesstab.htm" ResolvedId="7521571" />
+    <Map Name="AccountAddresses" Link="Common Tabs/addressestab.htm" ResolvedId="7521554" />
+    <Map Name="AccountContacts" Link="Accounts/accountcontactstab.htm" ResolvedId="7521501" />
+    <Map Name="AccountDetails" Link="Accounts/accountdetailview.htm" ResolvedId="1665" />
+    <Map Name="AccountExtendedDetails" Link="Accounts/accountdetailstab.htm" ResolvedId="7521504" />
+    <Map Name="AccountMarketing" Link="Campaigns/marketingtab.htm" ResolvedId="75215158" />
+    <Map Name="AccountOpportunities" Link="Accounts/accountopportunitiestab.htm" ResolvedId="2367" />
+    <Map Name="AccountTickets" Link="Common Tabs/ticketstab.htm" ResolvedId="75215326" />
+    <Map Name="InsertAccount" Link="Accounts/addaccount.htm" ResolvedId="7521511" />
+    <Map Name="InsertAccountEx" Link="Contacts/contactadd1.htm" ResolvedId="1494" />
+    <Map Name="OpportunityCampaign" Link="Opportunities/oppmarketingtab.htm" ResolvedId="75215176" />
+    <Map Name="MatchingRecords" Link="Contacts/contactpotentialmatch.htm" ResolvedId="2711" />
+    <Map Name="AddNote" Link="Common Tabs/noteadd.htm" ResolvedId="2382" />
+    <Map Name="HistoryDetails" Link="Common Tabs/histedit.htm" ResolvedId="75215125" />
+    <Map Name="CompleteActivity" Link="Activities/completeactivity.htm" ResolvedId="1636" />
+    <Map Name="AddEditTargetResponse" Link="Common Tabs/campaignresponseedit.htm" ResolvedId="6322" />
+    <Map Name="EditOpportunityCompetitor" Link="Opportunities/oppeditcompetitor.htm" ResolvedId="2707" />
+    <Map Name="TicketComments" Link="Tickets/csrtickcommentstab.htm" ResolvedId="7521575" />
+    <Map Name="OpportunityCompetitors" Link="Opportunities/oppcompetitorstab.htm" ResolvedId="1010020000" />
+    <Map Name="ContactLeadSources" Link="Contacts/contactleadsourcestab.htm" ResolvedId="2365" />
+    <Map Name="EventDetails" Link="Activities/addevent.htm" ResolvedId="2608" />
+    <Map Name="RescheduleActivity" Link="Activities/rescheduleactivity.htm" ResolvedId="7030" />
+    <Map Name="AddEditContactLeadSource" Link="Contacts/leadsourceinfo.htm" ResolvedId="75215154" />
+    <Map Name="EditOpportunityContact" Link="Opportunities/oppeditcontact.htm" ResolvedId="2701" />
+    <Map Name="EditOpportunityProduct" Link="Opportunities/addoppproduct.htm" ResolvedId="2709" />
+    <Map Name="SelectAccountAddress" Link="Contacts/addresslist.htm" ResolvedId="2712" />
+    <Map Name="AddLeadNote" Link="Common Tabs/noteadd.htm" ResolvedId="2382" />
+    <Map Name="CampaignBudgetResults" Link="Campaigns/campaignbudgettab.htm" ResolvedId="75215010" />
+    <Map Name="CampaignDetails" Link="Campaigns/campaigndetailview.htm" ResolvedId="6327" />
+    <Map Name="CampaignOpportunities" Link="Campaigns/campaignopptab.htm" ResolvedId="75215022" />
+    <Map Name="CampaignProducts" Link="Campaigns/campaignproductstab.htm" ResolvedId="75215023" />
+    <Map Name="InsertCampaign" Link="Campaigns/campaignaddnew.htm" ResolvedId="6312" />
+    <Map Name="InsertLead" Link="Leads/leadadd.htm" ResolvedId="6309" />
+    <Map Name="LeadDetails" Link="Leads/leaddetailview.htm" ResolvedId="6329" />
+    <Map Name="LeadExtendedDetails" Link="Leads/leaddetailstab.htm" ResolvedId="8061" />
+    <Map Name="LeadHistoryDetails" Link="Common Tabs/histedit.htm" ResolvedId="75215125" />
+    <Map Name="AccountAssets" Link="Accounts/accountassetstab.htm" ResolvedId="1000" />
+    <Map Name="AccountContracts" Link="Accounts/accountcontractstab.htm" ResolvedId="7521502" />
+    <Map Name="AccountReturns" Link="Tickets/csrticketrma.htm" ResolvedId="7521588" />
+    <Map Name="AddContactOrLeadNote" Link="Common Tabs/noteadd.htm" ResolvedId="2382" />
+    <Map Name="AddEditAccountProduct" Link="Assets/assetadd.htm" ResolvedId="29254" />
+    <Map Name="AddEditDefectTask" Link="Defects/defecttaskinfoboxes.htm" ResolvedId="7040" />
+    <Map Name="AddEditReturnShippedProduct" Link="Returns/returnshippedproductinfo.htm" ResolvedId="7042" />
+    <Map Name="AddEditTicketActivityItem" Link="Tickets/csrticketactivitypartedit.htm" ResolvedId="7521579" />
+    <Map Name="ContractComments" Link="Defects/defectcommentstab.htm" ResolvedId="7521597" />
+    <Map Name="ContractCoveredAssets" Link="Contracts/contractcoveredassetstab.htm" ResolvedId="7521563" />
+    <Map Name="ContractDetail" Link="Contracts/contractdetailview.htm" ResolvedId="7033" />
+    <Map Name="ContractReferenceDuplicate" Link="Contracts/contractrefnumberdupe.htm" ResolvedId="1133" />
+    <Map Name="ContractTickets" Link="Contracts/contractticketsab.htm" ResolvedId="7521569" />
+    <Map Name="DefectComments" Link="Defects/defectcommentstab.htm" ResolvedId="7521597" />
+    <Map Name="DefectDetails" Link="Defects/defectdetailview.htm" ResolvedId="7035" />
+    <Map Name="DefectExtendedDetails" Link="Defects/defectdetailstab.htm" ResolvedId="75215100" />
+    <Map Name="DefectHistory" Link="Defects/defectaudittrailtab.htm" ResolvedId="7521595" />
+    <Map Name="DefectProducts" Link="Defects/defectproductstab.htm" ResolvedId="75215104" />
+    <Map Name="DefectReturns" Link="Defects/defectreturnstab.htm" ResolvedId="75215106" />
+    <Map Name="DefectTasks" Link="Defects/defecttaskstab.htm" ResolvedId="75215108" />
+    <Map Name="DefectTickets" Link="Defects/defectticketstab.htm" ResolvedId="75215109" />
+    <Map Name="InsertContract" Link="Contracts/contractadd.htm" ResolvedId="7032" />
+    <Map Name="InsertDefect" Link="Defects/defectadd.htm" ResolvedId="7039" />
+    <Map Name="InsertReturn" Link="Returns/returnadd.htm" ResolvedId="7031" />
+    <Map Name="ReturnComments" Link="Returns/returncommentstab.htm" ResolvedId="75215256" />
+    <Map Name="ReturnDefects" Link="Returns/returndefectstab.htm" ResolvedId="75215257" />
+    <Map Name="ReturnExtendedDetails" Link="Returns/returndetailstab.htm" ResolvedId="75215259" />
+    <Map Name="ReturnShipToDetail" Link="Returns/returnshiptotab.htm" ResolvedId="75215263" />
+    <Map Name="SalesOrder" Link="Sales Orders/salesorderstab.htm" ResolvedId="75215277" />
+    <Map Name="TicketActivityParts" Link="Tickets/csrticketactivityparts.htm" ResolvedId="7521580" />
+    <Map Name="TicketAssets" Link="Tickets/csrticketrelatedassetstab.htm" ResolvedId="7521587" />
+    <Map Name="SalesOrders" Link="Sales Orders/salesorderstab.htm" ResolvedId="75215277" />
+    <Map Name="AccountTimeline" Link="Common Tabs/timeline.htm" ResolvedId="75215327" />
+    <Map Name="TicketActivityItems" Link="Tickets/csrticketactivitiestab.htm" ResolvedId="7521577" />
+    <Map Name="TicketTimeline" Link="Common Tabs/timeline.htm" ResolvedId="75215327" />
+    <Map Name="salesordereditproduct" Link="Sales Orders/salesordereditproduct.htm" ResolvedId="1001" />
+    <Map Name="BillToShipTo" Link="Sales Orders/salesorderbillshiptab.htm" ResolvedId="75215265" />
+    <Map Name="EditSalesOrderDetail" Link="Sales Orders/salesorderseditsnapshot.htm" ResolvedId="75215275" />
+    <Map Name="InsertSalesOrder" Link="Sales Orders/salesorderadd.htm" ResolvedId="2727" />
+    <Map Name="SalesOrderDetails" Link="Sales Orders/salesorderdetailview.htm" ResolvedId="75215269" />
+    <Map Name="SalesOrderItems" Link="Sales Orders/salesorderproductstab.htm" ResolvedId="75215274" />
+    <Map Name="AccountSalesOrders" Link="Sales Orders/salesorderstab.htm" ResolvedId="75215277" />
+    <Map Name="CompetitorDetails" Link="Manage/competitordetailview.htm" ResolvedId="1015" />
+    <Map Name="InsertLiteratureItem" Link="Literature/literatureaddedititem.htm" ResolvedId="1011" />
+    <Map Name="LeadSourceDetails" Link="Manage/leadsourcedetailview.htm" ResolvedId="1018" />
+    <Map Name="literatureitemslistview" Link="Literature/literatureitemslistview.htm" ResolvedId="1013" />
+    <Map Name="LiteratureItemDetails" Link="Literature/literatureitemdetailview.htm" ResolvedId="1012" />
+    <Map Name="UserCalendar" Link="Admin_useradmin/User_Detail_View_Users_Calendar_Tab.htm" ResolvedId="1010" />
+    <Map Name="UserChangePassword" Link="Client/prefspassadmin.htm" ResolvedId="75215185" />
+    <Map Name="UserClientSystem" Link="Admin_useradmin/User_Detail_View_Client_System_Tab.htm" ResolvedId="1008" />
+    <Map Name="UserDetails" Link="Admin_useradmin/User_Detail_View.htm" ResolvedId="1009" />
+    <Map Name="UserEmployee" Link="Admin_useradmin/User_Detail_View_Employee_Tab.htm" ResolvedId="1006" />
+    <Map Name="UserNotes" Link="Admin_useradmin/User_Detail_View_Notes_Tab.htm" ResolvedId="1005" />
+    <Map Name="UserSecurity" Link="Admin_useradmin/User_Detail_View_Security_Tab.htm" ResolvedId="1004" />
+    <Map Name="UserServiceAndSupport" Link="Admin_useradmin/User_Detail_View_Service_Support_Tab.htm" ResolvedId="1002" />
+    <Map Name="UserTeams" Link="Admin_useradmin/User_Detail_View_Team_Membership_Tab.htm" ResolvedId="6000020" />
+    <Map Name="UserUserTeams" Link="Admin_useradmin/User_Detail_View_User_Team_Members_Tab.htm" ResolvedId="6000021" />
+    <Map Name="OthersAccessToUserCal" Link="Admin_useradmin/User_Detail_View_Users_Calendar_Tab.htm" ResolvedId="600028" />
+    <Map Name="UserAccessToOthersCal" Link="Admin_useradmin/User_Detail_View_Other_Calendars_Tab.htm" ResolvedId="600027" />
+    <Map Name="AddEditProductPrice" Link="Manage/productpriceaddedit.htm" ResolvedId="8012" />
+    <Map Name="ProductDetails" Link="Manage/productdetailview.htm" ResolvedId="8005" />
+    <Map Name="ProductPackages" Link="Manage/productpackagestab.htm" ResolvedId="8007" />
+    <Map Name="ProductPrices" Link="Manage/productpricingtab.htm" ResolvedId="8010" />
+    <Map Name="AddEditPackage" Link="Manage/packageproductedit.htm" ResolvedId="8018" />
+    <Map Name="PackageDetails" Link="Manage/packagedetailview.htm" ResolvedId="8059" />
+    <Map Name="Products" Link="Manage/packageproductstab.htm" ResolvedId="8003" />
+    <Map Name="EditCalPermissions" Link="Admin_useradmin/Managing_Calendar_Access_Rights.htm" ResolvedId="60001" />
+    <Map Name="InsertTeam" Link="Admin_TeamsDepts/Creating_a_Team.htm" ResolvedId="6000011" />
+    <Map Name="TeamDetails" Link="Admin_TeamsDepts/Team_Detail_View.htm" ResolvedId="600023" />
+    <Map Name="EditSecurityProfile" Link="Admin_TeamsDepts/Editing_a_Security_Profile_Within_a_Team.htm" ResolvedId="6000015" />
+    <Map Name="DepartmentDetails" Link="Admin_TeamsDepts/Department_Detail_View.htm" ResolvedId="600025" />
+    <Map Name="InsertDepartment" Link="Admin_TeamsDepts/Creating_a_Department.htm" ResolvedId="6000010" />
+    <Map Name="AddToTeam" Link="Admin_TeamsDepts/Adding_Team_Members.htm" ResolvedId="6000019" />
+    <Map Name="TeamMembership" Link="Admin_useradmin/User_Detail_View_Team_Membership_Tab.htm" ResolvedId="6000020" />
+    <Map Name="UserTeamMembers" Link="Admin_useradmin/User_Detail_View_User_Team_Members_Tab.htm" ResolvedId="6000022" />
+    <Map Name="TeamMembers" Link="Admin_TeamsDepts/Teams_Members_Tab.htm" ResolvedId="600026" />
+    <Map Name="RoleActions" Link="Admin_security/Role_Actions_Tab.htm" ResolvedId="6000017" />
+    <Map Name="RoleDetails" Link="Admin_security/Role_Detail_View.htm" ResolvedId="6000018" />
+    <Map Name="RoleUsers" Link="Admin_security/Role_Users_Tab.htm" ResolvedId="600020" />
+    <Map Name="ReplaceOwner" Link="Admin_TeamsDepts/Removing_or_Replacing_Team_Members.htm" ResolvedId="6000016" />
+    <Map Name="DepartmentMembers" Link="Admin_TeamsDepts/Department_Members_Tab.htm" ResolvedId="6000013" />
+    <Map Name="DepartmentTeams" Link="Admin_TeamsDepts/Department_Teams_Tab.htm" ResolvedId="600014" />
+    <Map Name="AccountAccess" Link="Admin_TeamsDepts/Teams_Account_Access_Tab.htm" ResolvedId="600025" />
+    <Map Name="UserTeamMembership" Link="Admin_useradmin/User_Detail_View_User_Team_Membership_Tab.htm" ResolvedId="6000021" />
+    <Map Name="DepartmentMembership" Link="Admin_useradmin/User_Detail_View_Department_Members_Tab.htm" ResolvedId="600030" />
+    <Map Name="AddEditQualification" Link="Qualifications/qualificationcategorymanage.htm" ResolvedId="8040" />
+    <Map Name="QualificationCategoryDetail" Link="Qualifications/qualificationcategorydetailview.htm" ResolvedId="8023" />
+    <Map Name="Qualifications" Link="Qualifications/qualificationitemstab.htm" ResolvedId="8035" />
+    <Map Name="ResourceDetail" Link="Resource Mgt/resourcedetailview.htm" ResolvedId="8022" />
+    <Map Name="SecuredActionDetail" Link="Admin_security/SecuredActionDetailView.htm" ResolvedId="600033" />
+    <Map Name="SecuredActionRoles" Link="Admin_security/SecuredActionRolesTab.htm" ResolvedId="600035" />
+    <Map Name="SelectRole" Link="Admin_security/Select_Role_Dialog.htm" ResolvedId="6000031" />
+    <Map Name="UserRoles" Link="Admin_useradmin/User_Detail_View_Roles_Tab.htm" ResolvedId="600037" />
+    <Map Name="StandardProblemDetail" Link="Standard Problem/problemdetailview.htm" ResolvedId="8027" />
+    <Map Name="StandardResolutionAddEdit" Link="Standard Problem/resolutionmanage.htm" ResolvedId="8042" />
+    <Map Name="StandardSolutionList" Link="Standard Problem/problemresolutiontab.htm" ResolvedId="8030" />
+    <Map Name="StandardProblems" Link="Standard Problem/resolutionproblemtab.htm" ResolvedId="8045" />
+    <Map Name="StandardResolutionDetail" Link="Standard Problem/resolutiondetailview.htm" ResolvedId="8043" />
+    <Map Name="StandardResolutions" Link="Standard Problem/problemresolutiontab.htm" ResolvedId="8030" />
+    <Map Name="StandardSolutionAddEdit" Link="Standard Problem/resolutionmanage.htm" ResolvedId="8042" />
+    <Map Name="AddEditAccountingSystem" Link="Integration Contract/Setup_Accounting_Integration.htm" ResolvedId="800012" />
+    <Map Name="ICEditSalesOrderItems" Link="Sales Orders/salesorderaddeditcustomprod.htm" ResolvedId="1029" />
+    <Map Name="LogItems" Link="Integration Contract/Log_Items_Tab.htm" ResolvedId="800020" />
+    <Map Name="QuickInsertAccountContact" Link="Integration Contract/Create_Quick_Account_Contact.htm" ResolvedId="800006" />
+    <Map Name="SalesOrderProducts" Link="Sales Orders/salesorderproductstab.htm" ResolvedId="75215274" />
+    <Map Name="SlxEndPointDetails" Link="Integration Contract/Accounting_Integration_Detail_View.htm" ResolvedId="800003" />
+    <Map Name="Synchronization" Link="Integration Contract/Synchronization_Tab.htm" ResolvedId="800013" />
+    <Map Name="SyncJobDetails" Link="Integration Contract/Sync_Job_Detail_View.htm" ResolvedId="800021" />
+    <Map Name="SyncResultDetail" Link="Integration Contract/SyncResultsDetailView.htm" ResolvedId="800031" />
+    <Map Name="dedupresultlistview" Link="Manage/ProcessDuplicatesListView.htm" ResolvedId="1030" />
+    <Map Name="accountdelete" Link="Accounts/accountdelete.htm" ResolvedId="1408" />
+    <Map Name="rolelistview" Link="Admin_security/Roles_List_View.htm" ResolvedId="600021" />
+    <Map Name="Role_List_View" Link="Admin_security/Roles_List_View.htm" ResolvedId="600021" />
+    <Map Name="Teams_List_View" Link="Admin_TeamsDepts/Teams_List_View.htm" ResolvedId="600026" />
+    <Map Name="ICEditSalesItem" Link="Sales Orders/salesorderaddeditcustomprod.htm" ResolvedId="1029" />
+    <Map Name="Editing_Mail_Merge_Output_Prior_to_Sending" Link="Mail_Merge/Editing_Mail_Merge_Output_Prior_to_Sending.htm" ResolvedId="853" />
+    <Map Name="Selecting_a_Template" Link="Templates/Managing_and_Selecting_Templates.htm" ResolvedId="839" />
+    <Map Name="Printing_Address_Labels_or_Envelopes" Link="Mail_Merge/Printing_Address_Labels_or_Envelopes.htm" ResolvedId="847" />
+    <Map Name="Selecting_a_Contact" Link="Mail_Merge/Selecting_a_Contact.htm" ResolvedId="831" />
+    <Map Name="Selecting_Type_of_Address" Link="Mail_Merge/Selecting_Type_of_Address.htm" ResolvedId="840" />
+    <Map Name="Setting_Followup_Activity_Date_and_Time" Link="Mail_Merge/Selecting_Type_of_Address.htm" ResolvedId="861" />
+    <Map Name="Selecting_History_Options" Link="Mail_Merge/Setting_History_Options_for_Mail_Merge.htm" ResolvedId="856" />
+    <Map Name="Using_Mail_Merge" Link="Mail_Merge/Using_Mail_Merge.htm" ResolvedId="842" />
+    <Map Name="Viewing_Mail_Merge_Count_Information" Link="Mail_Merge/Viewing_Mail_Merge_Count_Information.htm" ResolvedId="852" />
+    <Map Name="Writing_a_Letter" Link="Mail_Merge/Writing_a_Letter.htm" ResolvedId="844" />
+    <Map Name="Writing_and_Sending_a_Fax_Message" Link="Mail_Merge/Writing_and_Sending_a_Fax_Message.htm" ResolvedId="845" />
+    <Map Name="Writing_and_Sending_an_Email_Message" Link="Mail_Merge/Writing_and_Sending_an_E-mail_Message.htm" ResolvedId="846" />
+    <Map Name="Inserting_a_File_to_a_Template" Link="Templates/Attaching_or_Removing_Template_Files.htm" ResolvedId="837" />
+    <Map Name="Copying_a_Template" Link="Templates/Copying_a_Template.htm" ResolvedId="832" />
+    <Map Name="Creating_a_New_Template" Link="Templates/Creating_a_New_Template.htm" ResolvedId="833" />
+    <Map Name="Customizing_Insert_SLX_Field_Menu" Link="Templates/Customizing_Insert_SLX_Field_Menu.htm" ResolvedId="834" />
+    <Map Name="Deleting_a_Template" Link="Templates/Deleting_a_Template.htm" ResolvedId="835" />
+    <Map Name="Email_Options" Link="Templates/Email_Options.htm" ResolvedId="903" />
+    <Map Name="Editing_a_Template" Link="Templates/Editing_a_Template.htm" ResolvedId="836" />
+    <Map Name="Editing_Columns" Link="Templates/Editing_Columns.htm" ResolvedId="901" />
+    <Map Name="Editing_Merge_Fields" Link="Templates/Editing_Merge_Fields.htm" ResolvedId="900" />
+    <Map Name="Editing_SQL" Link="Templates/Editing_SQL.htm" ResolvedId="902" />
+    <Map Name="Syncjoblistview" Link="Integration Contract/Sync_Jobs_List_View.htm" ResolvedId="800014" />
+    <Map Name="syncresultlistview" Link="Integration Contract/Sync_Results_List_View.htm" ResolvedId="800015" />
+    <Map Name="ResolvingDuplicates" Link="Manage/ResolvingDuplicates.htm" ResolvedId="800041" />
+    <Map Name="dedupjoblistview" Link="Manage/DedupJobListView.htm" ResolvedId="800042" />
+    <Map Name="salesorderaddeditcustomprod" Link="Sales Orders/salesorderaddeditcustomprod.htm" ResolvedId="800043" />
+    <Map Name="Mail_Merge_Overview" Link="Mail_Merge/About_the_Write_Menu.htm" ResolvedId="838" />
+    <Map Name="Setting_Merge_Options" Link="Mail_Merge/Setting_Merge_Options_for_Mail_Merge.htm" ResolvedId="855" />
+    <Map Name="Using_SalesLogix_Merge_Fields" Link="Templates/Using_Sage_SalesLogix_Merge_Fields.htm" ResolvedId="849" />
+    <Map Name="Using_the_Email_Editor" Link="Templates/Using_the_E-mail_Editor.htm" ResolvedId="864" />
+    <Map Name="Using_the_Fax_Editor" Link="Templates/Using_the_Fax_Editor.htm" ResolvedId="863" />
+    <Map Name="Using_the_Letter_Editor" Link="Templates/Using_the_Letter_Editor.htm" ResolvedId="865" />
+    <Map Name="Using_the_Template_Editor" Link="Templates/Using_the_Template_Editor.htm" ResolvedId="843" />
+    <Map Name="Attaching_a_Document_to_each_Contact_Critical_Message" Link="Mail_Merge/Attaching_a_Document_to_each_Contact_Critical_Message.htm" ResolvedId="862" />
+    <Map Name="emailselectcontact" Link="Outlook/emailselectcontact.htm" ResolvedId="8063" />
+    <Map Name="noteshistory" Link="Common Tabs/noteshistorytab.htm" ResolvedId="1031" />
 </CatapultAliasFile>

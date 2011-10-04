@@ -102,14 +102,9 @@ Sage.SalesLogix.Dashboard.prototype.updateUserOptions = function() {
     if (this._options.dirty) {
         this._options.dirty = false;
         $.ajax({
-            type: "POST",
+            type: "PUT",
             contentType: "application/json; charset=utf-8",
-            url: "DashboardService.asmx/UpdateUserOption",
-            data: Ext.util.JSON.encode({
-                name: "Options",
-                category: "Dashboard",
-                data: Ext.util.JSON.encode(this._options)
-            }),
+            url: String.format("slxdata.ashx/slx/crm/-/dashboard/useroption?name=Options&category=Dashboard&data={0}", Ext.util.JSON.encode(this._options)),
             dataType: "json",
             error: function(request, status, error) {
             },
@@ -270,25 +265,25 @@ function promoteGroupToDashboard() {
                     var cgi = getCurrentGroupInfo();
                     var page = Ext.getCmp('PagesGrid').getSelectionModel().getSelected();
                     if (page) {
-                        var widgetstring = String.format(template, cgi.Name, "Sage.Entity.Interfaces.I" + cgi.Family, cgi.Name, cgi.Id, 10,
-                        $('<div/>').text(cgi.Family).html(), $('<div/>').text(cgi.Name).html(), 10, cgi.Entity);
+                        var widgetstring = String.format(template, cgi.DisplayName, "Sage.Entity.Interfaces.I" + cgi.Family, cgi.Name, cgi.Id, 10,
+                            $('<div/>').text(cgi.Family).html(), $('<div/>').text(cgi.Name).html(), 10, cgi.Entity);
                         $.ajax({
                             type: "POST",
-                            url: "DashboardService.asmx/AddWidgetToPage",
-                            data: { name: page.data.Name,
-                                family: page.data.Family,
-                                widget: widgetstring
-                            },
+                            url: String.format("slxdata.ashx/slx/crm/-/dashboard/page?action=addwidget&name={0}&family={1}",
+                                page.data.Name,
+                                page.data.Family
+                            ),
+                            data: widgetstring,
+                            processData: false,
                             error: function (request, status, error) {
-                                var res = data.lastChild.textContent || data.lastChild.text;
-                                if (res != "Success") {
-                                    Ext.Msg.alert(MasterPageLinks.Warning, res);
-                                    return;
-                                }
                                 Ext.Msg.alert(MasterPageLinks.Warning, request.responseText);
                             },
                             success: function (data, status) {
-                                Sage.SalesLogix.userNotify(String.format(MasterPageLinks.PromotionNotification, page.data.Name, cgi.Name));
+                            if (data != "Success") {
+                                Ext.Msg.alert(MasterPageLinks.Warning, data);
+                                return;
+                            }
+                                Sage.SalesLogix.userNotify(String.format(MasterPageLinks.PromotionNotification, page.data.Name, cgi.DisplayName));
                                 if (typeof callback === "function") callback(data, status);
                             }
                         });
@@ -314,15 +309,15 @@ function promoteGroupToDashboard() {
     });
 
     $.ajax({
-        type: "POST",
-        url: "DashboardService.asmx/GetPagesForUser",
+        type: "GET",
+        url: "slxdata.ashx/slx/crm/-/dashboard/page",
+        cache: false,
         error: function(request, status, error) {
             Ext.Msg.alert(MasterPageLinks.Warning, request.responseText);
         },
         success: function(data, status) {
             var storedata = {};
-            var datastring = Ext.DomQuery.select("string", data)[0].text || Ext.DomQuery.select("string", data)[0].textContent;
-            storedata.items = Sys.Serialization.JavaScriptSerializer.deserialize(datastring);
+            storedata.items = Sys.Serialization.JavaScriptSerializer.deserialize(data);
             var grid = new Ext.grid.GridPanel({
                 store: new Ext.data.JsonStore({
                     autoDestroy: true,

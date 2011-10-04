@@ -59,6 +59,7 @@ public partial class SmartParts_Activity_ScheduleCompleteActivity : EntityBoundS
         {
             ResetForm();
             SetValuesFromEntityHistory();
+            ClientBindingMgr.SetFocusTo(rbContact);
         }
 
         btnContinue.Enabled = NewUnscheduledActivity.Checked;
@@ -80,6 +81,7 @@ public partial class SmartParts_Activity_ScheduleCompleteActivity : EntityBoundS
         {
             Company.Text = string.Empty;
         }
+
     }
 
     private void ResetForm()

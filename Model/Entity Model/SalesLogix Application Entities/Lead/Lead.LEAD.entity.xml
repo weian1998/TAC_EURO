@@ -17,7 +17,7 @@
     <keyReference id="2d710a24-63a7-432c-83e8-686987cd0895" ordinalPosition="1" />
   </keyProperties>
   <properties>
-    <property xsi:type="OrmFieldProperty" id="2d710a24-63a7-432c-83e8-686987cd0895" lastModifiedUtc="0001-01-01T00:00:00" name="LeadId" audited="false" isNullable="false" include="false" columnName="LEADID" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="2d710a24-63a7-432c-83e8-686987cd0895" lastModifiedUtc="2011-02-10T17:07:02.9676487Z" name="LeadId" audited="false" isNullable="false" include="false" columnName="LEADID" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
@@ -25,7 +25,7 @@
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="64a97691-ef87-444a-bb88-466f2acfc97c" lastModifiedUtc="0001-01-01T00:00:00" name="CreateUser" audited="false" columnName="CREATEUSER" maxLength="12" precision="0" scale="0" ordinal="1" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="64a97691-ef87-444a-bb88-466f2acfc97c" lastModifiedUtc="2011-02-10T17:05:58.7409752Z" name="CreateUser" audited="false" columnName="CREATEUSER" maxLength="12" precision="0" scale="0" ordinal="1" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
@@ -33,7 +33,7 @@
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="1c9b80f4-3b6a-4306-8011-692efd16afad" lastModifiedUtc="0001-01-01T00:00:00" name="CreateDate" audited="false" columnName="CREATEDATE" maxLength="0" precision="0" scale="0" ordinal="2" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="1c9b80f4-3b6a-4306-8011-692efd16afad" lastModifiedUtc="2011-02-10T17:06:08.947559Z" name="CreateDate" audited="false" columnName="CREATEDATE" maxLength="0" precision="0" scale="0" ordinal="2" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
@@ -41,7 +41,7 @@
         <DateTimeDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="44560b02-cc71-457b-9c9a-39bc8e5fad4a" lastModifiedUtc="0001-01-01T00:00:00" name="ModifyUser" audited="false" columnName="MODIFYUSER" maxLength="12" precision="0" scale="0" ordinal="3" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="44560b02-cc71-457b-9c9a-39bc8e5fad4a" lastModifiedUtc="2011-02-10T17:06:24.5164494Z" name="ModifyUser" audited="false" columnName="MODIFYUSER" maxLength="12" precision="0" scale="0" ordinal="3" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
@@ -49,7 +49,7 @@
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="ba499547-ba2e-4bdf-8ae8-286ab05f494e" lastModifiedUtc="0001-01-01T00:00:00" name="ModifyDate" audited="false" columnName="MODIFYDATE" maxLength="0" precision="0" scale="0" ordinal="4" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="ba499547-ba2e-4bdf-8ae8-286ab05f494e" lastModifiedUtc="2011-02-10T17:06:40.2283481Z" name="ModifyDate" audited="false" columnName="MODIFYDATE" maxLength="0" precision="0" scale="0" ordinal="4" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmPropertyMethod" id="68679c23-5e3a-4e22-95bd-ce052b1b4c91" lastModifiedUtc="2010-08-03T21:47:10.8002313Z" name="GetResultInfo" returnType="System.String" methodType="PropertyAccessor" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmPropertyMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="f46202bf-9b05-4732-974d-da5047ea2dc1" lastModifiedUtc="2010-08-03T21:46:56.7984304Z" targetType="Sage.BusinessRules.CodeSnippets.SyncResultBusinessRules, Sage.SnippetLibrary.CSharp" targetMethod="GetResultInfoStep" active="true" codeSnippetId="d61701e8-16d5-44c1-9e00-2eb842e91ba3">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

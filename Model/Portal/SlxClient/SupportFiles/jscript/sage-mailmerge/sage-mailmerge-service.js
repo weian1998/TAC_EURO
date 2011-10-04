@@ -1588,6 +1588,9 @@ Sage.MailMergeService.prototype.ExcelInstalled = function() {
 Sage.MailMergeService.prototype.ExportToExcel = function(groupId, useGroupContext) {
     try {
         this.CloseMenus();
+        if (!this.ExcelInstalled()) {
+            throw new Error(DesktopErrors().ExcelNotInstalled || "Excel not installed.");
+        }
         var oExcelExport = new Sage.ExcelExport(groupId, useGroupContext);
         oExcelExport.Execute();
     }
@@ -3268,9 +3271,7 @@ Sage.CustomGroupExport.prototype.Execute = function() {
     if (Ext.isEmpty(this.GroupId)) {
         throw new Error(DesktopErrors().InvalidGroupId);
     }
-    if (String(this.GroupId).toUpperCase() == "LOOKUPRESULTS") { /*DNL*/
-        throw new Error(DesktopErrors().LookupResultsError);
-    }
+   
 };
 
 Sage.CustomGroupExport.prototype.GetGroupDatasetNodeText = function(path, node) {
@@ -3441,7 +3442,7 @@ Sage.ExcelExport.prototype.DoExport = function() {
     return false;
 };
 
-Sage.ExcelExport.prototype.ExportGroup = function () {
+Sage.ExcelExport.prototype.ExportGroup = function() {
     /* Constants for enum Constants */
     var xlAutomatic = -4105;
     var xlDouble = -4119;
@@ -3481,6 +3482,11 @@ Sage.ExcelExport.prototype.ExportGroup = function () {
 
     /* Constants for enum XlCalculation */
     var xlCalculationAutomatic = 4294963191;
+
+    /* Constants for enum XlApplicationInternational */
+    var xlYearCode = 19;
+    var xlMonthCode = 20;
+    var xlDayCode = 21;
 
     try {
         try {
@@ -3599,16 +3605,16 @@ Sage.ExcelExport.prototype.ExportGroup = function () {
                                 this.GroupSheet.Range(this.GroupSheet.Cells.Item(this.StartingRow, i), this.GroupSheet.Cells.Item(this.EndingRow, i)).NumberFormat = "[<=9999999]###-####;(###) ###-####";
                             }
                             break;
-
                         case "DATETIME": /*DNL*/
                             try {
                                 var format = this.Service.MailMergeGUI().GetFormatSetting(7);
-                                if (this.ExcelApp.International) {
-                                    format = format.replace(/y/g, this.ExcelApp.International(19));
-                                    format = format.replace(/M/g, this.ExcelApp.International(20));
-                                    format = format.replace(/d/g, this.ExcelApp.International(21));
-                                }
-                                this.GroupSheet.Range(this.GroupSheet.Cells.Item(this.StartingRow, i), this.GroupSheet.Cells.Item(this.EndingRow, i)).NumberFormat = format;
+                                var sYearCode = this.Service.MailMergeGUI().GetExcelInternationalValue(this.ExcelApp, xlYearCode);
+                                var sMonthCode = this.Service.MailMergeGUI().GetExcelInternationalValue(this.ExcelApp, xlMonthCode);
+                                var sDayCode = this.Service.MailMergeGUI().GetExcelInternationalValue(this.ExcelApp, xlDayCode);
+                                format = format.replace(/y/g, sYearCode || "y");
+                                format = format.replace(/M/g, sMonthCode || "M");
+                                format = format.replace(/d/g, sDayCode || "d");
+                                this.GroupSheet.Range(this.GroupSheet.Cells.Item(this.StartingRow, i), this.GroupSheet.Cells.Item(this.EndingRow, i)).NumberFormatLocal = format;
                             } catch (e) {
                                 if (window.console) {
                                     console.log(e.message);

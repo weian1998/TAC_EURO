@@ -147,6 +147,11 @@ Sage.ClientContextService.prototype = {
             alert("can't find context data field");
         }
     },
+    updateFromServer: function (newContext) {
+        if (newContext) {
+            this.fromString(newContext);
+        }
+    },
     load: function() {
         var data = document.getElementById(this.contextDataFieldId);
         if (data) {

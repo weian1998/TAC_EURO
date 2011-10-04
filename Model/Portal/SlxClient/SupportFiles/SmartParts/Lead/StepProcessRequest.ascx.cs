@@ -22,6 +22,8 @@ using Sage.Entity.Interfaces;
 using Sage.Platform;
 using Sage.Platform.Data;
 using Sage.SalesLogix.Web;
+using NHibernate;
+using Sage.Platform.Orm;
 
 public partial class StepProcessRequest : UserControl
 {
@@ -56,59 +58,61 @@ public partial class StepProcessRequest : UserControl
     /// <param name="args">The args.</param>
     public void StartImportProcess(Object args)
     {
-        
-        SetImportSourceValue();
-        ImportManager importManager = Page.Session["importManager"] as ImportManager;
-        if (importManager != null)
-        {
-            SetStartProcessInfo();
-            
-            try
+
+       
+            SetImportSourceValue();
+            ImportManager importManager = Page.Session["importManager"] as ImportManager;
+            if (importManager != null)
             {
-                Page.Session["importManager"] = null;
                 SetStartProcessInfo();
-                AddJob(importManager);
-                AddCrossReferenceMananager(importManager);
-                importManager.StartImportProcess(ImportHandler);
-                SetCompleteProcessInfo();
-                string sourceFileName = ((ImportCSVReader)importManager.SourceReader).SourceFileName;
-                if (sourceFileName != null)
+
+                try
                 {
-                    string targetFileName = ImportService.GetImportCompletedPath() + importManager.ImportHistory.ImportNumber + ".csv";
-                    ImportService.MoveToPath(sourceFileName, targetFileName);
-                }
-                //Page.Session["importHistoryId"] = importManager.ImportHistory.Id;
-
-            }
-            catch
-            {
-
-                
-            }
-            finally 
-            {
-                SetCompleteProcessInfo();
-                RemoveJob(importManager);
-                importManager.Dispose();
-                importManager = null;
-                object objShutDown = Page.Session["SessionShutDown"];
-                if (System.Convert.ToBoolean(objShutDown))
-                {
-
-                    if (CanShutDown())
+                    //Page.Session["importManager"] = null;
+                    SetStartProcessInfo();
+                    AddJob(importManager);
+                    AddCrossReferenceMananager(importManager);
+                    importManager.StartImportProcess(ImportHandler);
+                    SetCompleteProcessInfo();
+                    string sourceFileName = ((ImportCSVReader)importManager.SourceReader).SourceFileName;
+                    if (sourceFileName != null)
                     {
-                        ApplicationContext.Shutdown();
-                        Page.Session.Abandon();
+                        string targetFileName = ImportService.GetImportCompletedPath() + importManager.ImportHistory.ImportNumber + ".csv";
+                        ImportService.MoveToPath(sourceFileName, targetFileName);
                     }
+                    //Page.Session["importHistoryId"] = importManager.ImportHistory.Id;
+
                 }
-            
+                catch
+                {
+
+
+                }
+                finally
+                {
+                    SetCompleteProcessInfo();
+                    RemoveJob(importManager);
+                    importManager.Dispose();
+                    importManager = null;
+                    object objShutDown = Page.Session["SessionShutDown"];
+                    if (System.Convert.ToBoolean(objShutDown))
+                    {
+
+                        if (CanShutDown())
+                        {
+                            ApplicationContext.Shutdown();
+                            Page.Session.Abandon();
+                        }
+                    }
+
+                }
+
             }
-                  
-        }
-        else
-        {
-            //raise exception
-        }
+            else
+            {
+                //raise exception
+            }
+        
     }
 
     
@@ -200,6 +204,7 @@ public partial class StepProcessRequest : UserControl
             string script = GetLocalResourceObject("ImportLeadProgress_ClientScript").ToString();
             StringBuilder sb = new StringBuilder(script);
             sb.Replace("@cmdCloseCtrlId", cmdCompleted.ClientID);
+            sb.Replace("@ProcessStatusCtrlId", ProcessStatus.ClientID);
             //this.Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "ImportLeadProgress_ClientScript", sb.ToString(), false);
             ScriptManager.RegisterStartupScript(Page, this.GetType(), "ImportLeadProgress_ClientScript", sb.ToString(), false);
         
@@ -213,18 +218,18 @@ public partial class StepProcessRequest : UserControl
     {
         ImportManager importManager = Page.Session["importManager"] as ImportManager;
         IImportHistory importHistory = null;
-        if (importManager != null)
-        {
-            importHistory = importManager.ImportHistory;
-        }
-        else 
-        {
-            string historyId =  Page.Session["importHistoryId"] as string;
-            importHistory = Sage.Platform.EntityFactory.GetById<IImportHistory>(historyId);
-                
-        }
+        string historyId = Page.Session["importHistoryId"] as string;
+        importHistory = Sage.Platform.EntityFactory.GetById<IImportHistory>(historyId);
 
+        if (importHistory == null)
+        {
 
+            if (importManager != null)
+            {
+                //importHistory = importManager.ImportHistory;
+            }
+        }
+               
         if (importHistory != null)
         {
             
@@ -243,6 +248,7 @@ public partial class StepProcessRequest : UserControl
 
                     cmdAbort.Visible = false;
 
+
                 }
                 else
                 {
@@ -257,6 +263,8 @@ public partial class StepProcessRequest : UserControl
 
                         importManager = null;
                         Page.Session["importManager"] = null;
+                        //Page.Session["importHistoryId"] = null;
+                        radImportProcessArea.Visible = false;
                         
                     }
                     else
@@ -264,6 +272,7 @@ public partial class StepProcessRequest : UserControl
                         cmdAbort.Visible = true;
                         lblHeader.Text = string.Format(GetLocalResourceObject("lblPrimary_Progress.Caption").ToString());
                         lblHeader2.Text = string.Format(GetLocalResourceObject("ProcessingMsg").ToString());
+                        
                     }
                 }
 
@@ -285,7 +294,11 @@ public partial class StepProcessRequest : UserControl
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void cmdCompleted_OnClick(object sender, EventArgs e)
     {
-        SetCompleteProcessInfo();
+       Page.Session["ProcessRunning"] = null;
+       RadProgressContext importProgress = RadProgressContext.Current;
+       importProgress["ProcessCompleted"] = "True";
+       ProcessStatus.Value = "Completed";
+       
     }
 
     /// <summary>

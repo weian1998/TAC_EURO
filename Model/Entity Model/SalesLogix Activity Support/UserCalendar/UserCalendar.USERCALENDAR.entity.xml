@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="a7752f54-e7a9-4f72-a91a-9766f94904eb" lastModifiedUtc="2010-04-19T18:14:56.539125Z" manageSchema="false" tableName="USERCALENDAR" name="UserCalendar" isExtension="false" audited="true" generateSDataFeed="true" sDataPathName="usercalendars" lastUpdatedPropertyId="b77fe5d3-ba2a-4aad-87b2-2950d91a2f23" onBeforeInsertMethodId="a8ad2955-f878-47dd-a000-b56d635e869d" onAfterInsertMethodId="674cadb0-e971-4e46-a6a2-0e5c88ea27cd" onBeforeUpdateMethodId="b34c2d7b-811f-4562-ba7f-6fa9f42fe630" onAfterUpdateMethodId="0f0e408e-5d7c-4828-b79d-070cb703b86d" onBeforeDeleteMethodId="e3b22f80-72a9-4f8e-9720-106d42a912be" onAfterDeleteMethodId="e7b37946-bd51-4b6a-99f4-10b68fec0132" onCreateId="c250806d-5c21-42e7-9650-54ae5f49d6a2">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="a7752f54-e7a9-4f72-a91a-9766f94904eb" lastModifiedUtc="2010-04-19T18:14:56.539125Z" manageSchema="false" tableName="USERCALENDAR" name="UserCalendar" isExtension="false" audited="true" generateSDataFeed="true" sDataPathName="userCalendars" lastUpdatedPropertyId="b77fe5d3-ba2a-4aad-87b2-2950d91a2f23" onBeforeInsertMethodId="a8ad2955-f878-47dd-a000-b56d635e869d" onAfterInsertMethodId="674cadb0-e971-4e46-a6a2-0e5c88ea27cd" onBeforeUpdateMethodId="b34c2d7b-811f-4562-ba7f-6fa9f42fe630" onAfterUpdateMethodId="0f0e408e-5d7c-4828-b79d-070cb703b86d" onBeforeDeleteMethodId="e3b22f80-72a9-4f8e-9720-106d42a912be" onAfterDeleteMethodId="e7b37946-bd51-4b6a-99f4-10b68fec0132" onCreateId="c250806d-5c21-42e7-9650-54ae5f49d6a2">
   <extendedMetaData>
     <i>
       <n>NHibernate.Mapping.AlternateConcreteClass</n>
@@ -111,7 +111,14 @@
 {
     get
     {
-        return CalUser.ToString();
+        try
+        {
+            return CalUser != null ? CalUser.ToString() : null;
+        }
+        catch (NHibernate.UnresolvableObjectException)
+        {
+            return null;
+        }
     }
 }]]></code>
     </property>

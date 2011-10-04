@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="2102fa07-140b-46e9-9e07-0d0c07a6209c" lastModifiedUtc="2011-02-11T16:47:47.6739527Z" cardinality="M:1" parentEntityId="5b719ba4-e4a9-43ed-bb63-b550b2395bdb" childEntityId="9b47425f-3b70-4f38-a4cf-574c64d46086">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="d5133779-92be-4cd4-a1e7-16c0c0bc41ba" lastModifiedUtc="2011-02-11T16:47:47.6739527Z" name="SalesQuotation" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="f9170448-873d-4def-a730-2112edab05bc" lastModifiedUtc="2011-02-11T00:52:19.5894927Z" name="SalesQuotationSyncView" audited="false" include="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="36e8e541-4ce7-46ae-9689-3bfd56d81eb9" parentPropertyId="a822a1e5-b29d-42d6-a4c4-f440a26e084f" childPropertyId="17935caf-63d3-493c-a723-467cd86393d3" ordinal="0" />
+  </column>
+</relationship>

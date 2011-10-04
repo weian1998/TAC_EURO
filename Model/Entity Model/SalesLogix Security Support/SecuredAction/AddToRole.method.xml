@@ -9,7 +9,7 @@
   </parameter>
   <preExecuteTargets />
   <methodTargets>
-    <methodTarget id="4ede24db-55e6-4585-b8c4-0d141f08b681" lastModifiedUtc="2010-12-28T23:52:27.9616859Z" targetType="Sage.SalesLogix.Accelerator.SecuredAction.Rules, Sage.SalesLogix.AdminAccelerator.BusinessRules" targetMethod="AddToRole" active="true">
+    <methodTarget id="4ede24db-55e6-4585-b8c4-0d141f08b681" lastModifiedUtc="2010-12-28T23:52:27.9616859Z" targetType="Sage.SalesLogix.SecuredAction.Rules, Sage.SalesLogix.BusinessRules" targetMethod="AddToRole" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>

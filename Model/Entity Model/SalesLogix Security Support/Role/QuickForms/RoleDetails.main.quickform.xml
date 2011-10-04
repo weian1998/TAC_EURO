@@ -25,24 +25,7 @@
       <DialogActionResult>NoResult</DialogActionResult>
       <PerformsUpdate>False</PerformsUpdate>
       <AppliedSecurity />
-    </ActionDefinition>
-    <ActionDefinition>
-      <ResourceKey>32eb9168-fd48-4676-a76b-7558d4c6d37b</ResourceKey>
-      <RootActionName>CSharpSnippetAction</RootActionName>
-      <Action>
-        <CSharpCodeSnippet><![CDATA[Sage.Platform.WebPortal.EntityPage page = Page as Sage.Platform.WebPortal.EntityPage;
-if(page.IsInsertMode)
-{
-	Sage.Platform.WebPortal.SmartParts.IWebHelpLinkProvider helpLink = this.FindControl("lnkRoleDetailsHelp") as Sage.Platform.WebPortal.SmartParts.IWebHelpLinkProvider;
-	if(helpLink != null)
-		helpLink.SetHelpLinkUrl("Creating_a_Role.htm");
-}]]></CSharpCodeSnippet>
-      </Action>
-      <IsDialogCloseAction>False</IsDialogCloseAction>
-      <RunOnEveryRePaint>False</RunOnEveryRePaint>
-      <DialogActionResult>NoResult</DialogActionResult>
-      <PerformsUpdate>False</PerformsUpdate>
-      <AppliedSecurity />
+      <RefreshData>False</RefreshData>
     </ActionDefinition>
   </LoadActions>
   <QuickFormElements>
@@ -59,7 +42,7 @@ if(page.IsInsertMode)
       </Properties>
       <ControlDefinition>
         <Properties>
-          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFTextBox, Sage.Platform.QuickForms"><QFTextBox xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>RoleName</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>RoleName</DataItemName><ControlItemName>Text</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><MaxLength>64</MaxLength><OnChangeAction><ResourceKey>RoleName</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /></OnChangeAction></QFTextBox></Property>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFTextBox, Sage.Platform.QuickForms"><QFTextBox xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>RoleName</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>RoleName</DataItemName><ControlItemName>Text</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><MaxLength>64</MaxLength><OnChangeAction><ResourceKey>RoleName</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction></QFTextBox></Property>
         </Properties>
       </ControlDefinition>
     </QuickFormElement>
@@ -76,7 +59,7 @@ if(page.IsInsertMode)
       </Properties>
       <ControlDefinition>
         <Properties>
-          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFTextBox, Sage.Platform.QuickForms"><QFTextBox xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ColumnSpan>2</ColumnSpan><RowSpan>2</RowSpan><Column>1</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>RoleDescription</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>RoleDescription</DataItemName><ControlItemName>Text</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><MaxLength>255</MaxLength><Lines>6</Lines><OnChangeAction><ResourceKey>RoleDescription</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /></OnChangeAction></QFTextBox></Property>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFTextBox, Sage.Platform.QuickForms"><QFTextBox xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ColumnSpan>2</ColumnSpan><RowSpan>2</RowSpan><Column>1</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>RoleDescription</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>RoleDescription</DataItemName><ControlItemName>Text</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><MaxLength>255</MaxLength><Lines>6</Lines><OnChangeAction><ResourceKey>RoleDescription</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction></QFTextBox></Property>
         </Properties>
       </ControlDefinition>
     </QuickFormElement>
@@ -118,7 +101,7 @@ if(page.IsInsertMode)
       </Properties>
       <ControlDefinition>
         <Properties>
-          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFButton, Sage.Platform.QuickForms"><QFButton xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>btnSave</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><ButtonType>Icon</ButtonType><Image>[Localization!Global_Images:Save_16x16]</Image><OnClientClick /><OnClickAction><ResourceKey>btnSave</ResourceKey><RootActionName>BusinessRuleAction</RootActionName><Action><BusinessRule>Save</BusinessRule><Object>Role</Object><Parameters /><PassResultsToNextAction>False</PassResultsToNextAction><OnCompleteActionName>NoActionAction</OnCompleteActionName><OnComplete /></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>True</PerformsUpdate><AppliedSecurity /></OnClickAction></QFButton></Property>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFButton, Sage.Platform.QuickForms"><QFButton xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>btnSave</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><ButtonType>Icon</ButtonType><Image>[Localization!Global_Images:Save_16x16]</Image><OnClientClick /><OnClickAction><ResourceKey>btnSave</ResourceKey><RootActionName>BusinessRuleAction</RootActionName><Action><BusinessRule>Save</BusinessRule><Object>Role</Object><Parameters /><PassResultsToNextAction>False</PassResultsToNextAction><OnCompleteActionName>NoActionAction</OnCompleteActionName><OnComplete /></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>True</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnClickAction></QFButton></Property>
         </Properties>
       </ControlDefinition>
     </QuickFormElement>
@@ -128,7 +111,7 @@ if(page.IsInsertMode)
       </Properties>
       <ControlDefinition>
         <Properties>
-          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFButton, Sage.Platform.QuickForms"><QFButton xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>btnInsert</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><ButtonType>Icon</ButtonType><Image>[Localization!Global_Images:Save_16x16]</Image><OnClientClick /><OnClickAction><ResourceKey>btnInsert</ResourceKey><RootActionName>BusinessRuleAction</RootActionName><Action><BusinessRule>Save</BusinessRule><Object>Role</Object><Parameters /><PassResultsToNextAction>False</PassResultsToNextAction><OnCompleteActionName>RedirectAction</OnCompleteActionName><OnComplete><MainViewEntityName>Role</MainViewEntityName><RawURL /><EntityViewMode>Detail</EntityViewMode><UseCurrentIdInLink>True</UseCurrentIdInLink></OnComplete></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>True</PerformsUpdate><AppliedSecurity /></OnClickAction></QFButton></Property>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFButton, Sage.Platform.QuickForms"><QFButton xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>btnInsert</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><ButtonType>Icon</ButtonType><Image>[Localization!Global_Images:Save_16x16]</Image><OnClientClick /><OnClickAction><ResourceKey>btnInsert</ResourceKey><RootActionName>BusinessRuleAction</RootActionName><Action><BusinessRule>Save</BusinessRule><Object>Role</Object><Parameters /><PassResultsToNextAction>False</PassResultsToNextAction><OnCompleteActionName>RedirectAction</OnCompleteActionName><OnComplete><MainViewEntityName>Role</MainViewEntityName><RawURL /><EntityViewMode>Detail</EntityViewMode><UseCurrentIdInLink>True</UseCurrentIdInLink></OnComplete></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>True</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnClickAction></QFButton></Property>
         </Properties>
       </ControlDefinition>
     </QuickFormElement>
@@ -138,7 +121,7 @@ if(page.IsInsertMode)
       </Properties>
       <ControlDefinition>
         <Properties>
-          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFButton, Sage.Platform.QuickForms"><QFButton xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>btnDelete</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><ButtonType>Icon</ButtonType><Image>[Localization!Global_Images:Delete_16x16]</Image><OnClientClick /><OnClickAction><ResourceKey>btnDelete</ResourceKey><RootActionName>BusinessRuleAction</RootActionName><Action><BusinessRule>Delete</BusinessRule><Object>Role</Object><Parameters /><PassResultsToNextAction>False</PassResultsToNextAction><OnCompleteActionName>RedirectAction</OnCompleteActionName><OnComplete><MainViewEntityName>Role</MainViewEntityName><RawURL /><EntityViewMode>List</EntityViewMode><UseCurrentIdInLink>True</UseCurrentIdInLink></OnComplete></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /></OnClickAction></QFButton></Property>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFButton, Sage.Platform.QuickForms"><QFButton xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>btnDelete</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><ButtonType>Icon</ButtonType><Image>[Localization!Global_Images:Delete_16x16]</Image><OnClientClick /><OnClickAction><ResourceKey>btnDelete</ResourceKey><RootActionName>BusinessRuleAction</RootActionName><Action><BusinessRule>Delete</BusinessRule><Object>Role</Object><Parameters /><PassResultsToNextAction>False</PassResultsToNextAction><OnCompleteActionName>RedirectAction</OnCompleteActionName><OnComplete><MainViewEntityName>Role</MainViewEntityName><RawURL /><EntityViewMode>List</EntityViewMode><UseCurrentIdInLink>True</UseCurrentIdInLink></OnComplete></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnClickAction></QFButton></Property>
         </Properties>
       </ControlDefinition>
     </QuickFormElement>

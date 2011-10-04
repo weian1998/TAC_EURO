@@ -1,4 +1,17 @@
 ﻿
+//Fix for IE9 Standards mode...
+//came from a sencha forum post:  http://www.sencha.com/forum/showthread.php?125869-Menu-shadow-probolem-in-IE9&p=579336
+if ((typeof Range !== "undefined") && !Range.prototype.createContextualFragment) {
+    Range.prototype.createContextualFragment = function (html) {
+        var frag = document.createDocumentFragment(),
+		    div = document.createElement("div");
+        frag.appendChild(div);
+        div.outerHTML = html;
+        return frag;
+    };
+}
+//End IE9 Standards mode...
+
 // Ext 3.x functions reimplemented for 2.1 rollback
 if (typeof Ext.isDefined === 'undefined') {
     Ext.isDefined = function(val) {

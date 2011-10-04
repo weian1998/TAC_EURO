@@ -15,14 +15,15 @@ var assemblies = (IEnumerable<string>) Context["assemblies"];
   <Dialect>Sage.SalesLogix.NHibernate.SLXDialect, Sage.SalesLogix.NHibernate</Dialect>
   <ConnectionProvider>Sage.Platform.Data.DataServiceConnectionProvider, Sage.Platform</ConnectionProvider>
   <ConnectionDriver>NHibernate.Driver.OleDbDriver</ConnectionDriver>
-  <CacheProvider>NHibernate.Caches.SysCache.SysCacheProvider, NHibernate.Caches.SysCache</CacheProvider>
+  <!--<CacheProvider>NHibernate.Caches.SysCache.SysCacheProvider, NHibernate.Caches.SysCache</CacheProvider>-->
+  <CacheProvider>NHibernate.Caches.MemCache.MemCacheProvider, NHibernate.Caches.MemCache</CacheProvider>
+  <ProxyFactory>NHibernate.ByteCode.Castle.ProxyFactoryFactory, NHibernate.ByteCode.Castle</ProxyFactory>
   <CacheExpiration>120</CacheExpiration>
 
   <hibernate-configuration xmlns='urn:nhibernate-configuration-2.2'>
     <session-factory>
       <property name="cache.use_query_cache">true</property>
       <property name="query.substitutions">true 'T', false 'F', True 'T', False 'F'</property>
-      <property name="proxyfactory.factory_class">NHibernate.ByteCode.Castle.ProxyFactoryFactory, NHibernate.ByteCode.Castle</property>
 
       <!-- Cache Settings -->
 
@@ -100,7 +101,7 @@ var assemblies = (IEnumerable<string>) Context["assemblies"];
       <class-cache class="Sage.SalesLogix.Plugins.PluginBlob, Sage.SalesLogix.Plugins" usage="read-write" />
 
       <!-- SystemInformation -->
-      <class-cache class="Sage.SalesLogix.SystemInformation, Sage.SalesLogix.System" usage="read-only" />
+      <class-cache class="Sage.SalesLogix.SystemInformation, Sage.SalesLogix.System" usage="read-write" />
 
     </session-factory>
   </hibernate-configuration>

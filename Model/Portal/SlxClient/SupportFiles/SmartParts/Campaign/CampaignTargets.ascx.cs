@@ -1,20 +1,22 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
-using System.Xml;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml;
+using Sage.Entity.Interfaces;
 using Sage.Platform;
 using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
 using Sage.Platform.Repository;
+using Sage.Platform.WebPortal;
 using Sage.Platform.WebPortal.Binding;
 using Sage.Platform.WebPortal.Services;
 using Sage.Platform.WebPortal.SmartParts;
-using Sage.Entity.Interfaces;
-using Sage.SalesLogix.PickLists;
-using System.Collections.Generic;
 using Sage.SalesLogix.CampaignTarget;
-using Sage.Platform.WebPortal;
+using Sage.SalesLogix.PickLists;
+using Helpers = Sage.SalesLogix.Campaign.Helpers;
+using Rules = Sage.SalesLogix.Campaign.Rules;
 
 /// <summary>
 /// Summary description for CampaignTargets
@@ -22,30 +24,21 @@ using Sage.Platform.WebPortal;
 public partial class CampaignTargets : EntityBoundSmartPartInfoProvider
 {
     #region properties
-    private IContextService _Context;
+
     private AddFilterStateInfo _State;
-    private bool _SetLastPageIndex = false;
-    
+    private bool _SetLastPageIndex;
+
     #endregion
 
     #region Public Methods
+
     /// <summary>
     /// Gets or sets the entity context.
     /// </summary>
     /// <value>The entity context.</value>
     /// <returns>The specified <see cref="T:System.Web.HttpContext"></see> object associated with the current request.</returns>
     [ServiceDependency]
-    public IContextService ContextService
-    {
-        set
-        {
-            _Context = ApplicationContext.Current.Services.Get<IContextService>();
-        }
-        get
-        {
-            return _Context;
-        }
-    }
+    public IContextService ContextService { get; set; }
 
     /// <summary>
     /// Gets the type of the entity.
@@ -106,6 +99,7 @@ public partial class CampaignTargets : EntityBoundSmartPartInfoProvider
         }
         return tinfo;
     }
+
     #endregion
 
     #region Public Classes
@@ -118,14 +112,15 @@ public partial class CampaignTargets : EntityBoundSmartPartInfoProvider
         public string EntityID = String.Empty;
         public bool showContacts = true;
         public bool showLeads = true;
-        public int groupFilter = 0;
-        public int respondedFilter = 0;
-        public int priorityFilter = 0;
-        public int statusFilter = 0;
-        public int stageFilter = 0;
-        public bool formOpen = false;
-        public bool manageViewOpen = false;
+        public int groupFilter;
+        public int respondedFilter;
+        public int priorityFilter;
+        public int statusFilter;
+        public int stageFilter;
+        public bool formOpen;
+        public bool manageViewOpen;
     }
+
     #endregion
 
     #region Private Methods
@@ -146,18 +141,16 @@ public partial class CampaignTargets : EntityBoundSmartPartInfoProvider
             if (_State == null)
             {
                 _State = new AddFilterStateInfo();
-                PopulateListBoxControl(lbxPriority, "Lead Priority");
+                _State.EntityID = EntityContext.EntityID.ToString();
                 AddDistinctGroupItemsToList();
                 AddDistinctStageItemsToList();
             }
-            else
-            {
-                lbxGroups.SelectedIndex = _State.groupFilter;
-                lbxPriority.SelectedIndex = _State.priorityFilter;
-                lbxStages.SelectedIndex = _State.stageFilter;
-                lbxStatus.SelectedIndex = _State.statusFilter;
-            }
+            PopulateListBoxControl(lbxPriority, "Lead Priority");
             PopulateListBoxControl(lbxStatus, "Target Status");
+            lbxGroups.SelectedIndex = _State.groupFilter;
+            lbxPriority.SelectedIndex = _State.priorityFilter;
+            lbxStages.SelectedIndex = _State.stageFilter;
+            lbxStatus.SelectedIndex = _State.statusFilter;
         }
     }
 
@@ -249,7 +242,7 @@ public partial class CampaignTargets : EntityBoundSmartPartInfoProvider
     /// </summary>
     protected override void OnActivating()
     {
-        cmdEmail.Enabled = Sage.SalesLogix.Campaign.Helpers.CanLaunchEmailCampaign();
+        cmdEmail.Enabled = Helpers.CanLaunchEmailCampaign();
         hfIsFormInit.Value = "False";
         base.OnActivating();
     }
@@ -287,7 +280,7 @@ public partial class CampaignTargets : EntityBoundSmartPartInfoProvider
             {
                 filterDiv.Style.Add(HtmlTextWriterStyle.Display, "none");
             }
-            chkDisplayOnOpen.Checked = Sage.SalesLogix.Campaign.Helpers.ShowTargetsOnOpen();
+            chkDisplayOnOpen.Checked = Helpers.ShowTargetsOnOpen();
 
             if (_State.EntityID != EntityContext.EntityID.ToString())
             {
@@ -295,7 +288,14 @@ public partial class CampaignTargets : EntityBoundSmartPartInfoProvider
                 ContextService.RemoveContext("CT_SELECT_STATE");
                 _State.EntityID = EntityContext.EntityID.ToString();
                 _State.formOpen = false;
+                AddDistinctGroupItemsToList();
+                AddDistinctStageItemsToList();
+                //lbxGroups.SelectedIndex = _State.groupFilter;
+                lbxPriority.SelectedIndex = _State.priorityFilter;
+                //lbxStages.SelectedIndex = _State.stageFilter;
+                lbxStatus.SelectedIndex = _State.statusFilter;
             }
+
             grdTargets.EmptyTableRowText = GetLocalResourceObject("grdTargets.EmptyTableRowText").ToString();
             if (!_State.formOpen || (hfIsFormInit.Value == "False") || _State.manageViewOpen)
             {
@@ -363,22 +363,22 @@ public partial class CampaignTargets : EntityBoundSmartPartInfoProvider
     /// <param name="picklistName">Name of the picklist.</param>
     private static void PopulateListBoxControl(ListBox listBox, string picklistName)
     {
-        listBox.Items.Clear();
-        string picklistId = PickList.PickListIdFromName(picklistName);
-        listBox.Items.Add(String.Empty);
-        if (!String.IsNullOrEmpty(picklistId))
+        if (listBox.Items.Count > 0)
         {
-            IList<PickList> items = PickList.GetPickListItems(picklistId, true);
-            if (items != null)
+            return;
+        }
+
+        listBox.Items.Clear();
+        listBox.Items.Add(String.Empty);
+        IList<PickList> items = PickList.GetPickListItemsByName(picklistName, true);
+        if (items != null)
+        {
+            foreach (PickList picklistItem in items)
             {
-                ListItem item;
-                foreach (PickList picklistItem in items)
-                {
-                    item = new ListItem();
-                    item.Text = picklistItem.Text;
-                    item.Value = picklistItem.ItemId;
-                    listBox.Items.Add(item);
-                }
+                var item = new ListItem();
+                item.Text = picklistItem.Text;
+                item.Value = picklistItem.ItemId;
+                listBox.Items.Add(item);
             }
         }
     }
@@ -395,10 +395,9 @@ public partial class CampaignTargets : EntityBoundSmartPartInfoProvider
         IQueryable query = (IQueryable)rep;
         IExpressionFactory expressions = query.GetExpressionFactory();
         IProjections projections = query.GetProjectionsFactory();
-        Sage.Platform.Repository.ICriteria criteria = query.CreateCriteria()
-                .SetProjection(projections.Distinct(projections.Property("GroupName")))
-                    .Add(expressions
-                        .And(expressions.Eq("Campaign.Id", EntityContext.EntityID), expressions.IsNotNull("GroupName")));
+        ICriteria criteria = query.CreateCriteria()
+            .SetProjection(projections.Distinct(projections.Property("GroupName")))
+            .Add(expressions.And(expressions.Eq("Campaign.Id", EntityContext.EntityID), expressions.IsNotNull("GroupName")));
 
         IList<object> groups = criteria.List<object>();
         if (groups != null)
@@ -428,10 +427,9 @@ public partial class CampaignTargets : EntityBoundSmartPartInfoProvider
         IQueryable query = (IQueryable)rep;
         IExpressionFactory expressions = query.GetExpressionFactory();
         IProjections projections = query.GetProjectionsFactory();
-        Sage.Platform.Repository.ICriteria criteria = query.CreateCriteria()
-                .SetProjection(projections.Distinct(projections.Property("Description")))
-                    .Add(expressions
-                        .And(expressions.Eq("Campaign.Id", EntityContext.EntityID), expressions.IsNotNull("Description")));
+        ICriteria criteria = query.CreateCriteria()
+            .SetProjection(projections.Distinct(projections.Property("Description")))
+            .Add(expressions.And(expressions.Eq("Campaign.Id", EntityContext.EntityID), expressions.IsNotNull("Description")));
 
         IList<object> stages = criteria.List<object>();
         if (stages != null)
@@ -588,7 +586,7 @@ public partial class CampaignTargets : EntityBoundSmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void chkDisplayOnOpen_CheckedChanged(object sender, EventArgs e)
     {
-        Sage.SalesLogix.Campaign.Helpers.SetShowOnOpenOption(((chkDisplayOnOpen.Checked) ? "T" : "F"), "Web.ViewTargets");
+        Helpers.SetShowOnOpenOption((chkDisplayOnOpen.Checked ? "T" : "F"), "Web.ViewTargets");
     }
 
     /// <summary>
@@ -604,7 +602,7 @@ public partial class CampaignTargets : EntityBoundSmartPartInfoProvider
             if (txtConfirmExternalList.Value.Equals("T"))
             {
                 campaign.UseExternalList = true;
-                Sage.SalesLogix.Campaign.Rules.DeleteCampaignTargets(campaign);
+                Rules.DeleteCampaignTargets(campaign);
                 IPanelRefreshService refresher = PageWorkItem.Services.Get<IPanelRefreshService>();
                 refresher.RefreshMainWorkspace();
             }
@@ -807,7 +805,6 @@ public partial class CampaignTargets : EntityBoundSmartPartInfoProvider
         string clientContext = txtSelectedTargets.Value;
         if (!string.IsNullOrEmpty(clientContext))
         {
-
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(clientContext);
             XmlNodeList targetNodes = xmlDoc.DocumentElement.SelectNodes("//Targets/Target");
@@ -820,7 +817,6 @@ public partial class CampaignTargets : EntityBoundSmartPartInfoProvider
                     selectState.Remove(Id);
                 }
                 selectState.Add(Id, Convert.ToBoolean(selected));
-
             }
             txtSelectedTargets.Value = string.Empty;
         }

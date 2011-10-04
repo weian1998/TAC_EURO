@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="91c6526f-0a45-4a65-9691-517922b24829" lastModifiedUtc="2010-12-02T14:07:20.9983576Z" manageSchema="false" tableName="DEFECTPRODUCT" name="DefectProduct" isExtension="false" audited="false" generateSDataFeed="true" sDataPathName="defectProducts" lastUpdatedPropertyId="b3702ff9-0e1d-46b0-b022-1473becb4442" onBeforeInsertMethodId="b96e0ed6-fa00-441a-b819-721cc8d7ab4f" onAfterInsertMethodId="604b7b53-ff8f-486b-a254-e79dbb79c4f6" onBeforeUpdateMethodId="0d8839ee-b1a0-4a6c-bef4-cdf9c77414e8" onAfterUpdateMethodId="65302b8a-5936-4f9e-ac66-2468ae731831" onBeforeDeleteMethodId="f72e644a-2a8a-4cd8-b57d-0a79bf9d3703" onAfterDeleteMethodId="a500932b-2ff1-4edb-be84-18d6fa56520b" onCreateId="54e3825f-6d5a-46c1-a1a5-7a93d961b776">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="91c6526f-0a45-4a65-9691-517922b24829" lastModifiedUtc="2010-12-01T06:46:11.2645163Z" manageSchema="false" tableName="DEFECTPRODUCT" name="DefectProduct" isExtension="false" audited="false" generateSDataFeed="true" sDataPathName="defectProducts" lastUpdatedPropertyId="b3702ff9-0e1d-46b0-b022-1473becb4442" onBeforeInsertMethodId="b96e0ed6-fa00-441a-b819-721cc8d7ab4f" onAfterInsertMethodId="604b7b53-ff8f-486b-a254-e79dbb79c4f6" onBeforeUpdateMethodId="0d8839ee-b1a0-4a6c-bef4-cdf9c77414e8" onAfterUpdateMethodId="65302b8a-5936-4f9e-ac66-2468ae731831" onBeforeDeleteMethodId="f72e644a-2a8a-4cd8-b57d-0a79bf9d3703" onAfterDeleteMethodId="a500932b-2ff1-4edb-be84-18d6fa56520b" onCreateId="54e3825f-6d5a-46c1-a1a5-7a93d961b776">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
@@ -14,7 +14,7 @@
     <keyReference id="7e3fa9e9-3172-4b31-955e-80cd5ab4ac8c" ordinalPosition="1" />
   </keyProperties>
   <properties>
-    <property xsi:type="OrmFieldProperty" id="7e3fa9e9-3172-4b31-955e-80cd5ab4ac8c" lastModifiedUtc="2010-12-02T14:08:11.3992403Z" name="DefectProductId" audited="false" isNullable="false" include="false" columnName="DEFECTPRODUCT" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="7e3fa9e9-3172-4b31-955e-80cd5ab4ac8c" lastModifiedUtc="2010-12-01T06:49:10.7497823Z" name="DefectProductId" audited="false" isNullable="false" include="false" columnName="DEFECTPRODUCT" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
@@ -22,7 +22,7 @@
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="b9d70b44-a78f-4d3a-bbe0-cd8eff1c6921" lastModifiedUtc="2010-12-02T14:08:13.613367Z" name="DefectId" audited="false" isNullable="false" include="false" columnName="DEFECTID" maxLength="12" precision="0" scale="0" ordinal="1" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="b9d70b44-a78f-4d3a-bbe0-cd8eff1c6921" lastModifiedUtc="2010-12-01T06:49:12.8239009Z" name="DefectId" audited="false" isNullable="false" include="false" columnName="DEFECTID" maxLength="12" precision="0" scale="0" ordinal="1" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
@@ -30,7 +30,7 @@
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="541ef44a-be9b-4492-b72c-4bfe8f178d26" lastModifiedUtc="2010-12-02T14:08:16.0745078Z" name="ProductId" audited="false" isNullable="false" include="false" columnName="PRODUCTID" maxLength="12" precision="0" scale="0" ordinal="2" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="541ef44a-be9b-4492-b72c-4bfe8f178d26" lastModifiedUtc="2010-12-01T06:49:15.1730353Z" name="ProductId" audited="false" isNullable="false" include="false" columnName="PRODUCTID" maxLength="12" precision="0" scale="0" ordinal="2" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>

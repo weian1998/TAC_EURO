@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="947b8e79-7156-4093-8342-bfbdab44039e" lastModifiedUtc="2010-04-05T15:09:08.0794953Z" name="btnInsert_OnClick" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="EndPoints">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="80a4db09-8e76-416f-a23e-5de6ea4b9dff" paramName="form" sequence="0" paramType="IEndPoints" />
+    <OrmEntityMethodParam id="66d0bd9e-1b9f-4774-b3e7-9133b6c96acc" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="4b6dab73-1eed-467f-9f35-20fda989269c" lastModifiedUtc="2010-04-05T17:17:42.1134953Z" targetType="Sage.BusinessRules.CodeSnippets.EndPointsEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="btnInsert_OnClick" active="true" codeSnippetId="d2e2ca0c-bd5f-48a6-94e8-8658b80c9b77">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

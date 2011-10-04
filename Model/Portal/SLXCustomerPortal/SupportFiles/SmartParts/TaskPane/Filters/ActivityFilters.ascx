@@ -88,9 +88,24 @@
         });
     }
 
-$(document).ready(function() {
-    Ext.ComponentMgr.get('activity_groups_tabs').on('tabchange', function() {
-        Sage.PopulateFilterList();
+    $(document).ready(function () {
+        Ext.ComponentMgr.get('activity_groups_tabs').on('tabchange', function () {
+            Sage.PopulateFilterList();
+        });
+
+        if (typeof Sys !== 'undefined') {
+            Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(
+            function (sender, args) {
+                var updated = args.get_panelsUpdated();
+                if (typeof updated !== 'undefined') {
+                    for (var i = 0; i < updated.length; i++) {
+                        if (updated[i].id && updated[i].id.indexOf('TaskPane_TaskPane_panel') > -1) {
+                            Sage.PopulateFilterList();
+                        }
+                    }
+                }
+            });
+        }
+
     });
-});
 </script>

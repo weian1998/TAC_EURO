@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="5e0ce9ff-bf29-4788-9915-5f8545f4dcc0" lastModifiedUtc="2010-07-08T00:24:56.9778945Z" manageSchema="false" tableName="ACCOUNTOPERATINGCOMP" name="AccountOperatingCompany" isExtension="false" audited="false" lastUpdatedPropertyId="e1db37cd-b4b9-40e7-a1fa-a535a7a696af" onBeforeInsertMethodId="363ded9b-8850-4286-bb6a-f554807a4a47" onAfterInsertMethodId="7c772029-8da4-43f3-a765-bb7fd12cdd57" onBeforeUpdateMethodId="4aeb9672-126a-4888-98d4-81b13549d64e" onAfterUpdateMethodId="f6cc3ade-b981-41bc-b1b5-d02efdcef0bf" onBeforeDeleteMethodId="254ea270-b8aa-400a-9768-0736cf724d6f" onAfterDeleteMethodId="4712582f-274d-4f92-950b-60b41da5f13a" onCreateId="8ed21d7a-e5f7-4f47-9cd2-c3c65299e843">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
+      <extender guid="1589723d-0536-4bf3-bdd7-3f6f7fe165d0">
+        <OrmEntityMetadataExtension>
+          <IsHistoryTable>false</IsHistoryTable>
+        </OrmEntityMetadataExtension>
+      </extender>
+    </extendee>
+  </ExtendedPropertiesCollection>
+  <description>Many-To-Many relationship table between Account and AppIdMapping.  Allows an Account to be associated to many Operating Companies and allows an Operating Company to be associated to many Accounts.</description>
+  <keyProperties>
+    <keyReference id="0c6dc05c-cb9f-44bd-a780-6f02dbf04836" ordinalPosition="1" />
+  </keyProperties>
+  <properties>
+    <property xsi:type="OrmFieldProperty" id="0c6dc05c-cb9f-44bd-a780-6f02dbf04836" lastModifiedUtc="2010-07-08T00:25:31.2988945Z" name="AccountOperatingCompId" description="The primary key." audited="false" isNullable="false" include="false" columnName="ACCOUNTOPERATINGCOMPID" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="c88a35b2-72a7-4421-93e0-0ed2ea495db7" lastModifiedUtc="2010-07-08T00:25:37.4478945Z" name="AccountId" description="Foreign key to the Account table." audited="false" isNullable="false" include="false" columnName="ACCOUNTID" maxLength="12" precision="0" scale="0" ordinal="1" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="55127709-1efa-442c-b7f5-a08c58dc55d3" lastModifiedUtc="2010-03-18T23:43:12.4311266Z" name="CreateUser" audited="false" columnName="CREATEUSER" maxLength="12" precision="0" scale="0" ordinal="2" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="3f5b782c-1b92-4d5e-baa5-488bb5346092" lastModifiedUtc="2010-03-18T23:43:15.7124547Z" name="CreateDate" audited="false" columnName="CREATEDATE" maxLength="0" precision="0" scale="0" ordinal="3" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
+        <DateTimeDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="9a9aa3e9-e0c3-4a98-9d64-46bcec43258c" lastModifiedUtc="2010-03-18T23:43:20.2719106Z" name="ModifyUser" audited="false" columnName="MODIFYUSER" maxLength="12" precision="0" scale="0" ordinal="4" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="e1db37cd-b4b9-40e7-a1fa-a535a7a696af" lastModifiedUtc="2010-03-18T23:43:24.2783112Z" name="ModifyDate" audited="false" columnName="MODIFYDATE" maxLength="0" precision="0" scale="0" ordinal="5" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
+        <DateTimeDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="412a9668-f3c6-499b-9e64-5fc55c56050b" lastModifiedUtc="2010-06-11T17:10:21.3862Z" name="SharedId" audited="false" columnName="SHAREDID" maxLength="12" precision="0" scale="0" ordinal="8" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="6188d0b2-b322-467a-ab15-fb2c84ad49bf" lastModifiedUtc="2010-07-06T23:27:26.4783064Z" name="LinkedDate" audited="false" columnName="LINKEDDATE" maxLength="0" precision="0" scale="0" ordinal="9" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
+        <DateTimeDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="993e4344-c925-414a-bb47-24bb6ba17d0e" lastModifiedUtc="2010-07-08T23:32:33.869096Z" name="AppID" audited="false" include="false" columnName="APPID" maxLength="12" precision="0" scale="0" ordinal="8" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="7a5d3767-0551-4c82-a5d1-d58a80cacdfd" lastModifiedUtc="2010-07-08T00:24:35.2698945Z" name="Status" audited="false" columnName="STATUS" maxLength="64" precision="0" scale="0" ordinal="9" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>64</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+  </properties>
+</entity>

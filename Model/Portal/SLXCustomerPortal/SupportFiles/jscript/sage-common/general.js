@@ -9,6 +9,10 @@ function showMoreInfo()
     var win = window.open(address, 'AlarmMgrWin', 'width=425,height=425,directories=no,location=no,menubar=no,status=yes,scrollbars=yes,resizable=yes,titlebar=no,toolbar=no');
 }
 
+function convertTimelessDate(value) {
+    return new Date(value.getUTCFullYear(), value.getUTCMonth(), value.getUTCDate(), 0, 0, 5, 0);
+}
+
 function ConvertToPhpDateTimeFormat(formatstring) {
     
     var conversions = [
@@ -327,27 +331,26 @@ function handleGroupChange(gMgrSvc, args) {
 
 if (typeof Sage != 'undefined') Sage.Lookupdisplayed = false; //flag so that once showlookuponload is in the url we don't reshow the lookup dialog
 function showMainLookup() {
+    //assume current entity...
     Sage.Lookupdisplayed = true;
-    var clContext = Sage.Services.getService("ClientContextService");
     var contextservice = Sage.Services.getService("ClientContextService");
     var modeid = "List";
     if ((contextservice) && (contextservice.containsKey("modeid"))) { 
         modeid = contextservice.getValue("modeid");
     }
+    if (!Sage.Services.hasService('GroupLookupManager')) {
+        Sage.Services.addService("GroupLookupManager", new Sage.GroupLookupManager());
+    }
+    var mgr = Sage.Services.getService("GroupLookupManager");    
     if (modeid.toUpperCase() != "LIST") {  
         var url = document.location.href;
-        url = url.substring(0, url.indexOf("?"));
-        url += "?modeid=list&showlookuponload=true";
-        document.location = url;
+        var endIndex = url.indexOf('?');
+        endIndex = (endIndex > 0) ? endIndex : url.length;
+        var page = url.substring(url.lastIndexOf('/') + 1, endIndex);
+        var grpInfo = getCurrentGroupInfo();
+        mgr.showLookup({ family: grpInfo.Family, name: 'LookupLayoutGroup', returnTo: page });
     } else {
-        var mgr = Sage.Services.getService("GroupLookupManager");
-        if (mgr) {
-            mgr.showLookup();
-        } else {
-            mgr = new Sage.GroupLookupManager();
-            Sage.Services.addService("GroupLookupManager", mgr);
-            mgr.showLookup();
-        }
+        mgr.showLookup();
     }
 }
 
@@ -378,52 +381,35 @@ function showMainLookupFor(family, page) {
             }
         }
     }
-    if (!bIsList || !bFamilyIsActive) {
-        var url = document.location.href;
-        if (!bIsList && bFamilyIsActive) {
-            url = url.substring(0, url.indexOf("?"));
-            url += "?modeid=list&showlookuponload=true";
+
+    if (!bIsList && bFamilyIsActive) {
+        var mgr = Sage.Services.getService("GroupLookupManager");
+        if (mgr) {
+            mgr.showLookup({ family: family, name: 'LookupLayoutGroup', returnTo: page });
         }
-        else {
-            var iIndex = url.lastIndexOf("/");
-            if (iIndex != -1) {
-                url = url.substring(0, iIndex);
-                url = String.format("{0}/{1}?modeid=list&showlookuponload=true", url, page);
-            }
+    } else if (!bIsList && !bFamilyIsActive) {
+        var url = document.location.href;
+        var iIndex = url.lastIndexOf("/");
+        if (iIndex != -1) {
+            url = url.substring(0, iIndex);
+            url = String.format("{0}/{1}?modeid=list&showlookuponload=true", url, page);
         }
         document.location = url;
     }
     else {
-        var mgr = Sage.Services.getService("GroupLookupManager");
-        if (mgr) {
-            mgr.showLookup();
-        } else {
-            mgr = new Sage.GroupLookupManager();
-            Sage.Services.addService("GroupLookupManager", mgr);
-            mgr.showLookup();
+        if (!Sage.Services.hasService('GroupLookupManager')) {
+            Sage.Services.addService("GroupLookupManager", new Sage.GroupLookupManager());
         }
+        var mgr = Sage.Services.getService("GroupLookupManager");
+        mgr.showLookup();
     }
 }
 
 function handleGroupTabChange(tabPanel, newTab, currentTab) {
-//      var panel = Sage.SalesLogix.Controls.ListPanel.find("MainList");
-//      if (panel) {
-//          panel.views.list.view.reset();
-    //      }
     if (_ignoreChangeEvent == true) { return; }
-//    if (newTab.id == "GroupLookup") {
-//        var mgr = Sage.Services.getService("GroupLookupManager");
-//        if (mgr) {
-//            mgr.showLookup();
-//        } else {
-//            mgr = new Sage.GroupLookupManager();
-//            Sage.Services.addService("GroupLookupManager", mgr);
-//            mgr.showLookup();
-//        }
-//        return false;
-//    } else {
-        navToNewGroup(newTab.url);
-//    }
+    window.setTimeout(function() {
+            navToNewGroup(newTab.url);
+        }, 1000);
 }
 function navToNewGroup(url) {
     window.location = url;
@@ -442,17 +428,22 @@ function getCurrentGroupInfo() {
     var clGrpContextSvc = Sage.Services.getService("ClientGroupContext");
     if (clGrpContextSvc) {
         var clGrpContext = clGrpContextSvc.getContext();
-        return {"Name": clGrpContext.CurrentName, 
-                "Family": clGrpContext.CurrentFamily, 
-                "Id": clGrpContext.CurrentGroupID,
-                "isAdhoc": clGrpContext.isAdhoc,
-                "Entity": clGrpContext.CurrentEntity
-            };
+        return { 
+            "Name": clGrpContext.CurrentName, 
+            "DisplayName": clGrpContext.CurrentDisplayName,
+            "Family": clGrpContext.CurrentFamily, 
+            "Id": clGrpContext.CurrentGroupID,
+            "isAdhoc": clGrpContext.isAdhoc,
+            "Entity": clGrpContext.CurrentEntity
+        };
     } else if (typeof(window.__groupContext) != "undefined") {
-        return {"Name": window.__groupContext.CurrentName,
-                "Family": window.__groupContext.CurrentFamily,
-                "Id": window.__groupContext.CurrentGroupID,
-                "isAdhoc": window.__groupContext.isAdhoc };    
+        return {
+            "Name": window.__groupContext.CurrentName,
+            "DisplayName": window.__groupContext.CurrentDisplayName,
+            "Family": window.__groupContext.CurrentFamily,
+            "Id": window.__groupContext.CurrentGroupID,
+            "isAdhoc": window.__groupContext.isAdhoc 
+        };    
     }
     return "";
 }
@@ -713,10 +704,12 @@ removeConfirmed = function(){
       }
   };
 
-  addConfirmed = function(groupID) {
-      var panel = Sage.SalesLogix.Controls.ListPanel.find("MainList");
-      if (panel) {
-          panel.views.list.view.reset();
+  addConfirmed = function (groupID) {
+      if (Sage.Services.getService("GroupManagerService")._contextService.getContext().CurrentGroupID === groupID) {
+          var panel = Sage.SalesLogix.Controls.ListPanel.find("MainList");
+          if (panel) {
+              panel.views.list.view.reset();
+          }
       }
       var selectionInfo = GetSeletionInfo();
       postUrl = "slxdata.ashx/slx/crm/-/groups/adhoc?action=EditAdHocGroupAddMembers&groupID=" + groupID + "&selectionKey=" + selectionInfo.key;
@@ -745,7 +738,7 @@ postAddToGroup = function(postUrl, payLoad)
             //Ext.Msg.alert( "Group Updated" );
             }       
            });
-           Sage.Services.getService("GroupManagerService").setNewGroup(Sage.Services.getService("GroupManagerService")._contextService.getContext().CurrentGroupID);       
+           //Sage.Services.getService("GroupManagerService").setNewGroup(Sage.Services.getService("GroupManagerService")._contextService.getContext().CurrentGroupID);       
       }    
 }
 // END AD HOC OPTIONS 

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="bffe6d09-c05e-4dbb-a10a-7f38f0f3aff8" lastModifiedUtc="2010-06-16T18:36:57.6302968Z" name="SaveSyncConfiguration" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="5e7d8973-be98-4087-8ad5-6a090ecb03d6" paramName="syncInterval" sequence="0" paramType="Int32">
+      <description>The interval, in minutes, the sync cylcle will occur.</description>
+    </OrmEntityMethodParam>
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="17c5f64c-9f4e-44f0-9155-61f005a2612f" lastModifiedUtc="2010-06-16T18:36:52.6212968Z" targetType="Sage.SalesLogix.AppIdMapping.Rules, Sage.SalesLogix.BusinessRules" targetMethod="SaveSyncConfiguration" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

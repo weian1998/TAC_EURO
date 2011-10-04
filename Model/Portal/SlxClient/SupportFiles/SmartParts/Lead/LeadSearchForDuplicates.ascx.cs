@@ -12,7 +12,6 @@ using Sage.Platform.WebPortal.Binding;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.SalesLogix.Services.PotentialMatch;
 using System.Web.UI.WebControls;
-using System.Web.UI.MobileControls;
 using System.Data;
 using Sage.Platform.Application.UI.Web;
 using System.Text;
@@ -78,7 +77,7 @@ public partial class LeadSearchForDuplicates : EntityBoundSmartPartInfoProvider
             }
             catch (Exception exp)
             {
-                throw new ApplicationException(GetLocalResourceObject("LoadErrorMSG").ToString()); 
+                throw new ApplicationException(GetLocalResourceObject("LoadErrorMSG").ToString(), exp); 
             }
             return _duplicateProvider;
         }
@@ -507,7 +506,7 @@ public partial class LeadSearchForDuplicates : EntityBoundSmartPartInfoProvider
         }
         catch (Exception exp)
         {
-            throw new ApplicationException(GetLocalResourceObject("LoadErrorMSG").ToString());
+            throw new ApplicationException(GetLocalResourceObject("LoadErrorMSG").ToString(), exp);
         }
     }
 

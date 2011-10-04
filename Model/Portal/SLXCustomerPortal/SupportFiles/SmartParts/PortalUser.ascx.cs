@@ -48,7 +48,7 @@ public partial class PortalUser : System.Web.UI.UserControl
         }
     }
 
-    protected void Page_Load(object sender, EventArgs e)
+    protected void Page_PreRender(object sender, EventArgs e)
     {
         try
         {

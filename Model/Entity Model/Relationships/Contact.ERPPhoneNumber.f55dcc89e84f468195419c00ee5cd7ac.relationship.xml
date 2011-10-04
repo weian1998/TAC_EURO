@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="f55dcc89-e84f-4681-9541-9c00ee5cd7ac" lastModifiedUtc="2010-03-26T21:33:00.8656443Z" parentEntityId="750a7f26-3604-467b-94fe-249370231df4" childEntityId="02bab7a9-f55c-4a48-b0c5-9d412c2e89d8">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="2cbc205e-3580-4d7c-b782-b304106a6f4e" lastModifiedUtc="2010-03-26T21:32:26.21918Z" name="ERPPhoneNumbers" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="c4a6d130-35a5-4f62-ae7f-a0238f607120" lastModifiedUtc="2010-03-26T21:32:36.0531633Z" name="Contact" audited="false" include="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="e95f760f-2acd-4d05-bec4-4965a880dce9" parentPropertyId="67fe9234-a814-4d79-a813-01046c1ae19d" childPropertyId="c94bddd9-02fd-4a1e-83ff-5607728e9ca4" ordinal="0" />
+  </column>
+</relationship>

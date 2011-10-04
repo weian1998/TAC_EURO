@@ -2,8 +2,7 @@
    
  
  var cmdCloseCtrlId = "@cmdCloseCtrlId";
- var _IsCompleted = false;
-  
+ var processStatusCrtlId = "@ProcessStatusCtrlId";
  
 function ImportProgress_InvokeClickEvent(control)
 {
@@ -26,20 +25,21 @@ function OnUpdateProgress(progressArea, args)
 {
     if (args.ProgressData.ProcessCompleted=="True")
     {
-        if(_IsCompleted)
+        var elementProcessStatusCtrl = document.getElementById(processStatusCrtlId);
+        var elementCloseCtrl = document.getElementById(cmdCloseCtrlId);
+        if ((elementCloseCtrl != null)&&(elementProcessStatusCtrl != null))
         {
-          return false;
-        } 
-        var elementStartCtrl = document.getElementById(cmdCloseCtrlId);
-        if (elementStartCtrl != null)
-        {
-              
-            ImportProgress_InvokeClickEvent(elementStartCtrl);
+             
+             if(elementProcessStatusCtrl.value != "Completed")
+             {
+               elementProcessStatusCtrl.value = "Completed"
+               ImportProgress_InvokeClickEvent(elementCloseCtrl);
+               return false;
+             }
             
-        }
-         _IsCompleted = true;        
-        return false;
+        }       
     }
+    return true;
 }
 
  

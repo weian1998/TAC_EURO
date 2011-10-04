@@ -178,14 +178,14 @@ function populateGroupTabs() {
         GroupsMenu.destroy();
     }
     $("#GroupTabs").css({ left: (MasterPageLinks.LookupBtnWidth - 0 + 6) + "px" });
-    GroupsMenu = new Ext.menu.Menu({ id: 'GroupMenu', listeners: { show: assertMenuHeight } });
+    GroupsMenu = new Ext.menu.Menu({ id: 'GroupMenu', listeners: { show: assertMenuHeight} });
     if (typeof idMenuItems != "undefined") {
         GroupsMenu.on("show", function() { idMenuItems(); });
     }
 
     if (typeof groupMenuData != "undefined") {
         var menustring = Ext.util.JSON.encode(groupMenuData.menuitems);
-        var groupName = getCurrentGroupInfo().Name;
+        var groupName = getCurrentGroupInfo().DisplayName;
         if (groupName == null) { groupName = ""; };
         var newgmd = Ext.util.JSON.decode(
             menustring.replace(/%GROUPNAME%/g, groupName).replace(/%GROUPID%/g, getCurrentGroupInfo().Id).replace(/%GROUPFILENAME%/g, groupName.replace(/[^A-Z0-9a-z&]/g, "_")));

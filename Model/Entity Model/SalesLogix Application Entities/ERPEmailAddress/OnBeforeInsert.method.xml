@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="22011954-4b22-4e51-b897-0cc428842986" lastModifiedUtc="2010-03-08T18:55:16.6413215Z" name="OnBeforeInsert" methodType="CrudEvent" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="15b8ed80-8775-4834-b002-28fba21425ef" lastModifiedUtc="2010-04-27T21:35:49.1563002Z" targetType="Sage.SalesLogix.ErpEmail.Rules, Sage.SalesLogix.BusinessRules" targetMethod="OnBeforeInsert" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets>
+    <methodTarget id="7a131b57-0f70-4f0c-8348-f1a116381511" lastModifiedUtc="2010-04-27T21:36:15.836968Z" targetType="Sage.SalesLogix.ErpEmail.Rules, Sage.SalesLogix.BusinessRules" targetMethod="EnsureColumnMappingBeforeInsert" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </postExecuteTargets>
+  <postFlushTargets />
+</method>

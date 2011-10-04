@@ -71,8 +71,8 @@ public class ActivityFormHelper
         }
 
         _IsAddAllowed = foundUserCalendar && uc.AllowAdd.Value && viewPersonal;
-        _IsEditAllowed = foundUserCalendar && uc.AllowEdit.Value && viewPersonal;
-        _IsDeleteAllowed = foundUserCalendar && uc.AllowDelete.Value && viewPersonal;
+        _IsEditAllowed = (foundUserCalendar && uc.AllowEdit.Value && viewPersonal) || CurrentUserId.Equals("ADMIN");
+        _IsDeleteAllowed = (foundUserCalendar && uc.AllowDelete.Value && viewPersonal) || CurrentUserId.Equals("ADMIN");
         _IsCompleteAllowed = (foundUserCalendar && uc.AllowEdit.Value && viewPersonal) || _Activity.MemberOfAdminActivity;
     }
 

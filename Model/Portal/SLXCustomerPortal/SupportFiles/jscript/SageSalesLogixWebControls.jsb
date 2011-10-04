@@ -5,6 +5,7 @@
   <file name="sage-controls\sage-controls-address.js" path="" />
   <file name="sage-controls\sage-controls-common.js" path="" />
   <file name="sage-controls\sage-controls-currency.js" path="" />
+  <file name="sage-controls\sage-controls-numeric.js" path="" />
   <file name="sage-controls\sage-controls-datetimepicker.js" path="" />
   <file name="sage-controls\sage-controls-dependencylookup.js" path="" />
   <file name="sage-controls\sage-controls-email.js" path="" />
@@ -18,12 +19,15 @@
   <file name="sage-controls\sage-controls-timeline.js" path="" />
   <file name="sage-controls\sage-controls-timezone.js" path="" />
   <file name="sage-controls\sage-controls-namepanel.js" path="" />
+  <file name="sage-controls\sage-controls-tasklet.js" path="" />
+  <file name="sage-controls\sage-controls-taskpaneitem.js" path="" />
   <target name="sage controls" file="$output\sage-controls.js" debug="True" shorthand="False" shorthand-list="YAHOO.util.Dom.setStyle&#xD;&#xA;YAHOO.util.Dom.getStyle&#xD;&#xA;YAHOO.util.Dom.getRegion&#xD;&#xA;YAHOO.util.Dom.getViewportHeight&#xD;&#xA;YAHOO.util.Dom.getViewportWidth&#xD;&#xA;YAHOO.util.Dom.get&#xD;&#xA;YAHOO.util.Dom.getXY&#xD;&#xA;YAHOO.util.Dom.setXY&#xD;&#xA;YAHOO.util.CustomEvent&#xD;&#xA;YAHOO.util.Event.addListener&#xD;&#xA;YAHOO.util.Event.getEvent&#xD;&#xA;YAHOO.util.Event.getTarget&#xD;&#xA;YAHOO.util.Event.preventDefault&#xD;&#xA;YAHOO.util.Event.stopEvent&#xD;&#xA;YAHOO.util.Event.stopPropagation&#xD;&#xA;YAHOO.util.Event.stopEvent&#xD;&#xA;YAHOO.util.Anim&#xD;&#xA;YAHOO.util.Motion&#xD;&#xA;YAHOO.util.Connect.asyncRequest&#xD;&#xA;YAHOO.util.Connect.setForm&#xD;&#xA;YAHOO.util.Dom&#xD;&#xA;YAHOO.util.Event">
     <include name="sage-controls\sage-controls-common.js" />
     <include name="sage-controls\sage-controls-tooltipcombo.js" />
     <include name="sage-controls\sage-controls-activityreminders.js" />
     <include name="sage-controls\sage-controls-address.js" />
     <include name="sage-controls\sage-controls-currency.js" />
+    <include name="sage-controls\sage-controls-numeric.js" />
     <include name="sage-controls\sage-controls-datetimepicker.js" />
     <include name="sage-controls\sage-controls-dependencylookup.js" />
     <include name="sage-controls\sage-controls-email.js" />
@@ -45,6 +49,8 @@
     <include name="sage-controls\sage-controls-copy.js" />
     <include name="sage-controls\sage-controls-url.js" />
     <include name="sage-controls\sage-controls-group\sage-controls-filter-clientscript.js" />
+    <include name="sage-controls\sage-controls-tasklet.js" />
+    <include name="sage-controls\sage-controls-taskpaneitem.js" />
   </target>
   <directory name="sage-controls\sage-controls-group" />
   <file name="sage-controls\sage-controls-group\groupmanager.js" path="" />

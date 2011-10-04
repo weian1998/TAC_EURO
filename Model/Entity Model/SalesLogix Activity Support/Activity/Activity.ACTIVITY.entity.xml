@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="53edfc8b-8699-4608-89e0-3a3d5a4980ac" lastModifiedUtc="2008-07-15T22:21:29.2968002Z" manageSchema="false" tableName="ACTIVITY" name="Activity" displayPropertyId="b152ce82-ab7c-4ff9-896b-a5962615ceed" isExtension="false" audited="true" generateSDataFeed="true" sDataPathName="activities" lastUpdatedPropertyId="0b56697e-e18f-43e9-80e1-31539c55fca1" onBeforeInsertMethodId="2441a266-7d0f-43cc-bbf4-4f0423b6e429" onAfterInsertMethodId="5ddf34ee-783f-4e78-bd73-f95cefca56a8" onBeforeUpdateMethodId="9d78c82a-9adb-4972-8531-4ec1d5e81bcd" onAfterUpdateMethodId="cb310c9b-7661-4b69-b364-8768b0554d91" onBeforeDeleteMethodId="493f646d-b1ae-4328-8c9f-c525bce89211" onAfterDeleteMethodId="591273da-fe7f-43f4-9ba5-c48aecb771fa" onCreateId="9da54433-2fb3-4c2a-b000-dd0f48951dc1">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="53edfc8b-8699-4608-89e0-3a3d5a4980ac" lastModifiedUtc="2010-10-05T00:53:29.9299843Z" manageSchema="false" tableName="ACTIVITY" name="Activity" displayPropertyId="b152ce82-ab7c-4ff9-896b-a5962615ceed" isExtension="false" audited="true" generateSDataFeed="true" sDataPathName="activities" lastUpdatedPropertyId="0b56697e-e18f-43e9-80e1-31539c55fca1" onBeforeInsertMethodId="2441a266-7d0f-43cc-bbf4-4f0423b6e429" onAfterInsertMethodId="5ddf34ee-783f-4e78-bd73-f95cefca56a8" onBeforeUpdateMethodId="9d78c82a-9adb-4972-8531-4ec1d5e81bcd" onAfterUpdateMethodId="cb310c9b-7661-4b69-b364-8768b0554d91" onBeforeDeleteMethodId="493f646d-b1ae-4328-8c9f-c525bce89211" onAfterDeleteMethodId="591273da-fe7f-43f4-9ba5-c48aecb771fa" onCreateId="9da54433-2fb3-4c2a-b000-dd0f48951dc1">
   <extendedMetaData>
     <i>
       <n>NHibernate.Mapping.AlternateConcreteClass</n>
@@ -10,6 +10,7 @@
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
       <extender guid="1589723d-0536-4bf3-bdd7-3f6f7fe165d0">
         <OrmEntityMetadataExtension>
+          <StringExpression>${Description}</StringExpression>
           <IsHistoryTable>false</IsHistoryTable>
         </OrmEntityMetadataExtension>
       </extender>
@@ -484,14 +485,6 @@
       </ExtendedPropertiesCollection>
       <SystemDataType guid="47f90249-e4c8-4564-9ae6-e1fa9904f8b8">
         <IntegerDataType />
-      </SystemDataType>
-    </property>
-    <property xsi:type="OrmFieldProperty" id="565f93fc-a0f9-45a0-a304-c2b2d6e3301e" lastModifiedUtc="2011-05-17T18:51:24.484375Z" name="FulfilmentTaskID" audited="false" columnName="FULFILMENTTASKID" maxLength="12" precision="0" scale="0" ordinal="48" isReadOnly="false">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
-        <StandardIdDataType />
       </SystemDataType>
     </property>
   </properties>

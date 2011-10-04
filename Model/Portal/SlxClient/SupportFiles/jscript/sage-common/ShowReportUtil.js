@@ -6,6 +6,7 @@ var REPORT_CONTACT = "Contact:Contact Detail";
 var REPORT_OPPORTUNITY = "Opportunity:Opportunity Detail";
 var REPORT_DEFECT = "Defect:Support Defect";
 var REPORT_TICKET = "Ticket:Support Ticket";
+var REPORT_SALESORDER = "Sales Order:Sales Order Detail";
 
 /* Set this to the report value for a view other than Account, Contact, Opportunity, Defect, or Ticket. */
 /* NOTE: This value should be set to a value that is supported for the current view. */
@@ -46,6 +47,14 @@ function SetDefectReport(Report) {
     REPORT_DEFECT = Report;
 }
 
+function GetSalesOrderReport() {
+    return REPORT_SALESORDER;
+}
+
+function SetSalesOrderReport(Report) {
+    REPORT_SALESORDER = Report;
+}
+
 function GetTicketReport() {
     return REPORT_TICKET;
 }
@@ -82,6 +91,8 @@ function GetCurrentReport() {
             case "DEFECT":
                 return GetDefectReport();
                 break;
+            case "SALESORDER":
+                return GetSalesOrderReport();
             case "TICKET":
                 return GetTicketReport();
                 break;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Sage.Common.Syndication.Json;
+using Sage.Common.Syndication.Json.Linq;
 using Sage.Platform.Application;
 using Sage.Platform.Application.UI.Web;
 using Sage.Platform.WebPortal;
@@ -80,7 +81,8 @@ public partial class SmartParts_ClientLinkHandler_ClientLinkHandler : UserContro
     {
         if (_state.Value == string.Empty) return;
 
-        JavaScriptObject jso = (JavaScriptObject)JavaScriptConvert.DeserializeObject(_state.Value);
+        var jso = new Dictionary<string, object>();
+        JsonConvert.PopulateObject(_state.Value, jso);
 
         string request = GetValue(jso, "request");
         string kind = GetValue(jso, "kind");
@@ -160,6 +162,19 @@ public partial class SmartParts_ClientLinkHandler_ClientLinkHandler : UserContro
                 break;
             case "MergeRecords":
                 Link.MergeRecords(selectionInfoKey);
+                break;
+            case "ShowDialog":
+                //dialog properties
+                String smartPart = GetValue(jso, "smartPart");
+                String entityId = GetValue(jso, "entityId");
+                String title = GetValue(jso, "dialogTitle");
+                bool isCentered = Convert.ToBoolean(GetValue(jso, "isCentered"));
+                int top = Convert.ToInt16(GetValue(jso, "dialogTop"));
+                int left = Convert.ToInt16(GetValue(jso, "dialogLeft"));
+                int height = Convert.ToInt16(GetValue(jso, "dialogHeight"));
+                int width = Convert.ToInt16(GetValue(jso, "dialogWidth"));                
+                
+                Link.ShowDialog(type, smartPart, entityId, title, isCentered, top, left, height, width);
                 break;
             case "Administration":
                 if(type == "AddUsers")
@@ -243,12 +258,12 @@ public partial class SmartParts_ClientLinkHandler_ClientLinkHandler : UserContro
 
         if (jso.ContainsKey("args"))
         {
-            IDictionary<string, object> jsoArgs = jso["args"] as IDictionary<string, object>;
+            var jsoArgs = jso["args"] as JObject;
             if (jsoArgs != null)
             {
-                foreach (KeyValuePair<string, object> arg in jsoArgs)
+                foreach (var arg in jsoArgs)
                 {
-                    args.Add(arg.Key, arg.Value.ToString());
+                    args.Add(arg.Key, arg.Value.Value<string>());
                 }
             }
         }

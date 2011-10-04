@@ -10,8 +10,8 @@
 				<tr>
 					<td class="header" colspan="3" align="left" ><label id="ADDCALCULATEDFIELD"><asp:Localize  runat="server" Text="<%$ resources: localizeAddCalcField.Text %>" /></label></td>							
 					<td class="header" align="right">    
-					    <SalesLogix:PageLink ID="AddCalcFieldHelpLink" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="queryaddeditcalcfields.aspx" ImageUrl="~/images/icons/Help_16x16.gif"></SalesLogix:PageLink>
-                    </td>
+						<SalesLogix:PageLink ID="AddCalcFieldHelpLink" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="queryaddeditcalcfields.aspx" ImageUrl="~/images/icons/Help_16x16.gif"></SalesLogix:PageLink>
+					</td>
 				</tr>
 			</table>
 		</td>
@@ -19,7 +19,7 @@
 	<tr>
 		<td valign="top">
 			<div id="divTableTree">
-			    <asp:TreeView ID="CalcFieldTreeView" runat="server" ExpandDepth="1"></asp:TreeView>
+				<asp:TreeView ID="CalcFieldTreeView" runat="server" ExpandDepth="1"></asp:TreeView>
 			</div>
 		</td>
 		<td valign="top" class="padd3">
@@ -82,13 +82,13 @@
 							<table>
 								<tr>
 									<td>
-										<button id="add" onclick="addCalc('+');">+</button>
-										<button id="sub" onclick="addCalc('-');">-</button>
-										<button id="mul" onclick="addCalc('*');">*</button>
-										<button id="div" onclick="addCalc('/');">&divide;</button>
+										<input type="button" id="add" onclick="addCalc('+');" value="+" />
+										<input type="button" id="sub" onclick="addCalc('-');" value="-" />
+										<input type="button" id="mul" onclick="addCalc('*');" value="*" />
+										<input type="button" id="div" onclick="addCalc('/');" value="&divide;" />
 										&nbsp;
-										<button id="lprns" onclick="addCalc('(');" class="smallertext">(</button>
-										<button id="rprns" onclick="addCalc(')');" class="smallertext">)</button>
+										<input type="button" id="lprns" onclick="addCalc('(');" class="smallertext" value="(" />
+										<input type="button" id="rprns" onclick="addCalc(')');" class="smallertext" value=")" />
 									</td>
 								</tr>
 								<tr>

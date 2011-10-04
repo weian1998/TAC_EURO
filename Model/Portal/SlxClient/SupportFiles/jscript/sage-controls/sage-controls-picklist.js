@@ -120,14 +120,7 @@ function PickList_getVal() {
     }
 }
 
-function PickList_HandleFocusLeave()
-{
-    var self = this;
-    var text = document.getElementById(this.textId);
-}
-
-function PickList_SetVisibility(visible)
-{
+function PickList_SetVisibility(visible) {
     var self = this;
     var listDiv = document.getElementById(this.listDivId);
     if(visible)
@@ -148,18 +141,18 @@ function PickList_SetVisibility(visible)
             this._globalClickBound = true;
             this._globalClickEl = Ext.isIE ? document.body : document;
                         
-            var last = false;
-            $(listDiv).parents().each(function() {
-                var overflow = $(this).css("overflow");
-                if (overflow == "auto" || overflow == "scroll")
-                {
-                    self._globalClickEl = last || this; 
-                    return false;
-                }                
-                last = this;
-            });            
+//            var last = false;
+//            $(listDiv).parents().each(function() {
+//                var overflow = $(this).css("overflow");
+//                if (overflow == "auto" || overflow == "scroll")
+//                {
+//                    self._globalClickEl = last || this; 
+//                    return false;
+//                }                
+//                last = this;
+//            });
             
-            Ext.get(this._globalClickEl).on("mousedown", this.MimicBlur, this, {delay: 10});
+            Ext.get(this._globalClickEl).on("click", this.MimicBlur, this, {delay: 10});
         }
         this.isDroppedDown = true;
     } 
@@ -170,8 +163,7 @@ function PickList_SetVisibility(visible)
         this.isDroppedDown = false;
     }
 }
-function PickList_ResolveValue()
-{
+function PickList_ResolveValue() {
     if((this.CanEditText)&&(this.mustExistInList)&&(this.multiSelect == "False"))
     {
        var textELM = document.getElementById(this.textId);
@@ -192,8 +184,7 @@ function PickList_ResolveValue()
     }
 
 }
-function PickList_MimicBlur(e) 
-{
+function PickList_MimicBlur(e) {
     var e = (e !== false) ? (e || window.event) : false;    
     var target = (e) ? e.currentTarget || (e.target || e.srcElement) : false; 
     var el = document.getElementById(this.clientId); 
@@ -210,7 +201,7 @@ function PickList_MimicBlur(e)
        
     if (this._globalClickBound === true)
     {
-        Ext.get(this._globalClickEl || (Ext.isIE ? document.body : document)).un("mousedown", this.MimicBlur);
+        Ext.get(this._globalClickEl || (Ext.isIE ? document.body : document)).un("click", this.MimicBlur);
         this._globalClickBound = false;
     }
     
@@ -266,14 +257,13 @@ function PickList_ButtonClick(e) {
         list.focus();
     }
     
-    e.cancelBubble = true;
-	if (e.stopPropagation) e.stopPropagation();
+//    e.cancelBubble = true;
+//	if (e.stopPropagation) e.stopPropagation();
 	return false;
 }
 
 // this fills the selection list asynchronously
-function PickList_GetList()
-{
+function PickList_GetList() {
     var list = document.getElementById(this.listId);
     if ((this.multiSelect == "True") || (list.options.length == 0))
     {
@@ -282,7 +272,7 @@ function PickList_GetList()
         }
         var current = document.getElementById(this.textId);
         var encodeText =  encodeURIComponent(current.value);               
-        var vURL = "SLXPickListCache.aspx?picklist=" + this.PickListName + "&multiselect=" + this.multiSelect + "&alphasort=" + this.AlphaSort + "&clientid=" + this.clientId + "&current=" + encodeText;
+        var vURL = "SLXPickListCache.aspx?picklist=" + encodeURIComponent(this.PickListName) + "&multiselect=" + this.multiSelect + "&alphasort=" + this.AlphaSort + "&clientid=" + this.clientId + "&current=" + encodeText;
         xmlhttp.open("GET", vURL, false);
         xmlhttp.send(null);
         this.HandleHttpResponse(xmlhttp.responseText);
@@ -328,15 +318,14 @@ function PickList_HandleHttpResponse(results) {
                 parts[0] = parts[0].substr(1);
                 oOption.selected = true;
             }
-            //oOption.innerHTML = parts[1];
             oOption.text = parts[1];
+            oOption.title = parts[1];
             oOption.value = parts[0];
         }
     }
 }
 
-function PickList_GetItemParts(item)
-{
+function PickList_GetItemParts(item) {
     var parts = item.split("^");
     if(parts.length > 2)
     {
@@ -346,32 +335,6 @@ function PickList_GetItemParts(item)
        }
      }
     return parts;
-}
-
-function PickList_SetHint(e)
-{
-    if (!e) var e = window.event;
-    var list = document.getElementById(this.listId);
-    if (e.target)
-    {
-        list.title = e.target.textContent;
-    }
-    else
-    {
-        var offset = e.y;
-        var indexOffset = 0;
-        var scrollIndex = list.scrollTop;
-        scrollIndex = scrollIndex/14;
-        while (offset >= 14)
-        {
-            offset = offset - 14;
-            indexOffset++;
-        }
-        if (scrollIndex + indexOffset < list.options.length) 
-        {
-            list.title = list.options[scrollIndex + indexOffset].innerText;
-        }
-    }
 }
 
 function PickList_SelectionChanged() {
@@ -511,8 +474,7 @@ function Picklist_HandleKeyDown(e) {
     return true;
 }
 
-function PickList_TextChange(e)
-{
+function PickList_TextChange(e) {
     if (!e) var e = window.event;
     if (e.keyCode == 13) //Enter
     {
@@ -576,8 +538,7 @@ function PickList_TextChange(e)
         }
 }
 
-function PickList_SetCheckedState(itemId, index, value)
-{
+function PickList_SetCheckedState(itemId, index, value) {
     var checkbox = document.getElementById(itemId);
     if (checkbox.checked)
     {
@@ -592,8 +553,7 @@ function PickList_SetCheckedState(itemId, index, value)
     
 }
 
-function PickList_InvokeChangeEvent(cntrl)
-{
+function PickList_InvokeChangeEvent(cntrl) {
     if (document.createEvent)
     {
         //FireFox
@@ -608,9 +568,6 @@ function PickList_InvokeChangeEvent(cntrl)
     }
 }
 
-
-PickList.prototype.SetHint = PickList_SetHint;
-
 PickList.prototype.setVal = PickList_setVal;
 PickList.prototype.getVal = PickList_getVal;
 PickList.prototype.SetVisibility = PickList_SetVisibility;
@@ -619,7 +576,6 @@ PickList.prototype.SelectionChanged = PickList_SelectionChanged;
 PickList.prototype.MultiSelect = PickList_MultiSelect;
 PickList.prototype.TextChange = PickList_TextChange;
 PickList.prototype.SetCheckedState = PickList_SetCheckedState;
-PickList.prototype.HandleFocusLeave = PickList_HandleFocusLeave;
 PickList.prototype.GetList = PickList_GetList;
 PickList.prototype.HandleHttpResponse = PickList_HandleHttpResponse;
 PickList.prototype.InvokeChangeEvent = PickList_InvokeChangeEvent;

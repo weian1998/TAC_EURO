@@ -236,7 +236,9 @@ public partial class SmartParts_Activity_ActivityReminders : UserControl, ISmart
                                {
                                    User = CurrentUser,
                                    CompletedDate = Convert.ToBoolean(asScheduled.Value)
-                                                       ? activity.StartDate.AddMinutes(activity.Duration)
+                                                       ? (activity.Timeless) 
+                                                            ? activity.StartDate.Date.AddSeconds(5) 
+                                                            : activity.StartDate.AddMinutes(activity.Duration)
                                                        : DateTime.UtcNow,
                                    Result = resultText.Value,
                                    Notes = completeNotes.Value
@@ -697,6 +699,8 @@ public partial class SmartParts_Activity_ActivityReminders : UserControl, ISmart
                 return ActivitySortOrder.soAccount;
             case "AlarmTime":
                 return ActivitySortOrder.soAlarmTime;
+            case "Regarding":
+                return ActivitySortOrder.soDescription;
             default:
                 return ActivitySortOrder.soStartDate;
         }

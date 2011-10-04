@@ -120,49 +120,20 @@ Sage.TaskPane.GroupListTasklet.prototype.initGroupManagerEvents = function() {
     });   
 };
 
-Sage.TaskPane.GroupListTasklet.prototype.setCurrentEntity = function(id, position) {
+Sage.TaskPane.GroupListTasklet.prototype.setCurrentEntity = function (id, position) {
     var entityContextSvc = Sage.Services.getService("ClientEntityContext");
     var contextSvc = Sage.Services.getService("ClientContextService");
-    if (entityContextSvc && contextSvc) 
-    {
+    if (entityContextSvc && contextSvc) {
         var gMgrSvc = Sage.Services.getService("ClientGroupContext");
         if (gMgrSvc) {
             var previousPosition = gMgrSvc.getContext().CurrentEntityPosition;
             if (position == previousPosition) return;
-
-            var mgr = Sage.Services.getService("ClientBindingManagerService");
-            if ((mgr) && (!mgr.canChangeEntityContext())) { 
-                this.navigateToRow(previousPosition - 1);
-                return;
-            }
         }
 
-        var entityContext = entityContextSvc.getContext();                
-        //$("#8332521B0B8E43bdB705171B97758A70").val("ClientEntityId=" + id + "&PreviousEntityId=" + context.EntityId);
-        
-        if (contextSvc.containsKey("ClientEntityId"))
-            contextSvc.setValue("ClientEntityId", id);
-        else
-            contextSvc.add("ClientEntityId", id);
-            
-        if (contextSvc.containsKey("PreviousEntityId"))
-            contextSvc.setValue("PreviousEntityId", entityContext.EntityId);
-        else
-            contextSvc.add("PreviousEntityId", entityContext.EntityId);
-            
-        if (contextSvc.containsKey("ClientEntityPosition"))
-            contextSvc.setValue("ClientEntityPosition", position);
-        else    
-            contextSvc.add("ClientEntityPosition", position);
-
-        if (window.TabControl) {
-            var tState = TabControl.getState();
-            if(tState) {
-                tState.clearUpdatedTabs();
-                TabControl.updateStateProxy();
-            }
+        var entityContext = entityContextSvc.getContext();
+        if (!entityContextSvc.navigateSLXGroupEntity(id, entityContext.EntityId, position)) {
+            this.navigateToRow(previousPosition - 1);
         }
-        
         __doPostBack("MainContent", "");
     }
 };
@@ -281,7 +252,7 @@ Sage.TaskPane.GroupListTasklet.prototype.buildUrl = function(which, context) {
     return Sage.TaskPane.GroupListTasklet.__urlBuilders[this._connections[which].builder](this._connections[which], context);    
 };
 
-Sage.TaskPane.GroupListTasklet.prototype.initGrid = function() {
+Sage.TaskPane.GroupListTasklet.prototype.initGrid = function () {
     var self = this;
     var bufferedReader = new Ext.ux.data.BufferedJsonReader({
         root: 'items',
@@ -295,9 +266,9 @@ Sage.TaskPane.GroupListTasklet.prototype.initGrid = function() {
         }, {
             name: 'SLXRN',
             sortType: 'int'
-}]
+        }]
     );
-    var bufferedDataStore = new Sage.SalesLogix.Controls.BufferedStore({ 
+    var bufferedDataStore = new Sage.SalesLogix.Controls.BufferedStore({
         autoLoad: false,
         bufferSize: 100,
         reader: bufferedReader,
@@ -305,7 +276,7 @@ Sage.TaskPane.GroupListTasklet.prototype.initGrid = function() {
         url: "build"
     });
 
-    bufferedDataStore.on("beforeload", function(store, options) {
+    bufferedDataStore.on("beforeload", function (store, options) {
         var url = this.buildUrl("data", { instance: self, store: store, startAt: 0, args: arguments });
         store.proxy.conn.url = url;
         store.proxy.conn.method = "GET";
@@ -321,35 +292,35 @@ Sage.TaskPane.GroupListTasklet.prototype.initGrid = function() {
         }
     });
 
-    bufferedView.on('beforebuffer', function(view, store, rowIndex, visibleRows, totalCount, bufferOffset) {
+    bufferedView.on('beforebuffer', function (view, store, rowIndex, visibleRows, totalCount, bufferOffset) {
         var url = this.buildUrl("data", { instance: self, store: store, startAt: bufferOffset, args: arguments });
         store.proxy.conn.url = url;
         store.proxy.conn.method = "GET";
         store.url = url;
     }, this);
 
-    bufferedView.on('buffer', function(view, store, rowIndex, visibleRows, totalCount, bufferOffset) {
+    bufferedView.on('buffer', function (view, store, rowIndex, visibleRows, totalCount, bufferOffset) {
         for (var i = 0; i < this._tasks.buffer.length; i++)
             this._tasks.buffer[i](this);
         this._tasks.buffer = [];
     }, this);
 
-    bufferedView.on('refresh', function(view) {
+    bufferedView.on('refresh', function (view) {
         var svc = Sage.Services.getService("ClientGroupContext");
         this.navigateToRow(svc.getContext().CurrentEntityPosition - 1);
     }, this, { single: true });
 
-    var bufferedSelectionModel = new Ext.ux.grid.BufferedRowSelectionModel({singleSelect: true});
-    bufferedSelectionModel.onRefresh = function() { };
+    var bufferedSelectionModel = new Ext.ux.grid.BufferedRowSelectionModel({ singleSelect: true });
+    bufferedSelectionModel.onRefresh = function () { };
 
-    bufferedSelectionModel.on('beforerowselect', function(selectionModel, index, keep, record) {
+    bufferedSelectionModel.on('beforerowselect', function (selectionModel, index, keep, record) {
         //ensure cleared selected - clear selections does not want to clear initial selection after page refresh
         selectionModel.clearSelections();
         if (selectionModel.lastActive !== false)
             selectionModel.deselectRow(selectionModel.lastActive);
     });
 
-    bufferedSelectionModel.on('rowselect', function(selectionModel, index, record) {
+    bufferedSelectionModel.on('rowselect', function (selectionModel, index, record) {
         var view = self._grid.getView();
         var store = self._grid.getStore();
 
@@ -367,12 +338,12 @@ Sage.TaskPane.GroupListTasklet.prototype.initGrid = function() {
         { header: 'SLXRN', dataIndex: 'SLXRN', hidden: true },
         { header: this._keyAlias, dataIndex: this._keyAlias, hidden: true },
         { header: this._columnDisplayName, dataIndex: this._columnAlias,
-            renderer: function(value, meta, record, rowIndex, columnIndex, store) {
-                return (value ? Ext.util.Format.htmlEncode(value) : "&nbsp;");
+            renderer: function (value, meta, record, rowIndex, columnIndex, store) {
+                return (value ? Ext.util.Format.htmlEncode(value) : String.format("({0})", meta.value));
             }
         }
     ]);
-    
+
     this._grid = new Ext.grid.GridPanel({
         id: this._clientId + '_grid',
         layout: 'fit',
@@ -391,13 +362,13 @@ Sage.TaskPane.GroupListTasklet.prototype.initGrid = function() {
         title: '',
         stripeRows: true,
         border: false,
-        stateful: false 
+        stateful: false
     });
-    
-    this._grid.on('rowclick', function(grid, index, e) {    
-                            
+
+    this._grid.on('rowclick', function (grid, index, e) {
+
     });
-        
+
     this._panel = new Ext.Panel({
         id: this._clientId + '_panel',
         cls: 'group-list-panel',
@@ -407,38 +378,35 @@ Sage.TaskPane.GroupListTasklet.prototype.initGrid = function() {
         renderTo: this._clientId,
         width: "100%"
     });
-    
+
     this._resizer = new Ext.Resizable(this._clientId + '_grid', {
         handles: 's',
         dynamic: true
     });
-    
-    this._resizer.on('resize', function(resizer, width, height, e) {
-            if (!self.isInIE6())
-            {                
+
+    this._resizer.on('resize', function (resizer, width, height, e) {
+        if (!self.isInIE6()) {
+            this.doLayout();
+        }
+        else {
+            self._grid.setHeight(height - 5);
+            self._grid.syncSize();
+            self._grid.doLayout();
+            this.doLayout();
+        }
+    }, this._panel);
+    if (mainViewport && mainViewport.findById) { //only need if grid is in maincontent, in which case mainviewport should exist
+        var layoutPanel = mainViewport.findById("center_panel_east");
+        layoutPanel.on('resize', function () {
+            if (!self.isInIE6()) {
                 this.doLayout();
             }
-            else
-            {                    
-                self._grid.setHeight(height - 5);
-		        self._grid.syncSize();
-		        self._grid.doLayout();
-		        this.doLayout();		        
+            else {
+                self._grid.setWidth(this.getInnerWidth());
+                self._grid.syncSize();
+                self._grid.doLayout();
+                this.doLayout();
             }
         }, this._panel);
-        
-    var layoutPanel = mainViewport.findById("center_panel_east");
-    layoutPanel.on('resize', function() {
-            if (!self.isInIE6())
-            {                
-                this.doLayout();
-            }
-            else
-            {                    
-                self._grid.setWidth(this.getInnerWidth());
-		        self._grid.syncSize();
-		        self._grid.doLayout();
-		        this.doLayout();		        
-            }
-        }, this._panel);             
+    }
 };

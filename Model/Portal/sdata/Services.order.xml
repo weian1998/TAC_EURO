@@ -3,8 +3,10 @@
   <Item Id="9b29c64e-a5df-40e4-a5c4-34ab6fd13b9f">Sage.Platform.Security.IUserService.service.xml</Item>
   <Item Id="247bbce7-de35-4a63-a305-39860be33ff5">Sage.Platform.Data.IDataService.service.xml</Item>
   <Item Id="75210299-8238-466d-8799-7d364cd562a8">Sage.Platform.Application.Services.IUserOptionsService.service.xml</Item>
-  <Item Id="db505a6c-c9ae-4b0c-a0c9-d0109aa981a1">Sage.Platform.Orm.Services.IDynamicEntityConfigurationService.service.xml</Item>
-  <Item Id="e46b761c-fc0b-49c8-bf75-98fe1cb2898e">Sage.Platform.Orm.Services.IDynamicEntityNHibernateConfigurationService.service.xml</Item>
-  <Item Id="adb7b4ab-9d76-4bd0-815b-2af9a6053cf9">Sage.Platform.Orm.Services.IDynamicEntitySDataConfigurationService.service.xml</Item>
-  <Item Id="523de0f7-8a76-4274-beb9-72753611130e">Sage.Platform.Data.IHibernateConfigurationService.service.xml</Item>
+  <Item Id="0ebfff29-970b-409a-94ac-e09c540315f9">Sage.Platform.SData.Sync.ISyncDigestService.service.xml</Item>
+  <Item Id="e213e3b2-3aa5-43bf-a277-56a2242f3017">Sage.Platform.SData.Sync.ISyncResultsService.service.xml</Item>
+  <Item Id="73704cec-f5db-4e1b-bb03-db1db02b2557">Sage.Platform.SData.IAppIdMappingService.service.xml</Item>
+  <Item Id="b106b9cc-0f1c-4adb-bbf1-4c1ea1c11350">Sage.Platform.Data.IHibernateConfigurationService.service.xml</Item>
+  <Item Id="72c3a945-7933-488a-8705-8c4da32b0439">Sage.SalesLogix.SalesLogixEntityKeyGenerator.service.xml</Item>
+  <Item Id="c0eec542-e0ac-42fb-9ca8-cf822f4c5599">Sage.SalesLogix.Services.ISystemOptionsService.service.xml</Item>
 </ModelItems>

@@ -1,6 +1,7 @@
 <%@ Import Namespace="System.Data"%>
 <%@ Import Namespace="System.Data.Common"%>
 <%@ Import namespace="Sage.Platform.WebPortal"%>
+<%@ Import namespace="Sage.Platform.Application"%>
 <%@ Control Language="C#" ClassName="AccountDetails" Inherits="Sage.Platform.WebPortal.SmartParts.EntityBoundSmartPartInfoProvider" %>
 <%@ Register Assembly="Sage.SalesLogix.Client.GroupBuilder" Namespace="Sage.SalesLogix.Client.GroupBuilder" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.PickList" TagPrefix="SalesLogix" %>
@@ -144,6 +145,23 @@ meta:resourcekey="LitRequestForm_7_rsc"
 </table>
 
 <script runat="server" type="text/C#">
+    
+    private IEntityContextService _EntityService;
+    [ServiceDependency(Type = typeof(IEntityContextService), Required = true)]
+    public IEntityContextService EntityService
+    {
+        get
+        {
+            return _EntityService;
+        }
+        set
+        {
+            _EntityService = value;
+        }
+    }
+
+
+    
     protected override void InnerPageLoad(object sender, EventArgs e)
     {
         btnDelLitRequest.Click += btnDelLitRequest_ClickAction;
@@ -158,7 +176,7 @@ meta:resourcekey="LitRequestForm_7_rsc"
                     conn.Open();
                 using (var cmd = new OleDbCommand(SQL, conn as OleDbConnection))
                 {
-                    cmd.Parameters.AddWithValue("@LitReqId", Page.Request.Params["entityId"]);
+                    cmd.Parameters.AddWithValue("@LitReqId", EntityService.EntityID);
                     using (var reader = cmd.ExecuteReader())
                     {
                         LitRequestGrid.DataSource = reader;
@@ -168,7 +186,7 @@ meta:resourcekey="LitRequestForm_7_rsc"
             }
 
             foreach (Object c in Controls)
-                if (c.GetType() == typeof(TextBox))
+                if (c is TextBox)
                     ((TextBox)c).ReadOnly = true;
             if (!IsPostBack)
             {
@@ -185,7 +203,7 @@ meta:resourcekey="LitRequestForm_7_rsc"
     protected void btnDelLitRequest_ClickAction(object sender, EventArgs e)
     {
         //TODO:using the delete method is choking, so manually deleting records for now.
-        Sage.Entity.Interfaces.ILitRequest lr = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.ILitRequest>(Page.Request.Params["entityId"].ToString());
+        Sage.Entity.Interfaces.ILitRequest lr = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.ILitRequest>(EntityService.EntityID);
         string conid = lr.Contact.Id.ToString();
         //lr.Delete();
         string SQL = "DELETE FROM LITREQUESTITEM WHERE LITREQID = ?";
@@ -197,7 +215,7 @@ meta:resourcekey="LitRequestForm_7_rsc"
                 conn.Open();
             using (var cmd = new OleDbCommand(SQL, conn))
             {
-                cmd.Parameters.AddWithValue("@LitReqId", Page.Request.Params["entityId"]);
+                cmd.Parameters.AddWithValue("@LitReqId", EntityService.EntityID);
                 cmd.ExecuteNonQuery();
                 cmd.CommandText = "DELETE FROM LITREQUEST WHERE LITREQID = ?";
                 cmd.ExecuteNonQuery();

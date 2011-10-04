@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PortalPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="37e4e99e-e24a-4b5d-b10e-824480b3cda1">
+  <PageAlias>DeDupJob</PageAlias>
+  <SmallImage>[Localization!Global_Images:process_duplicate_records_16x16]</SmallImage>
+  <LargeImage>[Localization!Global_Images:process_duplicate_records_24x24]</LargeImage>
+  <TemplateUrl>Masters\base.master</TemplateUrl>
+  <InheritTemplate>false</InheritTemplate>
+  <InheritsFrom>Sage.Platform.WebPortal.EntityPage, Sage.Platform.WebPortal</InheritsFrom>
+  <Properties>
+    <Property Name="EntityTypeName" TypeConverter="">Sage.Entity.Interfaces.IDeDupJob, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</Property>
+  </Properties>
+  <TemplateProperties>
+    <Property Name="IncludeMiddlePane" TypeConverter="">False</Property>
+    <Property Name="IncludeMoreTabsTab" TypeConverter="">false</Property>
+    <Property Name="IncludeTaskPane" TypeConverter="">false</Property>
+  </TemplateProperties>
+  <IsDefaultPage>false</IsDefaultPage>
+  <ExcludedGlobalModules />
+  <AppliedSecurity>Administration/Deduplication/ProcessDuplicates</AppliedSecurity>
+</PortalPage>

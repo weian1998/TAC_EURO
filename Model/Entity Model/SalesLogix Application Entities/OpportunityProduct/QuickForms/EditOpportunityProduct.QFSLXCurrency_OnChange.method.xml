@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="24f1a3c7-595d-4569-9194-56866aa991f7" lastModifiedUtc="2011-03-30T21:23:11.592Z" name="QFSLXCurrency_OnChange" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="EditOpportunityProduct">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="2966ccc7-84bd-4520-be37-be126acb25b4" paramName="form" sequence="0" paramType="IEditOpportunityProduct" />
+    <OrmEntityMethodParam id="0d48e172-54f7-4e0f-9566-f94d47c0f6cb" paramName="args" sequence="0" paramType="EventArgs" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="b43edbfb-c67b-4571-a869-c2cb16a51045" lastModifiedUtc="2011-03-30T21:22:46.069Z" targetType="Sage.BusinessRules.CodeSnippets.EditOpportunityProductEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="QFSLXCurrency_OnChangeStep" active="true" codeSnippetId="fbccc00d-f7b8-46d5-b719-fc001f813bc3">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

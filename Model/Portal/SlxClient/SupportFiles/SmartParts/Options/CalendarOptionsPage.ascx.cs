@@ -60,12 +60,18 @@ public partial class CalendarOptionsPage : Sage.Platform.WebPortal.SmartParts.Sm
         _defaultInterval.DataTextField = options.DataValueField;
         _defaultInterval.DataValueField = options.DataValueField;
 
+        _firstDayOfWeek.DataSource = LocalizeLookup("DayOfWeek", options.FistDayOfWeekList); 
+        _firstDayOfWeek.DataTextField = options.DataTextField;
+        _firstDayOfWeek.DataValueField = options.DataValueField;
+
+
         DataBind();
         BindUsers();
 
         // set defaults
         Utility.SetSelectedValue(_defaultCalendarView, options.DefaultCalendarView);
         Utility.SetSelectedValue(_showHistoryOnDayView, options.ShowHistoryOnDayView);
+      
 
         if (!Utility.SetSelectedValue(UserList, options.ViewCalendarFor))
         {
@@ -110,6 +116,7 @@ public partial class CalendarOptionsPage : Sage.Platform.WebPortal.SmartParts.Sm
 
         Utility.SetSelectedValue(_defaultInterval, options.DefaultInterval);
         Utility.SetSelectedValue(ddlDefaultActivityType, options.DefaultActivityType);
+        Utility.SetSelectedValue(_firstDayOfWeek, options.FirstDayOfTheWeek);
     }
 
     protected void _save_Click(object sender, EventArgs e)
@@ -124,6 +131,7 @@ public partial class CalendarOptionsPage : Sage.Platform.WebPortal.SmartParts.Sm
         options.DayEnd = _dayEnd.SelectedItem.Text; // _dayEnd.SelectedValue;
         options.DefaultInterval = _defaultInterval.SelectedValue;
         options.DefaultActivityType = ddlDefaultActivityType.SelectedValue;
+        options.FirstDayOfTheWeek = _firstDayOfWeek.SelectedValue;
 
         options.Save();
 
@@ -171,4 +179,28 @@ public partial class CalendarOptionsPage : Sage.Platform.WebPortal.SmartParts.Sm
             UserList.SelectedIndex = selectedindex;
         }
     }
+
+    private IDictionary<string, string> LocalizeLookup(string localizationTag, IDictionary<string, string> lookup)
+    {
+        IDictionary<string, string> ll = new Dictionary<string, string>();
+
+        foreach (KeyValuePair<string, string> item in lookup)
+        {
+            //Every thing is back wards in that the key is text and value is the key. this stems from Sage.SalesLogix.Web.UserOptoipns Project where Options based is defined. 
+            var localizedText = GetLocalResourceObject(string.Format("{0}_{1}.Text", localizationTag, item.Key));
+            if (localizedText != null)
+            {
+                ll.Add(localizedText.ToString(), item.Value);
+            }
+            else 
+            {
+                ll.Add(item.Key, item.Value);
+            }
+
+        }
+
+        return ll;
+    
+    }
+
 }

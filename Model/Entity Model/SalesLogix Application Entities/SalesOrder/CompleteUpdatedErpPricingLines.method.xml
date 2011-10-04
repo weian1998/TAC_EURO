@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="4411ae09-4a1b-49a9-a393-5dde321eae83" lastModifiedUtc="2010-07-13T15:05:45.2184995Z" name="CompleteUpdatedErpPricingLines" returnType="Boolean" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="82d438ed-3d2d-41cc-8dae-b7ea1851ef20" paramName="submitOrder" sequence="0" paramType="bool">
+      <description>Flag indicating whether or not to submit the order to the accounting system.</description>
+    </OrmEntityMethodParam>
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="a33731ef-ae19-418d-ba3c-2ecf9716c697" lastModifiedUtc="2010-07-02T23:25:42.9076942Z" targetType="Sage.SalesLogix.SalesOrder.SalesOrder, Sage.SalesLogix.BusinessRules" targetMethod="CompleteUpdatedErpPricingLines" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

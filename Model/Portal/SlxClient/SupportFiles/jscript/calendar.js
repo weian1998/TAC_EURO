@@ -26,7 +26,7 @@ $(function() {
         overrideWeekViewOnMouseDown();
         var updated = args.get_panelsUpdated();
         $(updated).each(function() {
-            if (this.id.indexOf("mainformUpdatePanel") > -1)
+            if (this.id === "ctl00_mainformUpdatePanel")
                 RenderCalendarAndEvents(panel);
         });
     });
@@ -34,6 +34,11 @@ $(function() {
 
 function RenderCalendarAndEvents(panel) {
     BuildCalendar();
+
+    // this is a hack to fix defect 1-70114.  The calendar does not show the correct date when
+    // F5 is pressed, even though the scheduleInfo holds the correct date.
+    __calendar.scheduleInfo.setActiveDay(__calendar.scheduleInfo.getActiveDay(), false, clientId);
+
     AdjustCalendar(panel);
     RebuildCalendarState(); 
     setCalendarView(__calendar.view);
@@ -110,7 +115,7 @@ function BuildCalendar() {
             day: function() {
                 //Set scroll position based on user pref calendar property          
                 if((x = this.getScrollPosition()) < 0)
-                    x = ((this._row0 && this._row0.offsetHeight > 0) ? this._row0.offsetHeight : 16) * this._props[9];
+                    x = (this._row0 ? this._row0.offsetHeight : 16) * this._props[9];
                 this._divScroll.scrollTop = x;
                                                                             
                 $(this.getElement()).show();
@@ -593,7 +598,7 @@ var EventList =
     month: null,
     userName: null,
 
-    setDate: function(date) {
+    setDate: function (date) {
         // if month or user changed, refresh list
         var month = Ext.util.Format.date(date, 'Y-m');
         var isNewMonth = EventList.month !== month;
@@ -617,15 +622,25 @@ var EventList =
             url: url
         });
         this.store.load();
+        this.render();
     },
 
     dateFormatString: getContextByKey('userDateFmtStr'),
 
-    dateRenderer: function(value) {
+    dateRenderer: function (value) {
+        if (typeof value === "string") {
+            var regex = /Date\(([0-9]+)/;
+            value = new Date(parseInt(regex.exec(value)[1], 10));
+        }
+        if(EventList.dateFormatString == ""){
+            
+          return value ?  value.format(Sys.CultureInfo.CurrentCulture.dateTimeFormat.ShortDatePattern): ""; 
+        }
+        
         return value ? value.format(EventList.dateFormatString) : "";
     },
 
-    linkRenderer: function(value, cell, record) {
+    linkRenderer: function (value, cell, record) {
         var entityId = record.get('id');
         var date = EventList.dateRenderer(value);
         return String.format('<a id="lnk{0}" href="Event.aspx?entityId={0}">{1}</a>', entityId, date);
@@ -635,6 +650,7 @@ var EventList =
         try {
             retvalue = SR[value + "_EventType"] || value;
         } catch (ex) {
+            if (console) console.log("Error getting localized type.");
         }
         return retvalue;
     },
@@ -646,7 +662,7 @@ var EventList =
         fields: ['id', 'startDate', 'endDate', 'type', 'description']
     }),
 
-    render: function() {
+    render: function () {
         var oldGrid = Ext.getCmp('event-list');
         if (oldGrid)
             oldGrid.destroy();
@@ -682,12 +698,12 @@ var EventList =
                 dataIndex: 'type',
                 header: SR.EventList_Column_Type,
                 renderer: this.typeRenderer
-}]
-            });
-            grid.getColumnModel().defaultSortable = true;
-            grid.render('calendar_events');
-        }
-    };
+            }]
+        });
+        grid.getColumnModel().defaultSortable = true;
+        grid.render('calendar_events');
+    }
+};
 
 //#endregion
 
