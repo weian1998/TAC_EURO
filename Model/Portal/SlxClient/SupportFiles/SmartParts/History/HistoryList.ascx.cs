@@ -129,6 +129,18 @@ public partial class SmartParts_History_HistoryList : EntityBoundSmartPartInfoPr
                 if (leadField != null)
                     leadField.Visible = false;
                 break;
+                //=============================================================
+                // TAC Customized below this line 26-05-2010
+                //=============================================================
+            case "Emailarchive":
+                keyId = "EMAILARCHIVEID";
+                break;
+            case "Oppfulfiltask":
+                keyId = "FulfilmentTaskID";
+                break;
+            //=============================================================
+            // TAC Customized Above this line 26-05-2010
+            //=============================================================
         }
         
         HqlBindingSource.OrderBy = "h.CompletedDate desc";

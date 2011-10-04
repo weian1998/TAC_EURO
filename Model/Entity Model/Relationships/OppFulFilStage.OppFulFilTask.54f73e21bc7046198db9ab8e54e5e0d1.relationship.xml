@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="54f73e21-bc70-4619-8db9-ab8e54e5e0d1" lastModifiedUtc="2011-05-16T22:58:53.5263301Z" parentEntityId="53302c69-76f7-49d8-a343-eb0113718198" childEntityId="47d94288-0fff-42f0-997d-685652fbe3f8">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="b45bf2de-5967-43bc-a42a-d058b7c35c51" lastModifiedUtc="2011-05-16T22:58:50.4013701Z" name="OppFulFilTasks" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="7c01f4a2-f566-49f9-b9d8-393fd34c15dd" lastModifiedUtc="2011-05-16T22:58:50.4013701Z" name="OppFulFilStage" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="e2444a88-a8dc-4002-8eca-26a932115e89" parentPropertyId="7c504326-5cf4-4548-a466-a6dca46dd6d1" childPropertyId="e4890107-6ffb-4ccd-87a8-a85474f437ca" ordinal="0" />
+  </column>
+</relationship>

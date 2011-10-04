@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="12528ef8-5441-49cc-9810-0c957789a87c" lastModifiedUtc="2007-10-26T23:28:51.339301Z" name="Complete" returnType="IHistory" methodType="Rule" actionType="None" returnMode="Object" isInstance="true">
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="12528ef8-5441-49cc-9810-0c957789a87c" lastModifiedUtc="2007-10-26T23:28:51.339301Z" name="Complete" returnType="IHistory" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
   </ExtendedPropertiesCollection>
@@ -19,6 +20,11 @@
   </methodTargets>
   <postExecuteTargets>
     <methodTarget id="f877f27d-0ff4-47e0-9ce0-9ea77b95ce90" lastModifiedUtc="0001-01-01T00:00:00" targetType="Sage.SalesLogix.TicketActivity.Rules, Sage.SalesLogix.BusinessRules" targetMethod="AddTicketActivityFromCompletedActivity" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="4df641ec-4a3d-4555-a2ac-2e88deebe889" lastModifiedUtc="2011-05-26T19:07:50.548875Z" targetType="TACEURO.Extentions, TACEURO" targetMethod="CompleteLinkedOppFulfilTask" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>

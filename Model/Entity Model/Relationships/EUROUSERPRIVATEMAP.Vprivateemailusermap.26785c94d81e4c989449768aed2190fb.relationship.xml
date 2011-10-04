@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="26785c94-d81e-4c98-9449-768aed2190fb" lastModifiedUtc="2011-04-14T00:06:28.75875Z" cardinality="M:1" parentEntityId="af3d403f-9cbd-4905-8f0f-f7772b73ad38" childEntityId="997eafd0-1288-430f-88b5-9f476c6c9b4b">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="8b744c58-19ef-45e4-b2d8-1e0decad5d74" lastModifiedUtc="2011-04-14T00:06:25.118125Z" name="SeccodeTeam" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="ce20bb7f-f74e-46a2-af22-a420475557b1" lastModifiedUtc="2011-04-14T00:05:51.54Z" name="EUROUSERPRIVATEMAP" audited="false" include="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="e4dc4898-4f1a-409a-bd99-eecdcd5a2830" parentPropertyId="1ab32b32-b523-4110-8692-070c17e5749a" childPropertyId="b736ad83-8cca-4127-ba9c-750e1b4caa33" ordinal="0" />
+  </column>
+</relationship>

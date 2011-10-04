@@ -131,6 +131,20 @@ public partial class SmartParts_ActivityList : EntityBoundSmartPartInfoProvider
                         if (((BoundField)(col)).DataField.Equals("OpportunityName"))
                             col.Visible = false;
                     }
+                    //=============================================================
+                    // TAC Customized below this line 26-05-2010
+                    //=============================================================
+                    if (entityName.Equals("Oppfulfiltask"))
+                    {
+                        if (((BoundField)(col)).DataField.Equals("ContactName"))
+                            col.Visible = false;
+                        if (((BoundField)(col)).DataField.Equals("OpportunityName"))
+                            col.Visible = true;
+                        keyId = "FulfilmentTaskID";
+                    }
+                    //=============================================================
+                    // TAC Customized Above this line 26-05-2010
+                    //=============================================================
                 }
             }
 
