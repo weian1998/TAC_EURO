@@ -1,0 +1,28 @@
+CACHE MANIFEST
+@version
+
+CACHE:
+# css
+@include 'content/css'
+@include 'content/reui/themes'
+
+# images
+@include 'content/images'
+
+# ext core
+content/ext/ext-core.js
+
+# application
+@include 'content/javascript', /.*(?<!-debug)\.js/i
+
+# environment
+@include 'configuration'
+
+# shell
+index.html
+
+# help
+help.html
+
+NETWORK:
+../sdata/
