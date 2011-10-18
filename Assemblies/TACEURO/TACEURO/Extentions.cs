@@ -119,7 +119,14 @@ namespace TACEURO
             //todo.ContactName = histContactName;
             todo.Type = ActivityType.atToDo;
             //todo.Category = histCategory;
-            todo.UserId = oppfulfiltask.Opportunity.AccountManager.Id.ToString();
+            if (oppfulfiltask.ASSIGNEDTOID == null)
+            {
+                todo.UserId = oppfulfiltask.Opportunity.AccountManager.Id.ToString();
+            }
+            else
+            {
+                todo.UserId = oppfulfiltask.ASSIGNEDTOID;
+            }
 
             todo.Duration = 15;
             todo.StartDate = (System.DateTime)oppfulfiltask.DueDate;
@@ -184,6 +191,30 @@ namespace TACEURO
 
                     // do something to compare oldValue with newValue...
                 }
+                //===========================================================================================
+                PropertyChange chgAssignedTo = state.GetChangedState().FindPropertyChange("ASSIGNEDTOID");
+                if (chgAssignedTo != null)
+                {
+                    //DateTime oldValue = (DateTime)chgDueDate.OldValue;
+                    //DateTime newValue = (DateTime)chgDueDate.NewValue;
+                    //OppFulFilTask.DueDate = Timelessize((DateTime)OppFulFilTask.DueDate);
+                    //Update the Linked Activity if there is one.
+                    string ToDoID = GetField<string>("ACTIVITYID", "ACTIVITY", "FULFILMENTTASKID = '" + OppFulFilTask.Id.ToString() + "'");
+
+
+                    Sage.Entity.Interfaces.IActivity ToDo = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IActivity>(ToDoID);
+                    if (ToDo != null)
+                    {
+                    
+                            ToDo.UserId = OppFulFilTask.ASSIGNEDTOID;
+                            ToDo.Save();
+                   
+                    }
+
+                    // do something to compare oldValue with newValue...
+                }
+
+                //============================================================================================
 
             }
 
@@ -237,6 +268,30 @@ namespace TACEURO
 
                     // do something to compare oldValue with newValue...
                 }
+                //=================================================================================
+
+                PropertyChange chgAssignedto = state.GetChangedState().FindPropertyChange("UserId");
+                if (chgAssignedto != null)
+                {
+                    string oldValue = (string)chgAssignedto.OldValue;
+                    string newValue = (string)chgAssignedto.NewValue;
+
+                    //Update the Linked Task if there is one.
+
+
+
+                    Sage.Entity.Interfaces.IOppFulFilTask Task = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOppFulFilTask>(Activity.FulfilmentTaskID);
+                    if (Task != null)
+                    {
+
+                            Task.ASSIGNEDTOID = newValue;
+                            Task.Save();
+                        
+                    }
+
+                    // do something to compare oldValue with newValue...
+                }
+                //====================================================================================
 
             }
 

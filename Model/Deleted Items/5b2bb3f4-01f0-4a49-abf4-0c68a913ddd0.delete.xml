@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<DeletedItem>
+  <id>5b2bb3f4-01f0-4a49-abf4-0c68a913ddd0</id>
+  <url>\Entity Model\Relationships\Opportunity.OppFulfilmentItem.5b2bb3f401f04a49abf40c68a913ddd0.relationship.xml</url>
+  <caption>Opportunity.OppFulfilmentItems 1:M OppFulfilmentItem.Opportunity</caption>
+  <extension>.relationship.xml</extension>
+  <modelId>a7bdd2d9-93b0-499d-9fd4-c3f7a5f94e28</modelId>
+  <dateDeleted>2011-10-11T12:58:03.2319977Z</dateDeleted>
+  <image>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALEQAACxEBf2RfkQAAASRJREFUOE9j+P//PwMxuHvVq/9NS17+L5394n/axOf/w9uf/veqe0ycZpAFIAMWHfr/f+rOv/9bVv/8XzTv23/D1LOkGYBwwbP/YUAXuFTcJ96A5dvOAB2CAD9+/ftv6pkMcRo2v8HCJaBoA3dQydZUmAF7jt/4v2zj4f+vP/1FGIDNb5H1x1mBmgNCK/f+swmr/zJ3zaH/f/7+A2r88//Gk1//j9z4js0FCL+FN175Zxve9Mw9bY41yDXTl+0Ga0DHDLj85pE+z46Y6IUbgO4337yVYjAD8IUTAy6/uSRM+OdfuC4aXxoAyeH0m2fGPLew6v3AAGz4g+oCRDiBDcDnT9fkqXx++as9cYUTQQNghuNKA0QbgCuciDYAVxog2gB84QQAZFfphEOau3wAAAAASUVORK5CYII=</image>
+  <restoreDataType>System.String, mscorlib</restoreDataType>
+  <restoreData>
+    <string>&lt;?xml version="1.0"?&gt;
+&lt;relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="5b2bb3f4-01f0-4a49-abf4-0c68a913ddd0" lastModifiedUtc="2011-04-26T22:05:05.319875Z" parentEntityId="3172551b-f476-45ea-98de-2bb04ddba687" childEntityId="9f765111-0f18-4177-859f-cd8665d73de2"&gt;
+  &lt;extendedMetaData /&gt;
+  &lt;ExtendedPropertiesCollection&gt;
+    &lt;extendee type="Sage.Platform.Orm.Entities.OrmRelationship" /&gt;
+  &lt;/ExtendedPropertiesCollection&gt;
+  &lt;parentProperty id="6a9ac750-faeb-463a-8fe4-becc71d3dc05" lastModifiedUtc="2011-04-26T22:04:51.86675Z" name="OppFulfilmentItems" audited="false"&gt;
+    &lt;ExtendedPropertiesCollection&gt;
+      &lt;extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" /&gt;
+    &lt;/ExtendedPropertiesCollection&gt;
+    &lt;SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7"&gt;
+      &lt;RelationshipDataType /&gt;
+    &lt;/SystemDataType&gt;
+  &lt;/parentProperty&gt;
+  &lt;childProperty id="bc6961ed-2029-4e77-9a97-887f40f25ef9" lastModifiedUtc="2011-04-26T22:04:51.86675Z" name="Opportunity" audited="false"&gt;
+    &lt;ExtendedPropertiesCollection&gt;
+      &lt;extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" /&gt;
+    &lt;/ExtendedPropertiesCollection&gt;
+    &lt;SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7"&gt;
+      &lt;RelationshipDataType /&gt;
+    &lt;/SystemDataType&gt;
+  &lt;/childProperty&gt;
+  &lt;column&gt;
+    &lt;OrmRelationshipColumn id="afabfb27-37e1-45c9-83f0-b4d23c103a2f" parentPropertyId="3e3db591-f7de-435b-a421-ef2c5e72aa2b" childPropertyId="c2eb0844-81db-4e1b-a990-b2d61d599317" ordinal="0" /&gt;
+  &lt;/column&gt;
+&lt;/relationship&gt;</string>
+  </restoreData>
+</DeletedItem>
