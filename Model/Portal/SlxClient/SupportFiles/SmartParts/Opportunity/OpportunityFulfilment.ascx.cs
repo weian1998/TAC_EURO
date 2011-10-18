@@ -328,6 +328,7 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                     MyStage.Notes = tmpStage.Notes;
                     MyStage.StageSequence = tmpStage.StageSequence;
                     MyStage.Status = tmpStage.Status;
+                    MyStage.SeccodeId = tmpStage.SeccodeId;
                     MyStage.Opportunity = CurrentOpportunity;
                     MyStage.Save();
                     foreach (IFulFilTemplateTask tmpTask in tmpStage.FulFilTemplateTasks)
@@ -344,6 +345,7 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                         MyTask.Notes = tmpTask.Notes;
                         MyTask.DueDate = Timelessize(CurrentOpportunity.DeliveryDate.Value.AddDays(-(double)tmpTask.DaysFromDeliveryDate));
                         MyTask.WeightedPercentage = tmpTask.WeightedPercentage;
+                        MyTask.SeccodeId = tmpTask.SeccodeId;   
                         MyTask.Opportunity = CurrentOpportunity;
                         MyTask.OppFulFilStage = MyStage;
                         if (tmpTask.DaysFromDeliveryDate == null)

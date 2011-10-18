@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-16"?>
+<clsProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <m_SourceConnection>Provider=SQLNCLI10.1;Password=sa;Persist Security Info=True;User ID=sa;Initial Catalog=Goldmine;Data Source=TACWEB;Initial File Name="";Server SPN=""</m_SourceConnection>
+  <m_SLXNativeConnection>Provider=SQLNCLI10.1;Password=masterkey;Persist Security Info=True;User ID=sysdba;Initial Catalog=EurOptimumSLX;Data Source=TACWEB;Initial File Name="";Server SPN=""</m_SLXNativeConnection>
+  <m_SLXProviderConnection>Provider=SLXOLEDB.1;Password="";Persist Security Info=True;User ID=admin;Initial Catalog=EUROSLX;Data Source=TACWEB;Extended Properties="PORT=1706;LOG=ON;CASEINSENSITIVEFIND=ON;AUTOINCBATCHSIZE=1;SVRCERT=;"</m_SLXProviderConnection>
+  <m_FilePath>C:\TAC_EURO\Assemblies\Import\EuroImport.ASIP</m_FilePath>
+  <m_MapArray>
+    <clsMap>
+      <m_MapName>Map1</m_MapName>
+      <m_SourceDataset>
+        <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+          <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Table1">
+                  <xs:complexType>
+                  </xs:complexType>
+                </xs:element>
+              </xs:choice>
+            </xs:complexType>
+          </xs:element>
+        </xs:schema>
+        <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1" />
+      </m_SourceDataset>
+      <m_UseQuery>false</m_UseQuery>
+      <m_Initialized>false</m_Initialized>
+    </clsMap>
+    <clsMap>
+      <m_MapName>Opps</m_MapName>
+      <m_SourceConnection>Provider=SQLNCLI.1;Password=sa;Persist Security Info=True;User ID=sa;Initial Catalog=Goldmine;Data Source=TACWEB</m_SourceConnection>
+      <m_SLXNativeConnection>Provider=SQLOLEDB.1;Password=masterkey;Persist Security Info=True;User ID=sysdba;Initial Catalog=EurOptimumSLX;Data Source=TACWEB</m_SLXNativeConnection>
+      <m_SLXProviderConnection>Provider=SLXOLEDB.1;Password="";Persist Security Info=True;User ID=admin;Initial Catalog=EUROSLX;Data Source=TACWEB;Extended Properties="PORT=1706;LOG=ON;CASEINSENSITIVEFIND=ON;AUTOINCBATCHSIZE=1;SVRCERT=;"</m_SLXProviderConnection>
+      <m_SourceDataset>
+        <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+          <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Table1">
+                  <xs:complexType>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="OPMGR">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="Mapped" type="xs:boolean" minOccurs="0" />
+                      <xs:element name="Column" type="xs:string" minOccurs="0" />
+                      <xs:element name="Tmp" type="xs:boolean" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:choice>
+            </xs:complexType>
+          </xs:element>
+        </xs:schema>
+        <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+          <NewDataSet>
+            <OPMGR diffgr:id="OPMGR1" msdata:rowOrder="0" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>OPID</Column>
+              <Tmp>true</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR2" msdata:rowOrder="1" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>RECTYPE</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR3" msdata:rowOrder="2" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>ACCOUNTNO</Column>
+              <Tmp>true</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR4" msdata:rowOrder="3" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>USERID</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR5" msdata:rowOrder="4" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>FLAGS</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR6" msdata:rowOrder="5" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>COMPANY</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR7" msdata:rowOrder="6" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>CONTACT</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR8" msdata:rowOrder="7" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>NAME</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR9" msdata:rowOrder="8" diffgr:hasChanges="inserted">
+              <Mapped>true</Mapped>
+              <Column>STATUS</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR10" msdata:rowOrder="9" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>CYCLE</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR11" msdata:rowOrder="10" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>STAGE</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR12" msdata:rowOrder="11" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>SOURCE</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR13" msdata:rowOrder="12" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>F1</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR14" msdata:rowOrder="13" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>F2</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR15" msdata:rowOrder="14" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>F3</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR16" msdata:rowOrder="15" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>STARTDATE</Column>
+              <Tmp>true</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR17" msdata:rowOrder="16" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>CLOSEDDATE</Column>
+              <Tmp>true</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR18" msdata:rowOrder="17" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>CLOSEBY</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR19" msdata:rowOrder="18" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>FORAMT</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR20" msdata:rowOrder="19" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>FORPROB</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR21" msdata:rowOrder="20" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>CLOSEAMT</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR22" msdata:rowOrder="21" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>NOTES</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR23" msdata:rowOrder="22" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>PRODUCTNAME</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR24" msdata:rowOrder="23" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>U_STAGE</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+            <OPMGR diffgr:id="OPMGR25" msdata:rowOrder="24" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>recid</Column>
+              <Tmp>false</Tmp>
+            </OPMGR>
+          </NewDataSet>
+        </diffgr:diffgram>
+      </m_SourceDataset>
+      <m_SLXDestinationDataSet>
+        <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+          <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="OPPORTUNITY">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="Mapped" type="xs:boolean" minOccurs="0" />
+                      <xs:element name="Column" type="xs:string" minOccurs="0" />
+                      <xs:element name="CreateID" type="xs:boolean" minOccurs="0" />
+                      <xs:element name="Add2View" type="xs:boolean" minOccurs="0" />
+                      <xs:element name="CreateID4Table" type="xs:string" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:choice>
+            </xs:complexType>
+          </xs:element>
+        </xs:schema>
+        <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+          <NewDataSet>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY1" msdata:rowOrder="0" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>OPPORTUNITYID</Column>
+              <CreateID>true</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table>OPPORTUNITY</CreateID4Table>
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY2" msdata:rowOrder="1" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>ACCOUNTID</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY3" msdata:rowOrder="2" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>DESCRIPTION</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY4" msdata:rowOrder="3" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>CLOSED</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY5" msdata:rowOrder="4" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>TYPE</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY6" msdata:rowOrder="5" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>STAGE</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY7" msdata:rowOrder="6" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>SALESCYCLE</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY8" msdata:rowOrder="7" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>PRODUCTID</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY9" msdata:rowOrder="8" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>SALESPOTENTIAL</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY10" msdata:rowOrder="9" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>CLOSEPROBABILITY</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY11" msdata:rowOrder="10" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>SALESAMOUNT</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY12" msdata:rowOrder="11" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>ACTUALAMOUNT</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY13" msdata:rowOrder="12" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>ESTIMATEDCLOSE</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY14" msdata:rowOrder="13" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>ACTUALCLOSE</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY15" msdata:rowOrder="14" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>SUMMARY</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY16" msdata:rowOrder="15" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>NOTES</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY17" msdata:rowOrder="16" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>ACCOUNTMANAGERID</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY18" msdata:rowOrder="17" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>REGIONALMANAGERID</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY19" msdata:rowOrder="18" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>DIVISIONALMANAGERID</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY20" msdata:rowOrder="19" diffgr:hasChanges="inserted">
+              <Mapped>true</Mapped>
+              <Column>STATUS</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY21" msdata:rowOrder="20" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>FIELDCOMMIT</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY22" msdata:rowOrder="21" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>MGTCOMMIT</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY23" msdata:rowOrder="22" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>CORPCOMMIT</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY24" msdata:rowOrder="23" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>MANUFCOMMIT</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY25" msdata:rowOrder="24" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>KEYEDPOTENTIAL</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY26" msdata:rowOrder="25" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>KEYEDPROBABILITY</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY27" msdata:rowOrder="26" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>DAYSINPIPELINE</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY28" msdata:rowOrder="27" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>CURRENTSTEP</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY29" msdata:rowOrder="28" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>NEXTSTEP</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY30" msdata:rowOrder="29" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>PROJCLOSESTEP</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY31" msdata:rowOrder="30" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>REASON</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY32" msdata:rowOrder="31" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>CURRENTSTEPDATE</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY33" msdata:rowOrder="32" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>NEXTSTEPDATE</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY34" msdata:rowOrder="33" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>PROJCLOSEDATE</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY35" msdata:rowOrder="34" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>LEADSOURCEID</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY36" msdata:rowOrder="35" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>LEADDATE</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY37" msdata:rowOrder="36" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>SECCODEID</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY38" msdata:rowOrder="37" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>CREATEUSER</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY39" msdata:rowOrder="38" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>CREATEDATE</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY40" msdata:rowOrder="39" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>MODIFYUSER</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY41" msdata:rowOrder="40" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>MODIFYDATE</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY42" msdata:rowOrder="41" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>WIN</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY43" msdata:rowOrder="42" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>CAMPAIGNID</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY44" msdata:rowOrder="43" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>SUBTYPE</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY45" msdata:rowOrder="44" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>ENGINEERID</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY46" msdata:rowOrder="45" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>SALESENGINEERID</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY47" msdata:rowOrder="46" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>ESTCLOSEDATE_PROBABILITY</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY48" msdata:rowOrder="47" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>ADDTOFORECAST</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY49" msdata:rowOrder="48" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>EXCHANGERATECODE</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY50" msdata:rowOrder="49" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>EXCHANGERATE</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY51" msdata:rowOrder="50" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>EXCHANGERATEDATE</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY52" msdata:rowOrder="51" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>EXCHANGERATELOCKED</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY53" msdata:rowOrder="52" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>LASTHISTORYDATE</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY54" msdata:rowOrder="53" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>LASTHISTORYBY</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY55" msdata:rowOrder="54" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>RESELLERID</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+            <OPPORTUNITY diffgr:id="OPPORTUNITY56" msdata:rowOrder="55" diffgr:hasChanges="inserted">
+              <Mapped>false</Mapped>
+              <Column>DATEOPENED</Column>
+              <CreateID>false</CreateID>
+              <Add2View>true</Add2View>
+              <CreateID4Table />
+            </OPPORTUNITY>
+          </NewDataSet>
+        </diffgr:diffgram>
+      </m_SLXDestinationDataSet>
+      <m_Source_TargetMappingDataset>
+        <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+          <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+            <xs:complexType>
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="OPMGR.OPPORTUNITY">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="Source" type="xs:string" minOccurs="0" />
+                      <xs:element name="SLX" type="xs:string" minOccurs="0" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:choice>
+            </xs:complexType>
+          </xs:element>
+        </xs:schema>
+        <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+          <NewDataSet>
+            <OPMGR.OPPORTUNITY diffgr:id="OPMGR.OPPORTUNITY1" msdata:rowOrder="0" diffgr:hasChanges="inserted">
+              <Source>STATUS</Source>
+              <SLX>STATUS</SLX>
+            </OPMGR.OPPORTUNITY>
+          </NewDataSet>
+        </diffgr:diffgram>
+      </m_Source_TargetMappingDataset>
+      <m_Source_Target_TableName>OPMGR.OPPORTUNITY</m_Source_Target_TableName>
+      <m_SLXTableName>OPPORTUNITY</m_SLXTableName>
+      <m_SourceTableName>OPMGR</m_SourceTableName>
+      <m_UseQuery>false</m_UseQuery>
+      <m_TempTableName>zz_Opp</m_TempTableName>
+      <m_Initialized>false</m_Initialized>
+    </clsMap>
+  </m_MapArray>
+</clsProject>

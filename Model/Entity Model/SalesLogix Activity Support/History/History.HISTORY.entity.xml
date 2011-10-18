@@ -630,5 +630,47 @@
         <StandardIdDataType />
       </SystemDataType>
     </property>
+    <property xsi:type="OrmFieldProperty" id="56d1bd23-3f0a-4a42-82e0-8dcb83b147e8" lastModifiedUtc="2011-10-18T13:44:23.7636122Z" name="TORECIPIENTS" audited="false" columnName="TORECIPIENTS" maxLength="2147483647" precision="0" scale="0" ordinal="44" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="f4ca6023-9f5f-4e41-8571-50ba94e8f233">
+        <LongTextDataType>
+          <Length>2147483647</Length>
+        </LongTextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="f18f9e24-3a2c-4226-962e-3e77a331b365" lastModifiedUtc="2011-10-18T13:44:23.7666124Z" name="CCRECIPIENTS" audited="false" columnName="CCRECIPIENTS" maxLength="2147483647" precision="0" scale="0" ordinal="45" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="f4ca6023-9f5f-4e41-8571-50ba94e8f233">
+        <LongTextDataType>
+          <Length>2147483647</Length>
+        </LongTextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="f731c3d5-c471-4b3e-bb99-0a184e2bed9e" lastModifiedUtc="2011-10-18T13:44:23.7826133Z" name="BCCRECIPIENTS" audited="false" columnName="BCCRECIPIENTS" maxLength="2147483647" precision="0" scale="0" ordinal="46" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="f4ca6023-9f5f-4e41-8571-50ba94e8f233">
+        <LongTextDataType>
+          <Length>2147483647</Length>
+        </LongTextDataType>
+      </SystemDataType>
+    </property>
   </properties>
 </entity>
