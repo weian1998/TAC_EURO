@@ -1,13 +1,14 @@
 ﻿Imports System.Text.RegularExpressions
+Imports HtmlAgilityPack
 Imports System.IO
 
 Module Module1
 
     Sub Main()
-        'CleanOppNotes()
+        CleanOppNotes()
         'CleanAddress()
 
-        AddContactEmails()
+        'AddContactEmails()
     End Sub
     'Public Function ConvertHtml(ByVal html As String) As String
     '    Dim doc As New HtmlDocument()
@@ -33,7 +34,7 @@ Module Module1
         '============================================================================================
         ' Use Native provider Connection as SLX Provider Cant handle the Query with SubQuieries
         '============================================================================================
-        Dim strConstring As String = "Provider=SQLOLEDB.1;Password=masterkey;Persist Security Info=True;User ID=sysdba;Initial Catalog=EURO-SLX-Production;Data Source=EUROSERV1" 'Extended Properties=""PORT=1706;LOG=ON;CASEINSENSITIVEFIND=ON;AUTOINCBATCHSIZE=1;SVRCERT=;"""
+        Dim strConstring As String = "Provider=SQLOLEDB.1;Password=masterkey;Persist Security Info=True;User ID=sysdba;Initial Catalog=EurOptimumSLX;Data Source=TACWEB" 'Extended Properties=""PORT=1706;LOG=ON;CASEINSENSITIVEFIND=ON;AUTOINCBATCHSIZE=1;SVRCERT=;"""
 
         Dim i As Integer = 0
         Dim iEmailcount As Integer = 0
@@ -104,7 +105,7 @@ Module Module1
         Dim objConn As New ADODB.Connection()
         Dim objRS As New ADODB.Recordset
         Dim strSQL As String = "SELECT * FROM CONTACT WHERE CONTACTID ='" & ID & "'" 'Get A Blank Recordset
-        Dim strConstring As String = "Provider=SLXOLEDB.1;Password=;Persist Security Info=True;User ID=admin;Initial Catalog=EUROSLX;Data Source=EUROSERV1" 'Extended Properties=""PORT=1706;LOG=ON;CASEINSENSITIVEFIND=ON;AUTOINCBATCHSIZE=1;SVRCERT=;"""
+        Dim strConstring As String = "Provider=SLXOLEDB.1;Password=;Persist Security Info=True;User ID=admin;Initial Catalog=EUROSLX;Data Source=TACWEB" 'Extended Properties=""PORT=1706;LOG=ON;CASEINSENSITIVEFIND=ON;AUTOINCBATCHSIZE=1;SVRCERT=;"""
         Try
             objConn.Open(strConstring)
             With objRS
@@ -141,7 +142,7 @@ Module Module1
         Dim objConn As New ADODB.Connection()
         Dim objRS As New ADODB.Recordset
         Dim strSQL As String = "SELECT * FROM EMAILEXTRA WHERE 1=2" 'Get A Blank Recordset"
-        Dim strConstring As String = "Provider=SLXOLEDB.1;Password=;Persist Security Info=True;User ID=admin;Initial Catalog=EUROSLX;Data Source=EUROSERV1" 'Extended Properties=""PORT=1706;LOG=ON;CASEINSENSITIVEFIND=ON;AUTOINCBATCHSIZE=1;SVRCERT=;"""
+        Dim strConstring As String = "Provider=SLXOLEDB.1;Password=;Persist Security Info=True;User ID=admin;Initial Catalog=EUROSLX;Data Source=TACWEB" 'Extended Properties=""PORT=1706;LOG=ON;CASEINSENSITIVEFIND=ON;AUTOINCBATCHSIZE=1;SVRCERT=;"""
         Try
             objConn.Open(strConstring)
             With objRS
