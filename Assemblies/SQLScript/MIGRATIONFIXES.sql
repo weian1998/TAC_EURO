@@ -1,17 +1,17 @@
 --Select * from sysdba.EMAILARCHIVE
 
---Update sysdba.EMAILARCHIVE 
---set ISLINKEDHISTORY = 'F'
+Update sysdba.EMAILARCHIVE 
+set ISLINKEDHISTORY = 'F'
 
---Drop table dbo.CAL
---Drop Table dbo.CONTACT1
---Drop Table dbo.CONTACT2
---Drop Table dbo.CONTHIST
---Drop Table dbo.CONTSUPP
---Drop Table dbo.CONTUDEF 
---Drop Table dbo.NOTES
---Drop Table dbo.OPMGR
---Drop Table dbo.USERS
+Drop table dbo.CAL
+Drop Table dbo.CONTACT1
+Drop Table dbo.CONTACT2
+Drop Table dbo.CONTHIST
+Drop Table dbo.CONTSUPP
+Drop Table dbo.CONTUDEF 
+Drop Table dbo.NOTES
+Drop Table dbo.OPMGR
+Drop Table dbo.USERS
 -- ReImort the tables
  
 
@@ -25,6 +25,8 @@ SELECT     sysdba.CONTACT.ACCOUNTID AS Accountid, sysdba.CONTACT.CONTACTID AS co
 FROM         CONTSUPP INNER JOIN
                       sysdba.CONTACT ON CONTSUPP.ACCOUNTNO = sysdba.CONTACT.USERFIELD1
 WHERE     (CONTSUPP.CONTACT = 'E-MAIL ADDRESS')
+
+
 
 Select * from sysdba.goldEmail
 
@@ -258,9 +260,29 @@ SET              SECCODEID = sysdba.ACCOUNT.SECCODEID
 FROM         sysdba.OPPORTUNITY INNER JOIN
                       sysdba.ACCOUNT ON sysdba.OPPORTUNITY.ACCOUNTID = sysdba.ACCOUNT.ACCOUNTID                      
                       
+
+Update sysdba.OPPORTUNITY set STATUS = 'Closed - Won' where STATUS = 'Closed Won'   
+Update sysdba.OPPORTUNITY set STATUS = 'Closed - Lost' where STATUS = 'Closed Lost' 
+
+Update sysdba.ACCOUNT 
+SET     TYPE= CONTACT1.KEY1
+FROM         sysdba.ACCOUNT INNER JOIN
+                      sysdba.CONTACT ON sysdba.ACCOUNT.ACCOUNTID = sysdba.CONTACT.ACCOUNTID INNER JOIN
+                      CONTACT1 ON sysdba.CONTACT.USERFIELD1 = CONTACT1.ACCOUNTNO 
+                      
+Update sysdba.CONTACT
+SET     TYPE =sysdba.ACCOUNT.TYPE 
+FROM         sysdba.CONTACT INNER JOIN
+                      sysdba.ACCOUNT ON sysdba.CONTACT.ACCOUNTID = sysdba.ACCOUNT.ACCOUNTID
+                      
+Update sysdba.CONTACT
+SET     accountmanagerid =sysdba.ACCOUNT.accountmanagerid 
+FROM         sysdba.CONTACT INNER JOIN
+                      sysdba.ACCOUNT ON sysdba.CONTACT.ACCOUNTID = sysdba.ACCOUNT.ACCOUNTID
                       
 
 
+Select distinct status from sysdba.OPPORTUNITY 
 Select * from CONTACT1 where COMPANY like 'Promotion%'
 A5101442434&8.YM.Agn
 Select * from dbo.CONTACT2  where ACCOUNTNO ='A5101442434&8.YM.Agn'
