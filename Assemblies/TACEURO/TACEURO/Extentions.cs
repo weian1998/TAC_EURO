@@ -92,7 +92,7 @@ namespace TACEURO
                     return text.Substring(0, length);
             }
             else
-            { 
+            {
                 //Null String entered
                 return string.Empty;
             }
@@ -102,7 +102,7 @@ namespace TACEURO
 
         #region Tasks and Activity Entity Events
 
-        
+
 
 
         // Example of target method signature
@@ -139,7 +139,7 @@ namespace TACEURO
             String Description = "Stage: " + oppfulfiltask.OppFulFilStage.Description + " :Task: " + oppfulfiltask.Description;
             todo.Description = Left(Description, 64);
             todo.LongNotes = oppfulfiltask.Notes;
-            todo.Notes = Left(oppfulfiltask.Notes,255);
+            todo.Notes = Left(oppfulfiltask.Notes, 255);
             todo.FulfilmentTaskID = oppfulfiltask.Id.ToString();
 
             try
@@ -160,7 +160,7 @@ namespace TACEURO
         public static void OnBeforeUpdate(IOppFulFilTask OppFulFilTask, ISession session)
         {
             ////TAC Code here
-            
+
             IChangedState state = OppFulFilTask as IChangedState;
 
             if (state != null)
@@ -171,7 +171,7 @@ namespace TACEURO
                 {
                     //DateTime oldValue = (DateTime)chgDueDate.OldValue;
                     //DateTime newValue = (DateTime)chgDueDate.NewValue;
-                    OppFulFilTask.DueDate = Timelessize ((DateTime )OppFulFilTask.DueDate );
+                    OppFulFilTask.DueDate = Timelessize((DateTime)OppFulFilTask.DueDate);
                     //Update the Linked Activity if there is one.
                     string ToDoID = GetField<string>("ACTIVITYID", "ACTIVITY", "FULFILMENTTASKID = '" + OppFulFilTask.Id.ToString() + "'");
 
@@ -179,7 +179,7 @@ namespace TACEURO
                     Sage.Entity.Interfaces.IActivity ToDo = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IActivity>(ToDoID);
                     if (ToDo != null)
                     {
-                        if (ToDo.StartDate != OppFulFilTask.DueDate )
+                        if (ToDo.StartDate != OppFulFilTask.DueDate)
                         {
                             // Set the Linked Activity Start Date If it exists.
 
@@ -205,10 +205,10 @@ namespace TACEURO
                     Sage.Entity.Interfaces.IActivity ToDo = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IActivity>(ToDoID);
                     if (ToDo != null)
                     {
-                    
-                            ToDo.UserId = OppFulFilTask.ASSIGNEDTOID;
-                            ToDo.Save();
-                   
+
+                        ToDo.UserId = OppFulFilTask.ASSIGNEDTOID;
+                        ToDo.Save();
+
                     }
 
                     // do something to compare oldValue with newValue...
@@ -226,7 +226,7 @@ namespace TACEURO
             Sage.Entity.Interfaces.IOppFulFilTask Task = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOppFulFilTask>(activity.FulfilmentTaskID);
             if (Task != null)
             {
-                if (Task.Completed  != "T")
+                if (Task.Completed != "T")
                 {
                     // Complete the Linked Activity.
                     Task.CompleteTask();
@@ -254,14 +254,14 @@ namespace TACEURO
 
 
 
-                    Sage.Entity.Interfaces.IOppFulFilTask  Task = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOppFulFilTask>(Activity.FulfilmentTaskID);
+                    Sage.Entity.Interfaces.IOppFulFilTask Task = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOppFulFilTask>(Activity.FulfilmentTaskID);
                     if (Task != null)
                     {
-                        if (Task.DueDate  != newValue)
+                        if (Task.DueDate != newValue)
                         {
                             // Set the Linked Activity Start Date If it exists.
-                            Task.DueDate  = newValue;
-                            
+                            Task.DueDate = newValue;
+
                             Task.Save();
                         }
                     }
@@ -284,9 +284,9 @@ namespace TACEURO
                     if (Task != null)
                     {
 
-                            Task.ASSIGNEDTOID = newValue;
-                            Task.Save();
-                        
+                        Task.ASSIGNEDTOID = newValue;
+                        Task.Save();
+
                     }
 
                     // do something to compare oldValue with newValue...
@@ -300,7 +300,7 @@ namespace TACEURO
 
         #endregion
 
-        
+
 
         #region Task Stage Complete Methods
         // Example of target method signature
@@ -319,7 +319,7 @@ namespace TACEURO
                 oppfulfiltask.CompletedBy = user.Id.ToString();
                 oppfulfiltask.CompletedDate = System.DateTime.Now.ToUniversalTime();
                 oppfulfiltask.Status = "Completed";
-               
+
                 // complete corresponding Activity if needed
                 //Update the Linked Activity if there is one.
                 string ToDoID = GetField<string>("ACTIVITYID", "ACTIVITY", "FULFILMENTTASKID = '" + oppfulfiltask.Id.ToString() + "'");
@@ -364,7 +364,7 @@ namespace TACEURO
                         EmailArchiveID = reader["EMAILARCHIVEID"].ToString();
                         Sage.Entity.Interfaces.IEmailArchive _entity = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IEmailArchive>(EmailArchiveID);
                         _entity.Delete();
-                        
+
                     }
                     reader.Close();
                 }
@@ -374,9 +374,9 @@ namespace TACEURO
 
         public static void ReprocessContactEmails(IEmailArchive emailarchive)
         {
-            String   UserName = String.Empty ;
-            String  UserID = String.Empty ;
-            String   ContactID = String.Empty;
+            String UserName = String.Empty;
+            String UserID = String.Empty;
+            String ContactID = String.Empty;
             String ContactName = String.Empty;
             String AccountID = String.Empty;
             String AccountName = String.Empty;
@@ -412,18 +412,18 @@ namespace TACEURO
         // Example of target method signature
         public static void ReProcess(IEmailArchive emailarchive, out String result)
         {
-            EmailArchiveProcess("ALL", "","");
+            EmailArchiveProcess("ALL", "", "");
             result = "Completed Message";
         }
         // Example of target method signature
         public static void ReprocessSingle(IEmailArchive emailarchive)
         {
-            EmailArchiveProcess("Single", emailarchive.Id.ToString(),"");
+            EmailArchiveProcess("Single", emailarchive.Id.ToString(), "");
         }
 
 
 
-        private static void EmailArchiveProcess(String Type, String Value,String EmailAddress)
+        private static void EmailArchiveProcess(String Type, String Value, String EmailAddress)
         {
             //====================================
             // Variables
@@ -497,137 +497,145 @@ namespace TACEURO
                     //loop through the reader
                     while (reader.Read())
                     {
-                        blnIsUserFoundinTo = false; // Intialize
-                        blnIsUserFoundinFrom = false;
-                        EmailArchiveID = reader["EMAILARCHIVEID"].ToString();
-                        RemoveHistoryLinkedtoEmailArchive(EmailArchiveID);
-                        //===========================================================================
-                        // Special Case for Now all Single reprocess will Clear out existing History
-                        //===========================================================================
-
-                        histArchiveDate = (DateTime)reader["CREATEDATE"];
-                        //===========================================
-                        // Check to See if the User Is Found
-                        //===========================================
-                        if (IsUserFound(reader["FROMADDRESS"].ToString(), out UserName, out UserID))
+                        try
                         {
-                            blnIsUserFoundinFrom = true;
-                            histCategory = "EMail Sent";
-                            //==================================================================================
-                            // Get Contact Information
-                            //==================================================================================
-                            if (IsContactFound(reader["TOADDRESS"].ToString(), out histContactID, out histContactName, out histAccountID, out histAccountName, out histContactType))
+                            blnIsUserFoundinTo = false; // Intialize
+                            blnIsUserFoundinFrom = false;
+                            EmailArchiveID = reader["EMAILARCHIVEID"].ToString();
+                            RemoveHistoryLinkedtoEmailArchive(EmailArchiveID);
+                            //===========================================================================
+                            // Special Case for Now all Single reprocess will Clear out existing History
+                            //===========================================================================
+
+                            histArchiveDate = (DateTime)reader["CREATEDATE"];
+                            //===========================================
+                            // Check to See if the User Is Found
+                            //===========================================
+                            if (IsUserFound(reader["FROMADDRESS"].ToString(), out UserName, out UserID))
                             {
-                                //=========================================================
-                                // Set Remaining History record Information
-                                //=========================================================
-                                histDescription = reader["SUBJECT"].ToString();
-                                histLongNotes = reader["MESSAGEBODY"].ToString();
-                                histNotes = reader["SHORTNOTES"].ToString();
-
-                                //=====================================
-                                // Is Contact Employee
-                                //===================================
-                                if (histContactType == "EMPL")
+                                blnIsUserFoundinFrom = true;
+                                histCategory = "EMail Sent";
+                                //==================================================================================
+                                // Get Contact Information
+                                //==================================================================================
+                                if (IsContactFound(reader["TOADDRESS"].ToString(), out histContactID, out histContactName, out histAccountID, out histAccountName, out histContactType))
                                 {
-                                    //Get User Private Team
-                                    histSeccodeID = GetUserPrivateSeccode(UserID);
-                                    CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
-                                    UpdateEmailArchiveLinked(EmailArchiveID, "", true);
-                                    //======================================================
-                                    // Create Accompanying History record Employee Contact
-                                    //======================================================
+                                    //=========================================================
+                                    // Set Remaining History record Information
+                                    //=========================================================
+                                    histDescription = reader["SUBJECT"].ToString();
+                                    histLongNotes = reader["MESSAGEBODY"].ToString();
+                                    histNotes = reader["SHORTNOTES"].ToString();
 
-                                    if (IsContactFound(reader["FROMADDRESS"].ToString(), out histContactID, out histContactName, out histAccountID, out histAccountName, out histContactType))
+                                    //=====================================
+                                    // Is Contact Employee
+                                    //===================================
+                                    if (histContactType == "EMPL")
                                     {
+                                        //Get User Private Team
                                         histSeccodeID = GetUserPrivateSeccode(UserID);
+                                        CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
+                                        UpdateEmailArchiveLinked(EmailArchiveID, "", true);
+                                        //======================================================
+                                        // Create Accompanying History record Employee Contact
+                                        //======================================================
+
+                                        if (IsContactFound(reader["FROMADDRESS"].ToString(), out histContactID, out histContactName, out histAccountID, out histAccountName, out histContactType))
+                                        {
+                                            histSeccodeID = GetUserPrivateSeccode(UserID);
+                                            CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
+                                            UpdateEmailArchiveLinked(EmailArchiveID, "", true);
+                                        }
+
+
+                                    }
+                                    else
+                                    {
+                                        // Not an Employee so Default Everyone
+                                        histSeccodeID = "SYST00000001";
                                         CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
                                         UpdateEmailArchiveLinked(EmailArchiveID, "", true);
                                     }
 
-
                                 }
                                 else
                                 {
-                                    // Not an Employee so Default Everyone
-                                    histSeccodeID = "SYST00000001";
-                                    CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
-                                    UpdateEmailArchiveLinked(EmailArchiveID, "", true);
+                                    // Contact Not Found
+                                    ReProcessNote = "Contact Not Found";
+                                    UpdateEmailArchiveLinked(EmailArchiveID, ReProcessNote, false);
                                 }
-
                             }
-                            else
-                            {
-                                // Contact Not Found
-                                ReProcessNote = "Contact Not Found";
-                                UpdateEmailArchiveLinked(EmailArchiveID, ReProcessNote, false);
-                            }
-                        }
 
-                        //=======================================================================================
-                        // Process Both user in To And From
-                        //=======================================================================================
-                        if (IsUserFound(reader["TOADDRESS"].ToString(), out UserName, out UserID))
-                        {
-                            blnIsUserFoundinFrom = true;
-                            histCategory = "EMail History Added";
-                            //==================================================================================
-                            // Get Contact Information
-                            //==================================================================================
-                            if (IsContactFound(reader["FROMADDRESS"].ToString(), out histContactID, out histContactName, out histAccountID, out histAccountName, out histContactType))
+                            //=======================================================================================
+                            // Process Both user in To And From
+                            //=======================================================================================
+                            if (IsUserFound(reader["TOADDRESS"].ToString(), out UserName, out UserID))
                             {
-                                //=========================================================
-                                // Set Remaining History record Information
-                                //=========================================================
-                                histDescription = reader["SUBJECT"].ToString();
-                                histLongNotes = reader["MESSAGEBODY"].ToString();
-                                histNotes = reader["SHORTNOTES"].ToString();
-
-                                //=====================================
-                                // Is Contact Employee
-                                //===================================
-                                if (histContactType == "EMPL")
+                                blnIsUserFoundinFrom = true;
+                                histCategory = "EMail History Added";
+                                //==================================================================================
+                                // Get Contact Information
+                                //==================================================================================
+                                if (IsContactFound(reader["FROMADDRESS"].ToString(), out histContactID, out histContactName, out histAccountID, out histAccountName, out histContactType))
                                 {
-                                    //Get User Private Team
-                                    histSeccodeID = GetUserPrivateSeccode(UserID);
-                                    CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
-                                    UpdateEmailArchiveLinked(EmailArchiveID, "", true);
-                                    //======================================================
-                                    // Create Accompanying History record Employee Contact
-                                    //======================================================
+                                    //=========================================================
+                                    // Set Remaining History record Information
+                                    //=========================================================
+                                    histDescription = reader["SUBJECT"].ToString();
+                                    histLongNotes = reader["MESSAGEBODY"].ToString();
+                                    histNotes = reader["SHORTNOTES"].ToString();
 
-                                    if (IsContactFound(reader["TOADDRESS"].ToString(), out histContactID, out histContactName, out histAccountID, out histAccountName, out histContactType))
+                                    //=====================================
+                                    // Is Contact Employee
+                                    //===================================
+                                    if (histContactType == "EMPL")
                                     {
+                                        //Get User Private Team
                                         histSeccodeID = GetUserPrivateSeccode(UserID);
                                         CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
                                         UpdateEmailArchiveLinked(EmailArchiveID, "", true);
+                                        //======================================================
+                                        // Create Accompanying History record Employee Contact
+                                        //======================================================
+
+                                        if (IsContactFound(reader["TOADDRESS"].ToString(), out histContactID, out histContactName, out histAccountID, out histAccountName, out histContactType))
+                                        {
+                                            histSeccodeID = GetUserPrivateSeccode(UserID);
+                                            CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
+                                            UpdateEmailArchiveLinked(EmailArchiveID, "", true);
+                                        }
+
+
+
                                     }
+                                    else
+                                    {
+                                        // Not an Employee so Default Everyone
+                                        histSeccodeID = "SYST00000001";
+                                        CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
+                                        UpdateEmailArchiveLinked(EmailArchiveID, "", true);
 
-
+                                    }
 
                                 }
                                 else
                                 {
-                                    // Not an Employee so Default Everyone
-                                    histSeccodeID = "SYST00000001";
-                                    CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, histSeccodeID);
-                                    UpdateEmailArchiveLinked(EmailArchiveID, "", true);
-
+                                    // Contact Not Found
+                                    ReProcessNote = "Contact Not Found";
+                                    UpdateEmailArchiveLinked(EmailArchiveID, ReProcessNote, false);
                                 }
+                            }
 
-                            }
-                            else
-                            {
-                                // Contact Not Found
-                                ReProcessNote = "Contact Not Found";
-                                UpdateEmailArchiveLinked(EmailArchiveID, ReProcessNote, false);
-                            }
+
+
+
+                            i++; // Increment the counter
                         }
+                        catch (Exception)
+                        {
 
-
-
-
-                        i++; // Increment the counter
+                           
+                        }
 
                     }
                     reader.Close();
