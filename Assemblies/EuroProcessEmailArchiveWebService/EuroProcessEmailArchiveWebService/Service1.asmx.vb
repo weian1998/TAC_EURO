@@ -23,6 +23,7 @@ Public Class Service1
     <WebMethod()> _
     Public Function ReProcessAllUnlinkedEmailArchives()
         GetSLXConnectionString()
+        Dim strMessage As String = "Complete"
         Dim oConnection As New OleDbConnection(_SLXConnectionString)
         Try
             oConnection.Open()
@@ -34,11 +35,48 @@ Public Class Service1
             End While
             objReader.Close()
         Catch ex As OleDbException
-
+            strMessage = "Error " & ex.Message
         Finally
             If oConnection.State = ConnectionState.Open Then oConnection.Close()
         End Try
+        Return strMessage
     End Function
+    <WebMethod()> _
+    Public Function ReProcessContactEmailArchives(ByVal ID As String)
+
+        GetSLXConnectionString()
+        Dim strMessage As String = "Complete"
+        Dim UserName As String = ""
+        Dim UserID As String = ""
+        Dim ContactID As String = ""
+        Dim ContactName As String = ""
+        Dim AccountID As String = ""
+        Dim AccountName As String = ""
+        Dim ContactType As String = ""
+
+        Dim strToAddress As String = ""
+        Dim strFromAddress As String = ""
+
+        strToAddress = GetField(Of String)("TOADDRESS", "EMAILARCHIVE", " EMAILARCHIVEID = '" & ID & "'")
+        strFromAddress = GetField(Of String)("FROMADDRESS", "EMAILARCHIVE", " EMAILARCHIVEID = '" & ID & "'")
+
+        If IsUserFound(strToAddress, UserName, UserID) Then
+            If IsContactFound(strFromAddress, ContactID, ContactName, AccountID, AccountName, ContactType) Then
+                ' ReProcess by Email Address 
+                strMessage = ReProcessContactEmailAddressEmailArchives(strFromAddress)
+            End If
+        Else
+            If IsUserFound(strFromAddress, UserName, UserID) Then
+                If IsContactFound(strToAddress, ContactID, ContactName, AccountID, AccountName, ContactType) Then
+                    ' ReProcess by Email Address 
+                    strMessage = ReProcessContactEmailAddressEmailArchives(strToAddress)
+                End If
+            End If
+        End If
+
+        Return strMessage
+    End Function
+
     <WebMethod()> _
     Public Function ProcessEmailArchiveID(ByVal ID As String)
         '===============================================================
@@ -286,6 +324,7 @@ Public Class Service1
 
         Return ID
     End Function
+
 
    
 
@@ -732,6 +771,26 @@ Public Class Service1
 
 
     End Sub
+    Public Function ReProcessContactEmailAddressEmailArchives(ByVal EmailAddress As String)
+        GetSLXConnectionString()
+        Dim strMessage As String = "Complete"
+        Dim oConnection As New OleDbConnection(_SLXConnectionString)
+        Try
+            oConnection.Open()
+            Dim objCmd As New OleDbCommand("SELECT EMAILARCHIVEID FROM sysdba.EMAILARCHIVE WHERE isnull(ISLINKEDHISTORY,'F') = 'F' AND (TOADDRESS ='" & EmailAddress & "') OR (FROMADDRESS ='" & EmailAddress & "') order by createdate desc", oConnection)
+            Dim objReader As OleDbDataReader = objCmd.ExecuteReader
+            While objReader.Read()
+                ProcessEmailArchiveID(objReader.GetString(0))
+
+            End While
+            objReader.Close()
+        Catch ex As OleDbException
+            strMessage = "Error " & ex.Message
+        Finally
+            If oConnection.State = ConnectionState.Open Then oConnection.Close()
+        End Try
+        Return strMessage
+    End Function
 
 
 End Class
