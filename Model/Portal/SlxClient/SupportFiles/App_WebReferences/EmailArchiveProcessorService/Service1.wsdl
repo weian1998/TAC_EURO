@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReProcessAllUnlinkedEmailArchives">
+        <s:complexType />
+      </s:element>
+      <s:element name="ReProcessAllUnlinkedEmailArchivesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReProcessAllUnlinkedEmailArchivesResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReProcessContactEmailArchives">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReProcessContactEmailArchivesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReProcessContactEmailArchivesResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcessEmailArchiveID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcessEmailArchiveIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProcessEmailArchiveIDResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReProcessAllUnlinkedEmailArchivesSoapIn">
+    <wsdl:part name="parameters" element="tns:ReProcessAllUnlinkedEmailArchives" />
+  </wsdl:message>
+  <wsdl:message name="ReProcessAllUnlinkedEmailArchivesSoapOut">
+    <wsdl:part name="parameters" element="tns:ReProcessAllUnlinkedEmailArchivesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReProcessContactEmailArchivesSoapIn">
+    <wsdl:part name="parameters" element="tns:ReProcessContactEmailArchives" />
+  </wsdl:message>
+  <wsdl:message name="ReProcessContactEmailArchivesSoapOut">
+    <wsdl:part name="parameters" element="tns:ReProcessContactEmailArchivesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcessEmailArchiveIDSoapIn">
+    <wsdl:part name="parameters" element="tns:ProcessEmailArchiveID" />
+  </wsdl:message>
+  <wsdl:message name="ProcessEmailArchiveIDSoapOut">
+    <wsdl:part name="parameters" element="tns:ProcessEmailArchiveIDResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Service1Soap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReProcessAllUnlinkedEmailArchives">
+      <wsdl:input message="tns:ReProcessAllUnlinkedEmailArchivesSoapIn" />
+      <wsdl:output message="tns:ReProcessAllUnlinkedEmailArchivesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReProcessContactEmailArchives">
+      <wsdl:input message="tns:ReProcessContactEmailArchivesSoapIn" />
+      <wsdl:output message="tns:ReProcessContactEmailArchivesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessEmailArchiveID">
+      <wsdl:input message="tns:ProcessEmailArchiveIDSoapIn" />
+      <wsdl:output message="tns:ProcessEmailArchiveIDSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Service1Soap" type="tns:Service1Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReProcessAllUnlinkedEmailArchives">
+      <soap:operation soapAction="http://tempuri.org/ReProcessAllUnlinkedEmailArchives" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReProcessContactEmailArchives">
+      <soap:operation soapAction="http://tempuri.org/ReProcessContactEmailArchives" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessEmailArchiveID">
+      <soap:operation soapAction="http://tempuri.org/ProcessEmailArchiveID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Service1Soap12" type="tns:Service1Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReProcessAllUnlinkedEmailArchives">
+      <soap12:operation soapAction="http://tempuri.org/ReProcessAllUnlinkedEmailArchives" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReProcessContactEmailArchives">
+      <soap12:operation soapAction="http://tempuri.org/ReProcessContactEmailArchives" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessEmailArchiveID">
+      <soap12:operation soapAction="http://tempuri.org/ProcessEmailArchiveID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="Service1Soap" binding="tns:Service1Soap">
+      <soap:address location="http://localhost:3336/Service1.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Service1Soap12" binding="tns:Service1Soap12">
+      <soap12:address location="http://localhost:3336/Service1.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
