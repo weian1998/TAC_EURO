@@ -41,6 +41,9 @@ FROM         sysdba.CONTACT INNER JOIN
                       
 Select * from sysdba.EMAILEXTRA 
 Truncate Table sysdba.EmailExtra 
+--Used to Create EmailExtra Table
+SELECT     CONTACTID, EMAIL
+FROM         sysdba.GOLDEMAIL
  
  -- =========================================================================================
  -- Clean Up Email Archives after Improt from gold Email and updateing the Contact Record
