@@ -2,6 +2,7 @@
 <PortalPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="7950f25b-aad6-41ca-8b87-b5aa5487c3b2">
   <PageAlias>InsertUserMapping</PageAlias>
   <TemplateUrl>Masters\base.master</TemplateUrl>
+  <InheritTemplate>false</InheritTemplate>
   <InheritsFrom>Sage.Platform.WebPortal.EntityPage, Sage.Platform.WebPortal</InheritsFrom>
   <Properties>
     <Property Name="EntityTypeName" TypeConverter="">Sage.Entity.Interfaces.IEUROUSERPRIVATEMAP, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</Property>
