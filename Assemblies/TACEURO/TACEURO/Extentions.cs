@@ -11,10 +11,28 @@ using Sage.Platform.ChangeManagement;
 using Sage.Platform.Security;
 
 
+using Sage.Platform.Application;
+using Sage.Platform.Application.UI;
+using Sage.Platform.WebPortal.Services;
+using Sage.Platform.WebPortal.Workspaces;
+using Sage.Platform.WebPortal.SmartParts;
+using Sage.SalesLogix.Security;
+using Sage.Platform.WebPortal.Workspaces.Tab;
+
+
+
 namespace TACEURO
 {
+
+
     public class Extentions
     {
+       
+        public static void EuroHideAccountTabVisibility(IAccount account)
+        {
+           
+
+        }
         #region Opportunity Events
         // Example of target method signature
         public static void TACOpportunityOnBeforeUpdate(IOpportunity Opportunity, ISession session)
@@ -853,6 +871,99 @@ namespace TACEURO
         }
         #endregion
     }
+    public class AccountModule : IModule
+    {
+        public WorkItem ModuleWorkItem
+        {
+            get { return null; }
+        }
+        private UIWorkItem _parentWorkItem;
+        [ServiceDependency(Type = typeof(WorkItem))]
+        public UIWorkItem ParentWorkItem
+        {
+            get { return _parentWorkItem; }
+            set { _parentWorkItem = value; }
+        }
+        private IUserService _userService;
+        [ServiceDependency]
+        public IUserService UserService
+        {
+            set { _userService = value; }
+            get { return _userService; }
+        }
 
+        private IEntityContextService _EntityService;
+        [ServiceDependency(Type = typeof(IEntityContextService), Required = true)]
+        public IEntityContextService EntityService
+        {
+            get { return _EntityService; }
+            set { _EntityService = value; }
+        }
+
+
+        #region IModule Members
+
+        public void Load()
+        {
+            SetTabVisibility();
+            //SetFieldSecurity();
+        }
+        //public WorkItem ModuleWorkItem { get { return null; } }
+        #endregion
+
+        /// <summary>
+        /// Disables all tabs in the Dynamic Tabs list, then reenables tabs according to the users role
+        /// </summary>
+        private void SetTabVisibility()
+        {
+
+            IAccount account = EntityFactory.GetById<IAccount>(EntityService.EntityID.ToString());
+
+            //Locate the currrent Tab Workspaces
+
+
+            if (account != null)
+            {
+                // These 2 lines get the tab collection for the page.
+                Sage.Platform.WebPortal.Workspaces.Tab.TabWorkspace tabWorkspace = (Sage.Platform.WebPortal.Workspaces.Tab.TabWorkspace)_parentWorkItem.Workspaces["TabControl"] as Sage.Platform.WebPortal.Workspaces.Tab.TabWorkspace;
+                //Get Current user
+                Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+                Sage.Entity.Interfaces.IUser currentuser = usersvc.GetUser();
+
+                if (currentuser.Id.ToString() != "ADMIN")
+                {
+                    foreach (Sage.Platform.WebPortal.Workspaces.Tab.TabInfo t in tabWorkspace.Tabs)
+                    {
+                        switch (t.ID)
+                        {
+                            case "AccountContacts":
+                                //Do not Hide
+                                tabWorkspace.Hide(t.ID, false);
+                                break;
+                            case "AccountAddresses":
+                                //Do not Hide
+                                tabWorkspace.Hide(t.ID, false);
+                                break;
+                            case "AccountTickets":
+                                tabWorkspace.Hide(t.ID, false);
+                                //Do not Hide
+                                break;
+                            default:
+                                //Hide
+                                tabWorkspace.Hide(t.ID, true);
+
+                                break;
+                        }
+                    }
+
+
+                }
+
+            }
+        }
+
+    }
+
+   
 
 }

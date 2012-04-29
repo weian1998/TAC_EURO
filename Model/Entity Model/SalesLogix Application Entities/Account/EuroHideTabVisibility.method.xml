@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="879f9a7c-7eac-4db0-80cd-acc64d92c90d" lastModifiedUtc="2012-04-28T23:29:55.3219988Z" name="EuroHideTabVisibility" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="f69693c1-bbcf-4f5a-b9b2-15158e874d9c" lastModifiedUtc="2012-04-28T23:29:44.6533886Z" targetType="TACEURO.Extentions, TACEURO" targetMethod="EuroHideAccountTabVisibility" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>
