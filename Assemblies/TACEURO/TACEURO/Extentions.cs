@@ -871,6 +871,7 @@ namespace TACEURO
         }
         #endregion
     }
+
     public class AccountModule : IModule
     {
         public WorkItem ModuleWorkItem
@@ -930,8 +931,18 @@ namespace TACEURO
                 Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
                 Sage.Entity.Interfaces.IUser currentuser = usersvc.GetUser();
 
-                if (currentuser.Id.ToString() != "ADMIN")
+                if (DoesUserHaveAccess(currentuser.Id.ToString(), account.Owner.Id.ToString()))
                 {
+                    // Has Full Access so UnHide all Tabs
+                    foreach (Sage.Platform.WebPortal.Workspaces.Tab.TabInfo t in tabWorkspace.Tabs)
+                    {
+                        tabWorkspace.Hide(t.ID, false);
+                    }
+                   
+                }
+                else
+                {
+                    //LIMITED ACCESS SO HIDE TABS
                     foreach (Sage.Platform.WebPortal.Workspaces.Tab.TabInfo t in tabWorkspace.Tabs)
                     {
                         switch (t.ID)
@@ -954,12 +965,190 @@ namespace TACEURO
 
                                 break;
                         }
-                    }
-
-
+                    }   
                 }
 
             }
+        }
+
+        private bool  DoesUserHaveAccess(string Userid, string Seccodeid)
+        {
+            bool blnReturn = false; // Intialize
+            if (Userid == "ADMIN")
+            {
+                blnReturn = true;
+            }
+            else
+            {
+                //Not the Admin User
+                string Profileid = Extentions.GetField<string>("PROFILEID", "SECRIGHTS", "ACCESSID = '" + Userid + "' AND SECCODEID ='" + Seccodeid + "'");
+                switch (Profileid)
+                {
+                    case "PROF00000001":
+                        //PROF00000001	Read/Write Default
+                        blnReturn = true;
+                        break;
+                    case "PROF00000002":
+                        //PROF00000002	Read Only Default
+                        blnReturn = false;
+                        break;
+                    case "PROF00000003":
+                        //PROF00000003	Team Owner Profile
+                        blnReturn = true;
+                        break;
+                    case "FEUROA00002Z":
+                        //FEUROA00002Z	Limited Access
+                        blnReturn = false;
+                        break;
+                    default:
+                        blnReturn = false; // Default = No Access
+                        break;
+                }
+               
+                
+                
+                //FEUROA00002Z	Limited Access
+            }
+            return blnReturn;
+        }
+
+    }
+
+    public class ContactModule : IModule
+    {
+        public WorkItem ModuleWorkItem
+        {
+            get { return null; }
+        }
+        private UIWorkItem _parentWorkItem;
+        [ServiceDependency(Type = typeof(WorkItem))]
+        public UIWorkItem ParentWorkItem
+        {
+            get { return _parentWorkItem; }
+            set { _parentWorkItem = value; }
+        }
+        private IUserService _userService;
+        [ServiceDependency]
+        public IUserService UserService
+        {
+            set { _userService = value; }
+            get { return _userService; }
+        }
+
+        private IEntityContextService _EntityService;
+        [ServiceDependency(Type = typeof(IEntityContextService), Required = true)]
+        public IEntityContextService EntityService
+        {
+            get { return _EntityService; }
+            set { _EntityService = value; }
+        }
+
+
+        #region IModule Members
+
+        public void Load()
+        {
+            SetTabVisibility();
+            //SetFieldSecurity();
+        }
+        //public WorkItem ModuleWorkItem { get { return null; } }
+        #endregion
+
+        /// <summary>
+        /// Disables all tabs in the Dynamic Tabs list, then reenables tabs according to the users role
+        /// </summary>
+        private void SetTabVisibility()
+        {
+
+            IContact contact = EntityFactory.GetById<IContact>(EntityService.EntityID.ToString());
+
+            //Locate the currrent Tab Workspaces
+
+
+            if (contact != null)
+            {
+                // These 2 lines get the tab collection for the page.
+                Sage.Platform.WebPortal.Workspaces.Tab.TabWorkspace tabWorkspace = (Sage.Platform.WebPortal.Workspaces.Tab.TabWorkspace)_parentWorkItem.Workspaces["TabControl"] as Sage.Platform.WebPortal.Workspaces.Tab.TabWorkspace;
+                //Get Current user
+                Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+                Sage.Entity.Interfaces.IUser currentuser = usersvc.GetUser();
+
+                if (DoesUserHaveAccess(currentuser.Id.ToString(), contact.Owner.Id.ToString()))
+                {
+                    // Has Full Access so UnHide all Tabs
+                    foreach (Sage.Platform.WebPortal.Workspaces.Tab.TabInfo t in tabWorkspace.Tabs)
+                    {
+                        tabWorkspace.Hide(t.ID, false);
+                    }
+
+                }
+                else
+                {
+                    //LIMITED ACCESS SO HIDE TABS
+                    foreach (Sage.Platform.WebPortal.Workspaces.Tab.TabInfo t in tabWorkspace.Tabs)
+                    {
+                        switch (t.ID)
+                        {
+                           
+                            case "ContactAddresses":
+                                //Do not Hide
+                                tabWorkspace.Hide(t.ID, false);
+                                break;
+                            case "ContactTickets":
+                                tabWorkspace.Hide(t.ID, false);
+                                //Do not Hide
+                                break;
+                            default:
+                                //Hide
+                                tabWorkspace.Hide(t.ID, true);
+
+                                break;
+                        }
+                    }
+                }
+
+            }
+        }
+
+        private bool DoesUserHaveAccess(string Userid, string Seccodeid)
+        {
+            bool blnReturn = false; // Intialize
+            if (Userid == "ADMIN")
+            {
+                blnReturn = true;
+            }
+            else
+            {
+                //Not the Admin User
+                string Profileid = Extentions.GetField<string>("PROFILEID", "SECRIGHTS", "ACCESSID = '" + Userid + "' AND SECCODEID ='" + Seccodeid + "'");
+                switch (Profileid)
+                {
+                    case "PROF00000001":
+                        //PROF00000001	Read/Write Default
+                        blnReturn = true;
+                        break;
+                    case "PROF00000002":
+                        //PROF00000002	Read Only Default
+                        blnReturn = false;
+                        break;
+                    case "PROF00000003":
+                        //PROF00000003	Team Owner Profile
+                        blnReturn = true;
+                        break;
+                    case "FEUROA00002Z":
+                        //FEUROA00002Z	Limited Access
+                        blnReturn = false;
+                        break;
+                    default:
+                        blnReturn = false; // Default = No Access
+                        break;
+                }
+
+
+
+                //FEUROA00002Z	Limited Access
+            }
+            return blnReturn;
         }
 
     }
