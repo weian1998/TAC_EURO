@@ -224,7 +224,8 @@ Public Class Service1
                             End If
                         Else
                             ' Not an Employee so Default Everyone
-                            histSeccodeID = "SYST00000001"
+                            'histSeccodeID = "SYST00000001"
+                            histSeccodeID = GetField(Of String)("SECCODEID", "ACCOUNT", "ACCOUNTID='" & histAccountID & "'")
 
                             Call CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
                                                      UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
