@@ -726,7 +726,7 @@
         <DoubleDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="1c05c3aa-86a4-40db-8b37-e0c1519c4c5f" lastModifiedUtc="0001-01-01T00:00:00" name="SeccodeId" audited="false" isNullable="false" include="false" columnName="SECCODEID" maxLength="12" precision="0" scale="0" ordinal="36" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="1c05c3aa-86a4-40db-8b37-e0c1519c4c5f" lastModifiedUtc="2012-05-02T02:21:00.9909019Z" name="SeccodeId" audited="false" isNullable="false" columnName="SECCODEID" maxLength="12" precision="0" scale="0" ordinal="36" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
           <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">

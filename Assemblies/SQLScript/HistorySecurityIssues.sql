@@ -62,6 +62,5 @@ WHERE     (sysdba.HISTORY.EMAILARCHIVEID IS NULL)
  --where ISLINKEDHISTORY  ='T'
  Select COUNT(*) from sysdba.EMAILARCHIVE where ISLINKEDHISTORY ='F'
  
- 
- Select * from sysdba.SECCODE 
- where SECCODETYPE = 'G' and LEFT(SECCODEDESC,1) <> 'z' 
+
+Select * from sysdba.seccode

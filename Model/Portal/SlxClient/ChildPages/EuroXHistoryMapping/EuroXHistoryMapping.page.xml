@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<PortalPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="8e387530-6fb1-4ae7-b707-85967a59a964">
+  <PageAlias>EuroXHistoryMapping</PageAlias>
+  <SmallImage>[Localization!Global_Images:xHistory16x16]</SmallImage>
+  <LargeImage>[Localization!Global_Images:xHistory32x32]</LargeImage>
+  <TemplateUrl>Masters\base.master</TemplateUrl>
+  <InheritsFrom>Sage.Platform.WebPortal.EntityPage, Sage.Platform.WebPortal</InheritsFrom>
+  <Properties>
+    <Property Name="EntityTypeName" TypeConverter="">Sage.Entity.Interfaces.IEuroXHistoryMapping, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</Property>
+  </Properties>
+  <TemplateProperties />
+  <IsDefaultPage>false</IsDefaultPage>
+  <ExcludedGlobalModules />
+  <AppliedSecurity />
+</PortalPage>

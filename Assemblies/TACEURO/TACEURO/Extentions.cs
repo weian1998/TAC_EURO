@@ -18,6 +18,7 @@ using Sage.Platform.WebPortal.Workspaces;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.SalesLogix.Security;
 using Sage.Platform.WebPortal.Workspaces.Tab;
+using Sage.Platform.Repository;
 
 
 
@@ -31,7 +32,67 @@ namespace TACEURO
         #region Account Events
 
         public static void EuroAccountOwnerHasChanged(IAccount account)
-        {
+        { 
+            //======================================================
+            // Contacts
+            //======================================================
+            foreach (IContact tmpContact in account.Contacts )
+            {
+                tmpContact.SeccodeId = account.SeccodeId;
+                tmpContact.Save();  
+            }
+
+            //======================================================
+            // Tickets
+            //======================================================
+            foreach (ITicket tmpTicket in account.Tickets)
+            {
+                tmpTicket.SeccodeId = account.SeccodeId;
+                tmpTicket.Save(); 
+            }
+
+            //======================================================
+            // Opportunities
+            //======================================================
+            foreach (IOpportunity tmpOpportunity in account.Opportunities)
+            {
+                tmpOpportunity.SeccodeId = account.SeccodeId;
+                tmpOpportunity.Save(); 
+            }
+            //======================================================
+            // Historyies
+            //======================================================
+            String HistoryID = String.Empty;
+            // get the DataService to get a connection string to the database
+            Sage.Platform.Data.IDataService datasvc = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Data.IDataService>();
+            using (System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection(datasvc.GetConnectionString()))
+            {
+                conn.Open();
+                using (System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand("Select *  from HISTORY where ACCOUNTID = '" + account.Id.ToString() +"'", conn))
+                {
+                    OleDbDataReader reader = cmd.ExecuteReader();
+                    //loop through the reader
+                    while (reader.Read())
+                    {
+                        HistoryID = reader["HISTORYID"].ToString();
+                        Sage.Entity.Interfaces.IHistory  _entity = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IHistory >(HistoryID );
+                        if (Left(_entity.SeccodeId, 1) == "z")
+                        {
+                            //ZTeam which Means Leave it alone
+                        }
+                        else
+                        {
+                            //======================================================
+                            // Logic to Find Mapped xHistory Table
+                            //======================================================
+                            _entity.SeccodeId = account.SeccodeId;
+                            _entity.Save();
+                        }
+
+                    }
+                    reader.Close();
+                }
+            }
 
         }
         public static void EuroHasLimitedAccess(IAccount account, out Boolean result)
@@ -79,6 +140,20 @@ namespace TACEURO
 
         public static void OnBeforeAccountUpdate(IAccount Account, ISession session)
         {
+            ////TAC Code here
+
+            IChangedState state = Account as IChangedState;
+            if (state != null)
+            {
+                EntityPropertyChange change = state.GetChangedState().FindMemberChange<EntityPropertyChange>("EuroOwner");
+                if (change != null && change.OldEntity != null)
+                {
+                    //IUser oldAcctMgr = (IUser)change.OldEntity.GetReferencedEntity();
+                    //IUser newAcctMgr = (IUser)change.NewEntity.GetReferencedEntity();
+                    Account.EuroAccountOwnerHasChanged(); 
+                    // do something
+                }
+            }
 
         }
         #endregion
