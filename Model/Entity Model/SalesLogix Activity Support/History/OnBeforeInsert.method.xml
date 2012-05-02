@@ -13,6 +13,12 @@
       </ExtendedPropertiesCollection>
     </methodTarget>
   </methodTargets>
-  <postExecuteTargets />
+  <postExecuteTargets>
+    <methodTarget id="aaa11380-64b1-4247-85f2-f81885f777d1" lastModifiedUtc="2012-05-01T23:38:49.1662733Z" targetType="TACEURO.Extentions, TACEURO" targetMethod="OnBeforeHistoryInsert" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </postExecuteTargets>
   <postFlushTargets />
 </method>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="0ba87adf-814c-4200-83dd-0752a1fa9b7b" lastModifiedUtc="2012-05-01T23:32:16.3988083Z" name="EuroHasLimitedAccess" returnType="Boolean" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="68cbf2ca-3dea-43a6-a71c-a95fda68b657" lastModifiedUtc="2012-05-01T23:32:07.4382958Z" targetType="TACEURO.Extentions, TACEURO" targetMethod="EuroHasLimitedAccess" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="7bb5a1df-37d9-4f86-9b8b-2a7cd00465c2" lastModifiedUtc="2012-05-02T00:51:52.9830133Z" name="EuroAccountOwnerHasChanged" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="b156a402-68e3-4353-8d69-984abc8d8ce2" lastModifiedUtc="2012-05-02T00:51:50.1888535Z" targetType="TACEURO.Extentions, TACEURO" targetMethod="EuroAccountOwnerHasChanged" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

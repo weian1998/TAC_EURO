@@ -27,12 +27,61 @@ namespace TACEURO
 
     public class Extentions
     {
-       
-        public static void EuroHideAccountTabVisibility(IAccount account)
+
+        #region Account Events
+
+        public static void EuroAccountOwnerHasChanged(IAccount account)
         {
-           
 
         }
+        public static void EuroHasLimitedAccess(IAccount account, out Boolean result)
+        {
+            Boolean blnreturn = true; //Intialize
+            //Get Current user
+            Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+            Sage.Entity.Interfaces.IUser currentuser = usersvc.GetUser();
+            if (currentuser.Id.ToString() == "ADMIN       ")
+            {
+                blnreturn = false;
+            }
+            else
+            {
+                //Not the Admin User
+                string Profileid = Extentions.GetField<string>("PROFILEID", "SECRIGHTS", "ACCESSID = '" + currentuser.Id.ToString() + "' AND SECCODEID ='" + account.SeccodeId.ToString()  + "'");
+                switch (Profileid)
+                {
+                    case "PROF00000001":
+                        //PROF00000001	Read/Write Default
+                        blnreturn = false;
+                        break;
+                    case "PROF00000002":
+                        //PROF00000002	Read Only Default
+                        blnreturn = true;
+                        break;
+                    case "PROF00000003":
+                        //PROF00000003	Team Owner Profile
+                        blnreturn = false;
+                        break;
+                    case "FEUROA00002Z":
+                        //FEUROA00002Z	Limited Access
+                        blnreturn = true;
+                        break;
+                    default:
+                        blnreturn = true; // Default = No Access
+                        break;
+                }
+                
+            }
+
+
+            result = blnreturn;
+        }
+
+        public static void OnBeforeAccountUpdate(IAccount Account, ISession session)
+        {
+
+        }
+        #endregion
         #region Opportunity Events
         // Example of target method signature
         public static void TACOpportunityOnBeforeUpdate(IOpportunity Opportunity, ISession session)
@@ -120,7 +169,10 @@ namespace TACEURO
 
         #region Tasks and Activity Entity Events
 
+        public static void OnBeforeHistoryInsert(IHistory History, ISession session)
+        {
 
+        }
 
 
         // Example of target method signature
@@ -931,7 +983,7 @@ namespace TACEURO
                 Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
                 Sage.Entity.Interfaces.IUser currentuser = usersvc.GetUser();
 
-                if (DoesUserHaveAccess(currentuser.Id.ToString(), account.Owner.Id.ToString()))
+                if (DoesUserHaveAccess(currentuser.Id.ToString(), account.SeccodeId.ToString() ))
                 {
                     // Has Full Access so UnHide all Tabs
                     foreach (Sage.Platform.WebPortal.Workspaces.Tab.TabInfo t in tabWorkspace.Tabs)
@@ -974,7 +1026,7 @@ namespace TACEURO
         private bool  DoesUserHaveAccess(string Userid, string Seccodeid)
         {
             bool blnReturn = false; // Intialize
-            if (Userid == "ADMIN")
+            if (Userid == "ADMIN       ")
             {
                 blnReturn = true;
             }
@@ -1073,7 +1125,7 @@ namespace TACEURO
                 Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
                 Sage.Entity.Interfaces.IUser currentuser = usersvc.GetUser();
 
-                if (DoesUserHaveAccess(currentuser.Id.ToString(), contact.Owner.Id.ToString()))
+                if (DoesUserHaveAccess(currentuser.Id.ToString(), contact.Account.SeccodeId.ToString()  ))
                 {
                     // Has Full Access so UnHide all Tabs
                     foreach (Sage.Platform.WebPortal.Workspaces.Tab.TabInfo t in tabWorkspace.Tabs)
@@ -1113,7 +1165,7 @@ namespace TACEURO
         private bool DoesUserHaveAccess(string Userid, string Seccodeid)
         {
             bool blnReturn = false; // Intialize
-            if (Userid == "ADMIN")
+            if (Userid == "ADMIN       ")
             {
                 blnReturn = true;
             }

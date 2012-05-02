@@ -144,9 +144,6 @@
   <data name="Address.Caption" xml:space="preserve">
     <value>Address:</value>
   </data>
-  <data name="Owner.Caption" xml:space="preserve">
-    <value>Owner:</value>
-  </data>
   <data name="MainPhone.Caption" xml:space="preserve">
     <value>Main:</value>
   </data>
@@ -171,8 +168,8 @@
   <data name="WebAddress.Caption" xml:space="preserve">
     <value>Web URL:</value>
   </data>
-  <data name="AccManager.Caption" xml:space="preserve">
-    <value>Acc Manager:</value>
+  <data name="lueOwner.LookupProperties.Teamname.PropertyHeader" xml:space="preserve">
+    <value>Teamname</value>
   </data>
   <data name="cmdCopyAccount.Caption" xml:space="preserve">
     <value>Copy</value>
@@ -180,11 +177,8 @@
   <data name="cmdCopyAccount.ToolTip" xml:space="preserve">
     <value>Copy Account Information to Clipboard</value>
   </data>
-  <data name="Owner.ButtonToolTip" xml:space="preserve">
-    <value>Find</value>
-  </data>
-  <data name="AccManager.ButtonToolTip" xml:space="preserve">
-    <value>Find</value>
+  <data name="lueOwner.Caption" xml:space="preserve">
+    <value>Owner:</value>
   </data>
   <data name="Address.AddressToolTip" xml:space="preserve">
     <value>MapQuest</value>
@@ -209,5 +203,11 @@
   </data>
   <data name="NumDesigners.Caption" xml:space="preserve">
     <value>No. Designers</value>
+  </data>
+  <data name="lueAccountManager.Caption" xml:space="preserve">
+    <value>Acct Manager:</value>
+  </data>
+  <data name="lueAccountManager.LookupProperties.Username.PropertyHeader" xml:space="preserve">
+    <value>Username</value>
   </data>
 </root>
