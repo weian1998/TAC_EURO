@@ -31,14 +31,14 @@ namespace TACEURO
 
         #region Account Events
 
-        public static void EuroAccountOwnerHasChanged(IAccount account)
+        public static void EuroAccountOwnerHasChanged(IAccount account,string NewOwnerID)
         { 
             //======================================================
             // Contacts
             //======================================================
             foreach (IContact tmpContact in account.Contacts )
             {
-                tmpContact.SeccodeId = account.SeccodeId;
+                tmpContact.SeccodeId = NewOwnerID;
                 tmpContact.Save();  
             }
 
@@ -47,7 +47,7 @@ namespace TACEURO
             //======================================================
             foreach (ITicket tmpTicket in account.Tickets)
             {
-                tmpTicket.SeccodeId = account.SeccodeId;
+                tmpTicket.SeccodeId = NewOwnerID;
                 tmpTicket.Save(); 
             }
 
@@ -56,7 +56,7 @@ namespace TACEURO
             //======================================================
             foreach (IOpportunity tmpOpportunity in account.Opportunities)
             {
-                tmpOpportunity.SeccodeId = account.SeccodeId;
+                tmpOpportunity.SeccodeId = NewOwnerID;
                 tmpOpportunity.Save(); 
             }
             //======================================================
@@ -85,8 +85,21 @@ namespace TACEURO
                             //======================================================
                             // Logic to Find Mapped xHistory Table
                             //======================================================
-                            _entity.SeccodeId = account.SeccodeId;
-                            _entity.Save();
+                            string strXMappedTeam = string.Empty ;
+                            strXMappedTeam = Extentions.GetField<string>("XHISTORYSECCODEID", "EUROXHISTORYMAPPING", "MAINACCOUNTSECCODEID = '" + NewOwnerID + "'");
+                           if (strXMappedTeam != string.Empty )
+                           {
+                               // Assign the xHistory Mapped Team
+                               _entity.SeccodeId = strXMappedTeam;
+                               _entity.Save ();
+                           }
+                           else
+                           {
+                               // Assign the Same Team as the Account
+                               _entity.SeccodeId = NewOwnerID; 
+                               _entity.Save(); 
+                           }
+                       
                         }
 
                     }
@@ -95,6 +108,7 @@ namespace TACEURO
             }
 
         }
+ 
         public static void EuroHasLimitedAccess(IAccount account, out Boolean result)
         {
             Boolean blnreturn = true; //Intialize
@@ -150,7 +164,7 @@ namespace TACEURO
                 {
                     //IUser oldAcctMgr = (IUser)change.OldEntity.GetReferencedEntity();
                     //IUser newAcctMgr = (IUser)change.NewEntity.GetReferencedEntity();
-                    Account.EuroAccountOwnerHasChanged(); 
+                    EuroAccountOwnerHasChanged(Account,change.NewEntity.EntityId.ToString()); 
                     // do something
                 }
             }
@@ -246,6 +260,27 @@ namespace TACEURO
 
         public static void OnBeforeHistoryInsert(IHistory History, ISession session)
         {
+            if (History.AccountId != null || History.AccountId != "")
+            {
+                //======================================================
+                // Logic to Find Mapped xHistory Table
+                //======================================================
+                Sage.Entity.Interfaces.IAccount Account = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IAccount>(History.AccountId);
+                string strXMappedTeam = string.Empty;
+                strXMappedTeam = Extentions.GetField<string>("XHISTORYSECCODEID", "EUROXHISTORYMAPPING", "MAINACCOUNTSECCODEID = '" + Account.SeccodeId  + "'");
+                if (strXMappedTeam != string.Empty)
+                {
+                    // Assign the xHistory Mapped Team
+                    History.SeccodeId = strXMappedTeam;
+                    
+                }
+                else
+                {
+                    // Assign the Same Team as the Account
+                    History.SeccodeId = Account.SeccodeId ;
+                    
+                }
+            }
 
         }
 

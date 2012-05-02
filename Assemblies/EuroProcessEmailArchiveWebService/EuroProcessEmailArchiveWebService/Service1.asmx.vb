@@ -225,7 +225,27 @@ Public Class Service1
                         Else
                             ' Not an Employee so Default Everyone
                             'histSeccodeID = "SYST00000001"
-                            histSeccodeID = GetField(Of String)("SECCODEID", "ACCOUNT", "ACCOUNTID='" & histAccountID & "'")
+                            'histSeccodeID = GetField(Of String)("SECCODEID", "ACCOUNT", "ACCOUNTID='" & histAccountID & "'")
+                            '==================================================================
+                            ' First Check if User is ExecutiveTeam where All Emails ArePrivate
+                            '===================================================================
+                            If IsUserPartOfExcecutiveTeam(UserID) Then
+                                histSeccodeID = GetUserPrivateSeccode(UserID)
+                            Else
+                                'Get AccountXHistory Mapp Team
+                                Dim strXHistoryMappedTeam As String
+                                Dim strAccountTeam As String
+                                strAccountTeam = GetField(Of String)("SECCODEID", "ACCOUNT", "(ACCOUNTID = '" & histAccountID & "')")
+                                strXHistoryMappedTeam = GetField(Of String)("XHISTORYSECCODEID", "ACCOUNT", "(EUROXHISTORYMAPPING = '" & strAccountTeam & "')")
+                                If strXHistoryMappedTeam Is Nothing Then
+                                    'No Mapped Team Found so Default to Account Ownership
+                                    histSeccodeID = strAccountTeam
+                                Else
+                                    'FOUND!! 
+                                    histSeccodeID = strXHistoryMappedTeam
+                                End If
+
+                            End If
 
                             Call CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
                                                      UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
@@ -286,7 +306,27 @@ Public Class Service1
                             End If
                         Else
                             ' Not an Employee so Default Everyone
-                            histSeccodeID = "SYST00000001"
+                            'histSeccodeID = "SYST00000001"
+                            '==================================================================
+                            ' First Check if User is ExecutiveTeam where All Emails ArePrivate
+                            '===================================================================
+                            If IsUserPartOfExcecutiveTeam(UserID) Then
+                                histSeccodeID = GetUserPrivateSeccode(UserID)
+                            Else
+                                'Get AccountXHistory Mapp Team
+                                Dim strXHistoryMappedTeam As String
+                                Dim strAccountTeam As String
+                                strAccountTeam = GetField(Of String)("SECCODEID", "ACCOUNT", "(ACCOUNTID = '" & histAccountID & "')")
+                                strXHistoryMappedTeam = GetField(Of String)("XHISTORYSECCODEID", "ACCOUNT", "(EUROXHISTORYMAPPING = '" & strAccountTeam & "')")
+                                If strXHistoryMappedTeam Is Nothing Then
+                                    'No Mapped Team Found so Default to Account Ownership
+                                    histSeccodeID = strAccountTeam
+                                Else
+                                    'FOUND!! 
+                                    histSeccodeID = strXHistoryMappedTeam
+                                End If
+
+                            End If
 
                             Call CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
                                                      UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
@@ -324,6 +364,17 @@ Public Class Service1
         objRS.Close()
 
         Return ID
+    End Function
+    Private Function IsUserPartOfExcecutiveTeam(ByVal userid) As Boolean
+        Dim blnReturn As Boolean = False 'Intialize
+        Dim strResult As String = "" 'Intialize
+        strResult = GetField(Of String)("SECRIGHTSID", "SECRIGHTS", "(SECCODEID = 'FEUROA00003E') AND (ACCESSID = " & userid & "')")
+        If strResult = Nothing Then
+            blnReturn = False ' User Not Found
+        Else
+            blnReturn = True ' User Found
+        End If
+        Return blnReturn
     End Function
 
 
