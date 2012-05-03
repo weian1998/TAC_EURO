@@ -236,7 +236,7 @@ Public Class Service1
                                 Dim strXHistoryMappedTeam As String
                                 Dim strAccountTeam As String
                                 strAccountTeam = GetField(Of String)("SECCODEID", "ACCOUNT", "(ACCOUNTID = '" & histAccountID & "')")
-                                strXHistoryMappedTeam = GetField(Of String)("XHISTORYSECCODEID", "ACCOUNT", "(EUROXHISTORYMAPPING = '" & strAccountTeam & "')")
+                                strXHistoryMappedTeam = GetField(Of String)("XHISTORYSECCODEID", "EUROXHISTORYMAPPING", "(MAINACCOUNTSECCODEID = '" & strAccountTeam & "')")
                                 If strXHistoryMappedTeam Is Nothing Then
                                     'No Mapped Team Found so Default to Account Ownership
                                     histSeccodeID = strAccountTeam
@@ -317,7 +317,7 @@ Public Class Service1
                                 Dim strXHistoryMappedTeam As String
                                 Dim strAccountTeam As String
                                 strAccountTeam = GetField(Of String)("SECCODEID", "ACCOUNT", "(ACCOUNTID = '" & histAccountID & "')")
-                                strXHistoryMappedTeam = GetField(Of String)("XHISTORYSECCODEID", "ACCOUNT", "(EUROXHISTORYMAPPING = '" & strAccountTeam & "')")
+                                strXHistoryMappedTeam = GetField(Of String)("XHISTORYSECCODEID", "EUROXHISTORYMAPPING", "(MAINACCOUNTSECCODEID = '" & strAccountTeam & "')")
                                 If strXHistoryMappedTeam Is Nothing Then
                                     'No Mapped Team Found so Default to Account Ownership
                                     histSeccodeID = strAccountTeam
@@ -368,7 +368,7 @@ Public Class Service1
     Private Function IsUserPartOfExcecutiveTeam(ByVal userid) As Boolean
         Dim blnReturn As Boolean = False 'Intialize
         Dim strResult As String = "" 'Intialize
-        strResult = GetField(Of String)("SECRIGHTSID", "SECRIGHTS", "(SECCODEID = 'FEUROA00003E') AND (ACCESSID = " & userid & "')")
+        strResult = GetField(Of String)("SECRIGHTSID", "SECRIGHTS", "(SECCODEID = 'FEUROA00003E') AND (ACCESSID = '" & userid & "')")
         If strResult = Nothing Then
             blnReturn = False ' User Not Found
         Else
