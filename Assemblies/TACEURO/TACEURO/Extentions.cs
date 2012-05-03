@@ -127,7 +127,7 @@ namespace TACEURO
                 {
                     case "PROF00000001":
                         //PROF00000001	Read/Write Default
-                        blnreturn = false;
+                        blnreturn = true;
                         break;
                     case "PROF00000002":
                         //PROF00000002	Read Only Default
