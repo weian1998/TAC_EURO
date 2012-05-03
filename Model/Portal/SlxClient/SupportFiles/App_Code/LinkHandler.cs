@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Web;
@@ -21,7 +21,7 @@ public class LinkHandler
     private const int ActivityDlg_Width = 870;
     private const int CompleteActivityDlg_Height = 590;
     private const int CompleteActivityDlg_Width = 870;
-    private const int HistoryDlg_Height = 580;
+    private const int HistoryDlg_Height = 780;
     private const int HistoryDlg_Width = 730;
 
     private readonly ApplicationPage _Page;
