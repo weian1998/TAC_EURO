@@ -325,7 +325,7 @@ dojo.declare('Sage.UI.Forms.ICSalesOrders', null, {
     },
     handleOnHide: function () {
         /* Destroy the grids that are loaded dynamically, so that the 
-           data for one entity is not initially displayed for another entity. */
+        data for one entity is not initially displayed for another entity. */
         this.destroyFirst('sdgrdSODeliveries');
         this.deliveriesDataStore = null;
         this.destroyFirst('sdgrdSOPayments');

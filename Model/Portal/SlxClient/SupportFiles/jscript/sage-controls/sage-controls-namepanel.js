@@ -70,38 +70,38 @@ function NamePanel_Trim(stringToTrim) {
 }
 
 
-function NamePanel_NameChanged()
-{
+function NamePanel_NameChanged() {
+    if (event.srcElement.value !== this.CombineName()) {
     this.TextChanged = true;
+    }
 }
 
-function NamePanel_FormatName()
-{
+function NamePanel_CombineName() {
     var name = ((this.prefix == "") ? "" : this.prefix + ' ');
     name += ((this.first == "") ? "" : this.first + ' ');
     name += ((this.middle == "") ? "" : this.middle + ' ');
     name += ((this.last == "") ? "" : this.last + ' ');
     name += ((this.suffix == "") ? "" : this.suffix);
     name = this.Trim(name);
+    return name;
+}
     
+function NamePanel_FormatName() {
+    var name = this.CombineName();
     var elem = document.getElementById(this.displayID);
     elem.value = name;
     this.TextChanged = false;
-    if (this.AutoPostBack)
-    {
-        if (Sys)
-        {
+    if (this.AutoPostBack) {
+        if (Sys) {
             Sys.WebForms.PageRequestManager.getInstance()._doPostBack(this.displayID, null);
         }
-        else
-        {
+        else {
             document.forms(0).submit();
         }
     }
 }
 
-function NamePanel_ParseName()
-{
+function NamePanel_ParseName() {
     if (!this.TextChanged) { return; }
     var longest = 0;
     var elem = document.getElementById(this.displayID);
@@ -272,6 +272,7 @@ function NamePanel_ParseName()
 }
 
 NamePanel.prototype.FormatName = NamePanel_FormatName;
+NamePanel.prototype.CombineName = NamePanel_CombineName;
 NamePanel.prototype.Show = NamePanel_Show;
 NamePanel.prototype.Cancel = NamePanel_Cancel;
 NamePanel.prototype.Ok = NamePanel_Ok;
