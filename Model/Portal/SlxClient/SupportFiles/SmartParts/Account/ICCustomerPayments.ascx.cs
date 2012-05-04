@@ -57,7 +57,7 @@ public partial class SmartParts_Account_CustomerPayments : EntityBoundSmartPartI
             {
                 if (clientContextService.CurrentContext.ContainsKey("OperatingCompany"))
                 {
-                    clientContextService.CurrentContext["OperatingCompany"].Equals(account.OperatingCompany.Id.ToString());
+                    clientContextService.CurrentContext["OperatingCompany"] = account.OperatingCompany.Id.ToString();
                 }
                 else
                 {
@@ -65,13 +65,18 @@ public partial class SmartParts_Account_CustomerPayments : EntityBoundSmartPartI
                 }
                 if (clientContextService.CurrentContext.ContainsKey("GlobalSyncId"))
                 {
-                    clientContextService.CurrentContext["GlobalSyncId"].Equals(account.GlobalSyncId.ToString());
+                    clientContextService.CurrentContext["GlobalSyncId"] = account.GlobalSyncId.ToString();
                 }
                 else
                 {
                     clientContextService.CurrentContext.Add("GlobalSyncId", account.GlobalSyncId.ToString());
                 }
             }
+            //else
+            //{
+            //    clientContextService.CurrentContext.Remove("OperatingCompany");
+            //    clientContextService.CurrentContext.Remove("GlobalSyncId");
+            //}
         }
     }
 

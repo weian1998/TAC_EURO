@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="357" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Troubleshooting Accounting Integration - Cannot Start the SalesLogix SData Sync Service</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Integration Contract/Accounting_Integration_Troubleshoot_Sync_Service.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor453"></a>Troubleshooting Accounting Integration - Cannot Start the <span class="MyVariablesCompanyNameShort">SalesLogix</span> SData Sync Service</h1>
+        <p>You may encounter the following issues when synchronizing information between Sage SalesLogix and supported accounting applications.</p>
+        <p class="Infinitive">Problem:</p>
+        <p>Cannot start the <span class="MyVariablesCompanyNameShort">SalesLogix</span> SData Sync Service</p>
+        <p class="Infinitive">Solutions:</p>
+        <ul>
+            <li value="1">Verify that Windows Authentication is enabled and mapped to the user the service is set to log on as and run as.<br /><table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%"><col style="width: 45px;" /><col /><tr><td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top"><p style="text-align: center;margin-bottom: 0;" align="center"><img src="../image/note.gif" /></p></td><td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%"><p><span class="MyVariablesCompanyNameFull">Sage SalesLogix</span> recommends using an External Access license for this user, not an ADMIN license.</p></td></tr></table></li>
+            <li value="2">Verify that the connection in the Sage.SalesLogix.SyncEngineService.exe.config file is correctly defined. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="config file">Tell me more...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a><ul MadCap:targetName="config file" style="display: none;"><li value="1">The connection information should
+match the connection.config deployed to your Web site.
+<br />By default the configuration file is in ...\Program
+Files\SalesLogix\Sage.SalesLogix.SyncEngineService.exe.config and the connection file is
+deployed to ...\inetpub\wwwroot\slxclient</li></ul></li>
+        </ul>
+        <ul>
+            <li value="1">Verify that the SalesLogix and Target feeds are accessible and that at least one target endpoint is defined. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="Endpoints">Tell me more...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a><ol style="list-style-type: lower-alpha; display: none;" MadCap:targetName="Endpoints"><li value="1">Open the    <a href="Accounting_Integration_Detail_View.htm">Accounting Integration Detail View</a>.</li><li value="2">Copy the <span class="SLXBold">SalesLogix Feed</span> URL.</li><li value="3">Open a separate browser window and paste the URL into the address box of the browser window. </li><li value="4">When prompted, enter the user name and password for the <span class="MyVariablesCompanyNameShort">SalesLogix</span> feed from the Accounting Integration Detail view.<br />If you see a list of your resources then the SalesLogix feed endpoint is accessible.</li><li value="5">To verify that a target is defined, click the <a href="Accounting_Systems_Tab.htm">Accounting Systems tab</a>.</li><li value="6">Click <span class="SLXBold">Edit</span> next to the <span class="SLXBold">Accounting Feed</span> (target endpoint) that you want to test.<br />The Setup Accounting Integration dialog box opens</li><li value="7">Click <span class="SLXBold">Test Feed</span>.<br />If the test is successful, the target endpoint is accessible and defined correctly. If the test is not successful, review the <a href="Setup_Accounting_Integration.htm">Setup Accounting Integration</a> information for incorrect data.</li></ol></li>
+            <li value="2">Open the Sage.SalesLogix.syncEngineService.exe in the Command Prompt window to view the application output.</li>
+            <li value="3">&#160;View log errors, warnings or debug messages. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="log items tab">Tell me more...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a><ul MadCap:targetName="log items tab" style="display: none;"><li value="1">On the <a href="Sync_Job_Detail_View.htm">Sync Job Detail View</a> , open the <a href="Log_Items_Tab.htm">Log Items tab</a>, and filter by <span class="SLXBold">Log Type</span> to view errors, warnings, or debug messages.</li></ul></li>
+            <li value="4">On the Web Server, check the Windows Event Viewer for errors.</li>
+            <li value="5">Enable additional logging on the Web Server. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="logging">Tell me more...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a><ol style="list-style-type: lower-alpha; display: none;" MadCap:targetName="logging"><li value="1">In the SalesLogix Install folder, create or open the <span class="SLXBold">log4net.config</span> file in order to output syncengineservice debug messages to the Event Viewer.</li><li value="2">Add or update the following:<br />&lt;log4net threshold="ALL"&gt;<br />&lt;appender name="EventLogAppender" <br />type="log4net.Appender.EventLogAppender" &gt;<br />&lt;applicationName value="Services" /&gt;<br />&lt;layout type="log4net.Layout.PatternLayout"&gt;<br />&lt;conversionPattern value="%date [%thread] %-5level %logger <br />[%property{NDC}] - %message%newline" /&gt;<br />&lt;/layout&gt;<br />&lt;/appender&gt;<br /><br />&lt;logger name="SDataSync"&gt;<br />&lt;level value="ALL" /&gt;<br />&lt;appender-ref ref="EventLogAppender"/&gt;<br />&lt;/logger&gt;<br />&lt;/log4net&gt;</li><li value="3">In the <span class="SLXBold">...\Inetpub\wwwroot\SLXClient</span> folder, open the <span class="SLXBold">log4net.config</span> file and  repeat step b. This enables debug and informational messages to be written for SData processes initiated by the client. For example, Pricing Service calls.</li><li value="4">In the <span class="SLXBold">...\Inetpub\wwwroot\sdata</span> folder, open the <span class="SLXBold">log4net.config</span> file and change the SDataSync <span class="SLXBold">level value</span> from <span class="SLXBold">INFO</span> to <span class="SLXBold">ALL</span> or <span class="SLXBold">DEBUG</span> depending on the messages you want to display in the<a href="Log_Items_Tab.htm"> Log Items </a>tab. <br />&lt;logger name="SDataSync"&gt;<br />&lt;level value="INFO" /&gt;<br />&lt;appender-ref ref="EventLogAppender"/&gt;<br /></li></ol></li>
+        </ul>
+        <p class="RelatedTopics">Related Topics</p>
+        <p MadCap:conditions="Output.WebClient,Output.Customer Portal"><a href="../Common/slxtroubleshooting.htm" target="_self">Troubleshooting Common Issues</a>
+        </p>
+        <p><a href="../Outlook/emailtroubleshooting.htm" target="_self">Troubleshooting Desktop Integration - Send SLX&#160;and Record to History</a><a href="../Outlook/desktopmanagertroubleshooting.htm" target="_self">&#160;</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="Output.WebClient,Output.Customer Portal">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

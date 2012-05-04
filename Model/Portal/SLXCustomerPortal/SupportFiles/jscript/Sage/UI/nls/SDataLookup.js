@@ -1,6 +1,5 @@
 ﻿({
-    okText: 'OK',
-    cancelText: 'Cancel',
+    cancelText: 'Close',
     loadingText: 'Loading...',
     noDataText: 'No records returned'
 })

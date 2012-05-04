@@ -561,6 +561,8 @@ dojo.require("dojo.parser");
                     if (typeof value !== 'string')
                         return value;
 
+                    //console.debug("toDateFromString(%o)", value);
+
                     var match,
                         utc,
                         h, m;
@@ -584,22 +586,24 @@ dojo.require("dojo.parser");
                         */
 
                         value = utc;
+
+                        //console.debug("jsonDate.exec: %o", value);
                     }
                     else if ((match = isoDate.exec(value)))
                     {
                         utc = new Date(Date.UTC(
                             parseInt(match[1]),
-                            parseInt(match[2]) - 1, // zero based
-                            parseInt(match[3]),
-                            parseInt(match[4]),
-                            parseInt(match[5]),
-                            parseInt(match[6])
+                            parseInt(match[2], 10) - 1, // zero based
+                            parseInt(match[3], 10),
+                            parseInt(match[4], 10),
+                            parseInt(match[5], 10),
+                            parseInt(match[6], 10)
                         ));
 
                         if (match[8] !== 'Z')
                         {
-                            h = parseInt(match[10]);
-                            m = parseInt(match[11]);
+                            h = parseInt(match[10], 10);
+                            m = parseInt(match[11], 10);
                     
                             if (match[9] === '-')
                                 utc.addMinutes((h * 60) + m);
@@ -608,13 +612,18 @@ dojo.require("dojo.parser");
                         }
 
                         value = utc;
+
+                        //console.debug("isoDate.exec: %o", value);
                     }
                     else if ((match = isoDateOnly.exec(value))) {
                         value = new Date();
                         value.setYear(parseInt(match[1]));
-                        value.setMonth(parseInt(match[2]) -1);                       
-                        value.setDate(parseInt(match[3]));                        
+                        value.setMonth(parseInt(match[2], 10) -1);                       
+                        value.setDate(parseInt(match[3], 10));                        
                         value.setHours(0, 0, 0, 0);   
+                        /*console.debug("match[1]: %o; match[2]: %o; match[3]: %o", match[1], match[2], match[3]);
+                        console.debug("Year: %o; Month: %o; Date: %o", parseInt(match[1]), parseInt(match[2], 10) -1, parseInt(match[3], 10));
+                        console.debug("isoDateOnly: %o", value);*/
                     }
 
                     return value;

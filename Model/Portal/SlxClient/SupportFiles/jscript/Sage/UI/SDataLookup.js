@@ -125,8 +125,7 @@ dojo.declare("Sage.UI.SDataLookup", [dijit._Widget, Sage._Templated], {
         'ButtonOnlyClient': 5
     },
     //i18n strings:
-    okText: 'OK',
-    cancelText: 'Cancel',
+    cancelText: 'Close',
     loadingText: 'Loading...',
     noDataText: 'No records returned',
     //end i18n strings.
@@ -320,9 +319,6 @@ dojo.declare("Sage.UI.SDataLookup", [dijit._Widget, Sage._Templated], {
                         '<button dojoType="dijit.form.Button" type="button" ',
                             'onClick="dijit.byId(\'{%= id %}\').getGridSelections(); ">',
                             '{%= dialogButtonText %} </button>',
-                        '<button dojoType="dijit.form.Button" type="submit" ',
-                            'onClick="dijit.byId(\'{%= id %}\').getGridSelections(); ',
-                            '">{%= okText %}</button>',
                         '<button dojoType="dijit.form.Button" type="button" ',
                             'onClick="dijit.byId(\'{%= id %}-Dialog\').hide();">{%= cancelText %}</button>',
                     '</div>',
@@ -363,7 +359,7 @@ dojo.declare("Sage.UI.SDataLookup", [dijit._Widget, Sage._Templated], {
                     _onKey: this._onKey
                 });
                 // Calculate the grid height by subtracting the height of the other dialog elements from the dialog height: dheight-125.
-                lookupDialog.attr("content", self.dialogContent.apply({ cancelText: self.cancelText, okText: self.okText, dialogButtonText: self.dialogButtonText, id: self.id, gridHeight: dHeight - 125 }));
+                lookupDialog.attr("content", self.dialogContent.apply({ cancelText: self.cancelText, dialogButtonText: self.dialogButtonText, id: self.id, gridHeight: dHeight - 125 }));
 
                 //ToDo: Condition Manager needs to be added to the Sage.UI namespace.
                 dojo.connect(ConditionManager.prototype, 'addLookupCondition', this.dialogResize);

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="SalesLogix Logoff" Language="C#" MasterPageFile="~/Masters/Login.master" %>
+﻿<%@ Page Title="SalesLogix Logoff" MasterPageFile="~/Masters/Login.master" Language="C#" %>
 
 <script runat="server">
 
@@ -17,10 +17,10 @@
             <div id="LogoffMessage"><%= GetLocalResourceObject("LogoffMessage") %></div>
             <div id="LogoffFormButtonPanel">
                 <asp:Button ID="btnLogin" runat="server" PostBackUrl="~/Login.aspx" 
-                    Text="<%$ resources: LogOn %>" ValidationGroup="slxLogin" />
+                    Text="Log On" ValidationGroup="slxLogin"
+                    meta:resourcekey="LoginButtonResource1" />
             </div>
         </div>
     </div>
 </div>      
 </asp:Content>
-

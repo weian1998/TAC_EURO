@@ -90,6 +90,7 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
                     IAppIdMapping slxFeed = IntegrationHelpers.GetSlxAccountingFeed();
                     lblLinkAccount.Enabled = !slxFeed.RestrictToSingleAccount.HasValue ||
                                              !slxFeed.RestrictToSingleAccount.Value;
+                    updateAccountPanel.Update();
                 }
                 else
                 {
@@ -207,7 +208,7 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
 
     protected void lnkSubmitSalesOrder_Click(object sender, EventArgs e)
     {
-        if (ValidateErpSalesOrder())
+        if (ValidateErpSalesOrder(true))
         {
             if (_currentSOEntity.Account == null || !_currentSOEntity.Account.PromotedToAccounting.HasValue ||
                     (_currentSOEntity.Account.PromotedToAccounting.HasValue && !_currentSOEntity.Account.PromotedToAccounting.Value))
@@ -220,8 +221,14 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
 
     private bool ValidateErpSalesOrder()
     {
+        return ValidateErpSalesOrder(false);
+    }
+
+    private bool ValidateErpSalesOrder(bool requirePromotion)
+    {
         if (_currentSOEntity != null)
         {
+            bool promoted = false;
             if (_currentSOEntity.OperatingCompany == null)
             {
                 throw new ValidationException(
@@ -232,6 +239,20 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
                 throw new ValidationException(
                     String.Format(GetLocalResourceObject("Error_IntegrationFeed_Disabled").ToString(),
                                   _currentSOEntity.OperatingCompany.Name));
+            }
+            //ensure that this account is linked to this opperating company
+            foreach (IAccountOperatingCompany oppCompany in _currentSOEntity.Account.AccountOperatingCompanies)
+            {
+                if (oppCompany.IntegrationApplication.Equals(_currentSOEntity.OperatingCompany))
+                {
+                    promoted = true;
+                    break;
+                }
+            }
+            if ((!promoted) && (requirePromotion))
+            {
+                throw new ValidationException(
+                    GetLocalResourceObject("Error_Account_NotPromoted").ToString());
             }
             if (_currentSOEntity.SalesOrderItems.Count <= 0)
             {
@@ -260,7 +281,7 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
                 DialogService.EntityID = entityId;
                 DialogService.ShowDialog();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw new ValidationException(GetLocalResourceObject("Error_PricingService").ToString());
             }

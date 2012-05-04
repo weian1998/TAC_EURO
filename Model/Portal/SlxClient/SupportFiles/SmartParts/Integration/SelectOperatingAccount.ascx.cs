@@ -56,25 +56,35 @@ public partial class SelectOperatingAccount : EntityBoundSmartPartInfoProvider
             ListItem item;
             foreach (IAppIdMapping map in mappings)
             {
+                bool addMapping = true;
                 if (map.Enabled.HasValue && map.Enabled.Value)
                 {
-                    if (!map.Equals(IntegrationManager.SourceAccount.OperatingCompany))
+                    foreach (IAccountOperatingCompany oppCompany in IntegrationManager.SourceAccount.AccountOperatingCompanies)
+                    {
+                        if (map.Equals(oppCompany.IntegrationApplication))
+                        {
+                            linkedTo += String.Format("{0}, ", map.Name);
+                            mapped = true;
+                            addMapping = false;
+                            break;
+                        }
+                    }
+                    if (addMapping)
                     {
                         item = new ListItem();
                         item.Text = map.Name;
                         item.Value = map.Id.ToString();
                         lbxSystems.Items.Add(item);
                     }
-                    else
-                    {
-                        linkedTo = map.Name;
-                        mapped = true;
-                    }
                 }
             }
         }
         if (lbxSystems.Items.Count <= 0)
         {
+            if (!String.IsNullOrEmpty(linkedTo))
+            {
+                linkedTo = linkedTo.Substring(0, linkedTo.Length - 2);
+            }
             lblSearchMsg.Text = restrict
                                     ? String.Format(GetLocalResourceObject("error_RestrictToSingleAccount").ToString(),
                                                     IntegrationManager.SourceAccount.AccountName,
