@@ -78,7 +78,7 @@ namespace Sage.BusinessRules.CodeSnippets
 			    bool erpSalesOrder = (oMappingService.IsIntegrationEnabled() && (salesOrder.GlobalSyncId.HasValue && !isOpen));
 
 			    form.rdgSOType.Enabled = (!closed || !salesOrder.IsQuote.HasValue) && !erpSalesOrder;
-                form.lueAccount.Enabled = !closed && !erpSalesOrder;
+                form.lueAccount.IsReadOnly = closed && erpSalesOrder;
                 form.usrAccountManager.IsReadOnly = closed || erpSalesOrder;
                 form.lueOpportunity.IsReadOnly = closed || erpSalesOrder;
                 form.dtpDateCreated.IsReadOnly = closed || erpSalesOrder;

@@ -208,6 +208,12 @@
     <value>Synchronization process has been started successfully.</value>
   </data>
   <data name="btnSyncAll.ToolTip" xml:space="preserve">
-    <value>Sync all accounting systems</value>
+    <value>Sync all enabled accounting systems</value>
+  </data>
+  <data name="Error_AccountingSystem_NotEnabled" xml:space="preserve">
+    <value>The selected accounting system, {0}, is not currently enabled. Please enable the accounting system before continuing.</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
 </root>

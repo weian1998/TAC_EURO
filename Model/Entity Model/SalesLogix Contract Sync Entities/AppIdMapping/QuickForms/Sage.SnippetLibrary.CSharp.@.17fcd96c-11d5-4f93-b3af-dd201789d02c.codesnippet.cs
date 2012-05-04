@@ -48,9 +48,10 @@ namespace Sage.BusinessRules.CodeSnippets
             IAppIdMapping appIdMapping = form.CurrentEntity as IAppIdMapping;
 			if (appIdMapping != null)
 			{
+				appIdMapping.ValidateEndPoint();
 				appIdMapping.EncryptAccountingSystemPassword(form.txtPassword.Text);
+				appIdMapping.Save();
 			}
-			appIdMapping.Save();
         }
     }
 }

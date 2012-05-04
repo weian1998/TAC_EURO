@@ -147,7 +147,8 @@ dojo.require("dojox.grid.cells.dijit");
                 field: this.lookupOptions.field,
                 name: this.lookupOptions.name,
                 structure: this.lookupStructure,
-                storeOptions: this.lookupStoreOptions
+                storeOptions: this.lookupStoreOptions,
+                gridOptions: this.lookupGridOptions
 			});
 		},
 //summary:

@@ -103,6 +103,8 @@ $(document).ready(function() {
         }
         else
         {
+            CheckClearListViewState();
+            
             if (Request.Cookies["SLXRememberMe"] != null)
             {
                 rememberMe.Checked = (Request.Cookies["SLXRememberMe"].Value == "T");
@@ -147,7 +149,27 @@ $(document).ready(function() {
         Version version = typeof(Sage.SalesLogix.Web.SLXMembershipProvider).Assembly.GetName().Version;
         Label lblVersion = (Label)slxLogin.FindControl("VersionLabel");
         lblVersion.Text = String.Format("{0} {1}", GetLocalResourceObject("VersionLabelResource1.Text").ToString(), version.ToString());
-              
+    }
+    private void CheckClearListViewState()
+    {
+        var setting = System.Web.Configuration.WebConfigurationManager.AppSettings["ClearListViewPersonalizationOnLogin"];
+        if (setting != null && setting == "true")
+        {
+            Page.ClientScript.RegisterClientScriptInclude("extJQueryAdapter", "Libraries/ext/adapter/jquery/ext-jquery-adapter.js");
+            Page.ClientScript.RegisterClientScriptInclude("extAll", "Libraries/ext/ext-all.js");
+            var script = @"
+$(document).ready(function() {
+    Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
+    var cookies = document.cookie.split('; ');
+    for (var i = 0; i < cookies.length; i++) {
+        var cookieName = cookies[i].split('=')[0];
+        if (cookieName.indexOf('MainList_list_') > -1) {
+            Ext.state.Manager.clear(cookieName.replace('ys-', ''));
+        }
+    }
+});";
+            Page.ClientScript.RegisterClientScriptBlock(GetType(), "clearListSettings", script, true);
+        }
     }
     
     

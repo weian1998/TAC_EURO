@@ -174,26 +174,26 @@
   <data name="cboResources.Caption" xml:space="preserve">
     <value>Filter By Resource:</value>
   </data>
-  <data name="cboResources_item9.Text" xml:space="preserve">
+  <data name="cboResources_item14.Text" xml:space="preserve">
     <value>Unit Of Measure</value>
   </data>
-  <data name="cboResources_item8.Text" xml:space="preserve">
+  <data name="cboResources_item13.Text" xml:space="preserve">
     <value>Trading Accounts</value>
   </data>
-  <data name="cboResources_item7.Text" xml:space="preserve">
-    <value>Sales Quotes</value>
+  <data name="cboResources_item12.Text" xml:space="preserve">
+    <value>Sales Quotation Lines</value>
   </data>
   <data name="btnResource.Caption" xml:space="preserve">
     <value>Execute</value>
   </data>
-  <data name="cboResources_item6.Text" xml:space="preserve">
+  <data name="cboResources_item11.Text" xml:space="preserve">
+    <value>Sales Quotes</value>
+  </data>
+  <data name="cboResources_item10.Text" xml:space="preserve">
+    <value>Sales Order Lines</value>
+  </data>
+  <data name="cboResources_item9.Text" xml:space="preserve">
     <value>Sales Orders</value>
-  </data>
-  <data name="cboResources_item5.Text" xml:space="preserve">
-    <value>Prices</value>
-  </data>
-  <data name="cboResources_item4.Text" xml:space="preserve">
-    <value>Price Lists</value>
   </data>
   <data name="grdSchemaDiffs_NoDiff.EmptyTableRowText" xml:space="preserve">
     <value> The resource selected contains no differences.</value>
@@ -201,8 +201,23 @@
   <data name="btnResource.ToolTip" xml:space="preserve">
     <value>Refesh list</value>
   </data>
-  <data name="cboResources_item3.Text" xml:space="preserve">
+  <data name="cboResources_item8.Text" xml:space="preserve">
+    <value>Prices</value>
+  </data>
+  <data name="cboResources_item7.Text" xml:space="preserve">
+    <value>Postal Addresses</value>
+  </data>
+  <data name="cboResources_item6.Text" xml:space="preserve">
+    <value>Price Lists</value>
+  </data>
+  <data name="cboResources_item5.Text" xml:space="preserve">
+    <value>Phones</value>
+  </data>
+  <data name="cboResources_item4.Text" xml:space="preserve">
     <value>Locations</value>
+  </data>
+  <data name="cboResources_item3.Text" xml:space="preserve">
+    <value>Emails</value>
   </data>
   <data name="cboResources_item2.Text" xml:space="preserve">
     <value>Contacts</value>

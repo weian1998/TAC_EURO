@@ -1537,6 +1537,7 @@ if (!Sage.UI.Numeric) {
         this.format = format;
         this.currValue = 0;
         this.formatNumber();
+        this.justChanged = false;
     };
     Sage.UI.Numeric.prototype.getFormatType = function () {
         //var type = "decimal";
@@ -1574,9 +1575,14 @@ if (!Sage.UI.Numeric) {
         }
         return true;
     };
+    Sage.UI.Numeric.prototype.changed = function (e) {
+        this.justChanged = true;
+    }
+
     Sage.UI.Numeric.prototype.validate = function () {
         this.formatNumber();
-        if (this.autoPostBack) {
+        if (this.justChanged && this.autoPostBack) {
+            this.justChanged = false;
             if (Sys) {
                 Sys.WebForms.PageRequestManager.getInstance()._doPostBack(this.controlId, null);
             }
@@ -1584,6 +1590,7 @@ if (!Sage.UI.Numeric) {
                 document.forms(0).submit();
             }
         }
+        this.justChanged = false;
     };
     Sage.UI.Numeric.prototype.formatNumber = function () {
         var control = dojo.byId(this.controlId);

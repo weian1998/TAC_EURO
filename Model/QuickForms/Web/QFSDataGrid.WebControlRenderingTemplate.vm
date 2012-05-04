@@ -120,7 +120,7 @@ $pagegenerator.addToFormLoadCode(" } ")
 	#end
 ## Editable Grid container
 <div id="${pagegenerator.FormName}${qfcontrol.ControlId}" style="width:100%;#if($qfcontrol.Visible == "False")visibility:hidden;#end" class="${qfcontrol.StyleScheme}">
-    <div id="${pagegenerator.FormName}${qfcontrol.ControlId}_Grid" style="width:100%;height:25px;"></div>
+    <div id="${pagegenerator.FormName}${qfcontrol.ControlId}_Grid" style="width:100%;height:75px;"></div>
 </div>
 
 

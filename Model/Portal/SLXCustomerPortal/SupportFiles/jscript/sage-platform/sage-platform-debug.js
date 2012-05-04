@@ -1657,7 +1657,7 @@ function promoteGroupToDashboard() {
                         sortable: false
                     },
                     columns: [
-                        { header: 'Page', dataIndex: 'Name' }
+                        { header: MasterPageLinks.PromotePageColumnHeader, dataIndex: 'Name' }
                     ]
                 }),
                 sm: new Ext.grid.RowSelectionModel({ singleSelect: true }),
@@ -5078,7 +5078,7 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                                     sortable: false
                                 },
                                 columns: [
-                                    { header: 'Released to', dataIndex: 'Text' }
+                                    { header: Sage.Analytics.WidgetResource.releasedTo, dataIndex: 'Text' }
                                 ]
                             }),
                             sm: new Ext.grid.RowSelectionModel({ singleSelect: false }),
@@ -5087,7 +5087,7 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                             frame: true,
                             id: 'ReleasedGrid',
                             buttons: [{
-                                text: 'Everyone',
+                                text: Sage.Analytics.WidgetResource.everyone,
                                 handler: function () {
                                     var grid = Ext.getCmp('ReleasedGrid');
                                     var found = false;
@@ -5101,14 +5101,14 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                                 }
                             },
                                 {
-                                    text: 'Add',
+                                    text: Sage.Analytics.WidgetResource.add,
                                     handler: function () {
                                         var vURL = 'OwnerAssign.aspx';
                                         window.open(vURL, "OwnerAssign", "resizable=yes,centerscreen=yes,width=500,height=450,status=no,toolbar=no,scrollbars=yes");
                                     }
                                 },
                                 {
-                                    text: 'Remove',
+                                    text: Sage.Analytics.WidgetResource.remove,
                                     handler: function () {
                                         var grid = Ext.getCmp('ReleasedGrid');
                                         var selected = grid.getSelectionModel().getSelections();
@@ -5205,6 +5205,11 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                         win.add(scrollpanel);
                     }
                     for (var widgetid in DashboardWidgetsList) {
+                        if (widgetid === 'Default') continue;
+                        // Default Widget is a stub example for creating new widgets.  
+                        // Click New and copy this content into a new editor to customize.  
+                        // Default Widgets do not appear as an item in the client dashboard Add Content menu.
+
                         scrollpanel.add(new Ext.Panel({
                             cls: 'addContentPanels', //for styling
                             margins: { top: 10 },
@@ -5323,6 +5328,10 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                          buttons:
                             [{ text: DashboardResource.Ok, handler: function (t, e) {
                                 if ($("#PortalName")[0].value.length > 0) {
+                                    var newName = Ext.util.Format.htmlEncode($("#PortalName")[0].value);
+                                    if (currentDashboardPage.name != newName) {
+                                        currentDashboardPage.name = newName;
+                                    }
                                     var newTitle = Ext.util.Format.htmlEncode($("#PortalName")[0].value);
                                     if (currentDashboardPage.title != newTitle) {
                                         currentDashboardPage.title = newTitle;
@@ -5904,6 +5913,7 @@ Sage.IntegrationContractService = function () {
         this.isIntegrationEnabled = obj.IsIntegrationEnabled;
         this.localAppId = obj.LocalAppId;
         this.isMultiCurrencyEnabled = obj.IsMultiCurrencyEnabled;
+        this.accountingSystemHandlesSO = obj.AccountingSystemHandlesSO;
     }
 }
 
@@ -5945,3 +5955,10 @@ function isMultiCurrencyEnabled() {
     return false; 
 }
 
+function accountingSystemHandlesSO() {
+    var service = Sage.Services.getService("IntegrationContractService");
+    if (service != null && typeof service !== "undefined") {
+        return service.accountingSystemHandlesSO;
+    }
+    return false;
+}

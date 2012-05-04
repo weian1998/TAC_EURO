@@ -248,7 +248,7 @@ dojo.declare("Sage.UI.SLXPreviewGrid.FilterPanel", [dijit._Widget], {
 //////////////////////////// Core Grid Widget
 
 dojo.provide("Sage.UI.SLXPreviewGrid.Grid");
-dojo.require('Sage.UI.SLXTabGrid');
+dojo.require('Sage.UI.EditableGrid');
 dojo.require('dijit.layout.BorderContainer');
 dojo.require('dijit.form.SimpleTextarea');
 
@@ -272,7 +272,7 @@ dojo.declare("Sage.UI.SLXPreviewGrid.Grid", [dijit._Widget], {
     //   - filterConfig: optional filter configuration, the "widgetType" property is the type of filter widget to use, the rest is passed to the widget
     //   - width: the width can be specified as a pixel width ('30px'), or '*' to use (approximately) the remaining width
     columnConfig: null,
-    // optional array of tools to be added to the toolbar (see SLXTabGrid)
+    // optional array of tools to be added to the toolbar (see EditableGrid)
     toolConfig: null,
     // SLX context parameter: workspace, tabId
     slxContext: null,
@@ -284,7 +284,7 @@ dojo.declare("Sage.UI.SLXPreviewGrid.Grid", [dijit._Widget], {
     height: 300,
 
     _filter: null, // filter panel
-    _grid: null, // SLXTabGrid instance
+    _grid: null, // EditableGrid instance
     _preview: null, // preview widget
     _container: null, // border container
 
@@ -485,8 +485,8 @@ dojo.declare("Sage.UI.SLXPreviewGrid.Grid", [dijit._Widget], {
         this.storeOptions.select.push('Id');
         this.storeOptions.select.push(this.previewField);
 
-        var grid = new Sage.UI.SLXTabGrid({
-            id: this.domNode.id + "_grid",  // id is required by some of the SLXTabGrid stuff
+        var grid = new Sage.UI.EditableGrid({
+            id: this.domNode.id + "_grid",  // id is required by some of the EditableGrid stuff
             tabId: this.slxContext.tabId,
             context: this.slxContext,
             region: 'center',

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.UI;
 using Sage.Entity.Interfaces;
+using Sage.Platform.ComponentModel;
 using Sage.Platform.WebPortal.Binding;
 using Sage.Platform.WebPortal.Services;
 using Sage.Platform.WebPortal.SmartParts;
@@ -43,17 +45,19 @@ public partial class ICUpdatePricing : EntityBoundSmartPartInfoProvider
     {
         if (_loadPricingChanges)
         {
-            ISalesOrder salesOrder = BindingSource.Current as ISalesOrder;            
-            lblHeader.Text = String.Format(GetLocalResourceObject("lblHeader.Text").ToString(),
-                                           salesOrder.SalesOrderNumber, salesOrder.Account.AccountName);
-            
-            grdProducts.DataSource = salesOrder.GetUpdatedErpPricingLines();
-            grdProducts.DataBind();
-            if (grdProducts.DataKeys[0].Values[0] != null)
+            if (DialogService.DialogParameters.ContainsKey("PriceList"))
             {
-                curNewTotalPrice.Text = grdProducts.DataKeys[0].Values[0].ToString();
+                ISalesOrder salesOrder = BindingSource.Current as ISalesOrder;
+                lblHeader.Text = String.Format(GetLocalResourceObject("lblHeader.Text").ToString(),
+                                               salesOrder.SalesOrderNumber, salesOrder.Account.AccountName);
+                grdProducts.DataSource = (IList<ComponentView>)DialogService.DialogParameters["PriceList"];
+                grdProducts.DataBind();
+                if (grdProducts.DataKeys[0].Values[0] != null)
+                {
+                    curNewTotalPrice.Text = grdProducts.DataKeys[0].Values[0].ToString();
+                }
+                ClientBindingMgr.RegisterDialogCancelButton(btnCancel);
             }
-            ClientBindingMgr.RegisterDialogCancelButton(btnCancel);
         }
     }
 
@@ -62,15 +66,7 @@ public partial class ICUpdatePricing : EntityBoundSmartPartInfoProvider
         ISalesOrder salesOrder = BindingSource.Current as ISalesOrder;
         bool submitSalesOrder = Convert.ToBoolean(DialogService.DialogParameters["SubmitSalesOrder"].ToString());
         salesOrder.CompleteUpdatedErpPricingLines(submitSalesOrder);
-        IPanelRefreshService refresher = PageWorkItem.Services.Get<IPanelRefreshService>(true);
-        if (refresher != null)
-        {
-            refresher.RefreshAll();
-        }
-        else
-        {
-            Response.Redirect(Request.Url.ToString());
-        }
+        Response.Redirect(Request.Url.ToString());
     }
 
     protected void btnCancel_ClickAction(object sender, EventArgs e)
@@ -95,6 +91,7 @@ public partial class ICUpdatePricing : EntityBoundSmartPartInfoProvider
     protected override void OnClosing()
     {
         DialogService.DialogParameters.Remove("SubmitSalesOrder");
+        DialogService.DialogParameters.Remove("PriceList");
         _loadPricingChanges = false;
     }
 

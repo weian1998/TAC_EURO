@@ -113,7 +113,7 @@ dojo.declare("Sage.UI.SDataLookup", [dijit._Widget, Sage._Templated], {
         select: ['Id'], //what about composite keys?....  <---<<<   <---<<<
         orderby: ''
     },
-    gridOptions: { },
+    gridOptions: {},
     sortColumn: '',
     //Reference enum for Display Mode 
     displayModes: {
@@ -143,12 +143,21 @@ dojo.declare("Sage.UI.SDataLookup", [dijit._Widget, Sage._Templated], {
             select: ['Id'] //what about composite keys?....  <---<<<   <---<<<            
         };
 
-        if (typeof this.gridOptions.contextualCondition === 'function') {
-            this.query = { fn: this.gridOptions.contextualCondition, scope: this }
-        } else if (typeof this.gridOptions.contextualCondition === 'object') {
-            if (this.gridOptions.contextualCondition.fn) {
-                this.ensureValue(this.gridOptions.contextualCondition, 'scope', this);
-                this.query = this.gridOptions.contextualCondition;
+        //If we are in Mode 0, drop down list, extend the grid query options directly onto the store.
+        if (this.displayMode === 0) {
+            this.initSDataStore();
+            this.buildSDataStoreQueryConditions();
+        }
+        //Else add them to the lookup level query.
+        //Do we need this else block?????
+        else {
+            if (typeof this.gridOptions.contextualCondition === 'function') {
+                this.query = { fn: this.gridOptions.contextualCondition, scope: this }
+            } else if (typeof this.gridOptions.contextualCondition === 'object') {
+                if (this.gridOptions.contextualCondition.fn) {
+                    this.ensureValue(this.gridOptions.contextualCondition, 'scope', this);
+                    this.query = this.gridOptions.contextualCondition;
+                }
             }
         }
 
@@ -159,14 +168,8 @@ dojo.declare("Sage.UI.SDataLookup", [dijit._Widget, Sage._Templated], {
             query: this.query
         };
 
-
         this.storeOptions = Sage.Utility.extend(true, storeOptions, this.storeOptions);
         this.gridOptions = Sage.Utility.extend(true, gridOptions, this.gridOptions);
-
-        if (this.displayMode === 0) {
-            this.initSDataStore();
-            this.buildSDataStoreQueryConditions();
-        }
 
         // Set the widgetTemplate here so we can select the appropriate template for the selected display mode.
         this.widgetTemplate = new Simplate(this.setTemplate(this.displayMode));
@@ -298,6 +301,13 @@ dojo.declare("Sage.UI.SDataLookup", [dijit._Widget, Sage._Templated], {
                 conditions: String.format(" {0}.Id eq \"{1}\" ", this.seedOnRelatedEntity, this.relatedEntityId)
             };
         }
+        // Check if there is a conditional where/contextual condition attached to the grid options.
+        // If display mode is 0, then there is no grid in this first interation.
+        // Future interations will include a grid in line.
+        if (typeof this.gridOptions.contextualCondition === 'function') {
+            var queryFunc = { fn: this.gridOptions.contextualCondition, scope: this }
+            this.sdataStore.query = Sage.Utility.extend(true, this.sdataStore.query, queryFunc);
+        }
     },
     //Not used
     render: function () {
@@ -317,32 +327,61 @@ dojo.declare("Sage.UI.SDataLookup", [dijit._Widget, Sage._Templated], {
                             'onClick="dijit.byId(\'{%= id %}-Dialog\').hide();">{%= cancelText %}</button>',
                     '</div>',
                     '</div> ']),
-    showLookup: function () {
-        var self = this;
-        var dHeight = (self.dialogHeight > 0) ? self.dialogHeight : 390;
-        var dWidth = (self.dialogWidth > 0) ? self.dialogWidth : 600;
-        var lookupDialog = dijit.byId([self.id, '-Dialog'].join(''));
-        if (!lookupDialog) {
-            lookupDialog = new dijit.Dialog({
-                title: self.dialogTitle,
-                id: [self.id, '-Dialog'].join(''),
-                style: ['height:', dHeight, 'px;width:', dWidth, 'px;'].join(''),
-                refreshOnShow: false,
-                _onKey: this._onKey
-            });
-            // Calculate the grid height by subtracting the height of the other dialog elements from the dialog height: dheight-125.
-            lookupDialog.attr("content", self.dialogContent.apply({ cancelText: self.cancelText, okText: self.okText, dialogButtonText: self.dialogButtonText, id: self.id, gridHeight: dHeight - 125 }));
-
-            //ToDo: Condition Manager needs to be added to the Sage.UI namespace.
-            dojo.connect(ConditionManager.prototype, 'addLookupCondition', this.dialogResize);
+    canShowLookup: function () {
+        if (typeof this.gridOptions.contextualShow === 'function') {
+            return this.gridOptions.contextualShow();
         }
-        lookupDialog.show();
-        dojo.destroy([self.id,'-Dialog_underlay'].join(''));
-        //Position the dialog just below the main header.
-        dojo.style([self.id,'-Dialog'].join(''), 'top', '60px');
-        dojo.style([self.id, '-Dialog'].join(''), 'left', '25%');
+        return { result: true, reason: '' };
+    },
+    showLookup: function () {
+        var sError = 'The lookup cannot be displayed because one or more conditions have not been met.';
+        var showError = function (msg) {
+            var msgService = Sage.Services.getService('WebClientMessageService');
+            if (msgService != null && typeof msgService !== 'undefined') {
+                msgService.showClientError(msg);
+            }
+            else {
+                alert(msg);
+            }
+        }
+        var oCanShowLookup = this.canShowLookup();
+        if (typeof oCanShowLookup !== 'object') {
+            showError('The call to the function canShowLookup() returned an invalid result.' );
+            return;
+        }
+        if (typeof oCanShowLookup.result === 'boolean' && oCanShowLookup.result) {
+            var self = this;
+            var dHeight = (self.dialogHeight > 0) ? self.dialogHeight : 390;
+            var dWidth = (self.dialogWidth > 0) ? self.dialogWidth : 600;
+            var lookupDialog = dijit.byId([self.id, '-Dialog'].join(''));
+            if (!lookupDialog) {
+                lookupDialog = new dijit.Dialog({
+                    title: self.dialogTitle,
+                    id: [self.id, '-Dialog'].join(''),
+                    style: ['height:', dHeight, 'px;width:', dWidth, 'px;'].join(''),
+                    refreshOnShow: false,
+                    _onKey: this._onKey
+                });
+                // Calculate the grid height by subtracting the height of the other dialog elements from the dialog height: dheight-125.
+                lookupDialog.attr("content", self.dialogContent.apply({ cancelText: self.cancelText, okText: self.okText, dialogButtonText: self.dialogButtonText, id: self.id, gridHeight: dHeight - 125 }));
 
-        self.initDialog();
+                //ToDo: Condition Manager needs to be added to the Sage.UI namespace.
+                dojo.connect(ConditionManager.prototype, 'addLookupCondition', this.dialogResize);
+            }
+            lookupDialog.show();
+            dojo.destroy([self.id, '-Dialog_underlay'].join(''));
+            //Position the dialog just below the main header.
+            dojo.style([self.id, '-Dialog'].join(''), 'top', '60px');
+            dojo.style([self.id, '-Dialog'].join(''), 'left', '25%');
+
+            self.initDialog();
+        }
+        else {            
+            if (typeof oCanShowLookup.reason === 'string' && oCanShowLookup.reason.length != 0) {
+                sError = oCanShowLookup.reason;
+            }
+            showError(sError);
+        }
     },
     dialogResize: function () {
         dojo.style([this._options.id, '-Dialog'].join(''), 'height', 'auto');

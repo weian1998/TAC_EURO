@@ -68,6 +68,9 @@
 	select : ${qfcontrol.LookupSelectList}
   },
   gridOptions: {
+	#if($qfcontrol.ConditionalShow != "")
+        contextualShow: ${qfcontrol.ConditionalShow},
+	#end	  
 	#if($qfcontrol.ConditionalWhere != "")
         contextualCondition: ${qfcontrol.ConditionalWhere},
 	#end

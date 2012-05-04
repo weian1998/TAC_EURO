@@ -197,13 +197,14 @@ public partial class SearchResults : SmartPartInfoProvider, IScriptControl
     private void SetViewDisplay()
     {
         lblSearchResults.Text = String.Format(GetLocalResourceObject("lblSearchResults.Caption").ToString(),
-                          IntegrationManager.TargetMapping.Name);
+                                              IntegrationManager.TargetMapping.Name);
         if (grdMatches.Rows.Count > 0)
         {
             rowLinkTo.Visible = true;
             rowSearchResults.Visible = true;
             rdbLinkTo.Text = String.Format(GetLocalResourceObject("rdbLinkAccount.Caption").ToString(),
-                               IntegrationManager.SourceAccount.AccountName, IntegrationManager.TargetMapping.Name);
+                                           IntegrationManager.SourceAccount.AccountName,
+                                           IntegrationManager.TargetMapping.Name);
             rowCreateAccount.Visible = false;
             rdbCreateNew.Text = GetLocalResourceObject("rdbCreateNew.Caption").ToString();
             rdbLinkTo.Checked = true;
@@ -226,6 +227,7 @@ public partial class SearchResults : SmartPartInfoProvider, IScriptControl
         }
         else
         {
+            rdbCreateNew.Checked = true;
             rowLinkTo.Visible = false;
             rowSearchResults.Visible = false;
             rowCreateAccount.Visible = true;
@@ -235,6 +237,7 @@ public partial class SearchResults : SmartPartInfoProvider, IScriptControl
             lblCreateAccount.Text = String.Format(GetLocalResourceObject("lblCreateAccount.Caption").ToString(),
                                                   IntegrationManager.TargetMapping.Name);
         }
+        rdbRefineSearch.Visible = IntegrationManager.TargetSearchFilters.Count > 0;
     }
 
     /// <summary>
@@ -362,10 +365,10 @@ public partial class SearchResults : SmartPartInfoProvider, IScriptControl
         var filters = (JavaScriptArray) JavaScriptConvert.DeserializeObject(txtFilters.Text);
         List<MatchingExpression> expressions = (from JavaScriptObject filter in filters
                                                 select
-                                                    new MatchingExpression(filter["property"].ToString(),
+                                                    new MatchingExpression(filter["Property"].ToString(),
                                                                            (MatchingOperation)
-                                                                           Convert.ToInt16(filter["operation"]),
-                                                                           filter["searchValue"].ToString())).ToList();
+                                                                           Convert.ToInt16(filter["Operator"]),
+                                                                           filter["SearchValue"].ToString())).ToList();
 #pragma warning restore 612,618
         grdMatches.DataSource = IntegrationManager.GetMatches(expressions);
         grdMatches.DataBind();

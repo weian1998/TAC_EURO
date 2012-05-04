@@ -1,4 +1,4 @@
-dojo.provide('Sage.Utility');
+﻿dojo.provide('Sage.Utility');
 dojo.require("dojo.parser");
 (function(){
     var nameToPathCache = {};
@@ -142,7 +142,7 @@ dojo.require("dojo.parser");
         return '';
     };
     
-    var getSDataService = function(contract, keepUnique) {
+    var getSDataService = function(contract, keepUnique, useJson) {
         // returns the instance of the service for the specific contract requested.
         // For example, if the data source needs an SData service for the dynamic or system feeds,
         // the code would pass 'dynamic' or 'system' to this method.
@@ -157,6 +157,12 @@ dojo.require("dojo.parser");
         if (Sage.Services.hasService(svcKey) && !keepUnique) {
             return Sage.Services.getService(svcKey);
         }
+        
+        var bJson = true;
+        if (typeof useJson === 'boolean') {
+            bJson = useJson;
+        }
+
         svc = new Sage.SData.Client.SDataService({
             serverName: window.location.hostname,
             virtualDirectory: Sage.Utility.getVirtualDirectoryName() + '/slxdata.ashx',
@@ -164,7 +170,7 @@ dojo.require("dojo.parser");
             contractName: contract,
             port: window.location.port && window.location.port != 80 ? window.location.port : false,
             protocol: /https/i.test(window.location.protocol) ? 'https' : false,
-            json: true
+            json: bJson //true
         });               
         if (!keepUnique) {
             Sage.Services.addService(svcKey, svc);
@@ -525,6 +531,7 @@ dojo.require("dojo.parser");
         convert = function() {
             var trueRE = /^(true|T)$/i,
                 isoDate = /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(Z|(-|\+)(\d{2}):(\d{2}))/,
+                isoDateOnly = /^(\d{4})-(\d{2})-(\d{2})$/,
                 jsonDate = /\/Date\((-?\d+)(?:(-|\+)(\d{2})(\d{2}))?\)\//,
                 pad = function(n) { return n < 10 ? '0' + n : n };
 
@@ -536,7 +543,7 @@ dojo.require("dojo.parser");
                     if (typeof value !== 'string')
                         return false;
             
-                    return isoDate.test(value) || jsonDate.test(value);
+                    return isoDate.test(value) || isoDateOnly.test(value) || jsonDate.test(value);
                 },
                 toIsoStringFromDate: function(value) {
                     // adapted from: https://developer.mozilla.org/en/JavaScript/Reference/global_objects/date
@@ -601,6 +608,13 @@ dojo.require("dojo.parser");
                         }
 
                         value = utc;
+                    }
+                    else if ((match = isoDateOnly.exec(value))) {
+                        value = new Date();
+                        value.setYear(parseInt(match[1]));
+                        value.setMonth(parseInt(match[2]) -1);                       
+                        value.setDate(parseInt(match[3]));                        
+                        value.setHours(0, 0, 0, 0);   
                     }
 
                     return value;

@@ -27,14 +27,23 @@
 }</FormattingCode></QFCustomFormatCol><QFEditCol><StyleScheme /><DataField /><ColumnId>403f2d07-3671-4fe0-bdbf-5b724f37372f</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>false</IsSortable><MultiCurrencyDependent>false</MultiCurrencyDependent><DialogSpecs><SmartPart>AddEditAccountingSystem</SmartPart><Height>550</Height><Width>885</Width><Top>0</Top><Left>0</Left><EntityType>AppIdMapping</EntityType><ResourceKey>04e1a283-eabb-465b-bc09-6ae588f52cf9</ResourceKey><CenterDialog>True</CenterDialog></DialogSpecs><AppliedSecurity /></QFEditCol><QFRowSelectionCol><StyleScheme /><DataField /><ColumnId>dacac144-28d9-468f-9e96-d8205b85791b</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>false</IsSortable><MultiCurrencyDependent>false</MultiCurrencyDependent><Image /></QFRowSelectionCol></Columns><RenderVertical>false</RenderVertical><OnRowSelectedAction><ResourceKey>QFDataGrid</ResourceKey><RootActionName>CSharpSnippetAction</RootActionName><Action><CSharpCodeSnippet><![CDATA[Sage.SalesLogix.Web.Controls.SlxGridView grid = sender as Sage.SalesLogix.Web.Controls.SlxGridView;
 Sage.Entity.Interfaces.IAppIdMapping appIdMapping =
     Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IAppIdMapping>(grid.SelectedDataKey.Values[1]);
-string jobName = appIdMapping.ExecuteSync();
-if (DialogService.DialogParameters.ContainsKey("NewSyncJobName"))
+if (appIdMapping.Enabled.HasValue && appIdMapping.Enabled.Value)
 {
-    DialogService.DialogParameters.Remove("NewSyncJobName");
+    string jobName = appIdMapping.ExecuteSync();
+    if (DialogService.DialogParameters.ContainsKey("NewSyncJobName"))
+    {
+        DialogService.DialogParameters.Remove("NewSyncJobName");
+    }
+    DialogService.DialogParameters.Add("NewSyncJobName", jobName);
+    DialogService.SetSpecs(150, 450, "SyncJobConfirmation");
+    DialogService.ShowDialog();
 }
-DialogService.DialogParameters.Add("NewSyncJobName", jobName);
-DialogService.SetSpecs(150, 450, "SyncJobConfirmation");
-DialogService.ShowDialog();]]></CSharpCodeSnippet></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnRowSelectedAction></QFDataGrid></Property>
+else
+{
+    throw new Sage.Platform.Application.ValidationException(
+        Sage.Platform.WebPortal.PortalUtil.JavaScriptEncode(
+        String.Format(GetLocalResourceObject("Error_AccountingSystem_NotEnabled").ToString(), appIdMapping.Name)));
+}]]></CSharpCodeSnippet></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnRowSelectedAction></QFDataGrid></Property>
         </Properties>
       </ControlDefinition>
     </QuickFormElement>

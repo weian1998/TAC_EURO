@@ -5,7 +5,13 @@
     <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
   </ExtendedPropertiesCollection>
   <parameter />
-  <preExecuteTargets />
+  <preExecuteTargets>
+    <methodTarget id="f96f1ea0-b9b7-4b1c-a587-7e4f3cd79b31" lastModifiedUtc="2011-06-24T16:02:09.5794Z" targetType="Sage.SalesLogix.SalesOrderAddress.SalesOrderAddress, Sage.SalesLogix.BusinessRules" targetMethod="ValidateCountryCode" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </preExecuteTargets>
   <methodTargets>
     <methodTarget id="9e87e8cf-8929-455b-a7eb-9853ad2fde44" lastModifiedUtc="2011-05-03T19:21:50.252566Z" targetType="Sage.SalesLogix.SalesOrderAddress.SalesOrderAddress, Sage.SalesLogix.BusinessRules" targetMethod="OnBeforeInsert" active="true">
       <ExtendedPropertiesCollection>

@@ -19,7 +19,7 @@ Sage.MatchFilterManager = function() {
     this.filterTpl = new Ext.XTemplate(
     '<div id="entitylookupdiv_{index}" class="lookup-condition-row" style="padding-left:20px">',
         '<select style="width:160px" id="fieldnames_{index}" class="lookup-fieldnames-list" onchange="var mgr = Sage.Services.getService(\'MatchFilterManager\');if (mgr) { mgr.operatorChange({index}); }">',
-            '<tpl for="fields"><option value="{fieldname}">{displayname}</option></tpl>',
+            '<tpl for="fields"><option value="{FieldName}">{DisplayName}</option></tpl>',
         '</select>',
         '<select style="width:160px; margin-left:130px" id="operators_{index}" class="lookup-operators-list">',
             '<tpl for="operators"><option value="{symbol}">{display}</option></tpl>',
@@ -39,7 +39,7 @@ Sage.MatchFilterManager = function() {
 Sage.MatchFilterManager.prototype.getTemplateObj = function() {
     var mgr = Sage.Services.getService("MatchFilterManager")
     mgr.setupTemplateObj = (window.matchSetupObject) ? window.matchSetupObject : {
-        fields: [{ fieldname: '', displayname: ''}],
+        fields: [{ FieldName: '', DisplayName: ''}],
         operators: [{ symbol: 'Equal To', display: 'Equal To'}],
         index: 0,
         hideimgurl: 'images/icons/Find_Remove_16x16.gif',
@@ -102,11 +102,11 @@ function showDialog() {
         mgr.addFilter();
         var field = document.getElementById(String.format("fieldnames_{0}", i));
         if (field != null) {
-            field.value = mgr.selectedFilters[i].property;
+            field.value = mgr.selectedFilters[i].Property;
         }
         var operator = document.getElementById(String.format("operators_{0}", i));
         if (operator != null) {
-            operator.value = mgr.selectedFilters[i].operation;
+            operator.value = mgr.selectedFilters[i].Operator;
         }
     }
     $(document).bind("keydown", mgr.checkKeys);
@@ -124,7 +124,7 @@ function getSelections() {
     return Ext.encode(filters);
 }
 
-Sage.MatchFilterManager.prototype.setupFilterElements = function() {
+Sage.MatchFilterManager.prototype.setupFilterElements = function () {
     var mgr = Sage.Services.getService("MatchFilterManager");
     if (mgr) {
         mgr.getTemplateObj();
@@ -145,9 +145,9 @@ Sage.MatchFilterManager.prototype.setupFilterElements = function() {
             stateful: false,
             html: contentHtml
         });
-
+        
         mgr.win = new Ext.Window({
-            title: MatchingResources.ConfigOptions_DialogCaption,
+            title: MatchingResources.DefaultCriteria_DialogCaption,
             header: false,
             footer: false,
             hideBorders: true,
@@ -162,8 +162,8 @@ Sage.MatchFilterManager.prototype.setupFilterElements = function() {
             items: pnl,
             tools: [{ id: 'help', handler: function () { window.open(Link.getHelpUrl('Matching_Tab')); } }],
             buttons: [{
-                text: MatchingResources.ConfigOptions_OKButton,
-                handler: function() {
+                text: MatchingResources.DefaultCriteria_OKButton,
+                handler: function () {
                     $.ajax({
                         type: "POST",
                         url: "slxdata.ashx/slx/crm/-/resources/updateconfiguration",
@@ -171,23 +171,23 @@ Sage.MatchFilterManager.prototype.setupFilterElements = function() {
                         data: getSelections(),
                         dataType: "json",
                         processData: false,
-                        error: function(request, status, error) {
+                        error: function (request, status, error) {
                             Ext.Msg.alert(error);
                         },
-                        success: function() {
+                        success: function () {
                             mgr.win.close();
                         }
                     });
                 }
             }, {
-                text: MatchingResources.ConfigOptions_CancelButton,
-                handler: function() {
+                text: MatchingResources.DefaultCriteria_CancelButton,
+                handler: function () {
                     mgr.win.close();
                 }
-}]
-            });
-        }
+            }]
+        });
     }
+}
 
 Sage.MatchFilterManager.prototype.resetMatchFilters = function(data) {
     var x = data;

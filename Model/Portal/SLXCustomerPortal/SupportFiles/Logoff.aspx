@@ -17,10 +17,10 @@
             <div id="LogoffMessage"><%= GetLocalResourceObject("LogoffMessage") %></div>
             <div id="LogoffFormButtonPanel">
                 <asp:Button ID="btnLogin" runat="server" PostBackUrl="~/Login.aspx" 
-                    Text="Log On" ValidationGroup="slxLogin"
-                    meta:resourcekey="LoginButtonResource1" />
+                    Text="<%$ resources: LogOn %>" ValidationGroup="slxLogin" />
             </div>
         </div>
     </div>
 </div>      
 </asp:Content>
+

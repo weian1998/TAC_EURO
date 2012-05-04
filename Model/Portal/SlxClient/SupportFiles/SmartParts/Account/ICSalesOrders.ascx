@@ -8,6 +8,7 @@
 
 <SalesLogix:ScriptResourceProvider ID="SalesOrderResources" runat="server">
     <Keys>
+        <SalesLogix:ResourceKeyName Key="grdSalesOrder_Edit" />
         <SalesLogix:ResourceKeyName Key="grdSalesOrder_OrderNumber" />
         <SalesLogix:ResourceKeyName Key="grdSalesOrder_OrderDate" />
         <SalesLogix:ResourceKeyName Key="grdSalesOrder_Status" />
@@ -20,19 +21,22 @@
         <SalesLogix:ResourceKeyName Key="grdSalesOrder_TaxTotal" />
         <SalesLogix:ResourceKeyName Key="grdSalesOrder_GrossTotal" />
         <SalesLogix:ResourceKeyName Key="grdSalesOrder_Currency" />
+
         <SalesLogix:ResourceKeyName Key="grdAddress_Name" />
         <SalesLogix:ResourceKeyName Key="grdAddress_Address1" />
         <SalesLogix:ResourceKeyName Key="grdAddress_Address2" />
         <SalesLogix:ResourceKeyName Key="grdAddress_City" />
         <SalesLogix:ResourceKeyName Key="grdAddress_State" />
         <SalesLogix:ResourceKeyName Key="grdAddress_Zip" />
+
         <SalesLogix:ResourceKeyName Key="grdItems_Line" />
         <SalesLogix:ResourceKeyName Key="grdItems_Type" />
-        <SalesLogix:ResourceKeyName Key="grdItems_Status" />
         <SalesLogix:ResourceKeyName Key="grdItems_Commodity" />
         <SalesLogix:ResourceKeyName Key="grdItems_CommodityVariant" />
         <SalesLogix:ResourceKeyName Key="grdItems_CommodityDimension" />
         <SalesLogix:ResourceKeyName Key="grdItems_UnitOfMeasure" />
+        <SalesLogix:ResourceKeyName Key="grdItems_Location" />
+        <SalesLogix:ResourceKeyName Key="grdItems_PriceList" />
         <SalesLogix:ResourceKeyName Key="grdItems_Quantity" />
         <SalesLogix:ResourceKeyName Key="grdItems_InitialPrice" />
         <SalesLogix:ResourceKeyName Key="grdItems_ActualPrice" />
@@ -41,6 +45,7 @@
         <SalesLogix:ResourceKeyName Key="grdItems_DiscountTotal" />
         <SalesLogix:ResourceKeyName Key="grdItems_TaxTotal" />
         <SalesLogix:ResourceKeyName Key="grdItems_GrossTotal" />
+
         <SalesLogix:ResourceKeyName Key="grdPayments_Date" />
         <SalesLogix:ResourceKeyName Key="grdPayments_Name" />
         <SalesLogix:ResourceKeyName Key="grdPayments_Type" />
@@ -54,6 +59,7 @@
         <SalesLogix:ResourceKeyName Key="grdPayments_TenderType" />
         <SalesLogix:ResourceKeyName Key="grdPayments_TenderReference" />
         <SalesLogix:ResourceKeyName Key="grdPayments_ProcessDate" />
+
         <SalesLogix:ResourceKeyName Key="grdDeliveries_Number" />
         <SalesLogix:ResourceKeyName Key="grdDeliveries_Type" />
         <SalesLogix:ResourceKeyName Key="grdDeliveries_Status" />
@@ -74,13 +80,14 @@
 </div>
 
 <SalesLogix:SmartPartToolsContainer runat="server" ID="ICSalesOrders_RTools" ToolbarLocation="right">
+    <asp:ImageButton runat="server" ID="cmdAddERPSalesOrder" OnClientClick="ExecuteErpInsertView();" ToolTip="<%$ resources: cmdAddSalesOrder.ToolTip %>" ImageUrl="~/images/icons/plus_16x16.gif" />
     <SalesLogix:PageLink ID="lnkICSalesOrdersHelp" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="MCWebHelp"
         NavigateUrl="Account_Accounting_Sales_Orders" ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16">
     </SalesLogix:PageLink>
 </SalesLogix:SmartPartToolsContainer>
 
 <div style="display: none;">
-    <div dojoType="dijit.Dialog" id="dlgSalesOrderDetails" title="Sales Order Details" execute="">
+    <div dojoType="dijit.Dialog" id="dlgSalesOrderDetails" onHide="salesOrder.handleOnHide()" title="Sales Order Details" execute="">
 	    <table cellspacing="30">
 		    <tr>
 			    <td>
@@ -139,10 +146,10 @@
                                     <input type="text" id="SalesOrder_HoldStatus" name="statusFlagText" readonly="readonly" dojoType="dijit.form.TextBox" />
                                 </td>
                                 <td>
-                                    <label for="SalesOrder_GrossTotals"><%= GetLocalResourceObject("lblGrossTotal.Caption")%></label>
+                                    <label for="SalesOrder_Currency"><%= GetLocalResourceObject("lblCurrency.Caption")%></label>
                                 </td>
                                 <td>
-                                    <input type="text" id="SalesOrder_GrossTotals" name="grossTotal" readonly="readonly" dojoType="dijit.form.TextBox" />
+                                    <input type="text" id="SalesOrder_Currency" name="currency" readonly="readonly" dojoType="dijit.form.TextBox" />
                                 </td>
                             </tr>
 		                    <tr>
@@ -153,10 +160,10 @@
                                     <input type="text" id="SalesOrder_Type" name="type" readonly="readonly" dojoType="dijit.form.TextBox" />
                                 </td>
                                 <td>
-                                    <label for="SalesOrder_Currency"><%= GetLocalResourceObject("lblCurrency.Caption")%></label>
+                                    <label for="SalesOrder_CostTotal"><%= GetLocalResourceObject("lblCostTotal.Caption")%></label>
                                 </td>
                                 <td>
-                                    <input type="text" id="SalesOrder_Currency" name="currency" readonly="readonly" dojoType="dijit.form.TextBox" />
+                                    <input type="text" id="SalesOrder_CostTotal" name="costTotal" readonly="readonly" dojoType="dijit.form.TextBox" />
                                 </td>
                             </tr>
                             <tr>
@@ -167,20 +174,6 @@
                                     <input type="text" id="SalesOrder_PONumber" name="customerReference" readonly="readonly" dojoType="dijit.form.TextBox" />
                                 </td>
                                 <td>
-                                    <label for="SalesOrder_CostTotal"><%= GetLocalResourceObject("lblCostTotal.Caption")%></label>
-                                </td>
-                                <td>
-                                    <input type="text" id="SalesOrder_CostTotal" name="costTotal" readonly="readonly" dojoType="dijit.form.TextBox" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="SalesOrder_Quotation"><%= GetLocalResourceObject("lblQuotation.Caption")%></label>
-                                </td>
-                                <td>
-                                    <input type="text" id="SalesOrder_Quotation" name="quotation" readonly="readonly" dojoType="dijit.form.TextBox" />
-                                </td>
-                                <td>
                                     <label for="SalesOrder_ProfitTotal"><%= GetLocalResourceObject("lblProfitTotal.Caption")%></label>
                                 </td>
                                 <td>
@@ -189,10 +182,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="SalesOrder_Contact"><%= GetLocalResourceObject("lblContact.Caption")%></label>
+                                    <label for="SalesOrder_Quotation"><%= GetLocalResourceObject("lblQuotation.Caption")%></label>
                                 </td>
                                 <td>
-                                    <input type="text" id="SalesOrder_Contact" name="buyerContact" readonly="readonly" dojoType="dijit.form.TextBox" />
+                                    <input type="text" id="SalesOrder_Quotation" name="quotation.reference" readonly="readonly" dojoType="dijit.form.TextBox" />
                                 </td>
                                 <td>
                                     <label for="SalesOrder_InvoiceStatus"><%= GetLocalResourceObject("lblinvoiceStatus.Caption")%></label>
@@ -203,10 +196,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="SalesOrder_SalesPerson"><%= GetLocalResourceObject("lblSalesPerson.Caption")%></label>
+                                    <label for="SalesOrder_Contact"><%= GetLocalResourceObject("lblContact.Caption")%></label>
                                 </td>
                                 <td>
-                                    <input type="text" id="SalesOrder_SalesPerson" name="salesPersons" readonly="readonly" dojoType="dijit.form.TextBox" />
+                                    <input type="text" id="SalesOrder_Contact" name="buyerContact.fullName" readonly="readonly" dojoType="dijit.form.TextBox" />
                                 </td>
                                 <td>
                                     <label for="SalesOrder_DeliveryDate"><%= GetLocalResourceObject("lblDeliveryDate.Caption")%></label>
@@ -217,10 +210,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="SalesOrder_PriceList"><%= GetLocalResourceObject("lblPriceList.Caption")%></label>
+                                    <label for="SalesOrder_SalesPerson"><%= GetLocalResourceObject("lblSalesPerson.Caption")%></label>
                                 </td>
                                 <td>
-                                    <input type="text" id="SalesOrder_PriceList" name="priceList" readonly="readonly" dojoType="dijit.form.TextBox" />
+                                    <input type="text" id="SalesOrder_SalesPerson" name="salesPersons" readonly="readonly" dojoType="dijit.form.TextBox" />
                                 </td>
                                 <td>
                                     <label for="SalesOrder_DueDate"><%= GetLocalResourceObject("lblDueDate.Caption")%></label>
@@ -231,10 +224,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="SalesOrder_NetTotal"><%= GetLocalResourceObject("lblNetTotal.Caption")%></label>
+                                    <label for="SalesOrder_PriceList"><%= GetLocalResourceObject("lblPriceList.Caption")%></label>
                                 </td>
                                 <td>
-                                    <input type="text" id="SalesOrder_NetTotal" name="netTotal" readonly="readonly" dojoType="dijit.form.TextBox" />
+                                    <input type="text" id="SalesOrder_PriceList" name="pricelist.name" readonly="readonly" dojoType="dijit.form.TextBox" />
                                 </td>
                                 <td>
                                     <label for="SalesOrder_Carrier"><%= GetLocalResourceObject("lblCarrier.Caption")%></label>
@@ -245,10 +238,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="SalesOrder_DiscountTotal"><%= GetLocalResourceObject("lblDiscountTotal.Caption")%></label>
+                                    <label for="SalesOrder_NetTotal"><%= GetLocalResourceObject("lblNetTotal.Caption")%></label>
                                 </td>
                                 <td>
-                                    <input type="text" id="SalesOrder_DiscountTotal" name="discountTotal" readonly="readonly" dojoType="dijit.form.TextBox" />
+                                    <input type="text" id="SalesOrder_NetTotal" name="netTotal" readonly="readonly" dojoType="dijit.form.TextBox" />
                                 </td>
                                 <td>
                                     <label for="SalesOrder_AllocationStatus"><%= GetLocalResourceObject("lblAllocationStatus.Caption")%></label>
@@ -259,16 +252,24 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="SalesOrder_ChargesTotal"><%= GetLocalResourceObject("lblChargesTotal.Caption")%></label>
+                                    <label for="SalesOrder_DiscountTotal"><%= GetLocalResourceObject("lblDiscountTotal.Caption")%></label>
                                 </td>
                                 <td>
-                                    <input type="text" id="SalesOrder_ChargesTotal" name="chargesTotal" readonly="readonly" dojoType="dijit.form.TextBox" />
+                                    <input type="text" id="SalesOrder_DiscountTotal" name="discountTotal" readonly="readonly" dojoType="dijit.form.TextBox" />
                                 </td>
                                 <td>
                                     <label for="SalesOrder_DeliveryStatus"><%= GetLocalResourceObject("lblDeliveryStatus.Caption")%></label>
                                 </td>
                                 <td>
                                     <input type="text" id="SalesOrder_DeliveryStatus" name="deliveryStatus" readonly="readonly" dojoType="dijit.form.TextBox" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="SalesOrder_ChargesTotal"><%= GetLocalResourceObject("lblChargesTotal.Caption")%></label>
+                                </td>
+                                <td>
+                                    <input type="text" id="SalesOrder_ChargesTotal" name="chargesTotal" readonly="readonly" dojoType="dijit.form.TextBox" />
                                 </td>
                             </tr>
                         </table>
@@ -279,7 +280,7 @@
                         <div id="sdgrdSalesOrderAddresses_Grid" style="width:100%;height:300px;"></div>
                     </div>
                 </div>
-                <div id="soLinesContent" dojoType="dijit.layout.ContentPane" title="Invoice Lines" style="width:100%;height:100%;">
+                <div id="soLinesContent" dojoType="dijit.layout.ContentPane" title="Sales Order Lines" style="width:100%;height:100%;">
                     <div id="sdgrdSalesOrderLines" style="width:100%;">
                         <div id="sdgrdSalesOrderLines_Grid" style="width:100%;height:300px;"></div>
                     </div>

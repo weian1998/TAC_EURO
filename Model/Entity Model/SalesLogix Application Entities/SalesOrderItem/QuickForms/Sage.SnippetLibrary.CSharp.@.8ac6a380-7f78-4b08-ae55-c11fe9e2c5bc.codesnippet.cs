@@ -89,7 +89,6 @@ namespace Sage.BusinessRules.CodeSnippets
                 form.txtDescription.IsReadOnly = false;
                 form.txtProduct.IsReadOnly = false;
                 form.ctrlstWarehouse.Visible = false;
-                form.ctrlstUOM.Visible = false;
                 form.ctrlstWarehouses.Visible = false;
             }
             IAppIdMappingService mappingService = Sage.Platform.Application.ApplicationContext.Current.Services.Get<IAppIdMappingService>(true);

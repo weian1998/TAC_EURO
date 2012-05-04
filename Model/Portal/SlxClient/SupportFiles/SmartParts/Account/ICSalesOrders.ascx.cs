@@ -41,6 +41,11 @@ public partial class ICSalesOrders : EntityBoundSmartPartInfoProvider
         _runActivating = true;
     }
 
+    protected override void OnWireEventHandlers()
+    {
+        cmdAddERPSalesOrder.Attributes.Add("onclick", "return false;");
+    }
+
     private void DoActivating()
     {
         ScriptManager.RegisterClientScriptInclude(this, GetType(), "ICSalesOrders", Page.ResolveUrl("~/SmartParts/Account/ICSalesOrders.js"));
@@ -72,6 +77,11 @@ public partial class ICSalesOrders : EntityBoundSmartPartInfoProvider
                     clientContextService.CurrentContext.Add("GlobalSyncId", account.GlobalSyncId.ToString());
                 }
             }
+            else
+            {
+                clientContextService.CurrentContext.Remove("OperatingCompany");
+                clientContextService.CurrentContext.Remove("GlobalSyncId");
+            }
         }
     }
 
@@ -81,6 +91,7 @@ public partial class ICSalesOrders : EntityBoundSmartPartInfoProvider
         if (epage != null)
             _runActivating = (epage.IsNewEntity || _runActivating);
         if (_runActivating) DoActivating();
+        cmdAddERPSalesOrder.Visible = Sage.SalesLogix.BusinessRules.BusinessRuleHelper.AccountingSystemHandlesSO();
     }
 
     /// <summary>

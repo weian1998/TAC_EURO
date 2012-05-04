@@ -338,6 +338,8 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
             else if (tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskSendEmail" && !CanShowReportOrEmail()) { }
             // do not display
             else if (tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskDetailReport" && (!_reportingEnabled || !CanShowReportOrEmail())) { }
+            //only want to add the sales order item if the accounting system does not handle sales orders)
+            else if (tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskAddSalesOrder" && (BusinessRuleHelper.AccountingSystemHandlesSO())) { }
             // do not display
             else if (lastUserId.Trim() == "ADMIN" && (tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskCopyUser" ||
                                                tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskCopyUserProfile" ||
@@ -1046,8 +1048,9 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         Response.Cache.SetMaxAge(TimeSpan.Zero);
         Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
         Response.AppendHeader("Content-Disposition",
-                              String.Format("attachment;filename={0:yyyyMMddhhmmss}_slx_exported_selections.csv",
-                              DateTime.Now));
+                              String.Format("attachment;filename={0:yyyyMMddhhmmss}{1}.csv",
+                              DateTime.Now,
+                              GetLocalResourceObject("ExportToFile_FileName")));
         Response.ContentType = "application/csv";
         Response.ContentEncoding = Encoding.Unicode;
         Response.Flush();
@@ -1066,8 +1069,9 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         Response.Cache.SetMaxAge(TimeSpan.Zero);
         Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
         Response.AppendHeader("Content-Disposition",
-                              String.Format("attachment;filename={0:yyyyMMddhhmmss}_slx_exported_selections.csv",
-                              DateTime.Now));
+                              String.Format("attachment;filename={0:yyyyMMddhhmmss}{1}.csv",
+                              DateTime.Now,
+                              GetLocalResourceObject("ExportToFile_FileName")));
         Response.ContentType = "application/csv";
         Response.ContentEncoding = Encoding.GetEncoding(1252);
         Response.Flush();
@@ -1534,8 +1538,6 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
                 {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
             };
         tasksByEntityList.Add("ILitRequest", litRequestListTasks);
-        //tasksByEntityList = ApplyRoleSecurity(tasksByEntityList);
-
     }
 
     private void FillDetailPageDictionaries()

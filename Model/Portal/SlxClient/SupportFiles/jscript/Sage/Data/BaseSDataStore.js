@@ -124,7 +124,19 @@ dojo.require('Sage.Utility');
                     msg = request.responseText;
                 }
             }
-            if (context.onError) context.onError.call(context.scope || this, msg, context);
+            if (context && context.onError) {
+                context.onError.call(context.scope || this, msg, context);
+            }
+            else {
+                if (typeof msg === 'string' && typeof console !== 'undefined') {
+                    if (request && request.status) {
+                        msg += ' (HTTP status = %o; statusText = %o)';
+                        console.error(msg, request.status, request.statusText);
+                    }
+                    else
+                        console.error(msg);
+                }
+            }
         },
         setContext: function(newContext) {
 

@@ -19,7 +19,7 @@
         <SalesLogix:ResourceKeyName Key="DefaultCriteria_OperatorValue" />
         <SalesLogix:ResourceKeyName Key="DefaultCriteria_DialogCaption" />
         <SalesLogix:ResourceKeyName Key="DefaultCriteria_CancelButton" />
-        <SalesLogix:ResourceKeyName Key="ConfigOptions_OKButton" />
+        <SalesLogix:ResourceKeyName Key="DefaultCriteria_OKButton" />
     </Keys>
 </SalesLogix:ScriptResourceProvider>
 

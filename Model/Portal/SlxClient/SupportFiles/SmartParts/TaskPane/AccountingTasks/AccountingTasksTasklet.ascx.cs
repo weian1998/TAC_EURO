@@ -6,6 +6,7 @@ using Sage.Entity.Interfaces;
 using Sage.Platform;
 using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
+using Sage.Platform.ComponentModel;
 using Sage.Platform.Security;
 using Sage.Platform.WebPortal.Services;
 using Sage.Platform.WebPortal.SmartParts;
@@ -232,6 +233,12 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
                     String.Format(GetLocalResourceObject("Error_IntegrationFeed_Disabled").ToString(),
                                   _currentSOEntity.OperatingCompany.Name));
             }
+            if (_currentSOEntity.SalesOrderItems.Count <= 0)
+            {
+                throw new ValidationException(
+                    String.Format(GetLocalResourceObject("Error_CheckPrice_NoProducts").ToString(),
+                                    _currentSOEntity.SalesOrderNumber));
+            }
             return true;
         }
         return false;
@@ -242,12 +249,21 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
         EntityPage page = Page as EntityPage;
         if (page != null)
         {
-            string caption = GetLocalResourceObject("CheckPrice_Dialog.Caption").ToString();
-            DialogService.SetSpecs(200, 200, 400, 975, "ICUpdatePricing", caption, true);
-            DialogService.EntityType = page.EntityContext.EntityType;
-            DialogService.DialogParameters.Add("SubmitSalesOrder", submitSalesOrder);
-            DialogService.EntityID = entityId;
-            DialogService.ShowDialog();
+            try
+            {
+                IList<ComponentView> lines = _currentSOEntity.GetUpdatedErpPricingLines();
+                string caption = GetLocalResourceObject("CheckPrice_Dialog.Caption").ToString();
+                DialogService.SetSpecs(200, 200, 400, 975, "ICUpdatePricing", caption, true);
+                DialogService.EntityType = page.EntityContext.EntityType;
+                DialogService.DialogParameters.Add("SubmitSalesOrder", submitSalesOrder);
+                DialogService.DialogParameters.Add("PriceList", lines);
+                DialogService.EntityID = entityId;
+                DialogService.ShowDialog();
+            }
+            catch (Exception)
+            {
+                throw new ValidationException(GetLocalResourceObject("Error_PricingService").ToString());
+            }
         }
     }
 

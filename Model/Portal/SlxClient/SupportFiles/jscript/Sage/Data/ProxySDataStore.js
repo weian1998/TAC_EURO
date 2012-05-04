@@ -117,7 +117,13 @@ dojo.require('Sage.Data.BaseSDataStore');
                         }
                     }
                 }
-                
+                if (this.pathSegments && this.pathSegments.length > 0) {
+                    var nextIdx = request.uri.pathSegments.length;
+                    for (var i = 0; i < this.pathSegments.length; i++) {
+                        request.uri.setPathSegment(nextIdx, this.evaluatePathSegment(this.pathSegments[i]));
+                        nextIdx++;
+                    }
+                }                
                 request.setQueryArgs({
                     'select': this.select.join(','),
                     'include': this.include.join(',')
@@ -138,8 +144,19 @@ dojo.require('Sage.Data.BaseSDataStore');
         },
         onSuccessLoad: function(options, data) {
             if (data) {
+                if (typeof console !== 'undefined') {
+                    console.debug('onSuccessLoad [WITH] DATA');
+                }
                 this._entity = data;
                 this.onGetSingleResource(data);
+            }
+            else {
+                if (typeof console !== 'undefined') {
+                    console.warn('onSuccessLoad [NO] DATA');
+                }
+                var empty = { $resources: [] };
+                this._entity = empty;
+                this.onGetSingleResource(empty);
             }
         },
         onGetSingleResource: function(data) { }

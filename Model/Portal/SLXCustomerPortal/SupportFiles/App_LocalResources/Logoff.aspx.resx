@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Company" xml:space="preserve">
     <value>Sage Software, Inc.</value>
@@ -124,13 +124,16 @@
     <value>Copyright 1997-2011</value>
   </data>
   <data name="LogoffLink" xml:space="preserve">
-    <value>Log on to SalesLogix Customer Portal</value>
+    <value>Log on to SalesLogix Web Client</value>
   </data>
   <data name="LogoffMessage" xml:space="preserve">
-    <value>You are logged off from the Sage SalesLogix Customer Portal.</value>
+    <value>You are logged off from the Sage SalesLogix Web Client.</value>
   </data>
   <data name="LogoffTitle" xml:space="preserve">
     <value>Log Off Complete</value>
+  </data>
+  <data name="LogOn" xml:space="preserve">
+    <value>Log On</value>
   </data>
   <data name="Rights" xml:space="preserve">
     <value>All Rights Reserved.</value>
