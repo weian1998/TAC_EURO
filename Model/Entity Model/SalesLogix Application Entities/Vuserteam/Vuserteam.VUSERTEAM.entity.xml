@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="650bc4e5-7b83-4f68-8416-78b96de7b801" lastModifiedUtc="2012-05-04T01:15:09.7403601Z" manageSchema="false" tableName="VUSERTEAM" name="Vuserteam" isExtension="false" audited="false" onBeforeInsertMethodId="82caf4c6-4c0b-4581-bf99-a55f55209ae2" onAfterInsertMethodId="234a04ae-93ed-47f7-ad25-fcfd9d556c2f" onBeforeUpdateMethodId="4fa93150-94a0-4508-88c1-b7f1b7bc2564" onAfterUpdateMethodId="ee9bd7ed-536e-4edb-bc12-e63d1fa467d4" onBeforeDeleteMethodId="75216e81-1800-4ab6-9d8b-82c0b2319a4a" onAfterDeleteMethodId="0ac2efbb-7cfc-43ca-ace6-3e61e54ae6a2" onCreateId="c6a9f249-c711-4c2b-ac24-c431d6921160">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
+      <extender guid="76aa0e24-2c8f-3b71-a1f9-ca6db3db4459">
+        <OrmEntitySDataExtension generateFeed="true" pathName="vuserteams" canPost="true" canPut="true" canDelete="true" />
+      </extender>
+      <extender guid="1589723d-0536-4bf3-bdd7-3f6f7fe165d0">
+        <OrmEntityMetadataExtension>
+          <StringExpression>${Teamname}</StringExpression>
+          <IsHistoryTable>false</IsHistoryTable>
+        </OrmEntityMetadataExtension>
+      </extender>
+    </extendee>
+  </ExtendedPropertiesCollection>
+  <keyProperties>
+    <keyReference id="68e57cc2-8aa2-432b-b6cc-64101e5dba9a" ordinalPosition="1" />
+  </keyProperties>
+  <properties>
+    <property xsi:type="OrmFieldProperty" id="68e57cc2-8aa2-432b-b6cc-64101e5dba9a" lastModifiedUtc="2012-05-04T01:14:32.2322147Z" name="Eurouserteamaccessid" audited="false" isNullable="false" columnName="EUROUSERTEAMACCESSID" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="2edfbb44-0add-4603-be36-5e4efddecbbb" lastModifiedUtc="2012-05-04T01:14:32.2642166Z" name="Eurouserid" audited="false" columnName="EUROUSERID" maxLength="12" precision="0" scale="0" ordinal="1" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="f3aa59c9-95f8-4e92-9b5e-24e3418f5431" lastModifiedUtc="2012-05-04T01:14:32.2692168Z" name="Myseccodeid" audited="false" columnName="MySeccodeid" maxLength="12" precision="0" scale="0" ordinal="2" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="5ef92a37-3b30-4ba7-8903-89df73dc3453" lastModifiedUtc="2012-05-04T01:14:32.2732171Z" name="Teamname" audited="false" columnName="TeamName" maxLength="64" precision="0" scale="0" ordinal="3" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>64</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+  </properties>
+</entity>

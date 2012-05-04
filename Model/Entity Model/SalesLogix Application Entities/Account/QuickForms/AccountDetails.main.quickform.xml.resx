@@ -168,17 +168,11 @@
   <data name="WebAddress.Caption" xml:space="preserve">
     <value>Web URL:</value>
   </data>
-  <data name="lueOwner.LookupProperties.Teamname.PropertyHeader" xml:space="preserve">
-    <value>Teamname</value>
-  </data>
   <data name="cmdCopyAccount.Caption" xml:space="preserve">
     <value>Copy</value>
   </data>
   <data name="cmdCopyAccount.ToolTip" xml:space="preserve">
     <value>Copy Account Information to Clipboard</value>
-  </data>
-  <data name="lueOwner.Caption" xml:space="preserve">
-    <value>Owner:</value>
   </data>
   <data name="Address.AddressToolTip" xml:space="preserve">
     <value>MapQuest</value>
@@ -216,7 +210,10 @@
   <data name="lueOwner2.LookupProperties.Teamname.PropertyHeader" xml:space="preserve">
     <value>Teamname</value>
   </data>
+  <data name="lueOwner2.LookupProperties.Myseccodeid.PropertyHeader" xml:space="preserve">
+    <value>Myseccodeid</value>
+  </data>
   <data name="lueOwner2.Caption" xml:space="preserve">
-    <value>Owner:</value>
+    <value>Owner</value>
   </data>
 </root>

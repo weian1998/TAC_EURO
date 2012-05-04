@@ -155,16 +155,19 @@ namespace TACEURO
         public static void OnBeforeAccountUpdate(IAccount Account, ISession session)
         {
             ////TAC Code here
-
+           
             IChangedState state = Account as IChangedState;
             if (state != null)
             {
-                EntityPropertyChange change = state.GetChangedState().FindMemberChange<EntityPropertyChange>("EuroOwner");
-                if (change != null && change.OldEntity != null)
+                //EntityPropertyChange change = state.GetChangedState().FindMemberChange<EntityPropertyChange>("EuroOwner");
+                PropertyChange change = state.GetChangedState().FindPropertyChange("SeccodeId");
+                //if (change != null && change.OldEntity != null)
+                if (change != null)
                 {
                     //IUser oldAcctMgr = (IUser)change.OldEntity.GetReferencedEntity();
                     //IUser newAcctMgr = (IUser)change.NewEntity.GetReferencedEntity();
-                    EuroAccountOwnerHasChanged(Account,change.NewEntity.EntityId.ToString()); 
+                    //EuroAccountOwnerHasChanged(Account,change.NewEntity.EntityId.ToString());
+                    EuroAccountOwnerHasChanged(Account,change.NewValue.ToString ());
                     // do something
                 }
             }
