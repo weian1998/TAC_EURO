@@ -1,8 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="357" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="357" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Administration|Accounting Integration|Configuring Accounting Integration" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
     <!-- saved from url=(0014)about:internet -->
-    <head><title>Configuring Accounting Integration</title>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Configuring Accounting Integration</title>
         <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
         <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
         <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
@@ -12,10 +13,31 @@
         <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Integration Contract/ConfiguringAccountingIntegration.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
         </p>
         <h1>Configuring Accounting Integration</h1>
-        <p><a name="kanchor454"></a>Complete the following tasks to configure Accounting Integration.</p>
+        <p><a name="kanchor45"></a>Complete the following tasks to configure Accounting Integration.</p>
         <ul>
             <li class="BulletCheckbox" value="1">If multi-currency is enabled, ensure Sage SalesLogix and your accounting system have the same base currency.</li>
-            <li class="BulletCheckbox" value="2">Accounting Integration is enabled when the Sage SalesLogix endpoint and at least one target endpoint is configured and enabled. Use the <a href="Accounting_Integration_Detail_View.htm" target="_self">Accounting Integration Detail</a> view to enable endpoints.</li>
+            <li class="BulletCheckbox" value="2">Run the<a href="Account_Integration_Phone_Email_Utility.htm">  phone and e-mail update utility</a>.
+          
+                </li>
+        </ul>
+        <li value="4">
+            <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+                <col style="width: 45px;" />
+                <col />
+                <tr>
+                    <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                        <p align="center" class="Topic-Text-Indent">
+                            <img src="../image/note.gif" />
+                        </p>
+                    </td>
+                    <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                        <p class="Tip-Note-Text" style="margin-bottom: 0;">Windows Authentication must be configured for the administrative user before running the Account Integration Phone and E-mail Update utility. For detailed steps, see the "Using Windows Authentication" topic in the Administrator Help.</p>
+                    </td>
+                </tr>
+            </table>
+        </li>
+        <ul>
+            <li class="BulletCheckbox" value="1">Accounting Integration is enabled when the Sage SalesLogix endpoint and at least one target endpoint is configured and enabled. Use the <a href="Accounting_Integration_Detail_View.htm" target="_self">Accounting Integration Detail</a> view to enable endpoints.</li>
         </ul>
         <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
             <col style="width: 45px;" />
@@ -27,7 +49,7 @@
                     </p>
                 </td>
                 <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
-                    <p class="Tip-Note-Text" style="margin-bottom: 0;">When you enable or disable Accounting Integration, changes do not take affect until you log off and log back on to Sage SalesLogix.</p>
+                    <p class="Tip-Note-Text" style="margin-bottom: 0;">When you enable or disable Accounting Integration, changes do not take effect until you log off and log back on to Sage SalesLogix.</p>
                 </td>
             </tr>
         </table>
@@ -51,9 +73,9 @@
         <ul>
             <li class="BulletCheckbox" value="1">Use the <a href="Matching_Tab.htm" target="_self">Matching tab</a> to set global default matching criteria for users creating links.</li>
             <li class="BulletCheckbox" value="2">Configure the <a href="ConfiguringAcctIntSyncSvc.htm" target="_self">Accounting Integration Synchronization Service</a>.</li>
-            <li class="BulletCheckbox" value="3">If necessary), export and <a href="../Manage/DedupWizard.htm" target="_self">merge</a> records from your accounting system. </li>
+            <li class="BulletCheckbox" value="3">(If necessary), export and <a href="../Manage/DedupWizard.htm" target="_self">merge</a> records from your accounting system. </li>
         </ul>
-        <p class="Topic-Text-Indent">Use the export tool provided by your accounting system to export the appropriate data into Sage SalesLogix</p>
+        <p class="Topic-Text-Indent">Use the export tool provided by your accounting system to export the appropriate data into Sage SalesLogix.</p>
         <ul>
             <li class="BulletCheckbox" value="1">Configure <a href="../Admin_security/What_are_Roles_and_Secured_Actions.htm" target="_self">user roles</a>. </li>
         </ul>

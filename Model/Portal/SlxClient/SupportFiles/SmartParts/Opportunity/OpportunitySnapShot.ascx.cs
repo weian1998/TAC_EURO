@@ -321,8 +321,8 @@ public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoPr
                 string scriptFmtString = @"dojo.require('Sage.Utility');Sage.Utility.writeEmail('{0}', '{1}', '{2}');";
 
                 string emailTo = String.Empty;
-                string subject = String.Format(GetLocalResourceObject("lblEmailSubject.Caption").ToString(),
-                                  opportunity.Description, opportunity.Account.AccountName);
+                string subject = PortalUtil.JavaScriptEncode(String.Format(GetLocalResourceObject("lblEmailSubject.Caption").ToString(),
+                                  opportunity.Description, opportunity.Account.AccountName));
 
                 string emailBody = FormatEmailBody(opportunity);
 
@@ -440,7 +440,7 @@ public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoPr
                                          String.Format("{0} \x0D\x0A",
                                                        String.Format("{0}, {1}; {2}", oppContact.Contact.Name,
                                                                      oppContact.Contact.Title, oppContact.SalesRole)));
-        return PortalUtil.JsonEncode(emailBody);
+        return PortalUtil.JavaScriptEncode(emailBody);
     }
     /// <summary>
     /// Shows the sales process info.

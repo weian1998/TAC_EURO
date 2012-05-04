@@ -1,12 +1,9 @@
-﻿//if (!Sage.UI) {
-//    Sage.namespace("UI");
-//}
-//if (!Sage.UI.Controls) {
-//    Sage.UI.namespace("Controls");
-//}
-//Sage.UI.
-dojo.provide('Sage.UI.ConditionManager');
+﻿dojo.provide('Sage.UI.ConditionManager');
+dojo.require("dojo.i18n");
+dojo.requireLocalization('Sage.UI', 'ConditionManager');
+
 ConditionManager = function (options) {
+    dojo.mixin(this, dojo.i18n.getLocalization("Sage.UI", "ConditionManager", this.lang));
     this._options = options;
     this.win = '';
     this.conditions = [];
@@ -15,8 +12,8 @@ ConditionManager = function (options) {
     this.lookupTpl = new Simplate([
         '<div id="lookupCondition_{%= index %}" class="lookup-condition-row">',
         '<label class="slxlabel" style="width:75px;clear:left;display:block;float:left;position:relative;padding:4px 0px 0px 0px">',
-            '{% if (index < 1 ) { %} {%= addrowlabel %} {% } %}',
-            '{% if (index > 0 ) { %} {%= hiderowlabel %} {% } %}',
+            '{% if (index < 1 ) { %} {%= $.addrowlabel %} {% } %}',
+            '{% if (index > 0 ) { %} {%= $.hiderowlabel %} {% } %}',
         '</label>',
         '<div style="padding-left:75px;position:relative;">',
             '<select id="fieldnames_{%= index %}" class="lookup-fieldnames-list" onchange="dijit.byId(\'{%= slcId %}\').conditionMgr.operatorChange({%= index %}); ">',
@@ -33,11 +30,11 @@ ConditionManager = function (options) {
             '<input type="text" id="value_{%= index %}" class="lookup-value" />',
             '{% if (index < 1 ) { %}',
     //TODO: Add a callback method in the cofiguration options coming from the LookupControl that is the 'DoSearch' method
-                '<img src="{%= addimgurl %}" alt="{%= addimgalttext %}" style="cursor:pointer;padding:0px 5px;" onclick="dijit.byId(\'{%= slcId %}\').conditionMgr.addLookupCondition();" />',
-                '<input type="button" id="lookupButton" onclick="dijit.byId(\'{%= slcId %}\').doLookup(); " value="{%= srchBtnCaption %}" />',
+                '<img src="{%= addimgurl %}" alt="{%= $.addimgalttext %}" style="cursor:pointer;padding:0px 5px;" onclick="dijit.byId(\'{%= slcId %}\').conditionMgr.addLookupCondition();" />',
+                '<input type="button" id="lookupButton" onclick="dijit.byId(\'{%= slcId %}\').doLookup(); " value="{%= $.srchBtnCaption %}" />',
             '{% } %}',
         '{% if (index > 0 ) { %}',
-            '<img src="{%= hideimgurl %}" alt="{%= hideimgalttext %}" style="cursor:pointer;padding:0px 5px;" onclick="dijit.byId(\'{%= slcId %}\').conditionMgr.removeLookupCondition({%= index %});" />',
+            '<img src="{%= hideimgurl %}" alt="{%= $.hideimgalttext %}" style="cursor:pointer;padding:0px 5px;" onclick="dijit.byId(\'{%= slcId %}\').conditionMgr.removeLookupCondition({%= index %});" />',
         '{% } %}',
         '</div>']);
 
@@ -80,28 +77,26 @@ ConditionManager = function (options) {
         fields: this.fields,
         operators: {
             "System.Boolean": [
-                  { symbol: 'eq', display: 'Equal to' },
-                  { symbol: 'ne', display: 'Not Equal to' },
-            //  {name: "LookupControl_Operator_Equal", value: "eq"},
-            //  {name: "LookupControl_Operator_NotEqual", value: "ne"}        
+                  { symbol: 'eq', display: this.equalTo },
+                  { symbol: 'ne', display: this.notEqualTo }   
             ],
             "System.String": [
-                { symbol: 'sw', display: 'Starting With' },
-                { symbol: 'like', display: 'Contains' },
-                { symbol: 'eq', display: 'Equal to' },
-                { symbol: 'ne', display: 'Not Equal to' },
-                { symbol: 'le', display: 'Equal or Less than' },
-                { symbol: 'ge', display: 'Equal or Greater than' },
-                { symbol: 'lt', display: 'Less than' },
-                { symbol: 'gt', display: 'Greater than' }
+                { symbol: 'sw', display: this.startingWith },
+                { symbol: 'like', display: this.contains },
+                { symbol: 'eq', display: this.equalTo },
+                { symbol: 'ne', display: this.notEqualTo },
+                { symbol: 'le', display: this.equalOrLessThan },
+                { symbol: 'ge', display: this.equalOrGreaterThan },
+                { symbol: 'lt', display: this.lessThan },
+                { symbol: 'gt', display: this.greaterThan }
             ],
             "default": [ //numericoperators  System.Decimal, System.Int32
-                {symbol: "eq", "display": "Equal to" },
-                { symbol: "ne", "display": "Not Equal to" },
-                { symbol: "le", "display": "Equal or Less than" },
-                { symbol: "ge", "display": "Equal or Greater than" },
-                { symbol: "lt", "display": "Less than" },
-                { symbol: "gt", "display": "Greater than" }
+                {symbol: "eq", "display": this.equalTo },
+                { symbol: "ne", "display": this.notEqualTo },
+                { symbol: "le", "display": this.equalOrLessThan },
+                { symbol: "ge", "display": this.equalOrGreaterThan },
+                { symbol: "lt", "display": this.lessThan },
+                { symbol: "gt", "display": this.greaterThan }
             ]
         },
         index: 0,
@@ -115,6 +110,14 @@ ConditionManager = function (options) {
         hiderowlabel: 'And:',
         srchBtnCaption: 'Search',
         errorOperatorRequiresValue: 'The operator requires a value',
+        startingWith: 'Starting With',
+        contains: 'Contains',
+        equalTo: 'Equal to',
+        notEqualTo: 'Not Equal to',
+        equalOrLessThan: 'Equal or Less than',
+        equalOrGreaterThan: 'Equal or Greater than',
+        lessThan: 'Less than',
+        greaterThan: 'Greater than',
         slcId: options.id
     };
 }

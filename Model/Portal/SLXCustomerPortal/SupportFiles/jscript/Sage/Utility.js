@@ -290,24 +290,24 @@ dojo.require("dojo.parser");
     var restrictToNumber = function (e, /*currency, number, percent*/ type) {        
         var SystemFormat = Sys.CultureInfo.CurrentCulture.numberFormat;
         var code = e.charCode || e.keyCode;
-        var char = e.keyChar;
+        var keyChar = e.keyChar;
         
         if (e.keyCode && Sage.Utility.isAllowedNavigationKey(e.keyCode)) return true;
         // 0-9 Keyboard and numberpad.
         if ((code >= 48 && code <= 57) || (code >= 96 && code <= 105)) return true;  
         // Negative, ".", "-"
-        if (char === SystemFormat.NegativeSign || code == 109 || code == 110) return true;   
+        if (keyChar === SystemFormat.NegativeSign || code == 109 || code == 110) return true;   
         //Separators
         switch (type)
         {
             case 'currency':
-                if (char == SystemFormat.CurrencyGroupSeparator || char == SystemFormat.CurrencyDecimalSeparator) return true;
+                if (keyChar == SystemFormat.CurrencyGroupSeparator || keyChar == SystemFormat.CurrencyDecimalSeparator) return true;
             break;
             case 'percent':
-                if (char == SystemFormat.PercentGroupSeparator || char == SystemFormat.PercentDecimalSeparator) return true;
+                if (keyChar == SystemFormat.PercentGroupSeparator || keyChar == SystemFormat.PercentDecimalSeparator) return true;
             break;
             default: //number
-                if (char == SystemFormat.NumberGroupSeparator || char == SystemFormat.NumberDecimalSeparator) return true;
+                if (keyChar == SystemFormat.NumberGroupSeparator || keyChar == SystemFormat.NumberDecimalSeparator) return true;
             break;
         }
         return false;                 
@@ -319,7 +319,7 @@ dojo.require("dojo.parser");
 
         var SystemFormat = Sys.CultureInfo.CurrentCulture.numberFormat;
         var code = e.charCode || e.keyCode;
-        var char = String.fromCharCode(code);
+        var keyChar = String.fromCharCode(code);
         var validChar = '0123456789' + SystemFormat.NegativeSign;
         switch(type) {
             case 'currency':
@@ -332,7 +332,7 @@ dojo.require("dojo.parser");
                 validChar += SystemFormat.NumberGroupSeparator + SystemFormat.NumberDecimalSeparator;
                 break;
         }
-        return (validChar.indexOf(char) >= 0);
+        return (validChar.indexOf(keyChar) >= 0);
     }
 
     

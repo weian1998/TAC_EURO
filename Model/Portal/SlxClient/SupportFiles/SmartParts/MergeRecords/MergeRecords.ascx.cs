@@ -267,9 +267,7 @@ public partial class MergeRecords : SmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void btnOK_OnClick(object sender, EventArgs e)
     {
-        bool success = false;
         UpdatePropertyMappings(SessionMergeArguments.MergeProvider.MergeMaps);
-
         string recordOverWrite = Request.Form["rdoRecordOverwrite"];
         if (recordOverWrite != null)
         {
@@ -277,24 +275,11 @@ public partial class MergeRecords : SmartPartInfoProvider
                                                                       ? MergeOverwrite.sourceWins
                                                                       : MergeOverwrite.targetWins;
         }
-
-        //object[] objarray = new object[] { SessionMergeProvider.Target.EntityData };
-        //Sage.Platform.EntityFactory.Execute<type>("Account.MergeAccount", objarray);
-        Type type = SessionMergeArguments.MergeProvider.Target.EntityType;
-        if (type.Equals(typeof (IAccount)))
+        
+        if (Sage.SalesLogix.BusinessRules.BusinessRuleHelper.MergeRecords(SessionMergeArguments))
         {
-            IAccount account = (IAccount) SessionMergeArguments.MergeProvider.Target.EntityData;
-            success = account.MergeAccount(SessionMergeArguments.MergeProvider);
-        }
-        else if (type.Equals(typeof (IContact)))
-        {
-            IContact contact = (IContact) SessionMergeArguments.MergeProvider.Target.EntityData;
-            success = contact.MergeContact(SessionMergeArguments.MergeProvider);
-        }
-        if (success)
-        {
-            IPersistentEntity source =
-                (IPersistentEntity) GetEntity(type, SessionMergeArguments.MergeProvider.Source.EntityId);
+            Type type = SessionMergeArguments.MergeProvider.Target.EntityType;
+            IPersistentEntity source = (IPersistentEntity)GetEntity(type, SessionMergeArguments.MergeProvider.Source.EntityId);
             source.Delete();
             EntityService.RemoveEntityHistory(type, source);
             Response.Redirect(String.Format("{0}.aspx", GetTableName(EntityService.EntityType)));

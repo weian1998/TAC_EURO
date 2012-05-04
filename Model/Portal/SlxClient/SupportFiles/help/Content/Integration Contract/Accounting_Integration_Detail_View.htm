@@ -1,8 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="357" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Administration|Accounting Integration" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="357" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Administration|Accounting Integration|Configuring Accounting Integration" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
     <!-- saved from url=(0014)about:internet -->
-    <head><title>Accounting Integration Detail View</title>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Accounting Integration Detail View</title>
         <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
         <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
         <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
@@ -33,25 +34,25 @@
         <p class="Infinitive">To set</p>
         <ol>
             <li class="Topic-Text-Numbered" value="1">On the <span class="SLXBold">Administration</span> menu, click <span class="SLXBold">Integration Setup</span>.</li>
-            <li class="Topic-Text-Numbered" value="2">In the <span class="SLXBold">SalesLogix Feed</span> box, type the SData URL to the accounting system. </li>
+            <li class="Topic-Text-Numbered" value="2">In the <span class="SLXBold">SalesLogix Feed</span> box, type the SData URL to the GCRM feed. </li>
         </ol>
-        <p class="Topic-Text-Indent">Use the format: http://server:port/sdatavirtualdir/<i>application</i>/<i>contract</i>/<i>operatingcompany</i></p>
+        <p class="Topic-Text-Indent">Use the format: http://server:port/<i>sdatavirtualdir</i>/slx/gcrm/-/<i>&#160;</i></p>
         <ul>
-            <li class="Topic-Text-Bulleted-2" value="1">Set <i>application</i> to your accounting application name. For example, Sage 1000.</li>
-            <li class="Topic-Text-Bulleted-2" value="2">Set <i>contract</i> to GCRM.</li>
-            <li class="Topic-Text-Bulleted-2" value="3">Set <i>operatingcompany</i> to the operating company in your accounting application that you are integrating with.</li>
+            <li class="Topic-Text-Bulleted-2" value="1">Set <i>sdatavirtualdir</i> to the directory to which you deployed your SData portal.</li>
         </ul>
-        <ol MadCap:continue="true">
-            <li class="Topic-Text-Numbered" value="4">In the <span class="SLXBold">User Name</span> box, type the user name for the Sage SalesLogix database that the accounting system connects to.</li>
-            <li class="Topic-Text-Numbered" value="5">In the <span class="SLXBold">Password</span> box, type the password for the user name.</li>
-            <li class="Topic-Text-Numbered" value="6">In the <span class="SLXBold">Display Name</span> box, type the display name for the feed.</li>
-            <li class="Topic-Text-Numbered" value="7">Click <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Save<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>.</li>
-            <li class="Topic-Text-Numbered" value="8">If necessary, select the <span class="SLXBold">Restrict account promotion to single accounting system</span> option to limit your integration to Sage SalesLogix and one accounting system.</li>
+        <p class="Topic-Text-Indent2">The default directory is "SData".</p>
+        <p class="Topic-Text-Indent2">For example, http://localhost:3333/sdaata/slx/gcrm/-/</p>
+        <ol start="3">
+            <li class="Topic-Text-Numbered" value="3">In the <span class="SLXBold">User Name</span> box, type the user name for the Sage SalesLogix database that the accounting system connects to.</li>
+            <li class="Topic-Text-Numbered" value="4">In the <span class="SLXBold">Password</span> box, type the password for the user name.</li>
+            <li class="Topic-Text-Numbered" value="5">In the <span class="SLXBold">Display Name</span> box, type the display name for the feed.</li>
+            <li class="Topic-Text-Numbered" value="6">Click <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Save<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>.</li>
+            <li class="Topic-Text-Numbered" value="7">If necessary, select the <span class="SLXBold">Restrict account promotion to single accounting system</span> option to limit your integration to Sage SalesLogix and one accounting system.</li>
         </ol>
         <ol MadCap:continue="true">
-            <li class="Topic-Text-Numbered" value="9">Use the <a href="Accounting_Systems_Tab.htm" target="_self">Accounting Systems</a> tab to configure the feed details for your accounting system(s).</li>
-            <li class="Topic-Text-Numbered" value="10">Use the <a href="Synchronization_Tab.htm" target="_self">Synchronization</a> tab to configure synchronization intervals.</li>
-            <li class="Topic-Text-Numbered" value="11">Use the <a href="Matching_Tab.htm" target="_self">Matching</a> tab to set global default matching criteria for users creating links.</li>
+            <li class="Topic-Text-Numbered" value="8">Use the <a href="Accounting_Systems_Tab.htm" target="_self">Accounting Systems</a> tab to configure the feed details for your accounting system(s).</li>
+            <li class="Topic-Text-Numbered" value="9">Use the <a href="Synchronization_Tab.htm" target="_self">Synchronization</a> tab to configure synchronization intervals.</li>
+            <li class="Topic-Text-Numbered" value="10">Use the <a href="Matching_Tab.htm" target="_self">Matching</a> tab to set global default matching criteria for users creating links.</li>
         </ol>
         <p class="RelatedTopics">How Do I?</p>
         <p><a href="Linking_Records.htm" target="_self">Link Records</a>

@@ -37,8 +37,8 @@ public partial class SearchResults : SmartPartInfoProvider, IScriptControl
         [JsonProperty("sourceAccountId")]
         public string SourceAccountId { get; set; }
 
-        [JsonProperty("resourceTypeName")]
-        public object ResourceTypeName { get; set; }
+        [JsonProperty("resourceKind")]
+        public object ResourceKind { get; set; }
 
         [JsonProperty("optionRefineSearchId")]
         public object OptionRefineSearchId { get; set; }
@@ -100,7 +100,7 @@ public partial class SearchResults : SmartPartInfoProvider, IScriptControl
             searchResultsScript.ClientId = page.ClientID;
             searchResultsScript.TargetAccount = _integrationManager.TargetMapping.Name;
             searchResultsScript.SourceAccountId = _integrationManager.SourceAccount.Id.ToString();
-            searchResultsScript.ResourceTypeName = "tradingAccount";
+            searchResultsScript.ResourceKind = Sage.SalesLogix.Web.SData.Constants.TradingAcctResourceKind;
             searchResultsScript.OptionRefineSearchId = page.rdbRefineSearch.ClientID;
             searchResultsScript.DescriptionText = page.GetLocalResourceObject("refineSearch_DescriptionText");
             searchResultsScript.HeaderText = page.GetLocalResourceObject("refineSearch_HeaderText");

@@ -54,7 +54,7 @@ Sage.MatchFilterManager.prototype.getTemplateObj = function() {
 }
 
 function onEditMatchConfig(matchType, resourceDisplayName) {
-    Matching.ConfigOptions.resourceTypeName = matchType;
+    Matching.ConfigOptions.resourceKind = matchType;
     Matching.ConfigOptions.resourceDisplayName = resourceDisplayName;
     var mgr = Sage.Services.getService("MatchFilterManager");
     if (mgr) {
@@ -74,7 +74,7 @@ Sage.MatchFilterManager.prototype.buildDialog = function() {
         $.ajax({
             type: "GET",
             contentType: "application/json",
-            url: String.format("slxdata.ashx/slx/crm/-/resources/getmatchproperties?resourceTypeName={0}&_dc={1}", Matching.ConfigOptions.resourceTypeName,
+            url: String.format("slxdata.ashx/slx/crm/-/resources/getmatchproperties?resourceKind={0}&_dc={1}", Matching.ConfigOptions.resourceKind,
                 new Date().getTime()),
             dataType: 'json',
             success: handleReturnedItems,

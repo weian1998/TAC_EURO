@@ -1050,7 +1050,7 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         Response.AppendHeader("Content-Disposition",
                               String.Format("attachment;filename={0:yyyyMMddhhmmss}{1}.csv",
                               DateTime.Now,
-                              GetLocalResourceObject("ExportToFile_FileName")));
+                              Server.UrlEncode(GetLocalResourceObject("ExportToFile_FileName").ToString())));
         Response.ContentType = "application/csv";
         Response.ContentEncoding = Encoding.Unicode;
         Response.Flush();
@@ -1071,7 +1071,7 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         Response.AppendHeader("Content-Disposition",
                               String.Format("attachment;filename={0:yyyyMMddhhmmss}{1}.csv",
                               DateTime.Now,
-                              GetLocalResourceObject("ExportToFile_FileName")));
+                              Server.UrlEncode(GetLocalResourceObject("ExportToFile_FileName").ToString())));
         Response.ContentType = "application/csv";
         Response.ContentEncoding = Encoding.GetEncoding(1252);
         Response.Flush();
@@ -1538,6 +1538,51 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
                 {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
             };
         tasksByEntityList.Add("ILitRequest", litRequestListTasks);
+
+        string[,] Resources =
+            {
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            };
+        tasksByEntityList.Add("IResourceList", Resources);
+
+        string[,] Qualifications =
+            {
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            };
+        tasksByEntityList.Add("IQualificationCategory", Qualifications);
+
+        string[,] SecuredActions =
+            {
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            };
+        tasksByEntityList.Add("ISecuredAction", SecuredActions);
+
+        string[,] StandardProblems =
+            {
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            };
+        tasksByEntityList.Add("ITicketProblemType", StandardProblems);
+
+        string[,] StandardResolutions =
+            {
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            };
+        tasksByEntityList.Add("ITicketSolutionType", StandardResolutions);
     }
 
     private void FillDetailPageDictionaries()

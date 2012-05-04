@@ -154,7 +154,7 @@ function (entity, attribute, oldValue, newValue) {
                 if ((attribute === 'Discount') || (attribute === 'CalculatedPrice') || (attribute === 'Quantity')) {
                     entity.ExtendedPrice = entity.CalculatedPrice * entity.Quantity;
                 }            }</OnDataChange><OnAdd /><Tools><SDataGridSaveTool><Name>Save</Name><Image>[Localization!Global_Images:Save_16x16]</Image><OnClick>function () { if (Sage.Utility.getModeId() !== 'insert') { __doPostBack('MainContent', ''); } }</OnClick><StyleScheme /><AppliedSecurity /></SDataGridSaveTool><SDataGridAddRelationTool><Name>Relate</Name><Image /><OnClick>//default add relationship behavior</OnClick><StyleScheme /><AppliedSecurity /><LookupButton><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>lueProduct</ControlId><DataBindings /><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>06df5581-bbe5-44b1-b261-ca6d637024da</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction><LookupImage>[Localization!Global_Images:add_products_16x16]</LookupImage><LookupDialogWidth xsi:nil="true" /><LookupDialogHeight xsi:nil="true" /><LookupDisplayMode>ButtonOnly</LookupDisplayMode><LookupBindingMode>Object</LookupBindingMode><LookupResultValue xsi:type="xsd:string" /><Required>false</Required><AddEmptyListItem>false</AddEmptyListItem><AllowClearingResult>false</AllowClearingResult><OverrideSeedOnSearch>false</OverrideSeedOnSearch><LookupEntityName>Product</LookupEntityName><LookupEntityTypeName>Sage.Entity.Interfaces.IProduct, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</LookupEntityTypeName><AutoPostBack>false</AutoPostBack><EnableHyperLinking>false</EnableHyperLinking><InitializeLookup>false</InitializeLookup><LookupProperties><LookupProperty><PropertyName>Name</PropertyName><PropertyType>System.String</PropertyType><PropertyHeader>Name</PropertyHeader><PropertyFormat>None</PropertyFormat><PropertyFormatString /><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty><LookupProperty><PropertyName>Family</PropertyName><PropertyType>System.String</PropertyType><PropertyHeader>Family</PropertyHeader><PropertyFormat>None</PropertyFormat><PropertyFormatString /><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty><LookupProperty><PropertyName>Status</PropertyName><PropertyType>System.String</PropertyType><PropertyHeader>Status</PropertyHeader><PropertyFormat>None</PropertyFormat><PropertyFormatString /><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty><LookupProperty><PropertyName>ActualId</PropertyName><PropertyType>System.String</PropertyType><PropertyHeader>SKU</PropertyHeader><PropertyFormat>None</PropertyFormat><PropertyFormatString /><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty></LookupProperties><LookupPreFilters /><LookupSelectionMode>Multi</LookupSelectionMode><OnSelection>function (items) {
-    if (!items.length) return;
+        if (!items.length) return;
         var grid = dijit.byId('OpportunityProductsgrdOppProducts');
         if (grid &amp;&amp; grid.store) {
             var recordCount = grid.rowCount;
@@ -184,16 +184,7 @@ function (entity, attribute, oldValue, newValue) {
                 if (sAppId === "") {
                     Ext.Msg.show({
                         title: "Sage SalesLogix",
-                        msg: "Products cannot be added to the Opportunity because the Accounting System or Price List is undefined. Please close this message and the Add Product lookup to return to the main window.",
-                        buttons: Ext.Msg.OK,
-                        icon: Ext.MessageBox.ERROR
-                    });
-                    return;
-                }
-                if (sPriceListId === "") {
-                    Ext.Msg.show({
-                        title: "Sage SalesLogix",
-                        msg: "Products cannot be added to the Opportunity because the Accounting System or Price List is undefined. Please close this message and the Add Product lookup to return to the main window.",
+                        msg: "Products cannot be added to the Opportunity because the Accounting System is undefined. Please close this message and the Add Product lookup to return to the main window.",
                         buttons: Ext.Msg.OK,
                         icon: Ext.MessageBox.ERROR
                     });
@@ -203,10 +194,13 @@ function (entity, attribute, oldValue, newValue) {
             var arrItems = [];
             grid.store.newItem({ onComplete: function (oppProduct) {
                 var addProduct = function (prod, refresh, quantity) {
+                    var acctSystemHandlesSO = accountingSystemHandlesSO();
                     var sSelect = "select=Id,Description,Family,Name,Unit,";
                     sSelect += (bIsICEnabled) ? "UnitOfMeasure/Id,Prices/Price,Prices/Currency,Prices/UnitOfMeasure,Prices/SlxPriceList,Prices/SlxPriceList.Id" : "ProductProgram/Program,ProductProgram/Price,ProductProgram/DefaultProgram";
                     var sWhere = String.format("where=Id eq '{0}'", prod.$key);
-                    sWhere += (bIsICEnabled) ? String.format(" and UnitOfMeasure eq Prices.UnitOfMeasure and Prices.SlxPriceList.Id eq '{0}' and Prices.AppId eq '{1}' and Prices.ActiveFlag = true", sPriceListId, sAppId) : "";
+                    if (!acctSystemHandlesSO) {
+                        sWhere += (bIsICEnabled) ? String.format(" and UnitOfMeasure eq Prices.UnitOfMeasure and Prices.SlxPriceList.Id eq '{0}' and Prices.AppId eq '{1}' and Prices.ActiveFlag = true", sPriceListId, sAppId) : "";
+                    }
                     var sUrl = String.format("slxdata.ashx/slx/dynamic/-/products?{0}&amp;{1}&amp;format=json&amp;_t={2}",
 										sSelect, sWhere, (new Date().getTime().toString()));
                     $.ajax({
@@ -222,7 +216,9 @@ function (entity, attribute, oldValue, newValue) {
                                     sSelect = "select=Id,ActualId,CommodityType,Description,Family,Name,";
                                     sSelect += "UnitOfMeasure/Id,UnitOfMeasure/Name,Prices/Price,Prices/Currency,Prices/UnitOfMeasure";
                                     sWhere = String.format("where=Id eq '{0}'", prod.$key);
-                                    sWhere += String.format(" and UnitOfMeasure eq Prices.UnitOfMeasure and Prices.AppId eq '{0}' and Prices.ActiveFlag = true", sAppId);
+                                    if (!acctSystemHandlesSO) {
+                                        sWhere += String.format(" and UnitOfMeasure eq Prices.UnitOfMeasure and Prices.AppId eq '{0}' and Prices.ActiveFlag = true", sAppId);
+                                    }
                                     sUrl = String.format("slxdata.ashx/slx/dynamic/-/products?{0}&amp;{1}&amp;format=json&amp;_t={2}",
                                             sSelect, sWhere, (new Date().getTime().toString()));
                                     $.ajax({
@@ -376,7 +372,7 @@ function (entity, attribute, oldValue, newValue) {
                                     iCurrentCount++;
                                     if (iCurrentCount === iTotalCount) {
                                         grid.createItems(arrItems, function () { if (Sage.Utility.getModeId() !== 'insert') { __doPostBack("MainContent", ""); } });
-                                    } 
+                                    }
                                 }
                             }
                             else {
@@ -522,9 +518,10 @@ function (entity, attribute, oldValue, newValue) {
                     }
                 }
             }
-                });
-            }
-        }</OnSelection><AdditionalSelectFields><string>ProductId</string><string>ProdPackageKitType</string><string>AppId</string><string>Quantity</string><string>ActiveFlag</string></AdditionalSelectFields><ChildEntity>PackageKitChildViews</ChildEntity><LookupResourceName>ProdPackageKitView</LookupResourceName><ConditionalWhere>function () {
+            });
+        }
+    }
+</OnSelection><AdditionalSelectFields><string>ProductId</string><string>ProdPackageKitType</string><string>AppId</string><string>Quantity</string><string>ActiveFlag</string></AdditionalSelectFields><ChildEntity>PackageKitChildViews</ChildEntity><LookupResourceName>ProdPackageKitView</LookupResourceName><ConditionalWhere>function () {
                 var sCondition = '';
                 var showError = function (msg) {
                     var msgService = Sage.Services.getService("WebClientMessageService");
@@ -539,7 +536,6 @@ function (entity, attribute, oldValue, newValue) {
                 if (service != null &amp;&amp; typeof service !== "undefined") {
                     if (service.isIntegrationEnabled) {
                         var bFoundOperatingCompany = false;
-                        var bFoundSlxPriceList = false;
                         var clientContextService = Sage.Services.getService("ClientContextService");
                         if (clientContextService != null &amp;&amp; typeof clientContextService !== "undefined") {
                             if (clientContextService.containsKey("OperatingCompany")) {
@@ -565,7 +561,35 @@ function (entity, attribute, oldValue, newValue) {
                 }
                 return sCondition;
             }
-</ConditionalWhere></LookupButton></SDataGridAddRelationTool><SDataGridCancelTool><Name>Cancel</Name><Image>[Localization!Global_Images:Reset_16x16]</Image><OnClick>//default Cancel behavior</OnClick><StyleScheme /><AppliedSecurity /></SDataGridCancelTool><SDataGridDeleteTool><Name>Delete</Name><Image>[Localization!Global_Images:Delete_16x16]</Image><OnClick>function () { if (Sage.Utility.getModeId() !== 'insert') { __doPostBack('MainContent', ''); } }</OnClick><StyleScheme /><AppliedSecurity /></SDataGridDeleteTool></Tools></QFSDataGrid></Property>
+</ConditionalWhere><ConditionalShow>function () {
+            var oResult = { result: true, reason: '' };
+            var service = Sage.Services.getService('IntegrationContractService');
+            if (service != null &amp;&amp; typeof service !== 'undefined') {
+                if (service.isIntegrationEnabled) {
+                    var bFoundOperatingCompany = false;
+                    var clientContextService = Sage.Services.getService('ClientContextService');
+                    if (clientContextService != null &amp;&amp; typeof clientContextService !== 'undefined') {
+                        if (clientContextService.containsKey('OperatingCompany')) {
+                            var sOperatingCompanyId = clientContextService.getValue('OperatingCompany');
+                            bFoundOperatingCompany = (dojo.isString(sOperatingCompanyId) &amp;&amp; String(sOperatingCompanyId).length == 12);
+                        }
+                        if (clientContextService.containsKey('SlxPriceList')) {
+                            var sSlxPriceListId = clientContextService.getValue('SlxPriceList');
+                        }
+                        if (!bFoundOperatingCompany) {
+                            oResult.result = false;
+                            oResult.reason = 'Products cannot be added to the Opportunity because the Accounting System is undefined.';
+                        }
+                    }
+                    else {
+                        oResult.result = false;
+                        oResult.reason = 'The ClientContextService is unavailable.';
+                    }
+                }
+            }
+            return oResult;
+        }
+</ConditionalShow></LookupButton></SDataGridAddRelationTool><SDataGridCancelTool><Name>Cancel</Name><Image>[Localization!Global_Images:Reset_16x16]</Image><OnClick>//default Cancel behavior</OnClick><StyleScheme /><AppliedSecurity /></SDataGridCancelTool><SDataGridDeleteTool><Name>Delete</Name><Image>[Localization!Global_Images:Delete_16x16]</Image><OnClick>function () { if (Sage.Utility.getModeId() !== 'insert') { __doPostBack('MainContent', ''); } }</OnClick><StyleScheme /><AppliedSecurity /></SDataGridDeleteTool></Tools></QFSDataGrid></Property>
         </Properties>
       </ControlDefinition>
     </QuickFormElement>

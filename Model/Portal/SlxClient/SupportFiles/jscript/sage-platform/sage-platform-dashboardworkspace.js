@@ -321,7 +321,7 @@ function promoteGroupToDashboard() {
             var grid = new Ext.grid.GridPanel({
                 store: new Ext.data.JsonStore({
                     autoDestroy: true,
-                    fields: ['Name', 'Family'],
+                    fields: ['Name', 'Family', 'Title'],
                     root: 'items',
                     data: storedata
                 }),
@@ -331,7 +331,7 @@ function promoteGroupToDashboard() {
                         sortable: false
                     },
                     columns: [
-                        { header: MasterPageLinks.PromotePageColumnHeader, dataIndex: 'Name' }
+                        { header: MasterPageLinks.PromotePageColumnHeader, dataIndex: 'Title' }
                     ]
                 }),
                 sm: new Ext.grid.RowSelectionModel({ singleSelect: true }),

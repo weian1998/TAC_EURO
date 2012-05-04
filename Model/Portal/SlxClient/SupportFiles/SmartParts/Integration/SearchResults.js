@@ -63,8 +63,8 @@ Sage.MatchFilterManager.prototype.buildDialog = function () {
         $.ajax({
             type: "GET",
             contentType: "application/json",
-            url: String.format("slxdata.ashx/slx/crm/-/resources/getmatchproperties?resourceTypeName={0}&targetMapping={1}&_dc={2}",
-                SearchResults.SearchOptions.resourceTypeName, true, new Date().getTime()),
+            url: String.format("slxdata.ashx/slx/crm/-/resources/getmatchproperties?resourceKind={0}&targetMapping={1}&_dc={2}",
+                SearchResults.SearchOptions.resourceKind, true, new Date().getTime()),
             dataType: 'json',
             success: handleReturnedItems,
             data: {},

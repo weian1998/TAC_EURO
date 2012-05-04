@@ -127,10 +127,10 @@
     <value>No records match the selection criteria.</value>
   </data>
   <data name="AddressGrid_Primary.HeaderText" xml:space="preserve">
-    <value>Primary</value>
+    <value>Primary Billing</value>
   </data>
   <data name="AddressGrid_Shipping.HeaderText" xml:space="preserve">
-    <value>Shipping</value>
+    <value>Primary Shipping</value>
   </data>
   <data name="AddressGrid_Description.HeaderText" xml:space="preserve">
     <value>Description</value>
@@ -164,5 +164,8 @@
   </data>
   <data name="SaveChanges" xml:space="preserve">
     <value>You must save pending changes before addresses can be modified.</value>
+  </data>
+  <data name="AddressGrid_AddressType_HeaderText" xml:space="preserve">
+    <value>Address Type</value>
   </data>
 </root>

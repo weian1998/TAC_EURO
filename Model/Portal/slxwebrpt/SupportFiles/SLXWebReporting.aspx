@@ -9,14 +9,22 @@
 <head runat="server">
     <title>Sage SalesLogix Crystal Reports Viewer</title>
 </head>
+
 <body>
     <form id="form1" runat="server">
     <div>
-        <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" EnableDatabaseLogonPrompt="False" 
-        CssFilename="/crystalreportviewers115/css/default.css" 
-        GroupTreeImagesFolderUrl="/crystalreportviewers115/images/tree/" 
-        ToolbarImagesFolderUrl="/crystalreportviewers115/images/toolbar/" />
+        <CR:CrystalReportViewer ID="CRViewer" 
+            runat="server" AutoDataBind="true" EnableDatabaseLogonPrompt="False" 
+            CssFilename="/crystalreportviewers115/css/default.css" 
+            GroupTreeImagesFolderUrl="/crystalreportviewers115/images/tree/" 
+            ToolbarImagesFolderUrl="/crystalreportviewers115/images/toolbar/"            
+            onerror="HandleViewerError" 
+            onunload="HandleViewerUnload" 
+            ondisposed="HandleViewerDisposed"            
+            oninit="HandleViewerInit" 
+            onnavigate="HandleViewerNavigate" />
     </div> 
     </form>
+
 </body>
 </html>
