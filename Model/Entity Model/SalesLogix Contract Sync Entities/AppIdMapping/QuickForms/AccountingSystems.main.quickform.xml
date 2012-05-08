@@ -26,15 +26,24 @@
 	return Convert.ToBoolean(enabled) ? GetLocalResourceObject("lblEnabled.Caption").ToString() : GetLocalResourceObject("lblDisabled.Caption").ToString();
 }</FormattingCode></QFCustomFormatCol><QFEditCol><StyleScheme /><DataField /><ColumnId>403f2d07-3671-4fe0-bdbf-5b724f37372f</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>false</IsSortable><MultiCurrencyDependent>false</MultiCurrencyDependent><DialogSpecs><SmartPart>AddEditAccountingSystem</SmartPart><Height>550</Height><Width>885</Width><Top>0</Top><Left>0</Left><EntityType>AppIdMapping</EntityType><ResourceKey>04e1a283-eabb-465b-bc09-6ae588f52cf9</ResourceKey><CenterDialog>True</CenterDialog></DialogSpecs><AppliedSecurity /></QFEditCol><QFRowSelectionCol><StyleScheme /><DataField /><ColumnId>dacac144-28d9-468f-9e96-d8205b85791b</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>false</IsSortable><MultiCurrencyDependent>false</MultiCurrencyDependent><Image /></QFRowSelectionCol></Columns><RenderVertical>false</RenderVertical><OnRowSelectedAction><ResourceKey>QFDataGrid</ResourceKey><RootActionName>CSharpSnippetAction</RootActionName><Action><CSharpCodeSnippet><![CDATA[Sage.SalesLogix.Web.Controls.SlxGridView grid = sender as Sage.SalesLogix.Web.Controls.SlxGridView;
 Sage.Entity.Interfaces.IAppIdMapping appIdMapping =
-    Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IAppIdMapping>(grid.SelectedDataKey.Values[1]);
-string jobName = appIdMapping.ExecuteSync();
-if (DialogService.DialogParameters.ContainsKey("NewSyncJobName"))
+    Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IAppIdMapping>(grid.SelectedDataKey.Values["Id"]);
+if (appIdMapping != null && appIdMapping.Enabled.HasValue && appIdMapping.Enabled.Value)
 {
-    DialogService.DialogParameters.Remove("NewSyncJobName");
+    string jobName = appIdMapping.ExecuteSync();
+    if (DialogService.DialogParameters.ContainsKey("NewSyncJobName"))
+    {
+        DialogService.DialogParameters.Remove("NewSyncJobName");
+    }
+    DialogService.DialogParameters.Add("NewSyncJobName", jobName);
+    DialogService.SetSpecs(150, 450, "SyncJobConfirmation");
+    DialogService.ShowDialog();
 }
-DialogService.DialogParameters.Add("NewSyncJobName", jobName);
-DialogService.SetSpecs(150, 450, "SyncJobConfirmation");
-DialogService.ShowDialog();]]></CSharpCodeSnippet></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnRowSelectedAction></QFDataGrid></Property>
+else
+{
+    throw new Sage.Platform.Application.ValidationException(
+        Sage.Platform.WebPortal.PortalUtil.JavaScriptEncode(
+        String.Format(GetLocalResourceObject("Error_AccountingSystem_NotEnabled").ToString(), appIdMapping.Name)));
+}]]></CSharpCodeSnippet></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnRowSelectedAction></QFDataGrid></Property>
         </Properties>
       </ControlDefinition>
     </QuickFormElement>
@@ -86,7 +95,7 @@ DialogService.ShowDialog();]]></CSharpCodeSnippet></Action><IsDialogCloseAction>
       </Properties>
       <ControlDefinition>
         <Properties>
-          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFButton, Sage.Platform.QuickForms"><QFButton xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>btnSyncAll</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><ButtonType>Icon</ButtonType><Image>[Localization!Global_Images:Recurring_16x16]</Image><OnClientClick /><OnClickAction><ResourceKey>btnSyncAll</ResourceKey><RootActionName>BusinessRuleAction</RootActionName><Action><BusinessRule>ExecuteSyncAll</BusinessRule><Object>AppIdMapping</Object><Parameters /><PassResultsToNextAction>False</PassResultsToNextAction><OnCompleteActionName>NoActionAction</OnCompleteActionName><OnComplete /></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>True</RefreshData></OnClickAction></QFButton></Property>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFButton, Sage.Platform.QuickForms"><QFButton xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><Visible>false</Visible><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>btnSyncAll</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><ButtonType>Icon</ButtonType><Image>[Localization!Global_Images:Recurring_16x16]</Image><OnClientClick /><OnClickAction><ResourceKey>btnSyncAll</ResourceKey><RootActionName>BusinessRuleAction</RootActionName><Action><BusinessRule>ExecuteSyncAll</BusinessRule><Object>AppIdMapping</Object><Parameters /><PassResultsToNextAction>False</PassResultsToNextAction><OnCompleteActionName>NoActionAction</OnCompleteActionName><OnComplete /></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>True</RefreshData></OnClickAction></QFButton></Property>
         </Properties>
       </ControlDefinition>
     </QuickFormElement>

@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using System.Web.UI;
 using System.Collections.Generic;
+using System.Web.UI.WebControls;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.Entity.Interfaces;
 using Sage.Platform.Orm.Interfaces;
@@ -9,6 +10,7 @@ using Sage.Platform.EntityBinding;
 using Sage.Platform.Application.UI;
 using Sage.Platform.WebPortal.Services;
 using Sage.SalesLogix.Address;
+using Sage.SalesLogix.GlobalCrmContractAdapter.Transformations.PostalAddress;
 
 public partial class SmartParts_Address_AddEditAddress : EntityBoundSmartPartInfoProvider
 {
@@ -40,6 +42,9 @@ public partial class SmartParts_Address_AddEditAddress : EntityBoundSmartPartInf
 
         BindingSource.AddBindingProvider(cbxIsShipping as IEntityBindingProvider);
         BindingSource.Bindings.Add(new PropertyBinding("IsMailing", cbxIsShipping, "Checked", "", false));
+
+        BindingSource.AddBindingProvider(txtAddressType as IEntityBindingProvider);
+        BindingSource.Bindings.Add(new PropertyBinding("AddressType", txtAddressType, "Text", "", ""));
 
         BindingSource.AddBindingProvider(txtAddress1 as IEntityBindingProvider);
         BindingSource.Bindings.Add(new PropertyBinding("Address1", txtAddress1, "Text", "", ""));
@@ -82,6 +87,26 @@ public partial class SmartParts_Address_AddEditAddress : EntityBoundSmartPartInf
         txtAddress3.MaxLength = 64;
         txtPostalCode.MaxLength = 24;
         txtSalutation.MaxLength = 64;
+        txtAddressType.Items.Add(new ListItem("",""));
+        txtAddressType.Items.Add(GetListItem("AddressType_Billing", PostalAddressType.Billing.ToString()));
+        txtAddressType.Items.Add(GetListItem("AddressType_Shipping", PostalAddressType.Shipping.ToString()));
+        txtAddressType.Items.Add(GetListItem("AddressType_BillingShipping", "Billing & Shipping"));
+        txtAddressType.Items.Add(GetListItem("AddressType_Correspondence", PostalAddressType.Correspondence.ToString()));
+        txtAddressType.Items.Add(GetListItem("AddressType_Home", PostalAddressType.Home.ToString()));
+        txtAddressType.Items.Add(GetListItem("AddressType_Office", PostalAddressType.Office.ToString()));
+        txtAddressType.Items.Add(GetListItem("AddressType_Other", PostalAddressType.Other.ToString()));
+        txtAddressType.Items.Add(GetListItem("AddressType_Unknown", PostalAddressType.Unknown.ToString()));
+
+    }
+
+    private ListItem GetListItem(string resource, string type)
+    {
+        var resString = type;
+        if (GetLocalResourceObject(resource) != null)
+        {
+            resString = GetLocalResourceObject(resource).ToString();
+        }
+        return new ListItem(resString, type);
     }
 
     /// <summary>

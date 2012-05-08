@@ -4,8 +4,8 @@ dojo.require('Sage.Utility');
 (function() {
     dojo.declare('Sage.Data.WritableStore', Sage.Data.BaseSDataStore, {
         //  summary:
-        //      A data store implementation that allows the SLXTabGrid to have its data participate in .net postback and binding
-        //      Configuration information is recieved from SLXTabGrid.
+        //      A data store implementation that allows the EditableGrid to have its data participate in .net postback and binding
+        //      Configuration information is recieved from EditableGrid.
         //  description:
         //      dojo.data.api.Identity Implemented on BaseSDataStore...
         //      dojo.data.api.Read Implemented on BaseSDataStore...        

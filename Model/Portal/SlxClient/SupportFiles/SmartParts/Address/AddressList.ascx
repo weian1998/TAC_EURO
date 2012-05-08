@@ -45,8 +45,9 @@
                 <Columns>
                       <asp:ButtonField CommandName="Edit"  Text="Edit" meta:resourcekey="AddressGrid_Edit" /> 
                       <asp:ButtonField CommandName="Delete" Text="Delete"  meta:resourcekey="AddressGrid_Delete" />
-                      <asp:TemplateField HeaderText="Primary" SortExpression="IsPrimary" meta:resourcekey="AddressGrid_Primary"><ItemTemplate><%# ConvertBoolean(Eval("IsPrimary")) %></ItemTemplate></asp:TemplateField>
-                      <asp:TemplateField HeaderText="Shipping" SortExpression="IsMailing" meta:resourcekey="AddressGrid_Shipping"><ItemTemplate><%# ConvertBoolean(Eval("IsMailing")) %></ItemTemplate></asp:TemplateField>
+                      <asp:TemplateField HeaderText="Primary Billing" SortExpression="IsPrimary" meta:resourcekey="AddressGrid_Primary"><ItemTemplate><%# ConvertBoolean(Eval("IsPrimary")) %></ItemTemplate></asp:TemplateField>
+                      <asp:TemplateField HeaderText="Primary Shipping" SortExpression="IsMailing" meta:resourcekey="AddressGrid_Shipping"><ItemTemplate><%# ConvertBoolean(Eval("IsMailing")) %></ItemTemplate></asp:TemplateField>
+                      <asp:BoundField DataField="AddressType"    HeaderText="Address Type"  SortExpression="AddressType" meta:resourcekey="AddressGrid_AddressType" />
                       <asp:BoundField DataField="Description"    HeaderText="Description" SortExpression="Description" meta:resourcekey="AddressGrid_Description" />
                       <asp:BoundField DataField="Salutation"    HeaderText="Attention"  SortExpression="Salutation" meta:resourcekey="AddressGrid_Attention" />
                       <asp:BoundField DataField="StreetAddress"    HeaderText="Address" SortExpression="Address1" meta:resourcekey="AddressGrid_Address1"    />

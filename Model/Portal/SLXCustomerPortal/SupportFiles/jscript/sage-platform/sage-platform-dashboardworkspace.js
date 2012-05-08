@@ -331,7 +331,7 @@ function promoteGroupToDashboard() {
                         sortable: false
                     },
                     columns: [
-                        { header: 'Page', dataIndex: 'Name' }
+                        { header: MasterPageLinks.PromotePageColumnHeader, dataIndex: 'Name' }
                     ]
                 }),
                 sm: new Ext.grid.RowSelectionModel({ singleSelect: true }),

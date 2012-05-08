@@ -1,13 +1,19 @@
 <?xml version="1.0"?>
-<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="5856a15a-7ca0-4555-8a8f-0d08fe597ca6" lastModifiedUtc="2008-01-21T21:57:13.3156237Z" name="OnBeforeUpdate" returnType="void" methodType="CrudEvent" actionType="None" returnMode="None" isInstance="true">
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="5856a15a-7ca0-4555-8a8f-0d08fe597ca6" lastModifiedUtc="2008-01-21T21:57:13.3156237Z" name="OnBeforeUpdate" methodType="CrudEvent" actionType="None" returnMode="None">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
   </ExtendedPropertiesCollection>
   <parameter />
-  <preExecuteTargets />
+  <preExecuteTargets>
+    <methodTarget id="9656ea37-179a-49f2-839d-0b25182bd2b3" lastModifiedUtc="2011-06-24T16:08:35.3154Z" targetType="Sage.SalesLogix.ReturnAddress.Rules, Sage.SalesLogix.BusinessRules" targetMethod="ValidateCountryCode" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </preExecuteTargets>
   <methodTargets>
-    <methodTarget id="9001c057-f5de-40bc-b471-9c33f97fc613" lastModifiedUtc="2008-01-21T21:57:13.1437498Z" targetType="Sage.Platform.Orm.DefaultCRUDEventHandler, Sage.Platform" targetMethod="OnBeforeUpdate" active="true">
+    <methodTarget id="a4708f8a-5167-4c19-87a3-dc51da0dbfde" lastModifiedUtc="2011-06-24T17:06:11.1794Z" targetType="Sage.SalesLogix.ReturnAddress.Rules, Sage.SalesLogix.BusinessRules" targetMethod="OnBeforeUpdate" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>

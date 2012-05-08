@@ -8,6 +8,7 @@ Sage.IntegrationContractService = function () {
         this.isIntegrationEnabled = obj.IsIntegrationEnabled;
         this.localAppId = obj.LocalAppId;
         this.isMultiCurrencyEnabled = obj.IsMultiCurrencyEnabled;
+        this.accountingSystemHandlesSO = obj.AccountingSystemHandlesSO;
     }
 }
 
@@ -47,4 +48,12 @@ function isMultiCurrencyEnabled() {
         return service.isMultiCurrencyEnabled;
     }
     return false; 
+}
+
+function accountingSystemHandlesSO() {
+    var service = Sage.Services.getService("IntegrationContractService");
+    if (service != null && typeof service !== "undefined") {
+        return service.accountingSystemHandlesSO;
+    }
+    return false;
 }

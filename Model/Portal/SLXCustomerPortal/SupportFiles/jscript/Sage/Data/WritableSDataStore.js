@@ -36,6 +36,7 @@ dojo.require('Sage.Utility');
             //console.log('success: %o, %o', context, feed);
             if (context.onBegin) { context.onBegin.call(context.scope || this, feed.$totalResults, context) };
             if (context.onComplete) { context.onComplete.call(context.scope || this, feed.$resources, context) };
+            this.clearCache();
             this.addToCache(context, feed);
         },
         clearCache: function() {
@@ -104,7 +105,20 @@ dojo.require('Sage.Utility');
             }
             return this.dirtyDataCache.isDirty;
         },
+        _checkPageExitWarningMessage: function() {
+            var response = true;
+            if  (this.dirtyDataCache.isDirty) {
+                var service = Sage.Services.getService("ClientBindingManagerService");
+                response = confirm(service._PageExitWarningMessage);
+            }
+            return response;
+        },
         newItem: function(args /*, parentInfo */) {
+        
+          if(!this._checkPageExitWarningMessage()) {
+            return;          
+          }
+
             var request = this.createTemplateRequest();
             if (request) {
                 request.read({

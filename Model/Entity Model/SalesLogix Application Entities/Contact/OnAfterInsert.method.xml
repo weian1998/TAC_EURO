@@ -1,9 +1,24 @@
 <?xml version="1.0"?>
-<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="4306e365-1341-442c-b9e1-9301add5cd27" name="OnAfterInsert" returnType="void" methodType="CrudEvent" actionType="None" returnMode="None" isInstance="false">
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="4306e365-1341-442c-b9e1-9301add5cd27" lastModifiedUtc="2011-10-06T20:57:19.8008601Z" name="OnAfterInsert" methodType="CrudEvent" actionType="None" returnMode="None">
+  <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
   </ExtendedPropertiesCollection>
   <parameter />
+  <preExecuteTargets />
   <methodTargets>
+    <methodTarget id="e1d69d0e-84e9-4ee6-9562-77d13ddbf430" lastModifiedUtc="2011-11-03T23:23:02.0326034Z" targetType="Sage.SalesLogix.Contact.Rules, Sage.SalesLogix.BusinessRules" targetMethod="OnAfterInsert" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
   </methodTargets>
+  <postExecuteTargets>
+    <methodTarget id="5c5ea4b8-9d47-48d0-81d7-a7814d929f03" lastModifiedUtc="2011-11-03T23:24:43.9474034Z" targetType="Sage.SalesLogix.Contact.Rules, Sage.SalesLogix.BusinessRules" targetMethod="LinkContact" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </postExecuteTargets>
+  <postFlushTargets />
 </method>

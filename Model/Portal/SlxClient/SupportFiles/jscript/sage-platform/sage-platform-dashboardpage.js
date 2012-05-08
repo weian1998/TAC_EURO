@@ -178,15 +178,15 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
             }
             $.ajax({
                 type: "POST",
-                    url: String.format("slxdata.ashx/slx/crm/-/dashboard/page?name={0}&family={1}", this.name, this.family),
-                    data: thisPageSerialized,
-                    processData: false,
+                url: String.format("slxdata.ashx/slx/crm/-/dashboard/page?title={0}&name={1}&family={2}", this.title, this.name, this.family),
+                data: thisPageSerialized,
+                processData: false,
                 error: function (request, status, error) {
                     Ext.Msg.alert(DashboardResource.Warning, request.responseText);
                 },
                 success: function (data, status) {
-                        if (data != "Success") {
-                            Ext.Msg.confirm(DashboardResource.Warning, data + "<br>" + DashboardResource.PersonalCopy,
+                    if (data != "Success") {
+                        Ext.Msg.confirm(DashboardResource.Warning, data + "<br>" + DashboardResource.PersonalCopy,
                             function (btn) {
                                 if (btn == 'yes') {
                                     self.createCopy();
@@ -280,7 +280,7 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                                     sortable: false
                                 },
                                 columns: [
-                                    { header: 'Released to', dataIndex: 'Text' }
+                                    { header: Sage.Analytics.WidgetResource.releasedTo, dataIndex: 'Text' }
                                 ]
                             }),
                             sm: new Ext.grid.RowSelectionModel({ singleSelect: false }),
@@ -289,7 +289,7 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                             frame: true,
                             id: 'ReleasedGrid',
                             buttons: [{
-                                text: 'Everyone',
+                                text: Sage.Analytics.WidgetResource.everyone,
                                 handler: function () {
                                     var grid = Ext.getCmp('ReleasedGrid');
                                     var found = false;
@@ -303,14 +303,14 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                                 }
                             },
                                 {
-                                    text: 'Add',
+                                    text: Sage.Analytics.WidgetResource.add,
                                     handler: function () {
                                         var vURL = 'OwnerAssign.aspx';
                                         window.open(vURL, "OwnerAssign", "resizable=yes,centerscreen=yes,width=500,height=450,status=no,toolbar=no,scrollbars=yes");
                                     }
                                 },
                                 {
-                                    text: 'Remove',
+                                    text: Sage.Analytics.WidgetResource.remove,
                                     handler: function () {
                                         var grid = Ext.getCmp('ReleasedGrid');
                                         var selected = grid.getSelectionModel().getSelections();
@@ -407,6 +407,11 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                         win.add(scrollpanel);
                     }
                     for (var widgetid in DashboardWidgetsList) {
+                        if (widgetid === 'Default') continue;
+                        // Default Widget is a stub example for creating new widgets.  
+                        // Click New and copy this content into a new editor to customize.  
+                        // Default Widgets do not appear as an item in the client dashboard Add Content menu.
+
                         scrollpanel.add(new Ext.Panel({
                             cls: 'addContentPanels', //for styling
                             margins: { top: 10 },
@@ -467,6 +472,11 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                     });
                     for (var i = 0; i < currentDashboardPage.dashboard._options.hiddenPages.length; i++) {
                         var newPanel = new Ext.Panel({ border: false, style: 'padding:10px' }); //was hbox
+                        var hiddenPageTitle = '';
+                        for (var tpi = 0; tpi < slxDashboard._tabPanel.items.items.length; tpi++) {
+                            if (slxDashboard._tabPanel.items.items[tpi].name === currentDashboardPage.dashboard._options.hiddenPages[i])
+                                hiddenPageTitle = slxDashboard._tabPanel.items.items[tpi].title;
+                        }
                         newPanel.add(new Ext.Button({
                             text: DashboardResource.Show,
                             name: currentDashboardPage.dashboard._options.hiddenPages[i],
@@ -484,7 +494,7 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                             mainViewport.findById("dashboard_panel").unhideTabStripItem(tabid);
                             win.remove(b.panel);
                         });
-                        newPanel.add(new Ext.form.Label({ text: currentDashboardPage.dashboard._options.hiddenPages[i],
+                        newPanel.add(new Ext.form.Label({ text: hiddenPageTitle,
                             margins: "5",
                             style: 'display:inline;margin-left:10px'
                         }));
@@ -524,7 +534,7 @@ Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard
                          height: parseInt(DashboardResource.Popup_Height),
                          buttons:
                             [{ text: DashboardResource.Ok, handler: function (t, e) {
-                                if ($("#PortalName")[0].value.length > 0) {
+                                if ($("#PortalName")[0].value.length > 0) {                                    
                                     var newTitle = Ext.util.Format.htmlEncode($("#PortalName")[0].value);
                                     if (currentDashboardPage.title != newTitle) {
                                         currentDashboardPage.title = newTitle;

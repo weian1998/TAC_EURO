@@ -23,8 +23,16 @@
             <li class="Topic-Text-Numbered" value="4">In the <span class="SLXBold">Edit Match Criteria</span> dialog box, complete the following:</li>
         </ol>
         <ol style="list-style-type: lower-alpha;">
-            <li class="Topic-Text-Lettered" value="1">In the <span class="SLXBold">Property</span> box, select the record for which you want to define matching criteria.</li>
-            <li class="Topic-Text-Lettered" value="2">In the <span class="SLXBold">Operator</span> box, select the matching criteria used by the system for the selected record type.</li>
+            <li class="Topic-Text-Lettered" value="1">In the <span class="SLXBold">Property</span> box, select a property for which you want to compare values.</li>
+        </ol>
+        <p class="Topic-Text-Indent2">Your accounting system(s) must support filtering on this property or users attempting to promote accounts cannot see any matches until they modify the search. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="4a para 3;4a para2;4a bul">Tell me more...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a> <![CDATA[ ]]></p>
+        <ol style="list-style-type: lower-roman;">
+            <li class="Bullet3" MadCap:targetName="4a bul" value="1" style="display: none;">In your browser type the Accounting Feed URL you created when you set up<a href="Setup_Accounting_Integration.htm"> Accounting Integration</a>, followed by    <![CDATA[ ]]><span class="SLXBold">/$schema</span> and verify that property's <span class="SLXBold">canFilter</span> attribute is set to <span class="SLXBold">true</span>.</li>
+        </ol>
+        <p MadCap:targetName="4a para2" xml:space="preserve" class="TopicTextIndent3" style="display: none;">URL example:</p>
+        <p class="TopicTextIndent3" MadCap:targetName="4a para 3" style="display: none;">http://server:port/sdatavirtualdir/<i>application</i>/gcrm/<i>operatingcompany</i>/$schema</p>
+        <ol style="list-style-type: lower-alpha;" MadCap:continue="true">
+            <li class="Topic-Text-Lettered" value="2">In the <span class="SLXBold">Operator</span> box, select an operator to complete the matching condition.</li>
         </ol>
         <ul>
             <li class="Bullet3" value="1"><span class="SLXBold">Equal To</span> - The property value in each system must be equal to be considered a match. For example, Abbott is not a match for Abbott Inc.</li>

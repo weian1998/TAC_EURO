@@ -338,6 +338,8 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
             else if (tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskSendEmail" && !CanShowReportOrEmail()) { }
             // do not display
             else if (tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskDetailReport" && (!_reportingEnabled || !CanShowReportOrEmail())) { }
+            //only want to add the sales order item if the accounting system does not handle sales orders)
+            else if (tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskAddSalesOrder" && (BusinessRuleHelper.AccountingSystemHandlesSO())) { }
             // do not display
             else if (lastUserId.Trim() == "ADMIN" && (tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskCopyUser" ||
                                                tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskCopyUserProfile" ||
@@ -1046,8 +1048,9 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         Response.Cache.SetMaxAge(TimeSpan.Zero);
         Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
         Response.AppendHeader("Content-Disposition",
-                              String.Format("attachment;filename={0:yyyyMMddhhmmss}_slx_exported_selections.csv",
-                              DateTime.Now));
+                              String.Format("attachment;filename={0:yyyyMMddhhmmss}{1}.csv",
+                              DateTime.Now,
+                              Server.UrlEncode(GetLocalResourceObject("ExportToFile_FileName").ToString())));
         Response.ContentType = "application/csv";
         Response.ContentEncoding = Encoding.Unicode;
         Response.Flush();
@@ -1066,8 +1069,9 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         Response.Cache.SetMaxAge(TimeSpan.Zero);
         Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
         Response.AppendHeader("Content-Disposition",
-                              String.Format("attachment;filename={0:yyyyMMddhhmmss}_slx_exported_selections.csv",
-                              DateTime.Now));
+                              String.Format("attachment;filename={0:yyyyMMddhhmmss}{1}.csv",
+                              DateTime.Now,
+                              Server.UrlEncode(GetLocalResourceObject("ExportToFile_FileName").ToString())));
         Response.ContentType = "application/csv";
         Response.ContentEncoding = Encoding.GetEncoding(1252);
         Response.Flush();
@@ -1534,8 +1538,51 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
                 {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
             };
         tasksByEntityList.Add("ILitRequest", litRequestListTasks);
-        //tasksByEntityList = ApplyRoleSecurity(tasksByEntityList);
 
+        string[,] Resources =
+            {
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            };
+        tasksByEntityList.Add("IResourceList", Resources);
+
+        string[,] Qualifications =
+            {
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            };
+        tasksByEntityList.Add("IQualificationCategory", Qualifications);
+
+        string[,] SecuredActions =
+            {
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            };
+        tasksByEntityList.Add("ISecuredAction", SecuredActions);
+
+        string[,] StandardProblems =
+            {
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            };
+        tasksByEntityList.Add("ITicketProblemType", StandardProblems);
+
+        string[,] StandardResolutions =
+            {
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            };
+        tasksByEntityList.Add("ITicketSolutionType", StandardResolutions);
     }
 
     private void FillDetailPageDictionaries()

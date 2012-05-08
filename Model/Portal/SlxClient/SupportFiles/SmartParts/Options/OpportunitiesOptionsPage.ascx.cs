@@ -10,6 +10,7 @@ using Sage.Platform.Application.UI;
 using Sage.SalesLogix.Plugins;
 using Sage.SalesLogix;
 using Sage.SalesLogix.Orm.Utility;
+using Sage.SalesLogix.BusinessRules;
 
 public partial class OpportunitiesOptionsPage : UserControl, ISmartPartInfoProvider
 {
@@ -97,6 +98,7 @@ public partial class OpportunitiesOptionsPage : UserControl, ISmartPartInfoProvi
             lblDefCurrency.Visible = false;
             luDefCurrency.Visible = false;
         }
+        _addProducts.Visible = !BusinessRuleHelper.IsIntegrationContractEnabled();
     }
 
     protected void Page_UnLoad(object sender, EventArgs e)

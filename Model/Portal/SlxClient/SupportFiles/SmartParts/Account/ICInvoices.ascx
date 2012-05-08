@@ -80,7 +80,7 @@
 </SalesLogix:SmartPartToolsContainer>
 
 <div style="display: none;">
-    <div dojoType="dijit.Dialog" id="dlgInvoiceDetails" title="Invoice Details" execute="">
+    <div dojoType="dijit.Dialog" onHide="invoice.handleOnHide()" id="dlgInvoiceDetails" title="Invoice Details" execute="">
 	    <table cellspacing="30">
 		    <tr>
 			    <td>
@@ -90,7 +90,7 @@
                     <input type="text" id="Invoice_reference" name="reference" readonly="readonly" dojoType="dijit.form.TextBox" />
                 </td>
                 <td>
-                    <label for="NetTotal"><%= GetLocalResourceObject("lblNetTotal.Caption")%></label>
+                    <label for="InvoiceAmount"><%= GetLocalResourceObject("lblNetTotal.Caption")%></label>
                 </td>
                 <td>
                     <input type="text" id="Invoice_grossTotal" name="grossTotal" readonly="readonly" dojoType="dijit.form.TextBox" />
@@ -212,7 +212,7 @@
                                     <label for="Invoice_priceList"><%= GetLocalResourceObject("lblPriceList.Caption")%></label>
                                 </td>
                                 <td>
-                                    <input type="text" id="Invoice_priceList" name="priceList" readonly="readonly" dojoType="dijit.form.TextBox" />
+                                    <input type="text" id="Invoice_priceList" name="pricelist.name" readonly="readonly" dojoType="dijit.form.TextBox" />
                                 </td>
                             </tr>
                             <tr>
@@ -226,7 +226,7 @@
                                     <label for="Invoice_salesPerson"><%= GetLocalResourceObject("lblSalesPerson.Caption")%></label>
                                 </td>
                                 <td>
-                                    <input type="text" id="Invoice_salesPerson" name="salesPerson" readonly="readonly" dojoType="dijit.form.TextBox" />
+                                    <input type="text" id="Invoice_salesPerson" name="buyerContact.fullName" readonly="readonly" dojoType="dijit.form.TextBox" />
                                 </td>
                             </tr>
                         </table>

@@ -192,8 +192,13 @@ Sage.GroupManagerService.prototype.getDistinctValuesForField = function(field, o
         url: this.buildRequestUrl(sdata),
         dataType: "json",
         success: function(data) {
+            // Has clearDistinctValuesCache been called? This happens when Sage.PopulateFilterList is called from Filters.ascx.
+            // This scenario occurs when the user switches groups before the filters have been loaded for the current group.
+            if (typeof self._distinctValuesCache === "undefined") {
+	            return;
+            }
             self._distinctValuesCache[valueId] = data;
-            callback(data)
+            callback(data);
         },
         error: function(request, status, error) {
         }

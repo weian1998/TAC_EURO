@@ -76,7 +76,7 @@
                     <label for="PaymentDetails_currency"><%= GetLocalResourceObject("lblCurrency.Caption")%></label>
                 </td>
                 <td>
-                    <input type="text" id="PaymentDetails_currency" name="processDatecurrency" readonly="readonly" dojoType="dijit.form.TextBox" />
+                    <input type="text" id="PaymentDetails_currency" name="currency" readonly="readonly" dojoType="dijit.form.TextBox" />
                 </td>
                 <td>
                     <label for="PaymentDetails_tenderType"><%= GetLocalResourceObject("lblTenderType.Caption")%></label>
@@ -91,12 +91,6 @@
                 </td>
                 <td>
                     <input type="text" id="PaymentDetails_tenderReference" name="tenderReference" readonly="readonly" dojoType="dijit.form.TextBox" />
-                </td>
-                <td>
-                    <label for="PaymentDetails_originatorDocument"><%= GetLocalResourceObject("lblInvoice.Caption")%></label>
-                </td>
-                <td>
-                    <input type="text" id="PaymentDetails_originatorDocument" name="originatorDocument" readonly="readonly" dojoType="dijit.form.TextBox" />
                 </td>
 		    </tr>
             <tr>

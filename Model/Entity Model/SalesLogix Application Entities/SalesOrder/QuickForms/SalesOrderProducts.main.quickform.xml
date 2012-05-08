@@ -183,11 +183,52 @@ if (salesOrder != null)
     return !isIntegrationContractEnabled();
 }</HideCondition><Width>-1</Width></QFSDataCheckBoxCol><QFEditableCol><StyleScheme /><DataField>LineNumber</DataField><ColumnId>530b7cdb-cef1-4e94-a46a-cf8d931ff779</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>LineNumber</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition /><Width>3</Width></QFEditableCol><QFEditableCol><StyleScheme /><DataField>ProductName</DataField><ColumnId>0c39de35-d246-4c4b-a1fa-57a0a9be41c6</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>ProductName</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition /><Width>15</Width></QFEditableCol><QFEditableCol><StyleScheme /><DataField>Family</DataField><ColumnId>506f0947-d9d3-441f-bfed-329263b9df81</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>Family</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition /><Width>-1</Width></QFEditableCol><QFSDataLookupCol><StyleScheme /><DataField>Program</DataField><ColumnId>a74f322c-ebd9-49d4-ad41-3bcd939e8b41</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>Program</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>true</IsEditable><HideCondition>function () {
     return isIntegrationContractEnabled();
-}</HideCondition><Width>-1</Width><SeedOnRowEntity>false</SeedOnRowEntity><SeedOnRelatedEntity>Product</SeedOnRelatedEntity><ResourceKind>productPrograms</ResourceKind><LookupBindingMode>String</LookupBindingMode><LookupDisplayProperty>Program</LookupDisplayProperty></QFSDataLookupCol><QFSDataCurrencyCol><StyleScheme /><DataField>Price</DataField><ColumnId>3ef53358-80dd-4e3f-99fb-355cb397a797</ColumnId><HorizontalAlignment>right</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>Price</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition /><Width>10</Width><CurrentCode /><ExchangeRate /><ExchangeRateType>BaseRate</ExchangeRateType><DecimalDigits>-1</DecimalDigits></QFSDataCurrencyCol><QFSDataNumericCol><StyleScheme /><DataField>Discount</DataField><ColumnId>983c7b9b-3c12-48e3-add2-73ff8cd065c2</ColumnId><HorizontalAlignment>right</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>Discount</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>true</IsEditable><HideCondition /><Width>-1</Width><DecimalDigits><DecimalDigits>2</DecimalDigits><Strict>false</Strict></DecimalDigits><FormatType>Percent</FormatType></QFSDataNumericCol><QFSDataCurrencyCol><StyleScheme /><DataField>CalculatedPrice</DataField><ColumnId>5cd443a0-928c-44a2-86f2-a4246f8223c7</ColumnId><HorizontalAlignment>right</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>CalculatedPrice</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>true</IsEditable><HideCondition /><Width>10</Width><CurrentCode /><ExchangeRate /><ExchangeRateType>BaseRate</ExchangeRateType><DecimalDigits>-1</DecimalDigits></QFSDataCurrencyCol><QFSDataCurrencyCol><StyleScheme /><DataField>CalculatedPrice</DataField><ColumnId>28d57a8b-13ca-47c0-b41e-d969ed17dc28</ColumnId><HorizontalAlignment>right</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>CalculatedPrice</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition>function () {
+}</HideCondition><Width>-1</Width><SeedOnRowEntity>false</SeedOnRowEntity><SeedOnRelatedEntity>Product</SeedOnRelatedEntity><ConditionalWhere /><ResourceKind>productPrograms</ResourceKind><LookupBindingMode>String</LookupBindingMode><LookupDisplayProperty>Program</LookupDisplayProperty></QFSDataLookupCol><QFSDataCurrencyCol><StyleScheme /><DataField>Price</DataField><ColumnId>3ef53358-80dd-4e3f-99fb-355cb397a797</ColumnId><HorizontalAlignment>right</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>Price</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition /><Width>10</Width><CurrentCode /><ExchangeRate /><ExchangeRateType>BaseRate</ExchangeRateType><DecimalDigits>-1</DecimalDigits></QFSDataCurrencyCol><QFSDataNumericCol><StyleScheme /><DataField>Discount</DataField><ColumnId>983c7b9b-3c12-48e3-add2-73ff8cd065c2</ColumnId><HorizontalAlignment>right</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>Discount</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>true</IsEditable><HideCondition /><Width>-1</Width><DecimalDigits><DecimalDigits>2</DecimalDigits><Strict>false</Strict></DecimalDigits><FormatType>Percent</FormatType></QFSDataNumericCol><QFSDataCurrencyCol><StyleScheme /><DataField>CalculatedPrice</DataField><ColumnId>5cd443a0-928c-44a2-86f2-a4246f8223c7</ColumnId><HorizontalAlignment>right</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>CalculatedPrice</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>true</IsEditable><HideCondition /><Width>10</Width><CurrentCode /><ExchangeRate /><ExchangeRateType>BaseRate</ExchangeRateType><DecimalDigits>-1</DecimalDigits></QFSDataCurrencyCol><QFSDataCurrencyCol><StyleScheme /><DataField>CalculatedPrice</DataField><ColumnId>28d57a8b-13ca-47c0-b41e-d969ed17dc28</ColumnId><HorizontalAlignment>right</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>CalculatedPrice</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition>function () {
     return !isMultiCurrencyEnabled();
 }</HideCondition><Width>10</Width><CurrentCode>SalesOrder.CurrencyCode</CurrentCode><ExchangeRate>SalesOrder.ExchangeRate</ExchangeRate><ExchangeRateType>EntityRate</ExchangeRateType><DecimalDigits>-1</DecimalDigits></QFSDataCurrencyCol><QFSDataNumericCol><StyleScheme /><DataField>Quantity</DataField><ColumnId>0fd9479b-1d6f-497f-a870-26efbf44550d</ColumnId><HorizontalAlignment>right</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>Quantity</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>true</IsEditable><HideCondition /><Width>-1</Width><DecimalDigits><DecimalDigits>4</DecimalDigits><Strict>false</Strict></DecimalDigits><FormatType>Number</FormatType></QFSDataNumericCol><QFSDataLookupCol><StyleScheme /><DataField>UnitOfMeasure</DataField><ColumnId>eef3d53b-092f-4f1b-9429-22cfd8dd2bf4</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>UnitOfMeasure</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>true</IsEditable><HideCondition>function () {
     return !isIntegrationContractEnabled();
-}</HideCondition><Width>-1</Width><SeedOnRowEntity>false</SeedOnRowEntity><SeedOnRelatedEntity /><ResourceKind>unitsOfMeasure</ResourceKind><LookupBindingMode>Object</LookupBindingMode><LookupDisplayProperty>Name</LookupDisplayProperty></QFSDataLookupCol><QFSDataCurrencyCol><StyleScheme /><DataField>ExtendedPrice</DataField><ColumnId>68096333-c869-44c2-9b19-51d9058e50d8</ColumnId><HorizontalAlignment>right</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>ExtendedPrice</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition>function () {
+}</HideCondition><Width>-1</Width><SeedOnRowEntity>false</SeedOnRowEntity><SeedOnRelatedEntity /><ConditionalWhere>function () {
+	        var sCondition = '';
+	        var showError = function (msg) {
+	            var msgService = Sage.Services.getService("WebClientMessageService");
+	            if (msgService != null &amp;&amp; typeof msgService !== "undefined") {
+	                msgService.showClientError(msg);
+	            }
+	            else {
+	                alert(msg);
+	            }
+	        }
+	        var service = Sage.Services.getService("IntegrationContractService");
+	        if (service != null &amp;&amp; typeof service !== "undefined") {
+	            if (service.isIntegrationEnabled) {
+	                var bFoundOperatingCompany = false;
+	                var bFoundSlxPriceList = false;
+	                var clientContextService = Sage.Services.getService("ClientContextService");
+	                if (clientContextService != null &amp;&amp; typeof clientContextService !== "undefined") {
+	                    if (clientContextService.containsKey("OperatingCompany")) {
+	                        var sOperatingCompanyId = clientContextService.getValue("OperatingCompany");
+	                        bFoundOperatingCompany = (dojo.isString(sOperatingCompanyId) &amp;&amp; String(sOperatingCompanyId).length == 12);
+	                        if (bFoundOperatingCompany) {
+	                            sCondition = 'AppId eq "' + sOperatingCompanyId + '" ' + "And ActiveFlag eq true";
+	                        }
+	                    }
+	                    var sError = "";
+	                    if (!bFoundOperatingCompany) {
+	                        sError = "The Operating Company could not be determined.";
+	                        showError(sError);
+	                        throw new Error(sError);
+	                    }
+	                }
+	                else {
+	                    sError = "The ClientContextService is unavailable.";
+	                    showError(sError);
+	                    throw new Error(sError);
+	                }
+	            }
+	        }
+	        return sCondition;
+        }
+</ConditionalWhere><ResourceKind>unitsOfMeasure</ResourceKind><LookupBindingMode>Object</LookupBindingMode><LookupDisplayProperty>Name</LookupDisplayProperty></QFSDataLookupCol><QFSDataCurrencyCol><StyleScheme /><DataField>ExtendedPrice</DataField><ColumnId>68096333-c869-44c2-9b19-51d9058e50d8</ColumnId><HorizontalAlignment>right</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>ExtendedPrice</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition>function () {
     return isMultiCurrencyEnabled();
 }</HideCondition><Width>10</Width><CurrentCode /><ExchangeRate /><ExchangeRateType>BaseRate</ExchangeRateType><DecimalDigits>-1</DecimalDigits></QFSDataCurrencyCol><QFSDataCurrencyCol><StyleScheme /><DataField>ExtendedPrice</DataField><ColumnId>ff4abcfa-992a-4721-8841-c0c0b6e89485</ColumnId><HorizontalAlignment>right</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>ExtendedPrice</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition>function () {
     return !isMultiCurrencyEnabled();
@@ -198,9 +239,7 @@ if (salesOrder != null)
     return !isIntegrationContractEnabled();
 }</HideCondition><Width>-1</Width></QFEditableCol><QFEditableCol><StyleScheme /><DataField>CommodityType</DataField><ColumnId>7f13becf-d7b7-41ec-82af-24215aec5077</ColumnId><HorizontalAlignment>left</HorizontalAlignment><HeaderAlignment>left</HeaderAlignment><IsSortable>true</IsSortable><SortField>CommodityType</SortField><MultiCurrencyDependent>false</MultiCurrencyDependent><IsEditable>false</IsEditable><HideCondition>function () {
     return !isIntegrationContractEnabled();
-}</HideCondition><Width>-1</Width></QFEditableCol></Columns><ConditionalWhere>function() { return 'SalesOrder.Id eq "' + Sage.Utility.getCurrentEntityId() + '"'; }</ConditionalWhere><Select><string>Id</string><string>Product.Id</string><string>SalesOrder.CurrencyCode</string><string>SalesOrder.OperatingCompany.Id</string><string>SalesOrder.SlxPriceList.Id</string><string>UnitOfMeasure.Id</string><string>UnitOfMeasure.Name</string><string>UnitOfMeasure.AppId</string></Select><Include><string>SalesOrder</string><string>Product</string><string>UnitOfMeasure</string></Include><FeedCategory>InternalAppEntities</FeedCategory><OnGetMappingId /><ParentRelationshipPropertyName>SalesOrder</ParentRelationshipPropertyName><ChildRelationshipPropertyName>Product</ChildRelationshipPropertyName><OnDataChange>function (entity, attribute, oldValue, newValue) {
-    if (attribute === 'UnitOfMeasure') {
-    }
+}</HideCondition><Width>-1</Width></QFEditableCol></Columns><ConditionalWhere>function() { return 'SalesOrder.Id eq "' + Sage.Utility.getCurrentEntityId() + '"'; }</ConditionalWhere><Select><string>Id</string><string>Product.Id</string><string>SalesOrder.CurrencyCode</string><string>SalesOrder.OperatingCompany.Id</string><string>SalesOrder.SlxPriceList.Id</string><string>UnitOfMeasure.Id</string><string>UnitOfMeasure.Name</string><string>UnitOfMeasure.AppId</string></Select><Include><string>SalesOrder</string><string>Product</string><string>UnitOfMeasure</string></Include><FeedCategory>InternalAppEntities</FeedCategory><OnGetMappingId /><ParentRelationshipPropertyName>SalesOrder</ParentRelationshipPropertyName><ChildRelationshipPropertyName>Product,UnitOfMeasure</ChildRelationshipPropertyName><OnDataChange>function (entity, attribute, oldValue, newValue) {
     if (oldValue === newValue) {
         return;
     }
@@ -260,6 +299,7 @@ if (salesOrder != null)
     }
     if (attribute === 'UnitOfMeasure') {
         if (!isIntegrationContractEnabled()) return;
+        if (!entity.Product) return;
         var sUrl = String.format("slxdata.ashx/slx/dynamic/-/slxPrices?select=Price,Currency&amp;where=UnitOfMeasure.Id eq '{0}' and AppId eq '{1}' and Product.Id eq '{2}' and SlxPriceList.Id eq '{3}' and ActiveFlag = true&amp;format=json&amp;_t={4}",
                         newValue.$key, entity.SalesOrder.OperatingCompany.$key, entity.Product.$key, entity.SalesOrder.SlxPriceList.$key, (new Date().getTime().toString()));
         $.ajax({
@@ -353,7 +393,7 @@ if (salesOrder != null)
                 grid.store.newItem({ onComplete: function (soItem) {
                     var addProduct = function (prod, refresh, quantity) {
                         var sSelect = "select=Id,ActualId,CommodityType,Description,Family,Name,";
-                        sSelect += (bIsICEnabled) ? "UnitOfMeasure/Id,Prices/Price,Prices/Currency,Prices/UnitOfMeasure,Prices/SlxPriceList,Prices/SlxPriceList.Id" : "ProductProgram/Program,ProductProgram/Price,ProductProgram/DefaultProgram";
+                        sSelect += (bIsICEnabled) ? "UnitOfMeasure/Id,UnitOfMeasure/Name,Prices/Price,Prices/Currency,Prices/UnitOfMeasure,Prices/SlxPriceList,Prices/SlxPriceList.Id" : "ProductProgram/Program,ProductProgram/Price,ProductProgram/DefaultProgram";
                         var sWhere = String.format("where=Id eq '{0}'", prod.$key);
                         sWhere += (bIsICEnabled) ? String.format(" and UnitOfMeasure eq Prices.UnitOfMeasure and Prices.SlxPriceList.Id eq '{0}' and Prices.AppId eq '{1}' and Prices.ActiveFlag = true", sPriceListId, sAppId) : "";
                         var sUrl = String.format("slxdata.ashx/slx/dynamic/-/products?{0}&amp;{1}&amp;format=json&amp;_t={2}",
@@ -369,7 +409,7 @@ if (salesOrder != null)
                                     if (bIsICEnabled) {
                                         /* Check without using an SlxPriceList.Id. */
                                         sSelect = "select=Id,ActualId,CommodityType,Description,Family,Name,";
-                                        sSelect += "UnitOfMeasure/Id,Prices/Price,Prices/Currency,Prices/UnitOfMeasure";
+                                        sSelect += "UnitOfMeasure/Id,UnitOfMeasure/Name,Prices/Price,Prices/Currency,Prices/UnitOfMeasure";
                                         sWhere = String.format("where=Id eq '{0}'", prod.$key);
                                         sWhere += String.format(" and UnitOfMeasure eq Prices.UnitOfMeasure and Prices.AppId eq '{0}' and Prices.ActiveFlag = true", sAppId);
                                         sUrl = String.format("slxdata.ashx/slx/dynamic/-/products?{0}&amp;{1}&amp;format=json&amp;_t={2}",
@@ -711,8 +751,7 @@ if (salesOrder != null)
                 }
                 });
             }
-        }
-</OnSelection><AdditionalSelectFields><string>ProductId</string><string>ProdPackageKitType</string><string>CommodityType</string><string>Program</string><string>AppId</string><string>Quantity</string></AdditionalSelectFields><ChildEntity>PackageKitChildViews</ChildEntity><LookupResourceName>ProdPackageKitView</LookupResourceName><ConditionalWhere>function () {
+        }</OnSelection><AdditionalSelectFields><string>ProductId</string><string>ProdPackageKitType</string><string>CommodityType</string><string>Program</string><string>AppId</string><string>Quantity</string><string>ActiveFlag</string></AdditionalSelectFields><ChildEntity>PackageKitChildViews</ChildEntity><LookupResourceName>ProdPackageKitView</LookupResourceName><ConditionalWhere>function () {
                 var sCondition = '';
                 var showError = function (msg) {
                     var msgService = Sage.Services.getService("WebClientMessageService");
@@ -734,7 +773,7 @@ if (salesOrder != null)
                                 var sOperatingCompanyId = clientContextService.getValue("OperatingCompany");
                                 bFoundOperatingCompany = (dojo.isString(sOperatingCompanyId) &amp;&amp; String(sOperatingCompanyId).length == 12);
                                 if (bFoundOperatingCompany) {
-                                    sCondition = 'AppId eq "' + sOperatingCompanyId + '"';
+                                    sCondition = 'AppId eq "' + sOperatingCompanyId + '" ' + "And ActiveFlag eq true";
                                 }
                             }
                             var sError = "";
@@ -753,7 +792,36 @@ if (salesOrder != null)
                 }
                 return sCondition;
             }
-</ConditionalWhere></LookupButton></SDataGridAddRelationTool><SDataGridCancelTool><Name>Cancel</Name><Image>[Localization!Global_Images:Reset_16x16]</Image><OnClick>//default Cancel behavior</OnClick><StyleScheme /><AppliedSecurity /></SDataGridCancelTool><SDataGridDeleteTool><Name>Delete</Name><Image>[Localization!Global_Images:Delete_16x16]</Image><OnClick>function () { if (Sage.Utility.getModeId() !== 'insert') { __doPostBack('MainContent', ''); } }</OnClick><StyleScheme /><AppliedSecurity /></SDataGridDeleteTool></Tools></QFSDataGrid></Property>
+</ConditionalWhere><ConditionalShow>function () {
+            var oResult = { result: true, reason: '' };
+            var service = Sage.Services.getService('IntegrationContractService');
+            if (service != null &amp;&amp; typeof service !== 'undefined') {
+                if (service.isIntegrationEnabled) {
+                    var bFoundOperatingCompany = false;
+                    var bFoundSlxPriceList = false;
+                    var clientContextService = Sage.Services.getService('ClientContextService');
+                    if (clientContextService != null &amp;&amp; typeof clientContextService !== 'undefined') {
+                        if (clientContextService.containsKey('OperatingCompany')) {
+                            var sOperatingCompanyId = clientContextService.getValue('OperatingCompany');
+                            bFoundOperatingCompany = (dojo.isString(sOperatingCompanyId) &amp;&amp; String(sOperatingCompanyId).length == 12);
+                        }
+                        if (clientContextService.containsKey('SlxPriceList')) {
+                            var sSlxPriceListId = clientContextService.getValue('SlxPriceList');
+                            bFoundSlxPriceList = (dojo.isString(sSlxPriceListId) &amp;&amp; String(sSlxPriceListId).length == 12);
+                        }
+                        if (!bFoundOperatingCompany || !bFoundSlxPriceList) {
+                            oResult.result = false;
+                            oResult.reason = 'Products cannot be added to the Sales Order because the Accounting System or Price List is undefined.';
+                        }
+                    }
+                    else {
+                        oResult.result = false;
+                        oResult.reason = 'The ClientContextService is unavailable.';
+                    }
+                }
+            }
+            return oResult;
+        }</ConditionalShow></LookupButton></SDataGridAddRelationTool><SDataGridCancelTool><Name>Cancel</Name><Image>[Localization!Global_Images:Reset_16x16]</Image><OnClick>//default Cancel behavior</OnClick><StyleScheme /><AppliedSecurity /></SDataGridCancelTool><SDataGridDeleteTool><Name>Delete</Name><Image>[Localization!Global_Images:Delete_16x16]</Image><OnClick>function () { if (Sage.Utility.getModeId() !== 'insert') { __doPostBack('MainContent', ''); } }</OnClick><StyleScheme /><AppliedSecurity /></SDataGridDeleteTool></Tools></QFSDataGrid></Property>
         </Properties>
       </ControlDefinition>
     </QuickFormElement>

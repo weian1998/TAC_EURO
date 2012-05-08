@@ -16,7 +16,7 @@ Sage.UI.Forms.HistoryList = {
         //  Optional function to be evaluated to restrict the query according to the current context (e.g. for a SalesLogix tab, it
         //  should usually filter according to the parent entity id)
         // runtimeConfig: 
-        //  SalesLogix context to be passed to SLXTabGrid.  Usually should have the "workspace" and "tabId" (for SLX tabs) properties
+        //  SalesLogix context to be passed to EditableGrid.  Usually should have the "workspace" and "tabId" (for SLX tabs) properties
 
         // These strings are localized in NotesHistoryResources, but there is a fallback in case something blows up...
         var localeStrings = NotesHistoryResources || {
@@ -41,9 +41,7 @@ Sage.UI.Forms.HistoryList = {
         };
 
         /////////////// Support for Activity Type - specific to this HistoryList grid
-
-        var hmstring = Sage.Utility.getClientContextByKey("HistoryTypeMap");  // filled from server side
-        var historyTypeMap = Sage.UI.Forms.HistoryList.buildHistoryMap(hmstring);
+        var historyTypeMap = Sage.UI.Forms.HistoryList.HistoryTypeMap;  // filled from server side
         dojo.declare("HistoryTypeCell", dojox.grid.cells.Cell, {
             // summary:
             //  custom column used for display of history type (also acts as a link for edit)
@@ -325,18 +323,6 @@ Sage.UI.Forms.HistoryList = {
         grid.setSortColumn('CompletedDate', false);
         grid.startup();
         return grid;
-    },
-
-    buildHistoryMap: function (hm) {
-        var items = hm.split(',');
-        var map = {};
-        for (var i = 0; i < items.length; i++) {
-            var item = items[i].split(':');
-            if (item.length === 2) {
-                map[item[0]] = item[1];
-            }
-        }
-        return map;
     }
 
 }

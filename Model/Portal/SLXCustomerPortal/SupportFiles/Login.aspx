@@ -1,8 +1,8 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Masters/Login.master" AutoEventWireup="true" Culture="auto" UICulture="auto" EnableEventValidation="false"%>
 <%@ Import Namespace="Sage.Platform.Orm"%>
 <%@ Import Namespace="System.Collections.Generic"%>
-<%@ Import Namespace="NHibernate"%>
 <%@ Import Namespace="Sage.Entity.Interfaces"%>
+<%@ Import Namespace="NHibernate"%>
 <%@ Import Namespace="Sage.Platform.Application"%>
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="ContentPlaceHolderArea" >

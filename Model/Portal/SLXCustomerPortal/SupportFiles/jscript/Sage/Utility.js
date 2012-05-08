@@ -1,4 +1,4 @@
-dojo.provide('Sage.Utility');
+﻿dojo.provide('Sage.Utility');
 dojo.require("dojo.parser");
 (function(){
     var nameToPathCache = {};
@@ -142,7 +142,7 @@ dojo.require("dojo.parser");
         return '';
     };
     
-    var getSDataService = function(contract, keepUnique) {
+    var getSDataService = function(contract, keepUnique, useJson) {
         // returns the instance of the service for the specific contract requested.
         // For example, if the data source needs an SData service for the dynamic or system feeds,
         // the code would pass 'dynamic' or 'system' to this method.
@@ -157,6 +157,12 @@ dojo.require("dojo.parser");
         if (Sage.Services.hasService(svcKey) && !keepUnique) {
             return Sage.Services.getService(svcKey);
         }
+        
+        var bJson = true;
+        if (typeof useJson === 'boolean') {
+            bJson = useJson;
+        }
+
         svc = new Sage.SData.Client.SDataService({
             serverName: window.location.hostname,
             virtualDirectory: Sage.Utility.getVirtualDirectoryName() + '/slxdata.ashx',
@@ -164,7 +170,7 @@ dojo.require("dojo.parser");
             contractName: contract,
             port: window.location.port && window.location.port != 80 ? window.location.port : false,
             protocol: /https/i.test(window.location.protocol) ? 'https' : false,
-            json: true
+            json: bJson //true
         });               
         if (!keepUnique) {
             Sage.Services.addService(svcKey, svc);
@@ -284,24 +290,24 @@ dojo.require("dojo.parser");
     var restrictToNumber = function (e, /*currency, number, percent*/ type) {        
         var SystemFormat = Sys.CultureInfo.CurrentCulture.numberFormat;
         var code = e.charCode || e.keyCode;
-        var char = e.keyChar;
+        var keyChar = e.keyChar;
         
         if (e.keyCode && Sage.Utility.isAllowedNavigationKey(e.keyCode)) return true;
         // 0-9 Keyboard and numberpad.
         if ((code >= 48 && code <= 57) || (code >= 96 && code <= 105)) return true;  
         // Negative, ".", "-"
-        if (char === SystemFormat.NegativeSign || code == 109 || code == 110) return true;   
+        if (keyChar === SystemFormat.NegativeSign || code == 109 || code == 110) return true;   
         //Separators
         switch (type)
         {
             case 'currency':
-                if (char == SystemFormat.CurrencyGroupSeparator || char == SystemFormat.CurrencyDecimalSeparator) return true;
+                if (keyChar == SystemFormat.CurrencyGroupSeparator || keyChar == SystemFormat.CurrencyDecimalSeparator) return true;
             break;
             case 'percent':
-                if (char == SystemFormat.PercentGroupSeparator || char == SystemFormat.PercentDecimalSeparator) return true;
+                if (keyChar == SystemFormat.PercentGroupSeparator || keyChar == SystemFormat.PercentDecimalSeparator) return true;
             break;
             default: //number
-                if (char == SystemFormat.NumberGroupSeparator || char == SystemFormat.NumberDecimalSeparator) return true;
+                if (keyChar == SystemFormat.NumberGroupSeparator || keyChar == SystemFormat.NumberDecimalSeparator) return true;
             break;
         }
         return false;                 
@@ -313,7 +319,7 @@ dojo.require("dojo.parser");
 
         var SystemFormat = Sys.CultureInfo.CurrentCulture.numberFormat;
         var code = e.charCode || e.keyCode;
-        var char = String.fromCharCode(code);
+        var keyChar = String.fromCharCode(code);
         var validChar = '0123456789' + SystemFormat.NegativeSign;
         switch(type) {
             case 'currency':
@@ -326,7 +332,7 @@ dojo.require("dojo.parser");
                 validChar += SystemFormat.NumberGroupSeparator + SystemFormat.NumberDecimalSeparator;
                 break;
         }
-        return (validChar.indexOf(char) >= 0);
+        return (validChar.indexOf(keyChar) >= 0);
     }
 
     
@@ -525,6 +531,7 @@ dojo.require("dojo.parser");
         convert = function() {
             var trueRE = /^(true|T)$/i,
                 isoDate = /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(Z|(-|\+)(\d{2}):(\d{2}))/,
+                isoDateOnly = /^(\d{4})-(\d{2})-(\d{2})$/,
                 jsonDate = /\/Date\((-?\d+)(?:(-|\+)(\d{2})(\d{2}))?\)\//,
                 pad = function(n) { return n < 10 ? '0' + n : n };
 
@@ -536,7 +543,7 @@ dojo.require("dojo.parser");
                     if (typeof value !== 'string')
                         return false;
             
-                    return isoDate.test(value) || jsonDate.test(value);
+                    return isoDate.test(value) || isoDateOnly.test(value) || jsonDate.test(value);
                 },
                 toIsoStringFromDate: function(value) {
                     // adapted from: https://developer.mozilla.org/en/JavaScript/Reference/global_objects/date
@@ -553,6 +560,8 @@ dojo.require("dojo.parser");
                 toDateFromString: function(value) {
                     if (typeof value !== 'string')
                         return value;
+
+                    //console.debug("toDateFromString(%o)", value);
 
                     var match,
                         utc,
@@ -577,22 +586,24 @@ dojo.require("dojo.parser");
                         */
 
                         value = utc;
+
+                        //console.debug("jsonDate.exec: %o", value);
                     }
                     else if ((match = isoDate.exec(value)))
                     {
                         utc = new Date(Date.UTC(
                             parseInt(match[1]),
-                            parseInt(match[2]) - 1, // zero based
-                            parseInt(match[3]),
-                            parseInt(match[4]),
-                            parseInt(match[5]),
-                            parseInt(match[6])
+                            parseInt(match[2], 10) - 1, // zero based
+                            parseInt(match[3], 10),
+                            parseInt(match[4], 10),
+                            parseInt(match[5], 10),
+                            parseInt(match[6], 10)
                         ));
 
                         if (match[8] !== 'Z')
                         {
-                            h = parseInt(match[10]);
-                            m = parseInt(match[11]);
+                            h = parseInt(match[10], 10);
+                            m = parseInt(match[11], 10);
                     
                             if (match[9] === '-')
                                 utc.addMinutes((h * 60) + m);
@@ -601,6 +612,18 @@ dojo.require("dojo.parser");
                         }
 
                         value = utc;
+
+                        //console.debug("isoDate.exec: %o", value);
+                    }
+                    else if ((match = isoDateOnly.exec(value))) {
+                        value = new Date();
+                        value.setYear(parseInt(match[1]));
+                        value.setMonth(parseInt(match[2], 10) -1);                       
+                        value.setDate(parseInt(match[3], 10));                        
+                        value.setHours(0, 0, 0, 0);   
+                        /*console.debug("match[1]: %o; match[2]: %o; match[3]: %o", match[1], match[2], match[3]);
+                        console.debug("Year: %o; Month: %o; Date: %o", parseInt(match[1]), parseInt(match[2], 10) -1, parseInt(match[3], 10));
+                        console.debug("isoDateOnly: %o", value);*/
                     }
 
                     return value;

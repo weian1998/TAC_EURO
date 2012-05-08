@@ -59,7 +59,12 @@
     }],
 	lookupStoreOptions: {		
         resourceKind: #if ($col.ResourceKind == "")'$generator.GetSDataPathName(${col.DataField})' #else '$col.ResourceKind' #end
-     }
+     },
+	lookupGridOptions: {
+		#if($col.ConditionalWhere != "")
+			contextualCondition: ${col.ConditionalWhere}
+		#end
+	  }
 }
 #end
 #macro(doCurrencyCol $col)
@@ -206,7 +211,7 @@
 ## ----------- Actual grid start -----------------------------------------------
 $pagegenerator.AddToInitializationScript("${pagegenerator.FormScriptObjectName}.makeGrid(runtimeConfig);")
 makeGrid : function(runtimeConfig) {
-    dojo.require('Sage.UI.SLXTabGrid');
+    dojo.require('Sage.UI.EditableGrid');
 
     if (typeof $stringObjectName === 'undefined') {
         $stringObjectName = {};
@@ -333,7 +338,7 @@ $comma
         singleClickEdit: true
     };
 
-    var grid = new Sage.UI.SLXTabGrid(options);
+    var grid = new Sage.UI.EditableGrid(options);
     window.setTimeout(function () { grid.startup(); }, 1);
 #if (${qfcontrol.OnAdd} != "")
     grid.store.onNew = ${qfcontrol.OnAdd} ;

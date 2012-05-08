@@ -722,7 +722,58 @@ function ClearWarning()
     RolloverObj.RollingOver = false;
 }
 
-PickListComboBox = function(options) {
+AddrTypeComboBox = function (options) {
+    var self = this;
+    var o = options || {};
+    o.mode = "local";
+    o.displayField = "addrTypeDisplay";
+    o.valueField = "addressType";
+    o.editable = false;
+    o.triggerAction = "all";
+    var rt = Ext.data.Record.create([
+        { name: "addressType", mapping: 1 },
+        { name: "addrTypeDisplay", mapping: 2}]);
+    var typestore = new Ext.data.Store({
+        reader: new Ext.data.ArrayReader(
+            {
+                idIndex: 0
+            },
+            rt
+        )
+    });
+        var typeData = [[1, "Billing", addressrsc.AddressControl_EditPanel_AddrType_Billing],
+                        [2, "Shipping", addressrsc.AddressControl_EditPanel_AddrType_Shipping],
+                        [3, "Billing & Shipping", addressrsc.AddressControl_EditPanel_AddrType_BillingShipping],
+                        [4, "Correspondence", addressrsc.AddressControl_EditPanel_AddrType_Correspondence],
+                        [5, "Home", addressrsc.AddressControl_EditPanel_AddrType_Home],
+                        [6, "Office", addressrsc.AddressControl_EditPanel_AddrType_Office],
+                        [7, "Other", addressrsc.AddressControl_EditPanel_AddrType_Other],
+                        [8, "Unknown", addressrsc.AddressControl_EditPanel_AddrType_Unknown]];
+    typestore.loadData(typeData);
+    this.store = o.store = typestore;
+    AddrTypeComboBox.superclass.constructor.call(this, o);
+}
+Ext.extend(AddrTypeComboBox, Ext.form.ComboBox, {
+    initComponent: function () {
+        AddrTypeComboBox.superclass.initComponent.call(this);
+        this.bind();
+    },
+    bind: function () {
+
+    },
+    unbind: function () {
+
+    },
+    setValue: function (v) {
+        AddrTypeComboBox.superclass.setValue.call(this, v);
+    },
+    getValue: function () {
+        return AddrTypeComboBox.superclass.getValue.call(this);
+    }
+});
+Ext.reg('addrtypecombo', AddrTypeComboBox); 
+
+PickListComboBox = function (options) {
     var self = this;
     var o = options || {};    
     this.pickListRequestUrl = o.pickListRequestUrl || "slxdata.ashx/slx/crm/-/picklists/find"; 
@@ -825,7 +876,7 @@ function AddressControl(options) {
     this._map = {};          
     this._templates = {
         returnValue: [
-            '{addr1}|{addr2}|{addr3}|{city}|{state}|{postalCode}|{country}|{attention}|{description}|{isPrimary}|{isMailing}'
+            '{addr1}|{addr2}|{addr3}|{city}|{state}|{postalCode}|{country}|{attention}|{description}|{isPrimary}|{isMailing}|{addrType}'
         ]
     };
 };
@@ -974,7 +1025,7 @@ AddressControl.prototype.setReturnValue = function(values) {
 
 AddressControl.prototype.setDisplayValue = function(values, complete) {
     var self = this;
-    var map = {'addr1': 'addr1', 'addr2': 'addr2', 'addr3': 'addr3', 'city': 'city', 'st': 'state', 'zip': 'postalCode', 'cntry': 'country'};
+    var map = {'addr1': 'addr1', 'addr2': 'addr2', 'addr3': 'addr3', 'city': 'city', 'st': 'state', 'zip': 'postalCode', 'cntry': 'country', 'addrType': 'addrType'};
     var parameters = {};
     for (var key in map)
         if (values[map[key]])
@@ -1043,9 +1094,9 @@ AddressControl.prototype.createDialog = function () {
         title: addressrsc.AddressControl_EditPanel_Header,
         cls: "address-dialog",
         width: (this._options.width > 0) ? this._options.width : 350,
-        height: (this._options.height > 0) ? this._options.height : 390,
+        height: (this._options.height > 0) ? this._options.height : 400,
         minWidth: (this._options.minWidth > 0) ? this._options.minWidth : 350,
-        minHeight: (this._options.minHeight > 0) ? this._options.minHeight : 390,
+        minHeight: (this._options.minHeight > 0) ? this._options.minHeight : 400,
         layout: "fit",
         closeAction: "hide",
         plain: true,
@@ -1233,7 +1284,7 @@ function OpenMap(wCode)
     winH = window.open(wCode, '', 'directories=no,location=no,menubar=no,pageXOffset=0px,pageYOffset=0px,scrollbars=yes,status=no,titlebar=no,toolbar=yes');
 }
 
-function Address (clientId, desc1, desc2, desc3, city, state, zip, country, county, salutation, description, primary, mailing, autoPostBack)
+function Address (clientId, desc1, desc2, desc3, city, state, zip, country, county, salutation, description, primary, mailing, addrtype, autoPostBack)
 {
     this.clientId = clientId;
     this.displayID = clientId + "_displayText";
@@ -1251,6 +1302,7 @@ function Address (clientId, desc1, desc2, desc3, city, state, zip, country, coun
     this.description = description;
     this.isPrimary = primary;
     this.isMailing = mailing;
+    this.typevalue = addrtype;
     this.AutoPostBack = autoPostBack;
     
     this.panel = null;
@@ -1283,6 +1335,7 @@ function Address_Cancel()
     document.getElementById(this.clientId + "_Desc_Text").value = this.description;
     document.getElementById(this.clientId + "_IsPrimary").checked = this.isPrimary;
     document.getElementById(this.clientId + "_IsMailing").checked = this.isMailing;
+    document.getElementById(this.clientId + "_AddrType").value = this.typevalue;
 }
 
 function Address_Ok()
@@ -1299,8 +1352,9 @@ function Address_Ok()
     this.description = document.getElementById(this.clientId + "_Desc_Text").value;
     this.isPrimary = document.getElementById(this.clientId + "_IsPrimary").checked;
     this.isMailing = document.getElementById(this.clientId + "_IsMailing").checked
+    this.typevalue = document.getElementById(this.clientId + "_AddrType").value;
     var returnValue = document.getElementById(this.returnValueId);
-    returnValue.value = this.desc1value + "|" + this.desc2value + "|" + this.desc3value + "|" + this.cityvalue + "|" + this.statevalue + "|" + this.zipvalue + "|" + this.countryvalue + "|" + this.salutationvalue + '|' + this.description + '|' + this.isPrimary + '|' + this.isMailing;
+    returnValue.value = this.desc1value + "|" + this.desc2value + "|" + this.desc3value + "|" + this.cityvalue + "|" + this.statevalue + "|" + this.zipvalue + "|" + this.countryvalue + "|" + this.salutationvalue + '|' + this.description + '|' + this.isPrimary + '|' + this.isMailing + '|' + this.typevalue;
     this.FormatAddress(this.displayID);
 }
 
@@ -1537,6 +1591,7 @@ if (!Sage.UI.Numeric) {
         this.format = format;
         this.currValue = 0;
         this.formatNumber();
+        this.justChanged = false;
     };
     Sage.UI.Numeric.prototype.getFormatType = function () {
         //var type = "decimal";
@@ -1574,9 +1629,14 @@ if (!Sage.UI.Numeric) {
         }
         return true;
     };
+    Sage.UI.Numeric.prototype.changed = function (e) {
+        this.justChanged = true;
+    }
+
     Sage.UI.Numeric.prototype.validate = function () {
         this.formatNumber();
-        if (this.autoPostBack) {
+        if (this.justChanged && this.autoPostBack) {
+            this.justChanged = false;
             if (Sys) {
                 Sys.WebForms.PageRequestManager.getInstance()._doPostBack(this.controlId, null);
             }
@@ -1584,6 +1644,7 @@ if (!Sage.UI.Numeric) {
                 document.forms(0).submit();
             }
         }
+        this.justChanged = false;
     };
     Sage.UI.Numeric.prototype.formatNumber = function () {
         var control = dojo.byId(this.controlId);
@@ -5724,38 +5785,38 @@ function NamePanel_Trim(stringToTrim) {
 }
 
 
-function NamePanel_NameChanged()
-{
+function NamePanel_NameChanged() {
+    if (event.srcElement.value !== this.CombineName()) {
     this.TextChanged = true;
+    }
 }
 
-function NamePanel_FormatName()
-{
+function NamePanel_CombineName() {
     var name = ((this.prefix == "") ? "" : this.prefix + ' ');
     name += ((this.first == "") ? "" : this.first + ' ');
     name += ((this.middle == "") ? "" : this.middle + ' ');
     name += ((this.last == "") ? "" : this.last + ' ');
     name += ((this.suffix == "") ? "" : this.suffix);
     name = this.Trim(name);
+    return name;
+}
     
+function NamePanel_FormatName() {
+    var name = this.CombineName();
     var elem = document.getElementById(this.displayID);
     elem.value = name;
     this.TextChanged = false;
-    if (this.AutoPostBack)
-    {
-        if (Sys)
-        {
+    if (this.AutoPostBack) {
+        if (Sys) {
             Sys.WebForms.PageRequestManager.getInstance()._doPostBack(this.displayID, null);
         }
-        else
-        {
+        else {
             document.forms(0).submit();
         }
     }
 }
 
-function NamePanel_ParseName()
-{
+function NamePanel_ParseName() {
     if (!this.TextChanged) { return; }
     var longest = 0;
     var elem = document.getElementById(this.displayID);
@@ -5926,6 +5987,7 @@ function NamePanel_ParseName()
 }
 
 NamePanel.prototype.FormatName = NamePanel_FormatName;
+NamePanel.prototype.CombineName = NamePanel_CombineName;
 NamePanel.prototype.Show = NamePanel_Show;
 NamePanel.prototype.Cancel = NamePanel_Cancel;
 NamePanel.prototype.Ok = NamePanel_Ok;
@@ -10279,8 +10341,13 @@ Sage.GroupManagerService.prototype.getDistinctValuesForField = function(field, o
         url: this.buildRequestUrl(sdata),
         dataType: "json",
         success: function(data) {
+            // Has clearDistinctValuesCache been called? This happens when Sage.PopulateFilterList is called from Filters.ascx.
+            // This scenario occurs when the user switches groups before the filters have been loaded for the current group.
+            if (typeof self._distinctValuesCache === "undefined") {
+	            return;
+            }
             self._distinctValuesCache[valueId] = data;
-            callback(data)
+            callback(data);
         },
         error: function(request, status, error) {
         }

@@ -19,7 +19,7 @@
         <SalesLogix:ResourceKeyName Key="DefaultCriteria_OperatorValue" />
         <SalesLogix:ResourceKeyName Key="DefaultCriteria_DialogCaption" />
         <SalesLogix:ResourceKeyName Key="DefaultCriteria_CancelButton" />
-        <SalesLogix:ResourceKeyName Key="ConfigOptions_OKButton" />
+        <SalesLogix:ResourceKeyName Key="DefaultCriteria_OKButton" />
     </Keys>
 </SalesLogix:ScriptResourceProvider>
 
@@ -34,18 +34,18 @@
 
 <SalesLogix:SlxGridView runat="server" ID="grdMatches" GridLines="None" AutoGenerateColumns="false" CellPadding="4"
     CssClass="datagrid" PagerStyle-CssClass="gridPager" AlternatingRowStyle-CssClass="rowdk" RowStyle-CssClass="rowlt"
-    SelectedRowStyle-CssClass="rowSelected" ShowEmptyTable="true" EnableViewState="false" DataKeyNames="ResourceTypeName"
+    SelectedRowStyle-CssClass="rowSelected" ShowEmptyTable="true" EnableViewState="false" DataKeyNames="ResourceKind"
     EmptyTableRowText="<%$ resources: grdMatches.EmptyTableRowText %>" ExpandableRows="True" ResizableColumns="True"  
     OnRowEditing="grdMatches_RowEditing" >
     <Columns>
         <asp:TemplateField>
             <ItemTemplate>
-                <a href="javascript:onEditMatchConfig('<%# Eval("ResourceTypeName") %>', '<%# Eval("Resource") %>');">
+                <a href="javascript:onEditMatchConfig('<%# Eval("ResourceKind") %>', '<%# Eval("Resource") %>');">
                     <asp:Localize ID="Localize1" runat="server" Text="<%$ resources: grdMatches.Edit.Text %>" />
                 </a>
             </ItemTemplate>
         </asp:TemplateField>
-        <asp:BoundField DataField="ResourceTypeName" Visible="false"/>
+        <asp:BoundField DataField="ResourceKind" Visible="false"/>
         <asp:BoundField DataField="Resource" HeaderText="<%$ resources: grdMatches.Property.ColumnHeading %>" />
         <asp:BoundField DataField="Description" HeaderText="<%$ resources: grdMatches.Description.ColumnHeading %>" />
     </Columns>

@@ -13,6 +13,8 @@ var REPORT_SALESORDER = "Sales Order:Sales Order Detail";
 /* The helper function SetDefaultReport(Report) can be used to set this value (e.g. SetDefaultReport("Lead:Lead Detail"). */
 var REPORT_DEFAULT = "";
 
+var REPORTING_INFO = null;
+
 /* Helper functions for working with the reports associated with specific entities. */
 
 function GetAccountReport() {
@@ -154,7 +156,9 @@ function PopulateGlobals(ReportId, EntityTableName, EntityId) {
 
 /* Displays a report by PLUGIN.PLUGINID. The report should be based on the main table associated with the current view. */
 function ShowReportById(ReportId) {
-    if (GLOBAL_REPORTING_URL == "") {
+    var oInfo = GetReportingInfo();
+    var bUseActiveReporting = (oInfo.RemoteInfo.Remote && oInfo.RemoteInfo.UseActiveReporting);
+    if ((GLOBAL_REPORTING_URL == "") && !bUseActiveReporting) {
         alert(MSGID_THE_REPORTING_SERVER_HAS_NOT_BEEN);
         return;
     }
@@ -169,8 +173,7 @@ function ShowReportById(ReportId) {
         var strEntityId = context.EntityId;
         if (strEntityId != "") {
             PopulateGlobals(ReportId, strTableName, strEntityId);
-            var url = "ShowReport.aspx";
-            window.open(url, "ShowReportViewer", "location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,titlebar=no,toolbar=no,width=800,height=630");
+            _ShowReport();
         }
         else {
             alert(MSGID_THE_CURRENT_ENTITY_IS_UNDEFINED);
@@ -183,7 +186,9 @@ function ShowReportById(ReportId) {
 
 /* Displays a report by FAMILY:NAME. The report should be based on the main table associated with the current view. */
 function ShowReportByName(ReportName) {
-    if (GLOBAL_REPORTING_URL == "") {
+    var oInfo = GetReportingInfo();
+    var bUseActiveReporting = (oInfo.RemoteInfo.Remote && oInfo.RemoteInfo.UseActiveReporting);
+    if ((GLOBAL_REPORTING_URL == "") && !bUseActiveReporting) {
         alert(MSGID_THE_REPORTING_SERVER_HAS_NOT_BEEN);
         return;
     }
@@ -200,8 +205,7 @@ function ShowReportByName(ReportName) {
             var strReportId = GetReportId(ReportName);
             if (strReportId != null && strReportId != "") {
                 PopulateGlobals(strReportId, strTableName, strEntityId);
-                var url = "ShowReport.aspx";
-                window.open(url, "ShowReportViewer", "location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,titlebar=no,toolbar=no,width=800,height=630");
+                _ShowReport();
             }
             else {
                 alert(MSGID_THE_REPORT_COULD_NOT_BE_LOCATED_FOR)
@@ -220,7 +224,9 @@ function ShowReportByName(ReportName) {
 /* The ReportNameOrId can be a FAMILY:NAME value or a PLUGIN.PLUGINID value. */
 /* The EntityTableName should be the main table associated with the report. */
 function ShowReport(ReportNameOrId, EntityTableName, EntityId) {
-    if (GLOBAL_REPORTING_URL == "") {
+    var oInfo = GetReportingInfo();
+    var bUseActiveReporting = (oInfo.RemoteInfo.Remote && oInfo.RemoteInfo.UseActiveReporting);
+    if ((GLOBAL_REPORTING_URL == "") && !bUseActiveReporting) {
         alert(MSGID_THE_REPORTING_SERVER_HAS_NOT_BEEN);
         return;
     }
@@ -242,8 +248,7 @@ function ShowReport(ReportNameOrId, EntityTableName, EntityId) {
         var strEntityId = EntityId;
         if (strEntityId != "") {
             PopulateGlobals(strReportId, strTableName, strEntityId);
-            var url = "ShowReport.aspx";
-            window.open(url, "ShowReportViewer", "location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,titlebar=no,toolbar=no,width=800,height=630");
+            _ShowReport();
         }
         else {
             alert(MSGID_THE_CURRENT_ENTITY_IS_UNDEFINED);
@@ -256,7 +261,9 @@ function ShowReport(ReportNameOrId, EntityTableName, EntityId) {
 
 /* Displays the default report for the current view and entity, if a report has been associated with the view. */
 function ShowDefaultReport() {
-    if (GLOBAL_REPORTING_URL == "") {
+    var oInfo = GetReportingInfo();
+    var bUseActiveReporting = (oInfo.RemoteInfo.Remote && oInfo.RemoteInfo.UseActiveReporting);
+    if ((GLOBAL_REPORTING_URL == "") && !bUseActiveReporting) {
         alert(MSGID_THE_REPORTING_SERVER_HAS_NOT_BEEN);
         return;
     }
@@ -271,8 +278,7 @@ function ShowDefaultReport() {
                 var strEntityId = context.EntityId;
                 if (strEntityId != "") {
                     PopulateGlobals(strReportId, strTableName, strEntityId);
-                    var url = "ShowReport.aspx";
-                    window.open(url, "ShowReportViewer", "location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,titlebar=no,toolbar=no,width=800,height=630");
+                    _ShowReport();
                 }
                 else {
                     alert(MSGID_THE_CURRENT_ENTITY_IS_UNDEFINED);
@@ -288,5 +294,84 @@ function ShowDefaultReport() {
     }
     else {
         alert(MSGID_UNABLE_TO_SHOW_THE_DETAIL_REPORT);
+    }
+}
+
+function GetReportingInfo() {
+    if (REPORTING_INFO == null) {
+        var xmlhttp = YAHOO.util.Connect.createXhrObject().conn;
+        var strUrl = "SLXReportsHelper.ashx?method=GetReportingInfo";
+        xmlhttp.open("GET", strUrl, false);
+        xmlhttp.send(null);
+        if (xmlhttp.status == 200) {
+            var sInfo = xmlhttp.responseText;
+            var oInfo = Sys.Serialization.JavaScriptSerializer.deserialize(sInfo);
+            REPORTING_INFO = oInfo;
+            return REPORTING_INFO;
+        }
+        REPORTING_INFO = { "IsDebuggingEnabled": false, "RemoteInfo": { "Arg1": "", "Arg2": "", "Arg3": "", "Arg4": "", "Arg5": 0, "Remote": false, "UseActiveReporting": false} };
+    }
+    return REPORTING_INFO;
+}
+
+function _ShowReport() {
+    var oInfo = GetReportingInfo();
+    var bUseActiveReporting = (oInfo.RemoteInfo.Remote && oInfo.RemoteInfo.UseActiveReporting);
+    if (!bUseActiveReporting) {
+        var sToolbar = (oInfo.IsDebuggingEnabled) ? "yes" : "no";
+        var iWidth = 800;
+        var iHeight = 600;
+        var sUrl = dojo.string.substitute("location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,titlebar=no,toolbar=${options.toolbar},width=${options.width},height=${options.height}",
+                    { options: { "toolbar": sToolbar, "width": iWidth, "height": iHeight} });
+        window.open("ShowReport.aspx", "ShowReportViewer", sUrl);
+    }
+    else {
+        if (Sage && !Sage.gears) {
+            if (typeof initGears === "function") {
+                initGears();
+            }
+        }
+
+        if (!Sage || !Sage.gears || !Sage.gears.factory) {
+            alert("The report cannot be displayed. Sage.gears.factory is inaccessible.");
+            return;
+        }
+
+        var oSlxReportViewer;
+        try {
+            var oComFactory = Sage.gears.factory.create("com.factory");
+            oSlxReportViewer = oComFactory.newActiveXObject("SLXCRV.CRViewer");
+        }
+        catch (err) {
+            alert("The SalesLogix Crystal Report Viewer object is unavailable or is not installed. " + err.message);
+            return;
+        }
+
+        if (oSlxReportViewer.IsCrystalViewerInstalled() == false) {
+            alert("The Crystal ActiveX Report Viewer is not installed.");
+            return;
+        }
+
+        if (oSlxReportViewer.IsCrystalReportsRunTimeInstalled() == false) {
+            alert("The Crystal Reports ActiveX Designer Run Time Library is not installed.");
+            return;
+        }
+
+        oSlxReportViewer.ShowReport(
+            oInfo.RemoteInfo.Arg1,
+            oInfo.RemoteInfo.Arg2,
+            oInfo.RemoteInfo.Arg5,
+            false,
+            GLOBAL_REPORTING_SS,
+            GLOBAL_REPORTING_KEYFIELD,
+            oInfo.RemoteInfo.Arg3,
+            GLOBAL_REPORTING_PLUGINID,
+            GLOBAL_REPORTING_RSF,
+            GLOBAL_REPORTING_SORTDIRECTIONS,
+            GLOBAL_REPORTING_SORTFIELDS,
+            GLOBAL_REPORTING_SQLQRY,
+            GLOBAL_REPORTING_WSQL,
+            oInfo.RemoteInfo.Arg4
+        );
     }
 }

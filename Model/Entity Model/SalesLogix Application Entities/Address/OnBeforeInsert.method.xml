@@ -1,14 +1,24 @@
 <?xml version="1.0"?>
-<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="6345d9b5-c524-47f3-a5d0-0c3457950289" name="OnBeforeInsert" returnType="void" methodType="CrudEvent" actionType="None" returnMode="BooleanOR" isInstance="false">
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="6345d9b5-c524-47f3-a5d0-0c3457950289" lastModifiedUtc="2011-06-13T16:43:28.1848Z" name="OnBeforeInsert" methodType="CrudEvent" actionType="None" returnMode="None">
+  <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
   </ExtendedPropertiesCollection>
   <parameter />
+  <preExecuteTargets>
+    <methodTarget id="b11c8f24-7297-47dc-9974-8c10f028a510" lastModifiedUtc="2011-06-24T16:07:39.4764Z" targetType="Sage.SalesLogix.Address.Rules, Sage.SalesLogix.BusinessRules" targetMethod="ValidateCountryCode" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </preExecuteTargets>
   <methodTargets>
-    <methodTarget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="94cc019e-42c0-4172-a21a-45569cbec127" targetType="Sage.SalesLogix.Address.Rules, Sage.SalesLogix.BusinessRules" sequence="20" targetMethod="OnBeforeInsert" active="true">
+    <methodTarget id="94cc019e-42c0-4172-a21a-45569cbec127" lastModifiedUtc="0001-01-01T00:00:00" targetType="Sage.SalesLogix.Address.Rules, Sage.SalesLogix.BusinessRules" targetMethod="OnBeforeInsert" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>
     </methodTarget>
   </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
 </method>

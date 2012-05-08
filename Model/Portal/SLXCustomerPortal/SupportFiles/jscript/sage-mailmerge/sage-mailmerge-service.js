@@ -2657,7 +2657,7 @@ Sage.MailMergeService.prototype.StripParameters = function(sql, xmlReader) {
         var bIsInClause = (String(sOperator).toUpperCase().trim() == "IN"); /*DNL*/
         var bIsNumber = (String(sDataType).toUpperCase().trim() == "NUMBER"); /*DNL*/
         sParamName = ":" + xmlReader.selectSingleNodeText("name", oParam);
-        var oRegExp = new RegExp(sParamName, "gi");
+        var oRegExp = new RegExp(sParamName, "i");
         if (!bIsInClause) {
             sResult = sResult.replace(oRegExp, "?");
         }

@@ -297,10 +297,12 @@
     <script pin="pin" type="text/javascript" src="jscript/sage-common/sage-common.js"></script>
     
     <script src="Libraries/rml.js" type="text/javascript"></script>
-    <script src="Libraries/Simplate.js" type="text/javascript"></script>
+    <script pin="pin" src="Libraries/Simplate.js" type="text/javascript"></script>
     <script pin="pin" language="JavaScript" src="Libraries/sdata/Base64.js" type="text/javascript"></script>
     <script pin="pin" language="JavaScript" src="Libraries/sdata/ObjTree.js" type="text/javascript"></script>
     <script pin="pin" language="JavaScript" src="Libraries/sdata/sdata-client.js" type="text/javascript"></script>    
+
+    <script pin="pin" type="text/javascript" src="jscript/Sage/Sage.js"></script>
     
 </head>
 <body class="claro">
@@ -387,6 +389,7 @@
                 <SalesLogix:ResourceKeyName Key="OK" />
                 <SalesLogix:ResourceKeyName Key="Warning" />
                 <SalesLogix:ResourceKeyName Key="PromoteTitle" />
+                <SalesLogix:ResourceKeyName Key="PromotePageColumnHeader" />
                 <SalesLogix:ResourceKeyName Key="PromoteDescription" />
                 <SalesLogix:ResourceKeyName Key="PromotionNotification" />                
                 <SalesLogix:ResourceKeyName Key="FindOutMore" />

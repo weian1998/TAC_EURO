@@ -187,7 +187,7 @@ public partial class MergeChildren : SmartPartInfoProvider
         if (IntegrationManager.MergeData())
         {
             IntegrationManager.LinkChildren = true;
-            IntegrationManager.ExecuteSync();
+            IntegrationManager.LinkOperatingCompany();
         }
         if (!String.IsNullOrEmpty(IntegrationManager.LinkAccountError))
         {

@@ -34,8 +34,8 @@ public partial class Matching : EntityBoundSmartPartInfoProvider, IScriptControl
         [JsonProperty("clientId")]
         public string ClientId { get; set; }
 
-        [JsonProperty("resourceTypeName")]
-        public object ResourceTypeName { get; set; }
+        [JsonProperty("resourceKind")]
+        public object ResourceKind { get; set; }
 
         [JsonProperty("resourceDisplayName")]
         public object ResourceDisplayName { get; set; }

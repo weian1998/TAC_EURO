@@ -1,8 +1,8 @@
 <%@ Import namespace="Sage.Platform.Application.UI.Web"%>
 <%@ Import namespace="Sage.Platform.Application.UI"%>
 <%@ Import namespace="Sage.SalesLogix"%>
-<%@ Import namespace="Sage.Platform.Application"%>
 <%@ Import namespace="Sage.Platform.Security"%>
+<%@ Import namespace="Sage.Platform.Application"%>
 <%@ Master Language="C#" %>
 <%@ Register Assembly="Sage.SalesLogix.Client.GroupBuilder" Namespace="Sage.SalesLogix.Client.GroupBuilder.Controls" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.Client.GroupBuilder" Namespace="Sage.SalesLogix.Client.GroupBuilder" TagPrefix="SalesLogix" %>

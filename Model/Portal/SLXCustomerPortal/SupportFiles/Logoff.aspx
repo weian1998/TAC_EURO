@@ -1,4 +1,4 @@
-﻿<%@ Page Title="SalesLogix Logoff" Language="C#" MasterPageFile="~/Masters/Login.master" %>
+﻿<%@ Page Title="SalesLogix Logoff" MasterPageFile="~/Masters/Login.master" Language="C#" %>
 
 <script runat="server">
 

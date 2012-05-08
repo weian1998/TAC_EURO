@@ -41,6 +41,11 @@ public partial class ICSalesOrders : EntityBoundSmartPartInfoProvider
         _runActivating = true;
     }
 
+    protected override void OnWireEventHandlers()
+    {
+        cmdAddERPSalesOrder.Attributes.Add("onclick", "return false;");
+    }
+
     private void DoActivating()
     {
         ScriptManager.RegisterClientScriptInclude(this, GetType(), "ICSalesOrders", Page.ResolveUrl("~/SmartParts/Account/ICSalesOrders.js"));
@@ -57,21 +62,26 @@ public partial class ICSalesOrders : EntityBoundSmartPartInfoProvider
             {
                 if (clientContextService.CurrentContext.ContainsKey("OperatingCompany"))
                 {
-                    clientContextService.CurrentContext["OperatingCompany"].Equals(account.OperatingCompany.Id.ToString());
+                    clientContextService.CurrentContext["OperatingCompany"] = account.OperatingCompany.Id.ToString();
                 }
-                else
+                else if (account.OperatingCompany != null)
                 {
                     clientContextService.CurrentContext.Add("OperatingCompany", account.OperatingCompany.Id.ToString());
                 }
                 if (clientContextService.CurrentContext.ContainsKey("GlobalSyncId"))
                 {
-                    clientContextService.CurrentContext["GlobalSyncId"].Equals(account.GlobalSyncId.ToString());
+                    clientContextService.CurrentContext["GlobalSyncId"] = account.GlobalSyncId.ToString();
                 }
                 else
                 {
                     clientContextService.CurrentContext.Add("GlobalSyncId", account.GlobalSyncId.ToString());
                 }
             }
+            //else
+            //{
+            //    clientContextService.CurrentContext.Remove("OperatingCompany");
+            //    clientContextService.CurrentContext.Remove("GlobalSyncId");
+            //}
         }
     }
 
@@ -81,6 +91,7 @@ public partial class ICSalesOrders : EntityBoundSmartPartInfoProvider
         if (epage != null)
             _runActivating = (epage.IsNewEntity || _runActivating);
         if (_runActivating) DoActivating();
+        cmdAddERPSalesOrder.Visible = Sage.SalesLogix.BusinessRules.BusinessRuleHelper.AccountingSystemHandlesSO();
     }
 
     /// <summary>

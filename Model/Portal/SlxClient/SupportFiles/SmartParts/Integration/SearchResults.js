@@ -1,17 +1,17 @@
 ﻿Type.registerNamespace("SmartParts.Integration");
 
-SmartParts.Integration.SearchResults = function(searchOptions) {
+SmartParts.Integration.SearchResults = function (searchOptions) {
     this.SearchOptions = searchOptions;
 };
 
-SmartParts.Integration.SearchResults.create = function(id, searchOptions) {
+SmartParts.Integration.SearchResults.create = function (id, searchOptions) {
     window[id] = new SmartParts.Integration.SearchResults(searchOptions);
 };
 
-SmartParts.Integration.SearchResults.prototype.init = function() {
+SmartParts.Integration.SearchResults.prototype.init = function () {
 };
 
-Sage.MatchFilterManager = function() {
+Sage.MatchFilterManager = function () {
     this.win = '';
     this.matchesIsOpen = false;
     this.saveFilters = false;
@@ -20,7 +20,7 @@ Sage.MatchFilterManager = function() {
     this.filterTpl = new Ext.XTemplate(
         '<div id="entitylookupdiv_{index}" class="lookup-condition-row" style="padding-left:20px">',
             '<select style="width:160px" id="fieldnames_{index}" class="lookup-fieldnames-list" onchange="var mgr = Sage.Services.getService(\'MatchFilterManager\');if (mgr) { mgr.onPropertyChange({index}); }">',
-                '<tpl for="fields"><option value="{fieldname}">{displayname}</option></tpl>',
+                '<tpl for="fields"><option value="{FieldName}">{DisplayName}</option></tpl>',
             '</select>',
             '<select style="width:160px; margin-left:10px" id="operators_{index}" class="lookup-operators-list">',
                 '<tpl for="operators"><option value="{symbol}">{display}</option></tpl>',
@@ -38,10 +38,10 @@ Sage.MatchFilterManager = function() {
     }
 }
 
-Sage.MatchFilterManager.prototype.getTemplateObj = function() {
+Sage.MatchFilterManager.prototype.getTemplateObj = function () {
     var mgr = Sage.Services.getService("MatchFilterManager")
     mgr.setupTemplateObj = (window.matchSetupObject) ? window.matchSetupObject : {
-        fields: [{ fieldname: '', displayname: ''}],
+        fields: [{ FieldName: '', DisplayName: ''}],
         operators: [{ symbol: 'Equal To', display: 'Equal To'}],
         index: 0,
         hideimgurl: 'images/icons/Find_Remove_16x16.gif',
@@ -55,7 +55,7 @@ Sage.MatchFilterManager.prototype.getTemplateObj = function() {
     }
 }
 
-Sage.MatchFilterManager.prototype.buildDialog = function() {
+Sage.MatchFilterManager.prototype.buildDialog = function () {
     var mgr = Sage.Services.getService("MatchFilterManager");
     if (mgr) {
         if (mgr.matchesIsOpen) { return; }
@@ -63,19 +63,19 @@ Sage.MatchFilterManager.prototype.buildDialog = function() {
         $.ajax({
             type: "GET",
             contentType: "application/json",
-            url: String.format("slxdata.ashx/slx/crm/-/resources/getmatchproperties?resourceTypeName={0}&_dc={1}",
-                SearchResults.SearchOptions.resourceTypeName, new Date().getTime()),
+            url: String.format("slxdata.ashx/slx/crm/-/resources/getmatchproperties?resourceKind={0}&targetMapping={1}&_dc={2}",
+                SearchResults.SearchOptions.resourceKind, true, new Date().getTime()),
             dataType: 'json',
             success: handleReturnedItems,
             data: {},
-            error: function(request, status, error) {
+            error: function (request, status, error) {
                 alert("request: " + request + " \nstatus: " + status + " \nerror: " + error);
             }
         })
     }
 }
 
-Sage.MatchFilterManager.prototype.setupFilterElements = function() {
+Sage.MatchFilterManager.prototype.setupFilterElements = function () {
     var mgr = Sage.Services.getService("MatchFilterManager");
     if (mgr) {
         mgr.getTemplateObj();
@@ -95,7 +95,7 @@ Sage.MatchFilterManager.prototype.setupFilterElements = function() {
             stateful: false,
             html: contentHtml
         });
-        
+
         mgr.win = new Ext.Window({
             title: SearchResults.SearchOptions.dialogCaption,
             header: false,
@@ -113,31 +113,31 @@ Sage.MatchFilterManager.prototype.setupFilterElements = function() {
             tools: [{ id: 'help', handler: function () { window.open(Link.getHelpUrl('Search_for_Matches')); } }],
             buttons: [{
                 text: SearchResults.SearchOptions.OKButton,
-                handler: function() {
+                handler: function () {
                     mgr.saveFilters = true;
                     mgr.win.close();
                 }
             }, {
                 text: SearchResults.SearchOptions.cancelButton,
-                handler: function() {
+                handler: function () {
                     mgr.win.close();
                 }
-        }]
-            });
-        }
-        mgr.win.addListener("beforeclose", mgr.getSelections, mgr);
+            }]
+        });
     }
+    mgr.win.addListener("beforeclose", mgr.getSelections, mgr);
+}
 
-Sage.MatchFilterManager.prototype.getSelections = function() {
+Sage.MatchFilterManager.prototype.getSelections = function () {
     var mgr = Sage.Services.getService("MatchFilterManager");
     if (mgr.saveFilters) {
         mgr.updateDisplay();
         var filters = [];
-        $(".lookup-fieldnames-list").each(function(i, filter) {
+        $(".lookup-fieldnames-list").each(function (i, filter) {
             var field = $(String.format("#fieldnames_{0}", i)).get(0);
             var operator = $(String.format("#operators_{0}", i)).get(0);
             var searchValue = $(String.format("#searchvalues_{0}", i)).get(0);
-            filters.push({ "property": field.value, "operation": operator.value, "searchValue": searchValue.value });
+            filters.push({ "Property": field.value, "Operator": operator.value, "SearchValue": searchValue.value });
         });
         mgr.selectedFilters = filters;
         var filterCriteria = document.getElementById(SearchResults.SearchOptions.filtersId);
@@ -149,7 +149,7 @@ Sage.MatchFilterManager.prototype.getSelections = function() {
     mgr.saveFilters = false;
 }
 
-Sage.MatchFilterManager.prototype.updateDisplay = function() {
+Sage.MatchFilterManager.prototype.updateDisplay = function () {
     var control = document.getElementById(SearchResults.SearchOptions.resultsMsgId);
     if (control != null) {
         control.innerText = SearchResults.SearchOptions.loadingDisplay;
@@ -243,15 +243,15 @@ function showSearchResults() {
         mgr.addFilter();
         var field = document.getElementById(String.format("fieldnames_{0}", i));
         if (field != null) {
-            field.value = mgr.selectedFilters[i].property;
+            field.value = mgr.selectedFilters[i].Property;
         }
         var operator = document.getElementById(String.format("operators_{0}", i));
         if (operator != null) {
-            operator.value = mgr.selectedFilters[i].operation;
+            operator.value = mgr.selectedFilters[i].Operator;
         }
         var searchValue = document.getElementById(String.format("searchvalues_{0}", i));
         if (searchValue != null) {
-            searchValue.value = mgr.selectedFilters[i].searchValue;
+            searchValue.value = mgr.selectedFilters[i].SearchValue;
         }
     }
     $(document).bind("keydown", mgr.checkKeys);

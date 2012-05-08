@@ -204,9 +204,6 @@
   <data name="grdItems_Quantity" xml:space="preserve">
     <value>Quantity</value>
   </data>
-  <data name="grdItems_Status" xml:space="preserve">
-    <value>Status</value>
-  </data>
   <data name="grdItems_TaxTotal" xml:space="preserve">
     <value>Tax Total</value>
   </data>
@@ -365,5 +362,17 @@
   </data>
   <data name="lblPONumber.Caption" xml:space="preserve">
     <value>PO Number:</value>
+  </data>
+  <data name="cmdAddSalesOrder.ToolTip" xml:space="preserve">
+    <value>Add Sales Order</value>
+  </data>
+  <data name="grdSalesOrder_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="grdItems_Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="grdItems_PriceList" xml:space="preserve">
+    <value>Price List</value>
   </data>
 </root>

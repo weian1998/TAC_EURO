@@ -25,15 +25,11 @@ public partial class SmartParts_History_NotesHistoryList : EntityBoundSmartPartI
     protected override void OnFormBound()
     {
         base.OnFormBound();
-        ScriptManager.RegisterClientScriptInclude(this, GetType(), "NotesHistoryList", 
+        ScriptManager.RegisterClientScriptInclude(this, GetType(), "NotesHistoryList",
             Page.ResolveUrl("~/SmartParts/History/NotesHistoryList.js"));
 
-        var ccs = PageWorkItem.Services.Get<ClientContextService>();
-        if (!ccs.CurrentContext.ContainsKey("HistoryTypeMap"))
-        {
-            ccs.CurrentContext["HistoryTypeMap"] = Server.HtmlEncode(BuildHistoryTypeMap());
-        }
-
+        string scr = string.Format("Sage.UI.Forms.HistoryList.HistoryTypeMap = {{{0}}};", Server.HtmlEncode(BuildHistoryTypeMap()));
+        ScriptManager.RegisterStartupScript(this, GetType(), "historyTypes", scr, true);
 
         var script =
             String.Format(
@@ -41,7 +37,7 @@ public partial class SmartParts_History_NotesHistoryList : EntityBoundSmartPartI
                     function() {{ return '{2} eq \'' + Sage.Utility.getCurrentEntityId() + '\''; }}, 
                     {{ workspace: '{1}', tabId: '{3}' }}); }}, 1);",
                 placeholder.ClientID, getMyWorkspace(), GetParentField(), ID);
-                
+
         if (!Page.IsPostBack)
         {
             script = string.Format("dojo.ready(function() {{ {0} }});", script);
@@ -124,11 +120,11 @@ public partial class SmartParts_History_NotesHistoryList : EntityBoundSmartPartI
             {
                 String v = rm.GetString(((DisplayNameAttribute)attrs[0]).DisplayName) ??
                            ((DisplayNameAttribute)attrs[0]).DisplayName;
-                buf.Append(v);
+                buf.AppendFormat("'{0}'", v);
             }
             else
             {
-                buf.Append(fi.Name);
+                buf.AppendFormat("'{0}'", fi.Name);
             }
         }
         return buf.ToString();

@@ -6,6 +6,7 @@ using Sage.Entity.Interfaces;
 using Sage.Platform;
 using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
+using Sage.Platform.ComponentModel;
 using Sage.Platform.Security;
 using Sage.Platform.WebPortal.Services;
 using Sage.Platform.WebPortal.SmartParts;
@@ -89,6 +90,7 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
                     IAppIdMapping slxFeed = IntegrationHelpers.GetSlxAccountingFeed();
                     lblLinkAccount.Enabled = !slxFeed.RestrictToSingleAccount.HasValue ||
                                              !slxFeed.RestrictToSingleAccount.Value;
+                    updateAccountPanel.Update();
                 }
                 else
                 {
@@ -206,7 +208,7 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
 
     protected void lnkSubmitSalesOrder_Click(object sender, EventArgs e)
     {
-        if (ValidateErpSalesOrder())
+        if (ValidateErpSalesOrder(true))
         {
             if (_currentSOEntity.Account == null || !_currentSOEntity.Account.PromotedToAccounting.HasValue ||
                     (_currentSOEntity.Account.PromotedToAccounting.HasValue && !_currentSOEntity.Account.PromotedToAccounting.Value))
@@ -219,8 +221,14 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
 
     private bool ValidateErpSalesOrder()
     {
+        return ValidateErpSalesOrder(false);
+    }
+
+    private bool ValidateErpSalesOrder(bool requirePromotion)
+    {
         if (_currentSOEntity != null)
         {
+            bool promoted = false;
             if (_currentSOEntity.OperatingCompany == null)
             {
                 throw new ValidationException(
@@ -232,6 +240,26 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
                     String.Format(GetLocalResourceObject("Error_IntegrationFeed_Disabled").ToString(),
                                   _currentSOEntity.OperatingCompany.Name));
             }
+            //ensure that this account is linked to this opperating company
+            foreach (IAccountOperatingCompany oppCompany in _currentSOEntity.Account.AccountOperatingCompanies)
+            {
+                if (oppCompany.IntegrationApplication.Equals(_currentSOEntity.OperatingCompany))
+                {
+                    promoted = true;
+                    break;
+                }
+            }
+            if ((!promoted) && (requirePromotion))
+            {
+                throw new ValidationException(
+                    GetLocalResourceObject("Error_Account_NotPromoted").ToString());
+            }
+            if (_currentSOEntity.SalesOrderItems.Count <= 0)
+            {
+                throw new ValidationException(
+                    String.Format(GetLocalResourceObject("Error_CheckPrice_NoProducts").ToString(),
+                                    _currentSOEntity.SalesOrderNumber));
+            }
             return true;
         }
         return false;
@@ -242,12 +270,21 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
         EntityPage page = Page as EntityPage;
         if (page != null)
         {
-            string caption = GetLocalResourceObject("CheckPrice_Dialog.Caption").ToString();
-            DialogService.SetSpecs(200, 200, 400, 975, "ICUpdatePricing", caption, true);
-            DialogService.EntityType = page.EntityContext.EntityType;
-            DialogService.DialogParameters.Add("SubmitSalesOrder", submitSalesOrder);
-            DialogService.EntityID = entityId;
-            DialogService.ShowDialog();
+            try
+            {
+                IList<ComponentView> lines = _currentSOEntity.GetUpdatedErpPricingLines();
+                string caption = GetLocalResourceObject("CheckPrice_Dialog.Caption").ToString();
+                DialogService.SetSpecs(200, 200, 400, 975, "ICUpdatePricing", caption, true);
+                DialogService.EntityType = page.EntityContext.EntityType;
+                DialogService.DialogParameters.Add("SubmitSalesOrder", submitSalesOrder);
+                DialogService.DialogParameters.Add("PriceList", lines);
+                DialogService.EntityID = entityId;
+                DialogService.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                throw new ValidationException(GetLocalResourceObject("Error_PricingService").ToString());
+            }
         }
     }
 

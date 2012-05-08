@@ -278,8 +278,6 @@ public partial class MergeRecords : SmartPartInfoProvider
                                                                       : MergeOverwrite.targetWins;
         }
 
-        //object[] objarray = new object[] { SessionMergeProvider.Target.EntityData };
-        //Sage.Platform.EntityFactory.Execute<type>("Account.MergeAccount", objarray);
         Type type = SessionMergeArguments.MergeProvider.Target.EntityType;
         if (type.Equals(typeof (IAccount)))
         {
@@ -293,37 +291,22 @@ public partial class MergeRecords : SmartPartInfoProvider
         }
         if (success)
         {
-            IPersistentEntity source =
-                (IPersistentEntity) GetEntity(type, SessionMergeArguments.MergeProvider.Source.EntityId);
-            source.Delete();
-            EntityService.RemoveEntityHistory(type, source);
-            Response.Redirect(String.Format("{0}.aspx", GetTableName(EntityService.EntityType)));
+            using (ISession session = new Sage.Platform.Orm.SessionScopeWrapper(true))
+            {
+                string entityId = SessionMergeArguments.MergeProvider.Source.EntityId;
+                IPersistentEntity source = Sage.Platform.EntityFactory.GetById(type, entityId) as IPersistentEntity;
+                source.Delete();
+                EntityService.RemoveEntityHistory(type, source);
+                Response.Redirect(String.Format("{0}.aspx", GetEntityName(type)));
+            }
         }
-    }
-
-    private static Object GetEntity(Type type, string entityId)
-    {
-        ISession session = SessionFactoryHolder.HolderInstance.CreateSession();
-        try
-        {
-            StringBuilder hql = new StringBuilder();
-            hql.Append(String.Format("Select a From {0} a Where a.Id = :entityId", GetTableName(type)));
-            IQuery query = session.CreateQuery(hql.ToString());
-            query.SetAnsiString("entityId", entityId);
-            return query.UniqueResult();
-        }
-        catch (Exception ex)
-        {
-            log.Error(ex.Message);
-        }
-        return null;
     }
 
     /// <summary>
     /// Gets the name of the table.
     /// </summary>
     /// <returns></returns>
-    private static String GetTableName(Type entity)
+    private static String GetEntityName(Type entity)
     {
         return entity.Name.Substring(1, entity.Name.Length - 1);
     }
