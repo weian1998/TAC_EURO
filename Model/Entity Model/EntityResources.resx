@@ -12354,11 +12354,11 @@
   <data name="Vactiveteams.DisplayNamePlural" xml:space="preserve">
     <value>ActiveTeams</value>
   </data>
-  <data name="Account.EuroOwner.DisplayName" xml:space="preserve">
-    <value>EuroOwner</value>
+  <data name="Vhistowner.Accountid.DisplayName" xml:space="preserve">
+    <value>Accountid</value>
   </data>
-  <data name="Vactiveteams.Account.DisplayName" xml:space="preserve">
-    <value>Account</value>
+  <data name="Vhistowner.DisplayName" xml:space="preserve">
+    <value>Vhistowner</value>
   </data>
   <data name="Contact.EuroAccountManager.DisplayName" xml:space="preserve">
     <value>EuroAccountManager</value>
@@ -12441,21 +12441,6 @@
   <data name="EuroUserTeamAccess.User.DisplayName" xml:space="preserve">
     <value>User</value>
   </data>
-  <data name="Veurouserteamaccess.DisplayName" xml:space="preserve">
-    <value>Veurouserteamaccess</value>
-  </data>
-  <data name="Veurouserteamaccess.Eurouserteamaccessid.DisplayName" xml:space="preserve">
-    <value>Eurouserteamaccessid</value>
-  </data>
-  <data name="Veurouserteamaccess.Eurouserid.DisplayName" xml:space="preserve">
-    <value>Eurouserid</value>
-  </data>
-  <data name="Veurouserteamaccess.Teamseccodeid.DisplayName" xml:space="preserve">
-    <value>Teamseccodeid</value>
-  </data>
-  <data name="Veurouserteamaccess.Teamname.DisplayName" xml:space="preserve">
-    <value>Teamname</value>
-  </data>
   <data name="Vuserteam.DisplayName" xml:space="preserve">
     <value>UserTeam</value>
   </data>
@@ -12479,5 +12464,14 @@
   </data>
   <data name="Product.Filter.ModifiedBy.DisplayName" xml:space="preserve">
     <value>Modified By</value>
+  </data>
+  <data name="Vhistowner.Histowner.DisplayName" xml:space="preserve">
+    <value>Histowner</value>
+  </data>
+  <data name="Account.Vhistowner.DisplayName" xml:space="preserve">
+    <value>Vhistowner</value>
+  </data>
+  <data name="Vhistowner.Account.DisplayName" xml:space="preserve">
+    <value>Account</value>
   </data>
 </root>

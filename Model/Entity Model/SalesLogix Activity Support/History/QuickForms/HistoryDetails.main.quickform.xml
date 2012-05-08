@@ -417,6 +417,13 @@ else
     <QuickFormElement>
       <Properties>
         <Property name="EntityMappingType" type="System.String">Property</Property>
+        <Property name="EntityTypeName" type="System.String"></Property>
+        <Property name="EntityNamespace" type="System.String"></Property>
+        <Property name="EntityAssemblyName" type="System.String"></Property>
+        <Property name="DefaultNamespace" type="System.String"></Property>
+        <Property name="AssemblyName" type="System.String"></Property>
+        <Property name="EntityReferenceName" type="System.String"></Property>
+        <Property name="DesignerDisplayMember" type="System.String"></Property>
       </Properties>
       <ControlDefinition>
         <Properties>
@@ -427,6 +434,13 @@ else
     <QuickFormElement>
       <Properties>
         <Property name="EntityMappingType" type="System.String">Property</Property>
+        <Property name="EntityTypeName" type="System.String"></Property>
+        <Property name="EntityNamespace" type="System.String"></Property>
+        <Property name="EntityAssemblyName" type="System.String"></Property>
+        <Property name="DefaultNamespace" type="System.String"></Property>
+        <Property name="AssemblyName" type="System.String"></Property>
+        <Property name="EntityReferenceName" type="System.String"></Property>
+        <Property name="DesignerDisplayMember" type="System.String"></Property>
       </Properties>
       <ControlDefinition>
         <Properties>
@@ -437,6 +451,13 @@ else
     <QuickFormElement>
       <Properties>
         <Property name="EntityMappingType" type="System.String">Property</Property>
+        <Property name="EntityTypeName" type="System.String"></Property>
+        <Property name="EntityNamespace" type="System.String"></Property>
+        <Property name="EntityAssemblyName" type="System.String"></Property>
+        <Property name="DefaultNamespace" type="System.String"></Property>
+        <Property name="AssemblyName" type="System.String"></Property>
+        <Property name="EntityReferenceName" type="System.String"></Property>
+        <Property name="DesignerDisplayMember" type="System.String"></Property>
       </Properties>
       <ControlDefinition>
         <Properties>
@@ -605,14 +626,34 @@ else
         else
         {
             //Mark for Everyone
-            history.SeccodeId = "SYST00000001";
+            if (history.AccountId != "" || history.AccountId != null)
+            {
+                //Set to the Accounts XHistory Settings
+                Sage.Entity.Interfaces.IAccount _entity = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IAccount>(history.AccountId);
+                history.SeccodeId = _entity.Vhistowner.Histowner.ToString();
+            }
+            else
+            {
+                history.SeccodeId = "SYST00000001";
+            }    
+                
         }
    
     }
     else
     {
-        //Mark for Everyone
-        history.SeccodeId = "SYST00000001";
+       //Mark for Everyone
+            if (history.AccountId != "" || history.AccountId != null)
+            {
+                //Set to the Accounts XHistory Settings
+                Sage.Entity.Interfaces.IAccount _entity = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IAccount>(history.AccountId);
+                history.SeccodeId = _entity.Vhistowner.Histowner.ToString();
+            }
+            else
+            {
+                history.SeccodeId = "SYST00000001";
+            }    
+                
     }]]></CSharpCodeSnippet></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction></QFCheckBox></Property>
         </Properties>
       </ControlDefinition>

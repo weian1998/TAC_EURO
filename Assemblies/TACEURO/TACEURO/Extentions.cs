@@ -56,8 +56,25 @@ namespace TACEURO
             //======================================================
             foreach (IOpportunity tmpOpportunity in account.Opportunities)
             {
-                tmpOpportunity.SeccodeId = NewOwnerID;
-                tmpOpportunity.Save(); 
+                //tmpOpportunity.SeccodeId = NewOwnerID;
+                //tmpOpportunity.Save(); 
+                //=========================================================================================
+                // Logic to Find Mapped xHistory Table  This Give Row Level Security to Opportunities
+                //==========================================================================================
+                string strXMappedTeamOpp = string.Empty;
+                strXMappedTeamOpp = Extentions.GetField<string>("XHISTORYSECCODEID", "EUROXHISTORYMAPPING", "MAINACCOUNTSECCODEID = '" + NewOwnerID + "'");
+                if (strXMappedTeamOpp != string.Empty)
+                {
+                    // Assign the xHistory Mapped Team
+                    tmpOpportunity.SeccodeId  = strXMappedTeamOpp;
+                    tmpOpportunity.Save();
+                }
+                else
+                {
+                    // Assign the Same Team as the Account
+                    tmpOpportunity.SeccodeId = NewOwnerID;
+                    tmpOpportunity.Save();
+                }
             }
             //======================================================
             // Historyies

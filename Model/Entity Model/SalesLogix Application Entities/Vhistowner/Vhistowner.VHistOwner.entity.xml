@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="0f8e07b3-7f9a-4cad-a4f1-8ce21299a93d" lastModifiedUtc="2012-05-08T14:03:34.953125Z" manageSchema="false" tableName="VHistOwner" name="Vhistowner" isExtension="false" audited="false" onBeforeInsertMethodId="89009cea-fcba-4c3b-b063-f1b4e05a2ea0" onAfterInsertMethodId="9d8eaa3e-8938-4ebe-b0ca-8a6a456a3e02" onBeforeUpdateMethodId="3a6013f9-462d-4141-8ffc-e128a1edeafc" onAfterUpdateMethodId="c68a9cfe-e386-4ffd-b8b4-ceb59ef3944b" onBeforeDeleteMethodId="53fb64f4-29b0-4044-b019-04c22af05d6a" onAfterDeleteMethodId="a9d1738b-08ee-4a1c-a15d-9fa0997980b8" onCreateId="e1e28e88-631f-4451-a895-e4fa7b1ef21e">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
+      <extender guid="76aa0e24-2c8f-3b71-a1f9-ca6db3db4459">
+        <OrmEntitySDataExtension generateFeed="true" pathName="vhistowners" canPost="true" canPut="true" canDelete="true" />
+      </extender>
+      <extender guid="1589723d-0536-4bf3-bdd7-3f6f7fe165d0">
+        <OrmEntityMetadataExtension>
+          <IsHistoryTable>false</IsHistoryTable>
+        </OrmEntityMetadataExtension>
+      </extender>
+    </extendee>
+  </ExtendedPropertiesCollection>
+  <keyProperties>
+    <keyReference id="1ad2097b-5e15-4026-b39f-3a5e1cba2d84" ordinalPosition="1" />
+  </keyProperties>
+  <properties>
+    <property xsi:type="OrmFieldProperty" id="1ad2097b-5e15-4026-b39f-3a5e1cba2d84" lastModifiedUtc="2012-05-08T14:03:34.78125Z" name="Accountid" audited="false" isNullable="false" columnName="ACCOUNTID" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="16539e58-531d-402d-bce1-9b7b74ac240f" lastModifiedUtc="2012-05-08T14:03:34.796875Z" name="Histowner" audited="false" isNullable="false" columnName="HistOwner" maxLength="12" precision="0" scale="0" ordinal="1" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
+      </SystemDataType>
+    </property>
+  </properties>
+</entity>
