@@ -258,6 +258,33 @@ namespace TACEURO
             }
         }
 
+        public static void OnBeforeInsertOpportunity(IOpportunity Opportunity, ISession session)
+        {
+            //tmpOpportunity.SeccodeId = NewOwnerID;
+            //tmpOpportunity.Save(); 
+            //=========================================================================================
+            // Logic to Find Mapped xHistory Table  This Give Row Level Security to Opportunities
+            //==========================================================================================
+            if (Opportunity.Account != null)
+            {
+                string strXMappedTeamOpp = string.Empty;
+                strXMappedTeamOpp = Extentions.GetField<string>("XHISTORYSECCODEID", "EUROXHISTORYMAPPING", "MAINACCOUNTSECCODEID = '" + Opportunity.Account.SeccodeId + "'");
+                if (strXMappedTeamOpp != string.Empty)
+                {
+                    // Assign the xHistory Mapped Team
+                    Sage.Entity.Interfaces.IOwner MyOwner = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOwner>(strXMappedTeamOpp);
+                    Opportunity.Owner = MyOwner;
+
+                }
+                else
+                {
+                    // Assign the Same Team as the Account
+                    //opportunity.SeccodeId = opportunity.Account.SeccodeId;
+
+                }
+            }
+        }
+
         #endregion
 
 

@@ -195,9 +195,6 @@
   <data name="pklStatus.Caption" xml:space="preserve">
     <value>Status:</value>
   </data>
-  <data name="usrUser.Caption" xml:space="preserve">
-    <value>Acct. Mgr.:</value>
-  </data>
   <data name="cmdReset.Caption" xml:space="preserve">
     <value>Reset</value>
   </data>
@@ -238,9 +235,6 @@
     <value>Reseller</value>
   </data>
   <data name="lueAccount.ButtonToolTip" xml:space="preserve">
-    <value>Find</value>
-  </data>
-  <data name="usrUser.ButtonToolTip" xml:space="preserve">
     <value>Find</value>
   </data>
   <data name="lueReseller.ButtonToolTip" xml:space="preserve">
@@ -296,5 +290,14 @@
   </data>
   <data name="luePriceList.LookupDialogTitle" xml:space="preserve">
     <value>Lookup Price List</value>
+  </data>
+  <data name="SalesPotential.Caption" xml:space="preserve">
+    <value>Sales Potential</value>
+  </data>
+  <data name="lueAcctManager.LookupProperties.Username.PropertyHeader" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="lueAcctManager.Caption" xml:space="preserve">
+    <value>Acct. Manager:</value>
   </data>
 </root>

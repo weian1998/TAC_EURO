@@ -8,7 +8,7 @@
     <Property name="ImagePath" type="System.String"></Property>
     <Property name="DefinitionType" type="System.String">Sage.Platform.QuickForms.QuickFormMainDetailViewDefinition, Sage.Platform.QuickForms</Property>
     <Property name="Columns" type="System.ComponentModel.BindingList`1[[System.Windows.Forms.ColumnStyle, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><ArrayOfColumnStyle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ColumnStyle><SizeType>Percent</SizeType><Width>50</Width></ColumnStyle><ColumnStyle><SizeType>Percent</SizeType><Width>50</Width></ColumnStyle></ArrayOfColumnStyle></Property>
-    <Property name="Rows" type="System.ComponentModel.BindingList`1[[System.Windows.Forms.RowStyle, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><ArrayOfRowStyle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle></ArrayOfRowStyle></Property>
+    <Property name="Rows" type="System.ComponentModel.BindingList`1[[System.Windows.Forms.RowStyle, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><ArrayOfRowStyle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle></ArrayOfRowStyle></Property>
     <Property name="GeneratePrintView" type="System.Boolean">False</Property>
     <Property name="Description" type="System.String"></Property>
     <Property name="ActiveControl" type="System.String"></Property>
@@ -78,18 +78,25 @@
     </QuickFormElement>
     <QuickFormElement>
       <Properties>
-        <Property name="EntityMappingType" type="System.String">Property</Property>
-        <Property name="EntityTypeName" type="System.String">IOpportunity</Property>
-        <Property name="EntityNamespace" type="System.String"></Property>
-        <Property name="EntityAssemblyName" type="System.String"></Property>
-        <Property name="DefaultNamespace" type="System.String">Sage.Entity.Interfaces</Property>
-        <Property name="AssemblyName" type="System.String">Sage.Entity.Interfaces</Property>
-        <Property name="EntityReferenceName" type="System.String"></Property>
-        <Property name="ValueMember" type="System.String">AccountManager</Property>
+        <Property name="EntityMappingType" type="System.String">None</Property>
       </Properties>
       <ControlDefinition>
         <Properties>
-          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXUser, Sage.SalesLogix.QuickForms.QFControls"><QFSLXUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>2</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>usrUser</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>AccountManager</DataItemName><ControlItemName>LookupResultValue</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>usrUser</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction><ShowNonLoginUsers>false</ShowNonLoginUsers><LookupBindingMode>Object</LookupBindingMode><LookupResultValue xsi:type="xsd:string" /><AutoPostBack>false</AutoPostBack><Required>false</Required></QFSLXUser></Property>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXLookup, Sage.SalesLogix.QuickForms.QFControls"><QFSLXLookup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>2</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>lueAcctManager</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>EuroAccountManager</DataItemName><ControlItemName>LookupResultValue</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>lueAcctManager</ResourceKey><RootActionName>CSharpSnippetAction</RootActionName><Action><CSharpCodeSnippet><![CDATA[//==================================================================
+    // TAC Code here
+    //==================================================================
+    Sage.Entity.Interfaces.IOpportunity _entity = BindingSource.Current as Sage.Entity.Interfaces.IOpportunity;
+    if (_entity != null)
+    {
+        Sage.Entity.Interfaces.IVactiveusers tmpActiveUser = (Sage.Entity.Interfaces.IVactiveusers)lueAcctManager.LookupResultValue;
+        //Sage.Entity.Interfaces.IUser tmpUser = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IUser>(tmpActiveUser.Id.ToString()  );
+        //_entity.AccountManager   = tmpUser ;
+        //_entity.AccountManagerId = tmpActiveUser.Id.ToString();
+        _entity.EuroAccountManager = tmpActiveUser;
+        _entity.Save();
+        ScriptManager.RegisterStartupScript(this, GetType(), "refresh", "window.setTimeout('window.location.reload(true);',50);", true);
+        //Response.Redirect(Request.Url.ToString());
+    }]]></CSharpCodeSnippet></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction><LookupImage /><LookupDialogWidth xsi:nil="true" /><LookupDialogHeight xsi:nil="true" /><LookupBindingMode>Object</LookupBindingMode><LookupResultValue xsi:type="xsd:string" /><SeedProperty /><SeedValue /><Required>false</Required><DropDownDisplayProperty /><AllowClearingResult>false</AllowClearingResult><OverrideSeedOnSearch>false</OverrideSeedOnSearch><LookupEntityName>Vactiveusers</LookupEntityName><LookupEntityTypeName>Sage.Entity.Interfaces.IVactiveusers, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</LookupEntityTypeName><AutoPostBack>false</AutoPostBack><EnableHyperLinking>false</EnableHyperLinking><InitializeLookup>true</InitializeLookup><LookupProperties><LookupProperty><PropertyName>Username</PropertyName><PropertyType>System.String</PropertyType><PropertyHeader>Username</PropertyHeader><PropertyFormat>None</PropertyFormat><PropertyFormatString /><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty></LookupProperties><LookupPreFilters /></QFSLXLookup></Property>
         </Properties>
       </ControlDefinition>
     </QuickFormElement>
@@ -183,11 +190,28 @@
     </QuickFormElement>
     <QuickFormElement>
       <Properties>
+        <Property name="EntityMappingType" type="System.String">Property</Property>
+        <Property name="EntityTypeName" type="System.String">IOpportunity</Property>
+        <Property name="EntityNamespace" type="System.String">Sage.Entity.Interfaces</Property>
+        <Property name="EntityAssemblyName" type="System.String">Sage.Entity.Interfaces</Property>
+        <Property name="DefaultNamespace" type="System.String">Sage.Entity.Interfaces</Property>
+        <Property name="AssemblyName" type="System.String">Sage.Entity.Interfaces</Property>
+        <Property name="EntityReferenceName" type="System.String"></Property>
+        <Property name="ValueMember" type="System.String">SalesPotential</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFTextBox, Sage.Platform.QuickForms"><QFTextBox xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>10</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>SalesPotential</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>SalesPotential</DataItemName><ControlItemName>Text</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>SalesPotential</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction></QFTextBox></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
         <Property name="EntityMappingType" type="System.String">None</Property>
       </Properties>
       <ControlDefinition>
         <Properties>
-          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFTextBox, Sage.Platform.QuickForms"><QFTextBox xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ColumnSpan>2</ColumnSpan><Column>0</Column><Row>10</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>txtComments</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Notes</DataItemName><ControlItemName>Text</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><Lines>4</Lines><OnChangeAction><ResourceKey>txtComments</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction></QFTextBox></Property>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFTextBox, Sage.Platform.QuickForms"><QFTextBox xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ColumnSpan>2</ColumnSpan><Column>0</Column><Row>12</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>txtComments</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Notes</DataItemName><ControlItemName>Text</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><Lines>4</Lines><OnChangeAction><ResourceKey>txtComments</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction></QFTextBox></Property>
         </Properties>
       </ControlDefinition>
     </QuickFormElement>
