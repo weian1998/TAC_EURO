@@ -31,7 +31,7 @@
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="cf1a370f-47e5-42f9-b718-7b7c2d46ed5c" lastModifiedUtc="0001-01-01T00:00:00" name="AccountManagerId" audited="false" include="false" columnName="ACCOUNTMANAGERID" maxLength="12" precision="0" scale="0" ordinal="36" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="cf1a370f-47e5-42f9-b718-7b7c2d46ed5c" lastModifiedUtc="2012-05-09T18:04:45.859375Z" name="AccountManagerId" audited="false" columnName="ACCOUNTMANAGERID" maxLength="12" precision="0" scale="0" ordinal="36" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
           <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">

@@ -252,14 +252,29 @@
 <span   class="textcontrol">
 <SalesLogix:SlxUserControl runat="server" ID="usrAccountManager"  />
 
-</span> 
-</td>
-  <td >  
-           <span class="lbl"><asp:Label ID="ownAccountOwner_lz" AssociatedControlID="ownAccountOwner" runat="server" Text="<%$ resources: ownAccountOwner.Caption %>"></asp:Label></span> 
+</span>
+</td> 
+<td>
+        <%--   <span class="lbl"><asp:Label ID="ownAccountOwner_lz" AssociatedControlID="ownAccountOwner" runat="server" Text="<%$ resources: ownAccountOwner.Caption %>"></asp:Label></span> 
 <span   class="textcontrol">
 <SalesLogix:OwnerControl runat="server" ID="ownAccountOwner"  />
 
-</span> 
+</span> --%>
+<div class=" lbl alignleft">
+   <asp:Label ID="lueOwner2_lbl" AssociatedControlID="lueOwner2" runat="server" Text="Owner" ></asp:Label>
+ </div>   
+  <div  class="textcontrol lookup"  >
+<SalesLogix:LookupControl runat="server" ID="lueOwner2" LookupEntityName="Vuserteam" LookupEntityTypeName="Sage.Entity.Interfaces.IVuserteam, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" LookupBindingMode="String" SeedProperty="Eurouserid" InitializeLookup="true" AutoPostBack="true"  >
+<LookupProperties>
+<SalesLogix:LookupProperty PropertyHeader="Teamname" PropertyName="Teamname" PropertyType="System.String" PropertyFormat="None" PropertyFormatString="" UseAsResult="False" ExcludeFromFilters="False"></SalesLogix:LookupProperty>
+<SalesLogix:LookupProperty PropertyHeader="MySeccodeid" PropertyName="Myseccodeid" PropertyType="System.String" PropertyFormat="None" PropertyFormatString="" UseAsResult="True" ExcludeFromFilters="False"></SalesLogix:LookupProperty>
+</LookupProperties>
+<LookupPreFilters>
+</LookupPreFilters>
+</SalesLogix:LookupControl>
+  </div>
+ 
+
 </td>
                 <td  >
  <div class=" lbl alignleft">
@@ -436,7 +451,7 @@
 		BindingSource.Bindings.Add(new WebEntityBinding("Account.SubType", pklAccountSubType, "PickListValue"));
 		BindingSource.Bindings.Add(new WebEntityBinding("Account.Status", pklAccountStatus, "PickListValue"));
 		BindingSource.Bindings.Add(new WebEntityBinding("Account.AccountManager", usrAccountManager, "LookupResultValue"));
-		BindingSource.Bindings.Add(new WebEntityBinding("Account.Owner", ownAccountOwner, "LookupResultValue"));
+		//BindingSource.Bindings.Add(new WebEntityBinding("Account.Owner", ownAccountOwner, "LookupResultValue"));
         BindingSource.Bindings.Add(new WebEntityBinding("Account.LeadSource", lucLeadSource, "LookupResultValue"));
         
 
@@ -460,7 +475,8 @@
 			pklAccountIndustry.Enabled = false;
 			txtAccountBusinessDescription.Enabled = false;
 			usrAccountManager.Enabled = false;
-			ownAccountOwner.Enabled = false;
+			//ownAccountOwner.Enabled = false;
+            lueOwner2.Enabled = false;
             lucLeadSource.Enabled = false;
             
 
@@ -610,10 +626,32 @@
         IContact contact = BindingSource.Current as IContact;
 		if (contact != null)
 		{
+            //============================
+            // TAC Code Here
+            //============================
+            
+            if (contact.Account.Owner == null)
+            {
+                if (lueOwner2.LookupResultValue == "")
+                {
+                    Sage.Entity.Interfaces.IOwner tmpOwner = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOwner>("FEUROA00003F"); //Supplier
+                    contact.Account.Owner = tmpOwner;
+                }
+                else
+                {
+                 Sage.Entity.Interfaces.IVuserteam _UserTeam = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IVuserteam>(lueOwner2.LookupResultValue.ToString());
+                 Sage.Entity.Interfaces.IOwner tmpOwner = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOwner>(_UserTeam.Myseccodeid.ToString()   ); //Supplier
+                    contact.Account.Owner = tmpOwner;
+                }
+                
+            }
 			object[] objarray = new object[] { contact, contact.Account };
 			object contactId = EntityFactory.Execute<Contact>("Contact.SaveContactAccount", objarray);
-			if (contactId != null)
-				Response.Redirect(string.Format("Contact.aspx?entityId={0}", (contactId)));
+            if (contactId != null)
+            {
+               
+                Response.Redirect(string.Format("Contact.aspx?entityId={0}", (contactId)));
+            }
 		}
 	}
 
@@ -623,6 +661,25 @@
         IContact contact = BindingSource.Current as IContact;
 		if (contact != null)
 		{
+            //============================
+            // TAC Code Here
+            //============================
+
+            if (contact.Account.Owner == null)
+            {
+                if (lueOwner2.LookupResultValue == "")
+                {
+                    Sage.Entity.Interfaces.IOwner tmpOwner = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOwner>("FEUROA00003F"); //Supplier
+                    contact.Account.Owner = tmpOwner;
+                }
+                else
+                {
+                    Sage.Entity.Interfaces.IVuserteam _UserTeam = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IVuserteam>(lueOwner2.LookupResultValue.ToString());
+                    Sage.Entity.Interfaces.IOwner tmpOwner = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOwner>(_UserTeam.Myseccodeid.ToString()); //Supplier
+                    contact.Account.Owner = tmpOwner;
+                }
+
+            }
 			object[] objarray = new object[] {contact, contact.Account};
 			EntityFactory.Execute<Contact>("Contact.SaveContactAccount", objarray);
 			Response.Redirect(string.Format("InsertContactAccount.aspx?modeid=Insert&accountId={0}", contact.Account.Id));
@@ -635,6 +692,25 @@
         IContact contact = BindingSource.Current as IContact;
 		if (contact != null)
 		{
+            //============================
+            // TAC Code Here
+            //============================
+
+            if (contact.Account.Owner == null)
+            {
+                if (lueOwner2.LookupResultValue == "")
+                {
+                    Sage.Entity.Interfaces.IOwner tmpOwner = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOwner>("FEUROA00003F"); //Supplier
+                    contact.Account.Owner = tmpOwner;
+                }
+                else
+                {
+                    Sage.Entity.Interfaces.IVuserteam _UserTeam = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IVuserteam>(lueOwner2.LookupResultValue.ToString());
+                    Sage.Entity.Interfaces.IOwner tmpOwner = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOwner>(_UserTeam.Myseccodeid.ToString()); //Supplier
+                    contact.Account.Owner = tmpOwner;
+                }
+
+            }
 			object[] objarray = new object[] {contact, contact.Account};
 			EntityFactory.Execute<Contact>("Contact.SaveContactAccount", objarray);
 			Response.Redirect("InsertContactAccount.aspx?modeid=Insert");
@@ -654,6 +730,7 @@
 
     private void LoadView()
     {
+        
         IContact contact = (BindingSource.Current as IContact);
         if (contact != null)
         {
@@ -679,7 +756,7 @@
                 pklAccountIndustry.Enabled = changeEnable;
                 txtAccountBusinessDescription.Enabled = changeEnable;
                 usrAccountManager.Enabled = changeEnable;
-                ownAccountOwner.Enabled = changeEnable;
+                //ownAccountOwner.Enabled = changeEnable;
                 lucLeadSource.Enabled = changeEnable;
 
                 pklAccountSubType.PickListName = account.GetSubTypePickListName();
@@ -689,6 +766,7 @@
                     lueUseExistingAccount.LookupResultValue = account;
                     pklAccountSubType.PickListName = account.GetSubTypePickListName();
                 }
+                
                 
                 if (!IsPostBack)
                 {
@@ -724,6 +802,27 @@
                     }
                     
                     contact.Address.Description  = account.Address.Description;
+                    //================================================================================
+                    // TAC Code Here
+                    //================================================================================
+                    Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+                    Sage.Entity.Interfaces.IUser currentuser = usersvc.GetUser();
+                    lueOwner2.SeedValue = currentuser.Id.ToString();
+
+                    if (account.Owner.OwnerDescription == "Everyone")
+                    {
+                        account.Owner = null;
+                    }
+                    else
+                    {
+                        lueOwner2.LookupResultValue = account.Owner.OwnerDescription;
+                    }
+                        
+
+                    
+                    //================================================================================
+                    // TAC Code Here
+                    //================================================================================
                     
                 }
             }

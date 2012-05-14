@@ -191,6 +191,7 @@ namespace TACEURO
 
         }
         #endregion
+
         #region Opportunity Events
         // Example of target method signature
         public static void TACOpportunityOnBeforeUpdate(IOpportunity Opportunity, ISession session)
@@ -228,6 +229,35 @@ namespace TACEURO
 
             }
         }
+
+        // Example of target method signature
+        public static void OnCreateOpportunity(IOpportunity opportunity)
+        {
+            //tmpOpportunity.SeccodeId = NewOwnerID;
+            //tmpOpportunity.Save(); 
+            //=========================================================================================
+            // Logic to Find Mapped xHistory Table  This Give Row Level Security to Opportunities
+            //==========================================================================================
+            if (opportunity.Account != null)
+            {
+                string strXMappedTeamOpp = string.Empty;
+                strXMappedTeamOpp = Extentions.GetField<string>("XHISTORYSECCODEID", "EUROXHISTORYMAPPING", "MAINACCOUNTSECCODEID = '" + opportunity.Account.SeccodeId + "'");
+                if (strXMappedTeamOpp != string.Empty)
+                {
+                    // Assign the xHistory Mapped Team
+                    Sage.Entity.Interfaces.IOwner MyOwner = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOwner>(strXMappedTeamOpp);
+                    opportunity.Owner = MyOwner;
+
+                }
+                else
+                {
+                    // Assign the Same Team as the Account
+                    //opportunity.SeccodeId = opportunity.Account.SeccodeId;
+
+                }
+            }
+        }
+
         #endregion
 
 
