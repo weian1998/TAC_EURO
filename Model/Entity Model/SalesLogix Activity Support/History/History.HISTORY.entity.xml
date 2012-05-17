@@ -672,5 +672,19 @@
         </LongTextDataType>
       </SystemDataType>
     </property>
+    <property xsi:type="OrmFieldProperty" id="a25e54f2-3615-419a-add5-47765e47a5f3" lastModifiedUtc="2012-05-17T01:25:43.75Z" name="FROMRECIPIENT" audited="false" columnName="FROMRECIPIENT" maxLength="128" precision="0" scale="0" ordinal="47" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>128</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
   </properties>
 </entity>

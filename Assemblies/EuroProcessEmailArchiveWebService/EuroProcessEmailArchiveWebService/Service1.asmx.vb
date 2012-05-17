@@ -3,6 +3,7 @@ Imports System.Web.Services.Protocols
 Imports System.ComponentModel
 Imports System.IO
 Imports System.Data.OleDb
+Imports System.Threading
 
 
 ' To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line.
@@ -13,15 +14,22 @@ Imports System.Data.OleDb
 Public Class Service1
     Inherits System.Web.Services.WebService
     Private _SLXConnectionString As String
-    
-   
+
+
 
     <WebMethod()> _
     Public Function HelloWorld() As String
-       Return "Hello World"
+        Return "Hello World"
     End Function
     <WebMethod()> _
     Public Function ReProcessAllUnlinkedEmailArchives()
+
+        Dim t As New Thread(AddressOf ReprocessALL)
+        t.Start()
+        Return True
+
+    End Function
+    Private Sub ReprocessALL()
         GetSLXConnectionString()
         Dim strMessage As String = "Complete"
         Dim oConnection As New OleDbConnection(_SLXConnectionString)
@@ -39,8 +47,8 @@ Public Class Service1
         Finally
             If oConnection.State = ConnectionState.Open Then oConnection.Close()
         End Try
-        Return strMessage
-    End Function
+
+    End Sub
     <WebMethod()> _
     Public Function ReProcessContactEmailArchives(ByVal ID As String)
 
@@ -102,6 +110,7 @@ Public Class Service1
         Dim histTORECIPIENTS As String = String.Empty
         Dim histCCRECIPIENTS As String = String.Empty
         Dim histBCCRECIPIENTS As String = String.Empty
+        Dim histFROM As String = String.Empty
 
         Dim ReProcessNote As String = String.Empty
 
@@ -116,7 +125,7 @@ Public Class Service1
             Call UpdateEmailArchiveLinked(ID, ReProcessNote, False)
             Exit Function
         End If
-       
+
 
         '===========================================================================
         ' Proceed as This is not In the Duplicate EMAIL List
@@ -171,6 +180,14 @@ Public Class Service1
                 ' Intialize
                 '===>>>>>>>>>>>>>>  ADD TASKCENTER VARIABLE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                 EmailArchiveID = .Fields("EMAILARCHIVEID").Value
+                histDescription = .Fields("SUBJECT").Value
+                histLongNotes = .Fields("MESSAGEBODY").Value
+                histNotes = .Fields("SHORTNOTES").Value
+                histTORECIPIENTS = .Fields("TORECIPIENTS").Value
+                'histCCRECIPIENTS = .Fields("CCRECIPIENTS ").Value
+                histCCRECIPIENTS = .Fields(15).Value
+                histBCCRECIPIENTS = .Fields("BCCRECIPIENTS").Value
+                histFROM = .Fields("ORIGFROMADDRESS").Value
 
                 '===========================================================================
                 ' Special Case for Now all Single reprocess will Clear out existing History
@@ -192,12 +209,12 @@ Public Class Service1
                         '=========================================================
                         ' Set Remaining History record Information
                         '=========================================================
-                        histDescription = .Fields("SUBJECT").Value
-                        histLongNotes = .Fields("MESSAGEBODY").Value
-                        histNotes = .Fields("SHORTNOTES").Value
-                        histTORECIPIENTS = .Fields("TORECIPIENTS").Value
-                        histCCRECIPIENTS = .Fields("CCRECIPIENTS ").Value
-                        histBCCRECIPIENTS = .Fields("BCCRECIPIENTS").Value
+                        'histDescription = .Fields("SUBJECT").Value
+                        'histLongNotes = .Fields("MESSAGEBODY").Value
+                        'histNotes = .Fields("SHORTNOTES").Value
+                        'histTORECIPIENTS = .Fields("TORECIPIENTS").Value
+                        'histCCRECIPIENTS = .Fields("CCRECIPIENTS ").Value
+                        'histBCCRECIPIENTS = .Fields("BCCRECIPIENTS").Value
 
                         '=====================================
                         ' Is Contact Employee
@@ -205,20 +222,44 @@ Public Class Service1
                         If histContactType = "EMPL" Then
                             'Get User Private Team
                             histSeccodeID = GetUserPrivateSeccode(UserID)
-                            Call CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
+                            If IsDuplicateHistoryItemExist(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
+                                                    UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
+                                                    histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS) Then
+                                '=============================================
+                                ' Check if Duplicate History allready Exists 
+                                ' Skip if one Does
+                                '=============================================
+                                ' Exit Sub
+                                Call UpdateEmailArchiveLinked(EmailArchiveID, "Duplicate History Exists", False)
+                            Else
+                                Call CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
                                                      UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
-                                                     histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS)
-                            Call UpdateEmailArchiveLinked(EmailArchiveID, "", True)
+                                                     histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS, histFROM)
+                                Call UpdateEmailArchiveLinked(EmailArchiveID, "Linked", True)
+                            End If
                             '======================================================
                             ' Create Accompanying History record Employee Contact
                             '======================================================
 
                             If IsContactFound(.Fields("FROMADDRESS").Value, histContactID, histContactName, histAccountID, histAccountName, histContactType) Then
                                 histSeccodeID = GetUserPrivateSeccode(UserID)
-                                Call CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
+
+                                If IsDuplicateHistoryItemExist(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
+                                                    UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
+                                                    histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS) Then
+                                    '=============================================
+                                    ' Check if Duplicate History allready Exists 
+                                    ' Skip if one Does
+                                    '=============================================
+                                    ' Exit Sub
+                                    Call UpdateEmailArchiveLinked(EmailArchiveID, "Duplicate History Exists", False)
+                                Else
+                                    Call CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
                                                          UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
-                                                         histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS)
-                                Call UpdateEmailArchiveLinked(EmailArchiveID, "Linked", True)
+                                                         histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS, histFROM)
+                                    Call UpdateEmailArchiveLinked(EmailArchiveID, "Linked", True)
+                                End If
+
 
 
                             End If
@@ -247,10 +288,21 @@ Public Class Service1
 
                             End If
 
-                            Call CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
+                            If IsDuplicateHistoryItemExist(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
+                                                    UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
+                                                    histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS) Then
+                                '=============================================
+                                ' Check if Duplicate History allready Exists 
+                                ' Skip if one Does
+                                '=============================================
+                                ' Exit Sub
+                                Call UpdateEmailArchiveLinked(EmailArchiveID, "Duplicate History Exists", False)
+                            Else
+                                Call CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
                                                      UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
-                                                     histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS)
-                            Call UpdateEmailArchiveLinked(EmailArchiveID, "Linked", True)
+                                                     histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS, histFROM)
+                                Call UpdateEmailArchiveLinked(EmailArchiveID, "Linked", True)
+                            End If
 
                         End If
                     Else
@@ -273,12 +325,12 @@ Public Class Service1
                         '=========================================================
                         ' Set Remaining History record Information
                         '=========================================================
-                        histDescription = .Fields("SUBJECT").Value
-                        histLongNotes = .Fields("MESSAGEBODY").Value
-                        histNotes = .Fields("SHORTNOTES").Value
-                        histTORECIPIENTS = .Fields("TORECIPIENTS").Value
-                        histCCRECIPIENTS = .Fields("CCRECIPIENTS ").Value
-                        histBCCRECIPIENTS = .Fields("BCCRECIPIENTS").Value
+                        'histDescription = .Fields("SUBJECT").Value
+                        'histLongNotes = .Fields("MESSAGEBODY").Value
+                        'histNotes = .Fields("SHORTNOTES").Value
+                        'histTORECIPIENTS = .Fields("TORECIPIENTS").Value
+                        'histCCRECIPIENTS = .Fields("CCRECIPIENTS ").Value
+                        'histBCCRECIPIENTS = .Fields("BCCRECIPIENTS").Value
 
                         '=====================================
                         ' Is Contact Employee
@@ -286,20 +338,42 @@ Public Class Service1
                         If histContactType = "EMPL" Then
                             'Get User Private Team
                             histSeccodeID = GetUserPrivateSeccode(UserID)
-                            Call CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
+                            If IsDuplicateHistoryItemExist(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
+                                                    UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
+                                                    histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS) Then
+                                '=============================================
+                                ' Check if Duplicate History allready Exists 
+                                ' Skip if one Does
+                                '=============================================
+                                ' Exit Sub
+                                Call UpdateEmailArchiveLinked(EmailArchiveID, "Duplicate History Exists", False)
+                            Else
+                                Call CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
                                                      UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
-                                                     histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS)
-                            Call UpdateEmailArchiveLinked(EmailArchiveID, "Linked", True)
+                                                     histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS, histFROM)
+                                Call UpdateEmailArchiveLinked(EmailArchiveID, "Linked", True)
+                            End If
                             '======================================================
                             ' Create Accompanying History record Employee Contact
                             '======================================================
 
                             If IsContactFound(.Fields("TOADDRESS").Value, histContactID, histContactName, histAccountID, histAccountName, histContactType) Then
                                 histSeccodeID = GetUserPrivateSeccode(UserID)
-                                Call CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
+                                If IsDuplicateHistoryItemExist(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
+                                                    UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
+                                                    histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS) Then
+                                    '=============================================
+                                    ' Check if Duplicate History allready Exists 
+                                    ' Skip if one Does
+                                    '=============================================
+                                    ' Exit Sub
+                                    Call UpdateEmailArchiveLinked(EmailArchiveID, "Duplicate History Exists", False)
+                                Else
+                                    Call CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
                                                          UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
-                                                         histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS)
-                                Call UpdateEmailArchiveLinked(EmailArchiveID, "Linked", True)
+                                                         histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS, histFROM)
+                                    Call UpdateEmailArchiveLinked(EmailArchiveID, "Linked", True)
+                                End If
 
 
 
@@ -328,10 +402,21 @@ Public Class Service1
 
                             End If
 
-                            Call CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
+                            If IsDuplicateHistoryItemExist(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
                                                      UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
-                                                     histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS)
-                            Call UpdateEmailArchiveLinked(EmailArchiveID, "Linked", True)
+                                                     histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS) Then
+                                '=============================================
+                                ' Check if Duplicate History allready Exists 
+                                ' Skip if one Does
+                                '=============================================
+                                ' Exit Sub
+                                Call UpdateEmailArchiveLinked(EmailArchiveID, "Duplicate History Exists", False)
+                            Else
+                                Call CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
+                                                     UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
+                                                     histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS, histFROM)
+                                Call UpdateEmailArchiveLinked(EmailArchiveID, "Linked", True)
+                            End If
 
                         End If
 
@@ -350,7 +435,7 @@ Public Class Service1
                     Call UpdateEmailArchiveLinked(EmailArchiveID, ReProcessNote, False)
                 End If
 
-               
+
 
             Else
                 'EmailArchive Record Not Found... Something Went wrong..
@@ -359,7 +444,7 @@ Public Class Service1
             '.MoveNext() ' Move to next record
 
         End With
-       
+
 
         objRS.Close()
 
@@ -378,7 +463,7 @@ Public Class Service1
     End Function
 
 
-   
+
 
 
 
@@ -644,7 +729,10 @@ Public Class Service1
                                    ByVal SeccodeId As String, _
                                    ByVal histTORECIPIENTS As String, _
                                    ByVal histCCRECIPIENTS As String, _
-                                   ByVal histBCCRECIPIENTS As String)
+                                   ByVal histBCCRECIPIENTS As String, _
+                                   ByVal histFROM As String)
+
+
 
         Dim objConn As ADODB.Connection
         Dim objRS As ADODB.Recordset
@@ -719,6 +807,7 @@ Public Class Service1
                 .Fields("TORECIPIENTS").Value = histTORECIPIENTS
                 .Fields("CCRECIPIENTS").Value = histCCRECIPIENTS
                 .Fields("BCCRECIPIENTS").Value = histBCCRECIPIENTS
+                .Fields("FROMRECIPIENT").Value = histFROM
                 .UpdateBatch()
 
             Else
@@ -842,6 +931,139 @@ Public Class Service1
             If oConnection.State = ConnectionState.Open Then oConnection.Close()
         End Try
         Return strMessage
+    End Function
+    Public Function IsDuplicateHistoryItemExist(
+                                   ByVal histAccountID As String, _
+                                   ByVal histAccountName As String, _
+                                   ByVal histContactID As String, _
+                                   ByVal histContactName As String, _
+                                   ByVal histCategory As String, _
+                                   ByVal UserID As String, _
+                                   ByVal UserName As String, _
+                                   ByVal histArchiveDate As String, _
+                                   ByVal Description As String, _
+                                   ByVal LongNotes As String, _
+                                   ByVal ShortNotes As String, _
+                                   ByVal EmailArchiveID As String, _
+                                   ByVal SeccodeId As String, _
+                                   ByVal histTORECIPIENTS As String, _
+                                   ByVal histCCRECIPIENTS As String, _
+                                   ByVal histBCCRECIPIENTS As String) As Boolean
+
+        Dim returnValue 'As [Boolean] = False
+        returnValue = False
+        ' Initialize 
+
+        Dim objConn As ADODB.Connection
+        Dim objRS As ADODB.Recordset
+        Dim strSQL As String
+        Dim objParams As Object
+        Dim objCmd As ADODB.Command
+        Try
+
+
+            objConn = New ADODB.Connection()
+            'objConn.Open(System.Variables("SLXConnString"))
+            objConn.Open(_SLXConnectionString)
+            Dim strCommand
+
+            objCmd = New ADODB.Command   'DNL
+            objCmd.ActiveConnection = objConn
+            objCmd.CommandType = 1 'adCmdText
+            objCmd.Prepared = True
+            strSQL = "SELECT    HISTORYID "
+            strSQL = strSQL & "        FROM sysdba.HISTORY "
+            strSQL = strSQL & " WHERE     (ACCOUNTID = ?) AND (CONTACTID = ?) AND "
+            strSQL = strSQL & " (CATEGORY = ?) AND (USERID = ?)  "
+            strSQL = strSQL & " AND (DESCRIPTION = ?) AND (SECCODEID = ?) AND (NOTES like ?) AND (CREATEDATE > ?) AND (CREATEDATE < ?)"
+            'strSQL = strSQL & " AND (CREATEDATE = ?) "
+
+            '    strSQL = strSQL & "   (SECCODEID = ?) AND (TORECIPIENTS = ?) AND "
+            'strSQL = strSQL & " (CCRECIPIENTS = ?)"
+            objCmd.CommandText = strSQL
+
+            objCmd.Parameters.Refresh()
+            objParams = objCmd.Parameters
+            '==================================================================================================
+            ' Get dates ready Dates are very inconsistent so test for Duplicate on the day and not by time
+            '===================================================================================================
+            Dim myDateTime As Date
+            myDateTime = CDate(histArchiveDate)
+            Dim StartDate As Date = CDate(myDateTime.ToString("d"))
+            Dim EndDate As Date = CDate(myDateTime.AddDays(1).ToString("d"))
+
+            objParams.Item(0).Value = histAccountID
+            'objParams.Item(1).Value = histAccountName
+            objParams.Item(1).Value = histContactID
+            'objParams.Item(3).Value = histContactName
+            objParams.Item(2).Value = histCategory
+            objParams.Item(3).Value = UserID
+            'objParams.Item(6).Value = UserName
+            'objParams.Item(7).Value = histArchiveDate
+            objParams.Item(4).Value = Description
+
+            '    
+            objParams.Item(5).Value = SeccodeId
+            'objParams.Item(6).Value = LongNotes
+            objParams.Item(6).Value = ShortNotes
+            objParams.Item(7).Value = StartDate
+            objParams.Item(8).Value = EndDate
+            '    objParams.Item(10).Value = histTORECIPIENTS
+            '    objParams.Item(11).Value = histCCRECIPIENTS
+
+            'Dim strTest As String
+            'strTest = "SELECT    HISTORYID "
+            'strTest = strTest & "        FROM sysdba.HISTORY "
+            'strTest = strTest & " WHERE     (ACCOUNTID = '" & histAccountID & "') AND (CONTACTID = '" & histContactID & "')  AND "
+            'strTest = strTest & " (CATEGORY = '" & histCategory & "') AND (USERID = '" & UserID & "') AND (USERNAME = '" & UserName & "') "
+            'strTest = strTest & " AND (CREATEDATE = '" & myDateTime.ToUniversalTime.ToString & "') "
+
+
+
+            objRS = New ADODB.Recordset  ' Create an object (onjRS) containing result set of sql supplied
+
+            objRS = objCmd.Execute
+            'On Error Resume Next ' ignore error and continue if necessary
+
+            With objRS ' Work with object - means you can just use . instead of entire name
+                'set cursor and lock information for the RecordSet
+                '.CursorType = 3 'adOpenStatic
+                '.CursorLocation = 3 'adUseClient
+                '.LockType = 4 'adLockBatchOptimistic
+                '.Open strSQL, objConn ' Open a connection, execute SQL and name it objRS
+
+
+                If Not (.BOF And .EOF) Then ' Check not at end/beginning
+
+                    returnValue = True
+                Else
+                    'Not Found
+                    returnValue = False
+
+                End If
+                'thisstep.Loginfo "Category " & Variables("hist_Category") & " " & Variables("UserFoundinFromEmailAddress")
+
+            End With
+        Catch ex As Exception
+            Dim msg = ex.Message
+        End Try
+
+        Try
+            objRS.Close()
+            objConn.Close()
+        Catch ex As Exception
+
+        End Try
+
+
+        objRS = Nothing
+        objParams = Nothing
+        objCmd = Nothing
+
+
+        Return returnValue
+
+
     End Function
 
 
