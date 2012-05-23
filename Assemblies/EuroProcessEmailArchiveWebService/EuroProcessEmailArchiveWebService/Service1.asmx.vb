@@ -774,7 +774,7 @@ Public Class Service1
                 .Fields("CATEGORY").Value = histCategory
                 .Fields("STARTDATE").Value = histArchiveDate
                 .Fields("DURATION").Value = "1"
-                .Fields("DESCRIPTION").Value = Description
+                .Fields("DESCRIPTION").Value = Left(Description, 128)
                 '.Fields("PROCESSID").Value = ""
                 '.Fields("PROCESSNODE").Value = ""
                 .Fields("TIMELESS").Value = "F"
