@@ -1,0 +1,8 @@
+Select DESCRIPTION,* from sysdba.HISTORY
+where NOTES  like 'Natalia, all yours!%'
+
+Update sysdba.history
+SET DESCRIPTION= Left(sysdba.EMAILARCHIVE.SUBJECT,64)
+FROM         sysdba.HISTORY INNER JOIN
+                      sysdba.EMAILARCHIVE ON sysdba.HISTORY.EMAILARCHIVEID = sysdba.EMAILARCHIVE.EMAILARCHIVEID
+WHERE     (sysdba.HISTORY.DESCRIPTION IS NULL) AND (sysdba.EMAILARCHIVE.SUBJECT IS NOT NULL)
