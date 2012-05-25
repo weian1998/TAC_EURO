@@ -306,9 +306,37 @@ Public Class Service1
 
                         End If
                     Else
+                        '=======================================================================================================================================
                         ' Contact Not Found
-                        ReProcessNote = "Contact Not Found"
-                        Call UpdateEmailArchiveLinked(EmailArchiveID, ReProcessNote, False)
+                        ' May 25, 2012 changed the Logic so if a Contact is not found then record the Email under the contact for the user that was found
+                        '=======================================================================================================================================
+                        If IsContactFound(.Fields("FROMADDRESS").Value, histContactID, histContactName, histAccountID, histAccountName, histContactType) Then
+                            '=====================================
+                            ' Is Contact Employee (Should BE)
+                            '===================================
+                            If histContactType = "EMPL" Then
+                                'Get User Private Team
+                                histSeccodeID = GetUserPrivateSeccode(UserID)
+                                If IsDuplicateHistoryItemExist(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
+                                                        UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
+                                                        histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS) Then
+                                    '=============================================
+                                    ' Check if Duplicate History allready Exists 
+                                    ' Skip if one Does
+                                    '=============================================
+                                    ' Exit Sub
+                                    Call UpdateEmailArchiveLinked(EmailArchiveID, "Duplicate History Exists", False)
+                                Else
+                                    Call CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
+                                                         UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
+                                                         histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS, histFROM)
+                                    Call UpdateEmailArchiveLinked(EmailArchiveID, "Linked...Contact Not Found", True)
+                                End If
+                            End If
+                        Else
+                            ReProcessNote = "Contact Not Found"
+                            Call UpdateEmailArchiveLinked(EmailArchiveID, ReProcessNote, False)
+                        End If
                     End If
                 End If
 
@@ -421,9 +449,38 @@ Public Class Service1
                         End If
 
                     Else
+                        '=======================================================================================================================================
                         ' Contact Not Found
-                        ReProcessNote = "Contact Not Found"
-                        Call UpdateEmailArchiveLinked(EmailArchiveID, ReProcessNote, False)
+                        ' May 25, 2012 changed the Logic so if a Contact is not found then record the Email under the contact for the user that was found
+                        '=======================================================================================================================================
+                        If IsContactFound(.Fields("TOADDRESS").Value, histContactID, histContactName, histAccountID, histAccountName, histContactType) Then
+                            '=====================================
+                            ' Is Contact Employee (Should BE)
+                            '===================================
+                            If histContactType = "EMPL" Then
+                                'Get User Private Team
+                                histSeccodeID = GetUserPrivateSeccode(UserID)
+                                If IsDuplicateHistoryItemExist(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
+                                                        UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
+                                                        histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS) Then
+                                    '=============================================
+                                    ' Check if Duplicate History allready Exists 
+                                    ' Skip if one Does
+                                    '=============================================
+                                    ' Exit Sub
+                                    Call UpdateEmailArchiveLinked(EmailArchiveID, "Duplicate History Exists", False)
+                                Else
+                                    Call CreateHistoryRecord(histAccountID, histAccountName, histContactID, histContactName, histCategory, UserID, _
+                                                         UserName, histArchiveDate, histDescription, histLongNotes, histNotes, EmailArchiveID, _
+                                                         histSeccodeID, histTORECIPIENTS, histCCRECIPIENTS, histBCCRECIPIENTS, histFROM)
+                                    Call UpdateEmailArchiveLinked(EmailArchiveID, "Linked...Contact Not Found", True)
+                                End If
+                            End If
+                        Else
+                            ReProcessNote = "Contact Not Found"
+                            Call UpdateEmailArchiveLinked(EmailArchiveID, ReProcessNote, False)
+                        End If
+
                     End If
                 End If
                 '=========================================================================
@@ -450,6 +507,7 @@ Public Class Service1
 
         Return ID
     End Function
+
     Private Function IsUserPartOfExcecutiveTeam(ByVal userid) As Boolean
         Dim blnReturn As Boolean = False 'Intialize
         Dim strResult As String = "" 'Intialize
@@ -633,6 +691,7 @@ Public Class Service1
         End Using
 
     End Sub
+
     Public Function IsContactFound(ByVal Emailaddress, ByRef ContactID, ByRef ContactName, ByRef AccountID, ByRef Account, ByRef ContactType)
         Dim returnValue 'As [Boolean] = False
         returnValue = False
@@ -700,6 +759,7 @@ Public Class Service1
 
         IsContactFound = returnValue
     End Function
+
     Public Function GetUserPrivateSeccode(ByVal UserID As String)
         Dim returnValue As String
         returnValue = "SYST00000001" ' Initialize to Everyone team
@@ -714,6 +774,7 @@ Public Class Service1
 
         Return returnValue
     End Function
+
     Public Sub CreateHistoryRecord(ByVal histAccountID As String, _
                                    ByVal histAccountName As String, _
                                    ByVal histContactID As String, _
@@ -828,6 +889,7 @@ Public Class Service1
 
 
     End Sub
+
     Private Function GetNewID(ByVal table)
 
         Dim objConn As ADODB.Connection
@@ -848,6 +910,7 @@ Public Class Service1
         objConn.Close()
         objConn = Nothing
     End Function
+
     Public Sub UpdateEmailArchiveLinked(ByVal EmailArchiveID As String, ByVal ReProcessNote As String, ByVal IsLinkedHistory As Boolean)
 
         Dim objConn As ADODB.Connection
@@ -912,6 +975,7 @@ Public Class Service1
 
 
     End Sub
+
     Public Function ReProcessContactEmailAddressEmailArchives(ByVal EmailAddress As String)
         GetSLXConnectionString()
         Dim strMessage As String = "Complete"
@@ -932,6 +996,7 @@ Public Class Service1
         End Try
         Return strMessage
     End Function
+
     Public Function IsDuplicateHistoryItemExist(
                                    ByVal histAccountID As String, _
                                    ByVal histAccountName As String, _
