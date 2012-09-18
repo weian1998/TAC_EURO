@@ -152,7 +152,7 @@
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="5cfcd871-c8b1-4ec9-8015-7f693e4d41c4" lastModifiedUtc="2011-05-16T22:55:33.8726357Z" name="Completed" audited="false" columnName="COMPLETED" maxLength="1" precision="0" scale="0" ordinal="12" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="5cfcd871-c8b1-4ec9-8015-7f693e4d41c4" lastModifiedUtc="2012-09-18T22:23:14.828649Z" name="Completed" audited="false" columnName="COMPLETED" maxLength="1" precision="0" scale="0" ordinal="12" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
           <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
@@ -162,7 +162,7 @@
       </ExtendedPropertiesCollection>
       <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
         <TextDataType>
-          <Length>1</Length>
+          <Length>255</Length>
         </TextDataType>
       </SystemDataType>
     </property>

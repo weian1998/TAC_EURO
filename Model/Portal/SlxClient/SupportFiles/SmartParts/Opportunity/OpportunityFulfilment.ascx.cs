@@ -138,6 +138,11 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
         column.ColumnName = "TaskSequence";
         column.DataType = typeof(double);
         column.AllowDBNull = true;
+        column = table.Columns.Add();
+        column.ColumnName = "Completed";
+        column.DataType = typeof(string);
+        column.AllowDBNull = true;
+
 
         return table;
     }
@@ -167,7 +172,7 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                 row["StageSequence"] = stage.StageSequence;
             }
 
-            row["TaskSequence"] = 0;
+            row["TaskSequence"] = 0;            
             table.Rows.Add(row);
             if (stage.OppFulFilTasks.Count == 0)
             {
@@ -183,7 +188,7 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                 {
                     row2["StageSequence"] = stage.StageSequence;
                 }
-                row2["TaskSequence"] = 0;
+                row2["TaskSequence"] = 0;                
                 table.Rows.Add(row2);
             }
             else
@@ -196,6 +201,9 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                     row3["Description"] = task.Description;
                     row3["Status"] = task.Status;
                     row3["Priority"] = task.Priority;
+                    if (task.Completed != null) {
+                        row3["Completed"] = task.Completed;
+                    }
                     try
                     {
                         row3["StageSequence"] = stage.StageSequence;
@@ -259,7 +267,7 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
             row4["CompletedDate"] = tmpRow["CompletedDate"];
             
             row4["WeightedPercentage"] = tmpRow["WeightedPercentage"];
-
+            row4["Completed"] = tmpRow["Completed"];
             returntable.Rows.Add(row4);
         }
         return returntable;
@@ -356,6 +364,7 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                         {
                             MyTask.DaysFromDeliveryDate = tmpTask.DaysFromDeliveryDate; 
                         }
+                        MyTask.Completed = tmpTask.Completed.ToString();
                         
                         MyTask.Save();
 
@@ -396,19 +405,31 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            DataRowView dr = (DataRowView)e.Row.DataItem;
+            DataRowView dr = (DataRowView)e.Row.DataItem; 
 
             if (dr["Type"].ToString() == "TASK")
             {
                 e.Row.Cells[0].Style.Value = "margin-left:20px";
-                e.Row.Cells[6].Text = String.Empty;
-                LinkButton editTask = (LinkButton)e.Row.Cells[7].Controls[0];
+                e.Row.Cells[7].Text = String.Empty;
+                LinkButton editTask = (LinkButton)e.Row.Cells[8].Controls[0];
                 editTask.Text = "Edit Task";
-                LinkButton completeTask = (LinkButton)e.Row.Cells[8].Controls[0];
+                LinkButton completeTask = (LinkButton)e.Row.Cells[9].Controls[0];
                 completeTask.Text = "Complete Task";
-                LinkButton deleteCommnad = (LinkButton)e.Row.Cells[9].Controls[0];
+                LinkButton deleteCommnad = (LinkButton)e.Row.Cells[10].Controls[0];
                 deleteCommnad.Text = "Delete Task";
                 deleteCommnad.Attributes.Add("onclick", string.Format("javascript: return confirm('{0}');", PortalUtil.JavaScriptEncode("Are you sure you want to Delete")));
+
+                //Setup the checkbox control to complete the tasks
+                CheckBox cbComplete = ((CheckBox)e.Row.FindControl("chkComplete"));
+                if (dr["Completed"].ToString() == "T") {
+                    cbComplete.Checked = true;
+                } else {
+                    cbComplete.Checked = false;
+                }
+                
+                //cbComplete.Attributes.Add("onClick", string.Format("return onCompleteStep('{0}','{1}','{2}');", cmdCompleteStep.ClientID, stepContext.ClientID, dr["Id"].ToString() + ":" + dr["Completed"]));
+                cbComplete.Attributes.Add("onclick", string.Format("return onChecked('{0}','{1}','{2}');", cmdCompleteStep.ClientID, rowContext.ClientID, e.Row.RowIndex));
+                                         
 
                 if (dr["WeightedPercentage"] != null)
                 {
@@ -564,6 +585,7 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
                     foreach (IOppFulFilTask tmpTSK in stage.OppFulFilTasks)
                     {
                         if (tmpTSK.Completed == "T")
+                        //if (tmpTSK.Completed == true)
                         {
                             // Do Nothing as it is allready completed
                         }
@@ -667,7 +689,47 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
     /// <param name="e">The <see cref="System.Web.UI.WebControls.GridViewDeleteEventArgs"/> instance containing the event data.</param>
     protected void grdStages_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
+    }  
+
+
+    /// <summary>
+    /// Handles the OnClick event of the cmdCompleteStep control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+    protected void cmdCompleteStep_OnClick(object sender, EventArgs e) {
+
+        //================================================================
+        //  Templates are Not Completed
+        //================================================================
+        int rowIndex = Convert.ToInt32(rowContext.Value);
+        string id = grdStages.DataKeys[rowIndex].Value.ToString();
+        string[] result = id.Split(':');
+
+        if (DialogService != null) {
+            if (result[1] == "S") {
+                IOppFulFilStage stage = EntityFactory.GetById<IOppFulFilStage>(result[0]);
+                foreach (IOppFulFilTask tmpTSK in stage.OppFulFilTasks) {
+                    if (tmpTSK.Completed == "T") {
+                    //if (tmpTSK.Completed == true) {
+                        // Do Nothing as it is allready completed
+                    } else {
+                        tmpTSK.CompleteTask();
+                    }
+                }
+
+                // Run Complete Stage Business Rule                    
+            } else if (result[1] == "T") {
+                IOppFulFilTask Task = EntityFactory.GetById<IOppFulFilTask>(result[0]);
+                Task.CompleteTask();
+            }
+        }
+
+        IPanelRefreshService refresher = PageWorkItem.Services.Get<IPanelRefreshService>();
+        refresher.RefreshAll();
+        LoadView();
     }
+ 
 
     /// <summary>
     /// Loads the grid.
