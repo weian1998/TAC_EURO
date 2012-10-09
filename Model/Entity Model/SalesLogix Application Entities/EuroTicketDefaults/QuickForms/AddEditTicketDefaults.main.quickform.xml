@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QuickFormDefinition Id="4b17c787-2747-4652-a1dd-987d681066a9" name="AddEditTicketDefaults">
+  <Properties>
+    <Property name="EntityTypeName" type="System.String">IEuroTicketDefaults</Property>
+    <Property name="DefaultNamespace" type="System.String">Sage.Entity.Interfaces</Property>
+    <Property name="AssemblyName" type="System.String">Sage.Entity.Interfaces</Property>
+    <Property name="UseEntityNameAsTitle" type="System.Boolean">True</Property>
+    <Property name="ImagePath" type="System.String"></Property>
+    <Property name="DefinitionType" type="System.String">Sage.Platform.QuickForms.QuickFormMainDetailViewDefinition, Sage.Platform.QuickForms</Property>
+    <Property name="Columns" type="System.ComponentModel.BindingList`1[[System.Windows.Forms.ColumnStyle, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><ArrayOfColumnStyle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ColumnStyle><SizeType>Percent</SizeType><Width>50</Width></ColumnStyle><ColumnStyle><SizeType>Percent</SizeType><Width>50</Width></ColumnStyle></ArrayOfColumnStyle></Property>
+    <Property name="Rows" type="System.ComponentModel.BindingList`1[[System.Windows.Forms.RowStyle, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><ArrayOfRowStyle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle><RowStyle><SizeType>Absolute</SizeType><Height>35</Height></RowStyle></ArrayOfRowStyle></Property>
+    <Property name="GeneratePrintView" type="System.Boolean">False</Property>
+    <Property name="Description" type="System.String"></Property>
+    <Property name="ActiveControl" type="System.String"></Property>
+  </Properties>
+  <LoadActions>
+    <ActionDefinition>
+      <ResourceKey>ce660634-ec75-47f8-b577-eef4d4808e46</ResourceKey>
+      <RootActionName>CSharpSnippetAction</RootActionName>
+      <Action>
+        <CSharpCodeSnippet><![CDATA[// TAC Code here
+    Sage.Entity.Interfaces.IEuroTicketDefaults _entity = BindingSource.Current as Sage.Entity.Interfaces.IEuroTicketDefaults;
+    if (_entity != null)
+    {
+        if (_entity.ITCompanyAccount != null)
+        {
+            lueContact.SeedValue = _entity.ITCompanyAccount.Id.ToString();
+        }
+       
+    }]]></CSharpCodeSnippet>
+      </Action>
+      <IsDialogCloseAction>False</IsDialogCloseAction>
+      <RunOnEveryRePaint>False</RunOnEveryRePaint>
+      <DialogActionResult>NoResult</DialogActionResult>
+      <PerformsUpdate>False</PerformsUpdate>
+      <AppliedSecurity />
+      <RefreshData>False</RefreshData>
+    </ActionDefinition>
+  </LoadActions>
+  <QuickFormElements>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">Property</Property>
+        <Property name="EntityTypeName" type="System.String"></Property>
+        <Property name="EntityNamespace" type="System.String"></Property>
+        <Property name="EntityAssemblyName" type="System.String"></Property>
+        <Property name="DefaultNamespace" type="System.String"></Property>
+        <Property name="AssemblyName" type="System.String"></Property>
+        <Property name="EntityReferenceName" type="System.String"></Property>
+        <Property name="DesignerDisplayMember" type="System.String"></Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXLookup, Sage.SalesLogix.QuickForms.QFControls"><QFSLXLookup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>lueAccount</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>ITCompanyAccount</DataItemName><ControlItemName>LookupResultValue</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>lueAccount</ResourceKey><RootActionName>CSharpSnippetAction</RootActionName><Action><CSharpCodeSnippet><![CDATA[// TAC Code Here
+     Sage.Entity.Interfaces.IEuroTicketDefaults _entity = BindingSource.Current as Sage.Entity.Interfaces.IEuroTicketDefaults;
+     if (_entity != null)
+     {
+         lueContact.SeedValue = _entity.ITCompanyAccount.Id.ToString();   
+     }]]></CSharpCodeSnippet></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction><LookupImage /><LookupDialogWidth xsi:nil="true" /><LookupDialogHeight xsi:nil="true" /><LookupBindingMode>Object</LookupBindingMode><LookupResultValue xsi:type="xsd:string" /><SeedProperty /><SeedValue /><Required>true</Required><DropDownDisplayProperty /><AllowClearingResult>false</AllowClearingResult><OverrideSeedOnSearch>false</OverrideSeedOnSearch><LookupEntityName>Account</LookupEntityName><LookupEntityTypeName>Sage.SalesLogix.Entities.Account, Sage.SalesLogix.Entities</LookupEntityTypeName><AutoPostBack>true</AutoPostBack><EnableHyperLinking>false</EnableHyperLinking><InitializeLookup>false</InitializeLookup><LookupProperties><LookupProperty><PropertyName>AccountName</PropertyName><PropertyType /><PropertyHeader>Account</PropertyHeader><PropertyFormat>None</PropertyFormat><PropertyFormatString /><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty><LookupProperty><PropertyName>Address.City</PropertyName><PropertyType>System.String</PropertyType><PropertyHeader>City</PropertyHeader><PropertyFormat>None</PropertyFormat><PropertyFormatString /><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty><LookupProperty><PropertyName>Address.State</PropertyName><PropertyType>System.String</PropertyType><PropertyHeader>State</PropertyHeader><PropertyFormat>None</PropertyFormat><PropertyFormatString /><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty><LookupProperty><PropertyName>MainPhone</PropertyName><PropertyType /><PropertyHeader>Phone</PropertyHeader><PropertyFormat>Phone</PropertyFormat><PropertyFormatString /><UseAsResult>false</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty><LookupProperty><PropertyName>Type</PropertyName><PropertyType /><PropertyHeader>Type</PropertyHeader><PropertyFormat>None</PropertyFormat><PropertyFormatString /><UseAsResult>false</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty><LookupProperty><PropertyName>SubType</PropertyName><PropertyType /><PropertyHeader>Sub-Type</PropertyHeader><PropertyFormat>None</PropertyFormat><PropertyFormatString /><UseAsResult>false</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty><LookupProperty><PropertyName>Status</PropertyName><PropertyType /><PropertyHeader>Status</PropertyHeader><PropertyFormat>None</PropertyFormat><PropertyFormatString /><UseAsResult>false</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty><LookupProperty><PropertyName>AccountManager.UserInfo.UserName</PropertyName><PropertyType>System.String</PropertyType><PropertyHeader>Acct Manager</PropertyHeader><PropertyFormat>None</PropertyFormat><PropertyFormatString /><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty><LookupProperty><PropertyName>Owner.OwnerDescription</PropertyName><PropertyType>System.String</PropertyType><PropertyHeader>Owner</PropertyHeader><PropertyFormat>None</PropertyFormat><PropertyFormatString /><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty></LookupProperties><LookupPreFilters /></QFSLXLookup></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">Property</Property>
+        <Property name="EntityTypeName" type="System.String"></Property>
+        <Property name="EntityNamespace" type="System.String"></Property>
+        <Property name="EntityAssemblyName" type="System.String"></Property>
+        <Property name="DefaultNamespace" type="System.String"></Property>
+        <Property name="AssemblyName" type="System.String"></Property>
+        <Property name="EntityReferenceName" type="System.String"></Property>
+        <Property name="DesignerDisplayMember" type="System.String"></Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXLookup, Sage.SalesLogix.QuickForms.QFControls"><QFSLXLookup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>1</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>lueContact</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Contact</DataItemName><ControlItemName>LookupResultValue</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Account.Id</DataItemName><ControlItemName>SeedValue</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>lueContact</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction><LookupImage /><LookupDialogWidth xsi:nil="true" /><LookupDialogHeight xsi:nil="true" /><LookupBindingMode>Object</LookupBindingMode><LookupResultValue xsi:type="xsd:string" /><SeedProperty>Account.Id</SeedProperty><SeedValue /><Required>false</Required><DropDownDisplayProperty /><AllowClearingResult>false</AllowClearingResult><OverrideSeedOnSearch>false</OverrideSeedOnSearch><LookupEntityName>Contact</LookupEntityName><LookupEntityTypeName>Sage.SalesLogix.Entities.Contact, Sage.SalesLogix.Entities</LookupEntityTypeName><AutoPostBack>true</AutoPostBack><EnableHyperLinking>false</EnableHyperLinking><InitializeLookup>false</InitializeLookup><LookupProperties><LookupProperty><PropertyName>NameLF</PropertyName><PropertyType /><PropertyHeader>Name</PropertyHeader><PropertyFormat>None</PropertyFormat><PropertyFormatString /><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty><LookupProperty><PropertyName>AccountName</PropertyName><PropertyType /><PropertyHeader>Account</PropertyHeader><PropertyFormat>None</PropertyFormat><PropertyFormatString /><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty><LookupProperty><PropertyName>Address.City</PropertyName><PropertyType /><PropertyHeader>City</PropertyHeader><PropertyFormat>None</PropertyFormat><PropertyFormatString /><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty><LookupProperty><PropertyName>Address.State</PropertyName><PropertyType /><PropertyHeader>State</PropertyHeader><PropertyFormat>None</PropertyFormat><PropertyFormatString /><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty><LookupProperty><PropertyName>WorkPhone</PropertyName><PropertyType /><PropertyHeader>Work Phone</PropertyHeader><PropertyFormat>Phone</PropertyFormat><PropertyFormatString /><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty><LookupProperty><PropertyName>Email</PropertyName><PropertyType /><PropertyHeader>E-mail</PropertyHeader><PropertyFormat>None</PropertyFormat><PropertyFormatString /><UseAsResult>true</UseAsResult><ExcludeFromFilters>false</ExcludeFromFilters><HideCondition /></LookupProperty></LookupProperties><LookupPreFilters /></QFSLXLookup></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">Property</Property>
+        <Property name="EntityTypeName" type="System.String"></Property>
+        <Property name="EntityNamespace" type="System.String"></Property>
+        <Property name="EntityAssemblyName" type="System.String"></Property>
+        <Property name="DefaultNamespace" type="System.String"></Property>
+        <Property name="AssemblyName" type="System.String"></Property>
+        <Property name="EntityReferenceName" type="System.String"></Property>
+        <Property name="DesignerDisplayMember" type="System.String"></Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXOwner, Sage.SalesLogix.QuickForms.QFControls"><QFSLXOwner xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>2</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>ownOwner</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>DefaultAssignedTo</DataItemName><ControlItemName>LookupResultValue</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>ownOwner</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction><LookupResultValue xsi:type="xsd:string" /><AutoPostBack>true</AutoPostBack><Required>false</Required><MultiSelect>false</MultiSelect></QFSLXOwner></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXPickList, Sage.SalesLogix.QuickForms.QFControls"><QFSLXPickList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>3</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>QFSLXPickList</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>ITTicketLevel</DataItemName><ControlItemName>PickListValue</ControlItemName><FormatString /><NullValueString /></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>QFSLXPickList</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction><Required>false</Required><AutoPostBack>false</AutoPostBack><PickListName>Euro ITTicketLevel</PickListName><StorageMode>Text</StorageMode><NameFormatString /><AllowMultiples>false</AllowMultiples><AlphaSort>false</AlphaSort><MustExistInList>false</MustExistInList><NoneEditable>false</NoneEditable><PickListId /><ValueStoredAsText>true</ValueStoredAsText></QFSLXPickList></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">Property</Property>
+        <Property name="EntityTypeName" type="System.String"></Property>
+        <Property name="EntityNamespace" type="System.String"></Property>
+        <Property name="EntityAssemblyName" type="System.String"></Property>
+        <Property name="DefaultNamespace" type="System.String"></Property>
+        <Property name="AssemblyName" type="System.String"></Property>
+        <Property name="EntityReferenceName" type="System.String"></Property>
+        <Property name="DesignerDisplayMember" type="System.String"></Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.SalesLogix.QuickForms.QFControls.QFSLXDependencyLookup, Sage.SalesLogix.QuickForms.QFControls"><QFSLXDependencyLookup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><RowSpan>3</RowSpan><Column>1</Column><Row>1</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>dplArea</ControlId><DataBindings><QuickFormPropertyDataBindingDefinition><DataSourceID>MainEntity</DataSourceID><DataItemName>Area</DataItemName><ControlItemName>Text</ControlItemName><FormatString /><NullValueString>null</NullValueString></QuickFormPropertyDataBindingDefinition></DataBindings><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><OnChangeAction><ResourceKey>dplArea</ResourceKey><RootActionName>NoActionAction</RootActionName><Action /><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>False</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnChangeAction><AutoPostBack>false</AutoPostBack><DependentLookups><DependencyLookup><PropertyDisplay>Area:</PropertyDisplay><LookupEntityName>AreaCategoryIssue</LookupEntityName><LookupEntityTypeName>Sage.Entity.Interfaces.IAreaCategoryIssue, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</LookupEntityTypeName><DropDownDisplayProperty>Area</DropDownDisplayProperty><ParentProperty /><BindingPropertyName>Area</BindingPropertyName></DependencyLookup><DependencyLookup><PropertyDisplay>Category:</PropertyDisplay><LookupEntityName>AreaCategoryIssue</LookupEntityName><LookupEntityTypeName>Sage.Entity.Interfaces.IAreaCategoryIssue, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</LookupEntityTypeName><DropDownDisplayProperty>Category</DropDownDisplayProperty><ParentProperty>Area</ParentProperty><BindingPropertyName>Category</BindingPropertyName></DependencyLookup><DependencyLookup><PropertyDisplay>Issue:</PropertyDisplay><LookupEntityName>AreaCategoryIssue</LookupEntityName><LookupEntityTypeName>Sage.Entity.Interfaces.IAreaCategoryIssue, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</LookupEntityTypeName><DropDownDisplayProperty>Issue</DropDownDisplayProperty><ParentProperty>Category</ParentProperty><BindingPropertyName>Issue</BindingPropertyName></DependencyLookup></DependentLookups><LookupPreFilters><LookupPreFilter><LookupEntityName>IAreaCategoryIssue</LookupEntityName><PropertyType>System.Boolean</PropertyType><OperatorCode>=</OperatorCode><PickListName /><PropertyName>Ticket</PropertyName><FilterValue>True</FilterValue></LookupPreFilter></LookupPreFilters></QFSLXDependencyLookup></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+  </QuickFormElements>
+  <QuickFormToolElements>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFElementSpacer, Sage.Platform.QuickForms"><QFElementSpacer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId /><DataBindings /><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /></QFElementSpacer></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFElementSpacer, Sage.Platform.QuickForms"><QFElementSpacer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId /><DataBindings /><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /></QFElementSpacer></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+    <QuickFormElement>
+      <Properties>
+        <Property name="EntityMappingType" type="System.String">None</Property>
+      </Properties>
+      <ControlDefinition>
+        <Properties>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFButton, Sage.Platform.QuickForms"><QFButton xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>QFButton</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><ButtonType>Icon</ButtonType><Image>[Localization!Global_Images:Save_16x16]</Image><OnClientClick /><OnClickAction><ResourceKey>QFButton</ResourceKey><RootActionName>BusinessRuleAction</RootActionName><Action><BusinessRule>Save</BusinessRule><Object>EuroTicketDefaults</Object><Parameters /><PassResultsToNextAction>False</PassResultsToNextAction><OnCompleteActionName>NoActionAction</OnCompleteActionName><OnComplete /></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>True</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnClickAction></QFButton></Property>
+        </Properties>
+      </ControlDefinition>
+    </QuickFormElement>
+  </QuickFormToolElements>
+</QuickFormDefinition>

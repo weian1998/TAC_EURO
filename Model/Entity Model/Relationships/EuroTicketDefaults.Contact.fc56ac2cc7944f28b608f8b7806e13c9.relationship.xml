@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="fc56ac2c-c794-4f28-b608-f8b7806e13c9" lastModifiedUtc="2012-10-08T20:06:11.296875Z" cardinality="M:1" parentEntityId="5baf02c4-9dc6-48ef-bf2a-bfb9125cea41" childEntityId="750a7f26-3604-467b-94fe-249370231df4">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="f994f1ba-2dce-4e88-abdd-79800e4df6b8" lastModifiedUtc="2012-10-08T20:06:09.171875Z" name="Contact" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty">
+        <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+          <OrmEntityPropertySDataExtension generate="true" />
+        </extender>
+      </extendee>
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="5bfc82c2-f9c8-4cab-9511-dc81e8808b5c" lastModifiedUtc="2012-10-08T20:06:09.171875Z" name="EuroTicketDefaults" audited="false" include="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty">
+        <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+          <OrmEntityPropertySDataExtension generate="true" />
+        </extender>
+      </extendee>
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="41889187-68b1-4b38-b0f5-295d33db9732" parentPropertyId="49c2189d-9708-4059-98ff-7cae2c7cb639" childPropertyId="67fe9234-a814-4d79-a813-01046c1ae19d" ordinal="0" />
+  </column>
+</relationship>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="b82280f4-f9f6-4448-a131-13601619c022" lastModifiedUtc="2012-10-08T21:06:31.984375Z" cardinality="M:1" parentEntityId="ff5e14c3-27a8-4b7f-9d62-66ff315d0413" childEntityId="6ab738f6-21b0-4fe2-8df5-6f192281423c">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
+  </ExtendedPropertiesCollection>
+  <parentProperty id="08f3291e-ff95-42c7-93a2-58efe64d05fc" lastModifiedUtc="2012-10-08T21:06:29.609375Z" name="User" audited="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty">
+        <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+          <OrmEntityPropertySDataExtension generate="true" />
+        </extender>
+      </extendee>
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </parentProperty>
+  <childProperty id="0fbbe61c-b342-448c-b90f-e67c3a8f704b" lastModifiedUtc="2012-10-08T21:06:29.609375Z" name="EuroXTicketMapping" audited="false" include="false">
+    <ExtendedPropertiesCollection>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty">
+        <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+          <OrmEntityPropertySDataExtension generate="true" />
+        </extender>
+      </extendee>
+    </ExtendedPropertiesCollection>
+    <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
+      <RelationshipDataType />
+    </SystemDataType>
+  </childProperty>
+  <column>
+    <OrmRelationshipColumn id="2972b8a1-77d7-450d-a610-41b4fa825e3e" parentPropertyId="f7ac2f52-4b7d-4e0b-8433-282f20bbecdf" childPropertyId="800df553-8c68-4eda-9715-8e1b688ce6ed" ordinal="0" />
+  </column>
+</relationship>
