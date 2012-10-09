@@ -12558,11 +12558,11 @@
   <data name="EuroXTicketMapping.OriginatorSeccodeId.DisplayName" xml:space="preserve">
     <value>OriginatorSeccodeId</value>
   </data>
-  <data name="EuroXTicketMapping.User.DisplayName" xml:space="preserve">
-    <value>User</value>
-  </data>
   <data name="User.EuroXTicketMapping.DisplayName" xml:space="preserve">
     <value>EuroXTicketMapping</value>
+  </data>
+  <data name="EuroXTicketMapping.OriginatingUser.DisplayName" xml:space="preserve">
+    <value>OriginatingUser</value>
   </data>
   <data name="Vprivateemailusermap.EuroXTicketMapping.DisplayName" xml:space="preserve">
     <value>EuroXTicketMapping</value>
@@ -12575,5 +12575,8 @@
   </data>
   <data name="Vprivateemailusermap.DisplayNamePlural" xml:space="preserve">
     <value>EuroPrivateEmailUserMaps</value>
+  </data>
+  <data name="Ticket.ITTicketLevel.DisplayName" xml:space="preserve">
+    <value>ITTicketLevel</value>
   </data>
 </root>

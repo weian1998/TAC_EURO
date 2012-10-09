@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="9bc6a109-b907-4f33-a078-22aa8105dbe7" lastModifiedUtc="2012-10-09T03:59:19.125Z" name="EuroGetTicketDefaultArea" returnType="String" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="526d0168-c2e5-43a8-85d2-357fc04323c4" lastModifiedUtc="2012-10-09T04:00:04.609375Z" targetType="TACEURO.Ticket, TACEURO" targetMethod="EuroGetTicketDefaultArea" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

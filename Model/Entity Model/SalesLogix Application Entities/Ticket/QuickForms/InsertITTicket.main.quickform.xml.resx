@@ -117,28 +117,166 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="QFButton2.Caption" xml:space="preserve">
-    <value>Delete</value>
+  <data name="lueAccount.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="QFSLXUser.Caption" xml:space="preserve">
-    <value>User:</value>
+  <data name="lueAccount.LookupProperties.AccountName.PropertyHeader" xml:space="preserve">
+    <value>Account</value>
   </data>
-  <data name="QFSLXLookup.LookupProperties.Description.PropertyHeader" xml:space="preserve">
+  <data name="lueAccount.Caption" xml:space="preserve">
+    <value>Account Name:</value>
+  </data>
+  <data name="lueAccount.LookupProperties.MainPhone.PropertyHeader" xml:space="preserve">
+    <value>Main Phone</value>
+  </data>
+  <data name="lueAccount.LookupProperties.Type.PropertyHeader" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="lueAccount.LookupProperties.SubType.PropertyHeader" xml:space="preserve">
+    <value>Sub-Type</value>
+  </data>
+  <data name="lueAccount.LookupProperties.Status.PropertyHeader" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="lueAccount.LookupProperties.Address.City.PropertyHeader" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="lueAccount.LookupProperties.Address.State.PropertyHeader" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="lueAccount.LookupProperties.AccountManager.UserName.PropertyHeader" xml:space="preserve">
+    <value>AccountManager User Name</value>
+  </data>
+  <data name="lueAccount.LookupProperties.AccountManager.UserInfo.UserName.PropertyHeader" xml:space="preserve">
+    <value>Acct Manager</value>
+  </data>
+  <data name="lueAccount.LookupProperties.Owner.OwnerDescription.PropertyHeader" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="lueAccount.ButtonToolTip" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="lueContact.Caption" xml:space="preserve">
+    <value>Contact Name:</value>
+  </data>
+  <data name="lueContact.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lueContact.LookupProperties.NameLF.PropertyHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="lueContact.LookupProperties.AccountName.PropertyHeader" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="lueContact.LookupProperties.Address.City.PropertyHeader" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="lueContact.LookupProperties.Address.State.PropertyHeader" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="lueContact.LookupProperties.WorkPhone.PropertyHeader" xml:space="preserve">
+    <value>Work Phone</value>
+  </data>
+  <data name="lueContact.LookupProperties.Mobile.PropertyHeader" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="lueContact.LookupProperties.Email.PropertyHeader" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="lueContact.LookupProperties.AccountManager.UserName.PropertyHeader" xml:space="preserve">
+    <value>Acct. Manager</value>
+  </data>
+  <data name="lueContact.LookupProperties.Owner.OwnerDescription.PropertyHeader" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="lueContact.ButtonToolTip" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="pklViaCode.Caption" xml:space="preserve">
+    <value>Source:</value>
+  </data>
+  <data name="pklStatusCode.Caption" xml:space="preserve">
+    <value>Status:</value>
+  </data>
+  <data name="lueUrgency.Caption" xml:space="preserve">
+    <value>Urgency:</value>
+  </data>
+  <data name="lueUrgency.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lueUrgency.LookupProperties.Description.PropertyHeader" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="QFSLXLookup.Caption" xml:space="preserve">
-    <value>Team</value>
+  <data name="lueUrgency.ButtonToolTip" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="dtpNeededByDate.Caption" xml:space="preserve">
+    <value>Needed Date:</value>
+  </data>
+  <data name="dtpNeededByDate.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dtpNeededByDate.ButtonToolTip" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
+  <data name="dtpAssignedDate.Caption" xml:space="preserve">
+    <value>Assigned Date:</value>
+  </data>
+  <data name="dtpAssignedDate.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dtpAssignedDate.ButtonToolTip" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
+  <data name="ownOwner.Caption" xml:space="preserve">
+    <value>Assigned To:</value>
+  </data>
+  <data name="ownOwner.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ownOwner.ButtonToolTip" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="dplArea.Caption" xml:space="preserve">
+    <value>Area:</value>
+  </data>
+  <data name="dplArea.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dplArea.DependentLookups.Area.PropertyDisplay" xml:space="preserve">
+    <value>Area:</value>
+  </data>
+  <data name="dplArea.DependentLookups.Category.PropertyDisplay" xml:space="preserve">
+    <value>Category:</value>
+  </data>
+  <data name="dplArea.DependentLookups.Issue.PropertyDisplay" xml:space="preserve">
+    <value>Issue:</value>
+  </data>
+  <data name="dplArea.ButtonToolTip" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="dplArea.DependentLookups..PropertyDisplay" xml:space="preserve">
+    <value />
+  </data>
+  <data name="pklITTicketLevel.Caption" xml:space="preserve">
+    <value>Ticket Level:</value>
   </data>
   <data name="QFButton.Caption" xml:space="preserve">
-    <value>Save</value>
+    <value>save</value>
   </data>
   <data name="QFButton.ToolTip" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="QFButton2.ToolTip" xml:space="preserve">
-    <value>Delete</value>
+  <data name="hzsDetails.Caption" xml:space="preserve">
+    <value>Details</value>
   </data>
-  <data name="QFButton2.ActionConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to delete?</value>
+  <data name="txtSubject.Caption" xml:space="preserve">
+    <value>Subject:</value>
+  </data>
+  <data name="txtDescriptions.Caption" xml:space="preserve">
+    <value>Description:</value>
+  </data>
+  <data name="txtResolution.Caption" xml:space="preserve">
+    <value>Resolution:</value>
   </data>
 </root>
