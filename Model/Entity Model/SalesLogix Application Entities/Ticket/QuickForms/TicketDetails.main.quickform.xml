@@ -80,7 +80,21 @@ else
       <ResourceKey>478aa710-9acc-4f21-9a73-49cf83a6aa1e</ResourceKey>
       <RootActionName>CSharpSnippetAction</RootActionName>
       <Action>
-        <CSharpCodeSnippet><![CDATA[// TAC Code Here.]]></CSharpCodeSnippet>
+        <CSharpCodeSnippet><![CDATA[// TAC Code Here.
+// TAC Code Here.
+    Sage.Entity.Interfaces.ITicket _entity = BindingSource.Current as Sage.Entity.Interfaces.ITicket;
+    if (_entity != null)
+    {
+        if (_entity.ITTicketLevel != null && _entity.ITTicketLevel != "")
+        {
+            pklITTicketLevel.Visible = true;
+        }
+        else
+        {
+            pklITTicketLevel.Visible = false;
+        }
+            
+    }]]></CSharpCodeSnippet>
       </Action>
       <IsDialogCloseAction>False</IsDialogCloseAction>
       <RunOnEveryRePaint>False</RunOnEveryRePaint>
