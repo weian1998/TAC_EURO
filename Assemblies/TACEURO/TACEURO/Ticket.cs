@@ -27,7 +27,7 @@ namespace TACEURO
             {
                 //Not the Admin User
                 result = Extentions.GetField<string>("ORIGINATORSECCODEID", "EUROXTICKETMAPPING", "USERID = '" + currentuser.Id.ToString() + "'");
-                if (result == string.Empty)
+                if (result == null)
                 {
                     //Set it to the default Assigned to as there is no Origniator Team to be found.
                     result = GetField<string>("ASSIGNEDTOID", "EUROTICKETDEFAULTS", "");
@@ -88,34 +88,40 @@ namespace TACEURO
         }
         public static void EuroOnAfterTicketInsert(ITicket ticket)
         {
+            //=========================================================================
+            // Needed to Update IT Tickets to the Correct Owner
+            //=========================================================================
             string result;
-            //Get Current user
-            Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
-            Sage.Entity.Interfaces.IUser currentuser = usersvc.GetUser();
-            if (currentuser.Id.ToString() == "ADMIN       ")
+            if (ticket.ITTicketLevel != null && ticket.ITTicketLevel != string.Empty)
             {
-                //Set it to the default Assigned to
-                result = GetField<string>("ASSIGNEDTOID", "EUROTICKETDEFAULTS", "");
-            }
-            else
-            {
-                //Not the Admin User
-                result = Extentions.GetField<string>("ORIGINATORSECCODEID", "EUROXTICKETMAPPING", "USERID = '" + currentuser.Id.ToString() + "'");
-                if (result == string.Empty)
+                //Get Current user
+                Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+                Sage.Entity.Interfaces.IUser currentuser = usersvc.GetUser();
+                if (currentuser.Id.ToString() == "ADMIN       ")
                 {
-                    //Set it to the default Assigned to as there is no Origniator Team to be found.
+                    //Set it to the default Assigned to
                     result = GetField<string>("ASSIGNEDTOID", "EUROTICKETDEFAULTS", "");
                 }
+                else
+                {
+                    //Not the Admin User
+                    result = Extentions.GetField<string>("ORIGINATORSECCODEID", "EUROXTICKETMAPPING", "USERID = '" + currentuser.Id.ToString() + "'");
+                    if (result == null)
+                    {
+                        //Set it to the default Assigned to as there is no Origniator Team to be found.
+                        result = GetField<string>("ASSIGNEDTOID", "EUROTICKETDEFAULTS", "");
+                    }
 
 
 
+                }
+                Sage.Entity.Interfaces.IOwner MyOwner = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOwner>(result);
+                ticket.Owner = MyOwner;
+                ticket.Save();
             }
-            Sage.Entity.Interfaces.IOwner MyOwner = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOwner>(result);
-            ticket.Owner = MyOwner;
-            ticket.Save();
         }
 
-        public static Boolean IsMember(string TeamName, string Type)
+        private  static Boolean IsMember(string TeamName, string Type)
         {
             Boolean blnReturn = false; // Intialize False
             //Get Current user
@@ -125,7 +131,7 @@ namespace TACEURO
             string SQL = "";
             SQL ="select accessid from secrights where seccodeid = " ;
             SQL +=       " (select seccodeid from seccode where (seccodedesc = '" + TeamName  + "') " ;
-            SQL += "a nd (seccodetype = '" + Type + "')) and (accessid = '" + currentuser.Id.ToString() + "')";
+            SQL += " and (seccodetype = '" + Type + "')) and (accessid = '" + currentuser.Id.ToString() + "')";
 
             Sage.Platform.Data.IDataService datasvc = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Data.IDataService>();
             using (System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection(datasvc.GetConnectionString()))
@@ -148,6 +154,72 @@ namespace TACEURO
                 }
             }
             return blnReturn;
+        }
+
+        public static void EuroCanChangeITTicketLevel(ITicket ticket, out Boolean result)
+        {
+            // Only Senior Opps and Junior Opps can change tickets.
+            Boolean blnReturn = false; // Intialize
+            //Senior Opps
+            if (IsMember("Senior Operations", "G"))
+            {
+                blnReturn = true;
+            }
+            else
+            {   
+                //Junior Opps
+                if(IsMember("Junior Operations","G"))
+                {
+                    blnReturn = true ;
+                }
+            }
+
+
+
+            
+            result= blnReturn ;
+        }
+        public static void EuroCanSaveITTicketLevel(ITicket ticket, out Boolean result)
+        {
+            Boolean blnReturn = false; // Intialize
+            if (ticket.ITTicketLevel != null && ticket.ITTicketLevel != string.Empty)
+            {
+                switch (ticket.ITTicketLevel)
+                {
+                    // Any True Statement flips the switch
+                    case "Level 1":
+                        // All Users Can Save Level 1
+                        blnReturn = true;
+
+                        break;
+                    case "Level 2":
+
+                        if (IsMember("Junior Operations", "G"))
+                        {
+                            blnReturn = true;
+                        }
+                        if (IsMember("Senior Operations", "G"))
+                        {
+                            blnReturn = true;
+                        }
+                        break;
+                    case "Level 3":
+                        if (IsMember("Senior Operations", "G"))
+                        {
+                            blnReturn = true;
+                        }
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                // Not an IT Ticket so don't Restrict them
+                blnReturn = true;
+            }
+            result = blnReturn ;
         }
     }
 }

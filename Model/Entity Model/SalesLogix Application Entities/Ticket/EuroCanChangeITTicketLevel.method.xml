@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="1098a5c7-5cd2-446c-aaea-780f7fe37952" lastModifiedUtc="2012-10-10T18:47:32.458Z" name="EuroCanChangeITTicketLevel" returnType="Boolean" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="cab3f6bc-13bd-41ca-80af-5902b307ef9f" lastModifiedUtc="2012-10-10T18:47:26.23925Z" targetType="TACEURO.Ticket, TACEURO" targetMethod="EuroCanChangeITTicketLevel" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

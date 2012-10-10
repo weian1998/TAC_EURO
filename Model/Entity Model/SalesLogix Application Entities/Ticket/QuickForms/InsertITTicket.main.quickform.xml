@@ -21,8 +21,7 @@
         <CSharpCodeSnippet><![CDATA[ // TAC Code Here
 	lueAccount.ReadOnly = true;
     lueAccount.Enabled = true;
-    lueContact.ReadOnly = true;
-    lueContact.Enabled = true;
+   
         if (this.Request["type"] == "IT")
         {
             Sage.Entity.Interfaces.ITicket _entity = BindingSource.Current as Sage.Entity.Interfaces.ITicket;
@@ -63,6 +62,21 @@
             // AREA
             _entity.Area = "IT";
             
+                if (_entity.EuroCanChangeITTicketLevel())
+            {
+                 // Has access to change
+                lueContact.ReadOnly = false;
+                lueContact.Enabled = true ;
+                pklITTicketLevel.ReadOnly = false;
+                pklITTicketLevel.Enabled = true;
+            }
+            else
+            { // No Access Read Only
+                lueContact.ReadOnly = true;
+                lueContact.Enabled = false ;
+                pklITTicketLevel.ReadOnly = true;
+                pklITTicketLevel.Enabled = false;
+            } 
             
             
         }]]></CSharpCodeSnippet>
@@ -314,7 +328,7 @@
       </Properties>
       <ControlDefinition>
         <Properties>
-          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFButton, Sage.Platform.QuickForms"><QFButton xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>QFButton</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><ButtonType>Icon</ButtonType><Image>[Localization!Global_Images:Save_16x16]</Image><OnClientClick /><OnClickAction><ResourceKey>QFButton</ResourceKey><RootActionName>BusinessRuleAction</RootActionName><Action><BusinessRule>Save</BusinessRule><Object>Ticket</Object><Parameters /><PassResultsToNextAction>False</PassResultsToNextAction><OnCompleteActionName>RedirectAction</OnCompleteActionName><OnComplete><MainViewEntityName>Ticket</MainViewEntityName><RawURL /><EntityViewMode>Detail</EntityViewMode><UseCurrentIdInLink>True</UseCurrentIdInLink></OnComplete></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>True</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnClickAction></QFButton></Property>
+          <Property name="Control" type="Sage.Platform.QuickForms.Controls.QFButton, Sage.Platform.QuickForms"><QFButton xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>0</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>QFButton</ControlId><DataBindings /><ControlLabelPlacement>none</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><ButtonType>Icon</ButtonType><Image>[Localization!Global_Images:Save_16x16]</Image><OnClientClick /><OnClickAction><ResourceKey>QFButton</ResourceKey><RootActionName>ValidationAction</RootActionName><Action><ValidationMethod>EuroCanSaveITTicketLevel</ValidationMethod><OnFailActionName>MessageAction</OnFailActionName><OnFail><ResourceKey>0e9964f6-ecb4-43e0-8761-ef11c7d00b25</ResourceKey></OnFail><OnSuccessActionName>BusinessRuleAction</OnSuccessActionName><OnSuccess><BusinessRule>Save</BusinessRule><Object>Ticket</Object><Parameters /><PassResultsToNextAction>False</PassResultsToNextAction><OnCompleteActionName>RedirectAction</OnCompleteActionName><OnComplete><MainViewEntityName>Ticket</MainViewEntityName><RawURL /><EntityViewMode>Detail</EntityViewMode><UseCurrentIdInLink>True</UseCurrentIdInLink></OnComplete></OnSuccess></Action><IsDialogCloseAction>False</IsDialogCloseAction><RunOnEveryRePaint>False</RunOnEveryRePaint><DialogActionResult>NoResult</DialogActionResult><PerformsUpdate>True</PerformsUpdate><AppliedSecurity /><RefreshData>False</RefreshData></OnClickAction></QFButton></Property>
         </Properties>
       </ControlDefinition>
     </QuickFormElement>
