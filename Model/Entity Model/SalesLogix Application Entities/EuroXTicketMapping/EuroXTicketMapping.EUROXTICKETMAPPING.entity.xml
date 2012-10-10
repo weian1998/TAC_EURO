@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="ff5e14c3-27a8-4b7f-9d62-66ff315d0413" lastModifiedUtc="2012-10-08T21:03:16.234375Z" manageSchema="true" tableName="EUROXTICKETMAPPING" name="EuroXTicketMapping" displayPropertyId="b8bdf28a-fa2e-416a-a301-8a4d4ff4774a" isExtension="false" audited="false" smallImage="[Localization!Global_Images:TicketDefaults16x16]" largeImage="[Localization!Global_Images:TicketDefaults32x32]" onBeforeInsertMethodId="3b3da193-5bf4-4cf6-a4a6-7e9e4e5cde2c" onAfterInsertMethodId="a495f49e-5d45-46b3-982e-80e583ceab77" onBeforeUpdateMethodId="5f829a95-9099-4dcd-bfcd-bc6b967e220e" onAfterUpdateMethodId="86057f7c-9ee1-40ad-b3c9-88b0ed33a369" onBeforeDeleteMethodId="f56a58ee-b896-422d-a89e-7fcdc42c9431" onAfterDeleteMethodId="a6b5331f-9aaa-4655-8bda-b0503598ae3f" onCreateId="851aa53e-0d74-48a1-b41d-30b2416754cd">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="ff5e14c3-27a8-4b7f-9d62-66ff315d0413" lastModifiedUtc="2012-10-10T12:08:22.583Z" manageSchema="true" tableName="EUROXTICKETMAPPING" name="EuroXTicketMapping" displayPropertyId="b8bdf28a-fa2e-416a-a301-8a4d4ff4774a" isExtension="false" audited="false" smallImage="[Localization!Global_Images:TicketDefaults16x16]" largeImage="[Localization!Global_Images:TicketDefaults32x32]" onBeforeInsertMethodId="3b3da193-5bf4-4cf6-a4a6-7e9e4e5cde2c" onAfterInsertMethodId="a495f49e-5d45-46b3-982e-80e583ceab77" onBeforeUpdateMethodId="5f829a95-9099-4dcd-bfcd-bc6b967e220e" onAfterUpdateMethodId="86057f7c-9ee1-40ad-b3c9-88b0ed33a369" onBeforeDeleteMethodId="f56a58ee-b896-422d-a89e-7fcdc42c9431" onAfterDeleteMethodId="a6b5331f-9aaa-4655-8bda-b0503598ae3f" onCreateId="851aa53e-0d74-48a1-b41d-30b2416754cd">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
@@ -8,7 +8,7 @@
       </extender>
       <extender guid="1589723d-0536-4bf3-bdd7-3f6f7fe165d0">
         <OrmEntityMetadataExtension>
-          <StringExpression>${EuroXTicketMappingId}</StringExpression>
+          <StringExpression>${Userid}</StringExpression>
           <IsHistoryTable>false</IsHistoryTable>
         </OrmEntityMetadataExtension>
       </extender>
