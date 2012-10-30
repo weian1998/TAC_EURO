@@ -19,7 +19,9 @@
 Templates<asp:DropDownList ID="ddlTemplates" runat="server">
     </asp:DropDownList>  
     <asp:Button ID="cmdAddTemplate" runat="server" Text="Add Template Items" 
-        onclick="cmdAddTemplate_Click1" />  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Delivery Date:  <SalesLogix:DateTimePicker runat="server" ID="dtDeliveryDate" DisplayDate="true" DisplayTime="false" Timeless="True" Enabled="true"/>        
+        onclick="cmdAddTemplate_Click1" />  &nbsp;&nbsp;
+        <asp:Button ID="cmdRemoveTemplate" runat="server" Text="Remove Template Items" 
+        onclick="cmdRemoveTemplate_Click1" />&nbsp;&nbsp;  Delivery Date:  <SalesLogix:DateTimePicker runat="server" ID="dtDeliveryDate" DisplayDate="true" DisplayTime="false" Timeless="True" Enabled="true"/>        
 </div>
 <div style="display:none">
 <asp:HiddenField ID="stepContext" runat="server" value=""  ></asp:HiddenField>&nbsp;
