@@ -50,6 +50,29 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
         _OppFulfilmentTemplate = GetParentEntity() as IOpportunity;
         LoadGrid();
         LoadcomboBox();
+        Sage.Entity.Interfaces.IOpportunity  _entity = BindingSource.Current as Sage.Entity.Interfaces.IOpportunity ;
+        if (_entity != null)
+        {
+            if (_entity.OppFulFilTasks.Count > 0)
+            {
+                ddlTemplates.Visible = false;
+                cmdAddTemplate.Visible = false;
+            }
+            else
+            {
+                ddlTemplates.Visible = true;
+                cmdAddTemplate.Visible = true;
+            }
+        }
+        //Senior Opps
+        if (IsMember("Senior Operations", "G"))
+        {
+            cmdRemoveTemplate.Visible = true;
+        }
+        else
+        {
+            cmdRemoveTemplate.Visible = false;
+        }
     }
 
     /// <summary>
@@ -810,4 +833,82 @@ public partial class SmartParts_Opportunity_OpportunityFulfilment : EntityBoundS
 
 
 
+    protected void cmdRemoveTemplate_Click1(object sender, EventArgs e)
+    {
+        Sage.Entity.Interfaces.IOpportunity  _entity = BindingSource.Current as Sage.Entity.Interfaces.IOpportunity ;
+        if (_entity != null)
+        {
+            if (_entity.OppFulFilTasks.Count > 0)
+            {
+                do
+                {
+                    foreach (Sage.Entity.Interfaces.IOppFulFilStage tmpStage in _entity.OppFulFilStages)
+                    {
+                        _entity.OppFulFilStages.Remove(tmpStage);
+                        tmpStage.Delete();
+                        _entity.Save();
+                        break;
+                    }
+
+                } while (_entity.OppFulFilStages.Count > 0);
+
+                do
+                {
+                    foreach (Sage.Entity.Interfaces.IOppFulFilTask tmpTask in _entity.OppFulFilTasks)
+                    {
+                        _entity.OppFulFilTasks.Remove(tmpTask);
+                        tmpTask.Delete();
+                        _entity.Save();
+                        break;
+                    }
+
+                } while (_entity.OppFulFilTasks.Count > 0);
+
+               
+                
+             
+                
+            }
+        }
+    }
+    private static Boolean IsMember(string TeamName, string Type)
+    {
+        Boolean blnReturn = false; // Intialize False
+        //Get Current user
+        Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+        Sage.Entity.Interfaces.IUser currentuser = usersvc.GetUser();
+        // get the DataService to get a connection string to the database
+        if (currentuser.Id.ToString() == "ADMIN       ")	
+
+        {
+            blnReturn = true;
+        }
+
+        string SQL = "";
+        SQL = "select accessid from secrights where seccodeid = ";
+        SQL += " (select seccodeid from seccode where (seccodedesc = '" + TeamName + "') ";
+        SQL += " and (seccodetype = '" + Type + "')) and (accessid = '" + currentuser.Id.ToString() + "')";
+
+        Sage.Platform.Data.IDataService datasvc = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Data.IDataService>();
+        using (System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection(datasvc.GetConnectionString()))
+        {
+            conn.Open();
+            using (System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(SQL, conn))
+            {
+                OleDbDataReader reader = cmd.ExecuteReader();
+                //loop through the reader
+                while (reader.Read())
+                {
+                    if (reader["accessid"].ToString() != string.Empty)
+                    {
+                        blnReturn = true;
+                    }
+
+
+                }
+                reader.Close();
+            }
+        }
+        return blnReturn;
+    }
 }
