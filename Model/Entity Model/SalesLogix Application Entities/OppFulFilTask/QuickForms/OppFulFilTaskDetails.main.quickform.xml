@@ -99,6 +99,13 @@
     <QuickFormElement>
       <Properties>
         <Property name="EntityMappingType" type="System.String">Property</Property>
+        <Property name="EntityTypeName" type="System.String"></Property>
+        <Property name="EntityNamespace" type="System.String"></Property>
+        <Property name="EntityAssemblyName" type="System.String"></Property>
+        <Property name="DefaultNamespace" type="System.String"></Property>
+        <Property name="AssemblyName" type="System.String"></Property>
+        <Property name="EntityReferenceName" type="System.String"></Property>
+        <Property name="DesignerDisplayMember" type="System.String"></Property>
       </Properties>
       <ControlDefinition>
         <Properties>
