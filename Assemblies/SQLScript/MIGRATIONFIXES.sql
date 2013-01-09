@@ -9,9 +9,10 @@ Drop Table dbo.CONTACT2
 Drop Table dbo.CONTHIST
 Drop Table dbo.CONTSUPP
 Drop Table dbo.CONTUDEF 
-Drop Table dbo.NOTES
-Drop Table dbo.OPMGR
-Drop Table dbo.USERS
+
+--Drop Table dbo.NOTES
+--Drop Table dbo.OPMGR
+--Drop Table dbo.USERS
 -- ReImort the tables
  
 

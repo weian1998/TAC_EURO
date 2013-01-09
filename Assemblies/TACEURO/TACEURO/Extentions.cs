@@ -256,6 +256,10 @@ namespace TACEURO
 
                 }
             }
+            //==================================================
+            // Set the Delivery Data
+            //==================================================
+            opportunity.DeliveryDate = opportunity.EstimatedClose;
         }
 
         public static void OnBeforeInsertOpportunity(IOpportunity Opportunity, ISession session)
@@ -283,6 +287,11 @@ namespace TACEURO
 
             //    }
             //}
+            //==================================================
+            // Set the Delivery Data
+            //==================================================
+            Opportunity.DeliveryDate = Opportunity.EstimatedClose;
+
         }
 
         #endregion
