@@ -305,3 +305,6 @@ Delete from sysdba.History where Emailarchiveid is not null
 Update sysdba.EmailArchive Set islinkedHistory = 'F'   
 
 Select * from sysdba.EmailArchive where islinkedHistory = 'T'      
+
+Update sysdba.CONTACT 
+set TYPE = null
