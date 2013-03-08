@@ -42,8 +42,9 @@
 
      lueOwner2.LookupResultValue = account.Owner.OwnerDescription; 
     
+
 	txtClientNotes.Font.Bold = true; //Make Client Notes Bold
-	 if (account.Type == "SPECIFIER" || account.Type == "PROSPECT SPECIFIER")
+	 if (account.Type == "Prospect" || account.Type == "Specifier")
     {
         NumDesigners_lbl.Visible = true;
         NumDesigners.Visible = true;

@@ -18,7 +18,22 @@
       <ResourceKey>d1bdcec7-0a0f-429d-a85f-7b67d6024a73</ResourceKey>
       <RootActionName>CSharpSnippetAction</RootActionName>
       <Action>
-        <CSharpCodeSnippet><![CDATA[lueReseller.SeedValue = GetLocalResourceObject("Reseller_rsc").ToString();]]></CSharpCodeSnippet>
+        <CSharpCodeSnippet><![CDATA[lueReseller.SeedValue = GetLocalResourceObject("Reseller_rsc").ToString();
+// TAC Code Here
+    //Get Current User Admin can Change the Probability No one else can manually
+Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+Sage.Entity.Interfaces.IUser user = usersvc.GetUser();
+    if (user.UserName == "ADMIN")
+    {
+        pklCloseProbability.Enabled = true ;
+        pklCloseProbability.ReadOnly = false ;   
+    }
+    else 
+    {
+        pklCloseProbability.Enabled = false ;
+        pklCloseProbability.ReadOnly = true ;    
+    }
+    ]]></CSharpCodeSnippet>
       </Action>
       <IsDialogCloseAction>False</IsDialogCloseAction>
       <RunOnEveryRePaint>False</RunOnEveryRePaint>
