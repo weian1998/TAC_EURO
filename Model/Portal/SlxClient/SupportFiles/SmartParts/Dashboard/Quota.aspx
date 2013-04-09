@@ -6,6 +6,12 @@
     <title></title>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8.3/dijit/themes/claro/claro.css"
         media="screen">
+    <style type="text/css">
+        .style1
+        {
+            font-family: Arial;
+        }
+    </style>
 </head>
 <body>
     <!-- load Dojo -->
@@ -42,9 +48,49 @@
 ], function (Chart, theme, ClusteredColumns, Legend, Tooltip, Magnify) {
 
     // Define the data
-    var chartData = [10000, 9200, 11811, 12000, 7662, 13887, 14200, 12222, 12000, 10009, 11288, 12099];
-    var chartData2 = [3000, 12000, 17733, 9876, 12783, 12899, 13888, 13277, 14299, 12345, 12345, 15763];
-    var chartData3 = [3000, 12000, 17733, 9876, 12783, 12899, 13888, 13277, 14299, 12345, 12345, 15763].reverse();
+    //   var chartData = [10000, 9200, 11811, 12000, 7662, 13887, 14200, 12222, 12000, 10009, 11288, 12099];
+    //   var chartData2 = [3000, 12000, 17733, 9876, 12783, 12899, 13888, 13277, 14299, 12345, 12345, 15763];
+    //  var chartData3 = [3000, 12000, 17733, 9876, 12783, 12899, 13888, 13277, 14299, 12345, 12345, 15763].reverse();
+
+    var chartData1 = new Array();
+    var chartData2 = new Array();
+    var chartMonthData = new Array();
+
+    //Convert the String array from the Hidden Values to an Integer array which we can use.
+    if (document.getElementById("hiddenTotalValues1") != undefined) {
+        var str = document.getElementById("hiddenTotalValues1").value;
+        //alert(str);
+        chartData1 = str.split(",");
+
+        for (var i = 0; i < chartData1.length; i++) {
+            chartData1[i] = parseInt(chartData1[i], 10);
+        }
+    }
+    else {
+        chartData1 = null;
+    }
+
+    //Convert the String array from the Hidden Values to an Integer array which we can use.
+    if (document.getElementById("hiddenTotalValues2") != undefined) {
+        var str2 = document.getElementById("hiddenTotalValues2").value;
+        chartData2 = str2.split(",");
+
+        for (var i = 0; i < chartData2.length; i++) {
+            chartData2[i] = parseInt(chartData2[i], 10);
+        }
+    }
+    else {
+        chartData2 = null;
+    }
+    //=================================================
+    //  Get Month data from Hidden values from Server
+    //=================================================
+    if (document.getElementById("hiddenMonthValues") != undefined) {
+        var strMonthData = document.getElementById("hiddenMonthValues").value;
+        chartMonthData = strMonthData.split(",");
+
+
+    }
 
     // Create the chart within it's "holding" node
     var chart = new Chart("chartNode");
@@ -60,12 +106,44 @@
     });
 
     // Add axes
-    chart.addAxis("x");
+    //chart.addAxis("x");
+    // There May be different amount of Months up to a Maximum of 12 months.
+    switch (chartMonthData.length) {
+        case 1:
+            //execute code block 1
+            break;
+        case 2:
+            //execute code block 2
+            break;
+        default:
+            chart.addAxis("x", {
+                labels: [
+            { value: 0, text: "" },
+			{ value: 1, text: chartMonthData[0] },
+            { value: 2, text: chartMonthData[1] },
+			{ value: 3, text: chartMonthData[2] },
+            { value: 4, text: chartMonthData[3] },
+			{ value: 5, text: chartMonthData[4] },
+            { value: 6, text: chartMonthData[5] },
+            { value: 7, text: chartMonthData[6] },
+            { value: 8, text: chartMonthData[7] },
+            { value: 9, text: chartMonthData[8] },
+            { value: 10, text: chartMonthData[9] },
+            { value: 11, text: chartMonthData[10] },
+            { value: 12, text: chartMonthData[11] },
+            { value: 13, text: chartMonthData[12] },
+		]
+            });
+            //code to be executed if n is different from case 1 and 2
+    }
     chart.addAxis("y", { vertical: true, fixLower: "major", fixUpper: "major" });
 
     // Add the series of data
-    chart.addSeries("Monthly Sales - 2010", chartData); //TotalSales
-    chart.addSeries("Monthly Sales - 2009", chartData2); //TotalTarget
+    var strLegend1 = document.getElementById("hiddenLegendValues1").value;
+    chart.addSeries(strLegend1, chartData1); //TotalSales
+
+    var strLegend2 = document.getElementById("hiddenLegendValues2").value;
+    chart.addSeries(strLegend2, chartData2); //TotalTarget
     //chart.addSeries("Monthly Sales - 2008", chartData3);
 
     // Create the tooltip
@@ -80,6 +158,7 @@
     // Create the legend
     var legend = new Legend({ chart: chart }, "legend");
 });</script>
+
     <script language="javascript" type="text/javascript">
         //Reference of the GridView. 
         var TargetBaseControl = null;
@@ -238,31 +317,31 @@
     <form id="form1" runat="server">
     <table>
         <tr>
-            <td>
-                Label for Chart
+            <td style="font-family: Arial">
+                <asp:Label ID="lblColumnChart" runat="server" Text="Label" Font-Names="Arial"></asp:Label>
             </td>
             <td>
                 &nbsp;</td>
         </tr>
         <tr>
             <td>
-                <div id="chartNode" style="width: 400px; height: 400px;">
+                <div id="chartNode" style="width: 500px; height: 400px;">
                 </div>
                 <div id="legend">
+                
                 </div>
             </td>
             <td>
-                Quota Type:
-                <asp:DropDownList ID="ddlQuotaType" runat="server">
-                    <asp:ListItem>Value of Sales</asp:ListItem>
-                    <asp:ListItem>Number Closed Sales</asp:ListItem>
-                    <asp:ListItem>Number Open Opportunties</asp:ListItem>
-                    <asp:ListItem>Number Quotes (New Opportunities)</asp:ListItem>
-                    <asp:ListItem>Opportunity Close Ratio</asp:ListItem>
+                <span class="style1">Quota Type:</span>
+                <asp:DropDownList ID="ddlQuotaType" runat="server" Font-Names="Arial">
+                    <asp:ListItem>Total Sales</asp:ListItem>
+                    <asp:ListItem>Number of Quotes</asp:ListItem>
+                    <asp:ListItem>Close Ratio</asp:ListItem>
+                    <asp:ListItem>Won vs Lost</asp:ListItem>
                 </asp:DropDownList>
                 <br />
                 Period:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:DropDownList ID="ddlPeriod" runat="server">
+                <asp:DropDownList ID="ddlPeriod" runat="server" Font-Names="Arial">
                     <asp:ListItem>Fiscal YTD</asp:ListItem>
                     <asp:ListItem>Fiscal QTD</asp:ListItem>
                     <asp:ListItem>Fiscal MTD</asp:ListItem>
@@ -272,17 +351,31 @@
                     <asp:ListItem>Custom Dates</asp:ListItem>
                 </asp:DropDownList>
                 <asp:GridView ID="GridView1" runat="server" Width="400px" 
-                    OnRowDataBound="GridView1_RowDataBound" onrowcreated="GridView1_RowCreated">
+                    OnRowDataBound="GridView1_RowDataBound" 
+                    onrowcreated="GridView1_RowCreated" Font-Names="Arial">
                 </asp:GridView>
                 <asp:Button ID="Button1" runat="server" Text="Refresh" OnClick="Button1_Click" />
+            </td>
+        </tr>
+        <tr >
+            <td>
+                <asp:GridView ID="grdMonthDetail" runat="server" Width="400px" 
+                    Font-Names="Arial">
+                </asp:GridView>
+            </td>
+            <td>
+              Nothing Yet
+            
             </td>
         </tr>
     </table>
     <asp:HiddenField ID="hdnFldSelectedValues" runat="server" />
     <asp:HiddenField ID="hdnREFRESH" runat="server" />
-    <asp:HiddenField ID="hiddenTotalSalesValues" runat="server" />
-    <asp:HiddenField ID="hiddenTotalTargetValues" runat="server" />
+    <asp:HiddenField ID="hiddenTotalValues1" runat="server" />
+    <asp:HiddenField ID="hiddenTotalValues2" runat="server" />
     <asp:HiddenField ID="hiddenMonthValues" runat="server" />
+    <asp:HiddenField ID="hiddenLegendValues1" runat="server" />
+    <asp:HiddenField ID="hiddenLegendValues2" runat="server" />
     </form>
 </body>
 </html>

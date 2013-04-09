@@ -233,11 +233,42 @@ namespace TACEURO
         // Example of target method signature
         public static void OnCreateOpportunity(IOpportunity opportunity)
         {
+            // DOESN'T FIRE
+
             //tmpOpportunity.SeccodeId = NewOwnerID;
             //tmpOpportunity.Save(); 
             //=========================================================================================
             // Logic to Find Mapped xHistory Table  This Give Row Level Security to Opportunities
             //==========================================================================================
+            //if (opportunity.Account != null)
+            //{
+            //    string strXMappedTeamOpp = string.Empty;
+            //    strXMappedTeamOpp = Extentions.GetField<string>("XHISTORYSECCODEID", "EUROXHISTORYMAPPING", "MAINACCOUNTSECCODEID = '" + opportunity.Account.SeccodeId + "'");
+            //    if (strXMappedTeamOpp != string.Empty)
+            //    {
+            //        // Assign the xHistory Mapped Team
+            //        Sage.Entity.Interfaces.IOwner MyOwner = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOwner>(strXMappedTeamOpp);
+            //        opportunity.Owner = MyOwner;
+
+            //    }
+            //    else
+            //    {
+            //        // Assign the Same Team as the Account
+            //        //opportunity.SeccodeId = opportunity.Account.SeccodeId;
+
+            //    }
+            //}
+            //==================================================
+            // Set the Delivery Data
+            //==================================================
+            //opportunity.DeliveryDate = opportunity.EstimatedClose;
+        }
+        public static void TACOnAfterInsertOpportunity(IOpportunity opportunity)
+        {
+            //=========================================================================================
+            // Logic to Find Mapped xHistory Table  This Give Row Level Security to Opportunities
+            //==========================================================================================
+            //CAUSES THE INSERT OF THE OPPORTUNITY TO FAIL
             if (opportunity.Account != null)
             {
                 string strXMappedTeamOpp = string.Empty;
@@ -252,16 +283,11 @@ namespace TACEURO
                 else
                 {
                     // Assign the Same Team as the Account
-                    //opportunity.SeccodeId = opportunity.Account.SeccodeId;
+                    opportunity.SeccodeId = opportunity.Account.SeccodeId;
 
                 }
             }
-            //==================================================
-            // Set the Delivery Data
-            //==================================================
-            opportunity.DeliveryDate = opportunity.EstimatedClose;
         }
-
         public static void OnBeforeInsertOpportunity(IOpportunity Opportunity, ISession session)
         {
             //tmpOpportunity.SeccodeId = NewOwnerID;
@@ -269,6 +295,7 @@ namespace TACEURO
             //=========================================================================================
             // Logic to Find Mapped xHistory Table  This Give Row Level Security to Opportunities
             //==========================================================================================
+            //CAUSES THE INSERT OF THE OPPORTUNITY TO FAIL
             //if (Opportunity.Account != null)
             //{
             //    string strXMappedTeamOpp = string.Empty;
