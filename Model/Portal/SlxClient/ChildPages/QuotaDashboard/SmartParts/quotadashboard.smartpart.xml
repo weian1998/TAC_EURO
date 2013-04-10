@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<SmartPartMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="4f86c828-d47a-4ec6-97c1-e1341c102d76">
+  <SmartPartId>quotadashboard</SmartPartId>
+  <ReferencedModelId>00000000-0000-0000-0000-000000000000</ReferencedModelId>
+  <SmartPart>SmartParts\SLX_IFRAME.ascx</SmartPart>
+  <TargetWorkspace>MainContent</TargetWorkspace>
+  <ShowInMode />
+  <Properties>
+    <Property Name="URL" TypeConverter="">./SmartParts/Dashboard/Quota.aspx</Property>
+  </Properties>
+  <AllowRoles />
+</SmartPartMapping>

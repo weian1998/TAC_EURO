@@ -31,19 +31,25 @@ public partial class SmartParts_Dashboard_Quota : System.Web.UI.Page
         RefreshAll();
        
     }
+    protected void ddlQuotaType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        RefreshAll();
+    }
     protected void RefreshAll()
     {
+        DataTable dt = null;
+        DataTable dt2 = null;
         switch (ddlQuotaType.Text)
         {
                 //======================================
             case "Total Sales":
                 //======================================
                 // Get MainGrid Data
-                DataTable dt = Get_TotalSales_MainGrid_Data();
+                 dt = Get_TotalSales_MainGrid_Data();
                 // Refresh MainGrid 
                 Refresh_TotalSalesMainGridView(dt);
                 // Get DetailGrid Data
-                DataTable dt2 = Get_TotalSales_Detail_Data();
+                 dt2 = Get_TotalSales_Detail_Data();
                
                 // Refresh DetailGrid and Chart
                 Refresh_TotalSales_DetailsGridandChart(dt2);
@@ -53,7 +59,15 @@ public partial class SmartParts_Dashboard_Quota : System.Web.UI.Page
             //======================================
             case "Number of Quotes":
                 //======================================
+                // Get MainGrid Data
+                 dt = Get_NumberQuotes_MainGrid_Data();
+                // Refresh MainGrid 
+                Refresh_NumberQuotesMainGridView(dt);
+                // Get DetailGrid Data
+                dt2 = Get_NumberQuotes_Detail_Data();
 
+                // Refresh DetailGrid and Chart
+                Refresh_NumberQuotes_DetailsGridandChart(dt2);
                 break;
             //======================================
             case "Close Ratio":
@@ -108,6 +122,12 @@ public partial class SmartParts_Dashboard_Quota : System.Web.UI.Page
            
             e.Row.Cells[1].Visible = false;
         }
+    }
+
+
+    protected void ddlPeriod_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        RefreshAll();
     }
 
     //===============================================
@@ -580,6 +600,476 @@ WHERE     (sysdba.USERINFO.USERID IN ";
     #endregion
 
 
+        //===============================================
+        #region NumberQuotes
+        //===============================================
+        protected DataTable Get_NumberQuotes_MainGrid_Data()
+        {
+            //Get Current user
+            Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+            Sage.Entity.Interfaces.IUser currentuser = usersvc.GetUser();
+            string strSQL = "";
+            string strStartDate = GetformatedStartDate();
+            string strEndDate = GetformatedEndDate();
+            //======================================================================
+            // Total Sales SQL
+            //=====================================================================
+            strSQL = @"SELECT     sysdba.USERINFO.USERID, sysdba.USERINFO.USERNAME, FLOOR(ISNULL(tmpActualNumQuotes.NumberQuotes, 0)) AS [Actual Quotes], 
+                      FLOOR(ISNULL(tmpTargetNumbQuotes.TargetNumQuotes , 0)) AS [Target Quotes], FLOOR(ISNULL(tmpActualNumQuotes.NumberQuotes, 0) 
+                      - ISNULL(tmpTargetNumbQuotes.TargetNumQuotes , 0)) AS [Total Difference]
+FROM         sysdba.USERINFO INNER JOIN
+                      sysdba.USERSECURITY ON sysdba.USERINFO.USERID = sysdba.USERSECURITY.USERID LEFT OUTER JOIN
+                          (SELECT     SUM((DATEDIFF(MM, '" + strStartDate + @"', '" + strEndDate + @"') + 1) * (QUANTITY  / (DATEDIFF(MM, BEGINDATE, ENDDATE) + 1))) 
+                                                   AS TargetNumQuotes, USERID
+                            FROM          sysdba.EUROQUOTA
+                            WHERE      (QUOTATYPE = 'Number of Quotes') AND (QUOTAACTIVE = 'T')
+                            GROUP BY USERID) AS tmpTargetNumbQuotes ON sysdba.USERINFO.USERID = tmpTargetNumbQuotes.USERID LEFT OUTER JOIN
+                          (SELECT     ACCOUNTMANAGERID, Count(OPPORTUNITYID) AS NumberQuotes
+                            FROM          sysdba.OPPORTUNITY
+                            WHERE      (CREATEDATE  >= '" + strStartDate + @"') AND (CREATEDATE  <= '" + strEndDate + @"') 
+                            GROUP BY ACCOUNTMANAGERID) AS tmpActualNumQuotes ON sysdba.USERINFO.USERID = tmpActualNumQuotes.ACCOUNTMANAGERID
+WHERE     (sysdba.USERINFO.USERID IN";
+
+            if (currentuser.Id.ToString() == "ADMIN       ")
+            {
+                // change the Security for Admin user
+                strSQL += @" (SELECT DISTINCT OPPORTUNITY_1.ACCOUNTMANAGERID
+                             FROM          sysdba.OPPORTUNITY AS OPPORTUNITY_1 INNER JOIN
+                                                   sysdba.SECRIGHTS AS S_AA ON OPPORTUNITY_1.SECCODEID = S_AA.SECCODEID
+                            WHERE      (OPPORTUNITY_1.ACCOUNTMANAGERID IS NOT NULL) ) AND 
+                      (sysdba.USERSECURITY.TYPE = 'N'))";
+            }
+            else
+            {
+                // Security Applied.
+                strSQL += @" (SELECT DISTINCT OPPORTUNITY_1.ACCOUNTMANAGERID
+                             FROM          sysdba.OPPORTUNITY AS OPPORTUNITY_1 INNER JOIN
+                                                   sysdba.SECRIGHTS AS S_AA ON OPPORTUNITY_1.SECCODEID = S_AA.SECCODEID
+                            WHERE      (OPPORTUNITY_1.ACCOUNTMANAGERID IS NOT NULL) AND (S_AA.ACCESSID = '" + currentuser.Id.ToString() + @"'))) AND 
+                      (sysdba.USERSECURITY.TYPE = 'N')";
+            }
+
+
+            strSQL += " ORDER BY sysdba.USERINFO.USERNAME";
+
+            // Generate In SQL statement
+            Sage.Platform.Data.IDataService datasvc = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Data.IDataService>();
+            //using (System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection(datasvc.GetConnectionString()))
+            using (OleDbConnection conn = new OleDbConnection(GetNativeConnectionString("masterkey")))
+            {
+                conn.Open();
+                using (OleDbDataAdapter da = new OleDbDataAdapter(strSQL, conn))
+                {
+                    //now create the DataSet and use the adapter to fill it
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
+
+                    //pull out the created DataTable to work with
+                    //our table is the first and only one in the tables collection
+                    DataTable dt = ds.Tables[0];
+
+                    return dt;
+                }
+            }
+
+        }
+        protected void Refresh_NumberQuotesMainGridView(DataTable dt)
+        {
+            // Intialize GridView
+            lblUserContext.Text = ""; // Intialize Selected Use
+            if (GridView1.Columns.Count > 0)
+            {
+                GridView1.Columns.RemoveAt(0); // Get rid of the Intial Checkbox column
+                GridView1.DataSource = null;
+            }
+
+            // Add Non databound Selected Column
+            TemplateField tf = new TemplateField();
+            tf.HeaderText = ""; //Selected
+            tf.ItemTemplate = new MyCustomTemplate();
+
+            GridView1.DataSource = dt;
+            GridView1.Columns.Add(tf);
+
+            GridView1.DataBind();
+
+            //===========================================================
+            // format so it looks Good by Having a currency Symbol
+            //============================================================
+            //double result;
+            //for (int i = 0; i < GridView1.Rows.Count; i++)
+            //{
+            //    foreach (TableCell c in GridView1.Rows[i].Cells)
+            //    {
+            //        if (double.TryParse(c.Text, out result))
+            //        {
+            //            c.Text = String.Format("{0:c}", result);
+            //        }
+            //    }
+            //}
+        }
+
+        protected double Get_NumberQuotes_MonthlyTarget(string startdate, string enddate)
+        {
+            double dblReturn = 0;
+            //Get Current user
+            Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+            Sage.Entity.Interfaces.IUser currentuser = usersvc.GetUser();
+            //=====================================================================================
+            // Define the SQL Statement note the StartDate and EndDate are typically for 1 Month
+            //======================================================================================
+            string SQL = @"SELECT     SUM(FLOOR(ISNULL(tmpTargetSales.MonthTargetNumQuotes, 0))) AS TotalTargetNumQuotes
+FROM         sysdba.USERINFO INNER JOIN
+                      sysdba.USERSECURITY ON sysdba.USERINFO.USERID = sysdba.USERSECURITY.USERID LEFT OUTER JOIN
+                          (SELECT     QUANTITY  / (DATEDIFF(MM, BEGINDATE, ENDDATE) + 1) AS MonthTargetNumQuotes, USERID
+                            FROM          sysdba.EUROQUOTA
+                            WHERE      (QUOTATYPE = 'Number of Quotes') AND (QUOTAACTIVE = 'T')) AS tmpTargetSales ON 
+                      sysdba.USERINFO.USERID = tmpTargetSales.USERID
+WHERE     (sysdba.USERINFO.USERID IN ";
+            if (currentuser.Id.ToString() == "ADMIN       ")
+            {
+                // change the Security for Admin user
+                SQL += @" (SELECT DISTINCT OPPORTUNITY_1.ACCOUNTMANAGERID
+                             FROM          sysdba.OPPORTUNITY AS OPPORTUNITY_1 INNER JOIN
+                                                   sysdba.SECRIGHTS AS S_AA ON OPPORTUNITY_1.SECCODEID = S_AA.SECCODEID
+                            WHERE      (OPPORTUNITY_1.ACCOUNTMANAGERID IS NOT NULL) ) AND 
+                      (sysdba.USERSECURITY.TYPE = 'N'))";
+            }
+            else
+            {
+                // Security Applied.
+                SQL += @" (SELECT DISTINCT OPPORTUNITY_1.ACCOUNTMANAGERID
+                             FROM          sysdba.OPPORTUNITY AS OPPORTUNITY_1 INNER JOIN
+                                                   sysdba.SECRIGHTS AS S_AA ON OPPORTUNITY_1.SECCODEID = S_AA.SECCODEID
+                            WHERE      (OPPORTUNITY_1.ACCOUNTMANAGERID IS NOT NULL) AND (S_AA.ACCESSID = '" + currentuser.Id.ToString() + @"'))) AND 
+                      (sysdba.USERSECURITY.TYPE = 'N')";
+            }
+
+
+
+            //=================================================================================================================================
+            // Get Additional User Filter information if the Hidden field on the form has data Parse this data and adjust the SQL statement
+            //===============================================================================================================================
+            if (hdnFldSelectedValues.Value != "")
+            {
+                //Parse the
+                //Get Ids
+                string strSQLFilter = " AND (sysdba.USERINFO.USERID IN (''"; //Intialzie the Filter String
+                string[] IDs = hdnFldSelectedValues.Value.Trim().Split('|');
+
+                //Code for deleting items
+                foreach (string Item in IDs)
+                {
+                    //Call appropiate method for deletion operation.
+                    if (Item != string.Empty)
+                    {
+                        strSQLFilter += ",'" + Item + "'";
+                    }
+                }
+                strSQLFilter += "))"; // Complete the SQL statement with correct syntax
+
+                SQL += strSQLFilter;
+                //=======================================================================
+                // ADD SQL Filter to Main SQL Statement
+                //========================================================================
+            }
+            //SQL += ")"; // Add Final Bracket to make sure things work;
+            //=======================================================================
+            // ADD SQL Filter to Main SQL Statement
+            //========================================================================
+
+            using (System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection(GetNativeConnectionString("masterkey")))
+            {
+                conn.Open();
+                using (System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(SQL, conn))
+                {
+                    OleDbDataReader reader = cmd.ExecuteReader();
+                    //loop through the reader
+                    while (reader.Read())
+                    {
+                        dblReturn = Convert.ToDouble(reader["TotalTargetNumQuotes"]);
+
+
+                    }
+                    reader.Close();
+                }
+            }
+
+            return dblReturn;
+        }
+        protected double Get_NumberQuotes_NumberQuotesActual(string startdate, string enddate)
+        {
+            double dblReturn = 0;
+            //Get Current user
+            Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+            Sage.Entity.Interfaces.IUser currentuser = usersvc.GetUser();
+            //=====================================================================================
+            // Define the SQL Statement note the StartDate and EndDate are typically for 1 Month
+            //======================================================================================
+            string SQL = @"SELECT     SUM(FLOOR(ISNULL(tmpActualNumQuotes.NumberQuotes, 0))) AS TotalActualNumQuotes
+FROM         sysdba.USERINFO INNER JOIN
+                      sysdba.USERSECURITY ON sysdba.USERINFO.USERID = sysdba.USERSECURITY.USERID LEFT OUTER JOIN
+                          (SELECT     ACCOUNTMANAGERID, Count(OPPORTUNITYID) AS NumberQuotes
+                            FROM          sysdba.OPPORTUNITY
+                            WHERE      (CREATEDATE  >= '" + startdate + @"') AND (CREATEDATE  <= '" + enddate + @"') 
+                            GROUP BY ACCOUNTMANAGERID) AS tmpActualNumQuotes ON sysdba.USERINFO.USERID = tmpActualNumQuotes.ACCOUNTMANAGERID
+WHERE     (sysdba.USERINFO.USERID IN ";
+            if (currentuser.Id.ToString() == "ADMIN       ")
+            {
+                // change the Security for Admin user
+                SQL += @" (SELECT DISTINCT OPPORTUNITY_1.ACCOUNTMANAGERID
+                             FROM          sysdba.OPPORTUNITY AS OPPORTUNITY_1 INNER JOIN
+                                                   sysdba.SECRIGHTS AS S_AA ON OPPORTUNITY_1.SECCODEID = S_AA.SECCODEID
+                            WHERE      (OPPORTUNITY_1.ACCOUNTMANAGERID IS NOT NULL) ) AND 
+                      (sysdba.USERSECURITY.TYPE = 'N'))";
+            }
+            else
+            {
+                // Security Applied.
+                SQL += @" (SELECT DISTINCT OPPORTUNITY_1.ACCOUNTMANAGERID
+                             FROM          sysdba.OPPORTUNITY AS OPPORTUNITY_1 INNER JOIN
+                                                   sysdba.SECRIGHTS AS S_AA ON OPPORTUNITY_1.SECCODEID = S_AA.SECCODEID
+                            WHERE      (OPPORTUNITY_1.ACCOUNTMANAGERID IS NOT NULL) AND (S_AA.ACCESSID = '" + currentuser.Id.ToString() + @"'))) AND 
+                      (sysdba.USERSECURITY.TYPE = 'N')";
+            }
+
+            //=================================================================================================================================
+            // Get Additional User Filter information if the Hidden field on the form has data Parse this data and adjust the SQL statement
+            //===============================================================================================================================
+            if (hdnFldSelectedValues.Value != "")
+            {
+                //Parse the
+                //Get Ids
+                string strSQLFilter = " AND (sysdba.USERINFO.USERID IN (''"; //Intialzie the Filter String
+                string[] IDs = hdnFldSelectedValues.Value.Trim().Split('|');
+
+                //Code for deleting items
+                foreach (string Item in IDs)
+                {
+                    //Call appropiate method for deletion operation.
+                    if (Item != string.Empty)
+                    {
+                        strSQLFilter += ",'" + Item + "'";
+                    }
+                }
+                strSQLFilter += "))"; // Complete the SQL statement with correct syntax
+
+
+                SQL += strSQLFilter;
+                //=======================================================================
+                // ADD SQL Filter to Main SQL Statement
+                //========================================================================
+            }
+            //SQL += ")"; // Add Closing Bracket so the SQL works
+            //=======================================================================
+            // ADD SQL Filter to Main SQL Statement
+            //========================================================================
+
+            using (System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection(GetNativeConnectionString("masterkey")))
+            {
+                conn.Open();
+                using (System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(SQL, conn))
+                {
+                    OleDbDataReader reader = cmd.ExecuteReader();
+                    //loop through the reader
+                    while (reader.Read())
+                    {
+                        dblReturn = Convert.ToDouble(reader["TotalActualNumQuotes"]);
+
+
+                    }
+                    reader.Close();
+                }
+            }
+
+            return dblReturn;
+        }
+
+        protected DataTable Get_NumberQuotes_Detail_Data()
+        {
+            string strStartDate = GetformatedStartDate();
+            string strEndDate = GetformatedEndDate();
+
+            int NumberQuotes = 0;
+            int TotalTarget = 0;
+            int TotalDifference = 0;
+            string strNumberQuotes = "";
+            string strTotalTarget = "";
+            int iYear;
+            int iMonth;
+            int iDay;
+            iYear = Convert.ToInt16(strStartDate.Substring(0, 4));
+            iMonth = Convert.ToInt16(strStartDate.Substring(4, 2));
+            iDay = Convert.ToInt16(strStartDate.Substring(6, 2));
+
+            DateTime StartDate = new DateTime(iYear, iMonth, iDay, 0, 0, 0);
+            // Calculate the EndDate
+            iYear = Convert.ToInt16(strEndDate.Substring(0, 4));
+            iMonth = Convert.ToInt16(strEndDate.Substring(4, 2));
+            iDay = Convert.ToInt16(strEndDate.Substring(6, 2));
+            DateTime EndDate = new DateTime(iYear, iMonth, iDay, 23, 59, 59);
+
+            //==============================================================
+            // Here we create a DataTable with four columns.
+            //==============================================================
+            DataTable table = new DataTable();
+            table.Columns.Add("Month Year", typeof(string));
+            table.Columns.Add(" Target", typeof(double));
+            table.Columns.Add("Target Cummulative", typeof(double));
+            table.Columns.Add(" Actual", typeof(double));
+            table.Columns.Add("Actual Cummulative", typeof(double));
+            table.Columns.Add("Difference", typeof(double));
+
+            string tmpMonth;
+            double tmpTarget = 0;
+            double tmpCumulativeTarget = 0; //Intialize
+            double tmpActual = 0;
+            double tmpCummulativeActual = 0;
+            double tmpMonthlyTarget = 0;
+            double tmpDifference = 0;
+
+            string tmpStartdate = "";
+            string tmpEnddate = "";
+            DateTime dtEnddate;
+            string tmpDate = "";
+
+            double tmpNumberQuotesTarget = 0;
+            double tmpNumMonths = 0;
+
+            //======================================================================================
+            // We Need to get the Total Target for the  Period divieded by the number of Months
+            //======================================================================================
+            if (Get_NumberofMonthsForPeriod(strStartDate, strEndDate) > 0)
+            {
+                tmpNumberQuotesTarget = Get_NumberQuotes_MonthlyTarget(strStartDate, strEndDate);
+                //tmpNumMonths = Get_NumberofMonthsForPeriod(strStartDate, strEndDate); // this is handled via the SQL Query to get the Monthly total 
+                tmpMonthlyTarget = tmpNumberQuotesTarget;//= tmpNumberQuotesTarget / tmpNumMonths;
+            }
+            else
+            {
+                // To Ensure Divsion by Zero Rules don't cause and Expeption
+                tmpMonthlyTarget = 0;
+            }
+
+
+
+            for (int i = 0; i < 12; i++) // Maximum 12 Months
+            {
+                if (StartDate.AddMonths(i) <= EndDate)
+                {
+                    //================================================================
+                    // format the Date as we will need it for our SQL Statements
+                    //WHERE      (BEGINDATE >= '20120901 00:00:00') AND (ENDDATE <= '20130831 23:59:59') 
+                    //======================================================================================
+                    tmpStartdate = string.Format("{0:yyyy}", StartDate.AddMonths(i)); //Year
+                    tmpStartdate += StartDate.AddMonths(i).Month.ToString("d2"); // Month digit
+                    tmpStartdate += "01 00:00:00"; // Day First of the Month
+
+                    tmpEnddate = string.Format("{0:yyyy}", StartDate.AddMonths(i)); //Year
+                    tmpEnddate += StartDate.AddMonths(i).Month.ToString("d2"); // Month digit
+
+                    tmpDate = string.Format("{0:yyyy}", StartDate.AddMonths(i + 1)) + StartDate.AddMonths(i + 1).Month.ToString("d2") + "01";
+                    // Get the Next Months first day to Subtract by One day to get the Last day of the current Month
+                    DateTime.TryParseExact(tmpDate, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out dtEnddate);
+                    tmpEnddate += dtEnddate.AddDays(-1).Day.ToString("d2") + " 23:59:59"; // Day First of the Next Month -1
+
+
+                    //======================================   
+                    // Get Display Month
+                    //=======================================
+                    tmpMonth = String.Format("{0:MMM}", StartDate.AddMonths(i)) + "-" + String.Format("{0:yyyy}", StartDate.AddMonths(i));
+
+                    //========================================
+                    // Get Sales Target 
+                    //========================================
+                    tmpTarget = tmpMonthlyTarget;
+
+                    //=========================================
+                    // Get Cumulative Target
+                    //=========================================
+                    tmpCumulativeTarget += tmpTarget;
+
+                    //=========================================
+                    // Get Sales Actual
+                    //=========================================
+                    tmpActual = Get_NumberQuotes_NumberQuotesActual(tmpStartdate, tmpEnddate);
+
+                    //=========================================
+                    // Get Sales Actual Cumulative 
+                    //=========================================
+                    tmpCummulativeActual += tmpActual;
+
+                    //=========================================
+                    // Get Difference 
+                    //=========================================
+                    tmpDifference = tmpCummulativeActual - tmpCumulativeTarget;
+
+                    //Add Row To datatable
+
+                    table.Rows.Add(tmpMonth, tmpTarget, tmpCumulativeTarget, tmpActual, tmpCummulativeActual, tmpDifference);
+                }
+            }
+            //================================================================
+            // Return the DataTable to the Grid
+            //=================================================================
+            return table;
+
+        }
+        protected void Refresh_NumberQuotes_DetailsGridandChart(DataTable dt)
+        {
+            // Intialize GridView
+            if (grdMonthDetail.Columns.Count > 0)
+            {
+                grdMonthDetail.DataSource = null;
+            }
+
+            grdMonthDetail.DataSource = dt;
+            grdMonthDetail.DataBind();
+            //=================================================
+            // Format the Data Grid so the currency's look good
+            //==================================================
+            //double result;
+            //for (int i = 0; i < grdMonthDetail.Rows.Count; i++)
+            //{
+            //    foreach (TableCell c in grdMonthDetail.Rows[i].Cells)
+            //    {
+            //        if (double.TryParse(c.Text, out result))
+            //        {
+            //            c.Text = String.Format("{0:c}", result);
+            //        }
+            //    }
+            //}
+
+            //===========================================================
+            // Set the Hidden Values for the Chart JavaScript to read
+            //===========================================================
+            string MonthValues1 = ""; //  Target
+            string MonthValues2 = ""; //  Actuals
+            string MonthNames = "";
+            foreach (DataRow row in dt.Rows)
+            {
+                MonthValues1 += Convert.ToInt64(row[1]).ToString() + ","; // Target
+                MonthValues2 += Convert.ToInt64(row[3]).ToString() + ","; // Actual
+                MonthNames += Left(row[0].ToString(), 3) + ",";
+            }
+
+
+            hiddenTotalValues1.Value = Left(MonthValues1, MonthValues1.Length - 1); //Remove trailing comma
+            hiddenTotalValues2.Value = Left(MonthValues2, MonthValues2.Length - 1); //Remove trailing comma
+            hiddenMonthValues.Value = Left(MonthNames, MonthNames.Length - 1); //Remove trailing comma
+
+            hiddenLegendValues1.Value = "Number of Quotes Target";
+            hiddenLegendValues2.Value = "Number of Quotes Actual";
+            lblColumnChart.Text = " Number of Quotes:         " + GetStartDate().ToString("MMMM dd, yyyy") + " - " + GetEndDate().ToString("MMMM dd, yyyy");
+            lblColumnChart.Font.Bold = true;
+
+        }
+
+
+        #endregion
+
+
+
     protected DateTime GetStartDate()
     {
         string strStartDate = GetformatedStartDate();
@@ -1001,10 +1491,7 @@ WHERE     (sysdba.USERINFO.USERID IN ";
     }
 
 
-    protected void ddlPeriod_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        RefreshAll();
-    }
+  
 }
 /* Create Template Field by Implementing ITemplate */
 public class MyCustomTemplate : ITemplate

@@ -335,7 +335,8 @@
                 <hr />
             </td>
             <td style="font-family: Arial"><span class="style1"> Quota Type:</span>
-                <asp:DropDownList ID="ddlQuotaType" runat="server" Font-Names="Arial">
+                <asp:DropDownList ID="ddlQuotaType" runat="server" Font-Names="Arial" 
+                    AutoPostBack="True" onselectedindexchanged="ddlQuotaType_SelectedIndexChanged">
                     <asp:ListItem>Total Sales</asp:ListItem>
                     <asp:ListItem>Number of Quotes</asp:ListItem>
                     <asp:ListItem>Close Ratio</asp:ListItem>
@@ -362,8 +363,9 @@
             </td>
         </tr>
         <tr >
-            <td style="font-family: Arial">&nbsp;<asp:GridView ID="grdMonthDetail" runat="server" Width="400px" 
-                    Font-Names="Arial">
+            <td style="font-family: Arial">&nbsp;<asp:GridView ID="grdMonthDetail" 
+                    runat="server" Width="400px" 
+                    Font-Names="Arial" CellPadding="5">
                 </asp:GridView>
             </td>
             <td style="font-family: Arial">&nbsp;</td>
