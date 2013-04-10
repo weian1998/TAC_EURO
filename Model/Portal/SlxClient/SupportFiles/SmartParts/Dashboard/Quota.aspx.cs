@@ -244,7 +244,7 @@ WHERE     (sysdba.USERINFO.USERID IN ";
                              FROM          sysdba.OPPORTUNITY AS OPPORTUNITY_1 INNER JOIN
                                                    sysdba.SECRIGHTS AS S_AA ON OPPORTUNITY_1.SECCODEID = S_AA.SECCODEID
                             WHERE      (OPPORTUNITY_1.ACCOUNTMANAGERID IS NOT NULL) ) AND 
-                      (sysdba.USERSECURITY.TYPE = 'N')";
+                      (sysdba.USERSECURITY.TYPE = 'N'))";
             }
             else
             {
@@ -332,7 +332,7 @@ WHERE     (sysdba.USERINFO.USERID IN ";
                              FROM          sysdba.OPPORTUNITY AS OPPORTUNITY_1 INNER JOIN
                                                    sysdba.SECRIGHTS AS S_AA ON OPPORTUNITY_1.SECCODEID = S_AA.SECCODEID
                             WHERE      (OPPORTUNITY_1.ACCOUNTMANAGERID IS NOT NULL) ) AND 
-                      (sysdba.USERSECURITY.TYPE = 'N')";
+                      (sysdba.USERSECURITY.TYPE = 'N'))";
             }
             else
             {
