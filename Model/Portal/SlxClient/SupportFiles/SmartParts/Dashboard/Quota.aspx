@@ -330,9 +330,11 @@
                 <div id="legend">
                 
                 </div>
+                <hr />
+                 <asp:Label ID="lblUserContext" runat="server" Text="Label" Font-Names="Arial"></asp:Label>
+                <hr />
             </td>
-            <td>
-                <span class="style1">Quota Type:</span>
+            <td style="font-family: Arial"><span class="style1"> Quota Type:</span>
                 <asp:DropDownList ID="ddlQuotaType" runat="server" Font-Names="Arial">
                     <asp:ListItem>Total Sales</asp:ListItem>
                     <asp:ListItem>Number of Quotes</asp:ListItem>
@@ -341,7 +343,8 @@
                 </asp:DropDownList>
                 <br />
                 Period:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:DropDownList ID="ddlPeriod" runat="server" Font-Names="Arial">
+                <asp:DropDownList ID="ddlPeriod" runat="server" Font-Names="Arial" 
+                    AutoPostBack="True" onselectedindexchanged="ddlPeriod_SelectedIndexChanged">
                     <asp:ListItem>Fiscal YTD</asp:ListItem>
                     <asp:ListItem>Fiscal QTD</asp:ListItem>
                     <asp:ListItem>Fiscal MTD</asp:ListItem>
@@ -354,22 +357,19 @@
                     OnRowDataBound="GridView1_RowDataBound" 
                     onrowcreated="GridView1_RowCreated" Font-Names="Arial">
                 </asp:GridView>
-                <asp:Button ID="Button1" runat="server" Text="Refresh" OnClick="Button1_Click" />
+                <asp:Button ID="cmdRefresh" runat="server" Text="Refresh" 
+                    OnClick="cmdRefresh_Click" />
             </td>
         </tr>
         <tr >
-            <td>
-                <asp:GridView ID="grdMonthDetail" runat="server" Width="400px" 
+            <td style="font-family: Arial">&nbsp;<asp:GridView ID="grdMonthDetail" runat="server" Width="400px" 
                     Font-Names="Arial">
                 </asp:GridView>
             </td>
-            <td>
-              Nothing Yet
-            
-            </td>
+            <td style="font-family: Arial">&nbsp;</td>
         </tr>
     </table>
-    <asp:HiddenField ID="hdnFldSelectedValues" runat="server" />
+    <asp:HiddenField ID="hdnFldSelectedValues" runat="server"  />
     <asp:HiddenField ID="hdnREFRESH" runat="server" />
     <asp:HiddenField ID="hiddenTotalValues1" runat="server" />
     <asp:HiddenField ID="hiddenTotalValues2" runat="server" />
