@@ -105,6 +105,7 @@ public partial class SmartParts_Dashboard_Quota : System.Web.UI.Page
             }
 
             //Hide UserId column
+           
             e.Row.Cells[1].Visible = false;
         }
     }
@@ -129,22 +130,38 @@ Floor(isnull(tmpTargetSales.TargetSales,0))as [Target Sales],
 Floor(Isnull(tmpActualSales.TotalSales,0) - isnull(tmpTargetSales.TargetSales,0)) As [Total Difference]
 FROM         sysdba.USERINFO INNER JOIN
                       sysdba.USERSECURITY ON sysdba.USERINFO.USERID = sysdba.USERSECURITY.USERID LEFT OUTER JOIN
-                          (SELECT     USERID, SUM(AMOUNT) AS TargetSales
-                            FROM          sysdba.EUROQUOTA
-                            WHERE      (BEGINDATE >= '" + strStartDate + @"') AND (ENDDATE <= '" + strEndDate + @"') AND (QUOTAACTIVE = 'T') AND 
-                                                   (QUOTATYPE = 'Total Sales')
-                            GROUP BY USERID) AS tmpTargetSales ON sysdba.USERINFO.USERID = tmpTargetSales.USERID LEFT OUTER JOIN
+                          (SELECT     SUM((DATEDIFF(MM, '" + strStartDate + @"', '" + strEndDate  + @"') + 1) * (AMOUNT / (DATEDIFF(MM, BEGINDATE, ENDDATE) + 1))) AS TargetSales, USERID
+                            FROM         sysdba.EUROQUOTA
+                            WHERE     (QUOTATYPE = 'Total Sales') AND (QUOTAACTIVE = 'T')
+                            GROUP BY USERID
+                           ) AS tmpTargetSales ON sysdba.USERINFO.USERID = tmpTargetSales.USERID LEFT OUTER JOIN
                        (SELECT     ACCOUNTMANAGERID, SUM(ACTUALAMOUNT) AS TotalSales
                             FROM          sysdba.OPPORTUNITY
                             WHERE      (ACTUALCLOSE >= '" + strStartDate + @"') AND (ACTUALCLOSE <= '" + strEndDate + @"') AND (STATUS = 'Closed - Won')
                             GROUP BY ACCOUNTMANAGERID) AS tmpActualSales ON sysdba.USERINFO.USERID = tmpActualSales.ACCOUNTMANAGERID
-WHERE     (sysdba.USERINFO.USERID IN
-                          (SELECT DISTINCT OPPORTUNITY_1.ACCOUNTMANAGERID
-                            FROM          sysdba.OPPORTUNITY AS OPPORTUNITY_1 INNER JOIN
-                                                   sysdba.SECRIGHTS AS S_AA ON S_AA.ACCESSID = '" + currentuser.Id.ToString() + @"' AND OPPORTUNITY_1.SECCODEID = S_AA.SECCODEID AND 
-                                                   OPPORTUNITY_1.ACCOUNTMANAGERID IS NOT NULL)) AND (sysdba.USERSECURITY.TYPE = 'N')
-ORDER BY sysdba.USERINFO.USERNAME         
-";
+WHERE     (sysdba.USERINFO.USERID IN";
+
+            if (currentuser.Id.ToString () == "ADMIN       ")
+            {
+                // change the Security for Admin user
+                strSQL += @" (SELECT DISTINCT OPPORTUNITY_1.ACCOUNTMANAGERID
+                             FROM          sysdba.OPPORTUNITY AS OPPORTUNITY_1 INNER JOIN
+                                                   sysdba.SECRIGHTS AS S_AA ON OPPORTUNITY_1.SECCODEID = S_AA.SECCODEID
+                            WHERE      (OPPORTUNITY_1.ACCOUNTMANAGERID IS NOT NULL) ) AND 
+                      (sysdba.USERSECURITY.TYPE = 'N'))";
+            }
+            else
+            {
+                // Security Applied.
+                strSQL += @" (SELECT DISTINCT OPPORTUNITY_1.ACCOUNTMANAGERID
+                             FROM          sysdba.OPPORTUNITY AS OPPORTUNITY_1 INNER JOIN
+                                                   sysdba.SECRIGHTS AS S_AA ON OPPORTUNITY_1.SECCODEID = S_AA.SECCODEID
+                            WHERE      (OPPORTUNITY_1.ACCOUNTMANAGERID IS NOT NULL) AND (S_AA.ACCESSID = '" + currentuser.Id.ToString() + @"'))) AND 
+                      (sysdba.USERSECURITY.TYPE = 'N')";
+            }
+
+                         
+strSQL += " ORDER BY sysdba.USERINFO.USERNAME";
        
         // Generate In SQL statement
         Sage.Platform.Data.IDataService datasvc = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Data.IDataService>();
@@ -203,7 +220,7 @@ ORDER BY sysdba.USERINFO.USERNAME
         }
     }
 
-        protected double Get_TotalSales_TotalSalesTarget(string startdate, string enddate)
+        protected double Get_TotalSales_MonthlyTarget(string startdate, string enddate)
         {
             double dblReturn = 0;
             //Get Current user
@@ -212,24 +229,35 @@ ORDER BY sysdba.USERINFO.USERNAME
             //=====================================================================================
             // Define the SQL Statement note the StartDate and EndDate are typically for 1 Month
             //======================================================================================
-            string SQL = @"SELECT     SUM(FLOOR(ISNULL(tmpTargetSales.TargetSales, 0))) AS TotalTargetSales
+            string SQL = @"SELECT     SUM(FLOOR(ISNULL(tmpTargetSales.MonthTargetSales, 0))) AS TotalTargetSales
 FROM         sysdba.USERINFO INNER JOIN
                       sysdba.USERSECURITY ON sysdba.USERINFO.USERID = sysdba.USERSECURITY.USERID LEFT OUTER JOIN
-                          (SELECT     USERID, SUM(AMOUNT) AS TargetSales
-                            FROM          sysdba.EUROQUOTA
-                            WHERE      (BEGINDATE >= '" + startdate + @"') AND (ENDDATE <= '" + enddate + @"') AND (QUOTAACTIVE = 'T') AND 
-                                                   (QUOTATYPE = 'Total Sales')
-                            GROUP BY USERID) AS tmpTargetSales ON sysdba.USERINFO.USERID = tmpTargetSales.USERID LEFT OUTER JOIN
-                          (SELECT     ACCOUNTMANAGERID, SUM(ACTUALAMOUNT) AS TotalSales
-                            FROM          sysdba.OPPORTUNITY
-                            WHERE      (ACTUALCLOSE >= '" + startdate + @"') AND (ACTUALCLOSE <= '" + enddate + @"') AND (STATUS = 'Closed - Won')
-                            GROUP BY ACCOUNTMANAGERID) AS tmpActualSales ON sysdba.USERINFO.USERID = tmpActualSales.ACCOUNTMANAGERID
-WHERE     (sysdba.USERINFO.USERID IN
-                          (SELECT DISTINCT OPPORTUNITY_1.ACCOUNTMANAGERID
-                            FROM          sysdba.OPPORTUNITY AS OPPORTUNITY_1 INNER JOIN
-                                                   sysdba.SECRIGHTS AS S_AA ON S_AA.ACCESSID = '" + currentuser.Id.ToString() + @"' AND OPPORTUNITY_1.SECCODEID = S_AA.SECCODEID AND 
-                                                   OPPORTUNITY_1.ACCOUNTMANAGERID IS NOT NULL)) AND (sysdba.USERSECURITY.TYPE = 'N')
-";
+                          (SELECT    AMOUNT / (DATEDIFF(MM, BEGINDATE, ENDDATE) + 1) AS MonthTargetSales,  USERID
+                            FROM         sysdba.EUROQUOTA
+                            WHERE     (QUOTATYPE = 'Total Sales') AND (QUOTAACTIVE = 'T')
+                           ) AS tmpTargetSales ON sysdba.USERINFO.USERID = tmpTargetSales.USERID 
+WHERE     (sysdba.USERINFO.USERID IN ";
+            if (currentuser.Id.ToString() == "ADMIN       ")
+            {
+                // change the Security for Admin user
+                SQL += @" (SELECT DISTINCT OPPORTUNITY_1.ACCOUNTMANAGERID
+                             FROM          sysdba.OPPORTUNITY AS OPPORTUNITY_1 INNER JOIN
+                                                   sysdba.SECRIGHTS AS S_AA ON OPPORTUNITY_1.SECCODEID = S_AA.SECCODEID
+                            WHERE      (OPPORTUNITY_1.ACCOUNTMANAGERID IS NOT NULL) ) AND 
+                      (sysdba.USERSECURITY.TYPE = 'N')";
+            }
+            else
+            {
+                // Security Applied.
+                SQL += @" (SELECT DISTINCT OPPORTUNITY_1.ACCOUNTMANAGERID
+                             FROM          sysdba.OPPORTUNITY AS OPPORTUNITY_1 INNER JOIN
+                                                   sysdba.SECRIGHTS AS S_AA ON OPPORTUNITY_1.SECCODEID = S_AA.SECCODEID
+                            WHERE      (OPPORTUNITY_1.ACCOUNTMANAGERID IS NOT NULL) AND (S_AA.ACCESSID = '" + currentuser.Id.ToString() + @"'))) AND 
+                      (sysdba.USERSECURITY.TYPE = 'N')";
+            }
+
+
+        
             //=================================================================================================================================
             // Get Additional User Filter information if the Hidden field on the form has data Parse this data and adjust the SQL statement
             //===============================================================================================================================
@@ -256,6 +284,7 @@ WHERE     (sysdba.USERINFO.USERID IN
                 // ADD SQL Filter to Main SQL Statement
                 //========================================================================
             }
+            //SQL += ")"; // Add Final Bracket to make sure things work;
             //=======================================================================
             // ADD SQL Filter to Main SQL Statement
             //========================================================================
@@ -291,21 +320,30 @@ WHERE     (sysdba.USERINFO.USERID IN
             string SQL = @"SELECT      SUM(FLOOR(ISNULL(tmpActualSales.TotalSales, 0))) AS TotalActualSales
 FROM         sysdba.USERINFO INNER JOIN
                       sysdba.USERSECURITY ON sysdba.USERINFO.USERID = sysdba.USERSECURITY.USERID LEFT OUTER JOIN
-                          (SELECT     USERID, SUM(AMOUNT) AS TargetSales
-                            FROM          sysdba.EUROQUOTA
-                            WHERE      (BEGINDATE >= '" + startdate + @"') AND (ENDDATE <= '" + enddate + @"') AND (QUOTAACTIVE = 'T') AND 
-                                                   (QUOTATYPE = 'Total Sales')
-                            GROUP BY USERID) AS tmpTargetSales ON sysdba.USERINFO.USERID = tmpTargetSales.USERID LEFT OUTER JOIN
                           (SELECT     ACCOUNTMANAGERID, SUM(ACTUALAMOUNT) AS TotalSales
                             FROM          sysdba.OPPORTUNITY
                             WHERE      (ACTUALCLOSE >= '" + startdate + @"') AND (ACTUALCLOSE <= '" + enddate + @"') AND (STATUS = 'Closed - Won')
                             GROUP BY ACCOUNTMANAGERID) AS tmpActualSales ON sysdba.USERINFO.USERID = tmpActualSales.ACCOUNTMANAGERID
-WHERE     (sysdba.USERINFO.USERID IN
-                          (SELECT DISTINCT OPPORTUNITY_1.ACCOUNTMANAGERID
-                            FROM          sysdba.OPPORTUNITY AS OPPORTUNITY_1 INNER JOIN
-                                                   sysdba.SECRIGHTS AS S_AA ON S_AA.ACCESSID = '" + currentuser.Id.ToString() + @"' AND OPPORTUNITY_1.SECCODEID = S_AA.SECCODEID AND 
-                                                   OPPORTUNITY_1.ACCOUNTMANAGERID IS NOT NULL)) AND (sysdba.USERSECURITY.TYPE = 'N')
-";
+WHERE     (sysdba.USERINFO.USERID IN ";
+            if (currentuser.Id.ToString() == "ADMIN       ")
+            {
+                // change the Security for Admin user
+                SQL += @" (SELECT DISTINCT OPPORTUNITY_1.ACCOUNTMANAGERID
+                             FROM          sysdba.OPPORTUNITY AS OPPORTUNITY_1 INNER JOIN
+                                                   sysdba.SECRIGHTS AS S_AA ON OPPORTUNITY_1.SECCODEID = S_AA.SECCODEID
+                            WHERE      (OPPORTUNITY_1.ACCOUNTMANAGERID IS NOT NULL) ) AND 
+                      (sysdba.USERSECURITY.TYPE = 'N')";
+            }
+            else
+            {
+                // Security Applied.
+                SQL += @" (SELECT DISTINCT OPPORTUNITY_1.ACCOUNTMANAGERID
+                             FROM          sysdba.OPPORTUNITY AS OPPORTUNITY_1 INNER JOIN
+                                                   sysdba.SECRIGHTS AS S_AA ON OPPORTUNITY_1.SECCODEID = S_AA.SECCODEID
+                            WHERE      (OPPORTUNITY_1.ACCOUNTMANAGERID IS NOT NULL) AND (S_AA.ACCESSID = '" + currentuser.Id.ToString() + @"'))) AND 
+                      (sysdba.USERSECURITY.TYPE = 'N')";
+            }
+
             //=================================================================================================================================
             // Get Additional User Filter information if the Hidden field on the form has data Parse this data and adjust the SQL statement
             //===============================================================================================================================
@@ -333,6 +371,7 @@ WHERE     (sysdba.USERINFO.USERID IN
                 // ADD SQL Filter to Main SQL Statement
                 //========================================================================
             }
+            //SQL += ")"; // Add Closing Bracket so the SQL works
             //=======================================================================
             // ADD SQL Filter to Main SQL Statement
             //========================================================================
@@ -413,9 +452,9 @@ WHERE     (sysdba.USERINFO.USERID IN
             //======================================================================================
             if (Get_NumberofMonthsForPeriod(strStartDate, strEndDate) > 0)
             {
-                tmpTotalSalesTarget = Get_TotalSales_TotalSalesTarget(strStartDate, strEndDate);
-                tmpNumMonths = Get_NumberofMonthsForPeriod(strStartDate, strEndDate);
-                tmpMonthlySalesTarget = tmpTotalSalesTarget / tmpNumMonths;
+                tmpTotalSalesTarget = Get_TotalSales_MonthlyTarget(strStartDate, strEndDate);
+                //tmpNumMonths = Get_NumberofMonthsForPeriod(strStartDate, strEndDate); // this is handled via the SQL Query to get the Monthly total 
+                tmpMonthlySalesTarget = tmpTotalSalesTarget;//= tmpTotalSalesTarget / tmpNumMonths;
             }
             else
             {
@@ -662,27 +701,45 @@ WHERE     (sysdba.USERINFO.USERID IN
                 }
                  strReturn = strYear + strMonth + strDay + " 00:00:00";//20120901 00:00:00//strReturn = ""; 
                 break;
-                break;
-            //======================================
+                //======================================
             case "Fiscal MTD":
                 //======================================
-                strReturn = "";
+           
+                    strYear = DateTime.Now.Year.ToString();  // Use Current Year
+                    strMonth = DateTime.Now.Month.ToString("d2") ; // Current Month
+                    strDay = "01";
+             
+                strReturn = strYear + strMonth + strDay + " 00:00:00";//20120901 00:00:00
+
                 break;
 
             //======================================
             case "Last 90 Days":
                 //======================================
-                strReturn = "";
+
+                 strYear = DateTime.Now.AddDays(-90).Year.ToString();  // Use Current Year
+                 strMonth = DateTime.Now.AddDays(-90).Month.ToString("d2") ; // Current Month
+                 strDay = DateTime.DaysInMonth((DateTime.Now.AddDays(-90).Year),DateTime.Now.AddDays(-90).Month).ToString (); // get How Manydays
+             
+                strReturn = strYear + strMonth + strDay + " 00:00:00";//20120901 00:00:00
                 break;
             //======================================
             case "Last 60 Days":
                 //======================================
-                strReturn = "";
+                strYear = DateTime.Now.AddDays(-60).Year.ToString();  // Use Current Year
+                    strMonth = DateTime.Now.AddDays(-60).Month.ToString("d2") ; // Current Month
+                    strDay = DateTime.DaysInMonth((DateTime.Now.AddDays(-60).Year),DateTime.Now.AddDays(-60).Month).ToString (); // get How Manydays
+             
+                strReturn = strYear + strMonth + strDay + " 00:00:00";//20120901 00:00:00
                 break;
             //======================================
-            case "FLast 30 Days":
+            case "Last 30 Days":
                 //======================================
-                strReturn = "";
+              strYear = DateTime.Now.AddDays(-30).Year.ToString();  // Use Current Year
+                    strMonth = DateTime.Now.AddDays(-30).Month.ToString("d2") ; // Current Month
+                    strDay = DateTime.DaysInMonth((DateTime.Now.AddDays(-30).Year),DateTime.Now.AddDays(-30).Month).ToString (); // get How Manydays
+             
+                strReturn = strYear + strMonth + strDay + " 00:00:00";//20120901 00:00:00
                 break;
             //======================================
             case "Custom Dates":
@@ -795,23 +852,39 @@ WHERE     (sysdba.USERINFO.USERID IN
             //======================================
             case "Fiscal MTD":
                 //======================================
-                strReturn = "";
+                  strYear = DateTime.Now.Year.ToString();  // Use Current Year
+                    strMonth = DateTime.Now.Month.ToString("d2") ; // Current Month
+                    strDay = DateTime.DaysInMonth((DateTime.Now.Year),DateTime.Now.Month).ToString (); // get How Manydays
+             
+                strReturn = strYear + strMonth + strDay + " 23:59:59";//20120901 00:00:00
                 break;
 
             //======================================
             case "Last 90 Days":
                 //======================================
-                strReturn = "";
+                    strYear = DateTime.Now.Year.ToString();  // Use Current Year
+                    strMonth = DateTime.Now.Month.ToString("d2") ; // Current Month
+                    strDay = DateTime.Now.Day.ToString ("d2") ;
+             
+                strReturn = strYear + strMonth + strDay + " 23:59:59";//20120901 00:00:00
                 break;
             //======================================
             case "Last 60 Days":
                 //======================================
-                strReturn = "";
+               strYear = DateTime.Now.Year.ToString();  // Use Current Year
+                    strMonth = DateTime.Now.Month.ToString("d2") ; // Current Month
+                    strDay = DateTime.Now.Day.ToString ("d2") ;
+             
+                strReturn = strYear + strMonth + strDay + " 23:59:59";//20120901 00:00:00
                 break;
             //======================================
-            case "FLast 30 Days":
+            case "Last 30 Days":
                 //======================================
-                strReturn = "";
+                strYear = DateTime.Now.Year.ToString();  // Use Current Year
+                    strMonth = DateTime.Now.Month.ToString("d2") ; // Current Month
+                    strDay = DateTime.Now.Day.ToString ("d2") ;
+             
+                strReturn = strYear + strMonth + strDay + " 23:59:59";//20120901 00:00:00
                 break;
             //======================================
             case "Custom Dates":
