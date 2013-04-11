@@ -269,24 +269,24 @@ namespace TACEURO
             // Logic to Find Mapped xHistory Table  This Give Row Level Security to Opportunities
             //==========================================================================================
             //CAUSES THE INSERT OF THE OPPORTUNITY TO FAIL
-            if (opportunity.Account != null)
-            {
-                string strXMappedTeamOpp = string.Empty;
-                strXMappedTeamOpp = Extentions.GetField<string>("XHISTORYSECCODEID", "EUROXHISTORYMAPPING", "MAINACCOUNTSECCODEID = '" + opportunity.Account.SeccodeId + "'");
-                if (strXMappedTeamOpp != string.Empty)
-                {
-                    // Assign the xHistory Mapped Team
-                    Sage.Entity.Interfaces.IOwner MyOwner = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOwner>(strXMappedTeamOpp);
-                    opportunity.Owner = MyOwner;
+            //if (opportunity.Account != null)
+            //{
+            //    string strXMappedTeamOpp = string.Empty;
+            //    strXMappedTeamOpp = Extentions.GetField<string>("XHISTORYSECCODEID", "EUROXHISTORYMAPPING", "MAINACCOUNTSECCODEID = '" + opportunity.Account.SeccodeId + "'");
+            //    if (strXMappedTeamOpp != string.Empty)
+            //    {
+            //         Assign the xHistory Mapped Team
+            //        Sage.Entity.Interfaces.IOwner MyOwner = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.IOwner>(strXMappedTeamOpp);
+            //        opportunity.Owner = MyOwner;
 
-                }
-                else
-                {
-                    // Assign the Same Team as the Account
-                    opportunity.SeccodeId = opportunity.Account.SeccodeId;
+            //    }
+            //    else
+            //    {
+            //         Assign the Same Team as the Account
+            //        opportunity.SeccodeId = opportunity.Account.SeccodeId;
 
-                }
-            }
+            //    }
+            //}
         }
         public static void OnBeforeInsertOpportunity(IOpportunity Opportunity, ISession session)
         {

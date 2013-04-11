@@ -339,6 +339,7 @@
                     AutoPostBack="True" onselectedindexchanged="ddlQuotaType_SelectedIndexChanged">
                     <asp:ListItem>Total Sales</asp:ListItem>
                     <asp:ListItem>Number of Quotes</asp:ListItem>
+                    <asp:ListItem>Total Quotes</asp:ListItem>
                     <asp:ListItem>Close Ratio</asp:ListItem>
                     <asp:ListItem>Won vs Lost</asp:ListItem>
                 </asp:DropDownList>
@@ -354,7 +355,7 @@
                     <asp:ListItem>Last 30 Days</asp:ListItem>
                     <asp:ListItem>Custom Dates</asp:ListItem>
                 </asp:DropDownList>
-                <asp:GridView ID="GridView1" runat="server" Width="400px" 
+                <asp:GridView ID="GridView1" runat="server" Width="500px" 
                     OnRowDataBound="GridView1_RowDataBound" 
                     onrowcreated="GridView1_RowCreated" Font-Names="Arial">
                 </asp:GridView>
@@ -364,8 +365,8 @@
         </tr>
         <tr >
             <td style="font-family: Arial">&nbsp;<asp:GridView ID="grdMonthDetail" 
-                    runat="server" Width="400px" 
-                    Font-Names="Arial" CellPadding="5">
+                    runat="server" Width="5px" 
+                    Font-Names="Arial" CellPadding="1">
                 </asp:GridView>
             </td>
             <td style="font-family: Arial">&nbsp;</td>
