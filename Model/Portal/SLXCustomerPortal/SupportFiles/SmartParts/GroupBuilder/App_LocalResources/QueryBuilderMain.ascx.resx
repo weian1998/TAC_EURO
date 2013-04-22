@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="jsAddDataToLayoutGridMessage" xml:space="preserve">
     <value>It appears that this field currently exists in this layout.  Do you want to continue?</value>
@@ -267,7 +267,7 @@
     <value>Value</value>
   </data>
   <data name="localizeViewSQL.Text" xml:space="preserve">
-    <value>View SQL...</value>
+    <value>View SQL</value>
   </data>
   <data name="MoveDown" xml:space="preserve">
     <value>Move Down</value>
@@ -280,5 +280,17 @@
   </data>
   <data name="MoveUp" xml:space="preserve">
     <value>Move Up</value>
+  </data>
+  <data name="jsCopyOf" xml:space="preserve">
+    <value>Copy of</value>
+  </data>
+  <data name="localizeColumn.Text" xml:space="preserve">
+    <value>Column</value>
+  </data>
+  <data name="Collapse" xml:space="preserve">
+    <value>Collapse</value>
+  </data>
+  <data name="Expand" xml:space="preserve">
+    <value>Expand</value>
   </data>
 </root>

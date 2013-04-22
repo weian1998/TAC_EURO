@@ -1,0 +1,54 @@
+﻿.libraryIcon {
+    background-repeat:no-repeat;
+    height:16px;
+    text-align:center;
+    width:16px;
+}
+.addFolderIcon {
+    background-image: url(../images/icons/Folder_add.png);
+}
+.editFolderIcon {
+    background-image: url(../images/icons/Folder_edit.png);
+} 
+.deleteFolderIcon {
+    background-image: url(../images/icons/Folder_delete.png);
+}
+.addFileIcon {
+    background-image: url(../images/icons/plus_16x16.gif);
+}
+.editFileIcon {
+    background-image: url(../images/icons/Edit_Item_16x16.gif);
+}
+.deleteFileIcon {
+    background-image: url(../images/icons/Delete_16x16.gif);
+}
+.helpFileIcon {
+    background-image: url(../images/icons/Help_16x16.png);
+}	
+.libTextBox {
+	font-size: 13px;
+	width: 100%;
+	min-height:40px;
+}
+
+.libTextBox.dijitTextBoxReadOnly,
+.libInputText.dijitTextBox.dijitTextBoxReadOnly,
+.libInputText.dijitTextBox.dijitValidationTextBox.dijitTextBoxReadOnly {
+	background-color : #F2F2F2 !important;
+    color : #444444 !important;
+    cursor : default;
+	border: 1px solid #C8C9DE;
+}
+
+.libTextBox.dijitTextBoxReadOnly.dijitFocused,
+.libInputText.dijitTextBox.dijitTextBoxReadOnly.dijitFocused,
+.libInputText.dijitTextBox.dijitValidationTextBox.dijitTextBoxReadOnly.dijitFocused {
+	background-color: #FFFFFF !important;
+	color: #000000 !important;
+    cursor : default;	
+	border: 1px solid #A8A9BE;
+}
+
+.libOkBtn.dijitButton [disabled] {
+    color : #8B8B8B !important;		
+}

@@ -1,12 +1,16 @@
 <?xml version="1.0"?>
-<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="1019ce3a-6845-408a-a641-8a519027dd90" lastModifiedUtc="2007-12-31T19:02:08.1055974Z" cardinality="1:M" parentEntityId="52552175-fd52-442f-a204-8257a8c52383" childEntityId="0f7b1686-d913-4e61-9a9f-f19482c57d11" cascadeOption="SaveUpdateDelete">
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="1019ce3a-6845-408a-a641-8a519027dd90" lastModifiedUtc="2012-07-25T14:32:59.5567757Z" parentEntityId="52552175-fd52-442f-a204-8257a8c52383" childEntityId="0f7b1686-d913-4e61-9a9f-f19482c57d11" cascadeOption="SaveUpdateDelete">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
   </ExtendedPropertiesCollection>
-  <parentProperty id="c3254dfc-8c70-4bdb-85ed-a08e447cbbce" lastModifiedUtc="2007-12-31T19:02:24.9492396Z" name="MarketingServiceRecipients" audited="false" displayCategory="Intermediate" isNullable="true" include="true">
+  <parentProperty id="c3254dfc-8c70-4bdb-85ed-a08e447cbbce" lastModifiedUtc="2012-07-25T14:32:59.5567757Z" name="MarketingServiceRecipients" audited="true">
     <ExtendedPropertiesCollection>
-      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty">
+        <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+          <OrmEntityPropertySDataExtension generate="true" />
+        </extender>
+      </extendee>
     </ExtendedPropertiesCollection>
     <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
       <RelationshipDataType />

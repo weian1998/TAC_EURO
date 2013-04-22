@@ -4,4 +4,5 @@
   <ServiceType>Sage.SalesLogix.Security.UserManagementService, Sage.SalesLogix.Security</ServiceType>
   <RegisterAs>Sage.SalesLogix.Security.IUserManagementService, Sage.SalesLogix.Security</RegisterAs>
   <Properties />
+  <Scope>Application</Scope>
 </PortalService>

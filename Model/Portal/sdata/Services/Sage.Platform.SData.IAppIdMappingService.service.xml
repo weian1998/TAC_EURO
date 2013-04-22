@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <PortalService xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="73704cec-f5db-4e1b-bb03-db1db02b2557">
   <InstanceId>229ddbdd7ec642b3bd7cc9f8feb2d6e9</InstanceId>
-  <ServiceType>Sage.SalesLogix.Web.SData.AppIdMappingService, Sage.SalesLogix.Web</ServiceType>
+  <ServiceType>Sage.SalesLogix.IntegrationContract.AppIdMappingService, Sage.SalesLogix.IntegrationContract</ServiceType>
   <RegisterAs>Sage.Platform.SData.IAppIdMappingService, Sage.Platform</RegisterAs>
   <Properties />
+  <Scope>Application</Scope>
 </PortalService>

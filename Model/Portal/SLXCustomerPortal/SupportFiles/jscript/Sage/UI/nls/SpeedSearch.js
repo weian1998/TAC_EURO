@@ -1,0 +1,1 @@
+define([        'Sage/LanguageList',        'dojo/_base/lang'],function (LanguageList, lang) {    var nls = {        root: {        standardText: 'standard',        advancedText: 'advanced',        speedSearchText: 'SpeedSearch'        }    };    return lang.mixin(LanguageList, nls);});

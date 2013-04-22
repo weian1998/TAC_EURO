@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PortalPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="f816bda5-36c7-44c1-b82f-53219bfbc6a2">
+  <PageAlias>DefectActivityRate</PageAlias>
+  <SmallImage>[Localization!Global_Images:DefectActivityRate_16x16]</SmallImage>
+  <LargeImage>[Localization!Global_Images:DefectActivityRate_24x24]</LargeImage>
+  <TemplateUrl>Masters\base.master</TemplateUrl>
+  <InheritTemplate>false</InheritTemplate>
+  <InheritsFrom>Sage.Platform.WebPortal.EntityPage, Sage.Platform.WebPortal</InheritsFrom>
+  <Properties>
+    <Property Name="EntityTypeName" TypeConverter="">Sage.Entity.Interfaces.IDefectActivityRate, Sage.Entity.Interfaces</Property>
+  </Properties>
+  <TemplateProperties />
+  <IsDefaultPage>false</IsDefaultPage>
+  <ExcludedGlobalModules />
+  <AppliedSecurity>Entities/DefectActivityRate/View</AppliedSecurity>
+  <IncludeScript />
+</PortalPage>

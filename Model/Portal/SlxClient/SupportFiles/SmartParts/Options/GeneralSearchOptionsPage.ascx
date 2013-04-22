@@ -14,7 +14,7 @@
 
 <div style="display:none">
 <asp:Panel ID="LitRequest_RTools" runat="server" meta:resourcekey="LitRequest_RToolsResource1">
-    <asp:ImageButton runat="server" ID="cmdSave" ToolTip="Save" OnClick="_save_Click" ImageUrl="~/images/icons/Save_16x16.gif" meta:resourcekey="cmdSave_rsc" />
+    <asp:ImageButton runat="server" ID="cmdSave" ToolTip="Save" OnClick="_save_Click" ImageUrl="~/images/icons/Save_16x16.gif" meta:resourcekey="cmdSave_rsc" OnClientClick="sessionStorage.clear();" />
     <SalesLogix:PageLink ID="GeneralOptionsHelpLink" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources:Portal, Help_ToolTip %>" ImageUrl="~/ImageResource.axd?scope=global&amp;type=Global_Images&amp;key=Help_16x16"
      Target="Help" NavigateUrl="prefsgen.aspx" meta:resourcekey="GeneralOptionsHelpLinkResource2"></SalesLogix:PageLink>
 </asp:Panel>
@@ -25,285 +25,377 @@
 <%--Used to store resources:msgMenuRangeMessage for use in javascript.--%>
 <asp:HiddenField ID="htxtMenuRangeMessage" Value="<%$ resources:msgMenuRangeMessage %>" runat="server" />
 <asp:HiddenField ID="htxtMailMergeServiceError" Value="<%$ resources:MailMergeServiceError %>" runat="server" />
+<asp:HiddenField ID="htxtSelectedTemplateType" Value="" runat="server" />
 
-<table border="0" cellpadding="1" cellspacing="0" class="formtable" style="margin-top:0px">
+<table border="0" cellpadding="1" cellspacing="0" class="formtable optionsTable" style="margin-top:0px">
 	<col width="50%" /><col width="50%" />
 	<tr>
-		<td class="highlightedCell">
+		<td  class="highlightedCell">
 			<asp:Label ID="lblGenOptions" runat="server" Font-Bold="True" Text="General Options" Width="120px" meta:resourcekey="lblGenOptionsResource1"></asp:Label>
 		</td>
-		<td class="highlightedCell">
-			<asp:Label ID="lblEmailOptions" runat="server" Font-Bold="True" Text="E-mail Options:" meta:resourcekey="lblEmailOptionsResource1" ></asp:Label>
-		</td>
+		<td  class="highlightedCell">
+            <asp:Label ID="lblMailMergeTemplateOptions" runat="server" Font-Bold="True" Text="Mail Merge Template Options:" meta:resourcekey="lblMailMergeTemplateOptions"></asp:Label>
+        </td>
 	</tr>
 	<tr>
-		<td>
-			<span class="lbl"><asp:Label ID="lblShowOnStartup" runat="server" Text="Show on Startup:" Width="123px" meta:resourcekey="lblShowOnStartupResource1"></asp:Label></span>
-			<span class="textcontrol"><asp:DropDownList runat="server" ID="_showOnStartup" CssClass="optionsInputClass" meta:resourcekey="_showOnStartupResource1" /></span>
-			
+		<td >
+			<span class="lbl">
+			    <asp:Label ID="lblShowOnStartup" runat="server" Text="Show on Startup:" Width="123px" meta:resourcekey="lblShowOnStartupResource1"></asp:Label>
+			</span>
+			<span class="textcontrol">
+			    <asp:DropDownList
+                    ID="_showOnStartup"
+                    data-dojo-type="Sage.UI.Controls.Select"
+                    CssClass="select-control"
+                    runat="server" 
+                    meta:resourcekey="_showOnStartupResource1" />
+			</span>
 		</td>
-		<td>
-			<span class="lbl"><asp:Label ID="lblLogToHistory" runat="server" Font-Bold="True" Text="Log To History" meta:resourcekey="lblLogToHistoryResource1" ></asp:Label></span>
-			<span class="textcontrol"><asp:DropDownList ID="_logToHistory" runat="server" DataTextField="Key" DataValueField="Value" meta:resourcekey="_logToHistoryResource1">
-                            </asp:DropDownList></span>
-		</td>                        
+		<td >
+            <span class="lbl"><asp:Label ID="lblType" runat="server" Text="Type:" 
+                meta:resourcekey="lblTypeResource"></asp:Label></span>
+            <span class="textcontrol"> 
+            <asp:DropDownList ID="cboTemplateType"
+                data-dojo-type="Sage.UI.Controls.Select"
+                CssClass="select-control"
+                runat="server"
+                OnSelectedIndexChanged="HandleTemplateTypeChanged"
+                AutoPostBack="True">
+                <asp:ListItem Selected="True" Value="CONTACT" Text="Contact" meta:resourcekey="listItemContactResource">Contact</asp:ListItem>
+                <asp:ListItem Value="LEAD" Text="Lead" meta:resourcekey="listItemLeadResource">Lead</asp:ListItem>
+            </asp:DropDownList>
+            </span>
+        </td>
 	</tr>
         <tr>
-            <td>
+            <td >
 				<span class="lbl"><asp:Label ID="lblDefaultOwner" runat="server" Text="Default Owner/Team:" Width="165px" meta:resourcekey="lblDefaultOwnerResource1"></asp:Label></span>
 				<span class="textcontrol">
-                <SalesLogix:OwnerControl runat="server" ID="_defaultOwnerTeam" AutoPostBack="False" DisplayMode="AsControl" meta:resourcekey="_defaultOwnerTeamResource1" >
+                <SalesLogix:OwnerControl title="<%$ resources: toolTipFind %>" alt="<%$ resources: toolTipFind %>" runat="server" ID="_defaultOwnerTeam" AutoPostBack="False" DisplayMode="AsControl" meta:resourcekey="_defaultOwnerTeamResource1" >
                     <OwnerDialogStyle BackColor="Control" />
                 </SalesLogix:OwnerControl></span>
 			</td>
-			<td class="slxlabel checkbox">
-            <%--Defect 1-80914 
-            DThompson - "Please only hide the options for now.  We may re-enable them in Sawgrass depending on the direction we choose to take."--%>
-				<%--<asp:CheckBox ID="_promptDuplicateContacts" runat="server"
-                  Text="<span id='lblPromptForDup'>Prompt for Duplicate Contacts or Leads</span>" meta:resourcekey="_promptDuplicateContactsResource1" />--%>
+            <td >
+                <span class="lbl"><asp:Label ID="lblEmailBaseTemplate" runat="server" Text="E-mail Base Template:" meta:resourcekey="lblEmailBaseTemplateResource1"></asp:Label></span>
+                <span class="textcontrol">
+                    <span runat="server" id="EmailSpan">
+                        <asp:TextBox ID="txtEmailBaseTemplate" runat="server" meta:resourcekey="txtEmailBaseTemplateResource1"></asp:TextBox>
+                        <img ID="txtEmailBaseTemplateImg" runat="server" title="<%$ resources: toolTipFind %>" alt="<%$ resources: toolTipFind %>" src="~/images/icons/find_16x16.png" class="optionsImageClass" onclick="getTemplate('Email')"/>
+                        <asp:HiddenField ID="txtEmailBaseTemplateId" runat="server"></asp:HiddenField>
+                    </span>
+                </span>
             </td>
 		</tr>
         <tr>
-			<td>
-				<span class="lbl"><asp:Label ID="lblIntellisync" runat="server" Text="Intellisync Contact Group:" meta:resourcekey="lblIntellisyncResource1"></asp:Label></span>
-                <span class="textcontrol">
-                <asp:DropDownList ID="_intellisyncGroup" CssClass="optionsInputClass" 
-                    DataTextField="Text" DataValueField="Value" runat="server">
-                </asp:DropDownList>
-                </span>
-			</td>
-            <td class="style1">
-            <%--Defect 1-80914 
-            DThompson - "Please only hide the options for now.  We may re-enable them in Sawgrass depending on the direction we choose to take."--%>
-				<%--<span class="slxlabel checkbox"><asp:CheckBox ID="_promptContactNotFound" runat="server"
-                      Text="<span id='lblPromptConNotFound'>Prompt for Contact or Lead not Found</span>" meta:resourcekey="_promptContactNotFoundResource1" />
-				</span>--%>
-            </td>        
-        </tr>		
-		<tr>
-		    <td>
-		        <span class="lbl"><asp:Label ID="lblAutoLogoff" runat="server" Text="Enable Automatic Logoff:" meta:resourcekey="lblAutoLogoffResource1"></asp:Label></span>
-                <span>
+            <td>
+                <span class="lbl"><asp:Label ID="lblAutoLogoff" runat="server" Text="Enable Automatic Logoff:" meta:resourcekey="lblAutoLogoffResource1"></asp:Label></span>
+                <span class="lbl" style="width:auto; padding-right:10px;">
                     <asp:CheckBox ID="_autoLogoff" runat="server" />
+                </span>
+                <span class="lbl" style="width:auto;">
                     <asp:Label ID="lblLogOffAfter" runat="server" Text="Log off after" meta:resourcekey="lblLogOffAfterResource1"></asp:Label>
                     <asp:TextBox ID="_logoffDuration" width="30px" runat="server" ></asp:TextBox>
-                    <asp:DropDownList ID="_logoffUnits" runat="server" DataTextField="Key" DataValueField="Value"></asp:DropDownList>
+                    <asp:DropDownList
+                        ID="_logoffUnits"
+                        data-dojo-type="Sage.UI.Controls.Select"
+                        CssClass="select-control"
+                        runat="server" DataTextField="Key" DataValueField="Value" />
                 </span>
+            </td>
+             <td >
+                <span class="lbl"><asp:Label ID="lblLetterBaseTemplate" runat="server" Text="Letter Base Template:" meta:resourcekey="lblLetterBaseTemplateResource1"></asp:Label></span>
+                <span class="textcontrol">
+                    <span runat="server" id="LetterSpan">
+                        <asp:TextBox ID="txtLetterBaseTemplate" runat="server" meta:resourcekey="txtLetterBaseTemplateResource1"></asp:TextBox>
+                        <img ID="txtLetterBaseTemplateImg" runat="server" title="<%$ resources: toolTipFind %>" alt="<%$ resources: toolTipFind %>" src="~/images/icons/find_16x16.png" class="optionsImageClass"  onclick="getTemplate('Letter')"/>
+                        <asp:HiddenField ID="txtLetterBaseTemplateId" runat="server"></asp:HiddenField>
+                    </span>
+                </span>
+            </td>
+        </tr>
+		<tr>
+		    <td>
+		        <span class="lbl"><asp:Label ID="lblPromptForUnsavedData" runat="server" Text="Prompt for unsaved data:" meta:resourcekey="lblPromptForUnsavedData"></asp:Label></span>
+		        <span class="lbl" style="width:auto;">
+		            <asp:CheckBox ID="chkPromptForUnsavedData" runat="server"/>
+		        </span>
 		    </td>
-            <td></td>
+            <td>
+                <span class="lbl"><asp:Label ID="lblFaxBaseTemplate" runat="server" Text="Fax Base Template:" meta:resourcekey="lblFaxBaseTemplateResource1"></asp:Label></span>
+                <span class="textcontrol">
+                    <span runat="server" id="FaxSpan">
+                        <asp:TextBox ID="txtFaxBaseTemplate" runat="server" meta:resourcekey="txtFaxBaseTemplateResource1"></asp:TextBox>
+                        <img ID="txtFaxBaseTemplateImg" runat="server" title="<%$ resources: toolTipFind %>" alt="<%$ resources: toolTipFind %>" src="~/images/icons/find_16x16.png"
+                            class="optionsImageClass" onclick="getTemplate('Fax')"/>						
+                        <asp:HiddenField ID="txtFaxBaseTemplateId" runat="server"></asp:HiddenField>
+                    </span>
+               </span>
+            </td>
 		</tr>
 		<tr>
 		    <td>
-		        <span class="lbl" style="width:100%"><asp:CheckBox ID="chkPromptForUnsavedData" runat="server" Text="<%$ resources: PromptForUnsavedData %>" /></span>
+		        <span class="lbl">&nbsp;</span>
+                <asp:Button runat="server" ID="btnClearPicklistData" OnClientClick="var x = new Sage.UI.Controls.PickList({});x.clear(x._storageNameSpace);return false;" Text="<%$ resources: clearSavedListData %>" CssClass="slxbutton"/>
 		    </td>
-		    <td style="text-align:left" rowspan="3">
-			    <div id="ExtFeatures">
-                    <asp:Button ID="btnEnhance" runat="server" CssClass="enhanceButton" UseSubmitBehavior="false" Text="<%$ resources: EnhanceSalesLogix %>"
-                        OnClientClick="Sage.installDesktopFeatures(); return false;//" />
-                    <SalesLogix:PageLink runat="server" ID="findoutmorelink" LinkType="HelpFileName" NavigateUrl="desktopintegration" Text="<%$ resources: FindOutMore %>" CssClass="findoutmoretext" Target="MCWebHelp" ></SalesLogix:PageLink>
-                    <div class="settings clicktodownload">
-                        <asp:Label ID="clicktodownload" runat="server" Text="<%$ resources: ClickToDownload %>" CssClass="notinstalled"></asp:Label>
-                        <asp:Label ID="sdiinstalled" runat="server" Text="<%$ resources: EnhancementsAreInstalled %>" CssClass="areinstalled" style="display:none" ></asp:Label>
-                    </div>
-                </div>
-		    </td>		    
+            <td >
+                <span class="lbl"><asp:Label ID="lblRecentTemplates" runat="server" Text="Write Menu - Recent Templates:" meta:resourcekey="lblRecentTemplatesResource1"></asp:Label></span>
+                <span class="textcontrol">
+                    <asp:TextBox ID="txtRecentTemplates" runat="server" meta:resourcekey="txtRecentTemplatesResource1"></asp:TextBox>
+                </span>
+            </td>
 		</tr>
         <tr>
-            <td>
-				<span class="lbl"><asp:Label ID="lblEmailBaseTemplate" runat="server" Text="E-mail Base Template:" meta:resourcekey="lblEmailBaseTemplateResource1"></asp:Label></span>
+            <td >
+                <span class="lbl"><asp:Label ID="lblMyCurrency" runat="server" Text="My Currency:" meta:resourcekey="lblMyCurrencyResource1"></asp:Label></span>
                 <span class="textcontrol">
-					<span runat="server" id="EmailSpan">
-						<asp:TextBox ID="txtEmailBaseTemplate" runat="server" meta:resourcekey="txtEmailBaseTemplateResource1"></asp:TextBox>
-						<img ID="txtEmailBaseTemplateImg" runat="server" alt="find" src="~/images/icons/find_16x16.gif" class="optionsImageClass"  onclick="getTemplate('Email')"/>						
-						<asp:TextBox ID="txtEmailBaseTemplateId" runat="server" meta:resourcekey="txtEmailBaseTemplateIdResource1"></asp:TextBox>
-					</span>
+                    <SalesLogix:LookupControl AutoPostBack="false" runat="server" ID="luMyCurrency" LookupEntityName="ExchangeRate" LookupEntityTypeName="Sage.Entity.Interfaces.IExchangeRate, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+                    <LookupProperties>
+                        <SalesLogix:LookupProperty PropertyHeader="Description" PropertyName="Description" PropertyType="System.String" PropertyFormat="None"  UseAsResult="True"></SalesLogix:LookupProperty>
+                        <SalesLogix:LookupProperty PropertyHeader="Currency Code" PropertyName="Id" PropertyFormat="None" PropertyType="System.String" UseAsResult="True"></SalesLogix:LookupProperty>
+                        <SalesLogix:LookupProperty PropertyHeader="Rate" PropertyName="Rate" PropertyFormat="None" PropertyType="System.Double" UseAsResult="True" ExcludeFromFilters="True" meta:resourceKey="LPRate_rsc"></SalesLogix:LookupProperty>
+                    </LookupProperties>
+                    <LookupPreFilters>
+                    </LookupPreFilters>
+                    </SalesLogix:LookupControl>
+                </span>
+            </td>
+            <td >
+                <span class="lbl" id="FaxProviderLabel">
+                    <asp:Label ID="lblFaxProvider" runat="server" Text="Fax Provider:" meta:resourcekey="lblFaxProviderResource1"></asp:Label>
+                </span>
+                <span id="FaxProviderOptions" class="textcontrol"></span>
+                <input type="hidden" ID="txtFaxProvider" runat="server" />
+            </td>
+        </tr>
+        <tr>
+            <td class="highlightedCell">
+                <asp:Label ID="lblIntellisyncOptions" runat="server" Font-Bold="True" Text="Intellisync Options:" meta:resourcekey="lblIntellisyncOptions"></asp:Label>
+            </td>
+            <td  class="highlightedCell">
+			    <asp:Label ID="lblEmailOptions" runat="server" Font-Bold="True" Text="E-mail Options:" meta:resourcekey="lblEmailOptionsResource1" ></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="lbl"><asp:Label ID="lblIntellisync" runat="server" Text="Intellisync Contact Group:" meta:resourcekey="lblIntellisyncResource1"></asp:Label></span>
+                <span class="textcontrol">
+                    <asp:DropDownList
+                        ID="_intellisyncGroup"
+                        data-dojo-type="Sage.UI.Controls.Select"
+                        CssClass="select-control"
+                        runat="server" />
+                </span>
+            </td>
+            <td >
+                <span class="lbl"><asp:Label ID="lblLogToHistory" runat="server" Text="Log To History" meta:resourcekey="lblLogToHistoryResource1" ></asp:Label></span>
+                <span class="textcontrol">
+                    <asp:DropDownList
+                        ID="_logToHistory"
+                        data-dojo-type="Sage.UI.Controls.Select"
+                        CssClass="select-control"
+                        runat="server"
+                        meta:resourcekey="_logToHistoryResource1" />
                 </span>
             </td>
         </tr>
         <tr>
-            <td>
-				<span class="lbl"><asp:Label ID="lblLetterBaseTemplate" runat="server" Text="Letter Base Template:" meta:resourcekey="lblLetterBaseTemplateResource1"></asp:Label></span>
-				<span class="textcontrol">
-					<span runat="server" id="LetterSpan">
-						<asp:TextBox ID="txtLetterBaseTemplate" runat="server" meta:resourcekey="txtLetterBaseTemplateResource1"></asp:TextBox>
-						<img ID="txtLetterBaseTemplateImg" runat="server" alt="find" src="~/images/icons/find_16x16.gif" class="optionsImageClass"  onclick="getTemplate('Letter')"/>
-						<asp:TextBox ID="txtLetterBaseTemplateId" runat="server" meta:resourcekey="txtLetterBaseTemplateIdResource1"></asp:TextBox>
-					</span>
-				</span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-				<span class="lbl"><asp:Label ID="lblFaxBaseTemplate" runat="server" Text="Fax Base Template:" meta:resourcekey="lblFaxBaseTemplateResource1"></asp:Label></span>
-				<span class="textcontrol">
-					<span runat="server" id="FaxSpan">
-						<asp:TextBox ID="txtFaxBaseTemplate" runat="server" meta:resourcekey="txtFaxBaseTemplateResource1"></asp:TextBox>
-						<img ID="txtFaxBaseTemplateImg" runat="server" alt="find" src="~/images/icons/find_16x16.gif" class="optionsImageClass"  onclick="getTemplate('Fax')"/>						
-						<asp:TextBox ID="txtFaxBaseTemplateId" runat="server" meta:resourcekey="txtFaxBaseTemplateIdResource1"></asp:TextBox>
-					</span>
-			   </span>
-			</td>
-			<td></td>
-        </tr>        
-        <tr>
-            <td>
-				<span class="lbl"><asp:Label ID="lblRecentTemplates" runat="server" Text="Write Menu - Recent Templates:" meta:resourcekey="lblRecentTemplatesResource1"></asp:Label></span>
-				<span class="textcontrol">
-	                <asp:TextBox ID="txtRecentTemplates" runat="server" meta:resourcekey="txtRecentTemplatesResource1"></asp:TextBox>
-				</span>
-            </td>
             <td></td>
         </tr>
         <tr>
-            <td>
-				<span class="lbl" id="FaxProviderLabel"><asp:Label ID="lblFaxProvider" runat="server" Text="Fax Provider:" meta:resourcekey="lblFaxProviderResource1"></asp:Label></span>
-				<span class="textcontrol" id="FaxProviderTextControl">
-                <span id="FaxProviderOptions"></span>
-                <asp:TextBox ID="txtFaxProvider" runat="server" meta:resourcekey="txtFaxProviderResource1"></asp:TextBox>
-                </span>
+            <td></td>
+        </tr>
+        <tr>
+            <td  class="highlightedCell">
+                <asp:Label ID="lblAccessibilityOptions" runat="server" Font-Bold="True" Text="Accessibility Options:" meta:resourcekey="lblAccessibilityOptions"></asp:Label>
             </td>
+           <td class="highlightedCell">
+                <asp:Label ID="SalesLogixEnhancements" runat="server" Font-Bold="True" Text="Sage SalesLogix Enhancements:" meta:resourcekey="lblEnhancements"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td >
+                <span class="lbl">
+                    <asp:Label ID="lblCheckboxEnabled" runat="server" Text="Display List view check boxes:" meta:resourcekey="lblCheckboxEnabledResource"></asp:Label>
+                </span>
+                <span>
+                    <asp:CheckBox runat="server" ID="cbCheckboxEnabled" />
+                </span>
+		    </td>
+            <td></td>
+        </tr>
+        <tr>
             <td><asp:Button ID="btnFlushCache" runat="server" Text="Clear Cache" visible="false" Enabled="false" OnClick="btnFlushCache_Click" meta:resourcekey="btnFlushCache1" /></td>
         </tr>
         <tr>
+            <td></td>
             <td>
-				<span class="lbl"><asp:Label ID="lblMyCurrency" runat="server" Text="My Currency:" meta:resourcekey="lblMyCurrencyResource1"></asp:Label></span>
-				<span class="textcontrol">
-					<SalesLogix:LookupControl runat="server" ID="luMyCurrency" LookupEntityName="ExchangeRate" LookupEntityTypeName="Sage.Entity.Interfaces.IExchangeRate, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-					<LookupProperties>
-						<SalesLogix:LookupProperty PropertyHeader="Description" PropertyName="Description" PropertyFormat="None"  UseAsResult="True"></SalesLogix:LookupProperty>
-						<SalesLogix:LookupProperty PropertyHeader="Currency Code" PropertyName="Id" PropertyFormat="None"  UseAsResult="True"></SalesLogix:LookupProperty>
-						<SalesLogix:LookupProperty PropertyHeader="Rate" PropertyName="Rate" PropertyFormat="None"  UseAsResult="True" ExcludeFromFilters="True" meta:resourceKey="LPRate_rsc"></SalesLogix:LookupProperty>
-					</LookupProperties>
-					<LookupPreFilters>
-					</LookupPreFilters>
-					</SalesLogix:LookupControl>				
-				</span>
+                <div style="position:relative;">
+                    <div id="enhancementsNotInstalledOptions" onclick="Sage.installDesktopFeatures();">
+			            <span class="enhancements">
+			                <asp:Label ID="lblInstallEnhancements" runat="server" Text="<%$ resources: lblInstallEnhancements.Text %>"></asp:Label>
+			            </span>
+			        </div>
+                    <div id="enhancementsInstalledOptions" style="display:none;" onclick="Sage.installDesktopFeatures();">
+			            <span class="enhancements">
+			                <asp:Label ID="EnhancementsInstalled" runat="server" Text="<%$ resources: lblEnhancementsInstalled.Text %>"></asp:Label>
+			            </span>
+			        </div>
+                    <span class="findOutMoreOptions"> <SalesLogix:PageLink runat="server" ID="findoutmorelink" LinkType="HelpFileName" NavigateUrl="desktopintegration" Text="<%$ resources: FindOutMore %>" CssClass="findoutmoretext" Target="MCWebHelp" ></SalesLogix:PageLink></span>
+                </div>
             </td>
+        </tr>
+        <tr>
+            <td></td>
             <td></td>
         </tr>   
         <tr>
 			<td colspan="2" class="slxlabel checkbox">
                 <asp:CheckBox ID="_useActiveReporting" runat="server" Text="Use ActiveReporting (requires ActiveX and Crystal Runtime)" meta:resourcekey="UseActiveReportingResource" />
-			</td> 
-      
-        </tr> 
-        
+			</td>
+        </tr>
+        <tr>
+            <%--Render, but do not display; otherwise the user option will get overwritten with the default value--%>
+            <td class="slxlabel checkbox" style="visibility:hidden">
+                <%--Defect 1-80914 
+            DThompson - "Please only hide the options for now.  We may re-enable them in Sawgrass depending on the direction we choose to take."--%>				
+            <asp:CheckBox ID="_promptDuplicateContacts" runat="server"
+                  Text="<span id='lblPromptForDup'>Prompt for Duplicate Contacts or Leads</span>" meta:resourcekey="_promptDuplicateContactsResource1" />
+            </td>
+            <td class="style1" style="visibility:hidden">
+                    <%--Defect 1-80914 
+                DThompson - "Please only hide the options for now.  We may re-enable them in Sawgrass depending on the direction we choose to take."--%>				
+                <span class="slxlabel checkbox"><asp:CheckBox ID="_promptContactNotFound" runat="server"
+                    Text="<span id='lblPromptConNotFound'>Prompt for Contact or Lead not Found</span>" meta:resourcekey="_promptContactNotFoundResource1" />
+                </span>
+            </td>
+        </tr>
 </table>
 
-<%--                   
-    <table style="display: none; width: 421px">
-        <tr style="display:none">
-            <td colspan="2" class="highlightedCell">
-                <asp:Label ID="lblSearchOptions" runat="server" Font-Bold="True" Text="Search Options" meta:resourcekey="lblSearchOptionsResource1"></asp:Label></td>
-        </tr>
-        <tr style="display:none">
-            <td style="width: 217px" valign="top">
-                <asp:Label ID="lblDefaultContactSearch" runat="server" Text="Default Contact Search:" meta:resourcekey="lblDefaultContactSearchResource1"></asp:Label></td>
-            <td valign="top">
-                <asp:DropDownList ID="_defaultContactSearch" runat="server" DataTextField="Key" DataValueField="Value" meta:resourcekey="_defaultContactSearchResource1">
-                </asp:DropDownList>
-            </td>
-        </tr>
-        <tr style="display:none">
-            <td style="width: 217px; height: 23px;" valign="top">
-                <asp:Label ID="lblDefaultAccountSearch" runat="server" Text="Default Account Search:" meta:resourcekey="lblDefaultAccountSearchResource1"></asp:Label></td>
-            <td style="height: 23px" valign="top">
-                <asp:DropDownList ID="_defaultAccountSearch" runat="server" DataTextField="Key" DataValueField="Value" meta:resourcekey="_defaultAccountSearchResource1">
-                </asp:DropDownList>
-            </td>
-        </tr>
-        <tr style="display:none">
-            <td style="width: 217px; height: 22px;" valign="top">
-                <asp:Label ID="lblDefaultOppSearch" runat="server" Text="Default Opportunity Search:" meta:resourcekey="lblDefaultOppSearchResource1"></asp:Label></td>
-            <td valign="top" style="height: 22px">
-                <asp:DropDownList ID="_defaultOpportunitySearch" runat="server" DataTextField="Key" DataValueField="Value" meta:resourcekey="_defaultOpportunitySearchResource1">
-                </asp:DropDownList>
-            </td>
-        </tr>
-        
-    </table>--%>
 <script type="text/javascript">
-function checkMenuRange()
-{
-    var oRecentTemplatesControl = document.getElementById("<%= txtRecentTemplates.ClientID %>");
-    if (oRecentTemplatesControl != null)
-    {
-        var iCount = oRecentTemplatesControl.value;
-        if ((iCount == null) || (iCount == ""))
-        {
-            oRecentTemplatesControl.value = "0";
-        }
-        else
-        {
-            if (!isNaN(iCount))
-            {
-                iCount = parseInt(iCount);
-                if ((iCount < 0) || (iCount > 10))
-                {
+    function checkMenuRange() {
+        var oRecentTemplatesControl = dojo.byId("<%= txtRecentTemplates.ClientID %>");
+        if (oRecentTemplatesControl != null) {
+            var iCount = oRecentTemplatesControl.value;
+            if ((iCount == null) || (iCount == "")) {
+                oRecentTemplatesControl.value = "0";
+            }
+            else {
+                if (!isNaN(iCount)) {
+                    iCount = parseInt(iCount);
+                    if ((iCount < 0) || (iCount > 10)) {
+                        alert('<%= htxtMenuRangeMessage.Value %>');
+                    }
+                }
+                else {
                     alert('<%= htxtMenuRangeMessage.Value %>');
                 }
             }
-            else
-            {
-                alert('<%= htxtMenuRangeMessage.Value %>');
-            }
         }
     }
-}
 
-function getTemplate(mode) {
-    var oService = GetMailMergeService();
-    if (oService) {
-        try {
-            var arrResult = oService.SelectTemplate();
-            if (Ext.isArray(arrResult)) {
-                var bCanceled = arrResult[TemplatesResult.trCanceled];
-                var bSuccess = arrResult[TemplatesResult.trSuccess];
-                if (!bCanceled && bSuccess) {
-                    var sPluginId = arrResult[TemplatesResult.trPluginId];
-                    var sPluginName = arrResult[TemplatesResult.trPluginName];
+    // Caches the mail merge template data so the DB does not have to be queried each time the user changes multiple fields.
+    var MailMergeTemplates = null;
+
+    function getTemplate(mode) {
+        require(['Sage/MailMerge/Helper', 'Sage/MailMerge/Templates', 'Sage/UI/Dialogs'], function(Helper, Templates, Dialogs) {
+            var fnOnSelect = function(item) {
+                if (dojo.config.isDebug) {
+                    console.debug("Template: family=%o; name=%o; id=%o; maintable=%o; template=%o",
+                        item.family, item.name, item.id, item.maintable, item.template);
+                }
+                try {
                     var inputs = document.getElementsByTagName("input");
                     for (var i = 0; i < inputs.length; i++) {
                         if (inputs[i].id.indexOf('txt' + mode + 'BaseTemplateId') > -1) {
-                            inputs[i].value = sPluginId;
+                            inputs[i].value = item.id;
                         } else {
                             if (inputs[i].id.indexOf('txt' + mode + 'BaseTemplate') > -1) {
-                                inputs[i].value = sPluginName;
+                                inputs[i].value = item.name;
                             }
                         }
                     }
+                } catch(err) {
+                    var sError = (typeof err.toMessage === "function") ? err.toMessage(Helper.DesktopErrors().UnexpectedError, Helper.MailMergeInfoStore().ShowJavaScriptStack) : err.message;
+                    Dialogs.showError(sError);
                 }
+            };
+            var sMainTable = "CONTACT";
+            var oTemplateCombo = dijit.byId("<%= cboTemplateType.ClientID %>");
+            if (oTemplateCombo) {
+                sMainTable = oTemplateCombo.value;
+            }
+            if (MailMergeTemplates == null) {
+                MailMergeTemplates = new Templates();
+            }
+            MailMergeTemplates.select(sMainTable, { onSelect: fnOnSelect });
+        });
+    }
+
+    function DoGeneralSearchOptionsPage_init() {
+        var faxOptionsSpan = document.getElementById("FaxProviderOptions");
+        if (faxOptionsSpan) {
+            var txtFaxProviderControl = document.getElementById("<%= txtFaxProvider.ClientID %>");
+            if (txtFaxProviderControl) {
+                require(['Sage/MailMerge/Helper', 'Sage/MailMerge/Service', 'dojo/ready', 'dojo/parser'], function (Helper, DesktopService, ready, parser) {
+                    ready(function () {
+                        var oService = Helper.GetMailMergeService(false);
+                        if (oService) {
+                            var providerOptions = oService.MailMergeGUI().GetFaxProviderOptions(txtFaxProviderControl.value),
+                               faxOptions = '<select id="FaxOptions" data-dojo-type="Sage.UI.Controls.Select" class="select-control" onchange="updateFaxProvider()">' + providerOptions + '</select>';
+
+                            faxOptionsSpan.innerHTML = faxOptions;
+
+                            var oFaxProviderLabel = dojo.byId("<%= lblFaxProvider.ClientID %>");
+                            if (oFaxProviderLabel) {
+                                oFaxProviderLabel.style.display = "inline";
+                            }
+
+                            parser.parse(faxOptionsSpan);
+                        }
+                    });
+                });
             }
         }
-        catch (err) {
-            var sError = (Ext.isFunction(err.toMessage)) ? err.toMessage(DesktopErrors().UnexpectedError, MailMergeInfoStore().ShowJavaScriptStack) : err.message;
-            Ext.Msg.show({
-                title: "Sage SalesLogix",
-                msg: sError,
-                buttons: Ext.Msg.OK,
-                icon: Ext.MessageBox.ERROR
-            });
+    }
+
+    function GeneralSearchOptionsPage_init() {
+        window.setTimeout('DoGeneralSearchOptionsPage_init()', 0);
+    }
+
+    Sys.Application.add_load(GeneralSearchOptionsPage_init);
+
+    function updateFaxProvider() {
+        if (dijit.byId("FaxOptions")) {
+            var oFaxProviderSelectedValue = dojo.byId("<%= FaxProviderSelectedValue.ClientID %>"),
+               faxOptions = dijit.byId('FaxOptions');
+            if (oFaxProviderSelectedValue != null
+                && faxOptions) {
+                oFaxProviderSelectedValue.value = faxOptions.value;
+            }
         }
     }
-}
 
-Sys.Application.add_load(GeneralSearchOptionsPage_init);
-
-function updateFaxProvider() {
-    if (document.getElementById("FaxOptions"))
-    {       
-        var oFaxProviderSelectedValue = document.getElementById("<%= FaxProviderSelectedValue.ClientID %>");
-        if (oFaxProviderSelectedValue != null)
-        {
-            oFaxProviderSelectedValue.value = document.all.FaxOptions.options[document.all.FaxOptions.selectedIndex].value;
-        }
+    function showMoreInfo() {
+        var address = 'ActivexInfo.aspx';
+        var win = window.open(address, 'AlarmMgrWin', 'width=425,height=425,directories=no,location=no,menubar=no,status=yes,scrollbars=yes,resizable=yes,titlebar=no,toolbar=no');
     }
-}
+    $(document).ready(function () {
+        initGears();
+        //DoGeneralSearchOptionsPage_init();
+        if (Sage.gears) {
+            console.log('Sage.gears is not null');
+            //to disable the Enhance SalesLogix button, remove the comments from the following line:
+            //$(".enhanceButton").attr('disabled', 'disabled');
 
-function showMoreInfo()
-{
-    var address = 'ActivexInfo.aspx';
-    var win = window.open(address, 'AlarmMgrWin', 'width=425,height=425,directories=no,location=no,menubar=no,status=yes,scrollbars=yes,resizable=yes,titlebar=no,toolbar=no');
-}
+            //to hide the whole thing...
+            //$('#ExtFeatures').css('visibility','hidden');
 
+            //to hide the "click to download" message:
+            //$('.clicktodownload').css('visibility', 'hidden');
+            //change the message:
+            //$('.clicktodownload').text(LoginStrings.EnhancementsAreInstalled || 'Enhancements have been installed');
+            $('#enhancementsNotInstalledOptions').css('display', 'none');
+            $('#enhancementsInstalledOptions').css('display', '');
+        }
+    });
 </script>

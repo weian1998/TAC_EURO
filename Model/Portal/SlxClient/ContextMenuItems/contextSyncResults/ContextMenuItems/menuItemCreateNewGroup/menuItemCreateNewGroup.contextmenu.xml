@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="ccc436c1-35f8-44f9-9a66-96988e3d0c09">
   <ItemId>menuItemCreateNewGroup</ItemId>
-  <NavUrl>javascript:groupManager.CreateGroup('SYNRESULT');</NavUrl>
+  <NavUrl>javascript:Sage.Groups.GroupManager.CreateGroup('SYNRESULT');</NavUrl>
   <LargeImageUrl />
   <SmallImageUrl />
   <ContextMenuId />

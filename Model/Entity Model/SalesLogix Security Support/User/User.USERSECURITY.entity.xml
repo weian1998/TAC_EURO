@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="6ab738f6-21b0-4fe2-8df5-6f192281423c" lastModifiedUtc="2011-05-05T13:52:54.8943781Z" manageSchema="false" tableName="USERSECURITY" name="User" displayPropertyId="438e811a-dc9f-4118-80b5-0c4827dd1c75" isExtension="false" audited="true" smallImage="[Localization!Global_Images:users_16x16]" largeImage="[Localization!Global_Images:users_32x32]" onBeforeInsertMethodId="3900b434-c65d-4c67-b6d0-067d23e1dcc9" onAfterInsertMethodId="baf25d9d-8abc-4921-a908-7a140df0c4ce" onBeforeUpdateMethodId="13e49337-1666-4247-97b4-4acd99fdf3da" onAfterUpdateMethodId="64deda6a-25b3-41ef-9506-2490a3a8e440" onBeforeDeleteMethodId="aa0c1323-8685-4b7e-b7e3-cbfc9449efdc" onAfterDeleteMethodId="06e1a163-c137-4eeb-a2e1-fbb31d86b338" onCreateId="ef9e26bb-ae7b-4760-a46f-c4719d664192">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="6ab738f6-21b0-4fe2-8df5-6f192281423c" lastModifiedUtc="2011-11-01T14:27:48.6711544Z" manageSchema="false" tableName="USERSECURITY" name="User" displayPropertyId="438e811a-dc9f-4118-80b5-0c4827dd1c75" isExtension="false" cacheUsage="ReadWrite" audited="true" smallImage="[Localization!Global_Images:users_16x16]" largeImage="[Localization!Global_Images:users_32x32]" onBeforeInsertMethodId="3900b434-c65d-4c67-b6d0-067d23e1dcc9" onAfterInsertMethodId="baf25d9d-8abc-4921-a908-7a140df0c4ce" onBeforeUpdateMethodId="13e49337-1666-4247-97b4-4acd99fdf3da" onAfterUpdateMethodId="64deda6a-25b3-41ef-9506-2490a3a8e440" onBeforeDeleteMethodId="aa0c1323-8685-4b7e-b7e3-cbfc9449efdc" onAfterDeleteMethodId="06e1a163-c137-4eeb-a2e1-fbb31d86b338" onCreateId="ef9e26bb-ae7b-4760-a46f-c4719d664192">
   <extendedMetaData>
     <i>
       <n>NHibernate.Mapping.AlternateConcreteClass</n>
@@ -15,7 +15,7 @@
         </OrmEntityMetadataExtension>
       </extender>
       <extender guid="76aa0e24-2c8f-3b71-a1f9-ca6db3db4459">
-        <OrmEntitySDataExtension generateFeed="true" pathName="users" lastUpdatedPropertyId="fa388697-39a2-47b0-9efb-8fc5b20154a3" canPost="false" canPut="false" canDelete="false" />
+        <OrmEntitySDataExtension generateFeed="true" pathName="users" lastUpdatedPropertyId="fa388697-39a2-47b0-9efb-8fc5b20154a3" feedType="Dynamic" canPost="false" canPut="false" canDelete="false" />
       </extender>
     </extendee>
   </ExtendedPropertiesCollection>
@@ -315,7 +315,7 @@
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="32775363-02e6-4216-9a99-b74a09b2a799" lastModifiedUtc="2010-01-13T20:55:13.8214521Z" name="Security" audited="false" columnName="SECURITY" maxLength="2147483647" precision="0" scale="0" ordinal="19" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="32775363-02e6-4216-9a99-b74a09b2a799" lastModifiedUtc="2011-08-24T15:15:05.2695176Z" name="Security" audited="false" include="false" columnName="SECURITY" maxLength="2147483647" precision="0" scale="0" ordinal="19" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
           <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
@@ -419,6 +419,18 @@
         </TextDataType>
       </SystemDataType>
     </property>
+    <property xsi:type="OrmFieldProperty" id="a37b7743-0a9c-4d0c-b3e5-563df2770bc2" lastModifiedUtc="2011-12-19T21:24:43.7593542Z" name="LoginAttempts" description="The number of sucessive failed login attempts." audited="false" columnName="LOGINATTEMPTS" maxLength="0" precision="10" scale="0" ordinal="1" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="6b0b3d51-0728-4b67-9473-52836a81da53">
+        <ShortIntegerDataType />
+      </SystemDataType>
+    </property>
     <property xsi:type="OrmCodeSnippetProperty" id="21349b10-a632-4830-a80d-d17fb4186d16" lastModifiedUtc="2010-03-05T16:13:02.05Z" name="Manager" audited="false" hasGet="true" hasSet="false" returnType="Sage.Entity.Interfaces.IUser" propertyMethodId="d38b445a-224d-403c-9406-9625e2e15a66">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmCodeSnippetProperty">
@@ -431,6 +443,18 @@
         <CustomPropertyDataType />
       </SystemDataType>
       <code><![CDATA[]]></code>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="004d3bc2-df1f-4f25-9a08-0271ddfbb987" lastModifiedUtc="2011-12-19T21:24:12.0429751Z" name="FailedAttemptDate" description="The datetime the user last attempted a login and failed." audited="false" columnName="FAILEDATTEMPTDATE" maxLength="0" precision="0" scale="0" ordinal="32" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
+        <DateTimeDataType />
+      </SystemDataType>
     </property>
   </properties>
 </entity>

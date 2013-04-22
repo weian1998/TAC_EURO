@@ -5,7 +5,6 @@ using Sage.Platform.Application;
 using Sage.Entity.Interfaces;
 using Sage.Platform.WebPortal;
 using Sage.SalesLogix.Security;
-using log4net;
 using Sage.Platform.Security;
 using Sage.Platform.Application.UI;
 using Sage.SalesLogix.PickLists;
@@ -162,17 +161,7 @@ public partial class SmartParts_Ticket_SendTicketEmail : EntityBoundSmartPartInf
     /// </summary>
     protected override void OnFormBound()
     {
-        object sender = this;
-        EventArgs e = EventArgs.Empty;
-
-        SLXUserService service = ApplicationContext.Current.Services.Get<IUserService>(true) as SLXUserService;
-        if (service != null)
-        {
-            IUser UserContext = service.GetUser();
-            //if (UserContext != null && UserContext.Manager != null && UserContext.Manager.UserInfo != null)
-            //    lblManagerName.Text = UserContext.Manager.UserInfo.FirstName + " " + UserContext.Manager.UserInfo.LastName;
-        }
-        base.OnFormBound();
+        ClientBindingMgr.RegisterDialogCancelButton(btnCancel);
     }
 
     /// <summary>
@@ -180,11 +169,8 @@ public partial class SmartParts_Ticket_SendTicketEmail : EntityBoundSmartPartInf
     /// </summary>
     protected override void OnWireEventHandlers()
     {
-        if (ScriptManager.GetCurrent(this.Page) != null)
-        {
-            cmdSendEmail.Click += new EventHandler(DialogService.CloseEventHappened);
-        }
-        base.OnWireEventHandlers();
+        cmdSendEmail.Click += DialogService.CloseEventHappened;
+        btnCancel.Click += DialogService.CloseEventHappened;
     }
 
     /// <summary>

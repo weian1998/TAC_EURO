@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="cmdSave.Caption" xml:space="preserve">
     <value>Save</value>
@@ -169,7 +169,7 @@
     <value>Assigned Date:</value>
   </data>
   <data name="dtpAssignedDate.ToolTip" xml:space="preserve">
-    <value>s</value>
+    <value />
   </data>
   <data name="dplArea.Caption" xml:space="preserve">
     <value>Area:</value>
@@ -208,13 +208,13 @@
     <value>Main Phone</value>
   </data>
   <data name="lueAccount.LookupProperties.Type.PropertyHeader" xml:space="preserve">
-    <value />
+    <value>Type</value>
   </data>
   <data name="lueAccount.LookupProperties.SubType.PropertyHeader" xml:space="preserve">
     <value>Sub-Type</value>
   </data>
   <data name="lueAccount.LookupProperties.Status.PropertyHeader" xml:space="preserve">
-    <value />
+    <value>Status</value>
   </data>
   <data name="lueContact.Caption" xml:space="preserve">
     <value>Contact Name:</value>
@@ -352,7 +352,7 @@
     <value>State</value>
   </data>
   <data name="lueAccount.LookupProperties.AccountManager.UserInfo.UserName.PropertyHeader" xml:space="preserve">
-    <value>Acct Manager</value>
+    <value>Acct. Manager</value>
   </data>
   <data name="lueAccount.LookupProperties.Owner.OwnerDescription.PropertyHeader" xml:space="preserve">
     <value>Owner</value>
@@ -410,23 +410,5 @@
   </data>
   <data name="lueContact.LookupProperties.LastHistoryDate.PropertyHeader" xml:space="preserve">
     <value>Last History Date</value>
-  </data>
-  <data name="txtOwner.Caption" xml:space="preserve">
-    <value>Owner:</value>
-  </data>
-  <data name="ModifyUser.Caption" xml:space="preserve">
-    <value>ModifyUser:</value>
-  </data>
-  <data name="ModifyDate.Caption" xml:space="preserve">
-    <value>ModifyDate:</value>
-  </data>
-  <data name="6bd77ba7-9a82-4eb2-a891-ba9b25a653f9.Title" xml:space="preserve">
-    <value>Restricted Access</value>
-  </data>
-  <data name="6bd77ba7-9a82-4eb2-a891-ba9b25a653f9.Message" xml:space="preserve">
-    <value>You don't have access to save current IT Ticket Level</value>
-  </data>
-  <data name="pklITTicketLevel.Caption" xml:space="preserve">
-    <value>IT Ticket Level:</value>
   </data>
 </root>

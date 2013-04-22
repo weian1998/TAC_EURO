@@ -56,33 +56,11 @@ namespace Sage.BusinessRules.CodeSnippets
 					form.lueERPApplication.Enabled = false;
 					form.luePriceList.Enabled = false;
 				}
-				else 
-				{
-					form.lueERPApplication.Enabled = true;
-					object oValue = form.lueERPApplication.LookupResultValue;
-					string sValue = string.Empty;
-					if (oValue != null)
-					{
-						sValue = oValue.ToString();
-					}
-					if (string.IsNullOrEmpty(sValue))
-					{
-						form.luePriceList.Text = string.Empty;
-						form.luePriceList.LookupResultValue = null;
-						form.luePriceList.Enabled = false;
-					}
-					else
-					{
-						form.luePriceList.Enabled = true;
-					}
-					SalesLogix.HighLevelTypes.LookupPreFilter filterAppId = new SalesLogix.HighLevelTypes.LookupPreFilter();
-					filterAppId.LookupEntityName = "Sage.Entity.Interfaces.IAppIdMapping";
-					filterAppId.PropertyName = "Id";
-					filterAppId.OperatorCode = "!=";
-					filterAppId.FilterValue = oMappingService.LocalAppId;
-					filterAppId.PropertyType = "System.String";
-					form.lueERPApplication.LookupPreFilters.Add(filterAppId);
-				}				
+                else
+                {
+                    form.lueERPApplication.Enabled = true;
+                    form.luePriceList.Enabled = (form.lueERPApplication.LookupResultValue != null);
+                }			
 			}
 			else
 			{

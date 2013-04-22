@@ -4,7 +4,7 @@
 
 <div style="display:none">
     <asp:Panel ID="LeadMarketing_RTools" runat="server" meta:resourcekey="LeadMarketing_RToolsResource1">
-        <asp:ImageButton runat="server" ID="AddResponse" ToolTip="Add Campaign Response" 
+        <asp:ImageButton runat="server" ID="AddResponse" ToolTip="<%$ resources: LeadMarketing_Add.Tooltip %>" 
             ImageUrl="~/images/icons/plus_16x16.gif" meta:resourcekey="AddResponse_rsc" />
         <SalesLogix:PageLink ID="lnkLeadMarketingHelp" runat="server" LinkType="HelpFileName"
             ToolTip="<%$ resources:Portal, Help_ToolTip %>" Target="Help" NavigateUrl="marketingtab.aspx"

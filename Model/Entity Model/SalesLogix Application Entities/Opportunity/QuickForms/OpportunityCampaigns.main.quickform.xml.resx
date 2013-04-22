@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="grdCampaigns.15d16c78-95dc-4007-8e3a-1f86ac3d880e.ColumnHeading" xml:space="preserve">
     <value>Campaign Name</value>
@@ -151,7 +151,7 @@
     <value>No records match the selection criteria.</value>
   </data>
   <data name="lueAssociateCampaign.ToolTip" xml:space="preserve">
-    <value>Associate Campaign</value>
+    <value />
   </data>
   <data name="lueAssociateCampaign.LookupProperties.Status.PropertyHeader" xml:space="preserve">
     <value>Status</value>
@@ -182,5 +182,14 @@
   </data>
   <data name="lueAssociateCampaign.LookupProperties.AccountManager.UserInfo.UserName.PropertyHeader" xml:space="preserve">
     <value>Manager</value>
+  </data>
+  <data name="lueAssociateCampaign.LookupProperties.CreateDate.PropertyHeader" xml:space="preserve">
+    <value>Create Date</value>
+  </data>
+  <data name="lueAssociateCampaign.ButtonToolTip" xml:space="preserve">
+    <value>Associate Campaign</value>
+  </data>
+  <data name="grdCampaigns.8c4fdbca-209f-4ee9-a206-9582edc128ae.ColumnHeading" xml:space="preserve">
+    <value>Campaign Name</value>
   </data>
 </root>

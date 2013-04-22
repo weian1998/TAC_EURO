@@ -1,150 +1,67 @@
 ﻿using System;
 using System.Web.UI;
+using Sage.Platform.Application;
+using Sage.Platform.Orm.Attributes;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.Entity.Interfaces;
-using System.Resources;
-using System.Reflection;
 using System.ComponentModel;
 using System.Text;
-using Sage.Platform.WebPortal.Services;
-using Sage.SalesLogix.Web.Controls;
 
-public partial class SmartParts_History_NotesHistoryList : EntityBoundSmartPartInfoProvider
+public partial class SmartParts_History_NotesHistoryList : SmartPart
 {
-    public override Type EntityType
+    [ServiceDependency]
+    public IEntityContextService EntityContext { get; set; }
+
+    protected void Page_Load(object sender, EventArgs e)
     {
-        get { return EntityPage.EntityContext.EntityType; }
-    }
+        var script = new StringBuilder();
+        script.AppendLine(@"require([
+            'dojo/ready',
+            'Sage/UI/NotesHistoryList'        
+        ], function (ready, NotesHistoryList) {");
 
-    protected override void OnAddEntityBindings()
-    {
-        // nothing to do
-    }
+        string baseScript = string.Format(
+                  "window.setTimeout( function() {{ var a = new NotesHistoryList({{ 'workspace': '{0}', 'tabId': '{1}', 'placeHolder': '{2}', 'parentRelationshipName': '{3}' }}); a.startup(); }}, 1);",
+                  getMyWorkspace(),
+                  ID,
+                  historyGridPlaceholder.ClientID,
+                  GetParentRelationshipName(EntityContext.EntityType));
 
-
-    protected override void OnFormBound()
-    {
-        base.OnFormBound();
-        ScriptManager.RegisterClientScriptInclude(this, GetType(), "NotesHistoryList",
-            Page.ResolveUrl("~/SmartParts/History/NotesHistoryList.js"));
-
-        string scr = string.Format("Sage.UI.Forms.HistoryList.HistoryTypeMap = {{{0}}};", Server.HtmlEncode(BuildHistoryTypeMap()));
-        ScriptManager.RegisterStartupScript(this, GetType(), "historyTypes", scr, true);
-
-        var script =
-            String.Format(
-                @"window.setTimeout(function() {{ Sage.UI.Forms.HistoryList.init('{0}', 
-                    function() {{ return '{2} eq \'' + Sage.Utility.getCurrentEntityId() + '\''; }}, 
-                    {{ workspace: '{1}', tabId: '{3}' }}); }}, 1);",
-                placeholder.ClientID, getMyWorkspace(), GetParentField(), ID);
 
         if (!Page.IsPostBack)
         {
-            script = string.Format("dojo.ready(function() {{ {0} }});", script);
+            script.AppendFormat("ready(function() {{ {0}; }} );", baseScript);
         }
-        ScriptManager.RegisterStartupScript(this, GetType(), "HistoryList_Init", script, true);
+        else
+        {
+            script.AppendLine(baseScript);
+        }
+
+        script.AppendLine("});");// end require
+        ScriptManager.RegisterStartupScript(this, GetType(), "NotesHistoryList", script.ToString(), true);
     }
 
+    ///// <summary>
+    ///// Parent relationship name to use for context condition
+    ///// </summary>
+    ///// <returns></returns>
+    private string GetParentRelationshipName(Type entity)
+    {
+        var propertyDescriptor = TypeDescriptor.GetProperties(typeof(IActivity)).Find(string.Concat(GetRealTableName(entity), "Id"), true);
+        return propertyDescriptor != null ? propertyDescriptor.Name : string.Empty;
+    }
     /// <summary>
-    /// Parent field to use for context condition, for example, "ContactId"
+    /// Helper method to retrieve the physical table name from the entity metadata
     /// </summary>
+    /// <param name="entity"></param>
     /// <returns></returns>
-    private String GetParentField()
+    private static string GetRealTableName(Type entity)
     {
-        switch (EntityType.Name)
+        if (Attribute.IsDefined(entity, typeof(ActiveRecordAttribute)))
         {
-            case "IAccount":
-                return "AccountId";
-            case "IContact":
-                return "ContactId";
-            case "ITicket":
-                return "TicketId";
-            case "ILead":
-                return "LeadId";
-            case "IOpportunity":
-                return "OpportunityId";
-            default:
-                throw new NotImplementedException(string.Format("Entity type {0} is not supported", EntityType));
+            ActiveRecordAttribute attribute = (ActiveRecordAttribute)Attribute.GetCustomAttribute(entity, typeof(ActiveRecordAttribute));
+            return attribute.Table;
         }
-    }
-
-    /// <summary>
-    /// Build a string representing a javascript object giving the mapping from the history type 
-    /// (as returned by sdata, i.e., atDatabaseChange, etc) to the localized description (e.g. "Database Change").
-    /// </summary>
-    /// <returns></returns>
-    private String BuildHistoryTypeMap_old()
-    {
-        var rm = new ResourceManager("Sage.Entity.Interfaces.EntityResources", typeof(HistoryType).Assembly);
-        StringBuilder buf = new StringBuilder();        
-
-        buf.Append('{');
-        foreach (FieldInfo fi in typeof(HistoryType).GetFields(BindingFlags.Public | BindingFlags.Static))
-        {
-            if(buf.Length != 1)
-                buf.Append(',');
-            object[] attrs = fi.GetCustomAttributes(typeof(DisplayNameAttribute), false);
-
-            if (attrs != null && attrs.Length == 1)
-            {
-                String v = rm.GetString(((DisplayNameAttribute)attrs[0]).DisplayName);
-                if (v == null)
-                    v = ((DisplayNameAttribute)attrs[0]).DisplayName;
-                buf.Append(v);
-            }
-            else
-            {
-                buf.Append(fi.Name);
-            }
-            buf.Append('\'');
-        }
-        buf.Append('}');
-
-        return buf.ToString();
-    }
-    private string BuildHistoryTypeMap()
-    {
-        var rm = new ResourceManager("Sage.Entity.Interfaces.EntityResources", typeof (HistoryType).Assembly);
-        var buf = new StringBuilder();
-
-        foreach (FieldInfo fi in typeof(HistoryType).GetFields(BindingFlags.Public | BindingFlags.Static))
-        {
-            if (buf.Length != 0)
-            {
-                buf.Append(",");
-            }
-            buf.Append(fi.Name).Append(":");
-            object[] attrs = fi.GetCustomAttributes(typeof(DisplayNameAttribute), false);
-
-            if (attrs.Length == 1)
-            {
-                String v = rm.GetString(((DisplayNameAttribute)attrs[0]).DisplayName) ??
-                           ((DisplayNameAttribute)attrs[0]).DisplayName;
-                buf.AppendFormat("'{0}'", v);
-            }
-            else
-            {
-                buf.AppendFormat("'{0}'", fi.Name);
-            }
-        }
-        return buf.ToString();
-    }
-
-    public override Sage.Platform.Application.UI.ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
-    {
-        var spi = new ToolsSmartPartInfo();
-        var ttobj = GetGlobalResourceObject("Portal", "Help_ToolTip");
-        var tt = (ttobj != null) ? ttobj.ToString() : "Help";
-        spi.RightTools.Add(new PageLink
-                {
-                    ID = "NotesHistoryHelp",
-                    LinkType = enumPageLinkType.HelpFileName,
-                    ToolTip = tt,
-                    Target = "MCWebHelp",
-                    NavigateUrl = "noteshistory",
-                    ImageUrl =
-                        ResolveUrl("~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16")
-                });
-        return spi;
+        return string.Empty;
     }
 }

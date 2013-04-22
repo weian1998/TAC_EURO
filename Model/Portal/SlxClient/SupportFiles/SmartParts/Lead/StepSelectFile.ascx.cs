@@ -4,23 +4,25 @@ using System.Reflection;
 using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Sage.Platform.Diagnostics;
+using Sage.Platform.Security;
+using Sage.Platform.WebPortal.Services;
+using Sage.Platform.WebPortal.SmartParts;
+using Sage.SalesLogix.Services.Import;
+using Sage.SalesLogix.Services.Import.Actions;
+using Telerik.Web.UI;
 using log4net;
 using Sage.Entity.Interfaces;
 using Sage.Platform;
 using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
-using Sage.Platform.WebPortal.Services;
-using Sage.Platform.WebPortal.SmartParts;
 using Sage.SalesLogix.Client.GroupBuilder;
-using Sage.SalesLogix.Services.Import;
-using Sage.SalesLogix.Services.Import.Actions;
 using Sage.SalesLogix.Services.PotentialMatch;
-using Telerik.WebControls;
 
 /// <summary>
 /// Summary description for Lead Imports Select a File step.
 /// </summary>
-public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
+public partial class StepSelectFile : UserControl
 {
     private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -111,40 +113,38 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
         lblRequiredMsg.Visible = false;
         try
         {
-            if (txtConfirmUpload.Value.Equals("F"))
+            switch (txtConfirmUpload.Value)
             {
-                uplFile.UploadedFiles.Clear();
-            }
-
-            if (txtConfirmUpload.Value.Equals("O"))
-            {
-                //elected to overwrite existing uploaded file
-                ImportManager importManager = GetImportManager();
-                importManager.SourceFileName = uplFile.UploadedFiles[0].FileName;
-                importManager.ImportMaps.Clear();
-                //importManager.SourceProperties.Clear();
-                ImportOptions options = new ImportOptions();
-                importManager.Options = options;
-                Page.Session["importManager"] = importManager;
-                txtConfirmUpload.Value = "T";
-            }
-
-            if (txtConfirmUpload.Value.Equals("T"))
-            {
-                UploadedFile file = uplFile.UploadedFiles[0];
-                if (file != null)
-                {
-                    ImportManager importManager = Page.Session["importManager"] as ImportManager;
-                    importManager.SourceFileName = file.FileName;
-                    importManager.SourceReader = GetCSVReader(file, importManager.ToString());
+                case "F":
+                    uplFile.UploadedFiles.Clear();
+                    break;
+                case "O":
+                    //elected to overwrite existing uploaded file
+                    ImportManager importManager = GetImportManager();
+                    importManager.SourceFileName = uplFile.UploadedFiles[0].FileName;
+                    importManager.ImportMaps.Clear();
+                    ImportOptions options = new ImportOptions();
+                    importManager.Options = options;
                     Page.Session["importManager"] = importManager;
-                }
+                    txtConfirmUpload.Value = "T";
+                    UploadFileEx();
+                    break;
+                case "T":
+                    UploadFileEx();
+                    break;
             }
         }
         catch (Exception ex)
         {
-            log.Error(ex.Message);
-            DialogService.ShowMessage(ex.Message);
+            string sSlxErrorId = null;
+            var sMsg = ErrorHelper.GetClientErrorHtmlMessage(ex, ref sSlxErrorId);
+            if (!string.IsNullOrEmpty(sSlxErrorId))
+            {
+                log.Error(ErrorHelper.AppendSlxErrorId("The call to StepSelectFile.UploadFile() failed", sSlxErrorId),
+                          ex);
+            }
+            DialogService.ShowHtmlMessage(sMsg, ErrorHelper.IsDevelopmentContext() ? 600 : -1,
+                                          ErrorHelper.IsDevelopmentContext() ? 800 : -1);
         }
     }
 
@@ -162,38 +162,44 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
     #region Protected Methods
 
     /// <summary>
-    /// Handles the Init event of the Page control.
-    /// </summary>
-    /// <param name="sender">The source of the event.</param>
-    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-    protected void Page_Init(object sender, EventArgs e)
-    {
-        StringBuilder sb = new StringBuilder(GetLocalResourceObject("ImportLead_ClientScript").ToString());
-        sb.Replace("@selectedFileId", txtImportFile.ClientID);
-        sb.Replace("@confirmOverwriteFileMsg", GetLocalResourceObject("confirmOverwriteFileMsg").ToString());
-        sb.Replace("@txtConfirmOverwriteId", txtConfirmUpload.ClientID);
-        sb.Replace("@rdbCreateGroupId", rdbCreateGroup.ClientID);
-        sb.Replace("@rdbAddToAddHocGroupId", rdbAddToAddHocGroup.ClientID);
-        sb.Replace("@txtCreateGroupNameId", txtCreateGroupName.ClientID);
-        sb.Replace("@lbxAddHocGroupsId", lbxAddHocGroups.ClientID);
-        sb.Replace("@chkAddToGroupId", chkAddToGroup.ClientID);
-        ScriptManager.RegisterClientScriptBlock(Page, GetType(), "ImportLeadScript", sb.ToString(), false);
-
-        radUProgressArea.Localization["CancelButton"] = GetLocalResourceObject("radProgress_Cancel").ToString();
-        radUProgressArea.Localization["Uploaded"] = GetLocalResourceObject("radProgress_Uploaded").ToString();
-
-        rdbCreateGroup.Attributes.Add("OnClick", "rdbCreateGroup_Click();");
-        rdbAddToAddHocGroup.Attributes.Add("OnClick", "rdbAddToAddHocGroup_Click();");
-        chkAddToGroup.Attributes.Add("onClick", "chkAddToGroup_Click();");
-    }
-
-    /// <summary>
     /// Raises the <see cref="E:System.Web.UI.Control.PreRender"></see> event.
     /// </summary>
     /// <param name="e">An <see cref="T:System.EventArgs"></see> object that contains the event data.</param>
     protected override void OnPreRender(EventArgs e)
     {
         LoadView();
+        var script = new StringBuilder();
+        script.AppendLine(" javascript: function onUploadImportFile() { ");
+        script.AppendLine("     var workSpace = window.importLeadsWizard.workSpace;");
+        script.AppendLine(String.Format("   var file = dojo.byId('{0}');", txtImportFile.ClientID));
+        script.AppendLine("     if (file !== null) {");
+        script.AppendLine(String.Format("         var confirmUpload = dojo.byId('{0}');", txtConfirmUpload.ClientID));
+        script.AppendLine("             confirmUpload.value = 'T';");
+        script.AppendLine("             if (file.value !== '') {");
+        script.AppendLine("                 Sage.UI.Dialogs.raiseQueryDialog(");
+        script.AppendLine("                     'SalesLogix',");
+        script.AppendLine("                     importLeadsWizard.confirmOverwriteFileMsg,");
+        script.AppendLine("                     function(result) {");
+        script.AppendLine("                         if (result) {");
+        script.AppendLine("                             confirmUpload.value = 'O';");
+        script.AppendLine("                             file.value = '';");
+        script.AppendLine("                         } else {");
+        script.AppendLine("                             confirmUpload.value = 'F';");
+        script.AppendLine("                         }");
+        script.AppendLine("                     },");
+        script.AppendLine("                     window.importLeadsWizard.yesText,");
+        script.AppendLine("                     window.importLeadsWizard.noText");
+        script.AppendLine("                 );");
+        script.AppendLine("             }");
+        script.AppendLine("     }");
+        script.AppendLine(" };");
+
+        ScriptManager.RegisterClientScriptBlock(Page, GetType(), ClientID, script.ToString(), true);
+
+        chkAddToGroup.Attributes.Add("onclick",
+                                     String.Format(
+                                         "javascript:importLeadsWizard.onAddHocGroupChecked('{0}', '{1}');",
+                                         groupOptions.ClientID, chkAddToGroup.ClientID));
         base.OnPreRender(e);
     }
 
@@ -208,19 +214,17 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
             if (importManager.SourceFileName != null)
             {
                 txtImportFile.Value = importManager.SourceFileName;
-                uploadProgressAreaDiv.Style.Add(HtmlTextWriterStyle.Display, "none");
             }
             chkAddToGroup.Checked = importManager.Options.AddToGroup;
+            if (chkAddToGroup.Checked)
+            {
+                groupOptions.Style.Add("display", String.Empty);
+            }
             SetDefaultTargetProperties(importManager);
             LoadAddHocGroups();
-
             Page.Session["importManager"] = importManager;
         }
-
-        if (!IsImportPathValid())
-        {
-            return;
-        }
+        IsImportPathValid();
     }
 
     /// <summary>
@@ -231,10 +235,7 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
     protected void ownDefaultOwner_LookupResultValueChanged(object sender, EventArgs e)
     {
         string ownerId;
-        if (ownDefaultOwner.LookupResultValue == null)
-            ownerId = string.Empty;
-        else
-            ownerId = ownDefaultOwner.LookupResultValue.ToString();
+        ownerId = ownDefaultOwner.LookupResultValue == null ? string.Empty : ownDefaultOwner.LookupResultValue.ToString();
         SetDefaultTargetPropertyValue("Owner", ownerId);
     }
 
@@ -252,6 +253,17 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
     #endregion
 
     #region Private Methods
+    private void UploadFileEx()
+    {
+        UploadedFile file = uplFile.UploadedFiles[0];
+        if (file != null)
+        {
+            ImportManager importManager = Page.Session["importManager"] as ImportManager;
+            importManager.SourceFileName = file.FileName;
+            importManager.SourceReader = GetCSVReader(file, importManager.ToString());
+            Page.Session["importManager"] = importManager;
+        }
+    }
 
     /// <summary>
     /// Gets and Sets the default target properties.
@@ -263,7 +275,6 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
         {
             ImportTargetProperty tpOwner = importManager.EntityManager.GetEntityProperty("Owner");
             ImportTargetProperty tpLeadSource = importManager.EntityManager.GetEntityProperty("LeadSource");
-            ImportTargetProperty tpImportSource = importManager.EntityManager.GetEntityProperty("ImportSource");
             if (tpOwner != null)
             {
                 string ownwerId = "SYST00000001";
@@ -335,15 +346,24 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
                 txtCreateGroupName.Text = DateTime.Now.ToString();
                 ImportService importService = new ImportService();
                 importManager = importService.CreateImportManager(typeof(ILead));
+                importProcessId.Value = importManager.ToString();
                 importManager.DuplicateProvider = duplicateProvider;
                 importManager.MergeProvider = new ImportLeadMergeProvider();
                 importManager.ActionManager = GetActionManager();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                string sSlxErrorId = null;
+                var sMsg = ErrorHelper.GetClientErrorHtmlMessage(ex, ref sSlxErrorId);
+                if (!string.IsNullOrEmpty(sSlxErrorId))
+                {
+                    log.Error(
+                        ErrorHelper.AppendSlxErrorId("The call to StepSelectFile.GetImportManager() failed", sSlxErrorId),
+                        ex);
+                }
                 divError.Style.Add(HtmlTextWriterStyle.Display, "inline");
                 divMainContent.Style.Add(HtmlTextWriterStyle.Display, "none");
-                lblError.Text = (e.Message);
+                lblError.Text = sMsg;
                 (Parent.Parent.FindControl("StartNavigationTemplateContainerID").FindControl("cmdStartButton")).Visible = false;
             }
         }
@@ -377,17 +397,19 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
             string fileName = importId + ".csv";
             string path = ImportService.GetImportProcessPath() + fileName;
             ImportService.DeleteImportFile(path);
-            file.MoveTo(path);
+            //file.MoveTo(path);
+            file.SaveAs(path);
             ImportCSVReader reader = new ImportCSVReader(path);
             return reader;
         }
-        catch (Exception exp)
+        catch (Exception ex)
         {
+            log.Error("The call to StepSelectFile.GetCSVReader() failed", ex);
             lblError.Text = GetLocalResourceObject("error_InvalidImportPath").ToString();
             divError.Style.Add(HtmlTextWriterStyle.Display, "inline");
             divMainContent.Style.Add(HtmlTextWriterStyle.Display, "none");
             (Parent.Parent.FindControl("StartNavigationTemplateContainerID").FindControl("cmdStartButton")).Visible = false;
-            throw new Exception(GetLocalResourceObject("error_InvalidImportPath").ToString(), exp.InnerException);
+            throw new UserObservableApplicationException(GetLocalResourceObject("error_InvalidImportPath").ToString(), ex);
         }
     }
 
@@ -396,13 +418,13 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
         try
         {
             string fileName = importProcessId.Value + "_.test";
-            string path = ImportService.GetImportProcessPath() + fileName;
             byte[] data = new byte[10];
             data[0] = 0;
             ImportService.WriteImportFile(fileName, data);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            log.Error("The call to StepSelectFile.IsImportPathValid() failed", ex);
             lblError.Text = GetLocalResourceObject("error_InvalidImportPath").ToString();
             divError.Style.Add(HtmlTextWriterStyle.Display, "inline");
             divMainContent.Style.Add(HtmlTextWriterStyle.Display, "none");
@@ -413,19 +435,7 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
     }
 
     /// <summary>
-    /// Gets the CSV reader.
-    /// </summary>
-    /// <param name="file">The file.</param>
-    /// <returns></returns>
-    private ImportCSVReader GetCSVReader(UploadedFile file)
-    {
-        byte[] data = GetData(file);
-        ImportCSVReader reader = new ImportCSVReader(data);
-        return reader;
-    }
-
-    /// <summary>
-    /// Loads the add hoc groups.
+    /// Loads the ad hoc groups.
     /// </summary>
     private void LoadAddHocGroups()
     {
@@ -438,11 +448,16 @@ public partial class StepSelectFile : UserControl, ISmartPartInfoProvider
                 if (group.IsAdHoc)
                 {
                     ListItem item = new ListItem();
-                    item.Text = group.GroupName;
+                    item.Text = group.DisplayName;
                     item.Value = group.GroupID;
                     lbxAddHocGroups.Items.Add(item);
                 }
             }
+        }
+        //if we don't have any ad hoc groups disable the option
+        if (lbxAddHocGroups.Items.Count <= 0)
+        {
+            rdbAddToAddHocGroup.Enabled = false;
         }
     }
 

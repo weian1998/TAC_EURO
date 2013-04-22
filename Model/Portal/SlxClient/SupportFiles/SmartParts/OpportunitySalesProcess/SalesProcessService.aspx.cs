@@ -14,6 +14,7 @@ using Sage.Entity.Interfaces;
 using Sage.SalesLogix.SalesProcess;
 using Sage.SalesLogix.Plugins;
 using Sage.Platform;
+using Sage.SalesLogix.Activity;
 
 public partial class SmartParts_OpportunitySalesProcess_SalesProcessService : System.Web.UI.Page
 {
@@ -39,6 +40,9 @@ public partial class SmartParts_OpportunitySalesProcess_SalesProcessService : Sy
                 break;
             case "GETPLUGINID":
                 results = GetPluginId(serviceContext);
+                break;
+            case "SCHEDULEACTIVITY":
+                results = ScheduleActivity(serviceContext);
                 break;
             default: break;
 
@@ -123,6 +127,34 @@ public partial class SmartParts_OpportunitySalesProcess_SalesProcessService : Sy
             pluginId = string.Empty;
         }
         return pluginId;
+    }
+
+    private string ScheduleActivity(string scheduleContext)
+    {
+
+        string activityId = string.Empty;
+        try
+        {
+            string[] args = scheduleContext.Split(new Char[] { ',' });
+            string spaId = args[0];
+            string contactId = args[1];
+            string opportunityId = args[2];
+            string leaderId = args[3];
+            ISalesProcessAudit spAudit = EntityFactory.GetById<ISalesProcessAudit>(spaId);
+            if (spAudit != null)
+            {
+                IContact contact = EntityFactory.GetById<IContact>(contactId);
+                IOpportunity opp = EntityFactory.GetById<IOpportunity>(opportunityId);
+                IUser leader = EntityFactory.GetById<IUser>(leaderId);
+                Activity activity = (Activity)spAudit.SalesProcess.ScheduleActivity(spaId, opp, leader, contact, true);
+                activityId = (string) activity.Id;
+            }           
+        }
+        catch
+        {
+            activityId = string.Empty;
+        }
+        return activityId;
     }
 
     private static IList<IContact> GetOppContacts(string opportunityId)

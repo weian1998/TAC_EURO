@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="dtpRecordedDate.Caption" xml:space="preserve">
     <value>Report Date:</value>
@@ -167,5 +167,20 @@
   </data>
   <data name="dtpAssignedDate.ButtonToolTip" xml:space="preserve">
     <value>Calendar</value>
+  </data>
+  <data name="agcTasks_grid.826a5a8c-dfeb-4a2e-902c-ec5849e258c6.ColumnHeading" xml:space="preserve">
+    <value>Activity Code</value>
+  </data>
+  <data name="agcTickets_grid.2a727575-7f6d-4a8d-8ee2-8318a04218b8.ColumnHeading" xml:space="preserve">
+    <value>Status Code</value>
+  </data>
+  <data name="pklStatus.Caption" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="pklPriority.Caption" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="pklSeverity.Caption" xml:space="preserve">
+    <value>Severity</value>
   </data>
 </root>

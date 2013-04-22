@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title>Sage.UI.Controls Browser Tests</title>
+        <style type="text/css">
+        /* Hide dojo validation controls */
+        .dijitValidationContainer, .dijitBackgroundIframe {
+            visibility: hidden;
+        }
+        </style>
+        <link rel="stylesheet" type="text/css" href="../../../../../Libraries/dojo/dijit/themes/claro/claro.css" />
+        <script type="text/javascript" src="mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript">
+            require([
+                    'dojo/parser',
+                    'dojo/ready',
+                    'doh',
+                    'dojo/date',
+                    'Sage/UI/Controls/DurationSelect'
+                ], function (
+                    parser,
+                    ready,
+                    doh,
+                    dojoDate,
+                    DurationSelect
+                ) {
+                    ready(function () {
+                        doh.register("Sage.UI.Controls.tests.DurationSelect", [
+                            function testShow() {
+                            },
+                            function setTimeValsGetCorrectDuration() {
+                                var ctrl = new DurationSelect(),
+                                    sDate = new Date(),
+                                    eDate = dojoDate.add(sDate, 'minute', 15);
+                                ctrl.set('startTime', sDate);
+                                ctrl.set('timeValue', eDate);
+                                doh.t(ctrl.get('value') === 15);
+                            },
+                            function setStartAndDurGetCorrectEndDate() {
+                                var ctrl = new DurationSelect(),
+                                    sDate = new Date(),
+                                    eDate = dojoDate.add(sDate, 'minute', 15);
+                                ctrl.set('value', 15);
+                                ctrl.set('startTime', sDate);
+                                doh.t(dojoDate.compare(ctrl.get('timeValue'), eDate, 'datetime') === 0);
+                            },
+                            function testSetTimeIncrements() {
+                                var ctrl = new DurationSelect(),
+                                    inc = [1, 2, 3, 4, 5];
+                                ctrl.set('timeIncrements', inc);
+                                doh.t(ctrl.items.length === 5);
+                                for (var i = 0; i < 5; i++) {
+                                    doh.t(ctrl.items[i].value[0] === inc[i]);
+                                }
+                            }
+                        ]);
+                        //Execute D.O.H. in this remote file.
+                        doh.run();
+                    });
+                });
+
+        </script>
+    </head>
+    <body class="claro">
+        <form>
+
+
+        </form>
+    </body>
+</html>

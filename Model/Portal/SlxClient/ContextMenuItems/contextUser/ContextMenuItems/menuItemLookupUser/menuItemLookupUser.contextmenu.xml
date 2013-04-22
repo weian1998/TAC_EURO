@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="590f0638-4202-4513-b912-fab887601059">
   <ItemId>menuItemLookupUser</ItemId>
-  <NavUrl>javascript:showMainLookupFor('USERSECURITY','User.aspx');</NavUrl>
+  <NavUrl>javascript:Sage.Utility.Groups.showMainLookupFor('USERSECURITY','User.aspx');</NavUrl>
   <LargeImageUrl />
   <SmallImageUrl />
   <ContextMenuId />

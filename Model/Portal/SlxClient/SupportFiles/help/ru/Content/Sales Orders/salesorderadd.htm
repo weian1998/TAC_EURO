@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Заказы" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" class="" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="copyright" />
+        <meta name="window-type" content="(w95sec)" /><title>Adding a Sales Order</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Sales Orders/salesorderadd.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1 value="Architect Help (09-19-01) for v5.2 © 2001 Interact Commerce Corporation"><a name="kanchor79"></a>Добавление Заказа</h1>
+        <p>Используйте эту форму, чтобы добавить заказ, включая адрес выставления счета, адрес доставки или информацию по продукту и другую информацию по заказу.</p>
+        <table wrapperparagraphselector="P" style="margin-top: 14pt;width: 98%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="98%">
+            <col style="width: 38px;" />
+            <col style="width: 92.25%;" />
+            <tr MadCap:conditions="Output.IntegrationContract">
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <img src="../image/note.gif" />
+                </td>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p class="Tip-Note-Text" style="margin-bottom: 0;">Нельзя распечатать или отправить по электронной почте котировку, пока заказ на продажи не будет подтвержден учетной системой. (Только для Интеграции учета)</p>
+                </td>
+            </tr>
+        </table>
+        <p class="Infinitive">Для того чтобы добавить</p>
+        <ol>
+            <li MadCap:conditions="Output.WebClient,Output.GSWeb" value="1">Выполните одно из следующих действий:<ul><li value="1">В меню 
+ <span class="SLXBold">Создать</span> выберите <span class="SLXBold">Заказ</span>.</li><li value="2">В <a href="../Opportunities/oppdetailview.htm">Детальном представлении Сделки</a>, на <a href="../General/taskpane.htm" target="_self">панели задач</a>, нажмите <span class="SLXBold">Добавить Заказ</span> или на закладке <span class="SLXBold">Заказы</span>, нажмите кнопку <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Добавить Заказ<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/add.gif" /></span></span>.<br />Субъект сделки, продукты и другая информация автоматически копируются в новый заказ.</li></ul></li>
+            <li MadCap:conditions="Output.WebClient,Output.GSWeb" value="2">Выберите <span class="SLXBold">Заказ</span>.</li>
+            <li value="3">
+                <MadCap:conditionalText MadCap:conditions="Output.WebClient,Output.GSWeb">Добавить 
+ <a href="salesorderinfoboxes.htm" target="_self">информацию по заказу</a>.</MadCap:conditionalText>
+                <table wrapperparagraphselector="P" style="margin-top: 14pt;width: 98%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="98%" MadCap:conditions="Output.WebClient">
+                    <col style="width: 43px;" />
+                    <col style="width: 410px;" />
+                    <tr>
+                        <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                            <p style="text-align: center;margin-bottom: 0;" align="center">
+                                <img src="../image/note.gif" />
+                            </p>
+                        </td>
+                        <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                            <p class="Tip-Note-Text" style="margin-bottom: 0;">Необходимо связать субъект с заказом.</p>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+            <li value="4">(Необязательно) Редактируйте информацию об                           <span class="SLXBold">Адресе счетов</span>. <MadCap:conditionalText MadCap:conditions="Output.GSWeb,Output.WebClient">По умолчанию, поле заполняется связанным с субъектом основным контактом и основным адресом, если заказ был создан из детального представления Контакта, Субъекта или Сделки.</MadCap:conditionalText><ol style="list-style-type: lower-alpha;" MadCap:conditions="Output.GSWeb,Output.WebClient"><li value="1">Чтобы выбрать <span class="SLXBold">Имя</span>, нажмите кнопку <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Найти<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/find.gif" /></span></span> и используйте поиск чтобы <a href="../Lookups/findlookup.htm" target="_self">найти</a> контакт.</li><li value="2">Рядом с полем <span class="SLXBold">Адрес    <![CDATA[ ]]></span> нажмите на указывающую вниз стрелку и выберите значение из списка.</li><li value="3">Чтобы <a href="../Common Tabs/Adding_Editing_an_Alternate_Address.htm">редактировать</a> <![CDATA[  ]]><span class="SLXBold">Адрес</span>, нажмите кнопку <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Редактировать<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/edit.gif" /></span></span>. Для просмотра адреса на карте нажмите кнопку    <![CDATA[ ]]><span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">MapQuest<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/map1.gif" /></span></span>.</li></ol></li>
+            <li value="5">(Необязательно) Редактируйте информацию об                              <span class="SLXBold">Адресе доставки</span>.<MadCap:conditionalText MadCap:conditions="Output.WebClient,Output.GSWeb"> По умолчанию, поле заполняется связанным с субъектом основным контактом и адресом доставки, если заказ был создан из детального представления Контакта, Субъекта или Сделки.</MadCap:conditionalText><ol style="list-style-type: lower-alpha;" MadCap:conditions="Output.GSWeb,Output.WebClient"><li value="1">Чтобы выбрать <span class="SLXBold">Имя</span>, нажмите кнопку <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Найти<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/find.gif" /></span></span> и используйте поиск чтобы <a href="../Lookups/findlookup.htm" target="_self">найти</a> контакт.</li><li value="2">Рядом с полем <span class="SLXBold">Адрес</span> нажмите на указывающую вниз стрелку и выберите значение из списка.</li><li value="3">Чтобы редактировать <span class="SLXBold">Адрес</span>, нажмите кнопку <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Редактировать<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/edit.gif" /></span></span>. Для просмотра адреса на карте нажмите кнопку    <![CDATA[ ]]><span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">MapQuest<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/map1.gif" /></span></span>.</li><li value="4">В поле <span class="SLXBold">Доставка</span> нажмите    <![CDATA[ ]]><MadCap:conditionalText MadCap:conditions="Output.GSWeb,Output.WebClient,Output.SendSLX Tray App,Output.Customer Portal,Output.IntegrationContract">стрелку</MadCap:conditionalText> и выберите элемент из списка.</li></ol></li>
+            <li value="6">
+                <MadCap:conditionalText MadCap:conditions="Output.GSWeb,Output.WebClient">Добавление <a href="salesorderaddproduct.htm">Продуктов</a>.</MadCap:conditionalText>
+                <br />Раздел Продукты отображает все продукты, связанные с заказом. Если вам нужно удалить продукт, выберите запись в таблице <span class="SLXBold">Продукты</span>, затем нажмите кнопку <span class="SLXBold">Удалить</span>.<br />Общая сумма заказа пересчитывается, когда добавляются или удаляются продукты.
+
+                </li>
+            <li value="7"> <![CDATA[ ]]><MadCap:conditionalText MadCap:conditions="Output.WebClient,Output.GSWeb">Нажмите    <![CDATA[ ]]><span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Сохранить<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>. </MadCap:conditionalText> <![CDATA[         
+                ]]></li>
+        </ol>
+        <p class="RelatedTopics">См. также</p>
+        <p><a href="salesorderoverview.htm" target="_self">Краткий Обзор Заказов</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

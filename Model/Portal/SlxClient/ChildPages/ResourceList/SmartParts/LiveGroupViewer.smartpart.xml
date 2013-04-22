@@ -5,6 +5,9 @@
   <SmartPart>SmartParts\GroupBuilder\LiveGroupViewer.ascx</SmartPart>
   <TargetWorkspace>MainContent</TargetWorkspace>
   <ShowInMode>List</ShowInMode>
-  <Properties />
+  <Properties>
+    <Property Name="ListContextMenu" TypeConverter="">GroupListContextMenu</Property>
+    <Property Name="HelpTopic" TypeConverter="">Resourcelistview</Property>
+  </Properties>
   <AllowRoles />
 </SmartPartMapping>

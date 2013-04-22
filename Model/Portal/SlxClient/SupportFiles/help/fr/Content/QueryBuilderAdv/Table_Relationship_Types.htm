@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" class="" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Types de relation entre les tables</title>
+        <link href="../Resources/TableStyles/TableStyle.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilderAdv/Table_Relationship_Types.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Ouvrir une rubrique avec la recherche, la table des matières et l'index</a>
+        </p>
+        <h1><a name="kanchor661"></a>Types de relation entre les tables</h1>
+        <table wrapperparagraphselector="P" style="margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col />
+            <col />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <ul style="list-style: disc;" type="disc">
+                        <li class="kadov-p-CBullets" value="1">La table parent détermine le type de relation. Par exemple, lorsque la table CONTACT est la table parent, sa relation avec la table ACCOUNT est du type un-à-un. En revanche, si la table ACCOUNT est la table parent, sa relation est du type un-à-plusieurs. Dans la colonne Exemple, le nom des tables parent est en italique.</li>
+                        <li class="SLXNote" value="2">Vous ne pouvez pas utiliser directement des tables qui ont une relation plusieurs-à-plusieurs. Vous devez vous servir d'une table de liaison, c'est-à-dire d'une table intermédiaire dont le but est de résoudre les relations plusieurs-à-plusieurs en créant un lien entre les tables. Si vous avez besoin d'informations provenant des tables USERINFO et ACTIVITY, utilisez la table USER_ACTIVITY pour y accéder. La table USER_ACTIVITY est une table de liaison.</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <p style="font-weight: normal;">Pour définir le type de relation entre plusieurs tables, utilisez les termes suivants&#160;:</p>
+        <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Terme</th>
+                    <th class="HeadE-Column1-Header1">Symbole</th>
+                    <th class="HeadE-Column1-Header1">Description</th>
+                    <th class="HeadD-Column1-Header1">Exemple</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Un à un</td>
+                    <td class="BodyE-Column1-Body1">
+                        <img src="../image/ONETOONE.GIF" alt="image\onetoone.gif" style="width: 78px;height: 13px;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;border-style: none;border-style: none;" width="78" height="13" border="0" />
+                    </td>
+                    <td class="BodyE-Column1-Body1">Chaque enregistrement unique d'une table est lié à un seul enregistrement d'une autre table.</td>
+                    <td class="BodyD-Column1-Body1">Supposons qu'un contact est associé à un seul compte. La relation entre les tables <i>CONTACT</i> et ACCOUNT est alors de type un-à-un (correspondance unique).</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">De zéro à un</td>
+                    <td class="BodyE-Column1-Body1">
+                        <img src="../image/ZEROTOONE.GIF" alt="image\zerotoone.gif" style="width: 76px;height: 13px;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;border-style: none;border-style: none;" width="76" height="13" border="0" />
+                    </td>
+                    <td class="BodyE-Column1-Body1">Chaque enregistrement unique d'une table est lié à un seul enregistrement d'une autre table ou à aucun enregistrement. Une relation zéro-à-un s'établit après la configuration d'une table avec une relation un-à-un avec une autre table ne contenant aucun enregistrement.</td>
+                    <td class="BodyD-Column1-Body1">Une activité peut n'être liée à aucune opportunité. Si elle est liée à une opportunité, elle n'est liée qu'à cette seule opportunité&#160;; la relation entre les tables <i>ACTIVITY</i> et OPPORTUNITY est alors de type zéro-à-un.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Un à plusieurs</td>
+                    <td class="BodyE-Column1-Body1">
+                        <img src="../image/ONETOMANY.GIF" alt="image\onetomany.gif" style="width: 77px;height: 15px;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;border-style: none;border-style: none;" width="77" height="15" border="0" />
+                    </td>
+                    <td class="BodyE-Column1-Body1">Chaque enregistrement de la table est lié à un ou plusieurs enregistrements d'une autre table.</td>
+                    <td class="BodyD-Column1-Body1">Plusieurs contacts peuvent être associés à un compte, mais un compte au moins est toujours associé à un contact. La relation entre les tables <i>ACCOUNT</i> et CONTACT est alors de type un-à-plusieurs (correspondances multiples).</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Zéro-à-plusieurs</td>
+                    <td class="BodyE-Column1-Body1">
+                        <img src="../image/ZEROTOMANY.GIF" alt="image\zerotomany.gif" style="width: 76px;height: 14px;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;border-style: none;float: none;border-style: none;" width="76" height="14" border="0" />
+                    </td>
+                    <td class="BodyE-Column1-Body1">Chaque enregistrement unique d'une table peut être lié à aucun enregistrement ou à plusieurs enregistrements d'une autre table. Une relation zéro-à-plusieurs s'établit après la configuration d'une table avec une relation un-à-plusieurs avec une autre table ne contenant aucun enregistrement.</td>
+                    <td class="BodyD-Column1-Body1">Un contact peut n'avoir aucune activité ou en avoir plusieurs. La relation entre les tables <i>CONTACT</i> et ACTIVITY est alors de type zéro-à-plusieurs.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">Plusieurs-à-plusieurs</td>
+                    <td class="BodyB-Column1-Body1">
+                        <img src="../image/Manytomany.gif" />
+                    </td>
+                    <td class="BodyB-Column1-Body1">La table contient plusieurs enregistrements qui sont liés à plusieurs enregistrements d'une autre table.</td>
+                    <td class="BodyA-Column1-Body1">Un utilisateur peut avoir plusieurs activités et une activité peut être associée à plusieurs utilisateurs. La relation entre les tables <i>USERINFO</i> et ACTIVITY est alors de type plusieurs-à-plusieurs. </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="RelatedTopics">Rubriques connexes</p>
+        <p class="Topic-Text-Numbered"><a href="Joining_Tables.htm">Association de tables</a>
+        </p>
+        <p class="Topic-Text-Numbered"><a href="Join_Example.htm">Exemple de jointure</a>
+        </p>
+        <p class="Topic-Text-Numbered"><a href="ID_Fields_in_Tables.htm">Champs ID dans les tables</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Dites-nous comment améliorer l'aide</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

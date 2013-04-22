@@ -112,96 +112,78 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="grdDefects.EmptyTableRowText" xml:space="preserve">
-    <value>No records match the selection criteria.</value>
+  <data name="grdDefects.1d05e9d0-92ed-48c3-817a-2a48effe395b.ColumnHeading" xml:space="preserve">
+    <value>Status</value>
   </data>
-  <data name="grdDefects.ccf5a384-2fe0-42ba-a5b4-5ba5ee3fef94.ColumnHeading" xml:space="preserve">
+  <data name="grdDefects.b30cb327-469a-46c4-9571-47e4c82303f8.ColumnHeading" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="grdDefects.ccf5a384-2fe0-42ba-a5b4-5ba5ee3fef94.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdDefects.c1286289-f124-40c7-a004-ffe479cc6cf1.ColumnHeading" xml:space="preserve">
-    <value>Resolution</value>
-  </data>
-  <data name="grdDefects.c1286289-f124-40c7-a004-ffe479cc6cf1.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdDefects.5ffcef17-a541-4c49-8adc-be01d33021b3.ColumnHeading" xml:space="preserve">
+  <data name="grdDefects.c979d17e-94af-476a-9590-64bb7659afae.ColumnHeading" xml:space="preserve">
     <value>Reported Date</value>
   </data>
-  <data name="grdDefects.2319a78f-15e6-49c4-95c5-e7bc3ba9dab8.ColumnHeading" xml:space="preserve">
-    <value>Priority</value>
-  </data>
-  <data name="grdDefects.5f8d1b02-473b-4b1a-9375-fc2a42729670.ColumnHeading" xml:space="preserve">
+  <data name="grdDefects.6c749f2e-220d-4510-8505-87c2e6d712a1.ColumnHeading" xml:space="preserve">
     <value>Severity</value>
   </data>
-  <data name="grdDefects.0aa6383c-00b4-445f-9cc6-c86d428d60d5.ColumnHeading" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="grdDefects.cdebaf0f-413a-4352-8493-9180ea68258e.ColumnHeading" xml:space="preserve">
-    <value>Defect ID</value>
-  </data>
-  <data name="lueDefect.ToolTip" xml:space="preserve">
-    <value>Assocate Defect...</value>
-  </data>
-  <data name="lueDefect.LookupProperties.Defect.PriorityCode.PropertyHeader" xml:space="preserve">
-    <value>Priority</value>
-  </data>
-  <data name="lueDefect.LookupProperties.Defect.SeverityCode.PropertyHeader" xml:space="preserve">
-    <value>Severity</value>
-  </data>
-  <data name="lueDefect.LookupProperties.Defect.StatusCode.PropertyHeader" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="lueDefect.LookupProperties..PropertyHeader" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdDefects.6b08b079-fc88-4271-a3ad-d614d9fb7d51.Text" xml:space="preserve">
-    <value>Remove</value>
-  </data>
-  <data name="grdDefects.6b08b079-fc88-4271-a3ad-d614d9fb7d51.ConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to remove this item?</value>
-  </data>
-  <data name="lnkAddDefect.ToolTip" xml:space="preserve">
-    <value>Create Defect...</value>
-  </data>
-  <data name="lnkAddDefect.Caption" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lueDefect.LookupProperties.PriorityCode.PropertyHeader" xml:space="preserve">
-    <value>Priority</value>
-  </data>
-  <data name="lueDefect.LookupProperties.SeverityCode.PropertyHeader" xml:space="preserve">
-    <value>Severity</value>
-  </data>
-  <data name="lueDefect.LookupProperties.StatusCode.PropertyHeader" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="lueDefect.LookupProperties.AssignedTo.OwnerDescription.PropertyHeader" xml:space="preserve">
-    <value>Assigned To</value>
-  </data>
-  <data name="lueDefect.LookupProperties.RecordedBy.OwnerDescription.PropertyHeader" xml:space="preserve">
-    <value>Reported By</value>
-  </data>
-  <data name="lueDefect.LookupProperties.DefectNumber.PropertyHeader" xml:space="preserve">
-    <value>Defect ID</value>
-  </data>
-  <data name="lueDefect.LookupProperties.Subject.PropertyHeader" xml:space="preserve">
-    <value>Subject</value>
-  </data>
-  <data name="lueDefect.LookupProperties.DefectProblem.Notes.PropertyHeader" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="lueDefect.LookupProperties.DefectSolution.Notes.PropertyHeader" xml:space="preserve">
+  <data name="grdDefects.d1c5e38f-ac43-43eb-9df5-3d0bd4e02a8c.ColumnHeading" xml:space="preserve">
     <value>Resolution</value>
   </data>
-  <data name="lueDefect.LookupProperties.Owner.OwnerDescription.PropertyHeader" xml:space="preserve">
+  <data name="grdDefects.a27fcbf1-eda2-4d7c-97b5-4991afda77f3.ColumnHeading" xml:space="preserve">
+    <value>Defect Number</value>
+  </data>
+  <data name="grdDefects.c7e3f898-2f57-4347-8e76-9b2f79fddac0.ColumnHeading" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.LookupProperties.CreateDate.PropertyHeader" xml:space="preserve">
+    <value>CreateDate (Create Date)</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.ButtonToolTip" xml:space="preserve">
+    <value>Associate Defect</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.DialogButtonText" xml:space="preserve">
+    <value>Add Selected</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.LookupProperties.DefectNumber.PropertyHeader" xml:space="preserve">
+    <value>Defect Number</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.LookupProperties.Subject.PropertyHeader" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.LookupProperties.DefectProblem.Notes.PropertyHeader" xml:space="preserve">
+    <value>Defect Problem</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.LookupProperties.DefectSolution.Notes.PropertyHeader" xml:space="preserve">
+    <value>Defect Solution</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.LookupProperties.AssignedTo.OwnerDescription.PropertyHeader" xml:space="preserve">
+    <value>Assigned To</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.LookupProperties.Owner.OwnerDescription.PropertyHeader" xml:space="preserve">
     <value>Owner</value>
+  </data>
+  <data name="grdDefects.btnCreate.ToolTip" xml:space="preserve">
+    <value>Create Defect...</value>
+  </data>
+  <data name="grdDefects.Delete.ToolTip" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.LookupDialogTitle" xml:space="preserve">
+    <value>Lookup Defect</value>
+  </data>
+  <data name="grdDefects.92200584-0557-4984-853a-35a53f147669.ColumnHeading" xml:space="preserve">
+    <value>Area</value>
+  </data>
+  <data name="grdDefects.df03034d-3803-4366-910c-caebf9fe5e18.ColumnHeading" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="grdDefects.be120163-290b-4bf5-b836-bc6d5e3bb4eb.ColumnHeading" xml:space="preserve">
+    <value>Severity</value>
+  </data>
+  <data name="grdDefects.3806343b-0b0a-4f79-9e5b-b1daa45b624a.ColumnHeading" xml:space="preserve">
+    <value>Status</value>
   </data>
 </root>

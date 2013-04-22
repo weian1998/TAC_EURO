@@ -22,12 +22,11 @@
 	<tr>
 		<td>
 		    <asp:Panel runat="server" ID="ctrlstQuantity" CssClass="controlslist">
-		        <span class="textcontrol" style="padding-left:35px; padding-right:20px;">
-                    <SalesLogix:DateTimePicker runat="server" ID="ChangeDate" DisplayTime="false" />
+		        <span class="textcontrol datepicker">
+                    <SalesLogix:DateTimePicker runat="server" ShouldPublishMarkDirty="false" ID="ChangeDate" DisplayTime="false" />
                 </span>
-                <div>
-                    <asp:Button ID="cmdSearch" runat="server" Text="<%$ resources : Search %>" OnClick="OnSearch" />
-                </div>
+                <asp:Button ID="cmdSearch" runat="server" Text="<%$ resources : Search %>" OnClick="OnSearch" />
+               
             </asp:Panel>
         </td>
 	</tr>

@@ -16,7 +16,7 @@ public partial class _Default : System.Web.UI.Page
     {
         
         string path = Server.MapPath(@"Downloads\IntellisyncInstall.zip");
-        
+
         if (!File.Exists(path))
         {
             intellisyncDownload.Visible = false;
@@ -27,7 +27,10 @@ public partial class _Default : System.Web.UI.Page
     private void SetVersion()
     {
         Version version = typeof(Sage.SalesLogix.Intellisync.Entity.ActivityGetCommand).Assembly.GetName().Version;
-        VersionLabel.Text = String.Format("Version {0}", version.ToString());
+        string resourceString = GetLocalResourceObject("lblVersion.Text").ToString();
+        lblVersion.Text = String.Format(resourceString, version);
+        string title = GetLocalResourceObject("Title").ToString();
+        ISTitle.InnerText = title;
     }
     
 }

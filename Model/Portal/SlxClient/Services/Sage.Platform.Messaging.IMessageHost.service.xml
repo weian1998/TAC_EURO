@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<PortalService xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="bd40994b-aff5-4d53-8bcb-7beedc315116">
+  <InstanceId>c457e2c6-5e17-4d09-8417-7b0cf4e60a6a</InstanceId>
+  <ServiceType>Sage.Platform.Messaging.SimpleMessageHost, Sage.Platform.Application</ServiceType>
+  <RegisterAs>Sage.Platform.Messaging.IMessageHost, Sage.Platform.Application</RegisterAs>
+  <AddOnDemand>false</AddOnDemand>
+  <Properties />
+  <Scope>Application</Scope>
+</PortalService>

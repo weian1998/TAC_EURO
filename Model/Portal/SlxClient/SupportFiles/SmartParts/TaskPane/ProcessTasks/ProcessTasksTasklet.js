@@ -1,57 +1,56 @@
-﻿var TitleNodeTemplate = new Ext.XTemplate('<div class="workflow-title">{Description}</div>');
+﻿dojo.require('Sage.UI.Dialogs');
+
+var TitleNodeTemplate = new Simplate(['<div class="workflow-title">{Description}</div>']);
 var ListStartTag = '<ul class="workflow-list">';
 var ListEndTag = '</ul>';
 var ListItemStartTag = '<li class="workflow-node"><div class="workflow-node-el">';
 var ListItemEndTag = '</div></li>';
 var IndentMarkup = '<span class="workflow-node-indent"><img src="Libraries/ext/resources/images/default/s.gif" /></span>';
 var ExpanderMarkup = '<span class="workflow-node-indent workflow-list-expander workflow-list-expanded"><img src="Libraries/ext/resources/images/default/s.gif" /></span>';
-var LeafTemplate = new Ext.XTemplate('<tpl if="Status == \'NotCompleted\'">',
-    '<span class="workflow-leaf-action" title="{[ProcessTaskletStrings.ClickToComplete]}" onclick="completeTask(\'{[currentWorkflowID]}\',\'{MessageUri}\', \'Completed\')">',
-    '<img src="ImageResource.axd?scope=global&type=Global_Images&key=gear_check" />',
-    '</span>',
-    '<span class="workflow-leaf-action" title="{[ProcessTaskletStrings.ClickToCancel]}" onclick="completeTask(\'{[currentWorkflowID]}\',\'{MessageUri}\', \'Cancelled\')">',
-    '<img src="ImageResource.axd?scope=global&type=Global_Images&key=gear_cancel" />',
-    '</span></tpl>',
-    '<tpl if="Status == \'Completed\'">',
-    '<span><img src="ImageResource.axd?scope=global&type=Global_Images&key=check" /></span>',    
-    '</tpl>',
-    '<tpl if="Status == \'Cancelled\'">',
-    '<span><img src="ImageResource.axd?scope=global&type=Global_Images&key=cancel" /></span>',    
-    '</tpl>',
-    '<span class="workflow-leaf-text">{Description}</span>');
+var LeafTemplate = new Simplate([
+    '{% if (Status == \'NotCompleted\') { %}',
+        '<span class="workflow-leaf-action" title="{[ProcessTaskletStrings.ClickToComplete]}" onclick="completeTask(\'{[currentWorkflowID]}\',\'{MessageUri}\', \'Completed\')">',
+            '<img src="ImageResource.axd?scope=global&type=Global_Images&key=gear_check" />',
+        '</span>',
+            '<span class="workflow-leaf-action" title="{[ProcessTaskletStrings.ClickToCancel]}" onclick="completeTask(\'{[currentWorkflowID]}\',\'{MessageUri}\', \'Cancelled\')">',
+        '<img src="ImageResource.axd?scope=global&type=Global_Images&key=gear_cancel" />',
+        '</span>',
+    '{% } %}',
+    '{% if (Status == \'Completed\') { %}',
+        '<span>',
+            '<img src="ImageResource.axd?scope=global&type=Global_Images&key=check" />',
+        '</span>',
+    '{% } %}',
+    '{% if (Status == \'Cancelled\') { %}',
+        '<span>',
+            '<img src="ImageResource.axd?scope=global&type=Global_Images&key=cancel" />',
+        '</span>',
+    '{% } %}',
+    '<span class="workflow-leaf-text">{Description}</span>']);
 
-
-
-//    '<tpl if="Status == \'Completed\'">',
-//    '<span><input type="checkbox" disabled="disabled" name="{Name}_chk" checked="checked" /></span>',    
-//    '</tpl>',
-    
-var StartProcessTemplate = new Ext.XTemplate('<div class="workflow-title"><a href="javascript:runProcess(\'{Name}\')" title="{[ProcessTaskletStrings.ClickToStartWorkflow]}" alt="{[ProcessTaskletStrings.ClickToStartWorkflow]}" >{FriendlyName}</a></div>');
+var StartProcessTemplate = new Simplate(['<div class="workflow-title"><a href="javascript:runProcess(\'{Name}\')" title="{[ProcessTaskletStrings.ClickToStartWorkflow]}" alt="{[ProcessTaskletStrings.ClickToStartWorkflow]}" >{FriendlyName}</a></div>']);
 
 $(document).ready(initTasklet);
-
 var intervalToken;
 var interval;
 
-function initTasklet(){
+function initTasklet() {
     interval = 10000;
     getPendingTasks();
-    //startTimer();
-    
-    var svc = Sage.Services.getService("GroupManagerService");  
+
+    var svc = Sage.Services.getService("GroupManagerService");
     if (svc) {
-	svc.addListener(Sage.GroupManagerService.CURRENT_GROUP_POSITION_CHANGED, function(sender, evt) {
-	    getPendingTasks();
-	}); 
+        svc.addListener(Sage.GroupManagerService.CURRENT_GROUP_POSITION_CHANGED, function (sender, evt) {
+            getPendingTasks();
+        });
     }
-    
 }
 
-function tryGetUrl(){
-    if(Sage.Services.hasService("ClientContextService")){
+function tryGetUrl() {
+    if (Sage.Services.hasService("ClientContextService")) {
         var context = Sage.Services.getService("ClientContextService");
-        if(context != null){
-            if(context.containsKey("ProcessHost")){
+        if (context != null) {
+            if (context.containsKey("ProcessHost")) {
                 return context.getValue("ProcessHost");
             }
         }
@@ -59,24 +58,23 @@ function tryGetUrl(){
     return null;
 }
 
-function startTimer(){
+function startTimer() {
     intervalToken = setInterval("elapseTimer()", interval);
 }
 
-function elapseTimer(){
+function elapseTimer() {
     getPendingTasks();
 }
 
-function getPendingTasks(){
+function getPendingTasks() {
     var baseUrl = tryGetUrl();
-    if(baseUrl != null){
+    if (baseUrl != null) {
         var eid = getCurrentEntityID()
         if (eid != "") {
             var url = "proxyrequest.ashx?target=" + escape(baseUrl + "/ProcessManager/crm/-/goal/instances(" + eid + ")");
-            $.ajax({
+            dojo.xhrGet({
                 url: url,
-                type: "GET",
-                success: function(data) {
+                load: function (data) {
                     var wkfls = eval(data);
                     if (wkfls.length > 0) {
                         drawWorkflows(wkfls);
@@ -84,7 +82,7 @@ function getPendingTasks(){
                         getAvailableProcesses();
                     }
                 },
-                error: function(reqObj) {
+                error: function (reqObj) {
                     if (reqObj.status == "404") {
                         $("#pendingTaskResult").text(ProcessTaskletStrings.ProcessHostNotFound);
                     } else {
@@ -95,22 +93,21 @@ function getPendingTasks(){
             });
         } else {
             $("#pendingTaskResult").text("");
-            if (intervalToken) { clearInterval(intervalToken); }	        
+            if (intervalToken) { clearInterval(intervalToken); }
         }
     } else {
-    	$("#pendingTaskResult").text(ProcessTaskletStrings.ProcessHostNotFound);
+        $("#pendingTaskResult").text(ProcessTaskletStrings.ProcessHostNotFound);
         if (intervalToken) { clearInterval(intervalToken); }
     }
 };
 
-function completeTask(procId, goalId, message){
+function completeTask(procId, goalId, message) {
     var baseUrl = tryGetUrl();
-    if(baseUrl != null){
-        $.ajax({
+    if (baseUrl != null) {
+        dojo.xhrPost({
             url: "proxyrequest.ashx?target=" + escape(baseUrl + "/ProcessManager/crm/-/RunningProcesses(" + procId + ")/Messages(" + goalId + ")"),
-            type : "POST",
-            data : message,
-            success: function() {
+            postData: message,
+            load: function () {
                 getPendingTasks();
             },
             error: handleProcessAjaxError
@@ -119,20 +116,19 @@ function completeTask(procId, goalId, message){
 };
 
 function getCurrentEntityType() {
-
     var entSvc = Sage.Services.getService("ClientEntityContext");
-	if (entSvc) {
-	    var curContext = entSvc.getContext();
-	    return curContext.EntityType;
-	}
+    if (entSvc) {
+        var curContext = entSvc.getContext();
+        return curContext.EntityType;
+    }
 }
 
 function getCurrentEntityID() {
     var entSvc = Sage.Services.getService("ClientEntityContext");
-	if (entSvc) {
-	    var curContext = entSvc.getContext();
-	    return curContext.EntityId;
-    }    
+    if (entSvc) {
+        var curContext = entSvc.getContext();
+        return curContext.EntityId;
+    }
 }
 
 function getAvailableProcesses() {
@@ -144,41 +140,37 @@ function getAvailableProcesses() {
         }
         var url = "proxyrequest.ashx?target=" + escape(baseUrl + "/ProcessManager/crm/-/goal/types?entityType=" + etype);
 
-        $.ajax({
+        dojo.xhrGet({
             url: url,
-            type : "GET",
-            success : function(data) {
+            load: function (data) {
                 drawStartLink(data);
             },
-            error: handleProcessAjaxError    
+            error: handleProcessAjaxError
         });
     }
 }
 
-
 function handleProcessAjaxError(reqObj) {
-    alert(reqObj.responseText);
-    //alert(reqObj.status + " " + reqObj.statusText + "\r\n" + reqObj.responseText);
+    Sage.UI.Dialogs.showError(reqObj.responseText);
 }
 
 function runProcess(procName) {
     var baseUrl = tryGetUrl();
     if (baseUrl != null) {
         var url = "proxyrequest.ashx?target=" + escape(baseUrl + "/ProcessManager/crm/-/RunningProcesses?name=" + procName)
-	    var data;
+        var data;
         var eid = getCurrentEntityID();
         if (eid != "") {
-            var data = { EntityId : eid }
-            $.ajax({
-                url : url,
-                type : "POST",
-                data : data,
-                success : function() {
+            var data = { EntityId: eid }
+            dojo.xhrPost({
+                url: url,
+                postData: data,
+                success: function () {
                     getPendingTasks();
                 },
-                error : handleProcessAjaxError	    
-            }); 
-        }      
+                error: handleProcessAjaxError
+            });
+        }
     }
 }
 
@@ -198,7 +190,7 @@ function drawStartLink(availableProcesses) {
 }
 
 function drawWorkflows(workflowdata) {
-    if (typeof(workflowdata) == "string") {
+    if (typeof (workflowdata) == "string") {
         workflowdata = eval(workflowdata);
     }
     var markup = "";
@@ -206,10 +198,10 @@ function drawWorkflows(workflowdata) {
         var workflow = workflowdata[wrkflw];
         markup += drawWorkFlow(workflow);
     }
-    
+
     $("#pendingTaskResult").html(markup);
 
-    $("#pendingTaskResult .workflow-list-expander").bind("click", function(e) {
+    $("#pendingTaskResult .workflow-list-expander").bind("click", function (e) {
         $(this).toggleClass("workflow-list-expanded");
         var disp = ($(this).hasClass("workflow-list-expanded")) ? "block" : "none";
         var pnt = $(this).parents(".workflow-node-el")[0];
@@ -222,7 +214,6 @@ function drawWorkflows(workflowdata) {
     });
 }
 
-
 var currentWorkflowID = '';
 function drawWorkFlow(workflow) {
     if (workflow.ActivityType == 'Workflow') {
@@ -234,7 +225,7 @@ function drawWorkFlow(workflow) {
         //render the insides
         for (var wact = 0; wact < workflow.Activities.length; wact++) {
             markup += drawBranch(workflow.Activities[wact], 0);
-        }        
+        }
         //end the outer list
         markup += ListEndTag;
         return markup;
@@ -259,10 +250,10 @@ function drawBranch(activity, indentLevel) {
         var act = activity.Activities[bact];
         if ((act.ActivityType == "Scope") || (act.ActivityType == "Stage")) {
             branchmarkup += drawBranch(act, indentLevel + 1);
-        } else if (act.ActivityType == "Step") { 
+        } else if (act.ActivityType == "Step") {
             branchmarkup += drawLeaf(act, indentLevel + 1);
         }
-    }  
+    }
     //end the list
     branchmarkup += ListEndTag;
     //</li></div>
@@ -283,7 +274,6 @@ function drawLeaf(activity, indentLevel) {
     leafmarkup += ListItemEndTag;
     return leafmarkup;
 }
-
 
 // Example workflow JSON:
 //no scope:

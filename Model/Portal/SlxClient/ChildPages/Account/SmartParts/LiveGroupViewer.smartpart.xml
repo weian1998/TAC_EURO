@@ -7,6 +7,7 @@
   <ShowInMode>List</ShowInMode>
   <Properties>
     <Property Name="SummaryConfigFile" TypeConverter="">AccountSummaryView</Property>
+    <Property Name="ListContextMenu" TypeConverter="">AccountListContextMenu</Property>
     <Property Name="HelpTopic" TypeConverter="">accountlistview</Property>
   </Properties>
   <AllowRoles />

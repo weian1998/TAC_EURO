@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="627e400e-8fee-4522-a32b-55e7f77ccd23">
   <ItemId>menuItemCreateNewContractGroup</ItemId>
-  <NavUrl>javascript:groupManager.CreateGroup('CONTRACT');</NavUrl>
+  <NavUrl>javascript:Sage.Groups.GroupManager.CreateGroup('CONTRACT');</NavUrl>
   <LargeImageUrl />
   <SmallImageUrl />
   <ContextMenuId />

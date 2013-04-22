@@ -41,7 +41,7 @@ namespace Sage.BusinessRules.CodeSnippets
 			{
 				form.curSalesPotential.IsReadOnly = true;
 				IOpportunity opportunity = form.CurrentEntity as IOpportunity;
-				form.curSalesPotential.Text = opportunity.CalculateSalesPotential().ToString();
+				opportunity.CalculateSalesPotential();
 			}
 			else
 			{

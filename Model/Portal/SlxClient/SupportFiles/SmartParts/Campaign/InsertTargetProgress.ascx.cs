@@ -1,26 +1,18 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
+using System.Linq;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.Entity.Interfaces;
 using Sage.Platform.Application.UI;
-using Telerik.WebControls;
 using System.Threading;
 using Sage.SalesLogix.CampaignTarget;
-using Sage.Platform.WebPortal.Services;
-using Sage.Platform.Application;
 using System.Text;
+using Telerik.Web.UI;
 
 public partial class InsertTargetProgress : EntityBoundSmartPartInfoProvider
 {
-
     #region Public Methods
 
     /// <summary>
@@ -52,32 +44,28 @@ public partial class InsertTargetProgress : EntityBoundSmartPartInfoProvider
             }
         }
 
-        foreach (Control control in Controls)
+        foreach (SmartPartToolsContainer cont in Controls.OfType<SmartPartToolsContainer>())
         {
-            SmartPartToolsContainer cont = control as SmartPartToolsContainer;
-            if (cont != null)
+            switch (cont.ToolbarLocation)
             {
-                switch (cont.ToolbarLocation)
-                {
-                    case SmartPartToolsLocation.Right:
-                        foreach (Control tool in cont.Controls)
-                        {
-                            tinfo.RightTools.Add(tool);
-                        }
-                        break;
-                    case SmartPartToolsLocation.Center:
-                        foreach (Control tool in cont.Controls)
-                        {
-                            tinfo.CenterTools.Add(tool);
-                        }
-                        break;
-                    case SmartPartToolsLocation.Left:
-                        foreach (Control tool in cont.Controls)
-                        {
-                            tinfo.LeftTools.Add(tool);
-                        }
-                        break;
-                }
+                case SmartPartToolsLocation.Right:
+                    foreach (Control tool in cont.Controls)
+                    {
+                        tinfo.RightTools.Add(tool);
+                    }
+                    break;
+                case SmartPartToolsLocation.Center:
+                    foreach (Control tool in cont.Controls)
+                    {
+                        tinfo.CenterTools.Add(tool);
+                    }
+                    break;
+                case SmartPartToolsLocation.Left:
+                    foreach (Control tool in cont.Controls)
+                    {
+                        tinfo.LeftTools.Add(tool);
+                    }
+                    break;
             }
         }
         return tinfo;
@@ -92,21 +80,11 @@ public partial class InsertTargetProgress : EntityBoundSmartPartInfoProvider
     /// </summary>
     protected override void OnWireEventHandlers()
     {
-        if (ScriptManager.GetCurrent(this.Page) != null)
+        if (ScriptManager.GetCurrent(Page) != null)
         {
-            ScriptManager.GetCurrent(this.Page).RegisterPostBackControl(cmdStartInsert);
+            ScriptManager.GetCurrent(Page).RegisterPostBackControl(cmdStartInsert);
         }
         base.OnWireEventHandlers();
-    }
-
-    /// <summary>
-    /// Called when the smartpart has been bound.  Derived components should override this method to run code that depends on entity context being set and it not changing.
-    /// </summary>
-    protected override void OnFormBound()
-    {
-        object sender = this;
-        EventArgs e = EventArgs.Empty;
-        base.OnFormBound();
     }
 
     /// <summary>
@@ -114,14 +92,6 @@ public partial class InsertTargetProgress : EntityBoundSmartPartInfoProvider
     /// </summary>
     protected override void OnAddEntityBindings()
     {
-    }
-
-    /// <summary>
-    /// Called when the dialog is closing.
-    /// </summary>
-    protected override void OnClosing()
-    {
-        base.OnClosing();
     }
 
     /// <summary>
@@ -166,7 +136,7 @@ public partial class InsertTargetProgress : EntityBoundSmartPartInfoProvider
     }
 
     /// <summary>
-    /// Gets the arguements from the handler to set the progress indicator.
+    /// Gets the arguments from the handler to set the progress indicator.
     /// </summary>
     /// <param name="args">The args.</param>
     private void InsertTargetHandler(InsertProgressArgs args)
@@ -213,25 +183,18 @@ public partial class InsertTargetProgress : EntityBoundSmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void StartInsert_OnClick(object sender, EventArgs e)
     {
-        if (DialogService.DialogParameters.Count > 0)
+        if (DialogService.DialogParameters.Count > 0 && DialogService.DialogParameters.ContainsKey("targetsDataTable"))
         {
-            if (DialogService.DialogParameters.ContainsKey("targetsDataTable"))
-            {
-                DataTable targets = DialogService.DialogParameters["targetsDataTable"] as DataTable;
-                SetStartProcessInfo();
-                InsertTargetManager insertManager = new InsertTargetManager();
-                insertManager.CampaignId = EntityContext.EntityID.ToString();
-                insertManager.TargetList = targets;
-                //insertManager.TargetType = _State.targetType;
-                insertManager.StartTargetInsertProcess(InsertTargetHandler);
-                SetCompleteProcessInfo();
-                DialogService.DialogParameters.Remove("targetsDataTable");
-            }
-            else
-            {
-                //throw exception
-            }
+            List<string> targets = DialogService.DialogParameters["targetsDataTable"] as List<string>;
+            SetStartProcessInfo();
+            InsertTargetManager insertManager = new InsertTargetManager();
+            insertManager.CampaignId = EntityContext.EntityID.ToString();
+            insertManager.TargetList = targets;
+            insertManager.StartTargetInsertProcess(InsertTargetHandler);
+            SetCompleteProcessInfo();
+            DialogService.DialogParameters.Remove("targetsDataTable");
         }
     }
+
     #endregion
 }

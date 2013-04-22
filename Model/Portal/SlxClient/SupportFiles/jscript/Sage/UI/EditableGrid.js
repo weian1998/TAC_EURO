@@ -1,280 +1,328 @@
-﻿dojo.provide('Sage.UI.EditableGrid');
+/*globals Sage, dojo, dojox, dijit, Simplate, window, Sys, define, TabControl */
 
-/*
-sample config object...
+define(['dojox/grid/DataGrid',
+    'dijit/Toolbar',
+    'dijit/form/Button',
+    'dijit/layout/ContentPane',
+    'Sage/Data/WritableSDataStore',
+    'Sage/Data/WritableStore',
+    'Sage/UI/SDataLookup',
+    'dojo/i18n',
+    'dojo/_base/lang',
+    'Sage/Utility',
+    'Sage/UI/ImageButton',
+    'Sage/UI/Dialogs',
+    'Sage/Utility/_LocalStorageMixin',
+    'dojo/i18n!./nls/EditableGrid',
+    'Sage/UI/ToolBarLabel',
+    'dojo/parser',
+    'dojo/dom-construct',
+    'dojo/_base/declare',
+    'dojo/_base/array'
+],
+function (DataGrid,
+    Toolbar,
+    Button,
+    ContentPane,
+    WritableSDataStore,
+    WritableStore,
+    SDataLookup,
+    i18n,
+    dojolang,
+    Utility,
+    ImageButton,
+    Dialogs,
+    _LocalStorageMixin,
+    nlsEditablGrid,
+    ToolBarLabel,
+    parser,
+    domConstruct,
+    declare,
+    array
+) {
+    var editableGrid = declare('Sage.UI.EditableGrid', [DataGrid, _LocalStorageMixin], {
+        recordCountLabel: null,
+        STORE_KEY_COLUMN_SIZE: '_COLUMN_UNIT_WIDTH_',
+        STORE_NS: 'SAGE_UI_EDITABLEGRID',
+        STORE_KEY_SORT: '_SORT_INFO_',
+        lookupControl: null,
+        mode: '',
+        region: 'center',
+        _dataChangeConnections: [],
+        _registeredWidgets: null,
 
-var config = {
-    id : 'OppProducts',
-    tabId : 'OpportunityProducts',
-    gridNodeId: 'OPGrid',
-    label : 'Products',
-    columnDefaults: { width: 10, editable: true, styles: 'text-align: right;' },
-    columns: [
-        { field: 'Sort', name: 'Sort', width: 4, editable: true, styles: 'text-align: center;', formatter: Sage.Format.integer},
-        {  
-            field: 'Product.Name', 
-            name:'Product',
-            width: 16, 
-            sortable: true, 
-            type: Sage.UI.Columns.SlxLink,
-            styles: '',
-            editable: false,
-        //SlxLink column properties:
-            //displayFields: ['Product.Name', 'Product.Family'],
-            //displayFormatString: '{0} - {1}',
-            idField: 'Product.$key',
-            pageName: 'Product', 
-            appliedSecurity: 'Products'//,
-            //urlFields: ['Product.Family', 'Product.Name'],
-            //urlFormatString: 'http://www.google.com?parm1={0}&parm2={1}',
-            //target: 'newWindow',
-        }, 
-        { field: 'Product.Family', name: 'Family', editable: false, styles: '' },
-        { field: 'Program', name: 'Program', styles: '' }, 
-        { field: 'Price', name: 'Price',editable: true, formatter: Sage.UI.Format.currency },
-    ],
-    storeOptions: {          //an object containing options for creating a Sage.Data.SDataStore or Sage.Data.WritableSDataStore...
-        pagesize: 20,        //20 is default
-        resourceKind: 'opportunityproducts',
-        include: ['Opportunity', 'Product'], //(optional - these will be obtained from the columns supplied, but you can add extra here if you want
-        select: [ 'Id', 'Product/Name' ]     // etc.  (optional - these will be obtained from the columns supplied
-    },
-    contextualCondition: {  //can be a function, or an object in this format:
-                            //if it is a function, it will run in the context of the EditableGrid (what the keyword 'this' points to)
-        fn : function() { 
-            return String.format('Opportunity.Id eq "{0}"', Sage.Utility.getCurrentEntityId());
+        constructor: function (opts) {
+            this.mode = Utility.getModeId();
+            if (opts.storeOptions && opts.storeOptions.isInsertMode) {
+                this.mode = 'insert';
+            }
+
+            this._dataChangeConnections = [];
+            this._registeredWidgets = [];
         },
-        scope: this
-    },
-    tools : [ // an array of strings specifying standard tools, or objects defining custom ones
-        //standard options include: 'save', 'delete', 'add', 'cancel'
-        'save', 
-        'delete',
-        { 
-            'id' : 'myBtn',
-            'icon' : 'images/icons/plus_16x16.gif',
-            'handler' : function() { alert('hello'); }, 
-            'alternateText' : 'Click Me!',
-            'appliedSecurity' : 'Products'
-        }
-    ],
-    onDataChange: function(entity, attribute, oldValue, newValue) {
-        //handle any custom data changing code here...
-    }
-}
 
-*/
+        _setModeAttr: function (mode) {
+            if (this.mode !== mode) {
+                this.mode = mode;
+                if (!this.store) {
+                    return;
+                }
+                if (((mode === 'insert') && (this.store.declaredClass !== 'Sage.Data.WritableStore')) ||
+                   ((mode !== 'insert') && (this.store.declaredClass != 'Sage.Data.WritableSDataStore'))) {
+                    this._replaceStore();
+                }
+            }
+        },
+        _getModeAttr: function () {
+            return this.mode;
+        },
+        // Fixes IE. Issue was the grid itself has focus, so blur on cells doesn't work
+        onBlur: function () {
+            if (this.edit && this.edit.isEditing()) {
+                this.edit.apply();
+            }
+        },
 
-(function(){
-	dojo.require('dojox.grid.DataGrid');
-	dojo.require("dijit.Toolbar");
-	dojo.require("dijit.ToolbarSeparator");
-	dojo.require("dijit.form.Button");
-	dojo.require("dijit.form.NumberTextBox");
-	dojo.require('Sage.Data.WritableSDataStore');
-	dojo.require('Sage.Data.WritableStore');
-        dojo.require('Sage.Format');
-	dojo.require('Sage.UI.SDataLookup');
-	dojo.require("Sage.UI.NumberTextBox");
-	dojo.require('Sage.UI.Currency');
-	dojo.require('Sage.UI.Controls.Numeric');    
-	dojo.require('Sage.UI.Columns.SlxLink');
-	dojo.require('Sage.UI.Columns.Lookup');
-        dojo.require('Sage.UI.Columns.SlxEdit');
-        dojo.require('Sage.UI.Columns.Currency');
-        dojo.require('Sage.UI.Columns.Numeric');
-	dojo.requireLocalization("dojo.cldr", "currency", 'de-de');
-	dojo.requireLocalization("dojo.cldr", "number", 'de-de');
-	dojo.requireLocalization("dojo.cldr", "currency", 'en-us');
-	dojo.requireLocalization("dojo.cldr", "number", 'en-us');
-	dojo.requireLocalization("dojo.cldr", "currency", 'fr-fr');
-	dojo.requireLocalization("dojo.cldr", "number", 'fr-fr');
-    dojo.require("dojo.i18n");
-    dojo.requireLocalization("Sage.UI", "EditableGrid");
-	
-    dojo.declare('Sage.UI.EditableGrid', dojox.grid.DataGrid, {
-        //i18n strings:
-        unsavedDataText: '*unsaved data',
-        addText: 'Add',
-        deleteText: 'Delete',
-        saveText: 'Save',
-        cancelText: 'Cancel',
-        noSelectionsText: 'There are no records selected',
-        confirmDeleteFmtTxt: 'Are you sure you want to delete these {0} items?',
         //end i18n strings.
-	    postMixInProperties: function(){
-            dojo.mixin(this, dojo.i18n.getLocalization("Sage.UI", "EditableGrid", this.lang));
+        postMixInProperties: function () {
+            dojo.mixin(this, nlsEditablGrid);
+            dojo.mixin(this, i18n.getLocalization("dijit", "common"));
             this.setEditable();
 
-            this.mode = Sage.Utility.getModeId();
-    		if (!this.storeOptions) {
-    		    this.storeOptions = { }
-    		}
-    		this.ensureValue(this.storeOptions, 'pagesize', this.rowsPerPage || 20);
-    		this.ensureValue(this, 'singleClickEdit', true);
-    		
-    		if (typeof this.contextualCondition === 'function') {
-    		    this.query = { fn : this.contextualCondition, scope : this }
-    		} else if (typeof this.contextualCondition === 'object') {
-    		    if (this.contextualCondition.fn) {
-    		        this.ensureValue(this.contextualCondition, 'scope', this);
-    		        this.query = this.contextualCondition;
-    		    }
-    		}
-            
+            if (!this.storeOptions) {
+                this.storeOptions = {};
+            }
+            this.ensureValue(this.storeOptions, 'pagesize', this.rowsPerPage || 20);
+            this.ensureValue(this, 'singleClickEdit', true);
+
+            if (typeof this.contextualCondition === 'function') {
+                this.query = { fn: this.contextualCondition, scope: this };
+            } else if (typeof this.contextualCondition === 'object') {
+                if (this.contextualCondition.fn) {
+                    this.ensureValue(this.contextualCondition, 'scope', this);
+                    this.query = this.contextualCondition;
+                }
+            }
+
             //set up structure:
             this.structure = [
-                { 
-                    defaultCell: this.columnDefaults,
+                {
+                    defaultCell: dojolang.mixin({ defaultValue: '' }, this.columnDefaults),
                     cells: this.columns
                 }
-            ];    		
-            function AddToListUnique(item, list) {
-                for(var i = 0; i < list.length; i++) {
+            ];
+            function addToListUnique(item, list) {
+                for (var i = 0; i < list.length; i++) {
                     if (item === list[i]) {
                         return;
                     }
                 }
                 list.push(item);
-            }           
-             
+            }
+
             //create and startup the toolbar...
             if ((this.tabId) && (this.tabId !== '')) {
                 this.addToolsToWorkspaceToolbar();
-                this.currentEntityId = Sage.Utility.getCurrentEntityId();
-                var self = this;
+                this.currentEntityId = Utility.getCurrentEntityId();
             } else {
                 this.createOwnToolbar();
             }
 
             //set up the datastore if they didn't give us one...
-            var cols = this.columns;
+            this._setUserPrefColumnWidths();
+            var cols = this.columns,
+                sel, i, p, inc, parts, combined;
+
             if (!this.store) {
-                var sel = this.storeOptions.select || [];
-                for (var i = 0; i < sel.length; i++){
+                sel = this.storeOptions.select || [];
+                for (i = 0; i < sel.length; i++) {
                     sel[i] = sel[i].replace(/\./g, '/');
                 }
-                var inc = this.storeOptions.include || [];
+                inc = this.storeOptions.include || [];
                 var field;
-                for (var i = 0; i < cols.length; i++) {
+                for (i = 0; i < cols.length; i++) {
                     if (cols[i].field) {
                         field = cols[i].field;
-                        AddToListUnique(field.replace(/\./g, '/'), sel);
+                        addToListUnique(field.replace(/\./g, '/'), sel);
                     }
                     if (cols[i].field.indexOf('.') > 0) {
-                        var parts = cols[i].field.split('.');
-                        var combined = '';
-                        for (var p = 0; p < parts.length - 1; p++) {
+                        parts = cols[i].field.split('.');
+                        combined = '';
+                        for (p = 0; p < parts.length - 1; p++) {
                             combined += parts[p];
-                            AddToListUnique(combined, inc);
+                            addToListUnique(combined, inc);
                             combined += '/';
                         }
                     }
                 }
                 this.store = this.getStore();
-    		} else {
+                //Clean up any dirty data flags.  We can assume it is clean with a new store.
+                this.markClean();
+            } else {
                 //this means a datastore was given to us - most likely a proxydatastore.
-                var sel = this.store.select = this.store.select || [];
-                var inc = this.store.include = this.store.include || [];
-                for (var i = 0; i < sel.length; i++){
+                sel = this.store.select = this.store.select || [];
+                inc = this.store.include = this.store.include || [];
+                for (i = 0; i < sel.length; i++) {
                     sel[i] = sel[i].replace(/\./g, '/');
-                }                
-                for (var i = 0; i < cols.length; i++) {
+                }
+                for (i = 0; i < cols.length; i++) {
                     if (cols[i].field) {
                         field = cols[i].field;
-                        AddToListUnique(field.replace(/\./g, '/'), sel);
+                        addToListUnique(field.replace(/\./g, '/'), sel);
                     }
                     if (cols[i].field.indexOf('.') > 0) {
-                        var parts = cols[i].field.split('.');
-                        var combined = '';
-                        for (var p = 0; p < parts.length - 1; p++) {
+                        parts = cols[i].field.split('.');
+                        combined = '';
+                        for (p = 0; p < parts.length - 1; p++) {
                             combined += parts[p];
-                            AddToListUnique(combined, inc);
+                            addToListUnique(combined, inc);
                             combined += '/';
                         }
                     }
-                }          
+                }
             }
-    		this.inherited(arguments);
+            //apply saved sort information...
+            this._setSortInfo();
+            this.inherited(arguments);
         },
-        postCreate: function(){
+        postCreate: function () {
             //summary:
             //Add event connections
-            //Enable the grid to commit its changes on blur
-            dojo.connect(this, 'onBlur', this.applyEditOnBlur); 
             //Enable the grid to commit its changes on Enter -- TODO: Review behavior.
             dojo.connect(this, 'onKeyDown', this.customKeyDown);
-            // Enable the grid to retract and expand 
-            dojo.connect(this, 'onResizeColumn', this.elasticizeGrid);
-            dojo.connect(this, '_onFetchComplete', this.elasticizeGrid);
+            // Store column resizings
+            dojo.connect(this, 'onResizeColumn', this._onResizeColumn);
+            dojo.subscribe('Sage/events/TabWorkspace/MIDDLE_AREA_DROP', this, this._setMiddleAreaHeight);
             // Enhanced Loading message when adding and deleting items from the editable 
             // grid to display immediately rather than waiting for datastore fetch.
             this.connect(this, '_onNew', this.showLoading);
-	
-    	    this.inherited(arguments);
-	    },
-        showLoading: function(){
-                this.showMessage(this.loadingMessage);                
-                this._clearData();                
-                this.markClean();
+            // Update the display count.
+            this.connect(this.scroller, 'scroll', this._onScroll);
+            dojo.connect(this, 'onResizeColumn', this._onScroll);
+            this.setupHeader();
+            this.inherited(arguments);
         },
-
-        elasticizeGrid: function(){
-            //summary:
-            // Enable the grid to retract and expand with it's container.
-            // If total grid height exceeds the max height desired, 300px, restrict grid height and provide scrollbars.
-
-            //Check that the grid has been added to it's own node container and that node Id has been provided to the grid object.
-            // gridNodeId is added in quickform scenarios.  Otherwise, this grid is likely used in a customization or in the PreviewGrid
-            if (!this.gridNodeId) { return; }
-
-            //Assemble queries by element id and css class.
-            var masterHead = ['#',this.id,' .dojoxGridMasterHeader'].join('');
-            var gridContent = ['#',this.id,' .dojoxGridContent'].join('');
-            var gridMasterMessages = ['#',this.id,' .dojoxGridMasterMessages'].join('');
-            var dojoxGridView = ['#',this.id,' .dojoxGridView'].join('');
-            var dojoxGridScrollbox = ['#',this.id,' .dojoxGridScrollbox'].join('');
-
-            // Gather the heights and widths of the various elements for resizing
-            var masterHeadHeight = dojo.query(masterHead)[0].clientHeight;
-            var gridContentHeight = dojo.query(gridContent)[0].clientHeight;
-            var dojoxGridViewWidth = dojo.query(dojoxGridView)[0].clientWidth;
-            var gridMasterMessagesHeight = dojo.query(gridMasterMessages)[0].clientHeight;
-            
-            var heightTotal = masterHeadHeight + gridContentHeight + gridMasterMessagesHeight;
-            //If heightTotal exceeds maxHeight desired, restrict grid height and provide scrollbars.
-            heightTotal = (heightTotal > 300) ? 300 : heightTotal;
-            
-            //Set final heights and widths based on calculated totals of various elements
-            dojo.style(dojo.query(dojoxGridView)[0], 'height', [heightTotal,"px"].join(''));
-            dojo.style(dojo.query(dojoxGridScrollbox)[0], 'height', '100%');
-            dojo.style(dojo.query(dojoxGridView)[0], 'width', '100%');
-            dojo.style(dojo.query(dojoxGridScrollbox)[0], 'width', '100%');
-            dojo.style(this.domNode, 'height', [heightTotal+25,"px"].join(''));
-            dojo.style(this.gridNodeId, 'height', [heightTotal+25,"px"].join(''));
-            
+        showLoading: function () {
+            this.showMessage(this.loadingMessage);
+            this._clearData();
+            this.markClean();
         },
-        listenForPageSave: function() {
+        headerTemplate: new Simplate([
+            '<div>',
+            '<div id="{%= $.id %}_HeaderBar"  data-dojo-type="dijit.layout.ContentPane" gutters="false"  region="top" ',
+                'style="{%= $.headerStyle %}" class="editable-grid-hbar">',
+                '<div class="editable-grid-hbar-left"></div>',
+                '<div class="editable-grid-hbar-center"></div>',
+                    '<div class="editable-grid-hbar-right"><div id="{%= $.gridNodeId %}_recordCountLabel"></div></div>',
+            '</div>',
+            '</div>'
+        ]),
+        setupHeader: function () {
+            //Get the headerBar created and ready.
+            this.recordCountLabel = new ToolBarLabel();
+            this.recordCountLabel.set('label', dojo.string.substitute(this.recordCountFormatString, this._getRecordCount()));
+            var headerBar = this.headerTemplate.apply(this);
+            headerBar = dojo.toDom(headerBar);
+            this.headerContentPane = parser.parse(headerBar);
+            // Put the header bar in place.
+            //dojo.place(this.headerBar, this.gridNodeId, 'before');
+            var container = dijit.byId(this.gridNodeId);
+            container.addChild(this.headerContentPane[0]);
+            // Put the record label in place
+            dojo.place(this.recordCountLabel.domNode, this.gridNodeId + '_recordCountLabel', 'replace');
+        },
+        resetContextualCondition: function (contextualCondition) {
+            if (typeof contextualCondition === 'function') {
+                this.query = { fn: contextualCondition, scope: this };
+            } else if (typeof contextualCondition === 'object') {
+                if (contextualCondition.fn) {
+                    this.ensureValue(contextualCondition, 'scope', this);
+                    this.query = contextualCondition;
+                }
+            }
+            this.contextualCondition = contextualCondition;
+
+        },
+        _getRecordCount: function () {
+            // summary: Returns an array with the counts for the displayed records in the grid.  [firstrow, lastrow, count]
+            var scroller,
+                firstrow,
+                lastrow,
+                count;
+            scroller = this.scroller;
+            count = scroller.rowCount;
+            if (count <= 0) {
+                firstrow = 0;
+                lastrow = 0;
+                count = 0;
+            } else {
+                firstrow = (scroller.firstVisibleRow === 0) ? 1 : scroller.firstVisibleRow + 1;
+                lastrow = (scroller.lastVisibleRow >= scroller.rowCount) ? scroller.rowCount : scroller.lastVisibleRow;
+            }
+            return [firstrow, lastrow, count];
+        },
+        _onScroll: function (inTop) {
+            // Set the record count.
+            if (this.recordCountLabel) {
+                this.recordCountLabel.set('label', dojo.string.substitute(this.recordCountFormatString, this._getRecordCount()));
+            }
+        },
+        _setMiddleAreaHeight: function (data) {
+            var selfQuery = ['#', data.tab.ElementId, ' #', this.id].join('');
+            var self = dojo.query(selfQuery)[0];
+            if (self) {
+                var middleTabItemQuery = ['#', data.tab.ElementId, ' .tws-tab-view-body'].join('');
+                var middleTabItemViewBody = dojo.query(middleTabItemQuery)[0];
+                //Set a default height (> 0) so the grid will have a place to expand from.
+                dojo.style(middleTabItemViewBody, 'height', '10px');
+                TabControl.setViewBodyHeight();
+            }
+        },
+        _setUserPrefColumnWidths: function () {
+            var self = this;
+            dojo.forEach(this.columns, function (col) {
+                if (col && col.field) {
+                    var key = self._getColumnSizeKey(col),
+                        value = self.getFromLocalStorage(key, self.STORE_NS);
+                    if (value) {
+                        col.width = value;
+                    }
+                }
+            });
+        },
+        _getColumnSizeKey: function (cell) {
+            var fieldStripped = cell.field.replace(/[\.\$]/g, '_'),
+                id = [this.id, '_', this.STORE_KEY_COLUMN_SIZE, fieldStripped].join('');
+            return id;
+        },
+        _onResizeColumn: function (columnIndex) {
+            // Handle size storage
+            var cell = this.getCell(columnIndex),
+                value = cell.unitWidth,
+                key = this._getColumnSizeKey(cell);
+            this.saveToLocalStorage(key, value, this.STORE_NS);
+        },
+        listenForPageSave: function () {
             var bindingMgr = Sage.Services.getService('ClientBindingManagerService');
             if (bindingMgr) {
-                bindingMgr.addListener(ClientBindingManagerService.ON_SAVE, this.saveChanges, this);
-            } 
+                bindingMgr.addListener(bindingMgr.ON_SAVE, this.saveChanges, this);
+            }
         },
-        removePageSaveListener: function() {
+        removePageSaveListener: function () {
             var bindingMgr = Sage.Services.getService('ClientBindingManagerService');
             if (bindingMgr) {
-                bindingMgr.removeListener(ClientBindingManagerService.ON_SAVE, this.saveChanges)
-            } 
+                bindingMgr.removeListener(bindingMgr.ON_SAVE, this.saveChanges);
+            }
         },
-        setEditable: function() {
+        setEditable: function () {
             var editable = true;
             //Check Action security of the grid.
-			if (this.appliedSecurity) {
+            if (this.appliedSecurity) {
                 var svc = Sage.Services.getService("RoleSecurityService");
                 if (svc) {
                     editable = svc.hasAccess(this.appliedSecurity);
                 }
-			}
+            }
             if (this.readOnly) {
                 editable = false;
             }
@@ -297,13 +345,6 @@ var config = {
                 }
             }
         },
-        adaptHeight: function(){
-            //summary: Override of grid._Grid.adaptHeight.  To enable elasticity of grid, set the window height to
-            // default value after the fact.  This allows the grid view to remain small until the data is returned.
-            this.inherited(arguments);
-            // Default grid height, 300. Could easily be replaced with a configurable value.
-            this.scroller.windowHeight = 300; 
-        },
         onHeaderCellClick: function (e) {
             // summary:
             // OVERRIDE of event fired when a header cell is clicked.
@@ -311,11 +352,11 @@ var config = {
             // Decorated event object which contains reference to grid, cell, and rowIndex
             // description:
             // Override for grid sorting to allow for:
-                // 1. Disabling of sorting on a column level.
-                // 2. Disabling of sorting on Insert mode due to limitations in the WritableStore.
-                // 3. Displaying PageExitWarningMessage when unsaved data exists.
+            // 1. Disabling of sorting on a column level.
+            // 2. Disabling of sorting on Insert mode due to limitations in the WritableStore.
+            // 3. Displaying PageExitWarningMessage when unsaved data exists.
             var r = true;
-            if  (this.store.dirtyDataCache.isDirty) {
+            if (this.store.dirtyDataCache.isDirty) {
                 var s = Sage.Services.getService("ClientBindingManagerService");
                 r = confirm(s._PageExitWarningMessage);
             }
@@ -324,178 +365,333 @@ var config = {
             }
             else {
                 this.inherited(arguments);
+                var sortProps = this.getSortProps();
+                if (sortProps && sortProps.length > 0) {
+                    var sortInfo = sortProps[0];
+                    sortInfo.cellIndex = e.cell.index;
+                    this.saveToLocalStorage(this.STORE_KEY_SORT + this.id, sortInfo, this.STORE_NS);
+                }
             }
         },
-        ensureValue: function(obj, key, defaultValue) {
+        _setSortInfo: function () {
+            var key = this.STORE_KEY_SORT + this.id;
+            var sortProps = this.getFromLocalStorage(key, this.STORE_NS);
+            if (sortProps) {
+                if (sortProps.descending) {
+                    this.sortInfo = (sortProps.cellIndex + 1) * -1;
+                } else {
+                    this.sortInfo = sortProps.cellIndex + 1;
+                }
+            }
+        },
+        ensureValue: function (obj, key, defaultValue) {
             obj[key] = obj[key] || defaultValue;
         },
-        amIInATab: function() {
+        amIInATab: function () {
             if (this.context && this.context.workspace) {
                 return (this.context.workspace.indexOf('TabWorkspace') > -1);
             }
             return false;
         },
-        isMyTabVisible: function() {
-            if (this.amIInATab()) {
-                return TabControl.getState().isTabVisible(this.tabId);
+        isMyTabVisible: function () {
+            if (this.amIInATab() && window.TabControl) {
+                return window.TabControl.getState().isTabVisible(this.tabId);
             }
             return true;
         },
-        startup: function() {
+        startup: function () {
             if (this._started) {
                 return;
             }
 
-            if (!this.isMyTabVisible()) {
-                if (this.hasTabListeners) { 
-                    return;
-                }
-                if (typeof TabControl !== 'undefined') {
-                    this.moreTabListener = TabControl.addListener('moretabchange', this.startup, this);
-                    this.mainTabListener = TabControl.addListener('maintabchange', this.startup, this);
-                    this.hasTabListeners = true;
-                    return;
-                }
-            } else {
-                if (this.hasTabListeners) {
-                    TabControl.removeListener('moretabchange', this.startup, this);
-                    TabControl.removeListener('maintabchange', this.startup, this);
-                    this.hasTabListeners = false;
-                }
-            }
+            console.warn('ToDo: EditableGrid needs to connect to tab change events to properly refresh themselves.   EditableGrid - startup()');
 
-            if (this.gridNodeId) {
-                dojo.place(this.domNode, this.gridNodeId, 'only');
-            }
+            //            if (!this.isMyTabVisible()) {
+            //                if (this.hasTabListeners) {
+            //                    return;
+            //                }
+            //                if (typeof TabControl !== 'undefined') {
+            //                    this.moreTabListener = TabControl.addListener('moretabchange', this.startup, this);
+            //                    this.mainTabListener = TabControl.addListener('maintabchange', this.startup, this);
+            //                    this.hasTabListeners = true;
+            //                    return;
+            //                }
+            //            } else {
+            //                if (this.hasTabListeners && TabControl) {
+            //                    TabControl.removeListener('moretabchange', this.startup, this);
+            //                    TabControl.removeListener('maintabchange', this.startup, this);
+            //                    this.hasTabListeners = false;
+            //                }
+            //            }
+
             this.inherited(arguments);
             if (this.mode !== 'insert') {
-                this.listenForPageSave();            
+                this.listenForPageSave();
+            }
+            // There are certain scenarios where a default height is required.
+            if (this.context && this.context.workspace) {
+                if (this.context.workspace.indexOf('TabWorkspace') <= -1) {
+                    //console.log('grid.id = ' + this.id);
+                    dojo.style(dojo.byId(this.id + '_Container'), 'height', '300px');
+                    var main = dijit.byId(this.gridNodeId);
+                    main.resize();
+                }
+            }
+            if (this.amIInATab() && this.isMyTabVisible()) {
+                var formtableQuery = ['#', 'element_', this.tabId, ' .formtable'].join('');
+                var formTableBody = dojo.query(formtableQuery)[0];
+                // Control is in a visible tab that is using a table layout
+                if (formTableBody) {
+                    //Editable Grid with it's container in markup
+                    var container = dojo.byId(this.id + '_Container');
+                    if (!container) {
+                        //Preview Grid Layout container
+                        container = dijit.byId(this.id).getParent();
+                        container = container.domNode;
+                    }
+
+                    dojo.style(container, 'height', '300px');
+                }
             }
         },
-        destroy: function() {
-            if (this.store && this.store.destroy) {
-                this.store.destroy();
+        destroy: function () {
+            if (this.lookupControl) {
+                this.lookupControl.destroy(false);
             }
+
+            if (this.toolbar) {
+                this.toolbar.destroy(false);
+            }
+
+            if (this.grid) {
+                this.grid.destroy(false);
+            }
+
+            if (this.store && this.store.destroy) {
+                this.store.destroy(false);
+            }
+
+            if (this._registeredWidgets) {
+                array.forEach(this._registeredWidgets, function (item) {
+                    item.destroy(false);
+                });
+
+                this._registeredWidgets = null;
+            }
+
             this.removePageSaveListener();
             this.inherited(arguments);
         },
-        getStore: function() {
+        _replaceStore: function () {
+            dojo.forEach(this._dataChangeConnections, function (connection) {
+                dojo.disconnect(connection);
+            });
+            if (this.store && this.store.destroy) {
+                this.store.destroy(false);
+            }
+            this.store = false;
+            this.store = this.getStore();
+        },
+        getStore: function () {
             if (this.store) {
                 return this.store;
             }
 
-            if (this.mode !== 'insert') {
-                var store = new Sage.Data.WritableSDataStore(this.storeOptions);
-            }
-            else {
-                var store = new Sage.Data.WritableStore(this.storeOptions);
-            }      
-            
+            this.storeOptions['isInsertMode'] = (this.mode === 'insert');
+
+            var store = (this.mode !== 'insert')
+                ? new WritableSDataStore(this.storeOptions)
+                : new WritableStore(this.storeOptions);
+
             if (this.onDataChange) {
-                dojo.connect(store, 'onSet', this.onDataChange);
+                this._dataChangeConnections.push(dojo.connect(store, 'onSet', this.onDataChange));
             }
             if (store.onDataChange) {
-                dojo.connect(store, 'setValue', store.onDataChange);
-                dojo.connect(store, 'saveNewEntity', store.onDataChange);
-                dojo.connect(store, 'deleteItem', store.onDataChange);
-                dojo.connect(store, 'createItem', store.onDataChange);
+                this._dataChangeConnections.push(dojo.connect(store, 'setValue', store.onDataChange));
+                this._dataChangeConnections.push(dojo.connect(store, 'saveNewEntity', store.onDataChange));
+                this._dataChangeConnections.push(dojo.connect(store, 'deleteItem', store.onDataChange));
+                this._dataChangeConnections.push(dojo.connect(store, 'createItem', store.onDataChange));
             }
-            dojo.connect(store, 'onSet', this, function(entity, attribute, oldValue, newValue) {
-                if (oldValue !== newValue && this.mode !== 'insert') {
-                    this.markDirty();
+            this._dataChangeConnections.push(dojo.connect(store, 'onSet', this, function (entity, attribute, oldValue, newValue) {
+                if (this.mode !== 'insert' && newValue) {
+                    //Varying column types have different levels of depth. We must check down the chain to
+                    // get to our returnObject property.
+                    if (this.edit.info.cell &&
+                        this.edit.info.cell.widget &&
+                        this.edit.info.cell.widget.returnObject === true) {
+                        if (oldValue.$key !== newValue.$key) {
+                            this.markDirty();
+                        }
+                    }
+                    else {
+                        if (oldValue !== newValue) {
+                            this.markDirty();
+                        }
+                    }
                 }
-            });
-           
+            }));
+
             return store;
         },
         customKeyDown: function (e) {
             this.applyEditOnEnter(e);
             this.navigateOnKeyDown(e);
         },
-        navigateOnKeyDown: function(e) {
+        navigateOnKeyDown: function (e) {
+            /* This code is causing the cells data to copy into the next cell on down arrow.
             if (e.keyCode === 38 || e.keyCode === 40) {
-                var newRow = this.selection.selectedIndex;
-                newRow = (e.keyCode === 38) ? newRow - 1 : newRow +1;  // Arrow button conditions
-                newRow = (newRow < 0 ) ? 0 : newRow;
-                newRow = (newRow > this.rowCount - 1 ) ? this.rowCount - 1 : newRow;
-                this.focus.setFocusIndex(newRow, 0);
-                this.selection.deselectAll();
-                this.selection.select(newRow);
-                this.focus.scrollIntoView();
-                dojo.stopEvent(e);
+            var newRow = this.selection.selectedIndex;
+            newRow = (e.keyCode === 38) ? newRow - 1 : newRow + 1;  // Arrow button conditions
+            newRow = (newRow < 0) ? 0 : newRow;
+            newRow = (newRow > this.rowCount - 1) ? this.rowCount - 1 : newRow;
+            this.focus.setFocusIndex(newRow, 0);
+            this.selection.deselectAll();
+            this.selection.select(newRow);
+            this.focus.scrollIntoView();
+            dojo.stopEvent(e);
             }
+            */
         },
-        applyEditOnEnter: function(e) {        
-            if (e.charOrCode == 13 || e.keyCode == 13) { 
+        applyEditOnEnter: function (e) {
+            if (e.charOrCode == 13 || e.keyCode == 13) {
                 this.doApplyEdit();
                 this.edit.apply();
                 dojo.stopEvent(e);
             }
         },
-        applyEditOnBlur: function() {
-            this.edit.apply();
+        createOwnToolbar: function () {
+            var roleService = Sage.Services.getService("RoleSecurityService");
+            var container = dijit.byId(this.gridNodeId);
+            this.toolbar = new Toolbar({ 'class': 'right-tools', 'region': 'top' });
+            container.addChild(this.toolbar);
+            for (var i = 0; i < this.tools.length; i++) {
+                var tool = this.tools[i];
+                if (tool.appliedSecurity && tool.appliedSecurity !== '') {
+                    if ((roleService) && (!roleService.hasAccess(tool.appliedSecurity))) {
+                        continue;
+                    }
+                }
+                var btn = false;
+                if (typeof tool === 'string') {
+                    switch (tool) {
+                        case 'add':
+                            btn = new ImageButton({
+                                imageClass: 'icon_plus_16x16',
+                                tooltip: this.addText,
+                                id: this.id + '_addBtn',
+                                onClick: dojolang.hitch(this, function () { this.addNew(); })
+                            });
+                            break;
+                        case 'delete':
+                            btn = new ImageButton({
+                                imageClass: 'icon_Delete_16x16',
+                                tooltip: this.deleteText,
+                                id: this.id + '_delBtn',
+                                onClick: dojolang.hitch(this, function () { this.deleteSelected(); })
+                            });
+                            break;
+                        case 'save':
+                            btn = new ImageButton({
+                                imageClass: 'icon_Save_16x16',
+                                tooltip: this.saveText,
+                                id: this.id + '_saveBtn',
+                                onClick: dojolang.hitch(this, function () { this.saveChanges(); })
+                            });
+                            break;
+                        case 'cancel':
+                            btn = new ImageButton({
+                                imageClass: 'icon_Reset_16x16',
+                                tooltip: this.cancelText,
+                                id: this.id + '_cancelBtn',
+                                onClick: dojolang.hitch(this, function () { this.cancelChanges(); })
+                            });
+                            break;
+                    }
+                } else {
+                    if ((tool.type) && (tool.type === 'Sage.UI.SDataLookup')) {
+                        var conf = tool.controlConfig || tool;
+                        btn = new SDataLookup(conf);
+                        this.lookupControl = btn;
+                    } else {
+                        btn = new ImageButton({
+                            icon: tool.icon || '',
+                            imageClass: tool.imageClass || '',
+                            id: tool.id,
+                            onClick: dojolang.hitch(tool.scope || this, tool.handler),
+                            tooltip: tool.alternateText || tool.tooltip
+                        });
+                    }
+                }
+                if (btn) {
+                    this.toolbar.addChild(btn);
+                    btn = false;
+                }
+            }
+
+            this.toolbar.startup();
         },
-        createOwnToolbar: function() {
-            alert('not implemented: createOwnToolbar()');
-            return;
-            //TODO: The following is just example code - needs fixed and completed...
-            //where do we render it to?:  this.id + '_tb' is not going to work...
-            this.toolbar = new dijit.Toolbar({ 'style':'text-align:right' }, this.id + '_tb');
-            var saveBtn = new dijit.form.Button({
-                id: 'OppProd_save',
-                label: this.saveText,
-                title: this.saveText,
-                showLabel: false,
-                iconClass: 'dijitEditorIcon dijitEditorIconSave',
-                onClick: this.saveChanges
-            });
-            this.toolbar.addChild(saveBtn);       
-            
-            this.toolbar.startup();        
-        },
-        addToolsToWorkspaceToolbar: function() {
+        addToolsToWorkspaceToolbar: function () {
             //summary:
             //Add items to the rightToolsContainer
 
             if (this.readOnly) {
                 return;
-            }            
+            }
             //Add dirty data message.
             //TODO: Rename TabId to containerNodeId.  Requires template change.
             this.dirtyDataMsgID = this.tabId + '_dirtydatamsg';
-            var msgBox = RML.span({
-                'class' : 'grid-unsaveddata-msg',
-                'id' : this.dirtyDataMsgID,
-                'style' : 'display:none;',
+            var msgBox = domConstruct.create('span', {
+                'class': 'grid-unsaveddata-msg',
+                'id': this.dirtyDataMsgID,
+                'style': 'display:none;',
                 //TODO: Localize
-                'content' : (this.editable) ? this.unsavedDataText : ''
-            });            
+                'content': (this.editable) ? this.unsavedDataText : ''
+            });
+            var rightToolsContainer, containerId;
             //Place the tools and 'unsaved data' message into the correct workspace.
-            switch(this.context.workspace)
-            {
+            switch (this.context.workspace) {
                 case 'Sage.Platform.WebPortal.Workspaces.Tab.TabWorkspace':
                     //Don't add the dirty data message if we are in insert mode.  All data is dirty in insert mode.
-                    if (this.mode !== 'insert') { dojo.place(msgBox, dojo.query('#' + 'element_' + this.tabId +' td.tws-tab-view-title')[0]); }
-                    var rightToolsContainer = dojo.query('#' + 'element_' + this.tabId +' td.tws-tab-view-tools-right');
-                break;
+                    if (this.mode !== 'insert') {
+                        var elem = dojo.query('#' + 'element_' + this.tabId + ' td.tws-tab-view-title');
+                        if (elem) {
+                            dojo.place(msgBox, elem[0]);
+                        }
+                    }
+                    containerId = ['element_', this.tabId].join('');
+                    rightToolsContainer = dojo.query(['#', containerId, ' td.tws-tab-view-tools-right'].join(''));
+                    break;
                 case 'Sage.Platform.WebPortal.Workspaces.MainContentWorkspace':
                     //Don't add the dirty data message if we are in insert mode.  All data is dirty in insert mode.
-                    if (this.mode !== 'insert') { dojo.place(msgBox, dojo.query('#' + this.tabId +' span.mainContentHeaderTitle')[0]); }
-                    var rightToolsContainer = dojo.query('#' + this.tabId +' td.mainContentHeaderToolsRight');
-                break;
-                default:             
+                    if (this.mode !== 'insert') { dojo.place(msgBox, dojo.query('#' + this.tabId + ' span.mainContentHeaderTitle')[0]); }
+                    //This containerId assignment appears redundant but we need the specific Id for the later query when placing the tool.
+                    containerId = this.tabId;
+                    rightToolsContainer = dojo.query('#' + containerId + ' td.mainContentHeaderToolsRight');
+                    break;
+                case 'Sage.Platform.WebPortal.Workspaces.DialogWorkspace':
+                    //This containerId assignment appears redundant but we need the specific Id for the later query when placing the tool.
+                    rightToolsContainer = dojo.query('td.dialog-tools-right');
+                    break;
+                default:
             }
 
-            var toolFmt = '<img id="{0}" src="{1}" alt="{2}" class="ui-icon" />';
-            var self = this;
             var roleService = Sage.Services.getService("RoleSecurityService");
             //Some buttons may be hidden in different modes and/or security levels.  
             //We'll keep a position variable to make sure the group stays together.            
-            var position = 0;
+            var position = 0, positionString, refNode;
             for (var i = 0; i < this.tools.length; i++) {
+                positionString = '';
                 var tool = this.tools[i];
-                //TODO: REFACTOR to include a displayInInsert bool property on config object
-                if ((tool.id === 'Save' || tool.id === 'Cancel') && this.mode === 'insert') {
+                if (typeof tool.mergeControlId !== 'undefined' && tool.mergeControlId.length !== 0) {
+                    refNode = dojo.query('[id$=' + tool.mergeControlId + ']', dojo.byId('element_' + this.tabId))[0];
+                    positionString = tool.mergePosition.toLowerCase();
+                }
+                if (!refNode) {
+                    // No control to place next to.  Use the container and possition 0.
+                    refNode = rightToolsContainer[0];
+                    positionString = '';
+                }
+                if (this.mode === 'insert' && !tool.displayInInsert) {
                     continue;
                 }
                 //check user's access to this functionality...
@@ -505,117 +701,168 @@ var config = {
                     }
                 }
                 if (typeof tool === 'string') {
-                    switch(tool) {
-                        case 'add' :
+                    switch (tool) {
+                        case 'add':
                             var addid = this.id + '_addBtn';
-                            var addBtn = RML.img({
-                                'id' : addid,
-                                'alt' : this.addText,
-                                'title' : this.addText,
-                                'src' : 'images/icons/Plus_16x16.gif',
-                                'class' : 'tws-header-icon'
+                            var addBtn = new ImageButton({
+                                id: addid,
+                                imageClass: 'icon_plus_16x16',
+                                onClick: dojolang.hitch(this, this.addNew),
+                                tooltip: this.addText
                             });
-                            dojo.place(addBtn, rightToolsContainer[0], position);
-                            dojo.connect(dojo.byId(addid), 'onclick', this, this.addNew);
+                            this._registeredWidgets.push(addBtn);
+                            dojo.place(addBtn.domNode, rightToolsContainer[0], position);
                             break;
-                        case 'delete' :
+                        case 'delete':
                             var delid = this.id + '_delBtn';
-                            var delBtn = RML.img({
-                                'id' : delid,
-                                'alt' : this.deleteText,
-                                'title' : this.deleteText,
-                                'src' : 'images/icons/Delete_16x16.gif',
-                                'class' : 'tws-header-icon'
+                            var delBtn = new ImageButton({
+                                id: delid,
+                                tooltip: this.deleteText,
+                                imageClass: 'icon_Delete_16x16',
+                                onClick: dojolang.hitch(this, this.deleteSelected)
                             });
-                            dojo.place(delBtn, rightToolsContainer[0], position);
-                            dojo.connect(dojo.byId(delid), 'onclick', this, this.deleteSelected);
+                            this._registeredWidgets.push(delBtn);
+                            dojo.place(delBtn.domNode, rightToolsContainer[0], position);
                             break;
-                        case 'save' :
+                        case 'save':
                             var saveid = this.id + '_saveBtn';
-                            var saveBtn = RML.img({
-                                'id' : saveid,
-                                'alt' : this.saveText,
-                                'title' : this.saveText,
-                                'src' : 'images/icons/Save_16x16.gif',
-                                'class' : 'tws-header-icon'
+                            var saveBtn = new ImageButton({
+                                id: saveid,
+                                tooltip: this.saveText,
+                                imageClass: 'icon_Save_16x16',
+                                onClick: dojolang.hitch(this, this.saveChanges)
                             });
-                            dojo.place(saveBtn, rightToolsContainer[0], position);
-                            dojo.connect(dojo.byId(saveid), 'onclick', this, this.saveChanges);
+                            this._registeredWidgets.push(saveBtn);
+                            dojo.place(saveBtn.domNode, rightToolsContainer[0], position);
                             break;
-                        case 'cancel' :
+                        case 'cancel':
                             var cclid = this.id + '_cancelBtn';
-                            var cancelBtn = RML.img({
-                                'id' : cclid,
-                                'alt' : this.cancelText,
-                                'title' : this.cancelText,
-                                'src' : 'images/icons/Reset_16x16.gif',
-                                'class' : 'tws-header-icon'
-                            });                            
-                            dojo.place(cancelBtn, rightToolsContainer[0], position);
-                            dojo.connect(dojo.byId(cclid), 'onclick', this, this.cancelChanges);
-                            break;                            
-                            
+                            var cancelBtn = new ImageButton({
+                                id: cclid,
+                                tooltip: this.cancelText,
+                                imageClass: 'icon_Reset_16x16',
+                                onClick: dojolang.hitch(this, this.cancelChanges)
+                            });
+                            this._registeredWidgets.push(cancelBtn);
+                            dojo.place(cancelBtn.domNode, rightToolsContainer[0], position);
+                            break;
                     }
                 } else {
                     if ((tool.type) && (tool.type === 'Sage.UI.SDataLookup')) {
-                        var lup = new Sage.UI.SDataLookup(tool.controlConfig || tool);
-                        dojo.place(lup.domNode, rightToolsContainer[0], position);
+                        var conf = tool.controlConfig || tool;
+                        var lup = new SDataLookup(conf);
+                        dojo.place(lup.domNode, refNode, position);
+                        this.lookupControl = lup;
                     } else {
-                        var newTool = RML.img({
-                            'id': tool.id,
-                            'alt': tool.alternateText || '',
-                            'title': tool.alternateText || '',
-                            'src': tool.icon,
-                            'class': tool['class'] || 'tws-header-icon'
+                        var custombtn = new ImageButton({
+                            id: tool.id,
+                            icon: tool.icon || '',
+                            imageClass: tool.imageClass || '',
+                            onClick: dojolang.hitch(tool.scope || this, tool.handler),
+                            tooltip: tool.alternateText || tool.tooltip
                         });
-                        dojo.place(newTool, rightToolsContainer[0], position);
-                        dojo.connect(dojo.byId(tool.id), 'onclick', tool.scope || this, tool.handler);
+                        this._registeredWidgets.push(custombtn);
+                        dojo.place(custombtn.domNode, refNode, (positionString.length > 0) ? positionString : position);
                     }
                 }
                 //Increment the position for consistent grouping of these items.
                 position++;
             }
         },
-        addNew : function(args) {
+        addNew: function (args) {
             if (this.store) {
                 this.store.newItem(args);
             }
         },
-        createItems: function (items, callback) {    
+        addAssociatedItems: function (items, parentName, childName, lookup) {
+            // summary:
+            //  Helper function for lookup tools.  This can be called by the handler to add items selected in a lookup
+            var grid = this;
+            if (Utility.getModeId() !== 'insert' && this.store.dirtyDataCache.isDirty) {
+                Dialogs.raiseQueryDialog(
+                    'SalesLogix',
+                    this.dirtyDataMessage,
+                    function (result) {
+                        if (result) {
+                            grid.addSelectedItems(items, parentName, childName, lookup);
+                        }
+                    },
+                    this.okText,
+                    this.cancelText
+                );
+            }
+            else {
+                grid.addSelectedItems(items, parentName, childName, lookup);
+            }
+        },
+        addSelectedItems: function (items, parentName, childName, lookup) {
+            var entities = [];
+            var grid = this;
+            for (var i = 0; i < items.length; i++) {
+                var hasRecord = false;
+                // duplicate detection
+                for (var k in grid.store.dataCache) {
+                    var rec = grid.store.dataCache[k];
+                    if (rec[childName] && rec[childName].$key == items[i].$key)
+                        hasRecord = true;
+                }
+                if (hasRecord)
+                    continue;
+
+                //Insert mode check
+                var newRecord = {};
+                if (Utility.getModeId() !== 'insert') {
+                    newRecord[parentName] = { $key: Utility.getCurrentEntityId() };
+                }
+                newRecord[childName] = {};
+                Utility.extend(newRecord[childName], items[i]);
+                delete newRecord.$key;
+                delete newRecord.$name;
+                delete newRecord.$url;
+                entities.push(newRecord);
+            }
+            if (entities.length > 0)
+                grid.createItems(entities, function () {
+                    if (Utility.getModeId() !== 'insert') {
+                        __doPostBack("MainContent", "");
+                    }
+                });
+            if (lookup)
+                lookup.lookupDialog.hide();
+        },
+        createItems: function (items, callback) {
             if (dojo.isArray(items)) {
-                var store = this.store;               
+                var store = this.store;
                 var iCreateCount = items.length;
                 if (typeof console !== 'undefined') {
                     console.log('createItems() items.length = %o', iCreateCount);
-                }       
+                }
                 //TODO: Replace callback with webworker.
-                var fnResponse = function (arg1, arg2) {
+                var fnResponse = function (arg1) {
                     // "this.", within the scope of fnResponse(), refers to the scope object below.
                     this.currentCount = this.currentCount + 1;
-                    if (typeof console !== 'undefined') {                    
-                        if (arg1 && typeof arg1 !== 'undefined' && arg1.getResponseHeader) {                            
+                    if (typeof console !== 'undefined') {
+                        if (arg1 && typeof arg1 !== 'undefined' && arg1.getResponseHeader) {
                             console.log('createItems() response: (status = %o; statusText = %o): currentCount = %o; totalCount = %o',
-                                arg1.status || 0, arg1.statusText || "", this.currentCount, this.totalCount);                  
+                            arg1.status || 0, arg1.statusText || "", this.currentCount, this.totalCount);
                             console.log('createItems() response ETag: %o', arg1.getResponseHeader('ETag'));
-                        }
-                        else {
+                        } else {
                             if (arg1 && typeof arg1 !== 'undefined' && typeof arg1.$httpStatus === 'string') {
                                 console.log('createItems() response ($httpStatus: %o; $key: %o; $descriptor: %o $etag: %o): currentCount = %o; totalCount = %o',
-                                    arg1.$httpStatus, arg1.$key || "", arg1.$descriptor, arg1.$etag, this.currentCount, this.totalCount);
-                            }
-                            else {
+                                arg1.$httpStatus, arg1.$key || "", arg1.$descriptor, arg1.$etag, this.currentCount, this.totalCount);
+                            } else {
                                 console.log('createItems() response: (unknown status): currentCount = %o; totalCount = %o',
-                                    this.currentCount, this.totalCount);
-                            }                 
+                                this.currentCount, this.totalCount);
+                            }
                         }
                     }
                     if (this.currentCount === this.totalCount) {
                         this.grid.refresh();
                         if (typeof this.onComplete === 'function') {
                             this.onComplete.call(this.grid);
-                        }                  
+                        }
                     }
-                }
+                };
                 var scope = { grid: this, totalCount: iCreateCount, currentCount: 0, onResponse: fnResponse, onComplete: callback || null };
                 for (var i = 0; i < items.length; i++) {
                     store.createItem(items[i], scope);
@@ -623,59 +870,72 @@ var config = {
             }
             else {
                 //TODO: Localize and use message service.
-                alert('The items parameter in Sage.UI.EditableGrid.createItems() should be an array.');
+                Dialogs.showError(this.createItemsInvalidArrayText);
             }
         },
-        deleteSelected: function (callback) {            
+        deleteSelected: function (callback) {
             var selectedItems = this.selection.getSelected();
             if (selectedItems.length < 1) {
-                alert(this.noSelectionsText);
+                Dialogs.showError(this.noSelectionsText);
                 return;
             }
             if (this.mode !== 'insert') {
                 if (!this.store._checkPageExitWarningMessage()) {
                     return;
                 }
-            } 
-            if (confirm(String.format(this.confirmDeleteFmtTxt, selectedItems.length))) {
-                var store = this.store;               
+            }
+            var self = this;
+            var opts = {
+                title: 'Sage SalesLogix',
+                query: dojo.string.substitute(this.confirmDeleteFmtTxt, [selectedItems.length]),
+                callbackFn: function (result) { self.deleteCallback(result, callback, selectedItems); },
+                yesText: this.buttonOk, //OK
+                noText: this.buttonCancel //Cancel
+            };
+            Dialogs.raiseQueryDialogExt(opts);
+        },
+        deleteCallback: function (result, callback, selectedItems) {
+            if (result) {
+                var grid = this;
+                var store = this.store;
                 var iDeleteCount = 0;
                 for (var i = 0; i < selectedItems.length; i++) {
                     if (this.store.isItem(selectedItems[i])) {
                         iDeleteCount++;
                     }
-                }                
+                }
+                grid.selection.clear();
                 this.showLoading();
                 //TODO: Replace callback with webworker.
                 var fnResponse = function (arg1, arg2) {
                     // "this.", within the scope of fnResponse(), refers to the scope object below.
                     this.currentCount = this.currentCount + 1;
-                    if (typeof console !== 'undefined') {                    
-                        if (arg1 && typeof arg1 !== 'undefined' && arg1.getResponseHeader) {                            
+                    if (typeof console !== 'undefined') {
+                        if (arg1 && typeof arg1 !== 'undefined' && arg1.getResponseHeader) {
                             console.log('deleteSelected() response: (status = %o; statusText = %o): currentCount = %o; totalCount = %o',
-                                arg1.status || 0, arg1.statusText || "", this.currentCount, this.totalCount);                  
+                                arg1.status || 0, arg1.statusText || "", this.currentCount, this.totalCount);
                             console.log('deleteSelected() response ETag: %o', arg1.getResponseHeader('ETag'));
-                        }
-                        else {
+                        } else {
                             console.log('deleteSelected() response (OK): currentCount = %o; totalCount = %o', this.currentCount, this.totalCount);
                         }
                     }
                     if (this.currentCount === this.totalCount) {
-                        this.grid.refresh();
+                        grid.refresh();
                         if (typeof this.onComplete === 'function') {
-                            this.onComplete.call(this.grid);
-                        }                  
+                            this.onComplete.call(grid);
+                        }
                     }
-                }
-                var scope = { grid: this, totalCount: iDeleteCount, currentCount: 0, onResponse: fnResponse, onComplete: callback || null };
+                };
+                var scope = { grid: grid, totalCount: iDeleteCount, currentCount: 0, onResponse: fnResponse, onComplete: callback || null };
                 for (var i = 0; i < selectedItems.length; i++) {
                     if (store.isItem(selectedItems[i])) {
                         store.deleteItem(selectedItems[i], scope);
                     }
                 }
+                store.clearCache();
             }
         },
-        cancelChanges : function() {
+        cancelChanges: function () {
             if (this.store && this.store.revert) {
                 this.store.revert();
                 this.markClean();
@@ -683,14 +943,18 @@ var config = {
             }
         },
         saveChanges: function (callback) {
-         
+            //grids onBlur event doesn't work as expected in IE9, have to actually click outside the grid to have the event fire, so in lieu of relying on that event we'll just apply here
+            if (this.exit) {
+                this.edit.apply();
+            }
+
             //Can be called from a listener on the page level save.  If the store is a proxy sdata store, it will not have a save function.
             if (!this.store.save) return;
 
             var iSaveCount = 0;
             for (var key in this.store.dirtyDataCache) {
                 if (key !== 'isDirty') {
-                    entity = this.store.dirtyDataCache[key];
+                    var entity = this.store.dirtyDataCache[key];
                     if (this.store.isItem(entity)) {
                         iSaveCount++;
                     }
@@ -700,21 +964,19 @@ var config = {
             var fnResponse = function (arg1, arg2) {
                 // "this.", within the scope of fnResponse(), refers to the scope object below.
                 this.currentCount = this.currentCount + 1;
-                if (typeof console !== 'undefined') {             
+                if (typeof console !== 'undefined') {
                     if (arg1 && typeof arg1 !== 'undefined' && arg1.getResponseHeader) {
                         console.log('saveChanges() response: (status = %o; statusText = %o): currentCount = %o; totalCount = %o',
-                            arg1.status || 0, arg1.statusText || "", this.currentCount, this.totalCount);                  
-                        console.log('saveChanges() response ETag: %o',arg1.getResponseHeader('ETag'));
-                    }
-                    else {
+                        arg1.status || 0, arg1.statusText || "", this.currentCount, this.totalCount);
+                        console.log('saveChanges() response ETag: %o', arg1.getResponseHeader('ETag'));
+                    } else {
                         if (arg1 && typeof arg1 !== 'undefined' && typeof arg1.$httpStatus === 'string') {
                             console.log('saveChanges() response ($httpStatus: %o; $key: %o; $descriptor: %o $etag: %o; $updated: %o): currentCount = %o; totalCount = %o',
-                                arg1.$httpStatus, arg1.$key || "", arg1.$descriptor, arg1.$etag, arg1.$updated, this.currentCount, this.totalCount);
-                        }
-                        else {
+                            arg1.$httpStatus, arg1.$key || "", arg1.$descriptor, arg1.$etag, arg1.$updated, this.currentCount, this.totalCount);
+                        } else {
                             console.log('saveChanges() response: (unknown status): currentCount = %o; totalCount = %o',
-                                this.currentCount, this.totalCount);
-                        }                 
+                            this.currentCount, this.totalCount);
+                        }
                     }
                 }
                 if (this.currentCount === this.totalCount) {
@@ -722,30 +984,42 @@ var config = {
                     this.grid.refresh();
                     if (typeof this.onComplete === 'function') {
                         this.onComplete.call(this.grid);
-                    }                  
+                    }
                 }
-            }
+            };
             var scope = { grid: this, totalCount: iSaveCount, currentCount: 0, onResponse: fnResponse, onComplete: callback || null };
             this.store.save(scope);
         },
-        markClean: function() {
-            dojo.style(dojo.byId(this.dirtyDataMsgID), 'display', 'none');
-            var bindingMgr = Sage.Services.getService('ClientBindingManagerService');
-            if (bindingMgr) {
-                bindingMgr.clearDirtyAjaxItem(this.id);
+        markClean: function () {
+            if (this.dirtyDataMsgID) {
+                var dirtyDataMsg = dojo.byId(this.dirtyDataMsgID);
+                if (dirtyDataMsg) {
+                    dojo.style(dojo.byId(this.dirtyDataMsgID), 'display', 'none');
+                }
+                var bindingMgr = Sage.Services.getService('ClientBindingManagerService');
+                if (bindingMgr) {
+                    bindingMgr.clearDirtyAjaxItem(this.id);
+                }
             }
         },
-        markDirty: function() {
-            dojo.style(dojo.byId(this.dirtyDataMsgID), 'display', 'inline');
+        markDirty: function () {
+            var node = dojo.byId(this.dirtyDataMsgID);
+            if (node) {
+                dojo.style(node, 'display', 'inline');
+            }
             var bindingMgr = Sage.Services.getService('ClientBindingManagerService');
             if (bindingMgr) {
                 bindingMgr.addDirtyAjaxItem(this.id);
             }
         },
-        refresh: function() {
+        refresh: function () {
+            if (!this.scroller) {
+                return;
+            }
             this._refresh();
-        }
-        
+            this.onRefresh();
+        },
+        onRefresh: function () { }
     });
-
-})();
+    return editableGrid;
+});

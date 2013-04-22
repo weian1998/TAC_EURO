@@ -49,8 +49,9 @@ namespace Sage.BusinessRules.CodeSnippets
 			if (appIdMapping != null)
 			{
 				appIdMapping.EncryptAccountingSystemPassword(form.txtPassword.Text);
+				appIdMapping.ValidateEndPoint();
+				appIdMapping.Save();
 			}
-			appIdMapping.Save();
         }
     }
 }

@@ -4,4 +4,5 @@
   <ServiceType>Sage.SalesLogix.Web.WebPickListService, Sage.SalesLogix.Web</ServiceType>
   <RegisterAs>Sage.SalesLogix.PickLists.IPickListService, Sage.SalesLogix.PickLists</RegisterAs>
   <Properties />
+  <Scope>Application</Scope>
 </PortalService>

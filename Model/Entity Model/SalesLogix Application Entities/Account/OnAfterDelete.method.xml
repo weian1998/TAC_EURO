@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="e0205bcf-4398-4439-8356-1ffc6bb26c1e" lastModifiedUtc="2007-08-09T21:19:32.1502061Z" name="OnAfterDelete" returnType="void" methodType="CrudEvent" actionType="None" returnMode="None" isInstance="false">
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="e0205bcf-4398-4439-8356-1ffc6bb26c1e" lastModifiedUtc="2007-08-09T21:19:32.1502061Z" name="OnAfterDelete" methodType="CrudEvent" actionType="None" returnMode="None">
+  <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
   </ExtendedPropertiesCollection>
@@ -11,7 +12,13 @@
       </ExtendedPropertiesCollection>
     </methodTarget>
   </preExecuteTargets>
-  <methodTargets />
+  <methodTargets>
+    <methodTarget id="7dc7d676-bfa3-4194-ab5a-6694a2a2c99b" lastModifiedUtc="2012-06-18T22:28:53.5527508Z" targetType="Sage.SalesLogix.Account.Rules, Sage.SalesLogix.BusinessRules" targetMethod="OnAfterDelete" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
   <postExecuteTargets />
   <postFlushTargets />
 </method>

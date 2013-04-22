@@ -1,0 +1,295 @@
+<html>
+    <head>
+        <title>Sage.UI.Controls Browser Tests</title>
+        <style type="text/css">
+        /* Hide dojo validation controls */
+        .dijitValidationContainer, .dijitBackgroundIframe {
+            visibility: hidden;
+        }
+        </style>
+        <link rel="stylesheet" type="text/css" href="../../../../../Libraries/dojo/dijit/themes/claro/claro.css" />
+        <script type="text/javascript" src="mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+
+        <script type="text/javascript" src="../../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript" src="../../../../../Libraries/sinon/sinon-1.3.4.js"></script>
+
+        <script type="text/javascript">
+            require([
+                "dojo/parser",
+                "doh",
+                "dojo/ready",
+                "dojo/_base/Deferred",
+                "Sage/Data/BaseSDataStore",
+                "Sage/UI/Controls/MultiSelectPickList",
+                "dojox/robot/recorder",// Press ctrl-alt-enter to start/stop recording
+                "dojo/robot"
+            ], function(
+                parser,
+                doh,
+                ready,
+                Deferred,
+                BaseSDataStore,
+                MultiSelectPickList
+            ) {
+                ready(function () {
+                    var pickListData = [
+                        {
+                            items: {
+                                '$resources': [
+                                    {
+                                        '$key': 1,
+                                        'code': 'MI',
+                                        'number': 1,
+                                        'text': 'Michigan'
+                                    },
+                                    {
+                                        '$key': 2,
+                                        'code': 'AZ',
+                                        'number': 2,
+                                        'text': 'Arizona'
+                                    }
+                                ]
+                            }
+                        }
+                    ];
+
+                    doh.register("Sage.UI.Controls.tests.MultiSelectPickList", [
+                        function testGetPickListDataDefault() {
+                            var store = sinon.stub(new BaseSDataStore()),
+                                pickList,
+                                def = new Deferred();
+
+                            pickList = new MultiSelectPickList({
+                                dataStore: store
+                            });
+
+                            pickList.getFromLocalStorage = function () {};
+                            pickList.saveToLocalStorage = function () {};
+
+                            pickList.getPickListData(def);
+                            store.fetch.yieldTo('onComplete', pickListData);
+
+                            def.then(function(d){
+                                // Sorting is enabled by default
+                                // Check that we got data back OK for this deferred and the first result is AZ.
+                                doh.t(d.items.$resources[0].code === 'AZ');
+                            });
+                        },
+                        function testMissingPicklist() {
+                            var store = sinon.stub(new BaseSDataStore()),
+                                pickList,
+                                def = new Deferred();
+
+                            pickList = new MultiSelectPickList({
+                                dataStore: store
+                            });
+
+                            pickList.getFromLocalStorage = function () {};
+                            pickList.saveToLocalStorage = function () {};
+
+                            pickList.getPickListData(def);
+                            store.fetch.yieldTo('onComplete', []);
+
+                            def.then(function(d){
+                                // We should get back a string with a message telling us the picklist does not exist.
+                                doh.t(typeof d === 'string');
+                            });
+                        },
+                        {
+                            name: 'testStoreAsId',
+                            timeout: 5000,
+                            setUp: function () {
+                                // Test store by id, used in return lookup dialogs.
+                                var store = sinon.stub(new BaseSDataStore()),
+                                    pickList,
+                                    def = new Deferred(),
+                                    val;
+
+                                
+                                pickList = new MultiSelectPickList({
+                                    dataStore: store,
+                                    storeMode: 'id',
+                                    clientId: 'pickListAsId',
+                                    getFromLocalStorage: function () {},
+                                    saveToLocalStorage: function () {}
+                                }, 'pickListAsId');
+
+                                pickList.getFromLocalStorage = function () {};
+                                pickList.saveToLocalStorage = function () {};
+
+                                store.fetch.yieldTo('onComplete', pickListData);
+                                pickList.startup();
+                                dojo.byId('pickListAsId-TextBox').focus();
+                            },
+                            runTest: function(){
+                                var d = new doh.Deferred();
+                                // Focus first button node
+                                doh.robot.keyPress(dojo.keys.TAB, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                
+                                // Open it
+                                doh.robot.keyPress(dojo.keys.ENTER, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                
+                                doh.robot.keyPress(dojo.keys.SPACE, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                doh.robot.keyPress(dojo.keys.TAB, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                doh.robot.keyPress(dojo.keys.SPACE, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                
+                                doh.robot.keyPress(dojo.keys.TAB, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                doh.robot.keyPress(dojo.keys.ENTER, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                
+                                doh.robot.sequence(function(){
+                                    var node = dojo.byId('pickListAsId_Text');
+                                    if(node.value === 'Arizona, Michigan'){
+                                         d.callback(true);
+                                    }else{
+                                         d.errback(new Error('pickListAsId did not return the right code in the hidden input.'));
+                                    }
+                                }, 1000);
+                                return d;
+                             }
+                         },
+                         {
+                            name: 'testStoreAsText',
+                            timeout: 5000,
+                            setUp: function () {
+                                // Test store by id, used in return lookup dialogs.
+                                var store = sinon.stub(new BaseSDataStore()),
+                                    pickList,
+                                    def = new Deferred(),
+                                    val;
+
+                                pickList = new MultiSelectPickList({
+                                    dataStore: store,
+                                    storeMode: 'text',
+                                    clientId: 'pickListAsText',
+                                    getFromLocalStorage: function () {},
+                                    saveToLocalStorage: function () {}
+                                }, 'pickListAsText');
+
+                                pickList.getFromLocalStorage = function () {};
+                                pickList.saveToLocalStorage = function () {};
+                                
+                                store.fetch.yieldTo('onComplete', pickListData);
+
+                                pickList.startup();
+                                dojo.byId('pickListAsText-TextBox').focus();
+                            },
+                            runTest: function(){
+                                
+                                var d = new doh.Deferred();
+                                // Focus first button node
+                                doh.robot.keyPress(dojo.keys.TAB, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                
+                                // Open it
+                                doh.robot.keyPress(dojo.keys.ENTER, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                
+                                doh.robot.keyPress(dojo.keys.SPACE, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                doh.robot.keyPress(dojo.keys.TAB, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                doh.robot.keyPress(dojo.keys.SPACE, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                
+                                doh.robot.keyPress(dojo.keys.TAB, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                doh.robot.keyPress(dojo.keys.ENTER, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                
+                                doh.robot.sequence(function(){
+                                    var node = dojo.byId('pickListAsText_Text');
+                                    if(node.value === 'Arizona, Michigan'){
+                                         d.callback(true);
+                                    }else{
+                                         d.errback(new Error('pickListAsText did not return the right text value in the hidden input.'));
+                                    }
+                                }, 1000);
+                                return d;
+                             }
+                         },
+                         {
+                            name: 'testItemMustExist',
+                            timeout: 5000,
+                            setUp: function () {
+                                // Test store by id, used in return lookup dialogs.
+                                var store = sinon.stub(new BaseSDataStore()),
+                                    pickList,
+                                    def = new Deferred(),
+                                    val;
+
+                                pickList = new MultiSelectPickList({
+                                    dataStore: store,
+                                    storeMode: 'text',
+                                    clientId: 'pickListItemMustExist',
+                                    itemMustExist: true,
+                                    getFromLocalStorage: function () {},
+                                    saveToLocalStorage: function () {}
+                                }, 'pickListItemMustExist');
+
+                                pickList.getFromLocalStorage = function () {};
+                                pickList.saveToLocalStorage = function () {};
+
+                                store.fetch.yieldTo('onComplete', pickListData);
+                                pickList.startup();
+                                
+                                dojo.byId('pickListItemMustExist-TextBox').focus();
+                            },
+                            runTest: function(){
+                                var d = new doh.Deferred();
+                                
+                                // Focus first button node
+                                doh.robot.keyPress(dojo.keys.TAB, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                
+                                // Open it
+                                doh.robot.keyPress(dojo.keys.ENTER, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                
+                                doh.robot.keyPress(dojo.keys.SPACE, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                doh.robot.keyPress(dojo.keys.TAB, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                doh.robot.keyPress(dojo.keys.SPACE, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                
+                                doh.robot.keyPress(dojo.keys.TAB, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                doh.robot.keyPress(dojo.keys.ENTER, 100, {'shift':false, 'ctrl':false, 'alt':false});
+                                
+                                doh.robot.sequence(function(){
+                                    var node = dojo.byId('pickListItemMustExist_Text');
+                                    if(node.value === 'Arizona, Michigan'){
+                                         d.callback(true);
+                                    }else{
+                                         d.errback(new Error('pickListItemMustExist did not return the right code in the hidden input.'));
+                                    }
+                                }, 1000);
+                                return d;
+                             }
+                         }
+                    ]);
+
+                    //Execute D.O.H. in this remote file.
+                    doh.run();
+                });
+            });
+
+        </script>
+    </head>
+    <body class="claro">
+        <form>
+            <!-- PickList storeMode as Text -->
+            <span>storeMode: text</span>
+            <input id="pickListAsText_Text" type="hidden" />
+            <input id="pickListAsText_Code" type="hidden" />
+            <div id="pickListAsText"></div>
+            
+            <!-- PickList storeMode as ID -->
+            <span>storeMode: id<span>
+            <input id="pickListAsId_Text" type="hidden" />
+            <input id="pickListAsId_Code" type="hidden" />
+            <div id="pickListAsId"></div>
+            
+            <!-- Item Must Exist -->
+            <span>storeMode: text, ItemMustExist: true<span>
+            <input id="pickListItemMustExist_Text" type="hidden" />
+            <input id="pickListItemMustExist_Code" type="hidden" />
+            <div id="pickListItemMustExist"></div>
+        </form>
+    </body>
+</html>

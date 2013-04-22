@@ -96,20 +96,20 @@
         </td>
     </tr>
     <tr>
-        <td colspan="2" style="padding:5px 0px;">
+        <td colspan="2">
             <hr />
         </td>
     </tr>
     <tr>
-        <td >  
+        <td>  
             <span class="lbl">
                 <asp:Label ID="lblSendTicketEmail_EmailType" Text="<%$ resources: lblSendTicketEmail_EmailType.Caption %>" runat="server"></asp:Label>
             </span>
         </td>
     </tr>
     <tr>
-        <td >   
-            <span >
+        <td>   
+            <span>
                 <asp:RadioButtonList runat="server" ID="rdgEmailType" >
                     <asp:ListItem Selected="true" Text="<%$ resources: lstOption_TicketInfo.Caption %>" Value="Ticket Info" />
                     <asp:ListItem Text="<%$ resources: lstOption_None.Caption %>" Value="None" />
@@ -118,18 +118,17 @@
         </td>
     </tr>
     <tr>
-        <td colspan="2" style="padding:5px 0px;">
+        <td colspan="2">
             <hr />
         </td>
     </tr>
     <tr>
-        <td >  
-            &nbsp;
-        </td>
+        <td></td>
         <td>
-            <span >
-                <asp:Button Width=80 runat="server" ID="cmdSendEmail" Text="<%$ resources: cmdSendEmail.Caption %>" UseSubmitBehavior="false" />
-            </span>
+            <asp:Panel runat="server" ID="QFControlsList" CssClass="controlslist qfActionContainer">
+                <asp:Button runat="server" ID="cmdSendEmail" Text="<%$ resources: cmdSendEmail.Caption %>" CssClass="slxbutton" />
+                <asp:Button runat="server" ID="btnCancel" Text="<%$ resources: btnCancel.Caption %>" CssClass="slxbutton" />
+            </asp:Panel>
         </td>
     </tr>
 </table>

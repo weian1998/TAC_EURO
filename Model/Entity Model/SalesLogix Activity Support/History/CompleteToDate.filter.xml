@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0"?>
-<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="d65f3f7f-f1b1-4ee3-b0e5-fc6c8249feb7" lastModifiedUtc="2010-04-22T16:34:27.2239603Z" filterName="CompleteToDate" propertyName="CompletedDate" analyticsAvailable="true" characters="0">
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="d65f3f7f-f1b1-4ee3-b0e5-fc6c8249feb7" lastModifiedUtc="2012-02-22T18:38:36.8128082Z" filterName="CompleteToDate" propertyName="CompletedDate" analyticsAvailable="true" characters="0">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRangeEntityFilter" />
   </ExtendedPropertiesCollection>
-  <ranges id="f126263a-2007-4359-ba76-44db56ce67dc" rangeName="Today" lower=":today" upper=":today" />
-  <ranges id="e4921215-9ddf-45de-8d6f-6ce0627d32ff" rangeName="WeekToDate" lower=":thisweekstart" upper=":today" />
-  <ranges id="cc809764-f77e-4a14-a9d1-14134e3ec7ea" rangeName="MonthToDate" lower=":thismonthstart" upper=":today" />
-  <ranges id="43e586fa-38d4-446f-9e65-fe47b926e144" rangeName="QuarterToDate" lower=":thisquarterstart" upper=":today" />
-  <ranges id="098fd063-4000-4f6c-b160-8a7b5abb415d" rangeName="YearToDate" lower=":thisyearstart" upper=":today" />
+  <ranges id="f126263a-2007-4359-ba76-44db56ce67dc" rangeName="Today" lower=":todaystart" upper=":todayend" />
+  <ranges id="e4921215-9ddf-45de-8d6f-6ce0627d32ff" rangeName="WeekToDate" lower=":thisweekstart" upper=":todayend" />
+  <ranges id="cc809764-f77e-4a14-a9d1-14134e3ec7ea" rangeName="MonthToDate" lower=":thismonthstart" upper=":todayend" />
+  <ranges id="43e586fa-38d4-446f-9e65-fe47b926e144" rangeName="QuarterToDate" lower=":thisquarterstart" upper=":todayend" />
+  <ranges id="098fd063-4000-4f6c-b160-8a7b5abb415d" rangeName="YearToDate" lower=":thisyearstart" upper=":todayend" />
 </entityFilter>

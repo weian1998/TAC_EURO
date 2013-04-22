@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="phFax.Caption" xml:space="preserve">
     <value>Fax:</value>
@@ -188,5 +188,23 @@
   </data>
   <data name="txtCompany.Caption" xml:space="preserve">
     <value>Company:</value>
+  </data>
+  <data name="addrWork.AddressToolTip" xml:space="preserve">
+    <value>MapQuest</value>
+  </data>
+  <data name="addrWork.ButtonToolTip" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="addrHome.AddressToolTip" xml:space="preserve">
+    <value>MapQuest</value>
+  </data>
+  <data name="addrHome.ButtonToolTip" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="dtPBirthDate.ButtonToolTip" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
+  <data name="dtpHireDate.ButtonToolTip" xml:space="preserve">
+    <value>Calendar</value>
   </data>
 </root>

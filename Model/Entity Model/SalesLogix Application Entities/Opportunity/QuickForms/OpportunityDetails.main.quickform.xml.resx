@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="cmdSave.Caption" xml:space="preserve">
     <value>Save</value>
@@ -162,20 +162,41 @@
   <data name="lueAccount.LookupProperties.Status.PropertyHeader" xml:space="preserve">
     <value>Status</value>
   </data>
-  <data name="lueReseller.LookupProperties.AccountManager.UserName.PropertyHeader" xml:space="preserve">
-    <value>AccountManager UserName (User Name)</value>
-  </data>
   <data name="lueReseller.Caption" xml:space="preserve">
-    <value>EndUser/Client/Contractor:</value>
+    <value>Reseller:</value>
+  </data>
+  <data name="lueReseller.LookupProperties.AccountName.PropertyHeader" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="lueReseller.LookupProperties.Address.City.PropertyHeader" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="lueReseller.LookupProperties.Address.State.PropertyHeader" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="lueReseller.LookupProperties.MainPhone.PropertyHeader" xml:space="preserve">
+    <value>Main Phone</value>
   </data>
   <data name="lueReseller.LookupProperties.Type.PropertyHeader" xml:space="preserve">
     <value>Type</value>
+  </data>
+  <data name="lueReseller.LookupProperties.Status.PropertyHeader" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="lueReseller.LookupProperties.AccountManager.UserName.PropertyHeader" xml:space="preserve">
+    <value>Acct Manager</value>
+  </data>
+  <data name="lueReseller.LookupProperties.Owner.CreateUser.PropertyHeader" xml:space="preserve">
+    <value>Owner</value>
   </data>
   <data name="pklCloseProbability.Caption" xml:space="preserve">
     <value>Close Probability:</value>
   </data>
   <data name="pklStatus.Caption" xml:space="preserve">
     <value>Status:</value>
+  </data>
+  <data name="usrUser.Caption" xml:space="preserve">
+    <value>Acct. Mgr.:</value>
   </data>
   <data name="cmdReset.Caption" xml:space="preserve">
     <value>Reset</value>
@@ -199,28 +220,31 @@
     <value>Owner</value>
   </data>
   <data name="lueReseller.LookupProperties.SubType.PropertyHeader" xml:space="preserve">
-    <value>SubType (Sub Type)</value>
+    <value>Sub-Type</value>
   </data>
-  <data name="lueReseller.LookupProperties.Status.PropertyHeader" xml:space="preserve">
-    <value>Status</value>
+  <data name="lueReseller.LookupProperties.AccountManager.UserInfo.UserName.PropertyHeader" xml:space="preserve">
+    <value>Acct Manager</value>
   </data>
-  <data name="lueReseller.LookupProperties.MainPhone.PropertyHeader" xml:space="preserve">
-    <value>MainPhone (Main Phone)</value>
+  <data name="lueReseller.LookupProperties.Owner.Description.PropertyHeader" xml:space="preserve">
+    <value>Owner</value>
   </data>
   <data name="lueAccount.LookupProperties.AccountManager.UserInfo.UserName.PropertyHeader" xml:space="preserve">
     <value>Acct Manager</value>
   </data>
-  <data name="lueReseller.LookupProperties.Address.State.PropertyHeader" xml:space="preserve">
-    <value>Address State</value>
+  <data name="lueReseller.LookupProperties.Owner.OwnerDescription.PropertyHeader" xml:space="preserve">
+    <value>Owner</value>
   </data>
-  <data name="lueReseller.LookupProperties.Address.City.PropertyHeader" xml:space="preserve">
-    <value>Address City</value>
+  <data name="lueReseller.LUPF.SubType" xml:space="preserve">
+    <value>Reseller</value>
   </data>
   <data name="lueAccount.ButtonToolTip" xml:space="preserve">
     <value>Find</value>
   </data>
-  <data name="lueReseller.LookupProperties.AccountName.PropertyHeader" xml:space="preserve">
-    <value>AccountName (Account Name)</value>
+  <data name="usrUser.ButtonToolTip" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="lueReseller.ButtonToolTip" xml:space="preserve">
+    <value>Find</value>
   </data>
   <data name="dtpEstimatedClose.ButtonToolTip" xml:space="preserve">
     <value>Calendar</value>
@@ -273,13 +297,10 @@
   <data name="luePriceList.LookupDialogTitle" xml:space="preserve">
     <value>Lookup Price List</value>
   </data>
-  <data name="SalesPotential.Caption" xml:space="preserve">
-    <value>Sales Potential</value>
+  <data name="cmdCopyOpportunity.Caption" xml:space="preserve">
+    <value>Copy Opportunity</value>
   </data>
-  <data name="lueAcctManager.LookupProperties.Username.PropertyHeader" xml:space="preserve">
-    <value>Username</value>
-  </data>
-  <data name="lueAcctManager.Caption" xml:space="preserve">
-    <value>Acct. Manager:</value>
+  <data name="cmdCopyOpportunity.ToolTip" xml:space="preserve">
+    <value>Copy</value>
   </data>
 </root>

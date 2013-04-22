@@ -16,7 +16,7 @@
     </tr>      
 </table>
 
-<asp:Panel runat="server" ID="pnlMatches" BorderStyle="Solid" BorderWidth="1px" BorderColor="#99BBE8" Width="99%">
+<asp:Panel runat="server" ID="pnlMatches" class="Bevel" Width="99%">
     <table cellpadding="1" cellspacing="0" class="formtable" style="width:100%">
         <col width="2%" /><col width="18%" /><col width="18%" /><col width="62%" />
         <tr>

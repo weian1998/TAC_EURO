@@ -7,8 +7,10 @@
   <InheritsFrom>Sage.Platform.WebPortal.WebPortalPage, Sage.Platform.WebPortal</InheritsFrom>
   <Properties />
   <TemplateProperties>
-    <Property Name="IncludeTaskPane" TypeConverter="">False</Property>
+    <Property Name="IncludeTaskPane" TypeConverter="">True</Property>
   </TemplateProperties>
   <IsDefaultPage>false</IsDefaultPage>
   <ExcludedGlobalModules />
+  <AppliedSecurity />
+  <IncludeScript />
 </PortalPage>

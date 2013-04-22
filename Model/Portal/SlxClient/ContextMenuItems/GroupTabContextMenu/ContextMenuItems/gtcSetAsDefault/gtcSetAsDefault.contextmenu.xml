@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="cdf61a51-c47d-466d-81f8-ac376e4a3b81">
+  <ItemId>gtcSetAsDefault</ItemId>
+  <NavUrl>javascript:Sage.Groups.GroupManager.SetDefault('${groupId}', '${groupName}', '${family}')</NavUrl>
+  <LargeImageUrl />
+  <SmallImageUrl />
+  <ContextMenuId />
+  <Target />
+  <AppliedSecurity />
+</MenuDropDownItem>

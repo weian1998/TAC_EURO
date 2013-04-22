@@ -1,13 +1,13 @@
-﻿<%@ Import Namespace="Sage.Platform.SData" %>
+<%@ Import Namespace="Sage.Platform.Application.Services" %>
 <%@ Import Namespace="Sage.Platform.WebPortal"%>
 <%@ Import namespace="Sage.Platform.Application.UI.Web"%>
 <%@ Import namespace="Sage.Platform.Application.UI"%>
 <%@ Import namespace="Sage.SalesLogix"%>
+<%@ Import namespace="Sage.Platform.Utility"%>
 <%@ Import namespace="Sage.Platform.Application"%>
 <%@ Import namespace="Sage.Platform.Security"%>
 <%@ Import namespace="Sage.Entity.Interfaces"%>
 <%@ Master Language="C#" %>
-<%@ Register Assembly="Sage.SalesLogix.Client.GroupBuilder" Namespace="Sage.SalesLogix.Client.GroupBuilder.Controls" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.Client.GroupBuilder" Namespace="Sage.SalesLogix.Client.GroupBuilder" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.Platform.WebPortal" Namespace="Sage.Platform.WebPortal.SmartParts" TagPrefix="smartParts" %>
 <%@ Register Assembly="Sage.Platform.WebPortal" Namespace="Sage.Platform.WebPortal.Workspaces" TagPrefix="workSpace" %>
@@ -60,7 +60,6 @@
         get { return TaskPane.Visible; }
         set { TaskPane.Visible = value; }
     }
-
     [System.ComponentModel.Browsable(false)]
     public override string ID
     {
@@ -80,43 +79,6 @@
     {
         get { return base.MasterPageFile; }
         set { base.MasterPageFile = value; }
-    }
-
-    public string HelpLink
-    {
-        get
-        {
-            string cacheKey = "HelpLink";
-            if (Cache[cacheKey] == null)
-            {
-                PageLink pageLink = new PageLink();
-                pageLink.LinkType = enumPageLinkType.HelpFileName;
-                pageLink.NavigateUrl = "Help";
-                pageLink.Target = "MCWebHelp";
-
-                Cache.Insert(cacheKey, pageLink.GetWebHelpLink().Url);
-            }
-
-            return Cache[cacheKey].ToString();
-        }
-    }
-
-    public string HelpAboutLink
-    {
-        get
-        {
-            string cacheKey = "HelpAboutLink";
-            if (Cache[cacheKey] == null)
-            {
-                PageLink pageLink = new PageLink();
-                pageLink.LinkType = enumPageLinkType.HelpFileName;
-                pageLink.NavigateUrl = "slxthirdparty";
-
-                Cache.Insert(cacheKey, pageLink.GetWebHelpLink().Url);
-            }
-
-            return Cache[cacheKey].ToString();
-        }
     }
 
     private bool _UseAutoLogoff = true;
@@ -144,71 +106,23 @@
             }
         }
     }
+    
     protected void Page_Load(object sender, EventArgs e)
     {
-        ClientGroupContextService clientGroupContext = new ClientGroupContextService();
-        Page.Form.Controls.Add(clientGroupContext);
+        Page.Form.Controls.Add(new ClientGroupContextService());
         if (Page.IsPostBack)
             return;
-            
-        System.Globalization.CultureInfo currentCulture = System.Globalization.CultureInfo.CurrentUICulture;
-        string extCultureScript = @"<script pin=""pin"" type=""text/javascript"" src=""Libraries/ext/source/locale/ext-lang-{0}.js""><" + @"/script>";
-        string extCulturePath = "~/Libraries/ext/source/locale/ext-lang-{0}.js";
-        if (System.IO.File.Exists(Server.MapPath(String.Format(extCulturePath, currentCulture.Name.Replace("-", "_")))))
-            Page.Header.Controls.Add(new LiteralControl(String.Format(extCultureScript, currentCulture.Name.Replace("-", "_"))));
-        else if (currentCulture.Parent != null && System.IO.File.Exists(Server.MapPath(String.Format(extCulturePath, currentCulture.Parent.Name))))
-            Page.Header.Controls.Add(new LiteralControl(String.Format(extCultureScript, currentCulture.Parent.Name)));
 
-        // used for common tasks created as part of the morpheus bundle
-        AddLocalizedScript(@"jscript/sage-common/sharedtasks.resources.{0}.js", currentCulture.TwoLetterISOLanguageName, "en");
-        AddLocalizedScript(@"jscript/sage-controls/sage-controls-tasklet.resources.{0}.js", currentCulture.TwoLetterISOLanguageName, "en");
-        // end morpheus bundle common task scripts
-        
         // Just used to create the Write menu now.
-        Page.Header.Controls.Add(new Sage.SalesLogix.Client.MailMerge.MailMergeInitControl()); 
-           
-        // sage-mailmerge-loader.js
-        var oMailMergeScript = new HtmlGenericControl("script");
-        oMailMergeScript.Attributes.Add("type", "text/javascript");
-        string sMailMergeJs = string.Format("jscript/sage-mailmerge/sage-mailmerge-loader{0}.js", (HttpContext.Current.IsDebuggingEnabled) ? "-debug" : "");
-        oMailMergeScript.Attributes.Add("src", sMailMergeJs);
-        oMailMergeScript.Attributes.Add("id", "sage_mailmerge_loader");
-        Page.Header.Controls.Add(oMailMergeScript);        
-        
-        //const string TestScript = "<script type='text/javascript' src='jscript/sage-mailmerge/sage-mailmerge-test.js'><" + "/script>";
-        //Page.Header.Controls.Add(new LiteralControl(TestScript));        
-
-            AddSalesProcessScript();
-
-        Sage.SalesLogix.WebUserOptions.GeneralSearchOptions options = Sage.SalesLogix.WebUserOptions.GeneralSearchOptions.Load(Server.MapPath(@"App_Data\LookupValues"));
-        _UseAutoLogoff = options.AutoLogoff;
-        _AutoLogoffDuration = options.LogoffDuration;
-
-        Page.Header.Controls.Add(new Sage.SalesLogix.Client.Reports.Helper.ReportsControl());
-        AddTimelineLibrary();
+        Page.Header.Controls.Add(new Sage.SalesLogix.Client.MailMerge.MailMergeInitControl());
         Page.Form.Controls.Add(new ClientAppIdMappingService());
+          
+        AddTimelineLibrary();
+        InitAutoLogout();
+        Page.Header.DataBind();
+        AlarmButton.Text = BuildAlarmButtonTag();
     }
-    private void AddSalesProcessScript()
-    {
-        try
-        {
-            if (Page.Request.Url.Segments.Length < 3)
-            {
-                return;
-            }
-            string urlPath = Page.Request.Url.Segments[2];
-            if (urlPath.Equals("Opportunity.aspx"))
-            {
-                const string spJavaScript = "<script type='text/javascript' src='jscript/spMailMerge.js'><" + "/script>";
-                Page.Header.Controls.Add(new LiteralControl(spJavaScript));
-            }
-        }
-        catch 
-        { 
-        
-        }
-    } 
- 
+
     private void AddTimelineLibrary()
     {
         // Load this BEFORE jQuery libraries
@@ -242,83 +156,455 @@
             }
 
             Page.Title = GetLocalResourceObject("PageTitle").ToString();
+
+            try
+            {
+                var context = Sage.Platform.Application.ApplicationContext.Current.Services.Get<IContextService>(true);
+
+                var tz = (Sage.Platform.TimeZone)context.GetContext("TimeZone");
+
+                string uid = ApplicationContext.Current.Services.Get<IUserService>().UserId.Trim();
+
+                IUser u = Sage.Platform.EntityFactory.GetById<IUser>(uid);
+                if (u != null)
+                {
+                    if (tz == null || u.UserInfo.TimeZone != tz.KeyName)
+                    {
+                        Sage.Platform.TimeZones tzs = null;
+                        if (tz == null)
+                        {
+                            tzs = new Sage.Platform.TimeZones();
+                            tz = tzs.CurrentTimeZone;
+                        }
+                        if (u.UserInfo.TimeZone == null)
+                        {
+                            u.UserInfo.TimeZone = tz.KeyName;
+                            u.Save();
+                        }
+                        else
+                        {
+                            if (tzs == null)
+                            {
+                                tzs = new Sage.Platform.TimeZones();
+                            }
+                            var userTimeZone = tzs.FindTimeZone(u.UserInfo.TimeZone);
+
+                            // If the Offsets match, use the User's TimeZone
+                            if (DoTimeZoneOffsetsMatch(userTimeZone, tz))
+                            {
+                                context.SetContext("TimeZone", userTimeZone);
+                            }
+                            else // Should no match be setting the User's TimeZone?
+                            {
+                                u.UserInfo.TimeZone = tz.KeyName;
+                                u.Save();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType).Error(String.Format("TimeZone: Failed to set timezone: {0}", ex.Message), ex);
+            }
         }
     }
 
-    protected void Search1_Click(object sender, ImageClickEventArgs e)
+    private bool DoTimeZoneOffsetsMatch(Sage.Platform.TimeZone tz1, Sage.Platform.TimeZone tz2)
     {
-        if (SearchText.Text != GetLocalResourceObject("SpeedSearch").ToString())
+        if(tz1.Bias == tz2.Bias)
         {
-            IContextService context =
-                Sage.Platform.Application.ApplicationContext.Current.Services.Get<IContextService>(true);
-            context.SetContext("SearchRequestText", SearchText.Text);
+            return true;
         }
-        Response.Redirect("SpeedSearch.aspx");
+
+        return false;
     }
 
-</script>
+    protected string GetSaveMsgSystemOption()
+    {
+        var systemInfo = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.SalesLogix.Services.ISystemOptionsService>(true);
+        return systemInfo.SendSlxSaveMSGFiles ? "true" : "false";
+    }
+    protected string GetFileUploadOptions()
+    {
+        int maxLength = 1000000;
+        Configuration config = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
+        var configSection = config.GetSection("system.web/httpRuntime") as System.Web.Configuration.HttpRuntimeSection;
+        if (configSection != null)
+        {
+            maxLength = configSection.MaxRequestLength * 1024;
+        }
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1" runat="server">
-	<title>Sage SalesLogix</title>
-    <%--CSS--%>
-    <link rel="stylesheet" type="text/css" href="~/css/YUI/fonts.css" />
-    <link rel="stylesheet" type="text/css" href="~/css/YUI/reset.css" />
-    <link rel="stylesheet" type="text/css" href="~/Libraries/ext/resources/css/ext-all.css" /> 
-    <link rel="stylesheet" type="text/css" href="~/css/YUI/container.css" />
-    <link rel="stylesheet" type="text/css" href="~/css/sage-styles.css" />      
-          
-    <script pin="pin" type="text/javascript" src="Libraries/jQuery/jquery.js"></script>
-    <script pin="pin" type="text/javascript" src="Libraries/jQuery/jquery.selectboxes.js"></script>
-    <script pin="pin" type="text/javascript" src="Libraries/jQuery/jquery-ui.js"></script>
-    <link rel="stylesheet" type="text/css" href="~/Libraries/dojo/1.5/dijit/themes/claro/claro.css" />
-    <link rel="stylesheet" type="text/css" href="~/Libraries/dojo/1.5/dojox/grid/resources/grid.css" />
-    <link rel="stylesheet" type="text/css" href="~/Libraries/dojo/1.5/dojox/grid/resources/claroGrid.css" />
-    <link rel="stylesheet" type="text/css" href="~/Libraries/dojo/1.5/dojox/grid/enhanced/resources/claroEnhancedGrid.css" />      
-    <script pin="pin" type="text/javascript" src="Libraries/ext/adapter/jquery/ext-jquery-adapter.js"></script>
-    <script pin="pin" type="text/javascript" src="Libraries/ext/ext-all.js"></script>
-    <script pin="pin" type="text/javascript" src="Libraries/ext/ext-paging-tree-loader.js"></script>
-    <script pin="pin" type="text/javascript" src="Libraries/ext/ext-tablegrid.js"></script>
-    <script pin="pin" type="text/javascript" src="Libraries/Ext/ux/ext-ux-combined.js"></script>
-    <script pin="pin" type="text/javascript" src="Libraries/ext/ext-overrides.js"></script>
+        string options = "{" + string.Format("maxFileSize:{0}", maxLength) + "}";
+        return options;
+    }
+    protected string GetDragDropOptions()
+    {
+        string allowDetailDragDrop = GetAllowDragDrop("Detail")  ? "true" : "false";
+        string allowListDragDrop = GetAllowDragDrop("List") ? "true" : "false";
+        string options = "{" + string.Format("tabWorkSpaceID:'{0}',allowDetailDragDrop:{1}, allowListDragDrop:{2}", TabControl.ID, allowDetailDragDrop,allowListDragDrop) + "}";
+        return options;
+    }
+    protected bool GetAllowDragDrop(string uiMode) {
 
-    <script pin="pin" type="text/javascript" src="jscript/YUI/yui-combined-min.js"></script>
+        if (uiMode != null)
+        {
+            if (uiMode.ToUpper() == "DETAIL")
+            {
+                return true;
+            }
+            if (uiMode.ToUpper() == "LIST")
+            {
+                return false;
+            }
+        }
+        return false;
+    }
     
+    protected string GetDefaultDropOptions()
+    {
+        
+        var systemInfo = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.SalesLogix.Services.ISystemOptionsService>(true);
+        string saveMsgFiles = systemInfo.SendSlxSaveMSGFiles ? "true" : "false";
+        string options = "{" + string.Format("tabWorkspaceId:'{0}', saveMSGFiles:{1}", TabControl.ID, saveMsgFiles) + "}";
+        return options;
+    }
+    protected string BuildAlarmButtonTag()
+    {
+        return string.Format("<div data-dojo-type=\"Sage.UI.Alarms.AlarmButton\" id=\"AlarmButton\" data-dojo-props=\"pollInterval:{0}\"></div>", Global.AlarmPollInterval);
+    }
+
+    private void InitAutoLogout()
+    {
+        var userOptions = ApplicationContext.Current.Services.Get<IUserOptionsService>();
+        if (userOptions != null)
+        {
+            var sUseAutoLogoff = userOptions.GetCommonOption("USEAUTOLOGOFF", "GENERAL");
+            if (!string.IsNullOrEmpty(sUseAutoLogoff))
+            {
+                this._UseAutoLogoff = StringUtility.IsTrueValueString(sUseAutoLogoff);
+            }
+            var sAutoLogoffDuration = userOptions.GetCommonOption("LOGOFFDURATION", "GENERAL");
+            int iValue;
+            if (int.TryParse(sAutoLogoffDuration, out iValue))
+            {
+                this._AutoLogoffDuration = iValue;
+            }
+        }
+    }    
+    
+</script>
+<html>
+<head id="Head1" runat="server">
+    <%-- IE Should use the latest version available  --%>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    
+    <title>Sage SalesLogix</title>
+    
+    <!-- dojo -->
+    <link rel="stylesheet" type="text/css" href="~/Libraries/dojo/dijit/themes/claro/claro.css" />
+    <link rel="stylesheet" type="text/css" href="~/Libraries/dojo/dojox/grid/enhanced/resources/claroEnhancedGrid.css" />  
+
+    <%--DHTMLX Scheduler Libraries  --%>
+    <link href="~/Libraries/dhtmlxScheduler_v30/dhtmlxscheduler.css" rel="stylesheet" type="text/css" />
+
+    <%-- un-comment this block to use seperate style sheets
+    <link rel="stylesheet" type="text/css" href="~/css/SlxBase.css" /> 
+    <link rel="stylesheet" type="text/css" href="~/css/quickform.css" /> 
+    <link rel="stylesheet" type="text/css" href="~/css/sage-controls.css" /> 
+    <link rel="stylesheet" type="text/css" href="~/css/sage-platform.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/sageStyles.css" />  
+    <link rel="stylesheet" type="text/css" href="~/css/layout.css"/>  
+    <link rel="stylesheet" type="text/css" href="~/css/library.css" /> 
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="~/css/layout-ie.css" />
+    <![endif]--> 
+    <link rel="stylesheet" type="text/css" href="~/css/theme.css"/>
+    <link rel="stylesheet" type="text/css" href="~/css/design.css"/>
+    <link rel="stylesheet" type="text/css" href="~/css/Global_Images.css"/>--%>
+    
+    
+    <%-- comment these two styles out if using seperate style sheets above--%>  
+    <link rel="stylesheet" type="text/css" href="~/css/sage-styles.css" />
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="~/css/layout-ie.css" />
+    <![endif]--> 
+
     <%-- DoJo Library --%>
     <script pin="pin" type="text/javascript">
-        var djConfig = {
-            modulePaths: { 'Sage' : '../../../../jscript/Sage' }
-        }
+        var errorHandlerConfig = {
+            isDebug: <%# Sage.Platform.Diagnostics.ErrorHelper.IsDevelopmentContext(Request).ToString(System.Globalization.CultureInfo.InvariantCulture).ToLowerInvariant() %>,            
+                preemption: {
+                enabled: <%# Sage.Platform.Diagnostics.ErrorHelper.AjaxPreemptionEnabled().ToString(System.Globalization.CultureInfo.InvariantCulture).ToLowerInvariant() %>,
+                allowAuthRedirect: <%# Sage.Platform.Diagnostics.ErrorHelper.AjaxPreemptionAllowAuthRedirect().ToString(System.Globalization.CultureInfo.InvariantCulture).ToLowerInvariant() %>,
+                handledStatusCodes: <%# String.Format("'{0}'", String.Join(",", Sage.Platform.Diagnostics.ErrorHelper.AjaxPreemptionHandledStatusCodes())) %>,
+                showPreemptedErrorMsg: <%# Sage.Platform.Diagnostics.ErrorHelper.AjaxPreemptionShowPreemptedErrorMsg().ToString(System.Globalization.CultureInfo.InvariantCulture).ToLowerInvariant() %>,
+                showInternalServerErrorMsg: <%# Sage.Platform.Diagnostics.ErrorHelper.AjaxPreemptionShowInternalServerErrorMsg().ToString(System.Globalization.CultureInfo.InvariantCulture).ToLowerInvariant() %>,
+                showUnhandledMessagingServiceExceptionMsg: <%# Sage.Platform.Diagnostics.ErrorHelper.AjaxPreemptionShowUnhandledMessagingServiceExceptionMsg().ToString(System.Globalization.CultureInfo.InvariantCulture).ToLowerInvariant() %>
+            },
+            authenticationRedirectUrl: <%# String.Format("'{0}'", Sage.Platform.Diagnostics.ErrorHelper.GetLoginRedirectUrl()) %>,
+            showExtendedValidationException: <%# Sage.Platform.Diagnostics.ErrorHelper.CanShowExtendedExceptionInfo(Sage.Platform.Diagnostics.ErrorHelper.ExceptionKind.ValidationException).ToString(System.Globalization.CultureInfo.InvariantCulture).ToLowerInvariant() %>,
+            showExtendedRoleAccessDeniedException: <%# Sage.Platform.Diagnostics.ErrorHelper.CanShowExtendedExceptionInfo(Sage.Platform.Diagnostics.ErrorHelper.ExceptionKind.RoleAccessDeniedException).ToString(System.Globalization.CultureInfo.InvariantCulture).ToLowerInvariant() %>
+        };   
+        var dojoConfig = {
+            parseOnLoad: true,
+            async: true,
+            isDebug: false,
+            locale: '<%# Global.Locale %>',
+            paths: { 'Sage': '../../../jscript/Sage' },
+            deferredOnError: function (e) {
+                if (dojo.config.isDebug) {
+                }
+            }
+        };
     </script>
-    <script pin="pin" type="text/javascript" src="Libraries/dojo/1.5/dojo/dojo.js"></script>
+    <script pin="pin" type="text/javascript" src="Libraries/dojo/dojo/dojo.js"></script>
 
-    <script pin="pin" type="text/javascript" src="jscript/sage-platform/sage-platform.js"></script>
-    <script pin="pin" type="text/javascript" src="jscript/sage-controls/sage-controls.js"></script>
-    <script pin="pin" type="text/javascript" src="jscript/sage-common/sage-common.js"></script>
-    
-    <script src="Libraries/rml.js" type="text/javascript"></script>
+    <%-- Flattened NLS bundles from dojo build (Comment these out for development)--%>
+    <script pin="pin" type="text/javascript" src="Libraries/dojo/dojox/nls/dojox_<%# Global.Locale %>.js"></script>
+    <script pin="pin" type="text/javascript" src="Libraries/dojo/dijit/nls/dijit_<%# Global.Locale %>.js"></script>
+    <script pin="pin" type="text/javascript" src="jscript/Sage/nls/Sage_<%# Global.Locale %>.js"></script> 
+
+    <%-- Combined dijit/dojox/Sage and all deps (Comment out for development) --%>
+    <script pin="pin" src="jscript/Sage/Sage-Combined.js" type="text/javascript"></script>
+
+    <%--  Built layers from dojo build (Uncomment to load each layer individual if needed)
+    <script pin="pin" type="text/javascript" src="Libraries/dojo/dijit/dijit.js"></script>
+    <script pin="pin" type="text/javascript" src="Libraries/dojo/dojox/dojox.js"></script>
+    <script pin="pin" type="text/javascript" src="jscript/Sage/Sage.js"></script>--%>
+
+    <%--Sage Platform (Uncomment to load for development)
+    <script pin="pin" src="jscript/sage-platform/sage-platform-servicecontainer.js" type="text/javascript"></script>
+    <script pin="pin" src="jscript/sage-platform/gears_init.js" type="text/javascript"></script>
+    <script pin="pin" src="jscript/sage-platform/sage-platform-maincontentworkspace.js" type="text/javascript"></script>
+    <script pin="pin" src="jscript/sage-platform/sage-platform-standardworkspace.js" type="text/javascript"></script>
+    <script pin="pin" src="jscript/sage-platform/sage-platform-tabworkspace.js" type="text/javascript"></script>
+    <script pin="pin" src="jscript/sage-platform/sage-platform-objectconnectionservice.js" type="text/javascript"></script>
+    <script pin="pin" src="jscript/sage-platform/sage-platform-integrationcontractservice.js" type="text/javascript"></script>
+    <script pin="pin" src="jscript/sage-platform/sage-controls-slxgridview.js" type="text/javascript"></script>
+    <script pin="pin" src="jscript/sage-platform/sage-controls-timeline.js" type="text/javascript"></script>--%>
+
+    <%-- Third Party Libs (Uncomment to load for development)
+    <script pin="pin" src="Libraries/sdata/Base64.js" type="text/javascript"></script>
+    <script pin="pin" src="Libraries/sdata/ObjTree.js" type="text/javascript"></script>
+    <script pin="pin" src="Libraries/sdata/sdata-client.js" type="text/javascript"></script>
     <script pin="pin" src="Libraries/Simplate.js" type="text/javascript"></script>
-    <script pin="pin" language="JavaScript" src="Libraries/sdata/Base64.js" type="text/javascript"></script>
-    <script pin="pin" language="JavaScript" src="Libraries/sdata/ObjTree.js" type="text/javascript"></script>
-    <script pin="pin" language="JavaScript" src="Libraries/sdata/sdata-client.js" type="text/javascript"></script>    
-
-    <script pin="pin" type="text/javascript" src="jscript/Sage/Sage.js"></script>
-    
+    <script pin="pin" src="Libraries/dhtmlxScheduler_v30/dhtmlxscheduler.js" type="text/javascript"></script>
+    <script pin="pin" src="Libraries/dhtmlxScheduler_v30/ext/dhtmlxscheduler_timeline.js" type="text/javascript"></script>
+    <script pin="pin" src="jscript/FusionCharts.js" type="text/javascript"></script>
+    <script pin="pin" src="Libraries/jQuery/jquery.js" type="text/javascript"></script>
+    <script pin="pin" src="Libraries/jQuery/jquery-ui.js" type="text/javascript"></script>--%>
 </head>
 <body class="claro">
+    <!--shown while dojo is loading-->
+    <div id='loader'>
+        <div id='loaderInner'></div>
+    </div>
+    <script pin="pin" type="text/javascript">
+        var localTitleTagId = '<%= localTitle.ClientID %>';
+    </script>
+    <form id="mainform" runat="server" style="width:100%; height:100%;" onsubmit="return Sage.Utility.Validate.shouldSubmit()">
+        <workSpace:DialogWorkspace runat="server" ID="DialogWorkspace"></workSpace:DialogWorkspace>
+         <SalesLogix:ScriptResourceProvider ID="MasterPageLinks" runat="server">
+            <Keys>
+                <SalesLogix:ResourceKeyName Key="IdleMessage" />
+                <SalesLogix:ResourceKeyName Key="LogoffMessage" />
+                <SalesLogix:ResourceKeyName Key="Merge_Account_SelectionError" />
+                <SalesLogix:ResourceKeyName Key="PromoteTitle" />
+                <SalesLogix:ResourceKeyName Key="PromotionNotification" />
+                <SalesLogix:ResourceKeyName Key="PromotePageNoneSelected" />  
+                <SalesLogix:ResourceKeyName Key="Warning" />
+                <SalesLogix:ResourceKeyName Key="PromoteDescription" />
+                <SalesLogix:ResourceKeyName Key="PromotePageColumnHeader" />                
+                <SalesLogix:ResourceKeyName Key="UnspecifiedError" />
+            </Keys>
+        </SalesLogix:ScriptResourceProvider>
+        <div data-dojo-type="dijit.layout.BorderContainer" data-dojo-props="gutters: true, liveSplitters: false" id="Viewport">
+            <div data-dojo-type="dijit.layout.ContentPane" id="MainHeader" data-dojo-props="region:'top', splitter:false">
+                <!-- outer bordercontainer top -->
+                <div id="MainHeaderWrap">
+                    <div id="LogoPanel">
+                        <asp:Image runat="server" ID="imgLogo" ImageAlign="top" ImageUrl="~/images/SLX_logo_20_gray.png" AlternateText="" Width="133" Height="20" />
+                    </div>                                     
+                    <workSpace:ToolbarWorkspace runat="server" ID="ToolBar"></workSpace:ToolbarWorkspace>                                                             
+                    <div data-dojo-type="Sage.UI.Controls.HelpMenu" id="HelpMenu"></div>
+                    <div data-dojo-type="Sage.UI.SpeedSearch" id="SpeedSearch" class="quick-speedsearch"></div>                                         
+                    <asp:Literal runat="server" ID="AlarmButton" Text=""></asp:Literal>
+                    <div id="asyncpostbackindicator">
+                        <asp:Image ID="Image1" ImageUrl="~/images/loading_animation_liferay.gif" AlternateText="<%$ resources: Loading %>" runat="server" />
+                    </div>       
 
-    <script pin="pin" type="text/javascript">   
-    
-    <% if (TaskPane.Visible) { %>
-    var __includeTaskPane = true;    
-    <% } else { %>
-    var __includeTaskPane = false;
-    <% } %>
-    var localTitleTagId = '<%= localTitle.ClientID %>';
-    
-    Ext.BLANK_IMAGE_URL = 'Libraries/ext/resources/images/default/s.gif';
-    Ext._stringFormat = String.format;
-    </script> 
+                    <%-- 
+                    <asp:PlaceHolder ID="surveyPlaceholder" runat="server" /> 
+                    --%>
+                </div>
+                <!-- end outer bordercontainer top -->
+            </div>
+
+            <!-- outer border container left, the Navordion -->
+            <div data-dojo-type="Sage.UI.NavBar" ID="MainNav" region="left" minSize="1" splitter="true" class="navordion">
+                <workSpace:NavWorkspace ID="NavBar" runat="server" ImagePosition="left"></workSpace:NavWorkspace>
+            </div>
+
+            <!-- begin inner border container -->
+            <div data-dojo-type="dijit.layout.BorderContainer" gutters="false" liveSplitters="false" id="innerBorder" region="center">
+                <!-- inner bordercontainer top -->
+                <div data-dojo-type="Sage.UI.TitleContentPane" id="titlePane" region="top" splitter="false"> 
+                    <asp:UpdatePanel runat="server" ID="localTitleUpdatePanel">
+                        <ContentTemplate>
+                            <div runat="server" id="localTitle" class="titlebar" ></div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+
+                    <div id="GroupsWrapper" style="clear: both;">
+                        <div id="GroupTabs" data-dojo-type="Sage.UI.GroupTabPane">
+                        </div>
+                    </div>
+
+                </div><!-- end inner border container top -->
+                
+                <!-- inner border container center -->
+                <div data-dojo-type="dijit.layout.BorderContainer" splitter="true" gutters="false" liveSplitters="true" region="center" id="centerContent">
+                    <div data-dojo-type="Sage.Layout.MainContentDetailsPane" minSize="32" region="top" id="mainContentDetails" splitter="true">
+                        <!-- main work area? inner bordercontainer center content-->
+                        <asp:UpdatePanel runat="server" ID="mainformUpdatePanel" ChildrenAsTriggers="true" UpdateMode="conditional">
+                            <ContentTemplate>
+                                <workSpace:MainContentWorkspace ID="MainContent" runat="server" SmartPartInfoStyle-CssClass="mainContentHeader" SmartPartContainerStyle-CssClass="mainContentContent" />
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                    <div data-dojo-type="dijit.layout.ContentPane" region="center" id="tabContent" splitter="true">
+                        <tws:TabWorkspace runat="server" ID="TabControl" UseUIStateService="true">
+                            <MoreTabListTools>
+                                <SalesLogix:PageLink ID="moreTabsHelp" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="MCWebHelp" NavigateUrl="moretabs.aspx" ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16"></SalesLogix:PageLink>
+                            </MoreTabListTools>
+                        </tws:TabWorkspace>
+                    </div>
+                </div>
+                <!-- end inner border container center -->
+ 
+                <!-- inner bordercontainer right -->
+                <workSpace:TaskPaneWorkspace runat="server" ID="TaskPane">
+                    <Tools>
+                        <SalesLogix:PageLink ID="taskPaneHelp" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="MCWebHelp" NavigateUrl="taskpane.aspx" ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16"></SalesLogix:PageLink>
+                    </Tools>
+                </workSpace:TaskPaneWorkspace>	            
+                
+            </div><!-- end inner border container-->    
+
+            <div data-dojo-type="dijit.layout.ContentPane" region="bottom" splitter="false" gutters="false" id="MainFooter">
+                <!-- outer border container bottom -->    
+                <span id="copyright"><asp:Localize ID="copyrightMessage" EnableViewState="false" runat="server" Text="<%$ Resources: SalesLogix, Copyright %>"/></span>
+                <div data-dojo-type="Sage.UI.Controls.LogOffButton" id="LogOffButton"></div>
+                <div data-dojo-type="Sage.UI.TimeZoneItem" id="TimeZoneMenu" class="floatright"></div>
+                <span id="autoLogoff" class="floatright"> </span>
+                <span id="lclCurrentDate"><smartParts:CurrentDate ID="CurrentDate" runat="server" DateFormat="dd MMMM yyyy" /></span>
+                <span id="lclLoginName" class="floatright"><asp:Label ID="LoginName" runat="server" OnLoad="LoginName_Load" /></span>
+                <span id="statusMessage" class="floatright"></span>
+            </div><!-- end outer border container bottom -->
+        </div><!-- end outer border container -->
+    </form>   
+    <div id="dev_null" style="visibility: hidden;"></div>
+    <script type="text/javascript">
+        require([
+            "dojo/_base/html",
+            "dijit/_base/manager",
+            "dojo/parser",
+            "dijit/Toolbar",
+            "dijit/layout/ContentPane",
+            "dijit/layout/BorderContainer",
+            "dijit/TitlePane",
+            "dijit/form/ValidationTextBox",
+            "dijit/form/SimpleTextarea",
+            "dijit/form/CheckBox",
+            "dijit/form/TextBox",
+            "dijit/form/Select",
+            "dojo/ready",
+            "dojo/_base/fx",
+            "dojo/dom",
+            "Sage/Utility/PickList",
+            "Sage/Groups/GroupManager",
+            "Sage/Groups/GroupNavigator", // all details
+            "Sage/Layout/MainContentDetailsPane",
+            "Sage/Layout/TabContainer", // Multi-Tab Controller
+            "Sage/Link",
+            "Sage/MailMerge/Loader",
+            "Sage/MainView/ActivityMgr/ActivityCalendar", // calendar page
+            "Sage/MainView/IntegrationContract/MatchingOptionsConfig", // integration setup
+            "Sage/Services/ActivityAction",
+            "Sage/Services/ActivityActionProcessor",
+            "Sage/Services/ActivityService",
+            "Sage/Services/CalendarSecurityService",
+            "Sage/Services/ClientBindingManagerService",
+            "Sage/Services/ClientContextService",
+            "Sage/Services/ClientEntityContext",
+            "Sage/Services/RoleSecurityService",
+            "Sage/Services/SelectionContextService",
+            "Sage/Services/SystemOptions",
+            "Sage/Services/UserOptions",
+            "Sage/Services/_ServiceMixin",
+            "Sage/UI/ActivityList", // activities tab
+            "Sage/UI/ActivityScheduler", // calendar page
+            "Sage/UI/Alarms/AlarmButton",
+            "Sage/UI/Controls/CheckBox", // contact detail
+            "Sage/UI/Controls/Currency",
+            "Sage/UI/Controls/HelpMenu",
+            "Sage/UI/Controls/LogOffButton",
+            "Sage/UI/Controls/Select", // account detail
+            "Sage/UI/Controls/SimpleTextarea", // account detail
+            "Sage/UI/Controls/PickListAsText", // Summary Views
+            "Sage/UI/Filters/FilterPanel",
+            "Sage/UI/Filters/GroupFilterConfigurationProvider", // list
+            "Sage/UI/GroupListConfigurationProvider",
+            "Sage/UI/GroupTabPane",
+            "Sage/UI/MenuBar",
+            "Sage/UI/NavBar",
+            "Sage/UI/NotesHistoryList", // notes/history tab
+            "Sage/UI/SpeedSearch",
+            "Sage/UI/SummaryDetailPane",
+            "Sage/UI/TimeZoneItem",
+            "Sage/UI/TitleContentPane",
+            "Sage/Utility",
+            "Sage/Utility/Activity",
+            "Sage/Utility/SDataLookup", // insert opportunity (editable grid script)
+            "Sage/Utility/Validate",
+            "Sage/Utility/Groups",
+            "Sage/Utility/File",
+            "Sage/Utility/File/DragDropWatcher",
+            "Sage/Utility/File/DefaultDropHandler",
+            "Sage/TaskPane/ActivityTaskPaneActions"
+        ], 
+        function (html, manager, parser, Toolbar, ContentPane, BorderContainer, TitlePane, ValidationTextBox, SimpleTextArea, CheckBox, TextBox, Select, ready, fx, dom, PickListUtil) { 
+            ready(function() {
+                initGears();
+                if ((Sage) && (Sage.Utility.File) && (Sage.Utility.File.DragDropWatcher)) {
+                    Sage.Utility.File.init(<%= GetFileUploadOptions() %>);
+                    Sage.Utility.File.DragDropWatcher.init(<%= GetDragDropOptions() %>);
+                    Sage.Utility.File.DefaultDropHandler.init(<%= GetDefaultDropOptions() %>);
+                }
+                
+                // For IE8, which does not have Date.now()
+                if(!Date.now) {
+                    Date.now = function() {
+                        return new Date().valueOf();
+                    };
+                }
+                
+                var loader = dom.byId("loader");
+                fx.fadeOut({
+                    node: loader,
+                    duration: 1,
+                    onEnd: function () {
+                        loader.style.display = 'none';
+                    }
+                }).play();
+
+                PickListUtil.checkStaleCache();
+            });
+        });
+    </script>
+    <%--Sage Common --%>
+    <script pin="pin" language="JavaScript" src="jscript/sage-common/sage-common.js" type="text/javascript"></script>
     <script type="text/javascript">                
         $(document).ready(function(){
             window.setTimeout('AutoLogout.process(1)',AutoLogout.OneMinute);
@@ -333,242 +619,5 @@
             }); 
         });        
     </script>
-    <form id="mainform" runat="server" style="width:100%; height:100%;">
-        <workSpace:DialogWorkspace runat="server" ID="DialogWorkspace"></workSpace:DialogWorkspace>
-        <div id="lclLoginName" style="visibility:hidden"><asp:Label ID="LoginName" runat="server" OnLoad="LoginName_Load" /></div>
-         
-         <SalesLogix:ScriptResourceProvider ID="MasterPageLinks" runat="server">
-            <Keys>
-                <SalesLogix:ResourceKeyName Key="Options" />
-                <SalesLogix:ResourceKeyName Key="LogOff" />
-                <SalesLogix:ResourceKeyName Key="Help" />
-                <SalesLogix:ResourceKeyName Key="Groups" />
-                <SalesLogix:ResourceKeyName Key="IdleMessage" />
-                <SalesLogix:ResourceKeyName Key="LogoffMessage" />
-                <SalesLogix:ResourceKeyName Key="WebClientHelp" />
-                <SalesLogix:ResourceKeyName Key="GettingStartedGuide" />
-                <SalesLogix:ResourceKeyName Key="Lookup" />
-                <SalesLogix:ResourceKeyName Key="LookupBtnWidth" />
-                <SalesLogix:ResourceKeyName Key="LookupSaveAsGroup" />
-                <SalesLogix:ResourceKeyName Key="SaveLookupAsGroupNamePrompt" />
-                <SalesLogix:ResourceKeyName Key="SaveLookupAsGroupNameDlgTitle" />
-                <SalesLogix:ResourceKeyName Key="AdHocDialog_NoneSelectedNewGroup" />
-                <SalesLogix:ResourceKeyName Key="AdHocDialog_NoneSelectedTitle" />      
-                <SalesLogix:ResourceKeyName Key="AdHocDialog_NewGroupNamePrompt" />      
-                <SalesLogix:ResourceKeyName Key="AdHocDialog_NewGroupTitle" />      
-                <SalesLogix:ResourceKeyName Key="AdHocDialog_NewGroupRePrompt" />      
-                <SalesLogix:ResourceKeyName Key="AdHocDialog_NoData" />  
-                <SalesLogix:ResourceKeyName Key="AdHocDialog_NoneSelectedRemove" />  
-                <SalesLogix:ResourceKeyName Key="AdHocDialog_NoneSelectedAddToGroup" />  
-                <SalesLogix:ResourceKeyName Key="AdHocDialog_NoneSelectedProcess" /> 
-                <SalesLogix:ResourceKeyName Key="AdHocDialog_NoEmail" />  
-                <SalesLogix:ResourceKeyName Key="AdHocDialog_NoneSelectedExcel" />
-                <SalesLogix:ResourceKeyName Key="AdHocDialog_GroupCountZero" />     
-                <SalesLogix:ResourceKeyName Key="AdHocDialog_CancelButton" />    
-                <SalesLogix:ResourceKeyName Key="AdHocDialog_OkButton" />        
-                <SalesLogix:ResourceKeyName Key="ActivitiesDialog_DeleteActivity" />
-                <SalesLogix:ResourceKeyName Key="ActivitiesDialog_DeleteActivityTitle" />
-                <SalesLogix:ResourceKeyName Key="About" />
-                <SalesLogix:ResourceKeyName Key="TooManyGroupsTipText" />
-                <SalesLogix:ResourceKeyName Key="TooManyGroupsTipLinkText" />
-                <SalesLogix:ResourceKeyName Key="confirm_DeleteRecords" />
-                <SalesLogix:ResourceKeyName Key="Leads_AssignOwner_ProgressMsg" />
-                <SalesLogix:ResourceKeyName Key="Leads_AssignOwner_ProgressTitle" />
-                <SalesLogix:ResourceKeyName Key="Leads_DeleteLeads_ProgressMsg" />
-                <SalesLogix:ResourceKeyName Key="AdHocDialog_YesButton" />
-                <SalesLogix:ResourceKeyName Key="AdHocDialog_NoButton" />
-                <SalesLogix:ResourceKeyName Key="SaveLookupAsGroupInvalidChar" />
-                <SalesLogix:ResourceKeyName Key="Merge_Account_SelectionError" />
-                <SalesLogix:ResourceKeyName Key="MailMergeView_Cancel" />
-                <SalesLogix:ResourceKeyName Key="MailMergeView_Title" />
-                <SalesLogix:ResourceKeyName Key="MailMergeView_Personal" />
-                <SalesLogix:ResourceKeyName Key="MailMergeView_Public" />
-                <SalesLogix:ResourceKeyName Key="MailMergeView_Email" />
-                <SalesLogix:ResourceKeyName Key="MailMergeView_Fax" />
-                <SalesLogix:ResourceKeyName Key="MailMergeView_Letter" />
-                <SalesLogix:ResourceKeyName Key="OK" />
-                <SalesLogix:ResourceKeyName Key="Warning" />
-                <SalesLogix:ResourceKeyName Key="PromoteTitle" />
-                <SalesLogix:ResourceKeyName Key="PromotePageColumnHeader" />
-                <SalesLogix:ResourceKeyName Key="PromoteDescription" />
-                <SalesLogix:ResourceKeyName Key="PromotionNotification" />                
-                <SalesLogix:ResourceKeyName Key="FindOutMore" />
-                <SalesLogix:ResourceKeyName Key="SDI_FeatureRequiresSDI" />
-                <SalesLogix:ResourceKeyName Key="SDI_InstallFeatureNow" />
-                <SalesLogix:ResourceKeyName Key="SDI_FeatureCanBeInstalled" />
-                <SalesLogix:ResourceKeyName Key="SDI_ClickToDownload" />
-                <SalesLogix:ResourceKeyName Key="SDI_LargeUploadWarning" />
-                <SalesLogix:ResourceKeyName Key="SDI_SDIMustBeInstalled" />
-                <SalesLogix:ResourceKeyName Key="SDI_KeepAttachmentsConfirmation" />
-                <SalesLogix:ResourceKeyName Key="SDI_UploadComplete" />
-                <SalesLogix:ResourceKeyName Key="SDI_FileNameAndSize" />
-                <SalesLogix:ResourceKeyName Key="SDI_FilesDropped" />
-                <SalesLogix:ResourceKeyName Key="SDI_ErrorExaminingFile" />
-                <SalesLogix:ResourceKeyName Key="SDI_AddAttachmentsFor" />
-                <SalesLogix:ResourceKeyName Key="SDI_UploadingFiles" />
-                <SalesLogix:ResourceKeyName Key="SDI_Uploading" />
-                <SalesLogix:ResourceKeyName Key="MissingPostUrl" />
-                <SalesLogix:ResourceKeyName Key="SaveAttachments" />
-                <SalesLogix:ResourceKeyName Key="UploadAttachment" />
-                <SalesLogix:ResourceKeyName Key="Complete" />
-                <SalesLogix:ResourceKeyName Key="Description" />
-                <SalesLogix:ResourceKeyName Key="PleaseWait" />
-                <SalesLogix:ResourceKeyName Key="QuickComplete" />
-                <SalesLogix:ResourceKeyName Key="Result" />
-                <SalesLogix:ResourceKeyName Key="NoteAppendToAll" />
-                <SalesLogix:ResourceKeyName Key="Individually" />
-                <SalesLogix:ResourceKeyName Key="AsScheduled" />
-                <SalesLogix:ResourceKeyName Key="Now" />
-                <SalesLogix:ResourceKeyName Key="PercentCompleteFmt" />
-            </Keys>
-         </SalesLogix:ScriptResourceProvider>
-         
-         <div id="west_panel_content" class="x-hide-display">
-            <div id="NavBarArea" class="NavBar" style="visibility:hidden;">
-                <workSpace:NavWorkspace ID="NavBar" runat="server" ImagePosition="left">
-                </workSpace:NavWorkspace>
-            </div>
-            <div id="ExtNavBar"></div>
-         </div>
-         <div id="south_panel_content" class="x-hide-display">
-            <span id="copyright"><asp:Localize ID="copyrightMessage" EnableViewState="false" runat="server" Text="<%$ Resources: SalesLogix, Copyright %>"/></span>
-            <span id="autoLogoff" class="floatright"> </span>
-            <span id="lclCurrentDate"><smartParts:CurrentDate ID="CurrentDate" runat="server" DateFormat="dd MMMM yyyy" /></span>
-            <span id="statusMessage" class="floatright"></span>
-        </div>
-        <div id="MainWorkArea" class="x-hide-display">                                
-            <asp:Panel ID="content" runat="server">
-                <asp:UpdatePanel runat="server" ID="mainformUpdatePanel" ChildrenAsTriggers="true" UpdateMode="conditional">
-                        <ContentTemplate>
-                    <workSpace:MainContentWorkspace ID="MainContent" runat="server" SmartPartInfoStyle-CssClass="mainContentHeader" SmartPartContainerStyle-CssClass="mainContentContent" />
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-                
-                <tws:TabWorkspace runat="server" ID="TabControl" UseUIStateService="true">
-                    <MoreTabListTools>
-                        <SalesLogix:PageLink ID="moreTabsHelp" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="MCWebHelp" NavigateUrl="moretabs.aspx" ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16"></SalesLogix:PageLink>
-                    </MoreTabListTools>
-                </tws:TabWorkspace>
-            </asp:Panel>
-         </div>
-         
-         <div id="center_panel_north_content" class="x-hide-display">
-            <asp:UpdatePanel runat="server" ID="localTitleUpdatePanel">
-                <ContentTemplate>
-                    <div runat="server" id="localTitle" class="titlebar"></div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-            <div id="GroupMenuSpace" class="GroupButton"></div>
-            <div class="Clear"></div>
-            <span id="lookupBtn"></span>
-            <span id="GroupTabs"></span>
-            <div id="GroupMenuOptions" style="visibility:hidden">
-                <asp:ContentPlaceHolder runat="server" ID="GroupButtonPlaceHolder">
-                </asp:ContentPlaceHolder>
-            </div>
-        </div>
-        
-        <div id="center_panel_east_content" class="x-hide-display">
-        <workSpace:TaskPaneWorkspace runat="server" ID="TaskPane">
-            <Tools>
-                <SalesLogix:PageLink ID="taskPaneHelp" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="MCWebHelp" NavigateUrl="taskpane.aspx" ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16"></SalesLogix:PageLink>
-            </Tools>
-        </workSpace:TaskPaneWorkspace>
-        </div>               
-        
-        <div id="north_panel_content" class="x-hide-display">
-            <div class="MainHeader">
-              <div class="MainHeaderLeft">
-                    <asp:Image runat="server" ID="imgLogo" style="float:left" ImageAlign="top" ImageUrl="~/images/icons/SalesLogix_logo_sm.png" AlternateText="" />
-                </div>
-                 
-                    <div id="OptionsMenu"></div>
-                    <div id="asyncpostbackindicator"><asp:Image ID="Image1" ImageUrl="~/images/loading_animation_liferay.gif" AlternateText="<%$ resources: Loading %>" runat="server" /></div>
-                  
-                 <div class="MainHeaderToolBar">
-                   <workSpace:ToolbarWorkspace runat="server" ID="ToolBar" CssClass="floatleft"></workSpace:ToolbarWorkspace>
-                    <div id="ssDrowdown" class="ssdropdown" onmouseover="this.className='ssdropdownhighlite'" onmouseout="javascript:MenuBtnLeave(this)" onclick="javascript:ShowMenuItem()">
-                        <asp:Image ID="imgSSOptions" runat="server" ImageUrl="~/images/blue/menuDropDown.gif" 
-                            ImageAlign="Middle" AlternateText="<%$ resources: SpeedSearchOptions %>" />
-                        </div>
-                    <div id="SSButtons" class="ssbutton" onmouseover="this.className='ssbuttonhighlite'" onmouseout="this.className='ssbutton'">
-				            <asp:ImageButton ID="Search1"  runat="server" Width="12" Height="12" ImageUrl="~/images/icons/Speed_Search_16x16.gif" ImageAlign="Middle" OnClick="Search1_Click" AlternateText="<%$ resources: Search %>"  />
-                        </div>
-                    <div id="ssTextDiv" style="float:right;">
-                        <asp:TextBox ID="SearchText" runat="server" style="width:150px;height:16px;padding-left:3px;" Text="<%$ resources: SpeedSearch %>" CssClass="tboxinfo" onfocus="checkSSText(this)" onkeydown="javascript:HandleEnterKeyMaster(event, this.id)"></asp:TextBox></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="ssMenuItemDiv" class="ssbutton" style="display:none;position:absolute; width:182px; height:17px; margin-left:2px" onmouseout="ssTimerId=window.setTimeout('HideSSDropDown()',1000)" onmouseover="clearTimeout(ssTimerId)">
-            <a href="SpeedSearch.aspx" onmouseover="clearTimeout(ssTimerId)" >
-                <asp:Literal ID="Literal1" runat="server" Text="<%$ resources: ssMenuItem_Advanced%>" /></a></div>
-
-        <Services:WebClientMessageService ID="SageSLXMessage" runat="server" />
-	    <div id="defaultErrorMessage" style="display:none; visibility:hidden"><asp:Localize ID="lclzUnspecifiedError" runat="server" Text="<%$ resources: UnspecifiedError %>"></asp:Localize></div>	    	    
-	    
-        <asp:PlaceHolder ID="surveyPlaceholder" runat="server" />
-        
-    </form>   
-    <!-- turn this on to get staic ids on anchor tags
-    <script pin="pin" type="text/javascript" src="jscript/testcomplete.js"></script>
-    -->    
-    <script pin="pin" type="text/javascript">
-        String.format = Ext._stringFormat;
-        $(document).ready(function () {
-            setUpPanels();
-
-            ScriptQueue.run.dom();
-
-            populateGroupTabs(); /* after merge */
-
-            populateTitleBar();
-            createMainToolbar();
-            populateNavBar();
-            createOptionsMenu();
-            setNavState();
-        });
-
-    </script> 
-    <script type="text/javascript">    
-    window.setTimeout(function() {
-    Sys.WebForms.PageRequestManager.getInstance().add_initializeRequest(showRequestIndicator);
-    Sys.WebForms.PageRequestManager.getInstance().add_initializeRequest(AutoLogout.resetTimer);
-    Sys.WebForms.PageRequestManager.getInstance().add_endRequest(hideRequestIndicator);
-    }, 1);
-    $(document).ready(checkforShowLookup);
-    
-     
-    </script>
-   <script type="text/javascript">
-       String.format = Ext._stringFormat;
-       $(document).ready(function () {
-           initGears();
-           if ((Sage) && (Sage.DragDropWatcher)) {
-               Sage.DragDropWatcher.init();
-               Sage.DefaultFileDropHandler.init();
-           }
-
-           // set focus when the page is first loaded
-           window.setTimeout(function () {
-               var selector = ".formtable input:not('input[type=hidden]')";
-               var elem = dojo.query(selector);
-               if (elem.length > 0 && elem[0].focus) {
-                   try {
-                       elem[0].focus();
-                   }
-                   catch (err) {
-                       // in IE 8, when a dialog is closing, the focus() function will throw an error 
-                       // even though client-side debuggers show elem[0] is a valid, visible control.
-                   }
-               }
-           }, 50);
-
-       });
-       
-    </script>
-
-    <input type="hidden" id="hidHelpLink" value='<%= HelpLink %>' />
-    <input type="hidden" id="hidHelpAboutLink" value='<%= HelpAboutLink %>' />
 </body>
 </html>

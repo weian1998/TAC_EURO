@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="SalesOrderStatus_Transmitted" xml:space="preserve">
+    <value>An Buchhaltung weitergeleitet</value>
+  </data>
+  <data name="grdItems.7f13becf-d7b7-41ec-82af-24215aec5077.ColumnHeading" xml:space="preserve">
+    <value>Produkttyp</value>
+  </data>
+  <data name="luProduct.LookupProperties.AppId.PropertyHeader" xml:space="preserve">
+    <value>Anwendungs-ID</value>
+  </data>
+  <data name="grdItems.28d57a8b-13ca-47c0-b41e-d969ed17dc28.ColumnHeading" xml:space="preserve">
+    <value>Ang. Preis</value>
+  </data>
+  <data name="erpStatus_Rejected" xml:space="preserve">
+    <value>Abgelehnt</value>
+  </data>
+  <data name="d7935840-afd7-43a4-9956-919b76aa6c7a.DialogTitleOverride" xml:space="preserve">
+    <value>Produkt bearbeiten</value>
+  </data>
+  <data name="luProduct.ButtonToolTip" xml:space="preserve">
+    <value>Produkt hinzufügen</value>
+  </data>
+  <data name="luProduct.LookupProperties.Program.PropertyHeader" xml:space="preserve">
+    <value>Preisstufe</value>
+  </data>
+  <data name="grdItems.ff4abcfa-992a-4721-8841-c0c0b6e89485.ColumnHeading" xml:space="preserve">
+    <value>Erweiterter Preis</value>
+  </data>
+  <data name="grdItems.ca87da6c-54ec-4780-b7c9-ff6e49313f91.ColumnHeading" xml:space="preserve">
+    <value>Positionstyp</value>
+  </data>
+  <data name="luProduct.LookupProperties.Price.PropertyHeader" xml:space="preserve">
+    <value>Preis</value>
+  </data>
+  <data name=".LookupProperties.ActualId.PropertyHeader" xml:space="preserve">
+    <value>Tatsächliche ID (Tatsächliche ID)</value>
+  </data>
+  <data name="luPackage.ButtonToolTip" xml:space="preserve">
+    <value>Produkt aus Paket hinzufügen</value>
+  </data>
+  <data name="grdItems.4e14a41d-5850-4a89-87c3-8a87a096f296.ColumnHeading" xml:space="preserve">
+    <value>Preisstufe</value>
+  </data>
+  <data name="grdItems.a3ad3b80-8190-4be8-829e-cafb6467ad29.Text" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="grdItems.530b7cdb-cef1-4e94-a46a-cf8d931ff779.ColumnHeading" xml:space="preserve">
+    <value>Positionsnr.</value>
+  </data>
+  <data name="grdItems.eae77157-0570-48d4-bd9a-d78df7b84496.ColumnHeading" xml:space="preserve">
+    <value>Gesperrt</value>
+  </data>
+  <data name="btnRenumber.Caption" xml:space="preserve">
+    <value>Elemente neu nummerieren</value>
+  </data>
+  <data name=".LookupProperties.Status.PropertyHeader" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="luProduct.LookupDialogTitle" xml:space="preserve">
+    <value>Produkte suchen</value>
+  </data>
+  <data name="grdItems.2936feab-1fba-4916-a91b-19f175e9a1d9.ColumnHeading" xml:space="preserve">
+    <value>Menge</value>
+  </data>
+  <data name="grdItems.e1a69123-3261-4eac-b1cc-8ce21ff52c2e.Text" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="luProduct.ToolTip" xml:space="preserve">
+    <value>Produkt hinzufügen</value>
+  </data>
+  <data name="SalesOrderStatus_Closed" xml:space="preserve">
+    <value>Abgeschlossen</value>
+  </data>
+  <data name=".LookupProperties.Description.PropertyHeader" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="grdItems.a74f322c-ebd9-49d4-ad41-3bcd939e8b41.ColumnHeading" xml:space="preserve">
+    <value>Preisstufe</value>
+  </data>
+  <data name="btnLockAll.ToolTip" xml:space="preserve">
+    <value>Alle Elemente sperren</value>
+  </data>
+  <data name="grdItems.b0fc2ecd-742c-4a7e-8012-afebc395c56e.Text" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="grdItems.Save.ToolTip" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="grdItems.983c7b9b-3c12-48e3-add2-73ff8cd065c2.ColumnHeading" xml:space="preserve">
+    <value>Rabatt</value>
+  </data>
+  <data name="btnLockAll.Caption" xml:space="preserve">
+    <value>Alle Elemente sperren</value>
+  </data>
+  <data name="grdItems.1c0db96d-c179-432b-a9b3-0a3034540713.ColumnHeading" xml:space="preserve">
+    <value>Rabatt</value>
+  </data>
+  <data name="luPackage.LookupProperties.Status.PropertyHeader" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="grdItems.cd2f695d-eb50-4193-87a9-459746679526.Text" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="0475f9ec-f5ca-4fbd-9241-6d93fbcbdaf7.DialogTitleOverride" xml:space="preserve">
+    <value>Produkt bearbeiten</value>
+  </data>
+  <data name="grdItems.3d7c5e37-1587-4ea1-a1cc-6da394ea8ffd.ColumnHeading" xml:space="preserve">
+    <value>Rabatt</value>
+  </data>
+  <data name="grdItems.427c6453-abe8-4679-a90b-3e9c6da0b5d5.ColumnHeading" xml:space="preserve">
+    <value>Produkt</value>
+  </data>
+  <data name="btnRenumber.ToolTip" xml:space="preserve">
+    <value>Positionen neu nummerieren</value>
+  </data>
+  <data name="luProduct.DialogButtonText" xml:space="preserve">
+    <value>Auswahl hinzufügen</value>
+  </data>
+  <data name="grdItems.5cd443a0-928c-44a2-86f2-a4246f8223c7.ColumnHeading" xml:space="preserve">
+    <value>Ang. Preis</value>
+  </data>
+  <data name="btnAddCustomProduct.ToolTip" xml:space="preserve">
+    <value>Benutzerdefiniertes Produkt hinzufügen...</value>
+  </data>
+  <data name="luPackage.LookupProperties.Name.PropertyHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="luPackage.ToolTip" xml:space="preserve">
+    <value>Produkt aus Paket hinzufügen</value>
+  </data>
+  <data name="grdItems.e0d08365-5629-4c34-b759-d79fc50dd7fb.ColumnHeading" xml:space="preserve">
+    <value>Rabatt</value>
+  </data>
+  <data name="grdItems.Cancel.ToolTip" xml:space="preserve">
+    <value>Zurücksetzen</value>
+  </data>
+  <data name="grdItems.0c39de35-d246-4c4b-a1fa-57a0a9be41c6.ColumnHeading" xml:space="preserve">
+    <value>Produkt</value>
+  </data>
+  <data name="grdItems.6cc2b0fb-3f70-4aa3-aa06-ec9fe8dc5c00.ColumnHeading" xml:space="preserve">
+    <value>Erweiterter Preis</value>
+  </data>
+  <data name="btnAddCustomProduct.Caption" xml:space="preserve">
+    <value>Benutzerdefiniertes Produkt hinzufügen</value>
+  </data>
+  <data name="luProduct.LookupProperties.Status.PropertyHeader" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="grdItems.506f0947-d9d3-441f-bfed-329263b9df81.ColumnHeading" xml:space="preserve">
+    <value>Familie</value>
+  </data>
+  <data name="64dd44d7-9a6e-4064-b212-432a84a37a1d.DialogTitleOverride" xml:space="preserve">
+    <value>Produkt bearbeiten</value>
+  </data>
+  <data name="grdItems.2b08495e-9221-4861-92dd-9d33c416c135.ColumnHeading" xml:space="preserve">
+    <value>Einheit</value>
+  </data>
+  <data name="luPackage.LookupDialogTitle" xml:space="preserve">
+    <value>Produkt aus Paket hinzufügen</value>
+  </data>
+  <data name="grdItems.cc585e30-dffc-449e-8e20-06a5c9b4acf0.ColumnHeading" xml:space="preserve">
+    <value>Ang. Preis</value>
+  </data>
+  <data name="grdItems.3160cbc2-c14d-4e58-94c9-5277e17b3951.Text" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="grdItems.db81fee5-514b-4607-96a2-296313a294ee.ColumnHeading" xml:space="preserve">
+    <value>Ang. Preis</value>
+  </data>
+  <data name=".LookupProperties.Family.PropertyHeader" xml:space="preserve">
+    <value>Familie</value>
+  </data>
+  <data name="grdItems.68096333-c869-44c2-9b19-51d9058e50d8.ColumnHeading" xml:space="preserve">
+    <value>Erweiterter Preis</value>
+  </data>
+  <data name="fa9f648f-24ba-4937-b26a-ec8ea9e558b6.DialogTitleOverride" xml:space="preserve">
+    <value>Produkt bearbeiten</value>
+  </data>
+  <data name="grdItems.eef3d53b-092f-4f1b-9429-22cfd8dd2bf4.ColumnHeading" xml:space="preserve">
+    <value>Einheit</value>
+  </data>
+  <data name="grdItems.e3166b21-f996-4454-83a8-addf72b5207e.ColumnHeading" xml:space="preserve">
+    <value>Gesperrt</value>
+  </data>
+  <data name="grdItems.96ea69f9-3c31-4071-bfef-541b5cd5bc50.ColumnHeading" xml:space="preserve">
+    <value>Preis</value>
+  </data>
+  <data name="grdItems.96a895c5-dda4-4060-8386-ade5a720b091.Text" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="btnUnlockAll.Caption" xml:space="preserve">
+    <value>Sperre aller Elemente aufheben</value>
+  </data>
+  <data name="erpStatus_Open" xml:space="preserve">
+    <value>Offen</value>
+  </data>
+  <data name="grdItems.a7a437f5-35ab-48f8-9fdb-688b439a6aa0.ColumnHeading" xml:space="preserve">
+    <value>Preis</value>
+  </data>
+  <data name="grdItems.7f833917-f742-4ea5-99ac-79fd7e66af4a.Text" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="luProduct.LookupProperties.Name.PropertyHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="luProduct.LookupProperties.ActualId.PropertyHeader" xml:space="preserve">
+    <value>SKU</value>
+  </data>
+  <data name="grdItems.3ef53358-80dd-4e3f-99fb-355cb397a797.ColumnHeading" xml:space="preserve">
+    <value>Preis</value>
+  </data>
+  <data name="luPackage.LookupProperties.Description.PropertyHeader" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="f90438ad-a72d-4613-97b7-51421c40a3ae.DialogTitleOverride" xml:space="preserve">
+    <value>Produkt bearbeiten</value>
+  </data>
+  <data name="d9b07a4f-deb8-465c-a53f-3f30460cfa96.DialogTitleOverride" xml:space="preserve">
+    <value>Produkt bearbeiten</value>
+  </data>
+  <data name="grdItems.5c4a57c9-4dd2-4c9d-9c37-be2ddc445878.ColumnHeading" xml:space="preserve">
+    <value>Preis</value>
+  </data>
+  <data name="f842ee53-0b9f-43c7-858c-57afa8508f76.DialogTitleOverride" xml:space="preserve">
+    <value>Produkt bearbeiten</value>
+  </data>
+  <data name="btnUnlockAll.ToolTip" xml:space="preserve">
+    <value>Sperre aller Elemente aufheben</value>
+  </data>
+  <data name="luProduct.LookupProperties.Family.PropertyHeader" xml:space="preserve">
+    <value>Familie</value>
+  </data>
+  <data name="grdItems.Delete.ToolTip" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="grdItems.0fd9479b-1d6f-497f-a870-26efbf44550d.ColumnHeading" xml:space="preserve">
+    <value>Menge</value>
+  </data>
+  <data name="grdItems.a8c6d9fd-1bde-4d02-b2a8-f56adc076935.Text" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="grdItems.58b387bd-88cc-459e-9d3c-4c62506c0db6.ColumnHeading" xml:space="preserve">
+    <value>Erweiterter Preis</value>
+  </data>
+</root>

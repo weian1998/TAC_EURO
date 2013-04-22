@@ -1,0 +1,476 @@
+CMCXmlParser._FilePathToXmlStringMap.Add(
+	'Index',
+	'<?xml version=\"1.0\" encoding=\"utf-8\"?>' +
+	'<CatapultTargetIndex Count=\"52\">' +
+	'    <IndexEntry>' +
+	'        <Entries>' +
+	'            <IndexEntry Term=\"Firefox\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Устранение общих неисправностей\" Link=\"/Content/Common/slxtroubleshooting.htm#kanchor14\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Internet Explorer\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Устранение общих неисправностей\" Link=\"/Content/Common/slxtroubleshooting.htm#kanchor14\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Быстрый поиск\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"обзор\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"SpeedSearch\" Link=\"/Content/SpeedSearch/SpeedSearch_Client.htm#kanchor12\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"поиск информации\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Searching for Information\" Link=\"/Content/SpeedSearch/Searching_for_Information.htm#kanchor13\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"предпросмотр\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Previewing SpeedSearch Results\" Link=\"/Content/SpeedSearch/Previewing_an_Item.htm#kanchor30\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"результаты\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Viewing SpeedSearch Results\" Link=\"/Content/SpeedSearch/Speedsearch_Results.htm#kanchor31\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"фильтры\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Using SpeedSearch Filter By Options\" Link=\"/Content/SpeedSearch/Filter_By_Options.htm#kanchor28\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Вложения\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"добавление\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Adding an Attachment\" Link=\"/Content/Common Tabs/addattachment.htm#kanchor17\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"закладка\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Attachments Tab\" Link=\"/Content/Common Tabs/attachmentstab.htm#kanchor18\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"редактирование\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Editing Attachment Information\" Link=\"/Content/Common Tabs/editattach.htm#kanchor22\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"удаление\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Deleting an Attachment\" Link=\"/Content/Common Tabs/deleteattach.htm#kanchor20\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Вход\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Logging on to Sage SalesLogix\" Link=\"/Content/Getting Started/slxlogin.htm#kanchor7\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Выбор\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"часовой пояс\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Выбор Часового Пояса\" Link=\"/Content/Client/Select_TimeZone.htm#kanchor15\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Закладки\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"таблицы\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Working with Grids in List Views and Tabs\" Link=\"/Content/General/gridfeatures.htm#kanchor25\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Заявки\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"детальное представление\">' +
+	'                        <Entries>' +
+	'                            <IndexEntry Term=\"закладки\">' +
+	'                                <Entries />' +
+	'                                <Links>' +
+	'                                    <IndexLink Title=\"Attachments Tab\" Link=\"/Content/Common Tabs/attachmentstab.htm#kanchor19\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                                    <IndexLink Title=\"Comments Tab\" Link=\"/Content/Customer Portal/custtickactframes.htm#kanchor24\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                                </Links>' +
+	'                                <SeeAlsoLinks />' +
+	'                                <IndexControlLinks />' +
+	'                                <SortAsLinks />' +
+	'                            </IndexEntry>' +
+	'                        </Entries>' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Using the Ticket Detail View\" Link=\"/Content/Customer Portal/custticketinfo.htm#kanchor10\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"добавление\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Adding a Ticket\" Link=\"/Content/Customer Portal/custaddticket.htm#kanchor9\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"предварительный просмотр перед печатью\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Viewing Ticket Details Before Printing\" Link=\"/Content/Customer Portal/csrticketprint.htm#kanchor23\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"списочное представление\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Using the Ticket List View\" Link=\"/Content/Customer Portal/custticktick.htm#kanchor11\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Контакты Sage Software\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Contacting Sage\" Link=\"/Content/Common/contacting_sage_software.htm#kanchor2\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Недавно просмотренные\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Recently Viewed\" Link=\"/Content/Common/recentlyviewed.htm#kanchor16\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Ограничения\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Assumptions and Conventions\" Link=\"/Content/Common/slxconventions.htm#kanchor5\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Открытие быстрого поиска\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"SpeedSearch\" Link=\"/Content/SpeedSearch/SpeedSearch_Client.htm#kanchor12\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Очистить\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"кэш\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Устранение общих неисправностей\" Link=\"/Content/Common/slxtroubleshooting.htm#kanchor14\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Панель Меню\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Understanding Your Workspace\" Link=\"/Content/Getting Started/Your_Workspace.htm#kanchor8\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Панель Навигации\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Understanding Your Workspace\" Link=\"/Content/Getting Started/Your_Workspace.htm#kanchor8\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"перетаскивание\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Dragging and Dropping\" Link=\"/Content/Common Tabs/dragdrop.htm#kanchor21\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Поиск\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"фильтрация по параметрам\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Using SpeedSearch Filter By Options\" Link=\"/Content/SpeedSearch/Filter_By_Options.htm#kanchor29\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Поиск записей\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Finding Records\" Link=\"/Content/Lookups/findlookup.htm#kanchor27\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Помощь\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Using the Help System\" Link=\"/Content/Common/Using_the_Help_System.htm#kanchor4\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Предпросмотр\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"результаты быстрого поиска\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Previewing SpeedSearch Results\" Link=\"/Content/SpeedSearch/Previewing_an_Item.htm#kanchor30\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Рабочее пространство\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"кнопки\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Предназначение доступных кнопок\" Link=\"/Content/Getting Started/webbuttons.htm#kanchor26\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Understanding Your Workspace\" Link=\"/Content/Getting Started/Your_Workspace.htm#kanchor8\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Рекомендации для пользователя\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"New User Tips\" Link=\"/Content/Common/slxusertips.htm#kanchor6\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Соглашения\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Assumptions and Conventions\" Link=\"/Content/Common/slxconventions.htm#kanchor5\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Списочное представление\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"таблицы\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Working with Grids in List Views and Tabs\" Link=\"/Content/General/gridfeatures.htm#kanchor25\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Техническая поддержка\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Contacting Sage\" Link=\"/Content/Common/contacting_sage_software.htm#kanchor3\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Товарные знаки\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Программное обеспечение третьих сторон, товарные знаки и зарегистрированные товарные знаки\" Link=\"/Content/Common/slxthirdparty.htm#kanchor1\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Устранение неисправностей\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"очистить кэш\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Устранение общих неисправностей\" Link=\"/Content/Common/slxtroubleshooting.htm#kanchor14\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"помощь в  Firefox\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Устранение общих неисправностей\" Link=\"/Content/Common/slxtroubleshooting.htm#kanchor14\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Устранение общих неисправностей\" Link=\"/Content/Common/slxtroubleshooting.htm#kanchor14\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Часовой пояс\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"выбор\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Выбор Часового Пояса\" Link=\"/Content/Client/Select_TimeZone.htm#kanchor15\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                        <SortAsLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'                <SortAsLinks />' +
+	'            </IndexEntry>' +
+	'        </Entries>' +
+	'        <Links />' +
+	'        <SeeAlsoLinks />' +
+	'        <IndexControlLinks />' +
+	'        <SortAsLinks />' +
+	'    </IndexEntry>' +
+	'</CatapultTargetIndex>'
+);

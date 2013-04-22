@@ -1,10 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using log4net;
 using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
 using Sage.Platform.WebPortal.Services;
@@ -19,8 +18,6 @@ using Sage.SalesLogix.Services.PotentialMatch.Configuration;
 public partial class StepSelectSource : UserControl, ISmartPartInfoProvider
 {
     private string _selectedEntitySourceName = String.Empty;
-
-    private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
     #region Public Properties
 
@@ -111,7 +108,7 @@ public partial class StepSelectSource : UserControl, ISmartPartInfoProvider
         };
 
         job.DataSource = ds;
-        Page.Session["DeDupJobIntit"] = true;
+        Page.Session["DeDupJobInit"] = true;
     }
 
     /// <summary>
@@ -126,25 +123,6 @@ public partial class StepSelectSource : UserControl, ISmartPartInfoProvider
     #endregion
 
     #region Protected Methods
-
-    /// <summary>
-    /// Handles the Init event of the Page control.
-    /// </summary>
-    /// <param name="sender">The source of the event.</param>
-    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-    protected void Page_Init(object sender, EventArgs e)
-    {
-        // StringBuilder sb = new StringBuilder(GetLocalResourceObject("DeDup_ClientScript").ToString());
-        // sb.Replace("@selectedFileId", txtImportFile.ClientID);
-        // sb.Replace("@confirmOverwriteFileMsg", GetLocalResourceObject("confirmOverwriteFileMsg").ToString());
-        // sb.Replace("@txtConfirmOverwriteId", txtConfirmUpload.ClientID);
-        //sb.Replace("@rdbCreateGroupId", rdbCreateGroup.ClientID);
-        //sb.Replace("@rdbAddToAddHocGroupId", rdbAddToAddHocGroup.ClientID);
-        //sb.Replace("@txtCreateGroupNameId", txtCreateGroupName.ClientID);
-        //sb.Replace("@lbxAddHocGroupsId", lbxAddHocGroups.ClientID);
-        //sb.Replace("@chkAddToGroupId", chkAddToGroup.ClientID);
-        //ScriptManager.RegisterClientScriptBlock(Page, this.GetType(), "DeDupScript", sb.ToString(), false);
-    }
 
     /// <summary>
     /// Raises the <see cref="E:System.Web.UI.Control.PreRender"></see> event.
@@ -169,6 +147,7 @@ public partial class StepSelectSource : UserControl, ISmartPartInfoProvider
                 ddlJobs.Items.Add(new ListItem { Text = GetJobDisplayName(job), Value = job.Name });
             }
             ddlJobs.SelectedIndex = 0;
+            Page.Session.Remove("DeDupJob");
         }
 
         IDeDupJobProcess savedJob = Page.Session["DeDupJob"] as IDeDupJobProcess;
@@ -176,17 +155,8 @@ public partial class StepSelectSource : UserControl, ISmartPartInfoProvider
 
         if (savedJob == null)
         {
-            DeDupJobConfig jobConfig = null;
-            jobConfig = GetConfig(ddlJobs.SelectedValue);
-
-            if (jobConfig != null)
-            {
-                _selectedEntitySourceName = jobConfig.EntitySourceName;
-            }
-            else
-            {
-                _selectedEntitySourceName = string.Empty;
-            }
+            DeDupJobConfig jobConfig = GetConfig(ddlJobs.SelectedValue);
+            _selectedEntitySourceName = jobConfig != null ? jobConfig.EntitySourceName : ddlJobs.SelectedValue;
         }
         else
         {
@@ -201,14 +171,7 @@ public partial class StepSelectSource : UserControl, ISmartPartInfoProvider
     private DeDupJobConfig GetConfig(string JobName)
     {
         IList<DeDupJobConfig> jobs = DeDupService.Configurations.DeDupJobs;
-        foreach (DeDupJobConfig jobConfig in jobs)
-        {
-            if (String.Equals(JobName, jobConfig.Name, StringComparison.InvariantCultureIgnoreCase))
-            {
-                return jobConfig;
-            }
-        }
-        return null;
+        return jobs.FirstOrDefault(jobConfig => String.Equals(JobName, jobConfig.Name, StringComparison.InvariantCultureIgnoreCase));
     }
 
     protected void ddlJobs_SelectedIndexChanged(object sender, EventArgs e)
@@ -221,7 +184,7 @@ public partial class StepSelectSource : UserControl, ISmartPartInfoProvider
     #region Private Methods
 
     /// <summary>
-    /// Loads the add hoc groups.
+    /// Loads the ad hoc groups.
     /// </summary>
     private void LoadAddHocGroups(string entityName, string groupId)
     {
@@ -237,7 +200,6 @@ public partial class StepSelectSource : UserControl, ISmartPartInfoProvider
             {
                 item.Selected = true;
             }
-
             lbxAddHocGroups.Items.Add(item);
         }
     }
@@ -266,17 +228,8 @@ public partial class StepSelectSource : UserControl, ISmartPartInfoProvider
     private string GetJobDisplayName(DeDupJobConfig jobConfig)
     {
         object resource = GetLocalResourceObject("Job." + jobConfig.Name);
-        string displayName = jobConfig.DisplayName;
-        if (resource != null)
-        {
-            displayName = resource.ToString();
-        }
+        string displayName = resource != null ? resource.ToString() : jobConfig.DisplayName;
         return displayName;
-    
     }
-
-   
-
-
     #endregion
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="fb3fdbf9-3aca-4ad6-8fb1-e3ea5a3e9029" lastModifiedUtc="2008-10-24T18:22:40.5174472Z" parentEntityId="750a7f26-3604-467b-94fe-249370231df4" childEntityId="e7a70408-03cb-4667-890b-39de33fb739b" cascadeOption="SaveUpdateDelete">
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="fb3fdbf9-3aca-4ad6-8fb1-e3ea5a3e9029" lastModifiedUtc="2012-07-25T14:33:00.4678278Z" parentEntityId="750a7f26-3604-467b-94fe-249370231df4" childEntityId="e7a70408-03cb-4667-890b-39de33fb739b" cascadeOption="SaveUpdateDelete">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
@@ -12,9 +12,13 @@
       <RelationshipDataType />
     </SystemDataType>
   </parentProperty>
-  <childProperty id="c2f4d181-f787-478a-8c86-d0621f5a6baf" lastModifiedUtc="2008-10-24T18:22:40.5174472Z" name="Contact" audited="false">
+  <childProperty id="c2f4d181-f787-478a-8c86-d0621f5a6baf" lastModifiedUtc="2012-07-25T14:33:00.4678278Z" name="Contact" audited="true">
     <ExtendedPropertiesCollection>
-      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty">
+        <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+          <OrmEntityPropertySDataExtension generate="true" />
+        </extender>
+      </extendee>
     </ExtendedPropertiesCollection>
     <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
       <RelationshipDataType />

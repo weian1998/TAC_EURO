@@ -17,12 +17,12 @@
     <tr>
         <td>
             <asp:Label runat="server" ID="lblFilterBy" AssociatedControlID="ddlCondition" Text="<%$ resources:FilterBy_rsc.Text %>" Font-Bold="True"></asp:Label>
-            <asp:DropDownList ID="ddlCondition" runat="server">
+            <asp:DropDownList ID="ddlCondition" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" runat="server">
                 <asp:ListItem Text="<%$ resources: Type_Condition.Text %>" Value="Type"></asp:ListItem>
                 <asp:ListItem Text="<%$ resources: Description_Condition.Text %>" Value="Description" Selected="True"></asp:ListItem>
                 <asp:ListItem Text="<%$ resources: SourceCode_Condition.Text %>" Value="SourceCode"></asp:ListItem>
             </asp:DropDownList>
-            <asp:DropDownList runat="server" ID="ddlFilterBy">
+            <asp:DropDownList runat="server" ID="ddlFilterBy" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control">
                 <asp:ListItem Text="<%$ resources: StartingWith_rsc.Text %>" Value="Starting With"></asp:ListItem>
                 <asp:ListItem Text="<%$ resources: Contains_rsc.Text %>" Value="Contains"></asp:ListItem>
                 <asp:ListItem Text="<%$ resources: Equalto_rsc.Text %>" Value="Equal to"></asp:ListItem>
@@ -33,17 +33,20 @@
                 <asp:ListItem Text="<%$ resources: Greaterthan_rsc.Text %>" Value="Greater than"></asp:ListItem>
             </asp:DropDownList>
             <asp:TextBox runat="server" ID="txtLookupValue"></asp:TextBox>
-            <asp:ImageButton runat="server" ID="imgFindButton" ImageUrl="~/images/icons/Find_16x16.gif" OnClick="imgFindButton_Click" />
+            <asp:ImageButton runat="server" ID="imgFindButton" ImageUrl="~/images/icons/Find_16x16.png" OnClick="imgFindButton_Click" />
         </td>
     </tr>
 </table>
 <hr />
-<SalesLogix:SlxGridView runat="server" ID="grdCampaignLeadSource" AutoGenerateColumns="false" ShowEmptyTable="true" CssClass="datagrid"
-    EmptyTableRowText="<%$ resources: grdCampaignLeadSource.EmptyTableRowText %>" DataKeyNames="Id" AlternatingRowStyle-CssClass="rowdk"
-    EnableViewState="false" RowStyle-CssClass="rowlt" OnRowCommand="grdCampaignLeadSource_RowCommand" OnRowEditing="grdCampaignLeadSource_RowEditing">
+<SalesLogix:SlxGridView runat="server" ID="grdCampaignLeadSource" AutoGenerateColumns="false" ShowEmptyTable="true" CssClass="datagrid" AllowPaging="True"
+    EmptyTableRowText="<%$ resources: grdCampaignLeadSource.EmptyTableRowText %>" DataKeyNames="Id" AlternatingRowStyle-CssClass="rowdk" PageSize="20"
+    EnableViewState="false" PagerStyle-CssClass="gridPager" RowStyle-CssClass="rowlt" OnPageIndexChanging="grdCampaignLeadSource_Changing"
+    OnRowCommand="grdCampaignLeadSource_RowCommand" OnRowEditing="grdCampaignLeadSource_RowEditing">
     <Columns>
         <asp:ButtonField CommandName="Associate" Text="<%$ resources: Associate_rsc.HeaderText %>" />
         <asp:BoundField DataField="Description" HeaderText="<%$ resources: Description_rsc.HeaderText %>" />        
         <asp:BoundField DataField="Type" HeaderText="<%$ resources: Type_rsc.HeaderText %>" />
     </Columns>
+    <PagerSettings Mode="NumericFirstLast" FirstPageImageUrl="ImageResource.axd?scope=global&type=Global_Images&key=Start_16x16"
+        LastPageImageUrl="ImageResource.axd?scope=global&type=Global_Images&key=End_16x16" />
 </SalesLogix:SlxGridView>

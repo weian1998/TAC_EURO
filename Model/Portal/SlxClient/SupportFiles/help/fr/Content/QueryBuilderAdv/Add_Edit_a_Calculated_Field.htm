@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Utilisation de Query Builder|Utilisation des champs calculés" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" class="" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Ajout ou modification d'un champ calculé</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilderAdv/Add_Edit_a_Calculated_Field.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Ouvrir une rubrique avec la recherche, la table des matières et l'index</a>
+        </p>
+        <h1><a name="kanchor219"></a>Ajout et modification de champs calculés</h1>
+        <table wrapperparagraphselector="P" style="margin-top: 14pt;width: 98%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="98%">
+            <col style="width: 43px;" />
+            <col style="width: 410px;" />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/adminonly.gif" />
+                    </p>
+                </td>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top"><span class="SLXBold">Administrateur système uniquement</span>
+                </td>
+            </tr>
+        </table>
+        <p class="Infinitive" MadCap:conditions="Output.WebClient">Pour ouvrir la boîte de dialogue Gérer des champs calculés</p>
+        <ol MadCap:conditions="Output.WebClient">
+            <li class="Topic-Text-Numbered" value="1"><a href="../QueryBuilder/Opening_Query_Builder.htm" target="_self">Ouvrez Query&#160;Builder</a>.  </li>
+            <li class="Topic-Text-Numbered" value="2">Cliquez sur le bouton <span class="SLXBold">Calculs</span>.</li>
+        </ol>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_3983081591_0" onclick="FMCDropDown( this ); return false;">Pour ajouter<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_3983081591_0" style="display: none;">
+                <ol>
+                </ol>
+                <ol>
+                    <li class="Topic-Text-Numbered" MadCap:conditions="Output.WebClient" value="1">Ouvrez <a href="../QueryBuilder/Opening_Query_Builder.htm">Query Builder</a>, puis cliquez sur le bouton <span class="SLXBold">Calculs</span>.
+</li>
+                </ol>
+                <p MadCap:conditions="Output.WebClient" class="Topic-Text-Indent">Ce bouton n'apparaît que si vous êtes connecté en tant qu'administrateur. </p>
+                <ol>
+                    <li class="Topic-Text-Numbered" value="2">Cliquez sur <span class="SLXBold">Ajouter</span>.</li>
+                    <li class="Topic-Text-Numbered" value="3">Cliquez sur l'onglet <span class="SLXBold">Propriétés</span>.</li>
+                    <li class="Topic-Text-Numbered" value="4">Dans la première zone <span class="SLXBold"><span class="MCPopup"><a href="javascript:void(0);" MadCap:src="Calculation_Alias.htm" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">Nom/Alias</a></span></span>, saisissez un nom qui décrit l'objet du calcul.</li>
+                </ol>
+                <p class="Topic-Text-Indent">Le nom du calcul apparaît uniquement dans le gestionnaire des calculs.</p>
+                <ol MadCap:continue="true">
+                    <li class="Topic-Text-Numbered" value="5">Dans la deuxième zone, entrez le nom à utiliser dans le calcul. Il ne peut pas contenir d'espaces ni de symboles. Il s'agit d'un champ obligatoire. Vous ne pourrez pas créer des champs calculés avant que celui-ci n'ait été défini.</li>
+                </ol>
+                <p class="Topic-Text-Indent">Lorsque le champ calculé est utilisé pour la création d'un plugin ou d'une requête, il s'affiche dans la liste des champs disponibles.<br /></p>
+                <ol start="5" MadCap:continue="true">
+                    <li class="Topic-Text-Numbered" value="6">Cliquez sur la flèche de la liste déroulante <span class="SLXBold">Table de base</span> et sélectionnez la table principale utilisée pour créer le champ calculé.</li>
+                </ol>
+                <p class="Topic-Text-Indent">Si vous associez deux tables, il s'agit de la table parent.</p>
+                <ol start="5" MadCap:continue="true">
+                    <li class="Topic-Text-Numbered" value="7">Cliquez sur la flèche de la liste déroulante <span class="SLXBold">Type de calc.</span> et sélectionnez un Type de calcul.</li>
+                    <li class="Topic-Text-Numbered" value="8">Saisissez une <span class="SLXBold">description</span> si vous souhaitez avoir une description plus détaillée du champ disponible.</li>
+                    <li class="Topic-Text-Numbered" value="9">Cliquez sur l'onglet <span class="SLXBold">Calcul</span>.</li>
+                    <li class="Topic-Text-Numbered" value="10">Vérifiez que les valeurs que vous souhaitez appliquer au champ calculé se trouvent dans la Table de base sélectionnée.</li>
+                </ol>
+                <p class="Topic-Text-Indent">La table affichée dans la vue de liste supérieure est la table que vous avez sélectionnée sous l'onglet Propriétés.</p>
+                <ol start="10" MadCap:continue="true">
+                    <li class="Topic-Text-Numbered" value="11">Si la table de base ne contient pas les valeurs dont vous avez besoin, vous pouvez changer la table de base plutôt que de créer une jointure. Cliquez sur l'onglet <span class="SLXBold">Propriétés</span> et sélectionnez une autre table de base.</li>
+                    <li class="Topic-Text-Numbered" value="12">Créez le calcul.</li>
+                    <li class="Topic-Text-Lettered" value="1">Cliquez sur le signe <b>+</b> ou <b>-</b> pour développer ou réduire la liste des tables et des champs afin de trouver le premier champ pour le calcul.</li>
+                    <li class="Topic-Text-Lettered" value="2">
+                        <MadCap:conditionalText MadCap:conditions="Output.WebClient">Pour ajouter un champ, cliquez dessus dans la zone supérieure pour l'ajouter à un quelconque endroit du calcul.</MadCap:conditionalText>
+                    </li>
+                </ol>
+                <p class="Topic-Text-Indent2">Il s'agit du premier champ du calcul.</p>
+                <ol start="10" MadCap:continue="true">
+                    <li class="Topic-Text-Lettered" value="3">Effectuez l'une des opérations suivantes&#160;:</li>
+                </ol>
+                <ul>
+                    <li class="Bullet3" value="1">Cliquez sur un opérateur si vous souhaitez créer un calcul numérique.</li>
+                </ul>
+                <p class="TopicTextIndent3">Vous devez alors insérer un opérateur entre les champs.</p>
+                <ul>
+                    <li class="Bullet3" value="1">Dans le cas d'une chaîne, vous n'avez pas besoin de choisir un opérateur mais vous pouvez insérer un espace pour une question d'apparence.</li>
+                </ul>
+                <ol start="10">
+                    <li class="Topic-Text-Lettered" value="4">Cliquez sur  un autre champ dans la vue de l'arborescence pour l'ajouter à la vue de l'onglet inférieur ou saisissez un nombre entier.</li>
+                    <li class="Topic-Text-Lettered" value="5">Continuez à ajouter autant de champs que vous souhaitez pour créer le champ calculé.</li>
+                    <li class="Topic-Text-Lettered" value="6">Utilisez les parenthèses pour regrouper les calculs. Pour insérer une parenthèse, placez votre curseur au point d'insertion dans le calcul et cliquez sur un bouton de parenthèse. Il est impératif d'insérer une parenthèse d'ouverture et une parenthèse de fermeture.</li>
+                    <li value="13" class="Topic-Text-Numbered">Cliquez sur <span class="SLXBold">OK</span>.</li>
+                    <li class="Topic-Text-Numbered" value="14">Cliquez sur <b>Fermer</b>.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_3983081591_1" onclick="FMCDropDown( this ); return false;">Pour modifier<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_3983081591_1" style="display: none;">
+                <ol>
+                    <li class="Topic-Text-Numbered" value="1">Dans la boîte de dialogue <span class="SLXBold">Gérer les champs calculés</span>, sélectionnez le calcul puis cliquez sur <span class="SLXBold">Modifier</span>.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="2">Dans la boîte de dialogue <span class="SLXBold">Modifier le calcul</span>, choisissez l'onglet <span class="SLXBold">Calcul</span>.
+                    </li>
+                </ol>
+                <ul style="list-style-type: disc;">
+                    <li class="Topic-Text-Bulleted-2" value="1">
+                        <MadCap:conditionalText MadCap:conditions="Output.WebClient">Pour ajouter un champ, cliquez dessus dans la zone supérieure pour l'ajouter à un quelconque endroit du calcul.</MadCap:conditionalText>
+                    </li>
+                    <li class="Topic-Text-Bulleted-2" value="2">Pour ajouter un <a href="Operators.htm" target="_self">opérateur</a> ou une parenthèse, placez le curseur dans le calcul et cliquez sur un bouton d'opérateur ou de parenthèse. Un opérateur est nécessaire entre des champs dans un calcul numérique et il doit y avoir impérativement une parenthèse ouvrante et une parenthèse fermante.</li>
+                    <li class="Topic-Text-Bulleted-2" value="3">Pour supprimer un quelconque élément du calcul, sélectionnez-le et appuyez sur <span class="SLXBold">Supprimer</span>.</li>
+                </ul>
+                <ol start="3">
+                    <li class="Topic-Text-Numbered" value="3">Cliquez sur <span class="SLXBold">OK</span>.</li>
+                    <li class="Topic-Text-Numbered" value="4">Cliquez sur <span class="SLXBold">Fermer</span>.
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <p class="RelatedTopics">Rubriques connexes</p>
+        <p><a href="Delete_a_Calculated_Field.htm">Suppression des champs calculés</a>
+        </p>
+        <p><a href="Calculated_Fields.htm">Champs calculés</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Dites-nous comment améliorer l'aide</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

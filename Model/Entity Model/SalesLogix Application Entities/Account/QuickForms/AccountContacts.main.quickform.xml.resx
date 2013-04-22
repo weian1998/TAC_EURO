@@ -112,64 +112,34 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="grdAccountContacts.EmptyTableRowText" xml:space="preserve">
-    <value>No records match the selection criteria.</value>
-  </data>
-  <data name="grdAccountContacts.5d12726b-20b5-47cf-aa2f-b4f005b24b7f.ColumnHeading" xml:space="preserve">
-    <value>Primary</value>
-  </data>
-  <data name="grdAccountContacts.5d12726b-20b5-47cf-aa2f-b4f005b24b7f.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdAccountContacts.78a7c620-18b8-4c85-a06e-88338be0d1c9.ColumnHeading" xml:space="preserve">
-    <value>Title</value>
-  </data>
-  <data name="grdAccountContacts.78a7c620-18b8-4c85-a06e-88338be0d1c9.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdAccountContacts.f64da4cb-e735-4332-b92b-3c494be38716.ColumnHeading" xml:space="preserve">
-    <value>City</value>
-  </data>
-  <data name="grdAccountContacts.f64da4cb-e735-4332-b92b-3c494be38716.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdAccountContacts.28953275-3f32-45bc-aa0c-4929e231a7c9.ColumnHeading" xml:space="preserve">
-    <value>State</value>
-  </data>
-  <data name="grdAccountContacts.28953275-3f32-45bc-aa0c-4929e231a7c9.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdAccountContacts.1a69ad2a-2dd7-4c35-994a-3288a2cec55f.ColumnHeading" xml:space="preserve">
+  <data name="grdContacts.b0797739-f9b8-4191-80d0-f5ab72498f4e.ColumnHeading" xml:space="preserve">
     <value>Type</value>
   </data>
-  <data name="grdAccountContacts.1a69ad2a-2dd7-4c35-994a-3288a2cec55f.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdAccountContacts.64e7fdbb-6ca0-4fea-8dd3-877ec7602901.ColumnHeading" xml:space="preserve">
+  <data name="grdContacts.0a4b0474-13d7-4742-8a38-9740f1c970d4.ColumnHeading" xml:space="preserve">
     <value>Department</value>
   </data>
-  <data name="grdAccountContacts.64e7fdbb-6ca0-4fea-8dd3-877ec7602901.FormatString" xml:space="preserve">
-    <value />
+  <data name="grdContacts.41801972-a525-4bec-ba50-c39a1becfdab.ColumnHeading" xml:space="preserve">
+    <value>City</value>
   </data>
-  <data name="grdAccountContacts.b3e50ac9-8c26-4fad-94de-cd264a414209.ColumnHeading" xml:space="preserve">
+  <data name="grdContacts.0570e9b7-d850-4b94-9d6b-aa925c0e71da.ColumnHeading" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="grdContacts.5075e590-c413-40b7-9a19-f1f3c206b485.ColumnHeading" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="grdContacts.421bd512-8d4c-46c6-991a-f9f1cb0f4761.ColumnHeading" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="grdContacts.10d885e5-3fb4-4984-b9bb-80c18b9328ec.ColumnHeading" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="grdAccountContacts.b3e50ac9-8c26-4fad-94de-cd264a414209.FormatString" xml:space="preserve">
-    <value>{0}, {1}</value>
-  </data>
-  <data name="grdAccountContacts.b3e50ac9-8c26-4fad-94de-cd264a414209.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdAccountContacts.b3e50ac9-8c26-4fad-94de-cd264a414209.DestinationFormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdAccountContacts.1bb85f2f-5423-4938-a40c-df75c00e5ab9.ColumnHeading" xml:space="preserve">
-    <value>Phone</value>
+  <data name="grdContacts.28eb51a3-1d00-4e98-a586-f14b7cfbaae4.ColumnHeading" xml:space="preserve">
+    <value>Primary</value>
   </data>
   <data name="cmdIncludeContact.Caption" xml:space="preserve">
     <value>Insert New Contact</value>
@@ -177,10 +147,13 @@
   <data name="cmdIncludeContact.ToolTip" xml:space="preserve">
     <value>Insert New Contact</value>
   </data>
-  <data name="grdAccountContacts.e834d2b2-1b27-45d3-8211-6b4efbdf0cb1.ColumnHeading" xml:space="preserve">
-    <value>Is Primary</value>
-  </data>
-  <data name="grdAccountContacts.93330347-8b66-4ca2-8991-8c4dbe8f0017.ColumnHeading" xml:space="preserve">
+  <data name="grdContacts.c41d5d37-4319-49f9-88de-b21dd1d0b16c.ColumnHeading" xml:space="preserve">
     <value>Primary</value>
+  </data>
+  <data name="grdContacts.41bb1751-36a5-46cf-9198-43cc531a3cd1.ColumnHeading" xml:space="preserve">
+    <value>Work Phone</value>
+  </data>
+  <data name="grdContacts.45ced659-1a1a-499c-a285-c81037121f46.ColumnHeading" xml:space="preserve">
+    <value>Email</value>
   </data>
 </root>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Amministrazione|Integrazione Contabilità|Configurare l'Integrazione Contabilità" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Vista Dettaglio Integrazione Contabilità</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Integration Contract/Accounting_Integration_Detail_View.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1>Vista Dettaglio Integrazione Contabilità</h1>
+        <p><a name="kanchor45"></a>Questa vista è utilizzata per configurare la connessione tra Sage SalesLogix e i sistemi contabili.</p>
+        <p>L'Integrazione Contabilità è abilitata nel momento in cui vengono configurati e abilitati i punti finali di SalesLogix e di almeno un'applicazione di contabilità. Se non c'è attivazione dei feed nella scheda Sistemi Contabilità, allora l'integrazione non sarà abilitata.</p>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <col style="width: 45px;" />
+            <col />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p class="Tip-Note-Text" style="margin-bottom: 0;">Nel momento in cui si attiva o disattiva l'Integrazione le modifiche non sono applicate fino a quando non ci si disconnette e riconnette a Sage SalesLogix.</p>
+                </td>
+            </tr>
+        </table>
+        <p>Impostare i dettagli dei feed per SalesLogix e poi per ciascun sistema di contabilità integrato. </p>
+        <p class="Infinitive">Per impostare</p>
+        <ol>
+            <li value="1">Nel menu <span class="SLXBold">Amministrazione</span>, clic su <span class="SLXBold">Configurazione Integrazione</span>.</li>
+            <li value="2">Nel campo <span class="SLXBold">SalesLogix Feed</span> digitare l'URL SData al feed GCRM. <br />Utilizzare il seguente formato: http://server:port/<i>sdatavirtualdir</i>/slx/gcrm/-/<i>&#160;</i><ul start="1"><li value="1">Impostare <i>sdatavirtualdir</i> alla directory dove viene fatto il deploy del portale SData.<br />La directory predefinita è "SData".<br />Ad esempio, http://localhost:3333/sdata/slx/gcrm/-/</li></ul></li>
+            <li value="3">Nel campo <span class="SLXBold">Nome Utente</span> digitare il nome dell'utente per il database SalesLogix a cui si connette il sistema di contabilità.</li>
+            <li value="4">Nella casella <span class="SLXBold">Password</span> digitare una password per l'utente.</li>
+            <li value="5">Nel campo <span class="SLXBold">Visualizza Nome</span>, digitare il nome che sarà visualizzato per il feed.</li>
+            <li value="6">Fare clic su <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Salva<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>..</li>
+            <li value="7">Se necessario, spuntare l'opzione <span class="SLXBold">Restringi la promozione dell'azienda a un singolo sistema di contabilità</span> per limitare l'integrazione a SalesLogix e un solo sistema.</li>
+            <li value="8">Se necessario, selezionare l'opzione <span class="SLXBold">Consenti la gestione degli ordini di vendita al sistema di contabilità</span> per rimuovere da SalesLogix la possibilità di creare e modificare gli <a href="../Sales Orders/salesorderoverview.htm" target="_self">ordini di vendita</a>. Quando si seleziona questa opzione, deve essere utilizzato il proprio sistema di contabilità per gestire gli ordini di vendita. </li>
+            <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+                <col style="width: 45px;" />
+                <col />
+                <tr>
+                    <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                        <p style="text-align: center;margin-bottom: 0;" align="center">
+                            <img src="../image/note.gif" />
+                        </p>
+                    </td>
+                    <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                        <p>Per alcune integrazioni, ad esempio X3, questa opzione è obbligatoria.</p>
+                    </td>
+                </tr>
+            </table>
+            <li value="9">Utilizzare la scheda <a href="Accounting_Systems_Tab.htm" target="_self">Sistemi Contabilità</a> per configurare i dettagli di feed per i sistemi di contabilità.</li>
+            <li value="10">Utilizzare la scheda <a href="Synchronization_Tab.htm" target="_self">Sincronizzazione</a> per configurare gli intervalli di sincronizzazione.</li>
+            <li value="11">Utilizzare la scheda <a href="Matching_Tab.htm" target="_self">Corrispondenza</a> per configurare i criteri predefiniti globali di corrispondenza per gli utenti che creano collegamenti.</li>
+        </ol>
+        <p class="RelatedTopics">Come fare a?</p>
+        <p><a href="Linking_Records.htm" target="_self">Collegare i Record</a>
+        </p>
+        <p><a href="FindSchemaDifferences.htm" target="_self">Verificare l'Integrità dei Dati con i Sistemi di Contabilità Integrati.</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Comunicaci come possiamo migliorare la guida</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

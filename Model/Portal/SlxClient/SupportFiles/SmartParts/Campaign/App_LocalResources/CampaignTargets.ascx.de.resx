@@ -1,0 +1,511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="cmdLaunchEmail.ToolTip" xml:space="preserve">
+    <value>E-Mail-System starten</value>
+  </data>
+  <data name="cmdManageList.Caption" xml:space="preserve">
+    <value>Liste verwalten</value>
+  </data>
+  <data name="grdTargets.Initial.ColumnHeading" xml:space="preserve">
+    <value>Initiale</value>
+  </data>
+  <data name="lnkHideFilters.Text" xml:space="preserve">
+    <value>Filter ausblenden</value>
+  </data>
+  <data name="chkGroup.Caption" xml:space="preserve">
+    <value>Gruppe:</value>
+  </data>
+  <data name="grdTargets.LastResponse.ColumnHeading" xml:space="preserve">
+    <value>Letzte Antwort</value>
+  </data>
+  <data name="cmdDelete.ToolTip" xml:space="preserve">
+    <value>Ausgewählte Ziele entfernen</value>
+  </data>
+  <data name="cmdDelete.Caption" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="cmdLaunchEmail.Caption" xml:space="preserve">
+    <value>E-Mail-System starten...</value>
+  </data>
+  <data name="grdTargets.EmptyTableRowText" xml:space="preserve">
+    <value>Den Auswahlkriterien entsprechen keine Datensätze.</value>
+  </data>
+  <data name="chkStage.Caption" xml:space="preserve">
+    <value>Letzte Phase:</value>
+  </data>
+  <data name="CampaignTargets_ClientScript" xml:space="preserve">
+    <value>&lt;script language="javascript" type="text/javascript"&gt;
+    
+    var ct_selectedTargetCtrlId = "@txtSelectedTargetId";
+    var ct_selectedTargetsCtrlId = "@txtSelectedTargetsId";
+    var ct_selectedTargetContextCtrlId = "@txtSelectedTargetContextId";
+    var ct_objTargets = new Object();
+            
+    function ResetFilters()
+    {
+        var control = document.getElementById("@chkShowContacts");
+        if (control != null)
+        {
+            control.checked = false;
+        }
+        control = document.getElementById("@chkShowLeads");
+        if (control != null)
+        {
+            control.checked = false;
+        }
+        control = document.getElementById("@chkGroup");
+        if (control != null)
+        {
+            control.checked = false;
+        }
+        control = document.getElementById("@lbxGroup");
+        if ((control != null) &amp;&amp; (control.options))
+        {
+            control.options[0].selected = true;
+        }
+        control = document.getElementById("@chkResponded");
+        if (control != null)
+        {
+            control.checked = false;
+        }
+        control = document.getElementById("@chkPriority");
+        if (control != null)
+        {
+            control.checked = false;
+        }
+        control = document.getElementById("@lbxPriority");
+        if ((control != null) &amp;&amp; (control.options))
+        {
+            control.options[0].selected = true;
+        }
+        control = document.getElementById("@chkStatus");
+        if (control != null)
+        {
+            control.checked = false;
+        }
+        control = document.getElementById("@lbxStatus");
+        if ((control != null) &amp;&amp; (control.options))
+        {
+            control.options[0].selected = true;
+        }
+        control = document.getElementById("@chkStage");
+        if (control != null)
+        {
+            control.checked = false;
+        }
+        control = document.getElementById("@lbxStage");
+        if ((control != null) &amp;&amp; (control.options))
+        {
+            control.options[0].selected = true;
+        }
+    }
+    
+    function confirmExternalListCheck()
+    {
+        var chkExternalList = document.getElementById("@chkExternalListId");
+        var confirmExternalList = document.getElementById("@txtConfirmExternalListId");
+        confirmExternalList.value = "F";
+        if (chkExternalList.checked)
+        {
+            if (confirm("@confirmExternalListMsg"))
+            {
+                confirmExternalList.value = "T";
+            }
+            else
+            {
+                chkExternalList.checked = false;               
+            }
+        }
+
+        if (!chkExternalList.checked)
+        {
+            ct_SetStyleDisplay("@divDisplayGridId", "inline");
+            ct_SetStyleDisplay("@divExternalId", "none");
+            ct_SetStyleDisplay("@lnkFiltersId", "inline");
+        }
+        else
+        {
+            ct_SetStyleDisplay("@divDisplayGridId", "none");
+            ct_SetStyleDisplay("@divExternalId", "inline");
+            ct_SetStyleDisplay("@lnkFiltersId", "none");        
+        }
+        var useExternalList = document.getElementById("@cmdExternalListId");
+        if (useExternalList != null)
+        {
+            InsertProgress_InvokeClickEvent(useExternalList);
+        }
+    }
+    
+    function ct_SetStyleDisplay(controlId, displayType)
+    {
+        var control = document.getElementById(controlId)
+        if (control != null)
+        {
+            control.style.display = displayType;
+        }
+    }
+    
+    function InsertProgress_InvokeClickEvent(control)
+	{
+	    if (dojo.isFF)
+	    {
+	        // FireFox
+	        var e = document.createEvent("MouseEvents");
+	        e.initEvent("click", true, true);
+	        control.dispatchEvent(e);
+	    }
+	    else
+	    {
+	        // IE
+	        control.click();
+	    }
+	}
+    
+    function onInitialTargetClick(gridInitialTargetCtrlId, newInitialTargetCtrlId, saveButtonId, targetId)
+    {
+        var value = false;
+        var grdInitTarget = document.getElementById(gridInitialTargetCtrlId)
+        if (grdInitTarget != null)
+        {
+            //get the changed value from the gridview
+            value = grdInitTarget.checked;
+            //assign the changed value
+            var newInitTarget = document.getElementById(newInitialTargetCtrlId);
+            if (newInitTarget != null)
+            {
+                newInitTarget.value = value;
+                //get the action to post the change
+                setSelectedTargetId(saveButtonId, targetId);
+            }
+        }
+    }
+    
+    function setSelectedTargetId(saveButtonId, targetId)
+    {
+        var cmdSave = document.getElementById(saveButtonId);
+        if (cmdSave != null)
+        {
+            var txtUpdateTargetId = document.getElementById(ct_selectedTargetCtrlId);
+            if (txtUpdateTargetId != null)
+            {
+                txtUpdateTargetId.value = targetId;
+                InsertProgress_InvokeClickEvent(cmdSave);
+            }
+        }
+    }
+    
+    function onStatusChange(statusCtrlId, newStatusCtrlId, saveButtonId, targetId)
+    {
+        var value = "";
+        var statusCtrl = document.getElementById(statusCtrlId);
+        if (statusCtrl != null)
+        {
+            //get the changed value
+            value = statusCtrl.value;
+            //assign the changed value
+            var newStatus = document.getElementById(newStatusCtrlId);
+            if (newStatus != null)
+            {
+                newStatus.value = value;
+                //get the action to post the change
+                setSelectedTargetId(saveButtonId, targetId);
+            }
+        }
+    }
+    
+    function ct_SelectAll()
+    {
+       ct_objTargets = new Object();
+       document.getElementById(ct_selectedTargetsCtrlId).value = '';
+       return true;
+    }
+    
+    function ct_ClearAll()
+    {
+       ct_objTargets = new Object();
+       document.getElementById(ct_selectedTargetsCtrlId).value = '';
+       return true;
+    }
+    
+    
+    function ct_OnTargetSelectClick(sender, targetId)
+    {
+        ct_objTargets[targetId]= sender.checked
+        ct_SaveSelectState(ct_objTargets);
+    }
+       
+    function ct_SaveSelectState(targets)
+    {
+        var context = '&lt;Targets&gt;';
+        for (var Id in targets) 
+        {
+            context = context + "&lt;Target Id='" + Id + "' Selected='" + targets[Id] + "'/&gt;" ; 
+        }
+        context = context + '&lt;/Targets&gt;';
+        document.getElementById(ct_selectedTargetsCtrlId).value = context;
+    }
+
+    function ct_ShowHideFilters()
+    {
+        var txtShowFilters = document.getElementById("@txtShowFilterId");
+        var lnkFilters = document.getElementById("@lnkFiltersId");
+        if (txtShowFilters != null)
+        {
+            if (txtShowFilters.value == "true")
+            {
+                txtShowFilters.value = "false";
+                ct_SetStyleDisplay("@filterDivId", "none");
+                lnkFilters.innerText = "@lnkShowFilters";            
+            }
+            else
+            {
+                txtShowFilters.value = "true";
+                ct_SetStyleDisplay("@filterDivId", "inline");
+                lnkFilters.innerText = "@lnkHideFilters";
+            }
+        }
+    }
+        
+&lt;/script&gt;</value>
+  </data>
+  <data name="chkStatus.Caption" xml:space="preserve">
+    <value>Status:</value>
+  </data>
+  <data name="Item_None.Text" xml:space="preserve">
+    <value>&lt;Keine&gt;</value>
+  </data>
+  <data name="cmdSelectAll.Caption" xml:space="preserve">
+    <value>Alle auswählen</value>
+  </data>
+  <data name="cmdUpdate.ToolTip" xml:space="preserve">
+    <value>Ausgewählte Ziele aktualisieren</value>
+  </data>
+  <data name="txtExternalLocation.Caption" xml:space="preserve">
+    <value>Standort:</value>
+  </data>
+  <data name="grdTargets.NoRecordsFoundText" xml:space="preserve">
+    <value>Klicken Sie oben auf die Schaltfläche "Aktualisieren", um Ziele anzuzeigen</value>
+  </data>
+  <data name="grdTargets.Name.ColumnHeading" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="grdTargets.LastUpdate.ColumnHeading" xml:space="preserve">
+    <value>Letzte Aktualisierung</value>
+  </data>
+  <data name="Status_Response" xml:space="preserve">
+    <value>Geantwortet</value>
+  </data>
+  <data name="grdTargets.Company.ColumnHeading" xml:space="preserve">
+    <value>Unternehmen</value>
+  </data>
+  <data name="lblSearchCount.Caption" xml:space="preserve">
+    <value>Datensätze {0} - {1} von {2}</value>
+  </data>
+  <data name="rdgResponded_Yes.Text" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="AddTargetResponse_DialogCaption" xml:space="preserve">
+    <value>Antwort hinzufügen</value>
+  </data>
+  <data name="grdTargets.Status.ColumnHeading" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="chkExternalList.Caption" xml:space="preserve">
+    <value>Externe Liste verwenden</value>
+  </data>
+  <data name="cmdSave.ToolTip" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="txtExternalDescription.Caption" xml:space="preserve">
+    <value>Beschreibung:</value>
+  </data>
+  <data name="grdTargets.Priority.ColumnHeading" xml:space="preserve">
+    <value>Priorität</value>
+  </data>
+  <data name="cmdSearch.Caption" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="confirmDeleteMsg" xml:space="preserve">
+    <value>Möchten Sie die ausgewählten Ziele wirklich aus der Liste entfernen?</value>
+  </data>
+  <data name="cmdSave.Caption" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="rdgResponded_No.Text" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="cmdUpdate.Caption" xml:space="preserve">
+    <value>Ziele aktualisieren</value>
+  </data>
+  <data name="chkDisplayOnOpen.Caption" xml:space="preserve">
+    <value>Ergebnisse beim Öffnen anzeigen</value>
+  </data>
+  <data name="lblShow.Caption" xml:space="preserve">
+    <value>Einblenden:</value>
+  </data>
+  <data name="cmdManageList.ToolTip" xml:space="preserve">
+    <value>Ziele hinzufügen</value>
+  </data>
+  <data name="txtExternalNumber.Caption" xml:space="preserve">
+    <value>Anzahl der Ziele:</value>
+  </data>
+  <data name="grdTargets.Type.ColumnHeading" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="cmdClearAll.Caption" xml:space="preserve">
+    <value>Alle löschen</value>
+  </data>
+  <data name="grdTargets.Group.ColumnHeading" xml:space="preserve">
+    <value>Gruppe</value>
+  </data>
+  <data name="chkPriority.Caption" xml:space="preserve">
+    <value>Priorität:</value>
+  </data>
+  <data name="error_NoTarget_Selected" xml:space="preserve">
+    <value>Sie müssen mindestens ein Ziel auswählen, bevor Sie fortfahren.</value>
+  </data>
+  <data name="confirm_ExternalList_Msg" xml:space="preserve">
+    <value>Alle mit dieser Kampagne verknüpften Ziele werden entfernt, wenn eine externe Liste verwendet wird.  Möchten Sie fortfahren?</value>
+  </data>
+  <data name="chkLeads.Caption" xml:space="preserve">
+    <value>Interessenten</value>
+  </data>
+  <data name="chkContacts.Caption" xml:space="preserve">
+    <value>Kontakte</value>
+  </data>
+  <data name="grdTargets.Stage.ColumnHeading" xml:space="preserve">
+    <value>Phase</value>
+  </data>
+  <data name="cmdSaveAsGroup.Caption" xml:space="preserve">
+    <value>Als Gruppe speichern</value>
+  </data>
+  <data name="error_EntityContext" xml:space="preserve">
+    <value>Aktueller Entitätskontext fehlt.</value>
+  </data>
+  <data name="lnkShowFilters.Text" xml:space="preserve">
+    <value>Filter anzeigen</value>
+  </data>
+  <data name="chkResponded.Caption" xml:space="preserve">
+    <value>Geantwortet:</value>
+  </data>
+  <data name="cmdReset.Caption" xml:space="preserve">
+    <value>Zurücksetzen</value>
+  </data>
+</root>

@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="OwnerDescription.Caption" xml:space="preserve">
     <value>Owner Description</value>
@@ -150,18 +150,6 @@
   <data name="grdOwnerJoins.50fdb4d2-a33a-4ee6-a88a-352bb7cd818f.ColumnHeading" xml:space="preserve">
     <value>Modified By</value>
   </data>
-  <data name="grdOwnerJoins.335c0188-b941-4ddc-8212-8d67914f4a2e.ColumnHeading" xml:space="preserve">
-    <value>Type</value>
-  </data>
-  <data name="grdOwnerJoins.98f2fbd0-386e-4542-9995-ff907fc9827b.ColumnHeading" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="grdOwnerJoins.21cffdaa-c802-4f4e-891e-136d22dac32b.ColumnHeading" xml:space="preserve">
-    <value>Security Profile</value>
-  </data>
-  <data name="grdOwnerJoins.EmptyTableRowText" xml:space="preserve">
-    <value>No team members found</value>
-  </data>
   <data name="lueAddTeamMember.ToolTip" xml:space="preserve">
     <value>Add a team member</value>
   </data>
@@ -170,12 +158,6 @@
   </data>
   <data name="grdOwnerJoins.44508582-929d-4243-bb1a-4405da4ec56c.Text" xml:space="preserve">
     <value>Remove</value>
-  </data>
-  <data name="grdOwnerJoins.98f2fbd0-386e-4542-9995-ff907fc9827b.DestinationFormatString" xml:space="preserve">
-    <value>javascript:Link.getTeamMemberLink('{0}','{1}');</value>
-  </data>
-  <data name="grdOwnerJoins.21cffdaa-c802-4f4e-891e-136d22dac32b.DestinationFormatString" xml:space="preserve">
-    <value>javascript:Link.editSecurityProfile('{0}','{1}','{2}');</value>
   </data>
   <data name="AddManagerCheckBox.Caption" xml:space="preserve">
     <value>Automatically add user's manager to team</value>
@@ -189,26 +171,14 @@
   <data name="grdOwnerJoins.d3c8a56d-0659-4210-99fd-4163631c2fb6.FormatString" xml:space="preserve">
     <value>{0:g}</value>
   </data>
-  <data name="grdOwnerJoins.ActionConfirmationMessage" xml:space="preserve">
-    <value>Are you sure?</value>
+  <data name="grdMembers.btnRemoveFromTeam.ToolTip" xml:space="preserve">
+    <value>Remove members</value>
   </data>
-  <data name="grdOwnerJoins.0fac90b4-acaa-42f4-8569-d372c5d3c159.Text" xml:space="preserve">
-    <value>Remove</value>
-  </data>
-  <data name="grdOwnerJoins.0fac90b4-acaa-42f4-8569-d372c5d3c159.ConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to remove this member?</value>
+  <data name="grdMembers.1029b5b9-8bbf-4005-b5de-5dc67f72beaa.ColumnHeading" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="lueAddTeamMember.ButtonToolTip" xml:space="preserve">
     <value>Add a team member</value>
-  </data>
-  <data name="grdOwnerJoins.ba40e916-b611-4f7e-9dfa-b66715359245.ColumnHeading" xml:space="preserve">
-    <value>Created</value>
-  </data>
-  <data name="grdOwnerJoins.b9a35c70-7416-458e-a1cc-6150a6ff3df9.ColumnHeading" xml:space="preserve">
-    <value>Last Modified</value>
-  </data>
-  <data name="grdOwnerJoins.8fc17665-0229-4f77-818b-a438a66ea1f7.ColumnHeading" xml:space="preserve">
-    <value>Modified By</value>
   </data>
   <data name="lueAddTeamMember.LookupDialogTitle" xml:space="preserve">
     <value>Lookup Member</value>
@@ -230,5 +200,29 @@
   </data>
   <data name="lueAddTeamMember.LookupProperties.OwnerView.Type.PropertyHeader" xml:space="preserve">
     <value>OwnerView Type</value>
+  </data>
+  <data name="grdMembers.ba2d83bf-74cc-4580-b255-e69b2ca9008e.ColumnHeading" xml:space="preserve">
+    <value>Modified By</value>
+  </data>
+  <data name="grdMembers.463701ca-8ff2-43c1-a864-c673dec0100b.ColumnHeading" xml:space="preserve">
+    <value>Team Name</value>
+  </data>
+  <data name="grdMembers.0dbef834-f6a7-4e0e-b7ef-710ee9b6b938.ColumnHeading" xml:space="preserve">
+    <value>Team</value>
+  </data>
+  <data name="grdMembers.289c9959-b3a3-4c90-a911-c12882cccecb.ColumnHeading" xml:space="preserve">
+    <value>Last Modified</value>
+  </data>
+  <data name="grdMembers.d81642fa-d355-4f94-b430-3d2a517c507d.ColumnHeading" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="grdMembers.d6016bfc-0528-4763-8c5e-891b3981be43.ColumnHeading" xml:space="preserve">
+    <value>Security Profile</value>
+  </data>
+  <data name="grdMembers.bfba721b-8b97-4afa-b081-accd61df6887.ColumnHeading" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="ConfirmRemoveFromTeamText.Value" xml:space="preserve">
+    <value>Remove selected member(s) from team?</value>
   </data>
 </root>

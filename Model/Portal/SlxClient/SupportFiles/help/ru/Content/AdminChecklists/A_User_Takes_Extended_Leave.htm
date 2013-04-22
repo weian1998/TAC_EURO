@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Администрирование|Административные Инструкции" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="copyright" /><title>A User Takes Extended Leave</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#AdminChecklists/A_User_Takes_Extended_Leave.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1 value="Workgroup Administrator Help (03-19-02) for v5.2.2 © 2002 Interact Commerce Corporation"><a name="kanchor21"></a>Пользователь отсутствует длительное время</h1>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <tr>
+                <td style="width: 10%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="10%">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/adminonly.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p>Только системный администратор и пользователи с соответствующей <a href="../Admin_security/What_are_Roles_and_Secured_Actions.htm" target="_self">ролью</a> могут иметь доступ к этим функциям.</p>
+                </td>
+            </tr>
+        </table>
+        <p>Когда пользователь отсутствует долгое время, используйте этот контрольный список, чтобы убедиться, что субъекты и дела пользователя управляются верным образом.</p>
+        <p>Перед тем как начать, определите кто возьмет на себя обязанности пользователя, пока он отсутствует. (Назовем этого человека "Пользователь-заместитель") Затем, определите, какие из следующих сценариев подходят для вашей компании:</p>
+        <p><span class="SLXBold">A</span> - Субъекты принадлежат командам, отсутствующий пользователь и пользователь-заместитель в одних и тех же командах.</p>
+        <p><span class="SLXBold">B</span> - Субъекты принадлежат командам, но отсутствующий пользователь и пользователь-заместитель не в одних и тех же командах.</p>
+        <p><span class="SLXBold">C</span> 
+ - Субъекты принадлежат индивидуальным пользователям.</p>
+        <p><span class="SLXBold">D</span> - Ваша организация использует группу ;Все" для определения принадлежности субъектов.</p>
+        <p>Выполните шаги из списка для нужного сценария, за которыми следует пункт "Все сценарии".</p>
+        <p class="subheading">СЦЕНАРИЙ A</p>
+        <p>Никаких специальных шагов в этом сценарии предпринимать не надо. Перейдите к секции Все сценарии.</p>
+        <p class="subheading">СЦЕНАРИЙ B</p>
+        <ul>
+            <li class="BulletCheckbox" value="1">Используйте закладку <a href="../Admin_useradmin/User_Detail_View_Team_Membership_Tab.htm" target="_self">участники команды</a> на детальном представлении пользователя, чтобы определить, участником каких команд является отсутствующий пользователь.</li>
+            <li class="BulletCheckbox" value="2"><a href="../Admin_TeamsDepts/Adding_Team_Members.htm" target="_self">Добавьте</a> пользователя-заместителя к каждой команде. Поскольку пользователю требуется только быть временным участником команд, выпишите, в какие команды вы его добавили, для того, чтобы ссылаться на них в дальнейшем.</li>
+            <li class="BulletCheckbox" value="3">(Дополнительно) Если вы хотите ограничить безопасность уровня поля пользователя-заместителя, измените <a href="../Admin_TeamsDepts/Editing_a_Security_Profile_Within_a_Team.htm" target="_self">профиль безопасности</a> для субъектов (например, предоставьте доступ только на чтение).</li>
+        </ul>
+        <p>Перейдите к секции Все сценарии.</p>
+        <p class="subheading">СЦЕНАРИЙ C</p>
+        <ul>
+            <li class="BulletCheckbox" value="1">Откройте <a href="../Admin_useradmin/User_Detail_View.htm" target="_self">детальное представлении пользователя</a>  для отсутствующего пользователя.</li>
+            <li class="BulletCheckbox" value="2">Выберите закладку <a href="../Admin_useradmin/User_Detail_View_User_Team_Members_Tab.htm" target="_self">члены команды пользователя</a>. Нажмите кнопку Добавить <img src="../image/add.gif" />.  Для того чтобы выбрать необходимого пользователя используйте форму <a href="../Lookups/findlookup.htm" target="_self">поиска</a>.  Добавление этого человека в команду пользователя позволяет пользователю-заместителю иметь доступ к необходимым субъектам. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="user">Узнать больше...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a></li>
+        </ul>
+        <p MadCap:targetName="user" class="Topic-Text-Indent" style="display: none;">Если вы используете комбинацию команд и индивидуальных пользователей, это предоставит пользователю-заместителю доступ к любым субъектам той команды, где отсутствующий пользователь является куратором команды.</p>
+        <ul>
+            <li class="BulletCheckbox" value="1">(Дополнительно) Если вы хотите ограничить безопасность уровня поля пользователя-заместителя, измените <a href="../Admin_TeamsDepts/Editing_a_Security_Profile_Within_a_Team.htm" target="_self">профиль безопасности</a> для субъектов (например, предоставьте доступ только на чтение).</li>
+        </ul>
+        <p>Перейдите к секции Все сценарии.</p>
+        <p class="subheading">Сценарий D</p>
+        <p>Никаких специальных шагов в этом сценарии предпринимать не надо. Перейдите к секции Все сценарии.</p>
+        <p>&#160;</p>
+        <p class="subheading" style="margin-top: 0.0;margin-bottom: 0.0;">&#160;<span style="font-weight: bold;">Все сценарии</span></p>
+        <ul>
+            <li class="BulletCheckbox" value="1">Используйте переназначение дел в Администраторе для того, чтобы назначить дела пользователя замещающему пользователю. Настройте условия используя построитель запросов (Например, чтобы были переназначены только те дела, которые попадают в период отсутствия пользователя).</li>
+            <li class="BulletCheckbox" value="2">(Дополнительно) Если необходимо, вы можете запретить вход пользователю на время его отсутствия. Откройте <a href="../Admin_useradmin/User_Detail_View.htm" target="_self">детальное предстваления пользователя</a> и снимите флаг Логин доступен.</li>
+        </ul>
+        <p class="Topic-Text-Bulleted" style="margin-left: 18.0pt;margin-top: 3.0pt;">&#160;</p>
+        <p style="margin-bottom: 0;">По возвращению пользовтеля на работу, воспользуйтесь контрольным списокм    <![CDATA[ 
+ ]]><a href="A_User_Returns_From_Extended_Leave.htm" target="_self">пользователь возвращается после длительного отсутствия</a>. </p>
+        <div style="width: 100%;position: relative;">
+            <p>&#160;</p>
+        </div>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -9,6 +9,6 @@ ${generator.FormScriptObjectName} = {
     init : function(runtimeConfig) {
         $generator.GetInitializationScript()
     }
-}
+};
 if (typeof Sys !== 'undefined')
     Sys.Application.notifyScriptLoaded();

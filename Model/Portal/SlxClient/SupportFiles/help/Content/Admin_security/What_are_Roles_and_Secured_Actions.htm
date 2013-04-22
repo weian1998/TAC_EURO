@@ -1,8 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="357" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Administration|Security" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Administration|Security" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
     <!-- saved from url=(0014)about:internet -->
-    <head><title>What are Roles and Secured Actions?</title>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>What are Roles and Secured Actions?</title>
         <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
         <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
         <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
@@ -10,11 +11,11 @@
         </script>
     </head>
     <body>
-        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Admin_security/What_are_Roles_and_Secured_Actions.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Admin_security/What_are_Roles_and_Secured_Actions.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
         </p>
         <h1>What are Roles and Secured Actions?</h1>
-        <p><a name="kanchor41"></a>A role determines what functionality a user can access in the Web Client. Roles use secured actions to control access to user interface elements such as pages, menus, menu items, toolbars, and buttons. When you control access to individual user interface elements, you can control access to actions such as editing, deleting, or printing. Current secured elements are all user interface elements giving access to accounts, contacts, and opportunities.</p>
-        <p>You secure a user interface element by assigning a secured action to its Applied Secured property in the Application Architect. Once a secured action is applied to a user interface element, only users who are assigned a role that includes the secured action can see and use the element. For example, Entities/Account/Save is the secured action assigned to the Applied Security property for the Save button action on the Account Detail view. When the button loads at runtime, the display value changes depending on whether the user has permission to perform the action.</p>
+        <p><a name="kanchor53"></a>A role determines what functionality a user can access in the Web Client. Roles use secured actions to control access to user interface elements such as pages, menus, menu items, toolbars, and buttons. When you control access to individual user interface elements, you can control access to actions such as editing, deleting, or printing. Current secured elements are all user interface elements giving access to accounts, contacts, and opportunities.</p>
+        <p>You secure a user interface element by assigning a secured action to its Applied Security property in the Application Architect. Once a secured action is applied to a user interface element, only users who are assigned a role that includes the secured action can see and use the element. For example, Entities/Account/Save is the secured action assigned to the Applied Security property for the Save button action on the Account Detail view. When the button loads at runtime, the display value changes depending on whether the user has permission to perform the action.</p>
         <p>A user interface element in the Web Client that is secured restricts access from all users until a role is assigned which gives access to the user. To secure elements in the Web Client using roles you must add secured actions to elements, add the secured action to a role, and assign users to the role.    <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="example;roles steps">Tell me more... <img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a></p>
         <p MadCap:targetName="example" style="display: none;">Elements are secured in the Application Architect by assigning a secured action to them, or applying security. The value of the Applied Security property is the secured action name. To secure an element in the UI and allow users access to that element you must:</p>
         <ol MadCap:targetName="roles steps" style="display: none;">
@@ -28,14 +29,13 @@
         <p><![CDATA[ ]]></p>
         <p>The default roles are:</p>
         <ul>
-            <li class="Bullets" value="1"><span class="SLXBold">Administrator</span> - Allows add, edit, and delete permissions to administration functions such as users, teams, departments, pick lists, products, packages, Check for Duplicates, Process Duplicates, and Check for Duplicates History. </li>
-            <li class="Bullets" value="2"><span class="SLXBold">Data Quality Manager</span> - Allows add, edit, and delete permissions to Check for Duplicates, Process Duplicates, and Check for Duplicates History.</li>
-            <li class="Bullets" value="3"><span class="SLXBold">Standard User</span> - Allows view, add, edit, and delete permissions to Web Client non-administrative entities such as accounts, contacts, opportunities, packages, products, sales orders, and leads.</li>
+            <li value="1"><span class="SLXBold">Administrator</span> - Allows add, edit, and delete permissions to administration functions such as users, teams, departments, pick lists, products, packages, Check for Duplicates, Process Duplicates, and Check for Duplicates History. Also gives edit permission for quick forms in the Web Form Designer.</li>
+            <li value="2"><span class="SLXBold">Data Quality Manager</span> - Allows add, edit, and delete permissions to Check for Duplicates, Process Duplicates, and Check for Duplicates History.</li>
+            <li value="3"><span class="SLXBold">Standard User</span> - Allows view, add, edit, and delete permissions to Web Client non-administrative entities such as accounts, contacts, opportunities, sales orders, leads, contracts, defects, and tickets. Also allows view permissions for products and packages.<br />If you have existing users or create new users in the Administrator, you must assign users to the <a href="Assigning_Users_To_Standard_Role.htm" target="_self">Standard User role</a>.</li>
         </ul>
-        <p class="Topic-Text-Indent">If you have existing users or create new users in the Administrator, you must assign users to the <a href="Assigning_Users_To_Standard_Role.htm" target="_self">Standard User role</a>.</p>
         <ul>
-            <li class="Bullets" value="1"><span class="SLXBold">Order and Quote Processor</span> - Allows add and view permissions to contacts and accounts and add, edit, and delete permissions to sales orders.</li>
-            <li class="Bullets" MadCap:conditions="Output.IntegrationContract" value="2"><span class="SLXBold">Integration Contract Lock Price</span> - Allows permission to lock product pricing on a sales order. (Accounting Integration Only)</li>
+            <li value="1"><span class="SLXBold">Order and Quote Processor</span> - Allows add and view permissions to contacts and accounts and add, edit, and delete permissions to sales orders.</li>
+            <li MadCap:conditions="Output.IntegrationContract" value="2"><span class="SLXBold">Integration Contract Lock Price</span> - Allows permission to lock product pricing on a sales order. (Accounting Integration Only)</li>
         </ul>
         <table wrapperparagraphselector="P" style="margin-top: 14pt;border-spacing: 0px;margin-left: 0;margin-right: auto;caption-side: top;" cellspacing="0">
             <col />
@@ -54,22 +54,22 @@
                 </td>
             </tr>
         </table>
-        <p class="RelatedTopics">How Do I?</p>
-        <p><a href="Creating_a_Role.htm" target="_self">Create a Role</a>
+        <p class="RelatedTopics" MadCap:conditions="Output.WebClient">How Do I?</p>
+        <p MadCap:conditions="Output.WebClient"><a href="Creating_a_Role.htm" target="_self">Create a Role</a>
         </p>
-        <p><a href="CreatingASecuredAction.htm" target="_self">Create a Secured Action</a>
+        <p MadCap:conditions="Output.WebClient"><a href="CreatingASecuredAction.htm" target="_self">Create a Secured Action</a>
         </p>
-        <p><a href="Role_Users_Tab.htm" target="_self">Assign a Role to Users</a>
+        <p MadCap:conditions="Output.WebClient"><a href="Role_Users_Tab.htm" target="_self">Assign a Role to Users</a>
         </p>
-        <p><a href="EditingOrDeletingASecuredAction.htm" target="_self">Edit or Delete a Secured Action</a>
+        <p MadCap:conditions="Output.WebClient"><a href="EditingOrDeletingASecuredAction.htm" target="_self">Edit or Delete a Secured Action</a>
         </p>
-        <p><a href="Assigning_Users_To_Standard_Role.htm" target="_self">Assign Users to the Standard User Role</a>
+        <p MadCap:conditions="Output.WebClient"><a href="Assigning_Users_To_Standard_Role.htm" target="_self">Assign Users to the Standard User Role</a>
         </p>
         <p>&#160;</p>
         <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
             <col style="width: 100%;" />
             <tbody>
-                <tr MadCap:conditions="Output.WebClient,Output.Customer Portal">
+                <tr MadCap:conditions="">
                     <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
                         <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
                     </td>

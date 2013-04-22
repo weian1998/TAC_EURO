@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="f7c5988f-bebd-4587-a735-c13fc919958d" lastModifiedUtc="2008-04-11T22:15:51.5586382Z" manageSchema="false" tableName="CAMPAIGNSTAGE" name="CampaignStage" displayPropertyId="169e0bb3-c95e-4768-9972-559f086b37dc" isExtension="false" audited="true" lastUpdatedPropertyId="5cfd7211-9d90-4279-a146-551d32bfd2f3" onBeforeInsertMethodId="be98d971-44e5-47e8-aac8-009cdc6d183f" onAfterInsertMethodId="1ae4e6a6-e9b4-4093-9a7d-5cd2a3977545" onBeforeUpdateMethodId="b2252443-218c-4cc9-aa63-fa0f2c7b9f84" onAfterUpdateMethodId="f686bdd3-c7cd-4b4d-b5be-9ce864211641" onBeforeDeleteMethodId="e0d0952a-f2ec-49e6-a3a1-66e3ab1a1ce0" onAfterDeleteMethodId="3cacde5f-09fc-487e-b75b-dddd8a71ec8d" onCreateId="816de8ed-6e54-4dbf-8cfa-4c79398ea65e">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="f7c5988f-bebd-4587-a735-c13fc919958d" lastModifiedUtc="2008-04-11T22:15:51.5586382Z" manageSchema="true" tableName="CAMPAIGNSTAGE" name="CampaignStage" displayPropertyId="169e0bb3-c95e-4768-9972-559f086b37dc" isExtension="false" audited="true" lastUpdatedPropertyId="5cfd7211-9d90-4279-a146-551d32bfd2f3" onBeforeInsertMethodId="be98d971-44e5-47e8-aac8-009cdc6d183f" onAfterInsertMethodId="1ae4e6a6-e9b4-4093-9a7d-5cd2a3977545" onBeforeUpdateMethodId="b2252443-218c-4cc9-aa63-fa0f2c7b9f84" onAfterUpdateMethodId="f686bdd3-c7cd-4b4d-b5be-9ce864211641" onBeforeDeleteMethodId="e0d0952a-f2ec-49e6-a3a1-66e3ab1a1ce0" onAfterDeleteMethodId="3cacde5f-09fc-487e-b75b-dddd8a71ec8d" onCreateId="816de8ed-6e54-4dbf-8cfa-4c79398ea65e">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
@@ -107,14 +107,14 @@
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="d8895e48-10c9-44f9-b4f3-16c2849d998c" lastModifiedUtc="0001-01-01T00:00:00" name="Notes" audited="false" columnName="NOTES" maxLength="2147483647" precision="0" scale="0" ordinal="13" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="d8895e48-10c9-44f9-b4f3-16c2849d998c" lastModifiedUtc="2012-02-10T03:17:28.7801046Z" name="Notes" audited="false" columnName="NOTES" maxLength="2147483647" precision="0" scale="0" ordinal="13" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
-      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
-        <TextDataType>
+      <SystemDataType guid="f4ca6023-9f5f-4e41-8571-50ba94e8f233">
+        <LongTextDataType>
           <Length>2147483647</Length>
-        </TextDataType>
+        </LongTextDataType>
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="10424732-6efc-44cb-b88b-941ecc713bdd" lastModifiedUtc="0001-01-01T00:00:00" name="StartDate" audited="false" columnName="STARTDATE" maxLength="0" precision="0" scale="0" ordinal="10" isReadOnly="false">
@@ -137,7 +137,7 @@
           <MustExistInList>true</MustExistInList>
           <NoneEditable>false</NoneEditable>
           <AlphaSort>false</AlphaSort>
-          <Length>255</Length>
+          <Length>32</Length>
         </PickListDataType>
       </SystemDataType>
     </property>

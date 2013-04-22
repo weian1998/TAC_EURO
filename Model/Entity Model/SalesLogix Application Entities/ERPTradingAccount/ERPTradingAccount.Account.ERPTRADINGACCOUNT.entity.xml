@@ -1,12 +1,16 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="b1a3a9c7-1b4b-4409-bc72-6c1b31d20d8f" lastModifiedUtc="2010-03-23T21:23:03.7386315Z" manageSchema="false" tableName="ERPTRADINGACCOUNT" name="ERPTradingAccount" isExtension="true" parentEntityId="ebfd715e-2b2f-4e5e-8c6d-cfc0d9b4ae52" audited="false" lastUpdatedPropertyId="f4b5d13b-4b1c-4e7e-a169-afe4b0d8b9bd" onBeforeInsertMethodId="351d13e7-4c43-4406-867b-8db496567c73" onAfterInsertMethodId="1fd7b10e-f742-4b48-96f4-c5df55420d9c" onBeforeUpdateMethodId="a2665ae2-ae95-4b7c-99fb-4c896792d633" onAfterUpdateMethodId="e1d95b8c-0c3b-45bf-a8ba-052074f73929" onBeforeDeleteMethodId="d79006e0-f06c-4258-81f6-4b6141543814" onAfterDeleteMethodId="1dc8bd44-ff28-4e4c-979e-145285dfa748" onCreateId="167a7917-2f12-4e67-995a-c21bc9dd7006">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="b1a3a9c7-1b4b-4409-bc72-6c1b31d20d8f" lastModifiedUtc="2012-10-17T17:41:14.035291Z" manageSchema="true" tableName="ERPTRADINGACCOUNT" name="ERPTradingAccount" isExtension="true" cacheUsage="ReadWrite" parentEntityId="ebfd715e-2b2f-4e5e-8c6d-cfc0d9b4ae52" audited="false" onBeforeInsertMethodId="351d13e7-4c43-4406-867b-8db496567c73" onAfterInsertMethodId="1fd7b10e-f742-4b48-96f4-c5df55420d9c" onBeforeUpdateMethodId="a2665ae2-ae95-4b7c-99fb-4c896792d633" onAfterUpdateMethodId="e1d95b8c-0c3b-45bf-a8ba-052074f73929" onBeforeDeleteMethodId="d79006e0-f06c-4258-81f6-4b6141543814" onAfterDeleteMethodId="1dc8bd44-ff28-4e4c-979e-145285dfa748" onCreateId="167a7917-2f12-4e67-995a-c21bc9dd7006">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
       <extender guid="1589723d-0536-4bf3-bdd7-3f6f7fe165d0">
         <OrmEntityMetadataExtension>
+          <HistoryTypeName>inherit</HistoryTypeName>
           <IsHistoryTable>false</IsHistoryTable>
         </OrmEntityMetadataExtension>
+      </extender>
+      <extender guid="76aa0e24-2c8f-3b71-a1f9-ca6db3db4459">
+        <OrmEntitySDataExtension lastUpdatedPropertyId="f4b5d13b-4b1c-4e7e-a169-afe4b0d8b9bd" canPost="true" canPut="true" canDelete="true" />
       </extender>
     </extendee>
   </ExtendedPropertiesCollection>
@@ -17,7 +21,11 @@
   <properties>
     <property xsi:type="OrmFieldProperty" id="ad8c5d39-6581-4efa-afed-7a5f68758218" lastModifiedUtc="2010-05-25T07:40:27.2821634Z" name="TradingAccountId" audited="false" isNullable="false" include="false" columnName="ACCOUNTID" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
         <StandardIdDataType />
@@ -25,7 +33,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="a7bb6d6b-b7b8-4b91-a982-7b8ad1cc2498" lastModifiedUtc="2010-03-08T18:59:42.9963215Z" name="CreateUser" audited="false" columnName="CREATEUSER" maxLength="12" precision="0" scale="0" ordinal="1" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
         <StandardIdDataType />
@@ -33,7 +45,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="53417547-5895-4607-8443-772f196c739a" lastModifiedUtc="2010-03-08T18:59:43.0093215Z" name="CreateDate" audited="false" columnName="CREATEDATE" maxLength="0" precision="0" scale="0" ordinal="2" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
         <DateTimeDataType />
@@ -41,7 +57,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="9970ab68-79a8-4f93-ad85-30f8c412f259" lastModifiedUtc="2010-03-08T18:59:43.0333215Z" name="ModifyUser" audited="false" columnName="MODIFYUSER" maxLength="12" precision="0" scale="0" ordinal="3" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
         <StandardIdDataType />
@@ -49,15 +69,23 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="f4b5d13b-4b1c-4e7e-a169-afe4b0d8b9bd" lastModifiedUtc="2010-03-08T18:59:43.0463215Z" name="ModifyDate" audited="false" columnName="MODIFYDATE" maxLength="0" precision="0" scale="0" ordinal="4" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
         <DateTimeDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="ade820c1-aed9-4f47-a3f1-e78520236337" lastModifiedUtc="2010-03-08T18:59:43.0593215Z" name="SeccodeId" audited="false" columnName="SECCODEID" maxLength="12" precision="0" scale="0" ordinal="5" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="ade820c1-aed9-4f47-a3f1-e78520236337" lastModifiedUtc="2012-01-13T15:35:37.7547103Z" name="SecCodeId" audited="false" include="false" columnName="SECCODEID" maxLength="12" precision="0" scale="0" ordinal="5" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
         <StandardIdDataType />
@@ -65,7 +93,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="6a40c5d2-7a24-4e27-924b-063c0656cd7a" lastModifiedUtc="2010-03-08T19:09:48.1133215Z" name="CustomerSupplierFlag" description="A flag to indicate if the Trading Account is a Customer or Supplier.  " audited="false" columnName="CUSTOMERSUPPLIERFLAG" maxLength="32" precision="0" scale="0" ordinal="6" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
         <TextDataType>
@@ -75,7 +107,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="e99288e9-285d-42d9-ad81-ade1cce81a8a" lastModifiedUtc="2010-03-08T19:09:25.9993215Z" name="OpenedDate" description="Date the Trading Account was opened. W3C date time standard for XML" audited="false" columnName="OPENEDDATE" maxLength="0" precision="0" scale="0" ordinal="7" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
         <DateTimeDataType />
@@ -83,7 +119,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="67f31043-a96b-4bc8-b2a5-571dfaead41d" lastModifiedUtc="2010-03-08T19:12:55.4463215Z" name="ShortName" description="A shorter name for the Trading Account." audited="false" columnName="SHORTNAME" maxLength="64" precision="0" scale="0" ordinal="10" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
         <TextDataType>
@@ -93,7 +133,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="060f50de-d508-448c-b320-773182d4f981" lastModifiedUtc="2010-03-08T19:14:33.0783215Z" name="DeliveryMethod" description="Preferred Delivery method to be used for the Trading Account (e.g.Courier, Collection ,etc)" audited="false" columnName="DELIVERYMETHOD" maxLength="64" precision="0" scale="0" ordinal="11" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
         <TextDataType>
@@ -103,7 +147,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="9e29328a-7137-4736-a6c2-54b5fda11fb8" lastModifiedUtc="2010-03-08T19:17:16.5981215Z" name="FinanceBalance" description="Trading account financial balance.   In TradingAccount currency." audited="false" columnName="FINANCEBALANCE" maxLength="0" precision="17" scale="4" ordinal="16" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="2596d57d-89d6-4b72-9036-b18c64c5324c">
         <DecimalDataType>
@@ -114,7 +162,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="d34b09af-d473-4b1d-bf41-afc320c95ce9" lastModifiedUtc="2010-03-08T19:17:30.0453215Z" name="FinanceLimit" description="Trading account financial (credit) limit.   In TradingAccount currency." audited="false" columnName="FINANCELIMIT" maxLength="0" precision="17" scale="4" ordinal="17" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="2596d57d-89d6-4b72-9036-b18c64c5324c">
         <DecimalDataType>
@@ -125,7 +177,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="b6b9ec18-001f-4417-8acf-59cec97b5116" lastModifiedUtc="2010-03-08T19:17:45.0213215Z" name="FinanceBalanceDate" description="The date upon which the finance balance was based. " audited="false" columnName="FINANCEBALANCEDATE" maxLength="0" precision="0" scale="0" ordinal="18" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
         <DateTimeDataType />
@@ -133,7 +189,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="62219391-926b-458f-824c-650d6fcaf3b0" lastModifiedUtc="2010-03-23T19:06:10.9562179Z" name="FinanceStatusFlag" description="Trading account financial status (e.g. on hold (or “blocked”), off hold).   True is on hold, False is not on hold. Default = False" audited="false" columnName="FINANCESTATUSFLAG" maxLength="1" precision="0" scale="0" ordinal="19" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="92432b4d-8206-4a96-ba7b-e4cbd374f148">
         <TrueFalseDataType />
@@ -141,7 +201,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="fd0b7eb1-cee5-4495-a345-a3c6d61e77fc" lastModifiedUtc="2010-03-08T19:19:55.2033215Z" name="FinanceStatusText" description="Trading account financial status text. Please note: this is the label used to describe the Finance Status Flag above – it is not a status in its own right. Default = “On Hold”" audited="false" columnName="FINANCESTATUSTEXT" maxLength="64" precision="0" scale="0" ordinal="20" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
         <TextDataType>
@@ -151,7 +215,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="68b94c1f-21b6-45bd-a256-9651282e1625" lastModifiedUtc="2010-03-08T19:27:31.5969215Z" name="PaymentTerms" description="Period in which outstanding amounts must be paid (e.g. 30 days, by end of month “EOM”). Also after this period additional (sur)charges may apply." audited="false" columnName="PAYMENTTERMS" maxLength="32" precision="0" scale="0" ordinal="27" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
         <TextDataType>
@@ -161,11 +229,43 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="e025044e-7fa8-45b3-b352-b2f22fe57012" lastModifiedUtc="2010-07-06T23:30:36.995665Z" name="ErpStatus" audited="false" columnName="ERPSTATUS" maxLength="64" precision="0" scale="0" ordinal="16" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
         <TextDataType>
           <Length>64</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="56734f81-ac15-4261-8adf-9550e846a72a" lastModifiedUtc="2012-10-17T17:40:55.9042539Z" name="Reference1" description="A user entered reference for the TradingAccount" audited="false" columnName="REFERENCE1" maxLength="24" precision="0" scale="0" ordinal="17" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>24</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="d09c0262-af46-4796-b33d-7e21c20d5987" lastModifiedUtc="2012-10-17T17:41:14.035291Z" name="Reference2" description="An additional reference for the TradingAccount" audited="false" columnName="REFERENCE2" maxLength="24" precision="0" scale="0" ordinal="18" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>24</Length>
         </TextDataType>
       </SystemDataType>
     </property>

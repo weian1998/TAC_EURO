@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<CabApplicationPortal xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="826ae928-70e1-4df3-b337-c8c0702d7248">
+  <PortalAlias>SLXCustomerPortal</PortalAlias>
+  <PortalReferences />
+  <DeploymentActions>
+    <ActionType TypeName="Sage.SalesLogix.Web.AdminModule.SLXWebAccessConnectionStringDeploymentAction, Sage.SalesLogix.Web.AdminModule">
+      <Properties />
+    </ActionType>
+    <ActionType TypeName="Sage.Platform.Deployment.AdminModule.EntityDeploymentAction, Sage.Platform.Deployment.AdminModule">
+      <Properties />
+    </ActionType>
+    <ActionType TypeName="Sage.Platform.Deployment.AdminModule.CabPortalDeploymentAction, Sage.Platform.Deployment.AdminModule">
+      <Properties />
+    </ActionType>	
+    <ActionType TypeName="Sage.Platform.Deployment.AdminModule.GlobalImageSpriteDeploymentAction, Sage.Platform.Deployment.AdminModule">
+      <Properties />
+    </ActionType>
+  </DeploymentActions>
+  <AuthenticationProvider>Sage.SalesLogix.Web.SLXCustomerAuthenticationProvider, Sage.SalesLogix.Web</AuthenticationProvider>
+  <TemplateUrl>masters\base.master</TemplateUrl>
+</CabApplicationPortal>

@@ -112,15 +112,11 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="LeadSearchAndConvert_ClientScript" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>LeadSearchAndConvert_ClientScript.js;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
   <data name="cmdCancel.Caption" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -269,7 +265,7 @@
     <value>Score</value>
   </data>
   <data name="LoadErrorMSG" xml:space="preserve">
-    <value>Lead convert view is not available please contact the system administrator: {0}</value>
+    <value>Lead convert view is not available please contact the system administrator. SalesLogix Error Id: {0}.</value>
   </data>
   <data name="Resolved.InsertedNewLead" xml:space="preserve">
     <value>Inserted New Lead:{0}</value>
@@ -281,7 +277,7 @@
     <value>Merged With Lead:{0}</value>
   </data>
   <data name="Error_MergingRecords" xml:space="preserve">
-    <value>Error merging records: {0}</value>
+    <value>Error merging records. SalesLogix Error Id: {0}.</value>
   </data>
   <data name="Opportunity_Description" xml:space="preserve">
     <value>Opportunity for {0}</value>

@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="OwnerDescription.Caption" xml:space="preserve">
     <value>Owner Description</value>
@@ -141,12 +141,6 @@
   <data name="grdDepartments.598e98dd-e682-4b1b-a260-245167f63585.Text" xml:space="preserve">
     <value>Remove</value>
   </data>
-  <data name="grdDepartments.5e896acf-eda1-4452-a6bd-2797ed21c11a.ColumnHeading" xml:space="preserve">
-    <value>Department</value>
-  </data>
-  <data name="grdDepartments.EmptyTableRowText" xml:space="preserve">
-    <value>User does not belong to any departments</value>
-  </data>
   <data name="QFLabel.Text" xml:space="preserve">
     <value>User is a member of the following departments</value>
   </data>
@@ -156,25 +150,43 @@
   <data name="lueAddDepartment.LookupProperties.OwnerDescription.PropertyHeader" xml:space="preserve">
     <value>Department</value>
   </data>
-  <data name="grdDepartments.bc34b828-085c-4666-a68e-3e72a74d9e7d.Text" xml:space="preserve">
-    <value>Remove</value>
+  <data name="grdDepartments.6f42efe5-b956-4480-b51b-797941c1e558.ColumnHeading" xml:space="preserve">
+    <value>Last Modified</value>
   </data>
-  <data name="grdDepartments.bc34b828-085c-4666-a68e-3e72a74d9e7d.ConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to remove this department from the team?</value>
+  <data name="grdDepartments.9f82b192-6e9a-4d05-bef5-14a5fe79bc42.ColumnHeading" xml:space="preserve">
+    <value>Created</value>
   </data>
   <data name="lueAddDepartment.ButtonToolTip" xml:space="preserve">
     <value>Add department to team</value>
   </data>
-  <data name="grdDepartments.fb3a028d-e434-448b-b55b-038122c20dfb.ColumnHeading" xml:space="preserve">
-    <value>Created</value>
+  <data name="ConfirmRemoveFromDept" xml:space="preserve">
+    <value>Are you sure you want to remove this Department?</value>
   </data>
-  <data name="grdDepartments.5cd1ffb4-aee7-43e2-ba65-bcd4deedef09.ColumnHeading" xml:space="preserve">
-    <value>Last Modified</value>
+  <data name="grdDepartments.754cbfab-117f-4b69-9777-3a3cd9953823.ColumnHeading" xml:space="preserve">
+    <value>Department</value>
   </data>
-  <data name="grdDepartments.7fdbc166-20dd-45ae-bb61-e6fc7e77c947.ColumnHeading" xml:space="preserve">
+  <data name="grdDepartments.c3344641-05fa-4d35-8159-fe31e3ea5d01.ColumnHeading" xml:space="preserve">
     <value>Modified By</value>
   </data>
   <data name="lueAddDepartment.LookupDialogTitle" xml:space="preserve">
     <value>Lookup Department</value>
+  </data>
+  <data name="lueAddDepartment.LookupProperties.Type.PropertyHeader" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="lueAddDepartment.LookupProperties..PropertyHeader" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lueAddDepartment.LookupProperties.Id.PropertyHeader" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="lueAddDepartment.LookupProperties.SeccodeDesc.PropertyHeader" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="lueAddDepartment.LookupProperties.SeccodeType.PropertyHeader" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="grdDepartments.btnRemoveFromDepartment.ToolTip" xml:space="preserve">
+    <value>Remove</value>
   </data>
 </root>

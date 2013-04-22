@@ -72,16 +72,9 @@
     </tr>
 </table>
 
-<table id="tblOptions" border="0" cellpadding="1" cellspacing="2" class="formtable">
-    <col width ="1" /><col width="1" /><col width="100%" />
-    <tr>
-        <td>
-        </td>
-    </tr>
-</table>
 
 <table id="tblAssignment" border="0" cellpadding="1" cellspacing="2" class="formtable">
-    <col width ="1" /><col width="60%" /><col width="1" /><col width="40%" />
+    <col width ="1" /><col width="50%" /><col width="1" /><col width="48%" />
     <tr>
         <td align="left"></td>
         <td>
@@ -89,29 +82,29 @@
                 <asp:Label ID="lblUpdateTargets" AssociatedControlID="ddlOptions" runat="server" Text="<%$ resources: lblUpdateTargets.Text %>"></asp:Label>
             </div>
             <div class="textcontrol">
-                <asp:DropDownList ID="ddlOptions" runat="server" AutoPostBack="false"></asp:DropDownList>
+                <select ID="ddlOptions" data-dojo-type="dijit.form.FilteringSelect" CssClass="select-control" runat="server" AutoPostBack="false"></select>
             </div>
         </td>
         <td align="left"></td>
         <td>
             <div id="opt0" style="display:none" runat="server">
-                <div class="lbl">
+                <div class="lbl" style="width: 50px">
                     <asp:Label ID="lblToStatus" runat="server" AssociatedControlID="ddlToStatus" Text="<%$ resources: lblTo.Text %>"></asp:Label>
                 </div>
                 <div class="textcontrol">
-                    <asp:DropDownList ID="ddlToStatus" runat="server" AutoPostBack="false"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlToStatus" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" runat="server" AutoPostBack="false"></asp:DropDownList>
                 </div>
             </div>
-                <div id="opt1" style="display:none" runat="server">
-                <div class="lbl">
+            <div id="opt1" style="display:none" runat="server">
+                <div class="lbl" style="width: 50px">
                     <asp:Label ID="lblToStage" runat="server" AssociatedControlID="ddlTOStage" Text="<%$ resources: lblTo.Text %>"></asp:Label>
                 </div>
                 <div class="textcontrol">
-                    <asp:DropDownList ID="ddlToStage" runat="server" AutoPostBack="false"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlToStage" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" runat="server" AutoPostBack="false" Width="100px"></asp:DropDownList>
                 </div>
             </div>
             <div id="opt2" style="display:none" runat="server" >
-                <div class="lbl">
+                <div class="lbl" style="width: 50px">
                     <asp:Label ID="lblInitTo" runat="server" Text="<%$ resources: lblTo.Text %>"></asp:Label>
                 </div>
                 <div>
@@ -156,21 +149,21 @@
                                 <SalesLogix:LookupControl runat="server" ID="luLeadSource"
                                     LookupEntityTypeName="Sage.Entity.Interfaces.ILeadSource, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" >
                                     <LookupProperties>
-                                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: LeadSourceType.PropertyHeader %>"
+                                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: LeadSourceType.PropertyHeader %>" PropertyType="System.String"
                                             PropertyName="Type" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
                                         </SalesLogix:LookupProperty>
-                                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: LeadSourceDescription.PropertyHeader %>"
+                                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: LeadSourceDescription.PropertyHeader %>" PropertyType="System.String"
                                             PropertyName="Description" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
                                         </SalesLogix:LookupProperty>
-                                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: LeadSourceAbbrev.PropertyHeader %>"
+                                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: LeadSourceAbbrev.PropertyHeader %>" PropertyType="System.String"
                                             PropertyName="AbbrevDescription" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
                                         </SalesLogix:LookupProperty>
-                                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: LeadSourceSourceDate.PropertyHeader %>"
+                                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: LeadSourceSourceDate.PropertyHeader %>" PropertyType="System.String"
                                             PropertyName="SourceDate" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
                                         </SalesLogix:LookupProperty>
                                     </LookupProperties>
                                     <LookupPreFilters>
-                                        <SalesLogix:LookupPreFilter PropertyName="Status" FilterValue="Active"></SalesLogix:LookupPreFilter>
+                                        <SalesLogix:LookupPreFilter PropertyType="System.String" PropertyName="Status" FilterValue="Active"></SalesLogix:LookupPreFilter>
                                     </LookupPreFilters>
                                 </SalesLogix:LookupControl>
                             </div>
@@ -184,7 +177,7 @@
                                 </asp:Label>
                             </div>
                             <div class="textcontrol">
-                                <asp:DropDownList ID="ddlResponseMethods" runat="server" AutoPostBack="false"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlResponseMethods" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" runat="server" AutoPostBack="false"></asp:DropDownList>
                             </div>
                         </td>
                         <td>
@@ -192,7 +185,7 @@
                                 <asp:Label ID="lblStage" runat="server" AssociatedControlID="ddlStage" Text="<%$ resources: lblStage.Text %>"></asp:Label>
                             </div>
                             <div class="textcontrol">
-                                <asp:DropDownList ID="ddlStage" runat="server" AutoPostBack="false"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlStage" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" runat="server" AutoPostBack="false"></asp:DropDownList>
                             </div>
                         </td>
                     </tr>
@@ -204,7 +197,7 @@
                                 </asp:Label>
                             </div>
                             <div class="textcontrol">
-                                <asp:DropDownList ID="ddlResponseInterests" runat="server" AutoPostBack="false"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlResponseInterests" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" runat="server" AutoPostBack="false"></asp:DropDownList>
                             </div>
                         </td>
                         <td>
@@ -214,7 +207,7 @@
                                 </asp:Label>
                             </div>
                             <div class="textcontrol">
-                                <asp:DropDownList ID="ddlResponseInterestLevels" runat="server" AutoPostBack="false"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlResponseInterestLevels" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" runat="server" AutoPostBack="false"></asp:DropDownList>
                             </div>
                         </td>
                     </tr>
@@ -231,27 +224,16 @@
                 </table>
             </div>
         </td>
-    </tr>  
-</table>
-
-<table id="tblButtons" border="0" cellpadding="1" cellspacing="2" class="formtable">
-    <col width="99%" /><col width="1" /><col width="1" />
-    <tr>
-        <td colspan="3" >
-            <hr />
-        </td>
     </tr>
     <tr>
         <td></td>
-        <td align="right">
-            <div class="slxButton" style="margin-right:10px">
-                <asp:Button ID="cmdUpdate" Text="<%$ resources: cmdUpdate.Text %>" width="100px" runat="server" OnClick="cmdUpdate_OnClick" />
-            </div>
-        </td>
-        <td align="right">
-            <div class="slxButton" style="margin-right:40px">
-                <asp:Button ID="cmdCancel" Text="<%$ resources: cmdCancel.Text %>" runat="server" width="100px" OnClick="cmdClose_OnClick" />
-            </div>
+        <td></td>
+        <td></td>
+        <td>
+            <asp:Panel runat="server" ID="ctrlstAddCancel" CssClass="controlslist qfActionContainer">
+                <asp:Button runat="server" ID="cmdUpdate" Text="<%$ resources: cmdUpdate.Text %>" CssClass="slxbutton"/>
+                <asp:Button runat="server" ID="cmdCancel" Text="<%$ resources: cmdCancel.Text %>" CssClass="slxbutton" />
+            </asp:Panel>
         </td>
     </tr>
 </table>

@@ -1,0 +1,95 @@
+﻿
+[
+'<div>',
+    '<div dojoType="dijit.Dialog" id="historyDialog" title="" dojoAttachPoint="_dialog" dojoAttachEvent="onHide:_onDlgHide">',
+        '<div class="activity-dialog">',  //body
+            '<div dojoType="dojox.layout.TableContainer" orientation="horiz" cols="1" labelWidth="{%= $.labelWidth %}">',
+                '<select label="{%= $.regardingText %}" shouldPublishMarkDirty="false" id="{%= $.id %}_pk_Regarding" dojoType="Sage.UI.Controls.SingleSelectPickList" dojoAttachPoint="pk_Regarding" canEditText="true" itemMustExist="false" maxLength="64"></select>',
+                '<div dojoType="Sage.UI.Controls.TextBox" shouldPublishMarkDirty="false" label="{%= $.locationText %}" id="{%= $.id %}_tb_Location" dojoAttachPoint="tb_Location" maxLength="255" ></div>',
+            '</div>', //first tablecontainer 1 col
+            '<div dojoType="dojox.layout.TableContainer" orientation="horiz" cols="2" labelWidth="{%= $.labelWidth %}">',
+                '<div dojoType="Sage.UI.Controls.DateTimePicker" shouldPublishMarkDirty="false" id="{%= $.id %}_dtp_CompletetdDate" dojoAttachPoint="dtp_completedDate" displayDate="true" displayTime="true" label="{%= $.completedDateText %}"></div>',
+                '<div dojoType="Sage.UI.Controls.DateTimePicker" shouldPublishMarkDirty="false" id="{%= $.id %}_dtp_StartDate" dojoAttachPoint="dtp_startDate" displayDate="true" displayTime="true" label="{%= $.startTimeText %}"></div>',
+                '<div dojoType="dijit.layout.ContentPane" label="" class="remove-padding">',
+                    '<div dojoType="dijit.form.CheckBox" label="{%= $.timeLessText %}" id="{%= $.id %}_cb_Timeless" dojoAttachPoint="cb_Timeless" ></div>',
+                    '<label class="checkbox-label" for="cb_Timeless">{%= $.timeLessText %}</label>',
+                '</div>',
+                 '<div dojoType="Sage.UI.Controls.DurationSelect" shouldPublishMarkDirty="false" label="{%= $.durationText %}" id="{%= $.id %}_sel_Duration" dojoAttachPoint="sel_Duration" includeDisablingCheckbox="false" valuesAreAfterStart="true"></div>',
+                '<div dojoType="dijit.layout.ContentPane" label="" class="remove-padding">',
+                    
+                '</div>',
+            '</div>', //second tablecontainer 2 col
+
+            '<div dojoType="dijit.layout.TabContainer" id="{%= $.id %}_tc_EditHistory"  dojoAttachPoint="tc_EditHistory" class="tab-container">',
+/*  General Tab   */
+                '<div dojoType="dijit.layout.ContentPane" id="{%= $.id %}_cp_General" title="{%= $.tabNameGeneralText %}" class="tabContent remove-padding" dojoAttachPoint="cp_General">',
+                    '<div dojoType="dojox.layout.TableContainer" orientation="horiz" cols="2" labelWidth="{%= $.labelWidth %}" dojoAttachPoint="result_Section" class="bottom-border-section">',
+                        '<select label="{%= $.resultText %}" id="{%= $.id %}_tb_Result" shouldPublishMarkDirty="false" dojoType="Sage.UI.Controls.SingleSelectPickList" dojoAttachPoint="pk_Result" canEditText="true" itemMustExist="false" maxLength="64"></select>',
+                    '</div>',
+                    '<div dojoType="dojox.layout.TableContainer" orientation="horiz" cols="4" labelWidth="4" baseClass="contact-lead-radios" >',
+                        '<input dojoType="dijit.form.RadioButton" type="radio" name="contactOrLead" label="{%= $.contactText %}" value="contact" id="{%= $.id %}_rdo_Contact" dojoAttachPoint="rdo_Contact" dojoAttachEvent="onChange:_setContactLeadVisibility" checked="true" />',
+                        '<input dojoType="dijit.form.RadioButton" type="radio" name="contactOrLead" label="{%= $.leadText %}" value="lead" id="{%= $.id %}_rdo_Lead" dojoAttachPoint="rdo_Lead" />',
+                    '</div>',
+                    '<div dojoType="dojox.layout.TableContainer" orientation="horiz" cols="2" labelWidth="{%= $.labelWidth %}" dojoAttachPoint="contactContainer" baseClass="bottom-border-section">',
+                        '<div dojoType="dijit.layout.ContentPane" label="{%= $.nameText %}" dojoAttachPoint="container_ContactLup" class="remove-padding lookup-container"></div>',
+                        '<div dojoType="dijit.layout.ContentPane" label="{%= $.opportunityText %}" dojoAttachPoint="container_OppLup" class="remove-padding lookup-container"></div>',
+                        '<div dojoType="dijit.layout.ContentPane" label="{%= $.accountText %}" dojoAttachPoint="container_AccountLup"  class="remove-padding lookup-container"></div>',
+                        '<div dojoType="dijit.layout.ContentPane" label="{%= $.ticketText %}" dojoAttachPoint="container_TicketLup"  class="remove-padding lookup-container"></div>',
+                    '</div>',
+                    '<div dojoType="dojox.layout.TableContainer" orientation="horiz" cols="2" labelWidth="{%= $.labelWidth %}" dojoAttachPoint="leadContainer"  baseClass="bottom-border-section" class="display-none">',
+                        '<div dojoType="dijit.layout.ContentPane" label="{%= $.nameText %}" dojoAttachPoint="container_LeadLup"  class="remove-padding lookup-container"></div>',
+                        '<input dojoType="dijit.form.TextBox" id="{%= $.id %}_tb_LeadCompanyName" label="{%= $.companyText %}" dojoAttachPoint="tb_LeadCompanyName" readonly="true" />',
+                    '</div>',                       
+                    '<div dojoType="dojox.layout.TableContainer" orientation="horiz" cols="2" labelWidth="{%= $.labelWidth %}"  class="bottom-border-section">',
+                        '<select label="{%= $.categoryText %}" id="{%= $.id %}_pk_Category" shouldPublishMarkDirty="false" dojoType="Sage.UI.Controls.SingleSelectPickList" dojoAttachPoint="pk_Category" canEditText="true" itemMustExist="false" maxLength="64"  style="width: {%= 472 - $.labelWidth %}px;" ></select>', 
+                         '<div dojoType="dijit.layout.ContentPane" label="{%= $.leaderText %}" dojoAttachPoint="container_LeaderLup" class="remove-padding lookup-container" style="width: {%= 472 - $.labelWidth %}px;"></div>',
+                         '<select label="{%= $.priorityText %}" id="{%= $.id %}_pk_Priority" shouldPublishMarkDirty="false" dojoType="Sage.UI.Controls.SingleSelectPickList" dojoAttachPoint="pk_Priority" canEditText="true" itemMustExist="false" pickListName="Priorities" sort="false" maxLength="64" style="width: {%= 472 - $.labelWidth %}px;"></select>',                          
+                    '</div>',
+                    '<div dojoType="dojox.layout.TableContainer" orientation="horiz" cols="1" labelWidth="{%= $.labelWidth %}"  class="valigntop">',
+                        '<textarea dojoType="dijit.form.SimpleTextarea" id="{%= $.id %}_ta_Notes" label="{%= $.notesText %}" dojoAttachPoint="ta_Notes" class="notes-text" ></textarea>',
+                    '</div>',
+                '</div>',  // end general tab
+
+              /* Attachments Tab  */
+                '<div dojoType="dijit.layout.ContentPane" id="{%= $.id %}_cp_Attachments" title="{%= $.tabNameAttachmentsText %}" class="tabContent" dojoAttachPoint="cp_Attachments" dojoAttachEvent="onShow:_showAttachmentsTab">',
+                    '<div id="{%= $.id %}_attachmentsGridPlaceholder" dojoAttachPoint="_attachmentGridPlaceholder" style="width:100%;height:100%;" ></div>',
+                '</div>',  //end attachments tab
+            '</div>', //end tab container
+            '<table class="button-bar">',
+                '<col width="50%" /><col width="50%" />',
+                 '<tr>',
+                    '<td class="alignleft">',
+                        //followUp section
+                        '<div dojoType="dojox.layout.TableContainer" orientation="horiz" cols="1" labelWidth="{%= $.labelWidth %}" dojoAttachPoint="followUp_Section" >',
+                            '<select label="{%= $.followupText %}" id="{%= $.id %}_followUpSelect" dojoType="dijit.form.ComboBox" dojoAttachPoint="sel_Followup">',
+                                '<option value="none" selected="selected">{%= $.noneText %}</option>',
+                                '<option value="atPhoneCall">{%= Sage.Utility.Activity.getActivityTypeName("atPhoneCall") %}</option>',
+                                '<option value="atAppointment">{%= Sage.Utility.Activity.getActivityTypeName("atAppointment") %}</option>',
+                                '<option value="atToDo">{%= Sage.Utility.Activity.getActivityTypeName("atToDo") %}</option>',
+                            '</select>',
+                            '<div dojoType="dijit.layout.ContentPane" label="" class="remove-padding">',
+                                '<div dojoType="dijit.form.CheckBox" label="" id="{%= $.id %}_ck_coAttachments" dojoAttachPoint="ck_coAttachments" ></div>',
+                                '<label class="checkbox-label" for="{%= $.id %}_ck_coAttachments">{%= $.carryOverAttachmentsText %}</label>',
+                            '</div>',
+                            '<div dojoType="dijit.layout.ContentPane" label="" class="remove-padding">',
+                                '<div dojoType="dijit.form.CheckBox" label="" id="{%= $.id %}_ck_coNotes" dojoAttachPoint="ck_coNotes" ></div>',
+                                '<label class="checkbox-label" for="{%= $.id %}_ck_coNotes">{%= $.carryOverNotesText %}</label>',
+                            '</div>',
+                        '</div>',//end followUp section                         
+                    '</td>',
+                    '<td class="alignright valignbottom" rowspan="2">',
+                        '<div dojoType="dijit.form.Button" id="{%= $.id %}_btnDelete" name="btn_Delete" dojoAttachPoint="btn_Delete" dojoAttachEvent="onClick:_deleteClick">{%= $.deleteText %}</div>',
+                        '<div dojoType="dijit.form.Button" id="{%= $.id %}_btn_OK" name="btn_OK" dojoAttachPoint="btn_OK" dojoAttachEvent="onClick:_okClick">{%= $.okText %}</div>',
+                        '<div dojoType="dijit.form.Button" id="{%= $.id %}_btn_Cancel" name="btn_Cancel" dojoAttachPoint="btn_Cancel" dojoAttachEvent="onClick:_cancelClick">{%= $. cancelText %}</div>',
+                    '</td>',
+                '</tr>',
+                '<tr>',
+                   '<td class="alignleft">',
+                      '<div class="scheduled-by-label" dojoAttachPoint="lbl_ScheduledBy"></div>',
+                   '</td>',                 
+                '</tr>',
+            '</table>',
+        '</div>', //body
+    '</div>',  //dialog
+'</div>' //root node
+]

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="6040956c-3e1b-4c87-9c47-21574aa0dfe2" lastModifiedUtc="2010-09-16T18:29:50.4653531Z" name="UpdateSecurityProfileData" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="118e9a07-e6b5-47dc-b4e6-756c7936771d" paramName="columnsToUpdate" sequence="0" paramType="List&lt;Sage.Platform.Security.SecurityProfileColumnData&gt;">
+      <description>The security profile columns to update in the encoded profile data.</description>
+    </OrmEntityMethodParam>
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="a4f97c94-7028-4a6e-9b2b-d450bf507420" lastModifiedUtc="2010-09-16T18:28:25.4814923Z" targetType="Sage.SalesLogix.OwnerSecurityProfile.Rules, Sage.SalesLogix.BusinessRules" targetMethod="UpdateSecurityProfileData" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

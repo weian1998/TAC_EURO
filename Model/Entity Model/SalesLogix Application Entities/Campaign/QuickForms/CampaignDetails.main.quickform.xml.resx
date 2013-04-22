@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="dteEndDate.Caption" xml:space="preserve">
     <value>End Date:</value>
@@ -128,9 +128,6 @@
   </data>
   <data name="lblTargets.Text" xml:space="preserve">
     <value>Number of Targets</value>
-  </data>
-  <data name="txtLeadSources0.Caption" xml:space="preserve">
-    <value>Lead Sources:</value>
   </data>
   <data name="cboStatus.Caption" xml:space="preserve">
     <value>Status:</value>
@@ -198,17 +195,14 @@
   <data name="chkMyCurrency.Caption" xml:space="preserve">
     <value>Display using "My Currency"</value>
   </data>
-  <data name="lblDate.Caption" xml:space="preserve">
-    <value />
-  </data>
   <data name="lblDateLaunched.Text" xml:space="preserve">
     <value>Launched on:</value>
   </data>
-  <data name="1bda5920-8c11-4d1e-aba2-d14bb71652ee.DialogTitleOverride" xml:space="preserve">
-    <value>Campaign Lead Sources</value>
+  <data name="QFSLXLookup.Caption" xml:space="preserve">
+    <value>Lead Sources:</value>
   </data>
-  <data name="QFControlsList.ToolTip" xml:space="preserve">
-    <value />
+  <data name="QFSLXLookup.LookupProperties.Description.PropertyHeader" xml:space="preserve">
+    <value>Description</value>
   </data>
   <data name="Launch_rsc" xml:space="preserve">
     <value>Launch</value>
@@ -223,12 +217,15 @@
     <value>Calendar</value>
   </data>
   <data name="dteEndDate.ButtonToolTip" xml:space="preserve">
-    <value>v</value>
+    <value>Calendar</value>
   </data>
   <data name="lveManager.ButtonToolTip" xml:space="preserve">
     <value>Find</value>
   </data>
   <data name="lveOwner.ButtonToolTip" xml:space="preserve">
     <value>Find</value>
+  </data>
+  <data name="QFSLXLookup.LookupProperties.Type.PropertyHeader" xml:space="preserve">
+    <value>Type</value>
   </data>
 </root>

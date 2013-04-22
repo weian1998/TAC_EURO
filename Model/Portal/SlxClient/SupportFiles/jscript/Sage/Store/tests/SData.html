@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title>Sage.Store Tests</title>
+        <script type="text/javascript" src="../../UI/Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: false,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/sinon/sinon-1.3.4.js"></script>
+        <!--[if IE]>
+        <script type="text/javascript" src="../../../Libraries/sinon/sinon-ie-1.3.4.js"></script>
+        <![endif]-->
+
+        <script type="text/javascript">
+        require([
+            'doh',
+            'Sage/Store/SData'
+        ], function(
+            doh,
+            SData
+        ) {
+            doh.register("Sage.Store.tests.SData", [
+                function testStoreGetUsingID() {
+                    var store,
+                        request,
+                        query = 100,
+                        readStub,
+                        def;
+                        
+                    Sage.SData.Client.SDataSingleResourceRequest = sinon.stub();
+                    request = Sage.SData.Client.SDataSingleResourceRequest;
+                    readStub = sinon.stub();
+                    readStub.yieldsTo('success', { /* fake entry */
+                        id: 100,
+                        name: 'foo',
+                        age: 25,
+                        gender: 'male'
+                    });
+                    
+                    request.returns({
+                        setResourceSelector: function (id) {
+                            // The id will get wrapped in single quotes
+                            doh.t(id === ("'" + query + "'"));
+                            return {
+                                read: readStub
+                            };
+                        }
+                    });
+                    
+                    store = new SData();
+                    def = store.get(query);
+                    
+                    def.then(function (entry) { /* resolved */
+                        // Ensure our read is wired up correctly
+                        doh.t(entry.name === 'foo');
+                    }, function() { /* error */
+                        
+                    }, function () { /* progress */
+                    
+                    });
+                    
+                }
+            ]);
+            
+            //Execute D.O.H. in this remote file.
+            doh.run();
+        });
+        </script>
+    </head>
+    <body>
+        <form>
+        </form>
+    </body>
+</html>

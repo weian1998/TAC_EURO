@@ -112,13 +112,16 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Actions" xml:space="preserve">
     <value>Actions:</value>
+  </data>
+  <data name="AuthTokenNullExceptionMsg" xml:space="preserve">
+    <value>The authentication token is null.</value>
   </data>
   <data name="CannotCompleteRequest" xml:space="preserve">
     <value>We're sorry, your request could not be completed.</value>
@@ -127,16 +130,40 @@
     <value>You are about to permanently delete this record.</value>
   </data>
   <data name="Copyright" xml:space="preserve">
-    <value>© 2011 Sage Software Inc. All Rights Reserved.</value>
+    <value>© 2012 Sage Software Inc. All Rights Reserved.</value>
   </data>
   <data name="EmailSubject" xml:space="preserve">
-    <value>SalesLogix Exception Details</value>
+    <value>SalesLogix Exception Details (SalesLogix Error Id: {0})</value>
   </data>
   <data name="Error_NoAccess" xml:space="preserve">
-    <value>Sorry you do not have access to the select page.</value>
+    <value>Sorry you do not have access to this page.</value>
+  </data>
+  <data name="Exception" xml:space="preserve">
+    <value>Exception: {0}</value>
+  </data>
+  <data name="ExceptionIntercepted" xml:space="preserve">
+    <value>An unhandled server-side exception was intercepted. {0}</value>
   </data>
   <data name="ExceptionPageTitle" xml:space="preserve">
     <value>Sage SalesLogix Exception</value>
+  </data>
+  <data name="ExceptionSource" xml:space="preserve">
+    <value>Source: {0}.</value>
+  </data>
+  <data name="ExceptionStackTrace" xml:space="preserve">
+    <value>Stack trace: {0}.</value>
+  </data>
+  <data name="ExceptionTargetSite" xml:space="preserve">
+    <value>Target site: {0}.</value>
+  </data>
+  <data name="ExceptionType" xml:space="preserve">
+    <value>Exception type: {0}.</value>
+  </data>
+  <data name="ExceptionUrl" xml:space="preserve">
+    <value>URL: {0}</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
   </data>
   <data name="MailDetailsLink" xml:space="preserve">
     <value>Mail details of this exception to your administrator</value>
@@ -146,5 +173,11 @@
   </data>
   <data name="ShowDetails" xml:space="preserve">
     <value>Show details</value>
+  </data>
+  <data name="SlxErrorId" xml:space="preserve">
+    <value>SalesLogix Error Id: {0}.</value>
+  </data>
+  <data name="WereSorryMsg" xml:space="preserve">
+    <value>We're sorry, you've encountered an error. If applicable, please try again</value>
   </data>
 </root>

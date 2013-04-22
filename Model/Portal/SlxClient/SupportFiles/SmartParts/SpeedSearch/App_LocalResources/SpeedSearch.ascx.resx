@@ -237,4 +237,25 @@
   <data name="SpeedSearch_Title" xml:space="preserve">
     <value>SpeedSearch</value>
   </data>
+  <data name="SpeedSearch_Preview_Blocked_Error" xml:space="preserve">
+    <value>Preview blocked by popup blocker</value>
+  </data>
+  <data name="SpeedSearch_Paging_Button_First.ToolTip" xml:space="preserve">
+    <value>First Page</value>
+  </data>
+  <data name="SpeedSearch_Paging_Button_Last.ToolTip" xml:space="preserve">
+    <value>Last Page</value>
+  </data>
+  <data name="SpeedSearch_Paging_Button_Next.ToolTip" xml:space="preserve">
+    <value>Next Page</value>
+  </data>
+  <data name="SpeedSearch_Paging_Button_Prev.ToolTip" xml:space="preserve">
+    <value>Previous Page</value>
+  </data>
+  <data name="SpeedSearch_Error_Index_Required" xml:space="preserve">
+    <value>At least one index must be selected to perform search</value>
+  </data>
+  <data name="SpeedSearch_Error_Keyword_Required" xml:space="preserve">
+    <value>The search request must contain a keyword.</value>
+  </data>
 </root>

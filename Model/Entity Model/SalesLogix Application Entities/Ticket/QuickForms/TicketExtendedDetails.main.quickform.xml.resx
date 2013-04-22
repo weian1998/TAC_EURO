@@ -112,16 +112,16 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="txtSubject.Caption" xml:space="preserve">
     <value>Subject:</value>
   </data>
-  <data name="txtResolution.Caption" xml:space="preserve">
-    <value>Resolution:</value>
+  <data name="lueStandardProblem.LookupProperties.Description.PropertyHeader" xml:space="preserve">
+    <value>Description</value>
   </data>
   <data name="cmdDescDateStamp.ToolTip" xml:space="preserve">
     <value>User Date Stamp</value>
@@ -135,40 +135,40 @@
   <data name="cmdSpeedSearch.ToolTip" xml:space="preserve">
     <value>SpeedSearch</value>
   </data>
-  <data name="txtProblem.Caption" xml:space="preserve">
-    <value>Notes:</value>
-  </data>
-  <data name="lueStandardProblem.LookupProperties.Area.PropertyHeader" xml:space="preserve">
-    <value>Area</value>
-  </data>
-  <data name="lueStandardProblem.LookupProperties.Category.PropertyHeader" xml:space="preserve">
-    <value>Category</value>
-  </data>
-  <data name="lueStandardProblem.LookupProperties.Description.PropertyHeader" xml:space="preserve">
-    <value>Description</value>
-  </data>
   <data name="lueStandardProblem.LookupProperties.Issue.PropertyHeader" xml:space="preserve">
     <value>Issue</value>
-  </data>
-  <data name="lueStandardResolution.LookupProperties.Description.PropertyHeader" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="btnProblemTimestamp.ToolTip" xml:space="preserve">
-    <value>Date/Timestamp</value>
   </data>
   <data name="btnProblemSpeedSearch.ToolTip" xml:space="preserve">
     <value>SpeedSearch</value>
   </data>
+  <data name="btnProblemTimestamp.ToolTip" xml:space="preserve">
+    <value>Date/Timestamp</value>
+  </data>
+  <data name="txtProblem.Caption" xml:space="preserve">
+    <value>Description:</value>
+  </data>
   <data name="lueStandardProblem.ToolTip" xml:space="preserve">
     <value>Standard Problem</value>
   </data>
-  <data name="btnResolutionTimestamp.ToolTip" xml:space="preserve">
-    <value>Date/Timestamp</value>
+  <data name="lueStandardProblem.LookupProperties.Category.PropertyHeader" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="lueStandardProblem.LookupProperties.Area.PropertyHeader" xml:space="preserve">
+    <value>Area</value>
+  </data>
+  <data name="txtResolution.Caption" xml:space="preserve">
+    <value>Resolution:</value>
+  </data>
+  <data name="lueStandardResolution.LookupProperties.Description.PropertyHeader" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="lueStandardResolution.ToolTip" xml:space="preserve">
+    <value>Standard Resolution</value>
   </data>
   <data name="btnResolutionSpeedSearch.ToolTip" xml:space="preserve">
     <value>SpeedSearch</value>
   </data>
-  <data name="lueStandardResolution.ToolTip" xml:space="preserve">
-    <value>Standard Resolution</value>
+  <data name="btnResolutionTimestamp.ToolTip" xml:space="preserve">
+    <value>Date/Timestamp</value>
   </data>
 </root>

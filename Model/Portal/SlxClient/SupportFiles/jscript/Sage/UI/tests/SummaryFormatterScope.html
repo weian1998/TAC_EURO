@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>Sage.UI Browser Tests</title>
+        <script type="text/javascript" src="../Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/sinon/sinon-1.3.4.js"></script>
+        <!--[if IE]>
+        <script type="text/javascript" src="../../../Libraries/sinon/sinon-ie-1.3.4.js"></script>
+        <![endif]-->
+        <script type="text/javascript">
+        require([
+            'dojo/parser',
+            'dojo/ready',
+            'doh',
+            'Sage/UI/SummaryFormatterScope'
+        ],
+        function (
+            parser,
+            ready,
+            doh,
+            SummaryFormatterScope
+        ) {
+            ready(function(){
+                doh.register("Sage.UI.tests.SummaryFormatterScope", [
+                    function testLifeCycle() {
+                    }
+                ]);
+                
+                //Execute D.O.H. in this remote file.
+                doh.run();
+            });
+        });
+        </script>
+    </head>
+    <body>
+        <form>
+        </form>
+    </body>
+</html>

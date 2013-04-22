@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<PortalService xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="cf5c45cd-7cba-43cc-927f-089976304066">
+  <InstanceId>1dc98fd380d44871aa76cdef3d6746a7</InstanceId>
+  <ServiceType>Sage.Platform.Orm.Services.DynamicEntityNHibernateConfigurationService, Sage.Platform</ServiceType>
+  <RegisterAs>Sage.Platform.Orm.Services.IDynamicEntityNHibernateConfigurationService, Sage.Platform</RegisterAs>
+  <AddOnDemand>false</AddOnDemand>
+  <Properties />
+  <Scope>Application</Scope>
+</PortalService>

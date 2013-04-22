@@ -1,25 +1,19 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeFile="ReplaceTeamMember.ascx.cs" Inherits="ReplaceTeamMember" %>
-<%@ Register Assembly="Sage.SalesLogix.Client.GroupBuilder" Namespace="Sage.SalesLogix.Client.GroupBuilder" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.PickList" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.DependencyLookup" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.Lookup" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.Timeline" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.HighLevelTypes" Namespace="Sage.SalesLogix.HighLevelTypes" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.Platform.WebPortal" Namespace="Sage.Platform.WebPortal.SmartParts" TagPrefix="SalesLogix" %>
+<%@ Register TagPrefix="SalesLogix" Namespace="Sage.Platform.WebPortal.SmartParts" Assembly="Sage.Platform.WebPortal" %>
 
 <asp:HiddenField ID="hfMode" runat="server" Value="" /> 
 <asp:HiddenField ID="hfContext" runat="server" Value="" /> 
 
 
-<div style="display:none">
-    <asp:Panel ID="ReplaceTeamMember_RTools" runat="server">
-        <SalesLogix:PageLink ID="lnkReplaceTeamMemberHelp" runat="server" LinkType="HelpFileName"
-            ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="Removing_or_Replacing_Team_Members.htm" ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16">&nbsp;&nbsp;&nbsp;&nbsp;</SalesLogix:PageLink>
-    </asp:Panel>    
-</div>
+<SalesLogix:SmartPartToolsContainer runat="server" ID="ReplaceTeamMember_RTools" ToolbarLocation="Right">
+    <SalesLogix:PageLink ID="lnkReplaceTeamMemberHelp" runat="server" LinkType="HelpFileName"
+        ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="Removing_or_Replacing_Team_Members.htm" ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16">&nbsp;&nbsp;&nbsp;&nbsp;</SalesLogix:PageLink>
+</SalesLogix:SmartPartToolsContainer>
           
-<table border="0" cellpadding="0" cellspacing="0" class="formtable">         
+<table border="0" cellpadding="0" cellspacing="5" class="formtable">         
          <col width="85%" />     
        <tr>       
        <td>
@@ -63,10 +57,10 @@
         </td>
      </tr>      
     <tr>
-      <td align="right" style="padding-right:40px">
-         <asp:Button class="slxbutton" runat="server" ID="btnOk" Text="<%$ resources: btnOk.Caption %>" OnClick="OK_Click"  />
-         <asp:Button class="slxbutton" runat="server" ID="btnCancel" Text="<%$ resources: btnCancel.Caption %>"  OnClick="CANCEL_Click"  />
+      <td class="alignright" style="padding-right:20px">
+         <asp:Button CssClass="slxbutton" runat="server" ID="btnOk" Text="<%$ resources: btnOk.Caption %>" OnClick="OK_Click"  />
+         <asp:Button CssClass="slxbutton" runat="server" ID="btnCancel" Text="<%$ resources: btnCancel.Caption %>"  OnClick="CANCEL_Click"  />
        </td>
-    </tr>  
+    </tr>
 </table>
 

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<mashup id="972fe4d5-881b-4c53-a61f-9ffdc1855b7d" name="UserCalendarQueries">
+  <processors>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor id="b15dfa53-cca7-413f-809f-0645996b43ee" name="UserHasAccessToTheseCalendars" location="20, 20" expanded="true" width="440" continueOnError="false" query="select accessToUser.id as accessUserId, accessUserInfo.UserName as accessUserName, &#xD;&#xA;  userCalendar.AllowAdd as allowAdd, userCalendar.AllowDelete as allowDelete, &#xD;&#xA;  userCalendar.AllowEdit as allowEdit, userCalendar.AllowSync as allowSync&#xD;&#xA;from UserCalendar userCalendar&#xD;&#xA;  inner join userCalendar.OthersAccessToUserCal me&#xD;&#xA;  inner join userCalendar.CalUser accessToUser&#xD;&#xA;  inner join accessToUser.UserInfo accessUserInfo&#xD;&#xA;where userCalendar.OthersAccessToUserCal.id = '{userId}'&#xD;&#xA; and accessToUser.Type &lt;&gt; 'R'&#xD;&#xA; and not (me.Type &lt;&gt; 'P' and accessToUser.Type = 'P')&#xD;&#xA; and not (accessToUser.Type = 'W' and me.Id != 'ADMIN')&#xD;&#xA; and accessToUser.Id &lt;&gt; 'PROCESS'&#xD;&#xA;order by accessUserInfo.LastName, accessUserInfo.FirstName&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;">
+        <parameters />
+      </queryProcessor>
+    </processor>
+  </processors>
+  <parameters>
+    <parameter id="142e19ab-026c-41f6-90a7-8e58d4df36ae" name="userId" expression="'ADMIN'" />
+  </parameters>
+  <links />
+</mashup>

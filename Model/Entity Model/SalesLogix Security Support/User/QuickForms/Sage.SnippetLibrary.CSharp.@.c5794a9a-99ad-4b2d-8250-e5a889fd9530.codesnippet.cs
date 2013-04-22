@@ -40,10 +40,10 @@ namespace Sage.BusinessRules.CodeSnippets
     {
         public static void lueAddDepartment_OnChangeStep( IDepartmentMembership form,  EventArgs args)
         {
-            IOwner teamOwner = form.lueAddDepartment.LookupResultValue as IOwner;
+            IDepartment department = form.lueAddDepartment.LookupResultValue as IDepartment;
+            if (department == null) { throw new Sage.Platform.Security.UserObservableApplicationException("Lookup Result does not have a value."); }
 			// get security profile for member
 			IUser member = form.CurrentEntity as IUser;			
-			IDepartment department = EntityFactory.GetById<IDepartment>(teamOwner.Id);
 			department.AddMember(member.DefaultOwner);
 			
 			var panelRefresh = form.Services.Get<IPanelRefreshService>();

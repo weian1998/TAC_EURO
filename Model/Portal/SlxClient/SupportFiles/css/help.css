@@ -1,7 +1,7 @@
 body 
 {
 	margin : 0;
-	font-family: "Arial Unicode MS", Arial, Helvetica, sans-serif;
+	font-family: Arial,Helvetica,sans-serif;
 	color: #000000;
 	background-color : #e2f3ff;
 }
@@ -11,7 +11,7 @@ body
 	width: 100%;
 	min-width: 800px;
 	color: #000000;
-	font-size: 100%;
+	font-size: 13px;
 	padding : 0em;
 	margin : 0em;
 	/* padding : 1em .25em 0em .25em; */
@@ -37,7 +37,7 @@ body
 	width: 100%;
 	height: 2px;
 	background: url(../images/blue/HeaderHorizDivLine.gif) repeat-x top left;
-	font-size : 2%;
+	font-size : 1px;
 }
 .Clear {
 	clear: both;
@@ -88,7 +88,7 @@ body
 	color : #000000;
 	
 	
-	font-size : 200%;
+	font-size : 26px;
 	padding : 10px 0px 10px 5px;
 	font-weight : normal;
 }
@@ -100,7 +100,7 @@ P
 
 P, A
 {
-    font-size : 100%;
+    font-size : 13px;
 }
 
 .copyrightfooter 
@@ -111,12 +111,12 @@ P, A
 	width : 100%;
 	text-align : left;
 	border-top : solid 1px #CCCCCC;
-	font-size: 80%
+	font-size: 11px;
 }
 
 
 H4 {
-	font-size: 120%;
+	font-size: 16px;
 	padding-left : .5em;
 	font-weight : bold;
 }
@@ -124,7 +124,7 @@ H4 {
 H5 
 {
 	padding-left : .5em;
-	font-size : 100%;
+	font-size : 13px;
 	font-weight : bold;
 }
 .TopicTextIndent {
@@ -138,7 +138,7 @@ H5
 
 .SLXBold {
 	/*font-family: Arial, Helvetica, sans-serif;
-	font-size: 90%;
+	font-size: 12px;
 	font-style: normal;
 	font-weight: bolder;
 	color: #000000;*/
@@ -156,7 +156,7 @@ H5
 
 .Tabletop {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 9pt;
+	font-size: 12px
 	font-style: normal;
 	font-weight: bold;
 	text-transform: capitalize;
@@ -190,7 +190,7 @@ H5
 
 .tablerow {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 9pt;
+	font-size: 12px;
 	font-style: normal;
 	font-weight: normal;
 	text-transform: none;
@@ -205,7 +205,7 @@ H5
 
 .Tabletop {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 9pt;
+	font-size: 12px;
 	font-style: normal;
 	font-weight: bold;
 	text-transform: capitalize;
@@ -218,42 +218,42 @@ H5
 
 TD {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 9pt;
+	font-size: 12px;
 }
 
 TH {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 9pt;
+	font-size: 12px;
 	background-color: #D4D0C8;
 }
 /*
 P, DL, DT, DD {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 9pt;
+	font-size: 12px;
 }
 
 
 OL {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 9pt;
+	font-size: 12px;
 	margin-left: 25px;
 }
 
 UL {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 9pt;
+	font-size: 12px;
 	margin-left: 19px;
 }
 
 LI {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 9pt;
+	font-size: 12px;
 	margin-top: 1%;
 }
 
 H4 {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 11pt;
+	font-size: 14px;
 }
 A {
 	font-family: Arial, Helvetica, sans-serif;
@@ -271,7 +271,7 @@ A {
 
 .Sub-Heading {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 100%;
+	font-size: 13px;
 	font-style: normal;
 	font-weight: bold;
 	text-transform: uppercase;
@@ -305,7 +305,7 @@ A {
 }
 .tablerowcenter {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 90%;
+	font-size: 12px;
 	font-style: normal;
 	font-weight: normal;
 	color: #000000;
@@ -327,7 +327,7 @@ A {
 	body
 	{
 		background-color: White;
-		font-size: 12pt;
+		font-size: 16px;
 	}
 	
 	.MainHeader, 

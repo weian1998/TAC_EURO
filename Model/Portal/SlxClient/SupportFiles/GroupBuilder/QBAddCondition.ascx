@@ -50,7 +50,7 @@
 	<tr>
 		<td>&nbsp;</td>
 		<td class="borderr" align="left">
-			<input type="checkbox" id="chkLiteral" name="chkLiteral" />
+			<input type="checkbox" id="chkLiteral" name="chkLiteral" onclick="QBAddCondition_Literal_Click()" />
 			<label for="chkLiteral"><asp:Localize ID="localizeUseAsLiteral" runat="server" Text="<%$ resources: localizeUseAsLiteral.Text %>" /></label>
 		</td>
 	</tr>
@@ -64,5 +64,5 @@
 
 <div id="conditionInfo" visible="false"></div>
 
-
-
+<script src="jscript/Sage/GroupBuilder/querybuilder.js" type="text/javascript"></script>
+<script src="jscript/Sage/GroupBuilder/QBAddCondition.js" type="text/javascript"></script>

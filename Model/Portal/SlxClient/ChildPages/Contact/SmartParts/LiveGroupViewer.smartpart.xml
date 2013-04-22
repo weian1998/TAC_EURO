@@ -7,6 +7,7 @@
   <ShowInMode>List</ShowInMode>
   <Properties>
     <Property Name="SummaryConfigFile" TypeConverter="">ContactSummaryView</Property>
+    <Property Name="ListContextMenu" TypeConverter="">ContactListContextMenu</Property>
     <Property Name="HelpTopic" TypeConverter="">contactlistview</Property>
   </Properties>
   <AllowRoles />

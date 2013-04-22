@@ -1,28 +1,15 @@
 ﻿using System;
-using System.Text;
 using System.Web.UI;
 using Sage.Entity.Interfaces;
-using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
-using Sage.Platform.Security;
-using Sage.Platform.WebPortal;
-using Sage.Platform.WebPortal.Services;
 using Sage.Platform.WebPortal.SmartParts;
+using System.Text;
 
 /// <summary>
 /// Summary description for sales orders for integration contract.
 /// </summary>
 public partial class ICSalesOrders : EntityBoundSmartPartInfoProvider
 {
-    private bool _runActivating;
-
-    /// <summary>
-    /// Gets or sets the role security service.
-    /// </summary>
-    /// <value>The role security service.</value>
-    [ServiceDependency]
-    public IRoleSecurityService RoleSecurityService { get; set; }
-
     /// <summary>
     /// Gets the type of the entity.
     /// </summary>
@@ -36,11 +23,6 @@ public partial class ICSalesOrders : EntityBoundSmartPartInfoProvider
     {
     }
 
-    protected override void OnActivating()
-    {
-        _runActivating = true;
-    }
-
     protected override void OnWireEventHandlers()
     {
         cmdAddERPSalesOrder.Attributes.Add("onclick", "return false;");
@@ -48,49 +30,44 @@ public partial class ICSalesOrders : EntityBoundSmartPartInfoProvider
 
     private void DoActivating()
     {
-        ScriptManager.RegisterClientScriptInclude(this, GetType(), "ICSalesOrders", Page.ResolveUrl("~/SmartParts/Account/ICSalesOrders.js"));
-        var script = new StringBuilder();
-        script.Append(Page.IsPostBack
-                          ? "salesOrder = new Sage.UI.Forms.ICSalesOrders(); salesOrder.init({workspace: '" + getMyWorkspace() + "'});"
-                          : "dojo.ready(function() {dojo.parser.parse(dojo.query('#element_ICSalesOrders td.tws-tab-view-body')[0]); salesOrder = new Sage.UI.Forms.ICSalesOrders(); salesOrder.init({workspace: '" + getMyWorkspace() + "'}); });");
-        ScriptManager.RegisterStartupScript(this, GetType(), "initialize_ICSalesOrders", script.ToString(), true);
         IAccount account = BindingSource.Current as IAccount;
-        if (account != null && account.GlobalSyncId.HasValue)
+        string operatingCompanyId = String.Empty;
+        string globalSyncId = String.Empty;
+        if (account != null && account.GlobalSyncId != null && account.OperatingCompany != null)
         {
-            var clientContextService = PageWorkItem.Services.Get<ClientContextService>();
-            if (clientContextService != null)
-            {
-                if (clientContextService.CurrentContext.ContainsKey("OperatingCompany"))
-                {
-                    clientContextService.CurrentContext["OperatingCompany"] = account.OperatingCompany.Id.ToString();
-                }
-                else if (account.OperatingCompany != null)
-                {
-                    clientContextService.CurrentContext.Add("OperatingCompany", account.OperatingCompany.Id.ToString());
-                }
-                if (clientContextService.CurrentContext.ContainsKey("GlobalSyncId"))
-                {
-                    clientContextService.CurrentContext["GlobalSyncId"] = account.GlobalSyncId.ToString();
-                }
-                else
-                {
-                    clientContextService.CurrentContext.Add("GlobalSyncId", account.GlobalSyncId.ToString());
-                }
-            }
-            //else
-            //{
-            //    clientContextService.CurrentContext.Remove("OperatingCompany");
-            //    clientContextService.CurrentContext.Remove("GlobalSyncId");
-            //}
+            operatingCompanyId = account.OperatingCompany.Id.ToString();
+            globalSyncId = account.GlobalSyncId.ToString();
         }
+        var script = new StringBuilder();
+        script.AppendLine(
+            @"require([
+            'dojo/ready',
+            'Sage/MainView/IntegrationContract/SalesOrderRTDV'
+        ], function (ready, SalesOrderRTDV) {");
+
+        var baseScript = string.Format(
+            "window.setTimeout(function() {{ window.salesOrderRTDV = new SalesOrderRTDV({{ 'workspace': '{0}', 'tabId': '{1}', 'placeHolder': '{2}', 'operatingCompanyId': '{3}', 'globalSyncId': '{4}' }}); salesOrderRTDV.loadSalesOrders(); }}, 1);",
+            getMyWorkspace(),
+            ID,
+            sdgrdSalesOrders_Grid.ClientID,
+            operatingCompanyId,
+            globalSyncId);
+
+        if (!Page.IsPostBack)
+        {
+            script.AppendFormat("ready(function() {{ {0}; }} );", baseScript);
+        }
+        else
+        {
+            script.AppendLine(baseScript);
+        }
+        script.AppendLine("});"); // end require
+        ScriptManager.RegisterStartupScript(this, GetType(), "SalesOrderRTDV", script.ToString(), true);
     }
 
     protected override void OnFormBound()
     {
-        EntityPage epage = Page as EntityPage;
-        if (epage != null)
-            _runActivating = (epage.IsNewEntity || _runActivating);
-        if (_runActivating) DoActivating();
+        DoActivating();
         cmdAddERPSalesOrder.Visible = Sage.SalesLogix.BusinessRules.BusinessRuleHelper.AccountingSystemHandlesSO();
     }
 

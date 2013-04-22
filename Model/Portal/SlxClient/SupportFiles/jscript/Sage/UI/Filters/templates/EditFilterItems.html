@@ -1,0 +1,19 @@
+<div>
+    <div class="filter-items-dialog" data-dojo-type="dijit.Dialog" data-dojo-props="title:'${dialogTitle}'" data-dojo-attach-point="dialogNode">
+        <div class="filter-items-search">
+            <label>${findItemText}</label> <input data-dojo-attach-point="textFind" data-dojo-type="dijit.form.TextBox" />
+            <span data-dojo-attach-point="buttonFind" title="${findText}" data-dojo-type="Sage.UI.ImageButton" data-dojo-props="imageClass: 'icon_Find_16x16'" data-dojo-attach-event="onClick:_onFindClick"></span>&nbsp;
+			<span data-dojo-attach-point="buttonClear" title="${clearText}" data-dojo-type="dijit.form.Button" data-dojo-attach-event="onClick:_onClearClick">${clearText}</span>
+        </div>
+        <div class="filter-clear-all">
+            <input data-dojo-attach-point="checkAll" data-dojo-type="dijit.form.CheckBox" />
+            <label>${selectAllText}</label>
+        </div>
+        <div class="filter-items-dialog-content" data-dojo-attach-point="contentNode">
+        </div>
+        <div class="button-bar alignright">
+            <button data-dojo-attach-point="buttonOK" data-dojo-attach-event="onClick:_onOKClick" data-dojo-type="dijit.form.Button">${okText}</button>
+            <button data-dojo-attach-point="buttonCancel" data-dojo-attach-event="onClick:_onCancelClick" data-dojo-type="dijit.form.Button">${cancelText}</button>
+        </div>
+    </div>
+</div>

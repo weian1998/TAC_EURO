@@ -112,40 +112,25 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="cboProcessTypeResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cmdScheduleResource1.Text" xml:space="preserve">
+  <data name="cmdScheduleResource.Text" xml:space="preserve">
     <value>Schedule</value>
-  </data>
-  <data name="cmdScheduleResource1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Error_ProcessTypes" xml:space="preserve">
     <value>The list of process types is unavailable.</value>
   </data>
-  <data name="lblProcessOwnerResource1.Text" xml:space="preserve">
+  <data name="lblProcessOwner.Text" xml:space="preserve">
     <value>Process Owner:</value>
   </data>
-  <data name="lblProcessOwnerResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblProcessTypeResource1.Text" xml:space="preserve">
+  <data name="lblProcessType.Text" xml:space="preserve">
     <value>Process Type:</value>
   </data>
-  <data name="lblProcessTypeResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblScheduleForResource1.Text" xml:space="preserve">
+  <data name="lblScheduleFor.Text" xml:space="preserve">
     <value>Schedule For:</value>
-  </data>
-  <data name="lblScheduleForResource1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="lueContactToScheduleFor.LookupProperties.Account.PropertyHeader" xml:space="preserve">
     <value>Account</value>
@@ -174,31 +159,10 @@
   <data name="lueContactToScheduleFor.LookupProperties.Work.PropertyHeader" xml:space="preserve">
     <value>Work Phone</value>
   </data>
-  <data name="ownProcessOwnerResource1.Text" xml:space="preserve">
-    <value />
+  <data name="ownProcessOwner.ToolTip" xml:space="preserve">
+    <value>Find</value>
   </data>
-  <data name="ownProcessOwnerResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ScheduleProcess_CToolsResource1.GroupingText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ScheduleProcess_CToolsResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ScheduleProcess_LToolsResource1.GroupingText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ScheduleProcess_LToolsResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ScheduleProcess_RToolsResource1.GroupingText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ScheduleProcess_RToolsResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ScheduleProcessHelpLinkResource1.Text" xml:space="preserve">
-    <value />
+  <data name="error_ScheduleFor.Message" xml:space="preserve">
+    <value>The schedule for contact is required.</value>
   </data>
 </root>

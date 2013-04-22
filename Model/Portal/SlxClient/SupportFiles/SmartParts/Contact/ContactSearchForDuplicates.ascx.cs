@@ -4,6 +4,8 @@ using Sage.Entity.Interfaces;
 using Sage.Platform;
 using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
+using Sage.Platform.Diagnostics;
+using Sage.Platform.Security;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.SalesLogix.Services.PotentialMatch;
 using Sage.Platform.NamedQueries;
@@ -45,7 +47,7 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
         }
 
         tinfo.Title = GetLocalResourceObject("DialogTitle").ToString();
-        
+
         return tinfo;
     }
 
@@ -57,8 +59,6 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
     {
         get
         {
-            try
-            {
                 if (_duplicateProvider == null)
                 {
                     IContact contact = null;
@@ -74,15 +74,10 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
                     _duplicateProvider = new ContactDuplicateProvider();
                     _duplicateProvider.EntitySource = new MatchEntitySource(typeof(IContact), contact);
                 }
-            }
-            catch (Exception exp)
-            {
-                throw new ApplicationException(GetLocalResourceObject("LoadErrorMSG").ToString(), exp);
-            }
             return _duplicateProvider;
         }
     }
-    
+
     #endregion
 
     #region Private Methods
@@ -109,20 +104,16 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
     /// </summary>
     private void LoadMatchFilters()
     {
-        SetActiveFilters(); 
+        SetActiveFilters();
         chklstFilters.Items.Clear();
         foreach (MatchPropertyFilterMap propertyFilter in DuplicateProvider.GetFilters())
         {
             ListItem item = new ListItem();
-            // If resource does not exist then use the xml value. Item is prefixed with "Filter" to better identify resourse items
-            if (GetLocalResourceObject("Filter." + propertyFilter.PropertyName) != null && GetLocalResourceObject("Filter." + propertyFilter.PropertyName).ToString() != "")
-            {
-                item.Text = GetLocalResourceObject("Filter." + propertyFilter.PropertyName).ToString();
-            }
-            else
-            {
-                item.Text = propertyFilter.DisplayName;
-            }
+            // If resource does not exist then use the xml value. Item is prefixed with "Filter" to better identify resource items
+            item.Text = GetLocalResourceObject("Filter." + propertyFilter.PropertyName) != null &&
+                        GetLocalResourceObject("Filter." + propertyFilter.PropertyName).ToString() != ""
+                            ? GetLocalResourceObject("Filter." + propertyFilter.PropertyName).ToString()
+                            : propertyFilter.DisplayName;
 
             item.Value = propertyFilter.PropertyName;
             item.Selected = propertyFilter.Enabled;
@@ -151,16 +142,16 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
                 DataTable dataTable = GetPotentialMatchesLayout();
                 DataTable accountDataTable = GetAccountLayout();
 
-                ILead lead = null;
-                IContact contact = null;
-                IAccount account = null;
+                ILead lead;
+                IContact contact;
+                IAccount account;
                 string leadType = GetLocalResourceObject("lblLeads.Caption").ToString();
                 string contactType = GetLocalResourceObject("lblContacts.Caption").ToString();
 
                 matchResults.HydrateResults();
                 foreach (MatchResultItem resultItem in matchResults.Items)
                 {
-                    if (typeof(ILead).Equals(resultItem.EntityType))
+                    if (resultItem.EntityType == typeof(ILead))
                     {
                         try
                         {
@@ -172,7 +163,7 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
                         {
                         }
                     }
-                    else if (typeof(IContact).Equals(resultItem.EntityType))
+                    else if (resultItem.EntityType == typeof(IContact))
                     {
                         try
                         {
@@ -185,7 +176,7 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
                         {
                         }
                     }
-                    else if (typeof(IAccount).Equals(resultItem.EntityType))
+                    else if (resultItem.EntityType == typeof(IAccount))
                     {
                         try
                         {
@@ -205,10 +196,10 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
             grdMatches.DataBind();
             grdAccountMatches.DataBind();
         }
-        else 
+        else
         {
             grdMatches.DataBind();
-            grdAccountMatches.DataBind();        
+            grdAccountMatches.DataBind();
         }
     }
 
@@ -223,57 +214,57 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "Id";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "EntityType";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "Score";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "EntityName";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "Company";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "FirstName";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "LastName";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "Title";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "Email";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "CityStateZip";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "WorkPhone";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         return dataTable;
@@ -290,42 +281,42 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "Id";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "Score";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "Account";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "MainPhone";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "WebAddress";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "Industry";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "CityStateZip";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         dataColumn = dataTable.Columns.Add();
         dataColumn.ColumnName = "Type";
-        dataColumn.DataType = typeof (string);
+        dataColumn.DataType = typeof(string);
         dataColumn.AllowDBNull = true;
 
         return dataTable;
@@ -338,59 +329,16 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
     {
         foreach (ListItem item in chklstFilters.Items)
         {
-            if (item.Selected)
-                DuplicateProvider.SetActiveFilter(item.Value, item.Enabled);
+            DuplicateProvider.SetActiveFilter(item.Value, item.Selected);
         }
-        
-        ContactDuplicateProvider contactDupProvider = (ContactDuplicateProvider)DuplicateProvider;
 
-        if (rdgOptions.SelectedIndex == 0)
-            contactDupProvider.MatchOperator = MatchOperator.And;
-        else
-            contactDupProvider.MatchOperator = MatchOperator.Or;
+        ContactDuplicateProvider contactDupProvider = (ContactDuplicateProvider)DuplicateProvider;
+        contactDupProvider.MatchOperator = rdgOptions.SelectedIndex == 0 ? MatchOperator.And : MatchOperator.Or;
 
         contactDupProvider.SearchAccount = (chkAccounts.Checked);
         contactDupProvider.SearchContact = (chkContacts.Checked);
         contactDupProvider.SearchLead = (chkLeads.Checked);
         contactDupProvider.AdvancedOptions = MatchOptions.GetAdvancedOptions();
-    }
-
-    /// <summary>
-    /// Registers the client script.
-    /// </summary>
-    private void RegisterClientScript()
-    {
-        StringBuilder sb = new StringBuilder(GetLocalResourceObject("ContactSearchForDuplicates_ClientScript").ToString());
-        sb.Replace("@csd_divFiltersId", divFilters.ClientID);
-        sb.Replace("@csd_tabFiltersId", tabFilters.ClientID);
-        sb.Replace("@csd_divOptionsId", divOptions.ClientID);
-        sb.Replace("@csd_tabOptionsId", tabOptions.ClientID);
-        sb.Replace("@csd_txtSelectedTabId", txtSelectedTab.ClientID);
-
-        ScriptManager.RegisterClientScriptBlock(Page, GetType(), "ContactSearchForDuplicates", sb.ToString(), false);
-    }
-
-    /// <summary>
-    /// Sets the visible state of the tabs.
-    /// </summary>
-    private void SetVisibleTabState()
-    {
-        divFilters.Style.Add(HtmlTextWriterStyle.Display, "block");
-        divOptions.Style.Add(HtmlTextWriterStyle.Display, "none");
-        tabFilters.CssClass = "activeTab";
-        tabOptions.CssClass = "inactiveTab";
-        string selectedTab = Request.Form[txtSelectedTab.ClientID.Replace("_", "$")];
-        if (!String.IsNullOrEmpty(selectedTab))
-        {
-            if (selectedTab.Equals("2"))
-            {
-                divFilters.Style.Add(HtmlTextWriterStyle.Display, "none");
-                divOptions.Style.Add(HtmlTextWriterStyle.Display, "block");
-                tabFilters.CssClass = "inactiveTab";
-                tabOptions.CssClass = "activeTab";
-                return;
-            }
-        }
     }
 
     /// <summary>
@@ -442,9 +390,8 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
                     entitySmartPart.InitEntityBoundSmartPart(PageWorkItem.Services.Get<IEntityContextService>());
                 }
             }
-
-            tabFilters.Attributes.Add("onclick", "javascript:OnTabFiltersClick()");
-            tabOptions.Attributes.Add("onclick", "javascript:OnTabOptionsClick()");
+            tabFilters.Attributes.Add("onClick", "return contactSearchForDuplicates.onTabFiltersClick()");
+            tabOptions.Attributes.Add("onClick", "return contactSearchForDuplicates.onTabOptionsClick()");
 
             AddNamedQueries();
         }
@@ -457,12 +404,38 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e);
+        if (!Visible) return;
+        RegisterClientScript();
+    }
 
-        if (Visible)
+    /// <summary>
+    /// Registers the client script.
+    /// </summary>
+    private void RegisterClientScript()
+    {
+        var script = new StringBuilder();
+        if (Page.IsPostBack)
         {
-            RegisterClientScript();
-            SetVisibleTabState();
+            script.AppendLine("require(['Sage/MainView/Contact/ContactSearchForDuplicates', 'dojo/ready'],");
+            script.AppendLine(" function(contactSearchForDuplicates, dojoReady) {");
+            script.AppendLine("     dojoReady(function() {window.contactSearchForDuplicates = new Sage.MainView.Contact.ContactSearchForDuplicates();");
+            script.AppendLine("         window.contactSearchForDuplicates.init(" + GetWorkSpace() + ");");
+            script.AppendLine("     });");
+            script.AppendLine(" });");
         }
+        ScriptManager.RegisterStartupScript(Page, GetType(), "ContactSearchForDuplicates", script.ToString(), true);
+    }
+
+    private string GetWorkSpace()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append("{");
+        sb.AppendFormat("divFiltersId:'{0}',", divFilters.ClientID);
+        sb.AppendFormat("tabFiltersId:'{0}',", tabFilters.ClientID);
+        sb.AppendFormat("divOptionsId:'{0}',", divOptions.ClientID);
+        sb.AppendFormat("tabOptionsId:'{0}',", tabOptions.ClientID);
+        sb.Append("}");
+        return sb.ToString();
     }
 
     /// <summary>
@@ -478,19 +451,13 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected override void OnPreRender(EventArgs e)
     {
-        try
+        if (Visible && DuplicateProvider != null)
         {
-            if (Visible && DuplicateProvider != null)
-            {
-                LoadMatchFilters();
-                LoadSourceEntity();
-                LoadPotentialMatches();
-            }
+            LoadMatchFilters();
+            LoadSourceEntity();
+            LoadPotentialMatches();
         }
-        catch (Exception exp)
-        {
-            throw new ApplicationException(GetLocalResourceObject("LoadErrorMSG").ToString(), exp);
-        }
+
     }
 
     /// <summary>
@@ -529,7 +496,7 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
     {
         Mode.Value = "Load";
     }
-    
+
     /// <summary>
     /// Handles the OnRowCommand event of the grdDuplicates control.
     /// </summary>
@@ -558,7 +525,7 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
         {
             int rowIndex = Convert.ToInt32(e.CommandArgument);
             string Id = grdAccountMatches.DataKeys[rowIndex].Value.ToString();
-                   
+
             if (!DialogService.DialogParameters.ContainsKey("JumpID"))
             {
                 DialogService.DialogParameters.Add("JumpID", Id);
@@ -568,7 +535,7 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
                 DialogService.DialogParameters["JumpID"] = Id;
             }
             DialogService.CloseEventHappened(sender, e);
-                    
+
         }
     }
 
@@ -607,15 +574,14 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
 
     protected string CreateViewButton(object entityId, object entityType)
     {
-        string button;
-        button = string.Format("<a id='lnkViewSummaryID_{0}' onClick='showSummaryView(this,\"{1}\",\"{2}\")' style='cursor:hand' />{3}</a> ", entityId, entityType, entityId, GetLocalResourceObject("grdMatches.Open.ColumnHeading").ToString());
-        return button;      
+        return
+            String.Format(
+                "<a id='lnkViewSummaryID_{0}' onClick='contactSearchForDuplicates.showSummaryView(\"{1}\",\"{2}\")' style='cursor:hand' />{3}</a> ",
+                entityId, entityType, entityId, GetLocalResourceObject("grdMatches.Open.ColumnHeading"));
     }
-
 
     private void AddNamedQueries()
     {
-
         INamedQueryCacheService service = ApplicationContext.Current.Services.Get<INamedQueryCacheService>(false);
         if (service == null)
         {
@@ -626,64 +592,79 @@ public partial class ContactSearchForDuplicates : EntityBoundSmartPartInfoProvid
             }
         }
 
-        if (service != null)
+        if (service == null) return;
+        if (!service.Contains("ContactSearch"))
         {
-
-            if (!service.Contains("ContactSearch"))
-            {
-                service.Add(GetContactNamedQueryinfo());
-            }
-            if (!service.Contains("LeadSearch"))
-            {
-                service.Add(GetLeadNamedQueryinfo());
-            }
-            if (!service.Contains("AccountSearch"))
-            {
-                service.Add(GetAccountNamedQueryinfo());
-            }
+            service.Add(GetContactNamedQueryinfo());
+        }
+        if (!service.Contains("LeadSearch"))
+        {
+            service.Add(GetLeadNamedQueryinfo());
+        }
+        if (!service.Contains("AccountSearch"))
+        {
+            service.Add(GetAccountNamedQueryinfo());
         }
     }
 
-
     private NamedQueryInfo GetContactNamedQueryinfo()
     {
-      
         NamedQueryInfo info = new NamedQueryInfo();
         info.Name = "ContactSearch";
-        //info.Id = new Guid("1");
-        string[] AliasCols = new string[] {"id", "name", "address_address1","address_citystatezip","homephone","email", "account_id","accountname", "title", "type", "accountmanager_userinfo_firstname", "workphone", "mobilePhone", "webaddress" };
-        //string hql = "select  mainentity.id,  mainentity.Name,  mainentity.Address.Address1,  mainentity.Address.CityStateZip,  mainentity.HomePhone,  mainentity.Email,  mainentity.Account.id,  mainentity.AccountName,  mainentity.Title,  mainentity.Type,  mainentity.AccountManager.UserInfo.FirstName, mainentity.WorkPhone from Contact  mainentity  left join  mainentity.Address  left join  mainentity.Account  left join  mainentity.AccountManager  group by  mainentity.id,  mainentity.Name,  mainentity.Address.Address1,  mainentity.Address.CityStateZip,  mainentity.HomePhone,  mainentity.Email,  mainentity.Account.id,  mainentity.AccountName,  mainentity.Title,  mainentity.Type,  mainentity.AccountManager.UserInfo.FirstName, mainentity.WorkPhone ";
-        string hql = "select  mainentity.id,  mainentity.Name,  mainentity.Address.Address1,  mainentity.Address.CityStateZip,  mainentity.HomePhone,  mainentity.Email,  mainentity.Account.id,  mainentity.AccountName,  mainentity.Title,  mainentity.Type,  mainentity.AccountManager.UserInfo.FirstName, mainentity.WorkPhone, mainentity.Mobile, mainentity.WebAddress  from Contact  mainentity  left join  mainentity.Address  left join  mainentity.Account  left join  mainentity.AccountManager";
+        string[] aliasCols = new string[]
+                                 {
+                                     "id", "name", "address_address1", "address_citystatezip", "homephone", "email",
+                                     "account_id", "accountname", "title", "type", "accountmanager_userinfo_firstname",
+                                     "accountmanager_userinfo_lastname", "workphone", "mobilePhone", "webaddress"
+                                 };
+        string hql = "select mainentity.id, mainentity.Name, mainentity.Address.Address1, mainentity.Address.CityStateZip, mainentity.HomePhone, ";
+        hql += "mainentity.Email, mainentity.Account.id, mainentity.AccountName, mainentity.Title, mainentity.Type, ";
+        hql += "mainentity.AccountManager.UserInfo.FirstName, mainentity.AccountManager.UserInfo.LastName, mainentity.WorkPhone, ";
+        hql += "mainentity.Mobile, mainentity.WebAddress ";
+        hql += "from Contact mainentity left join mainentity.Address left join mainentity.Account left join mainentity.AccountManager";
         info.Hql = hql;
-        info.ColumnAliases = AliasCols;
-        return info;    
-    
+        info.ColumnAliases = aliasCols;
+        return info;
     }
+
     private NamedQueryInfo GetLeadNamedQueryinfo()
     {
         NamedQueryInfo info = new NamedQueryInfo();
         info.Name = "LeadSearch";
-        //info.Id = new Guid("1");
-        string[] AliasCols = new string[] { "id", "name", "address_address1", "address_citystatezip", "homephone", "email", "company", "title", "type", "accountmanager_userinfo_firstname","accountmanager_userinfo_lastname", "workphone", "mobilePhone", "webaddress" };
-        string hql = "select  mainentity.id,  mainentity.LeadNameFirstLast,  mainentity.Address.Address1,  mainentity.Address.LeadCtyStZip,  mainentity.HomePhone,  mainentity.Email,  mainentity.Company,  mainentity.Title,  mainentity.Type,  mainentity.AccountManager.UserInfo.FirstName, mainentity.AccountManager.UserInfo.LastName, mainentity.WorkPhone, mainentity.Mobile, mainentity.WebAddress  from Lead  mainentity left join  mainentity.Address  left join  mainentity.AccountManager";
+        string[] AliasCols = new string[]
+                                 {
+                                     "id", "name", "address_address1", "address_citystatezip", "homephone", "email",
+                                     "company", "title", "type", "accountmanager_userinfo_firstname",
+                                     "accountmanager_userinfo_lastname", "workphone", "mobilePhone", "webaddress"
+                                 };
+        string hql = "select mainentity.id, mainentity.LeadNameFirstLast, mainentity.Address.Address1, mainentity.Address.LeadCtyStZip, ";
+        hql += "mainentity.HomePhone, mainentity.Email, mainentity.Company, mainentity.Title, mainentity.Type, ";
+        hql += "mainentity.AccountManager.UserInfo.FirstName, mainentity.AccountManager.UserInfo.LastName, mainentity.WorkPhone, ";
+        hql += "mainentity.Mobile, mainentity.WebAddress ";
+        hql += "from Lead mainentity left join mainentity.Address left join mainentity.AccountManager";
         info.Hql = hql;
         info.ColumnAliases = AliasCols;
         return info;
-
     }
 
     private NamedQueryInfo GetAccountNamedQueryinfo()
     {
-        
         NamedQueryInfo info = new NamedQueryInfo();
         info.Name = "AccountSearch";
-        //info.Id = new Guid("1");
-        string[] AliasCols = new string[] { "id", "name", "address_address1", "address_citystatezip", "mainphone", "email", "division", "type", "accountmanager_userinfo_firstname", "accountmanager_userinfo_lastname", "tollfree", "industry", "webaddress", "status", "subType" };
-        string hql = "select  mainentity.id,  mainentity.AccountName,  mainentity.Address.Address1,  mainentity.Address.CityStateZip,  mainentity.MainPhone,  mainentity.Email,  mainentity.Division,  mainentity.Type,  mainentity.AccountManager.UserInfo.FirstName, mainentity.AccountManager.UserInfo.LastName, mainentity.TollFree, mainentity.Industry, mainentity.WebAddress, mainentity.Status, mainentity.SubType from Account mainentity left join  mainentity.Address  left join  mainentity.AccountManager";
+        string[] AliasCols = new string[]
+                                 {
+                                     "id", "name", "address_address1", "address_citystatezip", "mainphone", "email",
+                                     "division", "type", "accountmanager_userinfo_firstname",
+                                     "accountmanager_userinfo_lastname", "tollfree", "industry", "webaddress", "status",
+                                     "subtype"
+                                 };
+        string hql = "select mainentity.id, mainentity.AccountName, mainentity.Address.Address1, mainentity.Address.CityStateZip, ";
+        hql += "mainentity.MainPhone, mainentity.Email, mainentity.Division, mainentity.Type, mainentity.AccountManager.UserInfo.FirstName, ";
+        hql += "mainentity.AccountManager.UserInfo.LastName, mainentity.TollFree, mainentity.Industry, mainentity.WebAddress, ";
+        hql += "mainentity.Status, mainentity.SubType ";
+        hql += "from Account mainentity left join mainentity.Address left join mainentity.AccountManager";
         info.Hql = hql;
         info.ColumnAliases = AliasCols;
         return info;
-
     }
-
 }

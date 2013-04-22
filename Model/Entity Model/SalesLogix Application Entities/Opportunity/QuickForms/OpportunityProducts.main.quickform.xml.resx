@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="grdOppProducts.33816379-5ee4-4a9d-850c-ce5518934f95.ColumnHeading" xml:space="preserve">
     <value>Line #</value>
@@ -157,7 +157,7 @@
     <value>Revert Changes</value>
   </data>
   <data name="grdOppProducts.Delete.ToolTip" xml:space="preserve">
-    <value>Delete Selected Records</value>
+    <value>Remove</value>
   </data>
   <data name="lueProduct.LookupProperties.Name.PropertyHeader" xml:space="preserve">
     <value>Name</value>
@@ -202,10 +202,10 @@
     <value>Lookup Product</value>
   </data>
   <data name="lueProduct.DialogButtonText" xml:space="preserve">
-    <value>Add Products</value>
+    <value>Add Selected</value>
   </data>
   <data name="luePackage.DialogButtonText" xml:space="preserve">
-    <value>Add Packages</value>
+    <value>Add Selected</value>
   </data>
   <data name="luePackage.LookupDialogTitle" xml:space="preserve">
     <value>Lookup Package</value>
@@ -223,7 +223,7 @@
     <value>Edit</value>
   </data>
   <data name="38611e40-47c3-4f73-88e1-62bfa47171a4.DialogTitleOverride" xml:space="preserve">
-    <value>Edit Product</value>
+    <value />
   </data>
   <data name="grdOppProducts.6a57e635-5b9d-48b1-a5ec-baf4745cc0c4.ColumnHeading" xml:space="preserve">
     <value>Price</value>
@@ -257,5 +257,23 @@
   </data>
   <data name="grdOppProducts.ceb64e60-2b36-42fe-8a84-491ad1bf158d.ColumnHeading" xml:space="preserve">
     <value>Extended Price</value>
+  </data>
+  <data name="error_AccountingSystem_Undefined" xml:space="preserve">
+    <value>Products cannot be added to the Opportunity because the Accounting System is undefined.  Please define an Accounting System before continuing.</value>
+  </data>
+  <data name="error_ClientContext_Undefined" xml:space="preserve">
+    <value>The ClientContextService is unavailable.</value>
+  </data>
+  <data name="error_ExecutingRequest" xml:space="preserve">
+    <value>There was an error opening ${0}. StatusText: ${1}; StatusCode: ${2}.</value>
+  </data>
+  <data name="error_ExecutingRequest_Ext" xml:space="preserve">
+    <value>There was an error opening ${0}. Severity: ${1}; SDataCode: ${2}; Message: ${3}; ApplicationCode: ${4}; StatusText: ${5}; StatusCode: ${6}.</value>
+  </data>
+  <data name="error_OperatingCompany_Undefined" xml:space="preserve">
+    <value>The Operating Company could not be determined.</value>
+  </data>
+  <data name="error_ZeroBasePrice" xml:space="preserve">
+    <value>You cannot add a discount to a product, which does not contain a base price.</value>
   </data>
 </root>

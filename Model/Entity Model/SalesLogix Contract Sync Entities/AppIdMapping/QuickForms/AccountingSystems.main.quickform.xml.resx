@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="d51e1076-a61a-4e70-9c03-6f320b7465ea.Caption" xml:space="preserve">
     <value>EndPointURL</value>
@@ -175,10 +175,10 @@
     <value>Add</value>
   </data>
   <data name="btnInsert.ToolTip" xml:space="preserve">
-    <value>Setup Accounting Integration</value>
+    <value>Set Up Accounting Integration</value>
   </data>
   <data name="AddEndPoint_Caption" xml:space="preserve">
-    <value>Setup Accounting Integration</value>
+    <value>Set Up Accounting Integration</value>
   </data>
   <data name="grdEndPoints.dd9d353c-bd4d-498e-9840-1259991e08d7.ColumnHeading" xml:space="preserve">
     <value>User Name</value>
@@ -208,6 +208,12 @@
     <value>Synchronization process has been started successfully.</value>
   </data>
   <data name="btnSyncAll.ToolTip" xml:space="preserve">
-    <value>Sync all accounting systems</value>
+    <value>Sync all enabled accounting systems</value>
+  </data>
+  <data name="Error_AccountingSystem_NotEnabled" xml:space="preserve">
+    <value>The selected accounting system, {0}, is not currently enabled. Please enable the accounting system before continuing.</value>
+  </data>
+  <data name="Sync_Confirmation_Title" xml:space="preserve">
+    <value>SalesLogix Sync</value>
   </data>
 </root>

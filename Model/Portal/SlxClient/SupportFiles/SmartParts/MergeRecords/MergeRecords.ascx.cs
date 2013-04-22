@@ -8,6 +8,7 @@ using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
 using Sage.Platform.Framework;
 using Sage.Platform.Orm.Interfaces;
+using Sage.Platform.Security;
 using Sage.Platform.WebPortal;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.SalesLogix.Services.Integration;
@@ -119,7 +120,7 @@ public partial class MergeRecords : SmartPartInfoProvider
             //}
             if (!SessionMergeArguments.MergeProvider.ValidateUserSecurity())
             {
-                throw new ValidationException(GetLocalResourceObject("error_Security_NoAccess").ToString());
+                throw new UserObservableApplicationException(GetLocalResourceObject("error_Security_NoAccess").ToString());
             }
 
             grdMerge.DataSource = SessionMergeArguments.MergeProvider.GetMergeView(Convert.ToBoolean(txtShowAll.Value));
@@ -267,9 +268,7 @@ public partial class MergeRecords : SmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void btnOK_OnClick(object sender, EventArgs e)
     {
-        bool success = false;
         UpdatePropertyMappings(SessionMergeArguments.MergeProvider.MergeMaps);
-
         string recordOverWrite = Request.Form["rdoRecordOverwrite"];
         if (recordOverWrite != null)
         {
@@ -277,22 +276,12 @@ public partial class MergeRecords : SmartPartInfoProvider
                                                                       ? MergeOverwrite.sourceWins
                                                                       : MergeOverwrite.targetWins;
         }
-
-        Type type = SessionMergeArguments.MergeProvider.Target.EntityType;
-        if (type.Equals(typeof (IAccount)))
-        {
-            IAccount account = (IAccount) SessionMergeArguments.MergeProvider.Target.EntityData;
-            success = account.MergeAccount(SessionMergeArguments.MergeProvider);
-        }
-        else if (type.Equals(typeof (IContact)))
-        {
-            IContact contact = (IContact) SessionMergeArguments.MergeProvider.Target.EntityData;
-            success = contact.MergeContact(SessionMergeArguments.MergeProvider);
-        }
-        if (success)
+        
+        if (Sage.SalesLogix.BusinessRules.BusinessRuleHelper.MergeRecords(SessionMergeArguments))
         {
             using (ISession session = new Sage.Platform.Orm.SessionScopeWrapper(true))
             {
+                Type type = SessionMergeArguments.MergeProvider.Target.EntityType;
                 string entityId = SessionMergeArguments.MergeProvider.Source.EntityId;
                 IPersistentEntity source = Sage.Platform.EntityFactory.GetById(type, entityId) as IPersistentEntity;
                 source.Delete();
@@ -343,7 +332,7 @@ public partial class MergeRecords : SmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void btnBack_OnClick(object sender, EventArgs e)
     {
-        ShowDialog("SearchResults", GetLocalResourceObject("LinkToAccounting.Caption").ToString(), 375, 800);
+        ShowDialog("SearchResults", GetLocalResourceObject("LinkToAccounting_SelectAccount.Caption").ToString(), 375, 800);
     }
 
     /// <summary>

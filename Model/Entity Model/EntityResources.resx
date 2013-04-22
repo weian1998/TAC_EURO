@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Account.Account.DisplayName" xml:space="preserve">
     <value>Account</value>
@@ -505,7 +505,7 @@
     <value>Account Operating Comp Id</value>
   </data>
   <data name="AccountOperatingCompany.AppID.DisplayName" xml:space="preserve">
-    <value>AppID</value>
+    <value>App Id</value>
   </data>
   <data name="AccountOperatingCompany.CreateDate.DisplayName" xml:space="preserve">
     <value>Create Date</value>
@@ -523,7 +523,7 @@
     <value>Integration Application</value>
   </data>
   <data name="AccountOperatingCompany.LinkedDate.DisplayName" xml:space="preserve">
-    <value>LinkedDate</value>
+    <value>Linked Date</value>
   </data>
   <data name="AccountOperatingCompany.ModifyDate.DisplayName" xml:space="preserve">
     <value>Modify Date</value>
@@ -831,8 +831,8 @@
   <data name="Activity.Filter.ActivityType.DisplayName" xml:space="preserve">
     <value>Activity Type</value>
   </data>
-  <data name="Activity.Filter.Alarm.DisplayName" xml:space="preserve">
-    <value>Alarm</value>
+  <data name="UserActivity.Recurring.True.DisplayName" xml:space="preserve">
+    <value>True</value>
   </data>
   <data name="Activity.Filter.Attachment.DisplayName" xml:space="preserve">
     <value>Attachment</value>
@@ -858,8 +858,8 @@
   <data name="Activity.Filter.Ticket.DisplayName" xml:space="preserve">
     <value>Ticket</value>
   </data>
-  <data name="Activity.Filter.Type.DisplayName" xml:space="preserve">
-    <value>Type</value>
+  <data name="Activity.Timeless.False.DisplayName" xml:space="preserve">
+    <value>False</value>
   </data>
   <data name="Activity.Filter.User.DisplayName" xml:space="preserve">
     <value>Leader</value>
@@ -943,7 +943,7 @@
     <value>Rollover</value>
   </data>
   <data name="Activity.StartDate.DisplayName" xml:space="preserve">
-    <value>Time Frame</value>
+    <value>Start Date</value>
   </data>
   <data name="Activity.StartDate.LastMonth.DisplayName" xml:space="preserve">
     <value>Last Month</value>
@@ -1080,17 +1080,17 @@
   <data name="Activity.Type.atView.DisplayName" xml:space="preserve">
     <value>Form</value>
   </data>
-  <data name="Activity.Type.Contact.DisplayName" xml:space="preserve">
-    <value>Contact</value>
+  <data name="Activity.Timeless.True.DisplayName" xml:space="preserve">
+    <value>True</value>
   </data>
   <data name="Activity.Type.DisplayName" xml:space="preserve">
     <value>Type</value>
   </data>
-  <data name="Activity.Type.Lead.DisplayName" xml:space="preserve">
-    <value>Lead</value>
+  <data name="Activity.Filter.Timeless.DisplayName" xml:space="preserve">
+    <value>Timeless</value>
   </data>
-  <data name="Activity.User.DisplayName" xml:space="preserve">
-    <value>User</value>
+  <data name="Activity.Leader.DisplayName" xml:space="preserve">
+    <value>Leader </value>
   </data>
   <data name="Activity.UserDef1.DisplayName" xml:space="preserve">
     <value>User Def 1</value>
@@ -1189,7 +1189,7 @@
     <value>Address Id</value>
   </data>
   <data name="Address.AppId.DisplayName" xml:space="preserve">
-    <value>AppId</value>
+    <value>App Id</value>
   </data>
   <data name="Address.City.DisplayName" xml:space="preserve">
     <value>City</value>
@@ -1273,10 +1273,10 @@
     <value>User Info Alternate Address</value>
   </data>
   <data name="AdHocGroup.DisplayName" xml:space="preserve">
-    <value>Add Hoc Group</value>
+    <value>Ad Hoc Group</value>
   </data>
   <data name="AdHocGroup.DisplayNamePlural" xml:space="preserve">
-    <value>Add Hoc Groups</value>
+    <value>Ad Hoc Groups</value>
   </data>
   <data name="AppIdMapping.AccountOperatingCompany.DisplayName" xml:space="preserve">
     <value>Account Operating Company</value>
@@ -1491,7 +1491,7 @@
   <data name="Attachment.ReturnId.DisplayName" xml:space="preserve">
     <value>Return Id</value>
   </data>
-  <data name="Attachment.SalesOrderID.DisplayName" xml:space="preserve">
+  <data name="Attachment.SalesOrderId.DisplayName" xml:space="preserve">
     <value>Sales Order Id</value>
   </data>
   <data name="Attachment.TicketId.DisplayName" xml:space="preserve">
@@ -1672,7 +1672,7 @@
     <value>Family</value>
   </data>
   <data name="Campaign.Filter.AccountManager.AnalyticsDescription" xml:space="preserve">
-    <value>AccountManager</value>
+    <value>Account Manager</value>
   </data>
   <data name="Campaign.Filter.AccountManager.DisplayName" xml:space="preserve">
     <value>Account Manager</value>
@@ -1705,7 +1705,7 @@
     <value>Count Campaigns</value>
   </data>
   <data name="Campaign.Filter.EndDate.AnalyticsDescription" xml:space="preserve">
-    <value>EndDate</value>
+    <value>End Date</value>
   </data>
   <data name="Campaign.Filter.EndDate.DisplayName" xml:space="preserve">
     <value>End Date</value>
@@ -1720,7 +1720,7 @@
     <value>Owner</value>
   </data>
   <data name="Campaign.Filter.StartDate.AnalyticsDescription" xml:space="preserve">
-    <value>StartDate</value>
+    <value>Start Date</value>
   </data>
   <data name="Campaign.Filter.StartDate.DisplayName" xml:space="preserve">
     <value>Start Date</value>
@@ -1984,7 +1984,7 @@
     <value>Description</value>
   </data>
   <data name="CommodityGroup.DisplayName" xml:space="preserve">
-    <value>CommodityGroup</value>
+    <value>Commodity Group</value>
   </data>
   <data name="CommodityGroup.GlobalSyncId.DisplayName" xml:space="preserve">
     <value>Global Sync Id</value>
@@ -2781,14 +2781,14 @@
   <data name="DeDupJob.CreateUser.DisplayName" xml:space="preserve">
     <value>Create User</value>
   </data>
-  <data name="DeDupJob.DateChecked.SlxMonthly.DisplayName" xml:space="preserve">
-    <value>Last month</value>
+  <data name="DeDupJob.DateChecked.LastMonth.DisplayName" xml:space="preserve">
+    <value>Last Month</value>
   </data>
-  <data name="DeDupJob.DateChecked.SlxWeekly.DisplayName" xml:space="preserve">
-    <value>Last week</value>
+  <data name="DeDupJob.DateChecked.LastWeek.DisplayName" xml:space="preserve">
+    <value>Last Week</value>
   </data>
-  <data name="DeDupJob.DateChecked.SlxYearly.DisplayName" xml:space="preserve">
-    <value>Last year</value>
+  <data name="DeDupJob.DateChecked.LastYear.DisplayName" xml:space="preserve">
+    <value>Last Year</value>
   </data>
   <data name="DeDupJob.DeDupJobId.DisplayName" xml:space="preserve">
     <value>De Dup Job Id</value>
@@ -2889,14 +2889,14 @@
   <data name="DeDupResult.Filter.Status.DisplayName" xml:space="preserve">
     <value>Status</value>
   </data>
-  <data name="DeDupResult.JobDate.SlxMonthly.DisplayName" xml:space="preserve">
-    <value>Last month</value>
+  <data name="DeDupResult.JobDate.LastMonth.DisplayName" xml:space="preserve">
+    <value>Last Month</value>
   </data>
-  <data name="DeDupResult.JobDate.SlxWeekly.DisplayName" xml:space="preserve">
-    <value>Last week</value>
+  <data name="DeDupResult.JobDate.LastWeek.DisplayName" xml:space="preserve">
+    <value>Last Week</value>
   </data>
-  <data name="DeDupResult.JobDate.SlxYearly.DisplayName" xml:space="preserve">
-    <value>Last year</value>
+  <data name="DeDupResult.JobDate.LastYear.DisplayName" xml:space="preserve">
+    <value>Last Year</value>
   </data>
   <data name="DeDupResult.ModifyDate.DisplayName" xml:space="preserve">
     <value>Modify Date</value>
@@ -3718,7 +3718,7 @@
     <value>Address</value>
   </data>
   <data name="ERPEmailAddress.AppId.DisplayName" xml:space="preserve">
-    <value>AppId</value>
+    <value>App Id</value>
   </data>
   <data name="ERPEmailAddress.ColumnMap.DisplayName" xml:space="preserve">
     <value>Column Map</value>
@@ -3772,7 +3772,7 @@
     <value>Account</value>
   </data>
   <data name="ERPPhoneNumber.AppId.DisplayName" xml:space="preserve">
-    <value>AppId</value>
+    <value>App Id</value>
   </data>
   <data name="ERPPhoneNumber.AreaCode.DisplayName" xml:space="preserve">
     <value>Area Code</value>
@@ -3871,7 +3871,7 @@
     <value>Modify User</value>
   </data>
   <data name="ERPSalesOrder.PriceDetail1.DisplayName" xml:space="preserve">
-    <value>PriceDetail1</value>
+    <value>Price Detail1</value>
   </data>
   <data name="ERPSalesOrder.Reference.DisplayName" xml:space="preserve">
     <value>Reference</value>
@@ -3993,11 +3993,8 @@
   <data name="ERPTradingAccount.Reference.DisplayName" xml:space="preserve">
     <value>Reference</value>
   </data>
-  <data name="ERPTradingAccount.Reference2.DisplayName" xml:space="preserve">
-    <value>Reference 2</value>
-  </data>
-  <data name="ERPTradingAccount.SeccodeId.DisplayName" xml:space="preserve">
-    <value>Seccode Id</value>
+  <data name="ERPTradingAccount.SecCodeId.DisplayName" xml:space="preserve">
+    <value>Sec Code Id</value>
   </data>
   <data name="ERPTradingAccount.SettlementDiscountAmount.DisplayName" xml:space="preserve">
     <value>Settlement Discount Amount</value>
@@ -4228,7 +4225,7 @@
     <value>Result</value>
   </data>
   <data name="History.Filter.TotalDuration.AnalyticsDescription" xml:space="preserve">
-    <value>Calculates the total duration -  or amount of time spent in these activities.</value>
+    <value>Calculates the total duration - or amount of time spent in these activities.</value>
   </data>
   <data name="History.Filter.TotalDuration.DisplayName" xml:space="preserve">
     <value>Total Duration</value>
@@ -4420,7 +4417,7 @@
     <value>Link Url</value>
   </data>
   <data name="HistoryMarketingServiceClick.MKTGSVCCAMPAIGNID.DisplayName" xml:space="preserve">
-    <value>MKTGSVCCAMPAIGNID</value>
+    <value>Mktg Svc Campaign Id</value>
   </data>
   <data name="HistoryMarketingServiceClick.ModifyDate.DisplayName" xml:space="preserve">
     <value>Modify Date</value>
@@ -4447,7 +4444,7 @@
     <value>Hist Mktgsvc Open Id</value>
   </data>
   <data name="HistoryMarketingServiceOpen.MKTGSVCCAMPAIGNID.DisplayName" xml:space="preserve">
-    <value>MKTGSVCCAMPAIGNID</value>
+    <value>Mktg Svc Campaign Id</value>
   </data>
   <data name="HistoryMarketingServiceOpen.ModifyDate.DisplayName" xml:space="preserve">
     <value>Modify Date</value>
@@ -4498,7 +4495,7 @@
     <value>Hist Mktgsvc Undeliver Id</value>
   </data>
   <data name="HistoryMarketingServiceUndeliverable.MKTGSVCCAMPAIGNID.DisplayName" xml:space="preserve">
-    <value>MKTGSVCCAMPAIGNID</value>
+    <value>Mktg Svc Campaign Id</value>
   </data>
   <data name="HistoryMarketingServiceUndeliverable.ModifyDate.DisplayName" xml:space="preserve">
     <value>Modify Date</value>
@@ -5017,7 +5014,7 @@
     <value>State</value>
   </data>
   <data name="Lead.Filter.UnassignedLeadAgingAverage.AnalyticsDescription" xml:space="preserve">
-    <value>Unassigned Lead Aging Average.  Use only unassigned leads.</value>
+    <value>Unassigned Lead Aging Average. Use only unassigned leads.</value>
   </data>
   <data name="Lead.Filter.UnassignedLeadAgingAverage.DisplayName" xml:space="preserve">
     <value>Unassigned Lead Aging Average</value>
@@ -6139,7 +6136,7 @@
     <value>Requester</value>
   </data>
   <data name="LitRequest.Filter.SendVia.DisplayName" xml:space="preserve">
-    <value>Sendvia</value>
+    <value>Send Via</value>
   </data>
   <data name="LitRequest.Filter.Status.DisplayName" xml:space="preserve">
     <value>Status</value>
@@ -6256,7 +6253,7 @@
     <value>Modify User</value>
   </data>
   <data name="MarketingServiceCampaign.NotificationEmail.DisplayName" xml:space="preserve">
-    <value>Notification  Email</value>
+    <value>Notification Email</value>
   </data>
   <data name="MarketingServiceCampaign.ProcessResponses.DisplayName" xml:space="preserve">
     <value>Process Responses</value>
@@ -6372,9 +6369,6 @@
   <data name="MarketingServiceRecipient.Skipped.DisplayName" xml:space="preserve">
     <value>Skipped</value>
   </data>
-  <data name="MarketingServiceRecipient.TargetResponse.DisplayName" xml:space="preserve">
-    <value>Target Response</value>
-  </data>
   <data name="MarketingServiceRecipient.TargetResponseId.DisplayName" xml:space="preserve">
     <value>Target Response Id</value>
   </data>
@@ -6442,7 +6436,7 @@
     <value>Modify User</value>
   </data>
   <data name="MarketingServiceUserInfo.OwnerEmail.DisplayName" xml:space="preserve">
-    <value>Owner  Email</value>
+    <value>Owner Email</value>
   </data>
   <data name="MarketingServiceUserInfo.ServiceCode.DisplayName" xml:space="preserve">
     <value>Service Code</value>
@@ -6580,13 +6574,13 @@
     <value>Count Opportunities</value>
   </data>
   <data name="Opportunity.Filter.DaysFromOpenToClose.AnalyticsDescription" xml:space="preserve">
-    <value>Calculates the average number of days that closed opportunities were open.  (Use this with groups that contain only closed opportunities)</value>
+    <value>Calculates the average number of days that closed opportunities were open. (Use this with groups that contain only closed opportunities)</value>
   </data>
   <data name="Opportunity.Filter.DaysFromOpenToClose.DisplayName" xml:space="preserve">
     <value>Days in pipeline - closed</value>
   </data>
   <data name="Opportunity.Filter.DaysInPipeLineOpen.AnalyticsDescription" xml:space="preserve">
-    <value>Calculates the average number of days since the opportunities were opened.  (Use this with groups that contain only open opportunities)</value>
+    <value>Calculates the average number of days since the opportunities were opened. (Use this with groups that contain only open opportunities)</value>
   </data>
   <data name="Opportunity.Filter.DaysInPipeLineOpen.DisplayName" xml:space="preserve">
     <value>Days in pipeline - open</value>
@@ -6765,9 +6759,6 @@
   <data name="Opportunity.Type.DisplayName" xml:space="preserve">
     <value>Type</value>
   </data>
-  <data name="Opportunity.Weighted.DisplayName" xml:space="preserve">
-    <value>Weighted</value>
-  </data>
   <data name="Opportunity.Win.DisplayName" xml:space="preserve">
     <value>Win</value>
   </data>
@@ -6814,7 +6805,7 @@
     <value>Opportunity Competitor</value>
   </data>
   <data name="OpportunityCompetitor.DisplayNamePlural" xml:space="preserve">
-    <value>Opportunity Competitor</value>
+    <value>Opportunity Competitors</value>
   </data>
   <data name="OpportunityCompetitor.Incumbent.DisplayName" xml:space="preserve">
     <value>Incumbent</value>
@@ -6868,10 +6859,10 @@
     <value>Create User</value>
   </data>
   <data name="OpportunityContact.DisplayName" xml:space="preserve">
-    <value>Opportunity  Contact</value>
+    <value>Opportunity Contact</value>
   </data>
   <data name="OpportunityContact.DisplayNamePlural" xml:space="preserve">
-    <value>Opportunity  Contacts</value>
+    <value>Opportunity Contacts</value>
   </data>
   <data name="OpportunityContact.Influence.DisplayName" xml:space="preserve">
     <value>Influence</value>
@@ -7149,9 +7140,6 @@
   <data name="OwnerSecurityProfile.ModifyUser.DisplayName" xml:space="preserve">
     <value>Modify User</value>
   </data>
-  <data name="OwnerSecurityProfile.OwnerJoin.DisplayName" xml:space="preserve">
-    <value>Owner Joins</value>
-  </data>
   <data name="OwnerSecurityProfile.ProfileDescription.DisplayName" xml:space="preserve">
     <value>Profile Description</value>
   </data>
@@ -7201,7 +7189,7 @@
     <value>Package Products</value>
   </data>
   <data name="Package.PackagesId.DisplayName" xml:space="preserve">
-    <value>PackagesId</value>
+    <value>Packages Id</value>
   </data>
   <data name="Package.Status.DisplayName" xml:space="preserve">
     <value>Status</value>
@@ -7234,10 +7222,10 @@
     <value>Data Owner</value>
   </data>
   <data name="PackageKitChildView.DisplayName" xml:space="preserve">
-    <value>PackageKitChildView</value>
+    <value>Package Kit Child View</value>
   </data>
   <data name="PackageKitChildView.DisplayNamePlural" xml:space="preserve">
-    <value>PackageKitChildViews</value>
+    <value>Package Kit Child Views</value>
   </data>
   <data name="PackageKitChildView.Family.DisplayName" xml:space="preserve">
     <value>Family</value>
@@ -7372,10 +7360,10 @@
     <value>Default Index</value>
   </data>
   <data name="PickList.DisplayName" xml:space="preserve">
-    <value>PickList</value>
+    <value>Pick List</value>
   </data>
   <data name="PickList.DisplayNamePlural" xml:space="preserve">
-    <value>PickLists</value>
+    <value>Pick Lists</value>
   </data>
   <data name="PickList.ItemId.DisplayName" xml:space="preserve">
     <value>Item Id</value>
@@ -7390,13 +7378,19 @@
     <value>Number</value>
   </data>
   <data name="PickList.PickListId.DisplayName" xml:space="preserve">
-    <value>PickList Id</value>
+    <value>Pick List Id</value>
   </data>
   <data name="PickList.Text.DisplayName" xml:space="preserve">
     <value>Text</value>
   </data>
   <data name="PickList.UserId.DisplayName" xml:space="preserve">
     <value>User Id</value>
+  </data>
+  <data name="PickList.Id.DisplayName" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="PickList.ShortText.DisplayName" xml:space="preserve">
+    <value>Short Text</value>
   </data>
   <data name="PickListItemView.Code.DisplayName" xml:space="preserve">
     <value>Code</value>
@@ -7852,10 +7846,10 @@
     <value>Data Owner</value>
   </data>
   <data name="ProdPackageKitView.DisplayName" xml:space="preserve">
-    <value>ProdPackageKitView</value>
+    <value>Prod Package Kit View</value>
   </data>
   <data name="ProdPackageKitView.DisplayNamePlural" xml:space="preserve">
-    <value>ProdPackageKitViews</value>
+    <value>Prod Package Kit Views</value>
   </data>
   <data name="ProdPackageKitView.Family.DisplayName" xml:space="preserve">
     <value>Family</value>
@@ -7957,7 +7951,7 @@
     <value>Commissionable</value>
   </data>
   <data name="Product.CommodityGroup.DisplayName" xml:space="preserve">
-    <value>CommodityGroup</value>
+    <value>Commodity Group</value>
   </data>
   <data name="Product.CommodityGroupId.DisplayName" xml:space="preserve">
     <value>Commodity Group Id</value>
@@ -8090,9 +8084,6 @@
   </data>
   <data name="Product.Program.DisplayName" xml:space="preserve">
     <value>Program</value>
-  </data>
-  <data name="Product.ResponseProducts.DisplayName" xml:space="preserve">
-    <value>Response Products</value>
   </data>
   <data name="Product.SalesOrderItems.DisplayName" xml:space="preserve">
     <value>Sales Order Items</value>
@@ -8524,7 +8515,7 @@
     <value>Reason</value>
   </data>
   <data name="Return.ReturnAddressId.DisplayName" xml:space="preserve">
-    <value>Return  Address Id</value>
+    <value>Return Address Id</value>
   </data>
   <data name="Return.ReturnDate.DisplayName" xml:space="preserve">
     <value>Return Date</value>
@@ -8902,7 +8893,7 @@
     <value>Acct. Manager</value>
   </data>
   <data name="SalesOrder.Filter.CommissionAverage.AnalyticsDescription" xml:space="preserve">
-    <value>CommissionAverage</value>
+    <value>Commission Average</value>
   </data>
   <data name="SalesOrder.Filter.CommissionAverage.DisplayName" xml:space="preserve">
     <value>Commission Average</value>
@@ -9145,7 +9136,7 @@
     <value>Actual Id</value>
   </data>
   <data name="SalesOrderItem.AppId.DisplayName" xml:space="preserve">
-    <value>AppId</value>
+    <value>App Id</value>
   </data>
   <data name="SalesOrderItem.CalculatedPrice.DisplayName" xml:space="preserve">
     <value>Calculated Price</value>
@@ -9271,7 +9262,7 @@
     <value>Global Sync Id</value>
   </data>
   <data name="SalesOrderSyncView.ModifyDate.DisplayName" xml:space="preserve">
-    <value>Modifydate</value>
+    <value>Modify Date</value>
   </data>
   <data name="SalesOrderSyncView.SalesOrder.DisplayName" xml:space="preserve">
     <value>Sales Order</value>
@@ -9628,10 +9619,10 @@
     <value>Create User</value>
   </data>
   <data name="SlxLogItem.DisplayName" xml:space="preserve">
-    <value>SlxLogItem</value>
+    <value>Slx Log Item</value>
   </data>
   <data name="SlxLogItem.DisplayNamePlural" xml:space="preserve">
-    <value>SlxLogItems</value>
+    <value>Slx Log Items</value>
   </data>
   <data name="SlxLogItem.EntityId.DisplayName" xml:space="preserve">
     <value>Entity Id</value>
@@ -9868,7 +9859,7 @@
     <value>App Id</value>
   </data>
   <data name="SyncDigest.AppIdMapping.DisplayName" xml:space="preserve">
-    <value>App ID Mapping</value>
+    <value>App Id Mapping</value>
   </data>
   <data name="SyncDigest.ConflictPriority.DisplayName" xml:space="preserve">
     <value>Conflict Priority</value>
@@ -9970,7 +9961,7 @@
     <value>Sync Results</value>
   </data>
   <data name="SyncResult.EntryInfo.DisplayName" xml:space="preserve">
-    <value>EntryInfo</value>
+    <value>Entry Info</value>
   </data>
   <data name="SyncResult.ErrorMessage.DisplayName" xml:space="preserve">
     <value>Error Message</value>
@@ -9997,7 +9988,7 @@
     <value>Resource Type</value>
   </data>
   <data name="SyncResult.RunName.DisplayName" xml:space="preserve">
-    <value>RunName</value>
+    <value>Run Name</value>
   </data>
   <data name="SyncResult.Severity.DisplayName" xml:space="preserve">
     <value>Severity</value>
@@ -10042,7 +10033,7 @@
     <value>Site Code</value>
   </data>
   <data name="SystemInformation.AppId.DisplayName" xml:space="preserve">
-    <value>AppId</value>
+    <value>App Id</value>
   </data>
   <data name="SystemInformation.BaseCurrency.DisplayName" xml:space="preserve">
     <value>Base Currency</value>
@@ -10903,10 +10894,10 @@
     <value>Create User</value>
   </data>
   <data name="TicketProblemSolutionType.DisplayName" xml:space="preserve">
-    <value>TicketProblem Solution Type</value>
+    <value>Ticket Problem Solution Type</value>
   </data>
   <data name="TicketProblemSolutionType.DisplayNamePlural" xml:space="preserve">
-    <value>TicketProblem Solution Types</value>
+    <value>Ticket Problem Solution Types</value>
   </data>
   <data name="TicketProblemSolutionType.ModifyDate.DisplayName" xml:space="preserve">
     <value>Modify Date</value>
@@ -10915,7 +10906,7 @@
     <value>Modify User</value>
   </data>
   <data name="TicketProblemSolutionType.TicketProblemSolutionTypeId.DisplayName" xml:space="preserve">
-    <value>Ticket Problem SolutionType Id</value>
+    <value>Ticket Problem Solution Type Id</value>
   </data>
   <data name="TicketProblemSolutionType.TicketProblemTypeId.DisplayName" xml:space="preserve">
     <value>Ticket Problem Type Id</value>
@@ -11079,53 +11070,11 @@
   <data name="UnitOfMeasure.Tick.DisplayName" xml:space="preserve">
     <value>Tick</value>
   </data>
-  <data name="UnitOfMeasure.UnitOfMeasureGroup.DisplayName" xml:space="preserve">
-    <value>Unit Of Measure Group</value>
-  </data>
-  <data name="UnitOfMeasure.UnitofMeasureGroupId.DisplayName" xml:space="preserve">
-    <value>Unit Of Measure Group Id</value>
-  </data>
   <data name="UnitOfMeasure.UnitOfMeasureId.DisplayName" xml:space="preserve">
     <value>Unit Of Measure Id</value>
   </data>
   <data name="UnitOfMeasure.UOMType.DisplayName" xml:space="preserve">
     <value>UOM Type</value>
-  </data>
-  <data name="UnitOfMeasureGroup.AppId.DisplayName" xml:space="preserve">
-    <value>App Id</value>
-  </data>
-  <data name="UnitOfMeasureGroup.CreateDate.DisplayName" xml:space="preserve">
-    <value>Create Date</value>
-  </data>
-  <data name="UnitOfMeasureGroup.CreateUser.DisplayName" xml:space="preserve">
-    <value>Create User</value>
-  </data>
-  <data name="UnitOfMeasureGroup.Description.DisplayName" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="UnitOfMeasureGroup.DisplayName" xml:space="preserve">
-    <value>Unit Of Measure Group</value>
-  </data>
-  <data name="UnitOfMeasureGroup.GlobalSyncId.DisplayName" xml:space="preserve">
-    <value>Global Sync Id</value>
-  </data>
-  <data name="UnitOfMeasureGroup.ModifyDate.DisplayName" xml:space="preserve">
-    <value>Modify Date</value>
-  </data>
-  <data name="UnitOfMeasureGroup.ModifyUser.DisplayName" xml:space="preserve">
-    <value>Modify User</value>
-  </data>
-  <data name="UnitOfMeasureGroup.Name.DisplayName" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="UnitOfMeasureGroup.Tick.DisplayName" xml:space="preserve">
-    <value>Tick</value>
-  </data>
-  <data name="UnitOfMeasureGroup.UnitOfMeasureGroupId.DisplayName" xml:space="preserve">
-    <value>Unit Of Measure Group Id</value>
-  </data>
-  <data name="UnitOfMeasureGroup.UnitOfMeasures.DisplayName" xml:space="preserve">
-    <value>Unit Of Measures</value>
   </data>
   <data name="UOMLookupView.Product.DisplayName" xml:space="preserve">
     <value>Product</value>
@@ -11592,8 +11541,8 @@
   <data name="UserNotification.DisplayNamePlural" xml:space="preserve">
     <value>User Notifications</value>
   </data>
-  <data name="UserNotification.Filter.Activity.DisplayName" xml:space="preserve">
-    <value>Activity</value>
+  <data name="UserNotification.Filter.ActivityType.DisplayName" xml:space="preserve">
+    <value>Activity Type</value>
   </data>
   <data name="UserNotification.Filter.Date.DisplayName" xml:space="preserve">
     <value>Date</value>
@@ -11896,7 +11845,7 @@
     <value>Global Sync Id</value>
   </data>
   <data name="SalesQuotationSyncView.AppId.DisplayName" xml:space="preserve">
-    <value>AppId</value>
+    <value>App Id</value>
   </data>
   <data name="SalesQuotationSyncView.Tick.DisplayName" xml:space="preserve">
     <value>Tick</value>
@@ -11908,10 +11857,10 @@
     <value>Modify Date</value>
   </data>
   <data name="SalesQuotationSyncView.ActionType.DisplayName" xml:space="preserve">
-    <value>ActionType</value>
+    <value>Action Type</value>
   </data>
   <data name="SalesQuotationSyncView.EndpointId.DisplayName" xml:space="preserve">
-    <value>EndpointId</value>
+    <value>Endpoint Id</value>
   </data>
   <data name="SalesQuotationSyncView.SalesQuotation.DisplayName" xml:space="preserve">
     <value>Sales Quotation</value>
@@ -11920,7 +11869,7 @@
     <value>Sales Quotation Sync View</value>
   </data>
   <data name="OwnerView.DisplayName" xml:space="preserve">
-    <value>OwnerView</value>
+    <value>Owner View</value>
   </data>
   <data name="OwnerView.OwnerId.DisplayName" xml:space="preserve">
     <value>Owner Id</value>
@@ -11932,25 +11881,25 @@
     <value>Type</value>
   </data>
   <data name="OwnerView.ModifyDate.DisplayName" xml:space="preserve">
-    <value>Modifydate</value>
+    <value>Modify Date</value>
   </data>
   <data name="OwnerView.ModifyUser.DisplayName" xml:space="preserve">
-    <value>Modifyuser</value>
+    <value>Modify User</value>
   </data>
   <data name="OwnerView.CreateDate.DisplayName" xml:space="preserve">
-    <value>Createdate</value>
+    <value>Create Date</value>
   </data>
   <data name="OwnerView.CreateUser.DisplayName" xml:space="preserve">
-    <value>Createuser</value>
+    <value>Create User</value>
   </data>
   <data name="OwnerView.DisplayNamePlural" xml:space="preserve">
-    <value>OwnerViews</value>
+    <value>Owner Views</value>
   </data>
   <data name="OwnerView.Owner.DisplayName" xml:space="preserve">
     <value>Owner</value>
   </data>
   <data name="Owner.OwnerView.DisplayName" xml:space="preserve">
-    <value>OwnerView</value>
+    <value>Owner View</value>
   </data>
   <data name="SalesOrder.Filter.IsQuote.DisplayName" xml:space="preserve">
     <value>Document Type</value>
@@ -12097,10 +12046,10 @@
     <value>Coordinator</value>
   </data>
   <data name="TicketProblemType.TicketProblemSolutionTypes.DisplayName" xml:space="preserve">
-    <value>StandardProblems</value>
+    <value>Standard Problems</value>
   </data>
   <data name="TicketSolutionType.TicketProblemSolutionTypes.DisplayName" xml:space="preserve">
-    <value>StandardSolutions</value>
+    <value>Standard Solutions</value>
   </data>
   <data name="ProdPackageKitView.CommodityType.DisplayName" xml:space="preserve">
     <value>Commodity Type</value>
@@ -12270,32 +12219,872 @@
   <data name="Opportunity.OverrideSalesPotential.DisplayName" xml:space="preserve">
     <value>Override Sales Potential</value>
   </data>
-  <data name="FulFilmentTemplate.SeccodeId.DisplayName" xml:space="preserve">
-    <value>SECCODEID</value>
+  <data name="User.Activity.DisplayName" xml:space="preserve">
+    <value>Activity</value>
   </data>
-  <data name="FulFilTemplateStage.SeccodeId.DisplayName" xml:space="preserve">
-    <value>SECCODEID</value>
+  <data name="AreaCategoryIssue.Filter.Area.DisplayName" xml:space="preserve">
+    <value>Area</value>
   </data>
-  <data name="FulFilTemplateTask.SeccodeId.DisplayName" xml:space="preserve">
-    <value>SECCODEID</value>
+  <data name="TicketAreaOwner.Filter.AssignedTo.DisplayName" xml:space="preserve">
+    <value>Assigned To</value>
   </data>
-  <data name="OppFulFilTask.SeccodeId.DisplayName" xml:space="preserve">
-    <value>SECCODEID</value>
+  <data name="TicketAreaOwner.AreaOwner.DisplayName" xml:space="preserve">
+    <value>Area Owner</value>
   </data>
-  <data name="OppFulFilStage.SeccodeId.DisplayName" xml:space="preserve">
-    <value>SECCODEID</value>
+  <data name="ResourceList.IsLocation.DisplayName" xml:space="preserve">
+    <value>Is Location</value>
   </data>
-  <data name="FulFilmentTemplate.Owner.DisplayName" xml:space="preserve">
+  <data name="ResourceList.Description.DisplayName" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="ActivityResourceView.DisplayName" xml:space="preserve">
+    <value>Activity Resource View</value>
+  </data>
+  <data name="ActivityResourceView.ActivityResourceViewId.DisplayName" xml:space="preserve">
+    <value>Activity Resource View Id</value>
+  </data>
+  <data name="ActivityResourceView.Name.DisplayName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ActivityResourceView.Type.DisplayName" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="ActivityResourceView.SubType.DisplayName" xml:space="preserve">
+    <value>Sub Type</value>
+  </data>
+  <data name="ActivityResourceView.IsLocation.DisplayName" xml:space="preserve">
+    <value>Is Location</value>
+  </data>
+  <data name="ActivityResourceView.Location.DisplayName" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="ActivityResourceView.ModifyDate.DisplayName" xml:space="preserve">
+    <value>Modify Date</value>
+  </data>
+  <data name="ActivityResourceView.ModifyUser.DisplayName" xml:space="preserve">
+    <value>Modify User</value>
+  </data>
+  <data name="ActivityResourceView.CreateDate.DisplayName" xml:space="preserve">
+    <value>Create Date</value>
+  </data>
+  <data name="ActivityResourceView.CreateUser.DisplayName" xml:space="preserve">
+    <value>Create User</value>
+  </data>
+  <data name="ActivityResourceView.DisplayNamePlural" xml:space="preserve">
+    <value>Activity Resource Views</value>
+  </data>
+  <data name="ActivityResourceView.Type.User.DisplayName" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="ActivityResourceView.Type.Resource.DisplayName" xml:space="preserve">
+    <value>Resource</value>
+  </data>
+  <data name="JoinData.DisplayNamePlural" xml:space="preserve">
+    <value>Join Data</value>
+  </data>
+  <data name="JoinData.DisplayName" xml:space="preserve">
+    <value>Join Data</value>
+  </data>
+  <data name="SecTableDef.DisplayName" xml:space="preserve">
+    <value>Sec Table Def</value>
+  </data>
+  <data name="SecTableDef.TableName.DisplayName" xml:space="preserve">
+    <value>Table Name</value>
+  </data>
+  <data name="SecTableDef.FieldName.DisplayName" xml:space="preserve">
+    <value>Field Name</value>
+  </data>
+  <data name="SecTableDef.FieldOffset.DisplayName" xml:space="preserve">
+    <value>Field Offset</value>
+  </data>
+  <data name="SecTableDef.FieldIndex.DisplayName" xml:space="preserve">
+    <value>Field Index</value>
+  </data>
+  <data name="SecTableDef.SeqCode.DisplayName" xml:space="preserve">
+    <value>Seq Code</value>
+  </data>
+  <data name="SecTableDef.KeyFlag.DisplayName" xml:space="preserve">
+    <value>Key Flag</value>
+  </data>
+  <data name="SecTableDef.Sync.DisplayName" xml:space="preserve">
+    <value>Sync</value>
+  </data>
+  <data name="SecTableDef.UserDef.DisplayName" xml:space="preserve">
+    <value>User Def</value>
+  </data>
+  <data name="SecTableDef.DisplayName.DisplayName" xml:space="preserve">
+    <value>Display Name</value>
+  </data>
+  <data name="SecTableDef.IsHidden.DisplayName" xml:space="preserve">
+    <value>Is Hidden</value>
+  </data>
+  <data name="SecTableDef.DateTimeType.DisplayName" xml:space="preserve">
+    <value>Date Time Type</value>
+  </data>
+  <data name="SecTableDef.Description.DisplayName" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="SecTableDef.AutoIncrement.DisplayName" xml:space="preserve">
+    <value>Auto Increment</value>
+  </data>
+  <data name="SecTableDef.ModifyDate.DisplayName" xml:space="preserve">
+    <value>Modify Date</value>
+  </data>
+  <data name="SecTableDef.ModifyUser.DisplayName" xml:space="preserve">
+    <value>Modify User</value>
+  </data>
+  <data name="SecTableDef.CreateDate.DisplayName" xml:space="preserve">
+    <value>Create Date</value>
+  </data>
+  <data name="SecTableDef.CreateUser.DisplayName" xml:space="preserve">
+    <value>Create User</value>
+  </data>
+  <data name="SecTableDef.DisplayNamePlural" xml:space="preserve">
+    <value>Sec Table Defs</value>
+  </data>
+  <data name="IndexDefinition.IsSecure.DisplayName" xml:space="preserve">
+    <value>Is Secure</value>
+  </data>
+  <data name="Activity.Location.DisplayName" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="User.Event.DisplayName" xml:space="preserve">
+    <value>Event</value>
+  </data>
+  <data name="Activity.Resources.DisplayName" xml:space="preserve">
+    <value>Resources</value>
+  </data>
+  <data name="ResourceSchedule.Activity.DisplayName" xml:space="preserve">
+    <value>Activity</value>
+  </data>
+  <data name="User.UserActivity.DisplayName" xml:space="preserve">
+    <value>User Activity</value>
+  </data>
+  <data name="UserActivity.User.DisplayName" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="ResourceList.ResourceSchedules.DisplayName" xml:space="preserve">
+    <value>Resource Schedules</value>
+  </data>
+  <data name="ResourceSchedule.Resource.DisplayName" xml:space="preserve">
+    <value>Resource</value>
+  </data>
+  <data name="Product.Filter.ModifiedBy.DisplayName" xml:space="preserve">
+    <value>Modified By</value>
+  </data>
+  <data name="Event.Location.DisplayName" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="History.Location.DisplayName" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="SystemInformation.LoginAttemptThreshold.DisplayName" xml:space="preserve">
+    <value>Login Attempt Threshold</value>
+  </data>
+  <data name="User.LoginAttempts.DisplayName" xml:space="preserve">
+    <value>Login Attempts</value>
+  </data>
+  <data name="ERPTradingAccount.ERP Trading Account.DisplayName" xml:space="preserve">
+    <value>ERP Trading Account</value>
+  </data>
+  <data name="ERPSalesOrder.ERP Sales Order.DisplayName" xml:space="preserve">
+    <value>ERP Sales Order</value>
+  </data>
+  <data name="OwnerSecurityProfile.DefaultPermission.Read.DisplayName" xml:space="preserve">
+    <value>Read</value>
+  </data>
+  <data name="OwnerSecurityProfile.DefaultPermission.Write.DisplayName" xml:space="preserve">
+    <value>Write</value>
+  </data>
+  <data name="OwnerSecurityProfile.ProfileType.System.DisplayName" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="OwnerSecurityProfile.ProfileType.UserDefined.DisplayName" xml:space="preserve">
+    <value>User Defined</value>
+  </data>
+  <data name="User.FailedAttemptDate.DisplayName" xml:space="preserve">
+    <value>Failed Attempt Date</value>
+  </data>
+  <data name="SystemInformation.LockoutTimeout.DisplayName" xml:space="preserve">
+    <value>Lockout Timeout</value>
+  </data>
+  <data name="ActivityResourceView.AccessId.DisplayName" xml:space="preserve">
+    <value>Access Id</value>
+  </data>
+  <data name="ActivityResourceView.AllowAdd.DisplayName" xml:space="preserve">
+    <value>Allow Add</value>
+  </data>
+  <data name="ActivityResourceView.AllowEdit.DisplayName" xml:space="preserve">
+    <value>Allow Edit</value>
+  </data>
+  <data name="ActivityResourceView.AllowDelete.DisplayName" xml:space="preserve">
+    <value>Allow Delete</value>
+  </data>
+  <data name="ActivityResourceView.AllowSync.DisplayName" xml:space="preserve">
+    <value>Allow Sync</value>
+  </data>
+  <data name="ActivityResourceView.ResourceId.DisplayName" xml:space="preserve">
+    <value>Resource Id</value>
+  </data>
+  <data name="AdHocGroup.CreateDate.DisplayName" xml:space="preserve">
+    <value>Create Date</value>
+  </data>
+  <data name="AdHocGroup.CreateUser.DisplayName" xml:space="preserve">
+    <value>Create User</value>
+  </data>
+  <data name="AdHocGroup.EntityId.DisplayName" xml:space="preserve">
+    <value>Entity Id</value>
+  </data>
+  <data name="AdHocGroup.GroupId.DisplayName" xml:space="preserve">
+    <value>Group Id</value>
+  </data>
+  <data name="AdHocGroup.ModifyDate.DisplayName" xml:space="preserve">
+    <value>Modify Date</value>
+  </data>
+  <data name="AdHocGroup.ModifyUser.DisplayName" xml:space="preserve">
+    <value>Modify User</value>
+  </data>
+  <data name="JoinData.CascadeType.DisplayName" xml:space="preserve">
+    <value>Cascade Type</value>
+  </data>
+  <data name="JoinData.CreateDate.DisplayName" xml:space="preserve">
+    <value>Create Date</value>
+  </data>
+  <data name="JoinData.CreateUser.DisplayName" xml:space="preserve">
+    <value>Create User</value>
+  </data>
+  <data name="JoinData.FromField.DisplayName" xml:space="preserve">
+    <value>From Field</value>
+  </data>
+  <data name="JoinData.FromTable.DisplayName" xml:space="preserve">
+    <value>From Table</value>
+  </data>
+  <data name="JoinData.JoinId.DisplayName" xml:space="preserve">
+    <value>Join Id</value>
+  </data>
+  <data name="JoinData.JoinType.DisplayName" xml:space="preserve">
+    <value>Join Type</value>
+  </data>
+  <data name="JoinData.KeyGenerator.DisplayName" xml:space="preserve">
+    <value>Key Generator</value>
+  </data>
+  <data name="JoinData.ModifyDate.DisplayName" xml:space="preserve">
+    <value>Modify Date</value>
+  </data>
+  <data name="JoinData.ModifyUser.DisplayName" xml:space="preserve">
+    <value>Modify User</value>
+  </data>
+  <data name="JoinData.Secondary.DisplayName" xml:space="preserve">
+    <value>Secondary</value>
+  </data>
+  <data name="JoinData.ToField.DisplayName" xml:space="preserve">
+    <value>To Field</value>
+  </data>
+  <data name="JoinData.ToTable.DisplayName" xml:space="preserve">
+    <value>To Table</value>
+  </data>
+  <data name="JoinData.UseByDefault.DisplayName" xml:space="preserve">
+    <value>Use By Default</value>
+  </data>
+  <data name="CampaignTask.ActualCost.DisplayName" xml:space="preserve">
+    <value>Actual Cost</value>
+  </data>
+  <data name="CampaignTask.ActualExpenses.DisplayName" xml:space="preserve">
+    <value>Actual Expenses</value>
+  </data>
+  <data name="CampaignTask.ActualHours.DisplayName" xml:space="preserve">
+    <value>Actual Hours</value>
+  </data>
+  <data name="CampaignTask.AssignedToId.DisplayName" xml:space="preserve">
+    <value>Assigned To Id</value>
+  </data>
+  <data name="CampaignTask.BudgetAmount.DisplayName" xml:space="preserve">
+    <value>Budget Amount</value>
+  </data>
+  <data name="CampaignTask.BudgetExpenses.DisplayName" xml:space="preserve">
+    <value>Budget Expenses</value>
+  </data>
+  <data name="CampaignTask.BudgetHours.DisplayName" xml:space="preserve">
+    <value>Budget Hours</value>
+  </data>
+  <data name="CampaignTask.CalendarDisplay.DisplayName" xml:space="preserve">
+    <value>Calendar Display</value>
+  </data>
+  <data name="CampaignTask.CampaignId.DisplayName" xml:space="preserve">
+    <value>Camapign Id</value>
+  </data>
+  <data name="CampaignTask.CampaignStageId.DisplayName" xml:space="preserve">
+    <value>Campaign Stage Id</value>
+  </data>
+  <data name="CampaignTask.CampaignTaskId.DisplayName" xml:space="preserve">
+    <value>Campaign Task Id</value>
+  </data>
+  <data name="CampaignTask.CampaignType.DisplayName" xml:space="preserve">
+    <value>Campaign Type</value>
+  </data>
+  <data name="CampaignTask.Completed.DisplayName" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="CampaignTask.CompletedDate.DisplayName" xml:space="preserve">
+    <value>Completed Date</value>
+  </data>
+  <data name="CampaignTask.ContactId.DisplayName" xml:space="preserve">
+    <value>Contact Id</value>
+  </data>
+  <data name="CampaignTask.CreateDate.DisplayName" xml:space="preserve">
+    <value>Create Date</value>
+  </data>
+  <data name="CampaignTask.CreateUser.DisplayName" xml:space="preserve">
+    <value>Create User</value>
+  </data>
+  <data name="CampaignTask.DateAssigned.DisplayName" xml:space="preserve">
+    <value>Date Assigned</value>
+  </data>
+  <data name="CampaignTask.Description.DisplayName" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="CampaignTask.DueDate.DisplayName" xml:space="preserve">
+    <value>Due Date</value>
+  </data>
+  <data name="CampaignTask.ModifyDate.DisplayName" xml:space="preserve">
+    <value>Modify Date</value>
+  </data>
+  <data name="CampaignTask.ModifyUser.DisplayName" xml:space="preserve">
+    <value>Modify User</value>
+  </data>
+  <data name="CampaignTask.Notes.DisplayName" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="CampaignTask.OwnerName.DisplayName" xml:space="preserve">
+    <value>Owner Name</value>
+  </data>
+  <data name="CampaignTask.OwnerType.DisplayName" xml:space="preserve">
+    <value>Owner Type</value>
+  </data>
+  <data name="CampaignTask.PercentComplete.DisplayName" xml:space="preserve">
+    <value>Percent Complete</value>
+  </data>
+  <data name="CampaignTask.Priority.DisplayName" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="CampaignTask.Status.DisplayName" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="CampaignTask.UserId.DisplayName" xml:space="preserve">
+    <value>User Id</value>
+  </data>
+  <data name="CampaignProduct.ActualId.DisplayName" xml:space="preserve">
+    <value>Actual Id</value>
+  </data>
+  <data name="CampaignProduct.CampaignId.DisplayName" xml:space="preserve">
+    <value>Campaign Id</value>
+  </data>
+  <data name="CampaignProduct.CampaignProductId.DisplayName" xml:space="preserve">
+    <value>Campaign Product Id</value>
+  </data>
+  <data name="CampaignProduct.CreateDate.DisplayName" xml:space="preserve">
+    <value>Create Date</value>
+  </data>
+  <data name="CampaignProduct.CreateUser.DisplayName" xml:space="preserve">
+    <value>Create User</value>
+  </data>
+  <data name="CampaignProduct.Family.DisplayName" xml:space="preserve">
+    <value>Family</value>
+  </data>
+  <data name="CampaignProduct.ModifyDate.DisplayName" xml:space="preserve">
+    <value>Modify Date</value>
+  </data>
+  <data name="CampaignProduct.ModifyUser.DisplayName" xml:space="preserve">
+    <value>Modify User</value>
+  </data>
+  <data name="CampaignProduct.Name.DisplayName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="CampaignProduct.ProductId.DisplayName" xml:space="preserve">
+    <value>Product Id</value>
+  </data>
+  <data name="Contract.IsActive.True.DisplayName" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="Contract.IsActive.False.DisplayName" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="UserNotification.Type.Leader.DisplayName" xml:space="preserve">
+    <value>Leader</value>
+  </data>
+  <data name="UserNotification.Type.Unknown.DisplayName" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="UserNotification.Type.Decline.DisplayName" xml:space="preserve">
+    <value>Decline</value>
+  </data>
+  <data name="UserNotification.Type.Confirm.DisplayName" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="UserNotification.Type.Deleted.DisplayName" xml:space="preserve">
+    <value>Deleted</value>
+  </data>
+  <data name="UserNotification.Type.Change.DisplayName" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="UserNotification.Type.New.DisplayName" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="ERPTradingAccount.Owner.DisplayName" xml:space="preserve">
     <value>Owner</value>
   </data>
-  <data name="OppFulFilTask.Owner.DisplayName" xml:space="preserve">
+  <data name="Owner.Owner.DisplayName" xml:space="preserve">
     <value>Owner</value>
   </data>
-  <data name="FulFilTemplateTask.ASSIGNEDTOID.DisplayName" xml:space="preserve">
-    <value>ASSIGNEDTOID</value>
+  <data name="ERPTradingAccount.DisplayNamePlural" xml:space="preserve">
+    <value>ERP Trading Accounts</value>
   </data>
-  <data name="OppFulFilTask.ASSIGNEDTOID.DisplayName" xml:space="preserve">
-    <value>ASSIGNEDTOID</value>
+  <data name="UserInfo.NameLF.DisplayName" xml:space="preserve">
+    <value>User Name (Last, First)</value>
+  </data>
+  <data name="UserActivity.Filter.Account.DisplayName" xml:space="preserve">
+    <value>Account/Company</value>
+  </data>
+  <data name="UserActivity.Filter.ActivityType.DisplayName" xml:space="preserve">
+    <value>Activity Type</value>
+  </data>
+  <data name="UserActivity.Filter.Attachment.DisplayName" xml:space="preserve">
+    <value>Attachment</value>
+  </data>
+  <data name="UserActivity.Filter.Duration.DisplayName" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="UserActivity.Filter.Leader.DisplayName" xml:space="preserve">
+    <value>Leader</value>
+  </data>
+  <data name="UserActivity.Filter.Name.DisplayName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="UserActivity.Filter.Opportunity.DisplayName" xml:space="preserve">
+    <value>Opportunity</value>
+  </data>
+  <data name="UserActivity.Filter.Recurring.DisplayName" xml:space="preserve">
+    <value>Recurring</value>
+  </data>
+  <data name="UserActivity.Filter.TimeFrame.DisplayName" xml:space="preserve">
+    <value>Time Frame</value>
+  </data>
+  <data name="UserActivity.Filter.Ticket.DisplayName" xml:space="preserve">
+    <value>Ticket</value>
+  </data>
+  <data name="Activity.Filter.Priority.DisplayName" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="UserActivity.Filter.Timeless.DisplayName" xml:space="preserve">
+    <value>Timeless</value>
+  </data>
+  <data name="UserActivity.Timeless.True.DisplayName" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="UserActivity.Recurring.False.DisplayName" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="UserActivity.Filter.Priority.DisplayName" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="UserActivity.TimeFrame.Yesterday.DisplayName" xml:space="preserve">
+    <value>Yesterday</value>
+  </data>
+  <data name="UserActivity.TimeFrame.Today.DisplayName" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="UserActivity.TimeFrame.Tomorrow.DisplayName" xml:space="preserve">
+    <value>Tomorrow</value>
+  </data>
+  <data name="UserActivity.TimeFrame.ThisWeek.DisplayName" xml:space="preserve">
+    <value>This Week</value>
+  </data>
+  <data name="UserActivity.TimeFrame.ThisMonth.DisplayName" xml:space="preserve">
+    <value>This Month</value>
+  </data>
+  <data name="UserActivity.TimeFrame.ThisQuarter.DisplayName" xml:space="preserve">
+    <value>This Quarter</value>
+  </data>
+  <data name="UserActivity.TimeFrame.ThisYear.DisplayName" xml:space="preserve">
+    <value>This Year</value>
+  </data>
+  <data name="UserActivity.TimeFrame.NextWeek.DisplayName" xml:space="preserve">
+    <value>Next Week</value>
+  </data>
+  <data name="UserActivity.TimeFrame.NextMonth.DisplayName" xml:space="preserve">
+    <value>Next Month</value>
+  </data>
+  <data name="UserActivity.TimeFrame.NextQuarter.DisplayName" xml:space="preserve">
+    <value>Next Quarter</value>
+  </data>
+  <data name="UserActivity.TimeFrame.NextYear.DisplayName" xml:space="preserve">
+    <value>Next Year</value>
+  </data>
+  <data name="UserActivity.TimeFrame.LastWeek.DisplayName" xml:space="preserve">
+    <value>Last Week</value>
+  </data>
+  <data name="UserActivity.TimeFrame.LastMonth.DisplayName" xml:space="preserve">
+    <value>Last Month</value>
+  </data>
+  <data name="UserActivity.TimeFrame.LastQuarter.DisplayName" xml:space="preserve">
+    <value>Last Quarter</value>
+  </data>
+  <data name="UserActivity.TimeFrame.LastYear.DisplayName" xml:space="preserve">
+    <value>Last Year</value>
+  </data>
+  <data name="UserActivity.TimeFrame.WeekToDate.DisplayName" xml:space="preserve">
+    <value>Week To Date</value>
+  </data>
+  <data name="UserActivity.TimeFrame.MonthToDate.DisplayName" xml:space="preserve">
+    <value>Month To Date</value>
+  </data>
+  <data name="UserActivity.TimeFrame.QuarterToDate.DisplayName" xml:space="preserve">
+    <value>Quarter To Date</value>
+  </data>
+  <data name="UserActivity.TimeFrame.YearToDate.DisplayName" xml:space="preserve">
+    <value>Year To Date</value>
+  </data>
+  <data name="UserActivity.Filter.Member.DisplayName" xml:space="preserve">
+    <value>Member</value>
+  </data>
+  <data name="RemoteAttachment.DisplayName" xml:space="preserve">
+    <value>Remote Attachment</value>
+  </data>
+  <data name="RemoteAttachment.RemoteAttachmentId.DisplayName" xml:space="preserve">
+    <value>Remote Attachment Id</value>
+  </data>
+  <data name="RemoteAttachment.AttachId.DisplayName" xml:space="preserve">
+    <value>Attach Id</value>
+  </data>
+  <data name="RemoteAttachment.CreateUser.DisplayName" xml:space="preserve">
+    <value>Create User</value>
+  </data>
+  <data name="RemoteAttachment.CreateDate.DisplayName" xml:space="preserve">
+    <value>Create Date</value>
+  </data>
+  <data name="RemoteAttachment.ModifyUser.DisplayName" xml:space="preserve">
+    <value>Modify User</value>
+  </data>
+  <data name="RemoteAttachment.ModifyDate.DisplayName" xml:space="preserve">
+    <value>Modify Date</value>
+  </data>
+  <data name="RemoteAttachment.SiteCode.DisplayName" xml:space="preserve">
+    <value>Site Code</value>
+  </data>
+  <data name="RemoteAttachment.Status.DisplayName" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="RemoteAttachment.DisplayNamePlural" xml:space="preserve">
+    <value>Remote Attachments</value>
+  </data>
+  <data name="UserActivity.ActivityType.Meeting.DisplayName" xml:space="preserve">
+    <value>Meeting</value>
+  </data>
+  <data name="UserActivity.ActivityType.Personal.DisplayName" xml:space="preserve">
+    <value>Personal</value>
+  </data>
+  <data name="UserActivity.ActivityType.Phone.DisplayName" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="UserActivity.ActivityType.ToDo.DisplayName" xml:space="preserve">
+    <value>To-Do</value>
+  </data>
+  <data name="RemoteAttachment.Attachment.DisplayName" xml:space="preserve">
+    <value>Attachment</value>
+  </data>
+  <data name="Attachment.Remote Attachment.DisplayName" xml:space="preserve">
+    <value>Remote Attachment</value>
+  </data>
+  <data name="UserNotification.ActivityType.Meeting.DisplayName" xml:space="preserve">
+    <value>Meeting</value>
+  </data>
+  <data name="UserNotification.ActivityType.Personal.DisplayName" xml:space="preserve">
+    <value>Personal</value>
+  </data>
+  <data name="UserNotification.ActivityType.Phone.DisplayName" xml:space="preserve">
+    <value>Phone Call</value>
+  </data>
+  <data name="UserNotification.ActivityType.ToDo.DisplayName" xml:space="preserve">
+    <value>To Do</value>
+  </data>
+  <data name="UserNotification.Notification.New.DisplayName" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="UserNotification.Notification.Change.DisplayName" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="UserNotification.Notification.Deleted.DisplayName" xml:space="preserve">
+    <value>Deleted</value>
+  </data>
+  <data name="UserNotification.Notification.Confirm.DisplayName" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="UserNotification.Notification.Decline.DisplayName" xml:space="preserve">
+    <value>Decline</value>
+  </data>
+  <data name="UserNotification.Notification.UnKnown.DisplayName" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="UserNotification.Notification.Leader.DisplayName" xml:space="preserve">
+    <value>Leader</value>
+  </data>
+  <data name="Address.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="Return.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="AccountProduct.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="Defect.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="ReturnAddress.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="LibraryDocs.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="Attachment.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="Competitor.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="Contact.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="ERPEmailAddress.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="ERPPhoneNumber.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="Lead.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="LeadAddress.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="LeadSource.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="Opportunity.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="OpportunityContact.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="OpportunityProduct.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="Product.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="SalesOrder.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="SalesOrderAddress.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="SalesOrderItem.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="Ticket.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="TicketActivity.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="UnitOfMeasure.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="Activity.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="History.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="UserActivity.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="UserNotification.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="Address.AddressType.DisplayName" xml:space="preserve">
+    <value>Address Type</value>
+  </data>
+  <data name="Address.PrimaryAddress.DisplayName" xml:space="preserve">
+    <value>Primary Address</value>
+  </data>
+  <data name="Address.Tick.DisplayName" xml:space="preserve">
+    <value>Tick</value>
+  </data>
+  <data name="Campaign.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="UserActivity.Timeless.False.DisplayName" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="ResourceList.Filter.IsLocation.DisplayName" xml:space="preserve">
+    <value>Is Location</value>
+  </data>
+  <data name="ResourceList.IsLocation.True.DisplayName" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="ResourceList.IsLocation.False.DisplayName" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="UserActivity.Attachment.True.DisplayName" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="UserActivity.Attachment.False.DisplayName" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="Event.CreateSource.DisplayName" xml:space="preserve">
+    <value>Create Source</value>
+  </data>
+  <data name="RemoteAttachment.Status.Available.DisplayName" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="RemoteAttachment.Status.Requested.DisplayName" xml:space="preserve">
+    <value>Requested</value>
+  </data>
+  <data name="RemoteAttachment.Status.Delivered.DisplayName" xml:space="preserve">
+    <value>Delivered</value>
+  </data>
+  <data name="Attachment.RemoteAttachments.DisplayName" xml:space="preserve">
+    <value>Remote Attachments</value>
+  </data>
+  <data name="Attachment.RemoteStatus.DisplayName" xml:space="preserve">
+    <value>Remote Status</value>
+  </data>
+  <data name="SalesOrderAddress.Salutation.DisplayName" xml:space="preserve">
+    <value>Salutation</value>
+  </data>
+  <data name="ReturnAddress.Salutation.DisplayName" xml:space="preserve">
+    <value>Salutation</value>
+  </data>
+  <data name="SecuredActionRole.DisplayNamePlural" xml:space="preserve">
+    <value>Secured Action Roles</value>
+  </data>
+  <data name="AppIdMapping.EnableEmailAuth.DisplayName" xml:space="preserve">
+    <value>Enable Email Authentication</value>
+  </data>
+  <data name="UserActivity.Filter.Status.DisplayName" xml:space="preserve">
+    <value>Unconfirmed</value>
+  </data>
+  <data name="UserActivity.Status.Unconfirmed.DisplayName" xml:space="preserve">
+    <value>Unconfirmed</value>
+  </data>
+  <data name="UserActivity.Status.Confirmed.DisplayName" xml:space="preserve">
+    <value>Confirmed</value>
+  </data>
+  <data name="UserActivity.Filter.Unconfirmed.DisplayName" xml:space="preserve">
+    <value>Unconfirmed</value>
+  </data>
+  <data name="UserActivity.Unconfirmed.True.DisplayName" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="UserActivity.Unconfirmed.False.DisplayName" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="AppIdMapping.SyncInterval.DisplayName" xml:space="preserve">
+    <value>Sync Interval</value>
+  </data>
+  <data name="LibraryDirs.Documents.DisplayName" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="LibraryDocs.Directory.DisplayName" xml:space="preserve">
+    <value>Directory</value>
+  </data>
+  <data name="IndexDefinition.IndexSchedules.DisplayName" xml:space="preserve">
+    <value>Index Schedules</value>
+  </data>
+  <data name="IndexSchedule.IndexDefinition.DisplayName" xml:space="preserve">
+    <value>Index Definition</value>
+  </data>
+  <data name="LitRequest.Filter.Account.DisplayName" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="ERPTradingAccount.Reference1.DisplayName" xml:space="preserve">
+    <value>Reference1</value>
+  </data>
+  <data name="ERPTradingAccount.Reference2.DisplayName" xml:space="preserve">
+    <value>Reference2</value>
+  </data>
+  <data name="User.UserType.Administrator.DisplayName" xml:space="preserve">
+    <value>Administrator</value>
+  </data>
+  <data name="User.UserType.Template.DisplayName" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="User.UserType.Remote.DisplayName" xml:space="preserve">
+    <value>Remote</value>
+  </data>
+  <data name="User.UserType.Web Only.DisplayName" xml:space="preserve">
+    <value>Web Only</value>
+  </data>
+  <data name="User.UserType.Retired.DisplayName" xml:space="preserve">
+    <value>Retired</value>
+  </data>
+  <data name="User.UserType.Concurrent.DisplayName" xml:space="preserve">
+    <value>Concurrent</value>
+  </data>
+  <data name="User.UserType.Web Viewer.DisplayName" xml:space="preserve">
+    <value>Web Viewer</value>
+  </data>
+  <data name="User.UserType.Network.DisplayName" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="Opportunity.Weighted.DisplayName" xml:space="preserve">
+    <value>Weighted Sales</value>
+  </data>
+  <data name="OwnerView.Type.System.DisplayName" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="OwnerView.Type.User.DisplayName" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="OwnerView.Type.Team.DisplayName" xml:space="preserve">
+    <value>Team</value>
+  </data>
+  <data name="OwnerView.Type.Department.DisplayName" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="Activity.FulfilmentTaskID.DisplayName" xml:space="preserve">
+    <value>FulfilmentTaskID</value>
+  </data>
+  <data name="Account.ClientNotes.DisplayName" xml:space="preserve">
+    <value>ClientNotes</value>
+  </data>
+  <data name="Account.MergeCode.DisplayName" xml:space="preserve">
+    <value>MergeCode</value>
+  </data>
+  <data name="Account.Rating.DisplayName" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="Account.TaxID.DisplayName" xml:space="preserve">
+    <value>TaxID</value>
+  </data>
+  <data name="Account.TaxExempt.DisplayName" xml:space="preserve">
+    <value>TaxExempt</value>
+  </data>
+  <data name="Account.NumDesigners.DisplayName" xml:space="preserve">
+    <value>NumDesigners</value>
+  </data>
+  <data name="Account.Specialty.DisplayName" xml:space="preserve">
+    <value>Specialty</value>
+  </data>
+  <data name="Opportunity.Forecaststage.DisplayName" xml:space="preserve">
+    <value>Forecast Stage</value>
+  </data>
+  <data name="Opportunity.DeliveryDate.DisplayName" xml:space="preserve">
+    <value>DeliveryDate</value>
+  </data>
+  <data name="Ticket.ITTicketLevel.DisplayName" xml:space="preserve">
+    <value>ITTicketLevel</value>
   </data>
   <data name="EmailArchive.ToRecipients.DisplayName" xml:space="preserve">
     <value>ToRecipients</value>
@@ -12306,14 +13095,8 @@
   <data name="EmailArchive.BCCRECIPIENTS.DisplayName" xml:space="preserve">
     <value>BCCRECIPIENTS</value>
   </data>
-  <data name="History.TORECIPIENTS.DisplayName" xml:space="preserve">
-    <value>TORECIPIENTS</value>
-  </data>
-  <data name="History.CCRECIPIENTS.DisplayName" xml:space="preserve">
-    <value>CCRECIPIENTS</value>
-  </data>
-  <data name="History.BCCRECIPIENTS.DisplayName" xml:space="preserve">
-    <value>BCCRECIPIENTS</value>
+  <data name="EmailArchive.Filter.FromAddress.DisplayName" xml:space="preserve">
+    <value>FromAddress</value>
   </data>
   <data name="EmailArchive.Filter.ReprocesNote.DisplayName" xml:space="preserve">
     <value>ReprocessNote</value>
@@ -12321,308 +13104,11 @@
   <data name="EmailArchive.Filter.ToAddress.DisplayName" xml:space="preserve">
     <value>ToAddress</value>
   </data>
-  <data name="EmailArchive.Filter.FromAddress.DisplayName" xml:space="preserve">
-    <value>FromAddress</value>
-  </data>
-  <data name="Vactiveusers.DisplayName" xml:space="preserve">
-    <value>ActiveUsers</value>
-  </data>
-  <data name="Vactiveusers.Userid.DisplayName" xml:space="preserve">
-    <value>Userid</value>
-  </data>
-  <data name="Vactiveusers.Username.DisplayName" xml:space="preserve">
-    <value>Username</value>
-  </data>
-  <data name="Account.EuroAccountManager.DisplayName" xml:space="preserve">
-    <value>EuroAccountManager</value>
-  </data>
-  <data name="Vactiveusers.Account.DisplayName" xml:space="preserve">
-    <value>Account</value>
-  </data>
-  <data name="Vactiveusers.DisplayNamePlural" xml:space="preserve">
-    <value>ActiveUsers</value>
-  </data>
-  <data name="Vactiveteams.DisplayName" xml:space="preserve">
-    <value>ActiveTeams</value>
-  </data>
-  <data name="Vactiveteams.Myseccodeid.DisplayName" xml:space="preserve">
-    <value>Myseccodeid</value>
-  </data>
-  <data name="Vactiveteams.Teamname.DisplayName" xml:space="preserve">
-    <value>Teamname</value>
-  </data>
-  <data name="Vactiveteams.DisplayNamePlural" xml:space="preserve">
-    <value>ActiveTeams</value>
-  </data>
-  <data name="Vhistowner.Accountid.DisplayName" xml:space="preserve">
-    <value>Accountid</value>
-  </data>
-  <data name="Vhistowner.DisplayName" xml:space="preserve">
-    <value>Vhistowner</value>
-  </data>
-  <data name="Contact.EuroAccountManager.DisplayName" xml:space="preserve">
-    <value>EuroAccountManager</value>
-  </data>
-  <data name="Vactiveusers.Contact.DisplayName" xml:space="preserve">
-    <value>Contact</value>
-  </data>
-  <data name="EuroXHistoryMapping.DisplayName" xml:space="preserve">
-    <value>EuroXHistoryMapping</value>
-  </data>
-  <data name="EuroXHistoryMapping.EuroXHistoryMappingId.DisplayName" xml:space="preserve">
-    <value>Id</value>
-  </data>
-  <data name="EuroXHistoryMapping.CreateUser.DisplayName" xml:space="preserve">
-    <value>Create User</value>
-  </data>
-  <data name="EuroXHistoryMapping.CreateDate.DisplayName" xml:space="preserve">
-    <value>Create Date</value>
-  </data>
-  <data name="EuroXHistoryMapping.ModifyUser.DisplayName" xml:space="preserve">
-    <value>Modify User</value>
-  </data>
-  <data name="EuroXHistoryMapping.ModifyDate.DisplayName" xml:space="preserve">
-    <value>Modify Date</value>
-  </data>
-  <data name="EuroXHistoryMapping.MainAccountSeccodeID.DisplayName" xml:space="preserve">
-    <value>MainAccountSeccodeID</value>
-  </data>
-  <data name="EuroXHistoryMapping.XHistorySeccodeID.DisplayName" xml:space="preserve">
-    <value>XHistorySeccodeID</value>
-  </data>
-  <data name="Account.ClientNotes.DisplayName" xml:space="preserve">
-    <value>ClientNotes</value>
-  </data>
-  <data name="EuroUserTeamAccess.DisplayName" xml:space="preserve">
-    <value>EuroUserTeamAccess</value>
-  </data>
-  <data name="EuroUserTeamAccess.EuroUserTeamAccessId.DisplayName" xml:space="preserve">
-    <value>Id</value>
-  </data>
-  <data name="EuroUserTeamAccess.CreateUser.DisplayName" xml:space="preserve">
-    <value>Create User</value>
-  </data>
-  <data name="EuroUserTeamAccess.CreateDate.DisplayName" xml:space="preserve">
-    <value>Create Date</value>
-  </data>
-  <data name="EuroUserTeamAccess.ModifyUser.DisplayName" xml:space="preserve">
-    <value>Modify User</value>
-  </data>
-  <data name="EuroUserTeamAccess.ModifyDate.DisplayName" xml:space="preserve">
-    <value>Modify Date</value>
-  </data>
-  <data name="EuroUserTeamAccess.EuroUserid.DisplayName" xml:space="preserve">
-    <value>EuroUserid</value>
-  </data>
-  <data name="EuroUserTeamAccess.TeamSeccodeid.DisplayName" xml:space="preserve">
-    <value>TeamSeccodeid</value>
-  </data>
-  <data name="Owner.EuroUserTeamAccess.DisplayName" xml:space="preserve">
-    <value>EuroUserTeamAccess</value>
-  </data>
-  <data name="EuroUserTeamAccess.EuroTeam.DisplayName" xml:space="preserve">
-    <value>Owner</value>
-  </data>
-  <data name="EuroUserTeamAccess.EuroUser.DisplayName" xml:space="preserve">
-    <value>EuroUser</value>
-  </data>
-  <data name="User.EuroUserTeamAccess.DisplayName" xml:space="preserve">
-    <value>EuroUserTeamAccess</value>
-  </data>
-  <data name="User.EuroUserTeamAccesses.DisplayName" xml:space="preserve">
-    <value>EuroUserTeamAccesses</value>
-  </data>
-  <data name="EuroUserTeamAccess.User.DisplayName" xml:space="preserve">
-    <value>User</value>
-  </data>
-  <data name="Vuserteam.DisplayName" xml:space="preserve">
-    <value>UserTeam</value>
-  </data>
-  <data name="Vuserteam.Eurouserteamaccessid.DisplayName" xml:space="preserve">
-    <value>Eurouserteamaccessid</value>
-  </data>
-  <data name="Vuserteam.Eurouserid.DisplayName" xml:space="preserve">
-    <value>Eurouserid</value>
-  </data>
-  <data name="Vuserteam.Myseccodeid.DisplayName" xml:space="preserve">
-    <value>Myseccodeid</value>
-  </data>
-  <data name="Vuserteam.Teamname.DisplayName" xml:space="preserve">
-    <value>Teamname</value>
-  </data>
-  <data name="Vuserteam.DisplayNamePlural" xml:space="preserve">
-    <value>UserTeam</value>
-  </data>
-  <data name="Address.AddressType.DisplayName" xml:space="preserve">
-    <value>AddressType</value>
-  </data>
-  <data name="Product.Filter.ModifiedBy.DisplayName" xml:space="preserve">
-    <value>Modified By</value>
-  </data>
-  <data name="Vhistowner.Histowner.DisplayName" xml:space="preserve">
-    <value>Histowner</value>
-  </data>
-  <data name="Account.Vhistowner.DisplayName" xml:space="preserve">
-    <value>Vhistowner</value>
-  </data>
-  <data name="Vhistowner.Account.DisplayName" xml:space="preserve">
-    <value>Account</value>
-  </data>
-  <data name="Opportunity.EuroAccountManager.DisplayName" xml:space="preserve">
-    <value>EuroAccountManager</value>
-  </data>
-  <data name="Vactiveusers.Opportunity.DisplayName" xml:space="preserve">
-    <value>Opportunity</value>
-  </data>
-  <data name="History.FROMRECIPIENT.DisplayName" xml:space="preserve">
-    <value>FROMRECIPIENT</value>
-  </data>
-  <data name="EuroTicketDefaults.DisplayName" xml:space="preserve">
-    <value>EuroTicketDefaults</value>
-  </data>
-  <data name="EuroTicketDefaults.Euroticketdefaultsid.DisplayName" xml:space="preserve">
-    <value>Euroticketdefaultsid</value>
-  </data>
-  <data name="EuroTicketDefaults.CreateUser.DisplayName" xml:space="preserve">
-    <value>Createuser</value>
-  </data>
-  <data name="EuroTicketDefaults.CreateDate.DisplayName" xml:space="preserve">
-    <value>Createdate</value>
-  </data>
-  <data name="EuroTicketDefaults.ModifyUser.DisplayName" xml:space="preserve">
-    <value>Modifyuser</value>
-  </data>
-  <data name="EuroTicketDefaults.ModifyDate.DisplayName" xml:space="preserve">
-    <value>Modifydate</value>
-  </data>
-  <data name="EuroTicketDefaults.ITAccountid.DisplayName" xml:space="preserve">
-    <value>ITAccountid</value>
-  </data>
-  <data name="EuroTicketDefaults.AssignedToID.DisplayName" xml:space="preserve">
-    <value>AssignedToID</value>
-  </data>
-  <data name="EuroTicketDefaults.ITTicketLevel.DisplayName" xml:space="preserve">
-    <value>ITTicketLevel</value>
-  </data>
-  <data name="EuroTicketDefaults.Area.DisplayName" xml:space="preserve">
-    <value>Area</value>
-  </data>
-  <data name="EuroTicketDefaults.Category.DisplayName" xml:space="preserve">
-    <value>Category</value>
-  </data>
-  <data name="EuroTicketDefaults.Issue.DisplayName" xml:space="preserve">
-    <value>Issue</value>
-  </data>
-  <data name="EuroTicketDefaults.ITCompanyAccount.DisplayName" xml:space="preserve">
-    <value>ITCompanyAccount</value>
-  </data>
-  <data name="Account.EuroTicketDefaults.DisplayName" xml:space="preserve">
-    <value>EuroTicketDefaults</value>
-  </data>
-  <data name="EuroTicketDefaults.DefaultAssignedTo.DisplayName" xml:space="preserve">
-    <value>DefaultAssignedto</value>
-  </data>
-  <data name="Owner.EuroTicketDefaults.DisplayName" xml:space="preserve">
-    <value>EuroTicketDefaults</value>
-  </data>
-  <data name="EuroTicketDefaults.ITContactId.DisplayName" xml:space="preserve">
-    <value>ITContactId</value>
-  </data>
-  <data name="EuroTicketDefaults.Contact.DisplayName" xml:space="preserve">
-    <value>Contact</value>
-  </data>
-  <data name="Contact.EuroTicketDefaults.DisplayName" xml:space="preserve">
-    <value>EuroTicketDefaults</value>
-  </data>
-  <data name="EuroXTicketMapping.DisplayName" xml:space="preserve">
-    <value>EuroXTicketMapping</value>
-  </data>
-  <data name="EuroXTicketMapping.EuroXTicketMappingId.DisplayName" xml:space="preserve">
-    <value>Id</value>
-  </data>
-  <data name="EuroXTicketMapping.CreateUser.DisplayName" xml:space="preserve">
-    <value>Create User</value>
-  </data>
-  <data name="EuroXTicketMapping.CreateDate.DisplayName" xml:space="preserve">
-    <value>Create Date</value>
-  </data>
-  <data name="EuroXTicketMapping.ModifyUser.DisplayName" xml:space="preserve">
-    <value>Modify User</value>
-  </data>
-  <data name="EuroXTicketMapping.ModifyDate.DisplayName" xml:space="preserve">
-    <value>Modify Date</value>
-  </data>
-  <data name="EuroXTicketMapping.Userid.DisplayName" xml:space="preserve">
-    <value>Userid</value>
-  </data>
-  <data name="EuroXTicketMapping.OriginatorSeccodeId.DisplayName" xml:space="preserve">
-    <value>OriginatorSeccodeId</value>
-  </data>
-  <data name="User.EuroXTicketMapping.DisplayName" xml:space="preserve">
-    <value>EuroXTicketMapping</value>
-  </data>
-  <data name="EuroXTicketMapping.OriginatingUser.DisplayName" xml:space="preserve">
-    <value>OriginatingUser</value>
-  </data>
-  <data name="Vprivateemailusermap.EuroXTicketMapping.DisplayName" xml:space="preserve">
-    <value>EuroXTicketMapping</value>
-  </data>
-  <data name="EuroXTicketMapping.OriginatorTeam.DisplayName" xml:space="preserve">
-    <value>OriginatorTeam</value>
-  </data>
-  <data name="Vprivateemailusermap.DisplayName" xml:space="preserve">
-    <value>EuroPrivateEmailUserMap</value>
-  </data>
-  <data name="Vprivateemailusermap.DisplayNamePlural" xml:space="preserve">
-    <value>EuroPrivateEmailUserMaps</value>
-  </data>
-  <data name="Ticket.ITTicketLevel.DisplayName" xml:space="preserve">
-    <value>ITTicketLevel</value>
-  </data>
-  <data name="OppAssociatedCompany.DisplayName" xml:space="preserve">
-    <value>Opp Associated Company</value>
-  </data>
-  <data name="OppAssociatedCompany.OppAssociatedCompanyId.DisplayName" xml:space="preserve">
-    <value>Id</value>
-  </data>
-  <data name="OppAssociatedCompany.CreateUser.DisplayName" xml:space="preserve">
-    <value>Create User</value>
-  </data>
-  <data name="OppAssociatedCompany.CreateDate.DisplayName" xml:space="preserve">
-    <value>Create Date</value>
-  </data>
-  <data name="OppAssociatedCompany.ModifyUser.DisplayName" xml:space="preserve">
-    <value>Modify User</value>
-  </data>
-  <data name="OppAssociatedCompany.ModifyDate.DisplayName" xml:space="preserve">
-    <value>Modify Date</value>
-  </data>
-  <data name="OppAssociatedCompany.OpportuntyId.DisplayName" xml:space="preserve">
-    <value>OpportuntyId</value>
-  </data>
-  <data name="OppAssociatedCompany.AccountId.DisplayName" xml:space="preserve">
-    <value>AccountId</value>
-  </data>
-  <data name="OppAssociatedCompany.Role.DisplayName" xml:space="preserve">
-    <value>Role</value>
-  </data>
-  <data name="Opportunity.OppAssociatedCompanies.DisplayName" xml:space="preserve">
-    <value>Opp Associated Companies</value>
-  </data>
-  <data name="OppAssociatedCompany.Opportunity.DisplayName" xml:space="preserve">
-    <value>Opportunity</value>
-  </data>
-  <data name="Account.OppAssociatedCompanies.DisplayName" xml:space="preserve">
-    <value>Opp Associated Companies</value>
-  </data>
-  <data name="OppAssociatedCompany.Account.DisplayName" xml:space="preserve">
-    <value>Account</value>
-  </data>
-  <data name="User.QUOTA.DisplayName" xml:space="preserve">
-    <value>Quota</value>
-  </data>
   <data name="EuroQuota.DisplayName" xml:space="preserve">
     <value>Quota</value>
+  </data>
+  <data name="EuroQuota.DisplayNamePlural" xml:space="preserve">
+    <value>Quotas</value>
   </data>
   <data name="EuroQuota.Euroquotaid.DisplayName" xml:space="preserve">
     <value>Euroquotaid</value>
@@ -12675,13 +13161,310 @@
   <data name="EuroQuota.Description.DisplayName" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="EuroQuota.DisplayNamePlural" xml:space="preserve">
-    <value>Quotas</value>
+  <data name="EuroTicketDefaults.DisplayName" xml:space="preserve">
+    <value>EuroTicketDefaults</value>
+  </data>
+  <data name="EuroTicketDefaults.Euroticketdefaultsid.DisplayName" xml:space="preserve">
+    <value>Euroticketdefaultsid</value>
+  </data>
+  <data name="EuroTicketDefaults.CreateUser.DisplayName" xml:space="preserve">
+    <value>Createuser</value>
+  </data>
+  <data name="EuroTicketDefaults.CreateDate.DisplayName" xml:space="preserve">
+    <value>Createdate</value>
+  </data>
+  <data name="EuroTicketDefaults.ModifyUser.DisplayName" xml:space="preserve">
+    <value>Modifyuser</value>
+  </data>
+  <data name="EuroTicketDefaults.ModifyDate.DisplayName" xml:space="preserve">
+    <value>Modifydate</value>
+  </data>
+  <data name="EuroTicketDefaults.ITAccountid.DisplayName" xml:space="preserve">
+    <value>ITAccountid</value>
+  </data>
+  <data name="EuroTicketDefaults.AssignedToID.DisplayName" xml:space="preserve">
+    <value>AssignedToID</value>
+  </data>
+  <data name="EuroTicketDefaults.ITTicketLevel.DisplayName" xml:space="preserve">
+    <value>ITTicketLevel</value>
+  </data>
+  <data name="EuroTicketDefaults.Area.DisplayName" xml:space="preserve">
+    <value>Area</value>
+  </data>
+  <data name="EuroTicketDefaults.Category.DisplayName" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="EuroTicketDefaults.Issue.DisplayName" xml:space="preserve">
+    <value>Issue</value>
+  </data>
+  <data name="EuroTicketDefaults.ITContactId.DisplayName" xml:space="preserve">
+    <value>ITContactId</value>
+  </data>
+  <data name="EuroUserTeamAccess.DisplayName" xml:space="preserve">
+    <value>EuroUserTeamAccess</value>
+  </data>
+  <data name="EuroUserTeamAccess.EuroUserTeamAccessId.DisplayName" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="EuroUserTeamAccess.CreateUser.DisplayName" xml:space="preserve">
+    <value>Create User</value>
+  </data>
+  <data name="EuroUserTeamAccess.CreateDate.DisplayName" xml:space="preserve">
+    <value>Create Date</value>
+  </data>
+  <data name="EuroUserTeamAccess.ModifyUser.DisplayName" xml:space="preserve">
+    <value>Modify User</value>
+  </data>
+  <data name="EuroUserTeamAccess.ModifyDate.DisplayName" xml:space="preserve">
+    <value>Modify Date</value>
+  </data>
+  <data name="EuroUserTeamAccess.EuroUserid.DisplayName" xml:space="preserve">
+    <value>EuroUserid</value>
+  </data>
+  <data name="EuroUserTeamAccess.TeamSeccodeid.DisplayName" xml:space="preserve">
+    <value>TeamSeccodeid</value>
+  </data>
+  <data name="EuroXHistoryMapping.DisplayName" xml:space="preserve">
+    <value>EuroXHistoryMapping</value>
+  </data>
+  <data name="EuroXHistoryMapping.EuroXHistoryMappingId.DisplayName" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="EuroXHistoryMapping.CreateUser.DisplayName" xml:space="preserve">
+    <value>Create User</value>
+  </data>
+  <data name="EuroXHistoryMapping.CreateDate.DisplayName" xml:space="preserve">
+    <value>Create Date</value>
+  </data>
+  <data name="EuroXHistoryMapping.ModifyUser.DisplayName" xml:space="preserve">
+    <value>Modify User</value>
+  </data>
+  <data name="EuroXHistoryMapping.ModifyDate.DisplayName" xml:space="preserve">
+    <value>Modify Date</value>
+  </data>
+  <data name="EuroXHistoryMapping.MainAccountSeccodeID.DisplayName" xml:space="preserve">
+    <value>MainAccountSeccodeID</value>
+  </data>
+  <data name="EuroXHistoryMapping.XHistorySeccodeID.DisplayName" xml:space="preserve">
+    <value>XHistorySeccodeID</value>
+  </data>
+  <data name="EuroXTicketMapping.DisplayName" xml:space="preserve">
+    <value>EuroXTicketMapping</value>
+  </data>
+  <data name="EuroXTicketMapping.EuroXTicketMappingId.DisplayName" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="EuroXTicketMapping.CreateUser.DisplayName" xml:space="preserve">
+    <value>Create User</value>
+  </data>
+  <data name="EuroXTicketMapping.CreateDate.DisplayName" xml:space="preserve">
+    <value>Create Date</value>
+  </data>
+  <data name="EuroXTicketMapping.ModifyUser.DisplayName" xml:space="preserve">
+    <value>Modify User</value>
+  </data>
+  <data name="EuroXTicketMapping.ModifyDate.DisplayName" xml:space="preserve">
+    <value>Modify Date</value>
+  </data>
+  <data name="EuroXTicketMapping.Userid.DisplayName" xml:space="preserve">
+    <value>Userid</value>
+  </data>
+  <data name="EuroXTicketMapping.OriginatorSeccodeId.DisplayName" xml:space="preserve">
+    <value>OriginatorSeccodeId</value>
+  </data>
+  <data name="FulFilmentTemplate.SeccodeId.DisplayName" xml:space="preserve">
+    <value>SECCODEID</value>
+  </data>
+  <data name="FulFilTemplateStage.SeccodeId.DisplayName" xml:space="preserve">
+    <value>SECCODEID</value>
+  </data>
+  <data name="FulFilTemplateTask.SeccodeId.DisplayName" xml:space="preserve">
+    <value>SECCODEID</value>
+  </data>
+  <data name="FulFilTemplateTask.ASSIGNEDTOID.DisplayName" xml:space="preserve">
+    <value>ASSIGNEDTOID</value>
+  </data>
+  <data name="OppAssociatedCompany.DisplayName" xml:space="preserve">
+    <value>Opp Associated Company</value>
+  </data>
+  <data name="OppAssociatedCompany.OppAssociatedCompanyId.DisplayName" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="OppAssociatedCompany.CreateUser.DisplayName" xml:space="preserve">
+    <value>Create User</value>
+  </data>
+  <data name="OppAssociatedCompany.CreateDate.DisplayName" xml:space="preserve">
+    <value>Create Date</value>
+  </data>
+  <data name="OppAssociatedCompany.ModifyUser.DisplayName" xml:space="preserve">
+    <value>Modify User</value>
+  </data>
+  <data name="OppAssociatedCompany.ModifyDate.DisplayName" xml:space="preserve">
+    <value>Modify Date</value>
+  </data>
+  <data name="OppAssociatedCompany.OpportuntyId.DisplayName" xml:space="preserve">
+    <value>OpportuntyId</value>
+  </data>
+  <data name="OppAssociatedCompany.AccountId.DisplayName" xml:space="preserve">
+    <value>AccountId</value>
+  </data>
+  <data name="OppAssociatedCompany.Role.DisplayName" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="OppFulFilStage.SeccodeId.DisplayName" xml:space="preserve">
+    <value>SECCODEID</value>
+  </data>
+  <data name="OppFulFilTask.SeccodeId.DisplayName" xml:space="preserve">
+    <value>SECCODEID</value>
+  </data>
+  <data name="OppFulFilTask.ASSIGNEDTOID.DisplayName" xml:space="preserve">
+    <value>ASSIGNEDTOID</value>
+  </data>
+  <data name="Vactiveteams.DisplayName" xml:space="preserve">
+    <value>ActiveTeams</value>
+  </data>
+  <data name="Vactiveteams.DisplayNamePlural" xml:space="preserve">
+    <value>ActiveTeams</value>
+  </data>
+  <data name="Vactiveteams.Myseccodeid.DisplayName" xml:space="preserve">
+    <value>Myseccodeid</value>
+  </data>
+  <data name="Vactiveteams.Teamname.DisplayName" xml:space="preserve">
+    <value>Teamname</value>
+  </data>
+  <data name="Vactiveusers.DisplayName" xml:space="preserve">
+    <value>ActiveUsers</value>
+  </data>
+  <data name="Vactiveusers.DisplayNamePlural" xml:space="preserve">
+    <value>ActiveUsers</value>
+  </data>
+  <data name="Vactiveusers.Userid.DisplayName" xml:space="preserve">
+    <value>Userid</value>
+  </data>
+  <data name="Vactiveusers.Username.DisplayName" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="Vhistowner.DisplayName" xml:space="preserve">
+    <value>Vhistowner</value>
+  </data>
+  <data name="Vhistowner.Accountid.DisplayName" xml:space="preserve">
+    <value>Accountid</value>
+  </data>
+  <data name="Vhistowner.Histowner.DisplayName" xml:space="preserve">
+    <value>Histowner</value>
+  </data>
+  <data name="Vprivateemailusermap.DisplayName" xml:space="preserve">
+    <value>EuroPrivateEmailUserMap</value>
+  </data>
+  <data name="Vprivateemailusermap.DisplayNamePlural" xml:space="preserve">
+    <value>EuroPrivateEmailUserMaps</value>
+  </data>
+  <data name="Vuserteam.DisplayName" xml:space="preserve">
+    <value>UserTeam</value>
+  </data>
+  <data name="Vuserteam.DisplayNamePlural" xml:space="preserve">
+    <value>UserTeam</value>
+  </data>
+  <data name="Vuserteam.Eurouserteamaccessid.DisplayName" xml:space="preserve">
+    <value>Eurouserteamaccessid</value>
+  </data>
+  <data name="Vuserteam.Eurouserid.DisplayName" xml:space="preserve">
+    <value>Eurouserid</value>
+  </data>
+  <data name="Vuserteam.Myseccodeid.DisplayName" xml:space="preserve">
+    <value>Myseccodeid</value>
+  </data>
+  <data name="Vuserteam.Teamname.DisplayName" xml:space="preserve">
+    <value>Teamname</value>
+  </data>
+  <data name="Account.OppAssociatedCompanies.DisplayName" xml:space="preserve">
+    <value>Opp Associated Companies</value>
+  </data>
+  <data name="OppAssociatedCompany.Account.DisplayName" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="Account.EuroAccountManager.DisplayName" xml:space="preserve">
+    <value>EuroAccountManager</value>
+  </data>
+  <data name="Vactiveusers.Account.DisplayName" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="Account.Vhistowner.DisplayName" xml:space="preserve">
+    <value>Vhistowner</value>
+  </data>
+  <data name="Vhistowner.Account.DisplayName" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="Contact.EuroAccountManager.DisplayName" xml:space="preserve">
+    <value>EuroAccountManager</value>
+  </data>
+  <data name="Vactiveusers.Contact.DisplayName" xml:space="preserve">
+    <value>Contact</value>
   </data>
   <data name="EuroQuota.User.DisplayName" xml:space="preserve">
     <value>User</value>
   </data>
   <data name="User.EuroQuota.DisplayName" xml:space="preserve">
     <value>EuroQuota</value>
+  </data>
+  <data name="EuroTicketDefaults.ITCompanyAccount.DisplayName" xml:space="preserve">
+    <value>ITCompanyAccount</value>
+  </data>
+  <data name="Account.EuroTicketDefaults.DisplayName" xml:space="preserve">
+    <value>EuroTicketDefaults</value>
+  </data>
+  <data name="EuroTicketDefaults.Contact.DisplayName" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Contact.EuroTicketDefaults.DisplayName" xml:space="preserve">
+    <value>EuroTicketDefaults</value>
+  </data>
+  <data name="EuroTicketDefaults.DefaultAssignedTo.DisplayName" xml:space="preserve">
+    <value>DefaultAssignedto</value>
+  </data>
+  <data name="Owner.EuroTicketDefaults.DisplayName" xml:space="preserve">
+    <value>EuroTicketDefaults</value>
+  </data>
+  <data name="EuroUserTeamAccess.EuroTeam.DisplayName" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="Owner.EuroUserTeamAccess.DisplayName" xml:space="preserve">
+    <value>EuroUserTeamAccess</value>
+  </data>
+  <data name="EuroUserTeamAccess.EuroUser.DisplayName" xml:space="preserve">
+    <value>EuroUser</value>
+  </data>
+  <data name="User.EuroUserTeamAccess.DisplayName" xml:space="preserve">
+    <value>EuroUserTeamAccess</value>
+  </data>
+  <data name="EuroXTicketMapping.OriginatingUser.DisplayName" xml:space="preserve">
+    <value>OriginatingUser</value>
+  </data>
+  <data name="User.EuroXTicketMapping.DisplayName" xml:space="preserve">
+    <value>EuroXTicketMapping</value>
+  </data>
+  <data name="EuroXTicketMapping.OriginatorTeam.DisplayName" xml:space="preserve">
+    <value>OriginatorTeam</value>
+  </data>
+  <data name="Vprivateemailusermap.EuroXTicketMapping.DisplayName" xml:space="preserve">
+    <value>EuroXTicketMapping</value>
+  </data>
+  <data name="Opportunity.OppAssociatedCompanies.DisplayName" xml:space="preserve">
+    <value>Opp Associated Companies</value>
+  </data>
+  <data name="OppAssociatedCompany.Opportunity.DisplayName" xml:space="preserve">
+    <value>Opportunity</value>
+  </data>
+  <data name="Opportunity.EuroAccountManager.DisplayName" xml:space="preserve">
+    <value>EuroAccountManager</value>
+  </data>
+  <data name="Vactiveusers.Opportunity.DisplayName" xml:space="preserve">
+    <value>Opportunity</value>
+  </data>
+  <data name="User.EuroUserTeamAccesses.DisplayName" xml:space="preserve">
+    <value>EuroUserTeamAccesses</value>
+  </data>
+  <data name="EuroUserTeamAccess.User.DisplayName" xml:space="preserve">
+    <value>User</value>
   </data>
 </root>

@@ -2,18 +2,18 @@
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls" TagPrefix="SalesLogix" %>
 
 <table cellpadding="0" cellspacing="0" class="tbodylt">
-	<tr>
-		<td>
-			<table cellpadding="2" cellspacing="0" class="theader">
-				<tr>
-					<td class="header" colspan="3" align="left" ><asp:Localize ID="localizeSelectValue" runat="server" Text="<%$ resources: localizeSelectValue.Text %>" /></td>
-					<td class="header" align="right">
-					    <SalesLogix:PageLink ID="SelectHelpLink" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="queryconditionvalue.aspx" ImageUrl="~/images/icons/Help_16x16.gif"></SalesLogix:PageLink></td>
-                    </td>												
-				</tr>
-			</table>
-		</td>
-	</tr>
+	
+    <tr>
+    <td colspan="2">
+	    <div style="position:relative;">
+        <div style="position:absolute; top:-23px; right:45px; ">
+			       <SalesLogix:PageLink ID="SelectHelpLink" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="queryconditionvalue.aspx" ImageUrl="~/images/icons/Help_16x16.png"></SalesLogix:PageLink>
+			</div>
+            </div>
+    </td>
+</tr>
+    
+   
 	<tr>
 		<td>
 			<table cellpadding="2" cellspacing="0">
@@ -34,3 +34,5 @@
 	</tr>
 </table>
 
+<script src="jscript/Sage/GroupBuilder/querybuilder.js" type="text/javascript"></script>
+<script src="jscript/Sage/GroupBuilder/browseField.js" type="text/javascript"></script>

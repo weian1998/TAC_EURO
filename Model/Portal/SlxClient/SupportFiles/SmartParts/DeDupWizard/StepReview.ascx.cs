@@ -64,7 +64,6 @@ public partial class StepReview : UserControl
 
     private string GetEntityDisplayName(IDeDupJobProcess job)
     {
-
         object resource = GetLocalResourceObject("EntitySourceName." + job.EntitySourceName);
         string displayName = job.EntitySourceName;
         if (resource != null)
@@ -72,6 +71,5 @@ public partial class StepReview : UserControl
             displayName = resource.ToString();
         }
         return displayName;
-
     }
 }

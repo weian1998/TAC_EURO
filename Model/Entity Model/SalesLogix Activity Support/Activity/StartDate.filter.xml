@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0"?>
-<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="de3631df-b83f-4ef8-b4ab-af401f3238ea" lastModifiedUtc="2008-12-30T19:53:46.9754142Z" filterName="StartDate" propertyName="StartDate" characters="0">
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="de3631df-b83f-4ef8-b4ab-af401f3238ea" lastModifiedUtc="2012-02-24T21:18:24.9888149Z" filterName="StartDate" propertyName="StartDate" characters="0">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRangeEntityFilter" />
   </ExtendedPropertiesCollection>
-  <ranges id="a2e2fa83-9928-4115-a90a-e86938414c0b" rangeName="Yesterday" lower=":yesterday" upper=":yesterday" />
-  <ranges id="b2e2fa83-9928-4115-a90a-e86938414c0b" rangeName="Today" lower=":today" upper=":today" />
-  <ranges id="caf515cd-ee7a-4f39-974d-ee63fc7e3019" rangeName="Tomorrow" lower=":tomorrow" upper=":tomorrow" />
+  <ranges id="a2e2fa83-9928-4115-a90a-e86938414c0b" rangeName="Yesterday" lower=":yesterdaystart" upper=":yesterdayend" />
+  <ranges id="b2e2fa83-9928-4115-a90a-e86938414c0b" rangeName="Today" lower=":todaystart" upper=":todayend" />
+  <ranges id="caf515cd-ee7a-4f39-974d-ee63fc7e3019" rangeName="Tomorrow" lower=":tomorrowstart" upper=":tomorrowend" />
   <ranges id="dc754779-7382-48a7-a692-720f5d1cacb6" rangeName="ThisWeek" lower=":thisweekstart" upper=":thisweekend" />
   <ranges id="ed55138a-2822-4b87-8121-4db8508069a1" rangeName="ThisMonth" lower=":thismonthstart" upper=":thismonthend" />
   <ranges id="f3dc893f-27a8-43bb-8847-393458972db0" rangeName="ThisQuarter" lower=":thisquarterstart" upper=":thisquarterend" />
@@ -19,8 +19,8 @@
   <ranges id="6d55138a-2822-4b87-8121-4db8508069a1" rangeName="LastMonth" lower=":lastmonthstart" upper=":lastmonthend" />
   <ranges id="73dc893f-27a8-43bb-8847-393458972db1" rangeName="LastQuarter" lower=":lastquarterstart" upper=":lastquarterend" />
   <ranges id="83dc893f-27a8-43bb-8847-393458972db2" rangeName="LastYear" lower=":lastyearstart" upper=":lastyearend" />
-  <ranges id="93dc893f-27a8-43bb-8847-393458972db3" rangeName="WeekToDate" lower=":thisweekstart" upper=":today" />
-  <ranges id="13dc893f-27a8-43bb-8847-393458972db4" rangeName="MonthToDate" lower=":thismonthstart" upper=":today" />
-  <ranges id="23dc893f-27a8-43bb-8847-393458972db5" rangeName="QuarterToDate" lower=":thisquarterstart" upper=":today" />
-  <ranges id="3e0348fe-819a-4c17-91b5-333add37fc74" rangeName="YearToDate" lower=":thisyearstart" upper=":today" />
+  <ranges id="93dc893f-27a8-43bb-8847-393458972db3" rangeName="WeekToDate" lower=":thisweekstart" upper=":todayend" />
+  <ranges id="13dc893f-27a8-43bb-8847-393458972db4" rangeName="MonthToDate" lower=":thismonthstart" upper=":todayend" />
+  <ranges id="23dc893f-27a8-43bb-8847-393458972db5" rangeName="QuarterToDate" lower=":thisquarterstart" upper=":todayend" />
+  <ranges id="3e0348fe-819a-4c17-91b5-333add37fc74" rangeName="YearToDate" lower=":thisyearstart" upper=":todayend" />
 </entityFilter>

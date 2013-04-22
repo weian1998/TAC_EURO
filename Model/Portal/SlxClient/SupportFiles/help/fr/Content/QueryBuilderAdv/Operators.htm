@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Opérateurs</title>
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilderAdv/Operators.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Ouvrir une rubrique avec la recherche, la table des matières et l'index</a>
+        </p>
+        <h1><a name="kanchor656"></a>Opérateurs</h1>
+        <p>Les <a href="Calculated_Fields.htm">champs calculés</a> disposent de quatre opérateurs mathématiques&#160;: additionner, soustraire, multiplier et diviser. Utilisez les parenthèses pour regrouper certaines parties de vos calculs. Seuls les champs numériques (champs de nombre entier, par ex.) peuvent être utilisés dans des calculs numériques. Si un opérateur est employé dans un champ calculé de chaîne, il fonctionnera exactement comme un autre caractère. Les opérateurs des champs calculés de chaîne n'effectuent aucune opération.</p>
+        <p>Exemples&#160;:</p>
+        <ul>
+            <li class="Bullets" value="1">Calcul numérique : Opportunity.Salespotential * Opportunity.Closeprobability / 100. Le chiffre des ventes pondérées résultant sera 100 si le potentiel des ventes est de 200 et la probabilité de clôture de 50&#160;% (enregistrée sous la forme 50 et non pas 0,5).
+            </li>
+            <li class="Bullets" value="2">Calcul numérique avec parenthèses&#160;: (Opportunity.Salespotential * Opportunity.Closeprobability / 100) +5. Le chiffre des ventes pondérées résultant sera 105 si le potentiel des ventes est de 200 et la probabilité de clôture de 50&#160;% (enregistrée sous la forme 50 et non pas 0,5).
+            </li>
+            <li class="Bullets" value="3">Calcul de chaînes&#160;: Opportunity.Status + Opportunity.Account. Le résultat est Gagnée + Compte important si l'état est Gagnée et le type de compte Compte important. 
+            </li>
+        </ul>
+        <p class="RelatedTopics">Rubriques connexes</p>
+        <p><a href="../QueryBuilder/Using_SalesLogix_Query_Builder.htm" target="_self">Présentation de Query Builder</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Dites-nous comment améliorer l'aide</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

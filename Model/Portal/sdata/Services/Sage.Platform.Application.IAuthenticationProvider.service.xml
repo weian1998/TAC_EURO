@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<PortalService xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="37fbc574-d6e8-42db-8162-b9612180c902">
+  <InstanceId>f11eff9058354226bfa6cfea897e1a17</InstanceId>
+  <ServiceType>Sage.SalesLogix.Web.SLXWebAuthenticationProvider, Sage.SalesLogix.Web</ServiceType>
+  <RegisterAs>Sage.Platform.Application.IAuthenticationProvider, Sage.Platform.Application</RegisterAs>
+  <AddOnDemand>false</AddOnDemand>
+  <Properties />
+</PortalService>

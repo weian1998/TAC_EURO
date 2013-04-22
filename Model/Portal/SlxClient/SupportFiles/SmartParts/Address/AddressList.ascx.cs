@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Sage.Platform.ComponentModel;
@@ -7,29 +6,14 @@ using Sage.Platform.WebPortal.SmartParts;
 using Sage.Platform.Application;
 using Sage.Platform;
 using Sage.Entity.Interfaces;
-using ICriteria = Sage.Platform.Repository.ICriteria;
-using Sage.Platform.Repository;
 using Sage.Platform.WebPortal;
 using Sage.Platform.Orm.Interfaces;
-using Sage.Platform.WebPortal.Binding;
-
 
 public partial class SmartParts_AddressList : EntityBoundSmartPartInfoProvider 
 {
-    private IEntityContextService _EntityService;
     [ServiceDependency(Type = typeof(IEntityContextService), Required = true)]
-    public IEntityContextService EntityService
-    {
-        get
-        {
-            return _EntityService;
-        }
-        set
-        {
-            _EntityService = value;
-        }
-    }
-  
+    public IEntityContextService EntityService { get; set; }
+
     public override Type EntityType
     {
         get { return typeof(IAccount); }
@@ -38,12 +22,11 @@ public partial class SmartParts_AddressList : EntityBoundSmartPartInfoProvider
     protected override void OnAddEntityBindings()
     {
     }
-    
 
     protected override void OnWireEventHandlers()
     {
-        btnAdd.Click += new ImageClickEventHandler(btnAdd_ClickAction);
-        AddressGrid.PageIndexChanging += new GridViewPageEventHandler(AddressGrid_PageIndexChanging);
+        btnAdd.Click += btnAdd_ClickAction;
+        AddressGrid.PageIndexChanging += AddressGrid_PageIndexChanging;
         base.OnWireEventHandlers();
     }
 
@@ -51,8 +34,6 @@ public partial class SmartParts_AddressList : EntityBoundSmartPartInfoProvider
     {
         base.OnFormBound();
         LoadGrid();
-        
-       
     }
 
     private Sage.Platform.WebPortal.Binding.WebEntityListBindingSource _dsAddrss;
@@ -62,8 +43,7 @@ public partial class SmartParts_AddressList : EntityBoundSmartPartInfoProvider
         {
             if (_dsAddrss == null)
             {
-               
-                _dsAddrss = new Sage.Platform.WebPortal.Binding.WebEntityListBindingSource(typeof(Sage.Entity.Interfaces.IAddress),
+                _dsAddrss = new Sage.Platform.WebPortal.Binding.WebEntityListBindingSource(typeof(IAddress),
                  EntityService.EntityType, "Addresses", System.Reflection.MemberTypes.Property);
                 _dsAddrss.UseSmartQuery = false;
             }
@@ -71,10 +51,6 @@ public partial class SmartParts_AddressList : EntityBoundSmartPartInfoProvider
         }
     }
 
-
-
-
-   
     public override Sage.Platform.Application.UI.ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
     {
         ToolsSmartPartInfo tinfo = new ToolsSmartPartInfo();
@@ -92,25 +68,22 @@ public partial class SmartParts_AddressList : EntityBoundSmartPartInfoProvider
         }
         return tinfo;
     }
+
     protected void btnAdd_ClickAction(object sender, EventArgs e)
     {
-
         if (!CanChangeAddress())
         {
-
             return;
         }
-
         
         if (DialogService != null)
         {
-            DialogService.SetSpecs(200, 200, 318, 600, "AddEditAddress", "", true);
+            DialogService.SetSpecs(200, 200, 440, 300, "AddEditAddress", "", true);
             DialogService.EntityType = typeof(IAddress);
             DialogService.ShowDialog();
             LoadGrid();
         }
     }
-
 
     private int _deleteColumnIndex = -2;
     protected int DeleteColumnIndex
@@ -138,7 +111,6 @@ public partial class SmartParts_AddressList : EntityBoundSmartPartInfoProvider
             }
             return _deleteColumnIndex;
         }
-
     }
 
     protected void AddressGrid_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -166,19 +138,16 @@ public partial class SmartParts_AddressList : EntityBoundSmartPartInfoProvider
     {
         if (!CanChangeAddress())
         {
-
             return;
         }
 
         if (e.CommandName.Equals("Edit"))
         {
-
-
             int rowIndex = Convert.ToInt32(e.CommandArgument);
             string Id = AddressGrid.DataKeys[rowIndex].Value.ToString();
             if (DialogService != null)
             {
-                DialogService.SetSpecs(200, 200, 318, 600, "AddEditAddress", "", true);
+                DialogService.SetSpecs(200, 200, 440, 300, "AddEditAddress", "", true);
                 DialogService.EntityType = typeof(IAddress);
                 DialogService.EntityID = Id;
                 DialogService.ShowDialog();
@@ -188,7 +157,6 @@ public partial class SmartParts_AddressList : EntityBoundSmartPartInfoProvider
         if (e.CommandName.Equals("Delete"))
         {
             int rowIndex = Convert.ToInt32(e.CommandArgument);
-            
             string Id = AddressGrid.DataKeys[rowIndex].Value.ToString();
             IAddress address = EntityFactory.GetById<IAddress>(Id);
             if ((address.IsPrimary == true) || (address.IsMailing == true))
@@ -216,6 +184,7 @@ public partial class SmartParts_AddressList : EntityBoundSmartPartInfoProvider
     protected void AddressGrid_RowEditing(object sender, GridViewEditEventArgs e)
     {
         AddressGrid.SelectedIndex = e.NewEditIndex;
+        e.Cancel = true;
     }
 
     protected void AddressGrid_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -233,18 +202,14 @@ public partial class SmartParts_AddressList : EntityBoundSmartPartInfoProvider
 
     private void LoadGrid()
     {
-        
         DSAddress.Bindings.Add(new Sage.Platform.WebPortal.Binding.WebEntityListBinding("Addresses", AddressGrid));
         DSAddress.SourceObject = EntityService.GetEntity();
         AddressGrid.DataBind();
     }
-
    
     private bool CanChangeAddress()
     {
-
         IPersistentEntity parentEntity = GetParentEntity() as IPersistentEntity;
-        IComponentReference parentEntityReference = parentEntity as IComponentReference;
         if (parentEntity.PersistentState == PersistentState.Modified)
         {
             if (DialogService != null)
@@ -252,11 +217,9 @@ public partial class SmartParts_AddressList : EntityBoundSmartPartInfoProvider
                 string msg = GetLocalResourceObject("SaveChanges").ToString(); 
                 DialogService.SetSpecs(100, 100, 25, 100, "");
                 DialogService.ShowMessage(msg);
-
             }
             return false;
         }
-
         return true;
     }
 }

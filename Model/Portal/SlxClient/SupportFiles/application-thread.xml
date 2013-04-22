@@ -12,7 +12,7 @@
     <Service TypeName="Sage.SalesLogix.Security.SLXUserService, Sage.SalesLogix.Security" RegisterAs="Sage.Platform.Security.IUserService, Sage.Platform" AddOnDemand="false">
       <Properties />
     </Service>
-    <Service TypeName="Sage.SalesLogix.Web.WebUserOptionsService, Sage.SalesLogix.Web" RegisterAs="Sage.Platform.Application.Services.IUserOptionsService, Sage.Platform.Application">
+    <Service TypeName="Sage.SalesLogix.UserOptionsService, Sage.SalesLogix.System" RegisterAs="Sage.Platform.Application.Services.IUserOptionsService, Sage.Platform.Application">
       <Properties />
     </Service>
     <Service TypeName="Sage.SalesLogix.Security.FieldLevelSecurityService, Sage.SalesLogix.Security" RegisterAs="Sage.Platform.Security.IFieldLevelSecurityService, Sage.Platform">
@@ -37,7 +37,7 @@
     <Service TypeName="Sage.Platform.NamedQueries.DictionaryBasedNamedQueryCacheService, Sage.Platform" RegisterAs="Sage.Platform.NamedQueries.INamedQueryLookupService, Sage.Platform" AddOnDemand="false">
       <Properties />
     </Service>
-    <Service TypeName="Sage.Platform.Mashups.Web.WebMashupDiscoveryService, Sage.Platform.Mashups.Web" RegisterAs="Sage.Platform.Mashups.IMashupDiscoveryService, Sage.Platform.Mashups">
+    <Service TypeName="Sage.Platform.Mashups.MashupDiscoveryService, Sage.Platform.Mashups" RegisterAs="Sage.Platform.Mashups.IMashupDiscoveryService, Sage.Platform.Mashups">
       <Properties />
     </Service>
     -->

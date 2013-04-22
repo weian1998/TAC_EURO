@@ -1,5 +1,6 @@
 <%@ Control Language="C#" ClassName="AccountDetails" Inherits="Sage.Platform.WebPortal.SmartParts.EntityBoundSmartPartInfoProvider" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls" TagPrefix="SalesLogix" %>
+<%@ Register TagPrefix="Saleslogix" Namespace="Sage.Platform.WebPortal.SmartParts" Assembly="Sage.Platform.WebPortal" %>
 <%@ Import Namespace="Sage.Entity.Interfaces" %>
 <%@ Import Namespace="Sage.Platform" %>
 <%@ Import Namespace="Sage.Platform.Application" %>
@@ -8,20 +9,14 @@
 <%@ Import Namespace="Sage.Platform.EntityBinding" %>
 <%@ Import Namespace="Sage.Platform.WebPortal.SmartParts" %>
 <%@ Import Namespace="Sage.SalesLogix.Security" %>
-<%@ Import Namespace="Sage.SalesLogix.Web" %>
 <%@ Import Namespace="Sage.SalesLogix.Entities" %>
 <%@ Import Namespace="Sage.Platform.Security" %>
 
-<div style="display:none">
-<asp:Panel ID="WebAccess_LTools" runat="server" meta:resourcekey="WebAccess_LToolsResource1">
-</asp:Panel>
-<asp:Panel ID="WebAccess_CTools" runat="server" meta:resourcekey="WebAccess_CToolsResource1">
-</asp:Panel>
-<asp:Panel ID="WebAccess_RTools" runat="server" meta:resourcekey="WebAccess_RToolsResource1">
- <asp:ImageButton runat="server" ID="Save" Text="Save" ToolTip="Save" ImageUrl="~/images/icons/Save_16x16.gif" meta:resourcekey="SaveResource1" />
+<Saleslogix:SmartPartToolsContainer runat="server" ID="WebAccess_Tools" ToolbarLocation="Right">
+    <asp:ImageButton runat="server" ID="Save" Text="Save" ToolTip="Save" ImageUrl="~/images/icons/Save_16x16.gif" meta:resourcekey="SaveResource1" />
+    <SalesLogix:PageLink ID="WebAccessHelpLink" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="csrconwebaccesstab.aspx" ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16"></SalesLogix:PageLink>
+</Saleslogix:SmartPartToolsContainer>
 
-<SalesLogix:PageLink ID="WebAccessHelpLink" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="csrconwebaccesstab.aspx" ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16"></SalesLogix:PageLink></asp:Panel>
-</div>
 <table border="0" cellpadding="1" cellspacing="0" class="formtable">
   <col width="50%" /><col width="50%" /><tr>
 <td >
@@ -139,8 +134,8 @@
         Boolean bEnableControl;
         string strOption;
         SLXUserService userService = ApplicationContext.Current.Services.Get<IUserService>() as SLXUserService;
-        WebUserOptionsService userWebOptions = ApplicationContext.Current.Services.Get<IUserOptionsService>() as WebUserOptionsService;
-        strOption = userWebOptions.GetPlatformOption("CONTEXT:webticketcust", "", false, "n", "", EntityContext.EntityID.ToString());
+        var userOptions = ApplicationContext.Current.Services.Get<IUserOptionsService>(true);
+        strOption = userOptions.GetPlatformOption("CONTEXT:webticketcust", "", false, "n", "", EntityContext.EntityID.ToString());
         if (!string.IsNullOrEmpty(strOption))
         {
             chkWebAccess.Checked = (strOption.Trim().ToUpper() == "Y");
@@ -161,7 +156,7 @@
             IUser userContext = userService.GetUser();
             if (userContext != null)
             {
-                bIsWebAdmin = userContext.IsWebAdmin.HasValue ? userContext.IsWebAdmin.Value : false;
+                bIsWebAdmin = userContext.IsWebAdmin ?? false;
             }
         }
         /* Users can make changes only if they are the Admin or if they are a Web Admin. */
@@ -194,15 +189,7 @@
     public override ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
     {
         ToolsSmartPartInfo tinfo = new ToolsSmartPartInfo();
-        foreach (Control c in WebAccess_LTools.Controls)
-        {
-            tinfo.LeftTools.Add(c);
-        }
-        foreach (Control c in WebAccess_CTools.Controls)
-        {
-            tinfo.CenterTools.Add(c);
-        }
-        foreach (Control c in WebAccess_RTools.Controls)
+        foreach (Control c in WebAccess_Tools.Controls)
         {
             tinfo.RightTools.Add(c);
         }
@@ -211,5 +198,3 @@
 
 </script>
 
-<script type="text/javascript">
-</script>

@@ -1,0 +1,72 @@
+<!--
+Simplate template
+https://github.com/mmorton/simplate
+https://github.com/mmorton/simplate/blob/master/demo/index.html
+Basic formatting example: {%= $.id %}
+-->
+<div>
+        <table width="100%">
+            <tr>
+                <td><label>{%= $.prefixText %}</label></td>
+                <td>
+                    <select id="{%= $.id %}-Prefix" data-dojo-type="Sage.UI.Controls.DropDownSelectPickList" 
+                    dojoAttachPoint="_valueBox"
+                    pickListName="Name Prefix"
+                    storeMode="text"
+                    name="{%= $.NamePrefix %}" 
+                    style="width: 150px;display: inline-block"
+                    shouldPublishMarkDirty="false" />
+                </td>
+            </tr>
+            <tr>
+                <td><label>{%= $.nameFirstText %}</label></td>
+                <td>
+                    <input id="{%= $.id %}-First" data-dojo-type="Sage.UI.Controls.TextBox"
+                    style="width:inherit;"
+                    textAlign="{%= $.textAlign %}"
+                    name="{%= $.NameFirst %}" type="text" data-dojo-attach-point="focusNode"
+                    shouldPublishMarkDirty="false">
+                </td>
+            </tr>
+            <tr>
+                <td><label>{%= $.nameMiddleText %}</label></td>
+                <td>
+                    <input id="{%= $.id %}-Middle" data-dojo-type="Sage.UI.Controls.TextBox"
+                    style="width:inherit;"
+                    textAlign="{%= $.textAlign %}"
+                    name="{%= $.NameMiddle %}" type="text" data-dojo-attach-point="focusNode"
+                    shouldPublishMarkDirty="false">
+                </td>
+            </tr>
+            <tr>
+                <td><label>{%= $.nameLastText %}</label></td>
+                <td>
+                    <input id="{%= $.id %}-Last" data-dojo-type="Sage.UI.Controls.TextBox"
+                    style="width:inherit;"
+                    textAlign="{%= $.textAlign %}"
+                    name="{%= $.NameLast %}" type="text" data-dojo-attach-point="focusNode"
+                    shouldPublishMarkDirty="false">
+                </td>
+            </tr>
+            <tr>
+                <td><label>{%= $.suffixText %}</label></td>
+                <td>
+                    <select id="{%= $.id %}-Suffix" data-dojo-type="Sage.UI.Controls.DropDownSelectPickList"
+                    dojoAttachPoint="_valueBox"
+                    pickListName="Name Suffix"
+                    storeMode="text"
+                    name="{%= $.NameSuffix %}"
+                    style="width: 150px;display: inline-block"
+                    shouldPublishMarkDirty="false" />
+                </td>
+            </tr>
+        </table>                    
+        <div class="button-bar alignright" style="clear: both">
+            <button id="{%= $.id %}-OKButton" data-dojo-type="dijit.form.Button" type="submit" onClick="dijit.byId('{%= $.id %}')._okClicked();">
+                {%= $.okText %}
+            </button>
+            <button id="{%= $.id %}-CancelButton" data-dojo-type="dijit.form.Button" type="button" onClick="dijit.byId('{%= $.id %}')._cancelClicked();">
+                {%= $.cancelText %}
+            </button>
+        </div>
+</div>

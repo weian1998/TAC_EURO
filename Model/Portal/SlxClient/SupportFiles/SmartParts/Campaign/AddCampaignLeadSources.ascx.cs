@@ -122,11 +122,14 @@ public partial class AddCampaignLeadSource : EntityBoundSmartPartInfoProvider
     /// </summary>
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-    protected void grdCampaign_OnRowCommand(object sender, EventArgs e)
+    protected void grdCampaign_OnRowCommand(object sender, GridViewCommandEventArgs e)
     {
-        if (DialogService != null)
-            DialogService.CloseEventHappened(sender, e);
-        Refresh();
+        if (e.CommandName == "Associate")
+        {
+            if (DialogService != null)
+                DialogService.CloseEventHappened(sender, e);
+            Refresh();
+        }
     }
 
     /// <summary>
@@ -162,27 +165,16 @@ public partial class AddCampaignLeadSource : EntityBoundSmartPartInfoProvider
     /// </summary>
     protected void LoadProductGrid()
     {
-        try
-        {
-            if (EntityContext != null && EntityContext.EntityType == typeof(ICampaign))
-            {
-                SearchParameter enumValue = (SearchParameter)ddlFilterBy.SelectedIndex;
-                IRepository<ILeadSource> leadSource = EntityFactory.GetRepository<ILeadSource>();
-                IQueryable query = (IQueryable)leadSource;
-                IExpressionFactory exp = query.GetExpressionFactory();
-                ICriteria criteria = query.CreateCriteria();
-                criteria.Add(GetExpression(exp, enumValue, GetEntityPropertyValue(), txtLookupValue.Text));
+        SearchParameter enumValue = (SearchParameter) ddlFilterBy.SelectedIndex;
+        IRepository<ILeadSource> leadSource = EntityFactory.GetRepository<ILeadSource>();
+        IQueryable query = (IQueryable) leadSource;
+        IExpressionFactory exp = query.GetExpressionFactory();
+        ICriteria criteria = query.CreateCriteria();
+        criteria.Add(GetExpression(exp, enumValue, GetEntityPropertyValue(), txtLookupValue.Text));
 
-                IList list = criteria.List();
-                grdCampaignLeadSource.DataSource = list;
-                grdCampaignLeadSource.DataBind();
-            }
-        }
-        catch (Exception ex)
-        {
-            log.Error(ex.Message);
-            throw;
-        }
+        IList list = criteria.List();
+        grdCampaignLeadSource.DataSource = list;
+        grdCampaignLeadSource.DataBind();
     }
 
     /// <summary>
@@ -230,6 +222,13 @@ public partial class AddCampaignLeadSource : EntityBoundSmartPartInfoProvider
     {
         if (grdCampaignLeadSource != null) 
             grdCampaignLeadSource.SelectedIndex = e.NewEditIndex;
+    }
+    
+    protected void grdCampaignLeadSource_Changing(object sender, GridViewPageEventArgs e)
+    {
+        grdCampaignLeadSource.PageIndex = e.NewPageIndex;
+        grdCampaignLeadSource.DataBind();
+        LoadProductGrid();
     }
 
     #region ISmartPartInfoProvider Members

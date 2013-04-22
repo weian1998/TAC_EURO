@@ -1,23 +1,24 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Diagnostics.aspx.cs" Inherits="Diagnostics" MasterPageFile="~/Masters/Diagnostics.master" %>
-<asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolderArea">
+<asp:Content ID="Content1" runat="server" ContentPlaceHolderID="ContentPlaceHolderArea">
 <div>
     <h1>
         <asp:Label runat="server" ID="DiagnosticsDescription" meta:ResourceKey="DiagnosticsDescription" Text="..." />
     </h1>
 </div>
+
 <div>
-    <table cellpadding="4" cellspacing="0">
+    <table cellpadding="4" cellspacing="0" >
         <tr>
             <td valign="top">
                 <asp:DataGrid ID="DataList1" runat="server" style="background-color:White;border:Solid 1px Black;" 
                               AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" 
                               GridLines="None" AllowPaging="true" PageSize="20" OnPageIndexChanged="OnPageIndexChanged">
-                    <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                    <FooterStyle BackColor="#a4bf7d" Font-Bold="True" ForeColor="White" />
                     <EditItemStyle BackColor="#2461BF" />
                     <SelectedItemStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                    <PagerStyle BackColor="#a4bf7d" ForeColor="White" HorizontalAlign="Center" />
                     <AlternatingItemStyle BackColor="White" />
-                    <ItemStyle BackColor="#EFF3FB" />
+                    <ItemStyle BackColor="#f8f8f8" />
                     <Columns>
                         <asp:TemplateColumn HeaderText="Assembly">
                             <ItemTemplate>
@@ -30,17 +31,17 @@
                             </ItemTemplate>
                         </asp:TemplateColumn>
                     </Columns>
-                    <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="#a4bf7d" Font-Bold="True" ForeColor="White" />
                 </asp:DataGrid>
             </td>
             <td valign="top">
             <table cellpadding="0" cellspacing="0">
 	            <tr>
 		            <td>
-			            <table width="500" cellpadding="4" cellspacing="0" style="background-color:#EFF3FB;border: Solid 1px Black;">
+			            <table width="500" cellpadding="4" cellspacing="0" style="background-color:#f8f8f8;border: Solid 1px Black;">
 				            <col />
 				            <col />
-				            <tr style="background-color:#507CD1;color:White;">
+				            <tr style="background-color:#a4bf7d;color:White;">
 					            <td colspan="2" style="font-weight:bold;">
 						            <asp:Label ID="LoginTitle" runat="server" meta:resourcekey="LoginTitle" Text="..."></asp:Label>
 					            </td>
@@ -60,11 +61,11 @@
 				            </tr>
 				            <tr>
 					            <td><asp:Label runat="server" ID="lblUserId" meta:resourcekey="lblUserId" Text="..." /></td>
-					            <td><asp:TextBox runat="server" ID="userId" /></td>
+					            <td><asp:TextBox runat="server" ID="userId" Width="135px" /></td>
 				            </tr>
 				            <tr>
 					            <td><asp:Label runat="server" ID="lblPassword" meta:resourcekey="lblPassword" Text="..." /></td>
-					            <td><asp:TextBox runat="server" ID="password" TextMode="Password"></asp:TextBox></td>
+					            <td><asp:TextBox runat="server" ID="password" TextMode="Password" Width="135px"></asp:TextBox></td>
 				            </tr>
 				            <tr>
 					            <td colspan="2" align="right"><asp:Button runat="server" ID="btnConnect" meta:resourcekey="btnConnect" Text="..." onclick="btnConnect_Click" /></td>

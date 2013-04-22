@@ -112,19 +112,19 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="grdItems.Save.ToolTip" xml:space="preserve">
     <value>Save</value>
   </data>
   <data name="grdItems.Delete.ToolTip" xml:space="preserve">
-    <value>Delete Selected Records</value>
+    <value>Remove</value>
   </data>
   <data name="grdItems.Cancel.ToolTip" xml:space="preserve">
-    <value>Revert Changes</value>
+    <value>Reset</value>
   </data>
   <data name="btnAddCustomProduct.ToolTip" xml:space="preserve">
     <value>Add Custom Product...</value>
@@ -208,7 +208,7 @@
     <value>Add Product from Package</value>
   </data>
   <data name="luProduct.LookupDialogTitle" xml:space="preserve">
-    <value>Add Products</value>
+    <value>Lookup Products</value>
   </data>
   <data name="luPackage.LookupProperties.Description.PropertyHeader" xml:space="preserve">
     <value>Description</value>
@@ -307,7 +307,7 @@
     <value />
   </data>
   <data name="luProduct.DialogButtonText" xml:space="preserve">
-    <value>Add Products</value>
+    <value>Add Selected</value>
   </data>
   <data name="grdItems.e1a69123-3261-4eac-b1cc-8ce21ff52c2e.ColumnHeading" xml:space="preserve">
     <value> </value>
@@ -380,5 +380,8 @@
   </data>
   <data name="grdItems.ff4abcfa-992a-4721-8841-c0c0b6e89485.ColumnHeading" xml:space="preserve">
     <value>Extended Price</value>
+  </data>
+  <data name="error_ZeroBasePrice" xml:space="preserve">
+    <value>You cannot add a discount to a product, which does not contain a base price.</value>
   </data>
 </root>

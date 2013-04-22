@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<SmartPartMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="e513ab43-a36d-4e47-92b1-6be054e8af4f">
+  <SmartPartId>SDataListViewer</SmartPartId>
+  <ReferencedModelId>00000000-0000-0000-0000-000000000000</ReferencedModelId>
+  <SmartPart>SmartParts\General\SDataListViewer.ascx</SmartPart>
+  <TargetWorkspace>MainContent</TargetWorkspace>
+  <ShowInMode />
+  <Properties>
+    <Property Name="MainViewDefinition" TypeConverter="">Sage.MainView.SecurityManager</Property>
+      <Property Name="HelpTopicName" TypeConverter="">formmgrlistview</Property>
+  </Properties>
+  <AllowRoles />
+</SmartPartMapping>

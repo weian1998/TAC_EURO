@@ -15,7 +15,7 @@
     <keyReference id="f015182f-ccc4-4221-a16c-9619726f52e2" ordinalPosition="1" />
   </keyProperties>
   <properties>
-    <property xsi:type="OrmFieldProperty" id="f015182f-ccc4-4221-a16c-9619726f52e2" lastModifiedUtc="2007-08-13T19:56:16.2238247Z" name="Importtemplateid" audited="false" isNullable="false" columnName="IMPORTTEMPLATEID" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="f015182f-ccc4-4221-a16c-9619726f52e2" lastModifiedUtc="2012-06-04T15:06:26.3653631Z" name="Importtemplateid" audited="false" isNullable="false" include="false" columnName="IMPORTTEMPLATEID" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
@@ -65,14 +65,14 @@
         </TextDataType>
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="cf018223-440c-4d3b-b6fe-88a04b527b04" lastModifiedUtc="2007-08-13T19:56:16.3335077Z" name="Data" audited="false" columnName="DATA" maxLength="2147483647" precision="0" scale="0" ordinal="6" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="cf018223-440c-4d3b-b6fe-88a04b527b04" lastModifiedUtc="2012-02-10T03:17:29.3701383Z" name="Data" audited="false" columnName="DATA" maxLength="2147483647" precision="0" scale="0" ordinal="6" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
-      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
-        <TextDataType>
+      <SystemDataType guid="f4ca6023-9f5f-4e41-8571-50ba94e8f233">
+        <LongTextDataType>
           <Length>2147483647</Length>
-        </TextDataType>
+        </LongTextDataType>
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="2bba60df-c1a3-4e60-b561-430175d229cd" lastModifiedUtc="2007-08-14T20:50:13.7043924Z" name="EntityType" audited="false" columnName="ENTITYTYPE" maxLength="255" precision="0" scale="0" ordinal="7" isReadOnly="false">

@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="UserName.Caption" xml:space="preserve">
     <value>User Name:</value>
@@ -151,7 +151,7 @@
     <value>Region:</value>
   </data>
   <data name="slxUserManager.ButtonToolTip" xml:space="preserve">
-    <value>Manager</value>
+    <value>Find</value>
   </data>
   <data name="slxUserManager.Caption" xml:space="preserve">
     <value>Manager:</value>
@@ -220,7 +220,7 @@
     <value>Password updated:</value>
   </data>
   <data name="QFSLXEmail.ToolTip" xml:space="preserve">
-    <value>E-Mail</value>
+    <value />
   </data>
   <data name="slxUserManager.LookupProperties.UserInfo.UserName.PropertyHeader" xml:space="preserve">
     <value>User Name</value>
@@ -239,5 +239,14 @@
   </data>
   <data name="c7526bb8-5d51-43b9-8efb-7a1b53d219c0.Title" xml:space="preserve">
     <value>Invalid User Type</value>
+  </data>
+  <data name="slxUserManager.LookupProperties.Type.PropertyHeader" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="slxUserManager.LookupProperties.IsManager.PropertyHeader" xml:space="preserve">
+    <value>Is Manager</value>
+  </data>
+  <data name="QFSLXEmail.ButtonToolTip" xml:space="preserve">
+    <value>E-Mail</value>
   </data>
 </root>

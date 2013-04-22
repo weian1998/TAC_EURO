@@ -7,7 +7,7 @@
 <%@ Register Assembly="Sage.Platform.WebPortal" Namespace="Sage.Platform.WebPortal.SmartParts" TagPrefix="SalesLogix" %>
 
 <SalesLogix:SmartPartToolsContainer runat="server" ID="CampaignTargets_LTools" ToolbarLocation="left">
-    <asp:LinkButton runat="server" ID="lnkFilters" OnClientClick="ShowHideFilters()" Text="<%$ resources: lnkShowFilters.Text %>"></asp:LinkButton>&nbsp;
+    <asp:LinkButton runat="server" ID="lnkFilters" OnClientClick="ct_ShowHideFilters()" Text="<%$ resources: lnkShowFilters.Text %>"></asp:LinkButton>&nbsp;
 </SalesLogix:SmartPartToolsContainer>
 
 <SalesLogix:SmartPartToolsContainer runat="server" ID="CampaignTargets_CTools" ToolbarLocation="Center">
@@ -27,8 +27,6 @@
         ToolTip="<%$ resources: cmdManageList.ToolTip %>" ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=plus_16x16" />
     <asp:ImageButton runat="server" ID="cmdDelete" OnClick="DeleteTargets_OnClick" AlternateText="<%$ resources: cmdDelete.Caption %>"
         ToolTip="<%$ resources: cmdDelete.ToolTip %>" ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Delete_16x16" />
-    <asp:ImageButton runat="server" ID="cmdEmail" OnClick="LaunchEmail_OnClick" AlternateText="<%$ resources: cmdLaunchEmail.Caption %>"
-        ToolTip="<%$ resources: cmdLaunchEmail.ToolTip %>" ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Send_Write_email_16x16" />
     <SalesLogix:PageLink ID="lnkHelp" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>"
         Target="Help" NavigateUrl="campaigntargetstab.aspx" ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16">
     </SalesLogix:PageLink>
@@ -77,7 +75,7 @@
                     </asp:Label>
                 </div>
                 <div class="textcontrol select">
-                    <asp:TextBox ID="txtExternalDescription" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtExternalDescription" runat="server" dojoType="Sage.UI.Controls.TextBox"></asp:TextBox>
                 </div>
             </td>
             <td>
@@ -87,7 +85,7 @@
                     </asp:Label>
                 </div>
                 <div class="textcontrol select">
-                    <asp:TextBox ID="txtExternalLocation" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtExternalLocation" runat="server" dojoType="Sage.UI.Controls.TextBox"></asp:TextBox>
                 </div>
             </td>
             <td>
@@ -96,8 +94,8 @@
                         Text="<%$ resources: txtExternalNumber.Caption %>">
                     </asp:Label>
                 </div>
-                <div class="textcontrol select">
-                    <asp:TextBox ID="txtExternalNumber" runat="server"></asp:TextBox>
+                <div class="textcontrol numeric">
+                    <SalesLogix:NumericControl ID="txtExternalNumber" runat="server" Strict="False" />
                 </div>
             </td>
         </tr>
@@ -148,7 +146,7 @@
                 </td>
                 <td id="row1col6">
                     <div class="textcontrol select">
-                        <asp:ListBox runat="server" ID="lbxStatus" SelectionMode="Single" Width="175px" Rows="1" EnableViewState="true" OnSelectedIndexChanged="lbxStatus_SelectedIndexChanged"></asp:ListBox>
+                        <asp:ListBox runat="server" ID="lbxStatus" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" shouldPublishMarkDirty="false" SelectionMode="Single" Width="175px" Rows="1" EnableViewState="true" OnSelectedIndexChanged="lbxStatus_SelectedIndexChanged"></asp:ListBox>
                     </div>
                 </td>
                 <td id="row1col7">
@@ -162,7 +160,7 @@
                 </td>
                 <td id="row2col2">
                     <div class="textcontrol select">
-                        <asp:ListBox runat="server" ID="lbxGroups" SelectionMode="Single" Width="175px" Rows="1"
+                        <asp:ListBox runat="server" ID="lbxGroups" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" shouldPublishMarkDirty="false" SelectionMode="Single" Width="175px" Rows="1"
                             OnSelectedIndexChanged="lbxGroups_OnSelectedIndexChanged" EnableViewState="true">
                         </asp:ListBox>
                     </div>
@@ -174,7 +172,7 @@
                 </td>
                 <td id="row2col4">
                     <div class="textcontrol select">
-                        <asp:ListBox runat="server" ID="lbxPriority" SelectionMode="Single" Width="175px" Rows="1"
+                        <asp:ListBox runat="server" ID="lbxPriority" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" shouldPublishMarkDirty="false" SelectionMode="Single" Width="175px" Rows="1"
                             OnSelectedIndexChanged="lbxPriority_OnSelectedIndexChanged" EnableViewState="true">
                         </asp:ListBox>
                     </div>
@@ -186,7 +184,7 @@
                 </td>
                 <td id="row2col6">
                     <div class="textcontrol select">
-                        <asp:ListBox runat="server" ID="lbxStages" OnSelectedIndexChanged="lbxStages_OnSelectedIndexChanged" Width="175px" Rows="1" EnableViewState="true"></asp:ListBox>
+                        <asp:ListBox runat="server" ID="lbxStages" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" shouldPublishMarkDirty="false" OnSelectedIndexChanged="lbxStages_OnSelectedIndexChanged" Width="175px" SelectionMode="Single" Rows="1" EnableViewState="true"></asp:ListBox>
                     </div>
                 </td>
                 <td id="row2col7">
@@ -268,7 +266,7 @@
                         <asp:TemplateField HeaderText="<%$ resources:grdTargets.Status.ColumnHeading %>" SortExpression="Status">
                             <ItemTemplate>
                                 <div style="width:100%">
-                                    <asp:DropDownList runat="server" ID="ddlTargetStatus"></asp:DropDownList>
+                                    <asp:DropDownList runat="server" ID="ddlTargetStatus" data-dojo-type="dijit.form.FilteringSelect" CssClass="select-control" ></asp:DropDownList>
                                 </div>
                             </ItemTemplate>
                         </asp:TemplateField>

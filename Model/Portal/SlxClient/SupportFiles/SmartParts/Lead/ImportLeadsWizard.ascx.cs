@@ -1,13 +1,12 @@
 using System;
 using System.IO;
+using System.Text;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Sage.Entity.Interfaces;
 using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
-using Sage.Platform.Application.UI.Web.Threading;
-using Sage.Platform.Orm;
 using Sage.Platform.WebPortal.Services;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.SalesLogix.Services.Import;
@@ -69,24 +68,23 @@ public partial class ImportLeadsWizard : EntityBoundSmartPartInfoProvider
         frmDefineDelimiter.DialogService = DialogService;
         frmDefineDelimiter.DialogService.onDialogClosing += OnStepClosing;
         frmMapFields.DialogService = DialogService;
+        frmMapFields.ContextService = ContextService;
         frmMapFields.DialogService.onDialogClosing += OnStepClosing;
         frmManageDuplicates.DialogService = DialogService;
+        frmManageDuplicates.ContextService = ContextService;
         frmManageDuplicates.DialogService.onDialogClosing += OnStepClosing;
         frmGroupActions.DialogService = DialogService;
+        frmGroupActions.ContextService = ContextService;
         frmGroupActions.DialogService.onDialogClosing += OnStepClosing;
         frmReview.DialogService = DialogService;
+        frmReview.ContextService = ContextService;
         frmReview.DialogService.onDialogClosing += OnStepClosing;
-        frmProcessRequest.DialogService = DialogService;
-        frmProcessRequest.DialogService.onDialogClosing += OnStepClosing;
     }
 
     public void OnStepClosing(object from, WebDialogClosingEventArgs e)
     {
-        IPanelRefreshService refresher = PageWorkItem.Services.Get<IPanelRefreshService>();
-        if (refresher != null)
-        {
-            refresher.RefreshAll();
-        }
+        IPanelRefreshService refresher = PageWorkItem.Services.Get<IPanelRefreshService>(true);
+        refresher.RefreshAll();
     }
 
     /// <summary>
@@ -101,9 +99,29 @@ public partial class ImportLeadsWizard : EntityBoundSmartPartInfoProvider
         }
         Button startButton = wzdImportLeads.FindControl("StartNavigationTemplateContainerID").FindControl("cmdStartButton") as Button;
         ScriptManager.GetCurrent(Page).RegisterPostBackControl(startButton);
+        Button cmdStartProcess = wzdImportLeads.FindControl("FinishNavigationTemplateContainerID").FindControl("cmdStartProcess") as Button;
+        Button cmdStartImportProcess = frmReview.FindControl("cmdStartImportProcess") as Button;
+        cmdStartProcess.Attributes.Add("onclick", String.Format("javascript: importLeadsWizard.showImportProcess('{0}')", cmdStartImportProcess.ClientID));
+    }
 
-        radImportProcessArea2.Visible = true;
-        radProcessProgressMgr.Visible = true;
+    protected override void OnLoad(EventArgs e)
+    {
+        base.OnLoad(e);
+        if (Visible)
+        {
+            RegisterClientScript();
+        }
+    }
+
+    protected void RegisterClientScript()
+    {
+        var script = new StringBuilder();
+        script.AppendLine("require(['Sage/MainView/Lead/ImportLeadsWizard', 'dojo/ready'],");
+        script.AppendLine(" function(importLeadsWizard, dojoReady) {");
+        script.AppendLine("     dojoReady(function() {window.importLeadsWizard = new Sage.MainView.Lead.ImportLeadsWizard();");
+        script.AppendLine("     });");
+        script.AppendLine(" });");
+        ScriptManager.RegisterStartupScript(Page, GetType(), "ImportLeadsWizard", script.ToString(), true);
     }
 
     /// <summary>
@@ -197,23 +215,22 @@ public partial class ImportLeadsWizard : EntityBoundSmartPartInfoProvider
     }
 
     /// <summary>
-    /// Handles the FinishButtonClick event of the wzdImportLeads control.
+    /// Called when the wizards submits the request to start the import process.
     /// </summary>
-    /// <param name="sender">The source of the event.</param>
-    /// <param name="e">The <see cref="System.Web.UI.WebControls.WizardNavigationEventArgs"/> instance containing the event data.</param>
-    protected void wzdImportLeads_FinishButtonClick(object sender, WizardNavigationEventArgs e)
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+    protected void StartImportProcess_Click(object sender, EventArgs e)
     {
         frmManageDuplicates.AssignMatchFilters();
-        using (new SessionScopeWrapper(true))
+        ImportManager importManager = Page.Session["importManager"] as ImportManager;
+        if (importManager != null)
         {
-            ImportManager importManager = Page.Session["importManager"] as ImportManager;
-            if (importManager != null)
-            {
-                importManager.ImportHistory.Save(); //Save the import history
-                Page.Session["importManager"] = importManager;
-                Page.Session["importHistoryId"] = importManager.ImportHistory.Id;
-                ThreadPoolHelper.QueueTask(frmProcessRequest.StartImportProcess);
-            }
+            Page.Session["importManager"] = importManager;
+            Button cmdStartImportProcess = wzdImportLeads.FindControl("FinishNavigationTemplateContainerID").FindControl("cmdStartProcess") as Button;
+            cmdStartImportProcess.Visible = false;
+            Button btnBackButton = wzdImportLeads.FindControl("FinishNavigationTemplateContainerID").FindControl("btnBack") as Button;
+            btnBackButton.Visible = false;
+            frmReview.StartImportProcess();
         }
     }
 
@@ -234,33 +251,27 @@ public partial class ImportLeadsWizard : EntityBoundSmartPartInfoProvider
     /// <param name="step">The step.</param>
     protected void SetStep(WizardStep step)
     {
-        string result = string.Empty;
-        if (step != null)
+        if (step == null) return;
+        switch (step.ID)
         {
-            switch (step.ID)
-            {
-                case "cmdSelectFile":
-                    SetStepControls(lblStep1Name, divStep1, step, IsVisited(visitedStep1.Value));
-                    break;
-                case "cmdDefineDelimiter":
-                    SetStepControls(lblStep2Name, divStep2, step, IsVisited(visitedStep2.Value));
-                    break;
-                case "cmdMapFields":
-                    SetStepControls(lblStep3Name, divStep3, step, IsVisited(visitedStep3.Value));
-                    break;
-                case "cmdManageDuplicates":
-                    SetStepControls(lblStep4Name, divStep4, step, IsVisited(visitedStep4.Value));
-                    break;
-                case "cmdGroupActions":
-                    SetStepControls(lblStep5Name, divStep5, step, IsVisited(visitedStep5.Value));
-                    break;
-                case "cmdReview":
-                    SetStepControls(lblStep6Name, divStep6, step, IsVisited(visitedStep6.Value));
-                    break;
-                case "cmdProcess":
-                    SetStepControls(lblStep7Name, divStep7, step, IsVisited(visitedStep7.Value));
-                    break;
-            }
+            case "cmdSelectFile":
+                SetStepControls(lblStep1Name, divStep1, step, !String.IsNullOrEmpty(visitedStep1.Value));
+                break;
+            case "cmdDefineDelimiter":
+                SetStepControls(lblStep2Name, divStep2, step, !String.IsNullOrEmpty(visitedStep2.Value));
+                break;
+            case "cmdMapFields":
+                SetStepControls(lblStep3Name, divStep3, step, !String.IsNullOrEmpty(visitedStep3.Value));
+                break;
+            case "cmdManageDuplicates":
+                SetStepControls(lblStep4Name, divStep4, step, !String.IsNullOrEmpty(visitedStep4.Value));
+                break;
+            case "cmdGroupActions":
+                SetStepControls(lblStep5Name, divStep5, step, !String.IsNullOrEmpty(visitedStep5.Value));
+                break;
+            case "cmdReview":
+                SetStepControls(lblStep6Name, divStep6, step, !String.IsNullOrEmpty(visitedStep6.Value));
+                break;
         }
     }
 
@@ -328,20 +339,6 @@ public partial class ImportLeadsWizard : EntityBoundSmartPartInfoProvider
     }
 
     /// <summary>
-    /// Determines whether the specified value is visited.
-    /// </summary>
-    /// <param name="value">The value.</param>
-    /// <returns>
-    /// 	<c>true</c> if the specified value is visited; otherwise, <c>false</c>.
-    /// </returns>
-    private bool IsVisited(string value)
-    {
-        if (string.IsNullOrEmpty(value))
-            return false;
-        return true;
-    }
-
-    /// <summary>
     /// Sets the step contorls.
     /// </summary>
     /// <param name="lblStepName">Name of the LBL step.</param>
@@ -355,35 +352,32 @@ public partial class ImportLeadsWizard : EntityBoundSmartPartInfoProvider
             lblStepName.Text = step.Title;
             if (wzdImportLeads.ActiveStep.ID == step.ID)
             {
-                lblStepName.Attributes.Add("class", "lblActive");
+                lblStepName.CssClass = "lblWizardActive";
                 lblStepName.Enabled = true;
             }
             else
             {
                 if (visited)
                 {
-                    lblStepName.Attributes.Add("class", "lblVisited");
+                    lblStepName.CssClass = "lblWizardVisited";
                     lblStepName.Enabled = true;
                 }
                 else
                 {
-                    lblStepName.Attributes.Add("class", "lblNotVisited");
                     lblStepName.Enabled = false;
+                    lblStepName.CssClass = "lblWizardNotVisited";
                 }
             }
         }
 
-        if (divStep != null)
+        if (divStep == null) return;
+        if (wzdImportLeads.ActiveStep.ID == step.ID)
         {
-            if (wzdImportLeads.ActiveStep.ID == step.ID)
-                divStep.Attributes.Add("class", "Active");
-            else
-            {
-                if (visited)
-                    divStep.Attributes.Add("class", "Visited");
-                else
-                    divStep.Attributes.Add("class", "NotVisited");
-            }
+            divStep.Attributes.Add("class", "wizardActive");
+        }
+        else
+        {
+            divStep.Attributes.Add("class", visited ? "wizardVisited" : "wizardNotVisited");
         }
     }
 

@@ -427,7 +427,6 @@ protected void ${qfcontrol.ControlId}_PreRender(object sender, EventArgs e)
 #if($qfcontrol.IsEntityBound)
     if (ViewState["selectedid"] != null)
     {
-        ${qfcontrol.DataSource}.SelectedMember = Sage.Platform.EntityFactory.GetById(${qfcontrol.DataSource}.BoundType, ViewState["selectedid"]);
         ${qfcontrol.DataSource}.Bind();
     }
 #else
@@ -490,6 +489,7 @@ protected void ${qfcontrol.ControlId}_PreRender(object sender, EventArgs e)
     protected void ${qfcontrol.ControlId}_RowEditing(object sender, GridViewEditEventArgs e)
     {
         ${qfcontrol.ControlId}.SelectedIndex = e.NewEditIndex;
+        e.Cancel = true;
     }
     #end
     #if($qfcontrol.HasDeleteColumn)

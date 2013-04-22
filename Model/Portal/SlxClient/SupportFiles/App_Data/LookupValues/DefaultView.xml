@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Lookup name="DefaultView">
-  <LookupValue id="0" text="AllOpen" default="true"></LookupValue>
-  <LookupValue id="1" text="Literature" default="false"></LookupValue>
-  <LookupValue id="2" text="Events" default="false"></LookupValue>
-  <LookupValue id="3" text="Confirmations" default="false"></LookupValue>
+  <LookupValue id="0" text="My Activities" localizedId="myActivities" default="true"></LookupValue>
+  <LookupValue id="1" text="All Open" localizedId="allOpen" default="false"></LookupValue>
+  <LookupValue id="2" text="Past Due" localizedId="pastDue" default="false"></LookupValue>
+  <LookupValue id="3" text="Alarms" localizedId="alarms" default="false"></LookupValue>
+  <LookupValue id="4" text="Events" localizedId="events" default="false"></LookupValue>
+  <LookupValue id="5" text="Confirmations" localizedId="confirmations" default="false"></LookupValue>
+  <LookupValue id="6" text="Literature" localizedId="literature" default="false"></LookupValue>
 </Lookup>
-

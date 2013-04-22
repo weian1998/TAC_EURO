@@ -144,6 +144,7 @@ public partial class SmartParts_NotWhatsNew_NotWhatsNew : UserControl, ISmartPar
         const string phoneURL = "~/images/icons/Call_16x16.gif";
         const string todoURL = "~/images/icons/To_Do_16x16.gif";
         const string personalURL = "~/images/icons/Personal_16x16.gif";
+        const string noteURL = "~/images/icons/Note_16x16.gif";
 
         switch (type.ToString())
         {
@@ -155,6 +156,8 @@ public partial class SmartParts_NotWhatsNew_NotWhatsNew : UserControl, ISmartPar
                 return todoURL;
             case "atPersonal":
                 return personalURL;
+            case "atNote":
+                return noteURL;
             default:
                 return meetingURL;
         }
@@ -170,15 +173,17 @@ public partial class SmartParts_NotWhatsNew_NotWhatsNew : UserControl, ISmartPar
         switch (type.ToString())
         {
             case "atAppointment":
-                return "Meeting";
+                return GetLocalResourceObject("Meeting_Type").ToString();
             case "atPhoneCall":
-                return "Phone Call";
+                return GetLocalResourceObject("Phone_Type").ToString();
             case "atToDo":
-                return "To-Do";
+                return GetLocalResourceObject("ToDo_Type").ToString();
             case "atPersonal":
-                return "Personal Activity";
+                return GetLocalResourceObject("Personal_Type").ToString();
+            case "atNote":
+                return GetLocalResourceObject("Note_Type").ToString();
             default:
-                return "Meeting";
+                return GetLocalResourceObject("Meeting_Type").ToString();
         }
     }
 
@@ -189,7 +194,7 @@ public partial class SmartParts_NotWhatsNew_NotWhatsNew : UserControl, ISmartPar
     /// <returns></returns>
     protected string GetActivityLink(object Id)
     {
-        return string.Format("javascript:Link.editHistory('{0}');", Id);
+        return string.Format("javascript:Sage.Link.editHistory('{0}');", Id);
     }
 
     /// <summary>
@@ -235,11 +240,26 @@ public partial class SmartParts_NotWhatsNew_NotWhatsNew : UserControl, ISmartPar
     /// <returns></returns>
     protected string GetDisplayName(object contact, object lead)
     {
+
+        string name = string.Empty;
         if (lead != null)
-            return lead.ToString();
+        {
+            name = lead.ToString().Trim();
+            if (!string.IsNullOrEmpty(name))
+            {
+                return name;
+            }
+
+        }
         if (contact != null)
-            return contact.ToString();
-        return String.Empty;
+        {
+            name = contact.ToString().Trim();
+            if (!string.IsNullOrEmpty(name))
+            {
+                return name;
+            }
+        }
+        return name;
     }
 
     /// <summary>

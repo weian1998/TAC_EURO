@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="b10b3a4e-b2ae-4879-beee-628538740884" lastModifiedUtc="2011-04-14T03:46:26.055625Z" manageSchema="false" tableName="EMAILEXCLUDELIST" name="EmailExcludeList" isExtension="false" audited="false" lastUpdatedPropertyId="cea89e65-6f0c-4725-a932-e22a7c06a41b" onBeforeInsertMethodId="a66df760-86d0-4e24-bfd1-f65b0cee5f8e" onAfterInsertMethodId="e3b5ea51-8710-4580-8158-123b957c09ea" onBeforeUpdateMethodId="4cd146bd-26d5-4d5a-b9f3-54d08bd2119b" onAfterUpdateMethodId="de7eeb5f-7bf8-4757-aa99-279efea41ab9" onBeforeDeleteMethodId="659fa729-5e5e-454c-82f6-366af604e8f8" onAfterDeleteMethodId="9bf1adde-a7d7-4bf4-9339-76fd5b90c456" onCreateId="604185ad-99bf-48da-8c40-96cdf4fd3b63">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="b10b3a4e-b2ae-4879-beee-628538740884" lastModifiedUtc="2013-04-22T17:09:53.9102859Z" manageSchema="false" tableName="EMAILEXCLUDELIST" name="EmailExcludeList" isExtension="false" audited="false" onBeforeInsertMethodId="a66df760-86d0-4e24-bfd1-f65b0cee5f8e" onAfterInsertMethodId="e3b5ea51-8710-4580-8158-123b957c09ea" onBeforeUpdateMethodId="4cd146bd-26d5-4d5a-b9f3-54d08bd2119b" onAfterUpdateMethodId="de7eeb5f-7bf8-4757-aa99-279efea41ab9" onBeforeDeleteMethodId="659fa729-5e5e-454c-82f6-366af604e8f8" onAfterDeleteMethodId="9bf1adde-a7d7-4bf4-9339-76fd5b90c456" onCreateId="604185ad-99bf-48da-8c40-96cdf4fd3b63">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
@@ -9,55 +9,82 @@
           <IsHistoryTable>false</IsHistoryTable>
         </OrmEntityMetadataExtension>
       </extender>
+      <extender guid="76aa0e24-2c8f-3b71-a1f9-ca6db3db4459">
+        <OrmEntitySDataExtension lastUpdatedPropertyId="cea89e65-6f0c-4725-a932-e22a7c06a41b" canPost="true" canPut="true" canDelete="true" />
+      </extender>
     </extendee>
   </ExtendedPropertiesCollection>
   <keyProperties>
     <keyReference id="fb25463a-a054-4123-9991-e422b51deca4" ordinalPosition="1" />
   </keyProperties>
   <properties>
-    <property xsi:type="OrmFieldProperty" id="fb25463a-a054-4123-9991-e422b51deca4" lastModifiedUtc="2011-04-14T03:45:12.6025Z" name="Emailexcludelistid" audited="false" isNullable="false" columnName="EMAILEXCLUDELISTID" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="fb25463a-a054-4123-9991-e422b51deca4" lastModifiedUtc="2013-04-22T17:09:53.9072857Z" name="Emailexcludelistid" audited="false" isNullable="false" columnName="EMAILEXCLUDELISTID" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="d66f7fb9-9c27-486b-a09e-ea68c4940a6c" lastModifiedUtc="2011-04-14T03:45:12.743125Z" name="CreateUser" audited="false" columnName="CREATEUSER" maxLength="12" precision="0" scale="0" ordinal="1" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="d66f7fb9-9c27-486b-a09e-ea68c4940a6c" lastModifiedUtc="2013-04-22T17:09:53.9082858Z" name="CreateUser" audited="false" columnName="CREATEUSER" maxLength="12" precision="0" scale="0" ordinal="1" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="7e5a5130-8963-4a61-8db9-63bc8ab98c15" lastModifiedUtc="2011-04-14T03:45:12.75875Z" name="CreateDate" audited="false" columnName="CREATEDATE" maxLength="0" precision="0" scale="0" ordinal="2" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="7e5a5130-8963-4a61-8db9-63bc8ab98c15" lastModifiedUtc="2013-04-22T17:09:53.9092858Z" name="CreateDate" audited="false" columnName="CREATEDATE" maxLength="0" precision="0" scale="0" ordinal="2" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
         <DateTimeDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="95b99ae5-8b2e-421e-8ea4-8aa363615594" lastModifiedUtc="2011-04-14T03:45:12.79Z" name="ModifyUser" audited="false" columnName="MODIFYUSER" maxLength="12" precision="0" scale="0" ordinal="3" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="95b99ae5-8b2e-421e-8ea4-8aa363615594" lastModifiedUtc="2013-04-22T17:09:53.9092858Z" name="ModifyUser" audited="false" columnName="MODIFYUSER" maxLength="12" precision="0" scale="0" ordinal="3" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="cea89e65-6f0c-4725-a932-e22a7c06a41b" lastModifiedUtc="2011-04-14T03:45:12.805625Z" name="ModifyDate" audited="false" columnName="MODIFYDATE" maxLength="0" precision="0" scale="0" ordinal="4" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="cea89e65-6f0c-4725-a932-e22a7c06a41b" lastModifiedUtc="2013-04-22T17:09:53.9092858Z" name="ModifyDate" audited="false" columnName="MODIFYDATE" maxLength="0" precision="0" scale="0" ordinal="4" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
         <DateTimeDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="858d7f78-36b8-44a1-9948-16f254f32160" lastModifiedUtc="2011-04-14T03:45:13.086875Z" name="EmailAddress" audited="false" columnName="EMAILADDRESS" maxLength="128" precision="0" scale="0" ordinal="5" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="858d7f78-36b8-44a1-9948-16f254f32160" lastModifiedUtc="2013-04-22T17:09:53.9102859Z" name="EmailAddress" audited="false" columnName="EMAILADDRESS" maxLength="128" precision="0" scale="0" ordinal="5" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
         <TextDataType>

@@ -1,0 +1,134 @@
+<html>
+    <head>
+        <title>Sage.UI Browser Tests</title>
+        <style type="text/css">
+        /* Hide dojo validation controls */
+        .dijitValidationContainer, .dijitBackgroundIframe {
+            visibility: hidden;
+        }
+        </style>
+        
+        <link rel="stylesheet" type="text/css" href="../../../../css/sage-styles.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../css/sageStyles.css" />        
+        <link rel="stylesheet" type="text/css" href="../../../../Libraries/dojo/dijit/themes/green/green.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../Libraries/dojo/dojox/grid/resources/grid.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../Libraries/dojo/dojox/grid/resources/claroGrid.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../Libraries/dojo/dojox/grid/enhanced/resources/claroEnhancedGrid.css" />
+        
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript" src="../Controls/tests/mocks.js"></script>
+        <script type="text/javascript">
+        String.prototype.trim = function() {
+            return this.replace(/^\s+|\s+$/g,'');
+        }
+        
+        dojo.provide("Sage.UI.tests.SDataLookup");
+        
+        dojo.require('dojo/parser');
+        dojo.require("doh/runner");
+        dojo.require("Sage/UI/ComboBox");
+        dojo.require("Sage/Data/BaseSDataStore");
+        dojo.require('Sage/UI/ConditionManager');
+        dojo.require('Sage/_Templated');
+        dojo.require('Sage/Data/BaseSDataStore');
+        dojo.require("Sage/UI/SDataLookup");
+        
+            
+        dojo.ready(function(){
+            doh.register("Sage.UI.tests.SDataLookup", [
+                function testLifeCycle() {
+                    var lookup = buildLookup();
+                    try {
+                        lookup.showLookup();
+                        lookup.destroy(false);
+                    } catch(e) {
+                        console.error(e);
+                        doh.t(false);
+                    }
+                    
+                },
+                function testTitle() {
+                    var lookup = buildLookup();
+                    lookup.showLookup();
+                    doh.t(lookup.dialogTitle === 'foo');
+                    var titleSpan = dojo.byId(lookup.id + '-Dialog_title');
+                    doh.t(titleSpan.innerHTML === 'foo');
+                    lookup.destroy(false);
+                }
+            ]);
+            
+            //Execute D.O.H. in this remote file.
+            doh.run();
+        });
+        
+        function buildLookup() {
+            // options
+            var options = {
+                id: 'lookupTester',
+                displayMode: 5,
+                seedProperty: '',
+                seedValue: '',
+                overrideSeedValueOnSearch: false,
+                preFilters: [],
+                initializeLookup: false,
+                dialogTitle: 'foo',
+                structure: [
+                    {
+                        defaultCell: { width: 12, editable: false, styles: 'text-align: right;' },
+                        cells: [
+                            {
+                                name: 'Family',
+                                field: 'Family',
+                                displayField: 'Family',
+                                sortable: true,
+                                width: 15,
+                                propertyType: 'System.String'
+                            },
+                            {
+                                name: 'Name',
+                                field: 'Name',
+                                displayField: 'Name',
+                                sortable: true,
+                                width: 15,
+                                propertyType: 'System.String'
+                            }
+                        ]
+                    }],
+                gridOptions: {
+                    contextualCondition : '',
+                    contextualShow : ''
+                },
+                storeOptions: {
+                    resourceKind: 'salesOrderItems'
+                }
+            };
+            // end options
+            
+            var lookup = new Sage.UI.SDataLookup(options);
+            return lookup;
+        }
+        </script>
+    </head>
+    <body>
+        <form>
+            <p>
+                <!-- Lookup Dialog (text + button) -->
+                <span>Lookup Dialog</span> 
+                <input type="text" slxchangehook="true" id="ctl00_DialogWorkspace_EditSalesOrderDetail_QFSLXLookup_LookupText" readonly="readonly" disabled="true" value="Abbott Ltd." name="ctl00$DialogWorkspace$EditSalesOrderDetail$QFSLXLookup$LookupText" accesskey="">
+                <input type="text" style="display:none;" id="ctl00_DialogWorkspace_EditSalesOrderDetail_QFSLXLookup_LookupResult" value="AGHEA0002669" name="ctl00$DialogWorkspace$EditSalesOrderDetail$QFSLXLookup$LookupResult">
+                <a style="" href="javascript:buildLookup().showLookup();"><img style="border-width:0px;vertical-align:middle;cursor:pointer;" src="/SlxClient/WebResource.axd?d=phvLtjgSUJgjC4gtLiOBhs4Do2-xzKf98SQC7ehxpYIeFQtoDgXSLwomcPWWFZavs7B-E__Vrz84QwBoZ5ZTuzwVGj_yem9ZuoHyRzGQX9KmurbEFb0aq8M7O_pU56uXJnZNSsnOgKKCrOeDjuNmdwkLeEbO_yqMY3ingoGrzi_p8NiL0&amp;t=634478753785502306" onclick="" title="Find" id="ctl00_DialogWorkspace_EditSalesOrderDetail_QFSLXLookup_LookupBtn"></a>
+                <img style="border-width:0px;cursor:pointer;vertical-align:middle;" alt="Remove" src="/SlxClient/WebResource.axd?d=XIzWBs1zD2RYZ8kOmssKwklwLEd4OhbkmNM50JL9-jujhKrql2Faj5LhkK720dxt2pysGzR-prYC2ox3F2zIeAxFAhjUwZKQsjt_IuZRgSCxfy0eSfsUt3r4MzoIHnB7tsQzKuO8A4BfcodfaVr3lypmHMYHgOqiGZs00YeK1daWcgh80&amp;t=634478753785502306" onclick="" id="ctl00_DialogWorkspace_EditSalesOrderDetail_QFSLXLookup_btnClearResult">
+            </p>
+            
+            <hr />
+        </form>
+    </body>
+</html>

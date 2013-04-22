@@ -1,0 +1,111 @@
+<html>
+    <head>
+        <title>Sage.Data Tests</title>
+        <script type="text/javascript" src="../../UI/Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/sinon/sinon-1.3.4.js"></script>
+        <!--[if IE]>
+        <script type="text/javascript" src="../../../Libraries/sinon/sinon-ie-1.3.4.js"></script>
+        <![endif]-->
+
+        <script type="text/javascript">
+        require([
+            'dojo/parser',
+            'doh',
+            'Sage/Data/GroupLayoutSingleton'
+        ], function(
+            parser,
+            doh,
+            GroupLayoutSingleton
+        ) {
+            doh.register("Sage.Data.tests.GroupLayoutSingleton", [
+                function testGetGroupLayoutSuccess() {
+                    var request,
+                        singleton,
+                        mockRead,
+                        mockOnSuccess = sinon.mock();
+                    
+                    Sage.SData.Client.SDataSingleResourceRequest = sinon.stub();
+                    request = Sage.SData.Client.SDataSingleResourceRequest;
+                    mockRead = sinon.mock();
+                    mockRead.yieldsTo('success', ['data']);
+                    mockRead.once();
+                    
+                    request.returns({
+                        setResourceKind: sinon.stub(),
+                        setResourceSelector: sinon.stub(),
+                        setQueryArg: sinon.stub(),
+                        read: mockRead
+                    });
+                    
+                    singleton = new GroupLayoutSingleton();
+                    sessionStorage.clear();
+                    singleton.data = {};
+                    
+                    // Register two callbacks for the same id.
+                    // Verify that only one request is issued,
+                    // and both callbacks get called.
+
+                    mockOnSuccess.twice();
+                    mockOnSuccess.withArgs(['data']);
+                    
+                    singleton.getGroupLayout(1, mockOnSuccess);
+                    singleton.getGroupLayout(1, mockOnSuccess);
+                    
+                    mockOnSuccess.verify();
+                    mockRead.verify();
+                },
+                function testGetGroupLayoutError() {
+                    // Similar to onSuccess test. This one changes the mockRead to verify it was called twice.
+                    var request,
+                        noop = function () {},
+                        singleton,
+                        mockRead,
+                        mockOnError = sinon.mock();
+                    
+                    Sage.SData.Client.SDataSingleResourceRequest = sinon.stub();
+                    request = Sage.SData.Client.SDataSingleResourceRequest;
+                    mockRead = sinon.mock();
+                    mockRead.yieldsTo('failure', ['new Error']);
+                    mockRead.twice();
+                    
+                    request.returns({
+                        setResourceKind: sinon.stub(),
+                        setResourceSelector: sinon.stub(),
+                        setQueryArg: sinon.stub(),
+                        read: mockRead
+                    });
+                    
+                    singleton = new GroupLayoutSingleton();
+                    sessionStorage.clear();
+                    singleton.data = {};
+                    
+                    mockOnError.twice();
+                    mockOnError.withArgs(['new Error']);
+                    
+                    singleton.getGroupLayout(2, noop, mockOnError);
+                    singleton.getGroupLayout(20, noop, mockOnError);
+                    
+                    mockOnError.verify();
+                    mockRead.verify();
+                }
+            ]);
+            
+            //Execute D.O.H. in this remote file.
+            doh.run();
+        });
+        </script>
+    </head>
+    <body>
+        <form>
+        </form>
+    </body>
+</html>

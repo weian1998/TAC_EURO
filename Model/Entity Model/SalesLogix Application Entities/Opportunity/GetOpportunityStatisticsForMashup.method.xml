@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="1614fa53-59db-4c68-8b1f-5d163806305f" lastModifiedUtc="2011-11-12T00:52:19.9249657Z" name="GetOpportunityStatisticsForMashup" returnType="Object" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="d77697fc-d5b8-45e7-8b9e-5638799547f9" paramName="selectionKey" sequence="0" paramType="String" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="754c0f22-bdf3-46a8-94a2-72519d19a825" lastModifiedUtc="2011-11-12T01:13:40.4502075Z" targetType="Sage.SalesLogix.Opportunity.OpportunityHelperClass, Sage.SalesLogix.BusinessRules" targetMethod="GetOpportunityStatisticsMashup" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

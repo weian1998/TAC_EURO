@@ -4,4 +4,5 @@
   <ServiceType>Sage.SalesLogix.Security.FieldLevelSecurityService, Sage.SalesLogix.Security</ServiceType>
   <RegisterAs>Sage.Platform.Security.IFieldLevelSecurityService, Sage.Platform</RegisterAs>
   <Properties />
+  <Scope>Application</Scope>
 </PortalService>

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<mashup id="85c13eb4-a9a3-4c41-8371-1e03fcfd39a3" name="ActivityFreeBusy">
+  <processors>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor id="92b1f9d8-fdbc-4f81-92d3-8bd9d51c2154" name="UserActivitySchedule" location="20, 20" expanded="true" continueOnError="false" query="select a.id as activityId, a.Type as type, a.StartDate as startDate, a.Duration as duration, a.Timeless as timeless, a.Description as description, ua.UserId as itemId&#xD;&#xA;from UserActivity ua&#xD;&#xA;  inner join ua.Activity a&#xD;&#xA;where ua.UserId in ({idlist})&#xD;&#xA;  and a.StartDate &gt; :fromDate&#xD;&#xA;  and a.StartDate &lt; :toDate&#xD;&#xA;  and not a.Timeless">
+        <parameters>
+          <parameter id="693313f9-f369-4e17-8886-fd1c44d39322" name="fromDate" expression="fromDate" />
+          <parameter id="c4efd8cc-68d5-454d-a35b-35cc6d63b2ca" name="toDate" expression="toDate" />
+        </parameters>
+      </queryProcessor>
+    </processor>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor id="ff74d7d4-c641-47c8-9439-04df0c51055a" name="ResourceSchedule" location="240, 20" expanded="true" continueOnError="false" query="select a.id as activityId, a.Type as type, a.StartDate as startDate, a.Duration as duration,&#xD;&#xA;  a.Timeless as timeless, a.Description as description, rs.ResourceId as itemId&#xD;&#xA;from ResourceSchedule rs&#xD;&#xA;  inner join rs.Activity a&#xD;&#xA;where rs.ResourceId in ({idlist}) &#xD;&#xA;  and a.StartDate &gt; :fromDate&#xD;&#xA;  and a.StartDate &lt; :toDate&#xD;&#xA;  and not a.Timeless">
+        <parameters>
+          <parameter id="257a082d-c7cd-46c6-90ee-bbbc686cf18a" name="fromDate" expression="fromDate" />
+          <parameter id="bc17e3a4-8e0a-4c27-b20e-07d75b462a3c" name="toDate" expression="toDate" />
+        </parameters>
+      </queryProcessor>
+    </processor>
+    <processor type="Sage.Platform.Mashups.Processors.SelectProcessor, Sage.Platform.Mashups">
+      <selectProcessor id="2b1652b2-4a4c-4387-93ed-202736bd59c5" name="GetAvailability" location="120, 280" expanded="true" continueOnError="false" type="Append">
+        <properties />
+      </selectProcessor>
+    </processor>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor id="5a8952ee-ff50-4312-9e26-7f7bb69dd162" name="UsersForActivity" location="460, 20" expanded="true" width="280" continueOnError="false" query="select ua.Status as status, ua.User.UserInfo.UserName as name, ua.User.id as id, 'user' as type&#xD;&#xA;from UserActivity ua&#xD;&#xA;where ua.Activity.id = :activityId&#xD;&#xA;order by ua.User.UserInfo.LastName asc">
+        <parameters>
+          <parameter id="3a760143-0d70-49c8-85fa-c87e31e117d6" name="activityId" expression="activityId" />
+        </parameters>
+      </queryProcessor>
+    </processor>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor id="3e64e6a5-2db8-4d7f-b109-98456f310076" name="ResourcesForActivity" location="760, 20" expanded="true" continueOnError="false" query="select '' as status, rs.Resource.Name as name, 'resource' as type, rs.Resource.id as id, rs.Resource.IsLocation as isLocation, rs.id as rsid&#xD;&#xA;from ResourceSchedule rs&#xD;&#xA;where rs.Activity.id = :activityId&#xD;&#xA;order by rs.Resource.Name asc">
+        <parameters>
+          <parameter id="282efd71-7275-4590-ab7c-16a8c14c5c66" name="activityId" expression="activityId" />
+        </parameters>
+      </queryProcessor>
+    </processor>
+    <processor type="Sage.Platform.Mashups.Processors.SelectProcessor, Sage.Platform.Mashups">
+      <selectProcessor id="37ed5394-9fee-4406-ae49-bc3a8dc46140" name="GetMembers" location="680, 220" expanded="true" continueOnError="false" type="Append">
+        <properties />
+      </selectProcessor>
+    </processor>
+  </processors>
+  <parameters>
+    <parameter id="5b640967-9e44-46f0-b7b5-ef95466e4e65" name="idlist" expression="'''UDEMOA00000I'',''UDEMOA000008'',''RGHEA0002884'''" />
+    <parameter id="2eb2d760-7115-4612-9886-23646043fc1c" name="activityId" expression="'VDEMOA0000KR'" />
+    <parameter id="ab7afe17-c864-4353-b63d-b49f5c7e2ce2" name="fromDate" expression="'2002-05-22T09:00:00Z'" />
+    <parameter id="88b2e6cd-8048-4a4e-868e-d27ac9cf8249" name="toDate" expression="'2012-05-22T09:00:00Z'" />
+  </parameters>
+  <links>
+    <link source="ResourceSchedule" target="GetAvailability" />
+    <link source="UserActivitySchedule" target="GetAvailability" />
+    <link source="ResourcesForActivity" target="GetMembers" />
+    <link source="UsersForActivity" target="GetMembers" />
+  </links>
+</mashup>

@@ -1,0 +1,30 @@
+CACHE MANIFEST
+@version
+@culture
+
+CACHE:
+# css
+@include 'content/css'
+@include 'content/reui/themes'
+
+# images
+@include 'content/images'
+
+# dojo
+@include 'content/dojo', /.*(?<!uncompressed|-debug)\.js$/i
+
+# application
+@include 'content/javascript', /.*(?<!-debug)\.js$/i
+
+# environment
+@include 'configuration', /^production.js$/i
+
+# localization
+@localize 'localization', '{0}.js'
+
+# help
+@localize 'help', 'help_{0}.html'
+help/help.html
+
+NETWORK:
+../sdata/

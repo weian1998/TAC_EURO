@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="1878" MadCap:lastWidth="798" MadCap:conditions="Output.Intellisync">
+    <head>
+        <link href="../Resources/TableStyles/TableStyle.css" rel="stylesheet" MadCap:stylesheetType="table" />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Synchronisieren" MadCap:conditions="Output.Intellisync" />Synchronisieren von Kontakten</h1>
+        <p>Während der Synchronisierung zwischen Intellisync for Sage SalesLogix und Outlook<MadCap:conditionalText MadCap:conditions="Primary.Lotus_Notes"> oder Lotus Notes</MadCap:conditionalText> werden nur Daten in zugeordneten Feldern übertragen. Die Daten werden verglichen und Anpassungen erfolgen, um sicherzustellen, dass die Informationen übereinstimmen. Doch eine Abweichung bei der Eingabe der Daten kann unerwünschte Änderungen verursachen. 
+
+
+</p>
+        <p>Angenommen, ein neuer Kontaktname wird in Outlook<MadCap:conditionalText MadCap:conditions="Primary.Lotus_Notes">oder Lotus Notes </MadCap:conditionalText>ohne dazugehörige Firma eingegeben. In diesem Fall wird eine Firma angelegt. Dies kann jedoch verhindern, dass der Kontaktname später der ordnungsgemäßen Firma zugeordnet wird, und zu Duplikaten führen. Sie müssen diese Datensätze konfigurieren, damit sie ordnungsgemäß verarbeitet werden.
+
+
+
+</p>
+        <p>Es gibt noch andere Bedingungen, die duplizierte Datensätze verursachen können. Wenn beispielsweise ein Meeting sowohl in Sage SalesLogix als auch Outlook<MadCap:conditionalText MadCap:conditions="Primary.Lotus_Notes">oder Lotus Notes</MadCap:conditionalText> vorhanden ist, können nach einer Synchronisierung Duplikate vorhanden sein.
+
+
+</p>
+        <p>Es es ggf. erforderlich, die Synchronisierungsgruppe zu aktualisieren oder Daten aus Outlook oder <MadCap:conditionalText MadCap:conditions="Primary.Lotus_Notes">Lotus Notes </MadCap:conditionalText>in Sage SalesLogix zu übertragen. Intellisync bietet folgende Möglichkeiten:</p>
+        <ul>
+            <li class="Bullets">Hinzufügen von Kontakten zu Outlook <MadCap:conditionalText MadCap:conditions="Primary.Lotus_Notes">oder Lotus Notes</MadCap:conditionalText> aus der Sage SalesLogix-Datenbank</li>
+            <li class="Bullets">Synchronisieren von Kontakten, die gegenwärtig in sowohl der Sage SalesLogix-Datenbank als auch in Outlook <MadCap:conditionalText MadCap:conditions="Primary.Lotus_Notes">oder Lotus Notes</MadCap:conditionalText>, aber nicht in der Synchronisierungsgruppe vorhanden sind</li>
+            <li class="Bullets">Hinzufügen von Kontakten aus Outlook<MadCap:conditionalText MadCap:conditions="Primary.Lotus_Notes"> oder Lotus Notes</MadCap:conditionalText> zur Sage SalesLogix-Synchronisierungsgruppe</li>
+            <li class="Bullets">Beenden der Synchronisierung von Kontaktdaten, ohne die Datensätze in Sage SalesLogix und/oder Outlook <MadCap:conditionalText MadCap:conditions="Primary.Lotus_Notes">oder Lotus Notes</MadCap:conditionalText> zu ändern</li>
+        </ul>
+        <table style="width: 95%; mc-table-style: url('../Resources/TableStyles/TableStyle.css'); margin-left: 0; margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Ziel</th>
+                    <th class="HeadE-Column1-Header1">Aktion/Ergebnis</th>
+                    <th class="HeadD-Column1-Header1">Warnung</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Hinzufügen von Kontakten aus der Sage SalesLogix-Datenbank zu Outlook oder Lotus Notes</td>
+                    <td class="BodyE-Column1-Body1">
+                        <p>AKTION: Fügen Sie den Kontakt der Synchronisierungsgruppe in Sage SalesLogix hinzu.
+
+
+</p>
+                        <p>ERGEBNIS: Der Kontakt wird Outlook oder Lotus Notes beim nächsten Synchronisierungszyklus hinzugefügt.</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1">Diese Methode verhindert Duplikate.
+
+
+</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Synchronisieren eines Kontaktdatensatzes, der gegenwärtig sowohl in der Sage SalesLogix-Datenbank als auch in Outlook oder Lotus Notes vorhanden ist.</td>
+                    <td class="BodyE-Column1-Body1">
+                        <p>AKTIONSOPTION 1: Sie können die Datensatz aus einer der Anwendungen entfernen und anschließend einen Synchronisierungszyklus durchführen. 
+
+
+Fügen Sie den Kontakt der Ad-hoc-Gruppe hinzu, die in Sage SalesLogix als die Intellisync-Synchronisierungsgruppe zugewiesen ist. Beim nächsten Synchronisierungszyklus wird das Synchronisierungsgruppenkennzeichen dem Feld <font style="font-weight: bold;">Kategorie</span> des Datensatzes in Outlook oder Lotus Notes hinzugefügt.
+
+
+</p>
+                        <p>ERGEBNIS: Die Daten werden synchronisiert und anschließend bei jedem Synchronisierungszyklus synchronisiert.</p>
+                        <p>AKTIONSOPTION 2: Sie können die Konfliktlösung aktivieren, die Option <font style="font-weight: bold;">Benachrichtigen</span> auswählen und anschließend die Funktion <font style="font-weight: bold;">Erneut synchronisieren</span> verwenden.
+
+
+</p>
+                        <p>ERGEBNIS: Die Datensätze werden verknüpft und die Daten anschließend bei jedem Synchronisierungszyklus synchronisiert.</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1">Duplikate entstehen, wenn das Synchronisierungsgruppenkennzeichen dem Feld <font style="font-weight: bold;">Kategorie</span> des Datensatzes in Outlook oder Lotus Notes hinzugefügt wird, der Datensatz sowohl in Sage SalesLogix als auch Outlook oder Lotus Notes vorhanden ist und nicht in den ersten Synchronisierungszyklus einbezogen wurde.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Hinzufügen eines einzelnen Kontaktdatensatzes aus Outlook oder Lotus Notes zur Sage SalesLogix-Synchronisierungsgruppe</td>
+                    <td class="BodyE-Column1-Body1">
+                        <p>AKTION: Fügen Sie den Namen der Synchronisierungsgruppe (z. B. SyncSalesLogix) dem Feld <font style="font-weight: bold;">Kategorie</span> des Datensatzes in Outlook oder Lotus Notes hinzu, und führen Sie eine Synchronisierung in beide Richtungen aus.
+</p>
+                        <p>ERGEBNIS: Der Datensatz wird der Sage SalesLogix-Synchronisierungsgruppe hinzugefügt, und die Daten werden anschließend bei jedem Synchronisierungszyklus synchronisiert.</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>Szenario 1: Wenn dem Kontakt kein Unternehmensname zugeordnet ist, wird eine Firma mit dem Namen des Kontakts (z. B. Nachname, Vorname) erstellt.
+
+
+</p>
+                        <p>Dies kann zu Duplikaten führen, wenn das Unternehmen in der Sage SalesLogix-Datenbank, aber nicht in der Synchronisierungsgruppe enthalten ist.
+
+
+</p>
+                        <p>Szenario 2: Wenn der Kontakt auf <font style="font-weight: bold;">Öffentlich</span> festgelegt ist, ist der Account Manager auf <font style="font-weight: bold;">Aktueller Benutzer</span> und der Zugriffsberechtigte auf <font style="font-weight: bold;">Jeder</span> festgelegt.
+
+
+</p>
+                        <p>Wenn der Kontakt auf <font style="font-weight: bold;">Privat</span> festgelegt ist, ist der Account Manager auf <font style="font-weight: bold;">Aktueller Benutzer</span> und der Zugriffsberechtigte auf <font style="font-weight: bold;">Aktueller Benutzer</span> festgelegt.
+
+
+</p>
+                        <p>Wenn ein Unternehmensname dem Kontakt zugeordnet ist und der Unternehmensname in der Synchronisierungsgruppe vorhanden ist, wird der neue Kontakt mit dem Firmendatensatz des Unternehmens verknüpft.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">Beenden der Synchronisierung von Daten für einen Kontakt und Beibehalten des Kontakts in Outlook oder Lotus Notes</td>
+                    <td class="BodyB-Column1-Body1">
+                        <p>AKTION: Entfernen Sie das Synchronisierungsgruppenkennzeichen aus dem Feld <font style="font-weight: bold;">Kategorie</span> des Datensatzes in Outlook oder Lotus Notes. Beim nächsten Synchronisierungszyklus in beide Richtungen wird der Kontakt aus der Synchronisierungsgruppe in Sage SalesLogix entfernt, ohne aus Outlook oder Lotus Notes entfernt zu werden.
+
+
+</p>
+                        <p>ERGEBNIS: Die Daten werden nicht mehr synchronisiert.</p>
+                    </td>
+                    <td class="BodyA-Column1-Body1">Dies funktioniert bei einer Synchronisierung in eine Richtung nicht. Das Entfernen des Synchronisierungsgruppenkennzeichens von einem Kontakt in Outlook oder Lotus Notes, während der Kontakt in der Synchronisierungsgruppe in Sage SalesLogix verbleibt, führt dazu, dass das Synchronisierungsgruppenkennzeichen wieder dem Feld <font style="font-weight: bold;">Kategorie</span> in Outlook oder Lotus Notes hinzugefügt wird.</td>
+                </tr>
+            </tbody>
+        </table>
+        <MadCap:snippetBlock src="../Resources/Snippets/Common/Related Topics.flsnp" />
+        <p><a href="Contact_SyncSalesLogix_Filter.htm">Erstellen des SyncSalesLogix-Filters für Kontakte</a>
+        </p>
+        <p><a href="understanding_intellisync_for_saleslogix_field_mapping.htm">Grundlegendes zur Feldzuordnung bei Intellisync for SalesLogix</a>
+        </p>
+        <p><a href="understanding_factors_affecting_synchronization.htm">Grundlegendes zu Faktoren mit Auswirkung auf die Synchronisierung</a>
+        </p>
+        <p><a href="understanding_data_exchange.htm">Datenaustausch</a>
+        </p>
+        <p><a href="Understanding__contacts_and_activities_synchronization.htm">Ausführen der Synchronisierung von Kontakten und Aktivitäten</a>
+        </p>
+    </body>
+</html>

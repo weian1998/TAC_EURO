@@ -1,5 +1,6 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeFile="ContactAssociations.ascx.cs" Inherits="SmartParts_Association_ContactAssociations" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls" TagPrefix="SalesLogix" %>
+<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.ScriptResourceProvider" TagPrefix="Saleslogix" %>
 
 <div style="display:none">
     <asp:Panel ID="ContactAssociations_LTools" runat="server"></asp:Panel>
@@ -14,24 +15,18 @@
     </asp:Panel>
 </div>
 
-<SalesLogix:SlxGridView runat="server" ID="ContactAssociations_Grid" GridLines="None" AutoGenerateColumns="False" CellPadding="4" 
-    CssClass="datagrid" AlternatingRowStyle-CssClass="rowdk" RowStyle-CssClass="rowlt" ShowEmptyTable="true" DataKeyNames="Id"
-    EmptyTableRowText="<%$ resources: ContactAssociationsGrid_NoRecordFound.EmptyTableRowText %>" AllowPaging="true"
-    OnRowDataBound="ContactAssociations_Grid_RowDataBound" OnRowCommand="ContactAssociations_Grid_RowCommand" EnableViewState="false"
-    OnRowEditing="ContactAssociations_Grid_RowEditing" OnRowDeleting="ContactAssociations_Grid_RowDeleting" PageSize="10" >
-    <Columns>
-       <asp:ButtonField CommandName="Edit" Text="<%$ resources: ContactAssociationsGrid_Edit.Text %>" /> 
-       <asp:ButtonField CommandName="Delete" Text="<%$ resources: ContactAssociationsGrid_Delete.Text %>"/> 
-       <asp:TemplateField HeaderText="<%$ resources: ContactAssociationsGrid_Name.HeaderText %>" >
-              <itemtemplate>
-                  <SalesLogix:PageLink runat="server" NavigateUrl="Contact" EntityId='<%# Eval("ContactId") %>' Text='<%# Eval("Contact") %>'
-                        LinkType="EntityAlias" ToolTip="<%$ resources: ContactAssociationsGrid_Link.ToolTip %>">
-                  </SalesLogix:PageLink>
-              </itemtemplate>
-          </asp:TemplateField>
-          <asp:BoundField DataField="Relation" HeaderText="<%$ resources: ContactAssociationsGrid_Relation.HeaderText %>" />
-          <asp:BoundField DataField="Notes" HeaderText="<%$ resources: ContactAssociationsGrid_Notes.HeaderText %>" />
-          <asp:BoundField DataField="CreatedBy" HeaderText="<%$ resources: ContactAssociationsGrid_CreatedBy.HeaderText %>" />
-          <asp:BoundField DataField="Date" DataFormatString="{0:d}" HtmlEncode="false" HeaderText="<%$ resources: ContactAssociationsGrid_Date.HeaderText %>" />
-      </Columns>
-</SalesLogix:SlxGridView>
+<div id="ContactAssociations_Container" style="width:100%;height:100%;" class="">
+    <div id="ContactAssociations_Grid" style="width:100%;height:100%;" data-dojo-type="dijit.layout.BorderContainer"></div>
+</div>
+
+<Saleslogix:ScriptResourceProvider ID="ContactAssociationsResource" runat="server">
+    <Keys>
+        <Saleslogix:ResourceKeyName Key="ContactAssociationsGrid_Name.HeaderText" />
+        <Saleslogix:ResourceKeyName Key="ContactAssociationsGrid_Notes.HeaderText" />
+        <Saleslogix:ResourceKeyName Key="ContactAssociationsGrid_CreatedBy.HeaderText" />
+        <Saleslogix:ResourceKeyName Key="ContactAssociationsGrid_Date.HeaderText" />
+        <Saleslogix:ResourceKeyName Key="ContactAssociationsGrid_Relation.HeaderText" />
+        <Saleslogix:ResourceKeyName Key="ContactAssociationsGrid_Delete.Text" />
+        <SalesLogix:ResourceKeyName Key="ContactAssociationsGrid_Edit.Text" />
+    </Keys>
+</Saleslogix:ScriptResourceProvider>

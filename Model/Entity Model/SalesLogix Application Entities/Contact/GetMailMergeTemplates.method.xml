@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="cf428a34-85e4-469b-b5f0-f7520c898aeb" lastModifiedUtc="2011-09-07T15:48:26.6057551Z" name="GetMailMergeTemplates" returnType="Object" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="28561bf9-708b-431c-8b80-1095b1e2e22c" paramName="all" sequence="0" paramType="Boolean">
+      <description>If true returns mail merge templates for Contacts and Leads.</description>
+    </OrmEntityMethodParam>
+    <OrmEntityMethodParam id="10f72869-1bcf-4af2-b839-0c2c3610bda8" paramName="json" sequence="0" paramType="Boolean">
+      <description>If true returns the TemplateItems as a JSON string.</description>
+    </OrmEntityMethodParam>
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="28214712-18cb-411f-9793-7439ab2aa074" lastModifiedUtc="2011-09-07T18:24:39.7370065Z" targetType="Sage.SalesLogix.Contact.Rules, Sage.SalesLogix.BusinessRules" targetMethod="GetMailMergeTemplates" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

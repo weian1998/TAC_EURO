@@ -11,10 +11,17 @@
 	sortable: $generator.GetJavascriptBoolString($col.IsSortable),
 	#if($col.Width > -1) 
 	width: ${col.Width},
+	#else
+	width: '10',
 	 #end
 	styles: 'width:auto;',
     cellClasses: '${col.StyleScheme} #if (${col.Horizontalalignment} == "right") alignright #elseif (${col.Horizontalalignment} == "left") alignleft #elseif(${col.Horizontalalignment} == "center") aligncenter #end',
 	headerClasses: '#if (${col.Headeralignment} == "right") alignright #elseif (${col.Headeralignment} == "left") alignleft #elseif(${col.Headeralignment} == "center") aligncenter #end'
+#end
+#macro(doAbbreviationLength $col)
+	#if($col.AbbreviationLength > 0)
+	,formatter: Sage.Format.abbreviationFormatter(${col.AbbreviationLength})
+	#end	
 #end
 #macro(doReadOnlyCondition $qfcontrol)
 	#if($qfcontrol.ReadOnlyCondition != "")
@@ -37,13 +44,36 @@
 	#doDefaultColParts($col), 
 	defaultValue: '', 
 	editable: $generator.GetJavascriptBoolString(${col.IsEditable})
+	#doAbbreviationLength ($col)
+	#if($col.CustomFormatter != "")
+	,formatter: ${col.CustomFormatter}
+	#end
+	#if($col.AbbreviationLength > 0)
+	,formatter: Sage.Format.abbreviationFormatter(${col.AbbreviationLength})
+	#end	
+}
+#end
+#macro(doDateTimeCol $col)
+{
+	#doDefaultColParts($col), 
+	dateOnly: $generator.GetJavascriptBoolString(${col.DateOnly}),
+	#if($col.AbbreviationLength > 0)
+	abbreviationLength: ${col.AbbreviationLength},
+	#end	
+	type: DateTime
+}
+#end
+#macro(doSlxUserCol $col)
+{
+	#doDefaultColParts($col),
+	type: Sage.UI.Columns.SlxUser
 }
 #end
 #macro(doLookupCol $col)
 {
 	#doDefaultColParts($col),  
 	editable: $generator.GetJavascriptBoolString(${col.IsEditable}),
-	type: Sage.UI.Columns.Lookup,
+	type: Lookup,
 	lookupOptions: {
 		field: '$col.LookupDisplayProperty',
 		seedOnRowEntity: $generator.GetJavascriptBoolString(${col.SeedOnRowEntity}),
@@ -65,13 +95,17 @@
 			contextualCondition: ${col.ConditionalWhere}
 		#end
 	  }
+	#doAbbreviationLength ($col)
 }
 #end
 #macro(doCurrencyCol $col)
 {
 	#doDefaultColParts($col),
 	editable: $generator.GetJavascriptBoolString(${col.IsEditable}),
-	type: Sage.UI.Columns.Currency,
+	#if($col.AbbreviationLength > 0)
+	abbreviationLength: ${col.AbbreviationLength},
+	#end	
+	type: Currency,
 	constraints: { #if($col.DecimalDigits != "-1") places: ${col.DecimalDigits} #else places: Sys.CultureInfo.CurrentCulture.numberFormat.CurrencyDecimalDigits #end },  
 
 	## TODO: Uncomment this after Exchange Rate Type enum has been updated
@@ -91,7 +125,7 @@
 #macro(doLinkCol $col)
 { 
     #doDefaultColParts($col)  
-    ,type: Sage.UI.Columns.SlxLink
+    ,type: SlxLink
     ,editable: false
 #if($col.AppliedSecurity != "")
     ,appliedSecurity: '$col.AppliedSecurity'
@@ -115,11 +149,11 @@
 {
     #if($col.DialogSpecs.SmartPart != "")
 		#doDefaultColParts($col),
-	   	type: Sage.UI.Columns.SlxEdit,
+	   	type: SlxEdit,
 		cellValue: ${stringObjectName}['$generator.ConvertResourceKeyToScriptReference($col.getColResourceKey("Text"))']  || '$col.Text',
 		entityType: '${col.DialogSpecs.GetFullyQualifiedEntityType()}',
 		smartPart: '${col.DialogSpecs.SmartPart}',
-		dialogTitle: ${stringObjectName}['${col.DialogSpecs.ResourceKey}.DialogTitleOverride'] || '${col.DialogSpecs.TitleOverride}',
+		dialogTitle: ${stringObjectName}['$generator.ConvertResourceKeyToScriptReference("${col.DialogSpecs.ResourceKey}.DialogTitleOverride")'] || '${col.DialogSpecs.TitleOverride}',
 		isCentered: #if($col.DialogSpecs.CenterDialog == "True")true #else false #end,
 		dialogTop: ${col.DialogSpecs.Top},
 		dialogLeft: ${col.DialogSpecs.Left},
@@ -136,31 +170,57 @@
 {
 	#doDefaultColParts($col),
 	editable: $generator.GetJavascriptBoolString(${col.IsEditable}),
-	type: dojox.grid.cells.Bool,
-	//Formatter will be run if editable is false.
-	formatter: function (value, rowIdx, cel) {
-		var checkbox = (value === true) ? '<input type="checkbox" checked="checked" disabled="disabled" />'
-			: '<input type="checkbox" disabled="disabled" />';
-		return checkbox;
-    }
+	type: CheckBox,
+	defaultValue: "x"   ## Work around for dojo bug where custom formatter does not run when value = false	
 }
 #end
 #macro(doNumericCol $col)
 {
 	#doDefaultColParts($col),
 	editable: $generator.GetJavascriptBoolString(${col.IsEditable}),
-	type: Sage.UI.Columns.Numeric,
-    constraints: { #if($col.DecimalDigits.Strict == "True") places: #else maxPlaces: #end #if($col.DecimalDigits.DecimalDigits != "-1") ${col.DecimalDigits.DecimalDigits} , #else Sys.CultureInfo.CurrentCulture.numberFormat.NumberDecimalDigits , #end round: -1 },  
+	type: Numeric,
+	#if($col.AbbreviationLength > 0)
+	abbreviationLength: ${col.AbbreviationLength},
+	#end	
+    constraints: { places: #if($col.DecimalDigits.DecimalDigits != "-1") #if($col.DecimalDigits.Strict == "True") ${col.DecimalDigits.DecimalDigits} #else '0,${col.DecimalDigits.DecimalDigits}' #end , #else Sys.CultureInfo.CurrentCulture.numberFormat.NumberDecimalDigits , #end round: -1 },  
 	formatType: '${col.FormatType}'
+}
+#end
+
+#macro(doPickListCol $col)
+{
+	#doDefaultColParts($col),
+	editable: false,
+	type: PickList,
+	pickListName: '${col.PickListName}',		
+	storageMode: #if ($col.StorageMode == "Text") 'text' #elseif ($col.StorageMode == "Code") 'code' #elseif ($col.StorageMode == "ID") 'id' #end,
+	displayMode: '${col.DisplayMode}'
+}
+#end
+#macro(doPhoneCol $col)
+{
+	#doDefaultColParts($col), 
+	editable: $generator.GetJavascriptBoolString(${col.IsEditable}),
+	type: Phone
+}
+#end
+#macro(doEmailCol $col)
+{
+	#doDefaultColParts($col), 
+	editable: $generator.GetJavascriptBoolString(${col.IsEditable}),
+	type: Email
 }
 #end
 ## ----------- Tool macros -----------------------------------------------
 #macro(doBaseTool $tool)
-  id : '$tool.Name',
-  icon : #if($tool.Image == "")'images/icons/no_Icon_16x16_x.gif',#else'$generator.getImageResourceURL( $tool.Image )',#end
+  id : '${pagegenerator.FormName}_$tool.Name',
+  displayInInsert : $generator.GetJavascriptBoolString($tool.DisplayInInsert),
+  imageClass: #if($tool.Image == "")'icon_No_icon_16x16',#else'$generator.getImageClassName($tool.Image)',#end
   'alternateText' : ${stringObjectName}['$generator.ConvertResourceKeyToScriptReference(${tool.getResourceKey("ToolTip")})'] || '$tool.ToolTip',
   #if($tool.StyleScheme != "")'class': '$tool.StyleScheme',#end
   #if($tool.AppliedSecurity != "") appliedSecurity : '$tool.AppliedSecurity',#end
+  #if(${tool.MergeControlId} != "") mergePosition : '${tool.MergePosition}',#end
+  #if(${tool.MergeControlId} != "") mergeControlId : '${tool.MergeControlId}',#end
 #end
 #macro(doCustomBtn $tool)
 {
@@ -199,24 +259,42 @@
 #macro(doSaveBtn $tool)
 {
   #doBaseTool($tool)
- 'handler' : function() { this.saveChanges($tool.OnClick); }
+ 'handler' : function() {
+    this.saveChanges($tool.OnClick);
+ }
 }
 #end
 #macro(doAddRelationBtn $tool)
 {
+  displayInInsert : $generator.GetJavascriptBoolString($tool.DisplayInInsert),
   type : 'Sage.UI.SDataLookup',
   controlConfig : $pagegenerator.parseControl($tool.LookupButton)
 }
 #end
 ## ----------- Actual grid start -----------------------------------------------
-$pagegenerator.AddToInitializationScript("${pagegenerator.FormScriptObjectName}.makeGrid(runtimeConfig);")
+$pagegenerator.AddToInitializationScript("setTimeout(function() { ${pagegenerator.FormScriptObjectName}.makeGrid(runtimeConfig); }, 1);")
 makeGrid : function(runtimeConfig) {
-    dojo.require('Sage.UI.EditableGrid');
-
+    require(['Sage/UI/EditableGrid',
+             'Sage/UI/Columns/DateTime',
+             'Sage/UI/Columns/SlxLink',
+             'Sage/UI/Columns/SlxEdit',
+             'Sage/UI/Columns/PickList',
+             'Sage/UI/Columns/Phone',
+             'Sage/UI/Columns/Email',
+             'Sage/UI/Columns/CheckBox',
+             'Sage/UI/Columns/Numeric',
+             'Sage/UI/Columns/Currency',
+             'Sage/UI/Columns/Lookup',
+             'dojo/aspect',
+             'Sage/UI/SLXPreviewGrid',
+             'Sage/UI/Columns/SlxUser'],
+			 
+			 function(EditableGrid, DateTime, SlxLink, SlxEdit, PickList, Phone, Email, CheckBox,
+			   Numeric, Currency, Lookup, aspect, SLXPreviewGrid, SlxUser) {
+    
     if (typeof $stringObjectName === 'undefined') {
         $stringObjectName = {};
     }
-
 
 #if($qfcontrol.FeedCategory == "Proxy")
     dojo.require('Sage.Data.ProxySDataStore');
@@ -229,11 +307,15 @@ makeGrid : function(runtimeConfig) {
 		#if($qfcontrol.EmptyTableRowText != "") 
         noDataMessage: ${stringObjectName}['$generator.ConvertResourceKeyToScriptReference("${qfcontrol.ControlId}.EmptyTableRowText")']  ||  '${qfcontrol.EmptyTableRowText}', 
 		#end
+		#if($qfcontrol.PreviewField != "")
+		previewField: '$qfcontrol.PreviewField',
+		#end		
         #doReadOnlyCondition($qfcontrol)
         columns: [
     {
         field: '$key',
         editable: false,
+		excludeFromFilters: true,
         hidden: true,
         id: 'id',
         formatter: function (value, rowIdx, cel) {
@@ -253,6 +335,11 @@ $comma
 #elseif($column.ColumnType == "Edit")#doEditCol($column)
 #elseif($column.ColumnType == "CheckBox")#doCheckBoxCol($column)
 #elseif($column.ColumnType == "Numeric")#doNumericCol($column)
+#elseif($column.ColumnType == "DateTime")#doDateTimeCol($column)
+#elseif($column.ColumnType == "SlxUser")#doSlxUserCol($column)
+#elseif($column.ColumnType == "PickList")#doPickListCol($column)
+#elseif($column.ColumnType == "Phone")#doPhoneCol($column)
+#elseif($column.ColumnType == "Email")#doEmailCol($column)
 #end  ##ColumnType checking
 #set ($comma = ",")
 	#if($column.ColumnType == "Currency")
@@ -267,6 +354,13 @@ $comma
 	#end
 #end  ## foreach
         ],
+## Assemble the Select criteria from the Select property and any controls requiring additional fields			
+#if ($qfcontrol.Select.Count > 0)
+	#foreach($item in $qfcontrol.Select)
+## The String Collection Add method returns the index.  Set to a garbage var so it doesn't write to the output.
+#if (!$qfcontrol.SelectUtil.Contains("$item")) #set ($garbage = $qfcontrol.SelectUtil.Add("$item")) #end		
+	#end ##foreach
+#end 
 #if($qfcontrol.FeedCategory == "Proxy")
         store : new Sage.Data.ProxySDataStore({
             service : Sage.Utility.getSDataService('proxy', true),
@@ -276,7 +370,7 @@ $comma
 #end
             getAppId: ${qfcontrol.OnGetMappingId},
             include: [${qfcontrol.StringsToQuotedArray($qfcontrol.Include)}],
-            select: [${qfcontrol.StringsToQuotedArray($qfcontrol.Select)}],
+            select: [${qfcontrol.StringsToQuotedArray($qfcontrol.SelectUtil)}],
             pathSegments: [
 #set ($comma = "")
 #foreach($seg in $qfcontrol.PathSegments)
@@ -297,16 +391,23 @@ $comma
             newItemParentReferenceProperty: '${qfcontrol.ParentRelationshipPropertyName}',
 #end
             include: [${qfcontrol.StringsToQuotedArray($qfcontrol.Include)}],
-## Assemble the Select criteria from the Select property and any controls requiring additional fields			
-#if ($qfcontrol.Select.Count > 0)
-	#foreach($item in $qfcontrol.Select)
-## The String Collection Add method returns the index.  Set to a garbage var so it doesn't write to the output.
-#if (!$qfcontrol.SelectUtil.Contains("$item")) #set ($garbage = $qfcontrol.SelectUtil.Add("$item")) #end		
-	#end ##foreach
-#end 
-select: [${qfcontrol.StringsToQuotedArray($qfcontrol.SelectUtil)}],
+            select: [${qfcontrol.StringsToQuotedArray($qfcontrol.SelectUtil)}],
 	    //The .net vehicle to store grid data on postback
-            dataCarrierId: '${pagegenerator.FormName}${qfcontrol.ControlId}_DataCarrier'
+            dataCarrierId: '${pagegenerator.FormName}${qfcontrol.ControlId}_DataCarrier',
+            sort: [
+## Default sort
+#set ($comma = "")
+#foreach($column in $qfcontrol.Columns)
+ #if ($column.SortDirection != "None")
+  $comma { attribute: "${column.SortField}"
+  #if ($column.SortDirection == "Descending")
+   ,descending: true
+  #end
+   }
+  #set ($comma = ",")   
+ #end  
+#end   ## foreach         
+            ]
         },
 #end
         tools: [
@@ -331,15 +432,34 @@ $comma
 #elseif($qfcontrol.ParentRelationshipPropertyName != "")
         contextualCondition: function() { return '${qfcontrol.ParentRelationshipPropertyName}.Id eq "' + Sage.Utility.getCurrentEntityId() + '"'; },
 #end
-        id : '${pagegenerator.FormName}${qfcontrol.ControlId}',
-        tabId : '${pagegenerator.FormName}',
-        gridNodeId: '${pagegenerator.FormName}${qfcontrol.ControlId}_Grid',
+        
+		## -- TODO: Refactor this condition out.  Preview grid made it necessary for the time being.
+		#if($qfcontrol.PreviewField != "")
+     slxContext: dojo.mixin({ tabId : '${pagegenerator.FormName}' }, runtimeConfig),	   
+		#else
+		tabId : '${pagegenerator.FormName}',
+		gridNodeId: '${pagegenerator.FormName}${qfcontrol.ControlId}_Grid',
+		#end        
+		id : '${pagegenerator.FormName}${qfcontrol.ControlId}',
         rowsPerPage: ${qfcontrol.PageSize},
         singleClickEdit: true
     };
 
-    var grid = new Sage.UI.EditableGrid(options);
+	#if($qfcontrol.PreviewField != "")
+
+	var grid = new SLXPreviewGrid.Grid(options, '${pagegenerator.FormName}${qfcontrol.ControlId}_Grid');
+	#else
+	var grid = new EditableGrid(options);
+	var container = dijit.byId(grid.gridNodeId);
+	container.addChild(grid);
+	#end
     window.setTimeout(function () { grid.startup(); }, 1);
+	aspect.after(grid, 'startup', function () {
+		// This is not a typo.  The dijit.layout.ContentPane is not affectively determining all of it's layout information
+		// on the first pass through resize.  Calling resize twice effectively renders the grid to fill it's container.
+		var localTC = dijit.byId('tabContent');
+		localTC.resize(); localTC.resize();
+	});
 #if (${qfcontrol.OnAdd} != "")
     grid.store.onNew = ${qfcontrol.OnAdd} ;
 #end
@@ -350,52 +470,13 @@ $comma
     var lup = dijit.byId('${tool.LookupButton.ControlId}');
     if (lup) {
       lup.doSelected = function (items) {
-        var grid = dijit.byId('${pagegenerator.FormName}${qfcontrol.ControlId}');
-        if (grid && grid.store) {
-          grid.store.newItem({
-            onComplete: function (entityTemplate) {
-			  var arrItems = [];
-              var currentCount = 0;
-              for (var i = 0; i < items.length; i++) {
-                var newEntity = {};
-                var item = items[i];
-				
-                //Insert Mode check
-                if (Sage.Utility.getModeId() !== 'insert') {               
-					#if (${qfcontrol.ParentRelationshipPropertyName} != "")
-					entityTemplate.${qfcontrol.ParentRelationshipPropertyName}  = { $key: Sage.Utility.getCurrentEntityId() }; 
-                #end
-                }
-                //Set item before destroying the key
-				entityTemplate.${qfcontrol.ChildRelationshipPropertyName} = item;
-                //Clean up the item for any values not to be extended to the new entity.
-                var temp = {};
-                dojo.mixin(temp, item);
-                delete temp.$key;
-                delete temp.$name;
-                delete temp.$url;
-                Sage.Utility.extend(true, newEntity, entityTemplate, temp);
-
-				## -- TODO: A property should be added to allow code to be processed on each item --
-				## #if(${tool.LookupButton.OnSelection} != "")
-				##	 ${tool.LookupButton.OnSelection};
-				## #end
-
-                grid.store.onNew(newEntity);
-				arrItems.push(newEntity);
-                currentCount++;
-             }
-             if (currentCount === items.length) {
-				grid.createItems(arrItems, function () { });
-             }		  
-            },
-            scope: this
-          });
-        }
+        var grid = dijit.byId('${pagegenerator.FormName}${qfcontrol.ControlId}');        
+        grid.addAssociatedItems(items, "${qfcontrol.ParentRelationshipPropertyName}", "${qfcontrol.ChildRelationshipPropertyName}", lup);
       };
     }
  #end
 #end ##if tool is Relate
 #end ##foreach
 
+});
 }

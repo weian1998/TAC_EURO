@@ -112,50 +112,11 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="grdDefectActivities.EmptyTableRowText" xml:space="preserve">
-    <value>No records match the selection criteria.</value>
-  </data>
-  <data name="grdDefectActivities.bae43115-5fa1-4202-8cdd-39101162cdd2.ColumnHeading" xml:space="preserve">
-    <value>Activity Type</value>
-  </data>
-  <data name="grdDefectActivities.fd8a60d8-4cf8-4b17-8113-feab102783f5.ColumnHeading" xml:space="preserve">
-    <value>User</value>
-  </data>
-  <data name="grdDefectActivities.c1b685b3-be92-4f26-989e-9549b9e717f2.ColumnHeading" xml:space="preserve">
-    <value>Rate Type</value>
-  </data>
-  <data name="grdDefectActivities.1cfff600-ea76-4201-8d4a-3934982e4759.ColumnHeading" xml:space="preserve">
-    <value>Time Units</value>
-  </data>
-  <data name="grdDefectActivities.1cfff600-ea76-4201-8d4a-3934982e4759.FormatString" xml:space="preserve">
-    <value>{0:n0}</value>
-  </data>
-  <data name="grdDefectActivities.24725a7c-62a1-4634-8b57-6cb1508d2a9e.ColumnHeading" xml:space="preserve">
-    <value>Elapsed Hours</value>
-  </data>
-  <data name="grdDefectActivities.2dc255fb-7fe2-4e3d-924a-f6fad08d9c62.ColumnHeading" xml:space="preserve">
-    <value>Total Fee</value>
-  </data>
-  <data name="grdDefectActivities.cbe5c549-56de-4149-a2df-59a8280f94f0.ColumnHeading" xml:space="preserve">
-    <value>Received Date</value>
-  </data>
-  <data name="grdDefectActivities.ee7dff2f-a350-47ba-a698-e2c95fc2d368.ColumnHeading" xml:space="preserve">
-    <value>Completed Date</value>
-  </data>
-  <data name="grdDefectActivities.16c4760d-83c4-4a3d-9466-65b8f77255de.ConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to delete the selected defect task?</value>
-  </data>
-  <data name="grdDefectActivities.16c4760d-83c4-4a3d-9466-65b8f77255de.Text" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="grdDefectActivities.64b7dd6b-646d-42dc-ab0f-70eb0350100f.Text" xml:space="preserve">
-    <value>Edit</value>
-  </data>
   <data name="cmdAddTask.ToolTip" xml:space="preserve">
     <value>Add Task</value>
   </data>
@@ -165,10 +126,46 @@
   <data name="b103cbb1-54c0-4921-80bb-0a4ddadcb084.DialogTitleOverride" xml:space="preserve">
     <value>Insert Defect Task</value>
   </data>
-  <data name="b2f35643-c83b-4187-af6c-e0f640e5c466.DialogTitleOverride" xml:space="preserve">
+  <data name="QFSDataGrid.2128f6c2-a1c6-4c50-b605-827ce4530d04.ColumnHeading" xml:space="preserve">
+    <value>Activity Type</value>
+  </data>
+  <data name="QFSDataGrid.1f81c6a0-6b8f-41cd-9b79-f4494ef9b93f.ColumnHeading" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="QFSDataGrid.3c192154-b97f-4114-a0b3-98006c84c0f9.ColumnHeading" xml:space="preserve">
+    <value>Received Date</value>
+  </data>
+  <data name="QFSDataGrid.d69bde13-9701-4f76-831e-7b628c6e7a70.ColumnHeading" xml:space="preserve">
+    <value>Completed Date</value>
+  </data>
+  <data name="QFSDataGrid.eb485934-e8fb-4779-8c8c-c2fc4a6f96f2.ColumnHeading" xml:space="preserve">
+    <value>Rate Type</value>
+  </data>
+  <data name="QFSDataGrid.bfe2b262-e412-4177-acc8-b026dc965d35.ColumnHeading" xml:space="preserve">
+    <value>Time Units</value>
+  </data>
+  <data name="QFSDataGrid.7d88d261-ff63-491d-a079-36cc5c9c5da1.ColumnHeading" xml:space="preserve">
+    <value>Elapsed Hours</value>
+  </data>
+  <data name="QFSDataGrid.32c60f20-75c4-486a-b342-0c083e1d80ef.ColumnHeading" xml:space="preserve">
+    <value>Total Fee</value>
+  </data>
+  <data name="QFSDataGrid.d710efdf-15a0-47bf-9bf3-5fd75236109e.ColumnHeading" xml:space="preserve">
+    <value>Elapsed Hours</value>
+  </data>
+  <data name="QFSDataGrid.0882c553-d70c-4e00-955f-86fbd1b8ab8d.ColumnHeading" xml:space="preserve">
+    <value>Time Units</value>
+  </data>
+  <data name="QFSDataGrid.Delete.ToolTip" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="QFSDataGrid.e922b190-ae70-4d7f-af2a-5f4ddbed026b.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="29ccadbc-442d-4f0d-aad8-e3f169ba8859.DialogTitleOverride" xml:space="preserve">
     <value>Edit Defect Task</value>
   </data>
-  <data name="grdDefectActivities.24725a7c-62a1-4634-8b57-6cb1508d2a9e.FormatString" xml:space="preserve">
-    <value>{0:f}</value>
+  <data name="QFSDataGrid.0f31a545-b3eb-4376-9be1-d782280951bd.ColumnHeading" xml:space="preserve">
+    <value>Activity Type</value>
   </data>
 </root>

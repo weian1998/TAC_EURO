@@ -112,19 +112,16 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="grdSecuredActionRoles.35c88b2e-7947-4932-b4dc-c77c4e1d6812.ColumnHeading" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="grdSecuredActionRoles.1d13e999-e545-45c4-aca7-12448ffcf5f6.ColumnHeading" xml:space="preserve">
-    <value>Parent</value>
-  </data>
-  <data name="grdSecuredActionRoles.c721e49b-01a5-4791-83cb-4b045dcad801.ColumnHeading" xml:space="preserve">
-    <value>Description</value>
+  <data name="grdActions_AddRelationTool.DialogButtonText" xml:space="preserve">
+    <value>Add Selected</value>
   </data>
   <data name="grdSecuredActionRoles.387c33ad-171d-452e-b45a-019ac3ccf33a.ColumnHeading" xml:space="preserve">
     <value>Modify User</value>
@@ -135,8 +132,8 @@
   <data name="QFLabel.Text" xml:space="preserve">
     <value>Actions assigned to this Role</value>
   </data>
-  <data name="grdSecuredActionRoles.d83a73d0-d34d-45ea-a711-202ab6c4452c.Text" xml:space="preserve">
-    <value>Remove</value>
+  <data name="grdActions_AddRelationTool.LookupProperties.Name.PropertyHeader" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="lueAddAction.ButtonToolTip" xml:space="preserve">
     <value>Add Action</value>
@@ -150,19 +147,37 @@
   <data name="lueAddAction.LookupProperties.Parent.PropertyHeader" xml:space="preserve">
     <value>Parent</value>
   </data>
-  <data name="grdSecuredActionRoles.d83a73d0-d34d-45ea-a711-202ab6c4452c.ConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to remove the selected Action?</value>
+  <data name="grdActions_AddRelationTool.LookupProperties.Description.PropertyHeader" xml:space="preserve">
+    <value>Description</value>
   </data>
   <data name="f144ebcf-9239-4d82-b1a8-eb778a21192f.DuplicateAssociationMessage" xml:space="preserve">
     <value>The selected Action is already part of this Role.</value>
   </data>
-  <data name="grdSecuredActionRoles.480bd009-eafe-44c2-b8d8-55ad2c855cab.ColumnHeading" xml:space="preserve">
-    <value>Modify User</value>
+  <data name="grdActions.Delete.ToolTip" xml:space="preserve">
+    <value>Remove</value>
   </data>
-  <data name="grdSecuredActionRoles.c0b41977-be17-49b2-b410-7600fbabae86.ColumnHeading" xml:space="preserve">
+  <data name="grdActions_AddRelationTool.LookupProperties.Parent.PropertyHeader" xml:space="preserve">
+    <value>Parent</value>
+  </data>
+  <data name="grdActions.b0ffa555-4b26-4a1d-ad52-ee24d2395a1c.ColumnHeading" xml:space="preserve">
     <value>Created By</value>
   </data>
-  <data name="grdSecuredActionRoles.489c8af2-21e1-4671-97cc-48c8238ce800.ColumnHeading" xml:space="preserve">
+  <data name="grdActions.d4b59393-8e72-4f22-9130-c3d6baea4461.ColumnHeading" xml:space="preserve">
+    <value>Modify User</value>
+  </data>
+  <data name="grdActions.6e83b38d-22a6-410c-be4d-d54a43278d11.ColumnHeading" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="grdActions.352f9b5f-09f0-4957-8039-9e9c9cbec6f6.ColumnHeading" xml:space="preserve">
+    <value>Parent</value>
+  </data>
+  <data name="grdActions.e7eaee1f-899d-4ba9-b582-28e6b2f7cfa0.ColumnHeading" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="grdActions_AddRelationTool.ButtonToolTip" xml:space="preserve">
+    <value>Add Action</value>
+  </data>
+  <data name="grdActions_AddRelationTool.LookupDialogTitle" xml:space="preserve">
+    <value>Lookup Action</value>
   </data>
 </root>

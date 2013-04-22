@@ -1,11 +1,15 @@
 <?xml version="1.0"?>
-<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="4fa2aca4-a61a-4ff9-ac8e-af5472e03bfe" cardinality="M:1" parentEntityId="27f9e8e9-34d8-4eaf-8fd7-c70d133e6f90" childEntityId="89454109-c579-42a0-b4df-d74d04f41acc">
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="4fa2aca4-a61a-4ff9-ac8e-af5472e03bfe" lastModifiedUtc="2012-07-25T14:32:59.5337744Z" cardinality="M:1" parentEntityId="27f9e8e9-34d8-4eaf-8fd7-c70d133e6f90" childEntityId="89454109-c579-42a0-b4df-d74d04f41acc">
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
   </ExtendedPropertiesCollection>
-  <parentProperty id="09ae14c2-b8f4-4474-8e53-0d23f52bf55d" name="LeadSource" audited="false" displayCategory="Intermediate" isNullable="true" include="true">
+  <parentProperty id="09ae14c2-b8f4-4474-8e53-0d23f52bf55d" lastModifiedUtc="2012-07-25T14:32:59.5337744Z" name="LeadSource" audited="true">
     <ExtendedPropertiesCollection>
-      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty">
+        <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+          <OrmEntityPropertySDataExtension generate="true" />
+        </extender>
+      </extendee>
     </ExtendedPropertiesCollection>
     <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
       <RelationshipDataType />

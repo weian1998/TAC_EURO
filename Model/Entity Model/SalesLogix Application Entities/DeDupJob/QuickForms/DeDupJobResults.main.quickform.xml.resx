@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="dgDeDupResults.f7e22454-5fcf-4230-a4f2-e2d3e1816316.ColumnHeading" xml:space="preserve">
     <value>Search Record</value>
@@ -155,5 +155,8 @@
   </data>
   <data name="error_SourceDestUnavaliable" xml:space="preserve">
     <value>Either the source or destination is no longer available for merge.</value>
+  </data>
+  <data name="error_RecordNotFound" xml:space="preserve">
+    <value>Unable to locate record.</value>
   </data>
 </root>

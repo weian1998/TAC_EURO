@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="7fbb129c-49e2-4beb-92be-27cabbbee891">
   <ItemId>menuItemCalScheduleToDo</ItemId>
-  <NavUrl>javascript:Link.scheduleToDo();</NavUrl>
+  <NavUrl>javascript:Sage.Link.scheduleToDo();</NavUrl>
   <LargeImageUrl />
   <SmallImageUrl />
   <ContextMenuId />

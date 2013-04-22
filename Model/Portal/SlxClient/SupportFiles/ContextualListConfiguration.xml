@@ -45,6 +45,11 @@
           <ConditionValue>ReferringId</ConditionValue>
         </ContextConditionInfo>
         <ContextConditionInfo>
+          <ReferringPage>CAMPAIGN</ReferringPage>
+          <DataPath>OPPORTUNITY:OPPORTUNITYID=OPPORTUNITYID.OPPORTUNITY_CAMPAIGN!CAMPAIGNID</DataPath>
+          <ConditionValue>ReferringId</ConditionValue>
+        </ContextConditionInfo>
+        <ContextConditionInfo>
           <ReferringPage>Default</ReferringPage>
           <DataPath>OPPORTUNITY:OPPORTUNITYID</DataPath>
           <ConditionValue>CurrentId</ConditionValue>
@@ -80,6 +85,11 @@
           <ConditionValue>ReferringId</ConditionValue>
         </ContextConditionInfo>
         <ContextConditionInfo>
+          <ReferringPage>CONTRACT</ReferringPage>
+          <DataPath>TICKET:CONTRACTID</DataPath>
+          <ConditionValue>ReferringId</ConditionValue>
+        </ContextConditionInfo>
+        <ContextConditionInfo>
           <ReferringPage>Default</ReferringPage>
           <DataPath>TICKET:TICKETID</DataPath>
           <ConditionValue>CurrentId</ConditionValue>
@@ -109,6 +119,16 @@
     <TargetConfigInfo>
       <TargetPage>RMA</TargetPage>
       <ReferingPages>
+        <ContextConditionInfo>
+          <ReferringPage>TICKET</ReferringPage>
+          <DataPath>RMA:TICKETID</DataPath>
+          <ConditionValue>ReferringId</ConditionValue>
+        </ContextConditionInfo>
+        <ContextConditionInfo>
+          <ReferringPage>ACCOUNT</ReferringPage>
+          <DataPath>RMA:ACCOUNTID</DataPath>
+          <ConditionValue>ReferringId</ConditionValue>
+        </ContextConditionInfo>
         <ContextConditionInfo>
           <ReferringPage>DEFECT</ReferringPage>
           <DataPath>RMA:RMAID=RMAID.DEFECTRMA!DEFECTID</DataPath>
@@ -149,6 +169,11 @@
     <TargetConfigInfo>
       <TargetPage>ACCOUNT</TargetPage>
       <ReferingPages>
+        <ContextConditionInfo>
+          <ReferringPage>CAMPAIGN</ReferringPage>
+          <DataPath>ACCOUNT:ACCOUNTID=ACCOUNTID.OPPORTUNITY_CAMPAIGN!CAMPAIGNID</DataPath>
+          <ConditionValue>ReferringId</ConditionValue>
+        </ContextConditionInfo>
         <ContextConditionInfo>
           <ReferringPage>Default</ReferringPage>
           <DataPath>ACCOUNT:ACCOUNTID</DataPath>
@@ -196,5 +221,5 @@
         </ContextConditionInfo>
       </ReferingPages>
     </TargetConfigInfo>
-  </TargetPages>  
+  </TargetPages>
 </ContextualListConfiguration>

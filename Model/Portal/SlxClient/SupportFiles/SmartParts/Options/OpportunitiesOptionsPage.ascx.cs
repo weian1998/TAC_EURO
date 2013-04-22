@@ -1,60 +1,21 @@
 using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Sage.Platform;
 using Sage.SalesLogix.WebUserOptions;
 using Sage.Platform.WebPortal.Services;
 using Sage.Platform.Application;
 using Sage.Entity.Interfaces;
-using Sage.Platform;
 using Sage.Platform.Application.UI;
 using Sage.SalesLogix.Plugins;
-using Sage.SalesLogix;
-using Sage.SalesLogix.Orm.Utility;
-using Sage.SalesLogix.BusinessRules;
 
 public partial class OpportunitiesOptionsPage : UserControl, ISmartPartInfoProvider
 {
-
-    /// <summary>
-    /// Gets or sets an instance of the Dialog Service.
-    /// </summary>
-    private IWebDialogService _DialogService;
     [ServiceDependency]
-    public IWebDialogService DialogService
-    {
-        set
-        {
-            _DialogService = value;
-        }
-        get
-        {
-            return _DialogService;
-        }
-    }
+    public IWebDialogService DialogService { get; set; }
 
-    //private IOpportunity exampleOpp;
-    private IEntityContextService _EntityContextService;
     [ServiceDependency]
-    public IEntityContextService EntityContextService
-    {
-        set
-        {
-            _EntityContextService = value;
-        }
-        get
-        {
-            return _EntityContextService;
-        }
-    }
-
-    protected void _addProducts_ClickAction(object sender, EventArgs e)
-    {
-        if (DialogService != null)
-        {
-            DialogService.SetSpecs(550, 1000, "DefaultOpportunityProduct");
-            DialogService.ShowDialog();
-        }
-    }
+    public IEntityContextService EntityContextService { get; set; }
 
     protected void Page_PreRender(object sender, EventArgs e)
     {
@@ -68,7 +29,7 @@ public partial class OpportunitiesOptionsPage : UserControl, ISmartPartInfoProvi
         if (options.Probability != String.Empty)
             pklOpportunityProbability.PickListValue = options.Probability;
         Utility.SetSelectedValue(_estimatedCloseToMonths, options.EstimatedCloseToMonths);
-        
+
         //Set the default to none if ther is not a match.
         try
         {
@@ -88,7 +49,7 @@ public partial class OpportunitiesOptionsPage : UserControl, ISmartPartInfoProvi
         {
             lblDefCurrency.Visible = true;
             luDefCurrency.Visible = true;
-            if (options.DefCurrencyCode != String.Empty)
+            if (!String.IsNullOrEmpty(options.DefCurrencyCode) && luDefCurrency.LookupResultValue == null)
             {
                 luDefCurrency.LookupResultValue = EntityFactory.GetById<IExchangeRate>(options.DefCurrencyCode);
             }
@@ -98,7 +59,6 @@ public partial class OpportunitiesOptionsPage : UserControl, ISmartPartInfoProvi
             lblDefCurrency.Visible = false;
             luDefCurrency.Visible = false;
         }
-        _addProducts.Visible = !BusinessRuleHelper.IsIntegrationContractEnabled();
     }
 
     protected void Page_UnLoad(object sender, EventArgs e)
@@ -109,10 +69,7 @@ public partial class OpportunitiesOptionsPage : UserControl, ISmartPartInfoProvi
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        _addProducts.Click += _addProducts_ClickAction;
-
         BindSalesProcess();
-
         _estimatedCloseToMonths.Items.Clear();
         for (int i = 0; i <= 36; i++)
         {
@@ -149,7 +106,6 @@ public partial class OpportunitiesOptionsPage : UserControl, ISmartPartInfoProvi
         {
             options.DefCurrencyCode = ((IExchangeRate)luDefCurrency.LookupResultValue).Id.ToString();
         }
-
         options.Save();
     }
 
@@ -163,7 +119,7 @@ public partial class OpportunitiesOptionsPage : UserControl, ISmartPartInfoProvi
         Sage.Platform.WebPortal.SmartParts.ToolsSmartPartInfo tinfo = new Sage.Platform.WebPortal.SmartParts.ToolsSmartPartInfo();
         tinfo.Description = GetLocalResourceObject("PageDescription.Text").ToString();
         tinfo.Title = GetLocalResourceObject("PageDescription.Title").ToString();
-        foreach (Control c in this.LitRequest_RTools.Controls)
+        foreach (Control c in LitRequest_RTools.Controls)
         {
             tinfo.RightTools.Add(c);
         }

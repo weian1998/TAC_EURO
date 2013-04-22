@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<mashup id="9afeef78-d2b1-43cc-baf5-35a1f5e0268d" name="AreaCategoryIssueQueries">
+  <processors>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor id="59998327-81e1-4a67-9c8c-f269ad362e11" name="Area" location="40, 40" expanded="true" continueOnError="false" query="Select distinct Area as Area&#xD;&#xA;from AreaCategoryIssue">
+        <parameters />
+      </queryProcessor>
+    </processor>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor id="f11a058e-931e-4627-bcf7-b74d028a3d8b" name="Category" location="260, 40" expanded="true" continueOnError="false" query="Select distinct Category as Category&#xD;&#xA;from AreaCategoryIssue&#xD;&#xA;where Area = :Area">
+        <parameters>
+          <parameter id="7af82359-9159-44f9-b910-493498ff15e2" name="Area" expression="Area" />
+        </parameters>
+      </queryProcessor>
+    </processor>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor id="55998377-cc6b-458b-a483-62ce1bcf9136" name="Issue" location="480, 40" expanded="true" continueOnError="false" query="Select distinct Issue as Issue&#xD;&#xA;from AreaCategoryIssue&#xD;&#xA;where Category = :Category">
+        <parameters>
+          <parameter id="a1682e98-327b-461c-8c72-89c6a2abe720" name="Category" expression="Category" />
+        </parameters>
+      </queryProcessor>
+    </processor>
+  </processors>
+  <parameters>
+    <parameter id="a1b325a9-50d9-4294-8310-cd07ff2fddbf" name="Area" expression="'Complaint'" />
+    <parameter id="af44d10d-df9c-49f0-85b6-a8d2343af752" name="Category" expression="'Sales'" />
+  </parameters>
+  <links />
+</mashup>

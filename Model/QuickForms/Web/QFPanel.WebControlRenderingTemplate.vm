@@ -1,10 +1,10 @@
-<SalesLogix:TabPanel ID="${qfcontrol.ControlId}" runat="server" #if(!$qfcontrol.Enabled)Enabled="false" #end
+<SalesLogix:TabPanel data-dojo-type="Sage.Layout.ContentPane" ID="${qfcontrol.ControlId}" runat="server" #if(!$qfcontrol.Enabled)Enabled="false" #end
  #if(${qfcontrol.Caption} != "")TabCaption="<%$ resources: ${qfcontrol.ControlId}.Caption %>" #end
  #if(!$qfcontrol.Visible)Visible="false" #end
 #if($qfcontrol.StyleScheme != "") CssClass="$qfcontrol.StyleScheme" #end
 >
 #if($qfcontrol.Controls.Count == 1)
-  #foreach($elem in ${qfcontrol.Controls})$pagegenerator.parseControl($elem.Control)#end
+  #foreach($elem in ${qfcontrol.Controls})$pagegenerator.parseControl($elem)#end
 #elseif($qfcontrol.Controls.Count > 1)
  #makestarttable
  #foreach($rowindex in [1..${qfcontrol.Rows.Count}])

@@ -1,0 +1,136 @@
+<html>
+    <head>
+        <title>Sage.UI.Controls Browser Tests</title>
+        <style type="text/css">
+        /* Hide dojo validation controls */
+        .dijitValidationContainer, .dijitBackgroundIframe {
+            visibility: hidden;
+        }
+        </style>
+        <script type="text/javascript" src="mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../../Libraries/dojo/dojo/dojo.js">
+        </script>
+        <script type="text/javascript" src="../../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript">
+            dojo.provide("Sage.UI.Controls.tests.Numeric");
+            dojo.require('dojo.parser');
+            dojo.require('doh.runner');
+            dojo.require('Sage.UI.Controls.Numeric');
+
+            dojo.ready(function () {
+                doh.register("Sage.UI.Controls.tests.Numeric", [
+                function testGetDecimal() {
+                    var txt = dijit.byId("ct100_NumberTextBox1");
+                    doh.t(txt.value === 100);
+                },
+                function testSetDecimal() {
+                    var txt = dijit.byId("ct100_NumberTextBox1");
+                    txt.value = 200;
+                    doh.t(txt.value === 200);
+                },
+                function testGetPercent() {
+                    var txt = dijit.byId("ct100_NumberTextBox2");
+                    doh.t(txt.value === 0.05);
+                },
+                function testSetPercent() {
+                    var txt = dijit.byId("ct100_NumberTextBox2");
+                    txt.value = 0.5;
+                    doh.t(txt.value === 0.5);
+                },
+                function testPercentFocusNoChange() {
+                    var txt = dijit.byId("ct100_NumberTextBox2");
+                    var node = txt.focusNode;
+                    node.value = 0.5
+                    node.focus();
+
+                    // assert values are unchanged after focus and that the textbox displays a whole number
+                    doh.t(node.value === 0.5, 'node value should be 0.5');
+                    doh.t(node.textbox.value === '50', 'node.textbox.value should be "50"');
+                },
+                function testPercentBlurNoChange() {
+                    /*var other = dijit.byId("ct100_NumberTextBox1");
+                    var txt = dijit.byId("ct100_NumberTextBox2");
+                    var node = txt.focusNode;
+                    node.value = 0.5
+                    node.focus();
+
+                    // assert values are unchanged after focus and that the textbox displays a whole number
+                    doh.t(node.value === 0.5, 'node value should be 0.5 while control has focus');
+                    doh.t(node.textbox.value === '50', 'node.textbox.value should be "50" while control has focus');
+                    other.focusNode.focus(); // focus a different field to trigger onBlur
+
+                    // assert that our values are unchanged after the blur
+                    doh.t(node.value === 0.5, 'node value should be 0.5 after blur');
+                    console.log(node.textbox.value);
+                    doh.t(node.textbox.value === '50.00%', 'node.textbox.value should be "50.00%" after blur');*/
+                },
+                function testPercentBlurWithChange() {
+                    /*var other = dijit.byId("ct100_NumberTextBox1");
+                    var txt = dijit.byId("ct100_NumberTextBox2");
+                    var node = txt.focusNode;
+                    node.value = 0.5
+                    node.focus();
+
+                    // assert values are unchanged after focus and that the textbox displays a whole number
+                    doh.t(node.value === 0.5, 'node value should be 0.5 while control has focus');
+                    doh.t(node.textbox.value === '50', 'node.textbox.value should be "50" while has focus');
+
+                    node.textbox.value = '60'; // set to 60%
+                    other.focusNode.focus(); // focus a different field to trigger onBlur
+
+                    // assert that our values are what we changed after the blur
+                    doh.t(node.value === 0.6, 'node.value should be 0.6 after blur');
+                    console.log(node.textbox.value);
+                    doh.t(node.textbox.value === '60.00%', 'node.textbox.value should be "60.00%" after blur');*/
+                },
+                function testGetNumber() {
+                    var txt = dijit.byId("ct100_NumberTextBox3");
+                    doh.t(txt.value === 10);
+                },
+                function testSetNumber() {
+                    var txt = dijit.byId("ct100_NumberTextBox3");
+                    txt.value = 200;
+                    doh.t(txt.value === 200);
+                }
+            ]);
+
+                //Execute D.O.H. in this remote file.
+                doh.run();
+            });
+        </script>
+    </head>
+    <body>
+        <form>
+            <p>
+                <!-- "Decimal" format type int he server side control -->
+                <span>Decimal Test</span>
+                <input id="ct100_NumberTextBox1" data-dojo-type="Sage.UI.Controls.Numeric" value="100" constraints="{places: 2, type: 'decimal'}" />
+            </p>
+            
+            <hr />
+            
+            <p>
+                <!-- "Percent" format type int he server side control -->
+                <span>Percent Test</span>
+                <input id="ct100_NumberTextBox2" data-dojo-type="Sage.UI.Controls.Numeric" value="0.05" constraints="{places: 2, type: 'percent'}" />
+            </p>
+            
+            <hr />
+            
+            <p>
+                <!-- "Number" format type int he server side control -->
+                <span>Number Test</span>
+                <input id="ct100_NumberTextBox3" data-dojo-type="Sage.UI.Controls.Numeric" value="10" constraints="{places: 0, type: 'decimal'}" />
+            </p>
+            
+            <!-- "Scientific" format type int he server side control. Not yet supported by dojo -->
+        </form>
+    </body>
+</html>

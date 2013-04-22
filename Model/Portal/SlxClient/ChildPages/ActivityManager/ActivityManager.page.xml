@@ -5,13 +5,11 @@
   <TemplateUrl>Masters\base.master</TemplateUrl>
   <InheritTemplate>false</InheritTemplate>
   <InheritsFrom>Sage.Platform.WebPortal.WebPortalPage, Sage.Platform.WebPortal</InheritsFrom>
-  <Properties />
-  <TemplateProperties>
-    <Property Name="IncludeMiddlePane" TypeConverter="">false</Property>
-    <Property Name="IncludeMoreTabsTab" TypeConverter="">false</Property>
-    <Property Name="IncludeTaskPane" TypeConverter="">True</Property>
-  </TemplateProperties>
-  <IsDefaultPage>false</IsDefaultPage>
-  <ExcludedGlobalModules />
-  <AppliedSecurity />
+  <Properties /> 
+  <TemplateProperties /> 
+  <IsDefaultPage>false</IsDefaultPage> 
+  <ExcludedGlobalModules>
+    <guid>3b5adc5c-34a1-4456-b8a1-336d88387d03</guid> 
+  </ExcludedGlobalModules>
+  <AppliedSecurity /> 
 </PortalPage>

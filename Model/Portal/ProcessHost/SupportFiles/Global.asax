@@ -1,42 +1,49 @@
-<%@ Import Namespace="Sage.Platform.Process"%>
 <%@ Application Language="C#" %>
+<%@ Import Namespace="System.IO" %>
+<%@ Import Namespace="System.Reflection" %>
+<%@ Import Namespace="log4net" %>
+<%@ Import Namespace="log4net.Config" %>
+<%@ Import Namespace="Sage.Platform.Application.UI.Web" %>
+<%@ Import Namespace="Sage.Platform.Process" %>
 
 <script runat="server">
 
-    void Application_Start(object sender, EventArgs e) 
+    static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+    void Application_Start(object sender, EventArgs e)
     {
-        // Code that runs on application startup
         string path = Server.MapPath("~/log4net.config");
-        log4net.Config.XmlConfigurator.Configure(new System.IO.FileInfo(path));
+        XmlConfigurator.Configure(new FileInfo(path));
 
         ApplicationContextAccessor.Initialize(HttpRuntime.AppDomainAppPath, "application-thread");
+
+        HierarchicalRuntime.Instance.Initialize();
     }
-    
-    void Application_End(object sender, EventArgs e) 
+
+    void Application_End(object sender, EventArgs e)
     {
-        //  Code that runs on application shutdown
         WorkflowProcessManagerService.ShutdownProcessHost();
     }
-        
-    void Application_Error(object sender, EventArgs e) 
-    { 
-        // Code that runs when an unhandled error occurs
 
-    }
-
-    void Session_Start(object sender, EventArgs e) 
+    void Application_Error(object sender, EventArgs e)
     {
-        // Code that runs when a new session is started
-
+        Exception oLastException = Server.GetLastError();
+        if (oLastException != null)
+        {
+            Exception oException = oLastException.GetBaseException();
+            Log.Error("Unhandled exception.", oException);
+            Server.ClearError();
+        }
     }
 
-    void Session_End(object sender, EventArgs e) 
+    void Session_Start(object sender, EventArgs e)
     {
-        // Code that runs when a session ends. 
-        // Note: The Session_End event is raised only when the sessionstate mode
-        // is set to InProc in the Web.config file. If session mode is set to StateServer 
-        // or SQLServer, the event is not raised.
-
+        HierarchicalRuntime.Instance.EnsureSessionWorkItem();
     }
-       
+
+    void Session_End(object sender, EventArgs e)
+    {
+        HierarchicalRuntime.Instance.TerminateSessionWorkItem(Session);
+    }
+
 </script>

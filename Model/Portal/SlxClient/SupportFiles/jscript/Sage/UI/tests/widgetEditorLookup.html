@@ -1,0 +1,91 @@
+<html>
+    <head>
+        <title>Sage.UI Browser Tests</title>
+        <script type="text/javascript" src="../Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript">
+        dojo.provide("Sage.UI.tests.widgetEditorLookup");
+        
+        dojo.require('dojo.parser');
+        dojo.require("doh.runner");
+        dojo.require("Sage.UI.widgetEditorLookup");
+            
+        dojo.ready(function(){
+            doh.register("Sage.UI.tests.widgetEditorLookup", [
+                function testTextField() {
+                    var textField = Sage.UI.widgetEditorLookup.txtField({
+                            id: 'testTextField',
+                            invMess: 'Invalid Message Placeholder'
+                        });
+                    doh.t(textField !== undefined);
+                },
+                
+                function testRadioGroup() {
+                    var testRadioGroup = Sage.UI.widgetEditorLookup.rdoGroup({
+                            name: 'testRadioGroup',
+                            idOne: 'buttonTrue',
+                            valOne: 'true',
+                            lblOne: 'True',
+                            idTwo: 'buttonFalse',
+                            valTwo: 'false',
+                            lblTwo: 'False'
+                        });
+                    
+                    doh.t(testRadioGroup !== undefined);
+                },
+                
+                function testComboField() {
+                    var testComboField = Sage.UI.widgetEditorLookup.comboField({
+                            id: 'testComboGroup',
+                            searchAttr: 'displayName'
+                        });
+                    
+                    doh.t(testComboField !== undefined);
+                },
+                
+                function testNumberField() {
+                    var testNumberField = Sage.UI.widgetEditorLookup.numberField({
+                            id: 'testNumberField',
+                            invMess: 'Invalid Message Placeholder'
+                        });
+                    
+                    doh.t(testNumberField !== undefined);
+                },
+                
+                function testWholeNumberField() {
+                    var testWholeNumberField = Sage.UI.widgetEditorLookup.wholeNumberField({
+                            id: 'testWholeNumberField',
+                            invMess: 'Invalid Message Placeholder'
+                        });
+                    
+                    doh.t(testWholeNumberField !== undefined);
+                },
+                
+                function testEntityField() {
+                    // TO-DO: Create an "Entity" field
+                    // (Requires an SData URL)
+                },
+                
+                function testMyEditRowField() {
+                    // TO-DO: Create a "_myEditRow" field
+                }
+            ]);
+            
+            //Execute D.O.H. in this remote file.
+            doh.run();
+        });
+        </script>
+    </head>
+    <body>
+        <form>
+        </form>
+    </body>
+</html>

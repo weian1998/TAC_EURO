@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="357" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
     <!-- saved from url=(0014)about:internet -->
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Troubleshooting Accounting Integration - Information Does Not Sync</title>
@@ -11,9 +11,9 @@
         </script>
     </head>
     <body>
-        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Integration Contract/Accounting_Integration_Does_Not_Sync.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Integration Contract/Accounting_Integration_Does_Not_Sync.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
         </p>
-        <h1><a name="kanchor452"></a>Troubleshooting Accounting Integration - Information Does Not Sync</h1>
+        <h1><a name="kanchor473"></a>Troubleshooting Accounting Integration - Information Does Not Sync</h1>
         <p>You may encounter the following issue when synchronizing information between Sage SalesLogix and supported accounting applications.</p>
         <p class="Infinitive">Problem:</p>
         <p>Accounting integration information does not synchronize</p>
@@ -22,7 +22,7 @@
             <li value="1">Verify that the <span class="SLXBold">SYNCDIGEST</span> table <span class="SLXBold">TICK</span> field is incrementing. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="TICK">Tell me more...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a><ol style="list-style-type: lower-alpha; display: none;" MadCap:targetName="TICK"><li value="1">In the database, open the <span class="SLXBold">SYNCDIGEST</span> table.</li><li value="2">Find the <span class="SLXBold">APPID</span>&#160;field for the appropriate resource and note the TICK field value.</li><li value="3">After the next synchronization, verify that the <span class="SLXBold">TICK</span> field  incremented.</li></ol></li>
             <li value="2">Enable additional logging in the ContractSyncTrigger. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="Trigger">Tell me more...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a><ol MadCap:targetName="Trigger" style="list-style-type: lower-alpha; display: none;"><li value="1">Open the registry editor and ensure the  <span class="SLXBold">HKEY_CURRENT_USER\Software\SalesLogix\Logging</span> key exists. If the Logging key does not exist, then create a new key named <span class="SLXBold">Logging</span>.</li><li value="2">Add a registry string value named <span class="SLXBold">Debug</span>.</li></ol></li>
             <li value="3">&#160;View log errors, warnings or debug messages. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="log items tab">Tell me more...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a><ul MadCap:targetName="log items tab" style="display: none;"><li value="1">On the <a href="Sync_Job_Detail_View.htm">Sync Job Detail View</a>, open the <a href="Log_Items_Tab.htm">Log Items tab</a>, and filter by <span class="SLXBold">Log Type</span> to view errors, warnings, or debug messages.</li></ul></li>
-            <li class="Bullets" value="4">Use the <a href="SyncResultsDetailView.htm">Sync Results Detail View</a> to see detailed information about a synchronization job item.</li>
+            <li value="4">Use the <a href="SyncResultsDetailView.htm">Sync Results Detail View</a> to see detailed information about a synchronization job item.</li>
         </ul>
         <p class="RelatedTopics">Related Topics</p>
         <p MadCap:conditions="Output.WebClient,Output.Customer Portal"><a href="../Common/slxtroubleshooting.htm" target="_self">Troubleshooting Common Issues</a>
@@ -33,7 +33,7 @@
         <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
             <col style="width: 100%;" />
             <tbody>
-                <tr MadCap:conditions="Output.WebClient,Output.Customer Portal">
+                <tr MadCap:conditions="">
                     <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
                         <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
                     </td>

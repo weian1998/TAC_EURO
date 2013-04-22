@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="grdDuplicates.EmptyTableRowText" xml:space="preserve">
     <value>There are no duplicates to resolve.</value>
@@ -145,7 +145,7 @@
     <value>Resolve Duplicate Import Lead</value>
   </data>
   <data name="LoadErrorMSG" xml:space="preserve">
-    <value>Resolve import lead duplicate view is not available please contact the system administrator: {0}</value>
+    <value>Resolve import lead duplicate view is not available please contact the system administrator. SalesLogix Error Id: {0}.</value>
   </data>
   <data name="chkShowResults.Text" xml:space="preserve">
     <value>Show Results</value>

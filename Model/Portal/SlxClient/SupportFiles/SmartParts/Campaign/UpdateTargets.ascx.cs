@@ -10,12 +10,11 @@ using Sage.SalesLogix.PickLists;
 using Sage.Platform.ComponentModel;
 using Sage.SalesLogix.CampaignTarget;
 
-public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInfoProvider, IScriptControl
+public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInfoProvider
 {
-    private ICampaign _campaign = null;
+    private ICampaign _campaign;
     private TargetSelectedFilterState _filterState;
-    private bool _SetLastPageIndex = false;
-   
+    private bool _setLastPageIndex;
    
     /// <summary>
     /// Gets the type of the entity.
@@ -48,7 +47,10 @@ public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInf
     /// </summary>
     protected override void OnWireEventHandlers()
     {
-        ddlOptions.Attributes.Add("onchange", string.Format("return {0}_obj.OptionChange();", ClientID));
+        cmdUpdate.Click += new EventHandler(cmdUpdate_OnClick);
+        cmdUpdate.Click += new EventHandler(DialogService.CloseEventHappened);
+        cmdCancel.Click += new EventHandler(DialogService.CloseEventHappened);
+        ddlOptions.Attributes.Add("onchange", String.Format("javascript:Sage.UI.Forms.UpdateTargets.optionChange('{0}');", ddlOptions.ClientID));
         grdTargets.PageIndexChanging += new GridViewPageEventHandler(grdTargets_PageIndexChanging);
         base.OnWireEventHandlers();
     }
@@ -74,16 +76,6 @@ public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInf
     }
 
     /// <summary>
-    /// Ints the register client scripts.
-    /// </summary>
-    private void IntRegisterClientScripts()
-    {
-        StringBuilder sb = new StringBuilder();
-        sb.AppendFormat("{0}_obj = new Sage.SalesLogix.CampaignUpdateTarget('{0}');", ClientID);
-        ScriptManager.RegisterClientScriptBlock(Page, GetType(), "UpdateTargetsScript", sb.ToString(), true);
-    }
-
-    /// <summary>
     /// Handles the OnClick event of the cmdUpdate control.
     /// </summary>
     /// <param name="sender">The source of the event.</param>
@@ -91,17 +83,6 @@ public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInf
     protected void cmdUpdate_OnClick(object sender, EventArgs e)
     {
         UpdateTargets();
-    }
-
-    /// <summary>
-    /// Handles the OnClick event of the cmdClose control.
-    /// </summary>
-    /// <param name="sender">The source of the event.</param>
-    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-    protected void cmdClose_OnClick(object sender, EventArgs e)
-    {
-        DialogService.CloseEventHappened(sender, e);
-        PanelRefresh.RefreshTabWorkspace();
     }
 
     /// <summary>
@@ -115,12 +96,12 @@ public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInf
         // if viewstate is off in the GridView then we need to calculate PageCount ourselves
         if (pageIndex > 10000)
         {
-            _SetLastPageIndex = true;
+            _setLastPageIndex = true;
             grdTargets.PageIndex = 0;
         }
         else
         {
-            _SetLastPageIndex = false;
+            _setLastPageIndex = false;
             grdTargets.PageIndex = pageIndex;
         }
     }
@@ -178,33 +159,13 @@ public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInf
     /// </summary>
     private void SetControls()
     {
-        string option = Request.Form[ddlOptions.ClientID.Replace("_", "$")];
         LoadOptionsDDL();
-        ddlOptions.SelectedValue = option;
-
-        string stageTo = Request.Form[ddlToStage.ClientID.Replace("_", "$")];
         LoadStageToDDL(_campaign);
-        ddlToStage.SelectedValue = stageTo;
-
-        string stage = Request.Form[ddlStage.ClientID.Replace("_", "$")];
         LoadStageDDL(_campaign);
-        ddlStage.SelectedValue = stage;
-
-        string status = Request.Form[ddlToStatus.ClientID.Replace("_", "$")];
         LoadPicklistItems("Target Status", ddlToStatus);
-        ddlToStatus.SelectedValue = status;
-
-        string responseMethod = Request.Form[ddlResponseMethods.ClientID.Replace("_", "$")];
         LoadPicklistItems("Response Method", ddlResponseMethods);
-        ddlResponseMethods.SelectedValue = responseMethod;
-
-        string responseInterest = Request.Form[ddlResponseInterests.ClientID.Replace("_", "$")];
         LoadPicklistItems("Response Interest", ddlResponseInterests);
-        ddlResponseInterests.SelectedValue = responseInterest;
-
-        string responseInterestLevel = Request.Form[ddlResponseInterestLevels.ClientID.Replace("_", "$")];
         LoadPicklistItems("Response Interest Level", ddlResponseInterestLevels);
-        ddlResponseInterestLevels.SelectedValue = responseInterestLevel;
 
         if (luLeadSource.LookupResultValue != null)
         {
@@ -221,18 +182,15 @@ public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInf
         opt2.Style.Add("display", "none");
         opt3.Style.Add("display", "none");
 
-        switch (ddlOptions.SelectedValue)
+        switch (ddlOptions.SelectedIndex)
         {
-            case "0":
-                opt0.Style.Add("display", "blocked");
-                break;
-            case "1":
+            case 1:
                 opt1.Style.Add("display", "blocked");
                 break;
-            case "2":
+            case 2:
                 opt2.Style.Add("display", "blocked");
                 break;
-            case "3":
+            case 3:
                 opt3.Style.Add("display", "blocked");
                 break;
             default:
@@ -242,136 +200,51 @@ public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInf
     }
 
     /// <summary>
-    /// Updates the targets by Ids.
+    /// Loads the options DDL.
     /// </summary>
-    private void UpdateTargets_ByIds()
+    private void LoadOptionsDDL()
     {
-        string option = Request.Form[ddlOptions.ClientID.Replace("_", "$")];
-        object[] targetIds = GetSelecetedTargetIds();
-        if (targetIds.GetLength(0) > 0)
-        {
-            switch (option)
-            {
-                case "0":
-                    string status = Request.Form[ddlToStatus.ClientID.Replace("_", "$")];
-                    DoUpdateStatus(status, targetIds);
-                    break;
-                case "1":
-                    string stage = Request.Form[ddlToStage.ClientID.Replace("_", "$")];
-                    DoUpdateStage(stage, targetIds);
-                    break;
-                case "2":
-                    string init = Request.Form[rdlInitTargets.ClientID.Replace("_", "$")];
-                    bool initTarget = false;
-                    if (init == "Y")
-                    {
-                        initTarget = true;
-                    }
-                    DoUpdateInit(initTarget, targetIds);
-                    break;
-                case "3":
-                    ICampaign campaign = (ICampaign)BindingSource.Current;
-                    DoAddResponse(targetIds, campaign);
-                    break;
-                default:
-                    break;
-            }
-        }
+        ddlOptions.Items.Clear();
+        ListItem item = new ListItem();
+
+        item = new ListItem {Text = GetLocalResourceObject("Option_Status").ToString(), Value = "0", Selected = true};
+        ddlOptions.Items.Add(item);
+
+        item = new ListItem {Text = GetLocalResourceObject("Option_Stage").ToString(), Value = "1"};
+        ddlOptions.Items.Add(item);
+
+        item = new ListItem {Text = GetLocalResourceObject("Option_Initial").ToString(), Value = "2"};
+        ddlOptions.Items.Add(item);
+
+        item = new ListItem {Text = GetLocalResourceObject("Option_AddResponse").ToString(), Value = "3"};
+        ddlOptions.Items.Add(item);
     }
+
     /// <summary>
     /// Updates the targets by data source.
     /// </summary>
     private void UpdateTargets()
     {
-        string option = Request.Form[ddlOptions.ClientID.Replace("_", "$")];
-
-
-        switch (option)
+        List<String> targetIds = GetSelecetedTargetIds();
+        switch (ddlOptions.SelectedIndex)
         {
-            case "0":
-                string status = Request.Form[ddlToStatus.ClientID.Replace("_", "$")];
-                DoUpdateStatus(status);
-
+            case 0:
+                Helpers.UpdateTargets("Status", ddlToStatus.SelectedValue, targetIds);
                 break;
-            case "1":
-                string stage = Request.Form[ddlToStage.ClientID.Replace("_", "$")];
-                DoUpdateStage(stage);
-
+            case 1:
+                Helpers.UpdateTargets("Stage", ddlToStage.Text, targetIds);
                 break;
-            case "2":
-                string init = Request.Form[rdlInitTargets.ClientID.Replace("_", "$")];
-                bool initTarget = false;
-                if (init == "Y")
-                {
-                    initTarget = true;
-                }
-                DoUpdateInit(initTarget);
-
+            case 2:
+                Helpers.UpdateTargets("InitialTarget", rdlInitTargets.Text, targetIds);
                 break;
-            case "3":
+            case 3:
                 ICampaign campaign = (ICampaign)BindingSource.Current;
-                DoAddResponse(campaign);
-
-                break;
-
-            default:
-
+                DoAddResponse(targetIds, campaign);
                 break;
         }
 
     }
-    /// <summary>
-    /// Does the update status.
-    /// </summary>
-    /// <param name="status">The status.</param>
-    /// <param name="targetIds">The target ids.</param>
-    private void DoUpdateStatus(string status, object[] targetIds)
-    {
-        Helpers.UpdateTargetStatus(status, targetIds);
-    }
 
-    /// <summary>
-    /// Does the update stage.
-    /// </summary>
-    /// <param name="stage">The stage.</param>
-    /// <param name="targetIds">The target ids.</param>
-    private static void DoUpdateStage(string stage, object[] targetIds)
-    {
-        Helpers.UpdateTargetStage(stage, targetIds);
-    }
-
-    /// <summary>
-    /// Does the update init.
-    /// </summary>
-    /// <param name="initTarget">if set to <c>true</c> [init target].</param>
-    /// <param name="targetIds">The target ids.</param>
-    private static void DoUpdateInit(Boolean initTarget, object[] targetIds)
-    {
-        Helpers.UpdateTargetInit(initTarget, targetIds);
-    }
-
-    /// <summary>
-    /// Does the add response.
-    /// </summary>
-    /// <param name="targetIds">The target ids.</param>
-    /// <param name="campaign">The campaign.</param>
-    private void DoAddResponse(object[] targetIds, ICampaign campaign)
-    {
-        string stage = Request.Form[ddlStage.ClientID.Replace("_", "$")];
-        string comment = txtComment.Text;
-        string responseMethod = Request.Form[ddlResponseMethods.ClientID.Replace("_", "$")];
-        string Id = luLeadSource.ClientID + "_LookupText";
-        string leadSource = Request.Form[Id.Replace("_", "$")];
-        string responseInterest = Request.Form[ddlResponseInterests.ClientID.Replace("_", "$")];
-        string responseInterestLevel = Request.Form[ddlResponseInterestLevels.ClientID.Replace("_", "$")];
-        DateTime? responseDate = dtpResponseDate.DateTimeValue;
-
-        String[] propNames = { "Stage", "Comment", "ResponseMethod", "LeadSource", "ResponseDate", "Interest", "InterestLevel" };
-        object[] propValues = { stage, comment, responseMethod, leadSource, responseDate, responseInterest, responseInterestLevel };
-        ComponentView responseData = new ComponentView(propNames, propValues);
-
-        Helpers.AddTargetResponses(targetIds, campaign, responseData);
-    }
     /// <summary>
     /// Does the update status.
     /// </summary>
@@ -381,7 +254,6 @@ public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInf
         TargetsViewDataSource ds = GetDataSource();
         Helpers.UpdateTargetStatus(status, ds);
     }
-
 
     /// <summary>
     /// Does the update stage.
@@ -397,43 +269,30 @@ public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInf
     /// Does the update init.
     /// </summary>
     /// <param name="initTarget">if set to <c>true</c> [init target].</param>
-    /// <param name="targetIds">The target ids.</param>
     private void DoUpdateInit(Boolean initTarget)
     {
         TargetsViewDataSource ds = GetDataSource();
         Helpers.UpdateTargetInit(initTarget, ds);
     }
 
-    /// <summary>
-    /// Does the add response.
-    /// </summary>
-    /// <param name="targetIds">The target ids.</param>
-    /// <param name="campaign">The campaign.</param>
-    private void DoAddResponse(ICampaign campaign)
+    private void DoAddResponse(List<String> targetIds, ICampaign campaign)
     {
-        string stage = Request.Form[ddlStage.ClientID.Replace("_", "$")];
+        string stage = ddlStage.Text;
         string comment = txtComment.Text;
-        string responseMethod = Request.Form[ddlResponseMethods.ClientID.Replace("_", "$")];
-        string Id = luLeadSource.ClientID + "_LookupText";
-        string leadSource = Request.Form[Id.Replace("_", "$")];
-        string responseInterest = Request.Form[ddlResponseInterests.ClientID.Replace("_", "$")];
-        string responseInterestLevel = Request.Form[ddlResponseInterestLevels.ClientID.Replace("_", "$")];
+        string responseMethod = ddlResponseMethods.Text;
+        string leadSource = luLeadSource.Text;
+        string responseInterest = ddlResponseInterests.Text;
+        string responseInterestLevel = ddlResponseInterestLevels.Text;
         DateTime? responseDate = dtpResponseDate.DateTimeValue;
 
         String[] propNames = { "Stage", "Comment", "ResponseMethod", "LeadSource", "ResponseDate", "Interest", "InterestLevel" };
         object[] propValues = { stage, comment, responseMethod, leadSource, responseDate, responseInterest, responseInterestLevel };
         ComponentView responseData = new ComponentView(propNames, propValues);
-        TargetsViewDataSource ds = GetDataSource();
-        Helpers.AddTargetResponses(ds, campaign, responseData);
+        Helpers.AddTargetResponses(targetIds, campaign, responseData);
     }
 
-    /// <summary>
-    /// Gets the seleceted target ids.
-    /// </summary>
-    /// <returns></returns>
-    private object[] GetSelecetedTargetIds()
+    private List<String> GetSelecetedTargetIds()
     {
-        object[] ids = null;
         TargetsViewDataSource ds = new TargetsViewDataSource();
 
         if (DialogService.DialogParameters.Count > 0)
@@ -445,10 +304,9 @@ public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInf
                 _filterState.IncludeSelectedOnly = true;
             }
         }
-        
+
         ds.SelectedFilterState = _filterState;
-        ids = ds.GetTargetIds(true);
-        return ids;
+        return ds.GetTargetIds(true);
     }
 
     /// <summary>
@@ -459,9 +317,7 @@ public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInf
     /// </returns>
     private TargetsViewDataSource GetDataSource()
     {
-
         TargetsViewDataSource ds = new TargetsViewDataSource();
-
         if (DialogService.DialogParameters.Count > 0)
         {
             object filterStateObj;
@@ -471,40 +327,8 @@ public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInf
                 _filterState.IncludeSelectedOnly = true;
             }
         }
-
         ds.SelectedFilterState = _filterState;
-
         return ds;
-    }
-
-    /// <summary>
-    /// Loads the options DDL.
-    /// </summary>
-    private void LoadOptionsDDL()
-    {
-        ddlOptions.Items.Clear();
-        ListItem item = new ListItem();
-
-        item = new ListItem();
-        item.Text = GetLocalResourceObject("Option_Status").ToString();
-        item.Value = "0";
-        ddlOptions.Items.Add(item);
-
-        item = new ListItem();
-        item.Text = GetLocalResourceObject("Option_Stage").ToString();
-        item.Value = "1";
-        item.Selected = true;
-        ddlOptions.Items.Add(item);
-
-        item = new ListItem();
-        item.Text = GetLocalResourceObject("Option_Initial").ToString();
-        item.Value = "2";
-        ddlOptions.Items.Add(item);
-
-        item = new ListItem();
-        item.Text = GetLocalResourceObject("Option_AddResponse").ToString();
-        item.Value = "3";
-        ddlOptions.Items.Add(item);
     }
 
     /// <summary>
@@ -581,7 +405,7 @@ public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInf
         if (!String.IsNullOrEmpty(grdTargets.SortExpression))
             dataSource.SortExpression = grdTargets.SortExpression;
         dataSource.IsAscending = grdTargets.SortDirection.Equals(SortDirection.Ascending);
-        if (_SetLastPageIndex)
+        if (_setLastPageIndex)
         {   
             int pageIndex = 0;
             int recordCount = dataSource.GetDataCount();
@@ -600,7 +424,7 @@ public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInf
     /// <param name="e">The <see cref="System.Web.UI.WebControls.ObjectDataSourceDisposingEventArgs"/> instance containing the event data.</param>
     protected void DisposeTargetsViewDataSource(object sender, ObjectDataSourceDisposingEventArgs e)
     {
-        // Cancel the event, so that the object will not be Disposed if it implements IDisposable.
+        //Cancel the event, so that the object will not be Disposed if it implements IDisposable.
         e.Cancel = true;
     }
 
@@ -616,9 +440,29 @@ public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInf
     protected override void OnPreRender(EventArgs e)
     {
         base.OnPreRender(e);
-        if (ScriptManager.GetCurrent(Page) != null)
-            ScriptManager.GetCurrent(Page).RegisterScriptControl(this);
-        IntRegisterClientScripts();
+        ScriptManager.RegisterClientScriptInclude(this, GetType(), "UpdateTargets", Page.ResolveUrl("~/SmartParts/Campaign/UpdateTargets_ClientScript.js"));
+        var script = new StringBuilder();
+        if (Page.IsPostBack)
+        {
+            script.Append("Sage.UI.Forms.UpdateTargets.init(" + GetWorkSpace() + " );");
+        }
+        else
+        {
+            script.Append("dojo.ready(function () {Sage.UI.Forms.UpdateTargets.init(" + GetWorkSpace() + ");");
+        }
+        ScriptManager.RegisterStartupScript(this, GetType(), "initialize_UpdateTargets", script.ToString(), true);
+    }
+
+    private string GetWorkSpace()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append("{");
+        sb.AppendFormat("optionStatusId:'{0}',", opt0.ClientID);
+        sb.AppendFormat("optionStageId:'{0}',", opt1.ClientID);
+        sb.AppendFormat("optionInitializeTargetId:'{0}',", opt2.ClientID);
+        sb.AppendFormat("optionAddResponseId:'{0}'", opt3.ClientID);
+        sb.Append("}");
+        return sb.ToString();
     }
 
     /// <summary>
@@ -651,18 +495,4 @@ public partial class SmartParts_Campaign_UpdateTargets : EntityBoundSmartPartInf
         }
         return tinfo;
     }
-
-    #region IScriptControl Members
-
-    public IEnumerable<ScriptDescriptor> GetScriptDescriptors()
-    {
-        yield break;
-    }
-
-    public IEnumerable<ScriptReference> GetScriptReferences()
-    {
-        yield return new ScriptReference("~/smartparts/Campaign/UpdateTargets_ClientScript.js");
-    }
-
-    #endregion
 }

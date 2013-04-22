@@ -8,7 +8,7 @@ runat="server" ID="${qfcontrol.ControlId}"
 #if($qfcontrol.StyleScheme != "")CssClass="$qfcontrol.StyleScheme" #end
 #if(!$qfcontrol.Visible)Visible="false" #end
 #if(${qfcontrol.Image} != "")ImageUrl="$generator.getImageResourceURL( ${qfcontrol.Image} )" #end
-#if(${qfcontrol.OnClientClick} != "") OnClientClick="${qfcontrol.ControlId}_ClientClick(); " 
+#if(${qfcontrol.OnClientClick} != "") OnClientClick="return ${qfcontrol.ControlId}_ClientClick(); " 
   #if(!${qfcontrol.HasActionCode}) UseSubmitBehavior="false" #end
 #end
 #if(${qfcontrol.IsReadOnly} || (!$qfcontrol.Enabled))Enabled="false" #end

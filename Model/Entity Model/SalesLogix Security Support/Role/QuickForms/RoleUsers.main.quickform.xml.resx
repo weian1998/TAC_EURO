@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="grdUsers.90f08781-a849-46f6-b759-5b89f771c1eb.ColumnHeading" xml:space="preserve">
     <value>Name</value>
@@ -123,17 +123,17 @@
   <data name="grdUsers.4bd395dd-9bf0-4815-a887-dff72cbff3f6.ColumnHeading" xml:space="preserve">
     <value>Department</value>
   </data>
-  <data name="grdUsers.d793b567-28ab-43b4-b750-5658622f5773.ColumnHeading" xml:space="preserve">
-    <value>Division</value>
-  </data>
-  <data name="grdUsers.0e343053-0bde-46cd-8b8b-be281d07c73c.ColumnHeading" xml:space="preserve">
+  <data name="grdRoles_AddRelationTool.LookupProperties.UserInfo.Region.PropertyHeader" xml:space="preserve">
     <value>Region</value>
+  </data>
+  <data name="grdRoles_AddRelationTool.LookupProperties.UserInfo.Division.PropertyHeader" xml:space="preserve">
+    <value>Division</value>
   </data>
   <data name="QFLabel.Text" xml:space="preserve">
     <value>Users assigned to this Role</value>
   </data>
-  <data name="grdUsers.57ab433b-62fd-4396-baa0-4e7fc2430424.Text" xml:space="preserve">
-    <value>Remove</value>
+  <data name="grdRoles_AddRelationTool.LookupProperties.UserInfo.UserName.PropertyHeader" xml:space="preserve">
+    <value>User Name</value>
   </data>
   <data name="lueAddUser.ButtonToolTip" xml:space="preserve">
     <value>Add User</value>
@@ -153,11 +153,11 @@
   <data name="lueAddUser.LookupProperties.UserInfo.Region.PropertyHeader" xml:space="preserve">
     <value>Region</value>
   </data>
-  <data name="grdUsers.57ab433b-62fd-4396-baa0-4e7fc2430424.ConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to remove the selected User?</value>
+  <data name="grdRoles_AddRelationTool.LookupProperties..PropertyHeader" xml:space="preserve">
+    <value />
   </data>
-  <data name="grdUsers.0795541e-c762-44d4-8eb4-2e1c5f57b490.ColumnHeading" xml:space="preserve">
-    <value>Name</value>
+  <data name="grdRoles_AddRelationTool.DialogButtonText" xml:space="preserve">
+    <value>Add Selected</value>
   </data>
   <data name="grdUsers.9f477191-783f-40eb-8e9d-ca3897a97a3c.ColumnHeading" xml:space="preserve">
     <value>Team</value>
@@ -165,7 +165,28 @@
   <data name="143457d7-890c-4fac-9e78-9662c2237589.DuplicateAssociationMessage" xml:space="preserve">
     <value>The selected User is already part of this Role.</value>
   </data>
-  <data name="grdUsers.EmptyTableRowText" xml:space="preserve">
-    <value>No users assigned to this role.</value>
+  <data name="grdRoles_AddRelationTool.ButtonToolTip" xml:space="preserve">
+    <value>Add Users</value>
+  </data>
+  <data name="lueAddUser.LookupProperties.Type.PropertyHeader" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="grdRoles.b495e985-92d7-43cf-b279-9b67507ef789.ColumnHeading" xml:space="preserve">
+    <value>Division</value>
+  </data>
+  <data name="grdRoles.67620def-0232-4382-ad67-e8cdd30779af.ColumnHeading" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="grdRoles.Delete.ToolTip" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="grdRoles.cc7540c6-a0ff-4e90-b21a-3b7bfd60a601.ColumnHeading" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="grdRoles_AddRelationTool.LookupProperties.Type.PropertyHeader" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="grdRoles_AddRelationTool.LookupDialogTitle" xml:space="preserve">
+    <value>Lookup User</value>
   </data>
 </root>

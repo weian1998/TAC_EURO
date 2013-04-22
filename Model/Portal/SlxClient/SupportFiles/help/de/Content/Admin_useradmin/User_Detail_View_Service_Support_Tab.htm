@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="de" xml:lang="de" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Registerkarte "Service/Support" im Benutzerprofil</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Admin_useradmin/User_Detail_View_Service_Support_Tab.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Thema mit den Registerkarten "Suchen", "Inhalt" und "Index" öffnen</a>
+        </p>
+        <h1 value="Workgroup Administrator Help (03-19-02) for v5.2.2 © 2002 Interact Commerce Corporation"><a name="kanchor337"></a>Registerkarte "Service/Support"</h1>
+        <p>Nutzen Sie die Registerkarte <B>Service/Support</B> in der Benutzerdetailansicht, um Optionen für Customer Service-Funktionen, Support-Features und SpeedSearch festzulegen. Beachten Sie beim Festlegen des Benutzerzugriffs Folgendes:</p>
+        <ul>
+            <li class="Bullets" value="1">Beim Hinzufügen eines neuen Benutzers ist <B>Für Anrufe verfügbar</B> die einzige standardmäßig ausgewählte Option. </li>
+            <li class="Bullets" value="2">Änderungen treten beim Laden der Anwendung in Kraft. Die Änderungen werden vom System übernommen, sobald ein Benutzer die Anwendung aktualisiert oder sich bei ihr anmeldet.</li>
+            <li class="Bullets" value="3">Wenn Sie die Registerkarte <B>Service/Support</B> im Profil eines Remote-Benutzers anzeigen, wird das Ticket-ID-Präfix des Remote-Benutzers ebenfalls (schreibgeschützt) angezeigt.</li>
+        </ul>
+        <p class="Topic-Text-Indent"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1">Weitere Informationen zu Ticket-IDs<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <p>Um die Synchronisierung zwischen Remote-Datenbanken und der Datenbank der Hauptniederlassung (Host-Datenbank) zu unterstützen, muss im Sage SalesLogix-System gewährleistet werden, dass eindeutige Ticket-IDs erstellt werden, wenn Benutzer in der Hauptniederlassung, in Remote Offices oder über die Computer von Remote-Benutzern Tickets hinzufügen. Vom System wird jeder Datenbank ein Ticket-Präfix zugewiesen, das aus zwei Teilen besteht:</p>
+            <ul style="list-style: disc;" type="disc">
+                <li class="Bullets" value="1"><span class="SLXBold">Niederlassungs-ID</span>: Die ersten drei Ziffern des Präfix identifizieren die Niederlassung. Die Niederlassungs-ID der Host-Datenbank lautet 001. Datenbanken von Remote Offices werden Niederlassungs-IDs im Bereich 100-199 zugewiesen. Datenbanken von Remote-Benutzern erhalten Niederlassungs-IDs im Bereich 200 und höher. (Beachten Sie dabei jedoch, dass die Niederlassungs-IDs nicht unbedingt in sequenzieller Reihenfolge zugewiesen werden.)</li>
+                <li class="Bullets" value="2"><span class="SLXBold">Schlüsselbasis</span>: Die letzten zwei Ziffern des Präfix repräsentieren die Revisionsnummer der Datenbank. Wenn Sie eine neue Datenbank für ein Remote Office oder einen Remote-Benutzer erstellen, wird diese Zahl erhöht.</li>
+            </ul>
+            <p>Wenn ein Benutzer ein Ticket erstellt, wird vom System das korrekte Präfix zugewiesen, auf das ein automatisch generiertes sechsstelliges Suffix folgt (z.&#160;B. 001-01-000015).</p>
+        </div>
+        <p class="Infinitive">So legen Sie Optionen fest              </p>
+        <ol style="list-style: lower-alpha;list-style-type: lower-alpha;">
+            <li class="Topic-Text-Numbered" value="1">Klicken Sie in der <a href="User_Detail_View.htm" target="_self">Benutzerdetailansicht</a> auf die Registerkarte <b>Service/Support</b>. </li>
+            <li class="Topic-Text-Numbered" value="2">Wählen Sie eine oder mehrere der folgenden Optionen aus:</li>
+        </ol>
+        <ul>
+            <li class="Topic-Text-Bulleted-2" value="1"><span style="font-weight: bold;" class="SLXBold">Für Anrufe verfügbar</span> - Ermöglicht anderen Benutzern das Zuweisen von Tickets zu diesem Benutzer.</li>
+        </ul>
+        <p class="Topic-Text-Indent2">	Tickets, die einem nicht verfügbaren Benutzer zugewiesen werden, werden standardmäßig als <B>Nicht zugewiesen</B> deklariert.</p>
+        <ul>
+            <li class="Topic-Text-Bulleted-2" value="1"><span class="SLXBold">Benutzer über neues Ticket benachrichtigen</span> - Bei Aktivierung dieser Option wird eine E-Mail-Nachricht gesendet, wenn dem Benutzer ein Ticket zugewiesen wird.</li>
+        </ul>
+        <p class="Topic-Text-Indent2">Das System sendet eine E-Mail-Nachricht, wenn diesem Benutzer ein neues Ticket zugewiesen oder ein vorhandenes Ticket neu zugewiesen wird.</p>
+        <ul>
+            <li class="Topic-Text-Bulleted-2" value="1"><span class="SLXBold">Benutzer kann Zugriff auf das Kundenportal erteilen</span> - Diese Option ermöglicht dem Benutzer, einem Kunden den Zugriff auf Tickets über das Kundenportal zu gewähren.</li>
+            <li class="Topic-Text-Bulleted-2" value="2"><span class="SLXBold">Benutzer hat "SpeedSearch durchführen" als Standard </span> - Legt <B>SpeedSearch durchführen</B> als Standardoption fest, wenn der Benutzer ein neues Ticket erstellt.</li>
+            <li class="Topic-Text-Bulleted-2" value="3"><span class="SLXBold">Benutzer kann SpeedSearch-Einsendungen zustimmen</span> - Ermöglicht dem Benutzer festzustellen, welche Tickets und Fehler über SpeedSearch verfügbar sind.</li>
+        </ul>
+        <p class="Topic-Text-Indent2">Diese Option ist nur verfügbar, wenn der SpeedSearch-Zustimmungsprozess für die Niederlassung aktiviert wurde. Diese Option wird in Administrator aktiviert.</p>
+        <ul>
+            <li class="Topic-Text-Bulleted-2" value="1"><span class="SLXBold">Benutzer über neuen Defekt benachrichtigen</span> - Bei Aktivierung dieser Option wird eine E-Mail-Nachricht gesendet, wenn dem Benutzer ein Fehler zugewiesen wird.</li>
+        </ul>
+        <p class="Topic-Text-Indent2">Das System sendet eine E-Mail-Nachricht, wenn diesem Benutzer ein neuer Fehler zugewiesen oder ein vorhandener Fehler neu zugewiesen wird.</p>
+        <ol style="list-style: lower-alpha;list-style-type: lower-alpha;">
+            <li class="Topic-Text-Numbered" value="3">Klicken Sie auf <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Speichern<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>.</li>
+        </ol>
+        <p class="RelatedTopics">Verwandte Themen</p>
+        <p><a href="User_Detail_View.htm" target="_self"><a href="User_Detail_View.htm" target="_self">Benutzerdetailansicht</a></a>
+        </p>
+        <p><a href="Changing_a_Users_Profile.htm" target="_self">Ändern von Benutzerprofilen</a>
+        </p>
+        <div style="width: 100%;position: relative;">
+            <p>&#160;</p>
+        </div>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Haben Sie Vorschläge zur Verbesserung der Hilfe?</a>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

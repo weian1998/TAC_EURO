@@ -24,10 +24,22 @@ public partial class CopyUserProfile : EntityBoundSmartPartInfoProvider
 
             _selUsers = GetSelectedUsers(ids);
         }
-
+        GenerateScript();
         lblTargetUser.Text = Server.HtmlEncode(_selUsers[0].UserInfo.UserName);
     }
 
+    private void GenerateScript()
+    {
+        StringBuilder script = new StringBuilder();
+        script.AppendLine("function SwitchLookup(showUser) {");
+        script.AppendLine("var usr = document.getElementById('DialogWorkspace_CopyUserProfile_copyProfileParameter_userListContainer');");
+        script.AppendLine("var templ = document.getElementById('DialogWorkspace_CopyUserProfile_copyProfileParameter_templateListContainer');");
+        script.AppendLine("showUser ? templ.style.display = 'none' : templ.style.display = 'inline';");
+        script.AppendLine("showUser ? usr.style.display = 'inline' : usr.style.display = 'none';");
+        script.AppendLine("}");
+
+        ScriptManager.RegisterStartupScript(Page, GetType(), ClientID, script.ToString(), true);
+    }
     /// <summary>
     /// 
     /// </summary>

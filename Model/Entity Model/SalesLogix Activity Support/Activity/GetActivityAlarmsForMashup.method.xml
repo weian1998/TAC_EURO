@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="c77f709b-a52c-47ed-9aa2-94a51e0fe37d" lastModifiedUtc="2011-09-16T22:42:31.4080957Z" name="GetActivityAlarmsForMashup" returnType="Object" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="bc902e3c-2840-41c5-9b90-8900cdb68914" paramName="UserId" sequence="0" paramType="String" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="60006de6-c72a-41fa-bc22-86aed74bfbd6" lastModifiedUtc="2011-09-16T22:42:31.4000953Z" targetType="Sage.SalesLogix.Activity.Activity, Sage.SalesLogix.Activity" targetMethod="GetMashupActivityAlarms" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

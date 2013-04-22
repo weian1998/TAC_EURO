@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="1e055a6e-85b4-4548-aff4-699996f07808.Caption" xml:space="preserve">
     <value>Log Level</value>
@@ -200,5 +200,50 @@
   </data>
   <data name="cboFilterLogType_item0.Text" xml:space="preserve">
     <value />
+  </data>
+  <data name="cboFilterLogType_item0.Value" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cboFilterLogType_item1.Value" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="cboFilterLogType_item2.Value" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="cboFilterLogType_item3.Value" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="cboFilterLogType_item4.Value" xml:space="preserve">
+    <value>Warn</value>
+  </data>
+  <data name="cboFilterResource_item0.Value" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cboFilterResource_item1.Value" xml:space="preserve">
+    <value>commodity</value>
+  </data>
+  <data name="cboFilterResource_item2.Value" xml:space="preserve">
+    <value>commodityGroup</value>
+  </data>
+  <data name="cboFilterResource_item3.Value" xml:space="preserve">
+    <value>contact</value>
+  </data>
+  <data name="cboFilterResource_item4.Value" xml:space="preserve">
+    <value>location</value>
+  </data>
+  <data name="cboFilterResource_item5.Value" xml:space="preserve">
+    <value>price</value>
+  </data>
+  <data name="cboFilterResource_item6.Value" xml:space="preserve">
+    <value>priceList</value>
+  </data>
+  <data name="cboFilterResource_item7.Value" xml:space="preserve">
+    <value>salesOrder</value>
+  </data>
+  <data name="cboFilterResource_item8.Value" xml:space="preserve">
+    <value>salesOrderLine</value>
+  </data>
+  <data name="cboFilterResource_item9.Value" xml:space="preserve">
+    <value>tradingAccount</value>
   </data>
 </root>

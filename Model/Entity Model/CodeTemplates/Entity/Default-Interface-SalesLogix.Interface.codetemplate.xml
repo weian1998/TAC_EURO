@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <codeTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="5e8b7df7-0ec3-46b3-b8f4-f7bde7d5a6a3" name="Default-Interface-SalesLogix" templateType="Interface" templateEngineType="T4">
-  <template><![CDATA[<#@ template language="C#v3.5" #>
+  <template>
+  <![CDATA[<#@ template language="C#v4.0" #>
 <#@ assembly name="System.Core.dll" #>
 <#@ assembly name="Microsoft.Unity.dll" #>
 <#@ assembly name="Sage.Platform.dll" #>
@@ -39,22 +40,23 @@ var entity = (OrmEntity) Context["entity"];
 var generator = (EntityInterfaceGenerator) Context["generator"];
 #>
 <#
-var parents = entity.ParentEntities.Where(relation => relation.ChildProperty.Include && IsEntityIncluded(relation.ParentEntity)).ToList();
-var children = entity.ChildEntities.Where(relation => relation.ParentProperty.Include && IsEntityIncluded(relation.ChildEntity)).ToList();
+var parents = entity.ParentEntities.Where(relation => !relation.IsDynamic && relation.ChildProperty.Include && IsEntityIncluded(relation.ParentEntity)).ToList();
+var children = entity.ChildEntities.Where(relation => !relation.IsDynamic && relation.ParentProperty.Include && IsEntityIncluded(relation.ChildEntity)).ToList();
 var extenders = entity.ExtensionEntities.Where(extender => IsEntityIncluded(extender)).ToList();
 var properties = OrmEntity.GetIncludedProperties(entity, true).OfType<OrmFieldProperty>().ToList();
 var customProperties = generator.GetIncludedCustomProperties(entity).ToList();
 
 //capture some global variables of entity state
-var isHistory = (bool) tools.ExtendedProperty(entity, "{1589723D-0536-4BF3-BDD7-3F6F7FE165D0}", "IsHistoryTable");
+var metadata = entity.ExtendedProperties.Get<OrmEntityMetadataExtension>();
+var isHistory = metadata.IsHistoryTable;
 string foreignPropertyName = null;
 var isRelationProperty = false;
 if (isHistory) {
-    foreignPropertyName = (string) tools.ExtendedProperty(entity, "{1589723D-0536-4BF3-BDD7-3F6F7FE165D0}", "ForeignIdProperty");
+    foreignPropertyName = metadata.ForeignIdProperty;
     var foreignProperty = entity.GetPropertyByPropertyName(foreignPropertyName);
     isRelationProperty = (foreignProperty.GetType().Name == "OrmRelationProperty");
 }
-var historyTypeName = tools.ExtendedProperty(entity, "{1589723D-0536-4BF3-BDD7-3F6F7FE165D0}", "HistoryTypeName");
+var historyTypeName = metadata.HistoryTypeName;
 var hasDisplayProperty = (entity.DisplayProperty != null);
 
 //composite key constants
@@ -80,7 +82,7 @@ namespace Sage.Entity.Interfaces
 <# if (entity.LocalResources.ContainsResource(entity.DisplayNamePluralKey)) { #>
     [Properties.SRPluralDisplayName("<#= entity.DisplayNamePluralKey #>")]
 <# } #>
-    [TypeConverter(typeof(EntityReferenceConverter))]
+    [TypeConverter(typeof(EntityReferenceConverter<global::Sage.Entity.Interfaces.<#= entity.InterfaceName #>>))]
     [ActiveRecord("<#= entity.TableName #>")]
     [Images("<#= entity.SmallImage #>", "<#= entity.LargeImage #>")]
     public interface <#= entity.InterfaceName #> : IPersistentEntity, IDynamicEntity<# if (!entity.HasCompositeKey) { #>, IComponentReference <# } else { #>, ICompositeKeyEntity <# } #>
@@ -106,6 +108,9 @@ namespace Sage.Entity.Interfaces
 <#    var keyordinal = key.OrdinalPosition - 1; #>
         [CompositeKey(<#= keyordinal #>)]
 <#   } #>
+<#   if (key.Reference.DisplayCategory == DisplayCategory.Obsolete) { #>
+        [Obsolete]
+<#   } #>
         <#= generator.ToClrType(key.Reference) #> <#= key.Reference.PropertyName #> { get;<# if (!ck_useRelationships) { #> set;<# } #> }
 <#  } #>
 <# } #>
@@ -116,6 +121,9 @@ namespace Sage.Entity.Interfaces
 <#  if (entity.LocalResources.ContainsResource(prop.DisplayNameKey)) { #>
         [Properties.SRDisplayName("<#= prop.DisplayNameKey #>")]
 <#  } #>
+<#  if (prop.DisplayCategory == DisplayCategory.Obsolete) { #>
+        [Obsolete]
+<#  } #>
         [Properties.ExtendedTypeInformationAttribute("<#= prop.Entity.Name #>_<#= prop.PropertyName #>", "<#= generator.GetDataTypeName(prop) #>")]
         [Field("<#= prop.ColumnName #>")]
         <#= generator.ToClrType(prop) #> <#= prop.PropertyName #> { get;<# if (!prop.IsReadOnly) { #> set;<# } #> }
@@ -124,6 +132,9 @@ namespace Sage.Entity.Interfaces
 <# if (customProperties.Count > 0) { #>
         #region Custom Properties
 <#  foreach (var prop in customProperties) { #>
+<#   if (prop.DisplayCategory == DisplayCategory.Obsolete) { #>
+        [Obsolete]
+<#   } #>
         <#= prop.ReturnType #> <#= prop.PropertyName #> {<# if (prop.HasGet) { #> get;<# } #> <# if (prop.HasSet) { #> set;<# } #> }
 <#  } #>
         #endregion Custom Properties
@@ -136,7 +147,13 @@ namespace Sage.Entity.Interfaces
         [Properties.SRDisplayName("<#= relation.ChildProperty.DisplayNameKey #>")]
 <#   } #>
         [BelongsTo]
-        <#= relation.ParentEntity.InterfaceName #> <#= relation.ChildProperty.PropertyName #> { get; set; }
+<#   foreach (var column in relation.Columns) { #>
+        [Field("<#= column.ChildProperty.ColumnName #>")]
+<#   } #>
+<#   if (relation.ChildProperty.DisplayCategory == DisplayCategory.Obsolete) { #>
+        [Obsolete]
+<#   } #>
+        global::Sage.Entity.Interfaces.<#= relation.ParentEntity.InterfaceName #> <#= relation.ChildProperty.PropertyName #> { get; set; }
 <#  } #>
         #endregion M:1 Relationships
 <# } #>
@@ -148,13 +165,19 @@ namespace Sage.Entity.Interfaces
         [Properties.SRDisplayName("<#= relation.ParentProperty.DisplayNameKey #>")]
 <#   } #>
 <#   if (relation.Cardinality == "1:M") { #>
-        ICollection<<#= relation.ChildEntity.InterfaceName #>> <#= relation.ParentProperty.PropertyName #> { get; }
+        ICollection<global::Sage.Entity.Interfaces.<#= relation.ChildEntity.InterfaceName #>> <#= relation.ParentProperty.PropertyName #> { get; }
 <#   } else if (relation.Cardinality == "M:1") { #>
         [BelongsTo]
+<#    foreach (var column in relation.Columns) { #>
+        [Field("<#= column.ParentProperty.ColumnName #>")]
+<#    } #>
 <#    if (relation.ParentProperty.IsNullable) { #>
         [IsNullable]
 <#    } #>
-        <#= relation.ChildEntity.InterfaceName #> <#= relation.ParentProperty.PropertyName #> { get; set; }
+<#    if (relation.ParentProperty.DisplayCategory == DisplayCategory.Obsolete) { #>
+        [Obsolete]
+<#    } #>
+        global::Sage.Entity.Interfaces.<#= relation.ChildEntity.InterfaceName #> <#= relation.ParentProperty.PropertyName #> { get; set; }
 <#   } #>
 <#  } #>
         #endregion 1:M Relationships
@@ -164,7 +187,7 @@ namespace Sage.Entity.Interfaces
         #region 1:1 Parent Entity Extension
 
         [OneToOne]
-        <#= entity.ExtendedEntity.InterfaceName #> <#= entity.ExtendedEntity.Name #> { get; set ; }
+        global::Sage.Entity.Interfaces.<#= entity.ExtendedEntity.InterfaceName #> <#= entity.ExtendedEntity.Name #> { get; set ; }
 
         #endregion 1:1 Parent Entity Extension
 <# } #>
@@ -173,7 +196,7 @@ namespace Sage.Entity.Interfaces
         #region Child extensions
 <#  foreach (var child in extenders) { #>
         [OneToOne]
-        <#= child.InterfaceName #> <#= child.Name #> { get; set; }
+        global::Sage.Entity.Interfaces.<#= child.InterfaceName #> <#= child.Name #> { get; set; }
 <#  } #>
         #endregion Child extensions
 <# } #>

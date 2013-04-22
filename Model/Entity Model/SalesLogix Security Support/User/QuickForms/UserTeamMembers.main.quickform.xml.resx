@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="OwnerDescription.Caption" xml:space="preserve">
     <value>Owner Description</value>
@@ -147,14 +147,8 @@
   <data name="grdOwnerJoins.76e5fabb-310e-47a2-a565-d3efacf82350.ColumnHeading" xml:space="preserve">
     <value>Modified By</value>
   </data>
-  <data name="grdOwnerJoins.a55f0c89-1a93-4664-b0dc-09928fd3c5b8.ColumnHeading" xml:space="preserve">
-    <value>User</value>
-  </data>
-  <data name="grdOwnerJoins.fc314406-1177-41b9-9276-3ec602e71bd1.ColumnHeading" xml:space="preserve">
-    <value>Security Profile</value>
-  </data>
-  <data name="grdOwnerJoins.EmptyTableRowText" xml:space="preserve">
-    <value>No user team members found.</value>
+  <data name="grdTeams.ba2d83bf-74cc-4580-b255-e69b2ca9008e.ColumnHeading" xml:space="preserve">
+    <value>Modified By</value>
   </data>
   <data name="lueAddUser.LookupProperties..PropertyHeader" xml:space="preserve">
     <value />
@@ -165,11 +159,8 @@
   <data name="grdOwnerJoins.fc0dd482-c468-48a0-be7e-feb4995084a4.Text" xml:space="preserve">
     <value>Remove</value>
   </data>
-  <data name="grdOwnerJoins.a55f0c89-1a93-4664-b0dc-09928fd3c5b8.DestinationFormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdOwnerJoins.fc314406-1177-41b9-9276-3ec602e71bd1.DestinationFormatString" xml:space="preserve">
-    <value>javascript:Link.editSecurityProfile('{0}','{1}','{2}');</value>
+  <data name="ConfirmRemoveFromTeam" xml:space="preserve">
+    <value>Remove user from selected team(s)?</value>
   </data>
   <data name="lueAddUser.LookupProperties.UserInfo.UserName.PropertyHeader" xml:space="preserve">
     <value>Name</value>
@@ -195,25 +186,31 @@
   <data name="grdOwnerJoins.8b8b773d-4fb0-4800-9acf-b8fe24c4a7b1.FormatString" xml:space="preserve">
     <value>{0:g}</value>
   </data>
-  <data name="grdOwnerJoins.af0bb980-70a7-427f-a9c8-4e7486a6fbaf.ConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to remove this member from the user team?</value>
+  <data name="grdTeams.463701ca-8ff2-43c1-a864-c673dec0100b.ColumnHeading" xml:space="preserve">
+    <value>User</value>
   </data>
-  <data name="grdOwnerJoins.af0bb980-70a7-427f-a9c8-4e7486a6fbaf.Text" xml:space="preserve">
-    <value>Remove</value>
+  <data name="grdTeams.0dbef834-f6a7-4e0e-b7ef-710ee9b6b938.ColumnHeading" xml:space="preserve">
+    <value>Team</value>
   </data>
   <data name="lueAddUser.ButtonToolTip" xml:space="preserve">
     <value>Add another user to this user's user team</value>
   </data>
-  <data name="grdOwnerJoins.e74c0ee5-5b87-4598-8487-487ffaf9e6c9.ColumnHeading" xml:space="preserve">
-    <value>Created</value>
-  </data>
-  <data name="grdOwnerJoins.d79914ed-af89-4d0c-a9b3-11c8a8a77afe.ColumnHeading" xml:space="preserve">
+  <data name="grdTeams.289c9959-b3a3-4c90-a911-c12882cccecb.ColumnHeading" xml:space="preserve">
     <value>Last Modified</value>
   </data>
-  <data name="grdOwnerJoins.aca10129-ab60-444e-83ff-b40df5239f0b.ColumnHeading" xml:space="preserve">
-    <value>Modified By</value>
+  <data name="grdTeams.d81642fa-d355-4f94-b430-3d2a517c507d.ColumnHeading" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="grdTeams.d6016bfc-0528-4763-8c5e-891b3981be43.ColumnHeading" xml:space="preserve">
+    <value>Security Profile</value>
   </data>
   <data name="lueAddUser.LookupDialogTitle" xml:space="preserve">
     <value>Lookup User</value>
+  </data>
+  <data name="lueAddUser.LookupProperties.Type.PropertyHeader" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="grdTeams.btnRemoveFromTeam.ToolTip" xml:space="preserve">
+    <value>Remove</value>
   </data>
 </root>

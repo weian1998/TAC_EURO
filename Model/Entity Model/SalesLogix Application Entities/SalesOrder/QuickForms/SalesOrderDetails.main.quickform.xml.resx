@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="txtComment.Caption" xml:space="preserve">
     <value>Comments:</value>
@@ -244,13 +244,13 @@
     <value>Main Phone</value>
   </data>
   <data name="lueAccount.LookupProperties.Type.PropertyHeader" xml:space="preserve">
-    <value />
+    <value>Type</value>
   </data>
   <data name="lueAccount.LookupProperties.SubType.PropertyHeader" xml:space="preserve">
     <value>Sub-Type</value>
   </data>
   <data name="lueAccount.LookupProperties.Status.PropertyHeader" xml:space="preserve">
-    <value />
+    <value>Status</value>
   </data>
   <data name="lueAccount.LookupProperties.Address.City.PropertyHeader" xml:space="preserve">
     <value>City</value>
@@ -307,16 +307,16 @@
     <value>Requested By:</value>
   </data>
   <data name="lueRequestedBy.LookupProperties.NameLF.PropertyHeader" xml:space="preserve">
-    <value>Contact Name (Last, First)</value>
+    <value>Name</value>
   </data>
   <data name="lueRequestedBy.LookupProperties.AccountName.PropertyHeader" xml:space="preserve">
-    <value>Account Name</value>
+    <value>Account</value>
   </data>
   <data name="lueRequestedBy.LookupProperties.Address.City.PropertyHeader" xml:space="preserve">
-    <value>Address City</value>
+    <value>City</value>
   </data>
   <data name="lueRequestedBy.LookupProperties.Address.State.PropertyHeader" xml:space="preserve">
-    <value>Address State</value>
+    <value>State</value>
   </data>
   <data name="lueRequestedBy.LookupProperties.WorkPhone.PropertyHeader" xml:space="preserve">
     <value>Work Phone</value>
@@ -410,5 +410,14 @@
   </data>
   <data name="erpStatus_Rejected" xml:space="preserve">
     <value>Rejected</value>
+  </data>
+  <data name="lueOpportunity.LookupProperties.CreateDate.PropertyHeader" xml:space="preserve">
+    <value>Create Date</value>
+  </data>
+  <data name="dtpDueDate.ButtonToolTip" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
+  <data name="dtpDueDate.Caption" xml:space="preserve">
+    <value>Due Date:</value>
   </data>
 </root>

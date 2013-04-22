@@ -1,7 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="SearchResults.ascx.cs" Inherits="SearchResults" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.HighLevelTypes" Namespace="Sage.SalesLogix.HighLevelTypes" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.Platform.WebPortal" Namespace="Sage.Platform.WebPortal.SmartParts" TagPrefix="SalesLogix" %>
 
 <div style="display:none">
     <asp:Panel ID="SearchResults_RTools" runat="server">
@@ -47,7 +45,9 @@
         <td></td>
         <td></td>
         <td colspan="3">
-            <asp:RadioButton ID="rdbLinkTo" runat="server" GroupName="rdgpLinkOption" Text="<%$ resources:rdbLinkAccount.Caption %>" />
+            <fieldset class="radio">
+                <asp:RadioButton ID="rdbLinkTo" runat="server" GroupName="rdgpLinkOption" Text="<%$ resources:rdbLinkAccount.Caption %>" />
+            </fieldset>
         </td>
         <td>
             <br />
@@ -73,12 +73,6 @@
                     <asp:BoundField DataField="Name" HeaderText="<%$ resources: grdMatches.Account.ColumnHeading %>"
                         SortExpression="Name" >
                     </asp:BoundField>
-<%--                    <asp:BoundField DataField="Type" HeaderText="<%$ resources: grdMatches.Type.ColumnHeading %>"
-                        SortExpression="Type" >
-                    </asp:BoundField>--%>
-<%--                    <asp:BoundField DataField="Status" HeaderText="<%$ resources: grdMatches.Status.ColumnHeading %>"
-                        SortExpression="Status" >
-                    </asp:BoundField>--%>
                     <asp:BoundField DataField="key" Visible="false"/>
                     <asp:BoundField DataField="Uuid" Visible="false"/>
                 </Columns>
@@ -101,7 +95,9 @@
         <td></td>
         <td></td>
         <td colspan="3">
-            <asp:RadioButton ID="rdbCreateNew" runat="server" GroupName="rdgpLinkOption" onClick="ClearTargetSelection();" Text="<%$ resources:rdbCreateNew.Caption %>" />
+            <fieldset class="radio">
+                <asp:RadioButton ID="rdbCreateNew" runat="server" GroupName="rdgpLinkOption" Text="<%$ resources:rdbCreateNew.Caption %>" />
+            </fieldset>
         </td>
         <td>
             <br />
@@ -112,7 +108,9 @@
         <td></td>
         <td></td>
         <td colspan="3">
-            <asp:RadioButton ID="rdbRefineSearch" runat="server" GroupName="rdgpLinkOption" onClick="ClearTargetSelection();" Text="<%$ resources:rdbRefineSearch.Caption %>" />
+            <fieldset class="radio">
+                <asp:RadioButton ID="rdbRefineSearch" runat="server" GroupName="rdgpLinkOption" Text="<%$ resources:rdbRefineSearch.Caption %>" />
+            </fieldset>
         </td>
         <td>
             <br />
@@ -127,11 +125,11 @@
             <asp:Panel runat="server" ID="ctrlstButtons" CssClass="controlslist qfActionContainer">
                 <asp:Button runat="server" ID="btnBack" Text="<%$ resources: btnBack.Caption %>" CssClass="slxbutton" />
                 <asp:Button runat="server" ID="btnNext" Text="<%$ resources: btnNext.Caption %>" CssClass="slxbutton"
-                    OnClientClick="if (onRefineSearch()) return false;" OnClick="btnNext_ClickAction" />
+                    OnClientClick="if (advancedSearchOptions.onRefineSearch()) return false;" OnClick="btnNext_ClickAction" />
             </asp:Panel>
         </td>
         <td>
-            <asp:Panel runat="server" ID="Panel1" CssClass="controlslist qfActionContainer">
+            <asp:Panel runat="server" ID="pnlbuttons" CssClass="controlslist qfActionContainer">
                 <asp:Button runat="server" ID="btnCancel" Text="<%$ resources: btnCancel.Caption %>" CssClass="slxbutton" />
             </asp:Panel>
         </td>

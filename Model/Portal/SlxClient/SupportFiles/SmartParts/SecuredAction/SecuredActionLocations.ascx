@@ -9,7 +9,7 @@
 
 <div style="display:none">
     <asp:Panel ID="SecuredActionLocations_RTools" runat="server">
-        <SalesLogix:PageLink ID="lnkSecuredActionLocationsHelp" runat="server" LinkType="HelpFileName"
+        <SalesLogix:PageLink ID="lnkSecuredActionLocationsHelp" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>"
             Target="Help" NavigateUrl="SecuredActionLocationsTab"
             ImageUrl="~/ImageResource.axd?scope=global&amp;type=Global_Images&amp;key=Help_16x16" >
         </SalesLogix:PageLink>

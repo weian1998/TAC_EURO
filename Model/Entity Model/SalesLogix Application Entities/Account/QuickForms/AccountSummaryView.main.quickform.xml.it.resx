@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="txtType.Caption" xml:space="preserve">
+    <value>Tipo:</value>
+  </data>
+  <data name="agcContacts.Caption" xml:space="preserve">
+    <value>Contatti:</value>
+  </data>
+  <data name="agcTickets.Caption" xml:space="preserve">
+    <value>Ticket:</value>
+  </data>
+  <data name="agcTickets_grid.237ec3ea-f19c-4004-9e2d-f26ef117baa2.ColumnHeading" xml:space="preserve">
+    <value>Categoria</value>
+  </data>
+  <data name="agcTickets.PopupCaptionFmt" xml:space="preserve">
+    <value>Ticket per {0}</value>
+  </data>
+  <data name="agcTickets_grid.4985c44b-c1ba-4889-ad79-f77ff1eea8c1.ColumnHeading" xml:space="preserve">
+    <value>Numero Ticket</value>
+  </data>
+  <data name="agcOpportunities_grid.dd00bf0d-64d6-4eac-88bd-c5d8d5f69fa8.ColumnHeading" xml:space="preserve">
+    <value>Descrizione</value>
+  </data>
+  <data name="agcOpportunities.PopupCaptionFmt" xml:space="preserve">
+    <value>Opportunità per {0}</value>
+  </data>
+  <data name="agcContacts_grid.2e532e71-9c31-4375-ae66-8ff50b57c3f7.ColumnHeading" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="agcOpportunities.Caption" xml:space="preserve">
+    <value>Opportunità:</value>
+  </data>
+  <data name="txtSubType.Caption" xml:space="preserve">
+    <value>Sotto-tipo:</value>
+  </data>
+  <data name="txtIndustry.Caption" xml:space="preserve">
+    <value>Settore:</value>
+  </data>
+  <data name="agcContacts.PopupCaptionFmt" xml:space="preserve">
+    <value>Contatti per {0}</value>
+  </data>
+  <data name="agcOpportunities_grid.d1593898-481b-46ac-9959-c7dcfd51c7c0.ColumnHeading" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="agcContacts_grid.54487aed-d3b7-49e2-b9e5-afea03c41197.ColumnHeading" xml:space="preserve">
+    <value>Tel. Ufficio</value>
+  </data>
+  <data name="agcContacts_grid.ae8c28ca-c20e-441d-b2dc-cb915d825a35.ColumnHeading" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="txtAccountMgr.Caption" xml:space="preserve">
+    <value>Responsabile:</value>
+  </data>
+  <data name="agcTickets_grid.a0166fee-248a-4754-9088-c7a2c04cb6fa.ColumnHeading" xml:space="preserve">
+    <value>Area</value>
+  </data>
+</root>

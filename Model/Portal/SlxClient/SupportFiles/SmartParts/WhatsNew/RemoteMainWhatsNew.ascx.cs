@@ -10,6 +10,7 @@ using Sage.Platform.WebPortal.Services;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.Platform.WebPortal.Workspaces.Tab;
 using Sage.SalesLogix.LegacyBridge;
+using System.Text;
 
 public partial class RemoteMainWhatsNew : UserControl, ISmartPartInfoProvider
 {
@@ -25,6 +26,12 @@ public partial class RemoteMainWhatsNew : UserControl, ISmartPartInfoProvider
         get { return _locator; }
         set { _locator = value; }
     }
+    protected override void OnPreRender(EventArgs e)
+    {
+        SetFilterDisplay();
+
+        base.OnPreRender(e);
+    }
 
     /// <summary>
     /// Handles the Load event of the Page control.
@@ -33,7 +40,6 @@ public partial class RemoteMainWhatsNew : UserControl, ISmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void Page_Load(object sender, EventArgs e)
     {
-        SetFilterDisplay();
         if (IsPostBack) return;
 
         DateTime searchDate = DateTime.UtcNow;
@@ -52,6 +58,8 @@ public partial class RemoteMainWhatsNew : UserControl, ISmartPartInfoProvider
         }
         dteChangeDate.DateTimeValue = searchDate;
     }
+
+
 
     /// <summary>
     /// Sets the filter display.

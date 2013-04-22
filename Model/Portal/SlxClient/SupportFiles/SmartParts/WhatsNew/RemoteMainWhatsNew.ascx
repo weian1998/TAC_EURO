@@ -85,8 +85,8 @@
     var div_UpdatedButtonCtrlId = "<%= divUpdatedOption.ClientID %>";
     var div_DeletedButtonCtrlId = "<%= divDeletedOption.ClientID %>";
 
-    $(document).ready(function() {
-        TabControl.on('maintabchange', function(id, tab) {
+    $(document).ready(function () {
+        dojo.subscribe("Sage/Events/WhatsNewTabChange", null, function (id) {
             switch (id) {
                 case 'RemoteAccountsWhatsNew':
                     SetFilterOptions("inline", "inline");
@@ -116,6 +116,7 @@
             }
         });
     });
+
 
     function ResetFilterOption(IsDocumentsTab) {
         var deleteButton = document.getElementById(rdb_DeletedCtrolId);

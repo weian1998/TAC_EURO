@@ -1,15 +1,16 @@
-using System.Data;
-using Sage.Platform.Application;
-using Sage.Platform;
-using Sage.Entity.Interfaces;
 using System;
+using System.Collections;
+using System.Data;
+using System.Drawing;
+using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Text;
 using NHibernate;
-using System.Collections;
-using Sage.Platform.Framework;
+using Sage.Entity.Interfaces;
+using Sage.Platform;
+using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
+using Sage.Platform.Framework;
 using Sage.Platform.Security;
 using Sage.Platform.WebPortal.Services;
 using Sage.Platform.WebPortal.SmartParts;
@@ -17,6 +18,7 @@ using Sage.Platform.WebPortal.SmartParts;
 public partial class SmartParts_Account_AccountMarketing : EntityBoundSmartPartInfoProvider
 {
     #region Public Properties
+
     /// <summary>
     /// Gets the type of the entity.
     /// </summary>
@@ -36,6 +38,7 @@ public partial class SmartParts_Account_AccountMarketing : EntityBoundSmartPartI
     #endregion
 
     #region Protected Methods
+
     /// <summary>
     /// Derived components should override this method to wire up event handlers.
     /// </summary>
@@ -84,8 +87,8 @@ public partial class SmartParts_Account_AccountMarketing : EntityBoundSmartPartI
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            System.Data.DataRowView row = (System.Data.DataRowView)e.Row.DataItem;
-            
+            var row = (DataRowView)e.Row.DataItem;
+
             LinkButton deleteCommand = (LinkButton)e.Row.Cells[3].Controls[0];
             LinkButton removeCommand = (LinkButton)e.Row.Cells[4].Controls[0];
 
@@ -97,7 +100,7 @@ public partial class SmartParts_Account_AccountMarketing : EntityBoundSmartPartI
             }
             else
             {
-                e.Row.Cells[3].ForeColor = System.Drawing.Color.Gray;
+                e.Row.Cells[3].ForeColor = Color.Gray;
             }
 
             msg = String.Format(GetLocalResourceObject("ConfirmMessage_RemoveTargetAssociation").ToString(), e.Row.Cells[5].Text);
@@ -108,25 +111,18 @@ public partial class SmartParts_Account_AccountMarketing : EntityBoundSmartPartI
             }
             else
             {
-                e.Row.Cells[4].ForeColor = System.Drawing.Color.Gray;
+                e.Row.Cells[4].ForeColor = Color.Gray;
             }
-
-            // this code can be used if we switch out the confirm dialog with the Ext messagebox.  This would allow us to
-            // create a custom title for the dialog.
-
-            // need to add these to the resource file in order for the Ext messagebox functions to work properly.
-            //ConfirmMessage_DeleteTitle	Delete?	
-            //ConfirmMessage_RemoveTitle	Remove?	
 
             //string title = GetLocalResourceObject("ConfirmMessage_DeleteTitle").ToString();
             //deleteCommand.Attributes["href"] = "#";
-            //string cmd = string.Format("javascript:Ext.Msg.confirm('{0}', '{1}', function(btn, text) {{ if(btn =='yes') {{ __doPostBack('{2}','{3}{4}{5}'); }} }});", title, msg, grdAccountMarketing.UniqueID, deleteCommand.CommandName, IdSeparator, e.Row.RowIndex);
+            //string cmd = dojo.string.substitute("javascript:Sage.UI.Dialogs.raiseQueryDialog('${0}', '${1}', function(btn, text) {{ if(btn =='yes') {{ __doPostBack('${2}','${3}${4}${5}'); }} }});", title, msg, grdAccountMarketing.UniqueID, deleteCommand.CommandName, IdSeparator, e.Row.RowIndex);
             //deleteCommand.Attributes.Add("onclick", cmd);
 
             //msg = String.Format(GetLocalResourceObject("ConfirmMessage_RemoveTargetAssociation").ToString(), e.Row.Cells[5].Text);
             //title = GetLocalResourceObject("ConfirmMessage_RemoveTitle").ToString();
             //removeCommand.Attributes["href"] = "#";
-            //cmd = string.Format("javascript:Ext.Msg.confirm('{0}', '{1}', function(btn, text) {{ if(btn =='yes') {{ __doPostBack('{2}','{3}{4}{5}'); }} }});", title, msg, grdAccountMarketing.UniqueID, removeCommand.CommandName, IdSeparator, e.Row.RowIndex);
+            //cmd = dojo.string.substitute("javascript:Sage.UI.Dialogs.raiseQueryDialog('${0}', '${1}', function(btn, text) {{ if(btn =='yes') {{ __doPostBack('${2}','${3}${4}${5}'); }} }});", title, msg, grdAccountMarketing.UniqueID, removeCommand.CommandName, IdSeparator, e.Row.RowIndex);
             //removeCommand.Attributes.Add("onclick", cmd);
         }
     }
@@ -162,7 +158,7 @@ public partial class SmartParts_Account_AccountMarketing : EntityBoundSmartPartI
         switch (e.CommandName.ToUpper())
         {
             case "ADD":
-                if (targetResponse == null  || targetResponse.Id != null)
+                if (targetResponse == null || targetResponse.Id != null)
                 {
                     targetResponse = EntityFactory.Create<ITargetResponse>();
                     targetResponse.Campaign = campaignTarget.Campaign;
@@ -233,6 +229,7 @@ public partial class SmartParts_Account_AccountMarketing : EntityBoundSmartPartI
     protected void AccountMarketing_RowEditing(object sender, GridViewEditEventArgs e)
     {
         grdAccountMarketing.SelectedIndex = e.NewEditIndex;
+        e.Cancel = true;
     }
 
     /// <summary>
@@ -241,7 +238,7 @@ public partial class SmartParts_Account_AccountMarketing : EntityBoundSmartPartI
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">The <see cref="System.Web.UI.WebControls.GridViewSortEventArgs"/> instance containing the event data.</param>
     protected void AccountMarketing_Sorting(object sender, GridViewSortEventArgs e)
-    {  
+    {
     }
 
     /// <summary>
@@ -257,6 +254,7 @@ public partial class SmartParts_Account_AccountMarketing : EntityBoundSmartPartI
     #endregion
 
     #region Private Methods
+
     /// <summary>
     /// Gets the order by clause.
     /// </summary>
@@ -301,25 +299,25 @@ public partial class SmartParts_Account_AccountMarketing : EntityBoundSmartPartI
                     }
                     IQuery q = session.CreateQuery(qry.ToString());
 
-                    q.SetAnsiString("accountId", account.Id.ToString());
+                    q.SetParameter("accountId", account.Id);
 
                     IList result;
                     using (new SparseQueryScope())
                     {
-                       result = q.List();
+                        result = q.List();
                     }
-                    System.Data.DataTable dt = new System.Data.DataTable();
+                    var dt = new DataTable();
                     dt.Columns.Add("CampaignName");
                     dt.Columns.Add("CampaignCode");
                     dt.Columns.Add("Status");
                     dt.Columns.Add("Stage");
                     dt.Columns.Add("ContactId");
                     dt.Columns.Add("Contact");
-                    System.Data.DataColumn col = new System.Data.DataColumn("StartDate", typeof(DateTime));
+                    var col = new DataColumn("StartDate", typeof(DateTime));
                     dt.Columns.Add(col);
-                    col = new System.Data.DataColumn("EndDate", typeof(DateTime));
+                    col = new DataColumn("EndDate", typeof(DateTime));
                     dt.Columns.Add(col);
-                    col = new System.Data.DataColumn("ResponseDate", typeof(DateTime));
+                    col = new DataColumn("ResponseDate", typeof(DateTime));
                     dt.Columns.Add(col);
                     dt.Columns.Add("ResponseMethod");
                     dt.Columns.Add("TargetId");
@@ -400,7 +398,7 @@ public partial class SmartParts_Account_AccountMarketing : EntityBoundSmartPartI
                 DialogService.EntityID = targetResponse.Id.ToString();
                 targetResponse.Contact = EntityFactory.GetById<IContact>(targetResponse.CampaignTarget.EntityId);
             }
-                
+
             DialogService.DialogParameters.Add("ResponseDataSource", targetResponse);
             DialogService.ShowDialog();
         }
@@ -423,6 +421,7 @@ public partial class SmartParts_Account_AccountMarketing : EntityBoundSmartPartI
             }
         }
     }
+
     #endregion
 
     #region ISmartPartInfoProvider Members
@@ -437,7 +436,7 @@ public partial class SmartParts_Account_AccountMarketing : EntityBoundSmartPartI
     /// </returns>
     public override ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
     {
-        Sage.Platform.WebPortal.SmartParts.ToolsSmartPartInfo tinfo = new ToolsSmartPartInfo();
+        var tinfo = new ToolsSmartPartInfo();
         foreach (Control c in AccountMarketing_RTools.Controls)
         {
             tinfo.RightTools.Add(c);

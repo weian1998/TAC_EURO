@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="ddef9783-eb63-4fdf-8641-c0848be13d52" lastModifiedUtc="2010-12-01T06:46:17.2978614Z" manageSchema="false" tableName="DEFECTSOLUTION" name="DefectSolution" isExtension="true" parentEntityId="aa22326e-6c3b-4a21-9518-0fb886e370d1" audited="true" generateSDataFeed="true" sDataPathName="defectSolutions" lastUpdatedPropertyId="0d91a13e-6562-4541-a922-85c6723c9ad9" onBeforeInsertMethodId="172c1e0a-9361-420e-864f-33bb2be1a8ef" onAfterInsertMethodId="bb94ad61-62be-478a-a971-d1a7cb2aa93e" onBeforeUpdateMethodId="725c135a-f567-4cd3-8f35-dd950b0e8cd2" onAfterUpdateMethodId="845235b3-b423-426d-8a25-48f4193d46de" onBeforeDeleteMethodId="02d85b23-df08-49a8-a850-d2509dd7bec1" onAfterDeleteMethodId="7d12e039-ba52-4c3a-8a84-a44dcb10d6e9" onCreateId="29c363cd-27d5-42c0-8698-c40e19accd69">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="ddef9783-eb63-4fdf-8641-c0848be13d52" lastModifiedUtc="2010-12-01T06:46:17.2978614Z" manageSchema="true" tableName="DEFECTSOLUTION" name="DefectSolution" isExtension="true" parentEntityId="aa22326e-6c3b-4a21-9518-0fb886e370d1" audited="true" generateSDataFeed="true" sDataPathName="defectSolutions" lastUpdatedPropertyId="0d91a13e-6562-4541-a922-85c6723c9ad9" onBeforeInsertMethodId="172c1e0a-9361-420e-864f-33bb2be1a8ef" onAfterInsertMethodId="bb94ad61-62be-478a-a971-d1a7cb2aa93e" onBeforeUpdateMethodId="725c135a-f567-4cd3-8f35-dd950b0e8cd2" onAfterUpdateMethodId="845235b3-b423-426d-8a25-48f4193d46de" onBeforeDeleteMethodId="02d85b23-df08-49a8-a850-d2509dd7bec1" onAfterDeleteMethodId="7d12e039-ba52-4c3a-8a84-a44dcb10d6e9" onCreateId="29c363cd-27d5-42c0-8698-c40e19accd69">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
@@ -24,14 +24,14 @@
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="30dc3093-8b9b-4159-8fcd-29ab2cc7cdb6" lastModifiedUtc="0001-01-01T00:00:00" name="Notes" audited="false" columnName="NOTES" maxLength="2147483647" precision="0" scale="0" ordinal="1" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="30dc3093-8b9b-4159-8fcd-29ab2cc7cdb6" lastModifiedUtc="2012-02-10T03:17:29.2961341Z" name="Notes" audited="false" columnName="NOTES" maxLength="2147483647" precision="0" scale="0" ordinal="1" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
-      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
-        <TextDataType>
+      <SystemDataType guid="f4ca6023-9f5f-4e41-8571-50ba94e8f233">
+        <LongTextDataType>
           <Length>2147483647</Length>
-        </TextDataType>
+        </LongTextDataType>
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="531d935f-8685-4543-a5fd-23d170ed8d0d" lastModifiedUtc="0001-01-01T00:00:00" name="CreateUser" audited="false" columnName="CREATEUSER" maxLength="12" precision="0" scale="0" ordinal="2" isReadOnly="false">

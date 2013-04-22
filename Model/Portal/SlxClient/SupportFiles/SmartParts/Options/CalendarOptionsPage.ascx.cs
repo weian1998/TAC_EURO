@@ -1,30 +1,134 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
 using System.Collections.Generic;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
-using Sage.Entity.Interfaces;
-using Sage.Platform;
-using Sage.Platform.Security;
-using Sage.Platform.Application;
-using Sage.Platform.Application.Services;
-using Sage.SalesLogix.Security;
 using Sage.SalesLogix.WebUserOptions;
 using Sage.Platform.Application.UI;
-using Sage.Platform.Repository;
-using Sage.SalesLogix.Activity;
 
 public partial class CalendarOptionsPage : Sage.Platform.WebPortal.SmartParts.SmartPart, ISmartPartInfoProvider
 {
+    // ****  09.22.11  kw  I think this should be here, for the category...
+    private const string CategoryCalendar = "Calendar";
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        UserOptionsManager options = new UserOptionsManager(CategoryCalendar, Server.MapPath(@"App_Data\LookupValues"));
+        // load dropdown lists
+        ddlDefaultCalendarView.DataSource = options.GetOptionsList("DefaultCalendarView");
+        ddlDefaultCalendarView.DataTextField = options.DataTextField;
+        ddlDefaultCalendarView.DataValueField = options.DataValueField;
+
+        ddlNumberOfEvents.DataSource = options.GetOptionsList("NumberOfEvents");
+        ddlNumberOfEvents.DataTextField = options.DataTextField;
+        ddlNumberOfEvents.DataValueField = options.DataValueField;
+
+        ddlDisplayContactAccount.DataSource = options.GetOptionsList("DisplayContactAccount");
+        ddlDisplayContactAccount.DataTextField = options.DataTextField;
+        ddlDisplayContactAccount.DataValueField = options.DataValueField;
+
+        ddlDayStart.DataSource = FormatDateTimeList(options.GetOptionsList("DayStart"));
+        ddlDayStart.DataTextField = options.DataValueField;
+        ddlDayStart.DataValueField = options.DataTextField;
+
+        ddlDayEnd.DataSource = FormatDateTimeList(options.GetOptionsList("DayEnd"));
+        ddlDayEnd.DataTextField = options.DataValueField;
+        ddlDayEnd.DataValueField = options.DataTextField;
+
+        // NEW to Sawgrass, not in LAN
+        ddlDefaultInterval.DataSource = options.GetOptionsList("DefaultInterval");
+        ddlDefaultInterval.DataTextField = options.DataValueField;
+        ddlDefaultInterval.DataValueField = options.DataValueField;
+
+        ddlDefaultActivityType.DataSource = options.GetOptionsList("DefaultActivityType");
+        ddlDefaultActivityType.DataTextField = options.DataTextField;
+        ddlDefaultActivityType.DataValueField = options.DataValueField;
+
+        ddlFirstDayOfWeek.DataSource = LocalizeLookup("DayOfWeek", options.GetOptionsList("FirstDayOfWeek"));
+        ddlFirstDayOfWeek.DataTextField = options.DataTextField;
+        ddlFirstDayOfWeek.DataValueField = options.DataValueField;
+
+        ddlFirstWeekOfYear.DataSource = options.GetOptionsList("FirstWeekOfYear");
+        ddlFirstWeekOfYear.DataTextField = options.DataTextField;
+        ddlFirstWeekOfYear.DataValueField = options.DataValueField;
+
+        chkOpportunity.Checked = false;
+        chkPhoneNumber.Checked = false;
+        chkRegarding.Checked = false;
+        chkTime.Checked = false;
+
+        // set day checkboxes for common workweek
+        chkMon.Checked = true;
+        chkTue.Checked = true;
+        chkWed.Checked = true;
+        chkThu.Checked = true;
+        chkFri.Checked = true;
+
+        DataBind();
+    }
+
     protected void Page_PreRender(object sender, EventArgs e)
     {
-        CalendarOptions options = null;
+        UserOptionsManager options = new UserOptionsManager(CategoryCalendar, Server.MapPath(@"App_Data\LookupValues"));
+        Utility.SetSelectedValue(ddlDefaultCalendarView, options.GetOptionAsString("DefaultCalendarView"));
+        Utility.SetSelectedValue(ddlNumberOfEvents, options.GetOptionAsString("NumEvents"));
+        Utility.SetSelectedValue(ddlShowHistoryOnDayView, options.GetOptionAsString("LoadHistoryOnStart"));
+        Utility.SetSelectedValue(ddlRememberSelectedUsers, options.GetOptionAsString("RememberUsers"));
+        Utility.SetSelectedValue(ddlDisplayContactAccount, options.GetOptionAsString("DisplayContactAccount"));
+
+        string dayStart = options.GetOptionAsString("DayStartTime");
+        if (!string.IsNullOrEmpty(dayStart))
+        {
+            DateTime timeHolder = DateTime.Parse(dayStart);
+            ddlDayStart.ClearSelection();
+
+            ListItem startItem = ddlDayStart.Items.FindByValue(timeHolder.ToString("t"));
+            if (startItem != null)
+                startItem.Selected = true;
+            else
+            {
+                startItem = ddlDayStart.Items.FindByText(timeHolder.ToString("t"));
+                if (startItem != null)
+                    startItem.Selected = true;
+            }
+        }
+        string dayEnd = options.GetOptionAsString("DayEndTime");
+        if (!string.IsNullOrEmpty(dayEnd))
+        {
+            DateTime timeHolder = DateTime.Parse(dayEnd);
+
+            ddlDayEnd.ClearSelection();
+            ListItem endItem = ddlDayEnd.Items.FindByValue(timeHolder.ToString("t"));
+            if (endItem != null)
+                endItem.Selected = true;
+            else
+            {
+                endItem = ddlDayEnd.Items.FindByText(timeHolder.ToString("t"));
+                if (endItem != null)
+                    endItem.Selected = true;
+            }
+        }
+
+        chkOpportunity.Checked = options.GetOptionAsBoolean("ShowOnOpportunities");
+        chkPhoneNumber.Checked = options.GetOptionAsBoolean("ShowOnPhoneNumber");
+        chkRegarding.Checked = options.GetOptionAsBoolean("ShowOnRegarding");
+        chkTime.Checked = options.GetOptionAsBoolean("ShowOnTime");
+        chkMon.Checked = options.GetOptionAsBoolean("WorkWeekMon");
+        chkTue.Checked = options.GetOptionAsBoolean("WorkWeekTue");
+        chkWed.Checked = options.GetOptionAsBoolean("WorkWeekWed");
+        chkThu.Checked = options.GetOptionAsBoolean("WorkWeekThu");
+        chkFri.Checked = options.GetOptionAsBoolean("WorkWeekFri");
+        chkSat.Checked = options.GetOptionAsBoolean("WorkWeekSat");
+        chkSun.Checked = options.GetOptionAsBoolean("WorkWeekSun");
+
+        Utility.SetSelectedValue(ddlDefaultInterval, options.GetOptionAsString("DefaultInterval"));
+        Utility.SetSelectedValue(ddlDefaultActivityType, options.GetOptionAsString("DefaultActivity"));
+        Utility.SetSelectedValue(ddlFirstDayOfWeek, options.GetOptionAsString("WeekStart"));
+        Utility.SetSelectedValue(ddlFirstWeekOfYear, options.GetOptionAsString("FirstWeekOfYear"));
+    }
+
+    protected void Page_PreRenderOld(object sender, EventArgs e)
+    {
+        CalendarOptions options;
         try
         {
             options = CalendarOptions.Load(Server.MapPath(@"App_Data\LookupValues"));
@@ -36,63 +140,24 @@ public partial class CalendarOptionsPage : Sage.Platform.WebPortal.SmartParts.Sm
             options = CalendarOptions.CreateNew(Server.MapPath(@"App_Data\LookupValues"));
         }
 
-        _defaultCalendarView.DataSource = options.DefaultCalendarViewLookupList;
-        _defaultCalendarView.DataTextField = options.DataTextField;
-        _defaultCalendarView.DataValueField = options.DataValueField;
-
-        _showHistoryOnDayView.DataSource = options.ShowHistoryOnDayViewLookupList;
-        _showHistoryOnDayView.DataTextField = options.DataTextField;
-        _showHistoryOnDayView.DataValueField = options.DataValueField;
-
-        _showOnActivities.DataSource = options.ShowOnActivitiesLookupList;
-        _showOnActivities.DataTextField = options.DataTextField;
-        _showOnActivities.DataValueField = options.DataValueField;
-
-        _dayStart.DataSource = options.DayStartLookupList;
-        _dayStart.DataTextField = options.DataValueField;
-        _dayStart.DataValueField = options.DataTextField;
-
-        _dayEnd.DataSource = options.DayEndLookupList;
-        _dayEnd.DataTextField = options.DataValueField;
-        _dayEnd.DataValueField = options.DataTextField;
-
-        _defaultInterval.DataSource = options.DefaultIntervalLookupList;
-        _defaultInterval.DataTextField = options.DataValueField;
-        _defaultInterval.DataValueField = options.DataValueField;
-
-        _firstDayOfWeek.DataSource = LocalizeLookup("DayOfWeek", options.FistDayOfWeekList); 
-        _firstDayOfWeek.DataTextField = options.DataTextField;
-        _firstDayOfWeek.DataValueField = options.DataValueField;
-
-
-        DataBind();
-        BindUsers();
-
-        // set defaults
-        Utility.SetSelectedValue(_defaultCalendarView, options.DefaultCalendarView);
-        Utility.SetSelectedValue(_showHistoryOnDayView, options.ShowHistoryOnDayView);
-      
-
-        if (!Utility.SetSelectedValue(UserList, options.ViewCalendarFor))
-        {
-            Utility.SetSelectedValue(UserList,
-                                     ((SLXUserService)(ApplicationContext.Current.Services.Get<IUserService>())).
-                                         GetUser().Id.ToString());
-        }
-
-        Utility.SetSelectedValue(_showOnActivities, options.ShowOnActivities);
+        // set user defaults
+        Utility.SetSelectedValue(ddlDefaultCalendarView, options.DefaultCalendarView);
+        Utility.SetSelectedValue(ddlNumberOfEvents, options.NumberOfEvents);
+        Utility.SetSelectedValue(ddlShowHistoryOnDayView, options.ShowHistoryOnDayView);
+        Utility.SetSelectedValue(ddlRememberSelectedUsers, options.RememberSelectedUsers);
+        Utility.SetSelectedValue(ddlDisplayContactAccount, options.DisplayContactAccount);
 
         if (!string.IsNullOrEmpty(options.DayStart))
         {
             DateTime timeHolder = DateTime.Parse(options.DayStart);
-            _dayStart.ClearSelection();
+            ddlDayStart.ClearSelection();
 
-            ListItem startItem = _dayStart.Items.FindByValue(timeHolder.ToString("t"));
+            ListItem startItem = ddlDayStart.Items.FindByValue(timeHolder.ToString("t"));
             if (startItem != null)
                 startItem.Selected = true;
             else
             {
-                startItem = _dayStart.Items.FindByText(timeHolder.ToString("t"));
+                startItem = ddlDayStart.Items.FindByText(timeHolder.ToString("t"));
                 if (startItem != null)
                     startItem.Selected = true;
             }
@@ -102,39 +167,62 @@ public partial class CalendarOptionsPage : Sage.Platform.WebPortal.SmartParts.Sm
         {
             DateTime timeHolder = DateTime.Parse(options.DayEnd);
 
-            _dayEnd.ClearSelection();
-            ListItem endItem = _dayEnd.Items.FindByValue(timeHolder.ToString("t"));
+            ddlDayEnd.ClearSelection();
+            ListItem endItem = ddlDayEnd.Items.FindByValue(timeHolder.ToString("t"));
             if (endItem != null)
                 endItem.Selected = true;
             else
             {
-                endItem = _dayEnd.Items.FindByText(timeHolder.ToString("t"));
+                endItem = ddlDayEnd.Items.FindByText(timeHolder.ToString("t"));
                 if (endItem != null)
                     endItem.Selected = true;
             }
         }
 
-        Utility.SetSelectedValue(_defaultInterval, options.DefaultInterval);
+        chkOpportunity.Checked = options.ShowOpportunities;
+        chkPhoneNumber.Checked = options.ShowPhoneNumber;
+        chkRegarding.Checked = options.ShowRegarding;
+        chkTime.Checked = options.ShowTime;
+        chkMon.Checked = options.WorkWeekMon;
+        chkTue.Checked = options.WorkWeekTue;
+        chkWed.Checked = options.WorkWeekWed;
+        chkThu.Checked = options.WorkWeekThu;
+        chkFri.Checked = options.WorkWeekFri;
+        chkSat.Checked = options.WorkWeekSat;
+        chkSun.Checked = options.WorkWeekSun;
+
+        Utility.SetSelectedValue(ddlDefaultInterval, options.DefaultInterval);
         Utility.SetSelectedValue(ddlDefaultActivityType, options.DefaultActivityType);
-        Utility.SetSelectedValue(_firstDayOfWeek, options.FirstDayOfTheWeek);
+        Utility.SetSelectedValue(ddlFirstDayOfWeek, options.FirstDayOfWeek);
+        Utility.SetSelectedValue(ddlFirstWeekOfYear, options.FirstWeekOfYear);
+
     }
 
     protected void _save_Click(object sender, EventArgs e)
     {
-        // save values
-        CalendarOptions options = new CalendarOptions(Server.MapPath(@"App_Data\LookupValues"));
-        options.DefaultCalendarView = _defaultCalendarView.SelectedValue;
-        options.ShowHistoryOnDayView = _showHistoryOnDayView.SelectedValue;
-        options.ViewCalendarFor = UserList.SelectedValue;
-        options.ShowOnActivities = _showOnActivities.SelectedValue;
-        options.DayStart = _dayStart.SelectedItem.Text; // _dayStart.SelectedValue;
-        options.DayEnd = _dayEnd.SelectedItem.Text; // _dayEnd.SelectedValue;
-        options.DefaultInterval = _defaultInterval.SelectedValue;
-        options.DefaultActivityType = ddlDefaultActivityType.SelectedValue;
-        options.FirstDayOfTheWeek = _firstDayOfWeek.SelectedValue;
-
-        options.Save();
-
+        UserOptionsManager options = new UserOptionsManager(CategoryCalendar, Server.MapPath(@"App_Data\LookupValues"));
+        options.SetOptionAsString("DefaultCalendarView", ddlDefaultCalendarView.SelectedValue);
+        options.SetOptionAsString("NumEvents", ddlNumberOfEvents.SelectedValue);
+        options.SetOptionAsString("LoadHistoryOnStart", ddlShowHistoryOnDayView.SelectedValue);
+        options.SetOptionAsString("RememberUsers", ddlRememberSelectedUsers.SelectedValue);
+        options.SetOptionAsString("DisplayContactAccount", ddlDisplayContactAccount.SelectedValue);
+        options.SetOptionAsString("DayStartTime", ddlDayStart.SelectedValue);
+        options.SetOptionAsString("DayEndTime", ddlDayEnd.SelectedValue);
+        options.SetOptionAsString("DefaultInterval", ddlDefaultInterval.SelectedValue);
+        options.SetOptionAsString("DefaultActivity", ddlDefaultActivityType.SelectedValue);
+        options.SetOptionAsString("WeekStart", ddlFirstDayOfWeek.SelectedValue);
+        options.SetOptionAsString("FirstWeekOfYear", ddlFirstWeekOfYear.SelectedValue);
+        options.SetOptionAsBoolean("ShowOnOpportunities", chkOpportunity.Checked);
+        options.SetOptionAsBoolean("ShowOnPhoneNumber", chkPhoneNumber.Checked);
+        options.SetOptionAsBoolean("ShowOnRegarding", chkRegarding.Checked);
+        options.SetOptionAsBoolean("ShowOnTime", chkTime.Checked);
+        options.SetOptionAsBoolean("WorkWeekMon", chkMon.Checked);
+        options.SetOptionAsBoolean("WorkWeekTue", chkTue.Checked);
+        options.SetOptionAsBoolean("WorkWeekWed", chkWed.Checked);
+        options.SetOptionAsBoolean("WorkWeekThu", chkThu.Checked);
+        options.SetOptionAsBoolean("WorkWeekFri", chkFri.Checked);
+        options.SetOptionAsBoolean("WorkWeekSat", chkSat.Checked);
+        options.SetOptionAsBoolean("WorkWeekSun", chkSun.Checked);
     }
 
     /// <summary>
@@ -144,63 +232,39 @@ public partial class CalendarOptionsPage : Sage.Platform.WebPortal.SmartParts.Sm
     /// <returns></returns>
     public ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
     {
-        Sage.Platform.WebPortal.SmartParts.ToolsSmartPartInfo tinfo = new Sage.Platform.WebPortal.SmartParts.ToolsSmartPartInfo();
+        Sage.Platform.WebPortal.SmartParts.ToolsSmartPartInfo tinfo =
+            new Sage.Platform.WebPortal.SmartParts.ToolsSmartPartInfo();
         tinfo.Description = GetLocalResourceObject("PageDescription.Text").ToString();
         tinfo.Title = GetLocalResourceObject("PageDescription.Title").ToString();
-        foreach (Control c in this.LitRequest_RTools.Controls)
+        foreach (Control c in LitRequest_RTools.Controls)
         {
             tinfo.RightTools.Add(c);
         }
-        //tinfo.ImagePath = Page.ResolveClientUrl("~/images/icons/Schdedule_To_Do_24x24.gif");
         return tinfo;
-    }
-
-    private void BindUsers()
-    {
-        if (IsActivating)
-        {
-            IUser loggedOnUser = ((SLXUserService)(ApplicationContext.Current.Services.Get<IUserService>())).GetUser();
-            UserList.Items.Add(new ListItem(loggedOnUser.ToString(), loggedOnUser.Id.ToString()));
-
-            IList<IUser> results = UserCalendar.GetCalendarUsers(loggedOnUser.Id.ToString());
-            int selectedindex = 0;
-            int i = 1;
-            if (results != null)
-            {
-                foreach (IUser listUser in results)
-                {
-                    if (!loggedOnUser.Equals(listUser))
-                    {
-                        UserList.Items.Add(new ListItem(listUser.ToString(), listUser.Id.ToString()));
-                    }
-                    i++;
-                }
-            }
-            UserList.SelectedIndex = selectedindex;
-        }
     }
 
     private IDictionary<string, string> LocalizeLookup(string localizationTag, IDictionary<string, string> lookup)
     {
         IDictionary<string, string> ll = new Dictionary<string, string>();
-
         foreach (KeyValuePair<string, string> item in lookup)
         {
             //Every thing is back wards in that the key is text and value is the key. this stems from Sage.SalesLogix.Web.UserOptoipns Project where Options based is defined. 
             var localizedText = GetLocalResourceObject(string.Format("{0}_{1}.Text", localizationTag, item.Key));
-            if (localizedText != null)
-            {
-                ll.Add(localizedText.ToString(), item.Value);
-            }
-            else 
-            {
-                ll.Add(item.Key, item.Value);
-            }
-
+            ll.Add(localizedText != null ? localizedText.ToString() : item.Key, item.Value);
         }
-
         return ll;
-    
     }
 
+    public Dictionary<string, string> FormatDateTimeList(Dictionary<string, string> timeList)
+    {
+        Dictionary<string, string> localDictionary = new Dictionary<string, string>(timeList.Count);
+        DateTime timeObj = DateTime.MinValue;
+        foreach (KeyValuePair<string, string> entry in timeList)
+        {
+            timeObj = DateTime.Parse(entry.Key);
+            string formattedTime = timeObj.ToString("t");
+            localDictionary.Add(entry.Key, formattedTime);
+        }
+        return localDictionary;
+    }
 }

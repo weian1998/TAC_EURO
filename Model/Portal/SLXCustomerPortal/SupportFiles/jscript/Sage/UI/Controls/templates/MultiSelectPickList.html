@@ -1,0 +1,17 @@
+<div>
+    <input id="${id}-TextBox" data-dojo-type="dijit.form.TextBox" data-dojo-attach-point="textNode" data-dojo-attach-event="onBlur: _onTextBlur" />
+    <div id="${id}-Button" data-dojo-type="dijit.form.DropDownButton" data-dojo-attach-point="dropDownButtonNode">
+        <span></span>
+        <div class="multiSelectPickListDialog" id="${id}-ToolTipDialog" data-dojo-type="dijit.TooltipDialog" data-dojo-attach-point="tooltipDialogNode" data-dojo-attach-event="onClose: _onTooltipClose, onShow: _onTooltipShow">
+            <div data-dojo-attach-point="tooltipContainer" style="height:200px; overflow-y:auto;">
+            
+            </div>
+            
+            <div style="width: 100%; text-align:right">
+                <p>
+                    <button id="${id}-OKButton" data-dojo-type="dijit.form.Button" type="submit">${okText}</button>
+                <p>
+            </div>
+        </div>
+    </div>
+</div>

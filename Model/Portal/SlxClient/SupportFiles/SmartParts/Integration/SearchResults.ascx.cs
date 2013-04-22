@@ -8,121 +8,15 @@ using Sage.Common.Syndication.Json;
 using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
 using Sage.Platform.WebPortal.SmartParts;
+using Sage.SalesLogix.IntegrationContract.Matching;
 using Sage.SalesLogix.Services;
 using Sage.SalesLogix.Services.Integration;
-using Sage.SalesLogix.Web.SData;
 using SmartPartInfoProvider=Sage.Platform.WebPortal.SmartParts.SmartPartInfoProvider;
 
-public partial class SearchResults : SmartPartInfoProvider, IScriptControl
+public partial class SearchResults : SmartPartInfoProvider
 {
     private static IntegrationManager _integrationManager;
-    private SearchResultsScript _searchResultsScript;
-    private bool loadSearchResults = true;
-
-    public class SearchResultsScript
-    {
-        /// <summary>
-        /// Gets or sets the page Id.
-        /// </summary>
-        /// <value>The Id of the page.</value>
-        [JsonProperty("id")]
-        public string Id { get; set; }
-
-        [JsonProperty("clientId")]
-        public string ClientId { get; set; }
-
-        [JsonProperty("targetAccount")]
-        public string TargetAccount { get; set; }
-
-        [JsonProperty("sourceAccountId")]
-        public string SourceAccountId { get; set; }
-
-        [JsonProperty("resourceKind")]
-        public object ResourceKind { get; set; }
-
-        [JsonProperty("optionRefineSearchId")]
-        public object OptionRefineSearchId { get; set; }
-
-        [JsonProperty("descriptionText")]
-        public object DescriptionText { get; set; }
-
-        [JsonProperty("headerText")]
-        public object HeaderText { get; set; }
-
-        [JsonProperty("propertyValue")]
-        public object PropertyValue { get; set; }
-
-        [JsonProperty("operatorValue")]
-        public object OperatorValue { get; set; }
-
-        [JsonProperty("searchValue")]
-        public object SearchValue { get; set; }
-
-        [JsonProperty("dialogCaption")]
-        public object DialogCaption { get; set; }
-
-        [JsonProperty("errorSaveConfig")]
-        public object ErrorSaveConfig { get; set; }
-
-        [JsonProperty("cancelButton")]
-        public object CancelButton { get; set; }
-
-        [JsonProperty("OKButton")]
-        public object OKButton { get; set; }
-
-        [JsonProperty("refreshGridId")]
-        public object RefreshGridId { get; set; }
-
-        [JsonProperty("filtersId")]
-        public object FiltersId { get; set; }
-
-        [JsonProperty("rowLinkToId")]
-        public object RowLinkToId { get; set; }
-
-        [JsonProperty("rowSearchResultsId")]
-        public object RowSearchResultsId { get; set; }
-
-        [JsonProperty("loadingDisplay")]
-        public object LoadingDisplay { get; set; }
-
-        [JsonProperty("resultsMsgId")]
-        public object ResultsMsgId { get; set; }
-
-        /// <summary>
-        /// Froms the specified page.
-        /// </summary>
-        /// <param name="page">The page.</param>
-        /// <returns></returns>
-        public static SearchResultsScript Initialize(SearchResults page)
-        {
-            SearchResultsScript searchResultsScript = new SearchResultsScript();
-            searchResultsScript.Id = page.ID;
-            searchResultsScript.ClientId = page.ClientID;
-            searchResultsScript.TargetAccount = _integrationManager.TargetMapping.Name;
-            searchResultsScript.SourceAccountId = _integrationManager.SourceAccount.Id.ToString();
-            searchResultsScript.ResourceKind = Sage.SalesLogix.Web.SData.Constants.TradingAcctResourceKind;
-            searchResultsScript.OptionRefineSearchId = page.rdbRefineSearch.ClientID;
-            searchResultsScript.DescriptionText = page.GetLocalResourceObject("refineSearch_DescriptionText");
-            searchResultsScript.HeaderText = page.GetLocalResourceObject("refineSearch_HeaderText");
-            searchResultsScript.PropertyValue = page.GetLocalResourceObject("refineSearch_PropertyValue");
-            searchResultsScript.OperatorValue = page.GetLocalResourceObject("refineSearch_OperatorValue");
-            searchResultsScript.SearchValue = page.GetLocalResourceObject("refineSearch_SearchValue");
-            searchResultsScript.DialogCaption = page.GetLocalResourceObject("refineSearch_DialogCaption");
-            searchResultsScript.ErrorSaveConfig = page.GetLocalResourceObject("refineSearch_error_saveConfig");
-            searchResultsScript.CancelButton = page.GetLocalResourceObject("refineSearch_CancelButton");
-            searchResultsScript.OKButton = page.GetLocalResourceObject("refineSearch_OkButton");
-            searchResultsScript.RefreshGridId = page.btnRefreshGrid.ClientID;
-            searchResultsScript.FiltersId = page.txtFilters.ClientID;
-            searchResultsScript.RowLinkToId = page.rowLinkTo.ClientID;
-            searchResultsScript.RowSearchResultsId = page.rowSearchResults.ClientID;
-            searchResultsScript.ResultsMsgId = page.lblResultsMsg.ClientID;
-            searchResultsScript.LoadingDisplay = page.GetLocalResourceObject("lblLoading.Caption");
-            ISessionService sessionService = ApplicationContext.Current.Services.Get<ISessionService>(true);
-            ISessionState sessionState = sessionService.GetSessionState();
-            sessionState["IntegrationManager"] = _integrationManager;
-            return searchResultsScript;
-        }
-    }
+    private bool _loadSearchResults = true;
 
     /// <summary>
     /// Gets the integration manager.
@@ -152,13 +46,10 @@ public partial class SearchResults : SmartPartInfoProvider, IScriptControl
     /// <value>The index of the selected target.</value>
     private int SelectedTargetIndex
     {
-        get
-        {
-            if (String.IsNullOrEmpty(Request.Form["TargetsGroup"]))
-            {
-                return -1;
-            }
-            return Convert.ToInt32(Request.Form["TargetsGroup"]);
+        get {
+            return String.IsNullOrEmpty(Request.Form["TargetsGroup"])
+                       ? -1
+                       : Convert.ToInt32(Request.Form["TargetsGroup"]);
         }
     }
 
@@ -168,33 +59,60 @@ public partial class SearchResults : SmartPartInfoProvider, IScriptControl
     /// <param name="e">An <see cref="T:System.EventArgs"/> object that contains the event data.</param>
     protected override void OnPreRender(EventArgs e)
     {
-        if (loadSearchResults)
+        try
         {
-            grdMatches.DataSource = IntegrationManager.GetMatches();
-            grdMatches.DataBind();
+            InitializeScript();
+            rdbCreateNew.Attributes.Add("onClick", "return advancedSearchOptions.clearTargetSelection();");
+            rdbRefineSearch.Attributes.Add("onClick", "return advancedSearchOptions.clearTargetSelection();");
+            string error = String.Empty;
+            if (_loadSearchResults)
+            {
+                grdMatches.DataSource = IntegrationManager.GetMatches(out error);
+                grdMatches.DataBind();
+            }
+            SetViewDisplay(error);
         }
-        SetViewDisplay();
-        InitializeScript();
+        catch (Exception ex)
+        {
+            rdbRefineSearch.Visible = false;
+            //SetViewDisplay will update UI to display the appropriate error
+        }
     }
 
     private void InitializeScript()
     {
-        if (_searchResultsScript == null)
-        {
-            _searchResultsScript = SearchResultsScript.Initialize(this);
-        }
-        StringBuilder script = new StringBuilder();
-        script.AppendFormat("SmartParts.Integration.SearchResults.create('{0}', {1})", ID,
-                            JsonConvert.SerializeObject(_searchResultsScript));
-
-        if (ScriptManager.GetCurrent(Page).IsInAsyncPostBack)
-            ScriptManager.RegisterStartupScript(Page, typeof (Page), "SearchResults",
-                                                script.ToString(), true);
-        if (ScriptManager.GetCurrent(Page) != null)
-            ScriptManager.GetCurrent(Page).RegisterScriptControl(this);
+        ISessionService sessionService = ApplicationContext.Current.Services.Get<ISessionService>(true);
+        ISessionState sessionState = sessionService.GetSessionState();
+        sessionState["IntegrationManager"] = IntegrationManager;
+        var script = new StringBuilder();
+        script.AppendLine("require(['Sage/MainView/IntegrationContract/AdvancedSearchOptions', 'dojo/ready'],");
+        script.AppendLine(" function(advancedSearchOptions, dojoReady) {");
+        script.AppendLine("     dojoReady(function() {window.advancedSearchOptions = new Sage.MainView.IntegrationContract.AdvancedSearchOptions();");
+        script.AppendLine("         window.advancedSearchOptions.init(" + GetWorkSpace() + ");");
+        script.AppendLine("     });");
+        script.AppendLine(" });");
+        ScriptManager.RegisterStartupScript(Page, GetType(), "AdvancedSearchOptions", script.ToString(), true);
     }
 
-    private void SetViewDisplay()
+    private string GetWorkSpace()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append("{");
+        sb.AppendFormat("Id:'{0}',", ID);
+        sb.AppendFormat("clientId:'{0}',", ClientID);
+        sb.AppendFormat("targetAccount:'{0}',", IntegrationManager.TargetMapping.Name);
+        sb.AppendFormat("resourceKind:'{0}',", Sage.SalesLogix.IntegrationContract.Utility.Constants.TradingAcctResourceKind);
+        sb.AppendFormat("optionRefineSearchId:'{0}',", rdbRefineSearch.ClientID);
+        sb.AppendFormat("refreshGridId:'{0}',", btnRefreshGrid.ClientID);
+        sb.AppendFormat("resultsMsgId:'{0}',", lblResultsMsg.ClientID);
+        sb.AppendFormat("filtersId:'{0}',", txtFilters.ClientID);
+        sb.AppendFormat("rowLinkToId:'{0}',", rowLinkTo.ClientID);
+        sb.AppendFormat("rowSearchResultsId:'{0}',", rowSearchResults.ClientID);
+        sb.Append("}");
+        return sb.ToString();
+    }
+
+    private void SetViewDisplay(string error)
     {
         lblSearchResults.Text = String.Format(GetLocalResourceObject("lblSearchResults.Caption").ToString(),
                                               IntegrationManager.TargetMapping.Name);
@@ -231,13 +149,15 @@ public partial class SearchResults : SmartPartInfoProvider, IScriptControl
             rowLinkTo.Visible = false;
             rowSearchResults.Visible = false;
             rowCreateAccount.Visible = true;
-            lblResultsMsg.Text = GetLocalResourceObject("lblNoMatches.Caption").ToString();
+            lblResultsMsg.Text = !String.IsNullOrEmpty(error)
+                                     ? GetLocalResourceObject("Error_SDataRequest").ToString()
+                                     : GetLocalResourceObject("lblNoMatches.Caption").ToString();
             rdbCreateNew.Text = String.Format(GetLocalResourceObject("lblNoMatchesCreateNew.Caption").ToString(),
                                               IntegrationManager.SourceAccount.AccountName);
             lblCreateAccount.Text = String.Format(GetLocalResourceObject("lblCreateAccount.Caption").ToString(),
                                                   IntegrationManager.TargetMapping.Name);
         }
-        rdbRefineSearch.Visible = IntegrationManager.TargetSearchFilters.Count > 0;
+        rdbRefineSearch.Visible = !String.IsNullOrEmpty(error) && IntegrationManager.TargetSearchFilters != null && IntegrationManager.TargetSearchFilters.Count > 0;
     }
 
     /// <summary>
@@ -246,9 +166,9 @@ public partial class SearchResults : SmartPartInfoProvider, IScriptControl
     protected override void OnWireEventHandlers()
     {
         base.OnWireEventHandlers();
-        btnBack.Click += new EventHandler(btnBack_ClickAction);
-        btnNext.Click += new EventHandler(DialogService.CloseEventHappened);
-        btnCancel.Click += new EventHandler(DialogService.CloseEventHappened);
+        btnBack.Click += btnBack_ClickAction;
+        btnNext.Click += DialogService.CloseEventHappened;
+        btnCancel.Click += DialogService.CloseEventHappened;
     }
 
     /// <summary>
@@ -262,7 +182,7 @@ public partial class SearchResults : SmartPartInfoProvider, IScriptControl
         {
             Literal radioButton = (Literal)e.Row.FindControl("rdbTarget");
             radioButton.Text =
-                String.Format("<input type=\"radio\" onClick='OnMatchSelection(\"{1}\");' name='TargetsGroup' id=\"RowSelector{0}\" value=\"{0}\"",
+                String.Format("<input type=\"radio\" onClick='advancedSearchOptions.onMatchSelection(\"{1}\");' name='TargetsGroup' id=\"RowSelector{0}\" value=\"{0}\"",
                               e.Row.RowIndex, rdbLinkTo.ClientID);
             if (SelectedTargetIndex == e.Row.RowIndex)
             {
@@ -340,7 +260,7 @@ public partial class SearchResults : SmartPartInfoProvider, IScriptControl
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void btnBack_ClickAction(object sender, EventArgs e)
     {
-        ShowDialog("SelectOperatingAccount", GetLocalResourceObject("Dialog.Caption").ToString(), 230, 600);
+        ShowDialog("SelectOperatingAccount", GetLocalResourceObject("Dialog.Caption").ToString(), 250, 600);
     }
 
     /// <summary>
@@ -348,7 +268,7 @@ public partial class SearchResults : SmartPartInfoProvider, IScriptControl
     /// </summary>
     protected override void OnClosing()
     {
-        loadSearchResults = false;
+        _loadSearchResults = false;
         ISessionService sessionService = ApplicationContext.Current.Services.Get<ISessionService>(true);
         ISessionState sessionState = sessionService.GetSessionState();
         sessionState.Remove("IntegrationManager");
@@ -365,14 +285,14 @@ public partial class SearchResults : SmartPartInfoProvider, IScriptControl
         var filters = (JavaScriptArray) JavaScriptConvert.DeserializeObject(txtFilters.Text);
         List<MatchingExpression> expressions = (from JavaScriptObject filter in filters
                                                 select
-                                                    new MatchingExpression(filter["Property"].ToString(),
+                                                    new MatchingExpression(filter["fieldName"].ToString(),
                                                                            (MatchingOperation)
-                                                                           Convert.ToInt16(filter["Operator"]),
-                                                                           filter["SearchValue"].ToString())).ToList();
+                                                                           Convert.ToInt16(filter["operator"]),
+                                                                           filter["searchValue"].ToString())).ToList();
 #pragma warning restore 612,618
         grdMatches.DataSource = IntegrationManager.GetMatches(expressions);
         grdMatches.DataBind();
-        loadSearchResults = false;
+        _loadSearchResults = false;
     }
 
     /// <summary>
@@ -388,27 +308,5 @@ public partial class SearchResults : SmartPartInfoProvider, IScriptControl
             tinfo.RightTools.Add(c);
         }
         return tinfo;
-    }
-
-    /// <summary>
-    /// Gets a collection of script descriptors that represent ECMAScript (JavaScript) client components.
-    /// </summary>
-    /// <returns>
-    /// An <see cref="T:System.Collections.IEnumerable"/> collection of <see cref="T:System.Web.UI.ScriptDescriptor"/> objects.
-    /// </returns>
-    public IEnumerable<ScriptDescriptor> GetScriptDescriptors()
-    {
-        yield break;
-    }
-
-    /// <summary>
-    /// Gets a collection of <see cref="T:System.Web.UI.ScriptReference"/> objects that define script resources that the control requires.
-    /// </summary>
-    /// <returns>
-    /// An <see cref="T:System.Collections.IEnumerable"/> collection of <see cref="T:System.Web.UI.ScriptReference"/> objects.
-    /// </returns>
-    public IEnumerable<ScriptReference> GetScriptReferences()
-    {
-        yield return new ScriptReference("~/SmartParts/Integration/SearchResults.js");
     }
 }

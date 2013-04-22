@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Operatori delle Espressioni del Query Builder</title>
+        <link href="../Resources/TableStyles/TableStyle.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilder/Query_Builder_Statement_Operators.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1>Operatori delle Espressioni del Query Builder<a name="kanchor634"></a></h1>
+        <p>Quando si aggiunge un'espressione condizionale, occorre selezionare un operatore. L'operatore è utilizzato per determinare se il record soddisfa il criterio definito in un'espressione condizionale. Quando si aggiunge un'espressione condizionale, l'operatore predefinito e gli altri operatori disponibili dipendono dal <a href="Query_Builder_Field_Type_Conventions.htm">tipo di campo</a>.</p>
+        <p>La tabella seguente descrive tutti i possibili operatori.</p>
+        <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Operatore</th>
+                    <th class="HeadD-Column1-Header1">Seleziona un record se il campo considerato contiene un valore che:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Inizia Per</td>
+                    <td class="BodyD-Column1-Body1">Inizia per il Valore definito nella casella relativa.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Contiene</td>
+                    <td class="BodyD-Column1-Body1">Contiene la stringa definita nel campo Valore.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(=) uguale a</td>
+                    <td class="BodyD-Column1-Body1">Uguale al valore definito nel campo Valore.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(&lt;&gt;) diverso da</td>
+                    <td class="BodyD-Column1-Body1">Non è Uguale al valore definito nel campo Valore.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(&lt;) minore di</td>
+                    <td class="BodyD-Column1-Body1">E' minore del Valore definito nella casella relativa.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(&lt;=) minore o uguale a</td>
+                    <td class="BodyD-Column1-Body1">E' minore o uguale al Valore definito nella casella relativa.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(&gt;) maggiore di</td>
+                    <td class="BodyD-Column1-Body1">E' maggiore del Valore definito nella casella relativa.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(&gt;=) maggiore o uguale a</td>
+                    <td class="BodyD-Column1-Body1">E' maggiore o uguale al Valore definito nella casella relativa.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyD-Column1-Body1">Contiene una delle stringhe definite nella casella Valore, come se fosse un'espressione O letterale. Le stringhe devono essere racchiuse tra apici (') e separate da virgole.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Non contiene dati</td>
+                    <td class="BodyD-Column1-Body1">E' null (non contiene alcun valore).</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Contiene dati</td>
+                    <td class="BodyD-Column1-Body1">Non è null (contiene qualche valore).</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">entro gli ultimi xxx giorni</td>
+                    <td class="BodyD-Column1-Body1">E' una data entro gli ultimi "xxx" giorni (passati). Inserire un intero o due interi separati da una virgola per definire un periodo.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">entro i prossimi xxx giorni</td>
+                    <td class="BodyA-Column1-Body1">E' una data entro i prossimi "xxx" giorni (futuri). Inserire un intero o due interi separati da una virgola per definire un periodo.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="RelatedTopics">Argomenti Correlati</p>
+        <p><a href="Using_SalesLogix_Query_Builder.htm" target="_self">Panoramica su Query Builder</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Comunicaci come possiamo migliorare la guida</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,24 +1,14 @@
 <?xml version="1.0"?>
-<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="8badccb5-2911-406d-bfe2-a46ac96091e7" lastModifiedUtc="2012-05-07T17:48:52.801125Z" name="OnCreate" methodType="CrudEvent" actionType="None" returnMode="None">
-  <extendedMetaData />
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="8badccb5-2911-406d-bfe2-a46ac96091e7" name="OnCreate" returnType="void" methodType="CrudEvent" actionType="None" returnMode="None" isInstance="true">
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
   </ExtendedPropertiesCollection>
   <parameter />
-  <preExecuteTargets />
   <methodTargets>
-    <methodTarget id="658be23a-869c-4311-bd05-f30c0ea9ecdc" lastModifiedUtc="0001-01-01T00:00:00" targetType="Sage.SalesLogix.Opportunity.Rules, Sage.SalesLogix.BusinessRules" targetMethod="OnCreate" active="true">
+    <methodTarget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="658be23a-869c-4311-bd05-f30c0ea9ecdc" targetType="Sage.SalesLogix.Opportunity.Rules, Sage.SalesLogix.BusinessRules" sequence="20" targetMethod="OnCreate" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>
     </methodTarget>
   </methodTargets>
-  <postExecuteTargets>
-    <methodTarget id="27c48b44-8e14-4dad-a2e1-086c60e8afce" lastModifiedUtc="2012-05-14T18:47:29.409Z" targetType="TACEURO.Extentions, TACEURO" targetMethod="OnCreateOpportunity" active="true">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
-      </ExtendedPropertiesCollection>
-    </methodTarget>
-  </postExecuteTargets>
-  <postFlushTargets />
 </method>

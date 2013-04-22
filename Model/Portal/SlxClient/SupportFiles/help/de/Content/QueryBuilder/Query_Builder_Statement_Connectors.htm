@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="de" xml:lang="de" class="" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Anweisungsverbindungen im Abfrage-Assistenten</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/TableStyle.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilder/Query_Builder_Statement_Connectors.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Thema mit den Registerkarten "Suchen", "Inhalt" und "Index" öffnen</a>
+        </p>
+        <h1><a name="kanchor647"></a>Anweisungsverbindungen im Abfrage-Assistenten</h1>
+        <p>Mit den Verbindungsstellen können Sie das Ende einer bedingten Anweisung anzeigen und angeben, wie mehrere Bedingungen zu interpretieren sind.</p>
+        <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Verbindungsstelle</th>
+                    <th class="HeadD-Column1-Header1">Verwendung </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">END</td>
+                    <td class="BodyD-Column1-Body1">Zeigt das Ende der letzten Bedingungsanweisung.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">AND</td>
+                    <td class="BodyD-Column1-Body1">Bei mehreren Bedingungsanweisungen müssen die Bedingungen in beiden Anweisungen erfüllt sein.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">ODER</td>
+                    <td class="BodyA-Column1-Body1">Bei mehreren Bedingungsanweisungen muss der Datensatz nur eine der beiden Bedingungen erfüllen.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Beim Hinzufügen der ersten Bedingungsanweisung zum Raster fügt der Abfrage-Assistent automatisch END als Verbindungsstelle ein. Wenn Sie weitere Bedingungsanweisungen hinzufügen, wird AND in die vorherige Anweisung eingefügt und END an das Ende der letzten Anweisung verschoben. <MadCap:conditionalText MadCap:conditions="Output.WebClient">Zum Ändern der Verbindungsstelle klicken Sie auf den Dropdown-Pfeil und wählen in der Liste eine Option aus. </MadCap:conditionalText> Die letzte Bedingungsanweisung muss END als Verbindungsstelle enthalten.</p>
+        <p><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t4">Beispiel 1: Verwenden von "AND" als Anweisungsverbindungsstelle<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <div MadCap:targetName="t4" style="display: none;">
+            <p>Der Abfrage-Assistent wählt den Datensatz aus, wenn der Status des Kontakts aktiv ist <span class="SLXBold">UND</span> der Umsatz der Firma größer oder gleich 10.000 € ist.</p>
+            <p>Das Raster auf der Registerkarte <span class="SLXBold">Bedingungen</span> wird in diesem Beispiel wie folgt angezeigt:</p>
+            <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+                <col class="Column-Column1" />
+                <col style="width: 32px;" class="Column-Column1" />
+                <col style="width: 145px;" class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col style="width: 50px;" class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Not</th>
+                        <th class="HeadE-Column1-Header1">(</th>
+                        <th class="HeadE-Column1-Header1">Feld</th>
+                        <th class="HeadE-Column1-Header1">Operator</th>
+                        <th class="HeadE-Column1-Header1">Wert</th>
+                        <th class="HeadE-Column1-Header1">Groß-/Kleinschr.</th>
+                        <th class="HeadE-Column1-Header1">)</th>
+                        <th class="HeadD-Column1-Header1">And/Or</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">Kontakt.Status</td>
+                        <td class="BodyE-Column1-Body1">gleich</td>
+                        <td class="BodyE-Column1-Body1">aktiv</td>
+                        <td class="BodyE-Column1-Body1">False</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyD-Column1-Body1">AND</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyB-Column1-Body1">Kontakt.Firma.Umsatz</td>
+                        <td class="BodyB-Column1-Body1">größer oder gleich</td>
+                        <td class="BodyB-Column1-Body1">10000</td>
+                        <td class="BodyB-Column1-Body1">True</td>
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyA-Column1-Body1">END</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3">Beispiel 2: Verwenden des "Contact.Status" "OR" als Anweisungsverbindungsstelle <img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <div MadCap:targetName="t3" style="display: none;">
+            <p>Der Abfrage-Assistent wählt den Datensatz aus, wenn der Status des Kontakts aktiv ist <span class="SLXBold">ODER</span> der Umsatz der Firma größer oder gleich 10.000 € ist.</p>
+            <p class="Tip-Note-Text">Das Raster auf der Registerkarte <span class="SLXBold">Bedingungen</span> wird in diesem Beispiel wie folgt angezeigt:</p>
+            <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+                <col class="Column-Column1" />
+                <col style="width: 32px;" class="Column-Column1" />
+                <col style="width: 145px;" class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col style="width: 50px;" class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col style="width: 66px;" class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Not</th>
+                        <th class="HeadE-Column1-Header1">(</th>
+                        <th class="HeadE-Column1-Header1">Feld</th>
+                        <th class="HeadE-Column1-Header1">Operator</th>
+                        <th class="HeadE-Column1-Header1">Wert</th>
+                        <th class="HeadE-Column1-Header1">Groß-/Kleinschr.</th>
+                        <th class="HeadE-Column1-Header1">)</th>
+                        <th class="HeadD-Column1-Header1">And/Or</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">Kontakt.Status</td>
+                        <td class="BodyE-Column1-Body1">gleich</td>
+                        <td class="BodyE-Column1-Body1">aktiv</td>
+                        <td class="BodyE-Column1-Body1">Falsch</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyD-Column1-Body1">ODER</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyB-Column1-Body1">Kontakt.Firma.Umsatz</td>
+                        <td class="BodyB-Column1-Body1">größer gleich</td>
+                        <td class="BodyB-Column1-Body1">10000</td>
+                        <td class="BodyB-Column1-Body1">Wahr</td>
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyA-Column1-Body1">END</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2">Beispiel 3: Verwenden von mehreren bedingten Anweisungen in Klammern<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <div MadCap:targetName="t2" style="display: none;">
+            <p>Der Abfrage-Assistent wählt den Datensatz aus, wenn der Status des Kontakts aktiv ist <span class="SLXBold">UND</span> der Umsatz der Firma größer oder gleich 10.000 € ist. Der Datensatz wird <span class="SLXBold">auch</span> ausgewählt, wenn der Status des Kontakts aktiv ist <span class="SLXBold">UND</span> der Umsatz der Firma kleiner oder gleich 500 € ist.</p>
+            <p class="Tip-Note-Text">Das Raster auf der Registerkarte <span class="SLXBold">Bedingungen</span> wird in diesem Beispiel wie folgt angezeigt:</p>
+            <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+                <col class="Column-Column1" />
+                <col style="width: 32px;" class="Column-Column1" />
+                <col style="width: 145px;" class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col style="width: 50px;" class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col style="width: 66px;" class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Not</th>
+                        <th class="HeadE-Column1-Header1">(</th>
+                        <th class="HeadE-Column1-Header1">Feld</th>
+                        <th class="HeadE-Column1-Header1">Operator</th>
+                        <th class="HeadE-Column1-Header1">Wert</th>
+                        <th class="HeadE-Column1-Header1">Groß-/Kleinschr.</th>
+                        <th class="HeadE-Column1-Header1">)</th>
+                        <th class="HeadD-Column1-Header1">And/Or</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">Kontakt.Status</td>
+                        <td class="BodyE-Column1-Body1">gleich</td>
+                        <td class="BodyE-Column1-Body1">aktiv</td>
+                        <td class="BodyE-Column1-Body1">Falsch</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyD-Column1-Body1">AND</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">(</td>
+                        <td class="BodyE-Column1-Body1">Kontakt.Firma.Umsatz</td>
+                        <td class="BodyE-Column1-Body1">größer gleich</td>
+                        <td class="BodyE-Column1-Body1">10000</td>
+                        <td class="BodyE-Column1-Body1">Wahr</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyD-Column1-Body1">ODER</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyB-Column1-Body1">Kontakt.Firma.Umsatz</td>
+                        <td class="BodyB-Column1-Body1">kleiner oder gleich</td>
+                        <td class="BodyB-Column1-Body1">500</td>
+                        <td class="BodyB-Column1-Body1">Wahr</td>
+                        <td class="BodyB-Column1-Body1">)</td>
+                        <td class="BodyA-Column1-Body1">END</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1">Beispiel 4: Verwenden von mehreren bedingten Anweisungen einschließlich "NOT"<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <p>Der Abfrage-Assistent wählt den Datensatz aus, wenn der Status des Kontakts <span class="SLXBold">NICHT</span> inaktiv ist <span class="SLXBold">UND</span> der Umsatz der Firma größer oder gleich 10.000 € ist. Der Datensatz wird <span class="SLXBold">auch</span> ausgewählt, wenn der Status des Kontakts <span class="SLXBold">NICHT</span> inaktiv ist <span class="SLXBold">UND</span> der Umsatz der Firma kleiner oder gleich 500 € ist.</p>
+            <p>Das Raster auf der Registerkarte <span class="SLXBold">Bedingungen</span> wird in diesem Beispiel wie folgt angezeigt:</p>
+            <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+                <col class="Column-Column1" />
+                <col style="width: 32px;" class="Column-Column1" />
+                <col style="width: 145px;" class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col style="width: 50px;" class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col style="width: 66px;" class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Not</th>
+                        <th class="HeadE-Column1-Header1">(</th>
+                        <th class="HeadE-Column1-Header1">Feld</th>
+                        <th class="HeadE-Column1-Header1">Operator</th>
+                        <th class="HeadE-Column1-Header1">Wert</th>
+                        <th class="HeadE-Column1-Header1">Groß-/Kleinschr.</th>
+                        <th class="HeadE-Column1-Header1">)</th>
+                        <th class="HeadD-Column1-Header1">And/Or</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">NOT</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">Kontakt.Status</td>
+                        <td class="BodyE-Column1-Body1">gleich</td>
+                        <td class="BodyE-Column1-Body1">inaktiv</td>
+                        <td class="BodyE-Column1-Body1">Falsch</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyD-Column1-Body1">AND</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">(</td>
+                        <td class="BodyE-Column1-Body1">Kontakt.Firma.Umsatz</td>
+                        <td class="BodyE-Column1-Body1">größer gleich</td>
+                        <td class="BodyE-Column1-Body1">10000</td>
+                        <td class="BodyE-Column1-Body1">Wahr</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyD-Column1-Body1">ODER</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyB-Column1-Body1">Kontakt.Firma.Umsatz</td>
+                        <td class="BodyB-Column1-Body1">kleiner oder gleich</td>
+                        <td class="BodyB-Column1-Body1">500</td>
+                        <td class="BodyB-Column1-Body1">Wahr</td>
+                        <td class="BodyB-Column1-Body1">)</td>
+                        <td class="BodyA-Column1-Body1">END</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="RelatedTopics">Verwandte Themen</p>
+        <p><a href="Query_Builder_Conditions.htm" target="_self">Hinzufügen und Bearbeiten von Bedingungen</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Haben Sie Vorschläge zur Verbesserung der Hilfe?</a>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

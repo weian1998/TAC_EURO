@@ -1,15 +1,4 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeFile="UpdateAccountOptions.ascx.cs" Inherits="SmartParts_Account_UpdateAccountOptions" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.PickList" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.DependencyLookup" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.Lookup" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.HighLevelTypes" Namespace="Sage.SalesLogix.HighLevelTypes" TagPrefix="SalesLogix" %>
-
-<div style="display:none">
-    <asp:Panel ID="AddressForm_LTools" runat="server"></asp:Panel>
-    <asp:Panel ID="AddressForm_CTools" runat="server"></asp:Panel>
-    <asp:Panel ID="AddressForm_RTools" runat="server"></asp:Panel>
-</div>
 
 <table id="tblOptions" border="0" cellpadding="1" cellspacing="2" class="formtable">
     <tr>      
@@ -100,26 +89,9 @@
         </td>
     </tr>
     <tr>
-        <td>
-            <asp:label runat="server" id="lblSapace" Height="20px"></asp:label>
-        </td>
-    </tr>
-    <tr>
-        <td align="right">
-            <table id="btnTable" cellspacing="5">
-                <tr>
-                    <td align="center">
-                        <span>
-                            <asp:Button runat="server" ID="btnOK" Text="<%$ resources: btnOK.Text %>" CssClass="slxbutton" />
-                        </span>
-                    </td>
-                    <td align="center">
-                        <span>
-                            <asp:Button runat="server" ID="btnCancel" Text="<%$ resources: btnCancel.Text %>" CssClass="slxbutton" />
-                        </span>
-                    </td>
-                </tr>
-            </table>
+        <td class="qfActionContainer">
+            <asp:Button runat="server" ID="btnOK" Text="<%$ resources: btnOK.Text %>" CssClass="slxbutton" />
+            <asp:Button runat="server" ID="btnCancel" Text="<%$ resources: btnCancel.Text %>" CssClass="slxbutton" />
         </td>
     </tr>
 </table>

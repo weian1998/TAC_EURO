@@ -7,6 +7,7 @@
   <ShowInMode>List</ShowInMode>
   <Properties>
     <Property Name="SummaryConfigFile" TypeConverter="">OpportunitySummary</Property>
+    <Property Name="ListContextMenu" TypeConverter="">OpportunityListContextMenu</Property>
     <Property Name="HelpTopic" TypeConverter="">opportunitylistview</Property>
   </Properties>
   <AllowRoles />

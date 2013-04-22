@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="grdSalesOrders.772d4037-0107-4cd2-9812-1b7af967da29.ColumnHeading" xml:space="preserve">
+    <value>Доставка через</value>
+  </data>
+  <data name="grdSalesOrders.d07bb56d-0baa-4b0e-ad31-2470b0126dfb.ColumnHeading" xml:space="preserve">
+    <value>Доставка через</value>
+  </data>
+  <data name="grdSalesOrders.btnAddSalesOrder.ToolTip" xml:space="preserve">
+    <value>Добавить заказ на продажу</value>
+  </data>
+  <data name="grdSalesOrders.30e419bf-d5b7-43ac-8eb1-277c486f59c7.ColumnHeading" xml:space="preserve">
+    <value>Номер заказа</value>
+  </data>
+  <data name="grdSalesOrders.Delete.ToolTip" xml:space="preserve">
+    <value>Исключить</value>
+  </data>
+  <data name="grdSalesOrders.9c6e0ed3-b071-4db4-ad09-65e2c6e62614.ColumnHeading" xml:space="preserve">
+    <value>Контакт доставки</value>
+  </data>
+  <data name="grdSalesOrders.f01ce137-e017-47c5-9a5e-7644db9ed01d.ColumnHeading" xml:space="preserve">
+    <value>Контакт для связи</value>
+  </data>
+  <data name="SalesOrderNumber.Caption" xml:space="preserve">
+    <value>Номер заказа на продажи</value>
+  </data>
+  <data name="btnInserSalesOrder.ToolTip" xml:space="preserve">
+    <value>Добавить заказ на продажу</value>
+  </data>
+  <data name="grdSalesOrders.98ef94f9-7ec9-4a26-85a6-80d718329f63.ColumnHeading" xml:space="preserve">
+    <value>Номер заказа на продажи</value>
+  </data>
+  <data name="grdSalesOrders.776cf92c-180a-4437-bd02-0aa109134b8b.ColumnHeading" xml:space="preserve">
+    <value>Номер заказа на продажи</value>
+  </data>
+  <data name="grdSalesOrders.52126107-e77d-4216-a3ce-f5e5e177b319.ColumnHeading" xml:space="preserve">
+    <value>Явл. котировкой</value>
+  </data>
+  <data name="grdSalesOrders.0cfc6bc3-1d80-4760-ac94-64d0a177c398.Text" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
+  <data name="grdSalesOrders.7410d76d-21aa-4d48-aaea-9095c1d85966.ColumnHeading" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="Status.Caption" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="ShipVia.Caption" xml:space="preserve">
+    <value>Доставка через</value>
+  </data>
+  <data name="grdSalesOrders.31709f7f-60cf-4c49-99a1-869846009171.ColumnHeading" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="NameLF.Caption" xml:space="preserve">
+    <value>Фамил. Имя</value>
+  </data>
+  <data name="CustomerPurchaseOrderNumber.Caption" xml:space="preserve">
+    <value>Номер заказа на покупку клиента</value>
+  </data>
+</root>

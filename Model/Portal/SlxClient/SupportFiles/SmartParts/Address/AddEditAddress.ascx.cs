@@ -1,7 +1,6 @@
-﻿using System;
+using System;
 using System.Web.UI;
 using System.Collections.Generic;
-using System.Web.UI.WebControls;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.Entity.Interfaces;
 using Sage.Platform.Orm.Interfaces;
@@ -10,7 +9,6 @@ using Sage.Platform.EntityBinding;
 using Sage.Platform.Application.UI;
 using Sage.Platform.WebPortal.Services;
 using Sage.SalesLogix.Address;
-using Sage.SalesLogix.GlobalCrmContractAdapter.Transformations.PostalAddress;
 
 public partial class SmartParts_Address_AddEditAddress : EntityBoundSmartPartInfoProvider
 {
@@ -37,22 +35,25 @@ public partial class SmartParts_Address_AddEditAddress : EntityBoundSmartPartInf
         BindingSource.AddBindingProvider(pklDecription as IEntityBindingProvider);
         BindingSource.Bindings.Add(new PropertyBinding("Description", pklDecription, "PickListValue", "", ""));
 
+        BindingSource.AddBindingProvider(cbxPrimaryAddr as IEntityBindingProvider);
+        BindingSource.Bindings.Add(new PropertyBinding("PrimaryAddress", cbxPrimaryAddr, "Checked", "", false));
+
         BindingSource.AddBindingProvider(cbxIsPrimary as IEntityBindingProvider);
         BindingSource.Bindings.Add(new PropertyBinding("IsPrimary", cbxIsPrimary, "Checked", "", false));
 
         BindingSource.AddBindingProvider(cbxIsShipping as IEntityBindingProvider);
         BindingSource.Bindings.Add(new PropertyBinding("IsMailing", cbxIsShipping, "Checked", "", false));
 
-        BindingSource.AddBindingProvider(txtAddressType as IEntityBindingProvider);
-        BindingSource.Bindings.Add(new PropertyBinding("AddressType", txtAddressType, "Text", "", ""));
+        BindingSource.AddBindingProvider(pklAddressType as IEntityBindingProvider);
+        BindingSource.Bindings.Add(new PropertyBinding("AddressType", pklAddressType, "PickListValue", "", ""));
 
         BindingSource.AddBindingProvider(txtAddress1 as IEntityBindingProvider);
         BindingSource.Bindings.Add(new PropertyBinding("Address1", txtAddress1, "Text", "", ""));
 
-        BindingSource.AddBindingProvider(txtAddress1 as IEntityBindingProvider);
+        BindingSource.AddBindingProvider(txtAddress2 as IEntityBindingProvider);
         BindingSource.Bindings.Add(new PropertyBinding("Address2", txtAddress2, "Text", "", ""));
 
-        BindingSource.AddBindingProvider(txtAddress1 as IEntityBindingProvider);
+        BindingSource.AddBindingProvider(txtAddress3 as IEntityBindingProvider);
         BindingSource.Bindings.Add(new PropertyBinding("Address3", txtAddress3, "Text", "", ""));
 
         BindingSource.AddBindingProvider(pklCity as IEntityBindingProvider);
@@ -63,6 +64,9 @@ public partial class SmartParts_Address_AddEditAddress : EntityBoundSmartPartInf
 
         BindingSource.AddBindingProvider(txtPostalCode as IEntityBindingProvider);
         BindingSource.Bindings.Add(new PropertyBinding("PostalCode", txtPostalCode, "Text", "", ""));
+        
+        BindingSource.AddBindingProvider(txtCounty as IEntityBindingProvider);
+        BindingSource.Bindings.Add(new PropertyBinding("County", txtCounty, "Text", "", ""));
 
         BindingSource.AddBindingProvider(pklCountry as IEntityBindingProvider);
         BindingSource.Bindings.Add(new PropertyBinding("Country", pklCountry, "PickListValue", "", ""));
@@ -82,31 +86,7 @@ public partial class SmartParts_Address_AddEditAddress : EntityBoundSmartPartInf
         pklCity.MaxLength = 32;
         pklState.MaxLength = 32;
         pklCountry.MaxLength = 32;
-        txtAddress1.MaxLength = 64;
-        txtAddress2.MaxLength = 64;
-        txtAddress3.MaxLength = 64;
-        txtPostalCode.MaxLength = 24;
-        txtSalutation.MaxLength = 64;
-        txtAddressType.Items.Add(new ListItem("",""));
-        txtAddressType.Items.Add(GetListItem("AddressType_Billing", PostalAddressType.Billing.ToString()));
-        txtAddressType.Items.Add(GetListItem("AddressType_Shipping", PostalAddressType.Shipping.ToString()));
-        txtAddressType.Items.Add(GetListItem("AddressType_BillingShipping", "Billing & Shipping"));
-        txtAddressType.Items.Add(GetListItem("AddressType_Correspondence", PostalAddressType.Correspondence.ToString()));
-        txtAddressType.Items.Add(GetListItem("AddressType_Home", PostalAddressType.Home.ToString()));
-        txtAddressType.Items.Add(GetListItem("AddressType_Office", PostalAddressType.Office.ToString()));
-        txtAddressType.Items.Add(GetListItem("AddressType_Other", PostalAddressType.Other.ToString()));
-        txtAddressType.Items.Add(GetListItem("AddressType_Unknown", PostalAddressType.Unknown.ToString()));
-
-    }
-
-    private ListItem GetListItem(string resource, string type)
-    {
-        var resString = type;
-        if (GetLocalResourceObject(resource) != null)
-        {
-            resString = GetLocalResourceObject(resource).ToString();
-        }
-        return new ListItem(resString, type);
+        pklAddressType.MaxLength = 32;
     }
 
     /// <summary>
@@ -139,7 +119,7 @@ public partial class SmartParts_Address_AddEditAddress : EntityBoundSmartPartInf
         {
             if (BindingSource.Current != null)
             {
-                IAddress address = (IAddress)BindingSource.Current;
+                IAddress address = (IAddress) BindingSource.Current;
 
                 txtEntityId.Value = _parentEntityReference.Id.ToString();
 
@@ -157,25 +137,22 @@ public partial class SmartParts_Address_AddEditAddress : EntityBoundSmartPartInf
 
                 if (_parentEntityReference is IAccount)
                 {
-                    if (Mode.Value == "ADD")
-                        tinfo.Title = GetLocalResourceObject("DialogTitleAccountAdd").ToString();
-                    else
-                        tinfo.Title = GetLocalResourceObject("DialogTitleAccountEdit").ToString();
+                    tinfo.Title = Mode.Value == "ADD"
+                                      ? GetLocalResourceObject("DialogTitleAccountAdd").ToString()
+                                      : GetLocalResourceObject("DialogTitleAccountEdit").ToString();
                 }
                 if (_parentEntityReference is IContact)
                 {
-                    if (Mode.Value == "ADD")
-                        tinfo.Title = GetLocalResourceObject("DialogTitleContactAdd").ToString();
-                    else
-                        tinfo.Title = GetLocalResourceObject("DialogTitleContactEdit").ToString();
+                    tinfo.Title = Mode.Value == "ADD"
+                                      ? GetLocalResourceObject("DialogTitleContactAdd").ToString()
+                                      : GetLocalResourceObject("DialogTitleContactEdit").ToString();
                 }
 
                 if (!(_parentEntityReference is IAccount || _parentEntityReference is IContact))
                 {
-                    if (Mode.Value == "ADD")
-                        tinfo.Title = GetLocalResourceObject("DialogTitleAdd").ToString();
-                    else
-                        tinfo.Title = GetLocalResourceObject("DialogTitleEdit").ToString();
+                    tinfo.Title = Mode.Value == "ADD"
+                                      ? GetLocalResourceObject("DialogTitleAdd").ToString()
+                                      : GetLocalResourceObject("DialogTitleEdit").ToString();
                 }
             }
         }
@@ -204,8 +181,7 @@ public partial class SmartParts_Address_AddEditAddress : EntityBoundSmartPartInf
         if (persistentEntity != null)
         {
             bool hasContactMatches = false;
-            bool hasSalesOrderMatches = false;
-            IAddress address = (IAddress)BindingSource.Current;
+            IAddress address = (IAddress) BindingSource.Current;
             if (Mode.Value == "ADD")
                 persistentEntity.Save();
             if (Mode.Value == "UPDATE")
@@ -213,7 +189,7 @@ public partial class SmartParts_Address_AddEditAddress : EntityBoundSmartPartInf
                 IContact contact = _parentEntityReference as IContact;
                 IAccount account = _parentEntityReference as IAccount;
 
-                hasSalesOrderMatches = (Helpers.HasMatchingSalesOrderAddresses(_parentEntityReference));
+                bool hasSalesOrderMatches = (Helpers.HasMatchingSalesOrderAddresses(_parentEntityReference));
                 if (contact != null)
                     hasContactMatches = contact.HasAddressChanges();
                 else if (account != null)
@@ -222,19 +198,18 @@ public partial class SmartParts_Address_AddEditAddress : EntityBoundSmartPartInf
                 {
                     UpdateAddressOptionManager addressOptions = new UpdateAddressOptionManager();
                     addressOptions.HasContactAddressChanges = hasContactMatches;
-                    if (contact != null)
-                        addressOptions.OldAddressValues = Sage.SalesLogix.Contact.Rules.getOriginalAddressValues(contact);
-                    else
-                        addressOptions.OldAddressValues = Sage.SalesLogix.Account.Rules.getOriginalAddressValues(account);
+                    addressOptions.OldAddressValues = contact != null
+                                                          ? Sage.SalesLogix.Contact.Rules.getOriginalAddressValues(
+                                                              contact)
+                                                          : Sage.SalesLogix.Account.Rules.getOriginalAddressValues(
+                                                              account);
                     addressOptions.HasSalesOrderAddressChanges = hasSalesOrderMatches;
                     addressOptions.ParentEntityReference = _parentEntityReference;
-                    addressOptions.IsPrimaryAddress = (address.IsPrimary.HasValue && (bool)address.IsPrimary);
+                    addressOptions.IsPrimaryAddress = (address.IsPrimary ?? false);
 
-                    if (contact != null)
-                        DialogService.SetSpecs(200, 200, 200, 450, "UpdateContactOptions", "", true);
-                    else
-                        DialogService.SetSpecs(200, 200, 200, 450, "UpdateAccountOptions", "", true);
-                    DialogService.EntityType = typeof(IAddress);
+                    DialogService.SetSpecs(200, 200, 200, 450,
+                                           contact != null ? "UpdateContactOptions" : "UpdateAccountOptions", "", true);
+                    DialogService.EntityType = typeof (IAddress);
                     DialogService.EntityID = address.Id.ToString();
                     DialogService.DialogParameters.Add("UpdateAddressOptionManager", addressOptions);
                     DialogService.ShowDialog();
@@ -256,8 +231,9 @@ public partial class SmartParts_Address_AddEditAddress : EntityBoundSmartPartInf
             {
                 if (adr != thisaddress)
                 {
-                    adr.IsMailing = System.Convert.ToBoolean(thisaddress.IsMailing) ? false : adr.IsMailing;
-                    adr.IsPrimary = System.Convert.ToBoolean(thisaddress.IsPrimary) ? false : adr.IsPrimary;
+                    adr.IsMailing = Convert.ToBoolean(thisaddress.IsMailing) ? false : adr.IsMailing;
+                    adr.IsPrimary = Convert.ToBoolean(thisaddress.IsPrimary) ? false : adr.IsPrimary;
+                    adr.PrimaryAddress = Convert.ToBoolean(thisaddress.PrimaryAddress) ? false : adr.PrimaryAddress;
                 }
             }
         }

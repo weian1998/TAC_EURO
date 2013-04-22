@@ -29,6 +29,15 @@
     </tr>
     <tr>
         <td>
+			<span class="lbl"><asp:Label ID="lblCurrentPassword" runat="server" Text="Current Password:" meta:resourcekey="lblCurrentPasswordResource1"></asp:Label></span>
+			<span class="textcontrol">
+				<asp:TextBox ID="_currentPassword" TextMode="Password" runat="server" meta:resourcekey="_currentPasswordResource1"></asp:TextBox>
+			</span>
+		</td>
+		<td></td>
+    </tr>
+    <tr>
+        <td>
 			<span class="lbl"><asp:Label ID="lblNewPassword" runat="server" Text="New Password:" meta:resourcekey="lblNewPasswordResource1"></asp:Label></span>
 			<span class="textcontrol">
 				<asp:TextBox ID="_newPassword" TextMode="Password" runat="server" meta:resourcekey="_newPasswordResource1"></asp:TextBox>

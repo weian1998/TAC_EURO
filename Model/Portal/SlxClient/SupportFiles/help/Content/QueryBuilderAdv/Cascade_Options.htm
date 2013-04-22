@@ -1,8 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="357" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
     <!-- saved from url=(0014)about:internet -->
-    <head><title>Cascade Options</title>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Cascade Options</title>
         <link href="../Resources/TableStyles/TableStyle.css" rel="stylesheet" />
         <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
         <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
@@ -10,50 +11,50 @@
         </script>
     </head>
     <body>
-        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilderAdv/Cascade_Options.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilderAdv/Cascade_Options.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
         </p>
-        <h1><a name="kanchor635"></a>Cascade Options</h1>
-        <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle_TableStyle" cellspacing="0">
+        <h1><a name="kanchor659"></a>Cascade Options</h1>
+        <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
             <thead>
-                <tr>
-                    <th class="TableStyle_TableStyle_Head_0_0_RowSep_ColSep">Select</th>
-                    <th class="TableStyle_TableStyle_Head_0_0_RowSep_ColEnd">To</th>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Select</th>
+                    <th class="HeadD-Column1-Header1">To</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">Delete</td>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Delete</td>
+                    <td class="BodyD-Column1-Body1">
                         <p>Delete the selected record and any dependent records.</p>
                         <p>For example, if a user is  deleted from the USERINFO table, the associated records in the USERPROFILE table  will also be deleted.</p>
                     </td>
                 </tr>
-                <tr>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">Clear</td>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Clear</td>
+                    <td class="BodyD-Column1-Body1">
                         <p>The key field linking the record in the secondary table is cleared out, but not  the entire record in the secondary table.</p>
                         <p>For example, if you delete a  CONTACT record, the HISTORY records associated with that contact are not  deleted, just the link to that particular contact.</p>
                     </td>
                 </tr>
-                <tr>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">Replace</td>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Replace</td>
+                    <td class="BodyD-Column1-Body1">
                         <p>When deleting a record, clear out the key field linking the record in a  secondary table, but not the record itself. Replace the key field with another  ID.</p>
                         <p>For example, if a user is deleted from the USERINFO table, replace might be  used to assign that person’s accounts to someone else</p>
                     </td>
                 </tr>
-                <tr>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">Delete (Stop cascade)</td>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Delete (Stop cascade)</td>
+                    <td class="BodyD-Column1-Body1">
                         <p>Delete the selected record, but do not delete any dependent 
  records.</p>
                         <p>For example, if a user is deleted from the USERINFO table, 
  the associated HISTORY records do not change at all.</p>
                     </td>
                 </tr>
-                <tr>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowEnd_ColSep">Ignore (Don’t use in cascade)</td>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowEnd_ColEnd">When deleting a record, skip this table as if it did not 
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">Ignore (Don’t use in cascade)</td>
+                    <td class="BodyA-Column1-Body1">When deleting a record, skip this table as if it did not 
  exist.</td>
                 </tr>
             </tbody>
@@ -65,7 +66,7 @@
         <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
             <col style="width: 100%;" />
             <tbody>
-                <tr MadCap:conditions="Output.WebClient,Output.Customer Portal">
+                <tr MadCap:conditions="">
                     <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
                         <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
                     </td>

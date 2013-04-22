@@ -1,0 +1,162 @@
+<html>
+    <head>
+        <title>Sage.Data Tests</title>
+        <script type="text/javascript" src="../../UI/Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/sinon/sinon-1.3.4.js"></script>
+        <!--[if IE]>
+        <script type="text/javascript" src="../../../Libraries/sinon/sinon-ie-1.3.4.js"></script>
+        <![endif]-->
+
+        <script type="text/javascript">
+        require([
+            'dojo/parser',
+            'doh',
+            'Sage/Data/SingleEntrySDataStore'
+        ], function(
+            parser,
+            doh,
+            SingleEntrySDataStore
+        ) {
+            doh.register("Sage.Data.tests.SingleEntrySDataStore", [
+                function testPredicate() {
+                    var store,
+                        request,
+                        predicate = 'foo';
+                        
+                    Sage.SData.Client.SDataSingleResourceRequest = sinon.stub();
+                    request = Sage.SData.Client.SDataSingleResourceRequest;
+                    request.returns({
+                        setResourceKind: sinon.stub(),
+                        setResourceSelector: function (s) {
+                            // The resource selector should be set as is, no quote wrapping
+                            doh.t(s === predicate);
+                        },
+                        read: sinon.stub()
+                    });
+                    
+                    store = new SingleEntrySDataStore();
+                    store.fetch({
+                        predicate: predicate
+                    });
+                    
+                    store = new SingleEntrySDataStore({
+                        predicate: predicate
+                    });
+                    store.fetch({});
+                },
+                function testSelect() {
+                    var store,
+                        request,
+                        mock;
+                        
+                    Sage.SData.Client.SDataSingleResourceRequest = sinon.stub();
+                    request = Sage.SData.Client.SDataSingleResourceRequest;
+                    mock = sinon.mock();
+                    request.returns({
+                        setResourceKind: sinon.stub(),
+                        setResourceSelector: sinon.stub(),
+                        setQueryArg: mock,
+                        read: sinon.stub()
+                    });
+                    
+                    try {
+                        mock.withArgs('select', 'one,two').once();
+                        store = new SingleEntrySDataStore({
+                            select: ['one', 'two']
+                        });
+                        store.fetch({});
+                        mock.verify();
+                    } catch (err) {
+                        console.error(err);
+                        doh.t(false);
+                    }
+                },
+                function testInclude() {
+                    var store,
+                        request,
+                        mock;
+                        
+                    Sage.SData.Client.SDataSingleResourceRequest = sinon.stub();
+                    request = Sage.SData.Client.SDataSingleResourceRequest;
+                    mock = sinon.mock();
+                    request.returns({
+                        setResourceKind: sinon.stub(),
+                        setResourceSelector: sinon.stub(),
+                        setQueryArg: mock,
+                        read: sinon.stub()
+                    });
+                    
+                    try {
+                        mock.withArgs('include', 'one,two').once();
+                        store = new SingleEntrySDataStore({
+                            include: ['one', 'two']
+                        });
+                        store.fetch({});
+                        mock.verify();
+                    } catch (err) {
+                        console.error(err);
+                        doh.t(false);
+                    }
+                },
+                function testRead() {
+                    var store,
+                        request,
+                        stub;
+                        
+                    Sage.SData.Client.SDataSingleResourceRequest = sinon.stub();
+                    request = Sage.SData.Client.SDataSingleResourceRequest;
+                    stub = sinon.stub();
+                    stub.yieldsTo('success', ['data']);
+                    request.returns({
+                        setResourceKind: sinon.stub(),
+                        setResourceSelector: sinon.stub(),
+                        setQueryArg: sinon.stub(),
+                        read: stub
+                    });
+                    
+                    try {
+                        store = new SingleEntrySDataStore({
+                            onSuccess: function (context, data) {
+                                doh.t(data[0] === 'data');
+                                doh.t(context.prop1 === 'foo');
+                            },
+                            onFailure: function (context) {
+                                doh.t(context.foo === 'bar');
+                            }
+                        });
+                        
+                        store.fetch({
+                            prop1: 'foo'
+                        });
+                        
+                        stub.yieldsTo('failure', [])
+                        store.fetch({
+                            foo: 'bar'
+                        });
+                        
+                    } catch (err) {
+                        console.error(err);
+                        doh.t(false);
+                    }
+                }
+            ]);
+            
+            //Execute D.O.H. in this remote file.
+            doh.run();
+        });
+        </script>
+    </head>
+    <body>
+        <form>
+        </form>
+    </body>
+</html>

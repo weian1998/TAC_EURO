@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="de" xml:lang="de" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Intellisync-Integritätsprüfung</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Intellisync/Intellisync_Health_Check.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Thema mit den Registerkarten "Suchen", "Inhalt" und "Index" öffnen</a>
+        </p>
+        <h1><a name="kanchor506"></a>Intellisync-Integritätsprüfung</h1>
+        <p>Intellisync for SalesLogix bietet zur Fehlerbehebung die Intellisync-Integritätsprüfung. Sie können zur Fehlerbehebung die Protokollierung im Portal aktivieren und die Version der Assemblys überprüfen. Das Überprüfen der Assemblyversionen erfolgt zumeist auf Anforderung des technischen Supports von Sage.
+
+
+</p>
+        <p>Der Zugriff auf die Intellisync-Integritätsprüfung erfolgt über den Internetinformationsdienste-Manager (IIS), das Intellisync-Portal und den <span class="MCPopup"><a href="javascript:void(0);" MadCap:src="../Remotes/slxpersonalwebserver.htm" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">Sage SalesLogix Personal Web Server</a></span>. </p>
+        <p class="Infinitive">So erfolgt der Zugriff über den Internetinformationsdienste-Manager</p>
+        <ol>
+            <li class="Topic-Text-Numbered" value="1">Klicken Sie auf <span class="SLXBold">Start</span>, zeigen Sie auf <span class="SLXBold">Programme</span> und anschließend auf <span class="SLXBold">Verwaltung</span>.</li>
+            <li class="Topic-Text-Numbered" value="2">Klicken Sie auf <span class="SLXBold">Internetinformationsdienste-Manager (IIS)</span>.</li>
+            <li class="Topic-Text-Numbered" value="3">Blenden Sie den Computernamen, dann <span class="SLXBold">Websites</span> und schließlich <span class="SLXBold">SalesLogix</span> ein.</li>
+            <li class="Topic-Text-Numbered" value="4">Doppelklicken Sie auf <span class="SLXBold">SLXIntellisync</span>.</li>
+            <li class="Topic-Text-Numbered" value="5">Führen Sie einen der folgenden Schritte durch:</li>
+        </ol>
+        <ul>
+            <li class="Topic-Text-Bulleted-2" value="1">Windows 2003: Klicken Sie im rechten Bereich in der Dateiliste mit der rechten Maustaste auf <span style="font-weight: bold;">Default.aspx</span>, und klicken Sie auf <span style="font-weight: bold;">Durchsuchen</span>.
+</li>
+            <li class="Topic-Text-Bulleted-2" value="2">Windows 2008: Klicken Sie im rechten Bereich in der Dateiliste mit der rechten Maustaste auf <span style="font-weight: bold;">Standarddokument</span>, zeigen Sie auf <span style="font-weight: bold;">Anwendung verwalten</span>, und klicken Sie dann auf <span style="font-weight: bold;">Durchsuchen</span>. Das Intellisync-Portal wird im Browser geöffnet. Falls nicht, vergewissern Sie sich, dass die Einstellungen ordnungsgemäß konfiguriert sind und das Portal bereitgestellt wurde.
+
+
+</li>
+        </ul>
+        <ol>
+            <li value="6" class="Topic-Text-Numbered">Klicken Sie im Browser auf <span class="SLXBold">Diagnostics</span>, und führen Sie einen der folgenden Schritte durch:</li>
+        </ol>
+        <ul>
+            <li class="Topic-Text-Bulleted-2" value="1">Um Benutzeranmeldedaten zu testen, geben Sie den Benutzernamen und das Passwort des zu testenden Benutzers ein und klicken auf <span style="font-weight: bold;">Verbindung herstellen</span>. Es wird eine Anforderung an den Server gesendet, um zu testen, ob die Anmeldeinformationen für das Portal gültig sind. Eine Meldung gibt an, ob der Anmeldeversuch erfolgreich war. <br /></li>
+            <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+                <col style="width: 45px;" />
+                <col />
+                <tr>
+                    <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                        <p style="text-align: center;margin-bottom: 0;" align="center">
+                            <img src="../image/note.gif" />
+                        </p>
+                    </td>
+                    <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                        <p class="Tip-Note-Text" style="margin-bottom: 0;">Dieser Test ermittelt nur, ob die Anmeldeinformationen für eine erfolgreiche Anmeldung beim Portal gültig sind. Es wird nicht getestet, ob eine funktionierende Datenbankverbindung vorliegt.
+</p>
+                    </td>
+                </tr>
+            </table>
+        </ul>
+        <ul>
+            <li class="Topic-Text-Bulleted-2" value="1">Um Assemblys und ihre Versionsnummer anzuzeigen, klicken Sie unten in der Liste auf die Schaltflächen <span style="font-weight: bold;">Vorwärts</span> und <span style="font-weight: bold;">Zurück</span>. 
+
+
+</li>
+        </ul>
+        <p class="Infinitive">So erfolgt der Zugriff über das Portal</p>
+        <ol>
+            <li class="Topic-Text-Numbered" value="1">Öffnen Sie das Intellisync-Portal. 
+</li>
+        </ol>
+        <p class="Topic-Text-Indent">Geben Sie z.&#160;B. den Portal-URL im folgenden Format in den Browser ein: http://Server:Port/Portalname/default.aspx
+
+
+</p>
+        <ol MadCap:continue="true">
+            <li class="Topic-Text-Numbered" value="2">Klicken Sie auf <span class="SLXBold">Diagnostics</span>.
+</li>
+        </ol>
+        <ol style="list-style-type: decimal;" MadCap:continue="true">
+            <li class="Topic-Text-Numbered" value="3">Führen Sie einen der folgenden Schritte durch:</li>
+        </ol>
+        <ul style="list-style-type: disc;">
+            <li class="Topic-Text-Bulleted-2" value="1">Um Assemblys und ihre Versionsnummer anzuzeigen, klicken Sie unten in der Liste auf die Schaltflächen <span style="font-weight: bold;">Vorwärts</span> und <span style="font-weight: bold;">Zurück</span>.</li>
+            <li class="Topic-Text-Bulleted-2" value="2">Um Benutzeranmeldedaten zu testen, geben Sie den <span class="SLXBold">Benutzernamen</span> und das <span class="SLXBold">Passwort</span> für den zu testenden Benutzer ein und klicken auf <span class="SLXBold">Verbindung herstellen</span>.</li>
+        </ul>
+        <p class="Topic-Text-Indent2">Es wird eine Anforderung an den Server gesendet, um zu testen, ob sich der Benutzer beim Intellisync-Portal anmelden kann. Eine Meldung gibt an, ob der Test erfolgreich war.</p>
+        <p class="Infinitive">So erfolgt der Zugriff über den Personal Web Server
+
+
+</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="1stalpha;1stp">So testen Sie Benutzeranmeldedaten<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <ol style="list-style-type: lower-alpha; display: none;" MadCap:targetName="1stalpha">
+            <li class="Topic-Text-Lettered" value="1">Klicken Sie auf der Windows-Taskleiste mit der rechten Maustaste auf das Symbol für <span class="SLXBold">Sage SalesLogix Personal Web Server</span>, und klicken Sie dann auf <span class="SLXBold">Eigenschaften</span>.
+
+
+</li>
+            <li class="Topic-Text-Lettered" value="2">Klicken Sie im Dialogfeld <span class="SLXBold">Sage SalesLogix Personal Web Server</span> auf <span class="SLXBold">Verwalten</span>. 
+
+
+</li>
+            <li class="Topic-Text-Lettered" value="3">Geben Sie den <span class="SLXBold">Benutzernamen</span> und das <span class="SLXBold">Passwort</span> für den zu testenden Benutzer ein. 
+
+
+</li>
+            <li class="Topic-Text-Lettered" value="4">Klicken Sie auf <span class="SLXBold">Verbindung testen</span>. </li>
+        </ol>
+        <p class="Topic-Text-Indent2" MadCap:targetName="1stp" style="display: none;">Es wird eine Anforderung an den Server gesendet, um zu testen, ob sich der Benutzer beim Intellisync-Portal anmelden kann. Eine Meldung gibt an, ob der Anmeldeversuch erfolgreich war.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="2ndalpha;2ndp">So zeigen Sie Assemblys und ihre Versionsnummer an<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <ol style="list-style-type: lower-alpha; display: none;" MadCap:targetName="2ndalpha">
+            <li class="Topic-Text-Lettered" value="1">Klicken Sie auf der Windows-Taskleiste mit der rechten Maustaste auf das Symbol für <span class="SLXBold">Sage SalesLogix Personal Web Server</span>, und klicken Sie dann auf <span class="SLXBold">Eigenschaften</span>.</li>
+            <li class="Topic-Text-Lettered" value="2">Wählen Sie im Dialogfeld <span class="SLXBold">Sage SalesLogix Personal Web Server</span> das Intellisync-Portal im Feld <span class="SLXBold">Website</span> aus.</li>
+            <li class="Topic-Text-Lettered" value="3">Klicken Sie auf <span class="SLXBold">Details</span>.</li>
+        </ol>
+        <p class="Topic-Text-Indent2" MadCap:targetName="2ndp" style="display: none;">Prüfen Sie die installierten Assemblys für das Intellisync-Portal und ihre Versionsnummern.</p>
+        <ul>
+            <li value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="3rdalpha">So vergleichen Sie Portalversionen<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <ol style="list-style-type: lower-alpha; display: none;" MadCap:targetName="3rdalpha">
+            <li class="Topic-Text-Lettered" value="1">Klicken Sie auf der Windows-Taskleiste mit der rechten Maustaste auf das Symbol <span class="SLXBold">Sage SalesLogix Personal Web Server</span>, und klicken Sie dann auf <span class="SLXBold">Gleiche Versionen</span>.</li>
+            <li class="Topic-Text-Lettered" value="2">Prüfen Sie die Version der Datei "sage.saleslogix.dll" für jedes installierte Portal.</li>
+        </ol>
+        <p class="RelatedTopics">Verwandte Themen</p>
+        <p>Fehlerbehebung mithilfe der Protokollierung</p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Haben Sie Vorschläge zur Verbesserung der Hilfe?</a>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

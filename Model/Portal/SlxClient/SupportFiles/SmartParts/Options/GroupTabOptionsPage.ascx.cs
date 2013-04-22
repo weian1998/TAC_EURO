@@ -51,6 +51,8 @@ public partial class GroupTabOptionsPage : System.Web.UI.UserControl, ISmartPart
         }
         userOption.SetCommonOption("autoFitColumns", "GroupGridView",
                                    cbAutoFitColumns.Checked.ToString(CultureInfo.InvariantCulture), false);
+
+        userOption.SetCommonOption("defaultLookupCondition", "DefaultLookupCondition", ddlDefaultSearchCondition.SelectedValue, false);
     }
 
     private string GetFamNameFromId(string id)
@@ -119,12 +121,20 @@ public partial class GroupTabOptionsPage : System.Web.UI.UserControl, ISmartPart
             if ((grp.Family.ToLower() == defLayoutGroup.Split(':')[0].ToLower()) && (grp.Name == defLayoutGroup.Split(':')[1]))
                 Utility.SetSelectedValue(ddlLookupLayoutGroup, grp.PluginId);
 
-        bool autoFitColumns;
         string autoFitColumnsValue = userOption.GetCommonOption("autoFitColumns", "GroupGridView");
-        if (!Boolean.TryParse(autoFitColumnsValue, out autoFitColumns))
-            autoFitColumns = true;
-
+        bool autoFitColumns = Utility.StringToBool(autoFitColumnsValue);
         cbAutoFitColumns.Checked = autoFitColumns;
+
+        string defaultLookupCondition = userOption.GetCommonOption("defaultLookupCondition", "DefaultLookupCondition");
+        ddlDefaultSearchCondition.ClearSelection();
+        foreach(ListItem item in ddlDefaultSearchCondition.Items)
+        {
+            if (string.Equals(item.Value, defaultLookupCondition))
+            {
+                item.Selected = true;
+                break;
+            }
+        }
     }
 
     private string DefaultGroupOptionName()

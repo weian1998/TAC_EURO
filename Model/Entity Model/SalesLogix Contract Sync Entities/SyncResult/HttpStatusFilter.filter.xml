@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0"?>
-<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmDistinctEntityFilter" id="ec12cf29-5a8d-4266-8b29-990721f79066" lastModifiedUtc="2011-04-07T17:37:20.3716907Z" filterName="HttpStatusFilter" propertyName="HttpStatus" dataPath="SYNCRESULT:HTTPSTATUS" characters="0">
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmDistinctEntityFilter" id="ec12cf29-5a8d-4266-8b29-990721f79066" lastModifiedUtc="2011-04-07T17:37:20.3716907Z" filterName="HttpStatusFilter" propertyName="HttpStatus" characters="0">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmDistinctEntityFilter" />

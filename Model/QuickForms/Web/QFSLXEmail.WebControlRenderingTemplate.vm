@@ -8,7 +8,7 @@
    <asp:Label ID="${qfcontrol.LabelId}" AssociatedControlID="${qfcontrol.ControlId}" runat="server" Text="<%$ resources: ${qfcontrol.ControlId}.Caption %>" #if(!$qfcontrol.Visible)Visible="false" #end></asp:Label>
  </div>   
 #end #end
-  <div #if(${qfcontrol.ColumnSpan} > 1 || ${qfcontrol.ControlLabelPlacement} == "top") class="twocoltextcontrol email" #else class="textcontrol email" #end > 
+  <div #if(${qfcontrol.ColumnSpan} == 2 || ${qfcontrol.ControlLabelPlacement} == "top") class="twocoltextcontrol" #elseif(${qfcontrol.ColumnSpan} > 2) class="threecoltextcontrol" #else class="textcontrol" #end > 
 #if($IsPrintView)<asp:Label runat="server" ID="$qfcontrol.ControlId" />
 #else
 <SalesLogix:Email runat="server" ID="${qfcontrol.ControlId}" #if($qfcontrol.IsReadOnly)ReadOnly="true" #end

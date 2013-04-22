@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Редактирование или удаление действия безопасности</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Admin_security/EditingOrDeletingASecuredAction.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1>Редактирование или удаление действия безопасности</h1>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <col style="width: 38px;" />
+            <col />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/adminonly.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p>Только системный администратор и пользователи с соответствующей <a href="What_are_Roles_and_Secured_Actions.htm" target="_self">ролью</a> могут иметь доступ к этим функциям.Только системный администратор и пользователи с ролью администратора могут иметь доступ к этим функциям.</p>
+                </td>
+            </tr>
+        </table>
+        <p>Если вы переименовываете или удаляете действие безопасности, оно отсоединяется ото всех элементов, которым было назначено в Архитекторе приложения. Хотя связь больше не существует, элемент все еще защищен, до тех пор пока вы вручную не удалите действие безопасности из свойства Applied Security в Архитекторе Приложений.           <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="ActionExample">Узнать больше...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a></p>
+        <p MadCap:targetName="ActionExample" style="display: none;">Например, вы создали действие безопасности под названием Печать/Отчеты и добавили это действие к кнопке Печать представления Отчеты.  Если вы удалите действие безопасности Печать/Отчеты, настройки кнопки Печать все еще будут содержать значение Печать/Отчеты в свойстве Applied Security в Архитекторе приложений, хотя действия уже не существует. Пользователь перейдя к представлению Отчеты, не будет иметь доступ к кнопке Печать, потому что ему не назначена роль, которая содержит действие Печать/Отчеты. Пользователь admin имеет доступ ко всем элементам интерфейса, несмотря на действия безопасности.</p>
+        <p>Если вы хотите удалить защиту с элемента, удалите действие безопасности и вручную удалите действие из свойства Applied Security в Архитекторе приложений.</p>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <col style="width: 38px;" />
+            <col />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/caution.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p>Sage рекомендует сохранять информацию с закладки     <![CDATA[ ]]><a href="SecuredActionLocationsTab.htm" target="_self">Размещение</a>, находящейся на сущности Действия безопасности перед переименованием или удалением действия безопасности.</p>
+                </td>
+            </tr>
+        </table>
+        <p class="RelatedTopics">Как выполнить?</p>
+        <p class="HowDoI"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="edit">Редактировать действие безопасности<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <ol MadCap:targetName="edit" style="display: none;">
+            <li class="Topic-Text-Numbered" value="1">Откройте <a href="SecuredActionDetailView.htm" target="_self">детальное представление действия безопасности</a>, которое вы хотели бы отредактировать.</li>
+            <li class="Topic-Text-Numbered" value="2">Используйте закладку <a href="SecuredActionRolesTab.htm" target="_self">Роли</a> для добавления или удаления действия безопасности из роли.</li>
+            <li class="Topic-Text-Numbered" value="3">Нажмите   <![CDATA[ ]]><span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Сохранить<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>.</li>
+        </ol>
+        <p class="HowDoI"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="delete">Удалить действие безопасности<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <ol MadCap:targetName="delete" style="display: none;">
+            <li class="Topic-Text-Numbered" value="1">Откройте <a href="SecuredActionDetailView.htm" target="_self">детальное представление действия безопасности</a>, которое вы хотели бы удалить.</li>
+            <li class="Topic-Text-Numbered" value="2">Нажмите   <![CDATA[ ]]><span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Удалить<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/Delete.gif" /></span></span>.</li>
+            <li class="Topic-Text-Numbered" value="3">Нажмите <b>OK</b> для подтверждения.</li>
+        </ol>
+        <p><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="recover">Восстановить действие безопасности<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <p MadCap:targetName="recover" style="display: none;">Если вы случайным образом удалите (или переименуете) действие безопасности, вы можете создать новое действие безопасности с таким же именем, которое заново установит связь действия со всеми элементами управления, использующими действие в Архитекторе приложений. Если вы вручную удалили действие из свойства Applied Security элемента управления  в Архитекторе приложений, действие не будет заново назначено элементам управления. Название нового действия безопасности должно В ТОЧНОСТИ соответствовать предыдущему названию действия безопасности.</p>
+        <p class="RelatedTopics">См. также</p>
+        <p><a target="_self" href="What_are_Roles_and_Secured_Actions.htm">Что такое роли и действия безопасности?</a>
+        </p>
+        <p><a href="CreatingASecuredAction.htm" target="_self">Создание действия безопасности</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

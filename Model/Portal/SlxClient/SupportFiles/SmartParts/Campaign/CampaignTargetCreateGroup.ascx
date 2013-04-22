@@ -1,10 +1,5 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeFile="CampaignTargetCreateGroup.ascx.cs" Inherits="CampaignTargetCreateGroup" %>
-<%@ Register Assembly="Sage.SalesLogix.Client.GroupBuilder" Namespace="Sage.SalesLogix.Client.GroupBuilder" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.PickList" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.DependencyLookup" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.Lookup" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.HighLevelTypes" Namespace="Sage.SalesLogix.HighLevelTypes" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.Platform.WebPortal" Namespace="Sage.Platform.WebPortal.SmartParts" TagPrefix="SalesLogix" %>
 
 <SalesLogix:SmartPartToolsContainer runat="server" ID="CampaignTargets_RTools" ToolbarLocation="right">
@@ -22,7 +17,7 @@
         </td>
         <td>
             <div class="textcontrol select">
-                <asp:ListBox runat="server" ID="lbxGroupType" SelectionMode="Single" Rows="1" >
+                <asp:ListBox runat="server" ID="lbxGroupType" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" shouldPublishMarkDirty="false" SelectionMode="Single" Rows="1" >
                     <asp:ListItem Selected="true" Text="<%$ resources: lbxGroupType_Contact.Text %>"
                         Value="<%$ resources: lbxGroupType_Contact.Value %>" />
                     <asp:ListItem Text="<%$ resources: lbxGroupType_Lead.Text %>"
@@ -32,12 +27,12 @@
         </td>
     </tr>
     <tr>
-    <td>
-        <asp:Label runat="server" ID="lblGroupName" Text="<%$ resources: lblGroupName.Caption %>"></asp:Label>
-    </td>
+        <td>
+            <asp:Label runat="server" ID="lblGroupName" Text="<%$ resources: lblGroupName.Caption %>"></asp:Label>
+        </td>
         <td>
             <div class="textcontrol">
-                <asp:TextBox runat="server" ID="txtGroupName" />
+                <asp:TextBox runat="server" ID="txtGroupName" dojoType="Sage.UI.Controls.TextBox" />
             </div>
         </td>
     </tr>
@@ -46,19 +41,12 @@
             <asp:Label runat="server" ID="lblGroupMembers" Text="<%$ resources: lblGroupMembers.Caption %>"></asp:Label>
         </td>
         <td>
-            <fieldset class="slxlabel radio"  style="width: 80%;" >
+            <fieldset class="slxlabel radio" style="width: 90%;">
                 <asp:RadioButtonList runat="server" ID="rdgGroupMembers" RepeatDirection="Vertical" >
-                    <asp:ListItem Text="<%$ resources: rdgGroupMembers_AllTargets.Text %>" Selected="True"
-                        Value="<%$ resources: rdgGroupMembers_AllTargets.Value %>" />
-                    <asp:ListItem Text="<%$ resources: rdgGroupMembers_SelectedTargets.Text %>"
-                        Value="<%$ resources: rdgGroupMembers_SelectedTargets.Value %>" />
+                    <asp:ListItem Text="<%$ resources: rdgGroupMembers_AllTargets.Text %>" Selected="True" Value="<%$ resources: rdgGroupMembers_AllTargets.Value %>" />
+                    <asp:ListItem Text="<%$ resources: rdgGroupMembers_SelectedTargets.Text %>" Value="<%$ resources: rdgGroupMembers_SelectedTargets.Value %>" />
                 </asp:RadioButtonList>
             </fieldset>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <hr />
         </td>
     </tr>
     <tr>

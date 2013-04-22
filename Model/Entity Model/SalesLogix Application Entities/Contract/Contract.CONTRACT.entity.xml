@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="3521b9b3-7701-4714-b257-197697f94f85" lastModifiedUtc="2008-07-15T23:48:27.3801406Z" manageSchema="false" tableName="CONTRACT" name="Contract" displayPropertyId="cf621d55-fb0c-4cc0-ab12-fe279772f7bf" isExtension="false" audited="true" smallImage="[Localization!Global_Images:contract_16x16]" largeImage="[Localization!Global_Images:contract_detail_24x24]" generateSDataFeed="true" sDataPathName="contracts" lastUpdatedPropertyId="3e68642a-76b3-4a8a-93c7-836990faf446" onBeforeInsertMethodId="45bcb3e9-66f3-431a-803b-e78adcb0be16" onAfterInsertMethodId="c8c317aa-9c2e-41f9-9538-517c3ef52ec1" onBeforeUpdateMethodId="c379160e-86e9-4b85-81dc-7966ea4edc9e" onAfterUpdateMethodId="d13276f8-5e77-4f2a-b956-2d5b7532ecd8" onBeforeDeleteMethodId="806b8a70-1486-47a8-99b8-b8423e7042da" onAfterDeleteMethodId="560e5a06-190b-4c4d-9014-3cbc3f6bcd66" onCreateId="c24c594a-1a6b-4809-86bc-6dfb812b2211">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="3521b9b3-7701-4714-b257-197697f94f85" lastModifiedUtc="2012-09-26T07:10:39.3109162Z" manageSchema="true" tableName="CONTRACT" name="Contract" displayPropertyId="cf621d55-fb0c-4cc0-ab12-fe279772f7bf" isExtension="false" cacheUsage="ReadWrite" audited="true" smallImage="[Localization!Global_Images:contract_16x16]" largeImage="[Localization!Global_Images:contract_detail_24x24]" generateSDataFeed="true" sDataPathName="contracts" lastUpdatedPropertyId="3e68642a-76b3-4a8a-93c7-836990faf446" onBeforeInsertMethodId="45bcb3e9-66f3-431a-803b-e78adcb0be16" onAfterInsertMethodId="c8c317aa-9c2e-41f9-9538-517c3ef52ec1" onBeforeUpdateMethodId="c379160e-86e9-4b85-81dc-7966ea4edc9e" onAfterUpdateMethodId="d13276f8-5e77-4f2a-b956-2d5b7532ecd8" onBeforeDeleteMethodId="806b8a70-1486-47a8-99b8-b8423e7042da" onAfterDeleteMethodId="560e5a06-190b-4c4d-9014-3cbc3f6bcd66" onCreateId="c24c594a-1a6b-4809-86bc-6dfb812b2211">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
@@ -141,7 +141,7 @@
         <TrueFalseDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="64810b72-e509-42c2-b3be-afcbb3f1b0c9" lastModifiedUtc="2008-01-28T20:44:35.0995999Z" name="ListPrice" audited="false" onBeforeChangeMethodId="0a700501-16cb-4947-8a8c-1ef781beb0ed" columnName="LISTPRICE" maxLength="0" precision="17" scale="4" ordinal="32" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="64810b72-e509-42c2-b3be-afcbb3f1b0c9" lastModifiedUtc="2008-01-28T20:44:35.0995999Z" name="ListPrice" audited="false" columnName="LISTPRICE" maxLength="0" precision="17" scale="4" ordinal="32" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
@@ -168,14 +168,14 @@
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="e79efb17-35b7-47bc-967b-356b4648dde5" lastModifiedUtc="0001-01-01T00:00:00" name="Notes" audited="false" columnName="NOTES" maxLength="2147483647" precision="0" scale="0" ordinal="16" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="e79efb17-35b7-47bc-967b-356b4648dde5" lastModifiedUtc="2012-02-10T03:17:29.0461198Z" name="Notes" audited="false" columnName="NOTES" maxLength="2147483647" precision="0" scale="0" ordinal="16" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
-      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
-        <TextDataType>
+      <SystemDataType guid="f4ca6023-9f5f-4e41-8571-50ba94e8f233">
+        <LongTextDataType>
           <Length>2147483647</Length>
-        </TextDataType>
+        </LongTextDataType>
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="2aebda4b-3123-4d44-829e-a05f777a990c" lastModifiedUtc="0001-01-01T00:00:00" name="Period" audited="false" columnName="PERIOD" maxLength="0" precision="53" scale="0" ordinal="5" isReadOnly="false">
@@ -222,17 +222,15 @@
         <DoubleDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="4da3e4d3-8c6a-4c55-b304-112f864e7c63" lastModifiedUtc="0001-01-01T00:00:00" name="SeccodeId" audited="false" include="false" columnName="SECCODEID" maxLength="12" precision="0" scale="0" ordinal="37" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="4da3e4d3-8c6a-4c55-b304-112f864e7c63" lastModifiedUtc="2012-09-26T07:10:39.3099161Z" name="SeccodeId" audited="false" include="false" columnName="SECCODEID" maxLength="12" precision="0" scale="0" ordinal="37" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
-      <SystemDataType guid="17541523-fc31-4269-ac97-df63290d0e31">
-        <OwnerDataType>
-          <Length>12</Length>
-        </OwnerDataType>
+      <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
+        <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="93969b72-ea90-4fa3-be72-1755df78d95a" lastModifiedUtc="2008-05-13T19:28:55.1026305Z" name="ServiceCode" audited="false" columnName="SERVICECODE" maxLength="12" precision="0" scale="0" ordinal="2" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="93969b72-ea90-4fa3-be72-1755df78d95a" lastModifiedUtc="2011-08-03T19:28:55.1026305Z" name="ServiceCode" audited="false" columnName="SERVICECODE" maxLength="12" precision="0" scale="0" ordinal="2" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
@@ -244,7 +242,7 @@
           <MustExistInList>true</MustExistInList>
           <NoneEditable>false</NoneEditable>
           <AlphaSort>false</AlphaSort>
-          <Length>255</Length>
+          <Length>12</Length>
         </PickListDataType>
       </SystemDataType>
     </property>
@@ -256,7 +254,7 @@
         <DateTimeDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="29cd71b5-2894-4ad7-bbc1-e7ef44bb56e7" lastModifiedUtc="2008-05-15T18:41:28.6705282Z" name="TypeCode" audited="false" columnName="TYPECODE" maxLength="12" precision="0" scale="0" ordinal="3" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="29cd71b5-2894-4ad7-bbc1-e7ef44bb56e7" lastModifiedUtc="2011-08-03T18:41:28.6705282Z" name="TypeCode" audited="false" columnName="TYPECODE" maxLength="12" precision="0" scale="0" ordinal="3" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
@@ -268,7 +266,7 @@
           <MustExistInList>true</MustExistInList>
           <NoneEditable>false</NoneEditable>
           <AlphaSort>false</AlphaSort>
-          <Length>255</Length>
+          <Length>12</Length>
         </PickListDataType>
       </SystemDataType>
     </property>

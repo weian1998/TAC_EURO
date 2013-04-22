@@ -19,6 +19,22 @@
   <reference>
    <assemblyName>Sage.SalesLogix.API.dll</assemblyName>
   </reference>
+  <reference>
+   <assemblyName>Sage.SalesLogix.dll</assemblyName>
+   <hintPath>%BASEBUILDPATH%\assemblies\Sage.SalesLogix.dll</hintPath>
+  </reference>
+  <reference>
+   <assemblyName>Sage.SalesLogix.Web.dll</assemblyName>
+   <hintPath>%BASEBUILDPATH%\assemblies\Sage.SalesLogix.Web.dll</hintPath>
+  </reference>
+  <reference>
+   <assemblyName>Sage.Platform.Application.dll</assemblyName>
+   <hintPath>%BASEBUILDPATH%\assemblies\Sage.Platform.Application.dll</hintPath>
+  </reference>
+  <reference>
+   <assemblyName>Sage.SalesLogix.Security.dll</assemblyName>
+   <hintPath>%BASEBUILDPATH%\assemblies\Sage.SalesLogix.Security.dll</hintPath>
+  </reference>
  </references>
 </snippetHeader>
 */
@@ -28,7 +44,10 @@
 using System;
 using Sage.Entity.Interfaces;
 using Sage.Form.Interfaces;
+using Sage.Platform.Application;
+using Sage.Platform.Data;
 using Sage.SalesLogix.API;
+using Sage.SalesLogix.Security;
 #endregion Usings
 
 namespace Sage.BusinessRules.CodeSnippets
@@ -50,11 +69,21 @@ namespace Sage.BusinessRules.CodeSnippets
 			string newPassword = form.txtNewPassword.Text;
             if (newPassword.Equals(form.txtConfirmPassword.Text))
 			{
-				IUser user = (IUser)form.usrUser.LookupResultValue;
+				IUser user = (IUser)form.CurrentEntity; 
+				
 				if (user.ValidateUserPassword(newPassword))
 				{
 					Sage.Platform.WebPortal.Services.IWebDialogService ds = form.Services.Get<Sage.Platform.WebPortal.Services.IWebDialogService>();
 					user.SavePassword(newPassword);
+					var slxUserService = (ISlxUserService)ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>(true);
+            		var currentUser = slxUserService.GetUser();
+					if (user.UserName == currentUser.UserName)
+					{
+                		var data = (Sage.SalesLogix.SLXDataService)ApplicationContext.Current.Services.Get<IDataService>(true);
+                		var auth = (Sage.SalesLogix.Web.SLXWebAuthenticationProvider)data.AuthenticationProvider;
+                		auth.AuthenticateWithContext(currentUser.UserName, newPassword);
+ 					}
+
 					form.lblInvalidPassword.Text = newPassword.Length == 0 ? form.GetResource("PasswordBlank").ToString() : String.Empty;
 					if(newPassword.Length == 0)
 					{

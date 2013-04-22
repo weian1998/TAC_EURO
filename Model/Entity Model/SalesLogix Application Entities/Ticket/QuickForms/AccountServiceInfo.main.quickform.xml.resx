@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="cmdSave.Caption" xml:space="preserve">
     <value>Save</value>
@@ -257,5 +257,14 @@
   </data>
   <data name="lueAccountName.LookupProperties.AccountManager.UserInfo.UserName.PropertyHeader" xml:space="preserve">
     <value>Account Manager</value>
+  </data>
+  <data name="grdContacts.81d821ad-516f-449d-b1b2-e7423c884354.Text" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="grdContracts.541749df-5753-4b47-9223-d2a9fe9f6ab0.Text" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="cmdCancel.CloseText" xml:space="preserve">
+    <value>Close</value>
   </data>
 </root>

@@ -7,7 +7,6 @@ using Sage.Platform;
 using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
 using Sage.Platform.ComponentModel;
-using Sage.Platform.Security;
 using Sage.Platform.WebPortal.Services;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.SalesLogix.BusinessRules;
@@ -16,14 +15,16 @@ using Sage.SalesLogix.Services.Integration;
 using Sage.SalesLogix.Web.SelectionService;
 using Sage.Platform.WebPortal;
 using TimeZone = Sage.Platform.TimeZone;
+using Sage.Platform.Security;
 
 public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvider
 {
-    [ServiceDependency]
-    private static IRoleSecurityService RoleSecurityService { get; set; }
     private static TimeZone _timeZone;
     private static ISalesOrder _currentSOEntity;
 
+    [ServiceDependency]
+    public IRoleSecurityService RoleSecurityService { get; set; }
+    
     /// <summary>
     /// Gets or sets the dialog service.
     /// </summary>
@@ -53,16 +54,14 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        ScriptManager.GetCurrent(Page).Scripts.Add(
-            new ScriptReference("~/SmartParts/TaskPane/AccountingTasks/AccountingTasks.js"));
         EntityPage page = Page as EntityPage;
         if (page != null && page.EntityContext != null)
         {
-            if (page.EntityContext.EntityType.Equals(typeof (IAccount)))
+            if (page.EntityContext.EntityType == typeof (IAccount))
             {
                 LoadAccountTasks(page);
             }
-            else if (page.EntityContext.EntityType.Equals(typeof (ISalesOrder)))
+            else if (page.EntityContext.EntityType == typeof (ISalesOrder))
             {
                 LoadSOTasks(page);
             }
@@ -71,43 +70,45 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
 
     private void LoadAccountTasks(EntityPage page)
     {
+        var canPromote = RoleSecurityService.HasAccess("Entities/Account/PromoteAccount");
+        var integrated = BusinessRuleHelper.IsIntegrationContractEnabled();
         if (page.IsDetailMode)
         {
             divEntityAccountList.Style.Add("display", "none");
             divEntityAccountDetails.Style.Add("display", "block");
-            IAccount account = EntityFactory.GetRepository<IAccount>().Get(page.EntityContext.EntityID);
-            if (account == null)
+            if (integrated)
             {
-                return;
-            }
-            if (BusinessRuleHelper.IsIntegrationContractEnabled())
-            {
-                if (account.PromotedToAccounting.HasValue && account.PromotedToAccounting.Value)
+                IAccount account = EntityFactory.GetRepository<IAccount>().Get(page.EntityContext.EntityID);
+                if (account == null)
                 {
+                    hideIntegration();
+                    return;
+                }
+                lblLinkAccount.Visible = canPromote;
+                imgLinkAccount.Visible = canPromote;
+                if (account.PromotedToAccounting ?? false)
+                {
+                    IAppIdMapping slxFeed = IntegrationHelpers.GetSlxAccountingFeed();
                     lblLinkAccount.Text = GetLocalResourceObject("lblLinkAnotherAccount.Caption").ToString();
                     lblNotLinkedStatus.Visible = false;
                     lblLinkedStatus.Visible = true;
-                    IAppIdMapping slxFeed = IntegrationHelpers.GetSlxAccountingFeed();
-                    lblLinkAccount.Enabled = !slxFeed.RestrictToSingleAccount.HasValue ||
-                                             !slxFeed.RestrictToSingleAccount.Value;
                     updateAccountPanel.Update();
+                    lblLinkAccount.Visible = canPromote && !(slxFeed.RestrictToSingleAccount ?? false);
+                    imgLinkAccount.Visible = canPromote && !(slxFeed.RestrictToSingleAccount ?? false);
                 }
                 else
                 {
                     lblLinkAccount.Text = GetLocalResourceObject("lblLinkAccount.Caption").ToString();
                     lblNotLinkedStatus.Visible = true;
                     lblLinkedStatus.Visible = false;
-                    lblLinkAccount.Enabled = true;
                 }
+                lblLastUpdate.Text = String.Format(GetLocalResourceObject("lblLastUpdate.Caption").ToString(),
+                                                   TimeZone.UTCDateTimeToLocalTime((DateTime)account.ModifyDate));
             }
             else
             {
-                rowlnkLinkAccount.Style.Add("display", "none");
-                rowlnkLinkAccount_List.Style.Add("display","none");    
-                rowlnkLinkStatus.Style.Add("display","none");
+                hideIntegration();
             }
-            lblLastUpdate.Text = String.Format(GetLocalResourceObject("lblLastUpdate.Caption").ToString(),
-                                               TimeZone.UTCDateTimeToLocalTime((DateTime) account.ModifyDate));
             if (page.IsNewEntity)
             {
                 updateAccountPanel.Update();
@@ -115,16 +116,25 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
         }
         else
         {
+            if (!integrated)
+            {
+                hideIntegration();
+            } 
+            else if (!canPromote)
+            {
+                rowlnkLinkAccount_List.Style.Add("display", "none");
+            }
             divEntityAccountList.Style.Add("display", "block");
             divEntityAccountDetails.Style.Add("display", "none");
             lblLinkStatus.Visible = false;
-            if (!BusinessRuleHelper.IsIntegrationContractEnabled())
-            {
-                rowlnkLinkAccount.Style.Add("display", "none");
-                rowlnkLinkAccount_List.Style.Add("display", "none");
-                rowlnkLinkStatus.Style.Add("display", "none");
-            }
         }
+    }
+
+    private void hideIntegration()
+    {
+        rowlnkLinkAccount.Style.Add("display", "none");
+        rowlnkLinkAccount_List.Style.Add("display", "none");
+        rowlnkLinkStatus.Style.Add("display", "none");
     }
 
     private void LoadSOTasks(EntityPage page)
@@ -189,13 +199,14 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
         string id = GetSelectedRecord();
         if (!String.IsNullOrEmpty(id))
         {
-            if (DialogService.DialogParameters.ContainsValue("LinkAccountSelectedId"))
-            {
-                DialogService.DialogParameters.Remove("LinkAccountSelectedId");
-            }
+            DialogService.DialogParameters.Remove("LinkAccountSelectedId");
             DialogService.DialogParameters.Add("LinkAccountSelectedId", id);
+            DialogService.ShowDialog();
         }
-        DialogService.ShowDialog();
+        else
+        {
+            throw new ValidationException(GetLocalResourceObject("Error_AccountNotFound").ToString());
+        }
     }
 
     protected void lnkCheckPrices_Click(object sender, EventArgs e)
@@ -210,8 +221,7 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
     {
         if (ValidateErpSalesOrder(true))
         {
-            if (_currentSOEntity.Account == null || !_currentSOEntity.Account.PromotedToAccounting.HasValue ||
-                    (_currentSOEntity.Account.PromotedToAccounting.HasValue && !_currentSOEntity.Account.PromotedToAccounting.Value))
+            if (_currentSOEntity.Account == null || (!_currentSOEntity.Account.PromotedToAccounting ?? false))
             {
                 throw new ValidationException(GetLocalResourceObject("Error_Account_NotPromoted").ToString());
             }
@@ -234,7 +244,7 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
                 throw new ValidationException(
                     GetLocalResourceObject("Error_Account_NotPromoted").ToString());
             }
-            if (_currentSOEntity.OperatingCompany.Enabled.HasValue && !_currentSOEntity.OperatingCompany.Enabled.Value)
+            if (!_currentSOEntity.OperatingCompany.Enabled ?? false)
             {
                 throw new ValidationException(
                     String.Format(GetLocalResourceObject("Error_IntegrationFeed_Disabled").ToString(),
@@ -243,7 +253,7 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
             //ensure that this account is linked to this opperating company
             foreach (IAccountOperatingCompany oppCompany in _currentSOEntity.Account.AccountOperatingCompanies)
             {
-                if (oppCompany.IntegrationApplication.Equals(_currentSOEntity.OperatingCompany))
+                if (oppCompany.IntegrationApplication == _currentSOEntity.OperatingCompany)
                 {
                     promoted = true;
                     break;
@@ -276,12 +286,14 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
                 string caption = GetLocalResourceObject("CheckPrice_Dialog.Caption").ToString();
                 DialogService.SetSpecs(200, 200, 400, 975, "ICUpdatePricing", caption, true);
                 DialogService.EntityType = page.EntityContext.EntityType;
+                DialogService.DialogParameters.Remove("SubmitSalesOrder");
+                DialogService.DialogParameters.Remove("PriceList");
                 DialogService.DialogParameters.Add("SubmitSalesOrder", submitSalesOrder);
                 DialogService.DialogParameters.Add("PriceList", lines);
                 DialogService.EntityID = entityId;
                 DialogService.ShowDialog();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new ValidationException(GetLocalResourceObject("Error_PricingService").ToString());
             }
@@ -307,7 +319,7 @@ public partial class AccountingTasksTasklet : UserControl, ISmartPartInfoProvide
         }
         //if none selected, assume it is the current one
         EntityPage page = Page as EntityPage;
-        if (page != null && page.EntityContext != null)
+        if (page != null && !page.IsListMode && page.EntityContext != null)
         {
             return page.EntityContext.EntityID.ToString();
         }

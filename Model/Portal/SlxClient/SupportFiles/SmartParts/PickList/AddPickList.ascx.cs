@@ -1,21 +1,10 @@
 using System;
-using System.Data;
-using System.Collections.Generic;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using Sage.Platform.WebPortal.SmartParts;
-using Sage.Platform.Application;
-using Sage.Platform.Orm;
-using Sage.Platform;
-using Sage.Entity.Interfaces;
-using Sage.Platform.Repository;
 using Sage.SalesLogix.PickLists;
-
-
 
 public partial class AddPickList : EntityBoundSmartPartInfoProvider 
 {
-   
     public override Type EntityType
     {
         get { return typeof(Sage.Entity.Interfaces.IPickListView); }
@@ -24,20 +13,12 @@ public partial class AddPickList : EntityBoundSmartPartInfoProvider
     protected void Page_Init(object sender, EventArgs e)
     {
         txtPicklistName.MaxLength = 64;
-         
-    }
-
-    protected override void InnerPageLoad(object sender, EventArgs e)
-    {
-        
-        
-    
     }
 
     protected override void OnAddEntityBindings()
     {
-       
     }
+
     protected override void OnWireEventHandlers()
     {
         base.OnWireEventHandlers();
@@ -52,16 +33,11 @@ public partial class AddPickList : EntityBoundSmartPartInfoProvider
         LoadView();
     }
 
-    
-
-
     public override Sage.Platform.Application.UI.ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
     {
         ToolsSmartPartInfo tinfo = new ToolsSmartPartInfo();
-
         tinfo.Description = GetLocalResourceObject("DialogTitle").ToString();
         tinfo.Title = GetLocalResourceObject("DialogTitle").ToString();
-                
 
         foreach (Control c in Controls)
         {
@@ -91,19 +67,12 @@ public partial class AddPickList : EntityBoundSmartPartInfoProvider
                 }
             }
         }
-
         return tinfo;
     }
 
-
     protected void btnOK_Click(object sender, EventArgs e)
     {
-
-
         SaveItem();
-
-
-
     }
     
     private void SaveItem()
@@ -113,19 +82,11 @@ public partial class AddPickList : EntityBoundSmartPartInfoProvider
         if (npl != null)
         {
             Response.Redirect(string.Format("~/{0}.aspx?entityId={1}", "PickListView", npl.ItemId), false);
-        
         }
-       
     }
-
 
     private void LoadView()
     {
-
         txtPicklistName.Text = PickList.GetUniqueName("");
-       
     }
-
-
-  
 }

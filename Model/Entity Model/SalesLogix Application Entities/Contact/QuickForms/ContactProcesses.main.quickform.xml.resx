@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="cmdScheduleProcess.Caption" xml:space="preserve">
     <value>Schedule Process</value>
@@ -123,46 +123,34 @@
   <data name="cmdScheduleProcess.ToolTip" xml:space="preserve">
     <value>Schedule Process</value>
   </data>
-  <data name="grdContactProcesses.EmptyTableRowText" xml:space="preserve">
-    <value>No records match the selection criteria.</value>
-  </data>
-  <data name="grdContactProcesses.9cc11b96-ad95-46f5-8df0-13969b5b2edc.ColumnHeading" xml:space="preserve">
+  <data name="grdProcesses.f673ca29-51ba-46b6-ab82-ae8971fc026c.ColumnHeading" xml:space="preserve">
     <value>Process</value>
   </data>
-  <data name="grdContactProcesses.9cc11b96-ad95-46f5-8df0-13969b5b2edc.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContactProcesses.995b0d30-0698-4cbd-820b-4b99906351a5.ColumnHeading" xml:space="preserve">
+  <data name="grdProcesses.0135b116-9df2-4261-baae-64068b033ed9.ColumnHeading" xml:space="preserve">
     <value>Change Status</value>
   </data>
-  <data name="grdContactProcesses.995b0d30-0698-4cbd-820b-4b99906351a5.FormatString" xml:space="preserve">
-    <value />
+  <data name="grdProcesses.dad5c53b-b767-42b8-aea4-97f43675f75b.ColumnHeading" xml:space="preserve">
+    <value>Suspended</value>
   </data>
-  <data name="grdContactProcesses.67474232-4875-487f-8924-a4c093f3c36b.ColumnHeading" xml:space="preserve">
+  <data name="grdProcesses.d03552b2-d413-40d0-b441-166c68bf5b80.ColumnHeading" xml:space="preserve">
     <value>Contact</value>
   </data>
-  <data name="grdContactProcesses.67474232-4875-487f-8924-a4c093f3c36b.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContactProcesses.67474232-4875-487f-8924-a4c093f3c36b.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContactProcesses.67474232-4875-487f-8924-a4c093f3c36b.DestinationFormatString" xml:space="preserve">
-    <value>~/Contact.aspx?entityId={0}</value>
-  </data>
-  <data name="grdContactProcesses.c0952b9c-a78a-458c-a77b-6501d3050c12.ColumnHeading" xml:space="preserve">
-    <value>Susp</value>
-  </data>
-  <data name="grdContactProcesses.04bc2aa1-1ec2-4b32-9201-90b2ad38f3a3.ColumnHeading" xml:space="preserve">
-    <value>Last Action</value>
-  </data>
-  <data name="grdContactProcesses.2ba5a025-0f8e-446e-879c-e88ca5f7424e.ColumnHeading" xml:space="preserve">
+  <data name="grdProcesses.fad41fff-1491-4776-a45c-f6c8e08072c9.ColumnHeading" xml:space="preserve">
     <value>Next Action</value>
+  </data>
+  <data name="grdProcesses.0801a878-b6fa-46e8-9f3b-014d07e6d73e.ColumnHeading" xml:space="preserve">
+    <value>Last Action</value>
   </data>
   <data name="No_res" xml:space="preserve">
     <value>No</value>
   </data>
   <data name="Yes_res" xml:space="preserve">
     <value>Yes</value>
+  </data>
+  <data name="grdProcesses.48925f4e-ddb4-4cd6-9a11-5db0f2858c16.ColumnHeading" xml:space="preserve">
+    <value>Suspended</value>
+  </data>
+  <data name="grdProcesses.5bc6a365-fc88-4c6a-ac04-4b820783b95e.ColumnHeading" xml:space="preserve">
+    <value>Suspended</value>
   </data>
 </root>

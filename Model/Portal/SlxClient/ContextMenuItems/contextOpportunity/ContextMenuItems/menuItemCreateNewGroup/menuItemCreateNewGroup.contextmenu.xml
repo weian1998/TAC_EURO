@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="d8adddc4-c716-4d55-937b-4985f66af99e">
   <ItemId>menuItemCreateNewGroup</ItemId>
-  <NavUrl>javascript:groupManager.CreateGroup('OPPORTUNITY');</NavUrl>
+  <NavUrl>javascript:Sage.Groups.GroupManager.CreateGroup('OPPORTUNITY');</NavUrl>
   <LargeImageUrl />
   <SmallImageUrl />
   <ContextMenuId />

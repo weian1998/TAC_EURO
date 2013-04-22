@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <ModelItems xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Item Id="3d454b8a-13b6-43f9-ab91-b169b72f509a">Sage.Platform.Application.IAuthenticationProvider.service.xml</Item>
   <Item Id="31dc03b6-e3cf-4baa-95d8-6d484b8b12cf">Sage.Platform.Data.IDataService.service.xml</Item>
   <Item Id="e6e77ab1-1707-44f2-a172-51f9fe8bbfda">Sage.SalesLogix.Client.GroupBuilder.IGroupContextService.service.xml</Item>
   <Item Id="d1e166cb-0eaf-499c-8055-d829350e2f02">Sage.Platform.Security.IUserService.service.xml</Item>
@@ -17,6 +18,20 @@
   <Item Id="bed6e216-69ea-4213-957d-30308179b5fd">Sage.SalesLogix.Services.ISessionService.service.xml</Item>
   <Item Id="530ff90b-f0b3-4873-a1ac-6494026bdb32">Sage.SalesLogix.SelectionService.ISelectionService.service.xml</Item>
   <Item Id="3d240202-d1dd-4006-a874-5a45455ed11c">Sage.SalesLogix.Services.PotentialMatch.IDeDupService.service.xml</Item>
+  <Item Id="0d3945e8-d628-4682-b347-5023424a9586">Sage.Platform.Application.Services.IEntityMappingInfoService.service.xml</Item>
+  <Item Id="0a21894e-30e1-4407-be52-1e039b117c14">Sage.Platform.QuickForms.WebFormGen.Web.IVirtualPathMapper.service.xml</Item>
+  <Item Id="c3e94a26-d25a-41be-9f45-ebbcd9d3169e">Sage.Platform.Application.Caching.CacheInitializationService.service.xml</Item>
   <Item Id="1cc4ef14-9224-4f07-a33e-da7a7a2014c2">Sage.SalesLogix.Services.ISystemOptionsService.service.xml</Item>
   <Item Id="0508f7ec-35d1-4ef1-9732-d1e15cfc071d">Sage.Platform.SData.IAtomEntryToEntityTransformationService.service.xml</Item>
+  <Item Id="e748adf1-f00e-4f08-938b-f725c24f3394">Sage.Platform.Messaging.Transport.IMessageTransport.service.xml</Item>
+  <Item Id="bd40994b-aff5-4d53-8bcb-7beedc315116">Sage.Platform.Messaging.IMessageHost.service.xml</Item>
+  <Item Id="60187b3c-6e39-4ffb-b739-5bdadc556709">Sage.Platform.VirtualFileSystem.IFileSystemEventService.service.xml</Item>
+  <Item Id="b9386606-6e5c-4bda-8aef-6d3e39eb3a56">Sage.Scheduling.Client.ISchedulerService.service.xml</Item>
+  <Item Id="0e670c33-0568-4a0f-8656-07bf9cbe403f">Sage.SalesLogix.Activity.ICalendarSecurityService.service.xml</Item>
+  <Item Id="bbc093a1-431b-4251-8b4f-e9e519085f58">Sage.Platform.SData.IFilterAnalyticsService.service.xml</Item>
+  <Item Id="36eadecf-0f04-428f-beaf-8a1104fd8ca4">Sage.Platform.Orm.Services.IDynamicEntityConfigurationService.service.xml</Item>
+  <Item Id="53b7e2c1-b552-4f90-aa3f-bcaa9a9c77a0">Sage.Platform.Orm.Services.IDynamicEntityDescriptorConfigurationService.service.xml</Item>
+  <Item Id="cf5c45cd-7cba-43cc-927f-089976304066">Sage.Platform.Orm.Services.IDynamicEntityNHibernateConfigurationService.service.xml</Item>
+  <Item Id="a757c2f3-dbf5-4254-ad01-204c35d5c41e">Sage.Platform.Orm.Services.IDynamicEntitySDataConfigurationService.service.xml</Item>
+  <Item Id="72a293d3-41df-4716-9137-f1298b2243fc">Sage.Platform.Projects.Localization.ProjectLocalizationService.service.xml</Item>
 </ModelItems>

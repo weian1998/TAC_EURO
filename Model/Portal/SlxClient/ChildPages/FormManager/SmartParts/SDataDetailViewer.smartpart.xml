@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<SmartPartMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="069673a6-b763-4377-b0d7-cfc148ad8901">
+  <SmartPartId>SDataDetailViewer</SmartPartId>
+  <ReferencedModelId>00000000-0000-0000-0000-000000000000</ReferencedModelId>
+  <SmartPart>SmartParts\General\SDataDetailViewer.ascx</SmartPart>
+  <TargetWorkspace>MainContent</TargetWorkspace>
+  <ShowInMode>Detail</ShowInMode>
+  <Properties>
+    <Property Name="MainViewDefinition" TypeConverter="">Sage.MainView.FormManager</Property>
+    <Property Name="HelpTopicName" TypeConverter="">formmgrdetailpane</Property>
+  </Properties>
+  <AllowRoles />
+</SmartPartMapping>

@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="cmdSave.Caption" xml:space="preserve">
     <value>Save</value>
@@ -147,29 +147,35 @@
   <data name="lueAccount.LookupProperties.Description.PropertyHeader" xml:space="preserve">
     <value />
   </data>
-  <data name="lueReseller.LookupProperties.AccountManager.UserName.PropertyHeader" xml:space="preserve">
-    <value>AccountManager UserName (User Name)</value>
+  <data name="lueReseller.Caption" xml:space="preserve">
+    <value>Reseller:</value>
   </data>
   <data name="lueReseller.LookupProperties.AccountName.PropertyHeader" xml:space="preserve">
-    <value>AccountName (Account Name)</value>
+    <value>Account</value>
   </data>
   <data name="lueReseller.LookupProperties.Address.City.PropertyHeader" xml:space="preserve">
-    <value>Address City</value>
+    <value>City</value>
   </data>
   <data name="lueReseller.LookupProperties.Address.State.PropertyHeader" xml:space="preserve">
-    <value>Address State</value>
+    <value>State</value>
   </data>
   <data name="lueReseller.LookupProperties.MainPhone.PropertyHeader" xml:space="preserve">
-    <value>MainPhone (Main Phone)</value>
+    <value>Main Phone</value>
+  </data>
+  <data name="lueReseller.LookupProperties.Type.PropertyHeader" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lueReseller.LookupProperties.SubType.PropertyHeader" xml:space="preserve">
+    <value>Sub-Type</value>
   </data>
   <data name="lueReseller.LookupProperties.Status.PropertyHeader" xml:space="preserve">
     <value>Status</value>
   </data>
-  <data name="lueReseller.LookupProperties.SubType.PropertyHeader" xml:space="preserve">
-    <value>SubType (Sub Type)</value>
+  <data name="lueReseller.LookupProperties.AccountManager.UserName.PropertyHeader" xml:space="preserve">
+    <value>Acct Manager</value>
   </data>
-  <data name="lueReseller.LookupProperties.Type.PropertyHeader" xml:space="preserve">
-    <value>Type</value>
+  <data name="lueReseller.LookupProperties.Owner.OwnerDescription.PropertyHeader" xml:space="preserve">
+    <value>Owner</value>
   </data>
   <data name="lueLeadSource.Caption" xml:space="preserve">
     <value>Lead Source:</value>
@@ -234,8 +240,8 @@
   <data name="usrUser.ButtonToolTip" xml:space="preserve">
     <value>Find</value>
   </data>
-  <data name="lueReseller.Caption" xml:space="preserve">
-    <value>EndUser/Client/Contractor</value>
+  <data name="lueReseller.ButtonToolTip" xml:space="preserve">
+    <value>Find</value>
   </data>
   <data name="dtpEstimatedClose.ButtonToolTip" xml:space="preserve">
     <value>Calendar</value>
@@ -288,7 +294,13 @@
   <data name="luePriceList.LookupDialogTitle" xml:space="preserve">
     <value>Lookup Price List</value>
   </data>
-  <data name="chkAddtoForecast.Caption" xml:space="preserve">
-    <value>Add To forecast</value>
+  <data name="lueLeadSource.LookupProperties.Status.PropertyHeader" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="lstbxOperatingCompany.Caption" xml:space="preserve">
+    <value>Accounting System:</value>
+  </data>
+  <data name="lueReseller.LUPF.SubType" xml:space="preserve">
+    <value>Reseller</value>
   </data>
 </root>

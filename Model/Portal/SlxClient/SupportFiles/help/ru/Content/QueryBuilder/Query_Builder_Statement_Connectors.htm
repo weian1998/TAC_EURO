@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" class="" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Query Builder Statement Connectors</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/TableStyle.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilder/Query_Builder_Statement_Connectors.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor637"></a>Соеденители условий Построителя запросов</h1>
+        <p>Используйте соединители для обозначения окончания последнего условия и для указания интерпретации нескольких условий.</p>
+        <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Соединитель</th>
+                    <th class="HeadD-Column1-Header1">Использование    <![CDATA[ ]]></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">КОНЕЦ</td>
+                    <td class="BodyD-Column1-Body1">В конце последнего условия.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">И</td>
+                    <td class="BodyD-Column1-Body1">Когда у вас имеется более одного условия отбора и вы хотите выбрать только те записи, если они удовлетворяют обоим условиям.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">ИЛИ</td>
+                    <td class="BodyA-Column1-Body1">Когда у вас имеется боле одного условия отбора и вы хотите выбрать те записи, которые удовлетворяют хотя бы одному из условий.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Когда вы добавляете первое условие  в таблицу, Построитель запросов автоматически добавляет КОНЕЦ в качестве соединителя. Когда вы добавите условия отбора, после предыдущего условия будет вставлен соединитель И, а за последним условием будет вставлен соединитель КОНЕЦ. <MadCap:conditionalText MadCap:conditions="Output.WebClient">Для изменения условного оператора щелкните на указывающую вниз стрелку и выберите значение из списка. </MadCap:conditionalText> У последнего условия отбора должен стоять соединитель КОНЕЦ.</p>
+        <p><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t4">Пример 1: Использование соединителя "И"<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <div MadCap:targetName="t4" style="display: none;">
+            <p>Построитель Запросов выберет запись, если контакт имеет статус активный 
+ <span class="SLXBold">И</span> доход субъекта больше или равен $10 000.</p>
+            <p>Так будет выглядеть таблица на закладке Условия для данного примера:</p>
+            <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+                <col class="Column-Column1" />
+                <col style="width: 32px;" class="Column-Column1" />
+                <col style="width: 145px;" class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col style="width: 50px;" class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Не</th>
+                        <th class="HeadE-Column1-Header1">(</th>
+                        <th class="HeadE-Column1-Header1">Поле</th>
+                        <th class="HeadE-Column1-Header1">Оператор</th>
+                        <th class="HeadE-Column1-Header1">Значение</th>
+                        <th class="HeadE-Column1-Header1">Учитывать регистр</th>
+                        <th class="HeadE-Column1-Header1">)</th>
+                        <th class="HeadD-Column1-Header1">И/Или</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">Контакт.Статус</td>
+                        <td class="BodyE-Column1-Body1">(=) равно</td>
+                        <td class="BodyE-Column1-Body1">Активный</td>
+                        <td class="BodyE-Column1-Body1">Неверно</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyD-Column1-Body1">И</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyB-Column1-Body1">Контакт.Субъект.Доход</td>
+                        <td class="BodyB-Column1-Body1">(&gt;=) больше или равно</td>
+                        <td class="BodyB-Column1-Body1">10000</td>
+                        <td class="BodyB-Column1-Body1">Верно</td>
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyA-Column1-Body1">КОНЕЦ</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3">Пример 2: Использование соединителя "ИЛИ"<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <div MadCap:targetName="t3" style="display: none;">
+            <p>Построитель Запросов выберет запись, если контакт имеет статус активный 
+ <span class="SLXBold">ИЛИ</span> доход субъекта больше или равен $10 000.</p>
+            <p class="Tip-Note-Text">Так будет выглядеть таблица на закладке Условия для данного примера:</p>
+            <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+                <col class="Column-Column1" />
+                <col style="width: 32px;" class="Column-Column1" />
+                <col style="width: 145px;" class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col style="width: 50px;" class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col style="width: 66px;" class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Не</th>
+                        <th class="HeadE-Column1-Header1">(</th>
+                        <th class="HeadE-Column1-Header1">Поле</th>
+                        <th class="HeadE-Column1-Header1">Оператор</th>
+                        <th class="HeadE-Column1-Header1">Значение</th>
+                        <th class="HeadE-Column1-Header1">Учитывать регистр</th>
+                        <th class="HeadE-Column1-Header1">)</th>
+                        <th class="HeadD-Column1-Header1">И/Или</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">Контакт.Статус</td>
+                        <td class="BodyE-Column1-Body1">(=) равно</td>
+                        <td class="BodyE-Column1-Body1">Активный</td>
+                        <td class="BodyE-Column1-Body1">Неверно</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyD-Column1-Body1">ИЛИ</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyB-Column1-Body1">Контакт.Субъект.Доход</td>
+                        <td class="BodyB-Column1-Body1">(&gt;=) больше или равно</td>
+                        <td class="BodyB-Column1-Body1">10000</td>
+                        <td class="BodyB-Column1-Body1">Верно</td>
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyA-Column1-Body1">КОНЕЦ</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2">Пример 3: Использование нескольких условных операторов внутри скобок<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <div MadCap:targetName="t2" style="display: none;">
+            <p>Построитель Запросов будет выбирать запись, если контакт имеет статус активный 
+ <span class="SLXBold">И</span> доход субъекта больше или равен $10 000. <span class="SLXBold">Также</span> запись будет выбрана, если контакт имеет статус активный <span class="SLXBold">И</span> доход меньше или равен $500.</p>
+            <p class="Tip-Note-Text">Так будет выглядеть таблица на закладке Условия для данного примера:</p>
+            <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+                <col class="Column-Column1" />
+                <col style="width: 32px;" class="Column-Column1" />
+                <col style="width: 145px;" class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col style="width: 50px;" class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col style="width: 66px;" class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Не</th>
+                        <th class="HeadE-Column1-Header1">(</th>
+                        <th class="HeadE-Column1-Header1">Поле</th>
+                        <th class="HeadE-Column1-Header1">Оператор</th>
+                        <th class="HeadE-Column1-Header1">Значение</th>
+                        <th class="HeadE-Column1-Header1">Учитывать регистр</th>
+                        <th class="HeadE-Column1-Header1">)</th>
+                        <th class="HeadD-Column1-Header1">И/Или</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">Контакт.Статус</td>
+                        <td class="BodyE-Column1-Body1">(=) равно</td>
+                        <td class="BodyE-Column1-Body1">Активный</td>
+                        <td class="BodyE-Column1-Body1">Неверно</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyD-Column1-Body1">И</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">(</td>
+                        <td class="BodyE-Column1-Body1">Контакт.Субъект.Доход</td>
+                        <td class="BodyE-Column1-Body1">(&gt;=) больше или равно</td>
+                        <td class="BodyE-Column1-Body1">10000</td>
+                        <td class="BodyE-Column1-Body1">Верно</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyD-Column1-Body1">ИЛИ</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyB-Column1-Body1">Контакт.Субъект.Доход</td>
+                        <td class="BodyB-Column1-Body1">(&lt;=) меньше или равно</td>
+                        <td class="BodyB-Column1-Body1">500</td>
+                        <td class="BodyB-Column1-Body1">Верно</td>
+                        <td class="BodyB-Column1-Body1">)</td>
+                        <td class="BodyA-Column1-Body1">КОНЕЦ</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1">Пример 4: Использование нескольких условных операторов, включая 
+ "НЕ"<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <p>Построитель Запросов будет выбирать запись, если контакт имеет статус <span class="SLXBold">НЕ</span> неактивный <span class="SLXBold">И</span> доход субъекта больше или равен $10 000. <span class="SLXBold">Также</span> 
+ запись будет выбрана, если контакт имеет статус <span class="SLXBold">НЕ</span> неактивный <span class="SLXBold">И</span> доход меньше или равен $500.</p>
+            <p>Так будет выглядеть таблица на закладке Условия для данного примера:</p>
+            <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+                <col class="Column-Column1" />
+                <col style="width: 32px;" class="Column-Column1" />
+                <col style="width: 145px;" class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col style="width: 50px;" class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col class="Column-Column1" />
+                <col style="width: 66px;" class="Column-Column1" />
+                <thead>
+                    <tr class="Head-Header1">
+                        <th class="HeadE-Column1-Header1">Не</th>
+                        <th class="HeadE-Column1-Header1">(</th>
+                        <th class="HeadE-Column1-Header1">Поле</th>
+                        <th class="HeadE-Column1-Header1">Оператор</th>
+                        <th class="HeadE-Column1-Header1">Значение</th>
+                        <th class="HeadE-Column1-Header1">Учитывать регистр</th>
+                        <th class="HeadE-Column1-Header1">)</th>
+                        <th class="HeadD-Column1-Header1">И/Или</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">НЕ</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">Контакт.Статус</td>
+                        <td class="BodyE-Column1-Body1">(=) равно</td>
+                        <td class="BodyE-Column1-Body1">Неактивный</td>
+                        <td class="BodyE-Column1-Body1">Неверно</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyD-Column1-Body1">И</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyE-Column1-Body1">(</td>
+                        <td class="BodyE-Column1-Body1">Контакт.Субъект.Доход</td>
+                        <td class="BodyE-Column1-Body1">(&gt;=) больше или равно</td>
+                        <td class="BodyE-Column1-Body1">10000</td>
+                        <td class="BodyE-Column1-Body1">Верно</td>
+                        <td class="BodyE-Column1-Body1">&#160;</td>
+                        <td class="BodyD-Column1-Body1">ИЛИ</td>
+                    </tr>
+                    <tr class="Body-Body1">
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyB-Column1-Body1">&#160;</td>
+                        <td class="BodyB-Column1-Body1">Контакт.Субъект.Доход</td>
+                        <td class="BodyB-Column1-Body1">(&lt;=) меньше или равно</td>
+                        <td class="BodyB-Column1-Body1">500</td>
+                        <td class="BodyB-Column1-Body1">Верно</td>
+                        <td class="BodyB-Column1-Body1">)</td>
+                        <td class="BodyA-Column1-Body1">КОНЕЦ</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="RelatedTopics">См. также</p>
+        <p><a href="Query_Builder_Conditions.htm" target="_self">Добавление и Изменение Условий</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

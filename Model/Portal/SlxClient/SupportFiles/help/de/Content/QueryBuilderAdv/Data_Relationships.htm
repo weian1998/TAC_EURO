@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="de" xml:lang="de" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Datenbeziehungen</title>
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilderAdv/Data_Relationships.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Thema mit den Registerkarten "Suchen", "Inhalt" und "Index" öffnen</a>
+        </p>
+        <h1><a name="kanchor659"></a>Datenbeziehungen</h1>
+        <p>Eine relationale Datenbank enthält mehrere Tabellen. Die Struktur der Datenbank wird durch die Beziehung zwischen den Tabellen definiert. Da Daten basierend auf Tabellenbeziehungen abgerufen werden, ist es wichtig, die Beziehungen zwischen den Tabellen zu kennen, bevor einer Datenbank benutzerdefinierte Tabellen und Felder hinzugefügt werden. Diese Kenntnis ist auch beim Erstellen von Abfragen für Suchen, Gruppen, Abonnementregeln oder Vorlagen usw. ungemein hilfreich.</p>
+        <p>Wenn Sie eine benutzerdefinierte Tabelle erstellen, werden die folgenden Felder automatisch hinzugefügt:</p>
+        <ul>
+            <li class="Bullets" value="1">CreateUser (Benutzer erstellen)
+            </li>
+            <li class="Bullets" value="2">CreateDate (Datum erstellen)
+            </li>
+            <li class="Bullets" value="3">ModifyUser (Benutzer ändern)
+            </li>
+            <li class="Bullets" value="4">ModifyDate (Datum ändern)
+            </li>
+        </ul>
+        <p>Da jede Tabelle zudem mindestens einen Primärschlüssel aufweisen muss, fügt Sage SalesLogix das Primärschlüsselfeld der benutzerdefinierten Tabelle (wenn die Tabelle über eine 1:0- oder 1:n-Beziehung zu einer anderen Tabelle verfügt) und das Primärschlüsselfeld jeder verknüpften Tabelle hinzu. Im Bedarfsfall können benutzerdefinierte Felder hinzugefügt werden.</p>
+        <p class="Infinitive">Tabellenbeziehungen</p>
+        <p>Eine Beziehung zwischen zwei Tabellen entsteht, wenn in beiden Tabellen wenigstens ein identisches Feld vorhanden ist. Oft ist auch der Name des Feldes identisch, jedoch nicht immer. Die Tabellen ACCOUNT und CONTACT sind beispielsweise miteinander verbunden, da sie beide über ein Feld mit dem Namen "AccountID" und identischem Wert verfügen. Allerdings ist die Tabelle ACCOUNT auch mit der Tabelle USERINFO über das Feld "AccountManagerID" in der Tabelle ACCOUNT und das Feld "UserID" in der Tabelle USERINFO verknüpft. Obwohl in diesen Tabellen unterschiedliche Feldnamen verwendet werden, sind die Werte identisch.</p>
+        <p>Die Verbindung zwischen zwei Tabellen wird als <a href="Joining_Tables.htm">Join</a> bezeichnet. Ein Join wird mithilfe eines Felds eingerichtet, das in beiden Tabellen vorhanden ist. Auch wenn zwei Tabellen verknüpft sind, kann jede Tabelle über unterschiedliche <a href="Table_Relationship_Types.htm">Beziehungen</a> verfügen. Tabellenbeziehungen sind bei der Erstellung von Abfragen wichtig. Eine Abfrage, die auf zwei Tabellen zugreift, kann je nachdem, welche Tabelle die Quelltabelle der Beziehung ist, zu unterschiedlichen Ergebnissen führen.</p>
+        <p class="RelatedTopics">Verwandte Themen</p>
+        <p class="Topic-Text-Numbered"><a href="../QueryBuilder/Using_SalesLogix_Query_Builder.htm" target="_self">Abfrage-Assistent-Übersicht</a>
+        </p>
+        <p class="Topic-Text-Numbered"><a href="Table_Relationship_Types.htm">Typen von Tabellenbeziehungen</a>
+        </p>
+        <p class="Topic-Text-Numbered"><a href="Join_Types.htm">Join-Typen</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Haben Sie Vorschläge zur Verbesserung der Hilfe?</a>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

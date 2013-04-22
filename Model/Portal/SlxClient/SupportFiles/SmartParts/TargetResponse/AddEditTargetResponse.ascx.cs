@@ -62,11 +62,9 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
     {
         get
         {
-            if (_dtsOpens == null)
-                _dtsOpens = new WebEntityListBindingSource(typeof(IMarketingServiceOpen), EntityType,
-                                                           "MarketingServiceRecipient.MarketingServiceOpens",
-                                                           MemberTypes.Property);
-            return _dtsOpens;
+            return _dtsOpens ?? (_dtsOpens = new WebEntityListBindingSource(typeof (IMarketingServiceOpen), EntityType,
+                                                                            "MarketingServiceRecipient.MarketingServiceOpens",
+                                                                            MemberTypes.Property));
         }
     }
 
@@ -78,11 +76,10 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
     {
         get
         {
-            if (_dtsClicks == null)
-                _dtsClicks = new WebEntityListBindingSource(typeof(IMarketingServiceClick), EntityType,
-                                                            "MarketingServiceRecipient.MarketingServiceClicks",
-                                                            MemberTypes.Property);
-            return _dtsClicks;
+            return _dtsClicks ??
+                   (_dtsClicks = new WebEntityListBindingSource(typeof (IMarketingServiceClick), EntityType,
+                                                                "MarketingServiceRecipient.MarketingServiceClicks",
+                                                                MemberTypes.Property));
         }
     }
 
@@ -94,11 +91,11 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
     {
         get
         {
-            if (_dtsUndeliverables == null)
-                _dtsUndeliverables = new WebEntityListBindingSource(typeof(IMarketingServiceUndeliverable), EntityType,
-                                                                    "MarketingServiceRecipient.MarketingServiceUndeliverables",
-                                                                    MemberTypes.Property);
-            return _dtsUndeliverables;
+            return _dtsUndeliverables ??
+                   (_dtsUndeliverables =
+                    new WebEntityListBindingSource(typeof (IMarketingServiceUndeliverable), EntityType,
+                                                   "MarketingServiceRecipient.MarketingServiceUndeliverables",
+                                                   MemberTypes.Property));
         }
     }
 
@@ -158,77 +155,6 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
     #region Private Methods
 
     /// <summary>
-    /// Registers the client script.
-    /// </summary>
-    private void RegisterClientScript()
-    {
-        StringBuilder sb = new StringBuilder(GetLocalResourceObject("AddEditTargetResponse_ClientScript").ToString());
-        sb.Replace("@tr_divProductsId", divProducts.ClientID);
-        sb.Replace("@tr_tabProductsId", tabProducts.ClientID);
-        sb.Replace("@tr_divClicksId", divClicks.ClientID);
-        sb.Replace("@tr_tabClicksId", tabClicks.ClientID);
-        sb.Replace("@tr_divOpensId", divOpens.ClientID);
-        sb.Replace("@tr_tabOpensId", tabOpens.ClientID);
-        sb.Replace("@tr_divUndeliverablesId", divUndeliverables.ClientID);
-        sb.Replace("@tr_tabUndeliverablesId", tabUndeliverables.ClientID);
-        sb.Replace("@tr_txtSelectedTabId", txtSelectedTab.ClientID);
-        sb.Replace("@tr_divAddProductId", divAddProduct.ClientID);
-
-        ScriptManager.RegisterStartupScript(Page, GetType(), "AddEditTargetResponse", sb.ToString(), false);
-    }
-
-    /// <summary>
-    /// Sets the visible state of the tabs.
-    /// </summary>
-    private void SetVisibleTabState()
-    {
-        if (!String.IsNullOrEmpty(txtSelectedTab.Value))
-        {
-            switch (Convert.ToInt16(txtSelectedTab.Value))
-            {
-                case 1:
-                    divClicks.Style.Add(HtmlTextWriterStyle.Display, "inline");
-                    divOpens.Style.Add(HtmlTextWriterStyle.Display, "none");
-                    divUndeliverables.Style.Add(HtmlTextWriterStyle.Display, "none");
-                    tabClicks.CssClass = "activeTab tab";
-                    tabOpens.CssClass = "inactiveTab tab";
-                    tabUndeliverables.CssClass = "inactiveTab tab";
-                    break;
-                case 2:
-                    divProducts.Style.Add(HtmlTextWriterStyle.Display, "none");
-                    divClicks.Style.Add(HtmlTextWriterStyle.Display, "none");
-                    divOpens.Style.Add(HtmlTextWriterStyle.Display, "inline");
-                    divUndeliverables.Style.Add(HtmlTextWriterStyle.Display, "none");
-                    tabProducts.CssClass = "inactiveTab tab";
-                    tabClicks.CssClass = "inactiveTab tab";
-                    tabOpens.CssClass = "activeTab tab";
-                    tabUndeliverables.CssClass = "inactiveTab tab";
-                    break;
-                case 3:
-                    divProducts.Style.Add(HtmlTextWriterStyle.Display, "none");
-                    divClicks.Style.Add(HtmlTextWriterStyle.Display, "none");
-                    divOpens.Style.Add(HtmlTextWriterStyle.Display, "inline");
-                    divUndeliverables.Style.Add(HtmlTextWriterStyle.Display, "none");
-                    tabProducts.CssClass = "inactiveTab tab";
-                    tabClicks.CssClass = "inactiveTab tab";
-                    tabOpens.CssClass = "inactiveTab tab";
-                    tabUndeliverables.CssClass = "activeTab tab";
-                    break;
-                default:
-                    divProducts.Style.Add(HtmlTextWriterStyle.Display, "inline");
-                    divClicks.Style.Add(HtmlTextWriterStyle.Display, "none");
-                    divOpens.Style.Add(HtmlTextWriterStyle.Display, "none");
-                    divUndeliverables.Style.Add(HtmlTextWriterStyle.Display, "none");
-                    tabProducts.CssClass = "activeTab tab";
-                    tabClicks.CssClass = "inactiveTab tab";
-                    tabOpens.CssClass = "inactiveTab tab";
-                    tabUndeliverables.CssClass = "inactiveTab tab";
-                    break;
-            }
-        }
-    }
-
-    /// <summary>
     /// Sets the UI display based on the TargetType selected.
     /// </summary>
     private void SetTargetTypeDisplay()
@@ -263,7 +189,7 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
                 else
                     entityId = targetResponse.Contact.Id;
                 IRepository<ICampaignTarget> repository = EntityFactory.GetRepository<ICampaignTarget>();
-                IQueryable query = (IQueryable) repository;
+                IQueryable query = (IQueryable)repository;
                 IExpressionFactory expFactory = query.GetExpressionFactory();
                 ICriteria criteria = query.CreateCriteria()
                     .Add(expFactory.And(
@@ -333,8 +259,11 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
         rdgTargetType.Enabled = true;
         ITargetResponse targetResponse = BindingSource.Current as ITargetResponse;
 
-        if (DialogService.DialogParameters.ContainsKey("IsLead"))
+        if (DialogService.DialogParameters.ContainsKey("IsLead") || EntityPage.EntityTypeName == "Sage.Entity.Interfaces.ILead, Sage.Entity.Interfaces")
+        {
             rdgTargetType.SelectedIndex = 1;
+            DialogService.DialogParameters.Remove("IsLead");
+        }
         else
         {
             if (rdgTargetType.SelectedIndex == -1) // default to contact if not set
@@ -363,19 +292,10 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
         {
             enableEntity = true;
             enableCampaign = true;
-
-            if (targetResponse.Contact != null)
-            {
-                lueContact.SeedValue = targetResponse.Contact.Account.Id.ToString();
-            }
-            else
-            {
-                lueContact.SeedValue = string.Empty;
-            }
+            lueContact.SeedValue = targetResponse.Contact != null ? targetResponse.Contact.Account.Id.ToString() : string.Empty;
         }
         else //Editing a response
         {
-            enableEntity = false;
             enableCampaign = (targetResponse.Campaign == null);
             rdgTargetType.Enabled = false;
         }
@@ -398,25 +318,21 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
         lbxStages.Items.Clear();
         lbxStages.Items.Add(string.Empty);
         ITargetResponse targetResponse = BindingSource.Current as ITargetResponse;
-        if (targetResponse != null)
+        if (targetResponse == null) return;
+        ICampaign campaign = targetResponse.Campaign;
+        if (campaign == null) return;
+        bool valueFound = false;
+        foreach (ICampaignStage stage in campaign.CampaignStages)
         {
-            ICampaign campaign = targetResponse.Campaign;
-            if (campaign != null)
-            {
-                bool valueFound = false;
-                foreach (ICampaignStage stage in campaign.CampaignStages)
-                {
-                    lbxStages.Items.Add(stage.Description);
-                    if (stage.Description != targetResponse.Stage) continue;
-                    lbxStages.SelectedValue = stage.Description;
-                    valueFound = true;
-                }
+            lbxStages.Items.Add(stage.Description);
+            if (stage.Description != targetResponse.Stage) continue;
+            lbxStages.SelectedValue = stage.Description;
+            valueFound = true;
+        }
 
-                if (!valueFound && !string.IsNullOrEmpty(targetResponse.Stage))
-                {
-                    lbxStages.Items.Add(targetResponse.Stage);
-                }
-            }
+        if (!valueFound && !string.IsNullOrEmpty(targetResponse.Stage))
+        {
+            lbxStages.Items.Add(targetResponse.Stage);
         }
     }
 
@@ -437,11 +353,6 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
             {
                 BindingSource_Set(sender, e);
             }
-
-            tabProducts.Attributes.Add("onclick", "javascript:OnTabProductsClick()");
-            tabClicks.Attributes.Add("onclick", "javascript:OnTabClicksClick()");
-            tabOpens.Attributes.Add("onclick", "javascript:OnTabOpensClick()");
-            tabUndeliverables.Attributes.Add("onclick", "javascript:OnTabUndeliverablesClick()");
         }
     }
 
@@ -462,7 +373,6 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
     /// </summary>
     protected override void OnFormBound()
     {
-        RegisterClientScript();
         if (IsLead)
         {
             lueLead.Text = String.Empty;
@@ -473,8 +383,6 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
             rdgTargetType.SelectedIndex = 0;
         }
         SetTargetTypeDisplay();
-
-        SetVisibleTabState();
         LoadCampaignStages();
         ClientBindingMgr.RegisterDialogCancelButton(cmdCancel);
         ClientBindingMgr.RegisterSaveButton(cmdOK);
@@ -511,7 +419,7 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
     /// </summary>
     protected override void OnAddEntityBindings()
     {
-        WebEntityBinding lueLeadSourceLookupResultValueBinding = new WebEntityBinding("LeadSource", lueTargetLeadSource, "LookupResultValue", String.Empty, null);
+        WebEntityBinding lueLeadSourceLookupResultValueBinding = new WebEntityBinding("LeadSource", lueTargetLeadSource, "LookupResultValue");
         BindingSource.Bindings.Add(lueLeadSourceLookupResultValueBinding);
         WebEntityBinding lueContactValueBinding = new WebEntityBinding("Contact", lueContact, "LookupResultValue", String.Empty, null);
         BindingSource.Bindings.Add(lueContactValueBinding);
@@ -533,14 +441,12 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
         BindingSource.Bindings.Add(pklInterestLevelPickListValueBinding);
         WebEntityBinding txtCommentsTextBinding = new WebEntityBinding("Comments", txtComments, "Text");
         BindingSource.Bindings.Add(txtCommentsTextBinding);
-        //dtsProducts.Bindings.Add(new WebEntityListBinding("ResponseProducts", grdProducts));
-        //dtsProducts.BindFieldNames = new String[] { "Id", "Product.Name", "Product.Description", "Product.ActualId", "Product.Status" };
         dtsClicks.Bindings.Add(new WebEntityListBinding("MarketingServiceRecipient.MarketingServiceClicks", grdClicks));
-        dtsClicks.BindFieldNames = new String[] { "Id", "LinkName", "LinkURL", "ClickDate" };
+        dtsClicks.BindFieldNames = new[] { "Id", "LinkName", "LinkURL", "ClickDate" };
         dtsOpens.Bindings.Add(new WebEntityListBinding("MarketingServiceRecipient.MarketingServiceOpens", grdOpens));
-        dtsOpens.BindFieldNames = new String[] { "Id", "OpenDate", "UnsubscribeDate", "UnsubscribeCampaignName" };
+        dtsOpens.BindFieldNames = new[] { "Id", "OpenDate", "UnsubscribeDate", "UnsubscribeCampaignName" };
         dtsUndeliverables.Bindings.Add(new WebEntityListBinding("MarketingServiceRecipient.MarketingServiceUndeliverables", grdUndeliverables));
-        dtsUndeliverables.BindFieldNames = new String[] { "Id", "BounceDate", "BounceCampaignName", "BounceCount", "BounceReason" };
+        dtsUndeliverables.BindFieldNames = new[] { "Id", "BounceDate", "BounceCampaignName", "BounceCount", "BounceReason" };
 
         BindingSource.OnCurrentEntitySet += dtsProducts_OnCurrentEntitySet;
         BindingSource.OnCurrentEntitySet += dtsOpens_OnCurrentEntitySet;
@@ -559,33 +465,6 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
     }
 
     /// <summary>
-    /// determines if the contact selected in the contact lookup is associated to an account.
-    /// If an account was created without a contact, this caused a problem since responses
-    /// are tied to an account.
-    /// </summary>
-    /// <param name="contact"></param>
-    /// <param name="account"></param>
-    /// <returns></returns>
-    private bool IsContactAssociatedToAccount(IContact contact, IAccount account)
-    {
-        bool isAccountContact = false;
-        foreach (IContact accountContact in account.Contacts)
-        {
-            IContact lookupContact = lueContact.LookupResultValue as IContact;
-            if (lookupContact != null)
-            {
-                if (accountContact.Id.ToString().CompareTo(lookupContact.Id) == 0)
-                {
-                    isAccountContact = true;
-                    break;
-                }
-            }
-        }
-
-        return isAccountContact;
-    }
-
-    /// <summary>
     /// Handles the ClickAction event of the cmdOK control.
     /// </summary>
     /// <param name="sender">The source of the event.</param>
@@ -598,12 +477,12 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
         if (!IsLead)
         {
             if (lueContact.Text.Trim().Length == 0)
-                throw new ValidationException("Please enter a Contact");
+                throw new ValidationException(GetLocalResourceObject("error_NoContact.Text").ToString());
         }
         else
         {
             if (lueLead.Text.Trim().Length == 0)
-                throw new ValidationException("Please enter a Lead");
+                throw new ValidationException(GetLocalResourceObject("error_NoLead.Text").ToString());
         }
 
         AssignCampaignTarget();
@@ -763,7 +642,6 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
     }
 
     private IList<ComponentView> _dtsProducts2;
-
     public IList<ComponentView> dtsProducts2
     {
         get
@@ -780,7 +658,7 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
                     IResponseProduct pr = objpr.Component as IResponseProduct;
                     if (pr.Id != null)
                     {
-                        String[] propNames = new String[] { "Id", "Product.Name", "Product.Description", "Product.ActualId", "Product.Status" };
+                        String[] propNames = new[] { "Id", "Product.Name", "Product.Description", "Product.ActualId", "Product.Status" };
                         object[] propValues = { pr.Id, pr.Product.Name, pr.Product.Description, pr.Product.ActualId, pr.Product.Status };
                         var view = new ComponentView(propNames, propValues);
                         list.Add(view);
@@ -790,7 +668,7 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
                 {
                     if (pr.Id == null)
                     {
-                        String[] propNames = new String[] { "Id", "Product.Name", "Product.Description", "Product.ActualId", "Product.Status" };
+                        String[] propNames = new[] { "Id", "Product.Name", "Product.Description", "Product.ActualId", "Product.Status" };
                         object[] propValues = { pr.Id, pr.Product.Name, pr.Product.Description, pr.Product.ActualId, pr.Product.Status };
                         var view = new ComponentView(propNames, propValues);
                         list.Add(view);
@@ -810,12 +688,9 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     void dtsProducts_OnCurrentEntitySet(object sender, EventArgs e)
     {
-        if (!Visible) return;
-        if (dtsProducts != null)
-        {
-            if (dtsProducts.SourceObject == null)
-                dtsProducts.SourceObject = BindingSource.Current;
-        }
+        if (!Visible || dtsProducts == null) return;
+        if (dtsProducts.SourceObject == null)
+            dtsProducts.SourceObject = BindingSource.Current;
     }
 
     /// <summary>
@@ -825,12 +700,9 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     void dtsOpens_OnCurrentEntitySet(object sender, EventArgs e)
     {
-        if (!Visible) return;
-        if (dtsOpens != null)
-        {
-            if (dtsOpens.SourceObject == null)
-                dtsOpens.SourceObject = BindingSource.Current;
-        }
+        if (!Visible || dtsOpens == null) return;
+        if (dtsOpens.SourceObject == null)
+            dtsOpens.SourceObject = BindingSource.Current;
     }
 
     /// <summary>
@@ -840,12 +712,9 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     void dtsClicks_OnCurrentEntitySet(object sender, EventArgs e)
     {
-        if (!Visible) return;
-        if (dtsClicks != null)
-        {
-            if (dtsClicks.SourceObject == null)
-                dtsClicks.SourceObject = BindingSource.Current;
-        }
+        if (!Visible || dtsClicks == null) return;
+        if (dtsClicks.SourceObject == null)
+            dtsClicks.SourceObject = BindingSource.Current;
     }
 
     /// <summary>
@@ -855,12 +724,9 @@ public partial class AddEditTargetResponse : EntityBoundSmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     void dtsUndeliverables_OnCurrentEntitySet(object sender, EventArgs e)
     {
-        if (!Visible) return;
-        if (dtsUndeliverables != null)
-        {
-            if (dtsUndeliverables.SourceObject == null)
-                dtsUndeliverables.SourceObject = BindingSource.Current;
-        }
+        if (!Visible || dtsUndeliverables == null) return;
+        if (dtsUndeliverables.SourceObject == null)
+            dtsUndeliverables.SourceObject = BindingSource.Current;
     }
 
     #endregion

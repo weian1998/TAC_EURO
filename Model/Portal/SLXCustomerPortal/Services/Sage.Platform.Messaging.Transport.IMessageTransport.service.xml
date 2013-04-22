@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<PortalService xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="fd1b4fba-393d-490e-a689-bbc5c81c69f7">
+  <InstanceId>5b3d121f596842df830ae0c774756495</InstanceId>
+  <ServiceType>Sage.Platform.Messaging.Transport.Wcf.MessageTransport, Sage.Platform.Application</ServiceType>
+  <RegisterAs>Sage.Platform.Messaging.Transport.IMessageTransport, Sage.Platform.Application</RegisterAs>
+  <AddOnDemand>false</AddOnDemand>
+  <Properties />
+  <Scope>Application</Scope>
+</PortalService>

@@ -24,12 +24,11 @@ function setup${qfcontrol.QuickFormDefinition.Name}_${qfcontrol.ControlID}spark(
     if (Sys) { Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(run${qfcontrol.QuickFormDefinition.Name}_${qfcontrol.ControlID}spark); }
 }
 function run${qfcontrol.QuickFormDefinition.Name}_${qfcontrol.ControlID}spark() {
-    GetCurrentEntity();
-    var id = strEntityId;
+    var id = Sage.Utility.getCurrentEntityId();
     var datasource = {
         'type':'mashup',
         'datavaluename':'result',
-        'params':{'mashup':'${qfcontrol.DataSource.MashupName}','result':'${qfcontrol.DataSource.ResultName}','EntityId':strEntityId}
+        'params':{'mashup':'${qfcontrol.DataSource.MashupName}','result':'${qfcontrol.DataSource.ResultName}','EntityId':id}
     };
 
     var config = {

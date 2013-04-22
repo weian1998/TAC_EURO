@@ -9,6 +9,10 @@ using Sage.Platform.WebPortal.SmartParts;
 using Sage.SalesLogix.LegacyBridge;
 using Sage.Platform.Application;
 using Sage.Entity.Interfaces;
+using System.Text;
+using Sage.Platform.Configuration;
+using Sage.Platform.Application.UI.Web;
+using Sage.Platform.WebPortal.Workspaces.Tab;
 
 /// <summary>
 /// 
@@ -51,6 +55,7 @@ public partial class RemoteHistoryWhatsNew : UserControl, ISmartPartInfoProvider
     {
         if (Page.Visible)
         {
+            RegisterClientScripts();
             DateTime searchDate = DateTime.UtcNow;
             WhatsNewSearchOptions.SearchTypeEnum searchTypeEnum = WhatsNewSearchOptions.SearchTypeEnum.New;
             IUserOptionsService userOpts = ApplicationContext.Current.Services.Get<IUserOptionsService>();
@@ -75,7 +80,31 @@ public partial class RemoteHistoryWhatsNew : UserControl, ISmartPartInfoProvider
         }
     }
 
-    /// <summary>
+    private void RegisterClientScripts()
+    {
+        if (GetActiveTab() != "RemoteHistoryWhatsNew") return;
+        StringBuilder vJS = new StringBuilder();
+        vJS.AppendLine("$(document).ready(function () {");
+        vJS.AppendLine("    dojo.publish(\"Sage/Events/WhatsNewTabChange\", \"RemoteHistoryWhatsNew\");");
+        vJS.AppendLine("});");
+
+        ScriptManager.RegisterClientScriptBlock(Page, GetType(), this.ClientID, vJS.ToString(), true);
+
+    }
+
+    private string GetActiveTab()
+    {
+        ConfigurationManager manager = ApplicationContext.Current.Services.Get<ConfigurationManager>(true);
+        ApplicationPage page = Page as ApplicationPage;
+        string pageAlias = Page.GetType().FullName + (String.IsNullOrEmpty(page.ModeId) ? page.ModeId : String.Empty);
+
+        TabWorkspaceState tabWorkSpace = manager.GetInstance<TabWorkspaceState>(pageAlias, true);
+        if (tabWorkSpace != null)
+        {
+            return tabWorkSpace.ActiveMainTab;
+        }
+        return string.Empty;
+    }    /// <summary>
     /// Sets the active grid display.
     /// </summary>
     /// <param name="searchType">Type of the search.</param>

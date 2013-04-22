@@ -1,0 +1,26 @@
+require({cache:{
+'dojox/grid/enhanced/nls/en/Filter':function(){
+define('dojox/grid/enhanced/nls/en/Filter',{});
+},
+'dojox/grid/enhanced/nls/en-bz/Filter':function(){
+define('dojox/grid/enhanced/nls/en-bz/Filter',{});
+},
+'dojox/grid/enhanced/nls/en/EnhancedGrid':function(){
+define('dojox/grid/enhanced/nls/en/EnhancedGrid',{});
+},
+'dojox/grid/enhanced/nls/en-bz/EnhancedGrid':function(){
+define('dojox/grid/enhanced/nls/en-bz/EnhancedGrid',{});
+},
+'dojox/grid/enhanced/nls/en/Pagination':function(){
+define('dojox/grid/enhanced/nls/en/Pagination',{});
+},
+'dojox/grid/enhanced/nls/en-bz/Pagination':function(){
+define('dojox/grid/enhanced/nls/en-bz/Pagination',{});
+},
+'dojox/form/nls/en/Uploader':function(){
+define('dojox/form/nls/en/Uploader',{});
+},
+'dojox/form/nls/en-bz/Uploader':function(){
+define('dojox/form/nls/en-bz/Uploader',{});
+}}});
+define("dojox/nls/dojox_en-bz", [], 1);

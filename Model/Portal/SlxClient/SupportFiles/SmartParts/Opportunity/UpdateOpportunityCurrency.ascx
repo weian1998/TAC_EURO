@@ -39,9 +39,9 @@
                     <asp:Label runat="server" ID="lblChange" Text="Change Rate to  " meta:resourceKey="lblChange_rsc"></asp:Label>
                     <SalesLogix:LookupControl runat="server" AutoPostBack="true" LookupBindingMode="String" OnLookupResultValueChanged="GetExchangeRate" ID="lveChangeRate" ReturnPrimaryKey="true" LookupEntityName="ExchangeRate" LookupEntityTypeName="Sage.SalesLogix.Entities.ExchangeRate, Sage.SalesLogix.Entities, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"  >
                         <LookupProperties>
-                        <SalesLogix:LookupProperty PropertyHeader="Currency Code" PropertyName="Id" PropertyFormat="None"  UseAsResult="True" ExcludeFromFilters="False" meta:resourceKey="LPCurrencyCode_rsc"></SalesLogix:LookupProperty>
-                        <SalesLogix:LookupProperty PropertyHeader="Description" PropertyName="Description" PropertyFormat="None"  UseAsResult="True" ExcludeFromFilters="False" meta:resourceKey="LPDescription_rsc"></SalesLogix:LookupProperty>
-                        <SalesLogix:LookupProperty PropertyHeader="Rate" PropertyName="Rate" PropertyFormat="None"  UseAsResult="True" ExcludeFromFilters="True" meta:resourceKey="LPRate_rsc"></SalesLogix:LookupProperty>
+                        <SalesLogix:LookupProperty PropertyHeader="Currency Code" PropertyName="Id" PropertyType="System.String" PropertyFormat="None"  UseAsResult="True" ExcludeFromFilters="False" meta:resourceKey="LPCurrencyCode_rsc"></SalesLogix:LookupProperty>
+                        <SalesLogix:LookupProperty PropertyHeader="Description" PropertyName="Description" PropertyType="System.String" PropertyFormat="None"  UseAsResult="True" ExcludeFromFilters="False" meta:resourceKey="LPDescription_rsc"></SalesLogix:LookupProperty>
+                        <SalesLogix:LookupProperty PropertyHeader="Rate" PropertyName="Rate" PropertyFormat="None" PropertyType="System.Double" UseAsResult="True" ExcludeFromFilters="True" meta:resourceKey="LPRate_rsc"></SalesLogix:LookupProperty>
                         </LookupProperties>
                         <LookupPreFilters>
                         </LookupPreFilters>

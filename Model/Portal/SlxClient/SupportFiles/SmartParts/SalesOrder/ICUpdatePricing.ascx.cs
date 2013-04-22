@@ -4,7 +4,6 @@ using System.Web.UI;
 using Sage.Entity.Interfaces;
 using Sage.Platform.ComponentModel;
 using Sage.Platform.WebPortal.Binding;
-using Sage.Platform.WebPortal.Services;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.Platform.Application.UI;
 
@@ -52,7 +51,7 @@ public partial class ICUpdatePricing : EntityBoundSmartPartInfoProvider
                                                salesOrder.SalesOrderNumber, salesOrder.Account.AccountName);
                 grdProducts.DataSource = (IList<ComponentView>)DialogService.DialogParameters["PriceList"];
                 grdProducts.DataBind();
-                if (grdProducts.DataKeys[0].Values[0] != null)
+                if (grdProducts.DataKeys.Count > 0)
                 {
                     curNewTotalPrice.Text = grdProducts.DataKeys[0].Values[0].ToString();
                 }
@@ -78,11 +77,11 @@ public partial class ICUpdatePricing : EntityBoundSmartPartInfoProvider
     protected override void OnWireEventHandlers()
     {
         base.OnWireEventHandlers();
-        btnOK.Click += new EventHandler(btnOK_ClickAction);
-        btnOK.Click += new EventHandler(DialogService.CloseEventHappened);
-        btnOK.Click += new EventHandler(Refresh);
-        btnCancel.Click += new EventHandler(btnCancel_ClickAction);
-        btnCancel.Click += new EventHandler(DialogService.CloseEventHappened);
+        btnOK.Click += btnOK_ClickAction;
+        btnOK.Click += DialogService.CloseEventHappened;
+        btnOK.Click += Refresh;
+        btnCancel.Click += btnCancel_ClickAction;
+        btnCancel.Click += DialogService.CloseEventHappened;
     }
 
     /// <summary>

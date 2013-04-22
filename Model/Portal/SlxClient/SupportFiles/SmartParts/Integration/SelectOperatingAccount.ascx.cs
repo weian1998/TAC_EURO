@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Sage.Entity.Interfaces;
 using Sage.Platform;
 using Sage.Platform.Application.UI;
 using Sage.Platform.WebPortal.SmartParts;
+using Sage.Platform.WebPortal.Services;
 using Sage.SalesLogix.Services.Integration;
 
 public partial class SelectOperatingAccount : EntityBoundSmartPartInfoProvider
@@ -34,7 +36,7 @@ public partial class SelectOperatingAccount : EntityBoundSmartPartInfoProvider
         }
     }
 
-    protected void Page_Load(object sender, EventArgs e)
+    protected override void OnFormBound()
     {
         if (_loadResults)
         {
@@ -47,33 +49,36 @@ public partial class SelectOperatingAccount : EntityBoundSmartPartInfoProvider
         lbxSystems.Items.Clear();
         bool mapped = false;
         string linkedTo = String.Empty;
-        bool restrict = IntegrationManager.SourceMapping.RestrictToSingleAccount.HasValue &&
-                        IntegrationManager.SourceMapping.RestrictToSingleAccount.Value &&
-                        IntegrationManager.SourceAccount.GlobalSyncId != null;
+        bool restrict = (IntegrationManager.SourceMapping.RestrictToSingleAccount ?? false) && IntegrationManager.SourceAccount.GlobalSyncId != null;
         if (!restrict)
         {
             IList mappings = IntegrationHelpers.GetAccountingFeeds();
-            ListItem item;
             foreach (IAppIdMapping map in mappings)
             {
                 bool addMapping = true;
-                if (map.Enabled.HasValue && map.Enabled.Value)
+                if (map.Enabled ?? false)
                 {
-                    foreach (IAccountOperatingCompany oppCompany in IntegrationManager.SourceAccount.AccountOperatingCompanies)
+                    if (IntegrationManager.SourceAccount.AccountOperatingCompanies.Count > 0)
                     {
-                        if (map.Equals(oppCompany.IntegrationApplication))
+                        foreach (IAccountOperatingCompany operatingCompany in IntegrationManager.SourceAccount.AccountOperatingCompanies)
                         {
-                            linkedTo += String.Format("{0}, ", map.Name);
-                            mapped = true;
-                            addMapping = false;
-                            break;
+                            if (operatingCompany.IntegrationApplication.EndPointURL == map.EndPointURL)
+                            {
+                                linkedTo += String.Format("{0}, ", map.Name);
+                                mapped = true;
+                                addMapping = false;
+                                break;
+                            }
+                        }
+                        if (addMapping)
+                        {
+                            ListItem item = new ListItem { Text = map.Name, Value = map.Id.ToString() };
+                            lbxSystems.Items.Add(item);
                         }
                     }
-                    if (addMapping)
+                    else
                     {
-                        item = new ListItem();
-                        item.Text = map.Name;
-                        item.Value = map.Id.ToString();
+                        ListItem item = new ListItem { Text = map.Name, Value = map.Id.ToString() };
                         lbxSystems.Items.Add(item);
                     }
                 }
@@ -123,8 +128,8 @@ public partial class SelectOperatingAccount : EntityBoundSmartPartInfoProvider
     protected override void OnWireEventHandlers()
     {
         base.OnWireEventHandlers();
-        btnNext.Click += new EventHandler(btnNext_ClickAction);
-        btnCancel.Click += new EventHandler(DialogService.CloseEventHappened);
+        btnNext.Click += btnNext_ClickAction;
+        btnCancel.Click += DialogService.CloseEventHappened;
     }
 
     /// <summary>
@@ -137,11 +142,8 @@ public partial class SelectOperatingAccount : EntityBoundSmartPartInfoProvider
         IntegrationManager.TargetMapping = EntityFactory.GetRepository<IAppIdMapping>().FindFirstByProperty(
             "Id", lbxSystems.SelectedValue);
         string caption = GetLocalResourceObject("LinkAccounting.Caption").ToString();
-        DialogService.SetSpecs(200, 200, 375, 800, "SearchResults", caption, true);
-        if (DialogService.DialogParameters.ContainsKey("IntegrationManager"))
-        {
-            DialogService.DialogParameters.Remove("IntegrationManager");
-        }
+        DialogService.SetSpecs(200, 200, 400, 800, "SearchResults", caption, true);
+        DialogService.DialogParameters.Remove("IntegrationManager");
         DialogService.DialogParameters.Add("IntegrationManager", IntegrationManager);
         DialogService.ShowDialog();
     }

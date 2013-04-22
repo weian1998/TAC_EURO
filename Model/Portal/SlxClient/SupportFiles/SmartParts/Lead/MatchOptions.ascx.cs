@@ -1,13 +1,5 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using Sage.Platform.Application.UI;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.Entity.Interfaces;
@@ -37,7 +29,7 @@ public partial class MatchOptions : EntityBoundSmartPartInfoProvider
     public override ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
     {
         ToolsSmartPartInfo tinfo = new ToolsSmartPartInfo();
-        foreach (Control c in this.MatchOptions_RTools.Controls)
+        foreach (Control c in MatchOptions_RTools.Controls)
         {
             tinfo.RightTools.Add(c);
         }
@@ -72,7 +64,6 @@ public partial class MatchOptions : EntityBoundSmartPartInfoProvider
             else 
             {
                 IsDefaultsSet.Value = "True";
-
                 txtDuplicate_Low.Text = Convert.ToString(advancedOptions.DuplicateBottomThreshhold);
                 txtPossibleDuplicate_Low.Text = Convert.ToString(advancedOptions.PossibleDuplicateBottomThreshhold);
                 lblPossibleDuplicate_High.Text = Convert.ToString(advancedOptions.PossibleDuplicateTopThreshhold);
@@ -82,11 +73,8 @@ public partial class MatchOptions : EntityBoundSmartPartInfoProvider
                 chkUseSynonym.Checked = advancedOptions.IncludeThesaurus;
                 chkUseFuzzy.Checked = advancedOptions.IncludeFuzzy;
                 lbxFuzzyLevel.SelectedValue = advancedOptions.FuzzyLevel.ToString();
-
-            
             }
         }
-        
         return advancedOptions;
     }
 
@@ -99,15 +87,32 @@ public partial class MatchOptions : EntityBoundSmartPartInfoProvider
     /// </summary>
     private void RegisterClientScript()
     {
-        StringBuilder sb = new StringBuilder(GetLocalResourceObject("MatchOptions_ClientScript").ToString());
-        sb.Replace("@mo_chkUseFuzzyId", chkUseFuzzy.ClientID);
-        sb.Replace("@mo_lbxFuzzyLevelId", lbxFuzzyLevel.ClientID);
-        sb.Replace("@mo_txtDuplicate_LowId", txtDuplicate_Low.ClientID);
-        sb.Replace("@mo_txtPossibleDuplicate_LowId", txtPossibleDuplicate_Low.ClientID);
-        sb.Replace("@mo_lblPossibleDuplicate_HighId", lblPossibleDuplicate_High.ClientID);
-        sb.Replace("@mo_lblNoDuplicate_HighId", lblNoDuplicate_High.ClientID);
-        
-        ScriptManager.RegisterClientScriptBlock(Page, this.GetType(), "MatchOptions", sb.ToString(), false);
+        ScriptManager.RegisterClientScriptInclude(this, GetType(), "MatchOptions",
+                                                  Page.ResolveUrl("~/SmartParts/Lead/MatchOptions.js"));
+        var script = new StringBuilder();
+        if (Page.IsPostBack)
+        {
+            script.Append(" Sage.UI.Forms.MatchOptions.init(" + GetWorkSpace() + " );");
+        }
+        else
+        {
+            script.Append("dojo.ready(function () {Sage.UI.Forms.MatchOptions.init(" + GetWorkSpace() + ");");
+        }
+        ScriptManager.RegisterStartupScript(this, GetType(), "initialize_MatchOptions", script.ToString(), true);
+    }
+
+    private string GetWorkSpace()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append("{");
+        sb.AppendFormat("chkUseFuzzyId:'{0}',", chkUseFuzzy.ClientID);
+        sb.AppendFormat("lbxFuzzyLevelId:'{0}',", lbxFuzzyLevel.ClientID);
+        sb.AppendFormat("txtDuplicate_LowId:'{0}',", txtDuplicate_Low.ClientID);
+        sb.AppendFormat("txtPossibleDuplicate_LowId:'{0}',", txtPossibleDuplicate_Low.ClientID);
+        sb.AppendFormat("lblPossibleDuplicate_HighId:'{0}',", lblPossibleDuplicate_High.ClientID);
+        sb.AppendFormat("lblNoDuplicate_HighId:'{0}',", lblNoDuplicate_High.ClientID);
+        sb.Append("}");
+        return sb.ToString();
     }
 
     #endregion
@@ -138,18 +143,17 @@ public partial class MatchOptions : EntityBoundSmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Visible)
+        if (!Visible) return;
+        RegisterClientScript();
+        chkUseFuzzy.Attributes.Add("onclick", "return Sage.UI.Forms.MatchOptions.onUseFuzzyCheckedChanged();");
+        txtDuplicate_Low.Attributes.Add("onblur", "return Sage.UI.Forms.MatchOptions.onDuplicateScoreChange();");
+        txtPossibleDuplicate_Low.Attributes.Add("onblur", "return Sage.UI.Forms.MatchOptions.onDuplicatePossibleChange();");
+        if (DialogService.DialogParameters.ContainsKey("IsImportWizard"))
         {
-            RegisterClientScript();
-            chkUseFuzzy.Attributes.Add("onclick", "javascript:OnUseFuzzyCheckedChanged()");
-            txtDuplicate_Low.Attributes.Add("onblur", "javascript:OnDuplicateScoreChange()");
-            txtPossibleDuplicate_Low.Attributes.Add("onblur", "javascript:OnDuplicatePossibleChange()");
-            if (DialogService.DialogParameters.ContainsKey("IsImportWizard"))
-            {
-                tblDupScores.Visible = true;
-                cmdCancel.Visible = true;
-                cmdOK.Visible = true;
-            }
+            tblDupScores.Visible = true;
+            cmdCancel.Visible = true;
+            cmdOK.Visible = true;
+            DialogService.DialogParameters.Remove("IsImportWizard");
         }
     }
 
@@ -160,7 +164,6 @@ public partial class MatchOptions : EntityBoundSmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void cmdOK_Click(object sender, EventArgs e)
     {
-        
         SaveOptions();
         DialogService.CloseEventHappened(sender, e);
         IPanelRefreshService refresher = PageWorkItem.Services.Get<IPanelRefreshService>();
@@ -196,18 +199,16 @@ public partial class MatchOptions : EntityBoundSmartPartInfoProvider
     protected void LoadForm()
     {
         MatchAdvancedOptions advancedOptions = GetOptions();
-        if (advancedOptions != null)
-        {
-            txtDuplicate_Low.Text = Convert.ToString(advancedOptions.DuplicateBottomThreshhold);
-            txtPossibleDuplicate_Low.Text = Convert.ToString(advancedOptions.PossibleDuplicateBottomThreshhold);
-            lblPossibleDuplicate_High.Text = Convert.ToString(advancedOptions.PossibleDuplicateTopThreshhold);
-            lblNoDuplicate_High.Text = Convert.ToString(advancedOptions.NotDuplicateTopThreshhold);
-            chkUseStemming.Checked = advancedOptions.IncludeStemming;
-            chkUsePhonic.Checked = advancedOptions.IncludePhonic;
-            chkUseSynonym.Checked = advancedOptions.IncludeThesaurus;
-            chkUseFuzzy.Checked = advancedOptions.IncludeFuzzy;
-            lbxFuzzyLevel.SelectedValue = advancedOptions.FuzzyLevel.ToString();
-        }
+        if (advancedOptions == null) return;
+        txtDuplicate_Low.Text = Convert.ToString(advancedOptions.DuplicateBottomThreshhold);
+        txtPossibleDuplicate_Low.Text = Convert.ToString(advancedOptions.PossibleDuplicateBottomThreshhold);
+        lblPossibleDuplicate_High.Text = Convert.ToString(advancedOptions.PossibleDuplicateTopThreshhold);
+        lblNoDuplicate_High.Text = Convert.ToString(advancedOptions.NotDuplicateTopThreshhold);
+        chkUseStemming.Checked = advancedOptions.IncludeStemming;
+        chkUsePhonic.Checked = advancedOptions.IncludePhonic;
+        chkUseSynonym.Checked = advancedOptions.IncludeThesaurus;
+        chkUseFuzzy.Checked = advancedOptions.IncludeFuzzy;
+        lbxFuzzyLevel.SelectedValue = advancedOptions.FuzzyLevel.ToString();
     }
 
     /// <summary>
@@ -217,32 +218,25 @@ public partial class MatchOptions : EntityBoundSmartPartInfoProvider
     protected MatchAdvancedOptions GetOptions()
     {
         ImportManager importManager = Page.Session["importManager"] as ImportManager;
-        if (importManager != null)
+        if (importManager != null && importManager.DuplicateProvider != null)
         {
-            if (importManager.DuplicateProvider != null)
-            {
-                return importManager.DuplicateProvider.AdvancedOptions;
-            }
+            return importManager.DuplicateProvider.AdvancedOptions;
         }
         IMatchDuplicateProvider dupProvider = Page.Session["duplicateProvider"] as IMatchDuplicateProvider;
         if (dupProvider != null)
         {
             return dupProvider.AdvancedOptions;
         }
-        if (DialogService.DialogParameters.ContainsKey("matchAdvancedOptions"))
-        {
-            return DialogService.DialogParameters["matchAdvancedOptions"] as MatchAdvancedOptions;
-        }
-        return null;
+        return DialogService.DialogParameters.ContainsKey("matchAdvancedOptions")
+                   ? DialogService.DialogParameters["matchAdvancedOptions"] as MatchAdvancedOptions
+                   : null;
     }
 
     /// <summary>
     /// Saves the options.
     /// </summary>
-    /// <param name="options">The options.</param>
     protected void SaveOptions()
     {
-        
         MatchAdvancedOptions advancedOptions = GetOptions();
         if (advancedOptions != null)
         {
@@ -268,8 +262,7 @@ public partial class MatchOptions : EntityBoundSmartPartInfoProvider
             advancedOptions.IncludeThesaurus = chkUseSynonym.Checked;
             advancedOptions.IncludeFuzzy = chkUseFuzzy.Checked;
             advancedOptions.FuzzyLevel = Convert.ToInt32(lbxFuzzyLevel.SelectedValue);
-        }
-                
+        }    
         
         ImportManager importManager = Page.Session["importManager"] as ImportManager;
         if (importManager != null)

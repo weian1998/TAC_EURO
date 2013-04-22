@@ -5,6 +5,9 @@
   <SmartPart>SmartParts\Calendar\ActivityCalendar.ascx</SmartPart>
   <TargetWorkspace>MainContent</TargetWorkspace>
   <ShowInMode />
-  <Properties />
+  <Properties>
+    <Property Name="ActivityContextMenu" TypeConverter="">contextCalendar</Property>
+    <Property Name="HelpTopic" TypeConverter="">caldailyforact</Property>
+  </Properties>
   <AllowRoles />
 </SmartPartMapping>

@@ -112,70 +112,13 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="grdContacts.EmptyTableRowText" xml:space="preserve">
-    <value>No records match the selection criteria.</value>
-  </data>
-  <data name="grdContacts.33ccb081-8a37-4251-8a54-caf8be00edff.ColumnHeading" xml:space="preserve">
-    <value>Title</value>
-  </data>
-  <data name="grdContacts.33ccb081-8a37-4251-8a54-caf8be00edff.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContacts.48c6d8d1-a5e2-4268-afaf-97d0f30414a9.ColumnHeading" xml:space="preserve">
-    <value>Role</value>
-  </data>
-  <data name="grdContacts.48c6d8d1-a5e2-4268-afaf-97d0f30414a9.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContacts.eb316f20-4244-44f3-9e9d-933c4a92a679.ColumnHeading" xml:space="preserve">
-    <value>Primary</value>
-  </data>
-  <data name="grdContacts.eb316f20-4244-44f3-9e9d-933c4a92a679.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContacts.bc1bc56a-0958-4c37-b6bd-4e615cac00fb.ColumnHeading" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContacts.bc1bc56a-0958-4c37-b6bd-4e615cac00fb.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContacts.bc1bc56a-0958-4c37-b6bd-4e615cac00fb.ConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to remove this item?</value>
-  </data>
-  <data name="grdContacts.bc1bc56a-0958-4c37-b6bd-4e615cac00fb.Text" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="grdContacts.0f5e475a-758a-472b-956d-eedfffe6fd42.ColumnHeading" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContacts.0f5e475a-758a-472b-956d-eedfffe6fd42.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContacts.0f5e475a-758a-472b-956d-eedfffe6fd42.Text" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="grdContacts.5b30bdbf-1684-417f-adf0-203a6005cc1c.ColumnHeading" xml:space="preserve">
-    <value>Contact Name</value>
-  </data>
-  <data name="grdContacts.5b30bdbf-1684-417f-adf0-203a6005cc1c.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContacts.5b30bdbf-1684-417f-adf0-203a6005cc1c.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContacts.5b30bdbf-1684-417f-adf0-203a6005cc1c.DestinationFormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContacts.9c3f68b2-1a93-4519-adc4-7429c342e02a.ColumnHeading" xml:space="preserve">
-    <value>Phone</value>
-  </data>
-  <data name="grdContacts.0c625b7d-5f98-4e84-9274-84251a56dea3.ColumnHeading" xml:space="preserve">
-    <value>E-mail</value>
+  <data name="lueAddContact.DialogButtonText" xml:space="preserve">
+    <value>Add Selected</value>
   </data>
   <data name="lueAssociateContact.ToolTip" xml:space="preserve">
     <value>Add Contact</value>
@@ -206,5 +149,80 @@
   </data>
   <data name="d1df0804-8d26-4a0a-a2a4-42e7e562fa5c.DuplicateAssociationMessage" xml:space="preserve">
     <value>The selected contact is already associated to this opportunity.</value>
+  </data>
+  <data name="grdContacts.4d2f53cb-d5a8-4b35-a692-52338cc459e8.ColumnHeading" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="lueAddContact.LookupProperties.LastName.PropertyHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="lueAddContact.LookupProperties.FullName.PropertyHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="lueAddContact.LookupProperties.AccountName.PropertyHeader" xml:space="preserve">
+    <value>Account Name</value>
+  </data>
+  <data name="lueAddContact.LookupProperties.Address.City.PropertyHeader" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="lueAddContact.LookupProperties.Address.State.PropertyHeader" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="lueAddContact.LookupProperties.WorkPhone.PropertyHeader" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="lueAddContact.LookupProperties.Email.PropertyHeader" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="grdContacts.8d492f7c-a115-4e0a-b392-c39eae576428.ColumnHeading" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="grdContacts.9ec8c428-5002-40a7-b0ce-036b9e38b1a9.ColumnHeading" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="grdContacts.0b348cda-aed0-4447-97a0-2cf9a75fc7e5.ColumnHeading" xml:space="preserve">
+    <value>Primary</value>
+  </data>
+  <data name="grdContacts.9f775fb0-57cb-4305-a53e-78d8cbd5b51f.ColumnHeading" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="grdContacts.6939e7e4-a733-4058-9dd6-e4a746ea0df1.ColumnHeading" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="grdContacts.Cancel.ToolTip" xml:space="preserve">
+    <value>Revert Changes</value>
+  </data>
+  <data name="lueAddContact.ButtonToolTip" xml:space="preserve">
+    <value>Include Contact</value>
+  </data>
+  <data name="lueAddContact.LookupDialogTitle" xml:space="preserve">
+    <value>Lookup Contact</value>
+  </data>
+  <data name="grdContacts.Delete.ToolTip" xml:space="preserve">
+    <value>Remove Selected Contacts</value>
+  </data>
+  <data name="grdContacts.Save.ToolTip" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="grdContacts.120cb1b9-c899-4a07-b587-6bb0fa6f0e59.ColumnHeading" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="grdContacts.53466a16-c110-4cc9-a255-766895b39c4a.ColumnHeading" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="grdContacts.9134df93-3411-44af-9c46-0be921f191ab.ColumnHeading" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="lueAddContact.LookupProperties.Title.PropertyHeader" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="grdContacts.c3b7f9ef-e728-4e71-91f9-cfed1ad93e97.ColumnHeading" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="grdContacts.EmptyTableRowText" xml:space="preserve">
+    <value>No records match the selection criteria.</value>
+  </data>
+  <data name="lueAddContact.LookupProperties.NameLF.PropertyHeader" xml:space="preserve">
+    <value>Name</value>
   </data>
 </root>

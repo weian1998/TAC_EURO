@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Lookup name="CarryOverNotes">
-    <LookupValue id="Yes" text="Yes" default="true"></LookupValue>
-    <LookupValue id="No" text="No" default="false"></LookupValue>
+    <LookupValue id="T" text="Yes" localizedId="yes" default="true"></LookupValue>
+    <LookupValue id="F" text="No" localizedId="no" default="false"></LookupValue>
 </Lookup>
-

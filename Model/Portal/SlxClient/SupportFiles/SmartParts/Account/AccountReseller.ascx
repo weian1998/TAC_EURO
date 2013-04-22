@@ -1,17 +1,18 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeFile="AccountReseller.ascx.cs" Inherits="SmartParts_AccountReseller" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls" TagPrefix="SalesLogix" %>
 
-
 <div style="display:none">
- <asp:Panel ID="Reseller_LTools" runat="server" meta:resourcekey="Reseller_LToolsResource1"> </asp:Panel>
- <asp:Panel ID="Reseller_CTools" runat="server" meta:resourcekey="Reseller_CToolsResource1"></asp:Panel>
- <asp:Panel ID="Reseller_RTools" runat="server" meta:resourcekey="Reseller_RToolsResource1">
-    <asp:HyperLink runat="server" ID="linkAddOpportunity"   ImageUrl="~\images\icons\plus_16X16.gif"    ToolTip="Insert New Opportunity"   NavigateUrl="~/InsertOpportunity.aspx?modeid=Insert"   meta:resourcekey="linkAddOpportunity"  />
-    <SalesLogix:PageLink ID="lnkAccountResellerHelp" runat="server" LinkType="HelpFileName"
-        ToolTip="<%$ resources:Portal, Help_ToolTip %>" Target="Help" NavigateUrl="accountresellertab.aspx"
-        ImageUrl="~/ImageResource.axd?scope=global&amp;type=Global_Images&amp;key=Help_16x16" meta:resourcekey="lnkAccountResellerHelpResource1"></SalesLogix:PageLink>
- </asp:Panel>
+    <asp:Panel ID="Reseller_RTools" runat="server">
+        <asp:HyperLink runat="server" ID="linkAddOpportunity" ImageUrl="~\images\icons\plus_16X16.gif" ToolTip="Insert New Opportunity"
+            NavigateUrl="~/InsertOpportunity.aspx?modeid=Insert" meta:resourcekey="linkAddOpportunity">
+        </asp:HyperLink>
+        <SalesLogix:PageLink ID="lnkAccountResellerHelp" runat="server" LinkType="HelpFileName" NavigateUrl="accountresellertab.aspx"
+            ToolTip="<%$ resources:Portal, Help_ToolTip %>" Target="Help" meta:resourcekey="lnkAccountResellerHelpResource1"
+            ImageUrl="~/ImageResource.axd?scope=global&amp;type=Global_Images&amp;key=Help_16x16">
+        </SalesLogix:PageLink>
+    </asp:Panel>
 </div>
+
 <table border="0" cellpadding="1" cellspacing="0" class="formtable">
   <col width="25%" /><col width="25%" /><col width="25%" /><col width="25%" />
   <tr>
@@ -147,18 +148,14 @@
     <Columns>
       <asp:TemplateField   HeaderText="Opportunity Name"  meta:resourcekey="grdReseller_OpportunityName"     >
        <itemtemplate>
-<SalesLogix:PageLink runat="server" EntityId='<%# Eval("Id") %>' LinkType="EntityAlias" Text='<%# Eval("Description") %>' NavigateUrl="Opportunity" meta:resourcekey="PageLinkResource1"></SalesLogix:PageLink>
+<SalesLogix:PageLink ID="PageLink1" runat="server" EntityId='<%# Eval("Id") %>' LinkType="EntityAlias" Text='<%# Eval("Description") %>' NavigateUrl="Opportunity" meta:resourcekey="PageLinkResource1"></SalesLogix:PageLink>
 
-       
 </itemtemplate>
      </asp:TemplateField>
      <asp:BoundField DataField="Status"    HeaderText="Status"  meta:resourcekey="grdReseller_Status"      />
-     <%--<asp:BoundField DataField="SalesPotential" DataFormatString="{0:C}" HtmlEncode="False"   HeaderText="Potential"  meta:resourcekey="grdReseller_Potential"    >
-         <itemstyle horizontalalign="Right" />
-     </asp:BoundField>--%>
      <asp:TemplateField HeaderText="Potential" meta:resourceKey="grdReseller_Potential">
         <ItemTemplate>
-            <SalesLogix:Currency runat="server" Text='<%# Eval("SalesPotential") %>' DisplayMode="AsText" ExchangeRateType="baseRate" DisplayCurrencyCode="true" />
+            <SalesLogix:Currency ID="Currency1" runat="server" Text='<%# Eval("SalesPotential") %>' DisplayMode="AsText" ExchangeRateType="baseRate" DisplayCurrencyCode="true" />
          </ItemTemplate>
      </asp:TemplateField>
      <asp:BoundField DataField="CloseProbability" DataFormatString="{0}%" HtmlEncode="False"   HeaderText="Probability"  meta:resourcekey="grdReseller_Probability"    >

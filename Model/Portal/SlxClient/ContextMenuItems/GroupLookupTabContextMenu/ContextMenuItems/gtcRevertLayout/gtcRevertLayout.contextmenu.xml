@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="692981ad-115c-4586-aa0c-654cdbfe81be">
+  <ItemId>gtcRevertLayout</ItemId>
+  <NavUrl>javascript:Sage.Groups.GroupManager.ClearLocalStorageForGroup('${groupId}')</NavUrl>
+  <LargeImageUrl />
+  <SmallImageUrl />
+  <ContextMenuId />
+  <Target />
+  <AppliedSecurity />
+</MenuDropDownItem>

@@ -1,0 +1,5 @@
+﻿define(
+    {
+      displayNameText: "Hidden Text"
+    }
+);

@@ -7,7 +7,7 @@
   <parameter />
   <preExecuteTargets />
   <methodTargets>
-    <methodTarget id="1ac6af45-b1f7-4c4b-9dd3-12ceb9b45868" lastModifiedUtc="2010-01-27T21:32:18.8912291Z" targetType="Sage.Platform.Orm.DefaultCRUDEventHandler, Sage.Platform" targetMethod="OnAfterDelete" active="true">
+    <methodTarget id="30ebadfe-62a4-48ae-a5b9-793c89b43179" lastModifiedUtc="2012-07-13T19:54:05.7806874Z" targetType="Sage.SalesLogix.AppIdMapping.Rules, Sage.SalesLogix.BusinessRules" targetMethod="OnAfterDelete" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>

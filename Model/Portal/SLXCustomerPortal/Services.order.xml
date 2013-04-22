@@ -1,11 +1,27 @@
 <?xml version="1.0"?>
 <ModelItems xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Item Id="bc402b35-3290-4bce-8b11-edb6c986f3d1">Sage.Platform.Data.IDataService.service.xml</Item>
+  <Item Id="54540cc5-4298-4720-8f9b-08f977e7c5a2">Sage.Platform.Data.IDataService.service.xml</Item>
   <Item Id="35a3eb1b-bc2c-4be7-a4e5-3e29d245f63d">Sage.SalesLogix.Client.GroupBuilder.IGroupContextService.service.xml</Item>
-  <Item Id="45b2fad2-6dc4-43b2-aa76-c166381749ab">Sage.Platform.Security.IUserService.service.xml</Item>
-  <Item Id="df277190-25b5-43c0-8159-9975735220fe">Sage.Platform.Application.Services.ITransactionManagerService.service.xml</Item>
-  <Item Id="cbc90542-ea28-4db4-8af2-fa31c897120f">Sage.Platform.Application.Services.IUserOptionsService.service.xml</Item>
-  <Item Id="da22c1bf-9ff8-4ab4-b8e1-4accbf167cdb">Sage.Platform.WebPortal.Services.IEntityStateService.service.xml</Item>
-  <Item Id="523de0f7-8a76-4274-beb9-72753611130e">Sage.Platform.Data.IHibernateConfigurationService.service.xml</Item>
+  <Item Id="5c9dfb80-dae6-4f0f-939b-fe22bd5c23f1">Sage.Platform.Security.IUserService.service.xml</Item>
+  <Item Id="124438a3-1474-4ba0-a8e0-7b4e9f7b990a">Sage.Platform.Application.Services.IUserOptionsService.service.xml</Item>
+  <Item Id="b950a13a-f345-4b3f-87ce-2b997dcd759a">Sage.Platform.Application.Services.ITransactionManagerService.service.xml</Item>
+  <Item Id="75ca844b-4ccd-4a7b-8678-e5504600224b">Sage.Platform.NamedQueries.INamedQueryCacheService.service.xml</Item>
+  <Item Id="19eaade5-5783-4a91-81c4-2ede8fce96c2">Sage.Platform.NamedQueries.INamedQueryLookupService.service.xml</Item>
+  <Item Id="b64e6ff4-6f9d-4460-80c2-b1ebfec93fd4">Sage.Platform.Mashups.IMashupDiscoveryService.service.xml</Item>
+  <Item Id="50f0e7e4-588f-4ca4-bb02-bb81d22aaeb1">Sage.Platform.Data.IHibernateConfigurationService.service.xml</Item>
   <Item Id="acd4ee27-e572-435f-8de6-fe575d0d96be">Sage.SalesLogix.PickLists.IPickListService.service.xml</Item>
+  <Item Id="5521bf7c-35f7-4678-a659-608f50564483">Sage.Platform.Security.IRoleSecurityService.service.xml</Item>
+  <Item Id="e2c59614-de7c-40d8-a9b2-0be2b320a708">Sage.SalesLogix.Services.ISessionService.service.xml</Item>
+  <Item Id="43cd8dad-e6d7-4788-a1c5-48f7b15006af">Sage.SalesLogix.SelectionService.ISelectionService.service.xml</Item>
+  <Item Id="94693af7-fc8b-48fe-a57b-3c1c0d04b8f9">Sage.Platform.Application.Services.IEntityMappingInfoService.service.xml</Item>
+  <Item Id="04bb4b2f-f14e-4dbe-a1c9-181b74bdf00d">Sage.Platform.QuickForms.WebFormGen.Web.IVirtualPathMapper.service.xml</Item>
+  <Item Id="d89e8c9b-f16a-4cdf-92b2-c8470c4a419e">Sage.Platform.Application.Caching.CacheInitializationService.service.xml</Item>
+  <Item Id="a0887e51-ed78-4d8c-ac2e-a14774c80410">Sage.SalesLogix.Services.ISystemOptionsService.service.xml</Item>
+  <Item Id="7afae795-21fb-4100-a233-7ac07021d425">Sage.Platform.WebPortal.Services.IEntityStateService.service.xml</Item>
+  <Item Id="1eec55d7-67d8-4756-b6cf-86020bb25c5a">Sage.Platform.SData.IAtomEntryToEntityTransformationService.service.xml</Item>
+  <Item Id="fd1b4fba-393d-490e-a689-bbc5c81c69f7">Sage.Platform.Messaging.Transport.IMessageTransport.service.xml</Item>
+  <Item Id="e9e0b528-7bc6-450c-889a-a4bd57b3d619">Sage.Platform.Messaging.IMessageHost.service.xml</Item>
+  <Item Id="26d04409-2f74-4dec-8cb6-68f7e28fbce1">Sage.Platform.VirtualFileSystem.IFileSystemEventService.service.xml</Item>
+  <Item Id="6303bc90-d416-468f-88bc-a3c6934eefd9">Sage.Scheduling.Client.ISchedulerService.service.xml</Item>
+  <Item Id="f2a59673-614f-2735-6187-01392b56478c">Sage.Platform.Projects.Localization.ProjectLocalizationService.service.xml</Item>
 </ModelItems>

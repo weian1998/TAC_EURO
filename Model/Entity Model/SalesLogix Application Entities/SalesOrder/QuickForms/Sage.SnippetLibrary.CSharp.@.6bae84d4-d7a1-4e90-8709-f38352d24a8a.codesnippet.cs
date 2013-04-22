@@ -78,10 +78,9 @@ namespace Sage.BusinessRules.CodeSnippets
 			    bool erpSalesOrder = (oMappingService.IsIntegrationEnabled() && (salesOrder.GlobalSyncId.HasValue && !isOpen));
 
 			    form.rdgSOType.Enabled = (!closed || !salesOrder.IsQuote.HasValue) && !erpSalesOrder;
-                form.lueAccount.Enabled = !closed && !erpSalesOrder;
+                form.lueAccount.IsReadOnly = closed || erpSalesOrder;
                 form.usrAccountManager.IsReadOnly = closed || erpSalesOrder;
                 form.lueOpportunity.IsReadOnly = closed || erpSalesOrder;
-                form.dtpDateCreated.IsReadOnly = closed || erpSalesOrder;
                 form.lueRequestedBy.IsReadOnly = closed || erpSalesOrder;
                 form.dtpOrderDate.IsReadOnly = closed || erpSalesOrder;
                 form.dtpPromisedDate.IsReadOnly = closed || erpSalesOrder;
@@ -99,40 +98,18 @@ namespace Sage.BusinessRules.CodeSnippets
     			
                 //if this is a Sales Order synced from the accounting system then no point executing this, as the Sales Order will be disabled.
 				if (!erpSalesOrder && oMappingService.IsIntegrationEnabled())
-				{
-					if (!salesOrder.CanChangeOperatingCompany())
-					{
-						form.lueERPApplication.Enabled = false;
-						form.luePriceList.Enabled = false;
-					}
-					else 
-					{
-						form.lueERPApplication.Enabled = true;
-						object oValue = form.lueERPApplication.LookupResultValue;
-						string sValue = string.Empty;
-						if (oValue != null)
-						{
-							sValue = oValue.ToString();
-						}
-						if (string.IsNullOrEmpty(sValue))
-						{
-							form.luePriceList.Text = string.Empty;
-							form.luePriceList.LookupResultValue = null;
-							form.luePriceList.Enabled = false;
-						}
-						else
-						{
-							form.luePriceList.Enabled = true;
-						}
-						SalesLogix.HighLevelTypes.LookupPreFilter filterAppId = new SalesLogix.HighLevelTypes.LookupPreFilter();
-						filterAppId.LookupEntityName = "Sage.Entity.Interfaces.IAppIdMapping";
-						filterAppId.PropertyName = "Id";
-						filterAppId.OperatorCode = "!=";
-						filterAppId.FilterValue = oMappingService.LocalAppId;
-						filterAppId.PropertyType = "System.String";
-						form.lueERPApplication.LookupPreFilters.Add(filterAppId);							
-					}				
-				}
+                {
+                    if (!salesOrder.CanChangeOperatingCompany())
+                    {
+                        form.lueERPApplication.Enabled = false;
+                        form.luePriceList.Enabled = false;
+                    }
+                    else
+                    {
+                        form.lueERPApplication.Enabled = true;
+                        form.luePriceList.Enabled = (form.lueERPApplication.LookupResultValue != null);
+                    }
+                }
 				form.ctrlstERPApplication.Visible = oMappingService.IsIntegrationEnabled();
 			}
         }

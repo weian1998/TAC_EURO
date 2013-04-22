@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Converting Leads</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Leads/converting_leads.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor502"></a>Конвертация наводок</h1>
+        <p>Как только наводке присвоена квалификация, наводку можно конвертировать в контакт или субъект. Диалоговое окно Конвертирования Наводки содержит информацию о похожих контактах и субъектах. Наводки с совпадающей информацией можно добавить в существующие контакт, субъект или можно создать новые контакт и субъект на основе наводки. Для поиска дублирующих записей можно воспользоваться функцией Фильтрации.</p>
+        <table wrapperparagraphselector="P" style="margin-top: 14pt;width: 98%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="98%">
+            <col style="width: 7.75%;" />
+            <col style="width: 92.25%;" />
+            <tr>
+                <td style="width: 7.75%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="7.75%">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="width: 92.25%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="92.25%">
+                    <p class="Tip-Note-Text" style="margin-bottom: 0;">Sage SalesLogix может осуществлять поиск  только среди записей, к которым у вас есть доступ. Возможно существуют дублирующие записи, к которым вы не можете получить доступ.</p>
+                </td>
+            </tr>
+        </table>
+        <p class="Infinitive">Для конвертации квалифицированных наводок</p>
+        <ol>
+            <li value="1">Откройте <a href="using_the_lead_detail_view.htm">Детальное представление Наводки</a>, которую необходимо конвертировать, а затем нажмите кнопку <span class="SLXBold">Преобразовать квалиф. наводку</span>.<br />Откроется диалоговое окно Конвертировать Наводку с информацией по наводке в верхней части диалогового окна и информацией по дубликату контакта или субъекта в нижней части диалогового окна.</li>
+            <li MadCap:conditions="Output.WebClient" value="2">На закладке    <![CDATA[ ]]><span class="SLXBold">Фильтры совпадений</span>, отметьте флажками фильтры, которые вы хотите применить.</li>
+            <li MadCap:conditions="Output.WebClient" value="3">Выберите один из следующих <span class="SLXBold">Параметров</span>:<ul><li MadCap:conditions="Output.WebClient" value="1"><span class="SLXBold">Соответ. всем выбранным фильтрам</span> - запись будет найдена, только при совпадении всех выбранных параметров фильтрации.</li><li MadCap:conditions="Output.WebClient" value="2"><span class="SLXBold">Соответ. любому из выбранных фильтров</span> - запись будет найдена, при совпадении хотя бы одного из выбранных параметров фильтрации.</li></ul></li>
+            <li MadCap:conditions="Output.WebClient" value="4">Для выполнения <a href="leadimportadvancedmatch.htm">Расширенного поиска</a> нажмите <span class="SLXBold">Расширенные параметры</span>.</li>
+            <li MadCap:conditions="Output.WebClient" value="5">Нажмите <span class="SLXBold">Изменить потенциальные соответствия</span>.</li>
+            <li MadCap:conditions="Output.WebClient" value="6">Нажмите на стрелку вниз в поле <span class="SLXBold">Конфликты</span>,  чтобы выбрать способ рзарешения конфликтов.<ul><li MadCap:conditions="Output.WebClient" value="1">Выберите пункт <span class="SLXBold">Побеждает субъект</span> если необходимо, чтобы осталась информация существующего контакта.</li><li MadCap:conditions="Output.WebClient" value="2">Выберите пункт <span class="SLXBold">Выигрывает Наводка</span> если необходимо, чтобы спорная информация была заменена на информацию из наводки.</li></ul></li>
+            <li value="7">Если необходимо создать сделку, <MadCap:conditionalText MadCap:conditions="Output.WebClient"> установите флаг <span class="SLXBold">Создать сделку после конвертации наводки</span> .</MadCap:conditionalText><br />Вся информация по делам, истории и заметкам Наводки будет связана с созданной Сделкой.</li>
+            <li value="8">Выполните одно из следующих действий:<ul><li value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="match">Объединить наводку с дублирующим контактом<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a><ol style="list-style-type: lower-alpha; display: none;" MadCap:targetName="match"><li MadCap:conditions="Output.WebClient" value="1">В таблице <span class="SLXBold">Совпадающие контакты/наводки</span> нажмите <span class="SLXBold">Объединить</span> рядом с записью, к которой нужно добавить информацию из наводки.</li><li MadCap:conditions="Output.WebClient" value="2">Выполните все шаги для <a href="leadmergerecords.htm">объединения записей</a>.</li></ol></li><li value="2"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="matchacctlan;matchacctweb">Добавить контакт в дублирующий субъект<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a><ul MadCap:targetName="matchacctweb" style="display: none;"><li MadCap:conditions="Output.WebClient" value="1">В таблице <span class="SLXBold">Совпадающие Субъекты</span> нажмите <span class="SLXBold">Добавить контакт</span> рядом с записью, к которой нужно добавить информацию о контакте.<br />Наводка будет добавлена как Контакт для выбранного субъекта и откроется Детальное представление нового Контакта.</li></ul></li><li value="3"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="convert">Продолжить конвертацию наводки в новый контакт и субъект<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a><ul><li MadCap:targetName="convert" value="1" style="display: none;">Нажмите <span class="SLXBold">Конвертация</span>.</li></ul></li></ul></li>
+        </ol>
+        <p class="RelatedTopics">См. также</p>
+        <p MadCap:conditions="Output.Legacy LAN,Output.WebClient"><a href="What_are_Leads_.htm">Что такое Наводки?</a>
+        </p>
+        <p MadCap:conditions="Output.Legacy LAN,Output.WebClient"><a href="Qualifying_Leads.htm">Квалификация Наводок</a>
+        </p>
+        <div style="width: 100%;position: relative;">
+            <p>&#160;</p>
+        </div>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

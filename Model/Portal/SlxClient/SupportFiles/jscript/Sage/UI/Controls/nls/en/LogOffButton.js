@@ -1,0 +1,5 @@
+﻿define(
+        ({
+            logOffText: 'Log Off'
+        })
+);

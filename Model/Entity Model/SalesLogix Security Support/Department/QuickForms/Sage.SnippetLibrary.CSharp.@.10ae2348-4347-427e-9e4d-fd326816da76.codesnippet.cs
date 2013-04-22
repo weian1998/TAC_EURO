@@ -43,7 +43,6 @@ namespace Sage.BusinessRules.CodeSnippets
 			IDepartment department = form.CurrentEntity as IDepartment;
 			department.AddMember(member.DefaultOwner);
 			
-			form.grdUsers.SelectedIndex = -1;
 			
 			var panelRefresh = form.Services.Get<IPanelRefreshService>();
 			panelRefresh.RefreshTabWorkspace();			

@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="907235dd-4888-4bca-956c-5c087ab0dbe9" lastModifiedUtc="2010-03-12T19:18:43.1161576Z" cardinality="M:1" parentEntityId="0ade5197-07ac-498b-8b31-1fe657763b21" childEntityId="9cb793c9-e9ad-4be8-ab9a-f71250a8762b">
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="907235dd-4888-4bca-956c-5c087ab0dbe9" lastModifiedUtc="2012-08-03T07:43:15.0564366Z" cardinality="M:1" parentEntityId="0ade5197-07ac-498b-8b31-1fe657763b21" childEntityId="9cb793c9-e9ad-4be8-ab9a-f71250a8762b">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
   </ExtendedPropertiesCollection>
-  <parentProperty id="9c15b5f8-d0c2-4586-b51d-8de9b199b2f5" lastModifiedUtc="2010-03-12T19:18:37.8111576Z" name="OwnerSecurityProfile" audited="false">
+  <parentProperty id="9c15b5f8-d0c2-4586-b51d-8de9b199b2f5" lastModifiedUtc="2012-08-03T07:35:41.0994717Z" name="OwnerSecurityProfile" audited="false">
     <ExtendedPropertiesCollection>
       <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
     </ExtendedPropertiesCollection>
@@ -12,7 +12,7 @@
       <RelationshipDataType />
     </SystemDataType>
   </parentProperty>
-  <childProperty id="3091edf2-bf8c-43cd-94f4-2646d53b8b8d" lastModifiedUtc="2010-03-12T19:18:40.9641576Z" name="OwnerJoin" audited="false">
+  <childProperty id="3091edf2-bf8c-43cd-94f4-2646d53b8b8d" lastModifiedUtc="2012-08-03T07:43:15.0564366Z" name="OwnerJoins" audited="false" include="false">
     <ExtendedPropertiesCollection>
       <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
     </ExtendedPropertiesCollection>

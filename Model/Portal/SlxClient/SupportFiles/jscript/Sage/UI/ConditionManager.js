@@ -1,216 +1,458 @@
-﻿dojo.provide('Sage.UI.ConditionManager');
-dojo.require("dojo.i18n");
-dojo.requireLocalization('Sage.UI', 'ConditionManager');
+﻿/*globals Sage, dojo, dojox, dijit, Simplate, window, Sys, define */
+define([
+       'Sage/_Templated',
+       'dijit/_Widget',
+       'dijit/form/Select',
+       'dijit/form/Button',
+       'Sage/UI/ImageButton',
+       'Sage/UI/SearchConditionWidget',
+       'Sage/Utility',
+       'dojo/i18n!./nls/ConditionManager',
+       'dojo/_base/declare'
+],
+function (_Templated, _Widget, select, button, imageButton, SearchConditionWidget, util, nls, declare) {
+    //dojo.requireLocalization('Sage.UI', 'ConditionManager');
 
-ConditionManager = function (options) {
-    dojo.mixin(this, dojo.i18n.getLocalization("Sage.UI", "ConditionManager", this.lang));
-    this._options = options;
-    this.win = '';
-    this.conditions = [];
-    this.fields = [];
-    // gather the select and include parts from the columns passed in...
-    this.lookupTpl = new Simplate([
-        '<div id="lookupCondition_{%= index %}" class="lookup-condition-row">',
-        '<label class="slxlabel" style="width:75px;clear:left;display:block;float:left;position:relative;padding:4px 0px 0px 0px">',
-            '{% if (index < 1 ) { %} {%= $.addrowlabel %} {% } %}',
-            '{% if (index > 0 ) { %} {%= $.hiderowlabel %} {% } %}',
-        '</label>',
-        '<div style="padding-left:75px;position:relative;">',
-            '<select id="fieldnames_{%= index %}" class="lookup-fieldnames-list" onchange="dijit.byId(\'{%= slcId %}\').conditionMgr.operatorChange({%= index %}); ">',
-                '{% for (var i=0;i<fields.length;i++) { %}',
-                    '<option value="{%= fields[i].fieldname %}"  {% if (selectedFieldIndex == i ) { %} selected {% } %} >{%= fields[i].displayname %}</option>',
-                '{% } %}',
-            '</select>',
-            '<select id="operators_{%= index %}" class="lookup-operators-list">',
-                '{% selectedFieldType = (operators.hasOwnProperty(fields[selectedFieldIndex].propertyType)) ? fields[selectedFieldIndex].propertyType : "default"  ; %}',
-                '{% for (var i=0;i<operators[selectedFieldType].length;i++) { %}',
-                    '<option value="{%= operators[selectedFieldType][i].symbol %}">{%= operators[selectedFieldType][i].display %}</option>',
-                '{% } %}',
-            '</select>',
-            '<input type="text" id="value_{%= index %}" class="lookup-value" />',
-            '{% if (index < 1 ) { %}',
-    //TODO: Add a callback method in the cofiguration options coming from the LookupControl that is the 'DoSearch' method
-                '<img src="{%= addimgurl %}" alt="{%= $.addimgalttext %}" style="cursor:pointer;padding:0px 5px;" onclick="dijit.byId(\'{%= slcId %}\').conditionMgr.addLookupCondition();" />',
-                '<input type="button" id="lookupButton" onclick="dijit.byId(\'{%= slcId %}\').doLookup(); " value="{%= $.srchBtnCaption %}" />',
-            '{% } %}',
-        '{% if (index > 0 ) { %}',
-            '<img src="{%= hideimgurl %}" alt="{%= $.hideimgalttext %}" style="cursor:pointer;padding:0px 5px;" onclick="dijit.byId(\'{%= slcId %}\').conditionMgr.removeLookupCondition({%= index %});" />',
-        '{% } %}',
-        '</div>']);
+    var widget = declare('Sage.UI.ConditionManager', [_Widget, _Templated], {
+        widgetsInTemplate: true,
+        srchBtnCaption: 'Search',
+        addrowlabel: 'Lookup by:',
+        hiderowlabel: 'And:',
 
-    //TODO: Move Sage.Utilities
-    function AddToFieldsUnique(fieldName, displayName, propertyType, list) {
-        for (var i = 0; i < list.length; i++) {
-            if (fieldName === list[i].fieldname) {
-                return;
-            }
-        }
-        list.push({ fieldname: fieldName, displayname: displayName, propertyType: propertyType });
-    }
-
-    this.initFields = function () {
-        var cols = this._options.structure[0];
-        var fields = this.fields;
-        var fieldName;
-        var displayName;
-        var propertyType;
-        for (var i = 0; i < cols.cells.length; i++) {
-            if (cols.cells[i].hidden != true && cols.cells[i].excludeFromFilters != true) {
-                if (cols.cells[i].field) {
-                    fieldName = cols.cells[i].field;
-                    propertyType = cols.cells[i].propertyType;
-                    if (cols.cells[i].displayField) {
-                        displayName = cols.cells[i].displayField;
-                    }
-                    else {
-                        displayName = cols.cells[i].name;
-                    }
-                    AddToFieldsUnique(fieldName, displayName, propertyType, fields);
-                }
-            }
-        }
-    };
-
-    this.initFields();
-
-    this.setupTemplateObj = {
-        fields: this.fields,
-        operators: {
-            "System.Boolean": [
-                  { symbol: 'eq', display: this.equalTo },
-                  { symbol: 'ne', display: this.notEqualTo }   
-            ],
-            "System.String": [
-                { symbol: 'sw', display: this.startingWith },
-                { symbol: 'like', display: this.contains },
-                { symbol: 'eq', display: this.equalTo },
-                { symbol: 'ne', display: this.notEqualTo },
-                { symbol: 'le', display: this.equalOrLessThan },
-                { symbol: 'ge', display: this.equalOrGreaterThan },
-                { symbol: 'lt', display: this.lessThan },
-                { symbol: 'gt', display: this.greaterThan }
-            ],
-            "default": [ //numericoperators  System.Decimal, System.Int32
-                {symbol: "eq", "display": this.equalTo },
-                { symbol: "ne", "display": this.notEqualTo },
-                { symbol: "le", "display": this.equalOrLessThan },
-                { symbol: "ge", "display": this.equalOrGreaterThan },
-                { symbol: "lt", "display": this.lessThan },
-                { symbol: "gt", "display": this.greaterThan }
-            ]
-        },
-        index: 0,
-        selectedFieldIndex: 0,
-        selectedFieldType: '',
         hideimgurl: 'images/icons/Find_Remove_16x16.gif',
         addimgurl: 'images/icons/Find_Add_16x16.gif',
         hideimgalttext: 'Remove Condition',
         addimgalttext: 'Add Condition',
-        addrowlabel: 'Lookup by:',
-        hiderowlabel: 'And:',
-        srchBtnCaption: 'Search',
         errorOperatorRequiresValue: 'The operator requires a value',
-        startingWith: 'Starting With',
-        contains: 'Contains',
+
         equalTo: 'Equal to',
         notEqualTo: 'Not Equal to',
+        startingWith: 'Starting With',
+        contains: 'Contains',
         equalOrLessThan: 'Equal or Less than',
         equalOrGreaterThan: 'Equal or Greater than',
         lessThan: 'Less than',
         greaterThan: 'Greater than',
-        slcId: options.id
-    };
-}
+        //end localize
 
-//Sage.UI.
-ConditionManager.prototype.addLookupCondition = function () {
-    this.setupTemplateObj.index++;
-    divContainer = dojo.byId([this._options.id, '-Condition-container'].join(''));
-    newRow = this.lookupTpl.apply(this.setupTemplateObj);
-    dojo.place(newRow, divContainer)
-}
-
-//Sage.UI.
-ConditionManager.prototype.removeLookupCondition = function (idx) {
-    dojo.html.set(dojo.byId(["lookupCondition_", idx].join('')), '');
-}
-
-//Sage.UI.
-ConditionManager.prototype.operatorChange = function (index) {
-    //Find the selected value of the condition.
-    var fields = dojo.byId(['fieldnames_', index].join(''));
-    //Find the field type of the selected value and make sure it is different from the current field type.
-    for (var i = 0; i < this.fields.length; i++) {
-        if (this.fields[i].fieldname === fields.value) {
-            if (this.fields[i].propertyType !== this.setupTemplateObj.selectedFieldType) {
-                //Reload the operators with ones that match the newly selected value.
-                this.reloadOperators(fields.selectedIndex, index)
+        operators: null,
+        fields: null,
+        fieldsHash: null,
+        fieldNameProperty: 'fieldname',
+        fieldDisplayNameProperty: 'displayname',
+        fieldTypeProperty: 'propertyType',
+        fieldPickListNameProperty: 'pickListName',
+        conditionWidgets: null,
+        widgetConnects: null,
+        widgetTemplate: new Simplate([
+            '<div id="{%= $.id %}" class="lookup-condition-manager">',
+                '<table cellspacing="0" cellpadding="3">',
+                    '<tr><td><div dojoAttachPoint="conditions"></div></td></tr>', 
+                '</table>',
+                '<div class="lookup-condition-actions">',
+                '<button id="{%= $.id %}-Search" data-dojo-type="dijit.form.Button" type="button" dojoAttachPoint="searchButton" dojoAttachEvent="onClick:_doSearch">{%= $.srchBtnCaption %}</button>',
+                '</div>',
+            '</div>']),
+        isSettingValues: false,
+        id: '',
+        constructor: function() {
+            this.conditionWidgets = {};
+            this.operators = {};
+            this.fieldsHash = {};
+            this.fields = [];
+            this.widgetConnects = [];
+        },
+        destroy: function() {
+            var wid,
+                i;
+            
+            for (i = 0; i < this.widgetConnects.length; i++) {
+                dojo.disconnect(this.widgetConnects[i]);
             }
-        }
-    }
-}
-ConditionManager.prototype.reloadOperators = function (selectedFieldIndex, rowIndex) {
-    this.setupTemplateObj.selectedFieldIndex = selectedFieldIndex;
-    this.setupTemplateObj.index = rowIndex;
-    newRow = this.lookupTpl.apply(this.setupTemplateObj);
-    //Replace old operators with new ones at the same index point.
-    dojo.place(newRow, ['lookupCondition_', rowIndex].join(''), 'replace');
-}
-
-//Sage.UI.
-    ConditionManager.prototype.reloadConditions = function () {
-    this.conditions = [];
-    var filterRows = dojo.query('.lookup-condition-row');
-    for (var i = 0; i < filterRows.length; i++) {
-        var row = filterRows[i];
-        var fieldname = dojo.query('.lookup-fieldnames-list', filterRows[i]);
-        var operator = dojo.query('.lookup-operators-list', filterRows[i]);
-        var val = dojo.query('.lookup-value', filterRows[i]);
-        if (fieldname[0]) {
-            if ((fieldname[0].value) && (operator[0].value)) {  
-                if ((!val[0].value) && ((operator[0].value != 'like') && (operator[0].value != 'sw'))) {
-                    return false; //must have a value for numeric comparisons
+            
+            for (wid in this.conditionWidgets) {
+                if(this.conditionWidgets.hasOwnProperty(wid)) {
+                    if (this.conditionWidgets[wid].destroy) {
+                        this.conditionWidgets[wid].destroy();
+                    }
                 }
-                var condition = {
-                    fieldname: fieldname[0].value,
-                    operator: operator[0].value,
-                    val: val[0].value.replace(/%/g, '')
-                }
-                //Must manipulate conditions to match Sdata requirements
-                if (operator[0].value === 'like') {
-                    condition.val = ['%', val[0].value, '%'].join('');
-                }
-                else if (operator[0].value === 'sw') {
-                    condition.operator = 'like'
-                    condition.val = [val[0].value, '%'].join('');
-                } 
-                this.conditions.push(condition);
-                this.operatorChange(0);
             }
+            
+            this.inherited(arguments);
+        },
+        postMixInProperties: function () {
+            dojo.mixin(this, nls);
+            this.inherited(arguments);
+        },
+        getOperatorsByField: function(field) {
+            var boolOptions,
+                stringLikeOptions,
+                basicOptions,
+                picklistControlOptions,
+                operators;
+                
+            //build this after localization has been applied:
+            //these are in the format of: dijit.form.__SelectOption 
+            boolOptions = [
+                { value: 'eq', label: this.equalTo, selected: false, disabled: false },
+                { value: 'ne', label: this.notEqualTo, selected: false, diabled: false }   
+            ];
+
+            stringLikeOptions = [
+                { value: 'sw', label: this.startingWith, selected: false, disabled: false },
+                { value: 'like', label: this.contains, selected: false, diabled: false },
+                { value: 'eq', label: this.equalTo, selected: false, diabled: false },
+                { value: 'ne', label: this.notEqualTo, selected: false, diabled: false },
+                { value: 'le', label: this.equalOrLessThan, selected: false, diabled: false },
+                { value: 'ge', label: this.equalOrGreaterThan, selected: false, diabled: false },
+                { value: 'lt', label: this.lessThan, selected: false, diabled: false },
+                { value: 'gt', label: this.greaterThan, selected: false, diabled: false }
+            ];
+
+            basicOptions = [
+                { value: 'eq', label: this.equalTo, selected: false, diabled: false },
+                { value: 'ne', label: this.notEqualTo, selected: false, diabled: false },
+                { value: 'le', label: this.equalOrLessThan, selected: false, diabled: false },
+                { value: 'ge', label: this.equalOrGreaterThan, selected: false, diabled: false },
+                { value: 'lt', label: this.lessThan, selected: false, diabled: false },
+                { value: 'gt', label: this.greaterThan, selected: false, diabled: false }
+            ];
+
+            picklistControlOptions = [
+                 { value: 'eq', label: this.equalTo, selected: false, diabled: false },
+                 { value: 'ne', label: this.notEqualTo, selected: false, diabled: false }
+            ];
+            
+            operators = {
+                "System.Boolean": {
+                    options: boolOptions 
+                },
+                "Boolean": {
+                    options: boolOptions 
+                },
+                "System.String": { 
+                    options: stringLikeOptions
+                },
+                "SalesLogix.PickList": {
+                    options: picklistControlOptions
+                },
+                "Sage.Entity.Interfaces.UserType": {
+                    options: basicOptions
+                },
+                "Sage.Entity.Interfaces.OwnerType": {
+                    options : basicOptions
+                },
+                "System.DateTime": {
+                    options: basicOptions
+                },
+                "DateTime": {
+                    options: basicOptions
+                },
+                "Phone": {
+                    options: stringLikeOptions
+                },
+                "User": {
+                    options: stringLikeOptions
+                },
+                "Owner": {
+                    options: stringLikeOptions
+                },
+                "System.Double": {
+                    options: basicOptions 
+                },
+                "System.Int32": {
+                    options: basicOptions 
+                },
+                "System.Int16": {
+                    options: basicOptions 
+                },
+                "System.Decimal": {
+                    options: basicOptions 
+                },
+                "Fixed": {
+                    options: basicOptions 
+                },
+                "Decimal": {
+                    options: basicOptions 
+                },
+                "Integer": {
+                    options: basicOptions 
+                },
+                "Positive Integer": {
+                    options: basicOptions 
+                },
+                "Currency": {
+                    options: basicOptions 
+                },
+                "Percent": {
+                    options: basicOptions 
+                },
+                "defaultOperators": {
+                    options: stringLikeOptions 
+                },
+                "None": {
+                    options: stringLikeOptions
+                }
+            };
+
+            if ((field.hasOwnProperty(this.fieldTypeProperty)) && (operators.hasOwnProperty(field[this.fieldTypeProperty]))) {
+                return operators[field[this.fieldTypeProperty]].options;
+            }
+            return operators.defaultOperators && operators.defaultOperators.options;
+        },
+        getConditionsAsUrlWhereString : function () {
+            //console.log('ConditionManager :: getConditionsAsUrlWhereString');
+            //manipulate conditions to match SData requirements for where URL parameter...
+            var conds = this.getConditions(),
+                condString = [],
+                condVal = null,
+                i,
+                tempCondition,
+                lhd, rhd, lhs, rhs,
+                dateFormat;
+                
+            for (i = 0; i < conds.length; i++) {
+                condVal = conds[i].val;
+                if (typeof condVal === 'string') {
+                    condVal = condVal.replace(/%/g, '');
+                }
+
+                if (condVal.constructor === Date){
+                    // Handle equal to and not equal to as a special case.
+                    // - They need to be in a range from start to end of date
+                    if (conds[i].operator === 'eq' || conds[i].operator === 'ne') {
+                        lhd = condVal;
+                        rhd = condVal;
+                        
+                        lhd.setHours(0);
+                        lhd.setMinutes(0);
+                        lhd.setSeconds(0);
+                        lhs = util.Convert.toIsoStringFromDate(lhd);
+                        
+                        rhd.setHours(23);
+                        rhd.setMinutes(59);
+                        rhd.setSeconds(59);
+                        rhs = util.Convert.toIsoStringFromDate(rhd);
+                        
+                        // eq:(somedate > lhs and somedate < rhs)
+                        // ne: (somedate < lhs or somedate > rhs)
+                        dateFormat = {
+                            field: conds[i].fieldname,
+                            leftOp: 'gt', 
+                            leftVal: lhs,
+                            rightOp: 'lt', 
+                            rightVal: rhs,
+                            join: 'and'
+                        };
+                        
+                        // Switch operators for not equal
+                        if (conds[i].operator === 'ne') {
+                            dateFormat.leftOp = 'lt';
+                            dateFormat.rightOp = 'gt';
+                            dateFormat.join = 'or';
+                        }
+                        
+                        condString.push(dojo.string.substitute("(${field} ${leftOp} '${leftVal}' ${join} ${field} ${rightOp} '${rightVal}')", dateFormat));
+                        continue;
+                    } else if (conds[i].operator === 'le' || conds[i].operator === 'gt') {
+                        /* less than/equal, greater than */
+                        condVal.setHours(23);
+                        condVal.setMinutes(59);
+                        condVal.setSeconds(59);
+                        
+                    } else if (conds[i].operator === 'ge' || conds[i].operator === 'lt') {
+                        /* greater than/equal, less than */
+                        condVal.setHours(0);
+                        condVal.setMinutes(0);
+                        condVal.setSeconds(0);
+                    }
+                    
+                    condVal = util.Convert.toIsoStringFromDate(condVal);
+                }
+
+                tempCondition = {
+                    field: conds[i].fieldname,
+                    op: conds[i].operator,
+                    val: condVal
+                };
+
+                var fld = this.getField(conds[i].fieldname);
+                if (fld && fld.propertyType === "SalesLogix.PickList") {
+                    if (typeof condVal === "object" && condVal[0]) {
+                        tempCondition.val = condVal[0];
+                    }
+                }
+                
+                if (tempCondition.op === 'like') {
+                    tempCondition.val = ['%', tempCondition.val, '%'].join('');
+                } else if (tempCondition.op === 'sw') {
+                    tempCondition.op = 'like';
+                    tempCondition.val += '%';
+                }
+
+                if (typeof tempCondition.val === 'string') {
+                    tempCondition.val = ['"', tempCondition.val.toUpperCase(), '"'].join('');// wrap string in quotes
+                    tempCondition.field = ['upper(', tempCondition.field, ')'].join('');// make search case insensitive
+                }
+                
+                condString.push([tempCondition.field, ' ', tempCondition.op, ' ', tempCondition.val].join(''));
+            }
+            
+            return condString.join(' and ');
+        },
+        getField: function (fieldName) {
+            if (this.fieldsHash && this.fieldsHash.hasOwnProperty(fieldName)) {
+                return this.fieldsHash[fieldName];
+            }
+            return false;
+        },
+        getConditionsJSON : function () {
+            var i = 0,
+                conditions = this.getConditions(),
+                condVal,
+                currentCondition;
+            for (i = 0; i < conditions.length; i++) {
+                currentCondition = conditions[i];
+                condVal = conditions[i].val;
+                if(condVal.constructor === Date) {
+                    condVal = util.Convert.toIsoStringFromDate(condVal);
+                }
+
+                conditions[i].val = condVal;
+            }
+
+            return Sys.Serialization.JavaScriptSerializer.serialize(conditions);
+        },
+        getConditions : function () {
+            var conds = [],
+                wid,
+                c;
+            
+            for (wid in this.conditionWidgets) {
+                if(this.conditionWidgets.hasOwnProperty(wid)) {
+                    if (this.conditionWidgets[wid].getCondition) {
+                        c = this.conditionWidgets[wid].getCondition();
+                        if (c) {
+                            conds.push(c);
+                        }
+                    }
+                }
+            }
+            
+            return conds;
+        },
+        resetConditions: function() {
+            var wid,
+                i;
+                
+            for (i = 0; i < this.widgetConnects.length; i++) {
+                dojo.disconnect(this.widgetConnects[i]);
+            }
+            for (wid in this.conditionWidgets) {
+                if (this.conditionWidgets.hasOwnProperty(wid)) {
+                    if (this.conditionWidgets[wid].getCondition) {
+                        this._removeCondition(this.conditionWidgets[wid]);
+                    }
+                }
+            }
+
+            this._setInitialCondition();
+        },
+        _doSearch: function() {
+            this.onDoSearch(this.getConditions());
+        },
+        _setFieldsAttr: function(fields) {
+            var i;
+            this.fields = fields;
+            this.fieldsHash = {};
+            for (i = 0; i < fields.length; i++) {
+                this.fieldsHash[fields[i][this.fieldNameProperty]] = fields[i];
+            }
+            this.resetConditions();
+        },
+        setFirstConditionValue: function(field, op, value) {
+            var prop,
+                wid;
+            for(prop in this.conditionWidgets) {
+                if(this.conditionWidgets.hasOwnProperty(prop)) {
+                    wid = this.conditionWidgets[prop];
+                    if(wid.isFirstCondition) {
+                        wid.defaultOperator = op;
+                        wid.defaultField = field;
+                        wid.defaultValue = value;
+                        wid.refreshDefaults();
+                    }
+                }
+            }
+        },
+        addCondition: function(field, op, value, visible) {
+            var count = this._conditionCount(),
+                newWid = new SearchConditionWidget({
+                    conditionManager: this,
+                    label: this.hiderowlabel,
+                    isFirstCondition: false,
+                    defaultField: field,
+                    defaultOperator: op,
+                    defaultValue: value,
+                    id: this.id + '-SearchCondition' + count,
+                    visible: visible
+                });
+
+            this.widgetConnects.push(dojo.connect(newWid, 'onRemoveLookupCondition', this, '_removeCondition'));
+            
+            dojo.place(newWid.domNode, this.conditions);
+            newWid.startup();
+            this.conditionWidgets[newWid.id] = newWid;
+        },
+        _setInitialCondition: function() {
+            var self = this,
+                wid = new SearchConditionWidget({
+                    conditionManager: self,
+                    label: self.addrowlabel,
+                    isFirstCondition: true,
+                    id: self.id + '-SearchCondition0',
+                    visible: true
+                });
+                
+            this.widgetConnects.push(dojo.connect(wid, 'onAddLookupCondition', self, '_addCondition'));
+            self.conditionWidgets[wid.id] = wid;
+            dojo.place(wid.domNode, self.conditions);
+            wid.startup();
+        },
+        _addCondition: function() {
+            var count = this._conditionCount(),
+                newWid = new SearchConditionWidget({
+                    conditionManager: this,
+                    label: this.hiderowlabel,
+                    isFirstCondition: false,
+                    id: this.id + '-SearchCondition' + count,
+                    visible: true
+                });
+                
+            this.widgetConnects.push(dojo.connect(newWid, 'onRemoveLookupCondition', this, '_removeCondition'));
+            this.conditionWidgets[newWid.id] = newWid;
+            dojo.place(newWid.domNode, this.conditions);
+            newWid.startup();
+        },
+        _removeCondition: function(conditionWidget) {
+            var id = conditionWidget.id;
+            conditionWidget.destroyRecursive();
+            delete(this.conditionWidgets[id]);
+        },
+        _conditionCount: function() {
+            var count = 0,
+                wid;
+            for (wid in this.conditionWidgets) {
+                if(this.conditionWidgets.hasOwnProperty(wid)) {
+                    count += 1;
+                }
+            }
+
+            return count;
+        },
+        onDoSearch: function(args) {
         }
-    }
-    return true;
-}
+    });
 
-//Sage.UI.
-ConditionManager.prototype.getConditionsString = function () {
-    var conditionsString = [];
-    if (typeof this.conditions === 'string') {
-        return this.conditions;
-    } else {
-        for (i = 0; i < this.conditions.length; i++) {
-            conditionsString.push(this.conditions[i].fieldname + ' ' + this.conditions[i].operator + ' ' + '"' + this.conditions[i].val + '"');
-        }
-    }
-    return conditionsString.join(' and ');
-}
-
-ConditionManager.prototype.getConditionsJSON = function () {
-    return Sys.Serialization.JavaScriptSerializer.serialize(this.conditions);
-}
-
-//Sage.UI.
-ConditionManager.prototype.getConditions = function () {
-    return this.conditions;
-}
-
+    return widget;
+});

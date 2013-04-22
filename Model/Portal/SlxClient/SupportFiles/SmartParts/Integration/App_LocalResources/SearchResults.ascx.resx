@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="btnBack.Caption" xml:space="preserve">
     <value>&lt; Back</value>
@@ -174,37 +174,10 @@
   <data name="MergeRecordsDialog_NoDifferences.Caption" xml:space="preserve">
     <value>Link to Accounting - Merge Data - No Differences</value>
   </data>
-  <data name="refineSearch_DescriptionText" xml:space="preserve">
-    <value>The following criteria was used in the previous search. Modify the criteria for a new search. Click OK to begin searching.</value>
-  </data>
-  <data name="refineSearch_DialogCaption" xml:space="preserve">
-    <value>Link to Accounting</value>
-  </data>
-  <data name="refineSearch_HeaderText" xml:space="preserve">
-    <value>Search for Matches in </value>
-  </data>
-  <data name="refineSearch_OperatorValue" xml:space="preserve">
-    <value>Operator</value>
-  </data>
-  <data name="refineSearch_PropertyValue" xml:space="preserve">
-    <value>Property</value>
-  </data>
-  <data name="refineSearch_SearchValue" xml:space="preserve">
-    <value>Search Value</value>
-  </data>
-  <data name="refineSearch_error_saveConfig" xml:space="preserve">
-    <value>An error occured attempting to save the search criteria: {0}</value>
-  </data>
-  <data name="refineSearch_CancelButton" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="refineSearch_OkButton" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="lblLoading.Caption" xml:space="preserve">
-    <value>Searching for results...</value>
-  </data>
   <data name="Error_TradingAccount_Linked" xml:space="preserve">
     <value>The select trading account is already linked to SalesLogix account '{0}'. You may not link a SalesLogix account to the same trading account.</value>
+  </data>
+  <data name="Error_SDataRequest" xml:space="preserve">
+    <value>Error retrieving matching entities through SData. Please see you system administrator for more information.</value>
   </data>
 </root>

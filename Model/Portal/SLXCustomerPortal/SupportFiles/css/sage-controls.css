@@ -89,14 +89,20 @@
 	border:1px solid #7E9CB8;
 	color:#000000;
 	cursor:pointer;
-	font-family:Tahoma,MS San Serif;
-	font-size:85%;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:12px;
 	font-weight:normal;
 	margin: 0;
 	padding: 0;
 	width: auto;	
 }
 
+/*  Sage.UI.Controls.Select styles................................................................................... */
+
+.select-control 
+{
+	
+}
 
 /*   SlxGridView styles..............................................................................................  */
 .slxgridrowcollapse 
@@ -104,7 +110,7 @@
 	width : 20px;
 	min-width : 20px;
 	cursor : pointer;
-	font-size : 200%;
+	font-size : 26px;
 }
 
 .slxgridrowexpand 
@@ -112,7 +118,7 @@
 	width : 20px;
 	min-width : 20px;
 	cursor : pointer;
-	font-size : 200%;
+	font-size : 26px;
 }
 table.datagrid th.slxgridrowexpand
 {	
@@ -128,16 +134,14 @@ table.datagrid th.slxgridrowcollapse
 	width : 20px;
 	min-width : 20px;
 	cursor : pointer;
-	font-size : 200%;
+	font-size : 26px;
 	background-image: none;
 }
 
 .datagrid TD DIV.cellcontents
 {
-overflow : hidden;
-/* height : 16px; */
-height: 17px;
-_height: 18px; /* IE6 */
+	overflow : hidden;
+	/*height: 17px;*/
 }
 
 
@@ -174,28 +178,53 @@ _height: 18px; /* IE6 */
 }    
 .SummaryTitle
 {
-    font-size: 120%;
+    font-size: 15px;
     font-weight: bold;
-    color: Blue;
+    color: #000;
     padding-bottom: 4px;
+    text-align: left;
+}
+.SummaryIcon
+{
+  vertical-align:middle;
+}
+.SummaryTitleButton
+{
+    font-size: 12px;
+    font-weight: normal;   
 }
 .SummaryCaption
 {
-    color: #999999;
+    color: #4d4d4d;
     width: 120px;
     text-align: right;
-    padding: 0px 0px 3px 0px;
 }
+
+.SummaryTextArea
+{
+    font: inherit;
+    min-width: 15em;
+    width: 800px;
+}
+
 .DataItem 
 {
     display : inline;
     padding-left : 4px;
 }
-.DataColumn 
+
+.DataColumn > ul
 {
-    padding-right : 30px;
-    vertical-align : top;
+	padding-left: 5px;
 }
+
+.DataItem,
+.DataColumn,
+.SummaryCaption
+{
+    vertical-align: text-top;
+}
+
 .SummaryCol1 
 {
      width : 180px;
@@ -220,10 +249,6 @@ _height: 18px; /* IE6 */
     text-decoration:underline;
     cursor : pointer;
     display : inline;
-}
-.x-paging-info {
-    left:4px;
-    right: auto;
 }
 .SummaryFooter
 {
@@ -329,7 +354,7 @@ _height: 18px; /* IE6 */
 }
 .edit-filters-dialog h1
 {
-	font-size: 1em;
+	font-size: 13px;
 	margin: 0 0 1em 0;
 	font-weight: bold;
 }
@@ -355,7 +380,7 @@ _height: 18px; /* IE6 */
 }
 .LookupFilter, .RangeFilter, .DistinctFilter
 {
-	font-size: .9em;
+	font-size: 12px;
 	margin-bottom: .5em;
 }
 .LookupFilter > DIV, .RangeFilter > DIV, .DistinctFilter > DIV

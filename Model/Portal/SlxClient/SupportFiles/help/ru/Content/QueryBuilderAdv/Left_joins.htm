@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Left joins</title>
+        <link href="../Resources/TableStyles/TableStyle.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilderAdv/Left_joins.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor656"></a>Левая Связь</h1>
+        <p>Левое объединение является типом по умолчанию для глобальных связей. Используйте Левую связь для выбора всех записей Родительской Таблицы, удовлетворяющих заданному условию, и только тех записей Дочерней Таблицы, у которых значения связанных полей равны.</p>
+        <p>Пример: Вам нужно получить список всех сделок со связанными делами, или без них. Если со сделкой связано дело, то необходимо его выбрать. Записи показанные в столбце Результаты Связи будут возвращены этим запросом. Конкретная сделка, связанная с делом, показана справа от дела.</p>
+        <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Источник</th>
+                    <th class="HeadE-Column1-Header1" colspan="2">Отобранные</th>
+                    <th class="HeadD-Column1-Header1">Результаты Связи</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Таблица СДЕЛКИ</td>
+                    <td class="BodyE-Column1-Body1" colspan="2">Таблица ДЕЛА</td>
+                    <td class="BodyD-Column1-Body1">&#160;</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Сделка1</td>
+                    <td class="BodyE-Column1-Body1">Дело 1</td>
+                    <td class="BodyE-Column1-Body1">&#160;</td>
+                    <td class="BodyD-Column1-Body1" rowspan="7">
+                        <p rowspan="7">Сделка1 </p>
+                        <p rowspan="7">Сделка2</p>
+                        <p rowspan="7">Сделка3</p>
+                        <p rowspan="7">Сделка4 </p>
+                        <p rowspan="7">Сделка5 </p>
+                        <p rowspan="7">Дело 3 </p>
+                        <p rowspan="7">Дело 4 </p>
+                        <p rowspan="7">Дело 6 </p>
+                        <p rowspan="7">Дело 7</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Сделка2</td>
+                    <td class="BodyE-Column1-Body1">Дело 2</td>
+                    <td class="BodyE-Column1-Body1">&#160;</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Сделка3</td>
+                    <td class="BodyE-Column1-Body1">Дело 3</td>
+                    <td class="BodyE-Column1-Body1">(Сделка1)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Сделка4</td>
+                    <td class="BodyE-Column1-Body1">Дело 4</td>
+                    <td class="BodyE-Column1-Body1">(Сделка4)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Сделка5</td>
+                    <td class="BodyE-Column1-Body1">Дело 5</td>
+                    <td class="BodyE-Column1-Body1">&#160;</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">&#160;</td>
+                    <td class="BodyE-Column1-Body1">Дело 6</td>
+                    <td class="BodyE-Column1-Body1">(Сделка5)</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">&#160;</td>
+                    <td class="BodyB-Column1-Body1">Дело 7</td>
+                    <td class="BodyB-Column1-Body1">(Сделка1)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="RelatedTopics">См. также</p>
+        <p><a href="Join_Example.htm">Пример Связи</a>
+        </p>
+        <p><a href="Inner_joins.htm">Внутренние Связи</a>
+        </p>
+        <p><a href="Right_joins.htm">Правые Связи</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -99,7 +99,7 @@
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
       <SystemDataType guid="3ca925e1-4b76-4621-a39c-a0d4cb7327d5">
-        <GuidDataType />
+        <GuidDataType storage="String" />
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="e515a227-998d-4bcd-9252-d74b386437bf" lastModifiedUtc="2010-01-27T21:51:49.8233106Z" name="AppId" audited="false" columnName="APPID" maxLength="12" precision="0" scale="0" ordinal="10" isReadOnly="false">

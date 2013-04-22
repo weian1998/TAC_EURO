@@ -1,79 +1,85 @@
 <script language="javascript" type="text/javascript">
-
-    function ResetResponseFilters()
-    {
-        var control = document.getElementById("@chkShowContacts");
+            
+    function ResetFilters()
+    {    
+        var control = dojo.byId("@chkShowContacts");
         if (control != null)
         {
             control.checked = false;
         }
-        control = document.getElementById("@chkShowLeads");
+        control = dojo.byId("@chkShowLeads");
         if (control != null)
         {
             control.checked = false;
         }
-        control = document.getElementById("@chkLeadSource");
+        control = dojo.byId("@chkLeadSource");
         if (control != null)
         {
             control.checked = false;
         }
-        control = document.getElementById("@lbxLeadSource");
+        control = dojo.byId("@lbxLeadSource");
         if (control != null)
         {
             control.options[0].selected = true;
         }
-        control = document.getElementById("@chkMethod");
+        control = dojo.byId("@chkMethod");
         if (control != null)
         {
             control.checked = false;
         }
-        control = document.getElementById("@lbxMethod");
+        control = dojo.byId("@lbxMethod");
         if (control != null)
         {
             control.options[0].selected = true;
         }
-        control = document.getElementById("@chkStage");
+        control = dojo.byId("@chkStage");
         if (control != null)
         {
             control.checked = false;
         }
-        control = document.getElementById("@lbxStage");
+        control = dojo.byId("@lbxStage");
         if (control != null)
         {
             control.options[0].selected = true;
         }
-        control = document.getElementById("@chkName");
+        control = dojo.byId("@chkName");
         if (control != null)
         {
             control.checked = false;
         }
-        control = document.getElementById("@txtName");
+        control = dojo.byId("@txtName");
         if (control != null)
         {
             control.value = "";
-        }        
+        }
     }
-    
-    function tr_ShowHideFilters()
+    function ct_SetStyleDisplay(controlId, displayType)
     {
-        var tr_txtShowFilters = document.getElementById("@tr_txtShowFilterId");
-        var tr_filterDiv = document.getElementById("@tr_filterDivId");
-        var tr_lnkFilters = document.getElementById("@tr_lnkFiltersId");
-        if (tr_txtShowFilters != null)
+        var control = dojo.byId(controlId)
+        if (control != null)
         {
-            if (tr_txtShowFilters.value == "true")
+            control.style.display = displayType;
+        }
+    }
+    function ShowHideFilters()
+    {
+        var txtShowFilters = dojo.byId("@tr_txtShowFilterId");
+        var lnkFilters = dojo.byId("@tr_lnkFiltersId");
+        if (txtShowFilters != null)
+        {
+            if (txtShowFilters.value == "true")
             {
-                tr_txtShowFilters.value = "false";
-                tr_filterDiv.style.display = "none";
-                tr_lnkFilters.innerText = "@tr_lnkShowFilters";
+                txtShowFilters.value = "false";
+                ct_SetStyleDisplay("@tr_filterDivId", "none");
+                lnkFilters.innerText = "@tr_lnkShowFilters";            
             }
             else
             {
-                tr_txtShowFilters.value = "true";
-                tr_filterDiv.style.display = "inline";
-                tr_lnkFilters.innerText = "@tr_lnkHideFilters";
+                txtShowFilters.value = "true";
+                ct_SetStyleDisplay("@tr_filterDivId", "inline");
+                lnkFilters.innerText = "@tr_lnkHideFilters";
             }
         }
     }
-
+        
 </script>

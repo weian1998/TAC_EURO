@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="AddEditAddress.ascx.cs" Inherits="SmartParts_Address_AddEditAddress" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeFile="AddEditAddress.ascx.cs" Inherits="SmartParts_Address_AddEditAddress" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.PickList" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.DependencyLookup" TagPrefix="SalesLogix" %>
@@ -18,136 +18,124 @@
     <asp:HiddenField runat="server" ID="Mode" />
 </div>
 
-<table id="tblTest" border="0" cellpadding="1" cellspacing="2" class="formtable">
-  <col width="25%" />
-  <col width="75%" />
-  <tr>
-      <td>  
-          <span class="lbl">
+<table id="tblTest" border="0" cellpadding="1" cellspacing="1" style="width:100%;height:100%;padding-right:10px" >
+    <tr>
+        <td>
             <asp:Label ID="lblDescription" AssociatedControlID="pklDecription" runat="server" Text="Description:" meta:resourcekey="lblDecription"></asp:Label>
-          </span></td><td>
-          <span class="textcontrol">
-            <SalesLogix:PickListControl runat="server" ID="pklDecription" PickListId="kSYST0000014" PickListName="Address Description (Account)" AutoPostBack="false" NoneEditable="false" mustExistInlist="false" />
-          </span> 
-     </td>
-  </tr>
-  <tr>   
-     <td>  
-        <span class="lblright">
-           <asp:Label ID="lblIsPrimary" AssociatedControlID="cbxIsPrimary" runat="server" Text="Is Primary" meta:resourcekey="lblPrimary"></asp:Label>
-        </span>
-        </td><td>
-        <span >
-           <asp:CheckBox runat="server" ID="cbxIsPrimary" Text=""  />
-        </span>         
-      </td>
-  </tr>
-  <tr>
-      <td>        
-        <span class="lblright">
-        <asp:Label ID="lblIsShipping" AssociatedControlID="cbxIsShipping" runat="server" Text="Is Shipping" meta:resourcekey="lblShipping"></asp:Label>
-        </span></td><td>
-         <span >
-           <asp:CheckBox runat="server" ID="cbxIsShipping" Text=""  />
-        </span> 
-     </td>
+        </td>
+        <td style="width: 150px;">
+            <SalesLogix:PickListControl runat="server" ID="pklDecription"  PickListId="kSYST0000014" PickListName="Address Description (Account)" AutoPostBack="false" NoneEditable="false" mustExistInlist="false" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <asp:Label ID="Label1" AssociatedControlID="cbxPrimaryAddr" runat="server" Text="Primary" meta:resourcekey="lblPrimaryAddr"></asp:Label>
+        </td>
+            <td style="width: 150px;">
+                <asp:CheckBox runat="server" ID="cbxPrimaryAddr" Text="" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <asp:Label ID="lblIsPrimary" AssociatedControlID="cbxIsPrimary" runat="server" Text="Primary Billing" meta:resourcekey="lblPrimary"></asp:Label>
+        </td>
+        <td style="width: 150px;">
+            <asp:CheckBox runat="server" ID="cbxIsPrimary" Text="" />
+        </td>
    </tr>
-   <tr>  
-     <td>  
-         <span class="lbl">
-           <asp:Label ID="lblAddressType" AssociatedControlID="txtAddressType" runat="server" Text="Address Type:" meta:resourcekey="lblAddressType"></asp:Label>
-         </span></td><td>
-         <span class="textcontrol">
-           <asp:DropDownList runat="server" ID="txtAddressType" MaxLength="32"  />
-         </span>       
-      </td>
-   </tr>
-   <tr>  
-     <td>  
-         <span class="lbl">
-           <asp:Label ID="lblAddress1" AssociatedControlID="txtAddress1" runat="server" Text="Address1:" meta:resourcekey="lblAddress1"></asp:Label>
-         </span></td><td>
-         <span class="textcontrol">
-           <asp:TextBox runat="server" ID="txtAddress1" MaxLength="64"  />
-         </span>       
-      </td>
-   </tr>
-   <tr>   
-      <td>  
-         <span class="lbl">
-           <asp:Label ID="lblAddress2"  AssociatedControlID="txtAddress2" runat="server" Text="Address2:" meta:resourcekey="lblAddress2"></asp:Label>
-         </span></td><td>
-         <span class="textcontrol">
-           <asp:TextBox runat="server" ID="txtAddress2" MaxLength="64"  />
-         </span>       
-      </td>
-   </tr>
-   <tr>  
-      <td>  
-         <span class="lbl">
-           <asp:Label ID="lblAddress3"  AssociatedControlID="txtAddress3" runat="server" Text="Address3:" meta:resourcekey="lblAddress3"></asp:Label>
-         </span></td><td>
-         <span class="textcontrol">
-           <asp:TextBox runat="server" ID="txtAddress3" MaxLength="64"  />
-         </span>       
-      </td>
-   </tr>
-   <tr>     
-      <td>  
-          <span class="lbl">
+   <tr>
+       <td>
+           <asp:Label ID="lblIsShipping" AssociatedControlID="cbxIsShipping" runat="server" Text="Primary Shipping" meta:resourcekey="lblShipping"></asp:Label>
+       </td>
+       <td style="width: 150px;">
+           <asp:CheckBox runat="server" ID="cbxIsShipping" Text="" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <asp:Label ID="lblAddressType" AssociatedControlID="pklAddressType" runat="server" Text="Address Type:" meta:resourcekey="lblAddressType"></asp:Label>
+        </td>
+        <td style="width: 150px;">
+            <SalesLogix:PickListControl runat="server" ID="pklAddressType" style="width: 100%" PickListId="kDEMOA0000D5" PickListName="Address Type" AutoPostBack="false" NoneEditable="false" mustExistInlist="true"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <asp:Label ID="lblAddress1" AssociatedControlID="txtAddress1" runat="server" Text="Address1:" meta:resourcekey="lblAddress1"></asp:Label>
+        </td>
+        <td style="width: 150px;">
+            <asp:TextBox runat="server" ID="txtAddress1" style="width: 100%" MaxLength="64" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <asp:Label ID="lblAddress2"  AssociatedControlID="txtAddress2" runat="server" Text="Address2:" meta:resourcekey="lblAddress2"></asp:Label>
+        </td>
+        <td style="width: 150px;">
+            <asp:TextBox runat="server" ID="txtAddress2" style="width: 100%" MaxLength="64" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <asp:Label ID="lblAddress3"  AssociatedControlID="txtAddress3" runat="server" Text="Address3:" meta:resourcekey="lblAddress3"></asp:Label>
+        </td>
+        <td style="width: 150px;">
+            <asp:TextBox runat="server" ID="txtAddress3" style="width: 100%" MaxLength="64" />
+        </td>
+    </tr>
+    <tr>
+        <td>
             <asp:Label ID="lblCity" AssociatedControlID="pklCity" runat="server" Text="City:" meta:resourcekey="lblCity"></asp:Label>
-          </span></td><td>
-          <span class="textcontrol">
-            <SalesLogix:PickListControl runat="server" ID="pklCity" PickListId="kSYST0000384" PickListName="City" AutoPostBack="false" NoneEditable="false" mustExistInlist="false"/>
-          </span> 
-     </td>
-   </tr>
-   <tr>     
-     <td>  
-          <span class="lbl">
+        </td>
+        <td style="width: 150px;">
+            <SalesLogix:PickListControl runat="server" ID="pklCity" style="width: 100%" PickListId="kSYST0000384" PickListName="City"
+                AutoPostBack="false" NoneEditable="false" mustExistInlist="false"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
             <asp:Label ID="lblState" AssociatedControlID="pklState" runat="server" Text="State:" meta:resourcekey="lblState"></asp:Label>
-          </span></td><td>
-          <span class="textcontrol">
-            <SalesLogix:PickListControl runat="server" ID="pklState" PickListId="kSYST0000390" PickListName="State" AutoPostBack="false" NoneEditable="false" mustExistInlist="false"/>
-          </span> 
-     </td>
-   </tr>
-   <tr>     
-     <td>  
-         <span class="lbl">
-           <asp:Label ID="lblPostalCode"  AssociatedControlID="txtPostalCode" runat="server" Text="PostalCode:" meta:resourcekey="lblPostalCode"></asp:Label>
-         </span></td><td>
-         <span class="textcontrol">
-           <asp:TextBox runat="server" ID="txtPostalCode" MaxLength="64"  />
-         </span>       
-      </td>
+        </td>
+        <td style="width: 150px;">
+            <SalesLogix:PickListControl runat="server" ID="pklState" style="width: 100%" PickListId="kSYST0000390" PickListName="State"
+                AutoPostBack="false" NoneEditable="false" mustExistInlist="false"/>
+        </td>
     </tr>
-    <tr>    
-      <td>  
-          <span class="lbl">
+    <tr>
+        <td>
+            <asp:Label ID="lblPostalCode"  AssociatedControlID="txtPostalCode" runat="server" Text="PostalCode:" meta:resourcekey="lblPostalCode"></asp:Label>
+        </td>
+        <td style="width: 150px; ">
+            <asp:TextBox runat="server" ID="txtPostalCode" style="width: 100%" MaxLength="24"  />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <asp:Label ID="lblCounty"  AssociatedControlID="txtCounty" runat="server" Text="<%$ resources: txtCounty.Text %>"></asp:Label>
+        </td>
+        <td style="width: 150px;">
+            <asp:TextBox runat="server" ID="txtCounty" style="width: 100%" MaxLength="32" />
+        </td>
+    </tr>
+    <tr>
+        <td>
             <asp:Label ID="lblCountry" AssociatedControlID="pklCountry" runat="server" Text="Country:" meta:resourcekey="lblCountry"></asp:Label>
-          </span></td><td>
-          <span class="textcontrol">
-            <SalesLogix:PickListControl runat="server" ID="pklCountry" PickListId="kSYST0000386" PickListName="Country" AutoPostBack="false" NoneEditable="false" mustExistInlist="false" />
-          </span> 
-      </td>
+        </td>
+        <td style="width: 150px;">
+            <SalesLogix:PickListControl runat="server" ID="pklCountry" style="width: 100%" PickListId="kSYST0000386" PickListName="Country"
+                AutoPostBack="false" NoneEditable="false" mustExistInlist="false" />
+        </td>
     </tr>
     <tr>
-      <td>  
-         <span class="lbl">
+        <td>
             <asp:Label ID="lblSalutation" AssociatedControlID="txtSalutation" runat="server" Text="Attention:" meta:resourcekey="lblSalutation"></asp:Label>
-         </span></td><td>
-         <span class="textcontrol">
-            <asp:TextBox runat="server" ID="txtSalutation" MaxLength="64" />
-         </span>       
-      </td>
-    </tr>      
-    <tr>
-        <td align="right" colspan="2">
-            <div style="padding: 10px 10px 0px 10px;">
-                <asp:Button runat="server" ID="btnSave" CssClass="slxbutton" ToolTip="btnSave" meta:resourcekey="btnSave" />  
-                <asp:Button runat="server" ID="btnCancel" CssClass="slxbutton" ToolTip="btnCancel" meta:resourcekey="btnCancel" />  
-            </div>
+        </td>
+        <td style="width: 150px; ">
+            <asp:TextBox runat="server" ID="txtSalutation" style="width: 100%" MaxLength="64" />
         </td>
     </tr>
 </table>
+<div class="button-bar alignright">
+            <asp:Button runat="server" ID="btnSave" CssClass="slxbutton" ToolTip="btnSave" meta:resourcekey="btnSave" />  
+            <asp:Button runat="server" ID="btnCancel" CssClass="slxbutton" ToolTip="btnCancel" meta:resourcekey="btnCancel" />             
+</div>

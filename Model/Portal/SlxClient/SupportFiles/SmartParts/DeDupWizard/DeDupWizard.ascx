@@ -2,105 +2,11 @@
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.Platform.WebPortal" Namespace="Sage.Platform.WebPortal.SmartParts" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.HighLevelTypes" Namespace="Sage.SalesLogix.HighLevelTypes" TagPrefix="SalesLogix" %>
-<%@ Register TagPrefix="radU" Namespace="Telerik.WebControls" Assembly="RadUpload.NET2" %>
 <%@ Register Src="~/SmartParts/DeDupWizard/StepSelectSource.ascx" TagName="StepSelectSource" TagPrefix="DeDupWizard" %>
 <%@ Register Src="~/SmartParts/DeDupWizard/StepManageDuplicates.ascx" TagName="StepManageDuplicates" TagPrefix="DeDupWizard" %>
 <%@ Register Src="~/SmartParts/DeDupWizard/StepReview.ascx" TagName="StepReview" TagPrefix="DeDupWizard" %>
 <%@ Register Src="~/SmartParts/DeDupWizard/StepProcessRequest.ascx" TagName="StepProcessRequest" TagPrefix="DeDupWizard" %>
-
-<style type="text/css">
-
-.lblStepNum
-{
-    position: relative;
-    top: 7px;
-    margin-left:12px;
-    color: #ffffff;
-    font-weight: bold; 
-    font-size: 90%;
-
-}
-
-.lblActive
-{
-	font-weight: bold;
-    color: #000000;
-    font-size: 90%;
-    white-space: nowrap;
-    display: block;
-    margin: 0 0 0 40px;
-    top: -6px;
-    position: relative;
-}
-
-.lblVisited
-{
-	font-weight:normal;
-    color: #000000;
-    font-size: 90%;
-    white-space: nowrap;
-    display: block;
-    margin: 0 0 0 40px;
-    top: -6px;
-    position: relative;
-}
-
-.lblNotVisited
-{
-    font-weight:normal;
-    color: #000000;
-    font-size: 90%;
-    white-space: nowrap;
-    display: block;
-    margin: 0 0 0 40px;
-    top: -6px;
-    position: relative;
-}
-
-div.Active
-{
-    padding-left:0px;
-    margin-top:12px;
-    padding-top: 0px;
-    text-align:left;
-    height: 32px;
-    background-image: url(images/wizard_step_active.gif);
-    background-repeat:no-repeat;
-}
-  
-div.Visited
-{
-    padding-left:0px;
-    margin-top:12px;
-    padding-top: 0px;
-    text-align:left;
-    height: 32px;
-    background: url(images/wizard_step_visited.gif);
-    background-repeat:no-repeat;
-}
-  
-div.NotVisited
-{
-    padding-left:0px;
-    margin-top:12px;
-    padding-top: 0px;
-    text-align:left;
-    height: 32px;
-    background: url(images/wizard_step_notvisited.gif);
-    background-repeat:no-repeat;
-}
-
-.wizArea
-{
-   border-style:solid; 
-   border-width:1px; 
-   border-color:#99BBE8;
-   background-color: #D9E7F8;  
-   vertical-align:top;
-   padding:10px 10px 10px 10px;
-}
-
-</style>
+<%@ Register TagPrefix="radU" Namespace="Telerik.Web.UI" Assembly="Telerik.Web.UI" %>
 
 <input id="deDupProcessId" type="hidden" runat="server" enableviewstate="true" />
 <input id="visitedStep1" type="hidden" runat="server" enableviewstate="true" />
@@ -117,49 +23,46 @@ div.NotVisited
 
 <table cellspacing="10">
     <tr>
-        <td class="wizArea">
+        <td class="wizardArea">
             <div>
                 <div ID="divStep1" runat="server" >
-                    <asp:Label ID="lblStep1" runat="server" Text="1" class="lblStepNum" ></asp:Label>
+                    <asp:Label ID="lblStep1" runat="server" Text="1" class="lblWizardStepNum" ></asp:Label>
                     <asp:Label ID="lblStep1Name"  runat="server" Text="Step1"></asp:Label>
                 </div>
                 <div ID="divStep2" runat="server" >
-                     <asp:Label ID="lblStep2" runat="server" Text="2" class="lblStepNum" ></asp:Label>
+                     <asp:Label ID="lblStep2" runat="server" Text="2" class="lblWizardStepNum" ></asp:Label>
                      <asp:Label ID="lblStep2Name"  runat="server" Text="Step2"></asp:Label>
                 </div>
                 <div ID="divStep3" runat="server" >
-                     <asp:Label ID="lblStep3" runat="server" Text="3" class="lblStepNum" ></asp:Label>
+                     <asp:Label ID="lblStep3" runat="server" Text="3" class="lblWizardStepNum" ></asp:Label>
                      <asp:Label ID="lblStep3Name"  runat="server" Text="Step3"></asp:Label>
                 </div>
                 <div ID="divStep4" runat="server" >
-                     <asp:Label ID="lblStep4" runat="server" Text="4" class="lblStepNum" ></asp:Label> 
+                     <asp:Label ID="lblStep4" runat="server" Text="4" class="lblWizardStepNum" ></asp:Label> 
                      <asp:Label ID="lblStep4Name"  runat="server" Text="Step4"></asp:Label>
                 </div>
              </div>
-               
         </td>
         <td>
         </td>
-        <td class="wizArea">
+        <td class="wizardArea">
             <asp:Wizard ID="wzdDeDup" runat="server" ActiveStepIndex="0"  BorderWidth="0" width="100%" Height="100%"
                 FinishCompleteButtonText="<%$ resources: cmdSubmit.Caption %>"
-                FinishPreviousButtonText="<%$ resources: cmdBack.Caption %>" 
+                FinishCompleteButtonStyle="slxbutton"
+                FinishPreviousButtonText="<%$ resources: cmdBack.Caption %>"
+                FinishPreviousButtonStyle="slxbutton"
                 StepPreviousButtonText="<%$ resources: cmdBack.Caption %>"
+                StepPreviousButtonStyle="slxbutton"
                 StartNextButtonText="<%$ resources: cmdNext.Caption %>" 
+                StepNextButtonStyle="slxbutton"
                 StepNextButtonText="<%$ resources: cmdNext.Caption %>" 
-                CancelButtonText="<%$ resources: cmdCancel.Caption %>"                
+                CancelButtonText="<%$ resources: cmdCancel.Caption %>"
+                CancelButtonStyle="slxbutton"
                 OnFinishButtonClick="wzdDeDup_FinishButtonClick" 
                 OnActiveStepChanged="wzdDeDup_ActiveStepChanged"
                 OnNextButtonClick="wzdDeDup_NextButtonClick" 
                 OnCancelButtonClick="wzdDeDup_CancelButtonClick"
-                OnPreviousButtonClick="wzdDeDup_PreviousButtonClick"
-                CancelButtonStyle-CssClass="slxbutton"
-                StartNextButtonStyle-CssClass="slxbutton"
-                FinishPreviousButtonStyle-CssClass="slxbutton"
-                FinishCompleteButtonStyle-CssClass="slxbutton"
-                StepNextButtonStyle-CssClass="slxbutton"
-                StepPreviousButtonStyle-CssClass="slxbutton"
-                >
+                OnPreviousButtonClick="wzdDeDup_PreviousButtonClick">
                 <SideBarTemplate>
                     <div style="display:block; width:0" >
                         <asp:datalist runat="Server" id="SideBarList">
@@ -198,11 +101,9 @@ div.NotVisited
     <tr>
        <td>
             <div style="display:none">
-               
-                <radu:radprogressarea ProgressIndicators="TotalProgressBar, TotalProgress" id="radImportProcessArea2"
-                    runat="server" Skin="Slx" SkinsPath="~/Libraries/RadControls/upload/skins">
-                </radu:radprogressarea>
-               
+                <radU:radprogressarea ProgressIndicators="TotalProgressBar, TotalProgress" id="radImportProcessArea2"
+                    runat="server" Skin="Slx" SkinsPath="~/Libraries/RadControls/upload/skins" EnableEmbeddedSkins="False">
+                </radU:radprogressarea>
             </div>
         </td>
      </tr>    

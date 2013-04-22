@@ -1,0 +1,141 @@
+<html>
+    <head>
+        <title>Sage.UI Browser Tests</title>
+        <link rel="stylesheet" type="text/css" href="../../../../../Libraries/dojo/dijit/themes/claro/claro.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../../Libraries/dojo/dojox/grid/enhanced/resources/claroEnhancedGrid.css" />
+        <script type="text/javascript" src="../../Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript">
+        require([
+            "dojo/parser",
+            "doh",
+            "dojox/grid/DataGrid",
+            "dojo/data/ItemFileWriteStore",
+            "Sage/UI/Columns/DateTime"
+        ], function (
+            parser,
+            doh,
+            DataGrid,
+            ItemFileWriteStore,
+            DateTime
+        ) {
+            var YEAR = 2012,
+                MONTH = 0,
+                DAY = 1;
+                
+            function loadGrid(id, date, layout) {
+                var data = {
+                  identifier: 'id',
+                  items: []
+                };
+                var data_list = [
+                  { col1: "normal", col2: date}
+                ];
+                var rows = 8;
+                for(var i=0, l=data_list.length; i<rows; i++){
+                  data.items.push(dojo.mixin({ id: i+1 }, data_list[i%l]));
+                }
+                var store = new ItemFileWriteStore({data: data});
+
+                /*create a new grid:*/
+                var grid = new DataGrid({
+                    id: id + '_grid',
+                    store: store,
+                    structure: layout,
+                    rowSelector: '20px'},
+                  document.createElement('div'));
+
+                /*append the new grid to the div*/
+                dojo.byId(id).appendChild(grid.domNode);
+
+                /*Call startup() to render the grid*/
+                grid.startup();
+            }
+            
+            dojo.ready(function(){
+                doh.register("Sage.UI.Columns.tests.DateTime", [
+                    function testDateOnly() {
+                        var midnight = new Date();
+                        midnight.setYear(YEAR);
+                        midnight.setMonth(MONTH);
+                        midnight.setDate(DAY);
+                        midnight.setHours(0);
+                        midnight.setMinutes(0);
+                        midnight.setSeconds(0);
+
+                        var layout = [[
+                          {
+                              'name': 'Column 1',
+                              'field': 'id',
+                              'width': '100px'
+                          },
+                          {
+                              'name': 'Column 2',
+                              'field': 'col2',
+                              'width': '100%',
+                              type: DateTime,
+                              dateOnly: true
+                          }
+                        ]];
+                        loadGrid('grid1', midnight, layout);
+                        var grid = dijit.byId('grid1_grid');
+                        var cell = grid.getCell(1);
+                        //var value = grid.store.getValue(grid.getItem(1), 'col2');
+                        //console.log(cell.format(1, value))
+                    },
+                    function testFiveSecond() {
+                        var five = new Date();
+                        five.setYear(YEAR);
+                        five.setMonth(MONTH);
+                        five.setDate(DAY);
+                        five.setHours(0);
+                        five.setMinutes(0);
+                        five.setSeconds(5);
+
+                        var layout = [[
+                          {
+                              'name': 'Column 1',
+                              'field': 'id',
+                              'width': '100px'
+                          },
+                          {
+                              'name': 'Column 2',
+                              'field': 'col2',
+                              'width': '100%',
+                              type: DateTime,
+                              useFiveSecondRuleToDetermineTimeless: true
+                          }
+                        ]];
+                        
+                        loadGrid('grid2', five, layout);
+                        var grid = dijit.byId('grid2_grid');
+                        var cell = grid.getCell(1);
+                        //var value = grid.store.getValue(grid.getItem(1), 'col2');
+                        //console.log(cell.format(1, value))
+                    }
+                ]);
+                
+                //Execute D.O.H. in this remote file.
+                doh.run();
+            });
+        });
+        </script>
+    </head>
+    <body class="claro">
+        <form>
+            <p>Midnight, dateOnly: true</p>
+            <div id="grid1" style="height: 250px; width: 400px"></div>
+            
+            <p>useFiveSecondRuleToDetermineTimeless: true</p>
+            <div id="grid2" style="height: 250px; width: 400px"></div>
+        </form>
+    </body>
+</html>

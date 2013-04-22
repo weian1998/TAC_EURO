@@ -112,90 +112,63 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="grdContactOpportunities.EmptyTableRowText" xml:space="preserve">
-    <value>No records match the selection criteria.</value>
-  </data>
-  <data name="grdContactOpportunities.cacff750-ebea-4372-bc04-70c70b9ceca3.ColumnHeading" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="grdContactOpportunities.cacff750-ebea-4372-bc04-70c70b9ceca3.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContactOpportunities.cc474762-daca-4aae-b580-d771b7fa660e.ColumnHeading" xml:space="preserve">
-    <value>Est. Close</value>
-  </data>
-  <data name="grdContactOpportunities.cc474762-daca-4aae-b580-d771b7fa660e.FormatString" xml:space="preserve">
-    <value>{0:d}</value>
-  </data>
-  <data name="grdContactOpportunities.bef53d82-587e-4a31-b55a-7fa711abd801.ColumnHeading" xml:space="preserve">
-    <value>Probability</value>
-  </data>
-  <data name="grdContactOpportunities.bef53d82-587e-4a31-b55a-7fa711abd801.FormatString" xml:space="preserve">
-    <value>{0}%</value>
-  </data>
-  <data name="grdContactOpportunities.1bbb2cb7-15c9-4ff9-90a8-8388110d3c7f.ColumnHeading" xml:space="preserve">
+  <data name="grdOpportunities.45925347-de96-4111-b652-5a49177877b9.ColumnHeading" xml:space="preserve">
     <value>Days Open</value>
   </data>
-  <data name="grdContactOpportunities.1bbb2cb7-15c9-4ff9-90a8-8388110d3c7f.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContactOpportunities.7b7f3a6f-82bb-415e-8ff7-6881d21c0eb1.ColumnHeading" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContactOpportunities.7b7f3a6f-82bb-415e-8ff7-6881d21c0eb1.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContactOpportunities.7b7f3a6f-82bb-415e-8ff7-6881d21c0eb1.ConfirmationMessage" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContactOpportunities.7b7f3a6f-82bb-415e-8ff7-6881d21c0eb1.Text" xml:space="preserve">
-    <value>Remove</value>
-  </data>
-  <data name="grdContactOpportunities.72add447-1cf0-49ae-afb7-7033adb0ff77.ColumnHeading" xml:space="preserve">
-    <value>Opportunity Name</value>
-  </data>
-  <data name="grdContactOpportunities.72add447-1cf0-49ae-afb7-7033adb0ff77.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContactOpportunities.72add447-1cf0-49ae-afb7-7033adb0ff77.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdContactOpportunities.72add447-1cf0-49ae-afb7-7033adb0ff77.DestinationFormatString" xml:space="preserve">
-    <value>~/Opportunity.aspx?entityId={0}</value>
-  </data>
-  <data name="grdContactOpportunities.13376adf-a30d-44a5-bbd8-a435d1d5757f.ColumnHeading" xml:space="preserve">
+  <data name="grdOpportunities.53dd7f36-5ffd-49f3-8020-ae4198b1ba88.ColumnHeading" xml:space="preserve">
     <value>Potential</value>
   </data>
-  <data name="lueAssociateOpportunity.ToolTip" xml:space="preserve">
-    <value>Include Opportunity</value>
+  <data name="grdOpportunities.5443d461-c088-4a41-9df4-5da1ab259b5d.ColumnHeading" xml:space="preserve">
+    <value>Probability</value>
   </data>
-  <data name="lueAssociateOpportunity.LookupProperties.AccountManager.UserName.PropertyHeader" xml:space="preserve">
-    <value>AccountManager User Name</value>
+  <data name="grdOpportunities.e3bbf2a2-4be5-40e4-8546-518711a148ba.ColumnHeading" xml:space="preserve">
+    <value>Opportunity Name</value>
   </data>
-  <data name="lueAssociateOpportunity.LookupProperties.AccountManager.UserInfo.UserName.PropertyHeader" xml:space="preserve">
-    <value>Acct Manager</value>
-  </data>
-  <data name="lueAssociateOpportunity.LookupProperties.Description.PropertyHeader" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="lueAssociateOpportunity.LookupProperties.Account.AccountName.PropertyHeader" xml:space="preserve">
-    <value>Account</value>
-  </data>
-  <data name="lueAssociateOpportunity.LookupProperties.Stage.PropertyHeader" xml:space="preserve">
-    <value>Stage</value>
-  </data>
-  <data name="lueAssociateOpportunity.LookupProperties.Status.PropertyHeader" xml:space="preserve">
+  <data name="grdOpportunities.ad462c04-ef99-4f77-8bf8-b155be122547.ColumnHeading" xml:space="preserve">
     <value>Status</value>
   </data>
-  <data name="lueAssociateOpportunity.LookupProperties.Owner.OwnerDescription.PropertyHeader" xml:space="preserve">
+  <data name="grdOpportunities.f24c7376-749d-43e0-b31e-437523eaedf3.ColumnHeading" xml:space="preserve">
+    <value>Est. Close</value>
+  </data>
+  <data name="grdOpportunities.ad3ad824-e453-4021-81ba-3c343029406d.ColumnHeading" xml:space="preserve">
+    <value>Potential</value>
+  </data>
+  <data name="lueAddOpportunity.LookupProperties..PropertyHeader" xml:space="preserve">
+    <value>Acct. Manager</value>
+  </data>
+  <data name="lueAddOpportunity.ButtonToolTip" xml:space="preserve">
+    <value>Include Opportunity</value>
+  </data>
+  <data name="lueAddOpportunity.DialogButtonText" xml:space="preserve">
+    <value>Add Selected</value>
+  </data>
+  <data name="lueAddOpportunity.LookupDialogTitle" xml:space="preserve">
+    <value>Lookup Opportunity</value>
+  </data>
+  <data name="lueAddOpportunity.LookupProperties.AccountManager.UserInfo.UserName.PropertyHeader" xml:space="preserve">
+    <value>Acct. Manager</value>
+  </data>
+  <data name="lueAddOpportunity.LookupProperties.Description.PropertyHeader" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="lueAddOpportunity.LookupProperties.Account.AccountName.PropertyHeader" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="lueAddOpportunity.LookupProperties.Stage.PropertyHeader" xml:space="preserve">
+    <value>Stage</value>
+  </data>
+  <data name="lueAddOpportunity.LookupProperties.Status.PropertyHeader" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="lueAddOpportunity.LookupProperties.Owner.OwnerDescription.PropertyHeader" xml:space="preserve">
     <value>Owner</value>
   </data>
-  <data name="lueAssociateOpportunity.ButtonToolTip" xml:space="preserve">
-    <value>Include Opportunity</value>
+  <data name="grdOpportunities.Delete.ToolTip" xml:space="preserve">
+    <value>Remove</value>
   </data>
 </root>

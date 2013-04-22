@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <PortalPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="87490dc5-1499-4d76-871a-3dc829e9b074">
   <PageAlias>SpeedSearch</PageAlias>
+  <LargeImage>[Localization!Global_Images:SpeedSearch_24x24]</LargeImage>
   <TemplateUrl>Masters\base.master</TemplateUrl>
+  <InheritTemplate>false</InheritTemplate>
   <InheritsFrom>Sage.Platform.WebPortal.WebPortalPage, Sage.Platform.WebPortal</InheritsFrom>
   <Properties />
   <TemplateProperties>
@@ -9,4 +11,6 @@
   </TemplateProperties>
   <IsDefaultPage>false</IsDefaultPage>
   <ExcludedGlobalModules />
+  <AppliedSecurity />
+  <IncludeScript />
 </PortalPage>

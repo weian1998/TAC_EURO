@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <title>Sage.Workspaces.Dialog Browser Tests</title>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../Libraries/dojo/dojo/dojo.js">
+        </script>
+
+        <script type="text/javascript">
+        // Mocks
+        window.Sys = {
+            WebForms : {
+                PageRequestManager : {
+                    getInstance : function() {
+                        return this;
+                    },
+                    add_pageLoaded : function() {},
+                    add_endRequest : function() {}
+                }
+            }
+        };
+        
+        window.Sage = {
+            Utility : {
+                restrictDecimalDigit : function(val) { return val; },
+                maximizeDecimalDigit : function(val) { return val; },
+                restrictToNumberOnKeyPress : function(val) { return true; }
+            },
+            Services : {
+                getService: function() {},
+                addService: function() {}
+            },
+            namespace: function(){},
+            Data: {},
+            UI: {
+                Dialogs: {}
+            },
+            Workspaces: {
+                Dialog: function() {
+                }
+            }
+        };
+
+        dojo.provide("Sage.Workspaces.tests.Dialog");
+        dojo.require("dojo.parser");
+        dojo.require("doh.runner");
+        dojo.require("Sage.Workspaces.Dialog");
+        
+        dojo.ready(function(){
+            var DIALOG_NAME = "dialog1";
+            var createDialog = function() {
+                var dialog = dijit.byId(DIALOG_NAME);
+                if(!dialog) {
+                    var options = { clientId : "ct100_foo_bar"};
+                    dialog = new Sage.Workspaces.Dialog(options, DIALOG_NAME);
+                    dialog.startup();
+                }
+                
+                return dialog;
+            };
+            
+             doh.register("Sage.Workspaces.tests.Dialog", [
+                  function test_Dialog_loaded() {
+                    var dialog = createDialog();
+                    doh.t(dijit.byId(DIALOG_NAME));
+                  },
+                  function test_Dialog_statics() {
+                    var dialog = createDialog();
+                    // dialog.statics.__instances object should have a prop with the clientId
+                    doh.t(dialog.statics.__instances.hasOwnProperty(dialog._clientId));
+                  }
+             ]);
+             
+            //Execute D.O.H. in this remote file.
+             doh.run();
+        });
+        </script>
+    </head>
+    <body>
+        <div id="dialog1">
+			<span>content</span>
+		</div>
+    </body>
+</html>

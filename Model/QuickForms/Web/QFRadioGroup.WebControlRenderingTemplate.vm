@@ -1,5 +1,5 @@
 <fieldset class="slxlabel radio" #if(${qfcontrol.ColumnSpan} > 1 || ${qfcontrol.ControlLabelPlacement} == "top")style="width: 75%;" #else style="width: 53%;" #end>
-<asp:RadioButtonList runat="server" ID="${qfcontrol.ControlId}" RepeatDirection="${qfcontrol.RepeatDirection}" #if(${qfcontrol.IsReadOnly} || (!$qfcontrol.Enabled))Enabled="false" #end
+<asp:RadioButtonList runat="server"  onclick="dojo.publish('Sage/events/markDirty')" ID="${qfcontrol.ControlId}" RepeatDirection="${qfcontrol.RepeatDirection}" #if(${qfcontrol.IsReadOnly} || (!$qfcontrol.Enabled))Enabled="false" #end
 #if($qfcontrol.ToolTip != "") ToolTip="<%$ resources: ${qfcontrol.ControlId}.ToolTip %>" #end
 #if($qfcontrol.HotKey != "")AccessKey="$qfcontrol.HotKey" #end
 #if($qfcontrol.TabIndex > 0)TabIndex="$qfcontrol.TabIndex" #end

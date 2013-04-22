@@ -41,8 +41,7 @@ namespace Sage.BusinessRules.CodeSnippets
 			ITeam team = form.lueTeams.LookupResultValue as ITeam;
 			IDepartment department = form.CurrentEntity as IDepartment;
             department.AddToTeam(team);
-			
-			form.grdOwnerJoins.SelectedIndex = -1;
+						
 			
 			var panelRefresh = form.Services.Get<IPanelRefreshService>();
 			panelRefresh.RefreshTabWorkspace();

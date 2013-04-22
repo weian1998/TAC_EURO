@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Amministrazione|Sicurezza" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Cosa sono i Ruoli e le Azioni Protette?</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Admin_security/What_are_Roles_and_Secured_Actions.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1>Cosa sono i Ruoli e le Azioni Protette?</h1>
+        <p><a name="kanchor41"></a>Un ruolo determina a quali funzionalità del Client Web può accedere un utente. I Ruoli utilizzano azioni protette per controllare l'accesso ad elementi dell'interfaccia utente, come ad esempio pagine, menù, elementi di menù, barre degli strumenti e pulsanti. Chi controlla l'accesso agli elementi dell'interfaccia utente può controllare l'accesso ad azioni quali modifica, cancellazione o stampa. Gli elementi attualmente protetti sono tutti elementi dell'interfaccia utente che danno accesso ad aziende, contatti e opportunità.</p>
+        <p>Un elemento dell'interfaccia utente viene protetta assegnando un'azione protetta alla sua proprietà Sicurezza Applicata in Application Architect. Una volta applicata un'azione protetta a un elemento dell'interfaccia, solo gli utenti assegnati ad un ruolo che include quell'azione possono visualizzare e utilizzare l'elemento. Per esempio, Entità/Aziende/Salva è l'azione protetta assegnata alla proprietà Sicurezza Applicata del pulsante Salva nella vista Dettaglio Azienda. Nel momento in cui viene caricato durante l'esecuzione del programma, il pulsante è visualizzato se l'utente corrente ha il permesso di effettuare l'azione.</p>
+        <p>Un elemento protetto dell'interfaccia utente del Client Web limita l'accesso agli utenti finchè non viene assegnato loro un ruolo che annulla questa limitazione. Per proteggere gli elementi del Client Web tramite i ruoli è necessario aggiungere azioni protette agli elementi, poi aggiungere le azioni a un ruolo e infine assegnare gli utenti al ruolo.    <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="example;roles steps">Per saperne di più... <img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a></p>
+        <p MadCap:targetName="example" style="display: none;">Gli elementi vengono protetti in Application Architect assegnando loro un'azione oppure applicando la sicurezza. Il valore della proprietà Sicurezza Applicata è il nome dell'azione protetta. Per proteggere un elemento nell'interfaccia utente e consentire agli utenti di accedervi è necessario:</p>
+        <ol MadCap:targetName="roles steps" style="display: none;">
+            <li class="Topic-Text-Numbered" value="1">Determinare quale azione si vuole usare per proteggere l'elemento. Se necessario, è possibile creare una nuova azione protetta nel Client Web.</li>
+            <li class="Topic-Text-Numbered" value="2">Aggiungere un'azione protetta alla proprietà Sicurezza Applicata dell'elemento di Application Architect. Per maggiori informazioni, consultare l'argomento "Comprendere le Azioni Protette" della Guida di Application Architect.</li>
+            <li class="Topic-Text-Numbered" value="3">Aggiungere l'azione protetta per l'elemento a un ruolo nel Client Web.</li>
+            <li class="Topic-Text-Numbered" value="4">Assegnare utenti al ruolo.</li>
+        </ol>
+        <p class="subheading">Ruoli Predefiniti</p>
+        <p><a name="DefaultRoles"></a>Per impostazione predefinita agli utenti creati nel Client Web viene assegnato il ruolo Utente Standard. In tal modo viene consentito l'accesso a tutte le funzioni non amministrative del Client. Se un utente viene rimosso da questo ruolo non potrà avere accesso ad alcun oggetto protetto fino a quando non gli sarà assegnato un nuovo ruolo. </p>
+        <p>
+        </p>
+        <p>I ruoli predefiniti sono:</p>
+        <ul>
+            <li value="1"><span class="SLXBold">Amministratore</span> - conferisce i permessi di aggiunta, modifica ed eliminazione delle funzioni di amministrazione (ad esempio utenti, team, dipartimenti, elenchi di selezione, prodotti, pacchetti, Controlla Duplicati, Elabora Duplicati,  Controlla Cronologia Duplicati). Fornisce anche i permessi per le quick form nel Web Form Designer.</li>
+            <li value="2"><span class="SLXBold">Responsabile Qualità Dati</span> - conferisce i permessi di aggiunta, modifica ed eliminazione di Controlla Duplicati, Elabora Duplicati e Controlla Cronologia Duplicati</li>
+            <li value="3"><span class="SLXBold">Utente Standard</span> - conferisce i permessi di visualizzazione, modifica ed eliminazione di entità non amministrative del Client Web (ad esempio aziende, contatti, opportunità, pacchetti, prodotti, ordini di vendita e nominativi).<br />E' necessario assegnare il <a href="Assigning_Users_To_Standard_Role.htm" target="_self">ruolo Utente Standard</a> agli utenti standard oppure quando vengono creati nuovi utenti in Administrator.</li>
+        </ul>
+        <ul>
+            <li value="1"><span class="SLXBold">Processore Ordini e Preventivi</span> - consente l'aggiunta e la visualizzazione di contatti e aziende, nonchè l'aggiunta, la modifica e l'eliminazione degli ordini di vendita.</li>
+            <li MadCap:conditions="Output.IntegrationContract" value="2"><span class="SLXBold">Contratto di Integrazione per il Blocco del Prezzo</span> - consente di bloccare il prezzo di un prodotto in un ordine di vendita. (Solo in Integrazione Contabilità)</li>
+        </ul>
+        <table wrapperparagraphselector="P" style="margin-top: 14pt;border-spacing: 0px;margin-left: 0;margin-right: auto;caption-side: top;" cellspacing="0">
+            <col />
+            <col />
+            <tr>
+                <td style="width: 10%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="10%">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <ul>
+                        <li class="Bullets" value="1">La sicurezza nel Client di rete viene definita dall'utilizzo di sicurezza di configurazione, di funzione e di ruoli amministrativi. La sicurezza web combina tutti gli elementi della rete in un unico modello di sicurezza - il ruolo. Un utente che accede al Client Web non può utilizzare il modello di sicurezza di Rete, così come un utente che accede al Client di Rete non può utilizzare il modello di sicurezza Web.</li>
+                        <li class="Bullets" value="2">Un utente con i privilegi di amministratore può invece accedere a tutti gli elementi dell'interfaccia, ignorando qualsiasi azione protetta.</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <p class="RelatedTopics">Come fare a?</p>
+        <p><a href="Creating_a_Role.htm" target="_self">Creare un Ruolo</a>
+        </p>
+        <p><a href="CreatingASecuredAction.htm" target="_self">Creare un'Azione Protetta</a>
+        </p>
+        <p><a href="Role_Users_Tab.htm" target="_self">Assegnare un Ruolo agli Utenti</a>
+        </p>
+        <p><a href="EditingOrDeletingASecuredAction.htm" target="_self">Modificare o Eliminare un'Azione Protetta</a>
+        </p>
+        <p><a href="Assigning_Users_To_Standard_Role.htm" target="_self">Assegnare Utenti al Ruolo Utente Standard</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Comunicaci come possiamo migliorare la guida</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

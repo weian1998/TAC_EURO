@@ -49,8 +49,8 @@ else
 
 CreateUser.Text = GetLocalResourceObject("rsScheduledOn") + " " + createdate + " " + GetLocalResourceObject("rsBy") + " " + userName + " " + GetLocalResourceObject("rsOriginallyFor") + " " + startDate;
 
-Sage.SalesLogix.Security.SLXUserService slxUserService = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>() as Sage.SalesLogix.Security.SLXUserService;
-string currentUserId = slxUserService.GetUser().Id.ToString();
+var userService = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>(true);
+string currentUserId = userService.UserId;
 
 if ((currentUserId == history.UserId) || (currentUserId.ToUpper().Trim() != "ADMIN"))
 {

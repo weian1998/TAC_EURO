@@ -1,7 +1,8 @@
 using System;
-using System.Data;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Sage.Platform.ComponentModel;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.Entity.Interfaces;
 using Sage.Platform.Application.UI;
@@ -10,11 +11,15 @@ using Sage.Platform.Repository;
 using System.Text;
 using Sage.Platform;
 using Sage.Platform.Application;
-using System.Collections;
 using Sage.SalesLogix.CampaignTarget;
-using Telerik.WebControls;
+using System.Collections;
 using System.Threading;
 using Sage.SalesLogix.Client.GroupBuilder;
+using Sage.Scheduling.Client;
+using Telerik.Web.UI;
+using Enumerable = System.Linq.Enumerable;
+using IQueryable = Sage.Platform.Repository.IQueryable;
+using System.Configuration;
 
 /// <summary>
 /// Summary description for CampaignTargets
@@ -23,12 +28,12 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
 {
     #region properties
 
-    private IContextService _Context;
-    private AddManageFilterStateInfo _State;
+    private IContextService _context;
+    private AddManageFilterStateInfo _state;
     
     #endregion
 
-    #region Public definations
+    #region Public definitions
 
     /// <summary>
     /// Gets the type of the entity.
@@ -59,32 +64,28 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
             }
         }
 
-        foreach (Control c in Controls)
+        foreach (SmartPartToolsContainer cont in Enumerable.Select(Enumerable.OfType<SmartPartToolsContainer>(Controls), c => c as SmartPartToolsContainer))
         {
-            if (c is SmartPartToolsContainer)
+            switch (cont.ToolbarLocation)
             {
-                SmartPartToolsContainer cont = c as SmartPartToolsContainer;
-                switch (cont.ToolbarLocation)
-                {
-                    case SmartPartToolsLocation.Right:
-                        foreach (Control tool in cont.Controls)
-                        {
-                            tinfo.RightTools.Add(tool);
-                        }
-                        break;
-                    case SmartPartToolsLocation.Center:
-                        foreach (Control tool in cont.Controls)
-                        {
-                            tinfo.CenterTools.Add(tool);
-                        }
-                        break;
-                    case SmartPartToolsLocation.Left:
-                        foreach (Control tool in cont.Controls)
-                        {
-                            tinfo.LeftTools.Add(tool);
-                        }
-                        break;
-                }
+                case SmartPartToolsLocation.Right:
+                    foreach (Control tool in cont.Controls)
+                    {
+                        tinfo.RightTools.Add(tool);
+                    }
+                    break;
+                case SmartPartToolsLocation.Center:
+                    foreach (Control tool in cont.Controls)
+                    {
+                        tinfo.CenterTools.Add(tool);
+                    }
+                    break;
+                case SmartPartToolsLocation.Left:
+                    foreach (Control tool in cont.Controls)
+                    {
+                        tinfo.LeftTools.Add(tool);
+                    }
+                    break;
             }
         }
         return tinfo;
@@ -95,7 +96,7 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
     /// </summary>
     public class AddManageFilterStateInfo
     {
-        public DataTable targetList = new DataTable();
+        public List<ComponentView> targetList = new List<ComponentView>();
         public string targetType = String.Empty;
         public string groupName = String.Empty;
     }
@@ -121,55 +122,73 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
     /// </summary>
     private void RegisterClientScript()
     {
-        StringBuilder sb = new StringBuilder(GetLocalResourceObject("ManageTargets_ClientScript").ToString());
-        sb.Replace("@mt_chkCompanyId", chkCompany.ClientID);
-        sb.Replace("@mt_lbxCompanyId", lbxCompany.ClientID);
-        sb.Replace("@mt_txtCompanyId", txtCompany.ClientID);
-        sb.Replace("@mt_chkIndustryId", chkIndustry.ClientID);
-        sb.Replace("@mt_lbxIndustryId", lbxIndustry.ClientID);
-        sb.Replace("@mt_pklIndustryId", pklIndustry.ClientID + "_obj");
-        sb.Replace("@mt_chkSICId", chkSIC.ClientID);
-        sb.Replace("@mt_lbxSICId", lbxSIC.ClientID);
-        sb.Replace("@mt_txtSICId", txtSIC.ClientID);
-        sb.Replace("@mt_chkTitleId", chkTitle.ClientID);
-        sb.Replace("@mt_lbxTitleId", lbxTitle.ClientID);
-        sb.Replace("@mt_pklTitleId", pklTitle.ClientID + "_obj");
-        sb.Replace("@mt_chkProductsId", chkProducts.ClientID);
-        sb.Replace("@mt_lbxProductsId", lbxProducts.ClientID);
-        sb.Replace("@mt_lueProductsId", lueProducts.ClientID + "_obj");
-        sb.Replace("@mt_chkStatusId", chkStatus.ClientID);
-        sb.Replace("@mt_lbxStatusId", lbxStatus.ClientID);
-        sb.Replace("@mt_pklStatusId", pklStatus.ClientID + "_obj");
-        sb.Replace("@mt_chkSolicitId", chkSolicit.ClientID);
-        sb.Replace("@mt_chkEmailId", chkEmail.ClientID);
-        sb.Replace("@mt_chkCallId", chkCall.ClientID);
-        sb.Replace("@mt_chkMailId", chkMail.ClientID);
-        sb.Replace("@mt_chkFaxId", chkFax.ClientID);
-        sb.Replace("@mt_chkCityId", chkCity.ClientID);
-        sb.Replace("@mt_lbxCityId", lbxCity.ClientID);
-        sb.Replace("@mt_txtCityId", txtCity.ClientID);
-        sb.Replace("@mt_chkStateId", chkState.ClientID);
-        sb.Replace("@mt_lbxStateId", lbxState.ClientID);
-        sb.Replace("@mt_txtStateId", txtState.ClientID);
-        sb.Replace("@mt_chkZipId", chkZip.ClientID);
-        sb.Replace("@mt_lbxZipId", lbxZip.ClientID);
-        sb.Replace("@mt_txtZipId", txtZip.ClientID);
-        sb.Replace("@mt_chkLeadSourceId", chkLeadSource.ClientID);
-        sb.Replace("@mt_lbxLeadSourceId", lbxLeadSource.ClientID);
-        sb.Replace("@mt_lueLeadSourceId", lueLeadSource.ClientID + "_obj");
-        sb.Replace("@mt_chkImportSourceId", chkImportSource.ClientID);
-        sb.Replace("@mt_lbxImportSourceId", lbxImportSource.ClientID);
-        sb.Replace("@mt_pklImportSourceId", pklImportSource.ClientID + "_obj");
-        sb.Replace("@mt_chkCreateDateId", chkCreateDate.ClientID);
-        sb.Replace("@mt_dtpFromDateId", dtpCreateFromDate.ClientID);
-        sb.Replace("@mt_dtpToDateId", dtpCreateFromDate.ClientID);
-        sb.Replace("@mt_divLookupTargetsId", divLookupTargets.ClientID);
-        sb.Replace("@mt_divAddFromGroupId", divAddFromGroup.ClientID);
-        sb.Replace("@mt_tabLookupTargetId", tabLookupTarget.ClientID);
-        sb.Replace("@mt_tabAddFromGroupId", tabAddFromGroup.ClientID);
-        sb.Replace("@mt_txtSelectedTabId", txtSelectedTab.ClientID);
+        ScriptManager.RegisterClientScriptInclude(this, GetType(), "ManageTargets", Page.ResolveUrl("~/SmartParts/Campaign/ManageTargets.js"));
+        var script = new StringBuilder();
+        if (Page.IsPostBack)
+        {
+            script.Append("Sage.UI.Forms.ManageTargets.init(" + GetWorkSpace() + " );");
+        }
+        else
+        {
+            script.Append("dojo.ready(function () {Sage.UI.Forms.ManageTargets.init(" + GetWorkSpace() + ");");
+        }
+        ScriptManager.RegisterStartupScript(this, GetType(), "initialize_ManageTargets", script.ToString(), true);
+    }
 
-        ScriptManager.RegisterStartupScript(Page, this.GetType(), "ManageTargetScript", sb.ToString(), false);
+    private string GetWorkSpace()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append("{");
+        sb.AppendFormat("mt_chkCompanyId:'{0}',", chkCompany.ClientID);
+        sb.AppendFormat("mt_lbxCompanyId:'{0}',", lbxCompany.ClientID);
+        sb.AppendFormat("mt_txtCompanyId:'{0}',", txtCompany.ClientID);
+        sb.AppendFormat("mt_chkIndustryId:'{0}',", chkIndustry.ClientID);
+        sb.AppendFormat("mt_lbxIndustryId:'{0}',", lbxIndustry.ClientID);
+        sb.AppendFormat("mt_pklIndustryId:'{0}',", pklIndustry.ClientID + "_Text");
+        sb.AppendFormat("mt_chkSICId:'{0}',", chkSIC.ClientID);
+        sb.AppendFormat("mt_lbxSICId:'{0}',", lbxSIC.ClientID);
+        sb.AppendFormat("mt_txtSICId:'{0}',", txtSIC.ClientID);
+        sb.AppendFormat("mt_chkTitleId:'{0}',", chkTitle.ClientID);
+        sb.AppendFormat("mt_lbxTitleId:'{0}',", lbxTitle.ClientID);
+        sb.AppendFormat("mt_pklTitleId:'{0}',", pklTitle.ClientID + "_Text");
+        sb.AppendFormat("mt_chkProductsId:'{0}',", chkProducts.ClientID);
+        sb.AppendFormat("mt_lbxProductsId:'{0}',", lbxProducts.ClientID);
+        sb.AppendFormat("mt_lueProductsId:'{0}',", lueProducts.ClientID + "_obj");
+        sb.AppendFormat("mt_lueProductsPrimaryId:'{0}',", lueProducts.ClientID);
+        sb.AppendFormat("mt_chkStatusId:'{0}',", chkStatus.ClientID);
+        sb.AppendFormat("mt_lbxStatusId:'{0}',", lbxStatus.ClientID);
+        sb.AppendFormat("mt_pklStatusId:'{0}',", pklStatus.ClientID + "_Text");
+        sb.AppendFormat("mt_chkSolicitId:'{0}',", chkSolicit.ClientID);
+        sb.AppendFormat("mt_chkEmailId:'{0}',", chkEmail.ClientID);
+        sb.AppendFormat("mt_chkCallId:'{0}',", chkCall.ClientID);
+        sb.AppendFormat("mt_chkMailId:'{0}',", chkMail.ClientID);
+        sb.AppendFormat("mt_chkFaxId:'{0}',", chkFax.ClientID);
+        sb.AppendFormat("mt_chkCityId:'{0}',", chkCity.ClientID);
+        sb.AppendFormat("mt_lbxCityId:'{0}',", lbxCity.ClientID);
+        sb.AppendFormat("mt_txtCityId:'{0}',", txtCity.ClientID);
+        sb.AppendFormat("mt_chkStateId:'{0}',", chkState.ClientID);
+        sb.AppendFormat("mt_lbxStateId:'{0}',", lbxState.ClientID);
+        sb.AppendFormat("mt_txtStateId:'{0}',", txtState.ClientID);
+        sb.AppendFormat("mt_chkZipId:'{0}',", chkZip.ClientID);
+        sb.AppendFormat("mt_lbxZipId:'{0}',", lbxZip.ClientID);
+        sb.AppendFormat("mt_txtZipId:'{0}',", txtZip.ClientID);
+        sb.AppendFormat("mt_chkLeadSourceId:'{0}',", chkLeadSource.ClientID);
+        sb.AppendFormat("mt_lbxLeadSourceId:'{0}',", lbxLeadSource.ClientID);
+        sb.AppendFormat("mt_lueLeadSourceId:'{0}',", lueLeadSource.ClientID + "_obj");
+        sb.AppendFormat("mt_lueLeadSourcePrimaryId:'{0}',", lueLeadSource.ClientID);
+        sb.AppendFormat("mt_chkImportSourceId:'{0}',", chkImportSource.ClientID);
+        sb.AppendFormat("mt_lbxImportSourceId:'{0}',", lbxImportSource.ClientID);
+        sb.AppendFormat("mt_pklImportSourceId:'{0}',", pklImportSource.ClientID + "_Text");
+        sb.AppendFormat("mt_chkCreateDateId:'{0}',", chkCreateDate.ClientID);
+        sb.AppendFormat("mt_dtpFromDateId:'{0}',", dtpCreateFromDate.ClientID);
+        sb.AppendFormat("mt_dtpToDateId:'{0}',", dtpCreateToDate.ClientID);
+        sb.AppendFormat("mt_divLookupTargetsId:'{0}',", divLookupTargets.ClientID);
+        sb.AppendFormat("mt_divAddFromGroupId:'{0}',", divAddFromGroup.ClientID);
+        sb.AppendFormat("mt_tabLookupTargetId:'{0}',", tabLookupTarget.ClientID);
+        sb.AppendFormat("mt_tabAddFromGroupId:'{0}',", tabAddFromGroup.ClientID);
+        sb.AppendFormat("mt_rdgIncludeType:'{0}'", rdgIncludeType.ClientID);
+        sb.Append("}");
+        return sb.ToString();
     }
 
     /// <summary>
@@ -184,8 +203,9 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
     /// </summary>
     protected override void OnWireEventHandlers()
     {
-        cmdCancel.Click += new EventHandler(DialogService.CloseEventHappened);
-        cmdClearAll.Attributes.Add("onClick", "return false;");
+        cmdAddTargets.Click += AddTargets_OnClick;
+        cmdAddTargets.Click += DialogService.CloseEventHappened;
+        cmdCancel.Click += DialogService.CloseEventHappened;
         base.OnWireEventHandlers();
     }
 
@@ -206,7 +226,7 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
     /// </summary>
     protected override void OnClosing()
     {
-        _Context.RemoveContext("AddManageFilterStateInfo");
+        _context.RemoveContext("AddManageFilterStateInfo");
         FilterOptions options = new FilterOptions();
         SetFilterOptions(options);
         options.Save();
@@ -225,12 +245,11 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
         IList groups = GroupInfo.GetGroupList(entityName);
         if (groups != null)
         {
-            ListItem item;
             foreach (GroupInfo group in groups)
             {
                 if (!String.IsNullOrEmpty(group.DisplayName))
                 {
-                    item = new ListItem();
+                    ListItem item = new ListItem();
                     item.Text = group.DisplayName;
                     item.Value = group.GroupID;
                     listBox.Items.Add(item);
@@ -246,26 +265,26 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void Page_Init(object sender, EventArgs e)
     {
-        if (Visible)
+        if (!Visible) return;
+        _context = ApplicationContext.Current.Services.Get<IContextService>();
+        if (_context.HasContext("AddManageFilterStateInfo"))
         {
-            _Context = ApplicationContext.Current.Services.Get<IContextService>();
-            if (_Context.HasContext("AddManageFilterStateInfo"))
-            {
-                _State = (AddManageFilterStateInfo) _Context.GetContext("AddManageFilterStateInfo");
-            }
-            if (_State == null)
-            {
-                _State = new AddManageFilterStateInfo();
-                _State.targetList = GetDataGridLayout();
-            }
-
-            rdgIncludeType.Items[0].Attributes.Add("onclick", "javascript:onSearchTypeChange(0);");
-            rdgIncludeType.Items[1].Attributes.Add("onclick", "javascript:onSearchTypeChange(1);");
-            rdgIncludeType.Items[2].Attributes.Add("onclick", "javascript:onSearchTypeChange(2);");
-            rdgIncludeType.Items[3].Attributes.Add("onclick", "javascript:onSearchTypeChange(3);");
-            tabLookupTarget.Attributes.Add("onclick", "javascript:OnTabLookupTargetClick()");
-            tabAddFromGroup.Attributes.Add("onclick", "javascript:OnTabAddFromGroupClick()");
+            _state = (AddManageFilterStateInfo) _context.GetContext("AddManageFilterStateInfo");
         }
+        if (_state == null)
+        {
+            _state = new AddManageFilterStateInfo();
+        }
+
+        rdgIncludeType.Items[0].Attributes.Add("onClick", "return Sage.UI.Forms.ManageTargets.onSearchTypeChange(0);");
+        rdgIncludeType.Items[1].Attributes.Add("onClick", "return Sage.UI.Forms.ManageTargets.onSearchTypeChange(1);");
+        rdgIncludeType.Items[2].Attributes.Add("onClick", "return Sage.UI.Forms.ManageTargets.onSearchTypeChange(2);");
+        rdgIncludeType.Items[3].Attributes.Add("onClick", "return Sage.UI.Forms.ManageTargets.onSearchTypeChange(3);");
+        tabLookupTarget.Attributes.Add("onclick", "return Sage.UI.Forms.ManageTargets.onTabLookupTargetClick();");
+        tabAddFromGroup.Attributes.Add("onclick", "return Sage.UI.Forms.ManageTargets.onTabAddFromGroupClick();");
+        radProcessProgressMgr.Attributes.Add("OnClientProgressUpdating", "return Sage.UI.Forms.ManageTargets.onUpdateProgress();");
+        radInsertProcessArea.Attributes.Add("OnClientProgressUpdating", "return Sage.UI.Forms.ManageTargets.onUpdateProgress();");
+        cmdClearAll.Attributes.Add("onclick", "return Sage.UI.Forms.ManageTargets.clearFilters();");
     }
 
     /// <summary>
@@ -275,51 +294,41 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
     protected override void OnFormBound()
     {
         ClientBindingMgr.RegisterDialogCancelButton(cmdCancel);
-        if (_State != null)
+        if (_state != null)
         {
-            if (!String.IsNullOrEmpty(txtSelectedTab.Value))
-            {
-                if (Convert.ToInt16(txtSelectedTab.Value) == 1)
-                {
-                    divLookupTargets.Style.Add(HtmlTextWriterStyle.Display, "none");
-                    divAddFromGroup.Style.Add(HtmlTextWriterStyle.Display, "inline");
-                    tabLookupTarget.CssClass = "inactiveTab tab";
-                    tabAddFromGroup.CssClass = "activeTab tab";
-                }
-                else
-                {
-                    divAddFromGroup.Style.Add(HtmlTextWriterStyle.Display, "none");
-                    divLookupTargets.Style.Add(HtmlTextWriterStyle.Display, "inline");
-                    tabLookupTarget.CssClass = "activeTab tab";
-                    tabAddFromGroup.CssClass = "inactiveTab tab";
-                }
-            }
-            grdTargets.DataSource = _State.targetList;
+            grdTargets.DataSource = _state.targetList;
         }
         grdTargets.DataBind();
         cmdAddTargets.Enabled = grdTargets.Rows.Count > 0;
     }
 
     /// <summary>
-    /// Called when [register client scripts].
+    /// Raises the <see cref="E:Load"/> event.
     /// </summary>
-    protected override void OnRegisterClientScripts()
+    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+    protected override void OnLoad(EventArgs e)
     {
-        base.OnRegisterClientScripts();
-        RegisterClientScript();
+        base.OnLoad(e);
+        if (Visible)
+        {
+            RegisterClientScript();
+        }
     }
 
     /// <summary>
     /// Gets the list of targets based on the filter options.
     /// </summary>
     /// <returns>DataTable </returns>
-    private DataTable GetTargets()
+    private IList<ComponentView> GetTargets()
     {
-        DataTable dt = null;
         IList targets = null;
+        List<ComponentView> targetsView = new List<ComponentView>();
+        string[] propertyNames = new[]
+                                     {
+                                         "EntityId", "FirstName", "LastName", "Company", "Email", "City", "State", "Zip", "WorkPhone"
+                                     };
         if (EntityContext != null)
         {
-            dt = GetDataGridLayout();
             switch (rdgIncludeType.SelectedIndex)
             {
                 case 0:
@@ -337,46 +346,23 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
             }
             if (targets != null)
             {
-                foreach (object[] data in targets)
+                targetsView.AddRange(from object[] data in targets
+                                     let propertyValues = new object[] {}
+                                     select new[]
+                                                {
+                                                    data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8]
+                                                }
+                                     into propertyValues
+                                     select new ComponentView(propertyNames, propertyValues));
+                if (_state != null)
                 {
-                    dt.Rows.Add(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8]);
-                }
-                if (_State != null)
-                {
-                    _State.targetType = rdgIncludeType.SelectedIndex == 0 ? "Lead" : "Contact";
-                    _State.targetList = dt;
-                    _Context.SetContext("AddManageFilterStateInfo", _State);
+                    _state.targetType = rdgIncludeType.SelectedIndex == 0 ? "Lead" : "Contact";
+                    _state.targetList = targetsView;
+                    _context.SetContext("AddManageFilterStateInfo", _state);
                 }
             }
         }
-        return dt;
-    }
-
-    /// <summary>
-    /// Builds the column collection for the data grid layout.
-    /// </summary>
-    /// <returns></returns>
-    private static DataTable GetDataGridLayout()
-    {
-        DataTable dt = new DataTable();
-        try
-        {
-            dt.Columns.Add("EntityId");
-            dt.Columns.Add("FirstName");
-            dt.Columns.Add("LastName");
-            dt.Columns.Add("Company");
-            dt.Columns.Add("Email");
-            dt.Columns.Add("City");
-            dt.Columns.Add("State");
-            dt.Columns.Add("Zip");
-            dt.Columns.Add("WorkPhone");
-        }
-        catch (Exception ex)
-        {
-            log.Error(ex.Message);
-            throw;
-        }
-        return dt;
+        return targetsView;
     }
 
     /// <summary>
@@ -386,32 +372,28 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
     private IList GetLeadTargets()
     {
         IList leadList;
-        try
-        {
-            IQueryable query = (IQueryable)EntityFactory.GetRepository<ILead>();
-            IExpressionFactory expressions = query.GetExpressionFactory();
-            IProjections projections = query.GetProjectionsFactory();
-            ICriteria criteria = query.CreateCriteria("a1")
-                .CreateCriteria("Addresses", "address")
-                    .SetProjection(projections.ProjectionList()
-                        .Add(projections.Distinct(projections.Property("Id")))
-                        .Add(projections.Property("FirstName"))
-                        .Add(projections.Property("LastName"))
-                        .Add(projections.Property("Company"))
-                        .Add(projections.Property("Email"))
-                        .Add(projections.Property("address.City"))
-                        .Add(projections.Property("address.State"))
-                        .Add(projections.Property("address.PostalCode"))
-                        .Add(projections.Property("WorkPhone"))
-                        );
-            AddExpressionsCriteria(criteria, expressions);
-            leadList = criteria.List();
-        }
-        catch (Exception ex)
-        {
-            log.Error(ex.Message);
-            throw;
-        }
+        IQueryable query = (IQueryable) EntityFactory.GetRepository<ILead>();
+        IExpressionFactory expressions = query.GetExpressionFactory();
+        IProjections projections = query.GetProjectionsFactory();
+        ICriteria criteria = query.CreateCriteria("a1")
+            .CreateCriteria("Addresses", "address")
+            .SetProjection(projections.ProjectionList()
+                               .Add(projections.Distinct(projections.Property("Id")))
+                               .Add(projections.Property("FirstName"))
+                               .Add(projections.Property("LastName"))
+                               .Add(projections.Property("Company"))
+                               .Add(projections.Property("Email"))
+                               .Add(projections.Property("address.City"))
+                               .Add(projections.Property("address.State"))
+                               .Add(projections.Property("address.PostalCode"))
+                               .Add(projections.Property("WorkPhone"))
+                             
+            );
+
+        AddExpressionsCriteria(criteria, expressions);
+        leadList = criteria.List();       
+        // NOTE: The generic exception handler was removed since the exception was rethrown; this exception would be logged twice otherwise.
+        // We may want to throw a UserObservableApplicationException in the future.
         return leadList;
     }
 
@@ -434,30 +416,27 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
                         .Add(projections.Distinct(projections.Property("Id")))
                         .Add(projections.Property("FirstName"))
                         .Add(projections.Property("LastName"))
-                        .Add(projections.Property("Account"))
+                        .Add(projections.Property("AccountName"))
                         .Add(projections.Property("Email"))
                         .Add(projections.Property("address.City"))
                         .Add(projections.Property("address.State"))
                         .Add(projections.Property("address.PostalCode"))
-                        .Add(projections.Property("WorkPhone"))
+                        .Add(projections.Property("WorkPhone"))                       
                         );
             AddExpressionsCriteria(criteria, expressions);
             contactList = criteria.List();
         }
         catch(NHibernate.QueryException nex)
         {
-            log.Error(nex.Message);
+            log.Error("The call to ManageTargets.GetAccountTargets() failed", nex);
             string message = GetLocalResourceObject("QueryError").ToString();
             if (nex.Message.Contains("could not resolve property"))
                 message += "  " + GetLocalResourceObject("QueryErrorInvalidParameter");
 
             throw new ValidationException(message);
         }
-        catch (Exception ex)
-        {
-            log.Error(ex.Message);
-            throw;
-        }
+        // NOTE: The generic exception handler was removed since the exception was rethrown; this exception would be logged twice otherwise.
+        // We may want to throw a UserObservableApplicationException in the future.
         return contactList;
     }
 
@@ -468,33 +447,28 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
     private IList GetContactTargets()
     {
         IList contactList;
-        try
-        {
-            IQueryable query = (IQueryable)EntityFactory.GetRepository<IContact>();
-            IExpressionFactory expressions = query.GetExpressionFactory();
-            IProjections projections = query.GetProjectionsFactory();
-            ICriteria criteria = query.CreateCriteria("a1")
-                .CreateCriteria("Account", "account")
-                .CreateCriteria("a1.Addresses", "address")
-                    .SetProjection(projections.ProjectionList()
-                        .Add(projections.Distinct(projections.Property("Id")))
-                        .Add(projections.Property("FirstName"))
-                        .Add(projections.Property("LastName"))
-                        .Add(projections.Property("Account"))
-                        .Add(projections.Property("Email"))
-                        .Add(projections.Property("address.City"))
-                        .Add(projections.Property("address.State"))
-                        .Add(projections.Property("address.PostalCode"))
-                        .Add(projections.Property("WorkPhone"))
-                        );
-            AddExpressionsCriteria(criteria, expressions);
-            contactList = criteria.List();
-        }
-        catch (Exception ex)
-        {
-            log.Error(ex.Message);
-            throw;
-        }
+        IQueryable query = (IQueryable) EntityFactory.GetRepository<IContact>();
+        IExpressionFactory expressions = query.GetExpressionFactory();
+        IProjections projections = query.GetProjectionsFactory();
+        ICriteria criteria = query.CreateCriteria("a1")
+            .CreateCriteria("Account", "account")
+            .CreateCriteria("a1.Addresses", "address")
+            .SetProjection(projections.ProjectionList()
+                               .Add(projections.Distinct(projections.Property("Id")))
+                               .Add(projections.Property("FirstName"))
+                               .Add(projections.Property("LastName"))
+                               .Add(projections.Property("AccountName"))
+                               .Add(projections.Property("Email"))
+                               .Add(projections.Property("address.City"))
+                               .Add(projections.Property("address.State"))
+                               .Add(projections.Property("address.PostalCode"))
+                               .Add(projections.Property("WorkPhone"))
+                            
+            );
+        AddExpressionsCriteria(criteria, expressions);
+        contactList = criteria.List();
+        // NOTE: The generic exception handler was removed since the exception was rethrown; this exception would be logged twice otherwise.
+        // We may want to throw a UserObservableApplicationException in the future.
         return contactList;
     }
 
@@ -521,26 +495,23 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
             if (chkCompany.Checked)
             {
                 clause = (SearchParameter)lbxCompany.SelectedIndex;
-                if (isLeads)
-                    criteria.Add(GetExpression(expressions, clause, "a1.Company", txtCompany.Text));
-                else
-                    criteria.Add(GetExpression(expressions, clause, "account.AccountName", txtCompany.Text));
+                criteria.Add(isLeads
+                                 ? GetExpression(expressions, clause, "a1.Company", txtCompany.Text)
+                                 : GetExpression(expressions, clause, "account.AccountName", txtCompany.Text));
             }
             if (chkIndustry.Checked)
             {
                 clause = (SearchParameter)lbxIndustry.SelectedIndex;
-                if (isLeads)
-                    criteria.Add(GetExpression(expressions, clause, "a1.Industry", pklIndustry.PickListValue));
-                else
-                    criteria.Add(GetExpression(expressions, clause, "account.Industry", pklIndustry.PickListValue));
+                criteria.Add(isLeads
+                                 ? GetExpression(expressions, clause, "a1.Industry", pklIndustry.PickListValue)
+                                 : GetExpression(expressions, clause, "account.Industry", pklIndustry.PickListValue));
             }
             if (chkSIC.Checked)
             {
                 clause = (SearchParameter)lbxSIC.SelectedIndex;
-                if (isLeads)
-                    criteria.Add(GetExpression(expressions, clause, "a1.SICCode", txtSIC.Text));
-                else
-                    criteria.Add(GetExpression(expressions, clause, "account.SicCode", txtSIC.Text));
+                criteria.Add(isLeads
+                                 ? GetExpression(expressions, clause, "a1.SICCode", txtSIC.Text)
+                                 : GetExpression(expressions, clause, "account.SicCode", txtSIC.Text));
             }
             if (chkTitle.Checked)
             {
@@ -571,10 +542,11 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
                 criteria.Add(expressions.Or(expressions.Eq("a1.DoNotMail", false), expressions.IsNull("a1.DoNotMail")));
             if (!chkFax.Checked)
             {
-                if (isLeads)
-                    criteria.Add(expressions.Or(expressions.Eq("a1.DoNotFAX", false), expressions.IsNull("a1.DoNotFAX")));
-                else
-                    criteria.Add(expressions.Or(expressions.Eq("a1.DoNotFax", false), expressions.IsNull("a1.DoNotFax")));
+                criteria.Add(isLeads
+                                 ? expressions.Or(expressions.Eq("a1.DoNotFAX", false),
+                                                  expressions.IsNull("a1.DoNotFAX"))
+                                 : expressions.Or(expressions.Eq("a1.DoNotFax", false),
+                                                  expressions.IsNull("a1.DoNotFax")));
             }
             if (chkCity.Checked)
             {
@@ -591,7 +563,7 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
                 clause = (SearchParameter)lbxZip.SelectedIndex;
                 AddCommaDelimitedStringsToExpression(criteria, expressions, txtZip.Text, "address.PostalCode", clause);
             }
-            if (chkLeadSource.Checked)
+            if (chkLeadSource.Checked && rdgIncludeType.SelectedIndex != 3)
             {             
                 switch (rdgIncludeType.SelectedIndex)
                 {
@@ -624,7 +596,6 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
                     criteria.Add(expressions.Between("account.CreateDate", CheckForNullDate(dtpCreateFromDate.DateTimeValue), CheckForNullDate(dtpCreateToDate.DateTimeValue)));
             }
         }
-        return;
     }
 
     /// <summary>
@@ -672,21 +643,15 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
     {
         if (!string.IsNullOrEmpty(text))
         {
-            IList<IExpression> expression = new List<IExpression>();
-            IJunction junction;
             string[] values = text.Split(',');
-            foreach (String value in values)
-            {
-                expression.Add(GetExpression(expressions, clause, propertyName, value));
-            }
-            junction = expressions.Disjunction();
+            IList<IExpression> expression = values.Select(value => GetExpression(expressions, clause, propertyName, value)).ToList();
+            IJunction junction = expressions.Disjunction();
             foreach (IExpression e in expression)
             {
                 junction.Add(e);
             }
             criteria.Add(junction);
         }
-        return;
     }
 
     /// <summary>
@@ -751,13 +716,13 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
 
         if (!String.IsNullOrEmpty(groupId))
         {
-            DataTable dataTable = Helpers.GetEntityGroupList(entityName, groupId);
-            if (_State != null)
+            List<ComponentView> targetList = Helpers.GetEntityGroupList(entityName, groupId);
+            if (_state != null)
             {
-                _State.targetList = dataTable;
-                _State.targetType = entityName;
-                _State.groupName = lbxContactGroups.SelectedItem.ToString();
-                _Context.SetContext("AddManageFilterStateInfo", _State);
+                _state.targetList = targetList;
+                _state.targetType = entityName;
+                _state.groupName = lbxContactGroups.SelectedItem.ToString();
+                _context.SetContext("AddManageFilterStateInfo", _state);
             }
         }
         else
@@ -791,9 +756,7 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
     /// <returns></returns>
     private DateTime? CheckForNullDate(DateTime? dateTime)
     {
-        if (dateTime == null)
-            dateTime = DateTime.UtcNow;
-        return dateTime;
+        return dateTime ?? (DateTime.UtcNow);
     }
 
     /// <summary>
@@ -941,31 +904,35 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
     /// <param name="e">The <see cref="System.Web.UI.WebControls.GridViewSortEventArgs"/> instance containing the event data.</param>
     protected void AddTargets_OnClick(object sender, EventArgs e)
     {
-        if (_State != null)
+        if (_state != null && _state.targetList.Count > 0)
         {
-            if (_State.targetList.Rows.Count > 0)
-            {
-                //SetStartProcessInfo();
-                InsertTargetManager insertManager = new InsertTargetManager();
-                insertManager.CampaignId = EntityContext.EntityID.ToString();
-                insertManager.TargetList = _State.targetList;
-                insertManager.TargetType = _State.targetType;
-                insertManager.GroupName = _State.groupName;
-                insertManager.StartTargetInsertProcess();
-                //SetCompleteProcessInfo();
-                DialogService.CloseEventHappened(sender, e);
-                Refresh();
-                //if (DialogService != null)
-                //{
-                //    DialogService.SetSpecs(200, 200, 200, 450, "InsertTargetProgress");
-                //    DialogService.DialogParameters.Add("targetsDataTable", _State.targetList);
-                //    DialogService.ShowDialog();
-                //}
-            }
-            else
-            {
-                DialogService.ShowMessage(GetLocalResourceObject("error_NoTargetsSelected").ToString());
-            }
+            List<string> targetIds =
+                _state.targetList.Select(
+                    componentView => componentView.VirtualComponentProperties.FirstOrDefault().Value.ToString()).ToList();
+            var tenantId = ConfigurationManager.AppSettings["sage.platform.scheduling.sdata.tenantId"];
+            var scheduler = ApplicationContext.Current.Services.Get<ISchedulerService>(true);
+            var authProvider = ApplicationContext.Current.Services.Get<IAuthenticationProvider>(true);
+            //scheduler.TriggerJob(
+            //    tenantId,
+            //    "Sage.SalesLogix.CampaignTarget.InsertJob",
+            //    new Dictionary<string, object>
+            //        {
+            //            {"AuthenticationToken", authProvider.AuthenticationToken},
+            //            {"CampaignId", EntityContext.EntityID.ToString()},
+            //            {"TargetType", _state.targetType},
+            //            {"TargetIds", targetIds.ToArray()},
+            //            {"GroupName", _state.groupName}
+            //        });
+
+            //SetStartProcessInfo();
+            InsertTargetManager insertManager = new InsertTargetManager();
+            insertManager.CampaignId = EntityContext.EntityID.ToString();
+            insertManager.TargetList = targetIds;
+            insertManager.TargetType = _state.targetType;
+            insertManager.GroupName = _state.groupName;
+            insertManager.StartTargetInsertProcess();
+            //SetCompleteProcessInfo();
+            Refresh();
         }
         else
         {
@@ -974,7 +941,7 @@ public partial class ManageTargets : EntityBoundSmartPartInfoProvider
     }
 
     /// <summary>
-    /// Gets the arguements from the handler to set the progress indicator.
+    /// Gets the arguments from the handler to set the progress indicator.
     /// </summary>
     /// <param name="args">The args.</param>
     private void InsertTargetHandler(InsertProgressArgs args)

@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="btnSave.Caption" xml:space="preserve">
     <value>Save</value>
@@ -139,7 +139,7 @@
     <value>Type</value>
   </data>
   <data name="LeadSource.LookupProperties.Description.PropertyHeader" xml:space="preserve">
-    <value>Descrption</value>
+    <value>Description</value>
   </data>
   <data name="LeadSource.LookupProperties.AbbrevDescription.PropertyHeader" xml:space="preserve">
     <value>Source Code</value>
@@ -194,5 +194,20 @@
   </data>
   <data name="Address.ButtonToolTip" xml:space="preserve">
     <value>Edit</value>
+  </data>
+  <data name="LeadSource.LookupProperties.Status.PropertyHeader" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="QFListBox_item3.Text" xml:space="preserve">
+    <value>cxz</value>
+  </data>
+  <data name="QFListBox_item2.Text" xml:space="preserve">
+    <value>rewq</value>
+  </data>
+  <data name="QFListBox_item1.Text" xml:space="preserve">
+    <value>fdsa</value>
+  </data>
+  <data name="QFListBox_item0.Text" xml:space="preserve">
+    <value />
   </data>
 </root>

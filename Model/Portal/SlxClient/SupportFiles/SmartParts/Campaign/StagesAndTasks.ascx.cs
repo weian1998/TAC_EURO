@@ -116,13 +116,7 @@ public partial class SmartParts_StagesAndTasks : EntityBoundSmartPartInfoProvide
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void btnAddStage_ClickAction(object sender, EventArgs e)
     {
-        if (DialogService != null)
-        {
-            DialogService.SetSpecs(200, 200, 550, 700, "AddEditStage", GetLocalResourceObject("DialogCaption_AddStage").ToString(), true);
-            DialogService.EntityType = typeof(ICampaignStage);
-            DialogService.DialogParameters.Add("Mode", "Add");
-            DialogService.ShowDialog();
-        }
+        LoadStageView(GetLocalResourceObject("DialogCaption_AddStage").ToString(), "Add", String.Empty);
     }
 
     /// <summary>
@@ -182,7 +176,7 @@ public partial class SmartParts_StagesAndTasks : EntityBoundSmartPartInfoProvide
                 e.Row.Cells[0].HorizontalAlign = HorizontalAlign.Left;
                 e.Row.Cells[0].Font.Bold = false;
                 e.Row.BackColor = Color.FromArgb(220, 233, 247);
-                e.Row.Cells[0].Text = string.Format("{0}: {1}", GetLocalResourceObject("Stage").ToString(), dr["Description"].ToString());
+                e.Row.Cells[0].Text = string.Format("{0}: {1}", GetLocalResourceObject("Stage"), dr["Description"]);
                 e.Row.Cells.RemoveAt(1);
                 e.Row.Cells.RemoveAt(1);
                 e.Row.Cells.RemoveAt(1);
@@ -215,104 +209,60 @@ public partial class SmartParts_StagesAndTasks : EntityBoundSmartPartInfoProvide
     /// <param name="e">The <see cref="System.Web.UI.WebControls.GridViewCommandEventArgs"/> instance containing the event data.</param>
     protected void grdStages_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-        if (e.CommandName.Equals("AddTask"))
+        int rowIndex = Convert.ToInt32(e.CommandArgument);
+        string id = grdStages.DataKeys[rowIndex].Value.ToString();
+        string[] result = id.Split(':');
+        switch (e.CommandName)
         {
-            int rowIndex = Convert.ToInt32(e.CommandArgument);
-            string id = grdStages.DataKeys[rowIndex].Value.ToString();
-            string[] result = id.Split(':');
-
-            if (DialogService != null)
-            {
+            case "AddTask":
                 if (result[1] == "S")
                 {
-                    DialogService.SetSpecs(200, 200, 550, 700, "AddEditTask", GetLocalResourceObject("DialogCaption_AddTask").ToString(), true);
-                    DialogService.EntityType = typeof(ICampaignTask);
-                    DialogService.DialogParameters.Add("StageId", result[0]);
-                    DialogService.DialogParameters.Add("Mode", "Add");
-                    DialogService.ShowDialog();
+                    LoadTaskView(GetLocalResourceObject("DialogCaption_AddTask").ToString(), "Add", result[0], String.Empty);
                 }
-            }
-        }
-        
-        if (e.CommandName.Equals("Edit"))
-        {
-            int rowIndex = Convert.ToInt32(e.CommandArgument);
-            string id = grdStages.DataKeys[rowIndex].Value.ToString();
-            string[] result = id.Split(':');
-            
-            if (DialogService != null)
-            {
-                if (result[1] == "S")
+                break;
+            case "Edit":
+                if (result[1] == "S") //Stage
                 {
-                    DialogService.SetSpecs(200, 200, 550, 700, "AddEditStage", GetLocalResourceObject("DialogCaption_EditStage").ToString(), true);
-                    DialogService.EntityType = typeof (ICampaignStage);
-                    DialogService.EntityID = result[0];
-                    DialogService.DialogParameters.Add("Mode", "Edit");
-                    DialogService.ShowDialog();
+                    LoadStageView(GetLocalResourceObject("DialogCaption_EditStage").ToString(), "Edit", result[0]);
                 }
-                else if (result[1] == "T")
+                else if (result[1] == "T") //Task
                 {
-                    DialogService.SetSpecs(200, 200, 550, 700, "AddEditTask", GetLocalResourceObject("DialogCaption_EditTask").ToString(), true);
-                    DialogService.EntityType = typeof(ICampaignTask);
-                    DialogService.EntityID = result[0];
-                    DialogService.DialogParameters.Add("Mode", "Edit");
-                    DialogService.ShowDialog();
+                    LoadTaskView(GetLocalResourceObject("DialogCaption_EditTask").ToString(), "Edit", String.Empty, result[0]);
                 }
-            }
-        }
-        if (e.CommandName.Equals("Complete"))
-        {
-            int rowIndex = Convert.ToInt32(e.CommandArgument);
-            string id = grdStages.DataKeys[rowIndex].Value.ToString();
-            string[] result = id.Split(':');
-
-            if (DialogService != null)
-            {
-                if (result[1] == "S")
+                break;
+            case "Complete":
+                if (result[1] == "S") //Stage
                 {
-                    DialogService.SetSpecs(200, 200, 550, 700, "AddEditStage", GetLocalResourceObject("DialogCaption_CompleteStage").ToString(), true);
-                    DialogService.EntityType = typeof(ICampaignStage);
-                    DialogService.EntityID = result[0];
-                    DialogService.DialogParameters.Add("Mode", "Complete");
-                    DialogService.ShowDialog();
+                    LoadStageView(GetLocalResourceObject("DialogCaption_CompleteStage").ToString(), "Complete", result[0]);
                 }
-                else if (result[1] == "T")
+                else if (result[1] == "T") //Task
                 {
-                    DialogService.SetSpecs(200, 200, 550, 700, "AddEditTask", GetLocalResourceObject("DialogCaption_CompleteTask").ToString(), true);
-                    DialogService.EntityType = typeof(ICampaignTask);
-                    DialogService.EntityID = result[0];
-                    DialogService.DialogParameters.Add("Mode", "Complete");
-                    DialogService.ShowDialog();
+                    LoadTaskView(GetLocalResourceObject("DialogCaption_CompleteTask").ToString(), "Complete", String.Empty, result[0]);
                 }
-            }
+                break;
+            case "Delete":
+                if (result[1] == "S")  //Stage
+                {
+                    ICampaignStage stage = EntityFactory.GetById<ICampaignStage>(result[0]);
+                    if (stage != null)
+                    {
+                        stage.Campaign.CampaignStages.Remove(stage);
+                        stage.Delete();
+                    }
+                }
+                else if (result[1] == "T") //Task
+                {
+                    ICampaignTask task = EntityFactory.GetById<ICampaignTask>(result[0]);
+                    if (task != null)
+                    {
+                        task.CampaignStage.CampaignTasks.Remove(task);
+                        task.Campaign.CampaignTasks.Remove(task);
+                        task.Delete();
+                    }
+                }
+                break;
         }
 
-        if (e.CommandName.Equals("Delete"))
-        {
-            int rowIndex = Convert.ToInt32(e.CommandArgument);
-            string Id = grdStages.DataKeys[rowIndex].Value.ToString();
-            string[] result = Id.Split(':');
-            if (result[1] == "S")  //Stage
-            {
-                ICampaignStage stage = EntityFactory.GetById<ICampaignStage>(result[0]);
-                if (stage != null)
-                {
-                    stage.Campaign.CampaignStages.Remove(stage);
-                    stage.Delete();
-                }
-            }
-            else if (result[1] == "T") //Task
-            {
-                ICampaignTask task = EntityFactory.GetById<ICampaignTask>(result[0]);
-                if (task != null)
-                {
-                    task.CampaignStage.CampaignTasks.Remove(task);
-                    task.Campaign.CampaignTasks.Remove(task);
-                    task.Delete();
-                }
-            }
-            
-        }
         if (PageWorkItem != null)
         {
             IPanelRefreshService refresher = PageWorkItem.Services.Get<IPanelRefreshService>();
@@ -320,6 +270,34 @@ public partial class SmartParts_StagesAndTasks : EntityBoundSmartPartInfoProvide
             {
                 refresher.RefreshAll();
             }
+        }
+    }
+
+    private void LoadStageView(string dialogCaption, string mode, string entityId)
+    {
+        if (DialogService != null)
+        {
+            DialogService.SetSpecs(200, 200, 580, 700, "AddEditStage", dialogCaption, true);
+            DialogService.EntityType = typeof(ICampaignStage);
+            DialogService.EntityID = entityId;
+            DialogService.DialogParameters.Add("Mode", mode);
+            DialogService.ShowDialog();
+        }
+    }
+
+    private void LoadTaskView(string dialogCaption, string mode, string stageId, string entityId)
+    {
+        if (DialogService != null)
+        {
+            DialogService.SetSpecs(200, 200, 580, 700, "AddEditTask", dialogCaption, true);
+            DialogService.EntityType = typeof(ICampaignTask);
+            DialogService.EntityID = entityId;
+            if (!String.IsNullOrEmpty(stageId))
+            {
+                DialogService.DialogParameters.Add("StageId", stageId);
+            }
+            DialogService.DialogParameters.Add("Mode", mode);
+            DialogService.ShowDialog();
         }
     }
 
@@ -331,6 +309,7 @@ public partial class SmartParts_StagesAndTasks : EntityBoundSmartPartInfoProvide
     protected void grdStages_RowEditing(object sender, GridViewEditEventArgs e)
     {
         grdStages.SelectedIndex = e.NewEditIndex;
+        e.Cancel = true;
     }
 
     /// <summary>

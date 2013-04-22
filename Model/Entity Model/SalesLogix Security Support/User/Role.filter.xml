@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0"?>
-<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="523c37bd-ae0d-40e9-ac87-03215779d3c0" lastModifiedUtc="2010-01-15T19:41:10.1888667Z" filterName="Role" propertyName="UserId" characters="0">
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="523c37bd-ae0d-40e9-ac87-03215779d3c0" lastModifiedUtc="2010-01-15T19:41:10.1888667Z" filterName="Role" propertyName="Roles.RoleId" characters="0">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRangeEntityFilter" />

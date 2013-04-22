@@ -1,0 +1,215 @@
+﻿ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+ <html>
+     <head>
+        <link rel="stylesheet" type="text/css" href="../../Libraries/dojo/dijit/themes/claro/claro.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/sageStyles.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/layout.css" />
+        <!--[if IE]>
+        <link rel="stylesheet" type="text/css" href="../../css/layout-ie.css" />
+        <![endif]-->
+         <link rel="stylesheet" type="text/css" href="../../css/theme.css" />
+        
+        <script src="../../Libraries/dhtmlxScheduler_v30/dhtmlxscheduler.js" type="text/javascript" charset="utf-8"></script>
+        <link href="../../Libraries/dhtmlxScheduler_v30/dhtmlxscheduler.css" rel="stylesheet" type="text/css" />
+        <script src='../../Libraries/dhtmlxScheduler_v30/ext/dhtmlxscheduler_tooltip.js' type="text/javascript" charset="utf-8"></script>
+        <script src='../../Libraries/dhtmlxScheduler_v30/ext/dhtmlxscheduler_custom.js' type="text/javascript" charset="utf-8"></script>
+        
+         
+         
+         <style type="text/css">
+             
+        /* Calendar Style Overrides */
+        .dhx_cal_next_button 
+        {
+        right:85px !important;
+        }
+        .dhx_cal_prev_button
+        {
+        right:115px !important;
+        }
+        .dhx_cal_today_button
+        {
+        right:10px !important;
+        }
+        .dhx_cal_navline .dhx_cal_date
+        {
+            right:160px !important;
+        }
+        /* end Calendar Style Overrides */
+             
+        .slx_calendar_today .dhx_month_body{
+		background-color: #FFFFFF;
+        }
+        .slx_calendar_today .dhx_month_head{
+		        background-color: #DEF4BE;
+        }
+	    .dhx_scale_holder_now.custom_color, .dhx_scale_holder.custom_color{
+		    background-image:url(../../Libraries/dhtmlxScheduler_v30/imgs/databg_now.png);
+		    background-position:0px -252px;  
+		}
+		.dhx_cal_event_clear {
+		    height: 16px;
+		    text-overflow: ellipsis;
+		}
+	     /*event bar color for user1 */
+	    .dhx_cal_event.event_user1 div, .dhx_cal_event_line.event_user1
+	    {
+	        background-image:url(../../Libraries/dhtmlxScheduler_v30/imgs/eventOverlay.png);
+            background-color: #d5e2bd !important;            
+            color: #000000 !important;
+            border-color: #A4BF7D;
+        }
+        .dhx_cal_event.event_day_user1 div, .dhx_cal_event_line.event_day_user1
+	    {	        
+            background-color: #d5e2bd !important;            
+            color: #000000 !important;
+            border-color: #A4BF7D;
+        }
+        .dhx_cal_event_clear.event_user1
+        {
+            background-color: #d5e2bd !important;
+            color: #000000 !important;
+        }
+         .dhx_cal_event_clear.event_user1.pending
+        {            
+            background-image:url(../../images/pendingRepeatDarker.png);            
+        }
+        
+             
+        
+         /*event bar color for user2 */
+        .dhx_cal_event.event_user2 div, .dhx_cal_event_line.event_user2
+        {
+            background-image:url(../../Libraries/dhtmlxScheduler_v30/imgs/eventOverlay.png);
+            background-color: #CFDEF5 !important;
+            color: #000000 !important;
+            border-color: #6887B7;
+        }
+        .dhx_cal_event.event_day_user2 div, .dhx_cal_event_line.event_day_user2
+        {            
+            background-color: #CFDEF5 !important;
+            color: #000000 !important;
+            border-color: #6887B7;
+        }
+        .dhx_cal_event_clear.event_user2
+        {
+            background-color: #CFDEF5 !important;
+            color: #000000 !important;
+        }
+         .dhx_cal_event_clear.event_user2.pending
+        {            
+            background-image:url(../../images/pendingRepeatDarker.png);            
+        }
+        
+         /*event bar color for user3 */
+        .dhx_cal_event.event_user3 div, .dhx_cal_event_line.event_user3
+         {
+            background-image:url(../../Libraries/dhtmlxScheduler_v30/imgs/eventOverlay.png);
+            background-color: #FBDBB5 !important;
+            color: #000000 !important;
+            border-color: #C0915A;
+        }
+        .dhx_cal_event.event_day_user3 div, .dhx_cal_event_line.event_day_user3
+        {            
+            background-color: #FBDBB5 !important;
+            color: #000000 !important;
+            border-color: #C0915A;
+        }
+        .dhx_cal_event_clear.event_user3
+        {
+            background-color: #FBDBB5 !important;
+            color: #000000 !important;
+        }
+         .dhx_cal_event_clear.event_user3.pending
+        {            
+            background-image:url(../../images/pendingRepeatDarker.png);            
+        }
+        
+          /*event bar color for user4 */        
+        .dhx_cal_event.event_user4 div, .dhx_cal_event_line.event_user4
+        {
+            background-image:url(../../Libraries/dhtmlxScheduler_v30/imgs/eventOverlay.png);
+            background-color: #DFC9F6 !important;           
+            color: #000000 !important;
+            border-color: #A079C8;
+        }      
+         .dhx_cal_event.event_day_user4 div, .dhx_cal_event_line.event_day_user4
+        {           
+            background-color: #DFC9F6 !important;           
+            color: #000000 !important;
+            border-color: #A079C8;
+        }   
+        .dhx_cal_event_clear.event_user4
+        {
+            background-color: #DFC9F6 !important;
+            color: #000000 !important;
+        }
+         .dhx_cal_event_clear.event_user4.pending
+        {            
+            background-image:url(../../images/pendingRepeatDarker.png);            
+        }
+        
+         /*event bar color for user5 */        
+        .dhx_cal_event.event_user5 div, .dhx_cal_event_line.event_user5
+        {
+            background-image:url(../../Libraries/dhtmlxScheduler_v30/imgs/eventOverlay.png);
+            background-color: #F5F1B1 !important;           
+            color: #000000 !important;
+            border-color: #C1B93F;
+        }      
+         .dhx_cal_event.event_day_user5 div, .dhx_cal_event_line.event_day_user5
+        {           
+            background-color: #F5F1B1 !important;           
+            color: #000000 !important;
+            border-color: #C1B93F;
+        }   
+        .dhx_cal_event_clear.event_user5
+        {
+            background-color: #F5F1B1 !important;
+            color: #000000 !important;
+        }
+         .dhx_cal_event_clear.event_user5.pending
+        {            
+            background-image:url(../../images/pendingRepeatDarker.png);            
+        }
+        
+     
+        .dhx_cal_event .dhx_title {
+            height: 14px;  
+        }
+        /* To differentiate the unconfirmed activities in event title bar of day and week views  */
+        .dhx_cal_event .dhx_title.pending {          
+            background-image:url(../../images/pendingRepeatDarker.png); 
+            background-repeat: repeat-x;
+        }  
+             
+       div.dhx_time_block_custom {
+            background: none repeat scroll 0 0 #CCCCCC;
+            opacity: 0.4;
+            -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)"; 
+			filter: alpha(opacity=40);
+            position: absolute;
+            width: 100%;            
+        }
+         </style>
+     </head>
+     <body class="claro">
+         <div id="slxLogixScheduler" class="dhx_cal_container" style="width:100%; height:100%;">
+             <div class="dhx_cal_navline">
+                 <div class="dhx_cal_prev_button">&nbsp;</div>
+                 <div class="dhx_cal_next_button">&nbsp;</div>
+                 <div class="dhx_cal_today_button"></div>
+                 <div class="dhx_cal_date"></div>
+                 <div class="dhx_cal_tab" name="day_tab" style="left:50px;"></div>
+                 <div class="dhx_cal_tab" name="workweek_tab" style="left:165px;"></div>
+                 <div class="dhx_cal_tab" name="week_tab" style="left:280px;"></div>
+                 <div class="dhx_cal_tab" name="month_tab" style="left:395px;"></div>
+             </div>
+             <div class="dhx_cal_header">
+             </div>
+             <div class="dhx_cal_data">
+             </div>	
+         </div>
+     </body>
+ </html>
+

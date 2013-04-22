@@ -5,7 +5,8 @@
   <SmartPart>smartparts\GroupBuilder\LiveGroupViewer.ascx</SmartPart>
   <TargetWorkspace>MainContent</TargetWorkspace>
   <ShowInMode>List</ShowInMode>
-  <Properties />
+  <Properties>
+    <Property Name="HelpTopic" TypeConverter="">CustTicketListView</Property>
+  </Properties>
   <AllowRoles />
-  <HelpTopic>custticktick</HelpTopic>
 </SmartPartMapping>

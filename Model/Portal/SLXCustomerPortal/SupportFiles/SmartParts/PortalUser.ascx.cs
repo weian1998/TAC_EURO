@@ -20,7 +20,7 @@ public partial class PortalUser : System.Web.UI.UserControl
 {
     static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodInfo.GetCurrentMethod().DeclaringType);
     private IEntityContextService _EntityService;
-    private WebPortalUserService _UserService;
+    private IWebPortalUserService _UserService;
 
     [ServiceDependency]
     public IEntityContextService EntityContext
@@ -36,7 +36,7 @@ public partial class PortalUser : System.Web.UI.UserControl
     }
 
     [ServiceDependency(Type = typeof(IUserService), Required = true)]
-    public WebPortalUserService UserService
+    public IWebPortalUserService UserService
     {
         get
         {

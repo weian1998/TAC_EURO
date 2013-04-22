@@ -1,13 +1,17 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="52552175-fd52-442f-a204-8257a8c52383" lastModifiedUtc="2008-04-11T22:30:30.7193498Z" manageSchema="false" tableName="MKTGSVC_CAMPAIGN" name="MarketingServiceCampaign" displayPropertyId="e5678f1d-1009-4914-86c5-9dde8820dcfa" isExtension="false" audited="true" lastUpdatedPropertyId="a5052c8a-eb02-4bb4-8843-4c4bfd338841" onBeforeInsertMethodId="30ba98d8-f853-424e-9ed3-ec38fe7b0cd4" onAfterInsertMethodId="d2945745-d584-4ef7-a32d-3bb421c588ad" onBeforeUpdateMethodId="4f03085e-e3b6-453d-90a4-a22954d56357" onAfterUpdateMethodId="2032725f-fa29-49e4-ae86-10714eebe927" onBeforeDeleteMethodId="5a64ab79-29e5-464e-852e-744767f3ba0e" onAfterDeleteMethodId="7ae0fdd4-295c-4a5c-9bdf-939676cb37ed" onCreateId="0a6c34e3-f90c-482e-b74d-60a0e108a471">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="52552175-fd52-442f-a204-8257a8c52383" lastModifiedUtc="2012-09-19T04:45:25.0233511Z" manageSchema="true" tableName="MKTGSVC_CAMPAIGN" name="MarketingServiceCampaign" displayPropertyId="e5678f1d-1009-4914-86c5-9dde8820dcfa" isExtension="false" audited="true" onBeforeInsertMethodId="30ba98d8-f853-424e-9ed3-ec38fe7b0cd4" onAfterInsertMethodId="d2945745-d584-4ef7-a32d-3bb421c588ad" onBeforeUpdateMethodId="4f03085e-e3b6-453d-90a4-a22954d56357" onAfterUpdateMethodId="2032725f-fa29-49e4-ae86-10714eebe927" onBeforeDeleteMethodId="5a64ab79-29e5-464e-852e-744767f3ba0e" onAfterDeleteMethodId="7ae0fdd4-295c-4a5c-9bdf-939676cb37ed" onCreateId="0a6c34e3-f90c-482e-b74d-60a0e108a471">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
       <extender guid="1589723d-0536-4bf3-bdd7-3f6f7fe165d0">
         <OrmEntityMetadataExtension>
           <StringExpression>${CampaignName}</StringExpression>
+          <HistoryTypeName>IHistory</HistoryTypeName>
           <IsHistoryTable>false</IsHistoryTable>
         </OrmEntityMetadataExtension>
+      </extender>
+      <extender guid="76aa0e24-2c8f-3b71-a1f9-ca6db3db4459">
+        <OrmEntitySDataExtension lastUpdatedPropertyId="a5052c8a-eb02-4bb4-8843-4c4bfd338841" canPost="true" canPut="true" canDelete="true" />
       </extender>
     </extendee>
   </ExtendedPropertiesCollection>

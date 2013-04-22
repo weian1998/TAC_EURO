@@ -2,6 +2,7 @@
 <%@ Import Namespace="System.Data.Common"%>
 <%@ Import namespace="Sage.Platform.WebPortal"%>
 <%@ Import namespace="Sage.Platform.Application"%>
+<%@ Import namespace="Sage.Platform.Data"%>
 <%@ Control Language="C#" ClassName="AccountDetails" Inherits="Sage.Platform.WebPortal.SmartParts.EntityBoundSmartPartInfoProvider" %>
 <%@ Register Assembly="Sage.SalesLogix.Client.GroupBuilder" Namespace="Sage.SalesLogix.Client.GroupBuilder" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.PickList" TagPrefix="SalesLogix" %>
@@ -10,18 +11,18 @@
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.Lookup" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.HighLevelTypes" Namespace="Sage.SalesLogix.HighLevelTypes" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="System.Data" Namespace="System.Data.OleDb" TagPrefix="OleDb" %>
+<%@ Register TagPrefix="SalesLogix" Namespace="Sage.Platform.WebPortal.SmartParts" Assembly="Sage.Platform.WebPortal" %>
 
-<div style="display:none">
-<asp:Panel ID="LitRequestForm_RTools" runat="server" meta:resourcekey="LitRequestForm_RToolsResource1">
-   <SalesLogix:GroupNavigator runat="server" ID="gpnLeadGroupNavigator" ></SalesLogix:GroupNavigator>
+<SalesLogix:SmartPartToolsContainer runat="server" ID="LitRequestForm_RTools" ToolbarLocation="right">
+   <SalesLogix:GroupNavigator runat="server" ID="gpnLiteratureRequestGroupNavigator"></SalesLogix:GroupNavigator>
     <asp:ImageButton runat="server" ID="btnDelLitRequest" ToolTip="Delete Literature Request" 
-        ImageUrl="~\images\icons\delete_16X16.gif" meta:resourcekey="btnDelLitRequest_rsc" />
+        ImageUrl="~\images\icons\delete_16X16.png" meta:resourcekey="btnDelLitRequest_rsc" />
     <SalesLogix:PageLink ID="lnkLiteratureRequestHelp" runat="server" LinkType="HelpFileName"
         ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="litreqinfo.aspx"
         ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16">
     </SalesLogix:PageLink>
-</asp:Panel>
-</div>
+ </SalesLogix:SmartPartToolsContainer>
+
 <table border="0" cellpadding="1" cellspacing="0" class="formtable">
   <col width="50%" /><col width="50%" />
 <tr>
@@ -34,7 +35,7 @@
 	<td>  
         <div class="lbl"><asp:Label ID="RequestDate_lz" meta:resourcekey="RequestDate_lz" AssociatedControlID="RequestDate" runat="server" Text="To Be Filled By:"></asp:Label></div>
         <div class="textcontrol datepicker">
-			<SalesLogix:DateTimePicker runat="server" ID="RequestDate" DisplayTime="False" AutoPostBack="False" DateTimeValue="01/01/0001 07:00:00" DisplayDate="True" DisplayMode="AsControl" Enable24HourTime="False" meta:resourcekey="RequestDateResource1" Text="3/16/2007" />
+			<SalesLogix:DateTimePicker runat="server" ID="RequestDate" Enabled="False" DisplayTime="False" AutoPostBack="False" DateTimeValue="01/01/0001 07:00:00" DisplayDate="True" DisplayMode="AsControl" Enable24HourTime="False" meta:resourcekey="RequestDateResource1" Text="3/16/2007" />
 		</div> 
 	</td>
 </tr>
@@ -65,7 +66,7 @@
 <td>  
         <div class="lbl"><asp:Label ID="SendDate_lz" meta:resourcekey="SendDate_lz" AssociatedControlID="SendDate" runat="server" Text="Send by:"></asp:Label></div>
         <div class="textcontrol datepicker">
-<SalesLogix:DateTimePicker runat="server" ID="SendDate" DisplayTime="False" AutoPostBack="False" DateTimeValue="01/01/0001 07:00:00" DisplayDate="True" DisplayMode="AsControl" Enable24HourTime="False" meta:resourcekey="SendDateResource1" Text="3/16/2007" />
+<SalesLogix:DateTimePicker runat="server" ID="SendDate" Enabled="False" DisplayTime="False" AutoPostBack="False" DateTimeValue="01/01/0001 07:00:00" DisplayDate="True" DisplayMode="AsControl" Enable24HourTime="False" meta:resourcekey="SendDateResource1" Text="3/16/2007" />
 
 </div> 
 </td>
@@ -95,7 +96,7 @@
 <td>  
         <div class="lbl"><asp:Label ID="FillDate_lz" meta:resourcekey="FillDate_lz" AssociatedControlID="FillDate" runat="server" Text="Fill Date:"></asp:Label></div>
         <div class="textcontrol datepicker">
-<SalesLogix:DateTimePicker runat="server" ID="FillDate" DisplayTime="False" AutoPostBack="False" DateTimeValue="01/01/0001 07:00:00" DisplayDate="True" DisplayMode="AsControl" Enable24HourTime="False" meta:resourcekey="FillDateResource1" Text="3/16/2007" />
+<SalesLogix:DateTimePicker runat="server" ID="FillDate" Enabled="False" DisplayTime="False" AutoPostBack="False" DateTimeValue="01/01/0001 07:00:00" DisplayDate="True" DisplayMode="AsControl" Enable24HourTime="False" meta:resourcekey="FillDateResource1" Text="3/16/2007" />
 
 </div> 
 </td>
@@ -104,7 +105,7 @@
 <td>  
         <div class="lbl"><asp:Label ID="TotalCost_lz" meta:resourcekey="TotalCost_lz" AssociatedControlID="TotalCost" runat="server" Text="Total Cost:"></asp:Label></div>
         <div class="textcontrol currency">
-<SalesLogix:Currency runat="server" ID="TotalCost" Enabled="false" ExchangeRateType="BaseRate" DisplayCurrencyCode="false"  />
+<SalesLogix:Currency runat="server" ID="TotalCost" Enabled="false" ExchangeRateType="BaseRate" DisplayCurrencyCode="false" DisplayMode="AsText" />
 </div> 
 </td>
 <td>  
@@ -133,7 +134,7 @@ meta:resourcekey="LitRequestForm_7_rsc"
                 <headerstyle width="150px" />
             </asp:BoundField>
             <asp:BoundField DataField="FAMILY" HeaderText="Family" SortExpression="FAMILY" meta:resourcekey="Family_lz" />
-            <asp:BoundField DataField="COST" HeaderText="Cost" ReadOnly="True" DataFormatString="{0:C}" HtmlEncode="false" meta:resourcekey="BoundFieldResource2"/>
+            <asp:BoundField DataField="COST" HeaderText="Cost" ReadOnly="True" DataFormatString="{0:N}" HtmlEncode="false" meta:resourcekey="BoundFieldResource2"/>
 </Columns>
     <RowStyle CssClass="rowlt" />
     <AlternatingRowStyle CssClass="rowdk" />
@@ -174,9 +175,9 @@ meta:resourcekey="LitRequestForm_7_rsc"
             {
                 if (conn.State != ConnectionState.Open)
                     conn.Open();
-                using (var cmd = new OleDbCommand(SQL, conn as OleDbConnection))
+                using (var cmd = conn.CreateCommand(SQL))
                 {
-                    cmd.Parameters.AddWithValue("@LitReqId", EntityService.EntityID);
+                    cmd.Parameters.Add(cmd.CreateParameter("@LitReqId", EntityService.EntityID));
                     using (var reader = cmd.ExecuteReader())
                     {
                         LitRequestGrid.DataSource = reader;
@@ -202,25 +203,9 @@ meta:resourcekey="LitRequestForm_7_rsc"
 
     protected void btnDelLitRequest_ClickAction(object sender, EventArgs e)
     {
-        //TODO:using the delete method is choking, so manually deleting records for now.
         Sage.Entity.Interfaces.ILitRequest lr = Sage.Platform.EntityFactory.GetById<Sage.Entity.Interfaces.ILitRequest>(EntityService.EntityID);
         string conid = lr.Contact.Id.ToString();
-        //lr.Delete();
-        string SQL = "DELETE FROM LITREQUESTITEM WHERE LITREQID = ?";
-        Sage.Platform.Data.IDataService service = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Data.IDataService>();
-        string constr = service.GetConnectionString();
-        using (var conn = new OleDbConnection(constr))
-        {
-            if (conn.State != ConnectionState.Open)
-                conn.Open();
-            using (var cmd = new OleDbCommand(SQL, conn))
-            {
-                cmd.Parameters.AddWithValue("@LitReqId", EntityService.EntityID);
-                cmd.ExecuteNonQuery();
-                cmd.CommandText = "DELETE FROM LITREQUEST WHERE LITREQID = ?";
-                cmd.ExecuteNonQuery();
-            }
-        }
+        lr.Delete();        
         Response.Redirect("~/Contact.aspx?entityId=" + conid);
     }
     

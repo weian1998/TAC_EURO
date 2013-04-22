@@ -1,30 +1,29 @@
-dojo.provide('Sage.Data.SDataStore');
-dojo.require('Sage.Utility');
-
-(function() {
-    var S = Sage,
-        U = Sage.Utility,
-        C = Sage.SData.Client,
-        getVirtualDirectoryName = function() {
-            var reg = new RegExp(window.location.host + "/([A-Za-z\-_]+)/");
-            var arr = reg.exec(window.location.href);
-            if (arr)
-                return arr[1];
-            return '';
-        };
-
-    dojo.declare('Sage.Data.SDataStore', null, {        
+/*globals Sage, dojo, dojox, dijit, Simplate, window, Sys, define */
+define([
+    'dojo/_base/declare',
+    'dojo/_base/lang'
+],
+function (declare, lang) {
+    var sDataStore = declare('Sage.Data.SDataStore', null, {
+        executeReadWith: 'read',
+        sort: null,
+        where: null,
+        select: null,
+        include: null,
+        request: null,
         queryName: null,
         resourceKind: null,
         resourcePredicate: null,
-        constructor: function(o) {
-            dojo.mixin(this, o);
+        collection: '$resources',
+        expandRecurrences: null,
 
+        constructor: function (o) {
+            lang.mixin(this, o);
             this.features = {
                 'dojo.data.api.Read': true
             };
         },
-        expandExpression: function(expression) {
+        _expandExpression: function (expression) {
             /// <summary>
             ///     Expands the passed expression if it is a function.
             /// </summary>
@@ -33,31 +32,44 @@ dojo.require('Sage.Utility');
             ///     2: string - Returned directly.
             /// </param>
             if (typeof expression === 'function')
-                return expression.call(this);
+                return expression.apply(this, Array.prototype.slice.call(arguments, 1));
             else
                 return expression;
         },
-        createFetchRequest: function() {
-            var queryName = this.expandExpression(this.options.queryName || this.queryName),
-                resourceKind = this.expandExpression(this.options.resourceKind || this.resourceKind),
-                resourcePredicate = this.expandExpression(this.options.resourcePredicate || this.resourcePredicate),
-                sort = this.options.sort || this.sort,
-                select = this.options.select || this.select,
-                include = this.options.include || this.include,                
-                request;
+        _createRequest: function (options) {
+            var sort = this._expandExpression(options.sort || this.sort),
+                query = '',
+                select = this._expandExpression(options.select || this.select),
+                include = this._expandExpression(options.include || this.include),
+                request = this._expandExpression(options.request || this.request);
 
-            if (queryName)
-            {
-                request = new C.SDataNamedQueryRequest(this.service)
-                    .setQueryName(queryName);
-
-                // todo: add this to the named query request class?
-                if (resourcePredicate) request.getUri().setCollectionPredicate(resourcePredicate);                
+            if (options.query) {
+                if (this.where) {
+                    query = this._expandExpression(this.where + ' and (' + options.query + ' )');
+                }
+                else {
+                    query = this._expandExpression(options.query);
+                }
             }
-            else
-                request = new C.SDataResourceCollectionRequest(this.service);
-            
-            if (resourceKind) request.setResourceKind(resourceKind);
+            else {
+                query = this._expandExpression(this.where);
+            }
+
+            if (request) {
+                request = request.clone();
+            }
+            else {
+                var queryName = this._expandExpression(options.queryName || this.queryName),
+                    resourceKind = this._expandExpression(options.resourceKind || this.resourceKind),
+                    resourcePredicate = this._expandExpression(options.resourcePredicate || this.resourcePredicate);
+
+                request = queryName
+                    ? new Sage.SData.Client.SDataNamedQueryRequest(this.service).setQueryName(queryName)
+                    : new Sage.SData.Client.SDataResourceCollectionRequest(this.service);
+
+                if (resourceKind) request.setResourceKind(resourceKind);
+                if (resourcePredicate) request.getUri().setCollectionPredicate(resourcePredicate);
+            }
 
             if (select && select.length > 0)
                 request.setQueryArg('select', select.join(','));
@@ -65,10 +77,12 @@ dojo.require('Sage.Utility');
             if (include && include.length > 0)
                 request.setQueryArg('include', include.join(','));
 
-            if (sort && sort.length > 0)
-            {
+            if (query)
+                request.setQueryArg('where', query);
+
+            if (sort && sort.length > 0) {
                 var order = [];
-                dojo.forEach(sort, function(v) {
+                dojo.forEach(sort, function (v) {
                     if (v.descending)
                         this.push(v.attribute + ' desc');
                     else
@@ -77,82 +91,74 @@ dojo.require('Sage.Utility');
                 request.setQueryArg('orderby', order.join(','));
             }
 
-            request
-                .setStartIndex(this.options.start)
-                .setCount(this.options.count);
+            if (typeof options.start !== 'undefined')
+                request.setQueryArg(Sage.SData.Client.SDataUri.QueryArgNames.StartIndex, options.start + 1);
+
+            if (typeof options.count !== 'undefined')
+                request.setQueryArg(Sage.SData.Client.SDataUri.QueryArgNames.Count, options.count);
+  
+            if (this.expandRecurrences !== null) {
+                request.uri.queryArgs['_expandRecurrences'] = this.expandRecurrences;
+            }
 
             return request;
         },
-        fetch: function(options) {
-            if (this.fetchRequiredFor(options))
-            {
-                this.options = options || {};
-            }
-            else
-            {
-                this.onSuccess(options, this.getCachedFeedFor(options));
-                return;
-            }
-            var request = this.createFetchRequest();            
-
-            var key = request.read({
-                success: dojo.hitch(this, this.onSuccess, options),
-                failure: dojo.hitch(this, this.onFailure, options)
+        fetch: function (options) {
+            var request = this._createRequest(options),
+                requestObject = lang.mixin({}, options);
+            var handle = request[this.executeReadWith]({
+                success: lang.hitch(this, this._onFetchSuccess, options, requestObject),
+                failure: lang.hitch(this, this._onFetchFailure, options, requestObject),
+                httpMethodOverride: options.queryOptions && options.queryOptions['httpMethodOverride']
             });
+            requestObject['abort'] = lang.hitch(this, this._abortRequest, handle);
+            return requestObject;
+        },
+        _abortRequest: function (handle) {
+            this.service.abortRequest(handle);
+        },
+        _onFetchSuccess: function (options, requestObject, result) {
+            if (result) {
+                if (result['$resources'])
+                    requestObject['feed'] = result['$resources'];
+                else
+                    requestObject['entry'] = result;
 
-            return {
-                abort: dojo.hitch(this, this.abortRequest, key)
-            };
-        },
-        abortRequest: function(key) {
-            this.service.abortRequest(key);
-        },
-        onSuccess: function(options, feed)
-        {
-            if (feed)
-            {
-                if (options.onBegin)
-                    options.onBegin.call(options.scope || this, feed.$totalResults, options);
-                if (options.onComplete)
-                    options.onComplete.call(options.scope || this, feed.$resources, options);
+                var items = lang.getObject(this.collection, false, result) || [result],
+                    size = result['$resources']
+                        ? result['$totalResults'] || -1
+                        : 1;
+
+                if (options.onBegin) {
+                    options.onBegin.call(options.scope || this, size, requestObject);
+                }
+                if (options.onItem) {
+                    for (var i = 0; i < items.length; i++)
+                        options.onItem.call(options.scope || this, items[i], requestObject);
+                }
+                if (options.onComplete) {
+                    options.onComplete.call(options.scope || this, options.onItem ? null : items, requestObject);
+                }
             }
-            else
-            {
-                if (options.onError)
+            else {
+                if (options.onError) {
                     options.onError.call(options.scope || this, 'invalid feed', options);
+                }
             }
         },
-        onFailure: function(options, request, requestOptions)
-        {
+        _onFetchFailure: function (options, requestObject, request, requestOptions) {
             if (options.onError)
                 options.onError.call(options.scope || this, request.responseText, options);
         },
-        getCachedFeedFor: function(options) {
-            return null;
+        getValue: function (item, attribute, defaultValue) {
+            var value = lang.getObject(attribute, false, item);
+            return typeof value === 'undefined'
+                ? defaultValue
+                : value;
         },
-        fetchRequiredFor: function(options) {
-            if (this.options)
-            {
-                if (options)
-                {
-                    // todo: compare options
-                    return true;
-                }
-
-                return false;
-            }
-            else
-                return true;
-        },
-        getValue: function(item, attribute, defaultValue)
-        {
-            return Sage.Utility.getValue(item, attribute, defaultValue);
-        },
-        getFeatures: function() {
+        getFeatures: function () {
             return this.features;
         }
     });
-})();
-
-
-
+    return sDataStore;
+});

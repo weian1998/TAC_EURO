@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Comparaison et configuration des différences de schéma</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Integration Contract/FindSchemaDifferences.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Ouvrir une rubrique avec la recherche, la table des matières et l'index</a>
+        </p>
+        <h1>Comparaison et configuration des différences de schéma</h1>
+        <p><a name="kanchor472"></a>Sage recommande la comparaison du schéma de base de données de Sage SalesLogix à celui de votre application de comptabilité pour garantir l'intégrité des données. Vous pouvez comparer les données de plusieurs ressources pour savoir si des différences de longueurs existent entre les données des systèmes.</p>
+        <p>Cette fonctionnalité compare le schéma de la ressource sélectionné dans les deux systèmes intégrés et renvoie les différences de longueur entre les données. </p>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_448830330_0" onclick="FMCDropDown( this ); return false;">En savoir plus sur la manière dont Sage SalesLogix gère les différences de schéma...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_448830330_0" style="display: none;">
+                <p><span class="SLXBold">Longueur Max</span> : si la longueur des donnés synchronisées vers Sage SalesLogix dépasse la LongueurMax d'un champ, la ligne entière est rejetée.</p>
+                <p><span class="SLXBold">Décimales</span> : si les donnés synchronisées vers Sage SalesLogix contiennent un nombre de décimales supérieur à celui défini, la valeur est arrondie en fonction du nombre de décimales autorisé. Par exemple, si un champ de devise a la valeur 17,4, alors une valeur de 123,12348 est enregistrée sous la forme 123,1235 et une valeur de 123.12343 est enregistrée sous la forme 123,1234.</p>
+            </div>
+        </div>
+        <p class="Infinitive">Pour comparer</p>
+        <ol>
+            <li class="Topic-Text-Numbered" value="1">Dans le menu <span class="SLXBold">Administration</span>, cliquez sur <span class="SLXBold">Configuration de l'intégration</span>.</li>
+            <li class="Topic-Text-Numbered" value="2">Sur l'onglet <span class="SLXBold">Systèmes de comptabilité</span>, cliquez sur <span class="SLXBold">Modifier</span> pour le système de comptabilité activé.</li>
+            <li class="Topic-Text-Numbered" value="3">Dans la boîte de dialogue <span class="SLXBold">Configuration de l'intégration de la comptabilité</span>, utilisez la section <span class="SLXBold">Différences de schéma</span> pour rechercher des différences entre les systèmes.</li>
+        </ol>
+        <ol style="list-style-type: lower-alpha;">
+            <li class="Topic-Text-Lettered" value="1">Dans le champ <span class="SLXBold">Filtrer par ressource</span>, sélectionnez le type de ressource.</li>
+            <li class="Topic-Text-Lettered" value="2">Cliquez sur <span class="SLXBold">Exécuter</span>.</li>
+            <li class="Topic-Text-Lettered" value="3">Vérifiez les différences dans la grille.</li>
+            <li class="Topic-Text-Lettered" value="4">Notez toute information qui pourrait causer des problèmes d'intégrité des données. Par exemple, un champ du système de comptabilité peut n'accepter que trois caractères alors que le même champ dans Sage SalesLogix accepte du texte libre.</li>
+            <li class="Topic-Text-Lettered" value="5">Répétez l'étape&#160;3 pour tous les types de ressources.</li>
+        </ol>
+        <ol MadCap:continue="true">
+            <li class="Topic-Text-Numbered" value="4">Cliquez sur <span class="SLXBold">OK</span>.</li>
+            <li class="Topic-Text-Numbered" value="5">Utilisez le Gestionnaire de base de données ou une autre application appropriée pour modifier le schéma de l'un des systèmes.</li>
+        </ol>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Dites-nous comment améliorer l'aide</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -23,7 +23,7 @@
             control.checked = false;
         }
         control = document.getElementById("@lbxGroup");
-        if (control != null)
+        if ((control != null) && (control.options))
         {
             control.options[0].selected = true;
         }
@@ -38,7 +38,7 @@
             control.checked = false;
         }
         control = document.getElementById("@lbxPriority");
-        if (control != null)
+        if ((control != null) && (control.options))
         {
             control.options[0].selected = true;
         }
@@ -48,7 +48,7 @@
             control.checked = false;
         }
         control = document.getElementById("@lbxStatus");
-        if (control != null)
+        if ((control != null) && (control.options))
         {
             control.options[0].selected = true;
         }
@@ -58,7 +58,7 @@
             control.checked = false;
         }
         control = document.getElementById("@lbxStage");
-        if (control != null)
+        if ((control != null) && (control.options))
         {
             control.options[0].selected = true;
         }
@@ -111,7 +111,7 @@
     
     function InsertProgress_InvokeClickEvent(control)
 	{
-	    if (document.createEvent)
+	    if (dojo.isFF)
 	    {
 	        // FireFox
 	        var e = document.createEvent("MouseEvents");
@@ -209,7 +209,7 @@
         document.getElementById(ct_selectedTargetsCtrlId).value = context;
     }
 
-    function ShowHideFilters()
+    function ct_ShowHideFilters()
     {
         var txtShowFilters = document.getElementById("@txtShowFilterId");
         var lnkFilters = document.getElementById("@lnkFiltersId");

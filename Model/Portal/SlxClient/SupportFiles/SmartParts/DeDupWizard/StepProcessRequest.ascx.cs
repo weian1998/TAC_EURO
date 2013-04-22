@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Web.UI;
 using System.Threading;
+using Telerik.Web.UI;
 using log4net;
 using Sage.Platform.Application;
 using Sage.Platform.WebPortal.Services;
-using Telerik.WebControls;
 using System.Text;
 using Sage.SalesLogix.Services.PotentialMatch;
 using Sage.Platform.Application.UI.Web.Threading;
@@ -125,17 +125,9 @@ public partial class StepProcessRequest : UserControl
     private bool CanShutDown()
     {
         IDictionary<string, string> jobs = Page.Session["DeDupJobs"] as Dictionary<string, string>;
-
-        if (jobs != null)
-        {
-            if (jobs.Count == 0)
-            {
-                return true;            
-            }
-        }
-        return false;
+        return jobs != null && jobs.Count == 0;
     }
-      
+
 
     /// <summary>
     /// Handles the Init event of the Page control.
@@ -256,7 +248,7 @@ public partial class StepProcessRequest : UserControl
     }
 
     /// <summary>
-    /// Gets the arguements from the handler to set the progress indicator.
+    /// Gets the arguments from the handler to set the progress indicator.
     /// </summary>
     /// <param name="args">The args.</param>
     private void JobProgressHandler(DeDupJobEventArgs args)
@@ -276,16 +268,14 @@ public partial class StepProcessRequest : UserControl
             Page.Session["DeDupJobId"] = args.Job.JobId;
         }
 
-        object processingMessageFormat = GetLocalResourceObject("processingMessage");
-        if (processingMessageFormat == null)
-            processingMessageFormat = "Processing record {0} of {1} - ({2}%)";
+        object processingMessageFormat = GetLocalResourceObject("processingMessage") ??
+                                         "Processing record {0} of {1} - ({2}%)";
 
-        jobProgress["PrimaryValue"] = String.Format((string)processingMessageFormat, args.Job.ProgressInfo.ProcessedCount, args.Job.ProgressInfo.RecordCount, percent);
+        jobProgress["PrimaryValue"] = String.Format((string) processingMessageFormat,
+                                                    args.Job.ProgressInfo.ProcessedCount,
+                                                    args.Job.ProgressInfo.RecordCount, percent);
         jobProgress["SecondaryTotal"] = args.Job.ProgressInfo.DuplicateCount.ToString();
-        if (args.Job.ProgressInfo.ErrorCount > 0)
-        {
-        }
-        else
+        if (args.Job.ProgressInfo.ErrorCount <= 0)
         {
             jobProgress["ProcessCompleted"] = "False";
         }
@@ -327,7 +317,6 @@ public partial class StepProcessRequest : UserControl
 
         RadProgressContext jobProgress = RadProgressContext.Current;
         jobProgress["OperationComplete"] = "True";
-
         GoToDeDupManager();
     }
     

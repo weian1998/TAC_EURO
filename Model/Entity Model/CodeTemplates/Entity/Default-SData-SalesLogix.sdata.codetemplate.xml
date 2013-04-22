@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <codeTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="bab54f5e-e03f-4eaf-8253-b05bdc80ef44" name="Default-SData-SalesLogix" entityType="Entity" templateType="sdata" templateEngineType="T4">
   <template>
-  <![CDATA[<#@ template language="C#v3.5" #>
+  <![CDATA[<#@ template language="C#v4.0" #>
 <#@ assembly name="System.Core.dll" #>
 <#@ assembly name="Microsoft.Unity.dll" #>
 <#@ assembly name="Sage.Common.Syndication.dll" #>
@@ -22,30 +22,23 @@ var generator = (SDataEntityCodeGenerator) Context["generator"];
 
 var entityDisplayName = entity.DisplayName ?? entity.Name;
 
-var parents = entity.ParentEntities.Where(relation => IsPropertyIncluded(relation.ChildProperty) && IsEntityIncluded(relation.ParentEntity)).ToList();
-var children = entity.ChildEntities.Where(relation => IsPropertyIncluded(relation.ParentProperty) && IsEntityIncluded(relation.ChildEntity)).ToList();
-var extenders = entity.ExtensionEntities.Where(extender => IsEntityIncluded(extender)).ToList();
+var parents = entity.ParentEntities.Where(relation => IsPropertyIncluded(relation.ChildProperty) &&
+                                                      (IsEntityIncluded(relation.ParentEntity) || !IsPropertyIncluded(relation.Columns[0].ChildProperty))).ToList();
+var children = entity.ChildEntities.Where(relation => IsPropertyIncluded(relation.ParentProperty) &&
+                                                      (IsEntityIncluded(relation.ChildEntity) || (!IsPropertyIncluded(relation.Columns[0].ParentProperty) && relation.Cardinality != "1:M"))).ToList();
+var extenders = entity.ExtensionEntities;
+var includedParents = parents.Where(relation => IsEntityIncluded(relation.ParentEntity)).ToList();
+var includedChildren = children.Where(relation => IsEntityIncluded(relation.ChildEntity)).ToList();
+var includedExtenders = extenders.Where(extender => IsEntityIncluded(extender)).ToList();
 var methods = entity.Methods
     .Where(method => IsTypeSupported(method.RuntimeReturnType) &&
-                     method.MethodParameters.All(param => IsTypeSupported(param.RuntimeParamType)) &&
-                     (method.RuntimeReturnType.Namespace != "Sage.Entity.Interfaces" || IsEntityIncluded(OrmEntity.GetByName(entity.Project, method.RuntimeReturnType.Name.Substring(1)))))
-    .Where(method =>
-               {
-                   var returnItemType = GetGenericCollectionItemType(method.RuntimeReturnType);
-                   return returnItemType == null || returnItemType.Namespace != "Sage.Entity.Interfaces" || IsEntityIncluded(OrmEntity.GetByName(entity.Project, returnItemType.Name.Substring(1)));
-               })
+                     method.MethodParameters.All(param => IsTypeSupported(param.RuntimeParamType)))
     .ToList();
 var properties = OrmEntity.GetIncludedProperties(entity).OfType<OrmFieldProperty>()
     .Where(prop => prop.GetGenerate() && prop != sdataExt.UniqueIdentifierProperty)
     .ToList();
 var customProperties = OrmEntity.GetIncludedCustomProperties(entity)
-    .Where(prop => IsTypeSupported(prop.RuntimeReturnType) &&
-                   (prop.RuntimeReturnType.Namespace != "Sage.Entity.Interfaces" || IsEntityIncluded(OrmEntity.GetByName(entity.Project, prop.RuntimeReturnType.Name.Substring(1)))))
-    .Where(prop =>
-               {
-                   var returnItemType = GetGenericCollectionItemType(prop.RuntimeReturnType);
-                   return returnItemType == null || returnItemType.Namespace != "Sage.Entity.Interfaces" || IsEntityIncluded(OrmEntity.GetByName(entity.Project, returnItemType.Name.Substring(1)));
-               })
+    .Where(prop => IsTypeSupported(prop.RuntimeReturnType))
     .ToList();
 #>
 //------------------------------------------------------------------------------
@@ -67,6 +60,7 @@ using System.ComponentModel;
 using System.Xml;
 using System.Xml.Serialization;
 using NHibernate;
+using NHibernate.SqlCommand;
 using Sage.Common.Metadata;
 using Sage.Common.Metadata.Model;
 using Sage.Common.Syndication;
@@ -85,7 +79,7 @@ using Sage.Platform.SData;
 namespace Sage.Integration.Entity.Adapter
 {
     [RequestPath(<#= entity.Name #>Feed.ResourcePath)]
-    public class <#= entity.Name #>RequestHandler : RequestHandlerBase<<#= entity.Name #>Feed, <#= entity.Name #>Entry, <#= entity.InterfaceName #>>
+    public class <#= entity.Name #>RequestHandler : RequestHandlerBase<<#= entity.Name #>Feed, <#= entity.Name #>Entry, global::Sage.Entity.Interfaces.<#= entity.InterfaceName #>>
     {
         public <#= entity.Name #>RequestHandler()
             : base(<#= entity.Name #>Feed.ResourceName, <#= entity.Name #>Feed.ResourcePath) {}
@@ -93,9 +87,9 @@ namespace Sage.Integration.Entity.Adapter
         internal <#= entity.Name #>RequestHandler(IRequestHandler parentRequest, string forwardPath, string backwardPath, bool isSingle)
             : base(<#= entity.Name #>Feed.ResourceName, <#= entity.Name #>Feed.ResourcePath, parentRequest, forwardPath, backwardPath, isSingle) {}
 
-<# if (parents.Count > 0) { #>
+<# if (includedParents.Count > 0) { #>
         #region M:1 Relationships
-<#  foreach (var relation in parents) { #>
+<#  foreach (var relation in includedParents) { #>
 <#   var propName = relation.ChildProperty.PropertyName; #>
 <#   var backwardPath = IsPropertyIncluded(relation.ParentProperty) ? relation.ParentProperty.PropertyName : null; #>
 <#   RequestRelatedHandler(propName, relation.ParentEntity.Name, propName, backwardPath, true); #>
@@ -103,9 +97,9 @@ namespace Sage.Integration.Entity.Adapter
         #endregion
 <# } #>
 
-<# if (children.Count > 0) { #>
+<# if (includedChildren.Count > 0) { #>
         #region 1:M Relationships
-<#  foreach (var relation in children) { #>
+<#  foreach (var relation in includedChildren) { #>
 <#   var propName = relation.ParentProperty.PropertyName; #>
 <#   var backwardPath = IsPropertyIncluded(relation.ChildProperty) ? relation.ChildProperty.PropertyName : null; #>
 <#   RequestRelatedHandler(propName, relation.ChildEntity.Name, propName, backwardPath, relation.Cardinality != "1:M"); #>
@@ -123,9 +117,9 @@ namespace Sage.Integration.Entity.Adapter
 <#  } #>
 <# } #>
 
-<# if (extenders.Count > 0) { #>
+<# if (includedExtenders.Count > 0) { #>
         #region Child Extensions
-<#  foreach (var child in extenders) { #>
+<#  foreach (var child in includedExtenders) { #>
 <#   var propName = child.Name; #>
 <#   RequestRelatedHandler(propName, propName, propName, entity.Name, true); #>
 <#  } #>
@@ -135,17 +129,17 @@ namespace Sage.Integration.Entity.Adapter
         #region Abstract Overrides
 
 <# if (!sdataExt.CanPost || !sdataExt.CanPut) { #>
-        protected override void SaveEntity(<#= entity.InterfaceName #> entity)
+        protected override void SaveEntity(global::Sage.Entity.Interfaces.<#= entity.InterfaceName #> entity)
         {
 <#  if (!sdataExt.CanPost && !sdataExt.CanPut) { #>
             throw new NotSupportedException("Insert and update not supported");
 <#  } else if (!sdataExt.CanPost) { #>
-            if ((entity.PersistentState & PersistentState.New) > 0)
+            if (entity.PersistentState.HasFlag(PersistentState.New))
             {
                 throw new NotSupportedException("Insert not supported");
             }
 <#  } else { #>
-            if ((entity.PersistentState & PersistentState.Modified) > 0)
+            if (!entity.PersistentState.HasFlag(PersistentState.New))
             {
                 throw new NotSupportedException("Update not supported");
             }
@@ -154,7 +148,7 @@ namespace Sage.Integration.Entity.Adapter
 <# } #>
 
 <# if (!sdataExt.CanDelete) { #>
-        protected override void DeleteEntity(<#= entity.InterfaceName #> entity)
+        protected override void DeleteEntity(global::Sage.Entity.Interfaces.<#= entity.InterfaceName #> entity)
         {
             throw new NotSupportedException("Delete not supported");
         }
@@ -164,18 +158,18 @@ namespace Sage.Integration.Entity.Adapter
         {
             switch (path.ToLower())
             {
-<# if (parents.Count > 0) { #>
+<# if (includedParents.Count > 0) { #>
                 #region M:1 Relationships
-<#  foreach (var relation in parents) { #>
+<#  foreach (var relation in includedParents) { #>
                 case "<#= relation.ChildProperty.PropertyName.ToLower() #>":
                     return <#= relation.ChildProperty.PropertyName #>RequestHandler;
 <#  } #>
                 #endregion
 <# } #>
 
-<# if (children.Count > 0) { #>
+<# if (includedChildren.Count > 0) { #>
                 #region 1:M Relationships
-<#  foreach (var relation in children) { #>
+<#  foreach (var relation in includedChildren) { #>
                 case "<#= relation.ParentProperty.PropertyName.ToLower() #>":
                     return <#= relation.ParentProperty.PropertyName #>RequestHandler;
 <#  } #>
@@ -192,9 +186,9 @@ namespace Sage.Integration.Entity.Adapter
 <#  } #>
 <# } #>
 
-<# if (extenders.Count > 0) { #>
+<# if (includedExtenders.Count > 0) { #>
                 #region Child Extensions
-<#  foreach (var child in extenders) { #>
+<#  foreach (var child in includedExtenders) { #>
                 case "<#= child.Name.ToLower() #>":
                     return <#= child.Name #>RequestHandler;
 <#  } #>
@@ -205,21 +199,48 @@ namespace Sage.Integration.Entity.Adapter
             }
         }
 
-        protected override void BuildTemplateEntity(<#= entity.InterfaceName #> entity, InclusionNode include)
+        protected override JoinType GetRelatedJoinType(string path)
         {
-<# if (parents.Count > 0) { #>
+            switch (path.ToLower())
+            {
+<# if (entity.IsExtension) { #>
+<#  var parent = entity.ExtendedEntity; #>
+<#  if (IsEntityIncluded(parent)) { #>
+                #region 1:1 Parent Entity Extension
+                case "<#= parent.Name.ToLower() #>":
+                    return JoinType.InnerJoin;
+                #endregion
+<#  } #>
+<# } #>
+
+<# if (includedExtenders.Count > 0) { #>
+                #region Child Extensions
+<#  foreach (var child in includedExtenders) { #>
+                case "<#= child.Name.ToLower() #>":
+                    return JoinType.InnerJoin;
+<#  } #>
+                #endregion
+<# } #>
+                default:
+                    return base.GetRelatedJoinType(path);
+            }
+        }
+
+        protected override void BuildTemplateEntity(global::Sage.Entity.Interfaces.<#= entity.InterfaceName #> entity, InclusionNode include)
+        {
+<# if (includedParents.Count > 0) { #>
             #region M:1 Relationships
-<#  foreach (var relation in parents) { #>
-<#   RequestBuildTemplateEntity(relation.ChildProperty.PropertyName, false); #>
+<#  foreach (var relation in includedParents) { #>
+<#   RequestBuildTemplateEntity(relation.ChildProperty.PropertyName, (int) relation.ChildProperty.DisplayCategory, false); #>
 <#  } #>
             #endregion
 <# } #>
 
-<# if (children.Count > 0) { #>
+<# if (includedChildren.Count > 0) { #>
             #region 1:M Relationships
-<#  foreach (var relation in children) { #>
+<#  foreach (var relation in includedChildren) { #>
 <#   var isCollection = (relation.Cardinality == "1:M"); #>
-<#   RequestBuildTemplateEntity(relation.ParentProperty.PropertyName, isCollection); #>
+<#   RequestBuildTemplateEntity(relation.ParentProperty.PropertyName, (int) relation.ParentProperty.DisplayCategory, isCollection); #>
 <#  } #>
             #endregion
 <# } #>
@@ -228,15 +249,15 @@ namespace Sage.Integration.Entity.Adapter
 <#  var parent = entity.ExtendedEntity; #>
 <#  if (IsEntityIncluded(parent)) { #>
             #region 1:1 Parent Entity Extension
-<#   RequestBuildTemplateEntity(parent.Name, false); #>
+<#   RequestBuildTemplateEntity(parent.Name, 3, false); #>
             #endregion
 <#  } #>
 <# } #>
 
-<# if (extenders.Count > 0) { #>
+<# if (includedExtenders.Count > 0) { #>
             #region Child Extensions
-<#  foreach (var child in extenders) { #>
-<#   RequestBuildTemplateEntity(child.Name, false); #>
+<#  foreach (var child in includedExtenders) { #>
+<#   RequestBuildTemplateEntity(child.Name, 3, false); #>
 <#  } #>
             #endregion
 <# } #>
@@ -275,22 +296,22 @@ namespace Sage.Integration.Entity.Adapter
                         "<#= entity.Name #>.<#= method.MethodName #>",
                         () => new object[]
                             {
-                                GetEntity(<#= method.MethodName #>Entry.Request.<#= entity.Name #>Id),
+                                GetEntity(<#= method.MethodName #>Entry.Request.Entity ?? new <#= entity.Name #>Entry {Key = <#= method.MethodName #>Entry.Request.<#= entity.Name #>Id}),
 <#   foreach (var param in method.MethodParameters) { #>
 <#    if (param.RuntimeParamType.Namespace == "Sage.Entity.Interfaces") { #>
 <#     if (IsEntityIncluded(OrmEntity.GetByName(method.Project, param.RuntimeParamType.Name.Substring(1)))) { #>
-                                new <#= param.RuntimeParamType.Name.Substring(1) #>RequestHandler().GetEntity(<#= method.MethodName #>Entry.Request.<#= param.ParamName #>Id),
+                                new <#= param.RuntimeParamType.Name.Substring(1) #>RequestHandler().GetEntity(<#= method.MethodName #>Entry.Request.<#= param.ParamName #>),
 <#     } else { #>
-                                EntityFactory.GetById<<#= param.ParamType #>>(<#= method.MethodName #>Entry.Request.<#= param.ParamName #>Id),
+                                EntityFactory.GetById<<#= param.ParamType #>>(<#= method.MethodName #>Entry.Request.<#= param.ParamName #>),
 <#     } #>
 <#    } else { #>
 <#     var itemType = GetGenericCollectionItemType(param.RuntimeParamType); #>
 <#     if (itemType != null) { #>
 <#      if (itemType.Namespace == "Sage.Entity.Interfaces") { #>
 <#       if (IsEntityIncluded(OrmEntity.GetByName(method.Project, itemType.Name.Substring(1)))) { #>
-                                new List<<#= itemType.Name #>>(new <#= itemType.Name.Substring(1) #>RequestHandler().GetEntities(<#= method.MethodName #>Entry.Request.<#= param.ParamName #>Ids)),
+                                new List<<#= itemType.Name #>>(new <#= itemType.Name.Substring(1) #>RequestHandler().GetEntities(<#= method.MethodName #>Entry.Request.<#= param.ParamName #>)),
 <#       } else { #>
-                                new List<string>(<#= method.MethodName #>Entry.Request.<#= param.ParamName #>Ids).ConvertAll(id => EntityFactory.GetById<<#= itemType.Name #>>(id)),
+                                new List<string>(<#= method.MethodName #>Entry.Request.<#= param.ParamName #>).ConvertAll(id => EntityFactory.GetById<<#= itemType.Name #>>(id)),
 <#       } #>
 <#      } else { #>
                                 new List<<#= itemType.Name #>>(<#= method.MethodName #>Entry.Request.<#= param.ParamName #>),
@@ -306,12 +327,20 @@ namespace Sage.Integration.Entity.Adapter
                                 <#= method.MethodName #>Entry.Request = null;
 <#   if (method.RuntimeReturnType != typeof (void)) { #>
 <#    if (method.RuntimeReturnType.Namespace == "Sage.Entity.Interfaces") { #>
+<#     if (IsEntityIncluded(OrmEntity.GetByName(method.Project, method.RuntimeReturnType.Name.Substring(1)))) { #>
                                 <#= method.MethodName #>Entry.Response = new <#= entity.Name #><#= method.MethodName #>Entry.ServiceResponse {Result = new <#= method.RuntimeReturnType.Name.Substring(1) #>RequestHandler().CopyRelatedEntityToFeedEntry((<#= method.ReturnType #>) result, null, null)};
+<#     } else { #>
+                                <#= method.MethodName #>Entry.Response = new <#= entity.Name #><#= method.MethodName #>Entry.ServiceResponse {Result = GenerateKey((<#= method.ReturnType #>) result)};
+<#     } #>
 <#    } else { #>
 <#     var returnItemType = GetGenericCollectionItemType(method.RuntimeReturnType); #>
 <#     if (returnItemType != null) { #>
 <#      if (returnItemType.Namespace == "Sage.Entity.Interfaces") { #>
+<#       if (IsEntityIncluded(OrmEntity.GetByName(method.Project, returnItemType.Name.Substring(1)))) { #>
                                 <#= method.MethodName #>Entry.Response = new <#= entity.Name #><#= method.MethodName #>Entry.ServiceResponse {Result = new <#= returnItemType.Name.Substring(1) #>RequestHandler().CopyRelatedEntitiesToFeedEntries((<#= method.ReturnType #>) result, null, null, null)};
+<#       } else { #>
+                                <#= method.MethodName #>Entry.Response = new <#= entity.Name #><#= method.MethodName #>Entry.ServiceResponse {Result = GenerateKeys((<#= method.ReturnType #>) result)};
+<#       } #>
 <#      } else { #>
                                 <#= method.MethodName #>Entry.Response = new <#= entity.Name #><#= method.MethodName #>Entry.ServiceResponse {Result = new List<<#= returnItemType.Name #>>((IEnumerable<<#= returnItemType.Name #>>) result)};
 <#      } #>
@@ -330,7 +359,7 @@ namespace Sage.Integration.Entity.Adapter
         }
 <# } #>
 
-        protected override void CopyFeedEntryToEntity(<#= entity.Name #>Entry entry, <#= entity.InterfaceName #> entity, InclusionNode include)
+        protected override void CopyFeedEntryToEntity(<#= entity.Name #>Entry entry, global::Sage.Entity.Interfaces.<#= entity.InterfaceName #> entity, InclusionNode include)
         {
 <# if (properties.Count > 0) { #>
             #region Properties
@@ -339,16 +368,22 @@ namespace Sage.Integration.Entity.Adapter
 <#    var name = prop.PropertyName; #>
             if (entry.IsPropertyChanged("<#= name #>"))
             {
+<#    if (prop.DisplayCategory == DisplayCategory.Obsolete) { #>
+#pragma warning disable 612,618
+<#    } #>
                 entity.<#= name #> = entry.<#= name #>;
+<#    if (prop.DisplayCategory == DisplayCategory.Obsolete) { #>
+#pragma warning restore 612,618
+<#    } #>
             }
 <#   } #>
 <#  } #>
             #endregion
 <# } #>
 
-<# if (parents.Count > 0) { #>
+<# if (includedParents.Count > 0) { #>
             #region M:1 Relationships
-<#  foreach (var relation in parents) { #>
+<#  foreach (var relation in includedParents) { #>
 <#   var otherName = IsPropertyIncluded(relation.ParentProperty) ? relation.ParentProperty.PropertyName : null; #>
 <#   var isCollection = (relation.Cardinality == "1:M"); #>
 <#   RequestReferenceCopyFeedEntryToEntity(relation.ChildProperty.PropertyName, otherName, isCollection); #>
@@ -356,15 +391,15 @@ namespace Sage.Integration.Entity.Adapter
             #endregion
 <# } #>
 
-<# if (children.Count > 0) { #>
+<# if (includedChildren.Count > 0) { #>
             #region 1:M Relationships
-<#  foreach (var relation in children) { #>
+<#  foreach (var relation in includedChildren) { #>
 <#   var name = relation.ParentProperty.PropertyName; #>
 <#   if (relation.Cardinality == "1:M") { #>
             if (entry.IsPropertyChanged("<#= name #>"))
             {
                 var <#= name #>Include = include != null ? include.GetChild("<#= name #>") : null;
-                if (include != null && <#= name #>Include == null)
+                if (include != null && <#= name #>Include == null && entity.<#= name #> != null && entry.<#= name #>.Entries.Count > 0)
                 {
                     <#= name #>Include = new InclusionNode(InclusionNode.InclusionLevel.Include);
                     include.SetChild("<#= name #>", <#= name #>Include);
@@ -378,8 +413,8 @@ namespace Sage.Integration.Entity.Adapter
 <#    } #>
             }
 <#   } else { #>
-<#     var otherName = IsPropertyIncluded(relation.ChildProperty) ? relation.ChildProperty.PropertyName : null; #>
-<#     RequestReferenceCopyFeedEntryToEntity(name, otherName, false); #>
+<#    var otherName = IsPropertyIncluded(relation.ChildProperty) ? relation.ChildProperty.PropertyName : null; #>
+<#    RequestReferenceCopyFeedEntryToEntity(name, otherName, false); #>
 <#   } #>
 <#  } #>
             #endregion
@@ -394,9 +429,9 @@ namespace Sage.Integration.Entity.Adapter
 <#  } #>
 <# } #>
 
-<# if (extenders.Count > 0) { #>
+<# if (includedExtenders.Count > 0) { #>
             #region Child Extensions
-<#  foreach (var child in extenders) { #>
+<#  foreach (var child in includedExtenders) { #>
 <#   RequestReferenceCopyFeedEntryToEntity(child.Name, entity.Name, false); #>
 <#  } #>
             #endregion
@@ -404,17 +439,22 @@ namespace Sage.Integration.Entity.Adapter
             base.CopyFeedEntryToEntity(entry, entity, include);
         }
 
-        protected override void CopyEntityToFeedEntry(<#= entity.InterfaceName #> entity, <#= entity.Name #>Entry entry, InclusionNode include)
+        protected override void CopyEntityToFeedEntry(global::Sage.Entity.Interfaces.<#= entity.InterfaceName #> entity, <#= entity.Name #>Entry entry, InclusionNode include)
         {
 <# if (properties.Count > 0) { #>
             #region Properties
 <#  foreach (var prop in properties) { #>
 <#   var name = prop.PropertyName; #>
-<#   var precedence = (int) prop.DisplayCategory; #>
             var <#= name #>Include = include != null ? include.GetChild("<#= name #>") : null;
-            if (InclusionNode.IsIncluded(include, <#= name #>Include, <#= precedence #>, true))
+            if (InclusionNode.IsIncluded(include, <#= name #>Include, <#= (int) prop.DisplayCategory #>, true))
             {
+<#    if (prop.DisplayCategory == DisplayCategory.Obsolete) { #>
+#pragma warning disable 612,618
+<#    } #>
                 entry.<#= name #> = entity.<#= name #>;
+<#    if (prop.DisplayCategory == DisplayCategory.Obsolete) { #>
+#pragma warning restore 612,618
+<#    } #>
             }
 <#  } #>
             #endregion
@@ -427,18 +467,32 @@ namespace Sage.Integration.Entity.Adapter
 <#   var precedence = (int) prop.DisplayCategory; #>
             var <#= name #>Include = include != null ? include.GetChild("<#= name #>") : null;
 <#   if (prop.RuntimeReturnType.Namespace == "Sage.Entity.Interfaces") { #>
+<#    if (IsEntityIncluded(OrmEntity.GetByName(entity.Project, prop.RuntimeReturnType.Name.Substring(1)))) { #>
             if (InclusionNode.IsIncluded(include, <#= name #>Include, <#= precedence #>, false))
             {
                 entry.<#= name #> = new <#= prop.RuntimeReturnType.Name.Substring(1) #>RequestHandler().CopyRelatedEntityToFeedEntry(entity.<#= name #>, entry.<#= name #>, <#= name #>Include);
             }
+<#    } else { #>
+            if (InclusionNode.IsIncluded(include, <#= name #>Include, <#= precedence #>, true))
+            {
+                entry.<#= name #> = GenerateKey(entity.<#= name #>);
+            }
+<#    } #>
 <#   } else { #>
 <#    var returnItemType = GetGenericCollectionItemType(prop.RuntimeReturnType); #>
 <#    if (returnItemType != null) { #>
 <#     if (returnItemType.Namespace == "Sage.Entity.Interfaces") { #>
+<#      if (IsEntityIncluded(OrmEntity.GetByName(entity.Project, returnItemType.Name.Substring(1)))) { #>
             if (InclusionNode.IsIncluded(include, <#= name #>Include, <#= precedence #>, false))
             {
                 entry.<#= name #> = new <#= returnItemType.Name.Substring(1) #>RequestHandler().CopyRelatedEntitiesToFeedEntries(entity.<#= name #>, entry.<#= name #>, entry.Uri, <#= name #>Include);
             }
+<#      } else { #>
+            if (InclusionNode.IsIncluded(include, <#= name #>Include, <#= precedence #>, true))
+            {
+                entry.<#= name #> = GenerateKeys(entity.<#= name #>);
+            }
+<#      } #>
 <#     } else { #>
             if (InclusionNode.IsIncluded(include, <#= name #>Include, <#= precedence #>, false))
             {
@@ -459,7 +513,18 @@ namespace Sage.Integration.Entity.Adapter
 <# if (parents.Count > 0) { #>
             #region M:1 Relationships
 <#  foreach (var relation in parents) { #>
-<#   RequestReferenceCopyEntityToFeedEntry(relation.ChildProperty.PropertyName); #>
+<#   var name = relation.ChildProperty.PropertyName; #>
+<#   var precedence = (int) relation.ChildProperty.DisplayCategory; #>
+<#   if (IsEntityIncluded(relation.ParentEntity)) { #>
+<#    RequestReferenceCopyEntityToFeedEntry(name, precedence); #>
+<#   } else { #>
+<#    name += "Id"; #>
+            var <#= name #>Include = include != null ? include.GetChild("<#= name #>") : null;
+            if (InclusionNode.IsIncluded(include, <#= name #>Include, <#= precedence #>, true))
+            {
+                entry.<#= name #> = GenerateKey(entity.<#= relation.ChildProperty.PropertyName #>);
+            }
+<#   } #>
 <#  } #>
             #endregion
 <# } #>
@@ -468,56 +533,78 @@ namespace Sage.Integration.Entity.Adapter
             #region 1:M Relationships
 <#  foreach (var relation in children) { #>
 <#   var name = relation.ParentProperty.PropertyName; #>
+<#   var precedence = (int) relation.ParentProperty.DisplayCategory; #>
 <#   if (relation.Cardinality == "1:M") { #>
             var <#= name #>Include = include != null ? include.GetChild("<#= name #>") : null;
-            if (InclusionNode.IsIncluded(include, <#= name #>Include, 1, false))
+            if (InclusionNode.IsIncluded(include, <#= name #>Include, <#= precedence #>, false))
             {
                 entry.<#= name #> = <#= name #>RequestHandler.CopyRelatedEntitiesToFeedEntries(entity.<#= name #>, entry.<#= name #>, entry.Uri, <#= name #>Include);
             }
-            else if (InclusionNode.IsIncluded(include, <#= name #>Include, 1, true))
+            else if (InclusionNode.IsIncluded(include, <#= name #>Include, <#= precedence #>, true))
             {
                 entry.<#= name #> = <#= name #>RequestHandler.CreateLinkFeed(entry.Uri);
             }
+<#   } else if (IsEntityIncluded(relation.ChildEntity)) { #>
+<#     RequestReferenceCopyEntityToFeedEntry(name, precedence); #>
 <#   } else { #>
-<#    RequestReferenceCopyEntityToFeedEntry(name); #>
+            var <#= name #>Include = include != null ? include.GetChild("<#= name #>") : null;
+            if (InclusionNode.IsIncluded(include, <#= name #>Include, <#= precedence #>, true))
+            {
+                entry.<#= name #> = GenerateKey(entity.<#= name #>);
+            }
 <#   } #>
 <#  } #>
             #endregion
 <# } #>
 
 <# if (entity.IsExtension) { #>
-<#  var parent = entity.ExtendedEntity; #>
-<#  if (IsEntityIncluded(parent)) { #>
             #region 1:1 Parent Entity Extension
-<#   RequestReferenceCopyEntityToFeedEntry(parent.Name); #>
-            #endregion
+<#  var name = entity.ExtendedEntity.Name; #>
+<#  if (IsEntityIncluded(entity.ExtendedEntity)) { #>
+<#   RequestReferenceCopyEntityToFeedEntry(name, 3); #>
+<#  } else { #>
+            var <#= name #>Include = include != null ? include.GetChild("<#= name #>") : null;
+            if (InclusionNode.IsIncluded(include, <#= name #>Include, 3, true))
+            {
+                entry.<#= name #> = GenerateKey(entity.<#= name #>);
+            }
 <#  } #>
+            #endregion
 <# } #>
 
 <# if (extenders.Count > 0) { #>
             #region Child Extensions
 <#  foreach (var child in extenders) { #>
-<#   RequestReferenceCopyEntityToFeedEntry(child.Name); #>
+<#   var name = child.Name; #>
+<#   if (IsEntityIncluded(child)) { #>
+<#    RequestReferenceCopyEntityToFeedEntry(name, 3); #>
+<#   } else { #>
+            var <#= name #>Include = include != null ? include.GetChild("<#= name #>") : null;
+            if (InclusionNode.IsIncluded(include, <#= name #>Include, 3, true))
+            {
+                entry.<#= name #> = GenerateKey(entity.<#= name #>);
+            }
+<#   } #>
 <#  } #>
             #endregion
 <# } #>
             base.CopyEntityToFeedEntry(entity, entry, include);
         }
 
-        protected override void CalculateETagHash(<#= entity.InterfaceName #> entity, InclusionNode include, InclusionNode hashInclude, ref long hash)
+        protected override void CalculateETagHash(global::Sage.Entity.Interfaces.<#= entity.InterfaceName #> entity, InclusionNode include, InclusionNode hashInclude, ref long hash)
         {
-<# if (parents.Count > 0) { #>
+<# if (includedParents.Count > 0) { #>
             #region M:1 Relationships
-<#  foreach (var relation in parents) { #>
-<#   RequestCalculateETagHash(relation.ChildProperty.PropertyName); #>
+<#  foreach (var relation in includedParents) { #>
+<#   RequestCalculateETagHash(relation.ChildProperty.PropertyName, (int) relation.ChildProperty.DisplayCategory); #>
 <#  } #>
             #endregion
 <# } #>
 
-<# if (children.Count > 0) { #>
+<# if (includedChildren.Count > 0) { #>
             #region 1:M Relationships
-<#  foreach (var relation in children) { #>
-<#   RequestCalculateETagHash(relation.ParentProperty.PropertyName); #>
+<#  foreach (var relation in includedChildren) { #>
+<#   RequestCalculateETagHash(relation.ParentProperty.PropertyName, (int) relation.ParentProperty.DisplayCategory); #>
 <#  } #>
             #endregion
 <# } #>
@@ -526,15 +613,15 @@ namespace Sage.Integration.Entity.Adapter
 <#  var parent = entity.ExtendedEntity; #>
 <#  if (IsEntityIncluded(parent)) { #>
             #region 1:1 Parent Entity Extension
-<#   RequestCalculateETagHash(parent.Name); #>
+<#   RequestCalculateETagHash(parent.Name, 3); #>
             #endregion
 <#  } #>
 <# } #>
 
-<# if (extenders.Count > 0) { #>
+<# if (includedExtenders.Count > 0) { #>
             #region Child Extensions
-<#  foreach (var child in extenders) { #>
-<#   RequestCalculateETagHash(child.Name); #>
+<#  foreach (var child in includedExtenders) { #>
+<#   RequestCalculateETagHash(child.Name, 3); #>
 <#  } #>
             #endregion
 <# } #>
@@ -588,7 +675,7 @@ namespace Sage.Integration.Entity.Adapter
             get { return "<#= sdataExt.UniqueIdentifierProperty.PropertyName #>"; }
         }
 
-        protected override Guid? GetUniqueIdentifier(<#= entity.InterfaceName #> entity)
+        protected override Guid? GetUniqueIdentifier(global::Sage.Entity.Interfaces.<#= entity.InterfaceName #> entity)
         {
 <#  var fieldProp = sdataExt.UniqueIdentifierProperty as OrmFieldProperty; #>
 <#  if (fieldProp != null && fieldProp.IsDynamic) { #>
@@ -598,7 +685,7 @@ namespace Sage.Integration.Entity.Adapter
 <#  } #>
         }
 <#  if (fieldProp != null && !(fieldProp.IsReadOnly || (entity.HasCompleteCompositeKeyRelationships && fieldProp.IsKeyProperty))) { #>
-        protected override void SetUniqueIdentifier(<#= entity.InterfaceName #> entity, Guid? uuid)
+        protected override void SetUniqueIdentifier(global::Sage.Entity.Interfaces.<#= entity.InterfaceName #> entity, Guid? uuid)
         {
 <#   if (fieldProp.IsDynamic) { #>
             entity["<#= sdataExt.UniqueIdentifierProperty.PropertyName #>"] = uuid;
@@ -610,7 +697,7 @@ namespace Sage.Integration.Entity.Adapter
 <# } #>
 
 <# if (sdataExt.LastUpdatedProperty != null && IsPropertyIncluded(sdataExt.LastUpdatedProperty)) { #>
-        protected override DateTime? GetLastUpdated(<#= entity.InterfaceName #> entity)
+        protected override DateTime? GetLastUpdated(global::Sage.Entity.Interfaces.<#= entity.InterfaceName #> entity)
         {
 <#  var fieldProp = sdataExt.LastUpdatedProperty as OrmFieldProperty; #>
 <#  if (fieldProp != null && fieldProp.IsDynamic) { #>
@@ -689,12 +776,20 @@ namespace Sage.Integration.Entity.Feeds
 <#  foreach (var prop in customProperties) { #>
 <#   string type; #>
 <#   if (prop.RuntimeReturnType.Namespace == "Sage.Entity.Interfaces") { #>
-<#    type = prop.RuntimeReturnType.Name.Substring(1) + "Entry"; #>
+<#    if (IsEntityIncluded(OrmEntity.GetByName(entity.Project, prop.RuntimeReturnType.Name.Substring(1)))) { #>
+<#     type = prop.RuntimeReturnType.Name.Substring(1) + "Entry"; #>
+<#    } else { #>
+<#     type = "String"; #>
+<#    } #>
 <#   } else { #>
 <#    var returnItemType = GetGenericCollectionItemType(prop.RuntimeReturnType); #>
 <#    if (returnItemType != null) { #>
 <#     if (returnItemType.Namespace == "Sage.Entity.Interfaces") { #>
-<#      type = returnItemType.Name.Substring(1) + "Feed"; #>
+<#      if (IsEntityIncluded(OrmEntity.GetByName(entity.Project, returnItemType.Name.Substring(1)))) { #>
+<#       type = returnItemType.Name.Substring(1) + "Feed"; #>
+<#      } else { #>
+<#       type = "List<String>"; #>
+<#      } #>
 <#     } else { #>
 <#      type = "List<" + returnItemType.Name + ">"; #>
 <#     } #>
@@ -711,9 +806,16 @@ namespace Sage.Integration.Entity.Feeds
 <# if (parents.Count > 0) { #>
         #region M:1 Relationships
 <#  foreach (var relation in parents) { #>
-<#   var type = relation.ParentEntity.Name + "Entry"; #>
+<#   string type; #>
+<#   string name = relation.ChildProperty.PropertyName; #>
+<#   if (IsEntityIncluded(relation.ParentEntity)) { #>
+<#    type = relation.ParentEntity.Name + "Entry"; #>
+<#   } else { #>
+<#    type = "String"; #>
+<#    name += "Id"; #>
+<#   } #>
 <#   var attr = generator.GetPropertySMEMetadataAttribute(relation.ChildProperty); #>
-<#   FeedEntryProperty(type, relation.ChildProperty.PropertyName, false, attr); #>
+<#   FeedEntryProperty(type, name, false, attr); #>
 <#  } #>
         #endregion
 <# } #>
@@ -721,7 +823,12 @@ namespace Sage.Integration.Entity.Feeds
 <# if (children.Count > 0) { #>
         #region 1:M Relationships
 <#  foreach (var relation in children) { #>
-<#   var type = relation.ChildEntity.Name + (relation.Cardinality == "1:M" ? "Feed" : "Entry"); #>
+<#   string type; #>
+<#   if (IsEntityIncluded(relation.ChildEntity)) { #>
+<#    type = relation.ChildEntity.Name + (relation.Cardinality == "1:M" ? "Feed" : "Entry"); #>
+<#   } else { #>
+<#    type = relation.Cardinality == "1:M" ? "List<String>" : "String"; #>
+<#   } #>
 <#   var attr = generator.GetPropertySMEMetadataAttribute(relation.ParentProperty); #>
 <#   FeedEntryProperty(type, relation.ParentProperty.PropertyName, false, attr); #>
 <#  } #>
@@ -729,20 +836,36 @@ namespace Sage.Integration.Entity.Feeds
 <# } #>
 
 <# if (entity.IsExtension) { #>
-<#  var parent = entity.ExtendedEntity; #>
-<#  if (IsEntityIncluded(parent)) { #>
         #region 1:1 Parent Entity Extension
-<#   var attr = generator.GetPropertySMEMetadataAttribute(parent, true); #>
-<#   FeedEntryProperty(parent.Name + "Entry", parent.Name, false, attr); #>
-        #endregion
+<#  var parent = entity.ExtendedEntity; #>
+<#  string type; #>
+<#  bool readOnly; #>
+<#  if (IsEntityIncluded(parent)) { #>
+<#   type = parent.Name + "Entry"; #>
+<#   readOnly = false; #>
+<#  } else { #>
+<#   type = "String"; #>
+<#   readOnly = true; #>
 <#  } #>
+<#  var attr = generator.GetPropertySMEMetadataAttribute(parent, true); #>
+<#  FeedEntryProperty(type, parent.Name, readOnly, attr); #>
+        #endregion
 <# } #>
 
 <# if (extenders.Count > 0) { #>
         #region Child Extensions
 <#  foreach (var child in extenders) { #>
+<#   string type; #>
+<#   bool readOnly; #>
+<#   if (IsEntityIncluded(child)) { #>
+<#    type = child.Name + "Entry"; #>
+<#    readOnly = false; #>
+<#   } else { #>
+<#    type = "String"; #>
+<#    readOnly = true; #>
+<#   } #>
 <#   var attr = generator.GetPropertySMEMetadataAttribute(child, false); #>
-<#   FeedEntryProperty(child.Name + "Entry", child.Name, false, attr); #>
+<#   FeedEntryProperty(type, child.Name, readOnly, attr); #>
 <#  } #>
         #endregion
 <# } #>
@@ -784,16 +907,29 @@ namespace Sage.Integration.Entity.Feeds
                 get { return _serializerNamespaces; }
             }
 
+            [SMERelationshipProperty(IncludeByDefault = true)]
+            [XmlElement("entity")]
+            public <#= entity.Name #>Entry Entity { get; set; }
+
             public string <#= entity.Name #>Id { get; set; }
 <#   foreach (var param in method.MethodParameters) { #>
 <#    if (param.RuntimeParamType.Namespace == "Sage.Entity.Interfaces") { #>
-            public string <#= param.ParamName #>Id { get; set; }
+<#     if (IsEntityIncluded(OrmEntity.GetByName(entity.Project, param.RuntimeParamType.Name.Substring(1)))) { #>
+            [SMERelationshipProperty(IncludeByDefault = true)]
+            public <#= param.RuntimeParamType.Name.Substring(1) #>Entry <#= param.ParamName #> { get; set; }
+<#     } else { #>
+            public string <#= param.ParamName #> { get; set; }
+<#     } #>
 <#    } else { #>
 <#     var itemType = GetGenericCollectionItemType(param.RuntimeParamType); #>
 <#     if (itemType != null) { #>
             [SMERelationshipProperty(IncludeByDefault = true)]
 <#      if (itemType.Namespace == "Sage.Entity.Interfaces") { #>
-            public List<string> <#= param.ParamName #>Ids { get; set; }
+<#       if (IsEntityIncluded(OrmEntity.GetByName(entity.Project, itemType.Name.Substring(1)))) { #>
+            public <#= itemType.Name.Substring(1) #>Feed <#= param.ParamName #> { get; set; }
+<#       } else { #>
+            public List<string> <#= param.ParamName #> { get; set; }
+<#       } #>
 <#      } else { #>
             public List<<#= itemType.Name #>> <#= param.ParamName #> { get; set; }
 <#      } #>
@@ -821,14 +957,22 @@ namespace Sage.Integration.Entity.Feeds
             }
 
 <#   if (method.RuntimeReturnType.Namespace == "Sage.Entity.Interfaces") { #>
+<#    if (IsEntityIncluded(OrmEntity.GetByName(entity.Project, method.RuntimeReturnType.Name.Substring(1)))) { #>
             [SMERelationshipProperty(IncludeByDefault = true)]
             public <#= method.RuntimeReturnType.Name.Substring(1) #>Entry Result { get; set; }
+<#    } else { #>
+            public string Result { get; set; }
+<#    } #>
 <#   } else { #>
 <#    var returnItemType = GetGenericCollectionItemType(method.RuntimeReturnType); #>
 <#    if (returnItemType != null) { #>
             [SMERelationshipProperty(IncludeByDefault = true)]
 <#     if (returnItemType.Namespace == "Sage.Entity.Interfaces") { #>
+<#      if (IsEntityIncluded(OrmEntity.GetByName(entity.Project, returnItemType.Name.Substring(1)))) { #>
             public <#= returnItemType.Name.Substring(1) #>Feed Result { get; set; }
+<#      } else { #>
+            public List<string> Result { get; set; }
+<#      } #>
 <#     } else { #>
             public List<<#= returnItemType.Name #>> Result { get; set; }
 <#     } #>
@@ -854,9 +998,9 @@ public IDictionary Context { get; set; }
             get { return _<#= propName #>RequestHandler ?? (_<#= propName #>RequestHandler = new <#= entityName #>RequestHandler(this, <#= forwardPath != null ? "\"" + forwardPath + "\"" : "null" #>, <#= backwardPath != null ? "\"" + backwardPath + "\"" : "null" #>, <#= isSingle.ToString().ToLower() #>)); }
         }
 <#+ } #>
-<#+ private void RequestBuildTemplateEntity(string name, bool isCollection) { #>
+<#+ private void RequestBuildTemplateEntity(string name, int precedence, bool isCollection) { #>
             var <#= name #>Include = include != null ? include.GetChild("<#= name #>") : null;
-            if (InclusionNode.IsIncluded(include, <#= name #>Include, 1, false))
+            if (InclusionNode.IsIncluded(include, <#= name #>Include, <#= precedence #>, false))
             {
 <#+  if (isCollection) { #>
                 entity.<#= name #>.Add(<#= name #>RequestHandler.BuildTemplateEntity(<#= name #>Include));
@@ -869,45 +1013,35 @@ public IDictionary Context { get; set; }
             if (entry.IsPropertyChanged("<#= name #>"))
             {
                 var <#= name #>Include = include != null ? include.GetChild("<#= name #>") : null;
-                if (include != null && <#= name #>Include == null)
+                if (include != null && <#= name #>Include == null && entry.<#= name #> != null && entry.<#= name #>.GetChangedProperties().Length > 0)
                 {
                     <#= name #>Include = new InclusionNode(InclusionNode.InclusionLevel.Include);
                     include.SetChild("<#= name #>", <#= name #>Include);
                 }
                 var parent = <#= name #>RequestHandler.CopyRelatedFeedEntryToEntity(entry.<#= name #>, entity.<#= name #>, <#= name #>Include);
                 entity.<#= name #> = parent;
-<#+  if (otherName != null) { #>
+<#+  if (otherName != null && !isCollection) { #>
                 if (parent != null)
                 {
-<#+   if (isCollection) { #>
-                    parent.<#= otherName #>.Add(entity);
-<#+   } else { #>
                     parent.<#= otherName #> = entity;
-<#+   } #>
                 }
 <#+  } #>
             }
 <#+ } #>
-<#+ private void RequestReferenceCopyEntityToFeedEntry(string name) { #>
-            try
+<#+ private void RequestReferenceCopyEntityToFeedEntry(string name, int precedence) { #>
+            var <#= name #>Include = include != null ? include.GetChild("<#= name #>") : null;
+            if (InclusionNode.IsIncluded(include, <#= name #>Include, <#= precedence #>, false))
             {
-                var <#= name #>Include = include != null ? include.GetChild("<#= name #>") : null;
-                if (InclusionNode.IsIncluded(include, <#= name #>Include, 1, false))
-                {
-                    entry.<#= name #> = <#= name #>RequestHandler.CopyRelatedEntityToFeedEntry(entity.<#= name #>, entry.<#= name #>, <#= name #>Include);
-                }
-                else if (InclusionNode.IsIncluded(include, <#= name #>Include, 1, true))
-                {
-                    entry.<#= name #> = <#= name #>RequestHandler.CreateLinkEntry(entity.<#= name #>);
-                }
+                entry.<#= name #> = <#= name #>RequestHandler.CopyRelatedEntityToFeedEntry(entity.<#= name #>, entry.<#= name #>, <#= name #>Include);
             }
-            catch (ObjectNotFoundException)
+            else if (InclusionNode.IsIncluded(include, <#= name #>Include, <#= precedence #>, true))
             {
+                entry.<#= name #> = <#= name #>RequestHandler.CreateLinkEntry(entity.<#= name #>);
             }
 <#+ } #>
-<#+ private void RequestCalculateETagHash(string name) { #>
+<#+ private void RequestCalculateETagHash(string name, int precedence) { #>
             var <#= name #>Include = include != null ? include.GetChild("<#= name #>") : null;
-            if (InclusionNode.IsIncluded(include, <#= name #>Include, 1, false))
+            if (InclusionNode.IsIncluded(include, <#= name #>Include, <#= precedence #>, false))
             {
                 var <#= name #>HashInclude = new InclusionNode(InclusionNode.InclusionLevel.Include);
                 hashInclude.SetChild("<#= name #>", <#= name #>HashInclude);

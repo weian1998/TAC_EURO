@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Operator_StartsWith" xml:space="preserve">
+    <value>Commence par</value>
+  </data>
+  <data name="GroupNoAccess" xml:space="preserve">
+    <value>Ce filtre contient un groupe auquel vous n’avez pas accès.</value>
+  </data>
+  <data name="RMA" xml:space="preserve">
+    <value>RMA</value>
+  </data>
+  <data name="Operator_IsNot" xml:space="preserve">
+    <value>N’est pas</value>
+  </data>
+  <data name="Operator_IsAfter" xml:space="preserve">
+    <value>Vient après</value>
+  </data>
+  <data name="localizeThisMonth.Text" xml:space="preserve">
+    <value>Ce mois</value>
+  </data>
+  <data name="ConditionsToggle_Edit" xml:space="preserve">
+    <value>Modifier &gt;&gt;&gt;</value>
+  </data>
+  <data name="DateRange_LastQuarter" xml:space="preserve">
+    <value>Trimestre dernier</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>Compte</value>
+  </data>
+  <data name="CurrentRecord" xml:space="preserve">
+    <value>[Enregistrement actuel]</value>
+  </data>
+  <data name="localizeConditions.Text" xml:space="preserve">
+    <value>Conditions</value>
+  </data>
+  <data name="Marketing" xml:space="preserve">
+    <value>Marketing</value>
+  </data>
+  <data name="localizeReleasedTo.Text" xml:space="preserve">
+    <value>Diffusé à :</value>
+  </data>
+  <data name="ConditionsTH_Condition" xml:space="preserve">
+    <value>Valeur de condition</value>
+  </data>
+  <data name="localizeSelectNameReport.Text" xml:space="preserve">
+    <value>Sélectionner le nom du rapport :</value>
+  </data>
+  <data name="Condition_User" xml:space="preserve">
+    <value>Utilisateur</value>
+  </data>
+  <data name="localizeQuarterToDate.Text" xml:space="preserve">
+    <value>Trimestre jusqu'à ce jour</value>
+  </data>
+  <data name="NoConditions" xml:space="preserve">
+    <value>Vous devez ajouter des conditions avant de pouvoir enregistrer un filtre.</value>
+  </data>
+  <data name="localizeThisYear.Text" xml:space="preserve">
+    <value>Cette année</value>
+  </data>
+  <data name="DateRange_LastWeek" xml:space="preserve">
+    <value>Semaine dernière</value>
+  </data>
+  <data name="DateRange_MonthToDate" xml:space="preserve">
+    <value>Mois à ce jour</value>
+  </data>
+  <data name="localizeOfFollowingConditions.Text" xml:space="preserve">
+    <value>des conditions suivantes</value>
+  </data>
+  <data name="localizeMonthToDate.Text" xml:space="preserve">
+    <value>Mois à ce jour</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Nom d'utilisateur</value>
+  </data>
+  <data name="Operator_Contains" xml:space="preserve">
+    <value>contient</value>
+  </data>
+  <data name="AllRecords" xml:space="preserve">
+    <value>[Tous les enregistrements]</value>
+  </data>
+  <data name="Operator_IsLessThan" xml:space="preserve">
+    <value>Est inférieur à</value>
+  </data>
+  <data name="Any" xml:space="preserve">
+    <value>N'importe quel(le)</value>
+  </data>
+  <data name="Condition_DateRange" xml:space="preserve">
+    <value>Intervalle de dates</value>
+  </data>
+  <data name="ConditionsTH_Field" xml:space="preserve">
+    <value>Champ</value>
+  </data>
+  <data name="ConditionsTH_Table" xml:space="preserve">
+    <value>Table</value>
+  </data>
+  <data name="ConditionsTH_Operator" xml:space="preserve">
+    <value>Opérateur</value>
+  </data>
+  <data name="localizeLastYear.Text" xml:space="preserve">
+    <value>Année dernière</value>
+  </data>
+  <data name="localizeDateRange.Text" xml:space="preserve">
+    <value>Intervalle de dates</value>
+  </data>
+  <data name="RemoveCondition" xml:space="preserve">
+    <value>Supprimer la condition</value>
+  </data>
+  <data name="localizeYearToDate.Text" xml:space="preserve">
+    <value>Année jusqu'à ce jour</value>
+  </data>
+  <data name="Operator_IsInTheRange" xml:space="preserve">
+    <value>Est compris dans l'intervalle</value>
+  </data>
+  <data name="Operator_IsBefore" xml:space="preserve">
+    <value>Vient avant</value>
+  </data>
+  <data name="localizeMatchBy.Text" xml:space="preserve">
+    <value>Rechercher par</value>
+  </data>
+  <data name="ConditionsToggle_Hide" xml:space="preserve">
+    <value>&lt;&lt;&lt; Masquer</value>
+  </data>
+  <data name="localizeShowRecordsThatMatch.Text" xml:space="preserve">
+    <value>Afficher les enregistrements correspondants</value>
+  </data>
+  <data name="Operator_EndsWith" xml:space="preserve">
+    <value>Finit par</value>
+  </data>
+  <data name="Activities" xml:space="preserve">
+    <value>Activités</value>
+  </data>
+  <data name="localizeNotConfigured.Text" xml:space="preserve">
+    <value>Web Reporting n'a pas été configuré. Veuillez contacter votre administrateur SalesLogix.</value>
+  </data>
+  <data name="Condition_Query" xml:space="preserve">
+    <value>Requête</value>
+  </data>
+  <data name="DateRange_QuarterToDate" xml:space="preserve">
+    <value>Trimestre jusqu'à ce jour</value>
+  </data>
+  <data name="localizeViewSqlButton.Text" xml:space="preserve">
+    <value>Afficher SQL</value>
+  </data>
+  <data name="DateRange_YearToDate" xml:space="preserve">
+    <value>Année jusqu'à ce jour</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>Historique</value>
+  </data>
+  <data name="localizeGroupName.Text" xml:space="preserve">
+    <value>Nom de groupe</value>
+  </data>
+  <data name="Ticket" xml:space="preserve">
+    <value>Ticket</value>
+  </data>
+  <data name="DateRange_ThisWeek" xml:space="preserve">
+    <value>Cette semaine</value>
+  </data>
+  <data name="DateRange_SpecificDates" xml:space="preserve">
+    <value>Dates spécifiques</value>
+  </data>
+  <data name="localizeGroup.Text" xml:space="preserve">
+    <value>Groupe</value>
+  </data>
+  <data name="localizeOperator.Text" xml:space="preserve">
+    <value>Opérateur</value>
+  </data>
+  <data name="localizeCurrentCondition.Text" xml:space="preserve">
+    <value>Actuel</value>
+  </data>
+  <data name="localizeSelectUser.Text" xml:space="preserve">
+    <value>Sélectionner un utilisateur :</value>
+  </data>
+  <data name="localizeSelectTypeReport.Text" xml:space="preserve">
+    <value>Sélectionner le type de rapport :</value>
+  </data>
+  <data name="Operator_IsGreaterThan" xml:space="preserve">
+    <value>Est supérieur à</value>
+  </data>
+  <data name="localizeSaveConditionAs.Text" xml:space="preserve">
+    <value>Enregistrer la condition comme :</value>
+  </data>
+  <data name="localizeLastMonth.Text" xml:space="preserve">
+    <value>Mois dernier</value>
+  </data>
+  <data name="Labels" xml:space="preserve">
+    <value>Etiquettes</value>
+  </data>
+  <data name="localizeRange.Text" xml:space="preserve">
+    <value>Plage</value>
+  </data>
+  <data name="localizeUserCondition.Text" xml:space="preserve">
+    <value>Utilisateur</value>
+  </data>
+  <data name="DateRange_ThisMonth" xml:space="preserve">
+    <value>Ce mois</value>
+  </data>
+  <data name="localizeLastWeek.Text" xml:space="preserve">
+    <value>Semaine dernière</value>
+  </data>
+  <data name="localizeMatch.Text" xml:space="preserve">
+    <value>Faire correspondre</value>
+  </data>
+  <data name="DateRange_ThisYear" xml:space="preserve">
+    <value>Cette année</value>
+  </data>
+  <data name="InitError" xml:space="preserve">
+    <value>Une erreur s'est produite lors du paramétrage des données du rapport.</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Tous</value>
+  </data>
+  <data name="localizeViewReport.Text" xml:space="preserve">
+    <value>Afficher le rapport</value>
+  </data>
+  <data name="FilterExists" xml:space="preserve">
+    <value>Vous avez déjà un filtre portant le nom 'FILTERNAME'.  Voulez-vous le remplacer ?</value>
+  </data>
+  <data name="localizeSaveConditionSetButton.Text" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="ConditionsTH_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="CurrentGroup" xml:space="preserve">
+    <value>[Groupe actuel]</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="DateRange_ThisQuarter" xml:space="preserve">
+    <value>Ce trimestre</value>
+  </data>
+  <data name="localizeTable.Text" xml:space="preserve">
+    <value>Table</value>
+  </data>
+  <data name="Opportunity" xml:space="preserve">
+    <value>Opportunité</value>
+  </data>
+  <data name="localizeViewXmlButton.Text" xml:space="preserve">
+    <value>Afficher XML</value>
+  </data>
+  <data name="AddCondition" xml:space="preserve">
+    <value>Ajouter une condition</value>
+  </data>
+  <data name="localizeThisWeek.Text" xml:space="preserve">
+    <value>Cette semaine</value>
+  </data>
+  <data name="DateRange_LastYear" xml:space="preserve">
+    <value>Année dernière</value>
+  </data>
+  <data name="Operator_Is" xml:space="preserve">
+    <value>Est</value>
+  </data>
+  <data name="Condition_Group" xml:space="preserve">
+    <value>Groupe</value>
+  </data>
+  <data name="localizeThisQuarter.Text" xml:space="preserve">
+    <value>Ce trimestre</value>
+  </data>
+  <data name="localizePublic.Text" xml:space="preserve">
+    <value>Public</value>
+  </data>
+  <data name="localizeUser.Text" xml:space="preserve">
+    <value>Utilisateur</value>
+  </data>
+  <data name="FilterNameRequired" xml:space="preserve">
+    <value>Nommez votre filtre et enregistrez de nouveau.</value>
+  </data>
+  <data name="localizeQuery.Text" xml:space="preserve">
+    <value>Requête</value>
+  </data>
+  <data name="Defect" xml:space="preserve">
+    <value>Défaut</value>
+  </data>
+  <data name="Contract" xml:space="preserve">
+    <value>Contrat</value>
+  </data>
+  <data name="localizeField.Text" xml:space="preserve">
+    <value>Champ</value>
+  </data>
+  <data name="localizeSpecDates.Text" xml:space="preserve">
+    <value>Dates spécifiques</value>
+  </data>
+  <data name="localizeValue.Text" xml:space="preserve">
+    <value>Valeur</value>
+  </data>
+  <data name="DateRange_LastMonth" xml:space="preserve">
+    <value>Mois dernier</value>
+  </data>
+  <data name="ActionCouldNotBeCompleted" xml:space="preserve">
+    <value>L’action n’a pas pu être terminée.</value>
+  </data>
+  <data name="localizeClearFilterButton.Text" xml:space="preserve">
+    <value>Effacer tout</value>
+  </data>
+  <data name="localizeLastQuarter.Text" xml:space="preserve">
+    <value>Trimestre dernier</value>
+  </data>
+</root>

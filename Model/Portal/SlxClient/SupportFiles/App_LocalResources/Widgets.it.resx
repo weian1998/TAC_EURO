@@ -1,0 +1,492 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="viewAllActivities" xml:space="preserve">
+    <value>Visualizza tutte le mie attività di oggi</value>
+  </data>
+  <data name="recentlyViewed" xml:space="preserve">
+    <value>Visto di recente</value>
+  </data>
+  <data name="ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="lblGroup" xml:space="preserve">
+    <value>Gruppo</value>
+  </data>
+  <data name="Displays_data_as_proportions_of_the_whole__Each_value_is_calculated_as_a_percentage_of_the_total__This_chart_has_no_axes_" xml:space="preserve">
+    <value>Visualizza i dati come porzioni dell'intero. Ciascun valore è calcolato come percentuale del totale. Questo grafico non ha assi.</value>
+  </data>
+  <data name="linkText" xml:space="preserve">
+    <value>Collega Testo</value>
+  </data>
+  <data name="lblTarget" xml:space="preserve">
+    <value>Target</value>
+  </data>
+  <data name="emptyDimension" xml:space="preserve">
+    <value>Seleziona Dimensione</value>
+  </data>
+  <data name="editorTitleLine" xml:space="preserve">
+    <value>Impostazioni Grafico a Linee</value>
+  </data>
+  <data name="My_Dashboard" xml:space="preserve">
+    <value>Il Mio Cruscotto</value>
+  </data>
+  <data name="Open_Opportunities" xml:space="preserve">
+    <value>Opportunità aperte</value>
+  </data>
+  <data name="lblTitle" xml:space="preserve">
+    <value>Titolo</value>
+  </data>
+  <data name="editorTitleBar" xml:space="preserve">
+    <value>Impostazioni Grafico a Barre</value>
+  </data>
+  <data name="Today_s_Activities" xml:space="preserve">
+    <value>Attività di Oggi</value>
+  </data>
+  <data name="Do_You_Know___" xml:space="preserve">
+    <value>Lo sai...</value>
+  </data>
+  <data name="yes" xml:space="preserve">
+    <value>Sì</value>
+  </data>
+  <data name="Displays_links_you_create__For_example__to_a_detail_view_in_Sage_SalesLogix_or_to_an_external_Web_site_" xml:space="preserve">
+    <value>Visualizza i collegamenti che hai creato. Ad esempio, a una vista di dettaglio SalesLogix o ad un sito esterno.</value>
+  </data>
+  <data name="lblVisibleRecords" xml:space="preserve">
+    <value>Record visibili</value>
+  </data>
+  <data name="Number_of_activities_completed" xml:space="preserve">
+    <value>Numero di attività completate</value>
+  </data>
+  <data name="Displays_a_list_of_group_records_by_entity__For_example__a_group_of_active_campaigns_" xml:space="preserve">
+    <value>Visualizza un elenco di record raggruppati per entità. Ad esempio, un gruppo di campagne attive.</value>
+  </data>
+  <data name="Invalid_character" xml:space="preserve">
+    <value>Carattere non valido</value>
+  </data>
+  <data name="welcomeH2" xml:space="preserve">
+    <value>Benvenuto in SalesLogix</value>
+  </data>
+  <data name="editorTitleTodaysActivities" xml:space="preserve">
+    <value>Impostazioni Attività di Oggi</value>
+  </data>
+  <data name="How_to_change_my_personal_options" xml:space="preserve">
+    <value>Come cambiare le mie opzioni personali</value>
+  </data>
+  <data name="How_to_create_a_group_using_Query_Builder" xml:space="preserve">
+    <value>Come creare un gruppo usando il Query Builder</value>
+  </data>
+  <data name="lblTruncate" xml:space="preserve">
+    <value>Nomi Troncati</value>
+  </data>
+  <data name="activitiesDestination" xml:space="preserve">
+    <value>Visualizza attività</value>
+  </data>
+  <data name="Be_a_part_of_the_Sage_SalesLogix_Community" xml:space="preserve">
+    <value>Essere un membro della Comunità Sage SalesLogix</value>
+  </data>
+  <data name="Bar_Chart" xml:space="preserve">
+    <value>Grafico a Barre</value>
+  </data>
+  <data name="txtDeleteConfirm" xml:space="preserve">
+    <value>Sei sicuro di volere cancellare questi {0} elementi?</value>
+  </data>
+  <data name="Group_List" xml:space="preserve">
+    <value>Elenco Gruppi</value>
+  </data>
+  <data name="txtDefaultWidgetEditorAlert" xml:space="preserve">
+    <value>Cliccato sul pulsante Editor!</value>
+  </data>
+  <data name="welcomeGettingStarted" xml:space="preserve">
+    <value>Introduzione all'Uso</value>
+  </data>
+  <data name="editorTitlePie" xml:space="preserve">
+    <value>Impostazioni Diagramma a Torta</value>
+  </data>
+  <data name="lblDelete" xml:space="preserve">
+    <value>Elimina</value>
+  </data>
+  <data name="Displays_an_introduction_to_Sage_SalesLogix_with_a_link_to_the_help_topic_Introducing_Sage_SalesLogix_for_Web_" xml:space="preserve">
+    <value>Visualizza un'introduzione a Sage SalesLogix con un collegamento all'argomento della guida Introduzione alla parte Web Sage SalesLogix</value>
+  </data>
+  <data name="loading" xml:space="preserve">
+    <value>Caricamento, attendere...</value>
+  </data>
+  <data name="How_to_add_a_New_Contact" xml:space="preserve">
+    <value>Come aggiungere un Nuovo Contatto</value>
+  </data>
+  <data name="How_to_add_a_New_Account" xml:space="preserve">
+    <value>Come Aggiungere una Nuova Azienda</value>
+  </data>
+  <data name="timeless" xml:space="preserve">
+    <value>Senza orario</value>
+  </data>
+  <data name="Schedule_a_Phone_Call" xml:space="preserve">
+    <value>Pianifica una telefonata</value>
+  </data>
+  <data name="lblNumberOfRecords" xml:space="preserve">
+    <value>Numero di record</value>
+  </data>
+  <data name="My_Notes" xml:space="preserve">
+    <value>Mie Note</value>
+  </data>
+  <data name="lblLabelLength" xml:space="preserve">
+    <value>Lunghezza etichetta</value>
+  </data>
+  <data name="noData" xml:space="preserve">
+    <value>Il server non riesce ad ottenere i dati. Controlla le opzioni di configurazione.</value>
+  </data>
+  <data name="welcomeHelpLinkText" xml:space="preserve">
+    <value>Premi qui per imparare a usare questo sistema</value>
+  </data>
+  <data name="welcomeWebClientHelp" xml:space="preserve">
+    <value>Guida in Linea Client Web</value>
+  </data>
+  <data name="welcomeQuickReference" xml:space="preserve">
+    <value>Scheda di riferimento rapido</value>
+  </data>
+  <data name="iconUrl" xml:space="preserve">
+    <value>Icona Url</value>
+  </data>
+  <data name="lblXaxis" xml:space="preserve">
+    <value>Asse X</value>
+  </data>
+  <data name="no" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Recently_Viewed" xml:space="preserve">
+    <value>Visto di recente</value>
+  </data>
+  <data name="Pie_Chart" xml:space="preserve">
+    <value>Grafico a Torta</value>
+  </data>
+  <data name="editorTitleFun" xml:space="preserve">
+    <value>Impostazioni Grafico a Imbuto</value>
+  </data>
+  <data name="Displays_data_as_a_series_of_data_points_connected_by_a_line__Useful_when_the_data_represents_many_groups_or_categories_" xml:space="preserve">
+    <value>Visualizza i dati sotto forma di punti connessi da una linea. Utile quando i dati rappresentano molti gruppi di categorie.</value>
+  </data>
+  <data name="Visit_the_Sage_SalesLogix_Website" xml:space="preserve">
+    <value>Visita il sito Web SalesLogix</value>
+  </data>
+  <data name="numberOfActivites" xml:space="preserve">
+    <value>Numero di Attività</value>
+  </data>
+  <data name="NoRecordsSelected" xml:space="preserve">
+    <value>Non ci sono record selezionati.</value>
+  </data>
+  <data name="Displays_data_as_a_set_of_vertical_bars_grouped_by_category__Useful_for_showing_data_changes_over_a_period_of_time_or_for_illustrating_comparisons_among_items_" xml:space="preserve">
+    <value>Visualizza i dati sotto forma di barre verticali raggruppate per categoria. Utile per mostrare le modifiche ai dati in un determinato periodo di tempo o per illustrare confronti tra dati.</value>
+  </data>
+  <data name="Access_to_Sage_SalesLogix_University" xml:space="preserve">
+    <value>Accesso all'Università Sage SalesLogix</value>
+  </data>
+  <data name="View_Activities" xml:space="preserve">
+    <value>Visualizza attività</value>
+  </data>
+  <data name="lblDisplayLabels" xml:space="preserve">
+    <value>Visualizza le etichette</value>
+  </data>
+  <data name="lblCaption" xml:space="preserve">
+    <value>Didascalia</value>
+  </data>
+  <data name="linkUrl" xml:space="preserve">
+    <value>CollegamentoUrl</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Benvenuto</value>
+  </data>
+  <data name="emptyMetric" xml:space="preserve">
+    <value>Seleziona Metrica</value>
+  </data>
+  <data name="Funnel_Chart" xml:space="preserve">
+    <value>Grafico a Imbuto</value>
+  </data>
+  <data name="lblLinks" xml:space="preserve">
+    <value>Collegamenti</value>
+  </data>
+  <data name="Column_Chart" xml:space="preserve">
+    <value>Grafico a Colonne</value>
+  </data>
+  <data name="lblSlices" xml:space="preserve">
+    <value>Numero di Fette</value>
+  </data>
+  <data name="lblSubtitle" xml:space="preserve">
+    <value>Sottotitolo</value>
+  </data>
+  <data name="Active_Campaigns" xml:space="preserve">
+    <value>Campagne Attive</value>
+  </data>
+  <data name="lblLegend" xml:space="preserve">
+    <value>Visualizza una Legenda</value>
+  </data>
+  <data name="Insert_New_Account" xml:space="preserve">
+    <value>Inserisci Nuova Azienda</value>
+  </data>
+  <data name="lblMaxLength" xml:space="preserve">
+    <value>Massima Lunghezza Nome</value>
+  </data>
+  <data name="How_to_use_Mail_Merge" xml:space="preserve">
+    <value>Come usare la Stampa Unione</value>
+  </data>
+  <data name="lblYaxis" xml:space="preserve">
+    <value>Asse Y</value>
+  </data>
+  <data name="Displays_data_as_progressive_proportions_in_a_funnel_shape__The_data_is_represented_as_portions_of_100___and_there_are_no_axes_" xml:space="preserve">
+    <value>Visualizza i dati sotto forma di imbuto con proporzioni progressive. Il dato viene rappresentato come porzione del 100% e non ci sono assi.</value>
+  </data>
+  <data name="Insert_New_Contact" xml:space="preserve">
+    <value>Inserisci Nuovo Contatto</value>
+  </data>
+  <data name="addLink" xml:space="preserve">
+    <value>Aggiungi Collegamento</value>
+  </data>
+  <data name="Widget_description_goes_here" xml:space="preserve">
+    <value>La descrizione widget va qui</value>
+  </data>
+  <data name="My_Pipeline" xml:space="preserve">
+    <value>Mia Pipeline</value>
+  </data>
+  <data name="lblOther" xml:space="preserve">
+    <value>Aggiungi Fetta per 'Altro'</value>
+  </data>
+  <data name="emptyGroup" xml:space="preserve">
+    <value>Seleziona Gruppo</value>
+  </data>
+  <data name="lblLimit" xml:space="preserve">
+    <value>Limite</value>
+  </data>
+  <data name="editorTitleCol" xml:space="preserve">
+    <value>Impostazioni Diagramma a Colonne</value>
+  </data>
+  <data name="lblEntity" xml:space="preserve">
+    <value>Entità</value>
+  </data>
+  <data name="My_Top_Opportunities" xml:space="preserve">
+    <value>Miei Migliori Opportunità</value>
+  </data>
+  <data name="Displays_data_as_a_set_of_horizontal_bars__Useful_for_comparing_several_sets_of_data_" xml:space="preserve">
+    <value>Visualizza i dati sotto forma di barre orizzontali. Utile nel confronto dei dati.</value>
+  </data>
+  <data name="emptyEntity" xml:space="preserve">
+    <value>Seleziona Entità</value>
+  </data>
+  <data name="ten" xml:space="preserve">
+    <value>Dieci</value>
+  </data>
+  <data name="Schedule_a_Meeting" xml:space="preserve">
+    <value>Pianifica una riunione</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Predefinito</value>
+  </data>
+  <data name="lblDimension" xml:space="preserve">
+    <value>Dimensione</value>
+  </data>
+  <data name="txtNoActivities" xml:space="preserve">
+    <value>Nessuna attività da visualizzare.</value>
+  </data>
+  <data name="Recent_Lead_Creation_History" xml:space="preserve">
+    <value>Cronologia Creazione Nominativo Recente</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="Sales" xml:space="preserve">
+    <value>Vendite</value>
+  </data>
+  <data name="lblNames" xml:space="preserve">
+    <value>Visualizza Nomi</value>
+  </data>
+  <data name="noDataToDisplay" xml:space="preserve">
+    <value>Nessun dato da visualizzare.</value>
+  </data>
+  <data name="Leads_Created" xml:space="preserve">
+    <value>Nominativi Creati</value>
+  </data>
+  <data name="By_Sum_Of_Sales_Potential" xml:space="preserve">
+    <value>Per Somma di Vendite Potenziali</value>
+  </data>
+  <data name="editorTitleLinks" xml:space="preserve">
+    <value>Impostazioni dei Collegamenti</value>
+  </data>
+  <data name="Displays_links_to_recently_viewed_records_with_an_icon_that_identifies_the_type__For_example__Account_or_Contact_" xml:space="preserve">
+    <value>Visualizza i collegamenti ai record visitati di recente con un'icona che identifica il tipo di record stesso. Ad esempio, Azienda o Contatto.</value>
+  </data>
+  <data name="lblTruncateLabels" xml:space="preserve">
+    <value>Tronca le etichette</value>
+  </data>
+  <data name="five" xml:space="preserve">
+    <value>Cinque</value>
+  </data>
+  <data name="Todays_Activities" xml:space="preserve">
+    <value>Attività di Oggi</value>
+  </data>
+  <data name="Potential" xml:space="preserve">
+    <value>Potenziale</value>
+  </data>
+  <data name="How_to_add_an_Opportunity" xml:space="preserve">
+    <value>Come aggiungere un'Opportunità</value>
+  </data>
+  <data name="Quick_Actions" xml:space="preserve">
+    <value>Azioni rapide</value>
+  </data>
+  <data name="editorTitleGroupList" xml:space="preserve">
+    <value>Impostazioni Elenco Gruppi</value>
+  </data>
+  <data name="todaysActivities" xml:space="preserve">
+    <value>Attività di Oggi</value>
+  </data>
+  <data name="My_Activity_trend" xml:space="preserve">
+    <value>Tendenza Mie Attività</value>
+  </data>
+  <data name="Displays_links_to_your_activities_for_today_" xml:space="preserve">
+    <value>Visualizza i collegamenti alle attività di oggi.</value>
+  </data>
+  <data name="welcomeP1" xml:space="preserve">
+    <value>Sage SalesLogix gestisce tutti gli aspetti del ciclo di vendita sul Web.  In aggiunta per tracciare contatti, aziende, nominativi, opportunità, ticket e  attività, gli utenti hanno accesso agli strumenti per il reporting, l'automatizzazione dei processi, e la creazione di email, fax e lettere con la stampa unione.</value>
+  </data>
+  <data name="Share_Your_Product_Ideas" xml:space="preserve">
+    <value>Condividi le Tue Idee sul Prodotto</value>
+  </data>
+  <data name="lblMetric" xml:space="preserve">
+    <value>Metrica</value>
+  </data>
+  <data name="viewGroup" xml:space="preserve">
+    <value>Visualizza Gruppo</value>
+  </data>
+  <data name="lblGoal" xml:space="preserve">
+    <value>Obiettivo</value>
+  </data>
+  <data name="My_Completed_Activities_by_Type" xml:space="preserve">
+    <value>Mie Attività Completate per Tipo</value>
+  </data>
+  <data name="Access_to_Sage_SalesLogix_Online_Support" xml:space="preserve">
+    <value>Accesso al Supporto Online Sage SalesLogix</value>
+  </data>
+  <data name="lblLoading" xml:space="preserve">
+    <value>Caricamento...</value>
+  </data>
+  <data name="Line_Chart" xml:space="preserve">
+    <value>Grafico a Linee</value>
+  </data>
+  <data name="lblAdd" xml:space="preserve">
+    <value>Aggiungi</value>
+  </data>
+</root>

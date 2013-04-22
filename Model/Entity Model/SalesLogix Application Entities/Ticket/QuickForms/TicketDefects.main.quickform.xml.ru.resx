@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="grdDefects_AddRelationTool.LookupProperties.Subject.PropertyHeader" xml:space="preserve">
+    <value>Предмет</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.LookupProperties.AssignedTo.OwnerDescription.PropertyHeader" xml:space="preserve">
+    <value>Поручено</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.LookupProperties.DefectSolution.Notes.PropertyHeader" xml:space="preserve">
+    <value>Решение дефекта</value>
+  </data>
+  <data name="grdDefects.c979d17e-94af-476a-9590-64bb7659afae.ColumnHeading" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.LookupProperties.DefectProblem.Notes.PropertyHeader" xml:space="preserve">
+    <value>Проблема</value>
+  </data>
+  <data name="grdDefects.d1c5e38f-ac43-43eb-9df5-3d0bd4e02a8c.ColumnHeading" xml:space="preserve">
+    <value>Решение</value>
+  </data>
+  <data name="grdDefects.1d05e9d0-92ed-48c3-817a-2a48effe395b.ColumnHeading" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.DialogButtonText" xml:space="preserve">
+    <value>Добавить выбранные</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.LookupProperties.Owner.OwnerDescription.PropertyHeader" xml:space="preserve">
+    <value>Доступ</value>
+  </data>
+  <data name="grdDefects.6c749f2e-220d-4510-8505-87c2e6d712a1.ColumnHeading" xml:space="preserve">
+    <value>Важность</value>
+  </data>
+  <data name="grdDefects.btnCreate.ToolTip" xml:space="preserve">
+    <value>Создать Дефект...</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.LookupProperties.CreateDate.PropertyHeader" xml:space="preserve">
+    <value>Дата создания</value>
+  </data>
+  <data name="grdDefects.Delete.ToolTip" xml:space="preserve">
+    <value>Исключить</value>
+  </data>
+  <data name="grdDefects.be120163-290b-4bf5-b836-bc6d5e3bb4eb.ColumnHeading" xml:space="preserve">
+    <value>Важность</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.ButtonToolTip" xml:space="preserve">
+    <value>Связать Дефект</value>
+  </data>
+  <data name="grdDefects.a27fcbf1-eda2-4d7c-97b5-4991afda77f3.ColumnHeading" xml:space="preserve">
+    <value>№ дефекта</value>
+  </data>
+  <data name="grdDefects.3806343b-0b0a-4f79-9e5b-b1daa45b624a.ColumnHeading" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="grdDefects.b30cb327-469a-46c4-9571-47e4c82303f8.ColumnHeading" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.LookupDialogTitle" xml:space="preserve">
+    <value>Поиск дефекта</value>
+  </data>
+  <data name="grdDefects.92200584-0557-4984-853a-35a53f147669.ColumnHeading" xml:space="preserve">
+    <value>Область</value>
+  </data>
+  <data name="grdDefects.df03034d-3803-4366-910c-caebf9fe5e18.ColumnHeading" xml:space="preserve">
+    <value>Приоритет</value>
+  </data>
+  <data name="grdDefects_AddRelationTool.LookupProperties.DefectNumber.PropertyHeader" xml:space="preserve">
+    <value>№ дефекта</value>
+  </data>
+  <data name="grdDefects.c7e3f898-2f57-4347-8e76-9b2f79fddac0.ColumnHeading" xml:space="preserve">
+    <value>Приоритет</value>
+  </data>
+</root>

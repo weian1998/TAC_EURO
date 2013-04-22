@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0"?>
-<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmAnalyticsDateDiffMetricFilter" id="9c3b6676-ea76-4884-a9f8-ea90961f629e" lastModifiedUtc="2010-04-15T23:04:16.2995597Z" filterName="OpenSalesOrderDeliveryExpectationAverage" analyticsAvailable="true" aggregation="AVG" fromPropertyName="DatePromised">
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmAnalyticsDateDiffMetricFilter" id="9c3b6676-ea76-4884-a9f8-ea90961f629e" lastModifiedUtc="2011-12-01T10:27:32.5422318Z" filterName="OpenSalesOrderDeliveryExpectationAverage" analyticsAvailable="true" aggregation="AVG" fromPropertyName="DatePromised" toPropertyName=":today">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmAnalyticsDateDiffMetricFilter" />

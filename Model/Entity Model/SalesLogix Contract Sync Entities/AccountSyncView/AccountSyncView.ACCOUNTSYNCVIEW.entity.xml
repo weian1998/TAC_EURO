@@ -20,7 +20,7 @@
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
       <SystemDataType guid="3ca925e1-4b76-4621-a39c-a0d4cb7327d5">
-        <GuidDataType />
+        <GuidDataType storage="String" />
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="58268149-a628-4aa5-9ec4-f993b4c787ab" lastModifiedUtc="2010-07-06T23:52:16.3800722Z" name="AppId" audited="false" columnName="APPID" maxLength="12" precision="0" scale="0" ordinal="1" isReadOnly="false">
@@ -39,7 +39,7 @@
         <IntegerDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="4a26cab1-b1d5-43b1-9418-38b98c2f1431" lastModifiedUtc="2010-05-25T07:30:50.2931615Z" name="EntityId" audited="false" columnName="ENTITYID" maxLength="12" precision="0" scale="0" ordinal="3" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="4a26cab1-b1d5-43b1-9418-38b98c2f1431" lastModifiedUtc="2012-06-04T15:06:26.959397Z" name="EntityId" audited="false" include="false" columnName="ENTITYID" maxLength="12" precision="0" scale="0" ordinal="3" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>

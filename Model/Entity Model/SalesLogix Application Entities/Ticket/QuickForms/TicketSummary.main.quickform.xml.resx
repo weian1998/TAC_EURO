@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lnkAccount.Caption" xml:space="preserve">
     <value>Account:</value>
@@ -182,5 +182,11 @@
   </data>
   <data name="dtpNeededDate.ButtonToolTip" xml:space="preserve">
     <value>Calendar</value>
+  </data>
+  <data name="agcReturns_grid.7ce29fa2-2910-47f9-be37-67a662d9a0f7.ColumnHeading" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="agcDefects_grid.f393b449-27c5-4310-8528-a4868dd5e58f.ColumnHeading" xml:space="preserve">
+    <value>Subject</value>
   </data>
 </root>

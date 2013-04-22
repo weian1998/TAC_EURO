@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="b7c4074d-e854-4d6a-a566-3e62dc28ca7e" lastModifiedUtc="2008-01-03T00:08:09.3477014Z" cardinality="M:1" parentEntityId="1de6f2b1-b361-454f-badf-116c47920046" childEntityId="750a7f26-3604-467b-94fe-249370231df4">
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="b7c4074d-e854-4d6a-a566-3e62dc28ca7e" lastModifiedUtc="2012-07-25T14:32:58.356707Z" cardinality="M:1" parentEntityId="1de6f2b1-b361-454f-badf-116c47920046" childEntityId="750a7f26-3604-467b-94fe-249370231df4">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
   </ExtendedPropertiesCollection>
-  <parentProperty id="0e9c8eb4-6293-47d8-84bd-966ae574b6a4" lastModifiedUtc="2008-01-03T00:08:00.612432Z" name="Contact" audited="false" displayCategory="Intermediate" isNullable="true" include="true">
+  <parentProperty id="0e9c8eb4-6293-47d8-84bd-966ae574b6a4" lastModifiedUtc="2012-07-25T14:32:58.356707Z" name="Contact" audited="true">
     <ExtendedPropertiesCollection>
       <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
     </ExtendedPropertiesCollection>

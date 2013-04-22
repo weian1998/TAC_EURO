@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0"?>
-<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="ea553079-e616-443b-aa2a-35e57fddd629" lastModifiedUtc="2011-03-14T21:57:58.6771226Z" filterName="StartDate" propertyName="Stamp" dataPath="SYNCRESULT:STAMP" characters="0">
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="ea553079-e616-443b-aa2a-35e57fddd629" lastModifiedUtc="2012-02-22T18:40:23.0068082Z" filterName="StartDate" propertyName="Stamp" characters="0">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRangeEntityFilter" />
   </ExtendedPropertiesCollection>
-  <ranges id="8dd50144-f861-4361-a333-b6c28530e7fb" rangeName="Yesterday" lower=":yesterday" upper=":yesterday" />
-  <ranges id="c8562060-e8de-4fa6-b271-745760508bf5" rangeName="Today" lower=":today" upper=":today" />
+  <ranges id="8dd50144-f861-4361-a333-b6c28530e7fb" rangeName="Yesterday" lower=":yesterdaystart" upper=":yesterdayend" />
+  <ranges id="c8562060-e8de-4fa6-b271-745760508bf5" rangeName="Today" lower=":todaystart" upper=":todayend" />
   <ranges id="00ee4975-c5fa-4523-8da1-25fc7df41d65" rangeName="ThisWeek" lower=":thisweekstart" upper=":thisweekend" />
   <ranges id="b733a22a-32fd-4410-b94b-7a0ac250ddf0" rangeName="ThisMonth" lower=":thismonthstart" upper=":thismonthend" />
   <ranges id="3736eb23-f03c-4fa8-8698-e407be183ee0" rangeName="ThisQuarter" lower=":thisquarterstart" upper=":thisquarterend" />

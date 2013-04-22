@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <title>Sage.UI Browser Tests</title>
+        <link rel="stylesheet" type="text/css" href="../../../../Libraries/dojo/dijit/themes/claro/claro.css" />
+        <script type="text/javascript" src="../Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript">
+        require(
+        [
+            'dojo/parser',
+            'dojo/ready',
+            'doh',
+            'Sage/UI/GroupTabPane',
+            'dijit/layout/ContentPane'
+        ],
+        function (parser, ready, doh, GroupTabPane, ContentPane) {
+            ready(function(){
+                doh.register("Sage.UI.tests.GroupTabPane", [
+                    {
+                        testType: "perf",
+                        name: 'bulkTabsAddChildren',
+                        trialDuration: 100,
+                        trialDelay: 50,
+                        trialIterations: 1,
+                        timeout: 15000,
+                        setUp: function () {
+                        },
+                        runTest: function () {
+                            var tabContainer = dijit.byId('GroupTabs'),
+                                i = 0, len = 100,
+                                pane,
+                                widgets = [];
+                            
+                            for (i = 0; i < len; i++) {
+                                pane = new ContentPane({
+                                    title: 'Test' + i
+                                });
+                                
+                                widgets.push(pane);
+                            }
+                            
+                            tabContainer.addChildren(widgets);
+                        },
+                        tearDown: function () {
+                        }
+                    },
+                    {
+                        name: 'getChildren',
+                        timeout: 15000,
+                        setUp: function () {
+                        },
+                        runTest: function () {
+                            var tabContainer = dijit.byId('GroupTabs'),
+                                i = 0, len = 10,
+                                pane,
+                                widgets = [],
+                                children;
+                            
+                            for (i = 0; i < len; i++) {
+                                pane = new ContentPane({
+                                    title: 'Test' + i
+                                });
+                                
+                                widgets.push(pane);
+                            }
+                            
+                            tabContainer.addChildren(widgets);
+                            
+                            children = tabContainer.getChildren();
+                            doh.t(children.length > 0);
+                        },
+                        tearDown: function () {
+                        }
+                    }
+                ]);
+                
+                //Execute D.O.H. in this remote file.
+                doh.run();
+            });
+        });
+        </script>
+    </head>
+    <body class="claro">
+        <div id="container">
+            <div id="GroupTabs" data-dojo-type="Sage.UI.GroupTabPane" style="position:static;">
+            </div>
+        </div>
+    </body>
+</html>

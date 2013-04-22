@@ -1,0 +1,2181 @@
+﻿img
+{
+	vertical-align: baseline;
+}
+
+a > img
+{
+	vertical-align: middle;
+}
+.dijitButton
+{
+	margin: 0;
+}
+
+.dijitButtonNode *
+{
+	vertical-align: baseline;
+}
+
+.claro .dijitDialogTitleBar
+{
+	height: 28px;
+	line-height: 28px;
+	padding: 0 8px;
+}
+
+.claro .dijitTitlePaneTitleFocus
+{
+    margin-top: 3px;
+    padding-bottom: 2px;
+    -moz-box-shadow: inset 1px 1px #fefefe;
+    -webkit-box-shadow: inset 1px 1px #fefefe;
+    box-shadow: inset 1px 1px #fefefe;
+}
+
+.claro .dijitToolbar
+{
+	height: 26px;
+	padding: 0px;
+	line-height: 26px;
+}
+
+.claro .dijitToolbar > .dijitButton
+{
+	vertical-align: baseline !important;	
+}
+
+.claro .dijitToolbar .dijitIcon div {
+    margin-top: 4px;
+}
+
+.claro .dijitToolbar > .dijitButton > .dijitButtonNode
+{
+	-webkit-transition-property: none;
+	-moz-transition-property: none;
+	transition-property: none;
+	line-height: 24px;
+	vertical-align: baseline;
+	border-width: 0px;
+	padding: 0px;
+}
+
+.dijitButtonNode.imageButtonNode
+{
+   min-width: 0 !important;
+}
+
+.dijitButtonNode.imageButtonNode IMG
+{
+    padding: 0;
+}
+
+.claro .dijitToolbar > .dijitButtonHover > .dijitButtonNode
+{
+	border-width: 0px;
+	padding: 0px;
+}
+
+.claro .dijitToolbar > .dijitToolbarLabel > .dijitInline
+{
+	/* padding: 1px 0 0 0; */
+	vertical-align: baseline;
+}
+
+.claro .dijitAccordionInnerContainer
+{
+	margin-bottom: -1px;
+}
+
+.claro .dijitAccordionTitle
+{
+	height: 26px;
+	line-height: 26px;
+	padding: 1px 0 1px 0
+}
+
+.claro .dijitAccordionText
+{
+	line-height: 26px;
+}
+
+.claro .dijitTitlePaneContentInner
+{
+    padding: 5px;
+}
+
+.dataTypeColumnDimensions
+{
+    height: 16px;
+    width: 16px;
+}
+
+#MainHeader
+{
+	border-width: 0 0 0 0; /* was single bottom border */
+	border-style: solid;
+    height: 32px;
+	padding: 0px;
+	position: relative;	   
+	zoom: 1; 
+}
+
+#MainHeader_splitter
+{
+	height: 0px;
+}
+
+#MainHeaderLeft 
+{	
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-align: left;
+    padding: 8px 0px 0px 5px;
+}
+
+#MainHeaderWrap
+{
+	position: relative;
+	border: none;
+    height: 32px;   
+    zoom: 1; 
+}
+
+#MainFooter
+{
+	border-width: 1px 0 0 0;
+	border-style: solid;
+	height: 24px;	
+	padding: 0;
+}
+
+#MainFooter > span
+{
+	line-height: 24px;
+}
+
+#MainFooter_splitter
+{
+	height: 0px;
+}
+
+#LogoPanel
+{
+	position: absolute;
+	top: 0;
+	left: 0;		
+	height: 32px;
+	width: 179px;
+}
+
+#LogoPanel > img
+{
+	margin: 7px 0 0 22px;
+}
+
+#ToolBar
+{	
+	position: absolute;
+	left: 180px;
+	bottom: 0;
+	border: none 0px black;	
+	height: 32px;
+}
+
+#ToolBar > .dijitMenuItem
+{
+    background-color: transparent;
+	height: 32px;
+	line-height: 32px;
+	padding: 0px 3px;
+	margin: 0;
+	border: none 0px black;
+}
+
+#ToolBar > .dijitMenuItemActive
+{
+	background-position: inherit;
+}
+
+#ToolBar > .dijitMenuItem > span > .dijitMenuItemLabel
+{
+	vertical-align: baseline !important;
+}
+
+#ToolBar > .dijitMenuItem > span > .dijitIcon
+{
+	position: relative;
+	top: 3px;
+}
+
+#ToolBar > .dijitMenuItemSelected
+{
+    background-color: #ABD6FF;
+}
+
+#ToolBar > .dijitMenuItemHover
+{
+	background-color: #ABD6FF;
+}
+
+#LogOffButton 
+{
+	float: right;
+	border: none 0px black;	
+	height: 24px;
+}
+
+#LogOffButton > .dijitMenuItem
+{
+	height: 24px;
+	padding: 0px 8px;
+	margin: 0;
+	border: none 0px black;
+}
+
+#LogOffButton > .dijitMenuItemActive
+{
+	background-position: inherit;
+}
+
+#LogOffButton > .dijitMenuItem > span > .dijitMenuItemLabel
+{
+	vertical-align: baseline !important;
+}
+
+#LogOffButton > .dijitMenuItem > span > .dijitIcon
+{
+	position: relative;
+	top: 3px;
+	height: 16px;
+}
+
+#TimeZoneMenu 
+{
+	float: right;
+	border: none 0px black;	
+	height: 24px;
+}
+
+#TimeZoneMenu > .dijitMenuItem
+{
+    line-height: 16px;
+	height: 16px;
+	padding: 4px;
+	margin: 0;
+	border: none 0px black;
+	font-size:11px;
+	vertical-align: baseline !important;
+}
+
+#TimeZoneMenu > .dijitMenuItem > span > span
+{
+       position: relative;
+       vertical-align: baseline !important;
+}
+
+#TimeZoneMenu > .dijitMenuItemSelected
+{
+    background-color: #F6F6F6;
+}
+
+#TimeZoneMenu > .dijitMenuItemSelected:hover
+{
+    background-color: #ABD6FF;
+}
+
+#HelpMenu
+{
+	float: right;
+	border: none 0px black;	
+	height: 32px;
+}
+
+#HelpMenu > .dijitMenuItem
+{
+	height: 32px;
+	line-height: 32px;
+	padding: 0px 10px 0px 8px;
+	margin: 0;
+	border: none 0px black;
+}
+
+#HelpMenu > .dijitMenuItemActive
+{
+	background-position: inherit;
+}
+
+#HelpMenu > .dijitMenuItem > span > .dijitMenuItemLabel
+{
+	vertical-align: baseline !important;
+}
+
+#HelpMenu > .dijitMenuItem > span > .dijitIcon
+{
+	position: relative;
+	top: 3px;
+}
+
+#HelpMenu > .dijitMenuItemHover
+{
+	
+}
+
+#MainNav
+{
+	width: 180px;
+}
+
+#lclLoginName
+{
+	padding: 0px;
+	font-size: 11px;
+	margin: 0 5px 0 0;
+}
+
+#SpeedSearch
+{
+	float: right;
+	margin: 4px 4px 0 4px;
+}
+
+.editor-table
+{
+    width: 100%;
+}
+
+.quick-speedsearch
+{
+    display : inline;
+}
+
+.quick-speedsearch > .dijitTextBox
+{
+	position: relative;
+    top: 0px;
+    
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    
+    width: 125px !important;
+}
+
+.quick-speedsearch-input 
+{
+    width: auto;    
+}
+
+.quick-speedsearch-toggle
+{
+    
+}
+
+.quick-speedsearch-button > .dijitButtonNode
+{    
+    padding: 0px 0 2px 3px !important;
+}
+
+.quick-speedsearch-button > .dijitButtonNode img
+{
+	padding: 2px 0px 2px 3px !important;
+}
+
+#titlePane
+{
+	height: 67px;
+	overflow: hidden;
+	padding: 5px 0 0 0;
+}
+
+#innerBorder
+{
+	padding: 5px 0px;
+}
+
+#centerContent > .dijitContentPane
+{
+	padding: 0;
+}
+
+.navordion .dijitContentPane
+{
+	padding: 2px 0 !important;
+}
+
+.navordion-item > span > a
+{
+	position: relative;
+	top: -11px;
+}
+
+.task-pane
+{
+	padding: 0 !important;
+	overflow: auto;
+	width: 170px;
+}
+
+.task-pane .dijitTitlePaneContentInner
+{
+	padding: 0;
+}
+
+.task-pane-item
+{
+	border-top: none 0px black;
+}
+
+.task-pane-item > .dijitTitlePaneTitle
+{
+	height: 26px;
+    padding: 0;
+    line-height: 26px;
+    vertical-align: baseline;
+}
+
+.task-pane-item .task-pane-item-header
+{	    
+    height: 20px;
+    padding: 3px 4px 0 4px;
+}
+
+.task-pane-item > .dijitTitlePaneTitle > .dijitTitlePaneTitleFocus
+{
+	margin: 0;
+	padding: 0 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.task-pane-item > .dijitTitlePaneTitle > .dijitTitlePaneTitleFocus > .dijitTitlePaneTextNode
+{
+	padding: 0 4px;
+	margin: 0;
+	vertical-align: baseline;
+}
+
+.mainContentHeader
+{
+	margin: 0px;
+}
+
+.mainContentHeaderTable
+{	
+	height: 26px;
+    -moz-box-shadow: inset 1px 1px #fefefe;
+    -webkit-box-shadow: inset 1px 1px #fefefe;
+    box-shadow: inset 1px 1px #fefefe;
+}
+
+.mainContentHeaderTable .list-panel-tbar
+{
+	height: 26px;
+	line-height: 26px;
+	display: inline-block;
+}
+
+.mainContentHeaderTable .dijitButtonNode
+{
+	padding: 0 !important;
+}
+
+.mainContentHeaderTable .dijitButton
+{
+	vertical-align: baseline !important;
+}
+
+.mainContentHeaderTable .icon16x16 
+{
+	vertical-align: middle;
+}
+
+.mainContentHeader a .Global_Images,
+.task-pane-header-tools a .Global_Images,
+.tws-tab-view-header a .Global_Images,
+.tws-more-tab-buttons-tools a .Global_Images
+{
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+.mainContentContent
+{
+	border: none 0px black;
+}
+
+.tws .tws-main-tab-buttons > ul
+{
+	padding: 0 0 0 8px;
+}
+
+.tws .tws-main-tab-content
+{
+	border-width: 1px 0 0 0;
+	border-style: solid;
+}
+
+.tws .tws-tab-element div.tws-tab-view-header
+{
+	height: 27px;
+	line-height: 27px;
+	border-width: 0px 0px 1px 0px;		
+	border-style: solid;
+}
+
+.tws .tws-tab-element .tws-tab-view-body
+{
+	padding: 4px 0;
+}
+
+.tws-tab-view-tools-right > img,
+.tws-tab-view-tools-middle > img,
+.tws-tab-view-tools-left > img
+{
+	vertical-align: middle;
+}
+
+.group-list .task-pane-item-bwrap
+{
+	padding: 0;
+}
+
+.group-list .dojoxGrid
+{
+	border: none 0px black;
+}
+
+.group-list .dojoxGridHeader
+{
+	border-bottom: none 0px black !important;
+}
+
+#GroupTabs
+{
+	position: absolute;
+	bottom: -2px;
+	right: 0px;
+	left: 26px;
+	height: 33px;
+}
+
+#GroupTabs > .dijitTabPaneWrapper
+{
+	border: none 0px black
+}
+
+#GroupTabs_tablist > .dijitTabListWrapper > .dijitTabContainerTop-tabs
+{
+	border-bottom: none 0px black;
+}
+
+#GroupTabs_tablist > .tabStripButton
+{
+	border-bottom: none 0px black;
+}
+
+#GroupLookupButton
+{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+#GroupLookupButton > .dijitButtonNode
+{
+	height: 16px;
+	width: 7px;
+	border-bottom: none 0px black;
+	-webkit-border-radius: 4px 4px 0 0;	
+	-moz-border-radius: 4px 4px 0 0;
+	border-radius: 4px 4px 0 0;
+	/*-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;*/
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+#GroupLookupButton img
+{
+	padding: 2px 4px 2px 4px;
+}
+
+.dojoxGridRow
+{
+	min-height: 17px;
+}
+
+.nav-bar-pane
+{
+	padding: 4px 0 !important;
+	overflow: auto;
+}
+
+.nav-bar-pane > ul
+{
+	padding: 0;
+	margin: 0;	
+}
+
+.nav-bar-item
+{
+	padding: 0
+}
+
+.dojoxGridCell,
+.dijitAccordionText
+{
+    text-overflow: ellipsis;
+}
+
+.nav-bar-item > a
+{
+	display: block;
+	padding: 4px 0px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.nav-bar-item > a > img
+{
+	width: 32px;
+	height: 32px;
+	margin-left: 4px; 
+}
+
+.nav-bar-item > a > span
+{
+	vertical-align: middle;
+	padding-left: 8px;
+}
+
+.nav-bar-item-current-page
+{
+    padding:0   
+}
+
+.nav-bar-item-current-page > a
+{
+	display: block;
+	padding: 4px 0px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.nav-bar-item-current-page > a > img
+{
+	width: 32px;
+	height: 32px;
+	margin-left: 4px; 
+}
+
+.nav-bar-item-current-page > a > span
+{
+	vertical-align: middle;
+	padding-left: 8px;
+}
+
+.nav-bar-item-current-page > a > div,
+.nav-bar-item > a > div {
+	margin-left: 4px;
+	vertical-align: middle;
+}
+
+#groupMenuBar
+{
+	position: absolute;
+	top: 7px;
+	height: 24px;
+	line-height: 24px;
+	right: 35px;
+}
+
+#addGroupButton[class~=dijitButton]
+{
+	position: relative;
+	right: 5px;
+	top: 2px;
+	float: right;
+}
+
+#addGroupButton > .dijitButtonNode
+{
+	width: 16px;
+	height: 19px;
+}
+
+#titlePane div.group-menu-bar > div.group-menu-button
+{
+	width: 80px;
+	padding: 0px;
+	display: block;
+	line-height: 26px;
+}
+
+#titlePane .group-menu-bar > .group-menu-button > span
+{
+	margin-left: 8px;
+}
+
+#titlePane .group-menu-bar > .group-menu-button > span > .dijitMenuItemIcon
+{
+	margin-top: 5px;
+}
+
+#titlePane .group-menu-bar > .group-menu-button > span > .dijitMenuItemLabel
+{
+	vertical-align: top;
+	color: #000;
+}
+
+#PageTitle img
+{
+	vertical-align: baseline;
+}
+
+#PageTitleText
+{
+	font-size: 22px;
+}
+
+#Dashboard
+{
+	padding: 5px 0px;
+}
+
+#Dashboard .dojoxPortlet .dojoxPortletSettingsIcon
+{
+	background-image: url('../images/icons/options_12x12.png');
+	background-position: 0 1px;
+}
+
+.dashboardGroupList
+{
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.searchConditionInput .dijitTextBox,
+.searchConditionInput .dijitButtonText
+{
+	width: 150px;
+}
+
+.searchConditionInput .dijitDropDown .dijitButtonText
+{
+	text-align: left;
+}
+
+#inputDialog-buttonDiv
+{
+	text-align: right;
+	margin-top: 10px
+}
+
+#inputDialog-buttonDiv  .dijitButton
+{
+	margin: 1px 2px 1px 2px;
+}
+
+.lookup-condition-actions
+{
+	text-align: right;
+}
+
+.lookup-condition-row > .dijitButton > .dijitButtonNode
+{	
+	border-width: 0;
+	border-style: none;
+	padding: 0;
+}
+
+.general-dialog-actions
+{
+	text-align: right;
+	padding: 10px 4px 0 0;
+}
+
+.general-dialog-actions .dijitButtonNode
+{
+    margin-left: 5px;
+    min-width: 80px;
+}
+
+.alarm-button-container
+{
+	float: right;
+	height: 32px;
+	overflow: hidden;
+}
+
+.alarm-button > .dijitComboButton .dijitButtonNode
+{		
+	padding-left: 20px;
+	padding-right: 0px;
+	min-height: 16px;	
+	font-size: 18px;
+	border: none 0px black;
+}
+
+.alarm-button > .dijitComboButton .dijitButtonNode > .dijitButtonText
+{
+	padding: 0 2px;
+}
+
+.alarm-button .dijitArrowButton 
+{
+    padding-left: 0px !important;
+}
+
+.past-due-button
+{
+    margin: 3px 6px 0 0;
+}
+
+/*
+.alarmMenuItem > .dijitMenuItemIconCell
+{
+	padding: 0 !important;
+	margin: 0 !important;
+}
+  */ 
+.alarm-title 
+{
+    font-size: 15px;
+    height: 32px;
+    line-height: 32px;    
+    padding: 0 8px 0 0;			
+	border-width: 0 0 1px 0; 
+}
+
+.alarm-tab-head
+{
+	display: inline-block;
+	width: 8px;
+	border-width: 0 !important;
+}
+
+.alarm-tab-tail
+{
+	display: inline-block;
+	width: 8px;
+	border-width: 0 !important;
+}
+
+.alarm-tab
+{
+	display: inline-block;
+	height: 32px;
+    line-height: 32px;   
+    padding: 0 6px;   
+    
+    border-width: 0 1px !important;
+}
+.alarm-title .alarm-title-tools
+{
+    /* float: right;*/
+    position: absolute;
+    right: 2px;
+    top: 36px;
+    height: 30px;
+    overflow: hidden;
+}
+.claro .alarm-title .dijitButton > .dijitButtonNode
+{
+    border-width: 0px;
+    line-height: 24px;
+    padding: 0 2px 8px;
+}
+.alarm-popup
+{
+	border-width: 1px;
+}
+
+.alarm-items-contents 
+{
+    width: auto;    
+    overflow: auto;
+}
+
+.alarm-item
+{
+    padding: 4px 20px;
+    font-size: 12px;
+    border-width: 0 0 1px 0;
+}
+
+.alarm-item-hover
+{	
+    background: #efefef;
+        
+    border-width: 0 0 1px 0;
+}
+
+.alarm-item .alarm-description
+{
+    font-size: 14px;
+}
+
+.alarm-item .alarm-countdown
+{
+    /* font-size: 24px; */
+}
+
+.alarm-item .alarm-countdownContainer
+{
+    text-align: center;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+.alarm-item td
+{
+    vertical-align: top;
+}
+
+.alarm-icon .dijitCheckBox
+{
+	margin-left: 5px;
+}
+
+.alarm-content
+{
+	line-height: 1.4em;
+}
+
+.alarm-snoozebar
+{
+    padding: 1px 0 5px 0;
+	border-width: 1px 0 0 0;	
+}
+
+.alarm-snoozebar .dijitButton
+{
+	margin: 0 2px;
+}
+
+.alarm-snoozebar .calendar-link
+{
+    text-align: right;
+	padding-right:5px;
+}
+
+.alarm-popup .alarm-body
+{
+    width: 600px;
+    height: 300px;
+}
+
+.alarm-pane
+{
+	padding: 0 !important;
+}
+
+.alarm-pane > div
+{
+	height: 100%;
+	overflow: hidden;
+	position: relative;	
+}
+
+.alarm-pane > div > .alarm-items-contents
+{
+	position: absolute;
+	top: 0;
+	bottom: 76px;
+	width: 100%;
+}
+
+.alarm-pane > div .alarm-snoozebar
+{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height:70px;
+}
+
+.alarm-snoozebar > table
+{
+	width: 600px;
+	height: 100%;
+}
+
+.alarm-snoozebar td
+{
+    vertical-align: middle;
+    padding-bottom: 5px;
+}
+
+.alarm-snoozebar .snoozeText
+{
+	text-align: left;
+	padding: 5px 0 5px 5px;
+	width:10%;
+	white-space:nowrap;
+}
+
+.alarm-snoozebar .snoozeBy
+{
+	padding-top:5px;
+	width:auto;
+}
+
+.alarm-snoozebar .snoozeBy > .dijitTextBox
+{
+     width:100%;
+}
+
+.alarm-snoozebar .snoozeActions
+{
+	text-align: right;
+	padding-top:5px;
+	width:30%;
+	white-space:nowrap;
+}
+
+.alarm-snoozebar .dismissActions
+{
+	text-align: left;
+}
+
+.display-none
+{   
+    display: none !important;
+}
+
+.textcontrol input, 
+.textcontrol textarea,
+.twocoltextcontrol input,
+.twocoltextcontrol textarea,
+.threecoltextcontrol input,
+.threecoltextcontrol textarea
+{
+	resize: none;
+	width: auto;
+	margin: 0;	
+}
+
+.textcontrol input,
+.twocoltextcontrol input,
+.threecoltextcontrol input
+{
+	height: 16px;
+}
+
+.textcontrol textarea,
+.twocoltextcontrol textarea,
+.threecoltextcontrol textarea
+{
+	overflow: auto;
+}
+
+.textcontrol select,
+.twocoltextcontrol select,
+.threecoltextcontrol select
+{
+	width: 100%;
+	margin: 0;
+	height: 22px;
+	
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* for non-dijit controls */
+.textcontrol > input,
+.textcontrol > textarea,
+.twocoltextcontrol > input,
+.twocoltextcontrol > textarea,
+.threecoltextcontrol > input,
+.threecoltextcontrol > textarea
+{
+	width: 100%;
+	
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.twocoltextcontrol
+{
+	float : left;
+	white-space : nowrap;
+	width : 75.25%;
+}
+
+.threecoltextcontrol
+{
+	float : left;
+	white-space : nowrap;
+	width : 83.6%;
+}
+
+
+.dijitTextBox
+{
+	width: auto;
+	
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.dijitComboBox > .dijitArrowButton > .dijitArrowButtonInner
+{
+	min-height: 16px;
+}
+
+.sageTextArea
+{	
+	border: none 0px black !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	overflow: visible !important;
+	
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.sageTextArea > textarea
+{
+	vertical-align: top;
+	width: 100% !important;
+	
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.twocoltextcontrol > .sageTextArea,
+.threecoltextcontrol > .sageTextArea
+{
+	border: none 0px black !important;
+	margin: 0 !important;
+	overflow: visible !important;
+}
+
+.twocoltextcontrol > .sageTextArea > textarea,
+.threecoltextcontrol > .sageTextArea > textarea
+{
+	width: 100% !important;	
+}
+
+.textcontrol .dijitTextBox,
+.twocoltextcontrol .dijitTextBox,
+.threecoltextcontrol .dijitTextBox
+{
+	display: block;
+}
+
+.textcontrol .ISOSpace
+{
+	display: inline-block
+}
+
+.ISOLabel 
+{    
+    background-color: white;
+    padding-bottom: 0px;
+    padding-left: 4px;
+    padding-right: 3px;
+    padding-top: 0px;
+    position: relative;
+    right: 38px;
+    top: 1px;
+}
+
+td > .textcontrol:only-child
+{
+	width: 90%;
+}
+
+.urlcontrol
+{
+	position: relative;
+}
+
+.urlcontrol > img
+{
+	position: absolute;
+	top: 3px;
+	right: 3px;
+	cursor: pointer; 	
+}
+
+
+.user,
+.owner,
+.lookup,
+.lookupDependency
+{
+	position: relative;
+	display: block;	
+	
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.datepicker > span
+{
+	position: relative;
+	display: block;
+	
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.datepicker.a > span {
+    position: relative;
+    display: inline;
+    bottom: 2px;
+}
+
+.user > input,
+.owner > input,
+.lookup > input,
+.lookupDependency > input
+{
+	height: 22px;	
+	width: 100%;
+	
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.datepicker > span > input
+{
+	height: 22px;
+	width: 100%;
+	
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.lookupDependency
+{
+    padding: 0 0 2px;
+}
+
+.twocoltextcontrol.user,
+.twocoltextcontrol.owner,
+.twocoltextcontrol.lookup,
+.twocoltextcontrol.datepicker > span,
+.threecoltextcontrol.user,
+.threecoltextcontrol.owner,
+.threecoltextcontrol.lookup,
+.threecoltextcontrol.datepicker > span
+{
+	position: relative;
+	display: block;
+	/* padding: 0 2px 0 0; */
+}
+
+.twocoltextcontrol.user > input,
+.twocoltextcontrol.owner > input,
+.twocoltextcontrol.lookup > input,
+.twocoltextcontrol.datepicker > span > input,
+.threecoltextcontrol.user > input,
+.threecoltextcontrol.owner > input,
+.threecoltextcontrol.lookup > input,
+.threecoltextcontrol.datepicker > span > input
+{
+	height: 18px;
+	/* margin: 0 -2px 0 0; */
+	width: 100%;
+	
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.user > img,
+.owner > img,
+.datepicker > span > img
+{
+	position: absolute;
+	top: 3px;
+	right: 3px;
+}
+
+.mainContentHeaderTable TD .lookup > a {
+    position: relative;
+}
+.mainContentHeaderTable TD .lookup 
+{
+    left: 3px;
+    display: inline-block;
+}
+
+.lookup > a,
+.lookupDependency > a
+{
+	top: 3px;
+	position: absolute;
+	right: 3px;
+}
+
+.lookup > img,
+.lookupDependency > img
+{
+	position: absolute;
+	right: 22px;
+	top: 3px;
+}
+
+.email,
+.person
+{
+	position: relative;
+}
+
+.email > img,
+.person > img
+{
+	position: absolute;
+	top: 3px;
+	right: 3px;
+}
+
+.email > img
+{
+	right: 4px;
+}
+
+.lookup > a
+{
+	top: 1px;
+}
+
+.address-control
+{	
+	position: relative;
+}
+
+.address-textarea > textarea
+{
+	height: 95px;
+    padding-right: 20px;
+}
+
+.address-container
+{
+	
+}
+
+.address-control .address-container .address-edit-button
+{
+	position: absolute;
+	top: 3px !important;
+	right: 3px !important; 
+	cursor:pointer;
+}
+
+.address-control .address-container .address-map-button
+{
+	position: absolute;
+	top: 22px !important;
+	right: 3px !important;
+	cursor:pointer;
+}
+
+.picklist > div
+{
+	position: relative;
+}
+
+.picklist .dijitDropDownButton
+{
+	margin: 0;
+	position: absolute;
+	top: 1px;
+	right: 3px;
+}
+
+.picklist .dijitDropDownButton > .dijitButtonNode
+{	
+	border: none 0px black;
+	padding: 0;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	
+	display: inline-block;
+	width: 16px;
+	height: 16px;	
+}
+
+.picklist .dijitDropDownButton > .dijitButtonNode > .dijitDownArrowButton 
+{
+	display: none;
+}
+
+.timezone > span > select
+{	
+	margin: 0;
+	height: 22px;
+}
+
+.timezone > span > input
+{
+	margin: 0 4px;
+	height: 22px;
+	padding: 0px 8px;		
+}
+
+.timezone > span > select
+{
+	width: 40%;
+}
+
+.timezone > span > .TimeZoneLabel
+{
+	margin: 0;
+}
+
+.slxlinkcontrol td
+{
+	padding-left: 2px;
+}
+
+.twocollbl
+{
+	margin-right: -2px;
+}
+
+.dependency 
+{
+
+}
+
+.mainContentHeader2
+{
+	height: 30px !important;
+    padding: 0;
+    line-height: 30px !important;   
+    
+    border-width: 1px 0px 1px 0px;    
+}
+
+.formtable td > .mainContentHeader2
+{
+	margin-left: -5px;		    
+}
+
+.mainContentHeader2 > span
+{
+	display: block;
+	margin-top: -1px;
+	
+	height: 30px;
+    line-height: 30px;
+}
+
+.formtable td > .mainContentHeader2 > span
+{
+	position: relative;
+	right: -5px;
+	margin-right: -1px;
+}
+
+fieldset
+{
+	border: none 0px black;
+}
+
+.dateTimePicker
+{
+	padding: 4px;
+	height: 266px;
+}
+
+.dateTimePicker .dateTimePicker-dateContainer
+{
+	float: left;
+    padding-top: 0px;
+	
+}
+
+.dateTimePicker .dateTimePicker-timeZoneContainer
+{
+	float: right;
+	display: none;
+	/*opacity: 0;*/
+	padding-left:5px;
+    padding-top: 4px; 
+    
+}
+.dateTimePicker .dateTimePicker-timeZoneCalculator 
+{
+    padding: 5px 5px 5px 5px;
+    background-color: #f8f8f8;
+	border: 1px solid #d6d5d5;
+    height: 140px;
+}
+
+.dateTimePicker .dateTimePicker-timeContainer
+{
+	/*float: left;*/
+	clear: left;
+}
+
+.dialogHelpIcon 
+{
+    position: absolute; 
+    right: 28px; 
+    top: 4px;
+}
+
+tr.dijitMenuItem .dialogHelpIcon
+{
+	right: 9px;
+	top: 5px;
+}
+
+/* general dialog styles (typically dojo templated dialogs) */
+
+.button-bar
+{
+    width: 95%;
+    padding: 10px 0;
+}
+
+.button-bar .dijitButton > .dijitButtonNode
+{
+    margin-left: 5px;
+   /*  min-width: 80px; */
+}
+
+.no-wrap
+{
+    white-space: nowrap;
+}
+
+/*  end general dialog styles  */
+
+/* --- activity dialog styles --- */
+.activity-dialog
+{
+    min-width: 75em;
+    width: 75em;
+}
+
+.activity-dialog .dijitTextBox 
+{
+ 
+    width: 100%;
+}
+.activity-dialog .dijitTextArea
+{
+    font: inherit;
+}
+.activity-dialog .textcontrol
+{
+    width: 100%;
+}
+.activity-dialog .notes-text
+{
+    min-height: 70px;
+}
+
+.activity-dialog .tab-container
+{
+    width: 100%;
+    min-height: 320px;
+    height: 320px;
+}
+
+.activity-dialog .contact-lead-radios
+{
+    margin-left: 104px;
+    margin-right: 50em;
+}
+
+.activity-dialog .bottom-border-section
+{
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+.activity-dialog .scheduled-by-label 
+{
+    padding: 10px 0 0 5px;
+}
+
+.activity-dialog .checkbox-label
+{
+    padding-left: 8px;
+}
+.activity-dialog .tableContainer-labelCell
+{
+    padding-left: 10px;
+}
+.activity-dialog .valigntop .tableContainer-labelCell
+{
+   vertical-align: top;
+}
+.activity-dialog .remove-padding
+{
+    padding: 0;
+}
+
+.activity-dialog .attendee-item
+{
+    width: 100%;
+    height: 100%;
+}
+
+.activity-dialog .attendee-name
+{
+    text-align:left;
+}
+
+.activity-dialog .remove-attendee
+{
+    width: 24px;
+}
+
+.activity-dialog .attendee-status
+{
+    width: 24px;
+}
+
+.activity-dialog .recurring-body
+{
+    width: 100%;
+    height: 100px;
+    
+}
+
+.activity-dialog .recurring-panel
+{
+    height:100px;
+}
+.activity-dialog .recurring-panel > div
+{
+    padding-bottom: 3px;
+}
+
+.activity-dialog .recurring-selectors
+{
+    vertical-align: top;
+    width:180px;
+}
+
+.activity-dialog .small-inline-textbox.dijitTextBox
+{
+    min-width:80px;
+    width:80px !important;
+}
+.activity-dialog .recurring-radio-label
+{
+    display: inline-block;
+}
+.activity-dialog .padded-inline-label
+{
+    padding-left:5px;
+    padding-right:5px;
+}
+.activity-dialog LABEL.padded-inline-label
+{
+    padding-right:15px;
+}
+
+
+/* --- end activity dialog styles --- */
+
+/* --- event dialog styles --- */
+.event-dialog
+{
+    min-width: 40em;
+    width: 40em;
+}
+
+.event-dialog .dijitTextBox 
+{
+    width: 98%;
+}
+.event-dialog .dijitTextArea
+{
+    font: inherit;
+    min-width: 15em;
+    width: 98%;
+    
+}
+.event-dialog .textcontrol
+{
+    width: 98%;
+}
+
+.event-dialog .remove-padding
+{
+    padding: 0;
+}
+
+/* --- end event dialog styles --- */
+
+/* --- quickComplete dialog styles --- */
+.quickComplete-dialog
+{
+    min-width: 40em;
+    width: 45em;
+}
+
+.quickComplete-dialog .dijitTextBox 
+{
+    width: 98%;
+}
+.quickComplete-dialog .dijitTextArea
+{
+    font: inherit;
+    min-width: 15em;
+    width: 98%;
+    
+}
+.quickComplete-dialog .textcontrol
+{
+    width: 98%;
+}
+
+/* --- end quickComplet dialog styles --- */
+
+.EntityCard 
+{
+	background: transparent !important;
+	/* margin: 0px; */
+}
+
+.EntityCard tr
+{
+	background: transparent !important;
+}
+
+.EntityCard > div > table
+{
+	width: 100% !important;
+}
+
+/*
+.EntityCard > div > table > colgroup > col
+{
+	width: 33% !important;
+}
+*/
+/*
+.summaryGrid > .dojoxGridMasterHeader
+{
+	display: none !important;
+}
+*/
+.summaryGrid .dojoxGridCell
+{
+	/* padding: 0px; */
+}
+.lookupButtonWrapper
+{
+	padding-top: 5px;
+	text-align: right;
+}
+
+.lookupButtonWrapper > span
+{
+	margin-left: 1px;
+	margin-right: 1px;
+}
+
+.groupMenuButton
+{
+	padding-left: 3px;
+}
+
+.groupMenuButton .dijitButtonNode
+{
+	height: 16px;
+}
+
+.groupMenuButton img
+{
+	position: relative;
+	left: 3px;
+}
+
+.groupMenuLabel
+{
+	position: relative;
+	padding-left: 9px;
+}
+
+.conditionButton
+{
+	display: inline;
+	margin: 0 0 0 2px;
+	width: 20px;
+}
+
+.conditionButton img
+{
+	margin-left:5px;
+}
+
+.multiSelectPickListDialog
+{
+	width: 150px;
+}
+
+.filter-summary
+{
+	padding: 2px;   
+    white-space:normal;
+	/*text-overflow: ellipsis;
+     overflow: hidden;*/
+}
+
+.filter-dialog,
+.filter-items-dialog
+{
+	width: 340px;
+	height: 400px;
+}
+
+.filter-dialog .filter-dialog-content,
+.filter-items-dialog .filter-items-dialog-content
+{
+	width: 100%;
+	overflow: auto;
+}
+.filter-dialog .filter-dialog-content
+{
+	height: 285px;
+}
+
+.filter-items-dialog .filter-items-dialog-content
+{
+	height: 220px;
+	margin-bottom:5px;
+}
+
+.filter-items-dialog .filter-items-search
+{
+	padding-bottom: 5px;
+	height: 55px; /* Account for additional height when button falls onto a new line when translated */
+}
+
+.filter-items-dialog .filter-items-search > .dijitButton > .dijitButtonNode
+{
+	height: 17px;
+}
+
+.filter-buttons
+{
+	bottom: -18px;
+	position: absolute;
+	right: 5px;
+}
+
+.filter-dialog .filter-buttons,
+.filter-items-dialog .filter-buttons,
+{
+	padding-top: 5px;
+}
+
+.filter-clear-all
+{
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+}
+
+.filter-collapsed .filter-clear,
+.filter-collapsed .filter-edit-items,
+.filter-collapsed .filter-sep,
+.filter-collapsed .filter-loading-indicator
+{
+	display: none;
+}
+
+.filter-edit
+{
+	display: inline-block;
+	clear: both;
+	width: 100%;
+}
+
+.filter-clear
+{
+	padding: 0 0 2px 26px;
+}
+
+.filter-edit
+{
+	text-align: right;
+	padding: 0 0 5px 0;
+}
+
+.lookup-filter-operators .dijitButtonContents
+{
+	width: 130px;
+}
+
+.filter-lookup-input
+{
+	width: 125px;
+}
+
+.filter-lookup-input
+{
+	margin: 0 0 0 24px;
+}
+
+.lookup-filter-operators
+{
+	margin: 0 0 1px 24px;
+    width: 123px !important;
+}
+
+.attachment-properties-form .uploadButton
+{
+    width: 100%;
+}
+
+.attachment-properties-form .dijitContentPane
+{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.attachment-properties-form .dijitTextBox 
+{
+	min-width: 250px;
+	width: 100%;
+}
+
+DIV.recur-activity-dialog 
+{
+	min-width: 350px; 
+}
+.recur-activity-dialog .dijitContentPane 
+{
+	padding: 2px 4px;
+}
+
+.ok-button
+{
+	margin-top: 10px;
+}
+.ok-button > .dijitButtonNode
+{
+	width: 50px;
+}
+.cancel-button
+{
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.cancel-button > .dijitButtonNode
+{
+	width: 50px;
+}
+
+#inputDialog-questionDiv
+{
+	min-width: 275px;
+}
+
+.QBHelpIcon
+{
+	position: fixed;
+	right: 30px;
+}
+
+/* rounding of the tabs */
+.claro .dijitTabContainerTop-tabs .dijitTabInnerDiv,
+.claro .dijitTabContainerTop-tabs .dijitTabContent
+{
+    border-radius: 4px 4px 0 0;
+}
+
+/* -- BEGIN EDITABLE GRID -- */
+.editable-grid-hbar, .gridPager {
+    height: 8px;
+    line-height: 5px;
+}
+
+.editable-grid-hbar-left {
+    float: left;    
+}
+
+.editable-grid-hbar-right {
+    text-align: right;
+    font-size: 11px;
+}
+/* -- END EDITABLE GRID -- */
+
+/* -- Begin SLXPreview Grid -- */
+
+.filterButtonPanel .dijitButton 
+{
+	margin-right: 5px;
+}
+.filterPanel .filterItem
+{
+	clear: both;
+	padding: 2px;
+}
+
+.filterPanel
+{
+	height :auto;
+	padding :2px;
+}
+.historyList .clearfix:after
+{
+	content: ".";
+	visibility: hidden;
+	display: block;
+	height: 0;
+	clear: both;
+} 
+
+.chkShowDBChanges
+{
+	padding :2px;
+	margin-left :20%;
+}
+
+.filterPanelLabel
+{
+	float: left;
+	text-align: left;
+	font-size: 12px;
+	padding-top: .3em;
+	margin-right: 3px;
+}
+
+/* -- End SLXPreview Grid -- */
+
+/* Activity dialog scheduler timeline view overrides*/
+.dhx_cal_prev_timeline_button {
+    background-image:url("./../Libraries/dhtmlxScheduler_v30/imgs/buttons.gif");
+    background-position:0 0;
+    width:30px;
+    height:20px;
+    cursor:pointer;
+}
+.dhx_cal_next_timeline_button {
+    background-image:url("./../Libraries/dhtmlxScheduler_v30/imgs/buttons.gif");
+    background-position:-30px 0;
+    width:30px;
+    height:20px;
+    cursor:pointer;
+}
+
+.dhx_cal_event_line.currentEvent {
+    background-color: #F5F1B1 !important;
+}
+
+.dhx_matrix_cell.currentEvent {
+    background-color: #F5F1B1;
+}
+/* end Activity dialog scheduler timeline view overrides*/
+
+.commonTaskAdHoc,
+div.dijitMenuPopup[dijitPopupParent="_listContextmenu"]
+{
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: auto;
+	max-height: 350px;
+	margin-right: 5px;
+	min-height: 27px;
+}
+
+.commonTaskAdHoc > table,
+div.dijitMenuPopup[dijitPopupParent="_listContextmenu"] > table
+{
+	padding: 0 15px 0 0 !important;
+	background-color: #f2f2f2 !important;
+}
+
+#widget_inputDialog-inputBox {
+    width: 100%;
+}
+
+
+/* notes history info box */
+.preview-grid-text
+{
+font-size:12px;
+}
+
+/* changed size of log off text */
+#btnLogOff_text
+{
+font-size:10px;
+}
+
+
+.alignleft.checkbox label 
+{
+    display: inline-block;
+    width: 70%;
+    margin-left:3px;
+}
+
+.checkboxRight label 
+{  
+    display: inline-block; 
+    width: 40% !important; 
+}
+
+.textcontainer-with-icons
+{
+    margin-right:20px;
+}
+
+.buttonAlignRight {
+    float: right;
+    padding-right: 3px;
+}
+
+
+/*remove extra space in table cell cause by dojo generated cellspacing/cellpadding*/
+.removeExtraSpace table tr td
+{
+    padding: 0;
+}
+
+/*IE shows a red X in the timeline popup*/
+.timeline-event-bubble-image
+{
+	display:none;
+}
+
+/* hide the summary view header */
+#list_summaryGridHdr0
+{
+	display:none;
+}
+
+
+
+/*---Specific to Schedule Process dialog---*/
+
+.SPcontrol .dijitTextBox,
+.twocoltextcontrol .dijitTextBox,
+.threecoltextcontrol .dijitTextBox
+{
+	display: block;
+}
+
+.icon_Find_16x16
+{
+    margin-left:5px;
+}

@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DefaultOwner.Caption" xml:space="preserve">
     <value>Owner:</value>
@@ -127,7 +127,7 @@
     <value>Default Security Profile:</value>
   </data>
   <data name="DefaultOwner.LookupProperties.UserInfo.UserName.PropertyHeader" xml:space="preserve">
-    <value>User</value>
+    <value>User Name</value>
   </data>
   <data name="addManagerCheckBox.Caption" xml:space="preserve">
     <value>Automatically add user's manager to team</value>
@@ -170,5 +170,20 @@
   </data>
   <data name="securityProfileLookup.LookupDialogTitle" xml:space="preserve">
     <value>Lookup Security Profile</value>
+  </data>
+  <data name="DefaultOwner.LookupProperties.UserInfo.Title.PropertyHeader" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="DefaultOwner.LookupProperties.UserInfo.Department.PropertyHeader" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="DefaultOwner.LookupProperties.UserInfo.Region.PropertyHeader" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="DefaultOwner.LookupProperties.Type.PropertyHeader" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="DefaultOwner.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>

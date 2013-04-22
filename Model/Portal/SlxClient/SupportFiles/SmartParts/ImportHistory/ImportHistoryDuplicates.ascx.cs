@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
 using System.IO;
 using System.Text;
 using Sage.Entity.Interfaces;
+using Sage.Platform.Application.UI;
+using Sage.Platform.Diagnostics;
+using Sage.Platform.Security;
 using Sage.SalesLogix.Services.Import;
 using Sage.SalesLogix.Services.PotentialMatch;
 using Sage.Platform.WebPortal.SmartParts;
@@ -44,9 +41,7 @@ public partial class ImportHistoryDuplicates : EntityBoundSmartPartInfoProvider
     protected override void OnFormBound()
     {
         base.OnFormBound();
-       
-         LoadForm();
-        
+        LoadForm();
     }
 
     /// <summary>
@@ -54,10 +49,9 @@ public partial class ImportHistoryDuplicates : EntityBoundSmartPartInfoProvider
     /// </summary>
     /// <param name="smartPartInfoType">Type of the smart part info.</param>
     /// <returns></returns>
-    public override Sage.Platform.Application.UI.ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
+    public override ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
     {
         ToolsSmartPartInfo tinfo = new ToolsSmartPartInfo();
-        
         foreach (Control c in Controls)
         {
             SmartPartToolsContainer cont = c as SmartPartToolsContainer;
@@ -87,7 +81,6 @@ public partial class ImportHistoryDuplicates : EntityBoundSmartPartInfoProvider
             }
         }
         return tinfo;
-        //tinfo.ImagePath = Page.ResolveClientUrl("ImageResource.axd?scope=global&type=Global_Images&key=Companies_24x24"); return tinfo;
     }
 
     /// <summary>
@@ -144,7 +137,6 @@ public partial class ImportHistoryDuplicates : EntityBoundSmartPartInfoProvider
     {
         grdDuplicates.SelectedIndex = e.NewEditIndex;
     }
-
    
     #region Private Methods
 
@@ -155,7 +147,7 @@ public partial class ImportHistoryDuplicates : EntityBoundSmartPartInfoProvider
     {
         try
         {
-            if ((Page.Visible) &&(chkShowDuplicates.Checked))
+            if (Page.Visible && chkShowDuplicates.Checked)
             {
                 IImportHistory importHistory = BindingSource.Current as IImportHistory;
                 if (importHistory != null)
@@ -163,61 +155,45 @@ public partial class ImportHistoryDuplicates : EntityBoundSmartPartInfoProvider
                     ImportTemplateManager templateManager = new ImportTemplateManager(importHistory.Data, Type.GetType(importHistory.EntityType));
                     ImportCSVOptions csvOptions = new ImportCSVOptions();
                     templateManager.LoadImportSourceOptions(csvOptions);
-
                     IList<IImportHistoryItem> items = Sage.SalesLogix.ImportHistory.Rules.GetHistoryItems(importHistory,"DUPLICATE","CreateDate",true);
 
-                    if ((items !=null)&&( items.Count > 0))
+                    if (items !=null && items.Count > 0)
                     {
                         IImportHistoryItem fItem = items[0];
                         string sQualifier = string.Empty;
                         if (fItem.Data.Contains(csvOptions.Qualifier.ToString()))
                         {
-
                              sQualifier = Convert.ToString(csvOptions.Qualifier);
-                      
                         }
                         
                         StringBuilder sb = new StringBuilder();
                         if (csvOptions.FirstRowColHeader)
                         {
                             string colheader = string.Empty;
-                            //bool AddIdcolumn = true;
                             colheader = string.Format("{0}{1}{2}{3}", sQualifier, "Id", sQualifier, csvOptions.Delimiter);
                             int lastColIndex = templateManager.SourceProperties.Count;
                             int index = 0;
                             foreach (ImportSourceProperty sp in templateManager.SourceProperties)
                             {
                                 index++;
-                                if (sp.FieldName.Equals("Id", StringComparison.InvariantCultureIgnoreCase))
-                                {
-                                    colheader = colheader + sQualifier + sp.FieldName + "_" + index + sQualifier;
-                                }
-                                else
-                                {
-                                    colheader = colheader + sQualifier + sp.FieldName + sQualifier;
-                                }
-                                                                
+                                colheader = sp.FieldName.Equals("Id", StringComparison.InvariantCultureIgnoreCase)
+                                                ? colheader + sQualifier + sp.FieldName + "_" + index + sQualifier
+                                                : colheader + sQualifier + sp.FieldName + sQualifier;
                                 if (lastColIndex != index)
                                 {
                                     colheader = colheader + Convert.ToString(csvOptions.Delimiter);
                                 }
-                               
                             }
-
                             sb.AppendLine(colheader);
                         }
 
-
                         foreach (IImportHistoryItem item in items)
                         {
-                            if (string.Equals("DUPLICATE", item.ItemType) && !System.Convert.ToBoolean(item.IsResolved))
+                            if (string.Equals("DUPLICATE", item.ItemType) && !Convert.ToBoolean(item.IsResolved))
                             {
-
                                 sb.AppendFormat("{0}{1}{2}{3}{4}\r\n", sQualifier, item.Id, sQualifier, csvOptions.Delimiter, item.Data);
-
                             }
                         }
-
 
                         ImportCSVReader sourceReader = GetCSVReader(sb.ToString());
                         sourceReader.Options = csvOptions;
@@ -227,17 +203,16 @@ public partial class ImportHistoryDuplicates : EntityBoundSmartPartInfoProvider
                             dtDups.Columns[0].ColumnName = "Id";
                         }
                         grdDuplicates.DataSource = dtDups;
-                        grdDuplicates.DataBind();
                     }
                 }
+                grdDuplicates.DataBind();
             }
         }
-        catch (Exception)
-        { 
-           
+        catch (Exception ex)
+        {
+            log.Error("The call to ImportHistoryDuplicates.LoadForm() failed", ex);
         }
     }
-
 
     /// <summary>
     /// Resolves the duplicate.
@@ -248,88 +223,83 @@ public partial class ImportHistoryDuplicates : EntityBoundSmartPartInfoProvider
         try
         {
             IMatchDuplicateProvider dupProvider = GetDuplicateProvider(itemId);
-
-            if (DialogService != null)
+            if (DialogService != null && dupProvider != null)
             {
-                if (dupProvider != null)
-                {
-                   
-                        DialogService.SetSpecs(200, 200, 600, 800, "LeadSearchAndConvert", GetLocalResourceObject("Title.Resolve.Duplicate.ImportLead").ToString(), true);
-                        DialogService.DialogParameters.Add("duplicateProvider", dupProvider);
-                        DialogService.DialogParameters.Add("importHistoryItemId", itemId);
-                        DialogService.EntityType = typeof(IImportHistory);
-                        DialogService.EntityID = itemId;
-                        DialogService.ShowDialog();
-                        chkShowDuplicates.Checked = false;
-                    
-                }
+                DialogService.SetSpecs(200, 200, 600, 800, "LeadSearchAndConvert",
+                                       GetLocalResourceObject("Title.Resolve.Duplicate.ImportLead").ToString(), true);
+                DialogService.DialogParameters.Add("duplicateProvider", dupProvider);
+                DialogService.DialogParameters.Add("importHistoryItemId", itemId);
+                DialogService.EntityType = typeof (IImportHistory);
+                DialogService.EntityID = itemId;
+                DialogService.ShowDialog();
+                chkShowDuplicates.Checked = false;
             }
         }
         catch (Exception exp)
         {
-            throw new ApplicationException(string.Format(GetLocalResourceObject("LoadErrorMSG").ToString(), exp.Message), exp);
+            var sSlxErrorId = ErrorHelper.GetNewLoggingId();
+            log.Error(ErrorHelper.AppendSlxErrorId("The call to ImportHistoryDuplicates.ResolveDuplicate() failed", sSlxErrorId), exp);
+            throw new UserObservableApplicationException(String.Format(GetLocalResourceObject("LoadErrorMSG").ToString(), sSlxErrorId), exp);
         }
-                    
     }
 
     /// <summary>
     /// Transforms to target object.
     /// </summary>
-    /// <param name="item">The item.</param>
+    /// <param name="itemId">The item</param>
     /// <returns></returns>
     private IMatchDuplicateProvider GetDuplicateProvider(string itemId)
     {
-        IMatchDuplicateProvider dupProvider = null;
-       
-            IImportHistoryItem item = Sage.Platform.EntityFactory.GetById<IImportHistoryItem>(itemId);
-            IImportHistory importHistory = Sage.Platform.EntityFactory.GetById<IImportHistory>(item.ImportHistoryId);
-            ImportTemplateManager templateManager = new ImportTemplateManager(importHistory.Data, Type.GetType(importHistory.EntityType));
-            ImportCSVOptions csvOptions = new ImportCSVOptions();
+        IImportHistoryItem item = Sage.Platform.EntityFactory.GetById<IImportHistoryItem>(itemId);
+        IImportHistory importHistory = Sage.Platform.EntityFactory.GetById<IImportHistory>(item.ImportHistoryId);
+        ImportTemplateManager templateManager = new ImportTemplateManager(importHistory.Data, Type.GetType(importHistory.EntityType));
+        ImportCSVOptions csvOptions = new ImportCSVOptions();
 
-            templateManager.LoadImportSourceOptions(csvOptions);
-            StringBuilder sb = new StringBuilder();
-            if (csvOptions.FirstRowColHeader)
+        templateManager.LoadImportSourceOptions(csvOptions);
+        StringBuilder sb = new StringBuilder();
+        if (csvOptions.FirstRowColHeader)
+        {
+            string colheader = string.Empty;
+            int lastColIndex = templateManager.SourceProperties.Count;
+            int index = 0;
+            foreach (ImportSourceProperty sp in templateManager.SourceProperties)
             {
-                string colheader = string.Empty;
-                int lastColIndex = templateManager.SourceProperties.Count;
-                int index = 0;
-                foreach (ImportSourceProperty sp in templateManager.SourceProperties)
+                index++;
+                colheader = colheader + Convert.ToString(csvOptions.Qualifier) + sp.FieldName +
+                            Convert.ToString(csvOptions.Qualifier);
+                if (lastColIndex != index)
                 {
-                    index++;
-                    colheader = colheader + Convert.ToString(csvOptions.Qualifier) + sp.FieldName + Convert.ToString(csvOptions.Qualifier);
-                    if (lastColIndex != index)
-                    {
-                        colheader = colheader + Convert.ToString(csvOptions.Delimiter);
-                    }
+                    colheader = colheader + Convert.ToString(csvOptions.Delimiter);
                 }
-                sb.AppendLine(colheader);
             }
-            sb.AppendLine(item.Data);
-            ImportCSVReader sourceReader = GetCSVReader(sb.ToString());
-            sourceReader.Options = csvOptions;
+            sb.AppendLine(colheader);
+        }
+        sb.AppendLine(item.Data);
+        ImportCSVReader sourceReader = GetCSVReader(sb.ToString());
+        sourceReader.Options = csvOptions;
 
-            ImportTransformationManager transformationManager = new ImportTransformationManager(templateManager.EntityManager.EntityType, templateManager.ImportMaps, templateManager.TargetPropertyDefaults);
+        ImportTransformationManager transformationManager =
+            new ImportTransformationManager(templateManager.EntityManager.EntityType, templateManager.ImportMaps,
+                                            templateManager.TargetPropertyDefaults);
 
-            //Calculated properties?
-            transformationManager.TransformationProvider = new ImportTransformationProvider();
-            sourceReader.MoveToNext();
-            object targetEntityObj = Sage.Platform.EntityFactory.Create(templateManager.EntityManager.EntityType);
-            transformationManager.FillEntity(sourceReader.CurrentRecord, targetEntityObj);
-            
-            //Need to make this more generic
-            dupProvider = new LeadDuplicateProvider();
-            dupProvider.AdvancedOptions = templateManager.MatchAdvancedOptions;
-            dupProvider.AdvancedOptions.AutoMerge = false;
-            foreach (string filter in templateManager.MatchFilters)
-            {
-                dupProvider.SetActiveFilter(filter, true);
-            }
-            MatchEntitySource entitySource = new MatchEntitySource(templateManager.EntityManager.EntityType, targetEntityObj);
-            dupProvider.EntitySource = entitySource;
+        //Calculated properties?
+        transformationManager.TransformationProvider = new ImportTransformationProvider();
+        sourceReader.MoveToNext();
+        object targetEntityObj = Sage.Platform.EntityFactory.Create(templateManager.EntityManager.EntityType);
+        transformationManager.FillEntity(sourceReader.CurrentRecord, targetEntityObj);
 
-            return dupProvider;
-              
-        
+        //Need to make this more generic
+        IMatchDuplicateProvider dupProvider = new LeadDuplicateProvider();
+        dupProvider.AdvancedOptions = templateManager.MatchAdvancedOptions;
+        dupProvider.AdvancedOptions.AutoMerge = false;
+        foreach (string filter in templateManager.MatchFilters)
+        {
+            dupProvider.SetActiveFilter(filter, true);
+        }
+        MatchEntitySource entitySource = new MatchEntitySource(templateManager.EntityManager.EntityType, targetEntityObj);
+        dupProvider.EntitySource = entitySource;
+
+        return dupProvider;
     }
 
     /// <summary>
@@ -339,22 +309,12 @@ public partial class ImportHistoryDuplicates : EntityBoundSmartPartInfoProvider
     /// <returns></returns>
     private ImportCSVReader GetCSVReader(string data)
     {  
-        MemoryStream stream = new MemoryStream(System.Text.ASCIIEncoding.ASCII.GetBytes(data));
+        MemoryStream stream = new MemoryStream(ASCIIEncoding.ASCII.GetBytes(data));
         byte[] bData = new byte[stream.Length];
-        stream.Read(bData, 0, System.Convert.ToInt32(stream.Length));
+        stream.Read(bData, 0, Convert.ToInt32(stream.Length));
         ImportCSVReader reader = new ImportCSVReader(bData);
         stream.Close();
         return reader;
-    }
-
-    /// <summary>
-    /// Gets the source reader.
-    /// </summary>
-    /// <param name="rawData">The raw data.</param>
-    /// <returns></returns>
-    private IImportSourceReader GetSourceReader(string rawData)
-    {
-        return GetCSVReader(rawData);
     }
 
     #endregion

@@ -47,15 +47,9 @@ namespace Sage.BusinessRules.CodeSnippets
         public static void btnSave_OnClickStep(ISynchronization form, EventArgs args)
         {
             IAppIdMapping appIdMapping = form.CurrentEntity as IAppIdMapping;
-			try
-			{
-				int syncInterval = Convert.ToInt32(form.txtInterval.Text);
-				appIdMapping.SaveSyncConfiguration(syncInterval);
-			}
-			catch (FormatException)
-			{
-				throw new ValidationException(form.GetResource("Error_Invalid_Number").ToString());
-			}
+            int syncInterval = Convert.ToInt32(form.txtInterval.Text);
+            appIdMapping.SaveSyncConfiguration(syncInterval);
+            appIdMapping.Save();
         }
     }
 }

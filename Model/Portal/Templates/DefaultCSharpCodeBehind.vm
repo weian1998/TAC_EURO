@@ -43,7 +43,7 @@ namespace ${portal.PortalAlias}
     public partial class ${page.PageAlias}Page : $baseType
     {
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private const string LargeImageUrl = $tools.GetLargeImageUrl($page).to_quote;
+        private const string ImageClass = $tools.GetPageImageClassName($page).to_quote;
 
         ScriptManager _scriptManager;
 
@@ -57,11 +57,7 @@ namespace ${portal.PortalAlias}
         public IUIElementAdapterFactoryCatalog AdapterCatalog
         {
             get { return _adapterCatalog; }
-            set
-            {
-                _adapterCatalog = value;
-                _adapterCatalog.RegisterFactory(new NavItemCollectionUIAdapterFactory());
-            }
+            set { _adapterCatalog = value; }
         }
 
         /// <summary>
@@ -82,7 +78,7 @@ namespace ${portal.PortalAlias}
                 base.OnPreInit(e);
                 if (!SecuredActionService.HasAccess($page.AppliedSecurity.to_quote))
                 {
-                    throw new ApplicationException(Resources.SalesLogix.Error_NoAccess);
+                    throw new RoleAccessDeniedException(Resources.SalesLogix.Error_NoAccess);
                 }
                 IDataService data = ApplicationContext.Current.Services.Get<IDataService>();
                 if(data != null)
@@ -133,6 +129,9 @@ namespace ${portal.PortalAlias}
                 LoadSmartParts();
                 LoadTasklets();
                 LoadModules();
+#if($page.IncludeScript.Length > 0)
+                LoadIncludeScript();
+#end
             }
             catch(Exception ex)
             {
@@ -146,9 +145,10 @@ namespace ${portal.PortalAlias}
             HtmlContainerControl localTitle = this.Master.FindControl("localTitle") as HtmlContainerControl;
             if (localTitle == null) return;
 
-            string img = !string.IsNullOrEmpty(this.TitleBar.Image) ?
-                string.Format("<img src='{0}' />", ResolveUrl(this.TitleBar.Image)) : string.Empty;
-            localTitle.InnerHtml = string.Format("<span id='PageTitle'>{0} {1}</span>", img, this.TitleBar.Text);
+            var img = !string.IsNullOrEmpty(TitleBar.Image)
+                          ? string.Format("<div class=\"Global_Images icon24x24 {0}\"> </div>", this.TitleBar.Image)
+                          : string.Empty;
+            localTitle.InnerHtml = string.Format("<span id=\"PageTitle\">{0} <span id=\"PageTitleText\">{1}</span></span>", img, this.TitleBar.Text);
         }
         #endregion
 
@@ -181,11 +181,11 @@ namespace ${portal.PortalAlias}
 
             if (String.IsNullOrEmpty(this.TitleBar.Text))
             {
-                this.TitleBar.Text = Server.HtmlEncode(text);
+                TitleBar.Text = Server.HtmlEncode(text);
             }
             if (String.IsNullOrEmpty(this.TitleBar.Image))
             {
-                this.TitleBar.Image = LargeImageUrl;
+                TitleBar.Image = ImageClass;
             }
         }
 
@@ -211,6 +211,17 @@ namespace ${portal.PortalAlias}
                 }
             }
         }
+
+#if($page.IncludeScript.Length > 0)
+        void LoadIncludeScript()
+        {	
+            if (!Page.ClientScript.IsClientScriptIncludeRegistered("Page_IncludeScript"))
+            {
+                ScriptManager.RegisterClientScriptInclude(this, GetType(), "Page_IncludeScript", Page.ResolveUrl("$tools.ToAppRelative($page.IncludeScript)"));
+            }
+        }
+#end
+
         void LoadMenu()
         {
             foreach (KeyValuePair<string, IWorkspace> wsPair in this.PageWorkItem.Workspaces)
@@ -225,13 +236,14 @@ namespace ${portal.PortalAlias}
                         ${menu.ItemId}.ID = $menu.ItemId.to_quote;
 #set($spInfoId = "${menu.ItemId}Info")
                         WebToolbarSmartPartInfo $spInfoId = new WebToolbarSmartPartInfo(GetResource($tools.ToAppRelative($menu.ToRelativeUserControlPath()).to_quote, "Text"),GetResource($tools.ToAppRelative($menu.ToRelativeUserControlPath()).to_quote, "Description"))
-                        { SmallImagePath = $tools.ResolveImageUrl($menu.SmallImageUrl).to_quote,LargeImagePath = $tools.ResolveImageUrl($menu.LargeImageUrl).to_quote};
+                        { SmallImagePath = $tools.ResolveImageUrl($menu.SmallImageUrl).to_quote,LargeImagePath = $tools.ResolveImageUrl($menu.LargeImageUrl).to_quote, LargeImageClass = $tools.ImageToCssClass($menu.LargeImageUrl).to_quote, SmallImageClass = $tools.ImageToCssClass($menu.SmallImageUrl).to_quote};
                         wsPair.Value.Show($menu.ItemId, $spInfoId);
                     }
 #end
                 }
             }
         }
+
         void LoadSmartParts()
         {
 #foreach ($sp in $page.SmartParts)
@@ -327,7 +339,7 @@ namespace ${portal.PortalAlias}
         }
         bool CanBeExtensionSite(Control c)
         {
-            foreach (IUIElementAdapterFactory factory in _adapterCatalog.Factories)
+            foreach (IUIElementAdapterFactory factory in AdapterCatalog.Factories)
             {
                 if (factory.Supports(c))
                     return true;
@@ -377,30 +389,63 @@ namespace ${portal.PortalAlias}
             }
             return null;
         }
+
+        // Sets the .SLXAUTH cookie to an empty value.
+        private static void FormsAuthSignOut()
+        {
+            try
+            {
+                if (FormsAuthentication.IsEnabled)
+                {
+                    FormsAuthentication.SignOut();
+                }
+            }
+            catch(Exception ex)
+            {
+                log.Debug("There was an error attempting to sign out of Forms authentication.", ex);
+            }
+        }
+
         void _scriptManager_AsyncPostBackError(object sender, AsyncPostBackErrorEventArgs e)
         {
-            log.Error("Unhandled exception occurred during async postback.", e.Exception);
+            var exception = e != null ? e.Exception : null;
+            if (exception == null) return;
 
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(e.Exception.Message);
+            var fullException = exception;
 
-            Exception innerEx = e.Exception.InnerException;
-            int verbositycheck = 0;
-            while (innerEx != null)
+            var eKind = Sage.Platform.Diagnostics.ErrorHelper.GetTargetedException(fullException, out exception);
+
+            var eMitigationType = Sage.Platform.Diagnostics.ErrorHelper.GetMitigationType(eKind, Request);
+
+            var sSlxErrorId = Sage.Platform.Diagnostics.ErrorHelper.GetNewLoggingId();
+
+            if (Sage.Platform.Diagnostics.ErrorHelper.ExceptionMustBeLogged(eKind))
             {
-                sb.Append(": <br />");
-                sb.Append(innerEx.Message);
-
-                if (innerEx is ValidationException)
-                {
-                    _scriptManager.AsyncPostBackErrorMessage = innerEx.Message;
-                    return;
-                }
-
-                innerEx = innerEx.InnerException;
-                if (verbositycheck++ > 3) { break; }
+                Sage.Platform.Diagnostics.ErrorHelper.LogException(fullException, Request, log,
+                                                                   string.Format(
+                                                                       "{0} unhandled exception during async postback",
+                                                                       Sage.Platform.Diagnostics.ErrorHelper.
+                                                                           GetCurrentEventLogSource()), sSlxErrorId);
             }
-            _scriptManager.AsyncPostBackErrorMessage = sb.ToString();
+
+            Server.ClearError();            
+
+            switch (eMitigationType)
+            {
+                case Sage.Platform.Diagnostics.ErrorHelper.MitigationType.AjaxLoginRedirect:
+                case Sage.Platform.Diagnostics.ErrorHelper.MitigationType.LoginRedirect:
+                    FormsAuthSignOut();
+                    Response.Redirect("Login.aspx");
+                    break;
+
+                default:
+                    _scriptManager.AsyncPostBackErrorMessage =
+                        Sage.Platform.Diagnostics.ErrorHelper.GetErrorMessageContent(exception, Request, eKind,
+                                                                                     sSlxErrorId, true, true,
+                                                                                     Resources.SalesLogix.
+                                                                                         MailDetailsLink);
+                    break;
+            }
         }
 
         void InitMode()

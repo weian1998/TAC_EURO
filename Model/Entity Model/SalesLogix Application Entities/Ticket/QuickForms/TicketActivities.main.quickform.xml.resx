@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="cmdAdvanced.Caption" xml:space="preserve">
     <value>Advanced...</value>
@@ -126,34 +126,64 @@
   <data name="cmdTicketActivities.ToolTip" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="grdActivities.EmptyTableRowText" xml:space="preserve">
-    <value>No records match the selection criteria.</value>
-  </data>
-  <data name="grdActivities.30158ae5-18ee-45a3-8b7b-c99c1e90e48d.ColumnHeading" xml:space="preserve">
-    <value>Comments</value>
-  </data>
-  <data name="grdActivities.30158ae5-18ee-45a3-8b7b-c99c1e90e48d.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdActivities.1e663f18-5b37-4d49-bb91-0871d5a85bf5.ColumnHeading" xml:space="preserve">
-    <value>Received Date</value>
-  </data>
-  <data name="grdActivities.2ad902ad-6096-4e3a-8393-2acbcc06ef28.ColumnHeading" xml:space="preserve">
-    <value>Type</value>
-  </data>
-  <data name="grdActivities.54f8b453-e05c-4563-8ae6-19b61665cbfe.ColumnHeading" xml:space="preserve">
-    <value>Public</value>
-  </data>
-  <data name="grdActivities.31671090-9801-4acd-83ab-8987659996ea.ColumnHeading" xml:space="preserve">
+  <data name="grdTicketActivities.9be5e185-56cc-4f82-a944-f3f01c35c6f0.ColumnHeading" xml:space="preserve">
     <value>Modified By</value>
   </data>
-  <data name="txtComments.Caption" xml:space="preserve">
+  <data name="grdTicketActivities.7bdba7e9-d8c5-4503-b69d-5e34d672972f.ColumnHeading" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="grdTicketActivities.b0729160-639b-46a3-a564-bc7198a67307.ColumnHeading" xml:space="preserve">
+    <value>Public</value>
+  </data>
+  <data name="grdTicketActivities.5c81df33-ce06-4fbd-8dca-a30d83d73917.ColumnHeading" xml:space="preserve">
+    <value>Modified By</value>
+  </data>
+  <data name="grdTicketActivities.12352d75-17a5-419a-a592-2d80ea965b55.ColumnHeading" xml:space="preserve">
+    <value>Received Date</value>
+  </data>
+  <data name="grdTicketActivities.13454d07-cba7-40e1-a8f0-78f4c6bc026e.ColumnHeading" xml:space="preserve">
     <value>Comments</value>
+  </data>
+  <data name="txtComments.Caption" xml:space="preserve">
+    <value>Comments:</value>
   </data>
   <data name="cmdCommentsDateStamp.ToolTip" xml:space="preserve">
     <value>User Time Stamp</value>
   </data>
-  <data name="grdActivities.00e5e360-e197-4174-8292-3850c917f7e1.FormatString" xml:space="preserve">
+  <data name="grdTicketActivities.0509cdb3-ff22-44fb-940f-19a24860e02f.Text" xml:space="preserve">
     <value>Edit</value>
+  </data>
+  <data name="grdTicketActivities.0509cdb3-ff22-44fb-940f-19a24860e02f.ColumnHeading" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="grdTicketActivities.0509cdb3-ff22-44fb-940f-19a24860e02f.FormatString" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="grdTicketActivities.e1fe0285-a9a6-4f96-9e9c-a9002dc6c4f1.ColumnHeading" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="grdTicketActivities.a5649ef5-882d-40ff-a72d-06f2e13a5440.ColumnHeading" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="grdTicketActivities.775e714d-a07a-4c31-9552-d6c9fcd99994.ColumnHeading" xml:space="preserve">
+    <value>Public</value>
+  </data>
+  <data name="grdTicketActivities.09bd8cf6-173a-44a4-b50c-249c9dcac484.ColumnHeading" xml:space="preserve">
+    <value>Modified By</value>
+  </data>
+  <data name="grdTicketActivities.999ab82e-6b24-4741-b77b-4dc90b785593.ColumnHeading" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="grdTicketActivities.79a654ac-e61e-4e5f-b371-7f8500df8ad5.ColumnHeading" xml:space="preserve">
+    <value>Public</value>
+  </data>
+  <data name="grdTicketActivities.deddaaf8-3898-42a1-916a-5cc7022414f2.ColumnHeading" xml:space="preserve">
+    <value>Modified By</value>
+  </data>
+  <data name="grdTicketActivities.fcb41bc4-3266-40dd-a87d-44955845c3f0.ColumnHeading" xml:space="preserve">
+    <value />
+  </data>
+  <data name="grdTicketActivities.1a8f67b9-1c52-4b9f-9eab-718774e3c741.ColumnHeading" xml:space="preserve">
+    <value>User</value>
   </data>
 </root>

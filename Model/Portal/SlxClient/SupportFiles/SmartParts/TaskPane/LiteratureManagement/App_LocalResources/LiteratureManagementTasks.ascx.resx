@@ -120,38 +120,20 @@
   <data name="Err_Complete" xml:space="preserve">
     <value>You do not have permission to complete all of the items selected.</value>
   </data>
-  <data name="Err_Fulfill" xml:space="preserve">
-    <value>The literature request(s) could not be fulfilled.</value>
-  </data>
-  <data name="Err_FulfillCanceled" xml:space="preserve">
-    <value>The fulfillment of the literature request was canceled for LitReqId {0}.</value>
-  </data>
-  <data name="Err_FulfillEx" xml:space="preserve">
-    <value>The following literature request(s) could not be fulfilled:</value>
-  </data>
-  <data name="Err_FulfillFailed" xml:space="preserve">
-    <value>The literature request could not be fulfilled for LitReqId {0}.</value>
-  </data>
-  <data name="Err_MailMergeService" xml:space="preserve">
-    <value>The literature request(s) could not be fulfilled because the mail merge service could not be loaded. This may happen if Sage SalesLogix Desktop Integration is not installed or is not installed properly.</value>
-  </data>
   <data name="Err_Reject" xml:space="preserve">
     <value>You do not have permission to reject all of the items selected.</value>
   </data>
-  <data name="Err_SelectionInfo" xml:space="preserve">
-    <value>There was an error retrieving information about the selected records.</value>
+  <data name="Err_Selection" xml:space="preserve">
+    <value>There must be at least one record selected before executing this action.</value>
   </data>
-  <data name="Fulfill_Success" xml:space="preserve">
-    <value>The literature request fulfillment was successful.</value>
+  <data name="Err_SelectionContext" xml:space="preserve">
+    <value>The selection context could not be retrieved.</value>
+  </data>
+  <data name="Err_SelectionService" xml:space="preserve">
+    <value>The selection service was not found.</value>
   </data>
   <data name="LitTask_NoLabels" xml:space="preserve">
     <value>No Labels</value>
-  </data>
-  <data name="Msg_Select_Records" xml:space="preserve">
-    <value>Please select one or more records before attempting to manage literature requests.</value>
-  </data>
-  <data name="Msg_Select_Records_Title" xml:space="preserve">
-    <value>No Records Selected</value>
   </data>
   <data name="TaskText_Complete" xml:space="preserve">
     <value>Complete</value>

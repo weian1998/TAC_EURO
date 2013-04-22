@@ -94,7 +94,7 @@ public class FormHelper
             //Set Base Rate and Code on the service.
             if (ccs.CurrentContext.ContainsKey("BaseRateCode"))
             {
-                ccs.CurrentContext["BaseRateCode"].Equals(baseCode);
+                ccs.CurrentContext["BaseRateCode"] = baseCode;
             }
             else
             {
@@ -103,7 +103,7 @@ public class FormHelper
 
             if (ccs.CurrentContext.ContainsKey("BaseRate"))
             {
-                ccs.CurrentContext["BaseRate"].Equals(baseRate);
+                ccs.CurrentContext["BaseRate"] = baseRate;
             }
             else
             {

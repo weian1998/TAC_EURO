@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="357" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
     <!-- saved from url=(0014)about:internet -->
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Set Up Accounting Integration</title>
@@ -11,61 +11,72 @@
         </script>
     </head>
     <body>
-        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Integration Contract/Setup_Accounting_Integration.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Integration Contract/Setup_Accounting_Integration.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
         </p>
         <h1>Set Up Accounting Integration</h1>
-        <p><a name="kanchor480"></a>Use the Setup Accounting Integration dialog box to define the accounting feed details. </p>
-        <table style="width: 52.5%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle_TableStyle" cellspacing="0">
-            <col style="width: 181px;" />
-            <col style="width: 444px;" />
+        <p><a name="kanchor494"></a>Use the Set Up Accounting Integration dialog box to define the accounting feed details. </p>
+        <table style="width: 52.5%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+            <col style="width: 181px;" class="Column-Column1" />
+            <col style="width: 444px;" class="Column-Column1" />
             <thead>
-                <tr>
-                    <th class="TableStyle_TableStyle_Head_0_0_RowSep_ColSep">Box</th>
-                    <th class="TableStyle_TableStyle_Head_0_0_RowSep_ColEnd">Description/Action</th>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Box</th>
+                    <th class="HeadD-Column1-Header1">Description/Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">Accounting Feed</td>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">
-                        <p>Type the SData URL to the accounting system. Use the format: http://server:port/sdatavirtualdir/ <i>application</i>/<i>contract</i>/<i>operatingcompany
-/</i></p>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Accounting Feed</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>Type the SData URL that Sage SalesLogix uses to share information between systems. Do one of the following:</p>
                         <ul>
-                            <li class="Bullets" value="1">Set <i>application</i> to your accounting application name. For example, Sage1000.
+                            <li value="1">If your implementation does not use the default port (port 80), use format http://server:port/sdatavirtualdir/<i>application</i>/<i>contract</i>/<i>operatingcompany</i>/-/</li>
+                            <li value="2"> If your implementation uses port 80, omit the port number from the URL. The Sync Service automatically strips the default port from the URL which causes matching issues and errors. Avoid this by using format http://server/sdatavirutaldir/<i>application</i>/<i>contract</i>/<i>operatingcompany</i>/-/</li>
+                        </ul>
+                        <p>Change the following:</p>
+                        <ul>
+                            <li class="Bullets" value="1"><i>application</i> to your accounting application name. For example, Sage1000.
 </li>
-                            <li class="Bullets" value="2">Set <i>contract</i> to gcrm.
+                            <li class="Bullets" value="2"><i>contract</i> to gcrm.
 </li>
-                            <li class="Bullets" value="3">Set <i>operatingcompany</i> to the operating company in your accounting application that you are integrating with.</li>
+                            <li class="Bullets" value="3"><i>operatingcompany</i> to the operating company in your accounting application that you are integrating with.</li>
                         </ul>
                     </td>
                 </tr>
-                <tr>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">User Name</td>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Type the user name used to log on to the accounting system.</td>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">User Name</td>
+                    <td class="BodyD-Column1-Body1">Type the user name used to log on to the accounting system.</td>
                 </tr>
-                <tr>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">Password</td>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Type the password for the corresponding user name.</td>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Password</td>
+                    <td class="BodyD-Column1-Body1">Type the password for the corresponding user name.</td>
                 </tr>
-                <tr>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">Test Feed</td>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Click to test and display the connection status.</td>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Test Feed</td>
+                    <td class="BodyD-Column1-Body1">Click to test and display the connection status.</td>
                 </tr>
-                <tr>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">Status</td>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Displays the test results of the accounting feed.</td>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Status</td>
+                    <td class="BodyD-Column1-Body1">Displays the test results of the accounting feed.</td>
                 </tr>
-                <tr>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">Display Name               <![CDATA[ ]]></td>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Type a display name for the accounting system. This name displays in the Web Client when users are linking records between Sage SalesLogix and the accounting system.</td>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Display Name             </td>
+                    <td class="BodyD-Column1-Body1">Type a display name for the accounting system. This name displays in the Web Client when users are linking records between Sage SalesLogix and the accounting system.</td>
                 </tr>
-                <tr>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">Enable Synchronization, Linking and Transacting</td>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Select or clear to enable or disable this feed. When the feed is disabled, the accounting system is not available for linking or synchronizing to or from Sage SalesLogix.</td>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Enable Synchronization, Linking and Transacting</td>
+                    <td class="BodyD-Column1-Body1">Select or clear to enable or disable this feed. When the feed is disabled, the accounting system is not available for linking or synchronizing to or from Sage SalesLogix.</td>
                 </tr>
-                <tr>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowEnd_ColSep">Filter By Resource</td>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowEnd_ColEnd">
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Enable Email Authentication</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>Select this option to use email authentication to restrict data that can be seen or to audit what a user has viewed. Some accounting systems may require email authentication. </p>
+                        <p>After selecting this option, you must <a href="../Admin_useradmin/Changing_a_Users_Profile.htm">modify each user's profile</a> to include an email address that matches  a user's email address in the accounting system.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">Filter By Resource</td>
+                    <td class="BodyA-Column1-Body1">
                         <p>Select a resource type and click the Execute button to display schema differences in the grid. </p>
                         <p>This feature <a href="FindSchemaDifferences.htm" target="_self">compares the schema</a> for the selected resource in the two integrated systems and returns any differences in string lengths. If string values do not match,  use the Database Manager or another application to modify the schema in one of the systems.</p>
                     </td>
@@ -93,7 +104,7 @@
         <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
             <col style="width: 100%;" />
             <tbody>
-                <tr MadCap:conditions="Output.WebClient,Output.Customer Portal">
+                <tr MadCap:conditions="">
                     <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
                         <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
                     </td>

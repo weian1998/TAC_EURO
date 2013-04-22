@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="chkLockRate.Caption" xml:space="preserve">
     <value>Lock in the rate for this Sales Order</value>
@@ -287,5 +287,8 @@
   </data>
   <data name="ERPStatus_Rejected" xml:space="preserve">
     <value>Rejected</value>
+  </data>
+  <data name="lueCurrencyCode.CurrencyCode.PropertyHeader" xml:space="preserve">
+    <value>Currency Code</value>
   </data>
 </root>

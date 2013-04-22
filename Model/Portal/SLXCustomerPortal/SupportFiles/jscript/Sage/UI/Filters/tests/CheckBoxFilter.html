@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Sage.UI.Filters Browser Tests</title>
+        <link rel="stylesheet" type="text/css" href="../../../../../Libraries/dojo/dijit/themes/claro/claro.css" />
+        <script type="text/javascript" src="../../Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript">
+            dojo.provide("Sage.UI.Filters.tests.CheckBoxFilter");
+            dojo.require("dojo.parser");
+            dojo.require("doh.runner");
+            dojo.require("Sage.UI.Filters.CheckBoxFilter");
+
+            dojo.ready(function () {
+                doh.register("Sage.UI.Filters.tests.CheckBoxFilter", [
+                function testShow() {
+                }
+            ]);
+
+                //Execute D.O.H. in this remote file.
+                doh.run();
+            });
+        </script>
+    </head>
+    <body class="claro">
+        <form>
+
+
+        </form>
+    </body>
+</html>

@@ -1,9 +1,24 @@
 <?xml version="1.0"?>
-<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="008e37f3-1847-4e15-87e0-43a936748054" name="OnBeforeUpdate" returnType="void" methodType="CrudEvent" actionType="None" returnMode="BooleanOR" isInstance="false">
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="008e37f3-1847-4e15-87e0-43a936748054" lastModifiedUtc="2011-06-07T23:53:16.6" name="OnBeforeUpdate" methodType="CrudEvent" actionType="None" returnMode="None">
+  <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
   </ExtendedPropertiesCollection>
   <parameter />
+  <preExecuteTargets>
+    <methodTarget id="4329e4c5-61f6-42f2-a7d3-ee337e7313e1" lastModifiedUtc="2011-09-21T05:21:16.6243811Z" targetType="Sage.SalesLogix.TicketActivityRate.Rules, Sage.SalesLogix.BusinessRules" targetMethod="ValidateProperties" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </preExecuteTargets>
   <methodTargets>
+    <methodTarget id="fd3fa6db-5926-4e0e-83f9-57b821c0bcff" lastModifiedUtc="2011-09-21T05:21:55.4736031Z" targetType="Sage.SalesLogix.TicketActivityRate.Rules, Sage.SalesLogix.BusinessRules" targetMethod="OnBeforeUpdate" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
   </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
 </method>

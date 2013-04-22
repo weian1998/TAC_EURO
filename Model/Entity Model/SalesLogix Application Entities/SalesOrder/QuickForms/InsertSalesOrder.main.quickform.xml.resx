@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lueOpportunity.Caption" xml:space="preserve">
     <value>Opportunity:</value>
@@ -232,10 +232,10 @@
     <value>Find</value>
   </data>
   <data name="lueRequestedBy.LookupProperties.AccountName.PropertyHeader" xml:space="preserve">
-    <value>Account Name</value>
+    <value>Account</value>
   </data>
   <data name="lueRequestedBy.LookupProperties.NameLF.PropertyHeader" xml:space="preserve">
-    <value>Contact Name (Last, First)</value>
+    <value>Name</value>
   </data>
   <data name="lueRequestedBy.LookupProperties.WorkPhone.PropertyHeader" xml:space="preserve">
     <value>Work Phone</value>
@@ -244,10 +244,10 @@
     <value>Email</value>
   </data>
   <data name="lueRequestedBy.LookupProperties.Address.City.PropertyHeader" xml:space="preserve">
-    <value>Address City</value>
+    <value>City</value>
   </data>
   <data name="lueRequestedBy.LookupProperties.Address.State.PropertyHeader" xml:space="preserve">
-    <value>Address State</value>
+    <value>State</value>
   </data>
   <data name="usrAccountManager.Caption" xml:space="preserve">
     <value>Account Manager:</value>
@@ -353,5 +353,11 @@
   </data>
   <data name="rdgSOType_item0.Text" xml:space="preserve">
     <value>Sales Order</value>
+  </data>
+  <data name="dtpDueDate.ButtonToolTip" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
+  <data name="dtpDueDate.Caption" xml:space="preserve">
+    <value>Due Date:</value>
   </data>
 </root>

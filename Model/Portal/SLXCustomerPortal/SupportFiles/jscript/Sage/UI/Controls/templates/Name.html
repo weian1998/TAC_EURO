@@ -1,0 +1,14 @@
+<div class="person" slxcompositecontrol="true" id="{%= $.id %}" ><input id="{%= $.id %}-TextBox" value="{%= $.nameDesc %}"
+    data-dojo-type="Sage.UI.Controls.TextBox" name="{%= $.name %}" required="{%= $.required %}" dojoAttachPoint="focusNode"  data-dojo-attach-event="onChange:textBoxOnChange, onDblClick: showDialog" data-dojo-props="textWithIcons: {%= $.buttonVisible %}" />
+    {% if ($.buttonVisible) { %}
+    <img alt="{%= $.buttonToolTip %}"  data-dojo-attach-event="ondijitclick: showDialog"  tabindex="{%= $.tabIndex %}"     
+    style="padding-left:0;cursor: pointer; vertical-align: left;" 
+    src="{%= $.buttonImageUrl %}" title="{%= $.buttonToolTip %}" id="{%= $.id %}-Button" />
+    {% } %}
+<!--
+Simplate template
+https://github.com/mmorton/simplate
+https://github.com/mmorton/simplate/blob/master/demo/index.html
+Basic formatting example: {%= $.id %}
+-->
+</div>

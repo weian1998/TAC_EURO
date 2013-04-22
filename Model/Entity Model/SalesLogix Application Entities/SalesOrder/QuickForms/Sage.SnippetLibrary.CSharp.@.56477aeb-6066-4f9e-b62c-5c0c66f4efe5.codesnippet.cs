@@ -59,7 +59,7 @@ namespace Sage.BusinessRules.CodeSnippets
 					salesOrder.IsQuote = true;
 				}
 				salesOrder.Save();
-				HttpContext.Current.Response.Redirect(string.Format("SalesOrder.aspx?entityId={0}", salesOrder.Id.ToString()), false);
+                HttpContext.Current.Response.Redirect(string.Format("InsertSalesOrder.aspx?modeid=Insert&entityId={0}", salesOrder.Id.ToString()), false);
 			}
         }
     }

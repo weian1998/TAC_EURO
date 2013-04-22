@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<mashup id="f9d4d61b-ed9e-4150-9ff7-a26422b9cc20" name="RemindersAndAlarms">
+  <processors>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor id="1bfc04d8-b6d8-42aa-a1f0-bf693d905142" name="CountRingingAlarms" location="20, 40" expanded="true" width="280" continueOnError="false" query="select count(*) as ringingAlarms&#xD;&#xA;from UserActivity ua&#xD;&#xA;where (ua.UserId = :userId &#xD;&#xA;  and ua.Status != 'D')&#xD;&#xA;  and((ua.Alarm = true &#xD;&#xA;  and ua.AlarmTime &lt; :beforeDate )&#xD;&#xA;  or(ua.Alarm = null &#xD;&#xA;  and ua.AlarmTime = null &#xD;&#xA;  and ua.Alarm.Activity.Alarm = true &#xD;&#xA;  and ua.Activity.AlarmTime &lt; :beforeDate))&#xD;&#xA;  ">
+        <parameters>
+          <parameter id="67e4de20-d21b-4ac3-a1d0-c7d221bff701" name="userId" expression="userId" />
+          <parameter id="2b91c7fc-add4-4fa8-b275-bc39bd0edeff" name="beforeDate" expression="beforeDate" />
+        </parameters>
+      </queryProcessor>
+    </processor>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor id="a28a63f0-e40c-49b0-a188-e3b4b9166d52" name="CountNewNotifications" location="340, 40" expanded="true" width="220" continueOnError="false" query="select count(*) as notifications&#xD;&#xA;from UserNotification&#xD;&#xA;where ToUserId = :userId&#xD;&#xA;  and Type = 'New'">
+        <parameters>
+          <parameter id="7829e6e3-99a5-4874-87ba-304d314af717" name="userId" expression="userId" />
+        </parameters>
+      </queryProcessor>
+    </processor>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor id="6980d161-08df-4b7d-abce-4c02ee421e51" name="CountPastDue" location="600, 40" expanded="true" width="400" continueOnError="false" query="select count(*) as pastDue&#xD;&#xA;from UserActivity ua&#xD;&#xA;where (ua.UserId = :userId)&#xD;&#xA;  and (ua.Activity.Type &lt;&gt; 262163)&#xD;&#xA;  and (ua.Alarm = false or ua.Alarm = null)&#xD;&#xA;  and (((ua.Activity.Timeless = false or ua.Activity.Timeless = null)&#xD;&#xA;  and ua.Activity.StartDate &lt; :beforeDate)&#xD;&#xA;  or (ua.Activity.Timeless = true&#xD;&#xA;  and ua.Activity.StartDate &lt; :timelessBeforeDate))&#xD;&#xA;&#xD;&#xA;">
+        <parameters>
+          <parameter id="3a59cd08-b705-4fd5-bc7c-5cfa708e2bc6" name="userId" expression="userId" />
+          <parameter id="66a54cc0-5e4e-4893-bc87-b05693745d44" name="beforeDate" expression="beforeDate" />
+          <parameter id="67c719f9-825d-40c8-ae7b-3640913e0105" name="timelessBeforeDate" expression="timelessBeforeDate" />
+        </parameters>
+      </queryProcessor>
+    </processor>
+    <processor type="Sage.Platform.Mashups.Processors.JoinProcessor, Sage.Platform.Mashups">
+      <joinProcessor id="2cf7af42-3b08-45f2-9b0b-be65ea621529" name="GetCounts" location="360, 240" expanded="true" continueOnError="false">
+        <joins>
+          <join id="aff3b1e5-aec6-470f-8990-1d68c4b61224" inputName="CountRingingAlarms" expression="true" />
+          <join id="f5c925ee-fd9d-425b-a6b6-7c7d11e4fc43" inputName="CountNewNotifications" expression="true" />
+          <join id="39354da0-0aad-44c6-bd59-771771b009b8" inputName="CountPastDue" expression="true" />
+        </joins>
+      </joinProcessor>
+    </processor>
+  </processors>
+  <parameters>
+    <parameter id="c040d74f-47be-457e-982e-68bc779f2265" name="userId" expression="'UDEMOA00000W'" />
+    <parameter id="d2aaaa20-efe1-4cfc-9b8b-6ddfd314bbce" name="beforeDate" expression="'2012-10-18T14:00:00Z'" />
+    <parameter id="754b9296-1b4e-4a20-a5ee-a00ca27c529c" name="timelessBeforeDate" expression="'2012-07-26T23:59:59Z'" />
+  </parameters>
+  <links>
+    <link source="CountRingingAlarms" target="GetCounts" />
+    <link source="CountNewNotifications" target="GetCounts" />
+    <link source="CountPastDue" target="GetCounts" />
+  </links>
+</mashup>

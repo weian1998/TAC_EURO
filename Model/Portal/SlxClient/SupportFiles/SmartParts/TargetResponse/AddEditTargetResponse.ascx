@@ -7,66 +7,15 @@
 <%@ Register Assembly="Sage.SalesLogix.HighLevelTypes" Namespace="Sage.SalesLogix.HighLevelTypes" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.Platform.WebPortal" Namespace="Sage.Platform.WebPortal.SmartParts" TagPrefix="SalesLogix" %>
 
-<style type="text/css">
-.activeTab .tableft
-{
-	background-image : url("./images/blue/TabCurrentLeft.gif");
-	float : left;
-	height : 24px;
-	width : 7px;
-}
-.activeTab .tabcenter
-{
-	background-image : url("./images/blue/TabCurrentCenter.gif");
-	float : left;
-	height : 24px;
-	cursor : pointer;
-	vertical-align : middle;
-}
-.activeTab .tabright
-{
-	background-image : url("./images/blue/TabCurrentRight.gif");
-	float : left;
-	height : 24px;
-	width : 7px;
-}
-.inactiveTab .tableft
-{
-	background-image : url("./images/blue/TabLeft.gif");
-	float : left;
-	height : 24px;
-	width : 7px;
-}
-.inactiveTab .tabcenter
-{
-	background-image : url("./images/blue/TabCenter.gif");
-	float : left;
-	height : 24px;
-	cursor : pointer;
-	vertical-align : middle;
-}
-.inactiveTab .tabright
-{
-	background-image : url("./images/blue/TabRight.gif");
-	float : left;
-	height : 24px;
-	width : 7px;
-}
-</style>
-
 <SalesLogix:SmartPartToolsContainer runat="server" ID="AddEditTargetResponse_RTools" ToolbarLocation="right">
     <SalesLogix:PageLink ID="lnkAddEditTargetResponseHelp" runat="server" LinkType="HelpFileName"
         ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="campaignresponseedit.aspx"
         ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16">
-    &nbsp;
+        &nbsp;
     </SalesLogix:PageLink>
 </SalesLogix:SmartPartToolsContainer>
 
-<div id="hiddenProps" style="display:none" runat="server">
-    <input id="txtSelectedTab" runat="server" type="hidden" />
-</div>
-
-<table border="0" cellpadding="1" cellspacing="0" class="formtable">
+<table border="0" cellpadding="4" cellspacing="0" class="formtable">
     <col width="50%" />
     <col width="50%" />
     <tr>
@@ -103,27 +52,27 @@
                      </asp:Label>
                 </div>
                 <div class="textcontrol lookup">
-                    <SalesLogix:LookupControl runat="server" ID="lueContact" ToolTip="<%$ resources: lueContact.ToolTip %>" LookupEntityName="Contact"
+                    <SalesLogix:LookupControl runat="server" ID="lueContact" ButtonToolTip="<%$ resources: lueContact.ToolTip %>" LookupEntityName="Contact"
                         LookupEntityTypeName="Sage.Entity.Interfaces.IContact, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         LookupBindingMode="Object" SeedProperty="Account.Id" AutoPostBack="true" DialogWidth="800" >
                         <LookupProperties>
                             <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueContact.LookupProperties.Name.PropertyHeader %>"
-                                PropertyName="NameLF" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
+                                PropertyName="NameLF" PropertyType="System.String" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
                             </SalesLogix:LookupProperty>
                             <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueContact.LookupProperties.AccountName.PropertyHeader %>"
-                                PropertyName="AccountName" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
+                                PropertyName="AccountName" PropertyType="System.String" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
                             </SalesLogix:LookupProperty>
                             <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueContact.LookupProperties.City.PropertyHeader %>"
-                                PropertyName="Address.City" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
+                                PropertyName="Address.City" PropertyType="System.String" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
                             </SalesLogix:LookupProperty>                            
                             <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueContact.LookupProperties.State.PropertyHeader %>"
-                                PropertyName="Address.State" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
+                                PropertyName="Address.State" PropertyType="System.String" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
                             </SalesLogix:LookupProperty>                            
                             <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueContact.LookupProperties.WorkPhone.PropertyHeader %>"
-                                PropertyName="WorkPhone" PropertyFormat="Phone" UseAsResult="True" ExcludeFromFilters="False">
+                                PropertyName="WorkPhone" PropertyType="System.String" PropertyFormat="Phone" UseAsResult="True" ExcludeFromFilters="False">
                             </SalesLogix:LookupProperty>
                             <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueContact.LookupProperties.Email.PropertyHeader %>"
-                                PropertyName="Email" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
+                                PropertyName="Email" PropertyType="System.String" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
                             </SalesLogix:LookupProperty>
                         </LookupProperties>
                         <LookupPreFilters>
@@ -138,23 +87,22 @@
                      </asp:Label>
                 </div>
                 <div class="textcontrol lookup">
-                    <SalesLogix:LookupControl runat="server" ID="lueLead" LookupEntityName="Lead" ToolTip="<%$ resources: lueLead.ToolTip %>" 
-                        LookupEntityTypeName="Sage.Entity.Interfaces.ILead, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                        LookupBindingMode="Object" AutoPostBack="true" >
+                    <SalesLogix:LookupControl runat="server" ID="lueLead" LookupEntityName="Lead" ButtonToolTip="<%$ resources: lueLead.ToolTip %>"
+                        LookupEntityTypeName="Sage.SalesLogix.Entities.Lead, Sage.SalesLogix.Entities" LookupBindingMode="Object" AutoPostBack="true" >
                         <LookupProperties>
-                            <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueLead.LookupProperties.Name.PropertyHeader %>"
+                            <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueLead.LookupProperties.Name.PropertyHeader %>" PropertyType="System.String"
                                 PropertyName="LeadNamePrefixFirstLast" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
                             </SalesLogix:LookupProperty>
-                            <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueLead.LookupProperties.Company.PropertyHeader %>"
+                            <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueLead.LookupProperties.Company.PropertyHeader %>" PropertyType="System.String"
                                 PropertyName="Company" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
                             </SalesLogix:LookupProperty>
-                            <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueLead.LookupProperties.WorkPhone.PropertyHeader %>"
+                            <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueLead.LookupProperties.WorkPhone.PropertyHeader %>" PropertyType="System.String"
                                 PropertyName="WorkPhone" PropertyFormat="Phone" UseAsResult="True" ExcludeFromFilters="False">
                             </SalesLogix:LookupProperty>
-                            <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueLead.LookupProperties.Mobile.PropertyHeader %>"
+                            <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueLead.LookupProperties.Mobile.PropertyHeader %>" PropertyType="System.String"
                                 PropertyName="Mobile" PropertyFormat="Phone" UseAsResult="True" ExcludeFromFilters="False">
                             </SalesLogix:LookupProperty>
-                            <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueLead.LookupProperties.Email.PropertyHeader %>"
+                            <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueLead.LookupProperties.Email.PropertyHeader %>" PropertyType="System.String"
                                 PropertyName="Email" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
                             </SalesLogix:LookupProperty>
                         </LookupProperties>
@@ -171,7 +119,7 @@
                 </asp:Label>
             </div>
             <div class="textcontrol datepicker">
-                <SalesLogix:DateTimePicker runat="server" ID="dtpResponseDate" ToolTip="<%$ resources: dtpResponseDate.ToolTip %>" />
+                <SalesLogix:DateTimePicker runat="server" ID="dtpResponseDate" ButtonToolTip="<%$ resources: dtpResponseDate.ToolTip %>" />
             </div>
         </td>
     </tr>
@@ -183,7 +131,7 @@
                 </asp:Label>
             </div>
             <div class="textcontrol lookup">
-                <SalesLogix:LookupControl runat="server" ID="lueCampaign" ToolTip="<%$ resources: lueCampaign.ToolTip %>" LookupEntityName="Campaign"
+                <SalesLogix:LookupControl runat="server" ID="lueCampaign" ButtonToolTip="<%$ resources: lueCampaign.ToolTip %>" LookupEntityName="Campaign"
                     LookupEntityTypeName="Sage.Entity.Interfaces.ICampaign, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     AutoPostBack="true" DialogWidth="800" >
                     <LookupProperties>
@@ -192,15 +140,15 @@
                         </SalesLogix:LookupProperty>
                         <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueCampaign.LookupProperties.CampaignCode.PropertyHeader %>"
                             PropertyName="CampaignCode" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
-                        </SalesLogix:LookupProperty>                                            
+                        </SalesLogix:LookupProperty>
                         <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueCampaign.LookupProperties.Manager.PropertyHeader %>"
                             PropertyName="AccountManager.UserInfo.UserName" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
                         </SalesLogix:LookupProperty>
                         <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueCampaign.LookupProperties.StartDate.PropertyHeader %>"
-                            PropertyName="StartDate" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
+                            PropertyName="StartDate" PropertyFormat="DateTime" UseAsResult="True" ExcludeFromFilters="False" PropertyType="System.DateTime">
                         </SalesLogix:LookupProperty>
                         <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueCampaign.LookupProperties.EndDate.PropertyHeader %>"
-                            PropertyName="EndDate" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
+                            PropertyName="EndDate" PropertyFormat="DateTime" UseAsResult="True" ExcludeFromFilters="False" PropertyType="System.DateTime">
                         </SalesLogix:LookupProperty>
                         <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueCampaign.LookupProperties.Status.PropertyHeader %>"
                             PropertyName="Status" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
@@ -228,7 +176,7 @@
                 <asp:Label ID="lbxStages_lbl" AssociatedControlID="lbxStages" runat="server" Text="<%$ resources: lbxStages.Caption %>" ></asp:Label>
             </div>
             <div class="textcontrol select">
-                <asp:ListBox runat="server" ID="lbxStages" SelectionMode="Single" Rows="1" >
+                <asp:ListBox runat="server" ID="lbxStages" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" shouldPublishMarkDirty="false" SelectionMode="Single" Rows="1" >
                 </asp:ListBox>
             </div>
         </td>
@@ -244,28 +192,29 @@
     <tr>
         <td>
             <div class="lbl alignleft">
-                <asp:Label ID="lueLeadSource_lbl" AssociatedControlID="lueTargetLeadSource" runat="server" 
-                    Text="<%$ resources: lueLeadSource.Caption %>" >
-                </asp:Label>
+                <asp:Label ID="lueLeadSource_lbl" AssociatedControlID="lueTargetLeadSource" runat="server" Text="<%$ resources: lueLeadSource.Caption %>"></asp:Label>
             </div>
             <div class="textcontrol lookup">
-                <SalesLogix:LookupControl runat="server" ID="lueTargetLeadSource" LookupEntityName="LeadSource" LookupBindingMode="String" ReturnPrimaryKey="false"
+                <SalesLogix:LookupControl runat="server" ID="lueTargetLeadSource" LookupEntityName="LeadSource" LookupBindingMode="String" ReturnPrimaryKey="False"
                     LookupEntityTypeName="Sage.Entity.Interfaces.ILeadSource, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
                     <LookupProperties>
-                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueLeadSource.LookupProperties.Type.PropertyHeader %>"
-                            PropertyName="Type" PropertyFormat="None" UseAsResult="False" ExcludeFromFilters="False">
+                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueLeadSource.LookupProperties.Type.PropertyHeader %>" PropertyName="Type"
+                            PropertyType="" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
                         </SalesLogix:LookupProperty>
-                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueLeadSource.LookupProperties.Description.PropertyHeader %>"
-                            PropertyName="Description" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
+                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueLeadSource.LookupProperties.Description.PropertyHeader %>" PropertyName="Description"
+                            PropertyType="" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
                         </SalesLogix:LookupProperty>
-                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueLeadSource.LookupProperties.AbbrevDescription.PropertyHeader %>"
-                            PropertyName="AbbrevDescription" PropertyFormat="None" UseAsResult="False" ExcludeFromFilters="False">
+                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueLeadSource.LookupProperties.AbbrevDescription.PropertyHeader %>" PropertyName="AbbrevDescription"
+                            PropertyType="" PropertyFormat="None" PropertyFormatString="" UseAsResult="True" ExcludeFromFilters="False">
+                        </SalesLogix:LookupProperty>
+                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueLeadSource.LookupProperties.Status.PropertyHeader %>" PropertyName="Status"
+                            PropertyType="System.String" PropertyFormat="None" PropertyFormatString="" UseAsResult="True" ExcludeFromFilters="False">
                         </SalesLogix:LookupProperty>
                     </LookupProperties>
                     <LookupPreFilters>
                         <SalesLogix:LookupPreFilter PropertyName="Status" PropertyType="System.String" OperatorCode="="
- FilterValue="<%$ resources: LeadSource.LUPF.Status %>"
- ></SalesLogix:LookupPreFilter>
+                            FilterValue="<%$ resources: LeadSource.LUPF.Status %>">
+                        </SalesLogix:LookupPreFilter>
                     </LookupPreFilters>
                 </SalesLogix:LookupControl>
             </div>
@@ -294,7 +243,7 @@
         <td colspan="2">
             <div class="twocoltextcontrol">
                 <asp:TextBox runat="server" ID="txtComments" TextMode="MultiLine" Columns="40" Rows="4" MultiLineMaxLength="255"
-                    onkeyup="doTextBoxKeyUp(this);" onpaste="doTextBoxPaste(this);">
+                    dojoType="Sage.UI.Controls.SimpleTextarea">
                 </asp:TextBox>
             </div>
         </td>
@@ -302,45 +251,18 @@
     <tr>
         <td>
             <br />
-            <br />
         </td>
     </tr>
-    <tr>
-        <td>
-            <asp:Panel id="tabProducts" runat="server" CssClass="activeTab tab">
-                <div class="tableft">&nbsp;</div>
-                <div class="tabcenter">
-                    <asp:Localize ID="lclTabProducts" runat="server" Text="<%$ resources: lblProducts.Caption %>"></asp:Localize>
-                </div>
-                <div class="tabright">&nbsp;</div>
-            </asp:Panel>
-            <asp:Panel id="tabClicks" runat="server" CssClass="inactiveTab tab">
-                <div class="tableft">&nbsp;</div>
-                <div class="tabcenter">
-                    <asp:Localize ID="lclTabClicks" runat="server" Text="<%$ resources: grdClicks.Caption %>"></asp:Localize>
-                </div>
-                <div class="tabright">&nbsp;</div>
-            </asp:Panel>
-            <asp:Panel id="tabOpens" runat="server" CssClass="inactiveTab tab">
-                <div class="tableft">&nbsp;</div>
-                <div class="tabcenter">
-                    <asp:Localize ID="lclOpens" runat="server" Text="<%$ resources: grdOpens.Caption %>"></asp:Localize>
-                </div>
-                <div class="tabright">&nbsp;</div>
-            </asp:Panel>
-            <asp:Panel id="tabUndeliverables" runat="server" CssClass="inactiveTab tab">
-                <div class="tableft">&nbsp;</div>
-                <div class="tabcenter">
-                    <asp:Localize ID="lclUndeliverables" runat="server" Text="<%$ resources: grdUndeliverables.Caption %>"></asp:Localize>
-                </div>
-                <div class="tabright">&nbsp;</div>
-            </asp:Panel>
-        </td>
-        <td align="right" style="padding-right:20px">
-            <div runat="server" id="divAddProduct">
-                <SalesLogix:LookupControl runat="server" ID="lueAddProduct" ToolTip="<%$ resources: lueAddProduct.ToolTip %>" LookupEntityName="Product"
+    <tr class="mainContentHeader">
+        <td colspan="2">
+            <div>
+                <span id="hzsComments">
+                    <asp:Localize ID="lclProducts" runat="server" Text="<%$ resources: lblProducts.Caption %>">Products</asp:Localize>
+                </span>
+                <SalesLogix:LookupControl runat="server" ID="lueAddProduct" ButtonToolTip="<%$ resources: lueAddProduct.ToolTip %>" LookupEntityName="Product"
                     LookupEntityTypeName="Sage.Entity.Interfaces.IProduct, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                    LookupDisplayMode="ButtonOnly" AutoPostBack="true" LookupImageURL="~/ImageResource.axd?scope=global&type=Global_Images&key=plus_16x16" >
+                    LookupDisplayMode="ButtonOnly" AutoPostBack="true" LookupImageURL="~/ImageResource.axd?scope=global&type=Global_Images&key=plus_16x16"
+                    style="bottom:17px" >
                     <LookupProperties>
                         <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueAddProduct.LookupProperties.ActualId.PropertyHeader %>"
                             PropertyName="ActualId" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">

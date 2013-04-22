@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0"?>
-<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmDistinctEntityFilter" id="c90d9506-c266-4169-8409-1b8fdb6838e2" lastModifiedUtc="2010-06-18T22:01:28.8274279Z" filterName="CompletedBy" propertyName="CompletedBy" analyticsAvailable="true" dataPath="TICKET:COMPLETEDBYID" characters="0">
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmDistinctEntityFilter" id="c90d9506-c266-4169-8409-1b8fdb6838e2" lastModifiedUtc="2010-06-18T22:01:28.8274279Z" filterName="CompletedBy" propertyName="CompletedBy" analyticsAvailable="true" characters="0">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmDistinctEntityFilter" />

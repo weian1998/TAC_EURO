@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="de" xml:lang="de" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Bearbeiten von Seriendruckfeldern</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Templates/Editing_Merge_Fields.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Thema mit den Registerkarten "Suchen", "Inhalt" und "Index" öffnen</a>
+        </p>
+        <h1><a name="kanchor746"></a>Bearbeiten von Seriendruckfeldern<a name="kanchor747"></a></h1>
+        <p>Mit dem Seriendruckfeld-Editor können Sie neue und vorhandene Seriendruckfelder bearbeiten. Sie können die Vorlagenseriendruckfelder in der Listenansicht und Ihre Bearbeitungsoptionen im Bearbeitungsteilfenster anzeigen. Darüber hinaus können Sie Seriendruckfelder aus der Vorlage entfernen, indem Sie auf der Symbolleiste die Schaltfläche <B>Aus Vorlage entfernen</B> auswählen.</p>
+        <p class="Infinitive">So bearbeiten Sie Seriendruckfelder</p>
+        <ol style="list-style-type: decimal;">
+            <li value="1">Öffnen Sie den <a href="Using_the_Template_Editor.htm">Vorlagen-Editor</a>.</li>
+            <li value="2">Klicken Sie auf <span class="SLXBold">Felder bearbeiten</span>.<br />Das Dialogfeld des Feld-Editors für die SalesLogix-Seriendruckfunktion wird geöffnet. Die Vorlagenseriendruckfelder werden in der Listenansicht angezeigt. Die Liste besteht aus folgenden Spalten:<ul><li value="1">Feld: Zeigt den Namen des Seriendruckfelds an, wie er in der Vorlage zu sehen ist, und zeigt ein mit dem Feldtyp verknüpftes Symbol an.</li><li value="2">Typ: Zeigt den Seriendruckfeldtyp an.  Gültige Typen sind: <B>Normal</B>, <B>Outlook-Signatur</B>, <B>Verkaufschancen-Produkttabelle</B>, <B>SQL</B> und <B>Benutzerdefiniert</B>.</li><li value="3">Position: Zeigt die numerische Position des Felds an, in der es in der Vorlage zu sehen ist.</li></ul></li>
+            <li value="3">Markieren Sie in der Listenansicht das Seriendruckfeld, das Sie bearbeiten möchten.<br />Abhängig vom jeweiligen Seriendruckfeldtyp werden unterschiedliche Bearbeitungsoptionen angezeigt.</li>
+        </ol>
+        <ul style="list-style-type: disc;">
+            <li class="Topic-Text-Bulleted-2" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="Regular bullets">Bearbeiten eines normalen Seriendruckfelds<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <ul style="list-style-type: disc; display: none;" MadCap:targetName="Regular bullets">
+            <li class="Bullet3" value="1">Feld-ID: Ermöglicht Ihnen, den Text zu ändern, der in der Vorlage angezeigt wird. Die Feld-ID für ein reguläres Seriendruckfeld besteht aus dem Tabellen- und dem Anzeigenamen. Sie können nur den Anzeigenamen bearbeiten.</li>
+            <li class="Bullet3" value="2">Formattyp: Ermöglicht Ihnen, die Art der Formatierung zu ändern, die auf das ausgewählte Seriendruckfeld angewendet wird (z. B. <B>Festkomma</B>, <B>Ganzzahl</B>, <B>Prozent</B> oder <B>Währung</B>).</li>
+            <li class="Bullet3" value="3">Formatzeichenfolge: Ermöglicht Ihnen, den im Seriendruckfeld angezeigten Wert zu formatieren. Sie müssen den Formattyp festlegen, bevor Sie eine Formatzeichenfolge hinzufügen. Welche Zeichenfolgenformate gültig sind, hängt vom ausgewählten Formattyp ab.</li>
+            <li class="Bullet3" value="4">Text vor: Ermöglicht Ihnen, Text einzugeben, der vor dem ausgewählten Seriendruckfeld angezeigt wird.</li>
+            <li class="Bullet3" value="5">Text nach: Ermöglicht Ihnen, Text einzugeben, der nach dem ausgewählten Seriendruckfeld angezeigt wird.</li>
+            <li class="Bullet3" value="6">Spezielles Format: Ermöglicht Ihnen, eine spezielle Zeichenformatierung auf das Seriendruckfeld anzuwenden (dies umfasst Text, der vor und nach einem Seriendruckfeld angezeigt wird).</li>
+            <li class="Bullet3" value="7">Tabelle: Zeigt die mit dem Datenbankfeld verknüpfte Tabelle an. Wenn der Inhalt des Datenbankfelds das Ergebnis eines Join ist, lautet die Beschriftung für diese Option "Haupttabelle".</li>
+            <li class="Bullet3" value="8">Feld: Zeigt das Datenbankfeld an. Wenn der Inhalt des Datenbankfelds das Ergebnis eines Join ist, lautet die Beschriftung für diese Option "Schlüsselfeld".</li>
+            <li class="Bullet3" value="9">Berechnet: Zeigt an, ob es sich bei dem Inhalt des Felds um einen berechneten Wert handelt.</li>
+            <li class="Bullet3" value="10">Join: Zeigt an, ob es sich bei dem Inhalt des Felds um das Ergebnis eines Datenbank-Joins handelt.</li>
+            <li class="Bullet3" value="11">Zeichenformatierung beibehalten: Ermöglicht Ihnen, beim Ausführen des Seriendrucks die Zeichenformatierung beizubehalten.</li>
+        </ul>
+        <ul style="list-style-type: disc;">
+            <li class="Topic-Text-Bulleted-2" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="OutlookSign">Bearbeiten eines Outlook-Signaturfelds<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <ul style="list-style-type: disc; display: none;" MadCap:targetName="OutlookSign">
+            <li class="Bullet3" value="1">Feld-ID: Ermöglicht Ihnen, den Text zu ändern, der in der Vorlage angezeigt wird.</li>
+        </ul>
+        <ul style="list-style-type: disc;">
+            <li class="Topic-Text-Bulleted-2" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="OppProd">Bearbeiten eines Verkaufschancen-Produktfelds<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <ul style="list-style-type: disc; display: none;" MadCap:targetName="OppProd">
+            <li class="Bullet3" value="1">Feld-ID: Ermöglicht Ihnen, den Text zu ändern, der in der Vorlage angezeigt wird.</li>
+            <li class="Bullet3" value="2">Tabellenformat: Ermöglicht Ihnen, Formatierung auf ein Tabellenfeld anzuwenden.</li>
+            <li class="Bullet3" value="3">Optionen: Ermöglicht Ihnen, Eigenschaften auf ein Tabellenformat anzuwenden.</li>
+            <li class="Bullet3" value="4">Automatisch anpassen: Ermöglicht Ihnen, Eigenschaften für die automatische Anpassung für die Tabelle festzulegen.</li>
+            <li class="Bullet3" value="5">
+                <B>Text zusammenfassen</B>: Ermöglicht Ihnen, Text einzugeben, der als Beschriftung für die erweiterte Preissumme von Produkten in der Tabelle</li>
+            <li class="Bullet3" value="6">verwendet werden soll.</li>
+            <li class="Bullet3" value="7"><a href="Editing_Columns.htm">Tabellenspalten bearbeiten</a>: Ermöglicht Ihnen, Beschriftungen, Breite und Ausrichtung von Tabellenspalten zu bearbeiten.</li>
+        </ul>
+        <ul style="list-style-type: disc;">
+            <li class="Topic-Text-Bulleted-2" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="Custom">Bearbeiten eines benutzerdefinierten Felds<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <ul style="list-style-type: disc; display: none;" MadCap:targetName="Custom">
+            <li class="Bullet3" value="1">
+                <B>Feld-ID</B>: Ermöglicht Ihnen, den Text zu ändern, der in der Vorlage angezeigt wird.</li>
+        </ul>
+        <ul style="list-style-type: disc;">
+            <li class="Topic-Text-Bulleted-2" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="Table">Bearbeiten eines Tabellenfelds<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <ul style="list-style-type: disc; display: none;" MadCap:targetName="Table">
+            <li class="Bullet3" value="1">
+                <B>Feld-ID</B>: Ermöglicht Ihnen, den Text zu ändern, der in der Vorlage angezeigt wird.</li>
+            <li class="Bullet3" value="2">
+                <B>SQL</B>: Ermöglicht Ihnen, eine SELECT-Anweisung einzugeben, um Daten vom OLE-DB-Provider abzurufen.</li>
+            <li class="Bullet3" value="3">Alle Spalten und Zeilen werden zum Erstellen der Tabelle verwendet.</li>
+            <li class="Bullet3" value="4">
+                <B>Formatieren als</B>: Ermöglicht Ihnen, den Seriendruckfeldtyp zu ändern.</li>
+            <li class="Bullet3" value="5">
+                <B>Tabellenformat</B>: Ermöglicht Ihnen, Formatierung auf ein Tabellenfeld anzuwenden.</li>
+            <li class="Bullet3" value="6">
+                <B>Optionen</B>: Ermöglicht Ihnen, Eigenschaften auf ein Tabellenformat anzuwenden.</li>
+            <li class="Bullet3" value="7">
+                <B>Automatisch anpassen</B>: Ermöglicht Ihnen, Eigenschaften für die automatische Anpassung für die Tabelle festzulegen.</li>
+            <li class="Bullet3" value="8"><a href="Editing_Columns.htm">Tabellenspalten bearbeiten</a>: Ermöglicht Ihnen, Beschriftungen, Breite und Ausrichtung von Tabellenspalten zu bearbeiten.</li>
+        </ul>
+        <ul style="list-style-type: disc;">
+            <li class="Topic-Text-Bulleted-2" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="Bullet;bullet p;bullet 3">Bearbeiten einer Aufzählungsliste<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <ul style="list-style-type: disc; display: none;" MadCap:targetName="Bullet">
+            <li class="Bullet3" value="1">
+                <B>Feld-ID</B>: Ermöglicht Ihnen, den Text zu ändern, der in der Vorlage angezeigt wird.</li>
+            <li class="Bullet3" value="2">
+                <B>SQL</B>: Ermöglicht Ihnen, eine SELECT-Anweisung einzugeben, um Daten vom OLE-DB-Provider abzurufen. Nur die Datensätze der ersten Spalte werden angezeigt.</li>
+        </ul>
+        <p class="TopicTextIndent3" MadCap:targetName="bullet p" style="display: none;">Klicken Sie auf die Schaltfläche <B>Bearbeiten</B>, um das Dialogfeld <a href="Editing_SQL.htm">SQL bearbeiten</a> zu öffnen.</p>
+        <ul style="list-style-type: disc; display: none;" MadCap:targetName="bullet 3">
+            <li class="Bullet3" value="1">
+                <B>Formatieren als</B>: Zeigt den Seriendruckfeldtyp an.</li>
+        </ul>
+        <ul style="list-style-type: disc;">
+            <li class="Topic-Text-Bulleted-2" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="Numbered-12;Numbered 3;Numbered P">Bearbeiten einer nummerierten Liste<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <ul style="list-style-type: disc; display: none;" MadCap:targetName="Numbered-12">
+            <li class="Bullet3" value="1">
+                <B>Feld-ID</B>: Ermöglicht Ihnen, den Text zu ändern, der in der Vorlage angezeigt wird.</li>
+            <li class="Bullet3" value="2">
+                <B>SQL</B>: Ermöglicht Ihnen, eine SELECT-Anweisung einzugeben, um Daten vom OLE-DB-Provider abzurufen. Nur die Datensätze der ersten Spalte werden angezeigt.</li>
+        </ul>
+        <p class="TopicTextIndent3" MadCap:targetName="Numbered P" style="display: none;">Klicken Sie auf die Schaltfläche <B>Bearbeiten</B>, um das Dialogfeld <a href="Editing_SQL.htm">SQL bearbeiten</a> zu öffnen.</p>
+        <ul style="list-style-type: disc; display: none;" MadCap:targetName="Numbered 3">
+            <li class="Bullet3" value="1">
+                <B>Formatieren als</B>: Zeigt den Seriendruckfeldtyp an.</li>
+        </ul>
+        <ul style="list-style-type: disc;">
+            <li class="Topic-Text-Bulleted-2" value="1"><a href="Editing_SQL_Text_Fields.htm">Bearbeiten eines Textfelds</a>
+            </li>
+        </ul>
+        <ul style="list-style-type: disc;">
+            <li class="Topic-Text-Bulleted-2" value="1"><a href="Editing_SQL_Image_Fields.htm">Bearbeiten eines Bildfelds</a>
+            </li>
+        </ul>
+        <ol style="list-style-type: decimal;">
+            <li value="4">Klicken Sie auf <span class="SLXBold">Anwenden</span>, sobald Sie Ihre Änderungen vorgenommen haben.</li>
+            <li value="5">Klicken Sie bei Aufforderung auf <span class="SLXBold">Ja</span>, um die Änderungen zu speichern.</li>
+        </ol>
+        <p class="RelatedTopics">Verwandte Themen</p>
+        <p><a href="Editing_SQL.htm">Bearbeiten von SQL-Anweisungen</a>
+        </p>
+        <p><a href="Deleting_Merge_Fields.htm">Löschen von Seriendruckfeldern</a>
+        </p>
+        <p><a href="Inserting_Special_Fields.htm">Einfügen von Spezialfeldern</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Haben Sie Vorschläge zur Verbesserung der Hilfe?</a>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

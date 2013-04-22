@@ -10,24 +10,21 @@
 <table cellpadding="0" cellspacing="0" class="tbodylt">
 <tr>
     <td colspan="2">
-	    <table cellpadding="2" cellspacing="0" class="theader">
-		    <tr>
-			    <td class="header" colspan="3" align="left" ><asp:Localize ID="localizeManageCalcFields" runat="server" Text="<%$ resources: localizeManageCalcFields.Text %>" /></td>							
-			    <td class="header" align="right">
-			        <SalesLogix:PageLink ID="McfHelpLink" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="querycalcfields.aspx" ImageUrl="~/images/icons/Help_16x16.gif"></SalesLogix:PageLink>
-			    </td>
-		    </tr>
-	    </table>
+	    <div style="position:relative;">
+        <div style="position:absolute; top:-23px; right:45px; ">
+			        <SalesLogix:PageLink ID="McfHelpLink" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="querycalcfields.aspx" ImageUrl="~/images/icons/Help_16x16.png"></SalesLogix:PageLink>
+			</div>
+            </div>
     </td>
 </tr>
 <tr>
     <td class="padded">
 	    <div id="calcFieldGrid" >
 		    <table id="grdCalcFields" groupid="calculations"  xmlns:v="urn:schemas-microsoft-com:vml" onrowselect="rowSelected()" onrowdeselect="rowDeSelected()" onrendercomplete="buildTable()" onbeforecolsort="sortTable()" >
-			    <tr>
-				    <th align="left"><asp:Localize ID="localizeBaseTable" runat="server" Text="<%$ resources: localizeBaseTable.Text %>" /></th>
-				    <th align="left"><asp:Localize ID="localizeName" runat="server" Text="<%$ resources: localizeName.Text %>" /></th>
-				    <th align="left"><asp:Localize ID="localizeAlias" runat="server" Text="<%$ resources: localizeAlias.Text %>" /></th>
+			    <tr class="nodojoTableHeader">
+				    <td align="left"><asp:Localize ID="localizeBaseTable" runat="server" Text="<%$ resources: localizeBaseTable.Text %>" /></td>
+				    <td align="left"><asp:Localize ID="localizeName" runat="server" Text="<%$ resources: localizeName.Text %>" /></td>
+				    <td align="left"><asp:Localize ID="localizeAlias" runat="server" Text="<%$ resources: localizeAlias.Text %>" /></td>
 			    </tr>
 		    </table>
 	    </div>
@@ -47,4 +44,5 @@
 </tr>
 </table>
 
-
+<script src="jscript/Sage/GroupBuilder/querybuilder.js" type="text/javascript"></script>
+<script src="jscript/Sage/GroupBuilder/calcFields.js" type="text/javascript"></script>

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="9cf9ff38-f546-417f-b990-79d1c13c011f" lastModifiedUtc="2010-11-29T21:47:52.2379893Z" manageSchema="false" tableName="SLXPRICE" name="SlxPrice" isExtension="false" audited="false" generateSDataFeed="true" sDataPathName="slxPrices" uniqueIdentifierPropertyId="527c4b8e-9402-439e-a278-afeb31f924e3" lastUpdatedPropertyId="30d6631e-7254-4a17-a0b5-65609bec43cc" onBeforeInsertMethodId="9ab3cc91-672d-4385-8a5f-872acc0218d5" onAfterInsertMethodId="daaa5bd8-17db-4923-984f-1d1851d5327c" onBeforeUpdateMethodId="85b5bbc6-ad5e-4366-9d29-f0eb00db0dbb" onAfterUpdateMethodId="02415fe5-6e41-4bcb-ab42-72c342f8bbbe" onBeforeDeleteMethodId="5697892c-ba0b-4aa9-b562-482ae1e690aa" onAfterDeleteMethodId="e2ac73ba-d852-430c-ba06-17880644c14d" onCreateId="edc10bb1-6ac2-4c5e-83e4-7cddb2b59139">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="9cf9ff38-f546-417f-b990-79d1c13c011f" lastModifiedUtc="2010-11-29T21:47:52.2379893Z" manageSchema="true" tableName="SLXPRICE" name="SlxPrice" isExtension="false" audited="false" generateSDataFeed="true" sDataPathName="slxPrices" uniqueIdentifierPropertyId="527c4b8e-9402-439e-a278-afeb31f924e3" lastUpdatedPropertyId="30d6631e-7254-4a17-a0b5-65609bec43cc" onBeforeInsertMethodId="9ab3cc91-672d-4385-8a5f-872acc0218d5" onAfterInsertMethodId="daaa5bd8-17db-4923-984f-1d1851d5327c" onBeforeUpdateMethodId="85b5bbc6-ad5e-4366-9d29-f0eb00db0dbb" onAfterUpdateMethodId="02415fe5-6e41-4bcb-ab42-72c342f8bbbe" onBeforeDeleteMethodId="5697892c-ba0b-4aa9-b562-482ae1e690aa" onAfterDeleteMethodId="e2ac73ba-d852-430c-ba06-17880644c14d" onCreateId="edc10bb1-6ac2-4c5e-83e4-7cddb2b59139">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
@@ -51,7 +51,7 @@
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
       <SystemDataType guid="3ca925e1-4b76-4621-a39c-a0d4cb7327d5">
-        <GuidDataType />
+        <GuidDataType storage="String" />
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="90dd24e1-786b-4e81-add5-f4575a3942df" lastModifiedUtc="2010-04-29T00:22:15.7059585Z" name="AppId" audited="false" columnName="APPID" maxLength="12" precision="0" scale="0" ordinal="5" isReadOnly="false">
@@ -104,7 +104,7 @@
       </ExtendedPropertiesCollection>
       <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
         <TextDataType>
-          <Length>16</Length>
+          <Length>1</Length>
         </TextDataType>
       </SystemDataType>
     </property>

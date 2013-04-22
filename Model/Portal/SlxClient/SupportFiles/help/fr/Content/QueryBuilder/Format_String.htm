@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="Gainey;decompilation;Admin;N;AccountID;USERINFO;AccountManagerID;UserID;USERPROFILE;t;OPPORTUNITYID;USER_ACTIVITY;CreateUser;CreateDate;ModifyUser;ModifyDate;Opportunity.Salespotential;Opportunity.Closeprobability;Opportunity.Status;Opportunity.Account.;Contact.Lastname;Contact.Firstname.;d.ddd...E+ddd;E;f;ddd.ddd...;g;n;d;ddd;acc_acc;con_con;opp_opp;conlname;Truevalue;FormatType;ftBoolean;FormatString;T;c;ShortDateFormat;LongTimeFormat;DateTime;ShortDayNames;dddd;LongDayNames;ddddd;dddddd;LongDateFormat;m;hh;mmm;Jan-Dec;ShortMonthNames;mmmm;LongMonthNames;yy;yyyy;nn;ss;ShortTimeFormat;tt;pm;ampm;TimeAMString;TimePMString;ftCurrency" MadCap:comment="KC 4/17/02: Merged versions from all Help files. CHANGE TITLE TO USING FORMAT STRINGS IN A QUERY??&#xD;&#xA;5.2 06/22/01 JM: Added sentence to click Close after viewing." MadCap:timeEstimate="0" MadCap:priority="0" MadCap:check_list="First Draft" MadCap:status="In Progress" MadCap:lastBlockDepth="5" MadCap:lastHeight="861" MadCap:lastWidth="437" MadCap:conditions="Output.WebClient,Output.Query Builder">
+    <head><title>Chaîne de formatage</title>
+        <link rel="StyleSheet" href="../Resources/Stylesheets/SALESLOGIX.CSS" />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Chaînes de formatage;Query Builder:chaînes de formatage;Formats des champs:chaînes de formatage;Chaînes de formatage:présentation" MadCap:conditions="Output.WebClient,Output.Query Builder"></MadCap:keyword>Chaîne de formatage</h1>
+        <p>Utilisez une chaîne de formatage pour mettre en forme les données affichées dans la requête. Sélectionnez tout d&apos;abord <a href="Format_Type.htm">Type de format</a>. Saisissez ensuite une chaîne de formatage pour modifier le type sélectionné. Les options valides dépendent du type de format sélectionné. Une chaîne de formatage doit commencer par un signe % et se terminer par un caractère de type de format :</p>
+        <p>[%] [type]</p>
+        <p>Le cas échéant, vous pouvez aussi inclure :</p>
+        <ul>
+            <li class="Bullets"><a href="../QueryBuilderAdv/Argument_index_specifier.htm" target="_popup">un spécificateur d&apos;index d&apos;arguments</a>
+            </li>
+            <li class="Bullets"><a href="../QueryBuilderAdv/Left_justification_indicator.htm" target="_popup">un indicateur de justification à gauche</a>
+            </li>
+            <li class="Bullets"><a href="Width_specifier.htm" target="_popup">un spécificateur de largeur</a>
+            </li>
+            <li class="Bullets"><a href="../QueryBuilderAdv/Precision_specifier.htm" target="_popup">un spécificateur de précision</a>
+            </li>
+        </ul>
+        <p>[%] [index:] [-] [width] [.precision] [type]</p>
+        <p>Pour indiquer le nombre de décimales à employer dans une chaîne de formatage, définissez la chaîne au format correspondant. Ajoutez ensuite un spécificateur de précision, soit une virgule et le nombre de chiffres après cette virgule, avant le caractère de chaîne de formatage mais après le % de début. Par exemple :</p>
+        <ul>
+            <li class="Bullets">Type de champ : Virgule flottante</li>
+            <li class="Bullets">Type de format : ftCurrency.</li>
+            <li class="Bullets">Chaîne de formatage : %.4f</li>
+            <li class="Bullets">Données (non formatées) : 3.1415926&ldots;</li>
+            <li class="Bullets">Résultat : 3.1416</li>
+        </ul>
+        <p>Vous pouvez utiliser les types de chaînes de format suivants à votre convenance :</p>
+        <ul>
+            <li class="Bullets"><a href="Boolean_Field_Format_Strings.htm">Chaînes de format de champ booléen</a>
+            </li>
+            <li class="Bullets"><a href="Currency_Field_Format_String.htm">Chaînes de format de champ Devise et Téléphone</a>
+            </li>
+            <li class="Bullets"><a href="Date_Time _Field_Format_Strings.htm">Chaînes de format de champ Date/heure</a>
+            </li>
+            <li class="Bullets"><a href="Fixed_Field_Format_Strings.htm">Chaînes de format de champ fixe</a>
+            </li>
+            <li class="Bullets"><a href="Integer_Field_Format_Strings.htm">Chaînes de format de champ Entier</a>
+            </li>
+        </ul>
+        <MadCap:snippetBlock src="../Resources/Snippets/Common/Related Topics.flsnp" MadCap:conditions="Output.WebClient" />
+        <p MadCap:conditions="Output.WebClient"><a href="Using_SalesLogix_Query_Builder.htm" target="_self">Présentation de Query Builder</a>
+        </p>
+        <MadCap:snippetBlock src="../Resources/Snippets/SLXClients/SalesLogixFooter09footer.flsnp" />
+    </body>
+</html>

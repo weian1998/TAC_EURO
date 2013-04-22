@@ -47,102 +47,69 @@ namespace Sage.BusinessRules.CodeSnippets
 {
     public static partial class InsertSalesOrderEventHandlers
     {
-        public static void OnLoad1Step( IInsertSalesOrder form,  EventArgs args)
+        public static void OnLoad1Step(IInsertSalesOrder form, EventArgs args)
         {
-			ISalesOrder so = form.CurrentEntity as ISalesOrder;
-			if (so == null) return;
-			if (String.IsNullOrEmpty(form.rdgSOType.SelectedValue))
+            ISalesOrder so = form.CurrentEntity as ISalesOrder;
+            if (so == null) return;
+            if (String.IsNullOrEmpty(form.rdgSOType.SelectedValue))
+            {
+                form.rdgSOType.SelectedValue = "SalesOrder";
+            }
+            Sage.Platform.SData.IAppIdMappingService oMappingService = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.SData.IAppIdMappingService>(false);
+            if (oMappingService != null && oMappingService.IsIntegrationEnabled())
 			{
-            	form.rdgSOType.SelectedValue = "SalesOrder";
-			}
-    		Sage.Platform.SData.IAppIdMappingService oMappingService = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.SData.IAppIdMappingService>(false);			
-			if (oMappingService != null && oMappingService.IsIntegrationEnabled())
-			{
-				form.clIntegrationContract.Visible = true;
-				object oValue = form.lueERPApplication.LookupResultValue;
-				string sValue = string.Empty;
-				if (oValue != null)
+				if (!so.CanChangeOperatingCompany())
 				{
-					sValue = oValue.ToString();
-				}
-				if (string.IsNullOrEmpty(sValue))
-				{
-					form.luePriceList.Text = string.Empty;
-					form.luePriceList.LookupResultValue = null;
+					form.lueERPApplication.Enabled = false;
 					form.luePriceList.Enabled = false;
 				}
-				else
+				else 
 				{
-					form.luePriceList.Enabled = true;
-				}	
-				
-				Sage.SalesLogix.HighLevelTypes.LookupPreFilter filterAppId = new Sage.SalesLogix.HighLevelTypes.LookupPreFilter();
-    			filterAppId.LookupEntityName = "Sage.Entity.Interfaces.IAppIdMapping";
-    			filterAppId.PropertyName = "Id";
-    			filterAppId.OperatorCode = "!=";
-    			filterAppId.FilterValue = oMappingService.LocalAppId;
-    			filterAppId.PropertyType = "System.String";
-    			form.lueERPApplication.LookupPreFilters.Add(filterAppId);
+					form.lueERPApplication.Enabled = true;
+                    form.luePriceList.Enabled = (form.lueERPApplication.LookupResultValue != null);
+				}				
 			}
-			else
-			{
-				form.clIntegrationContract.Visible = false;
-			}
-			
-            ISelectionService srv =  ApplicationContext.Current.Services.Get<ISelectionService>(true);
-			if( srv != null)
-			{
-			  ISelectionContext sc = srv.GetSelectionContext("QuickInsertAccountContact");
-			  if(sc != null)
-			  {
-			      List<string> sels = sc.GetSelectedIds();
-				  if(sels.Count > 0)
-				  {
-				     string newContactId = sels[0];
-					 IContact  newContact = Sage.Platform.EntityFactory.GetById<IContact>(newContactId); 
-					 IAccount  newAccount = newContact.Account;
-					 so.Account = newAccount;
-					 so.AccountManager = newAccount.AccountManager;
-					 so.BillingContact = newContact;
-					 so.ShippingContact = newContact;
-					 so.BillToName = newContact.NameLF;
-					 so.ShipToName = newContact.NameLF;
-					 
-					 if(so.BillingAddress == null)
-					 {
-					   ISalesOrderAddress billAddr = Sage.Platform.EntityFactory.Create<ISalesOrderAddress>();
-					   so.BillingAddress = billAddr;
-					 }
-					 so.BillingAddress.Address1 = newContact.Address.Address1;
-					 so.BillingAddress.Address2 = newContact.Address.Address2;
-					 so.BillingAddress.Address3 = newContact.Address.Address3;
-					 so.BillingAddress.Address4 = newContact.Address.Address4;
-					 so.BillingAddress.City = newContact.Address.City;
-					 so.BillingAddress.State = newContact.Address.State;
-					 so.BillingAddress.Country = newContact.Address.Country;
-					 so.BillingAddress.County = newContact.Address.County;
-					 so.BillingAddress.PostalCode = newContact.Address.PostalCode; 
-					
-					 if(so.ShippingAddress == null)
-					 {
-					   ISalesOrderAddress shipAddr = Sage.Platform.EntityFactory.Create<ISalesOrderAddress>();
-					   so.ShippingAddress = shipAddr;
-					 }
-					
-					 so.ShippingAddress.Address1 = newContact.Address.Address1;
-					 so.ShippingAddress.Address2 = newContact.Address.Address2;
-					 so.ShippingAddress.Address3 = newContact.Address.Address3;
-					 so.ShippingAddress.Address4 = newContact.Address.Address4;
-					 so.ShippingAddress.City = newContact.Address.City;
-					 so.ShippingAddress.State = newContact.Address.State;
-					 so.ShippingAddress.Country = newContact.Address.Country;
-					 so.ShippingAddress.County = newContact.Address.County;
-					 so.ShippingAddress.PostalCode = newContact.Address.PostalCode; 
-										 
-					 srv.SetSelectionContext("QuickInsertAccountContact", null);					
-				  }				
-		      }
-			}
+            else
+            {
+                form.clIntegrationContract.Visible = false;
+            }
+
+            ISelectionService srv = ApplicationContext.Current.Services.Get<ISelectionService>(true);
+            if (srv != null)
+            {
+                ISelectionContext sc = srv.GetSelectionContext("QuickInsertAccountContact");
+                if (sc != null)
+                {
+                    List<string> sels = sc.GetSelectedIds();
+                    if (sels.Count > 0)
+                    {
+                        string newContactId = sels[0];
+                        IContact newContact = Sage.Platform.EntityFactory.GetById<IContact>(newContactId);
+                        IAccount newAccount = newContact.Account;
+                        so.Account = newAccount;
+                        so.AccountManager = newAccount.AccountManager;
+                        so.BillingContact = newContact;
+                        so.ShippingContact = newContact;
+                        so.BillToName = newContact.NameLF;
+                        so.ShipToName = newContact.NameLF;
+
+                        if (so.BillingAddress == null)
+                        {
+                            ISalesOrderAddress billAddr = Sage.Platform.EntityFactory.Create<ISalesOrderAddress>();
+                            so.BillingAddress = billAddr;
+                        }
+                        so.SetSalesOrderBillingAddress(newContact.Address);
+
+                        if (so.ShippingAddress == null)
+                        {
+                            ISalesOrderAddress shipAddr = Sage.Platform.EntityFactory.Create<ISalesOrderAddress>();
+                            so.ShippingAddress = shipAddr;
+                        }
+                        so.SetSalesOrderShippingAddress(newContact.Address);
+                        srv.SetSelectionContext("QuickInsertAccountContact", null);
+                    }
+                }
+            }
         }
     }
 }

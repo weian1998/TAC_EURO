@@ -138,7 +138,7 @@ Sage.extend = function(subclass, superclass) {
 */
 (function(S) {
     var INITIALIZING = false,
-    OVERRIDE = /xyz/.test(function(){xyz;}) ? /\bbase\b/ : /.*/;
+        OVERRIDE = /xyz/.test(function(){xyz;}) ? /\bbase\b/ : /.*/;
     // The base Class placeholder
     S.Class = function(){};
     // Create a new Class that inherits from this class
@@ -162,7 +162,6 @@ Sage.extend = function(subclass, superclass) {
                 return ret;
             };
         };
-
         // Copy the properties over onto the new prototype
         var hidden = ['constructor'],
             i = 0,
@@ -472,49 +471,124 @@ Sage.extend = function(subclass, superclass) {
     };
 }(Sage));
 
+
 Sage.ServiceContainer = function(){
-    _services = [];
+    this._services = [];
 };
 Sage.ServiceContainer.prototype = {
-    addService: function(name, service){
-        if(name && service){
-            if(!this.hasService(name)){
-                var innerService = {};
+    addService: function(name, service) {
+        if (name && service) {
+            if (!this.hasService(name)) {
+                var innerService = { };
                 innerService.key = name;
                 innerService.service = service;
-                _services.push(innerService);
+                this._services.push(innerService);
                 return service;
-            }
-            else{
+            } else {
                 throw "Service already exists: " + name;
             }
         }
+        return false;
     },
-    removeService: function(name){
-        for(i=0;i<_services.length;i++){
-            if(_services[i].key === name){
-                _services.splice(i, 1);
+    removeService: function(name) {
+        for (var i = 0; i < this._services.length; i++) {
+            if (this._services[i].key === name) {
+                this._services.splice(i, 1);
             }
         }
     },
-    getService: function(name){
-        if(name){
-            for(i=0;i<_services.length;i++){
-                if(_services[i].key === name)
-                    return _services[i].service;
+    getService: function(name) {
+        if (name) {
+            for (var i = 0; i < this._services.length; i++) {
+                if (this._services[i].key === name)
+                    return this._services[i].service;
             }
         }
         return null;
     },
-    hasService: function(name){
-        if(name){
-            for(i=0;i<_services.length;i++){
-                if(_services[i].key === name)
+    hasService: function(name) {
+        if (name) {
+            for (var i = 0; i < this._services.length; i++) {
+                if (this._services[i].key === name)
                     return true;
             }
         }
         return false;
     }
-}
-
+};
 Sage.Services = new Sage.ServiceContainer();
+
+/*  When refactored, change to this:
+
+dojo.provide('Sage.ServiceContainer');
+dojo.provide('Sage.Services');
+
+Sage.Services = (function() {
+    dojo.declare('Sage.ServiceContainer', null, {
+        _services: null,
+        constructor: function() {
+            this._services = {};
+        },
+        _createAccessor: function(definition, options) {
+            var instance = typeof definition !== 'function'
+                ? definition
+                : options['singleton']
+                    ? new definition(options)
+                    : null;
+
+            if (instance)
+                return (function(_instance, _container) {
+                    return function() {
+                        return _instance;
+                    };
+                })(instance, this);
+            else
+                return (function(_ctor, _container) {
+                    return function(options) {
+                        return new _ctor(options);
+                    };
+                })(definition, this);
+        },
+        addService: function(name, definition, options) {
+            return (this._services[name] = {
+                definition: definition,
+                options: options,
+                accessor: this._createAccessor(definition, options || {})
+            });
+        },
+        removeService: function(name) {
+            delete this._services[name];
+        },
+        getService: function(name, options) {
+            var definition = this._services[name];
+            if (definition && definition['accessor']) return definition['accessor'](options);
+            return false;
+        },
+        releaseService: function(instance) {
+        },
+        hasService: function(name) {
+            return !!this._services[name];
+        }
+    });
+
+    return new Sage.ServiceContainer();
+})();
+
+
+*/
+
+
+
+/* 
+Kill the document.onkeypress event coming from the Enter key and of type 'text'.
+This function of web forms causes the form to submit.  Normally considered an acceptable function,
+if there are multiple control on the page that use SubmitBehavior, the top
+control in the form will win and it's onclick will be fired.
+UseSubmitBehaviour=false is the usual method to fix this, but .net ImageButtons do not extend that     attribute.
+*/
+document.onkeypress = function (evt) {
+    evt = (evt) ? evt : ((event) ? event : null);
+    var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+    if ((evt.keyCode === 13) && (node.type === "text")) { return false; }
+    return true;
+};

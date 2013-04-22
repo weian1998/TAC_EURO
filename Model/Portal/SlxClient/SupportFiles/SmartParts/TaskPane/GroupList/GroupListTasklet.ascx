@@ -1,77 +1,50 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="GroupListTasklet.ascx.cs" Inherits="SmartParts_TaskPane_GroupList_GroupListTasklet" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="GroupListTasklet.ascx.cs" Inherits="SmartParts_TaskPane_GroupList_GroupListTasklet" EnableTheming="false" ViewStateMode="Disabled" %>
 <div style="display:none">
-    <asp:Panel ID="GroupListTasklet_RTools" runat="server">
-           
-    </asp:Panel>
+    <asp:Panel ID="GroupListTasklet_RTools" runat="server"></asp:Panel>
 </div>
-<style>
- 
-    .group-list .x-grid3-header {
-        display:none;
-    }    
-    
-    .group-list,
-    .group-list .x-panel,
-    .group-list .x-panel-bwrap,
-    .group-list .x-panel-body,
-    .group-list .x-resizable-proxy,
-    .group-list .x-resizable-handle   
-    {    
-    	min-height: 0;	
-    }
-    
-    .group-list .task-pane-item-bwrap
-    {
-    	padding: 4px 0px 0px 0px;
-    }
-    
-    .group-list .group-list-panel
-    {   
-    	_overflow: hidden; 	
-    	border-top: solid 1px #DDDDDD;
-    }
-    
-    .group-list .x-panel
-    {
-        height: 200px;	
-    } 
-    
-    .group-list 
-    {
-    	position: relative;
-    }
-    
-    .group-list .task-pane-item-header
-    {
-
-    }    
-    
-    .group-list .x-resizable-over
-    {
-    	_overflow: hidden;
-    }         
-    
+<style type="text/css">
     #<%= ClientID %> .x-panel-body
     {
     	height: 200px;
     }
+    #TaskPane_item_GroupListTasklet_pane
+    {
+    	padding: 0px;
+    }
+    .displayNone
+    {
+    	display: none;
+    }
 </style>
-<div id="<%= ClientID %>">
+<div id="GroupList_node"></div>
 
-</div>
 <script type="text/javascript">
-var <%= ID %>;
-$(document).ready(function(){
-    if (!<%= ID %>) {
-        <%= ID %> = new Sage.TaskPane.GroupListTasklet({
-            id: '<%= ID %>',
-            clientId: '<%= ClientID %>',
-            keyAlias: '<%= KeyAlias %>',
-            columnAlias: '<%= ColumnAlias %>',
-            columnDisplayName: '<%= ColumnDisplayName %>',
-            entityDisplayName: '<%= EntityDisplayName %>'
-        });
-        <%= ID %>.init();     
-    }    
-});
+    require([
+            'Sage/TaskPane/GroupListTasklet',
+            'dojo/ready',
+            'dijit/registry',
+            'dojo/dom'
+            ],
+        function (GroupListTasklet, ready, registry, dom) {
+            var id = 'GroupList',
+                init = function () {
+                    var list = registry.byId(id),
+                        createList = function (id) {
+                            return new GroupListTasklet({
+                                id: id,
+                                keyAlias: '<%= KeyAlias %>',
+                                columnAlias: '<%= ColumnAlias %>',
+                                columnDisplayName: '<%= ColumnDisplayName %>',
+                                entityDisplayName: '<%= EntityDisplayName %>'
+                            });
+                        };
+
+                    if (!list) {
+                        createList(id);
+                    }
+                };
+
+            ready(init);
+        }
+    );
 </script>

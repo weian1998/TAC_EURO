@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <codeTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="4040a9aa-f9bf-4204-83d8-d5eb4da3e475" name="Default-Class-SalesLogix" entityType="Entity" templateType="Class" templateEngineType="T4">
   <template>
-  <![CDATA[<#@ template language="C#v3.5" #>
+  <![CDATA[<#@ template language="C#v4.0" #>
 <#@ assembly name="System.Core.dll" #>
 <#@ assembly name="Microsoft.Unity.dll" #>
 <#@ assembly name="Sage.Platform.dll" #>
@@ -34,7 +34,7 @@ var generator = (EntityCodeGenerator) Context["generator"];
 //------------------------------------------------------------------------------
 
 // disable XML documentation warnings and _Id never being assigned to
-#pragma warning disable 1591, 649
+#pragma warning disable 1591
 
 using System;
 using System.Collections;
@@ -57,12 +57,13 @@ using Sage.Platform.NHibernateRepository;
 using Sage.Platform.Orm;
 using Sage.Platform.Orm.Attributes;
 using Sage.Platform.Orm.Interfaces;
+using Sage.Platform.Validation;
 using Sage.Platform.Security;
 using Sage.SalesLogix.Orm;
 using log4net;
 <#
-var parents = entity.ParentEntities.Where(relation => relation.ChildProperty.Include && IsEntityIncluded(relation.ParentEntity)).ToList();
-var children = entity.ChildEntities.Where(relation => relation.ParentProperty.Include && IsEntityIncluded(relation.ChildEntity)).ToList();
+var parents = entity.ParentEntities.Where(relation => !relation.IsDynamic && relation.ChildProperty.Include && IsEntityIncluded(relation.ParentEntity)).ToList();
+var children = entity.ChildEntities.Where(relation => !relation.IsDynamic && relation.ParentProperty.Include && IsEntityIncluded(relation.ChildEntity)).ToList();
 var extenders = entity.ExtensionEntities.Where(extender => IsEntityIncluded(extender)).ToList();
 var properties = OrmEntity.GetIncludedProperties(entity).OfType<OrmFieldProperty>().ToList();
 var customProperties = generator.GetIncludedCustomProperties(entity).ToList();
@@ -70,18 +71,18 @@ var customProperties = generator.GetIncludedCustomProperties(entity).ToList();
 var baseMemberNames = generator.GetMemberNames(typeof(EntityBase));
 
 // capture some global variables of entity state
-var isHistory = (bool) tools.ExtendedProperty(entity, "{1589723D-0536-4BF3-BDD7-3F6F7FE165D0}", "IsHistoryTable");
+var metadata = entity.ExtendedProperties.Get<OrmEntityMetadataExtension>();
+var isHistory = metadata.IsHistoryTable;
 OrmEntityProperty foreignProperty = null;
 OrmRelationProperty relationProperty = null;
 var isRelationProperty = false;
 if (isHistory) {
-    var foreignPropertyName = (string) tools.ExtendedProperty(entity, "{1589723D-0536-4BF3-BDD7-3F6F7FE165D0}", "ForeignIdProperty");
-    foreignProperty = entity.GetPropertyByPropertyName(foreignPropertyName);
+    foreignProperty = entity.GetPropertyByPropertyName(metadata.ForeignIdProperty);
     relationProperty = foreignProperty as OrmRelationProperty;
     isRelationProperty = relationProperty != null;
 }
 
-var historyTypeName = (string) tools.ExtendedProperty(entity, "{1589723D-0536-4BF3-BDD7-3F6F7FE165D0}", "ResolvedHistoryType");
+var historyTypeName = metadata.ResolvedHistoryType;
 var isHistoryTable = (historyTypeName == "IHistory");
 var generateAuditSupport = (entity.HasAuditedProperties && (historyTypeName != null) && historyTypeName.Length > 0);
 
@@ -98,14 +99,17 @@ namespace <#= @namespace #>
 {
 <#= generator.GetClassComments(entity) #>
     [Serializable]
-    [TypeConverter(typeof(EntityReferenceConverter))]
+    [TypeConverter(typeof(EntityReferenceConverter<global::Sage.Entity.Interfaces.<#= entity.InterfaceName #>>))]
 <# if (entity.LocalResources.ContainsResource(entity.DisplayNameKey)) { #>
     [EntityResourcesDisplayName("<#= entity.DisplayNameKey #>")]
 <# } #>
 <# if (entity.LocalResources.ContainsResource(entity.DisplayNamePluralKey)) { #>
     [EntityResourcesPluralDisplayName("<#= entity.DisplayNamePluralKey #>")]
 <# } #>
-    public partial class <#= entity.Name #> : EntityBase, <#= entity.InterfaceName #>, ILifecycle, IComponentCreatingState<# if (entity.Audited) { #>, IAuditedEntity<# } #><# if (isHistory) { #>, IAuditTable<# } #><# if (hasDisplayProperty) { #>, INameable<# } #><# if(!entity.HasCompositeKey) { #>, IAssignableId<# } #><# if (securityService != null && securityService.EntityIsSecured(entity)) { #>, IOwnableEntity<# } #>
+<# foreach (var validator in entity.EntityValidators) { #>
+    [<#= validator.GetValidationAttributeCode() #>]
+<# } #>
+    public partial class <#= entity.Name #> : EntityBase, global::Sage.Entity.Interfaces.<#= entity.InterfaceName #>, ILifecycle, IComponentCreatingState<# if (entity.Audited) { #>, IAuditedEntity<# } #><# if (isHistory) { #>, IAuditTable<# } #><# if (hasDisplayProperty) { #>, INameable<# } #><# if(!entity.HasCompositeKey) { #>, IAssignableId<# } #><# if (securityService != null && securityService.EntityIsSecured(entity)) { #>, IOwnableEntity<# } #>
     {
 <# if (hasDisplayProperty) { #>
         #region INameable interface
@@ -152,14 +156,26 @@ namespace <#= @namespace #>
         [Browsable(false)]
         public override Type EntityInterfaceType
         {
-            get { return typeof(<#= entity.InterfaceName #>); }
+            get { return typeof(global::Sage.Entity.Interfaces.<#= entity.InterfaceName #>); }
+        }
+
+        static <#= entity.Name #>()
+        {
+            AttachValidators();
+<# if (generateAuditSupport) { #>
+            InitializeAuditProperties();
+<# } #>
+        }
+
+        static void AttachValidators()
+        {
+<# foreach (var rule in entity.ValidationRules) { #>
+<#  var methodName = rule.IsPropertyLevel ? "AttachPropertyValidator" : "AttachEntityValidator"; #>
+            <#= methodName #>(typeof (<#= entity.Name #>), <#= rule.GetValidatorCode() #>);
+<# } #>
         }
 
 <# if (generateAuditSupport) { #>
-        static <#= entity.Name #>()
-        {
-            InitializeAuditProperties();
-        }
 
         #region Audit Support
 
@@ -174,7 +190,9 @@ namespace <#= @namespace #>
 <#  } #>
 
 <#  foreach (var relationshipProp in entity.ChildRelationProperties) { #>
+<#   if (!relationshipProp.Audited) { #>
             auditProperties.Add("<#= relationshipProp.PropertyName #>");
+<#   } #>
 <#  } #>
 
             s_auditProperties = new ReadOnlyCollection<string>(auditProperties);
@@ -204,19 +222,17 @@ namespace <#= @namespace #>
         {
 <#  if (isHistoryTable) { #>
             IHistory h = (IHistory)EntityFactory.Create(typeof(<#= historyTypeName #>));
-<#   var ACO = (OrmEntity) tools.ExtendedProperty(entity, "{1589723D-0536-4BF3-BDD7-3F6F7FE165D0}", "FindACOParent"); #>
 <#   if (entity.Name == "Address") { #>
             SetAddressHistoryKeys(h);
-<#   } else if (ACO.InterfaceName == "IAccount") { #>
-            h.AccountId = Id;
-<#   } else if (ACO.InterfaceName == "IContact") { #>
-            h.ContactId = Id;
-<#   if ((ACO.InterfaceName == "IContact") && (entity.Name != "Contact")) { #>            
-            h.AccountId = (string)Contact.Account.Id;
-            h.AccountName = Contact.Account.AccountName;
-<#   } #>            
 <#   } else { #>
-            h.OpportunityId = Id;
+<#    var aco = metadata.FindACOParent; #>
+<#    if (aco != null) { #>
+            h.<#= aco.Name #>Id = Id;
+<#     if (aco.Name != "Account" && entity.Name != aco.Name) { #>
+            h.AccountId = (string)<#= aco.Name #>.Account.Id;
+            h.AccountName = <#= aco.Name #>.Account.AccountName;
+<#     } #>
+<#    } #>
 <#   } #>
             return h;
 <#  } else { #>
@@ -264,9 +280,9 @@ namespace <#= @namespace #>
         {
 <#  if (isRelationProperty) { #>
 <#   if (relationProperty.Relationship.ChildProperty.Include) { #>
-            <#= foreignProperty.PropertyName #> = (<#= relationProperty.Relationship.ParentEntity.InterfaceName #>)entity;
+            <#= foreignProperty.PropertyName #> = (global::Sage.Entity.Interfaces.<#= relationProperty.Relationship.ParentEntity.InterfaceName #>)entity;
 <#   } else { #>
-            <#= foreignProperty.PropertyName #> = (<#= relationProperty.Relationship.ChildEntity.InterfaceName #>)entity;
+            <#= foreignProperty.PropertyName #> = (global::Sage.Entity.Interfaces.<#= relationProperty.Relationship.ChildEntity.InterfaceName #>)entity;
 <#   } #>
 <#  } else { #>
             <#= foreignProperty.PropertyName #> = GetEntityId((IComponentReference)entity).ToString();
@@ -303,8 +319,19 @@ namespace <#= @namespace #>
         #endregion IAuditTable
 <# } #>
 
+<# var warningDisabled = false; #>
 <# foreach (var prop in properties) { #>
+<#  if (prop.IsReadOnly && !warningDisabled) { #>
+#pragma warning disable 649
+<#   warningDisabled = true; #>
+<#  } else if (!prop.IsReadOnly && warningDisabled) { #>
+#pragma warning restore 649
+<#   warningDisabled = false; #>
+<#  } #>
         private <#= generator.ToClrType(prop) #> _<#= prop.PropertyName #>;
+<# } #>
+<# if (warningDisabled) { #>
+#pragma warning restore 649
 <# } #>
 <# if (entity.HasCompositeKey) { #>
 <#  foreach (var keyProp in entity.KeyProperties) { #>
@@ -329,7 +356,7 @@ namespace <#= @namespace #>
 <# if (parents.Count > 0) { #>
         #region M:1 Fields
 <#  foreach (var relation in parents) { #>
-        private <#= relation.ParentEntity.InterfaceName #> _<#= relation.ChildProperty.PropertyName #>;
+        private global::Sage.Entity.Interfaces.<#= relation.ParentEntity.InterfaceName #> _<#= relation.ChildProperty.PropertyName #>;
 <#  } #>
         #endregion M:1 Fields
 <# } #>
@@ -338,9 +365,9 @@ namespace <#= @namespace #>
         #region 1:M and M:1 fields
 <#  foreach (var relation in children) { #>
 <#   if (relation.Cardinality == "1:M") { #>
-        private EntitySet<<#= relation.ChildEntity.InterfaceName #>> _<#= relation.ParentProperty.PropertyName #>;
+        private EntitySet<global::Sage.Entity.Interfaces.<#= relation.ChildEntity.InterfaceName #>> _<#= relation.ParentProperty.PropertyName #>;
 <#   } else if (relation.Cardinality == "M:1") { #>
-        private <#= relation.ChildEntity.InterfaceName #> _<#= relation.ParentProperty.PropertyName #>;
+        private global::Sage.Entity.Interfaces.<#= relation.ChildEntity.InterfaceName #> _<#= relation.ParentProperty.PropertyName #>;
 <#   } #>
 <#  } #>
         #endregion 1:M and M:1 fields
@@ -351,7 +378,7 @@ namespace <#= @namespace #>
         #region Constructors
 
 <# if (entity.IsExtension && IsEntityIncluded(entity.ExtendedEntity)) { #>
-        public <#= entity.Name #>(<#= entity.ExtendedEntity.InterfaceName #> parent)
+        public <#= entity.Name #>(global::Sage.Entity.Interfaces.<#= entity.ExtendedEntity.InterfaceName #> parent)
             : this()
         {
             _<#= entity.ExtendedEntity.Name #> = parent;
@@ -378,7 +405,7 @@ namespace <#= @namespace #>
 <# foreach (var relation in children) { #>
 <#  if (relation.Cardinality == "1:M") { #>
             //Initialize <#= relation.ParentProperty.PropertyName #> Collection
-            _<#= relation.ParentProperty.PropertyName #> = new EntitySet<<#= relation.ChildEntity.InterfaceName #>>(
+            _<#= relation.ParentProperty.PropertyName #> = new EntitySet<global::Sage.Entity.Interfaces.<#= relation.ChildEntity.InterfaceName #>>(
                     item => HandleCollectionItemAdded("<#= relation.ParentProperty.PropertyName #>", item),
                     item => HandleCollectionItemRemoved("<#= relation.ParentProperty.PropertyName #>", item)
                 );
@@ -412,9 +439,8 @@ namespace <#= @namespace #>
 <#    key++; #>
 <#   } #>
 
-<#   var validators = prop.DataType.Validators; #>
-<#   foreach (var dtv in validators) { #>
-        <#= generator.GetValidatorAttribute(dtv) #>
+<#   foreach (var validator in prop.Validators) { #>
+        [<#= validator.GetValidationAttributeCode() #>]
 <#   } #>
         <#= generator.GetTypeConverterAttribute(prop) #>
 <#   if (entity.LocalResources.ContainsResource(prop.DisplayNameKey)) { #>
@@ -438,7 +464,7 @@ namespace <#= @namespace #>
             {
 <#    if (prop.OnBeforeChangeMethod != null || prop.OnAfterChangeMethod != null) { #>
                 if (_<#= prop.PropertyName #>InSetter)
-                    throw new PropertyChangeEventException("Already executing the OnBefore / OnAfter business rule for the <#= entity.InterfaceName #>.<#= prop.PropertyName #> property.");
+                    throw new PropertyChangeEventException("Already executing the OnBefore / OnAfter business rule for the global::Sage.Entity.Interfaces.<#= entity.InterfaceName #>.<#= prop.PropertyName #> property.");
 
                 _<#= prop.PropertyName #>InSetter = true;
                 try
@@ -527,26 +553,16 @@ namespace <#= @namespace #>
 <#   if (entity.LocalResources.ContainsResource(relation.ChildProperty.DisplayNameKey)) { #>
         [EntityResourcesDisplayName("<#= relation.ChildProperty.DisplayNameKey #>")]
 <#   } #>
-        public virtual <#= baseMemberNames.Contains(relation.ChildProperty.PropertyName) ? "new" : "" #> <#= relation.ParentEntity.InterfaceName #> <#= relation.ChildProperty.PropertyName #>
+        public virtual <#= baseMemberNames.Contains(relation.ChildProperty.PropertyName) ? "new" : "" #> global::Sage.Entity.Interfaces.<#= relation.ParentEntity.InterfaceName #> <#= relation.ChildProperty.PropertyName #>
         {
             get
             {
-                ActivateRelatedEntity(_<#= relation.ChildProperty.PropertyName #>);
-                return _<#= relation.ChildProperty.PropertyName #>;
+                return ActivateRelatedEntity(_<#= relation.ChildProperty.PropertyName #>);
             }
             set
             {
-                bool noaccess = false;
-                try
-                {
-                    Utility.Unwrap(_<#= relation.ChildProperty.PropertyName #>);
-                }
-                catch (ObjectNotFoundException)
-                {
-                    _<#= relation.ChildProperty.PropertyName #> = null;
-                    noaccess = true;
-                }
-                if (!Equals(_<#= relation.ChildProperty.PropertyName #>, value) || noaccess)
+                Utility.Unwrap(_<#= relation.ChildProperty.PropertyName #>);
+                if (!Equals(_<#= relation.ChildProperty.PropertyName #>, value))
                 {
                     var oldValue = _<#= relation.ChildProperty.PropertyName #>;
                     _<#= relation.ChildProperty.PropertyName #> = value;
@@ -612,13 +628,13 @@ namespace <#= @namespace #>
 <#    if (entity.LocalResources.ContainsResource(relation.ParentProperty.DisplayNameKey)) { #>
         [EntityResourcesDisplayName("<#= relation.ParentProperty.DisplayNameKey #>")]
 <#    } #>
-        public virtual ICollection<<#= relation.ChildEntity.InterfaceName #>> <#= relation.ParentProperty.PropertyName #>
+        public virtual ICollection<global::Sage.Entity.Interfaces.<#= relation.ChildEntity.InterfaceName #>> <#= relation.ParentProperty.PropertyName #>
         {
             get
             {
                 if (_<#= relation.ParentProperty.PropertyName #> == null)
                 {
-                    _<#= relation.ParentProperty.PropertyName #> = new EntitySet<<#= relation.ChildEntity.InterfaceName #>>(
+                    _<#= relation.ParentProperty.PropertyName #> = new EntitySet<global::Sage.Entity.Interfaces.<#= relation.ChildEntity.InterfaceName #>>(
                             item => HandleCollectionItemAdded("<#= relation.ParentProperty.PropertyName #>", item),
                             item => HandleCollectionItemRemoved("<#= relation.ParentProperty.PropertyName #>", item)
                         );
@@ -638,33 +654,16 @@ namespace <#= @namespace #>
 <#    if (entity.LocalResources.ContainsResource(relation.ParentProperty.DisplayNameKey)) { #>
         [EntityResourcesDisplayName("<#= relation.ParentProperty.DisplayNameKey #>")]
 <#    } #>
-        public virtual <#= baseMemberNames.Contains(relation.ParentProperty.PropertyName) ? "new" : "" #> <#= relation.ChildEntity.InterfaceName #> <#= relation.ParentProperty.PropertyName #>
+        public virtual <#= baseMemberNames.Contains(relation.ParentProperty.PropertyName) ? "new" : "" #> global::Sage.Entity.Interfaces.<#= relation.ChildEntity.InterfaceName #> <#= relation.ParentProperty.PropertyName #>
         {
             get
             {
-                try
-                {
-                    ActivateRelatedEntity(_<#= relation.ParentProperty.PropertyName #>);
-                }
-                catch (ObjectNotFoundException)
-                {
-                    _<#= relation.ParentProperty.PropertyName #> = null;
-                }
-                return _<#= relation.ParentProperty.PropertyName #>;
+                return ActivateRelatedEntity(_<#= relation.ParentProperty.PropertyName #>);
             }
             set
             {
-                bool noaccess = false;
-                try
-                {
-                    Utility.Unwrap(_<#= relation.ParentProperty.PropertyName #>);
-                }
-                catch (ObjectNotFoundException)
-                {
-                    _<#= relation.ParentProperty.PropertyName #> = null;
-                    noaccess = true;
-                }
-                if (!Equals(_<#= relation.ParentProperty.PropertyName #>, value) || noaccess)
+                Utility.Unwrap(_<#= relation.ParentProperty.PropertyName #>);
+                if (!Equals(_<#= relation.ParentProperty.PropertyName #>, value))
                 {
 <#    if (relation.ParentProperty.PropertyName == "Owner" && securityService != null && securityService.EntityIsSecured(entity)) { #>
                     if (_LastPersistedOwner == null)
@@ -737,14 +736,13 @@ namespace <#= @namespace #>
 <# if (entity.IsExtension && IsEntityIncluded(entity.ExtendedEntity)) { #>
         #region 1:1 Parent Entity Extension
 
-        private <#= entity.ExtendedEntity.InterfaceName #> _<#= entity.ExtendedEntity.Name #>;
+        private global::Sage.Entity.Interfaces.<#= entity.ExtendedEntity.InterfaceName #> _<#= entity.ExtendedEntity.Name #>;
 
-        public virtual <#= baseMemberNames.Contains(entity.ExtendedEntity.Name) ? "new" : "" #> <#= entity.ExtendedEntity.InterfaceName #> <#= entity.ExtendedEntity.Name #>
+        public virtual <#= baseMemberNames.Contains(entity.ExtendedEntity.Name) ? "new" : "" #> global::Sage.Entity.Interfaces.<#= entity.ExtendedEntity.InterfaceName #> <#= entity.ExtendedEntity.Name #>
         {
             get
             {
-                ActivateRelatedEntity(_<#= entity.ExtendedEntity.Name #>);
-                return _<#= entity.ExtendedEntity.Name #>;
+                return ActivateRelatedEntity(_<#= entity.ExtendedEntity.Name #>);
             }
             set
             {
@@ -759,9 +757,9 @@ namespace <#= @namespace #>
 <# if (extenders.Count > 0) { #>
         #region Child extensions
 <#  foreach (var child in extenders) { #>
-        private <#= child.InterfaceName #> _<#= child.Name #>;
+        private global::Sage.Entity.Interfaces.<#= child.InterfaceName #> _<#= child.Name #>;
 
-        public virtual <#= baseMemberNames.Contains(child.Name) ? "new" : "" #> <#= child.InterfaceName #> <#= child.Name #>
+        public virtual <#= baseMemberNames.Contains(child.Name) ? "new" : "" #> global::Sage.Entity.Interfaces.<#= child.InterfaceName #> <#= child.Name #>
         {
             get
             {
@@ -769,8 +767,7 @@ namespace <#= @namespace #>
                 {
                     _<#= child.Name #> = new <#= child.Name #>(this);
                 }
-                ActivateRelatedEntity(_<#= child.Name #>, "<#= child.Name #>");
-                return _<#= child.Name #>;
+                return ActivateRelatedEntity(_<#= child.Name #>, "<#= child.Name #>");
             }
             set
             {
@@ -789,13 +786,14 @@ namespace <#= @namespace #>
         public override bool Equals(object obj)
         {
             if (this == obj) return true;
-
             if (obj == null) return false;
-
             var castObj = obj as <#= entity.Name #>;
             if (castObj == null) return false;
-
-            return castObj.GetHashCode() == GetHashCode();
+            return <#= tools.List(entity.KeyProperties, keyProp => ck_useRelationships
+                ? string.Format("Equals({0}, castObj.{0})", entity.GetRelationshipForKey(keyProp.Reference).ChildProperty.PropertyName)
+                : string.Format(generator.ToClrType(keyProp.Reference) == "String"
+                    ? "_{0} != null && castObj._{0} != null && string.Equals(_{0}.Trim(), castObj._{0}.Trim(), StringComparison.InvariantCultureIgnoreCase)"
+                    : "_{0} == castObj._{0}", entity.HasCompositeKey ? keyProp.Reference.PropertyName : "Id"), " && ") #>;
         }
 
         /// <summary>
@@ -803,29 +801,27 @@ namespace <#= @namespace #>
         /// </summary>
         public override int GetHashCode()
         {
-<# if (entity.HasCompositeKey) { #>
-<#  if (ck_useRelationships) { #>
-            object <#= tools.List(entity.KeyProperties, keyProp => entity.GetRelationshipForKey(keyProp.Reference).ChildProperty.PropertyName + "Id = GetEntityId(_" + entity.GetRelationshipForKey(keyProp.Reference).ChildProperty.PropertyName + ")", ", ") #>;
-            if (<#= tools.List(entity.KeyProperties, keyProp => "(" + entity.GetRelationshipForKey(keyProp.Reference).ChildProperty.PropertyName + "Id != null)", " && ") #>)
+<# if (ck_useRelationships) { #>
+            if (<#= tools.List(entity.KeyProperties, keyProp => entity.GetRelationshipForKey(keyProp.Reference).ChildProperty.PropertyName + " != null", " && ") #>)
             {
-                return (<#= tools.List(entity.KeyProperties, keyProp => entity.GetRelationshipForKey(keyProp.Reference).ChildProperty.PropertyName + "Id.GetHashCode()", " + ") #>);
+                return <#= tools.List(entity.KeyProperties, keyProp => entity.GetRelationshipForKey(keyProp.Reference).ChildProperty.PropertyName + ".GetHashCode()", " + ") #>;
             }
-<#  } else { #>
-            if (<#= tools.List(entity.KeyProperties, keyProp => "(_" + keyProp.Reference.PropertyName + " != null)", " && ") #>)
-            {
-                return (<#= tools.List(entity.KeyProperties, keyProp => "_" + keyProp.Reference.PropertyName + ".GetHashCode()", " + ") #> );
-            }
-<#  } #>
-<# } else { #>
+<# } else if (entity.IsExtension && IsEntityIncluded(entity.ExtendedEntity)) { #>
             if (_Id != null)
-<#  if (entity.IsExtension && IsEntityIncluded(entity.ExtendedEntity)) { #>
-                return _Id.GetHashCode() + GetType().GetHashCode();
+            {
+<#  if (generator.ToClrType(entity.KeyProperties[0].Reference) == "String") { #>
+                return _Id.Trim().ToUpperInvariant().GetHashCode() + GetType().GetHashCode();
 <#  } else { #>
-                return _Id.GetHashCode();
+                return _Id.GetHashCode() + GetType().GetHashCode();
 <#  } #>
+            }
+<# } else { #>
+            if (<#= tools.List(entity.KeyProperties, keyProp => string.Format("_{0} != null", entity.HasCompositeKey ? keyProp.Reference.PropertyName : "Id"), " && ") #>)
+            {
+                return <#= tools.List(entity.KeyProperties, keyProp => string.Format("_{0}{1}.GetHashCode()", entity.HasCompositeKey ? keyProp.Reference.PropertyName : "Id", generator.ToClrType(keyProp.Reference) == "String" ? ".Trim().ToUpperInvariant()" : null), " + ") #>;
+            }
 <# } #>
-            else
-                return base.GetHashCode();
+            return base.GetHashCode();
         }
 
         public override string ToString()
@@ -904,10 +900,12 @@ namespace <#= @namespace #>
 <# if (extenders.Count > 0) { #>
                 #region 1:1 extension update handlers
 <#  foreach (var child in extenders) { #>
+<#   if (child.OnBeforeUpdateMethod != null) { #>
                 if (<#= child.Name #>.PersistentState == PersistentState.Modified)
                 {
                     <#= @namespace #>.<#= child.Name #>._OnBeforeUpdate(<#= child.Name #>, session);
                 }
+<#   } #>
 <#  } #>
                 #endregion 1:1 extension update handlers
 <# } #>
@@ -935,8 +933,8 @@ namespace <#= @namespace #>
         }
 
 <# if (!entity.HasCompositeKey) { #>
-        private string _Id;
-        public virtual string Id
+        private <#= generator.ToClrType(entity.KeyProperties[0].Reference) #> _Id;
+        public virtual <#= generator.ToClrType(entity.KeyProperties[0].Reference) #> Id
         {
             get
             {
@@ -976,7 +974,7 @@ namespace <#= @namespace #>
         /// <summary>
         /// Creates a new instance and executes the OnCreate business rules.
         /// </summary>
-        public static <#= entity.InterfaceName #> Create()
+        public static global::Sage.Entity.Interfaces.<#= entity.InterfaceName #> Create()
         {
             return Create(EntityCreationOption.ExecuteBusinessRules);
         }
@@ -985,13 +983,13 @@ namespace <#= @namespace #>
         /// Creates a new instance and optionally executes the OnCreate business rules.
         /// </summary>
         /// <param name="executeBusinessRules"><c>true</c> if the OnCreate business rules should be run.</param>
-        public static <#= entity.InterfaceName #> Create(EntityCreationOption executeBusinessRules)
+        public static global::Sage.Entity.Interfaces.<#= entity.InterfaceName #> Create(EntityCreationOption executeBusinessRules)
         {
             if (log.IsDebugEnabled) {
                 if (executeBusinessRules == EntityCreationOption.ExecuteBusinessRules) {
-                    log.Debug("Creating new instance of <#= entity.InterfaceName #>.  Executing OnCreate business rules.");
+                    log.Debug("Creating new instance of global::Sage.Entity.Interfaces.<#= entity.InterfaceName #>.  Executing OnCreate business rules.");
                 } else {
-                    log.Debug("Creating new instance of <#= entity.InterfaceName #>.  Not executing OnCreate business rules.");
+                    log.Debug("Creating new instance of global::Sage.Entity.Interfaces.<#= entity.InterfaceName #>.  Not executing OnCreate business rules.");
                 }
             }
             var instance = new <#= entity.Name #>(true);
@@ -1015,47 +1013,44 @@ namespace <#= @namespace #>
 
         #region ILifecycle Members
 
-<# if (entity.OnBeforeDeleteMethod != null) { #>
         LifecycleVeto ILifecycle.OnDelete(ISession s)
         {
+<# if (entity.OnBeforeDeleteMethod != null) { #>
             var lib = DynamicMethodLibraryHelper.Instance;
             var methodArgs = new Object[] { this, s };
             lib.Execute("<#= entity.OnBeforeDeleteMethod #>", methodArgs);
+<# } #>
             return LifecycleVeto.NoVeto;
         }
-<# } #>
+
         void ILifecycle.OnLoad(ISession s, object id)
         {
         }
 
-<# if (entity.OnBeforeInsertMethod != null) { #>
         LifecycleVeto ILifecycle.OnSave(ISession s)
         {
+<# if (entity.OnBeforeInsertMethod != null) { #>
             var lib = DynamicMethodLibraryHelper.Instance;
-
             var methodArgs = new Object[] { this, s };
-
             lib.Execute("<#= entity.OnBeforeInsertMethod #>", methodArgs);
-
+<# } #>
             return LifecycleVeto.NoVeto;
         }
-<# } #>
 
-<# if (entity.OnBeforeUpdateMethod != null) { #>
         LifecycleVeto ILifecycle.OnUpdate(ISession s)
         {
             return LifecycleVeto.NoVeto;
         }
 
-        internal static void _OnBeforeUpdate(<#= entity.InterfaceName #> entity, ISession s)
+<# if (entity.OnBeforeUpdateMethod != null) { #>
+        internal static void _OnBeforeUpdate(global::Sage.Entity.Interfaces.<#= entity.InterfaceName #> entity, ISession s)
         {
             var lib = DynamicMethodLibraryHelper.Instance;
-
             var methodArgs = new Object[] { entity, s };
-
             lib.Execute("<#= entity.OnBeforeUpdateMethod #>", methodArgs);
         }
 <# } #>
+
         #endregion
 
         #region IPersistentEntity Members
@@ -1169,30 +1164,30 @@ namespace <#= @namespace #>
 <#  if (!((ck_useRelationships && prop.IsKeyProperty) || prop.IsReadOnly)) { #>
                 case "<#= prop.PropertyName #>":
                     <#= prop.PropertyName #> = (<#= generator.ToClrType(prop) #>) value;
-                    break;
+                    return;
 <#  } #>
 <# } #>
 <# foreach (var relation in parents) { #>
                 case "<#= relation.ChildProperty.PropertyName #>":
-                    <#= relation.ChildProperty.PropertyName #> = (<#= relation.ParentEntity.InterfaceName #>) value;
-                    break;
+                    <#= relation.ChildProperty.PropertyName #> = (global::Sage.Entity.Interfaces.<#= relation.ParentEntity.InterfaceName #>) value;
+                    return;
 <# } #>
 <# foreach (var relation in children) { #>
 <#  if (relation.Cardinality == "M:1") { #>
                 case "<#= relation.ParentProperty.PropertyName #>":
-                    <#= relation.ParentProperty.PropertyName #> = (<#= relation.ChildEntity.InterfaceName #>) value;
-                    break;
+                    <#= relation.ParentProperty.PropertyName #> = (global::Sage.Entity.Interfaces.<#= relation.ChildEntity.InterfaceName #>) value;
+                    return;
 <#  } #>
 <# } #>
 <# if (entity.IsExtension && IsEntityIncluded(entity.ExtendedEntity)) { #>
                 case "<#= entity.ExtendedEntity.Name #>":
-                    <#= entity.ExtendedEntity.Name #> = (<#= entity.ExtendedEntity.InterfaceName #>) value;
-                    break;
+                    <#= entity.ExtendedEntity.Name #> = (global::Sage.Entity.Interfaces.<#= entity.ExtendedEntity.InterfaceName #>) value;
+                    return;
 <# } #>
 <#  foreach (var child in extenders) { #>
                 case "<#= child.Name #>":
-                    <#= child.Name #> = (<#= child.InterfaceName #>) value;
-                    break;
+                    <#= child.Name #> = (global::Sage.Entity.Interfaces.<#= child.InterfaceName #>) value;
+                    return;
 <# } #>
             }
 

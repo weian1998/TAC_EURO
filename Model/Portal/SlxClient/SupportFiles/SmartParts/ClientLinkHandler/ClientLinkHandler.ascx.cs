@@ -8,7 +8,6 @@ using Sage.Platform.Application;
 using Sage.Platform.Application.UI.Web;
 using Sage.Platform.WebPortal;
 using Sage.Platform.WebPortal.Services;
-using Sage.Platform.Security;
 using Sage.SalesLogix.Client.GroupBuilder;
 using Sage.SalesLogix.SelectionService;
 using Sage.SalesLogix.Web.Controls;
@@ -44,13 +43,13 @@ public partial class SmartParts_ClientLinkHandler_ClientLinkHandler : UserContro
             if (!p.ClientContextService.CurrentContext.ContainsKey(WebHelpUrlFmtKey))
             {
                 PageLink linkCtrl = new PageLink
-                                        {
-                                            LinkType = enumPageLinkType.HelpFileName,
-                                            NavigateUrl = "bogustopic",
-                                            Target = "help"
-                                        };
+                        {
+                            LinkType = enumPageLinkType.HelpFileName,
+                            NavigateUrl = "bogustopic",
+                            Target = "help"
+                        };
                 var webHelpLink = linkCtrl.GetWebHelpLink();
-                p.ClientContextService.CurrentContext.Add(WebHelpUrlFmtKey, webHelpLink.Url.Replace("bogustopic", "{0}"));
+                p.ClientContextService.CurrentContext.Add(WebHelpUrlFmtKey, webHelpLink.Url.Replace("bogustopic", "${0}"));
                 p.ClientContextService.CurrentContext.Add(WebHelpUrlTargetKey, webHelpLink.Target);
             }
         }
@@ -58,8 +57,7 @@ public partial class SmartParts_ClientLinkHandler_ClientLinkHandler : UserContro
 
     protected override void CreateChildControls()
     {
-        _state = new HiddenField();
-        _state.ID = ID + "_state";
+        _state = new HiddenField {ID = ID + "_state"};
         _state.ValueChanged += HandleLinkRequest;
 
         Controls.Add(_state);
@@ -90,75 +88,18 @@ public partial class SmartParts_ClientLinkHandler_ClientLinkHandler : UserContro
         string id = GetValue(jso, "id");
         string selectionInfoKey = GetValue(jso, "selectionInfoKey");
         string recurDate = String.Empty;
-        DateTime dateTime;
         Dictionary<string, string> args = GetArgs(jso);
 
         switch (request)
         {
-            case "EntityDetail":
-                if (kind == "ACTIVITY")
-                    Link.EditActivity(id);
-                else if (kind == "HISTORY")
-                    Link.EditHistory(id);
-                else
-                    Link.EntityDetail(id, kind);
-                break;
             case "Schedule":
-                if (type == "PhoneCall")
-                    Link.SchedulePhoneCall();
-                else if (type == "Meeting")
-                    Link.ScheduleMeeting();
-                else if (type == "ToDo")
-                    Link.ScheduleToDo();
-                else if (type == "PersonalActivity")
-                    Link.SchedulePersonalActivity();
-                else if (type == "CompleteActivity")
+                if (type == "CompleteActivity")
+                {
                     Link.ScheduleCompleteActivity();
+                }
                 break;
-            case "New":
-                if (type == "Note")
-                    Link.NewNote();
-                break;
-            case "EditActivity":
-                Link.EditActivity(id);
-                break;
-            case "EditActivityOccurrence":
-                recurDate = GetValue(jso, "recurDate");
-                dateTime = Convert.ToDateTime(recurDate);
-                Link.EditActivityOccurrencePrompt(id, dateTime);
-                break;
-            case "EditHistory":
-                Link.EditHistory(id, args);
-                break;
-            case "CompleteActivity":
-                Link.CompleteActivity(id);
-                break;
-            case "CompleteActivityOccurrence":
-                recurDate = GetValue(jso, "recurDate");
-                dateTime = Convert.ToDateTime(recurDate);
-                Link.CompleteActivityOccurrencePrompt(id, dateTime);
-                break;
-            case "DeleteActivity":
-                Link.DeleteActivity(id);
-                break;
-            case "DeleteActivityOccurrence":
-                recurDate = GetValue(jso, "recurDate");
-                dateTime = Convert.ToDateTime(recurDate);
-                Link.DeleteActivityOccurrencePrompt(id, dateTime);
-                break;
-            case "ScheduleActivity":
-                Link.ScheduleActivity(args);
-                break;
-            case "ConfirmActivity":
-                string toUserId = GetValue(jso, "toUserId");
-                Link.ConfirmActivity(id, toUserId);
-                break;
-            case "DeleteConfirmation":
-                string notifyId = GetValue(jso, "notifyId");
-                Link.DeleteConfirmation(id, notifyId);
-                break;
-            case "RemoveDeletedConfirmation":
-                Link.RemoveDeletedConfirmation(id);
+            case "EntityDetail":
+                Link.EntityDetail(id, kind);
                 break;
             case "MergeRecords":
                 Link.MergeRecords(selectionInfoKey);
@@ -216,6 +157,13 @@ public partial class SmartParts_ClientLinkHandler_ClientLinkHandler : UserContro
                     Link.SetUsersToStandardRole();
                 break;
         }
+
+        // Clear the state, otherwise performing the same action again won't work
+        // (but remove the state changed event first, otherwise clearing the state will
+        //  trigger another postback with the same data -- if a dialog is closed,
+        //  it would open immediately after being closed, for example)
+        _state.ValueChanged -= HandleLinkRequest;
+        _state.Value = string.Empty;
     }
    
     /// <summary>
@@ -247,7 +195,7 @@ public partial class SmartParts_ClientLinkHandler_ClientLinkHandler : UserContro
 
     private static string GetValue(IDictionary<string, object> jso, string key)
     {
-        if (jso.ContainsKey(key))
+        if (jso.ContainsKey(key) && jso[key] != null)
             return jso[key].ToString();
         return null;
     }
@@ -272,22 +220,22 @@ public partial class SmartParts_ClientLinkHandler_ClientLinkHandler : UserContro
 
     private string GetClientScript()
     {
-        return @"
-if ($get('" + _state.ClientID + @"')) {
-    $get('" + _state.ClientID + @"').value = '';
-}
-
-var ClientLinkHandler = {
-    request: function(request) {
-        var value = Sys.Serialization.JavaScriptSerializer.serialize(request);
-        var hiddenField = $get('" + _state.ClientID + @"');
-        if (hiddenField) {
-            hiddenField.value = value;
-            __doPostBack('" + _state.ClientID + @"', '');
-        }
-    }
-};
-
-";
+        return string.Format(@"
+require(['dojo/ready', 'dojo/_base/lang'], function (ready, lang) {{
+    ready(function() {{
+        Sage.namespace('ClientLinkHandler');
+        lang.mixin(Sage.ClientLinkHandler, {{
+            request: function(request) {{
+                var value = Sys.Serialization.JavaScriptSerializer.serialize(request);
+                var hiddenField = dojo.byId('{0}');
+                if (hiddenField) {{
+                    hiddenField.value = value;
+                    __doPostBack('{0}', '')
+                    hiddenField.value = '';
+                }}
+            }}
+        }});
+    }});
+}});", _state.ClientID);
     }
 }

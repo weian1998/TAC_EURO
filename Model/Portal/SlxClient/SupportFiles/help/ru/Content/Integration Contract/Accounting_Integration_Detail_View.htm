@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Администрирование|Интеграция Учета|Настройка Интеграции Учета" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Детальное представление Интеграции Учета</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Integration Contract/Accounting_Integration_Detail_View.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1>Детальное представление Интеграции Учета</h1>
+        <p><a name="kanchor46"></a>Используйте детальное представление Интеграции Учета для настройки связей между Sage SalesLogix и вашими учетными системами.</p>
+        <p>Интеграция Учета возможна, когда возможны и настроены точки интеграции на стороне Sage SalesLogix и на стороне учетной системы. Если ничего не указано на закладке Системы учета, тогда интеграция не возможна.</p>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <col style="width: 45px;" />
+            <col />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p>Когда вы включаете или отключаете Интеграцию учета, изменения вступят в силу только после повторного входа в систему.</p>
+                </td>
+            </tr>
+        </table>
+        <p>Установите свойства подаваемой информации для Sage SalesLogix, затем настройте свойства информации для каждой интегрируемой учетной системы.</p>
+        <p class="Infinitive">Чтобы установить</p>
+        <ol>
+            <li value="1">В меню <span class="SLXBold">Администрирование</span> выберите <span class="SLXBold">Установка интеграции</span></li>
+            <li value="2">В поле <span class="SLXBold">SalesLogix Снабжение</span> введите SData URL для учетной системы. <br />Используйте формат: http://server:port/<i>sdatavirtualdir</i>/slx/gcrm/-/<i>&#160;</i><ul start="1"><li value="1">Замените <i>sdatavirtualdir</i> на каталог, в который развернут ваш портал SData.<br />По умолчанию каталог "SData".<br />Например, http://localhost:3333/sdata/slx/gcrm/-/</li></ul></li>
+            <li value="3">В поле <span class="SLXBold">Имя пользователя</span>, введите имя пользователя для базы данных Sage SalesLogix, к которой подсоединяется учетная система.</li>
+            <li value="4">В поле <span class="SLXBold">Пароль</span> введите пароль для имени пользователя.</li>
+            <li value="5">В поле <span class="SLXBold">Название</span> введите отображаемое название для снабжения.</li>
+            <li value="6">Нажмите    <![CDATA[ ]]><span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Сохранить<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>.</li>
+            <li value="7">При необходимости, выберите <span class="SLXBold">Ограничить выдвижение Субъекта в единственную систему учета</span>, чтобы ограничить интеграцию одной учетной системой.</li>
+            <li value="8">При необходимости, установите флажок <span class="SLXBold">Разрешить системе учета управлять Заказами</span> для удаления возможности создавать и редактировать <a href="../Sales Orders/salesorderoverview.htm" target="_self">заказы</a> в Sage SalesLogix. Когда вы выставите этот флажок, ваша система учета должна быть использована для управления заказами. </li>
+            <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+                <col style="width: 45px;" />
+                <col />
+                <tr>
+                    <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                        <p style="text-align: center;margin-bottom: 0;" align="center">
+                            <img src="../image/note.gif" />
+                        </p>
+                    </td>
+                    <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                        <p>Эта опция необходима для некоторых интеграции, например, с X3.</p>
+                    </td>
+                </tr>
+            </table>
+            <li value="9">Используйте закладку <a href="Accounting_Systems_Tab.htm" target="_self">Системы учета</a> для настройки деталей снабжения для вашей учетной системы.</li>
+            <li value="10">Используйте закладку <a href="Synchronization_Tab.htm" target="_self">Синхронизация</a> для настройки интервалов синхронизации.</li>
+            <li value="11">Используйте закладку <a href="Matching_Tab.htm" target="_self">Совпадения</a>, чтобы установить глобальные стандартные критерии совпадений для пользователей, создающих связи.</li>
+        </ol>
+        <p class="RelatedTopics">Как выполнить?</p>
+        <p><a href="Linking_Records.htm" target="_self">Связать Записи</a>
+        </p>
+        <p><a href="FindSchemaDifferences.htm" target="_self">Проверить целостность данных Учетных систем</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Закладка Совпадения</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Integration Contract/Matching_Tab.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1>Закладка Совпадения</h1>
+        <p><a name="kanchor475"></a>Используйте закладку Совпадения, чтобы настроить параметры поиска совпадений между Sage SalesLogix и учетной системой. Параметры, которые вы выбираете здесь, определяют, каким образом данные, введенные пользователями в Sage SalesLogix, будут сравниваться с существующими данными учетной системы. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="search criteria">Узнать больше...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a></p>
+        <p MadCap:targetName="search criteria" style="display: none;">Эти настройки определяют стандартные критерии совпадений для всех пользователей, связывающих учетные данные. Установка узких критериев поиска может не возвращать достаточные результаты пользователям, что может привести к созданию дублей.</p>
+        <p class="Infinitive">Для настройки</p>
+        <ol>
+            <li class="Topic-Text-Numbered" value="1">Открыть <a href="Accounting_Integration_Detail_View.htm" target="_self">Детальное представление Интеграции учета</a>.</li>
+            <li class="Topic-Text-Numbered" value="2">Выберите закладку <span class="SLXBold">Совпадения</span>.</li>
+            <li class="Topic-Text-Numbered" value="3">Нажмите ссылку <span class="SLXBold">Изменить</span> для ресурса, которому вы хотите определить или изменить критерии.</li>
+            <li class="Topic-Text-Numbered" value="4">В диалоге <span class="SLXBold">Изменить критерии совпадения</span>, сделайте следующее:</li>
+        </ol>
+        <ol style="list-style-type: lower-alpha;">
+            <li class="Topic-Text-Lettered" value="1">В поле <span class="SLXBold">Свойства</span>, выберите запись, для которой вы хотите определить критерии совпадения.</li>
+        </ol>
+        <p class="Topic-Text-Indent2">Ваша система учета должна поддерживать фильтрацию на это свойство или пользователи, которые пытаются продвигать субъект не увидят никаких совпадений, пока не изменят поиск.    <![CDATA[ ]]><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="4a para 3;4a para2;4a bul">Узнать больше...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a> <![CDATA[ ]]></p>
+        <ol style="list-style-type: lower-roman;">
+            <li class="Bullet3" MadCap:targetName="4a bul" value="1" style="display: none;">Введите в вашем браузере адрес системы учета, созданный при настройке<a href="Setup_Accounting_Integration.htm"> интеграции учета</a>, а затем  <span class="SLXBold">/$schema</span>, и проверьте, что атрибут <span class="SLXBold">canFilter</span> имеет значение <span class="SLXBold">истинна</span>.</li>
+        </ol>
+        <p MadCap:targetName="4a para2" xml:space="preserve" class="TopicTextIndent3" style="display: none;">Пример URL:</p>
+        <p class="TopicTextIndent3" MadCap:targetName="4a para 3" style="display: none;">http://server:port/sdatavirtualdir/<i>application</i>/gcrm/<i>operatingcompany</i>/$schema</p>
+        <ol style="list-style-type: lower-alpha;" MadCap:continue="true">
+            <li class="Topic-Text-Lettered" value="2">В поле <span class="SLXBold">Оператор</span>, выберите критерии соответствия, используемые системой для выбранного типа записей.</li>
+        </ol>
+        <ul>
+            <li class="Bullet3" value="1"><span class="SLXBold">Равно</span> - Значения свойства в каждой системе должны быть равны, для того чтобы являться совпадением. Например, Abbott и Abbott Inc - не являются совпадениями.</li>
+            <li class="Bullet3" value="2"><span class="SLXBold">Начинается с</span> - Значения свойства в каждой системе должны начинаться с одного и того же значения.</li>
+            <li class="Bullet3" value="3"><span class="SLXBold">Содержит</span> - Значения свойства в каждой системе должны содержать одинаковые значения. Например, Abbott будет найдено в Abbott Inc и Abbott Worldwide.</li>
+        </ul>
+        <ol style="list-style-type: lower-alpha;" MadCap:continue="true">
+            <li class="Topic-Text-Lettered" value="3">Чтобы добавить дополнительные критерии соответствия, нажмите    <![CDATA[ ]]><img src="../image/plus.gif" />.</li>
+            <li class="Topic-Text-Lettered" value="4">Чтобы удалить критерии соответствия, нажмите    <![CDATA[ ]]><img src="../image/minus.gif" />.</li>
+            <li class="Topic-Text-Lettered" value="5">Нажмите <span class="SLXBold">ОК</span>.</li>
+        </ol>
+        <p class="RelatedTopics">См. также</p>
+        <p><a href="Synchronization_Tab.htm" target="_self">Закладка Синхронизация</a>
+        </p>
+        <p><a href="Accounting_Systems_Tab.htm" target="_self">Закладка Системы учета</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

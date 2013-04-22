@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Lookup name="DisplayContactAccount">
+    <LookupValue id="0" text="Contact" localizedId="contact" default="false"></LookupValue>
+    <LookupValue id="1" text="Account" localizedId="account" default="false"></LookupValue>
+    <LookupValue id="2" text="ContactAccount" localizedId="contactAccount" default="true"></LookupValue>
+    <LookupValue id="3" text="AccountContact" localizedId="accountContact" default="false"></LookupValue>
+    <LookupValue id="4" text="Neither" localizedId="neither" default="false"></LookupValue>
+</Lookup>

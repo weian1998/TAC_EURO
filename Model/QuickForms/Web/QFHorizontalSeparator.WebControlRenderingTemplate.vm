@@ -1,16 +1,42 @@
 #if($qfcontrol.Visible)
 #if(${qfcontrol.DisplayAsTitleBar})
-<div class="mainContentHeader2"><span id="${qfcontrol.ControlId}" #if($qfcontrol.ToolTip != "") Title='<%$ resources: ${qfcontrol.ControlId}.ToolTip %>'#end >
+<div class="mainContentHeader2"><span id="${qfcontrol.ControlId}" #if($qfcontrol.ToolTip != "") Title='<%$ resources: ${qfcontrol.ControlId}.ToolTip %>'#end
+#if($qfcontrol.CaptionAlignment == "center") style="text-align:center"
+#else
+	#if($qfcontrol.CaptionAlignment == "right")	style="text-align:right" #end
+#end>
 <asp:Localize runat="server" #if(${qfcontrol.Caption} != "")Text="<%$ resources: ${qfcontrol.ControlId}.Caption %>" #else Text=""#end  #if(!$qfcontrol.Visible)Visible="false" #end>${qfcontrol.Caption}</asp:Localize></span></div>
 #else
  #if($qfcontrol.Caption != "")
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+#if($qfcontrol.CaptionAlignment == "right")
+<col width="100%" />
+<col />
+<tr>
+<td><hr /></td>
+<td NoWrap><asp:Label ID="${qfcontrol.ControlId}" runat="server" Text="<%$ resources: ${qfcontrol.ControlId}.Caption %>" #if(!$qfcontrol.Visible)Visible="false" #end></asp:Label></td>
+</tr>
+#else
+	#if($qfcontrol.CaptionAlignment == "center") 
+<col width="50%" />
+<col />
+<col width="50%" />
+<tr>
+<td><hr /></td>
+<td NoWrap><asp:Label ID="${qfcontrol.ControlId}" runat="server" Text="<%$ resources: ${qfcontrol.ControlId}.Caption %>" #if(!$qfcontrol.Visible)Visible="false" #end></asp:Label></td>
+<td><hr /></td>
+</tr>
+	#else
 <col />
 <col width="100%" />
 <tr>
 <td NoWrap><asp:Label ID="${qfcontrol.ControlId}" runat="server" Text="<%$ resources: ${qfcontrol.ControlId}.Caption %>" #if(!$qfcontrol.Visible)Visible="false" #end></asp:Label></td>
 <td><hr /></td>
 </tr>
+	#end
+#end
+
 </table> 
  #else
  <hr />

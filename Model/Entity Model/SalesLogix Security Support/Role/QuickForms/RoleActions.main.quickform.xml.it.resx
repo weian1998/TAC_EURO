@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="grdActions.b0ffa555-4b26-4a1d-ad52-ee24d2395a1c.ColumnHeading" xml:space="preserve">
+    <value>Creato da</value>
+  </data>
+  <data name="f144ebcf-9239-4d82-b1a8-eb778a21192f.DuplicateAssociationMessage" xml:space="preserve">
+    <value>L'azione selezionata è già parte di questo Ruolo.</value>
+  </data>
+  <data name="grdActions_AddRelationTool.LookupProperties.Parent.PropertyHeader" xml:space="preserve">
+    <value>Principale</value>
+  </data>
+  <data name="grdActions_AddRelationTool.LookupProperties.Description.PropertyHeader" xml:space="preserve">
+    <value>Descrizione</value>
+  </data>
+  <data name="lueAddAction.ButtonToolTip" xml:space="preserve">
+    <value>Aggiungi Azione</value>
+  </data>
+  <data name="grdActions.d4b59393-8e72-4f22-9130-c3d6baea4461.ColumnHeading" xml:space="preserve">
+    <value>Utente Modifica</value>
+  </data>
+  <data name="grdActions_AddRelationTool.ButtonToolTip" xml:space="preserve">
+    <value>Aggiungi Azione</value>
+  </data>
+  <data name="grdActions.e7eaee1f-899d-4ba9-b582-28e6b2f7cfa0.ColumnHeading" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="QFLabel.Text" xml:space="preserve">
+    <value>Azioni assegnate a questo Ruolo</value>
+  </data>
+  <data name="grdActions_AddRelationTool.DialogButtonText" xml:space="preserve">
+    <value>Aggiungi il(i) Selezionato(i)</value>
+  </data>
+  <data name="grdActions.352f9b5f-09f0-4957-8039-9e9c9cbec6f6.ColumnHeading" xml:space="preserve">
+    <value>Principale</value>
+  </data>
+  <data name="lueAddAction.LookupProperties.Name.PropertyHeader" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="grdActions.Delete.ToolTip" xml:space="preserve">
+    <value>Rimuovi</value>
+  </data>
+  <data name="grdActions.6e83b38d-22a6-410c-be4d-d54a43278d11.ColumnHeading" xml:space="preserve">
+    <value>Descrizione</value>
+  </data>
+  <data name="grdActions_AddRelationTool.LookupProperties.Name.PropertyHeader" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="lueAddAction.LookupProperties.Parent.PropertyHeader" xml:space="preserve">
+    <value>Principale</value>
+  </data>
+  <data name="grdSecuredActionRoles.387c33ad-171d-452e-b45a-019ac3ccf33a.ColumnHeading" xml:space="preserve">
+    <value>Utente Modifica</value>
+  </data>
+  <data name="grdSecuredActionRoles.4679e809-e5cf-4813-8ad6-945a752fd5d9.ColumnHeading" xml:space="preserve">
+    <value>Creato da</value>
+  </data>
+  <data name="grdActions_AddRelationTool.LookupDialogTitle" xml:space="preserve">
+    <value>Ricerca azione</value>
+  </data>
+  <data name="lueAddAction.LookupProperties.Description.PropertyHeader" xml:space="preserve">
+    <value>Descrizione</value>
+  </data>
+  <data name="grdSecuredActionRoles.35c88b2e-7947-4932-b4dc-c77c4e1d6812.ColumnHeading" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+</root>

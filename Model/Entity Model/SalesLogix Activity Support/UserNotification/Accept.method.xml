@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="7c7be1c9-a36a-4bd7-9bb9-22ffd75956b6" lastModifiedUtc="2012-01-11T22:43:51.2959421Z" name="Accept" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="cf47abda-954e-46cd-a326-73dc79c0d133" lastModifiedUtc="2012-01-11T22:43:46.6084734Z" targetType="Sage.SalesLogix.Activity.BusinessRules.UserNotificationRules, Sage.SalesLogix.Activity" targetMethod="Accept" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

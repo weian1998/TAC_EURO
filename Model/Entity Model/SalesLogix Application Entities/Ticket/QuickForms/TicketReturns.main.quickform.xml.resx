@@ -112,40 +112,34 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="grdReturns.EmptyTableRowText" xml:space="preserve">
-    <value>No records match the selection criteria.</value>
-  </data>
-  <data name="grdReturns.3336f4be-3154-4e56-a6ce-1ed0137dde34.ColumnHeading" xml:space="preserve">
-    <value>Return Information</value>
-  </data>
-  <data name="grdReturns.3336f4be-3154-4e56-a6ce-1ed0137dde34.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdReturns.211ca288-bf31-4196-b5ce-0d70e867f023.ColumnHeading" xml:space="preserve">
-    <value>Ship Information</value>
-  </data>
-  <data name="grdReturns.211ca288-bf31-4196-b5ce-0d70e867f023.FormatString" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdReturns.932ff95b-0bd5-49c8-901a-0f832e62af94.ColumnHeading" xml:space="preserve">
-    <value>Received Date</value>
-  </data>
-  <data name="grdReturns.3e710cf3-3e92-42ce-ab03-5edd88a78113.ColumnHeading" xml:space="preserve">
-    <value>Closed Date</value>
-  </data>
-  <data name="grdReturns.a3a93ba9-bc4f-42a5-8c5a-de9b65871384.ColumnHeading" xml:space="preserve">
+  <data name="grdReturns.0c58998b-d2f8-4d2f-945e-12cf35d78407.ColumnHeading" xml:space="preserve">
     <value>Status</value>
   </data>
-  <data name="grdReturns.57ff14cc-61cf-48c1-81ec-52cdc537ce2d.ColumnHeading" xml:space="preserve">
+  <data name="grdReturns.ba575b41-d536-4082-93de-2a013218e7da.ColumnHeading" xml:space="preserve">
+    <value>Closed Date</value>
+  </data>
+  <data name="grdReturns.92eb8a79-7cc1-47e6-bac0-0e40df056d7f.ColumnHeading" xml:space="preserve">
+    <value>Received Date</value>
+  </data>
+  <data name="grdReturns.2a6d32ef-9508-4f24-8421-acc1397fc171.ColumnHeading" xml:space="preserve">
     <value>Return ID</value>
   </data>
+  <data name="grdReturns.94c843df-1d4b-4d41-9b43-c73ef6e843a4.ColumnHeading" xml:space="preserve">
+    <value>Return ID</value>
+  </data>
+  <data name="grdReturns.df65e5ff-1f9e-4869-8d48-1d9fc60b578f.ColumnHeading" xml:space="preserve">
+    <value>Return Information</value>
+  </data>
+  <data name="grdReturns.9f0be066-8950-4daa-ba54-9105d385db3e.ColumnHeading" xml:space="preserve">
+    <value>Ship Information</value>
+  </data>
   <data name="lnkAddReturn.ToolTip" xml:space="preserve">
-    <value>Create Return...</value>
+    <value>Insert New Return</value>
   </data>
   <data name="lnkAddReturn.Caption" xml:space="preserve">
     <value />

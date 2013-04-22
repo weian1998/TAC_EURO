@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<mashup id="7338dd48-af16-47f9-b90c-eccfd0360880" name="ActivityManager">
+  <processors>
+    <processor type="Sage.Platform.Mashups.Processors.SnippetProcessor, Sage.Platform.Mashups">
+      <snippetProcessor id="04b9ed4f-13ea-4bd4-a10d-b695ba26b464" name="ActivityAlarmMashup" location="260, 20" expanded="true" continueOnError="false" methodName="Activity.GetActivityAlarmsForMashup">
+        <parameters>
+          <parameter id="4e8a13b8-a1b4-44ab-9aea-aca8c4f671bf" name="UserId" expression="UserId" />
+        </parameters>
+      </snippetProcessor>
+    </processor>
+    <processor type="Sage.Platform.Mashups.Processors.SnippetProcessor, Sage.Platform.Mashups">
+      <snippetProcessor id="506d3e87-5478-45eb-8445-8c2f7c4ce5aa" name="ActivityPastDueMashup" location="20, 20" expanded="true" continueOnError="false" methodName="Activity.GetActivityPastDueForMashup">
+        <parameters>
+          <parameter id="ad24473c-78ad-4fea-8643-d1077cf0d96f" name="UserId" expression="UserId" />
+        </parameters>
+      </snippetProcessor>
+    </processor>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor id="b5a1f16e-bc5a-4502-9a58-14c240660c70" name="ActivityDetailSummary_query" location="20, 240" expanded="true" continueOnError="false" query="select  mainentity.id as id, Leader1.id as UserId,  mainentity.Location as Location, Leader1.UserInfo.UserName as LeaderName,  mainentity.ContactId as ContactId,  mainentity.ContactName as ContactName,  mainentity.PhoneNumber as PhoneNumber,  mainentity.AccountId as AccountId,  mainentity.AccountName as AccountName,  mainentity.OpportunityId as OpportunityId,  mainentity.OpportunityName as OpportunityName,  mainentity.TicketId as TicketId,  mainentity.TicketNumber as TicketNumber,  mainentity.Timeless as Timeless,  mainentity.Type as Type,  mainentity.StartDate as StartDate,  mainentity.Duration as Duration,  mainentity.Description as Description,  mainentity.Alarm as Alarm,  mainentity.Recurring as Recurring,  mainentity.LeadId as LeadId,  mainentity.LeadName as LeadName,  mainentity.LongNotes as LongNotes from Activity  mainentity  , User as Leader1  where   mainentity.UserId = Leader1.id and   mainentity.id in ({ids}) " maximumResults="50">
+        <parameters />
+      </queryProcessor>
+    </processor>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor id="f97b62e7-713a-420d-a6be-e1724291f836" name="ActivityListSummary_query" location="20, 140" expanded="true" continueOnError="false" query="select  mainentity.id as id, Leader1.id as UserId, mainentity.Location as Location, Leader1.UserInfo.UserName as LeaderName,  mainentity.Type as Type,  mainentity.Timeless as Timeless,  mainentity.StartDate as StartDate,  mainentity.Description as Description,  mainentity.Alarm as Alarm,  mainentity.Recurring as Recurring,  mainentity.LeadId as LeadId,  mainentity.LeadName as LeadName,  mainentity.Duration as Duration,  mainentity.ContactId as ContactId,  mainentity.ContactName as ContactName,  mainentity.PhoneNumber as PhoneNumber,  mainentity.AccountId as AccountId,  mainentity.AccountName as AccountName,  mainentity.OpportunityId as OpportunityId,  mainentity.OpportunityName as OpportunityName,  mainentity.TicketId as TicketId,  mainentity.TicketNumber as TicketNumber,  mainentity.Notes as Notes from Activity  mainentity  , User as Leader1  where   mainentity.UserId = Leader1.id and   mainentity.id in ({ids}) " maximumResults="50">
+        <parameters />
+      </queryProcessor>
+    </processor>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor id="6513d4f0-9817-43ac-a7f3-b1f34fbac313" name="EventSummary_query" location="260, 340" expanded="true" width="260" continueOnError="false" query="select  mainentity.id as id,  mainentity.StartDate as StartDate,  mainentity.EndDate as EndDate, UserInfo.UserName as UserName,  mainentity.Location as Location,  mainentity.Description as Description,  mainentity.Type as Type from Event  mainentity   left join  mainentity.User as User1 left Join User1.UserInfo as UserInfo where   mainentity.id in ({ids}) " maximumResults="50">
+        <parameters />
+      </queryProcessor>
+    </processor>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor id="6690e39d-4c9f-4b4b-a6cb-167b2c84502c" name="ConfirmationDetailSummary_query" location="260, 140" expanded="true" width="260" continueOnError="false" query="select  mainentity.id as id,  mainentity.FromUser.UserInfo.UserName as FromUser, Leader1.UserInfo.UserName as LeaderName,  mainentity.Activity.Description as Description,  mainentity.Activity.Type as ActivityType,  mainentity.Type as Type,  mainentity.Activity.StartDate as StartDate,  mainentity.Activity.Timeless as Timeless,  mainentity.Activity.Duration as Duration,  mainentity.Activity.Alarm as Alarm,  mainentity.Activity.Recurring as Recurring,  mainentity.ActivityId as ActivityId,  mainentity.Activity.LeadId as LeadId,  mainentity.Activity.LeadName as LeadName,  mainentity.Activity.ContactId as ContactId,  mainentity.Activity.ContactName as ContactName,  mainentity.Activity.PhoneNumber as PhoneNumber,  mainentity.Activity.AccountId as AccountId,  mainentity.Activity.AccountName as AccountName,  mainentity.Activity.OpportunityId as OpportunityId,  mainentity.Activity.OpportunityName as OpportunityName,  mainentity.Activity.TicketId as TicketId,  mainentity.Activity.TicketNumber as TicketNumber, mainentity.Activity.Location as Location, mainentity.Activity.LongNotes as LongNotes from UserNotification  mainentity  left join  mainentity.FromUser  left join  mainentity.Activity  , User as Leader1  where   mainentity.Activity.UserId = Leader1.id and   mainentity.id in ({ids}) " maximumResults="50">
+        <parameters />
+      </queryProcessor>
+    </processor>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor id="6690e39d-4c9f-4b4b-a6cb-167b2c84502c" name="ConfirmationListSummary_query" location="260, 240" expanded="true" width="260" continueOnError="false" query="select  mainentity.id as id,  mainentity.FromUser.UserInfo.UserName as FromUser, Leader1.UserInfo.UserName as LeaderName,  mainentity.Activity.Description as Description,  mainentity.Activity.Type as ActivityType,  mainentity.Type as Type,  mainentity.Activity.StartDate as StartDate,  mainentity.Activity.Timeless as Timeless,  mainentity.Activity.Duration as Duration,  mainentity.Activity.Alarm as Alarm,  mainentity.Activity.Recurring as Recurring,  mainentity.ActivityId as ActivityId,  mainentity.Activity.LeadId as LeadId,  mainentity.Activity.LeadName as LeadName,  mainentity.Activity.ContactId as ContactId,  mainentity.Activity.ContactName as ContactName,  mainentity.Activity.PhoneNumber as PhoneNumber,  mainentity.Activity.AccountId as AccountId,  mainentity.Activity.AccountName as AccountName,  mainentity.Activity.OpportunityId as OpportunityId,  mainentity.Activity.OpportunityName as OpportunityName,  mainentity.Activity.TicketId as TicketId,  mainentity.Activity.TicketNumber as TicketNumber, mainentity.Activity.Location as Location, mainentity.Activity.Notes as Notes from UserNotification  mainentity  left join  mainentity.FromUser  left join  mainentity.Activity  , User as Leader1  where   mainentity.Activity.UserId = Leader1.id and   mainentity.id in ({ids}) " maximumResults="50">
+        <parameters />
+      </queryProcessor>
+    </processor>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor id="8a059313-2740-4b1c-bd40-0dc825f7ce83" name="LitRequestSummary_query" location="20, 340" expanded="true" continueOnError="false" query="select  mainentity.id as id,  mainentity.RequestDate as RequestDate,  mainentity.SendDate as SendDate,  mainentity.FillDate as FillDate,  mainentity.FillStatus as FillStatus,  mainentity.Description as Description, mainentity.Contact.Id as ContactId,  mainentity.Contact.NameLF as ContactName,  mainentity.Contact.WorkPhone as WorkPhone,  mainentity.Contact.HomePhone as HomePhone, mainentity.Priority as Priority,  mainentity.SendVia as SendVia,  mainentity.TotalCost as TotalCost, mainentity.Contact.Account.Id as AccountId, mainentity.Contact.AccountName as AccountName, mainentity.Contact.Address.PostalCode as PostalCode, mainentity.RequestUser.UserInfo.UserName as RequestUserName from LitRequest  mainentity  left join  mainentity.Contact as Contact1 left join Contact1.Address as ContactAddress left join  mainentity.Contact  where  mainentity.id in ({ids}) " maximumResults="50">
+        <parameters />
+      </queryProcessor>
+    </processor>
+  </processors>
+  <parameters>
+    <parameter id="253f8386-ff5c-4406-ac76-384bf2217fae" name="UserId" expression="'ADMIN'" />
+  </parameters>
+  <links />
+</mashup>

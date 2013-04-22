@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<PortalService xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="c3e94a26-d25a-41be-9f45-ebbcd9d3169e">
+  <InstanceId>c9612a8315174f2da9771ef39e233f1d</InstanceId>
+  <ServiceType>Sage.Platform.Application.Caching.CacheInitializationService, Sage.Platform.Application</ServiceType>
+  <RegisterAs>Sage.Platform.Application.Caching.CacheInitializationService, Sage.Platform.Application</RegisterAs>
+  <AddOnDemand>false</AddOnDemand>
+  <Properties />
+  <Scope>Application</Scope>
+</PortalService>
+

@@ -1,5 +1,6 @@
 using System;
 using System.Web.UI;
+using Sage.Platform.Security;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.Platform;
 using Sage.Entity.Interfaces;
@@ -102,9 +103,11 @@ public partial class SmartParts_UpdateOpportunityCurrency : EntityBoundSmartPart
                 opportunity.ExchangeRate = Convert.ToDouble(txtExchangeRate.Text);
                 opportunity.Save();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ApplicationException(GetLocalResourceObject("Error_ChangingExchangeRate").ToString());
+                log.Error("Unexpected error in cmdOK_Click().", ex);
+                throw new UserObservableApplicationException(
+                    GetLocalResourceObject("Error_ChangingExchangeRate").ToString(), ex);
             }
         }
 

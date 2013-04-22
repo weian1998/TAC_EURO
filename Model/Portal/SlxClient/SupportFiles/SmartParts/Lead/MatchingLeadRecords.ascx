@@ -1,9 +1,5 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeFile="MatchingLeadRecords.ascx.cs" Inherits="SmartParts_Lead_MatchingLeadRecords" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.PickList" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.DependencyLookup" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.Lookup" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.HighLevelTypes" Namespace="Sage.SalesLogix.HighLevelTypes" TagPrefix="SalesLogix" %>
 
 <div style="display:none">
 <asp:Panel ID="LeadMatching_RTools" runat="server">
@@ -247,13 +243,8 @@
         </tr>
     </table>
 </div>
-
-<div style="padding-left:10px">
-    <table width="785px" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-            <td align="right" style="padding-top:15px">
-                <asp:Button runat="server" ID="cmdClose" Text="Close" meta:resourcekey="btnClose" Width="100px" CssClass="slxbutton"/> 
-            </td>
-        </tr>
-    </table>
+<div style="padding-right:20px; text-align:right" >
+   <asp:Panel runat="server" ID="pnlCancel" CssClass="controlslist qfActionContainer">
+        <asp:Button runat="server" ID="cmdClose" CssClass="slxbutton" Text="<%$ resources: btnClose.Text %>" />
+    </asp:Panel>
 </div>

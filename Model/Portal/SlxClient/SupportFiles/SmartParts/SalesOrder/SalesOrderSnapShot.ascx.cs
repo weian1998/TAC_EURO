@@ -63,16 +63,19 @@ public partial class SalesOrderSnapShot : EntityBoundSmartPartInfoProvider
         if (salesOrder != null)
         {
             IAppIdMappingService mappingService = ApplicationContext.Current.Services.Get<IAppIdMappingService>(true);
-            bool closed = (salesOrder.Status.ToUpper().Equals(GetLocalResourceObject("SalesOrderStatus_Closed")) ||
-                salesOrder.Status.ToUpper().Equals(GetLocalResourceObject("SalesOrderStatus_Transmitted")));
+            bool closed = (ReferenceEquals(salesOrder.Status.ToUpper(), GetLocalResourceObject("SalesOrderStatus_Closed")) ||
+                salesOrder.Status.ToUpper() == "Closed" ||
+                ReferenceEquals(salesOrder.Status.ToUpper(), GetLocalResourceObject("SalesOrderStatus_Transmitted")) ||
+                salesOrder.Status.ToUpper() == "Transmitted to Accounting");
             //if this is a Sales Order that synced from the accounting system or the Sales Order has been submitted then we disable it
             bool isOpen = false;
             if (!String.IsNullOrEmpty(salesOrder.ERPSalesOrder.ERPStatus))
             {
                 isOpen =
-                    (salesOrder.ERPSalesOrder.ERPStatus.Equals(
-                        GetLocalResourceObject("ERPStatus_Open").ToString()) ||
-                     salesOrder.ERPSalesOrder.ERPStatus.Equals(GetLocalResourceObject("ERPStatus_Rejected").ToString()));
+                    (ReferenceEquals(salesOrder.ERPSalesOrder.ERPStatus, GetLocalResourceObject("ERPStatus_Open")) ||
+                    salesOrder.ERPSalesOrder.ERPStatus == "Open" ||
+                    ReferenceEquals(salesOrder.ERPSalesOrder.ERPStatus, GetLocalResourceObject("ERPStatus_Rejected")) ||
+                    salesOrder.ERPSalesOrder.ERPStatus == "Rejected");
             }
             bool erpSalesOrder = (mappingService.IsIntegrationEnabled() && (salesOrder.GlobalSyncId.HasValue && !isOpen));
 
@@ -86,10 +89,10 @@ public partial class SalesOrderSnapShot : EntityBoundSmartPartInfoProvider
             lnkTaxRate.Enabled = !closed && !erpSalesOrder;
             lueCurrencyCode.Enabled = !closed && !erpSalesOrder;
 
-            double subTotal = (salesOrder.OrderTotal.HasValue ? salesOrder.OrderTotal.Value : 0);
-            double taxRate = salesOrder.Tax.HasValue ? salesOrder.Tax.Value : 0;
+            double subTotal = salesOrder.OrderTotal ?? 0;
+            double taxRate = salesOrder.Tax ?? 0;
             double tax = Sage.SalesLogix.SalesOrder.SalesOrder.GetSalesOrderTaxAmount(salesOrder);
-            double discount = salesOrder.Discount.HasValue ? salesOrder.Discount.Value : 0;
+            double discount = salesOrder.Discount ?? 0;
             double grandTotal = Sage.SalesLogix.SalesOrder.SalesOrder.GetSalesOrderGrandTotal(salesOrder);
 
             if (BusinessRuleHelper.IsMultiCurrencyEnabled())
@@ -177,7 +180,7 @@ public partial class SalesOrderSnapShot : EntityBoundSmartPartInfoProvider
         if (salesOrder != null)
         {
             SetDisplayValues();
-            double shipping = (salesOrder.Freight.HasValue ? salesOrder.Freight.Value : 0);
+            double shipping = salesOrder.Freight ?? 0;
             if (String.IsNullOrEmpty(curBaseShipping.FormattedText))
                 curBaseShipping.Text = Convert.ToString(shipping);
             if (String.IsNullOrEmpty(curShipping.FormattedText))
@@ -311,7 +314,7 @@ public partial class SalesOrderSnapShot : EntityBoundSmartPartInfoProvider
                         emailCC = salesOrder.RequestedBy.Email;
                 if (salesOrder.ShippingContact != null)
                     emailTo = String.Format("{0};", salesOrder.ShippingContact.Email);
-                if (!salesOrder.BillingContact.Equals(salesOrder.ShippingContact))
+                if (salesOrder.BillingContact != null && !salesOrder.BillingContact.Equals(salesOrder.ShippingContact))
                     emailTo += salesOrder.BillingContact.Email;
                 string subject = PortalUtil.JavaScriptEncode(
                     String.Format(GetLocalResourceObject("lblEmailSubject.Caption").ToString(),
@@ -362,7 +365,7 @@ public partial class SalesOrderSnapShot : EntityBoundSmartPartInfoProvider
     private string FormatEmailBody(ISalesOrder salesOrder)
     {
         IContextService context = ApplicationContext.Current.Services.Get<IContextService>(true);
-        TimeZone timeZone = (TimeZone) context.GetContext("TimeZone");
+        TimeZone timeZone = (TimeZone)context.GetContext("TimeZone");
         bool isMultiCurr = BusinessRuleHelper.IsMultiCurrencyEnabled();
         string datePattern = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
 
@@ -375,15 +378,15 @@ public partial class SalesOrderSnapShot : EntityBoundSmartPartInfoProvider
                                                          ? salesOrder.Opportunity.Description
                                                          : String.Empty));
         emailBody += String.Format("{0} {1} %0A", GetLocalResourceObject("lblEmailDateCreated.Caption"),
-                                   timeZone.UTCDateTimeToLocalTime((DateTime) salesOrder.CreateDate).ToString(datePattern));
+                                   timeZone.UTCDateTimeToLocalTime((DateTime)salesOrder.CreateDate).ToString(datePattern));
         emailBody += String.Format("{0} {1} %0A", GetLocalResourceObject("lblEmailDateRequested.Caption"),
                                    salesOrder.OrderDate.HasValue
-                                       ? timeZone.UTCDateTimeToLocalTime((DateTime) salesOrder.OrderDate).ToString(
+                                       ? timeZone.UTCDateTimeToLocalTime((DateTime)salesOrder.OrderDate).ToString(
                                              datePattern)
                                        : String.Empty);
         emailBody += String.Format("{0} {1} %0A", GetLocalResourceObject("lblEmailDatePromised.Caption"),
                                    salesOrder.DatePromised.HasValue
-                                       ? timeZone.UTCDateTimeToLocalTime((DateTime) salesOrder.DatePromised).ToString(
+                                       ? timeZone.UTCDateTimeToLocalTime((DateTime)salesOrder.DatePromised).ToString(
                                              datePattern)
                                        : String.Empty);
         emailBody += String.Format("{0} {1} %0A", GetLocalResourceObject("lblEmailSalesOrderId.Caption"),
@@ -425,13 +428,13 @@ public partial class SalesOrderSnapShot : EntityBoundSmartPartInfoProvider
         emailBody += String.Format("{0} %0A", GetLocalResourceObject("lblEmailBillingAddress.Caption"));
         emailBody += String.Format("{0} {1} %0A",
                                    GetLocalResourceObject("lblEmailBillingAddressName.Caption"),
-                                   salesOrder.BillingContact.NamePFL);
+                                   salesOrder.BillingContact == null ? String.Empty : salesOrder.BillingContact.NameLF);
         emailBody += salesOrder.BillingAddress.FormatFullSalesOrderAddress().Replace("\r\n", "%0A");
 
         emailBody += String.Format("%0A %0A{0} %0A", GetLocalResourceObject("lblEmailShippingAddress.Caption"));
         emailBody += String.Format("{0} {1} %0A",
                            GetLocalResourceObject("lblEmailShippingAddressName.Caption"),
-                           salesOrder.ShippingContact.NamePFL);
+                           salesOrder.ShippingContact == null ? String.Empty : salesOrder.ShippingContact.NameLF);
         emailBody += salesOrder.ShippingAddress.FormatFullSalesOrderAddress().Replace("\r\n", "%0A");
         return PortalUtil.JavaScriptEncode(emailBody.Replace("+", "%20"));
     }

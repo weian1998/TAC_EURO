@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="_addProductsResource1.Text" xml:space="preserve">
     <value>Products...</value>
@@ -127,7 +127,7 @@
     <value />
   </data>
   <data name="_estimatedCloseToLastDayOfMonthResource1.Text" xml:space="preserve">
-    <value>&lt;span id='lblChangeEstClostToLastDayOfMonth'&gt;Initially change estimated close to last day of month&lt;/span&gt;</value>
+    <value>Initially change estimated close to last day of month</value>
   </data>
   <data name="_estimatedCloseToLastDayOfMonthResource1.ToolTip" xml:space="preserve">
     <value />
@@ -256,13 +256,13 @@
     <value />
   </data>
   <data name="ListItemResource1.Text" xml:space="preserve">
-    <value>&lt;span id='lblAddAllContacts'&gt;Add all contacts associated with account&lt;/span&gt;</value>
+    <value>Add all contacts associated with account</value>
   </data>
   <data name="ListItemResource2.Text" xml:space="preserve">
-    <value>&lt;span id='lblAddOnlyPrimary'&gt;Add only the account's primary contact&lt;/span&gt;</value>
+    <value>Add only the account's primary contact</value>
   </data>
   <data name="ListItemResource3.Text" xml:space="preserve">
-    <value>&lt;span id='lblAddNone'&gt;Add no contacts&lt;/span&gt;</value>
+    <value>Add no contacts</value>
   </data>
   <data name="LitRequest_RToolsResource1.GroupingText" xml:space="preserve">
     <value />

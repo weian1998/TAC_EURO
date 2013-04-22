@@ -1,13 +1,10 @@
 using System;
 using System.Data;
+using System.Linq;
 using System.Text;
-using System.Configuration;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
+using Sage.Platform.Diagnostics;
+using Sage.Platform.Security;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.Platform.Application.UI;
 using Sage.Entity.Interfaces;
@@ -18,7 +15,7 @@ using Sage.Platform.Application;
 /// <summary>
 /// Summary description for CampaignTargetCreateGroup
 /// </summary>
-public partial class CampaignTargetCreateGroup : EntityBoundSmartPartInfoProvider 
+public partial class CampaignTargetCreateGroup : EntityBoundSmartPartInfoProvider
 {
     #region Public Methods
 
@@ -133,8 +130,8 @@ public partial class CampaignTargetCreateGroup : EntityBoundSmartPartInfoProvide
                 TargetSelectedFilterState filterState = DialogService.DialogParameters["TargetSelectedFilterState"] as TargetSelectedFilterState;
                 TargetsViewDataSource ds = new TargetsViewDataSource();
                 string targetIds = null;
-                ds.SelectedFilterState = filterState; 
-                if (lbxGroupType.SelectedValue.ToString().Equals("Contact"))
+                ds.SelectedFilterState = filterState;
+                if (lbxGroupType.SelectedValue.Equals("Contact"))
                 {
                     filterState.IncludeContacts = true;
                     filterState.IncludeLeads = false;
@@ -144,30 +141,22 @@ public partial class CampaignTargetCreateGroup : EntityBoundSmartPartInfoProvide
                     filterState.IncludeContacts = false;
                     filterState.IncludeLeads = true;
                 }
-                
-                if (rdgGroupMembers.SelectedIndex == 0)//Get alls targets.
-                    targetIds = ConvertToString(ds.GetEntityIds(false));
-                else //Get selected targets.
-                    targetIds = ConvertToString(ds.GetEntityIds(true));
+
+                targetIds = ConvertToString(rdgGroupMembers.SelectedIndex == 0 ? ds.GetEntityIds(false) : ds.GetEntityIds(true));
                 if (!string.IsNullOrEmpty(targetIds))
                 {
-                    groupId = GroupInfo.CreateAdHocGroup(targetIds, lbxGroupType.SelectedValue.ToString(), txtGroupName.Text);
+                    groupId = GroupInfo.CreateAdHocGroup(targetIds, lbxGroupType.SelectedValue, txtGroupName.Text);
                 }
                 else
                 {
                     throw new ValidationException(String.Format(GetLocalResourceObject("error_NoTargetsFound").ToString(), lbxGroupType.SelectedValue));
                 }
-                
+
                 if (!String.IsNullOrEmpty(groupId))
                 {
-                    if (lbxGroupType.SelectedValue.ToString().Equals("Contact"))
-                    {
-                        Response.Redirect(string.Format("Contact.aspx?gid={0}", groupId));
-                    }
-                    else
-                    {
-                        Response.Redirect(string.Format("Lead.aspx?gid={0}", groupId));
-                    }
+                    Response.Redirect(lbxGroupType.SelectedValue.Equals("Contact")
+                                          ? string.Format("Contact.aspx?gid={0}", groupId)
+                                          : string.Format("Lead.aspx?gid={0}", groupId));
                 }
             }
             else
@@ -203,7 +192,7 @@ public partial class CampaignTargetCreateGroup : EntityBoundSmartPartInfoProvide
             {
                 foreach (object Id in targetIdsObjArry)
                 {
-                    sb.AppendFormat("{0},", Id.ToString());
+                    sb.AppendFormat("{0},", Id);
                 }
                 sb.Remove(sb.Length - 1, 1);
             }
@@ -212,7 +201,7 @@ public partial class CampaignTargetCreateGroup : EntityBoundSmartPartInfoProvide
         {
             DialogService.ShowMessage(GetLocalResourceObject("error_NoDataSourceFound").ToString());
         }
-        return  sb.ToString();
+        return sb.ToString();
     }
 
     /// <summary>
@@ -225,11 +214,8 @@ public partial class CampaignTargetCreateGroup : EntityBoundSmartPartInfoProvide
         string targetIds = string.Empty;
         if (targets != null)
         {
-            DataRow[] rows = targets.Select(String.Format("TargetType='{0}'", lbxGroupType.SelectedValue.ToString()));
-            foreach (DataRow row in rows)
-            {
-                targetIds += String.Format("{0},", row["EntityId"]);
-            }
+            DataRow[] rows = targets.Select(String.Format("TargetType='{0}'", lbxGroupType.SelectedValue));
+            targetIds = rows.Aggregate(targetIds, (current, row) => current + String.Format("{0},", (object[])row["EntityId"]));
         }
         return targetIds.Remove(targetIds.Length - 1);
     }
@@ -245,11 +231,16 @@ public partial class CampaignTargetCreateGroup : EntityBoundSmartPartInfoProvide
         if (targets != null)
         {
             DataRow[] rows = targets.Select("Selected=True");
-            foreach (DataRow row in rows)
-            {
-                if (row["TargetType"].Equals(lbxGroupType.SelectedValue.ToString()))
-                    targetIds += String.Format("{0},", row["EntityId"]);
-            }
+            targetIds = rows.Where(row => row["TargetType"].Equals(lbxGroupType.SelectedValue)).Aggregate(targetIds,
+                                                                                                          (current, row)
+                                                                                                          =>
+                                                                                                          current +
+                                                                                                          String.Format(
+                                                                                                              "{0},",
+                                                                                                              (object[])
+                                                                                                              row[
+                                                                                                                  "EntityId"
+                                                                                                                  ]));
         }
         return targetIds.Remove(targetIds.Length - 1);
     }

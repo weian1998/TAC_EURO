@@ -4,4 +4,5 @@
   <ServiceType>Sage.SalesLogix.Services.PotentialMatch.DeDupService, Sage.SalesLogix.Services.PotentialMatch</ServiceType>
   <RegisterAs>Sage.SalesLogix.Services.PotentialMatch.IDeDupService, Sage.SalesLogix.Services.PotentialMatch</RegisterAs>
   <Properties />
+  <Scope>Application</Scope>
 </PortalService>

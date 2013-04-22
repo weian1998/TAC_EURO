@@ -8,7 +8,7 @@
    <asp:Label ID="${qfcontrol.LabelId}" AssociatedControlID="${qfcontrol.ControlId}" runat="server" Text="<%$ resources: ${qfcontrol.ControlId}.Caption %>" #if(!$qfcontrol.Visible)Visible="false" #end></asp:Label>
  </div>   
 #end #end
-  <div #if(${qfcontrol.ColumnSpan} > 1 || ${qfcontrol.ControlLabelPlacement} == "top") class="twocoltextcontrol user" #else class="textcontrol user" #end > 
+  <div #if(${qfcontrol.ColumnSpan} == 2 || ${qfcontrol.ControlLabelPlacement} == "top") class="twocoltextcontrol" #elseif(${qfcontrol.ColumnSpan} > 2) class="threecoltextcontrol" #else class="textcontrol" #end > 
     <SalesLogix:SlxUserControl runat="server" ID="${qfcontrol.ControlId}" #if(!$qfcontrol.Enabled)Enabled="false" #end
 #if($qfcontrol.IsReadOnly)ReadOnly="true" #end
 #if($qfcontrol.LookupBindingMode != "Object")LookupBindingMode="$qfcontrol.LookupBindingMode" #end

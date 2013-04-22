@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Изменение Колонок</title>
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Templates/Editing_Columns.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor736"></a>Изменение Колонок</h1>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <col style="width: 45px;" />
+            <col />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/caution.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p>Изменение колонок рекомендуется проводить только опытным пользователям.</p>
+                </td>
+            </tr>
+        </table>
+        <p>При изменении колонок в диалоге Изменить Колонки, информация о колонках должна вводиться вручную на основе SQL. Нет автоматической синхронизации между SQL и информацией в колонках. Если не обеспечивается никакая информация о колонках, колонки будут форматироваться в соответствии с параметрами по умолчанию, названия полей будут использоваться в качестве названий колонок. Если определено больше колонок, чем содержится в SQL, тогда лишняя информация о колонках будет отброшена. Если колонок определено меньше, чем содержится в SQL, тогда оставшиеся колонки будут отформатированы в соответствии с параметрами по умолчанию, но не будут иметь названия.</p>
+        <p>Диалог Изменить колонки содержит следующие параметры:</p>
+        <ul>
+            <li value="1">Нажмите кнопку <span class="SLXBold">Добавить колонки</span>, чтобы добавить новую колонку в конец списка со следующими параметрами по умолчанию:<ul><li value="1"><p>Название = “Column%d” где %d номер колонки</p></li><li value="2"><p>Колонка = %d где %d номер колонки</p></li><li value="3"><p>Ширина = 1.00</p></li><li value="4"><p>Выравнивание = (по умолчанию)</p></li><li value="5"><p>Тип формата= (none)</p></li><li value="6"><p>Строка Форматирования = пусто</p></li></ul></li>
+            <li value="2">Кнопка <span class="SLXBold">Удалить колонку</span> удаляет выбранную колонку из списка.</li>
+            <li value="3">Кнопка  <span class="SLXBold">Сдвинуть вверх</span> сдвигает выбранную колонку на одну позицию вверх. Если колонка уже на первой позиции, это действие не имеет эффекта.</li>
+            <li value="4">Кнопка <span class="SLXBold">Сдвинуть вниз</span> сдвигает выбранную колонку на одну позицию вниз. Если колонка уже на последней позиции, это действие не имеет эффекта.</li>
+            <li value="5"><span class="SLXBold">Таблица колонок</span> используется для отображения и редактирования колонок. Название, Ширина, Выравнивание, Тип формата, Строка форматирования могут быть изменены с помощью выделения колонки и нажатия клавиши F2.
+            <ul><li value="1">Заголовок: Отображает текст, который будет показываться в первой ячейке колонки.</li><li value="2">Колонка: Отображает порядковый номер позиции колонки. Нельзя редактировать эту колонку.</li><li value="3">Ширина: Отображает ширину колонки в дюймах. Ширина по умолчанию 1,00.</li><li value="4">Выравнивание: Представляет собой выравнивание текста в ячейке.</li><li value="5">Тип Формата: Отображает тип форматирования, применяемый к этому полю.</li><li value="6">Вы можете выбрать из списка: (none), Фиксированный, Целый, Дата/Время,</li><li value="7">Проценты, Валюта, Пользователь, Телефон, Куратор, Логический.</li><li value="8">Строка Форматирования: Отображает строку, которая будет использоваться для выбранного Типа формата.</li></ul></li>
+            <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+                <col style="width: 45px;" />
+                <col />
+                <tr>
+                    <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                        <p style="text-align: center;margin-bottom: 0;" align="center">
+                            <img src="../image/note.gif" />
+                        </p>
+                    </td>
+                    <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                        <p>Поля Таблицы продуктов по сделке фиксированы, колонки нельзя перемещать, добавлять или удалять.</p>
+                    </td>
+                </tr>
+            </table>
+        </ul>
+        <p class="RelatedTopics">См. также</p>
+        <p><a href="Editing_Merge_Fields.htm">Редактирование полей для рассылки</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

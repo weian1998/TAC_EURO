@@ -1,0 +1,1416 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CONTACT_CONTACTTYPE" xml:space="preserve">
+    <value>Kontakttyp</value>
+  </data>
+  <data name="USER_WEBONLYUSERS" xml:space="preserve">
+    <value>Nur-Web-Benutzer</value>
+  </data>
+  <data name="CALCFIELD_OPPORTUNITY_PRODUCT" xml:space="preserve">
+    <value>Verkaufschancenprodukt</value>
+  </data>
+  <data name="CALCFIELD_OPPORTUNITY" xml:space="preserve">
+    <value>Verkaufschance</value>
+  </data>
+  <data name="QUALIFICATION_VISIBLE" xml:space="preserve">
+    <value>Sichtbar</value>
+  </data>
+  <data name="ACCOUNT_PROMOTEDACCOUNTS" xml:space="preserve">
+    <value>Hochgestufte Firmen</value>
+  </data>
+  <data name="CAMPAIGN_ALLCAMPAIGNS" xml:space="preserve">
+    <value>Alle Kampagnen</value>
+  </data>
+  <data name="ACCOUNT_ACTIVECAMPAIGNS" xml:space="preserve">
+    <value>Aktive Kampagnen</value>
+  </data>
+  <data name="TICKET_WEBPORTALOPENTICKETS" xml:space="preserve">
+    <value>Webportal – offene Tickets</value>
+  </data>
+  <data name="OPPORTUNITY_SALESPROCESS" xml:space="preserve">
+    <value>Verkaufsprozess</value>
+  </data>
+  <data name="TEAM_MODIFIEDBY" xml:space="preserve">
+    <value>Geändert von</value>
+  </data>
+  <data name="IMPORTHISTORY_STATUS" xml:space="preserve">
+    <value>Bundesland/Kanton</value>
+  </data>
+  <data name="RETURN_MYRETURNS" xml:space="preserve">
+    <value>Eigene Retouren</value>
+  </data>
+  <data name="IMPORTHISTORY_IMPORTEDCOUNT" xml:space="preserve">
+    <value>Importierte Anzahl</value>
+  </data>
+  <data name="CONTRACT_ACCOUNT" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="LITREQUEST_STATUS" xml:space="preserve">
+    <value>Erledigungsstatus</value>
+  </data>
+  <data name="HISTORY_COMPLETEDDATE" xml:space="preserve">
+    <value>Abschlussdatum</value>
+  </data>
+  <data name="OPPORTUNITY_PROB" xml:space="preserve">
+    <value>Wahrsch.</value>
+  </data>
+  <data name="CAMPAIGN_OPENCAMPAIGNTASKS" xml:space="preserve">
+    <value>Offene Kampagnenaufgaben</value>
+  </data>
+  <data name="TICKET_CATEGORY" xml:space="preserve">
+    <value>Kategorie</value>
+  </data>
+  <data name="CONTACT_NAME" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="CALCFIELD_RMAADDRESS" xml:space="preserve">
+    <value>Retourenadresse</value>
+  </data>
+  <data name="PACKAGE_CREATED" xml:space="preserve">
+    <value>Erstellt</value>
+  </data>
+  <data name="CONTRACT_ACTIVE" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="TICKETSOLUTIONTYPE_DESCRIPTION" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="ACCOUNT_TYPE" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="CONTRACT_QUANTITY" xml:space="preserve">
+    <value>Menge</value>
+  </data>
+  <data name="CALCFIELD_LEAD_FULLNAME" xml:space="preserve">
+    <value>Interessent - Vollständiger Name</value>
+  </data>
+  <data name="TICKET_AREA" xml:space="preserve">
+    <value>Bereich</value>
+  </data>
+  <data name="OPPORTUNITY_OWNER" xml:space="preserve">
+    <value>Zugriffsberechtigter</value>
+  </data>
+  <data name="CAMPAIGN_ASSIGNEDDATE" xml:space="preserve">
+    <value>Zugewiesenes Datum</value>
+  </data>
+  <data name="LITERATUREITEM_ONHAND" xml:space="preserve">
+    <value>Vorrätig</value>
+  </data>
+  <data name="CALCFIELD_RETURN_NUMBER" xml:space="preserve">
+    <value>Retourennummer</value>
+  </data>
+  <data name="CALCFIELD_DEFECT" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="USER_WEBVIEWERUSERS" xml:space="preserve">
+    <value>Benutzer des Web-Viewers</value>
+  </data>
+  <data name="RESOURCELIST_MODIFYUSER" xml:space="preserve">
+    <value>Geändert von</value>
+  </data>
+  <data name="CAMPAIGN_TASKDESCRIPTION" xml:space="preserve">
+    <value>Aufgabenbeschreibung</value>
+  </data>
+  <data name="SECUREDACTION_SECUREDACTION" xml:space="preserve">
+    <value>Gesicherte Aktion</value>
+  </data>
+  <data name="CONTACT_CONTACTSTATUS" xml:space="preserve">
+    <value>Kontaktstatus</value>
+  </data>
+  <data name="USER_REMOTEUSERS" xml:space="preserve">
+    <value>Remote-Benutzer</value>
+  </data>
+  <data name="CONTRACT_ENDDATE" xml:space="preserve">
+    <value>Enddatum</value>
+  </data>
+  <data name="PRODUCT_CREATED" xml:space="preserve">
+    <value>Erstellt</value>
+  </data>
+  <data name="QUALIFICATION_MODIFYDATE" xml:space="preserve">
+    <value>Geändert</value>
+  </data>
+  <data name="CONTACT_DONOTSOLICIT" xml:space="preserve">
+    <value>Keine Informationen erwünscht</value>
+  </data>
+  <data name="CONTACT_ACTIVECAMPAIGNS" xml:space="preserve">
+    <value>Aktive Kampagnen</value>
+  </data>
+  <data name="QUALIFICATION_SORTPOSITION" xml:space="preserve">
+    <value>Sortierungsposition</value>
+  </data>
+  <data name="PICKLISTVIEW_MODIFYDATE" xml:space="preserve">
+    <value>Datum ändern</value>
+  </data>
+  <data name="CALCFIELD_STREET_ADDRESS" xml:space="preserve">
+    <value>Postadresse</value>
+  </data>
+  <data name="LEAD_UNTOUCHEDLEADS" xml:space="preserve">
+    <value>Unbearbeitete Interessenten</value>
+  </data>
+  <data name="LITREQUEST_CONTACT" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
+  <data name="ACCOUNT_INTERESTLEVEL" xml:space="preserve">
+    <value>Grad des Interesses</value>
+  </data>
+  <data name="COMPETITOR_ACCOUNT" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="RETURN_ALLRETURNS" xml:space="preserve">
+    <value>Alle Retouren</value>
+  </data>
+  <data name="PICKLISTVIEW_CREATEDATE" xml:space="preserve">
+    <value>Erstellungsdatum</value>
+  </data>
+  <data name="LITERATUREITEM_ITEMNUMBER" xml:space="preserve">
+    <value>Eintragsnummer</value>
+  </data>
+  <data name="CAMPAIGN_STARTDATE" xml:space="preserve">
+    <value>Startdatum</value>
+  </data>
+  <data name="SECUREDACTION_MODIFYDATE" xml:space="preserve">
+    <value>Geändert</value>
+  </data>
+  <data name="SECUREDACTION_CREATEDATE" xml:space="preserve">
+    <value>Erstellt</value>
+  </data>
+  <data name="TICKET_ACTIVITY" xml:space="preserve">
+    <value>Aktivität</value>
+  </data>
+  <data name="PRODUCT_PRODUCTCODE" xml:space="preserve">
+    <value>Produktcode</value>
+  </data>
+  <data name="PACKAGE_NAME" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="OPPORTUNITY_ACTUALCLOSE" xml:space="preserve">
+    <value>Tatsächlicher Abschluss</value>
+  </data>
+  <data name="IMPORTHISTORY_DESCRIPTION" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="LITERATUREITEM_COST" xml:space="preserve">
+    <value>Kosten</value>
+  </data>
+  <data name="DEPARTMENTVIEW_ALLDEPARTMENTS" xml:space="preserve">
+    <value>Alle Abteilungen</value>
+  </data>
+  <data name="LEADSOURCE_TYPE" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="USER_TYPE" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="DEDUPRESULT_RESULTCOUNT" xml:space="preserve">
+    <value>Ergebnisanzahl</value>
+  </data>
+  <data name="PRODUCT_SKU" xml:space="preserve">
+    <value>SKU</value>
+  </data>
+  <data name="RESOURCELIST_NAME" xml:space="preserve">
+    <value>Ressource</value>
+  </data>
+  <data name="LITREQUEST_PRIORITY" xml:space="preserve">
+    <value>Priorität</value>
+  </data>
+  <data name="TICKETPROBLEMTYPE_ALLSTANDARDPROBLEMS" xml:space="preserve">
+    <value>Alle häufig auftretenden Probleme</value>
+  </data>
+  <data name="CONTRACT_ALLCONTRACTS" xml:space="preserve">
+    <value>Alle Verträge</value>
+  </data>
+  <data name="ACCOUNT_CONTACT" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
+  <data name="PRODUCT_FAMILY" xml:space="preserve">
+    <value>Familie</value>
+  </data>
+  <data name="DEFECT_PENDINGDEFECTS" xml:space="preserve">
+    <value>Ausstehende Fehler</value>
+  </data>
+  <data name="ACCOUNT_MYLEADS" xml:space="preserve">
+    <value>Eigene Interessenten</value>
+  </data>
+  <data name="ACCOUNT_STATUSDUPLICATE" xml:space="preserve">
+    <value>Status = Duplikat</value>
+  </data>
+  <data name="PRODUCT_PRODUCTNAME" xml:space="preserve">
+    <value>Produktname</value>
+  </data>
+  <data name="OPPORTUNITY_NOTES" xml:space="preserve">
+    <value>Notizen</value>
+  </data>
+  <data name="RETURN_TYPE" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="SECUREDACTION_ALLSECUREDACTIONS" xml:space="preserve">
+    <value>Alle gesicherten Aktionen</value>
+  </data>
+  <data name="PRODUCT_STATUS" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="QUALIFICATION_CREATEUSER" xml:space="preserve">
+    <value>Erstellt von</value>
+  </data>
+  <data name="SALESORDER_ALLSALESORDERS" xml:space="preserve">
+    <value>Alle Verkaufsaufträge</value>
+  </data>
+  <data name="OPPORTUNITY_ACCOUNT" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="CONTACT_TITLE" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="USERSECURITY_ALLUSERS" xml:space="preserve">
+    <value>Alle Benutzer</value>
+  </data>
+  <data name="TICKET_WORKPHONE" xml:space="preserve">
+    <value>Geschäftliche Telefonnummer</value>
+  </data>
+  <data name="USERSECURITY_RETIREDUSERS" xml:space="preserve">
+    <value>Inaktive Benutzer</value>
+  </data>
+  <data name="ACCOUNT_LATESTACCOUNTS" xml:space="preserve">
+    <value>Neueste Firmen</value>
+  </data>
+  <data name="DEDUPJOB_DUPLICATECOUNT" xml:space="preserve">
+    <value>Anzahl Doppeleinträge</value>
+  </data>
+  <data name="RETURN_RETURNSNEEDINGPO" xml:space="preserve">
+    <value>Retouren, für die Auftrag erforderlich ist</value>
+  </data>
+  <data name="ACCOUNT_OWNER" xml:space="preserve">
+    <value>Zugriffsberechtigter</value>
+  </data>
+  <data name="TEAMVIEW_ALLTEAMS" xml:space="preserve">
+    <value>Alle Teams</value>
+  </data>
+  <data name="OPPORTUNITY_SALESPROCESSES" xml:space="preserve">
+    <value>Verkaufsprozesse</value>
+  </data>
+  <data name="CALCFIELD_IMPORT_NUMBER" xml:space="preserve">
+    <value>Importnummer</value>
+  </data>
+  <data name="CALCFIELD_LEAD_ADDRESS" xml:space="preserve">
+    <value>Adresse des Interessenten</value>
+  </data>
+  <data name="ACCOUNT_CREATEUSER" xml:space="preserve">
+    <value>Erstellt von</value>
+  </data>
+  <data name="CALCFIELD_RMA" xml:space="preserve">
+    <value>Retoure</value>
+  </data>
+  <data name="LITREQUEST_REQUESTEDBY" xml:space="preserve">
+    <value>Angefordert von</value>
+  </data>
+  <data name="LEAD_STATE" xml:space="preserve">
+    <value>Bundesland/Kanton</value>
+  </data>
+  <data name="RETURN_OPENRETURNS" xml:space="preserve">
+    <value>Offene Retouren</value>
+  </data>
+  <data name="RESOURCELIST_COORDINATOR" xml:space="preserve">
+    <value>Koordinator</value>
+  </data>
+  <data name="HISTORY_DESCRIPTION" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="TICKET_FOLLOWUP" xml:space="preserve">
+    <value>Folgeaktivität</value>
+  </data>
+  <data name="CALCFIELD_SALES_ORDER_STREET_ADDRESS" xml:space="preserve">
+    <value>Verkaufsauftrag - Adresse</value>
+  </data>
+  <data name="TICKETSOLUTIONTYPE_ALLSTANDARDRESOLUTIONS" xml:space="preserve">
+    <value>Alle Standardlösungen</value>
+  </data>
+  <data name="DEDUPJOB_PROCESSEDCOUNT" xml:space="preserve">
+    <value>Verarbeitete Anzahl</value>
+  </data>
+  <data name="DEPARTMENT_NAME" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="DEDUPRESULT_SCORE" xml:space="preserve">
+    <value>Punktwert</value>
+  </data>
+  <data name="CONTACT_ACCTSTATUS" xml:space="preserve">
+    <value>Firmenstatus</value>
+  </data>
+  <data name="QUALIFICATION_MODIFYUSER" xml:space="preserve">
+    <value>Geändert von</value>
+  </data>
+  <data name="CALCFIELD_LEAD_CTY_ST_ZIP" xml:space="preserve">
+    <value>Interessent-PLZ/St./Bundes./Kan.</value>
+  </data>
+  <data name="USERSECURITY_CONCURRENTUSERS" xml:space="preserve">
+    <value>Gleichzeitige Benutzer</value>
+  </data>
+  <data name="OPPORTUNITY_STATUS" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="CONTACT_OWNER" xml:space="preserve">
+    <value>Zugriffsberechtigter</value>
+  </data>
+  <data name="SALESORDER_TYPE" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="DEFECT_UNASSIGNEDDEFECTS" xml:space="preserve">
+    <value>Nicht zugewiesene Fehler</value>
+  </data>
+  <data name="CALCFIELD_RMA_STREET_ADDRESS" xml:space="preserve">
+    <value>Retoure - Adresse</value>
+  </data>
+  <data name="USERSECURITY_TEMPLATES" xml:space="preserve">
+    <value>Vorlagen</value>
+  </data>
+  <data name="LEAD_OWNER" xml:space="preserve">
+    <value>Zugriffsberechtigter</value>
+  </data>
+  <data name="CONTACT_DUPLICATEEMAILS" xml:space="preserve">
+    <value>Duplizierte E-Mails</value>
+  </data>
+  <data name="CONTRACT_STARTDATE" xml:space="preserve">
+    <value>Startdatum</value>
+  </data>
+  <data name="OPPORTUNITY_MYPIPELINE" xml:space="preserve">
+    <value>Eigene Pipeline</value>
+  </data>
+  <data name="LEADSOURCE_ALLLEADSOURCES" xml:space="preserve">
+    <value>Alle Interessentenquellen</value>
+  </data>
+  <data name="HISTORY_LEADER" xml:space="preserve">
+    <value>Organisator</value>
+  </data>
+  <data name="DEPARTMENT_CREATED" xml:space="preserve">
+    <value>Erstellt</value>
+  </data>
+  <data name="OPPORTUNITY_DESCRIPTION" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="USER_ALLUSERS" xml:space="preserve">
+    <value>Alle Benutzer</value>
+  </data>
+  <data name="TICKET_URGENCY" xml:space="preserve">
+    <value>Dringlichkeit</value>
+  </data>
+  <data name="CALCFIELD_RMA_CITY_STATE_ZIP" xml:space="preserve">
+    <value>Retoure-PLZ/Stadt/Bundesl/Kanton</value>
+  </data>
+  <data name="TICKET_ACCOUNT" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="DEFECT_STATUS" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="PICKLISTVIEW_PICKLISTNAME" xml:space="preserve">
+    <value>Auswahllistenname</value>
+  </data>
+  <data name="OPPORTUNITY_CLOSEDWON" xml:space="preserve">
+    <value>Abgeschlossen - Erfolg</value>
+  </data>
+  <data name="DEFECT_CATEGORY" xml:space="preserve">
+    <value>Kategorie</value>
+  </data>
+  <data name="SECUREDACTION_MODIFYUSER" xml:space="preserve">
+    <value>Geändert von</value>
+  </data>
+  <data name="CONTACT_EMAIL" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="LITREQUEST_FILLDATE" xml:space="preserve">
+    <value>Datum für Erledigung</value>
+  </data>
+  <data name="ACCOUNT_DUPLICATESUSPECTS" xml:space="preserve">
+    <value>Mögliche Duplikate</value>
+  </data>
+  <data name="ACCOUNT_MYHISTORY" xml:space="preserve">
+    <value>Eigene Historie</value>
+  </data>
+  <data name="OPPORTUNITY_ALLOPEN" xml:space="preserve">
+    <value>Alle offenen Aktivitäten</value>
+  </data>
+  <data name="LITREQUEST_SENDVIA" xml:space="preserve">
+    <value>Versandart</value>
+  </data>
+  <data name="RETURN_PRIORITY" xml:space="preserve">
+    <value>Priorität</value>
+  </data>
+  <data name="ACCOUNT_STATE" xml:space="preserve">
+    <value>Bundesland/Kanton</value>
+  </data>
+  <data name="CONTACT_CONTACT" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
+  <data name="PRODUCT_TYPE" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="CALCFIELD_IMPORTHISTORY" xml:space="preserve">
+    <value>Importhistorie</value>
+  </data>
+  <data name="ACCOUNT_ALLACCOUNTS" xml:space="preserve">
+    <value>Alle Firmen</value>
+  </data>
+  <data name="LITREQUEST_FILLUSER" xml:space="preserve">
+    <value>Erfüllt von</value>
+  </data>
+  <data name="TICKET_LASTUPDATED" xml:space="preserve">
+    <value>Letzte Aktualisierung</value>
+  </data>
+  <data name="PRODUCT_VENDOR" xml:space="preserve">
+    <value>Hersteller</value>
+  </data>
+  <data name="CONTACT_ACCTTYPE" xml:space="preserve">
+    <value>Firmentyp</value>
+  </data>
+  <data name="DEFECT_OPENDEFECTS" xml:space="preserve">
+    <value>Nicht behobene Fehler</value>
+  </data>
+  <data name="TICKET_ALLOPEN" xml:space="preserve">
+    <value>Alle offenen Aktivitäten</value>
+  </data>
+  <data name="QUALIFICATIONCATEGORY_ALLQUALIFICATIONS" xml:space="preserve">
+    <value>Alle Qualifizierungsmerkmale</value>
+  </data>
+  <data name="USER_RETIREDUSERS" xml:space="preserve">
+    <value>Inaktive Benutzer</value>
+  </data>
+  <data name="DEFECT_ASSIGNEDTO" xml:space="preserve">
+    <value>Zugewiesen zu</value>
+  </data>
+  <data name="CALCFIELD_CITY_STATE_ZIP" xml:space="preserve">
+    <value>PLZ / Stadt / Bundesland/Kanton</value>
+  </data>
+  <data name="USER_SITECODE" xml:space="preserve">
+    <value>Site-Code</value>
+  </data>
+  <data name="RETURN_PRODUCTSINREPAIR" xml:space="preserve">
+    <value>In Reparatur befindliche Produkte</value>
+  </data>
+  <data name="OPPORTUNITY_REASONWON" xml:space="preserve">
+    <value>Grund für Erfolg</value>
+  </data>
+  <data name="TEAM_ALLTEAMS" xml:space="preserve">
+    <value>Alle Teams</value>
+  </data>
+  <data name="PACKAGE_ALLPACKAGES" xml:space="preserve">
+    <value>Alle Pakete</value>
+  </data>
+  <data name="LITREQUEST_USERNAME" xml:space="preserve">
+    <value>Angefordert von</value>
+  </data>
+  <data name="LITREQUEST_SENDDATE" xml:space="preserve">
+    <value>Senden bis</value>
+  </data>
+  <data name="USER_TEMPLATENAME" xml:space="preserve">
+    <value>Vorlagenname</value>
+  </data>
+  <data name="QUALIFICATIONCATEGORY_CREATEDBY" xml:space="preserve">
+    <value>Erstellt von</value>
+  </data>
+  <data name="DEDUPJOB_COMPLETED" xml:space="preserve">
+    <value>Abgeschlossen</value>
+  </data>
+  <data name="DEFECT_SPEEDSEARCHDEFECTS" xml:space="preserve">
+    <value>SpeedSearch - Fehler</value>
+  </data>
+  <data name="LEAD_EMAIL" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="OPPORTUNITY_STAGE" xml:space="preserve">
+    <value>Phase</value>
+  </data>
+  <data name="CAMPAIGN_TASKOWNER" xml:space="preserve">
+    <value>Aufgabe - Zugriffsberechtigter</value>
+  </data>
+  <data name="CALCFIELD_LEAD_NAME__FIRST_LAST_" xml:space="preserve">
+    <value>Interessent (Vorname Nachname)</value>
+  </data>
+  <data name="CALCFIELD_TICKET" xml:space="preserve">
+    <value>Ticket</value>
+  </data>
+  <data name="RETURN_RETURNID" xml:space="preserve">
+    <value>Retouren-ID</value>
+  </data>
+  <data name="QUALIFICATION_SHOWNOTES" xml:space="preserve">
+    <value>Notizen anzeigen</value>
+  </data>
+  <data name="CONTACT_MOBILE" xml:space="preserve">
+    <value>Mobil</value>
+  </data>
+  <data name="LEAD_LATESTLEADS" xml:space="preserve">
+    <value>Neueste Interessenten</value>
+  </data>
+  <data name="DEDUPJOB_ALLJOBS" xml:space="preserve">
+    <value>Alle Aufträge</value>
+  </data>
+  <data name="CAMPAIGN_OWNER" xml:space="preserve">
+    <value>Zugriffsberechtigter</value>
+  </data>
+  <data name="ROLE_ALLROLES" xml:space="preserve">
+    <value>Alle Rollen</value>
+  </data>
+  <data name="COMPETITOR_STRENGTHS" xml:space="preserve">
+    <value>Stärken</value>
+  </data>
+  <data name="COMPETITOR_RATING" xml:space="preserve">
+    <value>Bewertung</value>
+  </data>
+  <data name="CAMPAIGN_DUEDATE" xml:space="preserve">
+    <value>Fälligkeitsdatum</value>
+  </data>
+  <data name="TICKET_WEBPORTALCLOSEDTICKETS" xml:space="preserve">
+    <value>Webportal – abgeschlossene Tickets</value>
+  </data>
+  <data name="ACCOUNT_STATUSPURGE" xml:space="preserve">
+    <value>Status = Löschen</value>
+  </data>
+  <data name="RESOURCELIST_TYPE" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="LEADSOURCE_SOURCEDATE" xml:space="preserve">
+    <value>Datum der Interessentenquelle</value>
+  </data>
+  <data name="OPPORTUNITY_MYCLOSEDOPPORTUNITIES" xml:space="preserve">
+    <value>Eigene geschlossene Verkaufschancen</value>
+  </data>
+  <data name="USER_TITLE" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="ACCOUNT_CAMPAIGN" xml:space="preserve">
+    <value>Kampagne</value>
+  </data>
+  <data name="ACCOUNT_MYACCOUNTS" xml:space="preserve">
+    <value>Eigene Firmen</value>
+  </data>
+  <data name="OPPORTUNITY_CLOSEDLOST" xml:space="preserve">
+    <value>Abgeschlossen - Verloren</value>
+  </data>
+  <data name="TICKET_CONTACT" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
+  <data name="DEFECT_DEFECTID" xml:space="preserve">
+    <value>Fehler-ID</value>
+  </data>
+  <data name="CONTACT_ALLCONTACTS" xml:space="preserve">
+    <value>Alle Kontakte</value>
+  </data>
+  <data name="OPPORTUNITY_ESTCLOSE" xml:space="preserve">
+    <value>Voraussichtlicher Abschluss</value>
+  </data>
+  <data name="CONTACT_STATUS" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="TICKETSOLUTIONTYPE_STANDARDSOLUTIONID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="PRODUCT_PRODUCT" xml:space="preserve">
+    <value>Produkt</value>
+  </data>
+  <data name="LEAD_ALLLEADS" xml:space="preserve">
+    <value>Alle Interessenten</value>
+  </data>
+  <data name="OPPORTUNITY_MYOPPORTUNITIES" xml:space="preserve">
+    <value>Eigene Verkaufschancen</value>
+  </data>
+  <data name="CALCFIELD_FULLNAME" xml:space="preserve">
+    <value>Vollständiger Name</value>
+  </data>
+  <data name="USERSECURITY_REMOTEUSERS" xml:space="preserve">
+    <value>Remote-Benutzer</value>
+  </data>
+  <data name="SALESORDER_DATEREQ" xml:space="preserve">
+    <value>Datum der Anforderung</value>
+  </data>
+  <data name="LITREQUEST_ALLLITERATUREITEMS" xml:space="preserve">
+    <value>Alle Literatureinträge</value>
+  </data>
+  <data name="ACCOUNT_IMPORTEDACCOUNTS" xml:space="preserve">
+    <value>Importierte Firmen</value>
+  </data>
+  <data name="CALCFIELD_COUNTY__COUNTRY" xml:space="preserve">
+    <value>Bundesland/Kanton, Land</value>
+  </data>
+  <data name="CALCFIELD_TICKET_NUMBER" xml:space="preserve">
+    <value>Ticket-Nummer</value>
+  </data>
+  <data name="TEAM_NAME" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="USERSECURITY_NETWORKUSERS" xml:space="preserve">
+    <value>Netzwerkbenutzer</value>
+  </data>
+  <data name="LITREQUEST_CREATE_DATE" xml:space="preserve">
+    <value>Erstellungsdatum</value>
+  </data>
+  <data name="HISTORY_NOTES" xml:space="preserve">
+    <value>Notizen</value>
+  </data>
+  <data name="CONTACT_CONTACTID" xml:space="preserve">
+    <value>KontaktID</value>
+  </data>
+  <data name="RESOURCELIST_ALLRESOURCES" xml:space="preserve">
+    <value>Alle Ressourcen</value>
+  </data>
+  <data name="RESOURCELIST_PHONE" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="USERSECURITY_WEBVIEWERUSERS" xml:space="preserve">
+    <value>Benutzer des Web-Viewers</value>
+  </data>
+  <data name="TICKET_MYTICKETS" xml:space="preserve">
+    <value>Eigene Tickets</value>
+  </data>
+  <data name="DEDUPJOB_STATUS" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="TEAM_CREATED" xml:space="preserve">
+    <value>Erstellt</value>
+  </data>
+  <data name="CONTRACT_REFERENCE" xml:space="preserve">
+    <value>Referenznr.</value>
+  </data>
+  <data name="CONTRACTQUANTITY" xml:space="preserve">
+    <value>Menge</value>
+  </data>
+  <data name="DEDUPJOB_RECORDCOUNT" xml:space="preserve">
+    <value>Datensatzanzahl</value>
+  </data>
+  <data name="DEFECT_SUBJECT" xml:space="preserve">
+    <value>Betreff</value>
+  </data>
+  <data name="ACCOUNT_OPENRESPONSES" xml:space="preserve">
+    <value>Offene Antworten</value>
+  </data>
+  <data name="ACCOUNT_PARTNERS" xml:space="preserve">
+    <value>Partner</value>
+  </data>
+  <data name="DEDUPRESULT_RESULTENTITY" xml:space="preserve">
+    <value>Ergebnisentität</value>
+  </data>
+  <data name="CONTACT_CITY" xml:space="preserve">
+    <value>Stadt</value>
+  </data>
+  <data name="CALCFIELD_WEIGHTED_SALES" xml:space="preserve">
+    <value>Gewichtete Verkäufe</value>
+  </data>
+  <data name="DEFECT_PRIORITY" xml:space="preserve">
+    <value>Priorität</value>
+  </data>
+  <data name="ACCOUNT_CAMPAIGNCODE" xml:space="preserve">
+    <value>Kampagnencode</value>
+  </data>
+  <data name="SECUREDACTION_NAME" xml:space="preserve">
+    <value>Gesicherte Aktion</value>
+  </data>
+  <data name="SALESORDER_SALESORDERNUMBER" xml:space="preserve">
+    <value>Verkaufsauftragsnummer</value>
+  </data>
+  <data name="TICKET_RECEIVEDDATE" xml:space="preserve">
+    <value>Eingangsdatum</value>
+  </data>
+  <data name="LITREQUEST_TOTALCOST" xml:space="preserve">
+    <value>Gesamtkosten</value>
+  </data>
+  <data name="CONTACT_STATUSDUPLICATE" xml:space="preserve">
+    <value>Status = Duplikat</value>
+  </data>
+  <data name="TICKETPROBLEMTYPE_STANDARDPROBLEMID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="IMPORTHISTORY_ERRORCOUNT" xml:space="preserve">
+    <value>Fehleranzahl</value>
+  </data>
+  <data name="PACKAGE_STATUS" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="CONTACT_CAMPAIGNNAME" xml:space="preserve">
+    <value>Kampagnenname</value>
+  </data>
+  <data name="IMPORTHISTORY_DUPLICATECOUNT" xml:space="preserve">
+    <value>Anzahl Doppeleinträge</value>
+  </data>
+  <data name="CAMPAIGN_CAMPAIGNCODE" xml:space="preserve">
+    <value>Kampagnencode</value>
+  </data>
+  <data name="CAMPAIGN_CAMPAIGNNAME" xml:space="preserve">
+    <value>Kampagne</value>
+  </data>
+  <data name="CALCFIELD_MAILING_STREET_ADDRESS" xml:space="preserve">
+    <value>Postadresse</value>
+  </data>
+  <data name="LITREQUEST_CONTACTNAME" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
+  <data name="ACCOUNT_CAMPAIGNOWNER" xml:space="preserve">
+    <value>Zugriffsberechtigter für Kampagne</value>
+  </data>
+  <data name="USER_USERNAME" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="DEDUPRESULT_JOBNUMBER" xml:space="preserve">
+    <value>Auftragsnr.</value>
+  </data>
+  <data name="DEDUPRESULT_ALLDEDUPRESULTS" xml:space="preserve">
+    <value>Alle Deduplizierungsergebnisse</value>
+  </data>
+  <data name="SALESDASHBOARD_NAME" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="TICKET_UNASSIGNED" xml:space="preserve">
+    <value>Nicht zugewiesen</value>
+  </data>
+  <data name="CONTACT_STATE" xml:space="preserve">
+    <value>Bundesland/Kanton</value>
+  </data>
+  <data name="QUALIFICATION_DESCRIPTION" xml:space="preserve">
+    <value>Qualifizierungsmerkmal</value>
+  </data>
+  <data name="QUALIFICATIONCATEGORY_CREATED" xml:space="preserve">
+    <value>Erstellt</value>
+  </data>
+  <data name="ACCOUNT_MYPROSPECTS" xml:space="preserve">
+    <value>Eigene potenzielle Kunden</value>
+  </data>
+  <data name="OPPORTUNITY_MYOPENOPPS" xml:space="preserve">
+    <value>Eigene offene Verkaufschancen</value>
+  </data>
+  <data name="TICKET_COMPLETEDDATE" xml:space="preserve">
+    <value>Abschlussdatum</value>
+  </data>
+  <data name="LEAD_WORKPHONE" xml:space="preserve">
+    <value>Geschäftliche Telefonnummer</value>
+  </data>
+  <data name="DEFECT_SEVERITY" xml:space="preserve">
+    <value>Schweregrad</value>
+  </data>
+  <data name="CONTACT_WORKPHONE" xml:space="preserve">
+    <value>Geschäftliche Telefonnummer</value>
+  </data>
+  <data name="DEDUPRESULT_RESULTDATE" xml:space="preserve">
+    <value>Ergebnisdatum</value>
+  </data>
+  <data name="CAMPAIGN_MYCAMPAIGNS" xml:space="preserve">
+    <value>Eigene Kampagnen</value>
+  </data>
+  <data name="PRODUCT_PRICE" xml:space="preserve">
+    <value>Preis</value>
+  </data>
+  <data name="LITERATUREITEM_REORDERQTY" xml:space="preserve">
+    <value>Nachbestellmenge</value>
+  </data>
+  <data name="PRODUCT_ALLPRODUCTS" xml:space="preserve">
+    <value>Alle Produkte</value>
+  </data>
+  <data name="RESOURCELIST_MODIFYDATE" xml:space="preserve">
+    <value>Geändert</value>
+  </data>
+  <data name="CONTACT_CREATEDATE" xml:space="preserve">
+    <value>Erstellt</value>
+  </data>
+  <data name="PRODUCT_PRICELEVEL" xml:space="preserve">
+    <value>Preisstufe</value>
+  </data>
+  <data name="LEADSOURCE_STATUS" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="USER_ACTIVE" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="OPPORTUNITY_LATESTOPPORTUNITIES" xml:space="preserve">
+    <value>Neueste Verkaufschancen</value>
+  </data>
+  <data name="USER_NETWORKUSERS" xml:space="preserve">
+    <value>Netzwerkbenutzer</value>
+  </data>
+  <data name="CONTACT_AUTHORIZED" xml:space="preserve">
+    <value>Autorisiert</value>
+  </data>
+  <data name="CONTACT_MYCONTACTS" xml:space="preserve">
+    <value>Eigene Kontakte</value>
+  </data>
+  <data name="TICKET_WEBPORTALALLTICKETS" xml:space="preserve">
+    <value>Webportal – alle Tickets</value>
+  </data>
+  <data name="CALCFIELD_RMA_COUNTY_COUNTRY" xml:space="preserve">
+    <value>Retoure-Bundesland/Kanton/Land</value>
+  </data>
+  <data name="LEAD_COMPANY" xml:space="preserve">
+    <value>Unternehmen</value>
+  </data>
+  <data name="DEFECT_ALLDEFECTS" xml:space="preserve">
+    <value>Alle Fehler</value>
+  </data>
+  <data name="LITERATUREITEM_FAMILY" xml:space="preserve">
+    <value>Familie</value>
+  </data>
+  <data name="PRODUCT_MODIFIEDBY" xml:space="preserve">
+    <value>Geändert von</value>
+  </data>
+  <data name="CALCFIELD_MAILING_CITY_STATE_ZIP" xml:space="preserve">
+    <value>Adresse-PLZ/Stadt/Bundes./Kanton</value>
+  </data>
+  <data name="CALCFIELD_PRODUCT_FORECAST" xml:space="preserve">
+    <value>Produkt-Forecast</value>
+  </data>
+  <data name="DEDUPJOB_STARTED" xml:space="preserve">
+    <value>Begonnen</value>
+  </data>
+  <data name="OPPORTUNITY_MYHISTORY" xml:space="preserve">
+    <value>Eigene Historie</value>
+  </data>
+  <data name="ACCOUNT_RESPONSEDATE" xml:space="preserve">
+    <value>Antwortdatum</value>
+  </data>
+  <data name="CALCFIELD_CONTACT_NAME__PREFIX_FIRST_LAST_" xml:space="preserve">
+    <value>Kontaktname (Pr., Vor- Nachname)</value>
+  </data>
+  <data name="CALCFIELD_SALES_ORDER_CITY_STATE_ZIP" xml:space="preserve">
+    <value>Verkaufsa.-PLZ/Sta./Bundesl./Kn.</value>
+  </data>
+  <data name="ACCOUNT_MAINPHONE" xml:space="preserve">
+    <value>Haupttelefonnummer</value>
+  </data>
+  <data name="LITREQUEST_ZIPCODE" xml:space="preserve">
+    <value>PLZ</value>
+  </data>
+  <data name="LITERATUREITEM_NAME" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="TICKET_TICKETID" xml:space="preserve">
+    <value>Ticket-ID</value>
+  </data>
+  <data name="DEDUPJOB_USER" xml:space="preserve">
+    <value>Benutzer</value>
+  </data>
+  <data name="CONTACT_CREATEUSER" xml:space="preserve">
+    <value>Erstellt von</value>
+  </data>
+  <data name="USER_NAME" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="CONTACT_MYHISTORY" xml:space="preserve">
+    <value>Eigene Historie</value>
+  </data>
+  <data name="USER_TEMPLATES" xml:space="preserve">
+    <value>Vorlagen</value>
+  </data>
+  <data name="DEDUPRESULT_RESULTENTITYTYPENAME" xml:space="preserve">
+    <value>Name des Ergebnisentitätstyps</value>
+  </data>
+  <data name="RETURN_ACCOUNT" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="DEDUPRESULT_STATUS" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="SALESORDER_GRANDTOTAL" xml:space="preserve">
+    <value>Gesamtsumme</value>
+  </data>
+  <data name="CALCFIELD_RMARECEIVEDPRODUCT" xml:space="preserve">
+    <value>RMA - Empfangene Produkte</value>
+  </data>
+  <data name="IMPORTHISTORY_IMPORTNUMBER" xml:space="preserve">
+    <value>Importnummer</value>
+  </data>
+  <data name="LITERATUREITEM_AUTHOR" xml:space="preserve">
+    <value>Autor</value>
+  </data>
+  <data name="CONTRACT_CONTRACTTYPE" xml:space="preserve">
+    <value>Vertragstyp</value>
+  </data>
+  <data name="DEDUPJOB_SOURCEDESCRIPTION" xml:space="preserve">
+    <value>Quellenbeschreibung</value>
+  </data>
+  <data name="COMPETITOR_ALLCOMPETITORS" xml:space="preserve">
+    <value>Alle Mitbewerber</value>
+  </data>
+  <data name="OPPORTUNITY_ACTUALAMOUNT" xml:space="preserve">
+    <value>Tatsächlicher Betrag</value>
+  </data>
+  <data name="ACCOUNT_CITY" xml:space="preserve">
+    <value>Stadt</value>
+  </data>
+  <data name="SALESORDER_QUOTES" xml:space="preserve">
+    <value>Angebote</value>
+  </data>
+  <data name="USER_CONCURRENTUSERS" xml:space="preserve">
+    <value>Gleichzeitige Benutzer</value>
+  </data>
+  <data name="TICKETSOLUTIONTYPE_CREATEUSER" xml:space="preserve">
+    <value>Angelegt von</value>
+  </data>
+  <data name="CALCFIELD_NAME" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="SALESORDER_ALLORDERSANDQUOTES" xml:space="preserve">
+    <value>Alle Aufträge und Angebote</value>
+  </data>
+  <data name="SALESORDER_ACCTMANAGER" xml:space="preserve">
+    <value>Acct. Manager</value>
+  </data>
+  <data name="LITREQUEST_DESCRIPTION" xml:space="preserve">
+    <value>Literaturanfrage</value>
+  </data>
+  <data name="ACCOUNT_CREATEDDATE" xml:space="preserve">
+    <value>Erstellt</value>
+  </data>
+  <data name="CALCFIELD_SALESORDERADDRESS" xml:space="preserve">
+    <value>Verkaufsauftrag - Adresse</value>
+  </data>
+  <data name="CALCFIELD_SALESORDER" xml:space="preserve">
+    <value>Verkaufsauftrag</value>
+  </data>
+  <data name="CONTACT_ACCTMANAGER" xml:space="preserve">
+    <value>Acct. Manager</value>
+  </data>
+  <data name="OPPORTUNITY_MYOPENOPPORTUNITIES" xml:space="preserve">
+    <value>Eigene offene Verkaufschancen</value>
+  </data>
+  <data name="CAMPAIGN_COMPLETEDDATE" xml:space="preserve">
+    <value>Abschlussdatum</value>
+  </data>
+  <data name="RETURN_RETURNEDBY" xml:space="preserve">
+    <value>Zurückgegeben von</value>
+  </data>
+  <data name="DEPARTMENT_LASTMODIFIED" xml:space="preserve">
+    <value>Geändert</value>
+  </data>
+  <data name="CONTRACT_ACTIVECONTRACTS" xml:space="preserve">
+    <value>Aktive Verträge</value>
+  </data>
+  <data name="LEAD_TOUCHEDLEADS" xml:space="preserve">
+    <value>Bearbeitete Interessenten</value>
+  </data>
+  <data name="RETURN_EXPECTEDRETURNS" xml:space="preserve">
+    <value>Erwartete Retouren</value>
+  </data>
+  <data name="DEPARTMENT_MODIFIEDBY" xml:space="preserve">
+    <value>Geändert von</value>
+  </data>
+  <data name="RETURN_REQUESTEDDATE" xml:space="preserve">
+    <value>Angefordert am</value>
+  </data>
+  <data name="CONTACT_CAMPAIGNCODE" xml:space="preserve">
+    <value>Kampagnencode</value>
+  </data>
+  <data name="SALESORDER_MYORDERSANDQUOTES" xml:space="preserve">
+    <value>Eigene  Aufträge und Angebote</value>
+  </data>
+  <data name="QUALIFICATIONCATEGORY_MODIFIEDBY" xml:space="preserve">
+    <value>Geändert von</value>
+  </data>
+  <data name="RESOURCELIST_EMAIL" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="OPPORTUNITY_MYTOPOPPORTUNITIES" xml:space="preserve">
+    <value>Eigene beste Verkaufschancen</value>
+  </data>
+  <data name="DEPARTMENT_ALLDEPARTMENTS" xml:space="preserve">
+    <value>Alle Abteilungen</value>
+  </data>
+  <data name="CALCFIELD_LEAD_NAME__LAST__FIRST_" xml:space="preserve">
+    <value>Name des Interessenten (Nachname, Vorname)</value>
+  </data>
+  <data name="OPPORTUNITY_POTENTIAL" xml:space="preserve">
+    <value>Potenzial</value>
+  </data>
+  <data name="ACCOUNT_ACCTMANAGER" xml:space="preserve">
+    <value>Acct. Manager</value>
+  </data>
+  <data name="CAMPAIGN_ENDDATE" xml:space="preserve">
+    <value>Enddatum</value>
+  </data>
+  <data name="OPPORTUNITY_COMPLETEDDATE" xml:space="preserve">
+    <value>Abschlussdatum</value>
+  </data>
+  <data name="ACCOUNT_INTEREST" xml:space="preserve">
+    <value>Interesse</value>
+  </data>
+  <data name="DEDUPRESULT_SOURCEENTITY" xml:space="preserve">
+    <value>Quellentität</value>
+  </data>
+  <data name="CONTRACT_PENDINGEXPIRATIONS" xml:space="preserve">
+    <value>Ausstehende Ablauftermine</value>
+  </data>
+  <data name="CALCFIELD_CONTACT_NAME__LAST__FIRST_" xml:space="preserve">
+    <value>Kontaktname (Nachname, Vorname)</value>
+  </data>
+  <data name="RETURN_SHIPTO" xml:space="preserve">
+    <value>Senden an</value>
+  </data>
+  <data name="SECUREDACTION_DESCRIPTION" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="DEDUPJOB_ENTITYNAME" xml:space="preserve">
+    <value>Entitätsname</value>
+  </data>
+  <data name="LITREQUEST_REQUESTDATE" xml:space="preserve">
+    <value>Angefordert</value>
+  </data>
+  <data name="TICKETPROBLEMTYPE_AREA" xml:space="preserve">
+    <value>Bereich</value>
+  </data>
+  <data name="CONTRACT_SERVICETYPE" xml:space="preserve">
+    <value>Service-Typ</value>
+  </data>
+  <data name="ROLE_DESCRIPTION" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="CALCFIELD_DEFECT_NUMBER" xml:space="preserve">
+    <value>Fehlernummer</value>
+  </data>
+  <data name="CALCFIELD_SALES_ORDER_COUNTY_COUNTRY" xml:space="preserve">
+    <value>Verkaufsaftrg-Bundesl./Kan./Land</value>
+  </data>
+  <data name="RETURN_LASTMODIFIED" xml:space="preserve">
+    <value>Zuletzt geändert</value>
+  </data>
+  <data name="LEAD_CITY" xml:space="preserve">
+    <value>Stadt</value>
+  </data>
+  <data name="QUALIFICATIONCATEGORY_QUALIFICATION" xml:space="preserve">
+    <value>Qualifizierungsmerkmal</value>
+  </data>
+  <data name="LITERATUREITEM_ALLLITERATUREITEMS" xml:space="preserve">
+    <value>Alle Literatureinträge</value>
+  </data>
+  <data name="OPPORTUNITY_CREATED" xml:space="preserve">
+    <value>Erstellt</value>
+  </data>
+  <data name="DEFECT_REPORTDATE" xml:space="preserve">
+    <value>Gemeldet am</value>
+  </data>
+  <data name="IMPORTHISTORY_MERGECOUNT" xml:space="preserve">
+    <value>Anzahl zusammengeführter Datensätze</value>
+  </data>
+  <data name="PRODUCT_DISCONTINUEDPRODUCTS" xml:space="preserve">
+    <value>Eingestellte Produkte</value>
+  </data>
+  <data name="DEFECT_AREA" xml:space="preserve">
+    <value>Bereich</value>
+  </data>
+  <data name="CONTACT_LATESTCONTACTS" xml:space="preserve">
+    <value>Neueste Kontakte</value>
+  </data>
+  <data name="PRODUCT_AVAILABLEPRODUCTS" xml:space="preserve">
+    <value>Verfügbare Produkte</value>
+  </data>
+  <data name="CONTRACT_REMAINING" xml:space="preserve">
+    <value>Rest</value>
+  </data>
+  <data name="TICKET_OVERDUE" xml:space="preserve">
+    <value>Überfällig</value>
+  </data>
+  <data name="PRODUCT_LASTMODIFIED" xml:space="preserve">
+    <value>Geändert</value>
+  </data>
+  <data name="DEFECT_MYDEFECTS" xml:space="preserve">
+    <value>Eigene Fehler</value>
+  </data>
+  <data name="LEADSOURCE_DESCRIPTION" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="CONTACT_ACCOUNT" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="TICKET_STATUS" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="CALCFIELD_ADDRESS" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="TICKETPROBLEMTYPE_DESCRIPTION" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="LITREQUEST_SENDBY" xml:space="preserve">
+    <value>Senden bis</value>
+  </data>
+  <data name="CAMPAIGN_OPENCAMPAIGNS" xml:space="preserve">
+    <value>Offene Kampagnen</value>
+  </data>
+  <data name="ROLE_NAME" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="LITREQUEST_REQUESTUSER" xml:space="preserve">
+    <value>Angefordert von</value>
+  </data>
+  <data name="LEAD_MYLEADS" xml:space="preserve">
+    <value>Eigene Interessenten</value>
+  </data>
+  <data name="TEAM_MODIFIED" xml:space="preserve">
+    <value>Geändert</value>
+  </data>
+  <data name="CONTACT_MYACTIVITIESFORTODAY" xml:space="preserve">
+    <value>Meine Aktivitäten heute</value>
+  </data>
+  <data name="LITREQUEST_ACCOUNT" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="DEDUPJOB_DESCRIPTION" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="RETURN_RECEIVEDRETURNS" xml:space="preserve">
+    <value>Empfangene Retouren</value>
+  </data>
+  <data name="PICKLISTVIEW_ALLPICKLISTS" xml:space="preserve">
+    <value>Alle Auswahllisten</value>
+  </data>
+  <data name="CALCFIELD_LEAD" xml:space="preserve">
+    <value>Interessent</value>
+  </data>
+  <data name="ACCOUNT_LEADSOURCE" xml:space="preserve">
+    <value>Interessentenquelle</value>
+  </data>
+  <data name="TICKET_ASSIGNEDTO" xml:space="preserve">
+    <value>Zugewiesen zu</value>
+  </data>
+  <data name="OPPORTUNITY_ALLOPPORTUNITIES" xml:space="preserve">
+    <value>Alle Verkaufschancen</value>
+  </data>
+  <data name="COMPETITOR_COMPETITOR" xml:space="preserve">
+    <value>Mitbewerber</value>
+  </data>
+  <data name="OPPORTUNITY_WEIGHTED" xml:space="preserve">
+    <value>Gewichtet </value>
+  </data>
+  <data name="PACKAGE_LASTMODIFIED" xml:space="preserve">
+    <value>Zuletzt geändert</value>
+  </data>
+  <data name="LITREQUEST_ALLOPEN" xml:space="preserve">
+    <value>Alle offenen Aktivitäten</value>
+  </data>
+  <data name="QUALIFICATION_CREATEDATE" xml:space="preserve">
+    <value>Erstellt</value>
+  </data>
+  <data name="SALESORDER_STATUS" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="PICKLISTVIEW_CREATEUSER" xml:space="preserve">
+    <value>Angelegt von</value>
+  </data>
+  <data name="RETURN_ASSIGNEDTO" xml:space="preserve">
+    <value>Zugewiesen zu</value>
+  </data>
+  <data name="TICKET_USER" xml:space="preserve">
+    <value>Benutzer</value>
+  </data>
+  <data name="CONTACT_STATUSPURGE" xml:space="preserve">
+    <value>Status = Löschen</value>
+  </data>
+  <data name="CALCFIELD_EXTENDED_PRICE" xml:space="preserve">
+    <value>Erweiterter Preis</value>
+  </data>
+  <data name="CAMPAIGN_OVERDUECAMPAIGNTASKS" xml:space="preserve">
+    <value>Überfällige Kampagnenaufgaben</value>
+  </data>
+  <data name="PICKLISTVIEW_MODIFYUSER" xml:space="preserve">
+    <value>Geändert von</value>
+  </data>
+  <data name="ACCOUNT_CAMPAIGNNAME" xml:space="preserve">
+    <value>Kampagnenname</value>
+  </data>
+  <data name="USER_DEPARTMENT" xml:space="preserve">
+    <value>Abteilung</value>
+  </data>
+  <data name="IMPORT_NUMBER" xml:space="preserve">
+    <value>Importnummer</value>
+  </data>
+  <data name="SALESORDER_ACCOUNT" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="DEDUPJOB_JOBNUMBER" xml:space="preserve">
+    <value>Auftragsnr.</value>
+  </data>
+  <data name="IMPORTHISTORY_CREATEDATE" xml:space="preserve">
+    <value>Erstellungsdatum</value>
+  </data>
+  <data name="PACKAGE_MODIFIEDBY" xml:space="preserve">
+    <value>Geändert von</value>
+  </data>
+  <data name="TICKET_ISSUE" xml:space="preserve">
+    <value>Problem</value>
+  </data>
+  <data name="OPPORTUNITY_REASONLOST" xml:space="preserve">
+    <value>Grund für Misserfolg</value>
+  </data>
+  <data name="ACCOUNT_SUBTYPE" xml:space="preserve">
+    <value>Untertyp</value>
+  </data>
+  <data name="CALCFIELD_CONTACT" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
+  <data name="CALCFIELD_LEAD_NAME__PREFIX_FIRST_LAST_" xml:space="preserve">
+    <value>Interessent (Prä.,Vor- Nachname)</value>
+  </data>
+  <data name="USERSECURITY_WEBONLYUSERS" xml:space="preserve">
+    <value>Nur-Web-Benutzer</value>
+  </data>
+  <data name="SALESORDER_MYSALESORDERS" xml:space="preserve">
+    <value>Eigene Verkaufsaufträge</value>
+  </data>
+  <data name="QUALIFICATIONCATEGORY_MODIFIED" xml:space="preserve">
+    <value>Geändert</value>
+  </data>
+  <data name="ROLE_CREATEUSER" xml:space="preserve">
+    <value>Angelegt von</value>
+  </data>
+  <data name="CAMPAIGN_MANAGER" xml:space="preserve">
+    <value>Verantwortlicher</value>
+  </data>
+  <data name="LITREQUEST_COVERNAME" xml:space="preserve">
+    <value>Deckblatt</value>
+  </data>
+  <data name="TICKET_PUNCHEDIN" xml:space="preserve">
+    <value>Zeitmessung aktiviert</value>
+  </data>
+  <data name="ACCOUNT_ACCOUNT" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="CONTACT_CAMPAIGNOWNER" xml:space="preserve">
+    <value>Zugriffsberechtigter für Kampagne</value>
+  </data>
+  <data name="OPPORTUNITY_ACCTMANAGER" xml:space="preserve">
+    <value>Acct. Manager</value>
+  </data>
+  <data name="LITREQUEST_DATEREQ" xml:space="preserve">
+    <value>Datum der Anforderung</value>
+  </data>
+  <data name="LEAD_NAME" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="CALCFIELD_DESCRIPTION" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="ACCOUNT_STATUS" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="CALCFIELD_MAILING_COUNTY__COUNTRY" xml:space="preserve">
+    <value>Adresse - Landkreis/Land</value>
+  </data>
+  <data name="ACCOUNT_CUSTOMERS" xml:space="preserve">
+    <value>Kunden</value>
+  </data>
+  <data name="CALCFIELD_ACCOUNT" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="CALCFIELD_SALES_ORDER_NUMBER" xml:space="preserve">
+    <value>Verkaufsauftragsnummer</value>
+  </data>
+</root>

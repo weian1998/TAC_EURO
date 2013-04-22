@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Présentation du mappage de champs d'Intellisync for SalesLogix</title>
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../ehlpdhtm.js">
+        </script>
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Intellisync/understanding_intellisync_for_saleslogix_field_mapping.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Ouvrir une rubrique avec la recherche, la table des matières et l'index</a>
+        </p>
+        <h1><a name="kanchor500"></a>Présentation du mappage des champs Intellisync for SalesLogix</h1>
+        <p>Intellisync for SalesLogix déplace les données entre des connecteurs (ou parfois entre un connecteur et un traducteur) et ne connecte pas directement une base de données à une autre. Par exemple, lorsque vous exportez des données de Sage SalesLogix vers Microsoft Outlook<span MadCap:conditions="Primary.Lotus_Notes"> ou Lotus Notes</span>, Intellisync utilise à la fois les connecteurs Sage SalesLogix et MS Outlook<span MadCap:conditions="Primary.Lotus_Notes"> ou Lotus Notes</span>. Le connecteur Sage SalesLogix lit les données dans le groupe ad hoc que vous avez spécifié lors de la configuration ; le connecteur MS Outlook<span MadCap:conditions="Primary.Lotus_Notes"> ou Lotus Notes</span> lit les données dans la catégorie SyncSalesLogix de MS Outlook<span MadCap:conditions="Primary.Lotus_Notes"> ou Lotus Notes</span>. 
+ </p>
+        <p>Pendant une synchronisation manuelle, Intellisync compare les données des deux connecteurs et affiche des écrans de confirmation où vous pouvez voir les modifications et les accepter ou les refuser. Pendant une synchronisation automatique, le processus est le même mais sans écran de confirmation. Intellisync se base sur les paramètres de configuration pour résoudre les conflits.</p>
+        <p>La synchronisation ne transfère les données qu'entre les champs qui sont mappés, les champs non mappés sont ignorés. Un ensemble standard de champs mappés est fourni avec Intellisync for SalesLogix. Les tables détaillant les mappages de champs par défaut sont disponibles dans l'<span style="font-style: italic;">Aide du module Administrateur de Sage SalesLogix</span>. Vous pouvez afficher et redéfinir les mappages de champs actuels, mapper d'autres champs ou supprimer des mappages de champs en fonction des besoins de votre activité. Les mappages de champs sont propres à la version du traducteur ou du connecteur installée et au type d'action requis. </p>
+        <p>Créer un nouveau mappage entre des champs jusque-là non mappés permet la synchronisation des données entre les applications. Supprimer un mappage met fin à la synchronisation des données auparavant mappées. Pour savoir comment modifier le mappage des données, reportez-vous aux rubriques d'aide accessibles via l'Assistant de configuration d'applications d'Intellisync for SalesLogix. </p>
+        <table style="margin-left: 4.15pt;width: 94%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="94%">
+            <col style="width: 15%;" />
+            <col style="width: 84px;" />
+            <tr valign="top">
+                <td style="width: 15%;padding-left: 1px;padding-top: 1px;padding-right: 1px;padding-bottom: 1px;" width="15%">
+                    <p class="Tip-Note-Text" style="text-align: center;" align="center">
+                        <img src="../image/caution.gif" />
+                    </p>
+                </td>
+                <td style="padding-left: 1px;padding-top: 1px;padding-right: 1px;padding-bottom: 1px;">
+                    <ul>
+                        <li class="Bullets" value="1">Gardez bien à l'esprit que modifier le mappage des champs peut produire des résultats inattendus. Par conséquent, avant de personnaliser des champs mappés, veillez à sauvegarder vos données avant la synchronisation. Il est également conseillé de créer des fichiers test pour voir l'effet de vos modifications sur des données critiques.</li>
+                        <li class="Bullets" value="2">Si vous modifiez les champs mappés de données ayant déjà été synchronisées, la synchronisation suivante équivaudra à un premier cycle de synchronisation. C'est pourquoi vous devez exécuter la synchronisation d'Intellisync for SalesLogix avant de modifier les champs mappés.</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <p class="RelatedTopics">Rubriques connexes</p>
+        <p><a href="Intellisync_for_SalesLogix.htm" target="_self">Intellisync for SalesLogix</a>
+        </p>
+        <p><a href="understanding_data_exchange.htm" target="_self">Présentation de l'échange de données</a>
+        </p>
+        <p><a href="understanding_factors_affecting_synchronization.htm" target="_self">Présentation des facteurs affectant la synchronisation</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Dites-nous comment améliorer l'aide</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="ebfd715e-2b2f-4e5e-8c6d-cfc0d9b4ae52" lastModifiedUtc="2010-06-10T08:40:51.9971308Z" manageSchema="false" tableName="ACCOUNT" name="Account" displayPropertyId="985c3ffa-bede-4eb2-a791-3f473de668aa" isExtension="false" audited="true" smallImage="[Localization!Global_Images:Accounts_16x16]" largeImage="[Localization!Global_Images:Accounts_24x24]" onBeforeInsertMethodId="3160e6ee-9df3-4563-94bb-e2f7976f352b" onAfterInsertMethodId="8a044b4f-673e-46b3-95e8-ea7f2da9613d" onBeforeUpdateMethodId="e4e51779-5b81-4adc-aa1e-06a39aa529fd" onAfterUpdateMethodId="31fa6839-a43c-4e3a-9e06-307e82e90c32" onBeforeDeleteMethodId="7864d735-7e69-4bc8-988a-4951330e8057" onAfterDeleteMethodId="e0205bcf-4398-4439-8356-1ffc6bb26c1e" onCreateId="95a127c1-8af9-43ee-977f-dac73ff40a09">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="ebfd715e-2b2f-4e5e-8c6d-cfc0d9b4ae52" lastModifiedUtc="2013-04-22T18:26:29.1311175Z" manageSchema="true" tableName="ACCOUNT" name="Account" displayPropertyId="985c3ffa-bede-4eb2-a791-3f473de668aa" isExtension="false" cacheUsage="ReadWrite" audited="true" smallImage="[Localization!Global_Images:Accounts_16x16]" largeImage="[Localization!Global_Images:Accounts_24x24]" onBeforeInsertMethodId="3160e6ee-9df3-4563-94bb-e2f7976f352b" onAfterInsertMethodId="8a044b4f-673e-46b3-95e8-ea7f2da9613d" onBeforeUpdateMethodId="e4e51779-5b81-4adc-aa1e-06a39aa529fd" onAfterUpdateMethodId="31fa6839-a43c-4e3a-9e06-307e82e90c32" onBeforeDeleteMethodId="7864d735-7e69-4bc8-988a-4951330e8057" onAfterDeleteMethodId="e0205bcf-4398-4439-8356-1ffc6bb26c1e" onCreateId="95a127c1-8af9-43ee-977f-dac73ff40a09">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
@@ -43,7 +43,7 @@
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="985c3ffa-bede-4eb2-a791-3f473de668aa" lastModifiedUtc="0001-01-01T00:00:00" name="AccountName" audited="false" columnName="ACCOUNT" maxLength="128" precision="0" scale="0" ordinal="2" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="985c3ffa-bede-4eb2-a791-3f473de668aa" lastModifiedUtc="2012-07-25T15:10:39.9330618Z" name="AccountName" audited="true" columnName="ACCOUNT" maxLength="128" precision="0" scale="0" ordinal="2" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
           <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
@@ -139,7 +139,7 @@
         </PhoneDataType>
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="0db1e825-335f-4bb2-bc06-5b05b1fcae8f" lastModifiedUtc="0001-01-01T00:00:00" name="BusinessDescription" audited="false" columnName="BUSINESSDESCRIPTION" maxLength="2000" precision="0" scale="0" ordinal="73" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="0db1e825-335f-4bb2-bc06-5b05b1fcae8f" lastModifiedUtc="2012-07-25T15:10:41.283139Z" name="BusinessDescription" audited="true" columnName="BUSINESSDESCRIPTION" maxLength="2000" precision="0" scale="0" ordinal="73" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
           <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
@@ -480,7 +480,7 @@
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="d7b3ec56-5fb9-4742-8ed8-08bef0e120c0" lastModifiedUtc="0001-01-01T00:00:00" name="MainPhone" audited="false" columnName="MAINPHONE" maxLength="32" precision="0" scale="0" ordinal="10" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="d7b3ec56-5fb9-4742-8ed8-08bef0e120c0" lastModifiedUtc="2012-07-25T15:10:41.3091405Z" name="MainPhone" audited="true" columnName="MAINPHONE" maxLength="32" precision="0" scale="0" ordinal="10" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
           <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
@@ -530,7 +530,7 @@
         <TrueFalseDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="f32a589f-9d69-4c35-b0d6-097cf0afa213" lastModifiedUtc="0001-01-01T00:00:00" name="Notes" audited="false" columnName="NOTES" maxLength="2147483647" precision="0" scale="0" ordinal="26" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="f32a589f-9d69-4c35-b0d6-097cf0afa213" lastModifiedUtc="2012-02-10T03:17:28.4610864Z" name="Notes" audited="false" columnName="NOTES" maxLength="2147483647" precision="0" scale="0" ordinal="26" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
           <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
@@ -538,10 +538,10 @@
           </extender>
         </extendee>
       </ExtendedPropertiesCollection>
-      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
-        <TextDataType>
+      <SystemDataType guid="f4ca6023-9f5f-4e41-8571-50ba94e8f233">
+        <LongTextDataType>
           <Length>2147483647</Length>
-        </TextDataType>
+        </LongTextDataType>
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="8cb3b02e-162c-4363-96ad-4ff6def10409" lastModifiedUtc="0001-01-01T00:00:00" name="NotifyDefects" audited="false" columnName="NOTIFYDEFECTS" maxLength="1" precision="0" scale="0" ordinal="47" isReadOnly="false">
@@ -636,7 +636,7 @@
         </TextDataType>
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="35a9aaf6-c3a4-4aed-8bd3-4e563dfd703b" lastModifiedUtc="0001-01-01T00:00:00" name="ParentId" audited="false" columnName="PARENTID" maxLength="12" precision="0" scale="0" ordinal="5" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="35a9aaf6-c3a4-4aed-8bd3-4e563dfd703b" lastModifiedUtc="2012-07-25T15:10:41.3381422Z" name="ParentId" audited="true" columnName="PARENTID" maxLength="12" precision="0" scale="0" ordinal="5" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
           <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
@@ -727,7 +727,7 @@
         </TextDataType>
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="96532b8e-137f-43a8-b1f5-915c68509ff0" lastModifiedUtc="2012-05-02T00:32:52.6767915Z" name="SeccodeId" audited="false" isNullable="false" columnName="SECCODEID" maxLength="12" precision="0" scale="0" ordinal="21" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="96532b8e-137f-43a8-b1f5-915c68509ff0" lastModifiedUtc="2013-04-22T18:26:29.1301174Z" name="SeccodeId" audited="false" isNullable="false" columnName="SECCODEID" maxLength="12" precision="0" scale="0" ordinal="21" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
           <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
@@ -779,7 +779,7 @@
         </TextDataType>
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="5db6f8f6-9f43-4060-b22f-5c914ce998dc" lastModifiedUtc="0001-01-01T00:00:00" name="Status" audited="false" columnName="STATUS" maxLength="64" precision="0" scale="0" ordinal="27" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="5db6f8f6-9f43-4060-b22f-5c914ce998dc" lastModifiedUtc="2012-07-25T15:10:41.3651437Z" name="Status" audited="true" columnName="STATUS" maxLength="64" precision="0" scale="0" ordinal="27" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
           <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
@@ -793,7 +793,7 @@
         </TextDataType>
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="4c5ae0e6-d3ac-4f84-8c6b-4e1ff0397cd6" lastModifiedUtc="0001-01-01T00:00:00" name="SubType" audited="false" columnName="SUBTYPE" maxLength="64" precision="0" scale="0" ordinal="65" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="4c5ae0e6-d3ac-4f84-8c6b-4e1ff0397cd6" lastModifiedUtc="2012-07-25T15:10:41.3971456Z" name="SubType" audited="true" columnName="SUBTYPE" maxLength="64" precision="0" scale="0" ordinal="65" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
           <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
@@ -875,7 +875,7 @@
         </PhoneDataType>
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="3acbb9cb-3760-43d9-9644-64225372a4ca" lastModifiedUtc="0001-01-01T00:00:00" name="Type" audited="false" columnName="TYPE" maxLength="64" precision="0" scale="0" ordinal="1" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="3acbb9cb-3760-43d9-9644-64225372a4ca" lastModifiedUtc="2012-07-25T15:10:41.4261472Z" name="Type" audited="true" columnName="TYPE" maxLength="64" precision="0" scale="0" ordinal="1" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
           <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
@@ -1029,7 +1029,7 @@
         </TextDataType>
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="b20b052b-5493-46e2-b55f-957b2cdca2ca" lastModifiedUtc="0001-01-01T00:00:00" name="WebAddress" audited="false" columnName="WEBADDRESS" maxLength="128" precision="0" scale="0" ordinal="20" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="b20b052b-5493-46e2-b55f-957b2cdca2ca" lastModifiedUtc="2012-07-25T15:10:41.4521487Z" name="WebAddress" audited="true" columnName="WEBADDRESS" maxLength="128" precision="0" scale="0" ordinal="20" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
           <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
@@ -1118,7 +1118,7 @@
         </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="3ca925e1-4b76-4621-a39c-a0d4cb7327d5">
-        <GuidDataType />
+        <GuidDataType storage="String" />
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="a5438082-db43-4960-8888-1bff365ca05b" lastModifiedUtc="2010-10-05T22:53:52.6893045Z" name="PrimaryOperatingCompId" description="Foreign key to the AppIdMapping table" audited="false" include="false" columnName="PRIMARYOPERATINGCOMPID" maxLength="12" precision="0" scale="0" ordinal="80" isReadOnly="false">
@@ -1157,7 +1157,7 @@
         <TrueFalseDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="26d46abf-2791-4ae5-b4e3-c25957a16f1c" lastModifiedUtc="2010-09-13T18:37:13.2186912Z" name="CreateSource" audited="false" columnName="CREATESOURCE" maxLength="64" precision="0" scale="0" ordinal="83" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="26d46abf-2791-4ae5-b4e3-c25957a16f1c" lastModifiedUtc="2012-02-06T15:46:31.8038506Z" name="CreateSource" audited="false" columnName="CREATESOURCE" maxLength="64" precision="0" scale="0" ordinal="83" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
           <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
@@ -1167,513 +1167,11 @@
       </ExtendedPropertiesCollection>
       <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
         <TextDataType>
-          <Length>64</Length>
+          <Length>50</Length>
         </TextDataType>
       </SystemDataType>
     </property>
-    <property xsi:type="OrmCustomProperty" id="c0d09af6-6575-49db-badb-e1981a320c63" lastModifiedUtc="2008-07-03T02:36:24.09375Z" name="NumberOfOpenTickets" audited="false" hasGet="true" hasSet="false" returnType="System.Int32">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmCustomProperty">
-          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
-            <OrmEntityPropertySDataExtension generate="true" />
-          </extender>
-        </extendee>
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="6380b485-b76f-4cb2-953c-2008f39ff781">
-        <CustomPropertyDataType />
-      </SystemDataType>
-      <code><![CDATA[public virtual System.Int32 NumberOfOpenTickets
-{
-    get
-    {
-        int count = 0;
-        try
-        {
-            Sage.Platform.Repository.IRepository<Sage.Entity.Interfaces.ITicket> tickets = Sage.Platform.EntityFactory.GetRepository<Sage.Entity.Interfaces.ITicket>();
-            Sage.Platform.Repository.IQueryable query = (Sage.Platform.Repository.IQueryable)tickets;
-            Sage.Platform.Repository.IExpressionFactory expression = query.GetExpressionFactory();
-            Sage.Platform.Repository.IProjections projection = query.GetProjectionsFactory();
-            Sage.Platform.Repository.ICriteria criteria = query.CreateCriteria();
-            criteria.SetProjection(projection.Count("Account.Id"));
-
-            criteria.Add(expression.And(
-                expression.Eq("Account.Id", this.Id),
-                expression.IsNull("CompletedDate")));
-            count = (int)criteria.List<object>()[0];
-        }
-        catch (Exception ex)
-        {
-            throw new NotImplementedException("NumberOfOpenTickets", ex);
-        }
-        return count;
-    }
-}
-]]></code>
-    </property>
-    <property xsi:type="OrmCustomProperty" id="686f8120-b3f0-49ab-9d8c-a4abadfce4ae" lastModifiedUtc="2008-07-03T02:36:49.28125Z" name="NumberOfTotalTickets" audited="false" hasGet="true" hasSet="false" returnType="System.Int32">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmCustomProperty">
-          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
-            <OrmEntityPropertySDataExtension generate="true" />
-          </extender>
-        </extendee>
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="6380b485-b76f-4cb2-953c-2008f39ff781">
-        <CustomPropertyDataType />
-      </SystemDataType>
-      <code><![CDATA[public virtual System.Int32 NumberOfTotalTickets
-{
-    get
-    {
-        try
-        {
-            return Sage.Platform.EntityFactory.GetRepository<Sage.Entity.Interfaces.ITicket>().FindByProperty("Account.Id", this.Id).Count;
-        }
-        catch (Exception ex)
-        {
-            throw new NotImplementedException("NumberOfTotalTickets", ex);
-        }
-    }
-}
-]]></code>
-    </property>
-    <property xsi:type="OrmCustomProperty" id="73b92999-d3f8-4762-a023-6a0acedfbbd9" lastModifiedUtc="2009-08-13T22:51:36.0147389Z" name="OpportunitiesClosedLostCount" audited="false" hasGet="true" hasSet="false" returnType="System.Int32">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmCustomProperty">
-          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
-            <OrmEntityPropertySDataExtension generate="true" />
-          </extender>
-        </extendee>
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="6380b485-b76f-4cb2-953c-2008f39ff781">
-        <CustomPropertyDataType />
-      </SystemDataType>
-      <code><![CDATA[public virtual System.Int32 OpportunitiesClosedLostCount
-{
-    get
-    {
-        int count = 0;
-        try
-        {
-            object obj = System.Web.HttpContext.GetGlobalResourceObject("Opportunity", "Opp_Status_ClosedLost");
-            if (obj == null)
-                return -1;
-            Sage.Platform.Repository.IRepository<Sage.Entity.Interfaces.IOpportunity> opportunities =
-                Sage.Platform.EntityFactory.GetRepository<Sage.Entity.Interfaces.IOpportunity>();
-            Sage.Platform.Repository.IQueryable query = (Sage.Platform.Repository.IQueryable) opportunities;
-            Sage.Platform.Repository.IExpressionFactory expression = query.GetExpressionFactory();
-            Sage.Platform.Repository.IProjections projection = query.GetProjectionsFactory();
-            Sage.Platform.Repository.ICriteria criteria = query.CreateCriteria();
-            criteria.SetProjection(projection.Count("Account.Id"));
-            criteria.Add(expression.And(
-                            expression.Eq("Account.Id", this.Id),
-                            expression.Eq("Status", obj.ToString())));
-            count = (int) criteria.List<object>()[0];
-        }
-        catch
-        {
-            count = -1;
-        }
-        return count;
-    }
-}
-]]></code>
-    </property>
-    <property xsi:type="OrmCustomProperty" id="8e05d7d4-0d1d-4904-a70f-e4a4f62089de" lastModifiedUtc="2009-08-13T22:31:35.6837389Z" name="OpportunitiesClosedLostTotal" audited="false" hasGet="true" hasSet="false" returnType="System.Double">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmCustomProperty">
-          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
-            <OrmEntityPropertySDataExtension generate="true" />
-          </extender>
-        </extendee>
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="6380b485-b76f-4cb2-953c-2008f39ff781">
-        <CustomPropertyDataType />
-      </SystemDataType>
-      <code><![CDATA[public virtual System.Double OpportunitiesClosedLostTotal
-{
-    get
-    {
-        double total = 0.0;
-        try
-        {
-            object obj = System.Web.HttpContext.GetGlobalResourceObject("Opportunity", "Opp_Status_ClosedLost");
-            if (obj == null)
-                return -1;
-
-            Sage.Platform.Repository.IRepository<Sage.Entity.Interfaces.IOpportunity> opportunities =
-                Sage.Platform.EntityFactory.GetRepository<Sage.Entity.Interfaces.IOpportunity>();
-            Sage.Platform.Repository.IQueryable query = (Sage.Platform.Repository.IQueryable) opportunities;
-            Sage.Platform.Repository.IExpressionFactory expression = query.GetExpressionFactory();
-            Sage.Platform.Repository.IProjections projection = query.GetProjectionsFactory();
-            Sage.Platform.Repository.ICriteria criteria = query.CreateCriteria();
-            criteria.SetProjection(projection.Sum("SalesPotential"));
-        
-            criteria.Add(expression.And(
-                            expression.Eq("Account.Id", this.Id),
-                            expression.Eq("Status", obj.ToString())));
-            total = (double) (criteria.List<object>()[0] ?? 0.0);
-        }
-        catch
-        {
-            total = 0.0;
-        }
-        return total;
-    }
-}
-]]></code>
-    </property>
-    <property xsi:type="OrmCustomProperty" id="eeed62b9-e63c-4f07-a538-ebdeefbaf8c4" lastModifiedUtc="2009-08-13T22:31:40.8917389Z" name="OpportunitiesClosedWonCount" audited="false" hasGet="true" hasSet="false" returnType="System.Int32">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmCustomProperty">
-          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
-            <OrmEntityPropertySDataExtension generate="true" />
-          </extender>
-        </extendee>
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="6380b485-b76f-4cb2-953c-2008f39ff781">
-        <CustomPropertyDataType />
-      </SystemDataType>
-      <code><![CDATA[public virtual System.Int32 OpportunitiesClosedWonCount
-{
-    get
-    {
-        int count = 0;
-        
-        try
-        {
-            object obj = System.Web.HttpContext.GetGlobalResourceObject("Opportunity", "Opp_Status_ClosedWon");
-            if (obj == null)
-                return -1;
-
-            Sage.Platform.Repository.IRepository<Sage.Entity.Interfaces.IOpportunity> opportunities =
-            Sage.Platform.EntityFactory.GetRepository<Sage.Entity.Interfaces.IOpportunity>();
-            Sage.Platform.Repository.IQueryable query = (Sage.Platform.Repository.IQueryable) opportunities;
-            Sage.Platform.Repository.IExpressionFactory expression = query.GetExpressionFactory();
-            Sage.Platform.Repository.IProjections projection = query.GetProjectionsFactory();
-            Sage.Platform.Repository.ICriteria criteria = query.CreateCriteria();
-            criteria.SetProjection(projection.Count("Account.Id"));
-            criteria.Add(expression.And(
-                            expression.Eq("Account.Id", this.Id),
-                            expression.Eq("Status", obj.ToString())));
-            count = (int) criteria.List<object>()[0];
-        }
-        catch
-        {
-            count = -1;
-        }
-        
-        return count;
-    }
-}
-]]></code>
-    </property>
-    <property xsi:type="OrmCustomProperty" id="fe7bea37-ae86-497e-9b76-b62c28f6010f" lastModifiedUtc="2009-08-13T22:31:45.6707389Z" name="OpportunitiesClosedWonTotal" audited="false" hasGet="true" hasSet="false" returnType="System.Double">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmCustomProperty">
-          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
-            <OrmEntityPropertySDataExtension generate="true" />
-          </extender>
-        </extendee>
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="6380b485-b76f-4cb2-953c-2008f39ff781">
-        <CustomPropertyDataType />
-      </SystemDataType>
-      <code><![CDATA[public virtual System.Double OpportunitiesClosedWonTotal
-{
-    get
-    {
-        double total = 0.0;
-        
-        try
-        {
-            object obj = System.Web.HttpContext.GetGlobalResourceObject("Opportunity", "Opp_Status_ClosedWon");
-            if (obj == null)
-                return -1;
-
-            Sage.Platform.Repository.IRepository<Sage.Entity.Interfaces.IOpportunity> opportunities =
-                Sage.Platform.EntityFactory.GetRepository<Sage.Entity.Interfaces.IOpportunity>();
-            Sage.Platform.Repository.IQueryable query = (Sage.Platform.Repository.IQueryable) opportunities;
-            Sage.Platform.Repository.IExpressionFactory expression = query.GetExpressionFactory();
-            Sage.Platform.Repository.IProjections projection = query.GetProjectionsFactory();
-            Sage.Platform.Repository.ICriteria criteria = query.CreateCriteria();
-            criteria.SetProjection(projection.Sum("SalesPotential"));
-        
-            criteria.Add(expression.And(
-                            expression.Eq("Account.Id", this.Id),
-                            expression.Eq("Status", obj.ToString())));
-            total = (double) (criteria.List<object>()[0] ?? 0.0);
-        }
-        catch
-        {
-            total = 0.0;
-        }
-        return total;
-    }
-}
-]]></code>
-    </property>
-    <property xsi:type="OrmCustomProperty" id="98144bc9-a338-45cc-a1ba-7c3ec46ccd39" lastModifiedUtc="2009-08-13T22:31:50.4527389Z" name="OpportunitiesInactiveCount" audited="false" hasGet="true" hasSet="false" returnType="System.Int32">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmCustomProperty">
-          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
-            <OrmEntityPropertySDataExtension generate="true" />
-          </extender>
-        </extendee>
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="6380b485-b76f-4cb2-953c-2008f39ff781">
-        <CustomPropertyDataType />
-      </SystemDataType>
-      <code><![CDATA[public virtual System.Int32 OpportunitiesInactiveCount
-{
-    get
-    {
-        int count = 0;
-        
-        try
-        {
-            object obj = System.Web.HttpContext.GetGlobalResourceObject("Opportunity", "Opp_Status_Inactive");
-            if (obj == null)
-                return -1;
-
-            Sage.Platform.Repository.IRepository<Sage.Entity.Interfaces.IOpportunity> opportunities =
-            Sage.Platform.EntityFactory.GetRepository<Sage.Entity.Interfaces.IOpportunity>();
-            Sage.Platform.Repository.IQueryable query = (Sage.Platform.Repository.IQueryable) opportunities;
-            Sage.Platform.Repository.IExpressionFactory expression = query.GetExpressionFactory();
-            Sage.Platform.Repository.IProjections projection = query.GetProjectionsFactory();
-            Sage.Platform.Repository.ICriteria criteria = query.CreateCriteria();
-            criteria.SetProjection(projection.Count("Account.Id"));
-            criteria.Add(expression.And(
-                            expression.Eq("Account.Id", this.Id),
-                            expression.Eq("Status", obj.ToString())));
-            count = (int) criteria.List<object>()[0];
-        }
-        catch
-        {
-            count = -1;
-        }
-        return count;
-    }
-}
-]]></code>
-    </property>
-    <property xsi:type="OrmCustomProperty" id="a86313dc-79a6-465d-9eab-287d86c2d676" lastModifiedUtc="2009-08-13T22:31:55.4357389Z" name="OpportunitiesInactiveTotal" audited="false" hasGet="true" hasSet="false" returnType="System.Double">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmCustomProperty">
-          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
-            <OrmEntityPropertySDataExtension generate="true" />
-          </extender>
-        </extendee>
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="6380b485-b76f-4cb2-953c-2008f39ff781">
-        <CustomPropertyDataType />
-      </SystemDataType>
-      <code><![CDATA[public virtual System.Double OpportunitiesInactiveTotal
-{
-    get
-    {
-        double total = 0.0;
-        
-        try
-        {
-            object obj = System.Web.HttpContext.GetGlobalResourceObject("Opportunity", "Opp_Status_Inactive");
-            if (obj == null)
-                return -1;
-            
-            Sage.Platform.Repository.IRepository<Sage.Entity.Interfaces.IOpportunity> opportunities =
-                Sage.Platform.EntityFactory.GetRepository<Sage.Entity.Interfaces.IOpportunity>();
-            Sage.Platform.Repository.IQueryable query = (Sage.Platform.Repository.IQueryable) opportunities;
-            Sage.Platform.Repository.IExpressionFactory expression = query.GetExpressionFactory();
-            Sage.Platform.Repository.IProjections projection = query.GetProjectionsFactory();
-            Sage.Platform.Repository.ICriteria criteria = query.CreateCriteria();
-            criteria.SetProjection(projection.Sum("SalesPotential"));
-        
-            criteria.Add(expression.And(
-                            expression.Eq("Account.Id", this.Id),
-                            expression.Eq("Status", obj.ToString())));
-            total = (double) (criteria.List<object>()[0] ?? 0.0);
-        }
-        catch
-        {
-            total = 0.0;
-        }
-        return total;
-    }
-}
-]]></code>
-    </property>
-    <property xsi:type="OrmCustomProperty" id="56e176b5-7234-4157-83a7-1409d132ee09" lastModifiedUtc="2009-08-13T22:32:39.5787389Z" name="OpportunitiesOpenCount" audited="false" hasGet="true" hasSet="false" returnType="System.Int32">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmCustomProperty">
-          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
-            <OrmEntityPropertySDataExtension generate="true" />
-          </extender>
-        </extendee>
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="6380b485-b76f-4cb2-953c-2008f39ff781">
-        <CustomPropertyDataType />
-      </SystemDataType>
-      <code><![CDATA[public virtual System.Int32 OpportunitiesOpenCount
-{
-    get
-    {
-        int count = 0;
-        try
-        {
-            object obj = System.Web.HttpContext.GetGlobalResourceObject("Opportunity", "Opp_Status_Open");
-            if (obj == null)
-                return -1;
-
-            Sage.Platform.Repository.IRepository<Sage.Entity.Interfaces.IOpportunity> opportunities =
-            Sage.Platform.EntityFactory.GetRepository<Sage.Entity.Interfaces.IOpportunity>();
-            Sage.Platform.Repository.IQueryable query = (Sage.Platform.Repository.IQueryable) opportunities;
-            Sage.Platform.Repository.IExpressionFactory expression = query.GetExpressionFactory();
-            Sage.Platform.Repository.IProjections projection = query.GetProjectionsFactory();
-            Sage.Platform.Repository.ICriteria criteria = query.CreateCriteria();
-            criteria.SetProjection(projection.Count("Account.Id"));
-            criteria.Add(expression.And(
-                            expression.Eq("Account.Id", this.Id),
-                            expression.Eq("Status", obj.ToString())));
-            count = (int) criteria.List<object>()[0];
-        }
-        catch
-        {
-            count = -1;
-        }
-        return count;
-    }
-}
-]]></code>
-    </property>
-    <property xsi:type="OrmCustomProperty" id="d7ded231-1857-49a8-bcda-ebdeff2256c3" lastModifiedUtc="2009-08-13T22:33:06.9857389Z" name="OpportunitiesOpenTotal" audited="false" hasGet="true" hasSet="false" returnType="System.Double">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmCustomProperty">
-          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
-            <OrmEntityPropertySDataExtension generate="true" />
-          </extender>
-        </extendee>
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="6380b485-b76f-4cb2-953c-2008f39ff781">
-        <CustomPropertyDataType />
-      </SystemDataType>
-      <code><![CDATA[public virtual System.Double OpportunitiesOpenTotal
-{
-    get
-    {
-        double total = 0.0;
-        try
-        {
-            object obj = System.Web.HttpContext.GetGlobalResourceObject("Opportunity", "Opp_Status_Open");
-            if (obj == null)
-                return -1;
-
-            Sage.Platform.Repository.IRepository<Sage.Entity.Interfaces.IOpportunity> opportunities =
-                Sage.Platform.EntityFactory.GetRepository<Sage.Entity.Interfaces.IOpportunity>();
-            Sage.Platform.Repository.IQueryable query = (Sage.Platform.Repository.IQueryable) opportunities;
-            Sage.Platform.Repository.IExpressionFactory expression = query.GetExpressionFactory();
-            Sage.Platform.Repository.IProjections projection = query.GetProjectionsFactory();
-            Sage.Platform.Repository.ICriteria criteria = query.CreateCriteria();
-            criteria.SetProjection(projection.Sum("SalesPotential"));
-        
-            criteria.Add(expression.And(
-                            expression.Eq("Account.Id", this.Id),
-                            expression.Eq("Status", obj.ToString())));
-            total = (double) (criteria.List<object>()[0] ?? 0.0);
-        }
-        catch
-        {
-            total = 0.0;
-        }
-        return total;
-    }
-}
-]]></code>
-    </property>
-    <property xsi:type="OrmFieldProperty" id="514bea39-2ea5-41a9-b64c-db4148cb28ba" lastModifiedUtc="2011-05-28T19:44:44.9365Z" name="MergeCode" audited="false" columnName="MERGECODE" maxLength="64" precision="0" scale="0" ordinal="77" isReadOnly="false">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
-          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
-            <OrmEntityPropertySDataExtension generate="true" />
-          </extender>
-        </extendee>
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
-        <TextDataType>
-          <Length>64</Length>
-        </TextDataType>
-      </SystemDataType>
-    </property>
-    <property xsi:type="OrmFieldProperty" id="cc613e61-7317-47f5-8416-324205849483" lastModifiedUtc="2011-05-28T19:44:44.952125Z" name="Rating" audited="false" columnName="RATING" maxLength="32" precision="0" scale="0" ordinal="78" isReadOnly="false">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
-          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
-            <OrmEntityPropertySDataExtension generate="true" />
-          </extender>
-        </extendee>
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
-        <TextDataType>
-          <Length>32</Length>
-        </TextDataType>
-      </SystemDataType>
-    </property>
-    <property xsi:type="OrmFieldProperty" id="f0e4b2d0-d26d-4ed5-b15d-fe24559c82e9" lastModifiedUtc="2011-05-28T19:44:44.952125Z" name="TaxID" audited="false" columnName="TAXID" maxLength="32" precision="0" scale="0" ordinal="79" isReadOnly="false">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
-          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
-            <OrmEntityPropertySDataExtension generate="true" />
-          </extender>
-        </extendee>
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
-        <TextDataType>
-          <Length>32</Length>
-        </TextDataType>
-      </SystemDataType>
-    </property>
-    <property xsi:type="OrmFieldProperty" id="256d5018-34dd-446a-97d4-659bd6a30f3c" lastModifiedUtc="2011-05-28T19:44:44.952125Z" name="TaxExempt" audited="false" columnName="TAXEXEMPT" maxLength="32" precision="0" scale="0" ordinal="80" isReadOnly="false">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
-          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
-            <OrmEntityPropertySDataExtension generate="true" />
-          </extender>
-        </extendee>
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
-        <TextDataType>
-          <Length>32</Length>
-        </TextDataType>
-      </SystemDataType>
-    </property>
-    <property xsi:type="OrmFieldProperty" id="7c1c5312-5bca-4beb-b74e-b2e5a0455d3a" lastModifiedUtc="2011-05-28T19:44:44.952125Z" name="NumDesigners" audited="false" columnName="NUMDESIGNERS" maxLength="32" precision="0" scale="0" ordinal="81" isReadOnly="false">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
-          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
-            <OrmEntityPropertySDataExtension generate="true" />
-          </extender>
-        </extendee>
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
-        <TextDataType>
-          <Length>32</Length>
-        </TextDataType>
-      </SystemDataType>
-    </property>
-    <property xsi:type="OrmFieldProperty" id="ef9db502-2266-4871-8d20-b51dfe9a3bbd" lastModifiedUtc="2011-05-28T19:44:44.952125Z" name="Specialty" audited="false" columnName="SPECIALTY" maxLength="64" precision="0" scale="0" ordinal="82" isReadOnly="false">
-      <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
-          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
-            <OrmEntityPropertySDataExtension generate="true" />
-          </extender>
-        </extendee>
-      </ExtendedPropertiesCollection>
-      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
-        <TextDataType>
-          <Length>64</Length>
-        </TextDataType>
-      </SystemDataType>
-    </property>
-    <property xsi:type="OrmFieldProperty" id="8064d213-b31f-4965-9800-593c0aab0d45" lastModifiedUtc="2012-05-03T16:59:42.2849108Z" name="ClientNotes" audited="false" columnName="CLIENTNOTES" maxLength="2147483647" precision="0" scale="0" ordinal="90" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="fc8ea45e-9af2-4861-bb74-3b7312bfe0b2" lastModifiedUtc="2013-04-22T16:58:51.0883746Z" name="ClientNotes" audited="false" columnName="CLIENTNOTES" maxLength="2147483647" precision="0" scale="0" ordinal="90" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
           <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
@@ -1685,6 +1183,90 @@
         <LongTextDataType>
           <Length>2147483647</Length>
         </LongTextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="1d7a4efb-e37d-44e2-9b0b-38a63b01c83d" lastModifiedUtc="2013-04-22T16:58:51.0923749Z" name="MergeCode" audited="false" columnName="MERGECODE" maxLength="64" precision="0" scale="0" ordinal="77" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>64</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="0ccc459a-0f29-46f2-963b-2070b8ceda36" lastModifiedUtc="2013-04-22T16:58:51.094375Z" name="Rating" audited="false" columnName="RATING" maxLength="32" precision="0" scale="0" ordinal="78" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>32</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="decaa9b6-6c0b-4a4e-b5dc-cb52b61a7b46" lastModifiedUtc="2013-04-22T16:58:51.0963751Z" name="TaxID" audited="false" columnName="TAXID" maxLength="32" precision="0" scale="0" ordinal="79" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>32</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="73d348b9-688c-4784-840a-8c959fd30e5f" lastModifiedUtc="2013-04-22T16:58:51.0983752Z" name="TaxExempt" audited="false" columnName="TAXEXEMPT" maxLength="32" precision="0" scale="0" ordinal="80" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>32</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="8029a96a-5ba3-42b1-b4e4-c963ffa4fb93" lastModifiedUtc="2013-04-22T16:58:51.1013754Z" name="NumDesigners" audited="false" columnName="NUMDESIGNERS" maxLength="32" precision="0" scale="0" ordinal="81" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>32</Length>
+        </TextDataType>
+      </SystemDataType>
+    </property>
+    <property xsi:type="OrmFieldProperty" id="bb417690-e9fe-45a3-a8ba-98295ba97ac3" lastModifiedUtc="2013-04-22T16:58:51.1033755Z" name="Specialty" audited="false" columnName="SPECIALTY" maxLength="64" precision="0" scale="0" ordinal="82" isReadOnly="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
+      </ExtendedPropertiesCollection>
+      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
+        <TextDataType>
+          <Length>64</Length>
+        </TextDataType>
       </SystemDataType>
     </property>
   </properties>

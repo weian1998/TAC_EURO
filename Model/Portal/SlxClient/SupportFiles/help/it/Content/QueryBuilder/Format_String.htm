@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Stringa Formato</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilder/Format_String.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor627"></a>Stringa Formato</h1>
+        <p>Utilizzare la stringa formato per definire il modo con cui i dati sono visualizzati nella query. Per prima cosa, selezionare il <a href="Format_Type.htm">Tipo Formato</a>. Quindi,digitare una stringa formato per modificare il tipo di formato selezionato. Le opzioni valide dipendono dal tipo di formato selezionato. Un formato stringa deve cominciare con il segno % e terminare con un carattere.</p>
+        <p>[%] [tipo]</p>
+        <p>Se necessario, è possibile includere:</p>
+        <ul>
+            <li class="Bullets" value="1"><span class="MCPopup"><a href="javascript:void(0);" MadCap:src="../QueryBuilderAdv/Argument_index_specifier.htm" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">uno specificatore indice argomento</a></span>
+            </li>
+            <li class="Bullets" value="2"><span class="MCPopup"><a href="javascript:void(0);" MadCap:src="../QueryBuilderAdv/Left_justification_indicator.htm" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">un Indicatore di Giustificazione Sinistra</a></span>
+            </li>
+            <li class="Bullets" value="3"><span class="MCPopup"><a href="javascript:void(0);" MadCap:src="Width_specifier.htm" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">uno specificatore di larghezza</a></span>
+            </li>
+            <li class="Bullets" value="4"><span class="MCPopup"><a href="javascript:void(0);" MadCap:src="../QueryBuilderAdv/Precision_specifier.htm" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">uno specificatore di precisione</a></span>
+            </li>
+        </ul>
+        <p>[%] [indice:] [-] [larghezza] [.precisione] [tipo]</p>
+        <p>Per specificare quanti decimali utilizzare in una stringa formato, impostare la stringa al formato normale che si utilizzerebbe. Quindi, aggiungere lo specificatore di precisione - un punto decimale seguito dal numero di cifre - prima del carattere di formato stringa, ma dopo il % iniziale. Ad esempio:</p>
+        <ul>
+            <li class="Bullets" value="1">Tipo Campo Float</li>
+            <li class="Bullets" value="2">Tipo Formato: ftCurrency.</li>
+            <li class="Bullets" value="3">Stringa Formato: %.4f</li>
+            <li class="Bullets" value="4">Dati (Non formattati): 3.1415926</li>
+            <li class="Bullets" value="5">Risultato: 3.1416</li>
+        </ul>
+        <p>E' possibile utilizzare uno qualsiasi dei seguenti tipi di stringhe formato:</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="Boolean_Field_Format_Strings.htm">Stringhe Formato per campi Booleani</a>
+            </li>
+            <li class="Bullets" value="2"><a href="Currency_Field_Format_String.htm">Stringhe Formato Valuta e telefono</a>
+            </li>
+            <li class="Bullets" value="3"><a href="Date_Time _Field_Format_Strings.htm">Stringhe Formato Campi Ora/Data</a>
+            </li>
+            <li class="Bullets" value="4"><a href="Fixed_Field_Format_Strings.htm">Stringhe Formato per Campi Fissi</a>
+            </li>
+            <li class="Bullets" value="5"><a href="Integer_Field_Format_Strings.htm">Stringhe Formato per Campi Interi</a>
+            </li>
+        </ul>
+        <p class="RelatedTopics">Argomenti Correlati</p>
+        <p MadCap:conditions="Output.WebClient"><a href="Using_SalesLogix_Query_Builder.htm" target="_self">Panoramica su Query Builder</a>
+        </p>
+        <div style="width: 100%;position: relative;">
+            <p>&#160;</p>
+        </div>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Comunicaci come possiamo migliorare la guida</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

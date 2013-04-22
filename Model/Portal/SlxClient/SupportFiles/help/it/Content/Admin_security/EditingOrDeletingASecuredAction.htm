@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Modificare o Eliminare un'Azione Protetta</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Admin_security/EditingOrDeletingASecuredAction.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1>Modificare o Eliminare un'Azione Protetta</h1>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <col style="width: 38px;" />
+            <col />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/adminonly.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p>Possono accedere a queste funzioni l'amministratore di sistema e gli utenti con il <a href="What_are_Roles_and_Secured_Actions.htm" target="_self">ruolo</a> appropriato.Possono accedere a queste funzioni l'amministratore di sistema e gli utenti con il ruolo da amministratori.</p>
+                </td>
+            </tr>
+        </table>
+        <p>Se un'azione protetta viene rinominata o eliminata, tutti gli elementi a cui era assegnata in Application Architect vengono separati da essa. Sebbene la relazione non esista più, l'elemento rimane protetto finchè l'azione non è manualmente rimossa dalla proprietà Sicurezza Applicata del controllo in Application Architect.          <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="ActionExample">Per saperne di più...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a></p>
+        <p MadCap:targetName="ActionExample" style="display: none;">Esempio: è stata creata un'azione protetta chiamata Stampa/Report ed è aggiunta al pulsante Stampa della vista Report.  Una volta eliminata l'azione, il controllo del pulsante Stampa visualizzerà ancora Stampa/Report in Sicurezza Applicata, anche se l'azione a tutti gli effetti non esiste più. Nel momento in cui un utente accede alla vista Report, non è in grado di utilizzare il pulsante Stampa perchè non gli è stato assegnato un ruolo contenente l'azione protetta Stampa/Report. Un utente con i privilegi di amministratore può invece accedere a tutti gli elementi dell'interfaccia, ignorando qualsiasi azione protetta.</p>
+        <p>Se si desidera rimuovere la protezione dall'elemento è necessario eliminare l'azione protetta e di seguito rimuoverla manualmente dalla proprietà Sicurezza Applicata del controllo in Application Architect.</p>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <col style="width: 38px;" />
+            <col />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/caution.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p>Sage consiglia di salvare le informazioni sulla scheda <a href="SecuredActionLocationsTab.htm" target="_self">Posizioni</a> dell'Azione Protetta prima di rinominarla o eliminarla.</p>
+                </td>
+            </tr>
+        </table>
+        <p class="RelatedTopics">Come fare a?</p>
+        <p class="HowDoI"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="edit">Modificare un'azione protetta<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <ol MadCap:targetName="edit" style="display: none;">
+            <li class="Topic-Text-Numbered" value="1">Aprire la vista <a href="SecuredActionDetailView.htm" target="_self">Dettaglio Azione Protetta</a> dell'azione che si vuole modificare.</li>
+            <li class="Topic-Text-Numbered" value="2">Usare la scheda <a href="SecuredActionRolesTab.htm" target="_self">Ruoli</a> per aggiungere l'azione protetta a un ruolo. o rimuoverla da esso.</li>
+            <li class="Topic-Text-Numbered" value="3">Fare clic su <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Salva<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>..</li>
+        </ol>
+        <p class="HowDoI"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="delete">Eliminare un'azione protetta<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <ol MadCap:targetName="delete" style="display: none;">
+            <li class="Topic-Text-Numbered" value="1">Aprire la vista <a href="SecuredActionDetailView.htm" target="_self">Dettaglio Azione Protetta</a> dell'azione che si vuole eliminare.</li>
+            <li class="Topic-Text-Numbered" value="2">Fare clic su <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Elimina<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/Delete.gif" /></span></span>.</li>
+            <li class="Topic-Text-Numbered" value="3">Fare clic su <b>OK</b> per confermare.</li>
+        </ol>
+        <p><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="recover">Recuperare un'azione protetta<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <p MadCap:targetName="recover" style="display: none;">Se un'azione protetta è stata accidentalmente eliminata o rinominata, è possibile creare una nuova azione con lo stesso nome: tutti i controlli in Application Architect annessi all'azione precedente saranno collegati alla nuova azione. Se per un controllo l'azione è stata rimossa manualmente dalla proprietà Sicurezza Applicata, quel controllo non sarà più collegato alla nuova azione. Il nome della nuova azione deve essere IDENTICO a quello della precedente.</p>
+        <p class="RelatedTopics">Argomenti Correlati</p>
+        <p><a target="_self" href="What_are_Roles_and_Secured_Actions.htm">Cosa sono i Ruoli e le Azioni Protette?</a>
+        </p>
+        <p><a href="CreatingASecuredAction.htm" target="_self">Creare un'Azione Protetta</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Comunicaci come possiamo migliorare la guida</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

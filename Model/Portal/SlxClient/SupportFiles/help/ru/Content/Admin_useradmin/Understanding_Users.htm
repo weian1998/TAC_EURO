@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Администрирование|Администрирование Пользователей" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Понятие Пользователи</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Admin_useradmin/Understanding_Users.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1>Понятие Пользователи</h1>
+        <p><a name="kanchor24"></a>Пользователи - это люди, имеющие доступ к базе данных Sage SalesLogix. Каждый пользователь имеет профиль, определяющий такую информацию, как имя пользователя, должность, менеджер, участник команды, участник отдела, и права доступа.</p>
+        <p>Вы можете добавить любой из следующих типов пользователей:</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="network">Сеть<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a> <![CDATA[ ]]></li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="network" style="display: none;">Пользователь, получающий доступ к Sage SalesLogix через прямое сетевое соединение к базе данных.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="concurrent1;concurrent2;concurrent3;concurrent4">Конкурент<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="concurrent1" style="display: none;"> Эти лицензии позволяют получить доступ к Sage SalesLogix, но не приписываются к индивидуальному пользователю. Количество пользователей, получающих одновременно доступ к системе, не должно превышать количество лицензий для Конкурентных пользователей. Например, если у вас есть 100 лицензий для конкурентных пользователей, вы можете создать любое количество конкурентных пользователей, но только 100 из них смогут войти в систему одновременно.</p>
+        <p class="Topic-Text-Indent" MadCap:targetName="concurrent2" style="display: none;">Конкурентные пользователи имеют возможность войти в Веб Клиент, Sage SalesLogix Клиент, Администратор, Архитектор, SpeedSearch Клиент, Sync Клиентt (Только удаленный офис) и Remote Office. Каждый вход в систему будет соответствовать одной лицензии конкурентного пользователя. Конкурентные пользователи, входящие в SpeedSearch Client не будут занимать лицензии конкурентного пользователя, несмотря на метод доступа.</p>
+        <p class="Topic-Text-Indent" MadCap:targetName="concurrent3" style="display: none;">Лицензии конкурентного пользователя могут делиться между Хост и Удаленными Офисами. Это назначение может быть изменено в любой момент через Администратор (Systems &gt; Offices &gt; Edit Remote Office &gt; Sync Options tab). Когда вы приписываете лицензии конкурентного пользователя Удаленному Офису, Хост принимает, что все лицензии Удаленного Офиса употребляются всегда. Например, если у вас есть 30 лицензий конкурентных пользователей и вы припиисываете 10 лицензий одному Удаленному офису, Хост автоматически вычитает 10 лицензий и разрешает только 20 конкурентным пользователям войти в приложение основного офиса.</p>
+        <p class="Topic-Text-Indent" MadCap:targetName="concurrent4" style="display: none;">Тип лицензии конкурентного пользователя не может быть приписан Удаленным пользователям.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="remote1;remote2">Удаленный<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="remote1" style="display: none;">Удаленные клиенты хранят подмножество основной базы данных на локальном компьютере и используют синхронизацию для переноса изменений между их системой и основным офисом. Удаленные пользователи никогда не подсоединяются с помощью Удаленного офиса, всегда с помощью основного офиса.</p>
+        <p class="Topic-Text-Indent" MadCap:targetName="remote2" style="display: none;">Если у вас менее чем 5 удаленных пользователей, и нет необходимости одновременно получать доступ к одним и тем же субъектам, тогда каждый пользователь может быть определен как Удаленный пользователь. Путешествующий продавец или единственный региональный представитель в удаленном местоположении являются примерами Удаленных пользователей.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="template1;template2;template3">Шаблон<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="template1" style="display: none;">Шаблоны пользователей определяют параметры, которые вы хотите использовать при создании новых пользователей. Например, можно создать шаблон пользователя, содержащий все параметры Конкурентных пользователей. При создании нового пользователя, можно использовать шаблон конкурентного пользователя и параметры профиля уже определены.</p>
+        <ul>
+            <li class="Topic-Text-Bulleted-2" MadCap:targetName="template2" value="1" style="display: none;">Шаблоны пользователя не влияют на количество лицензий и не появляются в списке пользователей.</li>
+            <li class="Topic-Text-Bulleted-2" MadCap:targetName="template3" value="2" style="display: none;">Шаблон пользователя не является активным пользователем и не может войти в Sage SalesLogix.</li>
+            <li class="Bullets" value="3"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="webOnly">Только Веб<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="webOnly" style="display: none;">Пользователи, которые имеют доступ только к Sage SalesLogix Web Client и могут просматривать, добавлять, удалять или изменять информацию на основе их прав доступа. Этот тип пользователя не может войти в Sage SalesLogix Client.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="add_on">Добавить<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="add_on" style="display: none;">Пользователь Добавить позволяет вам создать пользователя с доступом к Sage SalesLogix OLE DB Provider для сторонних интерфейсов. Этот тип пользователя не может войти в Приложения Sage SalesLogix.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="webViewer1;webViewer2;webViewer3">Веб Viewer<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="webViewer1" style="display: none;">Веб Viewer пользователи имеют доступ Только Чтение к субъектам, контактам, сделкам, заявкам. В зависимости от субъекта и безопасности календаря, пользователи Веб Viewer могут добавлять, редактировать, удалять дела, заметки, историю, но не могут использовать отчеты и процессы. Этот тип пользователя не может войти в Sage SalesLogix Client.</p>
+        <p class="Topic-Text-Indent" MadCap:targetName="webViewer2" style="display: none;">Веб Viewer пользователь не может:</p>
+        <ul MadCap:targetName="webViewer3" style="display: none;">
+            <li class="Topic-Text-Bulleted-2" value="1">Быть менеджером.</li>
+            <li class="Topic-Text-Bulleted-2" value="2">Быть куратором любой команды.</li>
+            <li class="Topic-Text-Bulleted-2" value="3">Вписывать других пользователей на закладке Участники команды.</li>
+        </ul>
+        <p>В дополнение, Sage SalesLogix поддерживает несколько специальных типов пользователей:</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="systemadmin">Системный администратор<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="systemadmin" style="display: none;">Пользователь с доступом ко всем параметрам и функциям в Sage SalesLogix. Системный администратор заходит под логином "admin."</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="adminstrative">Административныйe<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="adminstrative" style="display: none;">Пользователь, который может выполнять задачи системного администратора. Пользователи с доступом к административным функциям определяются с помощью административных ролей в Администраторе или ролей в Веб Клиенте. Административные пользователи заходят в систему под своим именем пользователя (например, Lee или Dan). Системный администратор остается единственным пользователем с полным доступом ко всем параметрам и функциям системы.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="retired">Уволенный<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="retired" style="display: none;">Тип пользователя, обеспечивающий способ сохранить историю пользователей, покинувших вашу организацию. Уволенные пользователи подобны неактивным пользователям в том, что их активности сохраняются в базе данных, несмотря на то что они уже не могут войти в систему. Неактивные пользователи используют лицензии, уволенные пользователи - не используют.</p>
+        <p class="RelatedTopics">См. также</p>
+        <p><a href="Adding_a_User.htm" target="_self">Добавление Пользователя</a>
+        </p>
+        <p><a href="Creating_a_Copy_of_a_User.htm" target="_self">Копирование Пользователя</a>
+        </p>
+        <p><a href="User_Detail_View.htm" target="_self">Детальное представление Пользователя</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,197 +1,183 @@
 <%@ Import namespace="Sage.Platform.Application.Services" %>
 <%@ Import namespace="Sage.Platform.Application"%>
-<%@ Import namespace="Sage.Platform.Security"%>
-<%@ Import namespace="Sage.SalesLogix.Web"%>
+<%@ Import Namespace="Sage.Platform.Security" %>
+<%@ Import Namespace="Sage.Platform.WebPortal.Services" %>
+<%@ Import Namespace="Sage.Platform.WebPortal.SmartParts" %>
 <%@ Import namespace="Sage.Platform.WebPortal"%>
-<%@ Import namespace="System.ComponentModel"%>
-<%@ Import namespace="System.Drawing.Design"%>
-<%@ Control Language="C#" %>
+<%@ Control Language="C#" EnableViewState="false" ViewStateMode="Disabled" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.Timeline" TagPrefix="SalesLogix" %>
 
-<SalesLogix:ListPanel runat="server" ID="GroupList" FriendlyName="MainList" IncludeScript="true" IncludeScriptAsReference="false" DelayLoad="true" DelayLoadUntilReady="true" AddTo="center_panel_center" Viewport="mainViewport" CreateOnly="true">
-    <ViewOptions>
-        <SalesLogix:ViewOptions Name="list" FitToContainer="true" />
-    </ViewOptions>
-    <StateDefinition>
-        <%-- save panel state based on family --%>
-        <StateID Value="function() { return Sage.Services.getService('ClientGroupContext').getContext().CurrentFamily; }" Format="Literal" />
-        <%-- save view state based on group --%>
-        <ChildStateID Value="function() { return Sage.Services.getService('ClientGroupContext').getContext().CurrentGroupID; }" Format="Literal" />
-    </StateDefinition>
-    <MetaConverters>
-        <SalesLogix:MetaConverter Name="list" Type="groupmetaconverter" />
-        <SalesLogix:MetaConverter Name="summary" Type="groupsummarymetaconverter" />
-    </MetaConverters>
-    <Connections>
-        <SalesLogix:SDataConnection Name="list" Resource="slxdata.ashx/slx/crm/-/groups">
-            <Parameters>
-                <SalesLogix:ConnectionParameter 
-                    Name="family"
-                    Value="function() { return Sage.Services.getService('ClientGroupContext').getContext().CurrentFamily; }"
-                    Format="Literal" />
-                <SalesLogix:ConnectionParameter 
-                    Name="name"
-                    Value="function() { return Sage.Services.getService('ClientGroupContext').getContext().CurrentName; }"
-                    Format="Literal" />
-                <SalesLogix:ConnectionParameter Name="format" Value="json" />  
-            </Parameters>
-        </SalesLogix:SDataConnection>
-        <SalesLogix:SDataConnection Name="summary" Resource="slxdata.ashx/slx/crm/-/groups" UseStaticMetaData="true">
-            <MetaData ID="id" Root="items" VersionProperty="version" TotalProperty="total_count" />
-            <Parameters>
-                <SalesLogix:ConnectionParameter 
-                    Name="family"
-                    Value="function() { return Sage.Services.getService('ClientGroupContext').getContext().CurrentFamily; }"
-                    Format="Literal" />
-                <SalesLogix:ConnectionParameter 
-                    Name="name"
-                    Value="function() { return Sage.Services.getService('ClientGroupContext').getContext().CurrentName; }"
-                    Format="Literal" />
-                <SalesLogix:ConnectionParameter Name="format" Value="json" />
-                <SalesLogix:ConnectionParameter Name="justids" Value="True" />                        
-            </Parameters>
-        </SalesLogix:SDataConnection>        
-    </Connections>
-</SalesLogix:ListPanel>
+<style>
+.listPanelToolbar
+{
+    height: 21px;
+}
+.rightTools
+{
+    text-align: right;
+}
+.leftTools
+{
+    text-align: left;
+    z-index: 4;
+}
 
+
+.jsonPrintDetailPane
+{
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background: #eee;
+    border-top: solid 1px #aaa;
+}
+
+.jsonPrintDetailPane pre
+{
+    background: transparent;
+    border: none 0px transparent;
+}
+</style>
 <script type="text/javascript">
-     var waitingSelcectionCount = false;
-  $(document).ready(function() {                       
-        function hasValidFilter(store) {
-            return (store.filter && store.filter.columns && store.filter.columns.length > 0) || //old style
-                (store.filter && store.filter.field); //new style
-        }
+    require([
+        'dojo/ready',
+        'Sage/UI/ListPanel',
+        'Sage/UI/GroupListConfigurationProvider'
+    ],
+    function (ready, ListPanel, GroupListConfigurationProvider) {
+        ready(function(){
+            var virdir = function() {
+                var match = /^\/([^\/]+)\//.exec(location.pathname);                
+                return match ? match[1] : '';
+            };        
 
-        var list = window.<%= GroupList.ClientID %>;
-         
-        list.on('render', function(l) {
-            var context = Sage.Services.getService("ClientContextService");
-            if (context && context.containsKey("GroupingChar")) 
-                Sage.SalesLogix.Controls.GroupMetaConverter.numericGroupingChar = context.getValue("GroupingChar");      
-             
-            if (l.views.list)
-            {
-                                            
-               l.views.list.getSelectionModel().addListener("selectionchange", function() {
-                     // need to delay this
-                    if( !waitingSelcectionCount)
-                    {
-                       waitingSelcectionCount = true;
-                       window.setTimeout( function() {
-                       
-                          waitingSelcectionCount = false;
-                       
-                         $("#selectionCount").text(l.getTotalSelectionCount());
-                        }, 
-                        1000);
-                     }                    
-                       
-                },{
-                    single : true,        
-                    addOnce : true
-                    
-               });
-                               
-                l.views.list.addListener("sortChange", function() {              
-                  
-                       window.setTimeout( function() {
-                          $("#selectionCount").text(l.getTotalSelectionCount());
-                        }, 
-                        1000);
-                             
-                });
-                
-               
-            }
-            var svc = Sage.Services.getService("GroupManagerService");
-            svc.addListener(Sage.GroupManagerService.FILTER_CHANGED, function(mgr, evt) {
-                    if (hasValidFilter(evt)) 
-                        l.applyFilter(evt.filter);
-                    else
-                        l.clearFilter();                               
-                   l.refresh();
-                },{
-                    hold: 2000
-                });
-                
-            svc.addListener(Sage.GroupManagerService.LISTENER_HOLD_STARTED, function (mgr, args) {
-                    
-                });
-                
-            svc.addListener(Sage.GroupManagerService.CURRENT_GROUP_CHANGED, function (mgr, args) {                            
-                    l.clearFilter();                               
-                    l.refresh();    
-                   window.setTimeout( function() {
-                      $("#selectionCount").text(l.getTotalSelectionCount());
-                    }, 
-                    1000);
-                }); 
-        });
-        list.on("itemcontextmenu", function(d,e) {            
-            showAdHocMenu(e);
-            e.stopEvent();
-        });
-             
-        var svc = Sage.Services.getService("GroupManagerService");
+            ready(function() {
+                var systemService = new Sage.SData.Client.SDataService({
+                    serverName: window.location.hostname,
+                    virtualDirectory: virdir() + '/slxdata.ashx',
+                    applicationName: 'slx',
+                    contractName: 'system',
+                    port: window.location.port && window.location.port != 80 ? window.location.port : false,
+                    json: true,
+                    protocol: /https/i.test(window.location.protocol) ? 'https' : false,
+                    convertCustomEntityProperty: function(ns, propertyName, value) {
+                        if (propertyName === 'layout')
+                        {
+                            var layout = value[ns + ':layoutItem'];
+                            if (layout) 
+                                return dojo.isArray(layout) ? layout : [layout];
+                        }
+                        return value;
+                    }
+                });        
+
+                var groupsProvider = new GroupListConfigurationProvider({
+                    service: systemService,
+                    detailConfiguration: <%= GetConfiguration(DetailsPaneConfigFile) %>,
+                    summaryOptions: <%= GetConfiguration(SummaryConfigFile) %>
+                    }); 
         
-        window.setTimeout(        // need to delay this or the FILTERCHANGED event doesn't register correctly
-            function() {list.present();}, 
-            10);
-    });    
+                var panel = new ListPanel({
+                    id: 'list',
+                    configurationProvider: groupsProvider,
+                    //detailType: 'Sage.UI.JsonPrintDetailPane',
+                    detailType: 'Sage.UI.SummaryDetailPane',
+                    helpTopicName: '<%= HelpTopic %>',
+                region: 'center'
+            });
+
+                var container = dijit.byId('centerContent'),
+                    child = dijit.byId('mainContentDetails');
+                if (container && child) {
+                    container.removeChild(child);
+                    container.addChild(panel);
+                    container.layout();
+                }
+            });
+        });
+    });
 </script>
 
 <script runat="server" type="text/C#">
 
-    private string _summaryConfig;
-    public string SummaryConfigFile
-    {
-        get { return _summaryConfig; }
-        set { _summaryConfig = value; }
-    }
+    public string SummaryConfigFile { get; set; }
+    public string DetailsPaneConfigFile { get; set; }
+    public string ListContextMenu { get; set; }
 
-    private string _detailPaneConfig;
-    public string DetailsPaneConfigFile
-    {
-        get { return _detailPaneConfig; }
-        set { _detailPaneConfig = value;  }
-    }
+    [ServiceDependency]
+    public IMenuService MenuService { get; set; }
     
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e);
 
-        IUserOptionsService userOption = Sage.Platform.Application.ApplicationContext.Current.Services.Get<IUserOptionsService>();
-
-        bool autoFitColumns;
-        string autoFitColumnsValue = userOption.GetCommonOption("autoFitColumns", "GroupGridView");
-        if (!Boolean.TryParse(autoFitColumnsValue, out autoFitColumns))
-            autoFitColumns = true;
-
-        ViewOptions listViewOptions = GroupList.ViewOptions.Find("list");
-        if (listViewOptions == null)
-            GroupList.ViewOptions.Add((listViewOptions = new ViewOptions()));
-
-        listViewOptions.Name = "list";
-        listViewOptions.FitToContainer = autoFitColumns;
-        listViewOptions.selectionContextKey = GroupList.ClientID;
-        listViewOptions.selectionContextType = "Group";
         if (!IsPostBack)
         {
             Sage.SalesLogix.SelectionService.ISelectionService ss = Sage.SalesLogix.Web.SelectionService.SelectionServiceRequest.GetSelectionService();
             if (ss != null)
             {
                 Sage.SalesLogix.SelectionService.ISelectionContext groupSelectionContext = new Sage.SalesLogix.Client.GroupBuilder.GroupSelectionContext();
-                groupSelectionContext.Key = listViewOptions.selectionContextKey;
+                groupSelectionContext.Key = "list"; // listViewOptions.selectionContextKey;
                 groupSelectionContext.SelectionInfo = new Sage.SalesLogix.SelectionService.SelectionInfo();
-                ss.SetSelectionContext(listViewOptions.selectionContextKey, groupSelectionContext);
+                ss.SetSelectionContext("list" /*listViewOptions.selectionContextKey */, groupSelectionContext);
             }
         }
-        if (!String.IsNullOrEmpty(SummaryConfigFile))
-            GroupList.ApplySummaryConfig(String.Format("~/SummaryConfigData/{0}.xml", SummaryConfigFile));
-        if (!string.IsNullOrEmpty(DetailsPaneConfigFile))
-            GroupList.ApplySummaryConfigForDetail(String.Format("~/SummaryConfigData/{0}.xml", DetailsPaneConfigFile));
+        
+        if (MenuService != null)
+        {
+            RegisterContextMenu(!string.IsNullOrEmpty(ListContextMenu) ? ListContextMenu : "GroupListContextMenu",
+                                "listContextMenu");
+        }
+    }
 
+    private void RegisterContextMenu(string menu, string id)
+    {
+        var menuPath = (menu.IndexOf("ContextMenuItems") > 0) ? menu : string.Format("~/ContextMenuItems/{0}.ascx", menu);
+        
+        if (System.IO.File.Exists(Server.MapPath(menuPath)))
+        {
+            var menuControl = Page.LoadControl(menuPath);
+            if (menuControl != null)
+            {
+                var cMenu = menuControl.Controls[0] as NavItemCollection;
+                if (cMenu != null)
+                {
+                    cMenu.ID = id;
+                    MenuService.AddMenu(string.Empty, cMenu, menuType.ContextMenu);
+                }
+            }
+        }
+    }
+    
+    private string GetConfiguration(string configFile)
+    {
+        if (string.IsNullOrEmpty(configFile)) 
+        {
+            return "false";
+        }
+        
+        Sage.Platform.SummaryView.WebSummaryViewConfiguration config;
+        var serializer = new System.Xml.Serialization.XmlSerializer(typeof(Sage.Platform.SummaryView.WebSummaryViewConfiguration));
+        using (var reader = new System.IO.StreamReader(Page.MapPath(string.Format("~/SummaryConfigData/{0}.xml", configFile))))
+        {
+            config = serializer.Deserialize(reader) as Sage.Platform.SummaryView.WebSummaryViewConfiguration;
+        }
+        if (config == null)
+        {
+            return string.Empty;
+        }
+            
+        var obj = new Sage.Common.Syndication.Json.Linq.JObject();
+        obj["mashupName"] = config.MashupName;
+        obj["queryName"] = config.QueryName;
+        obj["templateLocation"] = config.Template;
+            
+        return Sage.Common.Syndication.Json.JsonConvert.SerializeObject(obj);
+    }
+
+    private string GetHelpTopic()
+    {
         EntityPage page = Page as EntityPage;
         if (page != null)
         {
@@ -202,18 +188,19 @@
             if (string.IsNullOrEmpty(HelpTopic))
                 pageLink.NavigateUrl = GetDefaultTopic();
 
-            GroupList.HelpUrl = pageLink.GetWebHelpLink().Url;
+            return pageLink.GetWebHelpLink().Url;
         }
+        return string.Empty;
     }
 
     private string GetDefaultTopic()
     {
-        string defaultTopic = string.Empty;
+        var defaultTopic = string.Empty;
         try
         {
             Match pageName = Regex.Match(Page.AppRelativeVirtualPath, @"\/(?<topic>[^\.]*)\.[\w]*");
             if (pageName.Groups.Count > 0)
-                defaultTopic = string.Concat(pageName.Groups["topic"].Value ?? string.Empty, "listview").ToLower();
+                defaultTopic = string.Concat(pageName.Groups["topic"].Value, "listview").ToLower();
         }
         catch { } // if the regular expression fails, just return an empty string
 

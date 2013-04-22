@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>Sage.UI.Filters Browser Tests</title>
+        <link rel="stylesheet" type="text/css" href="../../../../../Libraries/dojo/dijit/themes/claro/claro.css" />
+        <script type="text/javascript" src="../../Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript">
+            dojo.provide("Sage.UI.Filters.tests.EditFilters");
+            dojo.require("dojo.parser");
+            dojo.require("doh.runner");
+            dojo.require("dojo.data.ItemFileReadStore");
+            dojo.require("Sage.UI.Filters.EditFilters");
+
+            dojo.ready(function () {
+                var data = {
+                        identifier: '$key',
+                        items: [
+                            { '$key': 1, displayName: 'Account', filterName: 'Account', filterType: 'checkedList' },
+                            { '$key': 2, displayName: 'City', filterName: 'City', filterType: 'checkedList' }
+                        ]
+                    },
+                    store = new dojo.data.ItemFileReadStore({ data: data });
+                
+                doh.register("Sage.UI.Filters.tests.EditFilters", [
+                function testLifeCycle() {
+                    try {
+                        var editFilters = new Sage.UI.Filters.EditFilters({id: 'editFilters', store: store});
+                        editFilters.showDialog();
+                        editFilters.hideDialog();
+                        editFilters.destroy();
+                        
+                        // Ensure we destroyed OK
+                        doh.t(typeof dijit.byId('editFilters') === 'undefined');
+                    } catch (err) {
+                        console.error(err);
+                        doh.t(false);
+                    }
+                }
+            ]);
+
+                //Execute D.O.H. in this remote file.
+                doh.run();
+            });
+        </script>
+    </head>
+    <body class="claro">
+        <form>
+
+
+        </form>
+    </body>
+</html>

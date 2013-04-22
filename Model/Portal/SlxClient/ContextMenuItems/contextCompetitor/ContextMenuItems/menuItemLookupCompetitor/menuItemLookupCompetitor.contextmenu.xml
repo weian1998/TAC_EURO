@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="14bec5e2-1c34-4b55-afa0-ad2d16605576">
   <ItemId>menuItemLookupCompetitor</ItemId>
-  <NavUrl>javascript:showMainLookupFor('COMPETITOR','Competitor.aspx');</NavUrl>
+  <NavUrl>javascript:Sage.Utility.Groups.showMainLookupFor('COMPETITOR','Competitor.aspx');</NavUrl>
   <LargeImageUrl />
   <SmallImageUrl />
   <ContextMenuId />

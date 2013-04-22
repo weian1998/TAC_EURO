@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Объединение Данных</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/TableStyle.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Integration Contract/Merge_Data.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1>Объединение Данных</h1>
+        <p><a name="kanchor477"></a>Экран Объединения данных отображает различия в данных при связывании записей между Sage SalesLogix и системой учета. Используйте этот экран для выбора данных, которые вы хотите использовать при слиянии записей. Данные, которые вы храните, переписывает данные другой системы. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="IC rules">Узнать больше...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a></p>
+        <ul MadCap:targetName="IC rules" style="display: none;">
+            <li value="1">
+                <p>Если Интеграция учета не включена и вы объединяете два субъекта, заказы, связанные с удаляемым субъектом, добавляются к объединяемому субъекту.</p>
+            </li>
+            <li class="Bullets" value="2">Если интеграция учета включена, и вы сливаете два субъекта, субъект, у которого есть связанные заказы или котировки, которые были подтверждены в учетной системе, не могут быть удалены (субъект, который содержит подтвержденные записи, не может быть субъектом-источником). При необходимости, можно контролировать субъект-источник с помощью выбора этого субъекта первым при объединении данных. Это позволяет вам сохранить субъект с связанными заказами.</li>
+        </ul>
+        <p class="Infinitive">Чтобы выбрать</p>
+        <ol>
+            <li class="Topic-Text-Numbered" value="1">Откройте <a href="Linking_Records.htm" target="_self">Мастер связи</a> и пройдите предыдущие экраны.</li>
+        </ol>
+        <ol MadCap:continue="true">
+            <li class="Topic-Text-Numbered" value="2">Заполните экран <span class="SLXBold">Объединить данные</span>, нажмите <span class="SLXBold">Следующий</span>, чтобы перейти к следующему шагу. </li>
+        </ol>
+        <p class="Topic-Text-Indent">В зависимости от ваших выборов, вам может понадобиться <a href="Merge_Contacts.htm" target="_self">объединить контакты</a>.</p>
+        <table class="TableStyle-TableStyle" style="mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" cellspacing="0">
+            <col style="width: 149px;" class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Поле</th>
+                    <th class="HeadD-Column1-Header1">Описание/Действие</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Свойство</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>Перечисляет поля данных, которые существуют для записи в двух экземплярах в Sage SalesLogix.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>Колонка <i>[Источник]</i> <![CDATA[ ]]></p>
+                    </td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>Используйте колонку слева от Колонки источника, чтобы выбрать, какие данные сохранить из Sage SalesLogix при объединении записей.</p>
+                        <p>Выберите параметр в заголовке колонки, чтобы сохранить все данные Sage SalesLogix (Источник).</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Колонка <i>[Цель]</i></td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>Используйте колонку слева от целевой Колонки, чтобы выбрать, какие данные сохранить из учетной системы при объединении записей.</p>
+                        <p>Выберите параметр в заголовке колонки, чтобы сохранить все данные учетной системы.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">Скрыть Дубликаты или Показать все</td>
+                    <td class="BodyA-Column1-Body1">Нажмите, чтобы показать или скрыть информацию о свойствах, одинаковую для обеих систем. По умолчанию, в списке отображаются только поля с различными значениями.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="RelatedTopics">См. также</p>
+        <p><a href="Linking_Records.htm" target="_self">Связать Записи</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Lookup name="FirstDayOfWeek">
-  <LookupValue id="Monday" text="Monday" default="true"></LookupValue>
-  <LookupValue id="Tuesday" text="Tuesday" default="false"></LookupValue>
-  <LookupValue id="Wednesday" text="Wednesday" default="false"></LookupValue>
-  <LookupValue id="Thursday" text="Thursday" default="false"></LookupValue>
-  <LookupValue id="Friday" text="Friday" default="false"></LookupValue>
-  <LookupValue id="Saturday" text="Saturday" default="false"></LookupValue>
-  <LookupValue id="Sunday" text="Sunday" default="false"></LookupValue>
+  <LookupValue id="0" text="Sunday" default="false"></LookupValue>
+  <LookupValue id="1" text="Monday" default="true"></LookupValue>
+  <LookupValue id="2" text="Tuesday" default="false"></LookupValue>
+  <LookupValue id="3" text="Wednesday" default="false"></LookupValue>
+  <LookupValue id="4" text="Thursday" default="false"></LookupValue>
+  <LookupValue id="5" text="Friday" default="false"></LookupValue>
+  <LookupValue id="6" text="Saturday" default="false"></LookupValue>  
 </Lookup>
 

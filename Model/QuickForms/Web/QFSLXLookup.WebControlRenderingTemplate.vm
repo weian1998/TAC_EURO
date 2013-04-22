@@ -9,7 +9,7 @@
  </div>   
 #end #end
 #if($qfcontrol.LookupDisplayMode != "ButtonOnly")
- <div #if(${qfcontrol.ColumnSpan} > 1 || ${qfcontrol.ControlLabelPlacement} == "top") class="twocoltextcontrol lookup" #else class="textcontrol lookup" #end >
+ <div #if(${qfcontrol.ColumnSpan} == 2 || ${qfcontrol.ControlLabelPlacement} == "top") class="twocoltextcontrol lookup" #elseif(${qfcontrol.ColumnSpan} > 2) class="threecoltextcontrol lookup" #else #if($qfcontrol.LookupDisplayMode != "DropDownList") class="textcontrol lookup" #end #end >
 #end
 <SalesLogix:LookupControl runat="server" ID="${qfcontrol.ControlId}" #if($qfcontrol.HotKey != "")AccessKey="$qfcontrol.HotKey" #end
 #if($qfcontrol.ToolTip != "") ToolTip="<%$ resources: ${qfcontrol.ControlId}.ToolTip %>" #end
@@ -30,6 +30,7 @@
 #if($qfcontrol.Required)Required="true" #end
 #if($qfcontrol.TabIndex > 0)TabIndex="$qfcontrol.TabIndex" #end
 #if(!$qfcontrol.AddEmptyListItem)AddEmptyListItem="false" #end
+#if($qfcontrol.AppendStringValues)AppendStringValues="true" #end
 #if($qfcontrol.AllowClearingResult)AllowClearingResult="true" #end
 #if($qfcontrol.StyleScheme != "")CssClass="$qfcontrol.StyleScheme" #end
 #if(!$qfcontrol.Visible)Visible="false" #end
@@ -45,7 +46,7 @@
 </LookupProperties>
 <LookupPreFilters>
 #foreach($lprop in $qfcontrol.LookupPreFilters)
-<SalesLogix:LookupPreFilter PropertyName="$lprop.PropertyName" PropertyType="${lprop.PropertyType}" OperatorCode="$lprop.OperatorCode"
+<SalesLogix:LookupPreFilter PropertyName="$lprop.PropertyName" PropertyType="${lprop.PropertyType}" OperatorCode="$lprop.OperatorCode" Visible="${lprop.Visible}"
 #if($lprop.TranslateFilterValue) FilterValue="<%$ resources: ${qfcontrol.ControlId}.LUPF.${lprop.PropertyName} %>"
 #else FilterValue="$lprop.FilterValue"
 #end ></SalesLogix:LookupPreFilter>

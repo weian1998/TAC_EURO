@@ -6,7 +6,7 @@
   <TargetWorkspace>MainContent</TargetWorkspace>
   <ShowInMode>List</ShowInMode>
   <Properties>
-    <Property Name="DetailsPaneConfigFile" TypeConverter="">LitFulfillmentDetails</Property>
+    <Property Name="ListContextMenu" TypeConverter="">GroupListContextMenu</Property>
     <Property Name="HelpTopic" TypeConverter="">litreqmanage</Property>
   </Properties>
   <AllowRoles />

@@ -22,7 +22,7 @@
                 </asp:Label>
             </span> 
             <span class="textcontrol">
-                <asp:TextBox runat="server" ID="txtDescription" />
+                <asp:TextBox runat="server" ID="txtDescription" dojoType="Sage.UI.Controls.TextBox" />
             </span>
         </td>
     </tr>
@@ -92,7 +92,9 @@
         </td>
     </tr>
 </table>
-<div style="padding: 10px 10px 0px 10px; text-align: right;">
-     <asp:Button runat="server" ID="btnSave" CssClass="slxbutton" ToolTip="<%$ resources: cmdSave.Caption %>" Text="<%$ resources: cmdSave.Caption %>"  style="width:70px; margin: 0 5px 0 0;" />  
-     <asp:Button runat="server" ID="btnCancel" CssClass="slxbutton" ToolTip="<%$ resources: cmdCancel.Caption %>" Text="<%$ resources: cmdCancel.Caption %>" style="width:70px;" />  
+<div style="padding-right:20px; text-align:right" >
+   <asp:Panel runat="server" ID="pnlCancel" CssClass="controlslist qfActionContainer">
+        <asp:Button runat="server" ID="btnSave" CssClass="slxbutton" Text="<%$ resources: cmdSave.Caption %>" />
+        <asp:Button runat="server" ID="btnCancel" CssClass="slxbutton" Text="<%$ resources: cmdCancel.Caption %>" />
+    </asp:Panel>
 </div>

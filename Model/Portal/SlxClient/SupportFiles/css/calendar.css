@@ -5,7 +5,7 @@
 .igcv_CalendarViewFrame
 {
     cursor: default;
-    font-family: Tahoma,Verdana;
+    font-family: Arial,Helvetica,sans-serif;
     color: Black;
     background-color: white;
     border: solid 1px #103090;
@@ -33,7 +33,7 @@
 
 .igcv_Day
 {
-    font-family: Tahoma,Verdana;
+    font-family: Arial,Helvetica,sans-serif;
     font-size: 8pt;
     text-align: center;
     width: 14.3%;
@@ -107,7 +107,7 @@
     background-repeat: repeat-x;
     background-color: #8084AA;
     background-image: url(../images/calendar/captionheader.png);
-    font-family: Arial,Verdana,Tahoma,Helvetica,sans-serif;
+    font-family: Arial,Helvetica,sans-serif;
     font-weight: bold;
     font-size: 12pt;
     color: #FFFFFF;
@@ -123,7 +123,7 @@
     background-color: #E8E7D1;
     border: 1px solid #F4F4F4;
     border-right-color: #999;
-    font-family: Tahoma,Verdana;
+    font-family: Arial,Helvetica,sans-serif;
     font-size: 8pt;
     padding-left: 2px;
     height: 20px;
@@ -144,15 +144,23 @@
 
 .igdv_TimeSlotLabel
 {
-    font-family: Tahoma,Verdana;
+    font-family: Arial,Helvetica,sans-serif;
     font-size: 16pt;
     text-align: center;
     vertical-align: top;
     background-color: #EDECDD;
     width: 60px;
+	min-width: 60px;
     border-bottom: 1px solid #A8A8A8;
     border-right: 1px solid #A8A8A8;
 }
+
+.igdv_TimeSlotLabel + td
+{
+	width: 100%;
+}
+
+
 
 .igdv_TimeSlotLabelMinutes
 {
@@ -171,7 +179,7 @@
     border: solid 1px black;
     text-align: center;
     background-color: whitesmoke;
-    font-family: Tahoma,Verdana;
+    font-family: Arial,Helvetica,sans-serif;
     font-size: 8pt;
     padding-left: 3px;
     white-space: nowrap;
@@ -207,7 +215,7 @@
 {
     border: solid 1px #111111;
     background-color: White;
-    font-family: Tahoma,Verdana;
+    font-family: Arial,Helvetica,sans-serif;
     font-size: 8pt;
 }
 
@@ -277,7 +285,7 @@
     border-right: 1px solid #4A4F87;
     border-left: 1px solid #4A4F87;
     border-bottom: 1px solid #4A4F87;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-family: Arial,Helvetica,sans-serif;
     font-weight: bold;
     font-size: x-small;
     text-align: center;
@@ -306,7 +314,7 @@
     border-bottom: 1px solid #ACA899;
     cursor: default;
     font-size: 8pt;
-    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    font-family: Arial,Helvetica,sans-serif;
 }
 
 .igwv_TodayHeader
@@ -325,7 +333,7 @@
 
 .igwv_Day
 {
-    font-family: Microsoft Sans Serif;
+    font-family: Arial,Helvetica,sans-serif;
     font-size: 8pt;
     overflow-x: hidden;
 }
@@ -371,7 +379,7 @@
 
 .igmv_Month
 {
-    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-family: Arial,Helvetica,sans-serif;
     font-size: x-small;
     overflow: auto;
     margin: 0px;
@@ -395,7 +403,7 @@ tr.igmv_CaptionHeader td.igmv_WeekNumber
 
 .igmv_WeekNumber
 {
-    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    font-family: Arial,Helvetica,sans-serif;
     font-size: 10pt;
     text-align: center;
     background-color: #ECE9D8;
@@ -405,7 +413,7 @@ tr.igmv_CaptionHeader td.igmv_WeekNumber
 }
 .igmv_MonthDayOfWeekHeader
 {
-    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    font-family: Arial,Helvetica,sans-serif;
     font-size: 8pt;
     text-align: center;
     background-color: #ECE9D8;
@@ -421,7 +429,7 @@ tr.igmv_CaptionHeader td.igmv_WeekNumber
 
 .igmv_CaptionHeader
 {
-    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-family: Arial,Helvetica,sans-serif;
     font-weight: bold;
     font-size: x-small;
     text-align: center;
@@ -479,7 +487,7 @@ tr.igmv_CaptionHeader td.igmv_WeekNumber
 
 .igmv_DayHeader
 {
-    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-family: Arial,Helvetica,sans-serif;
     font-size: xx-small;
     color: #000000;
     text-align: right;
@@ -495,7 +503,7 @@ tr.igmv_CaptionHeader td.igmv_WeekNumber
 
 .igmv_OtherMonthDayHeader
 {
-    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-family: Arial,Helvetica,sans-serif;
     font-size: xx-small;
     color: #000000;
     text-align: right;
@@ -524,7 +532,7 @@ tr.igmv_CaptionHeader td.igmv_WeekNumber
 }
 .igmv_Appointment
 {
-    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    font-family: Arial,Helvetica,sans-serif;
     font-size: xx-small;
     text-align: left;
     margin-top: 1px;
@@ -537,7 +545,7 @@ tr.igmv_CaptionHeader td.igmv_WeekNumber
 
 .igmv_AllDayEvent
 {
-    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    font-family: Arial,Helvetica,sans-serif;
     font-size: xx-small;
     text-align: left;
     background-color: #FFFFFF;

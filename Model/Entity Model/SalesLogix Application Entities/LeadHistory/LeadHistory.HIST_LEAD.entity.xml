@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="27ff0d90-5d22-4bfd-938c-ed52c41e2de1" lastModifiedUtc="2008-04-11T22:28:36.166123Z" manageSchema="false" tableName="HIST_LEAD" name="LeadHistory" displayPropertyId="0b215c39-522c-4fb7-a0d8-2bd839113e5c" isExtension="false" audited="true" lastUpdatedPropertyId="60cebbfc-2779-4a0b-b604-db0d2b4b998d" onBeforeInsertMethodId="28cc621d-236d-4dda-8a51-3b7250b80a5e" onAfterInsertMethodId="b11c0828-9d77-4844-beed-a96f9a38ac0a" onBeforeUpdateMethodId="58de286a-547d-427c-8a99-903499c24fa0" onAfterUpdateMethodId="048e5365-f895-4378-a58a-0bd6b4f8b9d5" onBeforeDeleteMethodId="d5750034-c641-4083-ba48-34535d9e5301" onAfterDeleteMethodId="41b098bc-96f0-4625-9faa-e53cabd02c4c" onCreateId="524da9ca-bc2c-423f-b10b-89bde7dae616">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="27ff0d90-5d22-4bfd-938c-ed52c41e2de1" lastModifiedUtc="2008-04-11T22:28:36.166123Z" manageSchema="true" tableName="HIST_LEAD" name="LeadHistory" displayPropertyId="0b215c39-522c-4fb7-a0d8-2bd839113e5c" isExtension="false" audited="true" lastUpdatedPropertyId="60cebbfc-2779-4a0b-b604-db0d2b4b998d" onBeforeInsertMethodId="28cc621d-236d-4dda-8a51-3b7250b80a5e" onAfterInsertMethodId="b11c0828-9d77-4844-beed-a96f9a38ac0a" onBeforeUpdateMethodId="58de286a-547d-427c-8a99-903499c24fa0" onAfterUpdateMethodId="048e5365-f895-4378-a58a-0bd6b4f8b9d5" onBeforeDeleteMethodId="d5750034-c641-4083-ba48-34535d9e5301" onAfterDeleteMethodId="41b098bc-96f0-4625-9faa-e53cabd02c4c" onCreateId="524da9ca-bc2c-423f-b10b-89bde7dae616">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
@@ -374,14 +374,14 @@
         <DateTimeDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="fdb4efd0-6f3b-44fa-9d21-8baf609ffc8e" lastModifiedUtc="0001-01-01T00:00:00" name="Notes" audited="false" columnName="NOTES" maxLength="2147483647" precision="0" scale="0" ordinal="40" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="fdb4efd0-6f3b-44fa-9d21-8baf609ffc8e" lastModifiedUtc="2012-02-10T03:17:29.504146Z" name="Notes" audited="false" columnName="NOTES" maxLength="2147483647" precision="0" scale="0" ordinal="40" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
-      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
-        <TextDataType>
+      <SystemDataType guid="f4ca6023-9f5f-4e41-8571-50ba94e8f233">
+        <LongTextDataType>
           <Length>2147483647</Length>
-        </TextDataType>
+        </LongTextDataType>
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="28af7d1b-ce62-4627-8d00-f7a60aa2d2d3" lastModifiedUtc="2008-07-18T20:07:30.8066278Z" name="OpportunityId" audited="false" columnName="OPPORTUNITYID" maxLength="12" precision="0" scale="0" ordinal="41" isReadOnly="false">

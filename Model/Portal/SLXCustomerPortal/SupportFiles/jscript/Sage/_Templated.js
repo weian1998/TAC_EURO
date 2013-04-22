@@ -1,90 +1,89 @@
-dojo.provide('Sage._Templated');
-dojo.require('dijit._Templated');
-
-(function() {
+/*globals Sage, dojo, dojox, dijit, Simplate, window, Sys, define */
+define([
+        'dojo/dom-construct',
+        'dojo/_base/declare',
+        'dojo/query',
+        'dojo/parser',
+        'dojo/_base/array',
+        'dojo/_base/lang',
+        'dijit/registry',
+        'dijit/_base/wai'
+],
+function(domConstruct, declare, query, parser, array, lang, registry, wai) {
     // not inheriting from dijit._Templated, but using similar functionality.
     // this is required for contentTemplate to work property.
-    dojo.declare('Sage._Templated', null, {
-        constructor: function() {
+    var templated = declare('Sage._Templated', null, {
+        constructor: function () {
             this._attachPoints = [];
+            this._attachEvents = [];
         },
-        buildRendering: function()
-        {
-            if (this.widgetTemplate && this.contentTemplate)
+        buildRendering: function () {
+            if (this.widgetTemplate && this.contentTemplate) {
                 throw new Error('Both "widgetTemplate" and "contentTemplate" cannot be specified at the same time.');
-
-            if (this.contentTemplate)
-            {
-                this.inherited(arguments);
-
-                var root = dojo._toDom(['<div>', this.contentTemplate.apply(this), '</div>'].join(''))
             }
-            else if (this.widgetTemplate)
-            {
-                var root = dojo._toDom(this.widgetTemplate.apply(this));
-
-                if (root.nodeType !== 1)
+            
+            if (this.contentTemplate) {
+                this.inherited(arguments);
+                var root = domConstruct.toDom(['<div>', this.contentTemplate.apply(this), '</div>'].join(''));
+                this._attachTemplateNodes(root);
+            } else if (this.widgetTemplate) {
+                var root = domConstruct.toDom(this.widgetTemplate.apply(this));
+                if (root.nodeType !== 1) {
                     throw new Error('Invalid template.');
+                }
 
                 this.domNode = root;
-
                 this._attachTemplateNodes(root);
-            }
-            else
-            {
+            } else {
                 return;
             }
 
             if (this.widgetsInTemplate) {
-                // Make sure dojoType is used for parsing widgets in template.
-                // The dojo.parser.query could be changed from multiversion support.
-                var parser = dojo.parser, qry, attr;
-                if(parser._query != "[dojoType]"){
-                    qry = parser._query;
-                    attr = parser._attrName;
-                    parser._query = "[dojoType]";
-                    parser._attrName = "dojoType";
-                }
-
                 // Store widgets that we need to start at a later point in time
-                var widgetsToAttach = dojo.parser.parse(root, {
+                var widgetsToAttach = parser.parse(root, {
                     noStart: !this._earlyTemplatedStartup,
-                    inherited: {dir: this.dir, lang: this.lang}
+                    template: true,          //1.6 addition
+                    inherited: {dir: this.dir, lang: this.lang},
+                    propsThis: this,         //1.6 addition - so data-dojo-props of widgets in the template can reference "this" to refer to me
+                    scope: 'dojo'  //1.6 addition - even in multi-version mode templates use dojoType/data-dojo-type
                 });
 
                 this._startupWidgets = this._startupWidgets || [];
                 this._startupWidgets = this._startupWidgets.concat(widgetsToAttach);
 
-                // Restore the query.
-                if (qry) {
-                    parser._query = qry;
-                    parser._attrName = attr;
-                }
-
                 this._supportingWidgets = this._supportingWidgets || [];
-                this._supportingWidgets = this._supportingWidgets.concat(dijit.findWidgets(root));
+                this._supportingWidgets = this._supportingWidgets.concat(registry.findWidgets(root));
 
                 this._attachTemplateNodes(widgetsToAttach, function(n, p) {
                     return n[p];
                 });
             }
 
-            if (this.contentTemplate)
-                dojo.query('> *', root).place(this.domNode);
-            else
+            if (this.contentTemplate) {
+                query('> *', root).place(this.domNode);
+            } else {
                 this._fillContent(this.srcNodeRef);
-
+            }
         },
         _fillContent: function(/*DomNode*/ source){
             // summary:
-            //		Relocate source contents to templated container node.
-            //		this.containerNode must be able to receive children, or exceptions will be thrown.
+            //      Relocate source contents to templated container node.
+            //      this.containerNode must be able to receive children, or exceptions will be thrown.
             // tags:
-            //		protected
-            var dest = this.containerNode;
+            //      protected
+            var dest, frag, hasChildren;
+
+            dest = this.containerNode;
+            frag = document.createDocumentFragment();
+            hasChildren = false;
             if(source && dest){
                 while(source.hasChildNodes()){
-                    dest.appendChild(source.firstChild);
+                    frag.appendChild(source.firstChild);
+                    hasChildren = true;
+                }
+
+                if (hasChildren) {
+                    dest.appendChild(frag);
                 }
             }
         },
@@ -107,36 +106,39 @@ dojo.require('dijit._Templated');
             // tags:
             //		private
 
-            getAttrFunc = getAttrFunc || function(n,p){ return n.getAttribute(p); };
+            getAttrFunc = getAttrFunc || function (n,p){ return n.getAttribute(p); };
 
-            var nodes = dojo.isArray(rootNode) ? rootNode : (rootNode.all || rootNode.getElementsByTagName("*"));
-            var x = dojo.isArray(rootNode) ? 0 : -1;
-            for(; x<nodes.length; x++){
+            var nodes = (rootNode instanceof Array) ? rootNode : (rootNode.all || rootNode.getElementsByTagName("*"));
+            var x = (rootNode instanceof Array) ? 0 : -1;
+            for (; x<nodes.length; x++) {
                 var baseNode = (x == -1) ? rootNode : nodes[x];
-                if(this.widgetsInTemplate && getAttrFunc(baseNode, "dojoType")){
+                if(this.widgetsInTemplate && (getAttrFunc(baseNode, "dojoType") || getAttrFunc(baseNode, "data-dojo-type"))){
                     continue;
                 }
                 // Process dojoAttachPoint
-                var attachPoint = getAttrFunc(baseNode, "dojoAttachPoint");
-                if(attachPoint){
+                //var attachPoint = getAttrFunc(baseNode, "dojoAttachPoint");
+                var attachPoint = getAttrFunc(baseNode, "dojoAttachPoint") || getAttrFunc(baseNode, "data-dojo-attach-point");
+                if (attachPoint) {
                     var point, points = attachPoint.split(/\s*,\s*/);
-                    while((point = points.shift())){
-                        if(dojo.isArray(this[point])){
+                    while ((point = points.shift())){
+                        if (this[point] instanceof Array) {
                             this[point].push(baseNode);
-                        }else{
+                        } else {
                             this[point]=baseNode;
                         }
+                        
                         this._attachPoints.push(point);
                     }
                 }
 
                 // Process dojoAttachEvent
-                var attachEvent = getAttrFunc(baseNode, "dojoAttachEvent");
-                if(attachEvent){
+                //var attachEvent = getAttrFunc(baseNode, "dojoAttachEvent");
+                var attachEvent = getAttrFunc(baseNode, "dojoAttachEvent") || getAttrFunc(baseNode, "data-dojo-attach-event");
+                if (attachEvent) {
                     // NOTE: we want to support attributes that have the form
                     // "domEvent: nativeEvent; ..."
                     var event, events = attachEvent.split(/\s*,\s*/);
-                    var trim = dojo.trim;
+                    var trim = lang.trim;
                     while((event = events.shift())){
                         if(event){
                             var thisFunc = null;
@@ -151,29 +153,32 @@ dojo.require('dijit._Templated');
                             if(!thisFunc){
                                 thisFunc = event;
                             }
-                            this.connect(baseNode, event, thisFunc);
+                            //this.connect(baseNode, event, thisFunc);
+                            this._attachEvents.push(this.connect(baseNode, event, thisFunc));
                         }
                     }
                 }
 
                 // waiRole, waiState
+                // TODO: remove this in 2.0, templates are now using role=... and aria-XXX=... attributes directicly
                 var role = getAttrFunc(baseNode, "waiRole");
-                if(role){
-                    dijit.setWaiRole(baseNode, role);
+                if (role) {
+                    wai.setWaiRole(baseNode, role);
                 }
+                
                 var values = getAttrFunc(baseNode, "waiState");
-                if(values){
-                    dojo.forEach(values.split(/\s*,\s*/), function(stateValue){
+                if (values){
+                    array.forEach(values.split(/\s*,\s*/), function(stateValue){
                         if(stateValue.indexOf('-') != -1){
                             var pair = stateValue.split('-');
-                            dijit.setWaiState(baseNode, pair[0], pair[1]);
+                            wai.setWaiState(baseNode, pair[0], pair[1]);
                         }
                     });
                 }
             }
         },
         startup: function(){
-            dojo.forEach(this._startupWidgets, function(w){
+            array.forEach(this._startupWidgets, function(w){
                 if(w && !w._started && w.startup){
                     w.startup();
                 }
@@ -182,13 +187,19 @@ dojo.require('dijit._Templated');
         },
         destroyRendering: function(){
             // Delete all attach points to prevent IE6 memory leaks.
-            dojo.forEach(this._attachPoints, function(point){
+            array.forEach(this._attachPoints, function(point) {
                 delete this[point];
             }, this);
             this._attachPoints = [];
+
+			// And same for event handlers
+			array.forEach(this._attachEvents, this.disconnect, this);
+			this._attachEvents = [];
 
             this.inherited(arguments);
         }
 
     });
-})();
+
+    return templated;
+});

@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="FILTER_CITY" xml:space="preserve">
+    <value>Город</value>
+  </data>
+  <data name="INDEX_SALESORDER" xml:space="preserve">
+    <value>Заказ</value>
+  </data>
+  <data name="FILTER_PRODUCTNAME" xml:space="preserve">
+    <value>Продукт</value>
+  </data>
+  <data name="FILTER_SUPPLIER" xml:space="preserve">
+    <value>Поставщик</value>
+  </data>
+  <data name="INDEX_PRODUCT" xml:space="preserve">
+    <value>Продукт</value>
+  </data>
+  <data name="FILTER_DATEPROMISED" xml:space="preserve">
+    <value>Ожидаемая дата</value>
+  </data>
+  <data name="FILTER_REASON" xml:space="preserve">
+    <value>Причина</value>
+  </data>
+  <data name="FILTER_TYPE" xml:space="preserve">
+    <value>Тип</value>
+  </data>
+  <data name="INDEX_HISTORY" xml:space="preserve">
+    <value>История</value>
+  </data>
+  <data name="FILTER_SUMMARY" xml:space="preserve">
+    <value>Сводка</value>
+  </data>
+  <data name="FILTER_FILE_LAST_MODIFIED" xml:space="preserve">
+    <value>Послед. изменение файла</value>
+  </data>
+  <data name="FILTER_FAX" xml:space="preserve">
+    <value>Факс</value>
+  </data>
+  <data name="INDEX_CONTACT" xml:space="preserve">
+    <value>Контакт</value>
+  </data>
+  <data name="FILTER_FIXED_IN" xml:space="preserve">
+    <value>Фиксир. в</value>
+  </data>
+  <data name="FILTER_BILL_TO_NAME" xml:space="preserve">
+    <value>Контакт для связи</value>
+  </data>
+  <data name="FILTER_SHIPVIA" xml:space="preserve">
+    <value>Доставка по</value>
+  </data>
+  <data name="INDEX_TICKET_INTERNAL" xml:space="preserve">
+    <value>Внутренняя заявка</value>
+  </data>
+  <data name="FILTER_COUNTRY" xml:space="preserve">
+    <value>Страна</value>
+  </data>
+  <data name="FILTER_EMAIL" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="INDEX_LIBRARY" xml:space="preserve">
+    <value>Библиотека</value>
+  </data>
+  <data name="FILTER_TICKETID" xml:space="preserve">
+    <value>ИД заявки</value>
+  </data>
+  <data name="FILTER_AREA" xml:space="preserve">
+    <value>Область</value>
+  </data>
+  <data name="FILTER_CONTRACTTYPE" xml:space="preserve">
+    <value>Тип контракта</value>
+  </data>
+  <data name="INDEX_TICKET" xml:space="preserve">
+    <value>Заявка</value>
+  </data>
+  <data name="FILTER_STATE" xml:space="preserve">
+    <value>Область</value>
+  </data>
+  <data name="INDEX_DEFECT" xml:space="preserve">
+    <value>Дефект</value>
+  </data>
+  <data name="FILTER_OPPORTUNITYID" xml:space="preserve">
+    <value>ИД сделки</value>
+  </data>
+  <data name="INDEX_RMA" xml:space="preserve">
+    <value>Возврат</value>
+  </data>
+  <data name="FILTER_CAMPAIGN" xml:space="preserve">
+    <value>Маркетинг</value>
+  </data>
+  <data name="FILTER_ACTUALID" xml:space="preserve">
+    <value>Код продукта</value>
+  </data>
+  <data name="FILTER_SHIP_TO_NAME" xml:space="preserve">
+    <value>Контакт доставки</value>
+  </data>
+  <data name="FILTER_SALESPOTENTIAL" xml:space="preserve">
+    <value>Потенциал</value>
+  </data>
+  <data name="FILTER_PROJECT" xml:space="preserve">
+    <value>Проект</value>
+  </data>
+  <data name="INDEX_ACCOUNT" xml:space="preserve">
+    <value>Субъект</value>
+  </data>
+  <data name="INDEX_LEAD" xml:space="preserve">
+    <value>Наводка</value>
+  </data>
+  <data name="FILTER_PROGRAM" xml:space="preserve">
+    <value>Программа</value>
+  </data>
+  <data name="FILTER_FAMILY" xml:space="preserve">
+    <value>Семейство</value>
+  </data>
+  <data name="FILTER_LAST_UPDATED" xml:space="preserve">
+    <value>Посл. обновление</value>
+  </data>
+  <data name="FILTER_FIRSTNAME" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="FILTER_POSTALCODE" xml:space="preserve">
+    <value>Индекс</value>
+  </data>
+  <data name="FILTER_MIDDLENAME" xml:space="preserve">
+    <value>Отчество</value>
+  </data>
+  <data name="FILTER_FILE_DATE_CREATED" xml:space="preserve">
+    <value>Дата создания файла</value>
+  </data>
+  <data name="FILTER_SUBTYPE" xml:space="preserve">
+    <value>Подтип</value>
+  </data>
+  <data name="FILTER_RETURNTYPE" xml:space="preserve">
+    <value>Тип возврата</value>
+  </data>
+  <data name="FILTER_REMAINING" xml:space="preserve">
+    <value>Оставшееся</value>
+  </data>
+  <data name="FILTER_ACCOUNT" xml:space="preserve">
+    <value>Субъект</value>
+  </data>
+  <data name="FILTER_REGION" xml:space="preserve">
+    <value>Регион</value>
+  </data>
+  <data name="INDEX_ACTIVITY" xml:space="preserve">
+    <value>Дело</value>
+  </data>
+  <data name="FILTER_CONTACTID" xml:space="preserve">
+    <value>ИД  контакта</value>
+  </data>
+  <data name="FILTER_WEBADDRESS" xml:space="preserve">
+    <value>Web-адрес</value>
+  </data>
+  <data name="INDEX_CONTRACT" xml:space="preserve">
+    <value>Контракт</value>
+  </data>
+  <data name="INDEX_ATTACHMENT" xml:space="preserve">
+    <value>Вложение</value>
+  </data>
+  <data name="INDEX_DEFECT_INTERNAL" xml:space="preserve">
+    <value>Внутренний дефект</value>
+  </data>
+  <data name="FILTER_STATUS" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="INDEX_STANDARD_PROBLEM" xml:space="preserve">
+    <value>Стандартная проблема</value>
+  </data>
+  <data name="FILTER_VENDOR" xml:space="preserve">
+    <value>Поставщик</value>
+  </data>
+  <data name="FILTER_INDUSTRY" xml:space="preserve">
+    <value>Отрасль</value>
+  </data>
+  <data name="INDEX_DOCUMENT" xml:space="preserve">
+    <value>Документ</value>
+  </data>
+  <data name="FILTER_PRIORITY" xml:space="preserve">
+    <value>Приоритет</value>
+  </data>
+  <data name="FILTER_TOLLFREE" xml:space="preserve">
+    <value>Справ. тел.</value>
+  </data>
+  <data name="FILTER_ACTUALCLOSE" xml:space="preserve">
+    <value>Закрыта (факт)</value>
+  </data>
+  <data name="FILTER_ACCOUNTID" xml:space="preserve">
+    <value>ИД  субъекта</value>
+  </data>
+  <data name="FILTER_LASTNAME" xml:space="preserve">
+    <value>Фамилия</value>
+  </data>
+  <data name="FILTER_STAGE" xml:space="preserve">
+    <value>Стадия</value>
+  </data>
+  <data name="INDEX_OPPORTUNITY" xml:space="preserve">
+    <value>Сделка</value>
+  </data>
+  <data name="FILTER_CLOSEPROBABILITY" xml:space="preserve">
+    <value>Вероятность</value>
+  </data>
+  <data name="FILTER_ORDERDATE" xml:space="preserve">
+    <value>Дата заказа</value>
+  </data>
+  <data name="FILTER_FILE_NAME" xml:space="preserve">
+    <value>Название файла</value>
+  </data>
+  <data name="FILTER_MOBILE" xml:space="preserve">
+    <value>Мобильный тел.</value>
+  </data>
+  <data name="FILTER_TITLE" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="FILTER_CATEGORY" xml:space="preserve">
+    <value>Категория</value>
+  </data>
+  <data name="FILTER_PHONE" xml:space="preserve">
+    <value>Телефон</value>
+  </data>
+  <data name="FILTER_DATE_CREATED" xml:space="preserve">
+    <value>Дата создания</value>
+  </data>
+  <data name="FILTER_RMA_DATE" xml:space="preserve">
+    <value>Дата возврата</value>
+  </data>
+</root>

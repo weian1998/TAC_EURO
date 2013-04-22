@@ -42,7 +42,7 @@ namespace Sage.BusinessRules.CodeSnippets
 		public static void btnInsert_OnClick(IAccountingSystems form, EventArgs args)
 		{
 			Sage.Platform.WebPortal.Services.IWebDialogService DialogService = form.Services.Get<Sage.Platform.WebPortal.Services.IWebDialogService>(true);
-			DialogService.SetSpecs(550, 885, "AddEditAccountingSystem", form.GetResource("AddEndPoint_Caption").ToString());
+			DialogService.SetSpecs(650, 885, "AddEditAccountingSystem", form.GetResource("AddEndPoint_Caption").ToString());
 			DialogService.EntityType = typeof(IAppIdMapping);
 			DialogService.EntityID = "Insert";
 			DialogService.ShowDialog();

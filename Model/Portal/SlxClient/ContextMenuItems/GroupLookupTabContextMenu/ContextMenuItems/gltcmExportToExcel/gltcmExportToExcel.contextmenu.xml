@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="b64aebc5-d678-4751-92bf-fd1e8a309608">
+  <ItemId>gltcmExportToExcel</ItemId>
+  <NavUrl>javascript:Sage.Groups.GroupManager.ExportGroup('${groupId}')</NavUrl>
+  <LargeImageUrl />
+  <SmallImageUrl />
+  <ContextMenuId />
+  <Target />
+  <AppliedSecurity>Entities/Group/ExportToExcel</AppliedSecurity>
+</MenuDropDownItem>

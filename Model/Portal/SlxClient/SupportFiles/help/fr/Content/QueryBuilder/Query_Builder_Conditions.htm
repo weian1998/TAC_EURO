@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Utilisation de Query Builder|Onglets Query Builder" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Conditions de Query Builder</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilder/Query_Builder_Conditions.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Ouvrir une rubrique avec la recherche, la table des matières et l'index</a>
+        </p>
+        <h1><a name="kanchor211"></a>Conditions Query Builder</h1>
+        <p>Utilisez l'onglet Conditions de Query Builder pour ajouter, modifier ou supprimer des instructions conditionnelles qui sont appliqueés à la base de données pour sélectionner des informations. Les conditions s'appliquent dans l'ordre dans lequel elles sont répertoriées dans la grille&#160;; cependant, vous pouvez modifier cet ordre à l'aide des <MadCap:conditionalText MadCap:conditions="Output.WebClient">boutons</MadCap:conditionalText>Monter et Descendre. Vous pouvez également regrouper les instructions conditionnelles.</p>
+        <table wrapperparagraphselector="P" style="margin-top: 14pt;left: 0px;top: 156px;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col />
+            <col />
+            <tr valign="middle" MadCap:conditions="">
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;border-left-style: none;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <ul>
+                        <li class="Bullets" value="1">Le Query Builder prend en charge de nombreuses fonctionnalités. Les onglets visibles dépendent de la fonctionnalité que vous êtes en train d'utiliser.</li>
+                        <li class="Bullets" value="2">Il est recommandé d'insérer au moins une condition dans chaque groupe que vous créez. Les groupes incluant tous les enregistrements peuvent ralentir la performance du système, et un avertissement risque d'apparaître lorsque les utilisateurs tentent de visionner ces groupes.</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_4199063157_0" onclick="FMCDropDown( this ); return false;">Pour ajouter une instruction conditionnelle<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_4199063157_0" style="display: none;">
+                <ol>
+                    <li class="Topic-Text-Numbered" value="1">Ouvrez <a href="Opening_Query_Builder.htm">Query&#160;Builder</a>.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="2">Dans <span class="SLXBold">Query Builder</span>, cliquez sur l'onglet <span class="SLXBold">Conditions</span>.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="3">Sélectionnez une table dans le coin supérieur gauche de Query Builder. Si besoin, cliquez sur le signe plus pour développer la liste des tables.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="4">Sélectionnez un champ dans le coin supérieur droit de Query Builder. Cette zone affiche tous les champs appartenant à la table choisie. <MadCap:conditionalText MadCap:conditions="Output.WebClient">Double-cliquez sur le champ pour l'ajouter à la grille au bas de la boîte de dialogue.</MadCap:conditionalText></li>
+                </ol>
+                <p class="Topic-Text-Indent">La boîte de dialogue Affecter une condition s'ouvre automatiquement. Vous pouvez ouvrir cette boîte de dialogue en double-cliquant sur une instruction de la grille.</p>
+                <ol start="5">
+                    <li class="Topic-Text-Numbered" value="5">Sélectionnez un <a href="Query_Builder_Statement_Operators.htm">opérateur</a>.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="6">Dans la zone <span class="SLXBold">Valeur</span>, saisissez une valeur pour ce champ ou cliquez sur <span class="SLXBold">Parcourir</span> pour la sélectionner dans une liste d'entrées existantes.
+                    </li>
+                </ol>
+                <p class="Topic-Text-Indent">Si vous sélectionnez «&#160;In&#160;» en tant qu'opérateur, les valeurs doivent être entourées de guillemets à chaque entrée.</p>
+                <ol start="7">
+                    <li class="Topic-Text-Numbered" value="7">Pour que la casse soit prise en compte dans l'évaluation de la condition, sélectionnez <span class="SLXBold">Comparaison sensible à la casse</span>. Cette option est sélectionnée par défaut.
+                    </li>
+                </ol>
+                <p class="Topic-Text-Indent">Si vous utilisez MS&#160;SQL Server, cette option n'est pas disponible. Les requêtes ne sont pas sensibles à la casse.</p>
+                <ol start="8">
+                    <li class="Topic-Text-Numbered" value="8">Si besoin est, sélectionnez <a href="../QueryBuilderAdv/Use_Value_as_a_Literal.htm">Utiliser la valeur comme une valeur littérale</a>.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="9">Cliquez sur <span class="SLXBold">OK</span>.</li>
+                    <li class="Topic-Text-Numbered" value="10">Pour ajouter une autre instruction de condition, répétez les étapes&#160;1&#160;à&#160;9, puis sélectionnez le <a href="Query_Builder_Statement_Connectors.htm">connecteur</a> approprié.
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_4199063157_1" onclick="FMCDropDown( this ); return false;">Pour modifier une instruction conditionnelle<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_4199063157_1" style="display: none;">
+                <ol>
+                    <li class="Topic-Text-Numbered" value="1">Ouvrez <a href="Opening_Query_Builder.htm">Query&#160;Builder</a>.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="2">Cliquez sur l'onglet <span class="SLXBold">Conditions</span>.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="3">Sélectionnez une instruction dans la grille (au bas de la boîte de dialogue Query Builder).
+                    </li>
+                    <li class="Topic-Text-Numbered" value="4">Cliquez sur <span class="SLXBold">Modifier</span>.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="5">Dans la boîte de dialogue <a href="Assign_Condition.htm">Affecter des conditions</a>, effectuez vos modifications.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="6">Cliquez sur <span class="SLXBold">OK</span>.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_4199063157_2" onclick="FMCDropDown( this ); return false;">Pour supprimer une instruction conditionnelle<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_4199063157_2" style="display: none;">
+                <ol>
+                    <li class="Topic-Text-Numbered" value="1">Ouvrez <a href="Opening_Query_Builder.htm">Query&#160;Builder</a>.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="2">Cliquez sur l'onglet <span class="SLXBold">Conditions</span>.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="3">Sélectionnez une instruction dans la grille.
+                    </li>
+                    <li class="Topic-Text-Numbered" value="4">Cliquez sur <span class="SLXBold">Supprimer</span>.
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <p class="RelatedTopics">Rubriques connexes</p>
+        <p><a href="Group_Conditional_Statements.htm">Groupement d'instructions conditionnelles</a>
+        </p>
+        <p><a href="Change_the_order_of_a_Conditional_Statement.htm">Reclassement d'une instruction conditionnelle</a>
+        </p>
+        <p><a href="Use_Not_in_a_Conditional_Statement.htm">Utilisation de « Not » dans une instruction conditionnelle</a>
+        </p>
+        <p><a href="Assign_Condition.htm">Affecter des conditions</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Dites-nous comment améliorer l'aide</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

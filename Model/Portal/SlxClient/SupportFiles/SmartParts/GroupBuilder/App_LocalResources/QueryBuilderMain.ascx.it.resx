@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="localizeConditionInstructions.Text" xml:space="preserve">
+    <value>Fare doppio clic sul campo dell'elenco sopra e  
+														apparirà nella griglia sotto per essere usato come condizione per selezionare i record. 
+														Le condizioni sono applicate nell'ordine in cui appaiono nella griglia. Usa i pulsanti Sposta Sù  
+														e Sposta Giù per cambiare l'ordine.</value>
+  </data>
+  <data name="localizeColumn.Text" xml:space="preserve">
+    <value>Column</value>
+  </data>
+  <data name="jsDescending" xml:space="preserve">
+    <value>Discendente</value>
+  </data>
+  <data name="localizeField.Text" xml:space="preserve">
+    <value>Campo</value>
+  </data>
+  <data name="jsNewQuery" xml:space="preserve">
+    <value>Nuova query</value>
+  </data>
+  <data name="MoveRight" xml:space="preserve">
+    <value>Sposta a Destra</value>
+  </data>
+  <data name="localizeAssignQueryLayout.Text" xml:space="preserve">
+    <value>Definisci il layout della query</value>
+  </data>
+  <data name="localizeLayoutInstructions.Text" xml:space="preserve">
+    <value>Fare doppio clic sul campo della vista sopra per posizionarlo nella 
+														griglia sotto per usare il campo per ordinare i dati restituiti. Il dato è ordinato nell'ordine dei campi nella griglia. Usa i pulsanti Sposta Sù e Sposta Giù 
+														per cambiare l'ordine.</value>
+  </data>
+  <data name="localizeConditions.Text" xml:space="preserve">
+    <value>Condizioni</value>
+  </data>
+  <data name="localizeDelete.Text" xml:space="preserve">
+    <value>Elimina</value>
+  </data>
+  <data name="MoveLeft" xml:space="preserve">
+    <value>Sposta a Sinistra</value>
+  </data>
+  <data name="localizeOK.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="localizeAssignCondition.Text" xml:space="preserve">
+    <value>Assegna Condizione</value>
+  </data>
+  <data name="jsAscending" xml:space="preserve">
+    <value>Ascendente</value>
+  </data>
+  <data name="localizeSorting.Text" xml:space="preserve">
+    <value>Ordinamento</value>
+  </data>
+  <data name="Collapse" xml:space="preserve">
+    <value>Comprimi</value>
+  </data>
+  <data name="jsInvalidConditionStringMessage" xml:space="preserve">
+    <value>Errore: condizione stringa non valida -</value>
+  </data>
+  <data name="Expand" xml:space="preserve">
+    <value>Espandi</value>
+  </data>
+  <data name="localizeEdit.Text" xml:space="preserve">
+    <value>Modifica</value>
+  </data>
+  <data name="localizeMoveDown.Text" xml:space="preserve">
+    <value>Sposta Giù</value>
+  </data>
+  <data name="jsInvalidSortStringMessage" xml:space="preserve">
+    <value>Errore: Ordinamento stringa non valida -</value>
+  </data>
+  <data name="localizeCancel.Text" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="jsCreateLocalJoinMessage" xml:space="preserve">
+    <value>Devi prima selezionare una tabella e un campo.</value>
+  </data>
+  <data name="localizeDefaults.Text" xml:space="preserve">
+    <value>Impost.Predefinite</value>
+  </data>
+  <data name="localizeProperties.Text" xml:space="preserve">
+    <value>Proprietà</value>
+  </data>
+  <data name="localizeCalc.Text" xml:space="preserve">
+    <value>Campi Calcolati...</value>
+  </data>
+  <data name="localizeSortInstructions.Text" xml:space="preserve">
+    <value>Fare doppio clic sul campo della vista sopra per posizionarlo nella 
+														griglia sotto per usare il campo per ordinare i dati restituiti. Il dato è ordinato 
+														nell'ordine dei campi nella griglia Usa i pulsanti Sposta Sù e Sposta Giù 
+														per cambiare l'ordine.</value>
+  </data>
+  <data name="localizeNot.Text" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="MoveDown" xml:space="preserve">
+    <value>Sposta Giù</value>
+  </data>
+  <data name="localizeOperator.Text" xml:space="preserve">
+    <value>Operatore</value>
+  </data>
+  <data name="jsCopyOf" xml:space="preserve">
+    <value>Copia di</value>
+  </data>
+  <data name="jsConfirmDeleteMessage" xml:space="preserve">
+    <value>Sei sicuro di voler eliminare il Gruppo corrente?</value>
+  </data>
+  <data name="localizeDisplayName.Text" xml:space="preserve">
+    <value>Visualizza nome:</value>
+  </data>
+  <data name="localizeCaseSens.Text" xml:space="preserve">
+    <value>Maiusc/Minusc</value>
+  </data>
+  <data name="localizeHideHiddenFields.Text" xml:space="preserve">
+    <value>Nascondi Campi Nascosti</value>
+  </data>
+  <data name="jsInvalidLayoutConditionStringMessage" xml:space="preserve">
+    <value>Errore: Layout stringa non valida -</value>
+  </data>
+  <data name="localizeGrdSortsDirection.Text" xml:space="preserve">
+    <value>Direzione</value>
+  </data>
+  <data name="localizeCreateLocalJoin.Text" xml:space="preserve">
+    <value>Crea join locale</value>
+  </data>
+  <data name="localizeName.Text" xml:space="preserve">
+    <value>Nome:</value>
+  </data>
+  <data name="localizeGrdSortsOrder.Text" xml:space="preserve">
+    <value>Ordine</value>
+  </data>
+  <data name="localizeDescription.Text" xml:space="preserve">
+    <value>Descrizione:</value>
+  </data>
+  <data name="localizeHelp.Text" xml:space="preserve">
+    <value>Aiuto</value>
+  </data>
+  <data name="localizeGrdSortsSortBy.Text" xml:space="preserve">
+    <value>Ordina per</value>
+  </data>
+  <data name="jsAddDataToLayoutGridMessage" xml:space="preserve">
+    <value>Sembra che questa campo esista già nel layout attuale.  Si desidera continuare?</value>
+  </data>
+  <data name="localizeAndOr.Text" xml:space="preserve">
+    <value>E/o</value>
+  </data>
+  <data name="localizeMoveUp.Text" xml:space="preserve">
+    <value>Sposta Su</value>
+  </data>
+  <data name="MoveUp" xml:space="preserve">
+    <value>Sposta Su</value>
+  </data>
+  <data name="localizeLayout.Text" xml:space="preserve">
+    <value>Layout</value>
+  </data>
+  <data name="localizeReturnDistinct.Text" xml:space="preserve">
+    <value>Restituisci solo righe distinte</value>
+  </data>
+  <data name="localizeViewSQL.Text" xml:space="preserve">
+    <value>Visualizza SQL...</value>
+  </data>
+  <data name="localizeGlobalJoins.Text" xml:space="preserve">
+    <value>Join Globali...</value>
+  </data>
+  <data name="localizeValue.Text" xml:space="preserve">
+    <value>Valore</value>
+  </data>
+</root>

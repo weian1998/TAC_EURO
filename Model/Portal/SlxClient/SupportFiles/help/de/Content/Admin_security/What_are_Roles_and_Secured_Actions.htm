@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Administration|Sicherheit" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="de" xml:lang="de" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Was sind Rollen und gesicherte Aktionen?</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Admin_security/What_are_Roles_and_Secured_Actions.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Thema mit den Registerkarten "Suchen", "Inhalt" und "Index" öffnen</a>
+        </p>
+        <h1>Was sind Rollen und gesicherte Aktionen?</h1>
+        <p><a name="kanchor53"></a>Eine Rolle bestimmt, auf welche Funktionen ein Benutzer im Web Client zugreifen darf. Zu Rollen gehören gesicherte Aktionen, die bestimmen, auf welche Benutzeroberflächenelemente ein Benutzer zugreifen darf, z.&#160;B. Seiten, Menüs, Menüpunkte, Symbolleisten und Schaltflächen. Beim Steuern des Zugriffs auf einzelne Benutzeroberflächenelemente können Sie den Zugriff auf Aktionen wie Bearbeiten, Löschen und Drucken festlegen. Derzeit gesicherte Elemente sind alle Benutzeroberflächenelemente, die Zugriff auf Firmen, Kontakte und Verkaufschancen gewähren.</p>
+        <p>Sie sichern ein Benutzeroberflächenelement ab, indem Sie dessen Eigenschaft <B>Angewandte Sicherheit</B> in Application Architect eine abgesicherte Aktion zuweisen. Nachdem eine gesicherte Aktion einem Benutzeroberflächenelement zugewiesen wurde, können Benutzer nur dann das dazugehörige Element anzeigen und nutzen, wenn ihnen eine Rolle zugewiesen wurde, die die gesicherte Aktion enthält. <B>Entitäten/Firma/Speichern</B> ist beispielsweise die gesicherte Aktion, die der Eigenschaft <B>Angewandte Sicherheit</B> für die Schaltflächenaktion <B>Speichern</B> in der Firmendetailansicht zugewiesen ist. Wenn die Schaltfläche zur Laufzeit geladen wird, ändert sich der Anzeigewert abhängig davon, ob der Benutzer die Berechtigung zum Ausführen der Aktion hat.</p>
+        <p>Ein im Web Client gesichertes Benutzeroberflächenelement dient dem Einschränken des Zugriffs aller Benutzer, bis dem Benutzer eine Rolle zugewiesen wird, die den Zugriff erlaubt. Zum Sichern von Elementen im Web Client mithilfe von Rollen müssen Sie Elementen gesicherte Aktionen hinzufügen, die gesicherten Aktionen einer Rolle hinzufügen und Benutzer der Rolle zuweisen.    <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="example;roles steps">Weitere Informationen... <img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a></p>
+        <p MadCap:targetName="example" style="display: none;">Elemente werden in Application Architect gesichert, indem ihnen eine gesicherte Aktion zugewiesen wird oder Sicherheitseinstellungen angewendet werden. Der Wert der Eigenschaft <B>Angewandte Sicherheit</B> ist der Name der gesicherten Aktion. Zum Absichern eines Elements auf der Benutzeroberfläche und Gewähren des Benutzerzugriffs auf dieses Element müssen Sie die folgenden Schritte ausführen:</p>
+        <ol MadCap:targetName="roles steps" style="display: none;">
+            <li class="Topic-Text-Numbered" value="1">Bestimmen, mit welcher gesicherten Aktion Sie das Element sichern möchten. Bei Bedarf können Sie im Web Client eine neue gesicherte Aktion erstellen.</li>
+            <li class="Topic-Text-Numbered" value="2">Fügen Sie in Application Architect der Eigenschaft <B>Angewandte Sicherheit</B> des Elements eine gesicherte Aktion hinzu. Weitere Informationen finden Sie in der Application Architect-Hilfe im Thema "Grundlegendes zu gesicherten Aktionen".</li>
+            <li class="Topic-Text-Numbered" value="3">Fügen Sie im Web Client die gesicherte Aktion für dieses Element einer Rolle hinzu.</li>
+            <li class="Topic-Text-Numbered" value="4">Weisen Sie der Rolle Benutzer zu.</li>
+        </ol>
+        <p class="subheading">Standardrollen</p>
+        <p><a name="DefaultRoles"></a>Benutzern, die im Web Client erstellt werden, wird standardmäßig die Rolle <B>Standardbenutzer</B> zugewiesen. Diese Rolle erlaubt den Zugriff auf alle nicht administrativen Funktionen im Web Client. Wenn Sie einen Benutzer aus dieser Rolle entfernen, hat er keinen Zugriff auf gesicherte Elemente, es sei denn, Sie weisen ihn einer neuen Rolle zu. </p>
+        <p>
+        </p>
+        <p>Die Standardrollen sind:</p>
+        <ul>
+            <li value="1"><span class="SLXBold">Administrator</span> - Ermöglicht das Hinzufügen, Bearbeiten und Löschen von Berechtigungen für Verwaltungsfunktionen, z.&#160;B. Benutzer, Teams, Abteilungen, Auswahllisten, Produkte, Produktpakete und die Optionen <span class="SLXBold">Nach Duplikaten suchen</span>, <B>Duplikate verarbeiten </B> und <B>Historie der Duplikatsuche</B>. Dient außerdem dazu, die Bearbeitungsberechtigung für QuickForms im Web-Formular-Designer zu erteilen.</li>
+            <li value="2"><span class="SLXBold">Datenqualitätsmanager</span> - Ermöglicht das Hinzufügen, Bearbeiten und Löschen von Berechtigungen für <span class="SLXBold">Nach Duplikaten suchen</span>, <B>Duplikate verarbeiten </B> und <B>Historie der Duplikatsuche</B>.</li>
+            <li value="3"><span class="SLXBold">Standardbenutzer</span> - Ermöglicht das Anzeigen, Hinzufügen, Bearbeiten und Löschen von Berechtigungen für nicht administrative Web Client-Entitäten wie Firmen, Kontakte, Verkaufschancen, Produktpakete, Produkte, Verkaufsaufträge, Interessenten, Verträge, Fehler und Tickets.<br />Wenn Benutzer vorhanden sind oder Sie neue Benutzer in Administrator erstellen, müssen Sie die Benutzer der Rolle <a href="Assigning_Users_To_Standard_Role.htm" target="_self">Standardbenutzer</a> zuweisen.</li>
+        </ul>
+        <ul>
+            <li value="1"><span class="SLXBold">Auftrags- und Angebotsverarbeitung</span> - Ermöglicht das Hinzufügen und Anzeigen von Berechtigungen zu Kontakten und Firmen sowie das Hinzufügen, Bearbeiten und Löschen von Berechtigungen für Verkaufsaufträge.</li>
+            <li MadCap:conditions="Output.IntegrationContract" value="2"><span class="SLXBold">Integration Contract - Preis sperren</span> - Ermöglicht das Sperren von Produktpreisen auf einem Verkaufsauftrag. (Nur Buchhaltungsintegration)</li>
+        </ul>
+        <table wrapperparagraphselector="P" style="margin-top: 14pt;border-spacing: 0px;margin-left: 0;margin-right: auto;caption-side: top;" cellspacing="0">
+            <col />
+            <col />
+            <tr>
+                <td style="width: 10%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="10%">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <ul>
+                        <li class="Bullets" value="1">Sicherheitseinstellungen im Network Client werden mithilfe von Einstellungen für Features und Funktionen sowie von administrativen Rollen bestimmt. Für die Websicherheit werden alle Network-Elemente in einem Sicherheitsmodell mit dem Namen <B>Rolle</B> kombiniert. Sie können das Network-Sicherheitsmodell nicht für Benutzer verwenden, die beim Web Client angemeldet sind, und das Websicherheitsmodell nicht für Benutzer verwenden, die beim Network Client angemeldet sind.</li>
+                        <li class="Bullets" value="2">Benutzer mit Administratorrechten könnten ungeachtet der gesicherten Aktionen auf alle Benutzeroberflächenelemente zugreifen.</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <p class="RelatedTopics" MadCap:conditions="Output.WebClient">Vorgehensweise</p>
+        <p MadCap:conditions="Output.WebClient"><a href="Creating_a_Role.htm" target="_self">Erstellen von Rollen</a>
+        </p>
+        <p MadCap:conditions="Output.WebClient"><a href="CreatingASecuredAction.htm" target="_self">Erstellen gesicherter Aktionen</a>
+        </p>
+        <p MadCap:conditions="Output.WebClient"><a href="Role_Users_Tab.htm" target="_self">Zuweisen einer Rolle zu Benutzern</a>
+        </p>
+        <p MadCap:conditions="Output.WebClient"><a href="EditingOrDeletingASecuredAction.htm" target="_self">Bearbeiten oder Löschen einer gesicherten Aktion</a>
+        </p>
+        <p MadCap:conditions="Output.WebClient"><a href="Assigning_Users_To_Standard_Role.htm" target="_self">Zuweisen von Benutzern zur Rolle "Standardbenutzer"</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Haben Sie Vorschläge zur Verbesserung der Hilfe?</a>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,28 +1,14 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using Sage.Platform.WebPortal.Services;
 using Sage.Platform.Application.UI;
-using Sage.Platform.Application;
 using Sage.Platform.WebPortal.SmartParts;
-using log4net;
 using Sage.SalesLogix.Services.Import.Actions;
 using Sage.SalesLogix.Services.Import;
 using Sage.Entity.Interfaces;
 
-public partial class ImportActionAddNote :EntityBoundSmartPartInfoProvider // ISmartPartInfoProvider
+public partial class ImportActionAddNote : EntityBoundSmartPartInfoProvider
 {
-
-    private ActionAddNote _action;
-    
-
     #region Public Methods
 
     /// <summary>
@@ -38,11 +24,7 @@ public partial class ImportActionAddNote :EntityBoundSmartPartInfoProvider // IS
     /// Gets or sets the action.
     /// </summary>
     /// <value>The action.</value>
-    public ActionAddNote Action
-    {
-        get { return _action; }
-        set { _action = value; }
-    }
+    public ActionAddNote Action { get; set; }
 
     /// <summary>
     /// Gets the smart part info.
@@ -52,16 +34,15 @@ public partial class ImportActionAddNote :EntityBoundSmartPartInfoProvider // IS
     public override ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
     {
         ToolsSmartPartInfo tinfo = new ToolsSmartPartInfo();
-
-        foreach (Control c in this.Form_LTools.Controls)
+        foreach (Control c in ImportActionAddNote_LTools.Controls)
         {
             tinfo.LeftTools.Add(c);
         }
-        foreach (Control c in this.Form_CTools.Controls)
+        foreach (Control c in ImportActionAddNote_CTools.Controls)
         {
             tinfo.CenterTools.Add(c);
         }
-        foreach (Control c in this.Form_RTools.Controls)
+        foreach (Control c in ImportActionAddNote_RTools.Controls)
         {
             tinfo.RightTools.Add(c);
         }
@@ -85,7 +66,6 @@ public partial class ImportActionAddNote :EntityBoundSmartPartInfoProvider // IS
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void Page_Load(object sender, EventArgs e)
     {
-        //SetActionState();
     }
 
     /// <summary>
@@ -99,6 +79,7 @@ public partial class ImportActionAddNote :EntityBoundSmartPartInfoProvider // IS
             ClientBindingMgr.RegisterBoundControl(dtpStartDate);
             ClientBindingMgr.RegisterBoundControl(pklDescription);
             ClientBindingMgr.RegisterBoundControl(pklCategory);
+            ClientBindingMgr.RegisterDialogCancelButton(btnCancel);
         }
         SetActionState();
     }
@@ -111,7 +92,6 @@ public partial class ImportActionAddNote :EntityBoundSmartPartInfoProvider // IS
         btnSave.Click += btnSave_OnClick;
         btnSave.Click += DialogService.CloseEventHappened;
         btnCancel.Click += DialogService.CloseEventHappened;
-
         base.OnWireEventHandlers();
     }
 
@@ -140,7 +120,6 @@ public partial class ImportActionAddNote :EntityBoundSmartPartInfoProvider // IS
         SaveActionState(false);
     }
 
-
     /// <summary>
     /// Sets the state of the action.
     /// </summary>
@@ -158,7 +137,6 @@ public partial class ImportActionAddNote :EntityBoundSmartPartInfoProvider // IS
         dtpStartDate.DisplayTime = !chkTimeless.Checked;
         dtpStartDate.DateTimeValue = Action.History.StartDate;
         dpDuration.Enabled = !chkTimeless.Checked;
-        
     }
 
     /// <summary>
@@ -168,22 +146,14 @@ public partial class ImportActionAddNote :EntityBoundSmartPartInfoProvider // IS
     {
         ImportManager importManager = GetImportManager();
         Action = importManager.ActionManager.GetAction("AddNote") as ActionAddNote;
-
         Action.History.LongNotes = txtNotes.Text;
         Action.History.Category = pklCategory.PickListValue;
         Action.History.Description = pklDescription.PickListValue;
         Action.History.Timeless = chkTimeless.Checked;
-        //Action.History.UserId = slxUser.LookupResultValue.ToString();
         Action.History.Duration = dpDuration.Value;
-        if (dtpStartDate.DateTimeValue == null)
-        {
-            Action.History.StartDate = DateTime.UtcNow;
-        }
-        else 
-        {
-            Action.History.StartDate = (DateTime)dtpStartDate.DateTimeValue;
-        }
-
+        Action.History.StartDate = dtpStartDate.DateTimeValue == null
+                                       ? DateTime.UtcNow
+                                       : (DateTime) dtpStartDate.DateTimeValue;
         if (!Action.Initialized && setInit)
         {
             Action.Initialized = true;
@@ -200,10 +170,7 @@ public partial class ImportActionAddNote :EntityBoundSmartPartInfoProvider // IS
     private ImportManager GetImportManager()
     {
         ImportManager importManager = Page.Session["importManager"] as ImportManager;
-        if (importManager != null)
-        {
-        }
-        else
+        if (importManager == null)
         {
             DialogService.ShowMessage("error_ImportManager_NotFound");
         }

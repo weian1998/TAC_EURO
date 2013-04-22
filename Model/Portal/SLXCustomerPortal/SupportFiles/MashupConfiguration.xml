@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<mashupConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <processorTypes>
+    <processorType>Sage.Platform.Mashups.Processors.AggregateProcessor, Sage.Platform.Mashups</processorType>
+    <processorType>Sage.Platform.Mashups.Processors.FeedProcessor, Sage.Platform.Mashups</processorType>
+    <processorType>Sage.Platform.Mashups.Processors.FilterProcessor, Sage.Platform.Mashups</processorType>
+    <processorType>Sage.Platform.Mashups.Processors.JoinProcessor, Sage.Platform.Mashups</processorType>
+    <processorType>Sage.Platform.Mashups.Processors.MashupProcessor, Sage.Platform.Mashups</processorType>
+    <processorType>Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups</processorType>
+    <processorType>Sage.Platform.Mashups.Processors.SelectProcessor, Sage.Platform.Mashups</processorType>
+    <processorType>Sage.Platform.Mashups.Processors.SoapProcessor, Sage.Platform.Mashups</processorType>
+    <processorType>Sage.Platform.Mashups.Processors.SortProcessor, Sage.Platform.Mashups</processorType>
+    <processorType>Sage.Platform.Mashups.Processors.TimelineSelectProcessor, Sage.Platform.Mashups</processorType>
+    <processorType>Sage.Platform.Mashups.Processors.SDataProcessor, Sage.Platform.Mashups</processorType>
+  </processorTypes>
+</mashupConfiguration>

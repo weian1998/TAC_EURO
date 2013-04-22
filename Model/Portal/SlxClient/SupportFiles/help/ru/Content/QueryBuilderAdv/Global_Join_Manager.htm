@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Использование Построителя Запросов|Использование Связей" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Global Join Manager</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/TableStyle.css" rel="stylesheet" />
+        <style>
+td ol,
+td ul
+{
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+</style>
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilderAdv/Global_Join_Manager.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <p>&#160;</p>
+        <h1><a name="kanchor220"></a>Менеджер Глобальных Связей</h1>
+        <table wrapperparagraphselector="P" style="margin-top: 14pt;width: 98%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="98%">
+            <col style="width: 43px;" />
+            <col style="width: 410px;" />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/adminonly.gif" />
+                    </p>
+                </td>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top"><span class="SLXBold">Только для Системного Администратора</span>
+                </td>
+            </tr>
+        </table>
+        <table wrapperparagraphselector="P" style="margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col />
+            <col />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/caution.gif" />
+                    </p>
+                </td>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <ul>
+                        <li class="Tip-Note-Text-Bulleted" value="1">Пользуйтесь созданием глобальных связей предельно осторожно, поскольку можно создать глобальную связь, которая создаст проблемы в работе системы.
+                        </li>
+                        <li class="Tip-Note-Text-Bulleted" value="2">По умолчанию, таблица ADDRESS соединена с таблицей ACCOUNT через Inner join. Не изменяйте параметры этого соединения.
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <p>Менеджер Глобальных Связей показывает все глобальные связи в вашей базе данных SalesLogix, и позволяет системному администратору или пользователю с правами администратора добавлять, изменять и удалять глобальные связи в случае необходимости. Глобальная связь является постоянной и существует для каждого сеанса в структуре дерева данных Построителя Запросов.</p>
+        <p>SalesLogix содержит ряд предопределенных глобальных связей (называемых системные связи), которые не могут быть удалены. <MadCap:conditionalText MadCap:conditions="Output.WebClient">Любой может использовать эти предопределенные глобальные связи, выбрав поле в Построителе Запросов и нажав кнопку Глобальные Связи. Если предопределенная связь существует для этого поля, опция для ее просмотра отображается в меню как "Глобальная связь к" с именем таблицы.</MadCap:conditionalText> <![CDATA[ ]]></p>
+        <p>Менеджер Глобальных связей доступен, только если вы зашли в систему как Администратор.</p>
+        <p class="RelatedTopics">Как выполнить?</p>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_3960234311_0" onclick="FMCDropDown( this ); return false;">Открытие Менеджера Глобальных Связей<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_3960234311_0" style="display: none;">
+                <ol>
+                    <li value="1"><a href="../QueryBuilder/Opening_Query_Builder.htm">Откройте Построитель Запросов</a>.</li>
+                </ol>
+                <ol>
+                    <li class="Topic-Text-Numbered" MadCap:conditions="Output.WebClient" value="2">Откройте <a href="../QueryBuilder/Opening_Query_Builder.htm">Построитель Запросов</a>, а затем нажмите кнопку <span class="SLXBold">Глобальные Связи</span>.
+</li>
+                </ol>
+                <p class="Topic-Text-Indent" MadCap:conditions="Output.WebClient">Эта кнопку появляется только в том случае, если вы вошли как Администратор.    <![CDATA[ ]]></p>
+            </div>
+        </div>
+        <p class="Topic-Text-Numbered"><a href="Add_a_Global_Join.htm">Добавление Глобальных Связей</a> <![CDATA[ ]]></p>
+        <p class="Topic-Text-Numbered"><a href="Edit_a_Global_Join.htm">Изменение Глобальных Связей</a> <![CDATA[ ]]></p>
+        <p class="Topic-Text-Numbered"><a href="Delete_a_Global_Join.htm">Удаление Глобальных Связей</a>
+        </p>
+        <p class="Topic-Text-Numbered"><a href="Show_a_Global_Join.htm">Просмотр Глобальных Связей</a>
+        </p>
+        <p class="Topic-Text-Numbered"> <![CDATA[          ]]></p>
+        <p>В Менеджере Глобальных Связей отображаются следующие поля:</p>
+        <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Поле</th>
+                    <th class="HeadD-Column1-Header1">Описание</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Sys</td>
+                    <td class="BodyD-Column1-Body1">Системная связь, которая не может быть удалена.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">1:1</td>
+                    <td class="BodyD-Column1-Body1">Означает отношение один к одному.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Родительская Таблица, Родительское Поле</td>
+                    <td class="BodyD-Column1-Body1">Основная таблица и поле в отношении связи.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Дочерняя Таблица, Дочернее Поле</td>
+                    <td class="BodyD-Column1-Body1">Таблица и поле, связанные с Родительской Таблицей и Родительским Полем.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1"><a href="Join_Types.htm">Тип</a>
+                    </td>
+                    <td class="BodyD-Column1-Body1">Тип объединения, такой как <a href="Inner_joins.htm" target="_self">Внутреннее</a>, <a href="Left_joins.htm" target="_self">Левое</a> или <a href="Right_joins.htm" target="_self">Правое</a>.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1"><a href="Cascade_Options.htm">Каскад</a>
+                    </td>
+                    <td class="BodyD-Column1-Body1">Показывает, как удаляются записи в связи.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1"><a href="Visibility_Options.htm">Видимость</a>
+                    </td>
+                    <td class="BodyA-Column1-Body1">Показывает, как отображается связь в Построителе Запросов.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="RelatedTopics">См. также</p>
+        <p><a href="../QueryBuilder/Using_SalesLogix_Query_Builder.htm" target="_self">Краткий обзор построителя запросов</a>
+        </p>
+        <p><a href="Joining_Tables.htm">Объединение Таблиц</a>
+        </p>
+        <p><a href="Join_Example.htm">Примтер Связи</a>
+        </p>
+        <p><a href="Guidelines_for_Using_Joins.htm">Рекомендации по Использованию Объединений</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

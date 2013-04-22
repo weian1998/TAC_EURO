@@ -1,0 +1,26 @@
+<div style="margin-bottom:10px">
+	<div dojoAttachEvent="onclick:_onTitleClick, onkeypress:_onTitleKey"
+			class="dijitTitlePaneTitle" dojoAttachPoint="titleBarNode">
+		<div class="dijitTitlePaneTitleFocus" dojoAttachPoint="focusNode">
+            <img src="${_blankGif}" alt="" dojoAttachPoint="arrowNode" 
+                class="dijitArrowNode" waiRole="presentation"/>
+            <span dojoAttachPoint="arrowNodeInner" class="dijitArrowNodeInner"></span>
+            <span dojoAttachPoint="titleNode" class="dijitTitlePaneTextNode"></span>
+            <span dojoAttachPoint="buttonBarNode" style="float: right;
+                    font-size:9px"></span>
+		</div>
+	</div>
+	<div class="dijitTitlePaneContentOuter" dojoAttachPoint="hideNode" waiRole="presentation">
+		<div class="dijitReset" dojoAttachPoint="wipeNode" waiRole="presentation">
+			<div waiRole="region" tabindex="-1" id="${id}_pane">
+                <!--a table works cross browser for chart + legend-->
+                <table border="0" style="width:100%; height:100%">
+                    <tr>
+                        <td dojoAttachPoint="containerNode" id="${id}_chart" style="width:${chartWidth}%;"></td>
+                        <td style="width:33%${legendDisplay}"><span id="${id}_legend"></span></td>
+                    </tr>
+                </table>
+            </div>
+		</div>
+	</div>
+</div>

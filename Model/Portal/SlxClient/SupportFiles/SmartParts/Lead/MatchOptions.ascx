@@ -93,7 +93,6 @@
     </tr>
     <tr>
         <td colspan="3">
-            <br />
             <span>
                 <asp:CheckBox runat="server" ID="chkUsePhonic" Checked="false" />
             </span>
@@ -106,7 +105,6 @@
     </tr>
     <tr>
         <td colspan="3">
-            <br />
             <span>
                 <asp:CheckBox runat="server" ID="chkUseSynonym" Checked="false" />
             </span>
@@ -119,7 +117,6 @@
     </tr>
     <tr>
         <td colspan="3">
-            <br />
             <span>
                 <asp:CheckBox runat="server" ID="chkUseFuzzy" Checked="false" Text="" />
             </span>
@@ -139,7 +136,7 @@
         </td>
         <td>
             <div class="textcontrol select">
-                <asp:ListBox runat="server" ID="lbxFuzzyLevel" SelectionMode="Single" Width="50px" Rows="1" EnableViewState="true">
+                <asp:ListBox runat="server" ID="lbxFuzzyLevel" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" shouldPublishMarkDirty="false" SelectionMode="Single" Width="50px" Rows="1" EnableViewState="true">
                     <asp:ListItem>1</asp:ListItem>
                     <asp:ListItem Selected="True">2</asp:ListItem>
                     <asp:ListItem>3</asp:ListItem>

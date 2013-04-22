@@ -27,6 +27,8 @@
 
 .optionsImageClass
 {
-	margin-left : -4px;
 	cursor : pointer;
+	position: relative;
+    right:25px !important;
+    top:5px !important;
 }

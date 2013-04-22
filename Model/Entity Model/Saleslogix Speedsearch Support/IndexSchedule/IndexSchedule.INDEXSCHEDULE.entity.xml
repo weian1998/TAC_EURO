@@ -78,14 +78,14 @@
         <DateTimeDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="99c07740-4929-4812-97d1-ce405b2793ec" lastModifiedUtc="0001-01-01T00:00:00" name="LastRunLog" audited="false" columnName="LASTRUNLOG" maxLength="2147483647" precision="0" scale="0" ordinal="6" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="99c07740-4929-4812-97d1-ce405b2793ec" lastModifiedUtc="2012-02-10T03:17:30.570207Z" name="LastRunLog" audited="false" columnName="LASTRUNLOG" maxLength="2147483647" precision="0" scale="0" ordinal="6" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
-      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
-        <TextDataType>
+      <SystemDataType guid="f4ca6023-9f5f-4e41-8571-50ba94e8f233">
+        <LongTextDataType>
           <Length>2147483647</Length>
-        </TextDataType>
+        </LongTextDataType>
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="824c1ae6-feef-4064-a3e3-94267011f118" lastModifiedUtc="0001-01-01T00:00:00" name="LastRunStatus" audited="false" columnName="LASTRUNSTATUS" maxLength="0" precision="10" scale="0" ordinal="7" isReadOnly="false">
@@ -130,14 +130,14 @@
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="125bb127-0ec7-423d-9561-9f1164489d76" lastModifiedUtc="0001-01-01T00:00:00" name="Schedule" audited="false" columnName="SCHEDULE" maxLength="2147483647" precision="0" scale="0" ordinal="5" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="125bb127-0ec7-423d-9561-9f1164489d76" lastModifiedUtc="2012-02-10T03:17:30.571207Z" name="Schedule" audited="false" columnName="SCHEDULE" maxLength="2147483647" precision="0" scale="0" ordinal="5" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
-      <SystemDataType guid="ccc0f01d-7ba5-408e-8526-a3f942354b3a">
-        <TextDataType>
+      <SystemDataType guid="f4ca6023-9f5f-4e41-8571-50ba94e8f233">
+        <LongTextDataType>
           <Length>2147483647</Length>
-        </TextDataType>
+        </LongTextDataType>
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="e3a898a1-8ac1-4ee7-8cb8-318fe5fa20de" lastModifiedUtc="0001-01-01T00:00:00" name="ScheduleType" audited="false" columnName="SCHEDULETYPE" maxLength="0" precision="10" scale="0" ordinal="2" isReadOnly="false">

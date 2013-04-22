@@ -112,16 +112,22 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActionResource1.Text" xml:space="preserve">
+    <value>Action</value>
+  </data>
   <data name="AddResponse_DialogCaption" xml:space="preserve">
     <value>Add Response</value>
   </data>
   <data name="AddToTeamCaption" xml:space="preserve">
     <value>Add to Team</value>
+  </data>
+  <data name="ClearText_DisplayCaption" xml:space="preserve">
+    <value>Clear</value>
   </data>
   <data name="ConfirmCopyDepartmentMessage" xml:space="preserve">
     <value>Are you sure you want to copy the selected department?</value>
@@ -144,32 +150,20 @@
   <data name="CopyUserCaption" xml:space="preserve">
     <value>Copy User</value>
   </data>
+  <data name="EditResponse_DialogCaption" xml:space="preserve">
+    <value>Edit Response</value>
+  </data>
   <data name="ExportToFile_BoolenNo" xml:space="preserve">
     <value>No</value>
   </data>
   <data name="ExportToFile_BoolenYes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="ExportToFile_Cancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
   <data name="ExportToFile_DialogTitle" xml:space="preserve">
     <value>Export</value>
   </data>
   <data name="ExportToFile_FileName" xml:space="preserve">
     <value>_slx_exported_selections</value>
-  </data>
-  <data name="ExportToFile_Header" xml:space="preserve">
-    <value>Select a file format:</value>
-  </data>
-  <data name="ExportToFile_OK" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="ExportToFile_OptionCSV" xml:space="preserve">
-    <value>Standard CSV</value>
-  </data>
-  <data name="ExportToFile_OptionSaveFormat" xml:space="preserve">
-    <value>Remember my selection and do not ask again.</value>
   </data>
   <data name="ExportToFile_OptionTab" xml:space="preserve">
     <value>Tab Delimited (recommended for Microsoft Excel)</value>
@@ -182,6 +176,9 @@
   </data>
   <data name="ReplaceOnAllTeamsCaption" xml:space="preserve">
     <value>Replace on All Teams</value>
+  </data>
+  <data name="ReplaceOwner_DialogCaption" xml:space="preserve">
+    <value>Replace Owner</value>
   </data>
   <data name="SalesOrder_Status_OrderedConfirmed" xml:space="preserve">
     <value>Ordered/Confirmed</value>
@@ -203,12 +200,6 @@
   </data>
   <data name="TaskText_AddToGroup" xml:space="preserve">
     <value>Add to Group</value>
-  </data>
-  <data name="TaskText_AssignOwner" xml:space="preserve">
-    <value>Assign Owner...</value>
-  </data>
-  <data name="TaskText_DeleteLeads" xml:space="preserve">
-    <value>Delete Leads</value>
   </data>
   <data name="TaskText_DetailReport" xml:space="preserve">
     <value>Detail Report</value>
@@ -251,5 +242,8 @@
   </data>
   <data name="TaskText_ToDo" xml:space="preserve">
     <value>New To-Do</value>
+  </data>
+  <data name="TaskText_WriteEmailToGroupSelection" xml:space="preserve">
+    <value>E-mail</value>
   </data>
 </root>

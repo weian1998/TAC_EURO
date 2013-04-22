@@ -77,9 +77,7 @@ public partial class SmartParts_ActWhatsNew_ActWhatsNew : UserControl, ISmartPar
     protected override void OnPreRender(EventArgs e)
     {
         base.OnPreRender(e);
-
-        RegisterClientScript();
-
+       
         if (!Visible) return;
 
         DateTime fromDate = GetLastWebUpdate();
@@ -203,6 +201,7 @@ public partial class SmartParts_ActWhatsNew_ActWhatsNew : UserControl, ISmartPar
         const string phoneURL = "~/images/icons/Call_16x16.gif";
         const string todoURL = "~/images/icons/To_Do_16x16.gif";
         const string personalURL = "~/images/icons/Personal_16x16.gif";
+        const string noteURL = "~/images/icons/Note_16x16.gif";
 
         switch (type.ToString())
         {
@@ -214,6 +213,8 @@ public partial class SmartParts_ActWhatsNew_ActWhatsNew : UserControl, ISmartPar
                 return todoURL;
             case "atPersonal":
                 return personalURL;
+            case "atNote":
+                return noteURL;
             default:
                 return meetingURL;
         }
@@ -236,6 +237,8 @@ public partial class SmartParts_ActWhatsNew_ActWhatsNew : UserControl, ISmartPar
                 return GetLocalResourceObject("ToDo_Type").ToString();
             case "atPersonal":
                 return GetLocalResourceObject("Personal_Type").ToString();
+            case "atNote":
+                return GetLocalResourceObject("Note_Type").ToString();
             default:
                 return GetLocalResourceObject("Meeting_Type").ToString();
         }
@@ -249,7 +252,18 @@ public partial class SmartParts_ActWhatsNew_ActWhatsNew : UserControl, ISmartPar
     protected string GetActivityLink(object ActivityID)
     {
         IActivity act = EntityFactory.GetById<IActivity>(ActivityID.ToString());
-        return String.Format("WhatsNew_EditActivity('{0}', '{1}')", act.Id, act.StartDate.ToString(CultureInfo.InvariantCulture));
+        string link;
+        if (act.Recurring)
+        {
+            link = String.Format("Sage.Link.editActivity('{0};{1}')", act.Id, act.StartDate.Ticks / TimeSpan.TicksPerSecond);
+        }
+        else 
+        {
+            link = String.Format("Sage.Link.editActivity('{0}')", act.Id, act.StartDate.ToString(CultureInfo.InvariantCulture));
+        
+        }
+
+        return link; 
     }
 
     /// <summary>
@@ -259,8 +273,15 @@ public partial class SmartParts_ActWhatsNew_ActWhatsNew : UserControl, ISmartPar
     /// <returns></returns>
     protected string GetEntityType(object contactId)
     {
-        if (contactId != null)
-            return GetLocalResourceObject("Contact").ToString();
+        if (contactId != null) 
+        {
+           var  id = contactId.ToString().Trim();
+            if (!string.IsNullOrEmpty(id))
+            {
+                return GetLocalResourceObject("Contact").ToString(); 
+            }
+        
+        }         
         return GetLocalResourceObject("Lead").ToString();
     }
 
@@ -272,11 +293,27 @@ public partial class SmartParts_ActWhatsNew_ActWhatsNew : UserControl, ISmartPar
     /// <returns></returns>
     protected string GetDisplayName(object contact, object lead)
     {
+
+        string name = string.Empty;
         if (lead != null)
-            return lead.ToString();
+        {
+            name = lead.ToString().Trim();
+            if (!string.IsNullOrEmpty(name))
+            {
+                return name;
+            }
+
+        }
         if (contact != null)
-            return contact.ToString();
-        return String.Empty;
+        {
+            name = contact.ToString().Trim();
+            if (!string.IsNullOrEmpty(name))
+            {
+                return name;
+            }
+        }
+        return name;
+       
     }
 
     /// <summary>
@@ -287,11 +324,26 @@ public partial class SmartParts_ActWhatsNew_ActWhatsNew : UserControl, ISmartPar
     /// <returns></returns>
     protected string GetEntityId(object contactId, object leadId)
     {
+        string id = string.Empty;
+
         if (leadId != null)
-            return leadId.ToString();
-        if (contactId != null)
-            return contactId.ToString();
-        return String.Empty;
+        {
+            id = leadId.ToString().Trim();
+            if (!string.IsNullOrEmpty(id))
+            {
+                return id;
+            }
+        }
+        if (contactId != null) 
+        {
+            id = contactId.ToString().Trim();
+            if (!string.IsNullOrEmpty(id))
+            {
+                return id;
+            }
+        
+        }            
+        return id;
     }
 
     /// <summary>
@@ -347,49 +399,6 @@ public partial class SmartParts_ActWhatsNew_ActWhatsNew : UserControl, ISmartPar
     { }
 
     /// <summary>
-    /// Handles the Click event of the hEditAct control.
-    /// </summary>
-    /// <param name="sender">The source of the event.</param>
-    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-    protected void hEditAct_Click(object sender, EventArgs e)
-    {
-        string activityID = hActId.Value;
-        if (activityID.Length > 12)
-            activityID = activityID.Substring(0, 12);
-        Activity activity = EntityFactory.GetById<Activity>(activityID);
-
-        if (activity != null)
-        {
-            if (activity.Recurring && activity.RecurrencePattern.Range.NumOccurences > -1)
-            {
-                IWebDialogService dialogService = GetdialogService();
-                if (dialogService != null)
-                {
-                    dialogService.SetSpecs(200, 200, 250, 330, "EditRecurrence", "", true);
-                    dialogService.EntityType = typeof(IActivity);
-                    dialogService.EntityID = activityID;
-                    dialogService.DialogParameters.Add("recurdate", hOccurrenceDate.Value);
-                    var appContext = ApplicationContext.Current.Services.Get<IContextService>();
-                    if (appContext != null) {
-                        var actParams = new Dictionary<string, string>();
-                        actParams.Add("recurdate", hOccurrenceDate.Value);
-                        appContext["ActivityParameters"] = actParams;
-                    }
-                    dialogService.ShowDialog();
-                }
-                else
-                {
-                    Link.EditActivity(activityID);
-                }
-            }
-            else
-            {
-                Link.EditActivity(activityID);
-            }
-        }
-    }
-
-    /// <summary>
     /// Getdialogs the service.
     /// </summary>
     /// <returns></returns>
@@ -421,23 +430,7 @@ public partial class SmartParts_ActWhatsNew_ActWhatsNew : UserControl, ISmartPar
         return workItem.Services.Get<IWebDialogService>();
     }
 
-    /// <summary>
-    /// Registers the client script.
-    /// </summary>
-    private void RegisterClientScript()
-    {
-        StringBuilder script = new StringBuilder();
-        script.AppendLine("function WhatsNew_EditActivity(activityId, occurDate)");
-        script.AppendLine("{");
-        script.AppendFormat("        document.getElementById('{0}').value = activityId;", hActId.ClientID);
-        script.AppendLine();
-        script.AppendFormat("        document.getElementById('{0}').value = occurDate;", hOccurrenceDate.ClientID);
-        script.AppendLine();
-        script.AppendFormat("        document.getElementById('{0}').click();", hEditAct.ClientID);
-        script.AppendLine("}");
-        ScriptManager.RegisterClientScriptBlock(Page, GetType(), ClientID + "_EditActivityScript", script.ToString(), true);
-    }
-
+    
     #region ISmartPartInfoProvider Members
 
     /// <summary>

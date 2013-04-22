@@ -112,39 +112,39 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="grdProducts.EmptyTableRowText" xml:space="preserve">
-    <value>No records match the selection criteria.</value>
+  <data name="QFSDataGrid.Delete.ToolTip" xml:space="preserve">
+    <value>Delete</value>
   </data>
-  <data name="grdProducts.de8edd5f-82e8-4ca4-9f6b-7c1133bf7088.ColumnHeading" xml:space="preserve">
+  <data name="QFSDataGrid.a76dde7c-9ab7-4c43-81bf-7494751fb0a8.ColumnHeading" xml:space="preserve">
     <value>Product Name</value>
   </data>
-  <data name="grdProducts.08e8cd6a-ec50-4e98-a4cd-ae4f5a0c2ba8.ColumnHeading" xml:space="preserve">
-    <value>SKU</value>
-  </data>
-  <data name="grdProducts.1528088a-96f1-4d74-877a-90d2ca0c076b.ColumnHeading" xml:space="preserve">
+  <data name="QFSDataGrid.813b9306-7406-4224-ae72-3edc6db45327.ColumnHeading" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="grdProducts.4f93f1cf-dd7b-4e0a-926e-7a902881a5ec.Text" xml:space="preserve">
-    <value>Remove</value>
+  <data name="QFSDataGrid.82bea8fa-4081-457b-9b55-4ebbad99bd65.ColumnHeading" xml:space="preserve">
+    <value>SKU</value>
   </data>
-  <data name="grdProducts.4f93f1cf-dd7b-4e0a-926e-7a902881a5ec.ConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to remove the association with the selected product?</value>
+  <data name="QFSDataGrid_AddRelationTool.ButtonToolTip" xml:space="preserve">
+    <value>Associate Product</value>
   </data>
-  <data name="lueAssociateProduct.LookupProperties.Name.PropertyHeader" xml:space="preserve">
+  <data name="QFSDataGrid_AddRelationTool.LookupProperties.Name.PropertyHeader" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="lueAssociateProduct.LookupProperties.ActualId.PropertyHeader" xml:space="preserve">
+  <data name="QFSDataGrid_AddRelationTool.LookupProperties.ActualId.PropertyHeader" xml:space="preserve">
     <value>SKU</value>
   </data>
-  <data name="lueAssociateProduct.LookupProperties.Description.PropertyHeader" xml:space="preserve">
+  <data name="QFSDataGrid_AddRelationTool.LookupProperties.Description.PropertyHeader" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="lueAssociateProduct.ToolTip" xml:space="preserve">
-    <value>Associate Product</value>
+  <data name="QFSDataGrid_AddRelationTool.DialogButtonText" xml:space="preserve">
+    <value>Add Selected</value>
+  </data>
+  <data name="QFSDataGrid_AddRelationTool.LookupDialogTitle" xml:space="preserve">
+    <value>Lookup Product</value>
   </data>
 </root>

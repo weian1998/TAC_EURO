@@ -1,8 +1,3 @@
-/*
- * SagePlatform
- * Copyright(c) 2009, Sage Software.
- */
-
 
 window.Sage = window.Sage || {};
 window.Sage.__namespace = true; //allows child namespaces to be registered via Type.registerNamespace(...)
@@ -79,7 +74,7 @@ Sage.extend = function(subclass, superclass) {
 
 (function(S) {
     var INITIALIZING = false,
-    OVERRIDE = /xyz/.test(function(){xyz;}) ? /\bbase\b/ : /.*/;
+        OVERRIDE = /xyz/.test(function(){xyz;}) ? /\bbase\b/ : /.*/;
     // The base Class placeholder
     S.Class = function(){};
     // Create a new Class that inherits from this class
@@ -103,7 +98,6 @@ Sage.extend = function(subclass, superclass) {
                 return ret;
             };
         };
-
         // Copy the properties over onto the new prototype
         var hidden = ['constructor'],
             i = 0,
@@ -413,52 +407,64 @@ Sage.extend = function(subclass, superclass) {
     };
 }(Sage));
 
+
 Sage.ServiceContainer = function(){
-    _services = [];
+    this._services = [];
 };
 Sage.ServiceContainer.prototype = {
-    addService: function(name, service){
-        if(name && service){
-            if(!this.hasService(name)){
-                var innerService = {};
+    addService: function(name, service) {
+        if (name && service) {
+            if (!this.hasService(name)) {
+                var innerService = { };
                 innerService.key = name;
                 innerService.service = service;
-                _services.push(innerService);
+                this._services.push(innerService);
                 return service;
-            }
-            else{
+            } else {
                 throw "Service already exists: " + name;
             }
         }
+        return false;
     },
-    removeService: function(name){
-        for(i=0;i<_services.length;i++){
-            if(_services[i].key === name){
-                _services.splice(i, 1);
+    removeService: function(name) {
+        for (var i = 0; i < this._services.length; i++) {
+            if (this._services[i].key === name) {
+                this._services.splice(i, 1);
             }
         }
     },
-    getService: function(name){
-        if(name){
-            for(i=0;i<_services.length;i++){
-                if(_services[i].key === name)
-                    return _services[i].service;
+    getService: function(name) {
+        if (name) {
+            for (var i = 0; i < this._services.length; i++) {
+                if (this._services[i].key === name)
+                    return this._services[i].service;
             }
         }
         return null;
     },
-    hasService: function(name){
-        if(name){
-            for(i=0;i<_services.length;i++){
-                if(_services[i].key === name)
+    hasService: function(name) {
+        if (name) {
+            for (var i = 0; i < this._services.length; i++) {
+                if (this._services[i].key === name)
                     return true;
             }
         }
         return false;
     }
-}
-
+};
 Sage.Services = new Sage.ServiceContainer();
+
+
+
+
+
+
+document.onkeypress = function (evt) {
+    evt = (evt) ? evt : ((event) ? event : null);
+    var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+    if ((evt.keyCode === 13) && (node.type === "text")) { return false; }
+    return true;
+};
 // Copyright 2007, Google Inc.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -564,1519 +570,126 @@ function initGears() {
   }
 }//)();
 
-// class used for watching bound data fields and notifying the user that they have dirty data
-ClientBindingManagerService = function () {
-    this._WatchChanges = true;
-    this._PageExitWarningMessage = "";
-    this._ShowWarningOnPageExit = false;
-    this._SkipCheck = false;
-    //this flag tracks the dirty status of controls that were databound on the server
-    this._CurrentEntityIsDirty = false;
-    this._SaveBtnID = "";
-    this._MsgDisplayID = "";
-    this._entityTransactionID = "";
-    this._IgnoreDirtyFlag = false;
-    //this keeps track of any Ajax controls that also may have dirty data in them...
-    this._DirtyAjaxItems = [];
-    this._listeners = {};
-    this._listeners[ClientBindingManagerService.ON_SAVE] = [];
-    positionDirtyDataMessage();
-};
+require([
+    'dojo/dom'
+], function (dom) {
+    // TODO: Make this an AMD module
+    Sage.ContentPane = function (toggleBtn, contentArea, attr) {
+        this.contentArea = contentArea;
+        this.toggleButton = toggleBtn;
+        this.state = "open";
+        this.minText = attr.minText;
+        this.maxText = attr.maxText;
+        this.minClass = attr.minClass;
+        this.maxClass = attr.maxClass;
+        this.baseClass = "Global_Images icon16x16";
 
-ClientBindingManagerService.ON_SAVE = 'onsave';
-
-$(document).ready(function() {
-    Sys.WebForms.PageRequestManager.getInstance().add_endRequest(positionDirtyDataMessage);
-});
-
-function positionDirtyDataMessage() {
-    if ($('#PageTitle').get().length > 0) {
-        $('#PageTitle').after($('.dirtyDataMessage').replaceWith(''))
-        $('.dirtyDataMessage').css('top', $('#PageTitle').position().top);
-        $('.dirtyDataMessage').css('left', $('#PageTitle').outerWidth());
-    }
-}
-
-
-ClientBindingManagerService.prototype.addListener = function (event, listener, scope) {
-    this._listeners[event] = this._listeners[event] || [];
-    this._listeners[event].push({ listener: listener, scope: scope });
-};
-
-ClientBindingManagerService.prototype.removeListener = function (event, listener) {
-    this._listeners[event] = this._listeners[event] || [];
-    for (var i = 0; i < this._listeners[event].length; i++)
-        if (this._listeners[event][i].listener == listener)
-            break;
-
-    this._listeners[event].splice(i, 1);
-};
-
-ClientBindingManagerService.prototype.onSave = function () {
-    for (var i = 0; i < this._listeners[ClientBindingManagerService.ON_SAVE].length; i++) {
-        var fn = this._listeners[ClientBindingManagerService.ON_SAVE][i].listener;
-        var scope = this._listeners[ClientBindingManagerService.ON_SAVE][i].scope || this;
-        if (typeof fn === "function") {
-            fn.call(scope);
-        }
-    }
-}
-
-ClientBindingManagerService.prototype.SetShowWarningOnPageExit = function(showMsg) {
-    this._ShowWarningOnPageExit = (showMsg);
-    if (this._ShowWarningOnPageExit) {
-        window.onbeforeunload = this.onExit;
-    }
-};
-
-ClientBindingManagerService.prototype.onExit = function(e) {
-    var mgr = Sage.Services.getService("ClientBindingManagerService");
-    if (mgr) {
-        if (mgr._ShowWarningOnPageExit) {
-            if (mgr._SkipCheck) {
-                //_SkipCheck = false;
-                return;
-            }
-            var hdd = mgr.hasDirtyData();
-            if (hdd && (mgr._IgnoreDirtyFlag == false)) {
-                window.setTimeout(function() {
-                    hideRequestIndicator(null, { });
-                }, 1000);
-                if (window.event) {
-                    window.event.returnValue = mgr._PageExitWarningMessage;
-                } else {
-                    return mgr._PageExitWarningMessage;
-                }
-            }
-        }
-    }
-    return;
-};
-
-
-ClientBindingManagerService.prototype.canChangeEntityContext = function() {
-    if ((this._WatchChanges) && (this.hasDirtyData()) && (this._ShowWarningOnPageExit)) {
-        if (confirm(this._PageExitWarningMessage)) {
-            this.clearDirtyStatus();
-            return true;
-        } else {
-            return false;
-        }
-    }
-    return true;
-};
-
-ClientBindingManagerService.prototype.hasDirtyData = function () {
-    return (this._CurrentEntityIsDirty || (this._DirtyAjaxItems && this._DirtyAjaxItems.length > 0));
-}
-
-ClientBindingManagerService.prototype.markDirty = function(e) {
-    var mgr = Sage.Services.getService("ClientBindingManagerService");
-    if (mgr) {
-        if (mgr._WatchChanges) {
-            mgr._CurrentEntityIsDirty = true;
-            positionDirtyDataMessage();
-            if(mgr._IgnoreDirtyFlag == false){
-              $("#" + mgr._MsgDisplayID).show();
-            }
-        }
-    }
-};
-
-ClientBindingManagerService.prototype.addDirtyAjaxItem = function (itemId) {
-    //make sure we don't already know about this one...
-    var len = this._DirtyAjaxItems.length;
-    for (var i = 0; i < len; i++) {
-        if (this._DirtyAjaxItems[i] === itemId) {
+        var elem = dom.byId(toggleBtn);
+        if (!elem) {
             return;
         }
-    }
-    this._DirtyAjaxItems.push(itemId);
-    //show the message without marking _CurrentEntityIsDirty so it can be tracked separately.
-    if (this._WatchChanges) {
-        positionDirtyDataMessage();
-        if (this._IgnoreDirtyFlag == false) {
-            $("#" + this._MsgDisplayID).show();
-        }
-    }
-}
-
-ClientBindingManagerService.prototype.clearDirtyAjaxItem = function (itemId) {
-    var len = this._DirtyAjaxItems.length;
-    for (var i = 0; i < len; i++) {
-        if (this._DirtyAjaxItems[i] === itemId) {
-            this._DirtyAjaxItems.splice(i, 1);
-            //return;
-        }
-    }
-    if (!this.hasDirtyData()) {
-        $("#" + this._MsgDisplayID).hide();
-    }
-}
-
-ClientBindingManagerService.prototype.clearDirtyStatus = function() {
-    var mgr = Sage.Services.getService("ClientBindingManagerService");
-    if (mgr) {
-        mgr._CurrentEntityIsDirty = false;
-        $("#" + mgr._MsgDisplayID).hide();
-    }
-};
-
-function notifyIsSaving() {
-    Sys.WebForms.PageRequestManager.getInstance().add_endRequest(handleEndSaveRequest);
-    var mgr = Sage.Services.getService("ClientBindingManagerService");
-    if (mgr) {
-        mgr.clearDirtyStatus();
-        mgr.onSave();
-    }
-};
-
-function handleEndSaveRequest(sender, args) {
-    var mgr = Sage.Services.getService("ClientBindingManagerService");
-    if (mgr) {
-        if (!args.get_error()) {
-            mgr.clearDirtyStatus();
-        } else {
-            mgr.markDirty();
-        }
-        Sys.WebForms.PageRequestManager.getInstance().remove_endRequest(handleEndSaveRequest);
-    }
-};
-
-ClientBindingManagerService.prototype.saveForm = function() {
-    var btn = $get(this._SaveBtnID);
-    if (btn) {
-        if ((btn.tagName.toLowerCase() == "input") && (btn.type == "image")) {
-            notifyIsSaving();
-            Sys.WebForms.PageRequestManager.getInstance()._doPostBack(btn.name, null);
-        } else if (btn.onClick) {
-            notifyIsSaving();
-            btn.onClick();
-        }
-    }
-};
-
-ClientBindingManagerService.prototype.registerResetBtn = function(elemID) {
-    if (elemID) {
-        var btn = $get(elemID);
-        if (btn) {
-            $addHandler(btn, "click", this.resetCurrentEntity);
-        }
-    }
-};
-
-ClientBindingManagerService.prototype.registerSaveBtn = function(elemID) {
-    if (elemID) {
-        var btn = $get(elemID);
-        if (btn) {
-            $addHandler(btn, "click", notifyIsSaving);
-            if (this._SaveBtnID == "") {
-                this._SaveBtnID = elemID;
-            }
-        }
-    }
-};
-
-ClientBindingManagerService.prototype.registerDialogCancelBtn = function(elemID) {
-    if (elemID) {
-        var btn = $get(elemID);
-        if (btn) {
-            $addHandler(btn, "click", this.rollbackCurrentTransaction);
-        }
-    }
-};
-
-ClientBindingManagerService.prototype.registerBoundControls = function(controlList) {
-    var mgr = Sage.Services.getService("ClientBindingManagerService");
-    if (mgr) {
-        if ((mgr._WatchChanges) && (controlList)) {
-            var ctrlIDs = controlList.split(",");
-            var elem;
-            for (var i = 0; i < ctrlIDs.length; i++) {
-                elem = $get(ctrlIDs[i]);
-                if (elem) {
-                    // check here for attribute saying it is a container - if it is, recurse children looking for the correct one(s)...
-                    if (elem.attributes["slxcompositecontrol"]) {
-                        mgr.findChildControls(elem);
-                    } else {
-                        mgr.attachChangeHandler(elem);
-                    }
-                    //if (mgr._ShowWarningOnPageExit) {
-                    //    mgr.registerPostBackWarningExceptions(elem);  //if this is a control that contains a link we want to allow it to do its thing without prompting the user
-                    //}
-                }
-            }
-        }
-        mgr.findWarningExceptions();
-    }
-};
-
-ClientBindingManagerService.prototype.findChildControls = function(elem) {
-    if ((elem) && (elem.attributes) && (elem.attributes["slxchangehook"]) && (!elem.attributes["slxcompositecontrol"])) {
-        //alert("found a changehook: \nID: " + elem.id + "\nname: " + elem.name + "\nelem: " + elem);
-        this.attachChangeHandler(elem);
-    } else {
-        if (elem.childNodes) {
-            for (var n = 0; n < elem.childNodes.length; n++) {
-                this.findChildControls(elem.childNodes[n]);
-            }
-        }
-    }
-};
-
-ClientBindingManagerService.prototype.setControlFocus = function(ctrlid) {
-    trySelect = function(elem) {
-        if ((typeof (elem.select) == "function") || (typeof (elem.select) == "object")) {
-            elem.select();
-            return true;
-        }
-        return false;
-    };
-    var elem = $("#" + ctrlid)[0];
-    if (elem) {
-        if (trySelect(elem)) { return; }
-        elem = $("#" + ctrlid + " TEXTAREA")[0];
-        if ((elem) && (trySelect(elem))) { return; }
-        elem = $("#" + ctrlid + " INPUT")[0];
-        if ((elem) && (trySelect(elem))) { return; }
-        elem = $("#" + ctrlid + " SELECT")[0];
-        if ((elem) && (trySelect(elem))) { return; }
-    }
-};
-
-ClientBindingManagerService.prototype.attachChangeHandler = function(elem) {
-    if (elem) {
-        if ((elem.tagName == "A") || ((elem.tagName == "INPUT") && ((elem.type == "button") || (elem.type == "image") || (elem.type == "submit")))) {
-            this.registerChildPostBackWarningExceptions(elem);
-        } else {
-            try { $removeHandler(elem, "change", this.markDirty); } catch (e) { }
-            $addHandler(elem, "change", this.markDirty);
-        }
-    }
-};
-
-ClientBindingManagerService.prototype.registerPostBackWarningExceptions = function(elem) {
-    if (elem) {
-        elems = $("a,input[type='INPUT'],input[type='BUTTON'],input[type='IMAGE'],input[type='SUBMIT']", elem).get();
-        for(var i = 0; i < elems.length; i++) {
-            this.registerChildPostBackWarningExceptions(elems[i]);
-        }
-    }
-}
-ClientBindingManagerService.prototype.findWarningExceptions = function() {
-    var elems = $("span[slxcompositecontrol], div[slxcompositecontrol]").get();
-    for(var i = 0; i < elems.length; i++) {
-        this.registerPostBackWarningExceptions(elems[i]);
-    }
-}
-
-ClientBindingManagerService.prototype.registerChildPostBackWarningExceptions = function(elem) {
-    if (elem) {
-        if ($(elem).hasClass("leavesPage")) {
-            return;
-        }
-        if ((elem.tagName == "A") || ((elem.tagName == "INPUT") && ((elem.type == "button") || (elem.type == "image") || (elem.type == "submit")))) {
-            try { $removeHandler(elem, "click", this.skipWarning); } catch (e) { }
-            $addHandler(elem, "click", this.skipWarning);
-        }
-    }
-};
-
-ClientBindingManagerService.prototype.turnOffWarnings = function() {
-    var mgr = Sage.Services.getService("ClientBindingManagerService");
-    if (mgr) {
-        mgr._SkipCheck = true;
-        var x = window.setTimeout(function() {var mgr = Sage.Services.getService("ClientBindingManagerService"); if (mgr) { mgr._SkipCheck = true }}, 500);  //just in case there is a timer waiting to turn it back on
-    }
-};
-
-ClientBindingManagerService.prototype.resumeWarning = function() {
-    var mgr = Sage.Services.getService("ClientBindingManagerService");
-    if (mgr) {
-        mgr._SkipCheck = false;
-    }
-};
-
-ClientBindingManagerService.prototype.skipWarning = function() {
-    var mgr = Sage.Services.getService("ClientBindingManagerService");
-    if (mgr) {
-        mgr._SkipCheck = true;
-        var x = window.setTimeout(function() {var mgr = Sage.Services.getService("ClientBindingManagerService"); if (mgr) { mgr._SkipCheck = false }}, 500);
-    }
-};
-
-ClientBindingManagerService.prototype.resetCurrentEntity = function() {
-    doFormReset();
-    var mgr = Sage.Services.getService("ClientBindingManagerService");
-    if (mgr) {
-        var contextservice = Sage.Services.getService("ClientContextService");
-        if (contextservice) {
-            if (contextservice.containsKey("ResetCurrentEntity")) {
-                contextservice.setValue("ResetCurrentEntity", "true");
-            } else {
-                contextservice.add("ResetCurrentEntity", "true");
-            }
-        }
-        mgr.clearDirtyStatus();
-    }
-};
-
-ClientBindingManagerService.prototype.rollbackCurrentTransaction = function() {
-    doSectionReset("dialog");
-    var mgr = Sage.Services.getService("ClientBindingManagerService");
-    if (mgr) {
-        //alert("rolling back current transaction... " + mgr._entityTransactionID);
-        var contextservice = Sage.Services.getService("ClientContextService");
-        if (contextservice) {
-            if (contextservice.containsKey("RollbackEntityTransaction")) {
-                contextservice.setValue("RollbackEntityTransaction", mgr._entityTransactionID);
-            } else {
-                contextservice.add("RollbackEntityTransaction", mgr._entityTransactionID);
-            }
-        }
-    }
-};
-
-function doFormReset() {
-    if (document.all) {
-        doSectionReset("main");
-        doSectionReset("tabs");
-        doSectionReset("dialog");
-    } else {
-        document.forms[0].reset();
-    }
-};
-
-function doSectionReset(sectionId) {
-    function getElements(sectionId, tagName) {
-        if ((sectionId == "main") && (document.all.MainContent)) {
-            return document.all.MainContent.getElementsByTagName(tagName);
-        } else if ((sectionId == "tabs") && (document.all.ctl00_TabControl)) {
-            return document.all.ctl00_TabControl.getElementsByTagName(tagName);
-        } else if (document.all.ctl00_DialogWorkspace) {
-            return document.all.ctl00_DialogWorkspace.getElementsByTagName(tagName);
-        } 
-        return new Array();
-    }
-    if (document.all) {
-        var elem;
-        var elems = getElements(sectionId, "INPUT");
-        for (var i = 0; i < elems.length; i++) {
-            elem = elems[i];
-            if ((elem.type == "checkbox") || (elem.type == "radio")) {
-                if (elem.checked != elem.defaultChecked) {
-                    elem.checked = elem.defaultChecked;
-                }
-            } else {
-                if (elem.value != elem.defaultValue) {
-                    elem.value = elem.defaultValue;
-                }
-            }
-        }
-        elems = getElements(sectionId, "TEXTAREA");
-        for (var i = 0; i < elems.length; i++) {
-            elem = elems[i];
-            if (elem.value != elem.defaultValue) {
-                elem.value = elem.defaultValue;
-            }
-        }
-        elems = getElements(sectionId, "SELECT");
-        for (var i = 0; i < elems.length; i++) {
-            elem = elems[i];
-            for (var k = 0; k < elem.options.length; k++) {
-                elem.options[k].selected = elem.options[k].defaultSelected;
-            }
-        }
-    } else {
-        document.forms[0].reset();
-    }
-};
-
-//var mgr = Sage.Services.getService("ClientBindingManagerService");
-//if (mgr) { mgr.rollbackCurrentTransaction(); }
-
-ClientBindingManagerService.prototype.setCurrentTransaction = function(transaction) {
-    this._entityTransactionID = transaction;
-};
-
-function clearReset() {
-    //alert("clearing reset");
-    if (Sage.Services) {
-        var contextservice = Sage.Services.getService("ClientContextService");
-        if (contextservice) {
-            if (contextservice.containsKey("ResetCurrentEntity")) {
-                contextservice.remove("ResetCurrentEntity");
-            }
-            if (contextservice.containsKey("RollbackEntityTransaction")) {
-                contextservice.remove("RollbackEntityTransaction");
-                //alert(contextservice.containsKey("RollbackEntityTransaction"));
-            }
-        }
-    }
-};
-
-Sage.Services.addService("ClientBindingManagerService", new ClientBindingManagerService());
-
-Sage.ClientContextService = function(contextDataFieldId){
-    this.contextDataFieldId = contextDataFieldId;
-    _items = [];
-    _watches = [];
-    
-    //Internal Helper Methods
-    _toItemLiteral = function(key, value){
-        var newItem = {};
-        newItem.itemKey = key;
-        newItem.itemVal = value;
-        return newItem;
-    };
-    _indexOf = function(key){
-        for(i=0;i<_items.length;i++){
-            if(_items[i].itemKey == key){
-                return i;
-            }
-        }
-        return -1;
-    };
-    _indexOfNoCase = function(key) {
-        for (i = 0; i < _items.length; i++) {
-            if (_items[i].itemKey.toUpperCase() == key.toUpperCase()) {
-                return i;
-            }
-        }
-        return -1;
-    };    
-    
-    _throwKeyNotFound = function(key){
-        throw "Entry Not Found: " + key;
-    };
-    _throwDuplicateKey = function(key){
-        throw "Entry Already Exists: " + key;
-    }
-    this.load();
-}
-Sage.ClientContextService.prototype = {
-    add: function(key, value) {
-        if (_indexOf(key) === -1) {
-            var lit = _toItemLiteral(key, value);
-            _items.push(lit);
-            this.save();
-        }
-        else
-            _throwDuplicateKey(key);
-    },
-    remove: function(key) {
-        var index = _indexOf(key);
-        if (index !== -1) {
-            _items.splice(index, 1);
-            this.save();
-        }
-    },
-    setValue: function(key, value) {
-        var index = _indexOf(key);
-        if (index !== -1) {
-            _items[index].itemVal = value;
-            this.save();
-        }
-        else {
-            _throwKeyNotFound(key);
-        }
-    },
-    getValue: function(key) {
-        var index = _indexOf(key);
-        //alert(index);
-        if (index !== -1) {
-            return _items[index].itemVal;
-        }
-        else {
-            _throwKeyNotFound(key);
-        }
-    },
-    getValueEx: function(key, nocase) {
-        var index;
-        if (nocase)
-            index = _indexOfNoCase(key);
-        else
-            index = _indexOf(key);
-        //alert(index);
-        if (index !== -1) {
-            return _items[index].itemVal;
-        }
-        else {
-            _throwKeyNotFound(key);
-        }
-    },
-    clear: function() {
-        _items = [];
-        this.save();
-    },
-    containsKey: function(key) {
-        return (_indexOf(key) !== -1);
-    },
-    containsKeyEx: function(key, nocase) {
-        if (nocase)
-            return (_indexOfNoCase(key) !== -1);
-        else
-            return (_indexOf(key) !== -1);
-    },
-    getCount: function() {
-        return _items.length;
-    },
-    hasKeys: function() {
-        return _items.length === 0;
-    },
-    getKeys: function() {
-        var keyRes = [];
-        for (i = 0; i < _items.length; i++) {
-            keyRes.push(_items[i].itemKey);
-        }
-        return keyRes;
-    },
-    valueAt: function(index) {
-        if (_items[index]) {
-            return _items[index].itemVal;
-        }
-        else {
-            return null;
-        }
-    },
-    keyAt: function(index) {
-        this.load();
-        if (_items[index])
-            return _items[index].itemKey;
-        else
-            return null;
-    },
-    getValues: function() {
-        var valRes = [];
-        for (i = 0; i < _items.length; i++) {
-            valRes.push(_items[i].itemVal);
-        }
-        return valRes;
-    },
-    save: function(hours) {
-        var data = document.getElementById(this.contextDataFieldId);
-        if (data) {
-            //alert("saving to: " + data.id);
-            data.value = this.toString();
-        }
-        else {
-            alert("can't find context data field");
-        }
-    },
-    updateFromServer: function (newContext) {
-        if (newContext) {
-            this.fromString(newContext);
-        }
-    },
-    load: function() {
-        var data = document.getElementById(this.contextDataFieldId);
-        if (data) {
-            if (data.value) {
-                //alert("loading from: " + data.id);
-                this.fromString(data.value);
-            }
-        }
-        else {
-            alert("can't find context data field");
-        }
-    },
-    toString: function() {
-        var str = "";
-        for (i = 0; i < _items.length; i++) {
-            str += _items[i].itemKey + "=" + escape(_items[i].itemVal);
-            if (i !== _items.length - 1)
-                str += "&";
-        }
-        return str;
-    },
-    fromString: function(qString) {
-        _items = [];
-        if (qString != "") {
-            var items = qString.split("&");
-            for (i = 0; i < items.length; i++) {
-                var pair = items[i].split("=");
-                _items.push(_toItemLiteral(pair[0], unescape(pair[1])));
-            }
-        }
-        this.save();
-    }
-}
-
-//Sage.Services.addService("ClientContextService", new Sage.ClientContextService());
-
-
-Sage.ClientEntityContextService = function () {
-    this.emptyContext = { "EntityId": "", "EntityType": "", "Description": "", "EntityTableName": "" };
-    this._context = false;
-    this.hasClearListener = false;
-}
-
-Sage.ClientEntityContextService.prototype.getContext = function () {
-    if ((Sage.Data) && (Sage.Data.EntityContextStore)) {
-        return Sage.Data.EntityContextStore;
-    }
-    return this.emptyContext;
-}
-
-Sage.ClientEntityContextService.prototype.setContext = function (obj) {
-    if (typeof dojo !== 'undefined') {
-        Sage.Data.EntityContextStore = dojo.mixin(this.emptyContext, obj);
-    } else {
-        Sage.Data.EntityContextStore.EntityId = obj.EntityId || '';
-        Sage.Data.EntityContextStore.EntityType = obj.EntityType || '';
-        Sage.Data.EntityContextStore.Description = obj.Description || '';
-        Sage.Data.EntityContextStore.EntityTableName = obj.EntityTableName || '';
-    }
-}
-
-//function setCurentEntityContext(entityid, previousEntityid, clientPosition) {
-Sage.ClientEntityContextService.prototype.navigateSLXGroupEntity = function (toEntityId, previousEntityid, clientPosition) {
-    if (Sage.Services) {
-        var mgr = Sage.Services.getService("ClientBindingManagerService");
-        if ((mgr) && (!mgr.canChangeEntityContext())) { return false; }
-
-        var contextservice = Sage.Services.getService("ClientContextService");
-        if (contextservice.containsKey("ClientEntityId")) {
-            contextservice.setValue("ClientEntityId", toEntityId);
-        } else {
-            contextservice.add("ClientEntityId", toEntityId);
-        }
-        previousEntityid = (previousEntityid) ? previousEntityid : Sage.Data.EntityContextStore.EntityId;
-        if (contextservice.containsKey("PreviousEntityId")) {
-            contextservice.setValue("PreviousEntityId", previousEntityid);
-        } else {
-            contextservice.add("PreviousEntityId", previousEntityid);
-        }
-        if (clientPosition) {
-            if (contextservice.containsKey("ClientEntityPosition")) {
-                contextservice.setValue("ClientEntityPosition", clientPosition);
-            } else {
-                contextservice.add("ClientEntityPosition", clientPosition);
-            }
-        }
-        //wire up cleanup service...
-        if (!this.hasClearListener) {
-            Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function () {
-                if (Sage.Services) {
-                    var contextservice = Sage.Services.getService("ClientContextService");
-                    if (contextservice.containsKey("PreviousEntityId")) {
-                        contextservice.remove("PreviousEntityId");
-                    }
-                }
-            });
-            this.hasClearListener = true;
-        }
-        //set current state for things that load earlier in the response than the new full context.
-        Sage.Data.EntityContextStore.EntityId = toEntityId;
-        Sage.Data.EntityContextStore.Description = '';
-
-    }
-    if (window.TabControl) {
-        var tState = TabControl.getState();
-        if (tState) {
-            tState.clearUpdatedTabs();
-            TabControl.updateStateProxy();
-        }
-    }
-    return true;
-}
-
-Sage.Services.addService("ClientEntityContext", new Sage.ClientEntityContextService());
-Sage.WebClientMessageService = function(options) {
-   
-};
-
-Sage.WebClientMessageService.prototype.hideClientMessage = function() {	
-	Ext.Msg.hide();
-};
-
-Sage.WebClientMessageService.prototype.showClientMessage = function(title, msg, fn, scope) { 
-	if (typeof title === "object")
-	    return Ext.Msg.alert(title);	    	
-	
-	var o = {
-	    title: (typeof msg === "string") ? title : Sage.WebClientMessageService.Resources.DefaultDialogMessageTitle,
-	    msg: (typeof msg === "string") ? msg : title,
-	    buttons: Ext.Msg.OK,
-	    fn: fn,
-	    scope: scope
-	};
-	
-    Ext.Msg.show(o);
-};
-
-Sage.WebClientMessageService.prototype.showClientError = function (title, msg, fn, scope) {
-    if (typeof title === "object")
-        return Ext.Msg.alert(title);
-
-    var o = {
-        title: (typeof msg === "string") ? title : Sage.WebClientMessageService.Resources.DefaultDialogMessageTitle,
-        msg: (typeof msg === "string") ? msg : title,
-        buttons: Ext.Msg.OK,
-        icon: Ext.MessageBox.ERROR,
-        fn: fn,
-        scope: scope
-    };
-
-    Ext.Msg.show(o);
-};
-
-Sage.Services.addService("WebClientMessageService", new Sage.WebClientMessageService());
-
-
-
-function setupPortal() {
-    Ext.get("MainWorkArea").setStyle("display", "none");
-    slxDashboard = new Sage.SalesLogix.Dashboard(userDashboardOptions);
-    slxDashboard.init();
-};
-
-
-if (typeof Sys !== "undefined") {
-    Type.registerNamespace("Sage.SalesLogix");
-}
-else {
-    Ext.namespace("Sage.SalesLogix");
-}
-
-
-Sage.SalesLogix.Dashboard = function(options) {
-    this._options = options || { curportal: 0 };
-    this._options.dirty = false;
-    this._removed = {};
-    this.defaultPageString = '{"?xml":{"@version":"1.0","@encoding":"utf-8"},"Dashboard":{"@title":"{0}","@name":"{0}","@family":"System","@isHidden":"false","style":null,"Columns":{"Column":[{"@width":0.49,"Widgets":{"Widget":[]}},{"@width":0.49,"Widgets":{"Widget":[]}}]}}}';
-}
-
-//Sage.SalesLogix.Dashboard.refreshWidget = function(name) {
-//    var code = String.format("if (typeof {0} != 'undefined') {0}();", name + "_refresh");
-//    eval(code);
-//}
-//Sage.SalesLogix.Dashboard.editWidget = function(name) {
-//    var code = String.format("if (typeof {0} != 'undefined') {0}();", name + "_edit");
-//    eval(code);
-//}
-
-Sage.SalesLogix.Dashboard.prototype.init = function () {
-    var thisDashboard = this;
-    var pages = new Array();
-    var hiddenPages = new Array();
-    for (var k = 0; k < DashboardPages.length; k++) {
-        var pageObject = new Sage.SalesLogix.DashboardPage(DashboardPages[k], k, thisDashboard);
-        pageObject.id = "portal_panel_" + k;
-        pageObject.dashboardPagesIndex = k;
-        if (pageObject.name === this._options.defpage) {
-            this._options.curportal = k;
-        }
-        pages.push(pageObject);
-        //if ($.inArray(pageObject.name, this._options.hiddenPages) > -1) {
-        if (this._options.hiddenPages.indexOf(pageObject.name) > -1) {
-            hiddenPages.push(pageObject.id);
-        }
-    }
-    if (this._options.curportal > DashboardPages.length - 1) {
-        this._options.curportal = 0;
-    }
-    var curDashboard = this;
-    var centerpanel = mainViewport.findById("center_panel_center");
-    var panel = this._tabPanel = new Ext.TabPanel({
-        border: false,
-        enableTabScroll: true,
-        id: "dashboard_panel"
-    });
-    for (var i = 0; i < pages.length; i++) {
-        try {
-            pages[i].title = Sage.Analytics.localize(pages[i].title);
-            panel.add(pages[i]);
-        } catch (e) {
-            if (window.console) {
-                console.log("failed to load page " + i + " " + e);
-            }
-        }
-    }
-    panel.on("contextmenu", function (tabpanel, tab, e) {
-        var portalNum = parseInt(tab.id.match(/\d+$/), 10);
-        pages[portalNum].createTabContextMenu(portalNum).showAt(e.getXY());
-    });
-    panel.on("tabchange", function (tabpanel, tab) {
-        if (tab) { //hide fires this event with a null tab
-            var dp = mainViewport.findById("dashboard_panel");
-            dp.setWidth(dp.getSize().width - 1); //firing resize without changing anything doesn't recalc
-            dp.setWidth(dp.getSize().width + 1);
-            if (thisDashboard._options.curportal != tab.pageNumber) {
-                thisDashboard._options.curportal = tab.pageNumber;
-                thisDashboard._options.dirty = true;
-            }
-            tab.loadWidgets();
-        }
-    });
-    $(window).bind("beforeunload", function () {
-        thisDashboard.updateUserOptions();
-    });
-    centerpanel.add(panel);
-    mainViewport.doLayout();
-    this.ActivateVisible(this._options.curportal);
-    for (var i = 0; i < hiddenPages.length; i++) {
-        panel.hideTabStripItem(hiddenPages[i]);
-    }
-    panel.doLayout();
-    if (typeof idRefreshAndCloseButtons != "undefined") {
-        idRefreshAndCloseButtons();
-    }
-}
-
-Sage.SalesLogix.Dashboard.prototype.updateUserOptions = function() {
-    if (this._options.dirty) {
-        this._options.dirty = false;
-        $.ajax({
-            type: "PUT",
-            contentType: "application/json; charset=utf-8",
-            url: String.format("slxdata.ashx/slx/crm/-/dashboard/useroption?name=Options&category=Dashboard&data={0}", Ext.util.JSON.encode(this._options)),
-            dataType: "json",
-            error: function(request, status, error) {
-            },
-            success: function(data, status) {
-            }
-        });
-    }
-}
-
-Sage.SalesLogix.Dashboard.prototype.getAvailableContent = function(portalNum) {
-    return DashboardWidgetsList;
-}
-
-Sage.SalesLogix.Dashboard.prototype.deletePortal = function(portalNum) {
-    var panel = mainViewport.findById("dashboard_panel");
-    var tab = panel.findById("portal_panel_" + portalNum);
-    if (tab) {
-        panel.remove(tab);
-        DashboardPages.splice(portalNum, 1);
-        if (tab.name === this._options.defpage) {
-            this._options.defpage = '';
-        }
-        this.ActivateVisible();
-    }
-}
-
-Sage.SalesLogix.Dashboard.prototype.ActivateVisible = function(index) {
-    if ((index) && (index < this._tabPanel.items.length) && (index >= 0)) {
-        if (this._options.hiddenPages.indexOf(this._tabPanel.items.items[index].name) == -1) {
-            this._tabPanel.activate(this._tabPanel.items.items[index]);
-            return;
-        }
-    }
-    for (var i = 0; i < this._tabPanel.items.length; i++) {
-        var tabname = this._tabPanel.items.items[i].name;
-        if (this._options.hiddenPages.indexOf(tabname) == -1) {
-            this._tabPanel.activate(this._tabPanel.items.items[i]);
-            return;
-        }
-    }
-    //if none visible, add an empty
-    var DefaultPageString = String.format(this.defaultPageString, "Default");
-    this._options.hiddenPages.remove("Default");
-    DashboardPages.remove(DefaultPageString);
-    DashboardPages.push(DefaultPageString);
-    mainViewport.findById("center_panel_center").removeAll();
-    slxDashboard = new Sage.SalesLogix.Dashboard(this._options);
-    slxDashboard.init();
-}
-
-
-function setUpDashboardPanels() {
-    Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
-    mainViewport = new Ext.FormViewport({
-        layout: "border",
-        autoShow: false,
-        border: false,
-        bufferResize: true,
-        items: [
-            {
-                region: "north",
-                id: "north_panel",
-                height: 62,
-                title: false,
-                collapsible: false,
-                border: false,
-                contentEl: "north_panel_content"
-            }, {
-                region: "south",
-                id: "south_panel",
-                height: 20,
-                collapsible: false,
-                border: false,
-                contentEl: "south_panel_content"
-            }, {
-                region: "west",
-                id: "west_panel",
-                stateId: "west_panel",
-                border: false,
-                split: true,
-                width: 150,
-                collapsible: true,
-                collapseMode: 'mini',
-                margins: "0 0 0 0",
-                cmargins: "0 0 0 0",
-                layout: 'accordion',
-                sequence: true,
-                defaults: {
-                    stateEvents: ["collapse", "expand"],
-                    getState: function() {
-                        return { collapsed: this.collapsed };
-                    }
-                },
-                animCollapse: false,
-                animFloat: false,
-                layoutConfig: {
-                    animate: false,
-                    hideCollapseTool: true
-                },
-                header: false
-            }, {
-                region: "center",
-                id: "center_panel",
-                applyTo: "center_panel",
-                collapsible: false,
-                border: false,
-                margins: "6 6 6 6",
-                cmargins: "0 0 0 0",
-                layout: "border",
-                items: [{
-                    region: "center",
-                    id: "center_panel_center",
-                    applyTo: "center_panel_center",
-                    border: false,
-                    collapsible: false,
-                    margins: "0 0 0 0",
-                    autoScroll: false,
-                    layout: "fit"
-}]
-}]
-    });
-}
-
-function setNavState() {
-    for (var i = 0; i < NavBar_Menus.length; i++) {
-        var item = mainViewport.findById('nav_bar_menu_' + i);
-        if (item) item.saveState();
-    }
-}
-
-
-Sage.SalesLogix.userNotify = function (msg) {
-    if ($('#PageTitle').get().length > 0) {
-        var notifyElem = $("#userNotify").get(0);
-        if (notifyElem) {
-            $('#userNotify').html(msg);
-            $('#userNotify').css('display', 'inline');
-        } else {
-            $('#PageTitle').after('<div id="userNotify" style="display:inline;" class="sage-saleslogix-usernotify" >' + msg + '</div>')
-        }
-        $('#userNotify').css('top', $('#PageTitle').position().top);
-        $('#userNotify').css('left', $('#PageTitle').outerWidth());
-        window.setTimeout(function() { $('#userNotify').fadeOut(); }, 5000);
-    }
-}
-
-function promoteGroupToDashboard() {
-    var template = '<Widget name="Group List" family="System"><options><name>Group List</name><title>{0}</title><family>System</family><groupfamily>{1}</groupfamily><groupname>{2}</groupname><groupid>{3}</groupid><limit>{4}</limit><subtitle></subtitle><datasource>slxdata.ashx/slx/crm/-/groups?family={5}&amp;name={6}&amp;format=json&amp;meta=true&amp;start=0&amp;limit={4}</datasource><entity>{8}</entity><visiblerows>{7}</visiblerows></options></Widget>';
-
-    var win = new Ext.Window({ title: MasterPageLinks.PromoteTitle,
-        width: 215,
-        height: 375,
-        autoScroll: true,
-        buttons: [
-            {
-                text: MasterPageLinks.OK,
-                handler: function (t, e) {
-                    var cgi = getCurrentGroupInfo();
-                    var page = Ext.getCmp('PagesGrid').getSelectionModel().getSelected();
-                    if (page) {
-                        var widgetstring = String.format(template, cgi.DisplayName, "Sage.Entity.Interfaces.I" + cgi.Family, cgi.Name, cgi.Id, 10,
-                            $('<div/>').text(cgi.Family).html(), $('<div/>').text(cgi.Name).html(), 10, cgi.Entity);
-                        $.ajax({
-                            type: "POST",
-                            url: String.format("slxdata.ashx/slx/crm/-/dashboard/page?action=addwidget&name={0}&family={1}",
-                                page.data.Name,
-                                page.data.Family
-                            ),
-                            data: widgetstring,
-                            processData: false,
-                            error: function (request, status, error) {
-                                Ext.Msg.alert(MasterPageLinks.Warning, request.responseText);
-                            },
-                            success: function (data, status) {
-                            if (data != "Success") {
-                                Ext.Msg.alert(MasterPageLinks.Warning, data);
-                                return;
-                            }
-                                Sage.SalesLogix.userNotify(String.format(MasterPageLinks.PromotionNotification, page.data.Name, cgi.DisplayName));
-                                if (typeof callback === "function") callback(data, status);
-                            }
-                        });
-                    }
-                    win.close();
-                }
-            }, {
-                text: MasterPageLinks.MailMergeView_Cancel,
-                handler: function (t, e) {
-                    win.close();
-                }
-            }
-        ],
-        items: [{ xtype: 'label',
-            style: "padding:6px",
-            text: MasterPageLinks.PromoteDescription
-        }],
-        tools: [{ id: 'help',
-            handler: function (evt, toolEl, panel) {
-                window.open('help/WebClient_CSH.htm#taskpanecommontasks', "MCWebHelp");
-            }
-        }]
-    });
-
-    $.ajax({
-        type: "GET",
-        url: "slxdata.ashx/slx/crm/-/dashboard/page",
-        cache: false,
-        error: function(request, status, error) {
-            Ext.Msg.alert(MasterPageLinks.Warning, request.responseText);
+        //Use the ObjectConnectionService to manage dojo connections.
+        var ocService = Sage.Services.getService('ObjectConnectionService');
+        //Make sure there are no dangling connections.
+        ocService.disconnect(toggleBtn);
+        //Make the connection and add it to the service for later use.
+        ocService.add(dojo.connect(elem, 'onclick', this, function () {
+            this.toggle();
+            //This model goes go hell when we have mutiple smartparts in the mainContentDetails sapce.
+            //Sage.ContentPane is only ever used by mainContentDetails.  If that ever changes, this will need to be refactored.
+            dojo.publish(['Sage/events/mainContentDetails/toggleSplitter'].join(''), this);
         },
-        success: function(data, status) {
-            var storedata = {};
-            storedata.items = Sys.Serialization.JavaScriptSerializer.deserialize(data);
-            var grid = new Ext.grid.GridPanel({
-                store: new Ext.data.JsonStore({
-                    autoDestroy: true,
-                    fields: ['Name', 'Family'],
-                    root: 'items',
-                    data: storedata
-                }),
-                colModel: new Ext.grid.ColumnModel({
-                    defaults: {
-                        width: 180,
-                        sortable: false
-                    },
-                    columns: [
-                        { header: MasterPageLinks.PromotePageColumnHeader, dataIndex: 'Name' }
-                    ]
-                }),
-                sm: new Ext.grid.RowSelectionModel({ singleSelect: true }),
-                width: 200,
-                height: 250,
-                border: false,
-                frame: true,
-                id: 'PagesGrid'
-            });
-            win.add(grid);
-            win.show();
+            true), toggleBtn);
+        dojo.subscribe(['Sage/events/mainContentDetails/splitterToggled'].join(''), this, "toggle");
+        dojo.subscribe(['Sage/events/mainContentDetails/splitterMinSize'].join(''), this, function() {
+            this.setState('closed');
+            var elem = document.getElementById(this.toggleButton);
+            if (elem) {
+                elem.className = this.baseClass + " " + this.maxClass;
+                elem.title = this.maxText;
+            }
+        });
+        dojo.subscribe(['Sage/events/mainContentDetails/splitterMovedNotMin'].join(''), this, function() {
+            this.setState('open');
+            var elem = document.getElementById(this.toggleButton);
+            if (elem) {
+                elem.className = this.baseClass + " " + this.minClass;
+                elem.title = this.minText;
+            }
+        });
+
+        dojo.style(toggleBtn, "cursor", "pointer");
+
+        if (typeof (cookie) != "undefined") {
+            var st = cookie.getCookieParm(this.contentArea, "MainContentState");
+            if (st) {
+                if (st == "closed") {
+                    this.close();
+                }
+            }
         }
-    });
+    };
 
-}
+    Sage.ContentPane.prototype.setState = function(state) {
+        this.state = state;
+        if (typeof(cookie) != "undefined") {
+            cookie.setCookieParm(this.state, this.contentArea, "MainContentState");
+        }
+    };
 
-Sage.AspWindow = Ext.extend(Ext.Window, {  //Ext 3.1 doesn't render controls in a window into form,
-    initComponent: function() {             //this changes it to render them to the first (hopefully only) form, so postbacks work
-        Sage.AspWindow.superclass.initComponent.call(this);
-    },
-    show: function(C, A, B) {
-        if (!this.rendered)
-            this.render(Ext.get(document.forms[0]));
-        Sage.AspWindow.superclass.show.call(this, C, A, B);
-    }
+    Sage.ContentPane.prototype.toggle = function() {
+        if (this.state == "open") {
+            this.close();
+        } else {
+            this.open();
+        }
+        setTimeout(function() {
+            // Tab content might need to be resized for the border line to
+            // reset the height properly (otherwise content can overflow)
+            // *Doesn't appear to work outside of a timeout*
+            var tabContent = dijit.byId('tabContent');
+            if(tabContent) {
+                tabContent.resize();
+            }
+        }, 1);
+    };
+
+    Sage.ContentPane.prototype.close = function () {
+        var mainContent = dijit.byId('mainContentDetails');
+        if(!mainContent || !mainContent.splitter) {
+            dojo.style(this.contentArea + "_inner", "display", "none");
+        }
+        
+        this.setState("closed");
+        var elem = document.getElementById(this.toggleButton);
+        if (elem) {
+            elem.className = this.baseClass + " " + this.maxClass;
+            elem.title = this.maxText;
+        }
+        
+    };
+
+    Sage.ContentPane.prototype.open = function () {
+        var mainContent = dijit.byId('mainContentDetails');
+        if(!mainContent || !mainContent.splitter) {
+            dojo.style(this.contentArea + "_inner", "display", "block");
+        }
+        
+        this.setState("open");
+        var elem = document.getElementById(this.toggleButton);
+        if (elem) {
+            elem.className = this.baseClass + " " + this.minClass;
+            elem.title = this.minText;
+        }
+    };
+
+    Sage.ContentPaneAttr = function() {
+        this.minText = "";
+        this.maxText = "";
+        this.minClass = "";
+        this.maxClass = "";
+    };
 });
-
-Ext.reg('AspWindow', Sage.AspWindow);
-
-
-Sage.DialogWorkspace = function(options) {
-    this._initialized = false;
-    this._id = options.id;
-    this._clientId = options.clientId;
-    this._stateClientId = options.stateClientId;
-    this._panelClientId = options.panelClientId;
-    this._contentClientId = options.contentClientId;
-    this._context = null;
-    this._dialog = null;
-    this._dialogPanel = null;
-    this._closedOnServerSide = false;
-    this._dialogInfo = {};
-    this.addEvents(
-        'open',
-        'close'
-    );
-
-    Sage.DialogWorkspace.__instances[this._clientId] = this;
-    Sage.DialogWorkspace.__initRequestManagerEvents();
-};
-Ext.extend(Sage.DialogWorkspace, Ext.util.Observable);
-Sage.DialogWorkspace.__maskCount = 0;
-Sage.DialogWorkspace.__instances = {};
-Sage.DialogWorkspace.__requestManagerEventsInitialized = false;
-Sage.DialogWorkspace.__initRequestManagerEvents = function() {
-    if (Sage.DialogWorkspace.__requestManagerEventsInitialized)
-        return;
-
-    var contains = function(a, b) {
-        if (!a || !b)
-            return false;
-        else
-            return a.contains ? (a != b && a.contains(b)) : (!!(a.compareDocumentPosition(b) & 16));
-    };
-
-    var prm = Sys.WebForms.PageRequestManager.getInstance();
-    prm.add_beginRequest(function(sender, args) {
-        var element = args.get_postBackElement();
-        if (element) {
-            for (var id in Sage.DialogWorkspace.__instances) {
-                var instance = Sage.DialogWorkspace.__instances[id];
-                if (instance._context && contains(instance._context, element)) {
-                    instance.disable();
-                }
-            }
-        }
-
-        
-    });
-    prm.add_pageLoaded(function(sender, args) {
-        var panels = args.get_panelsUpdated();
-        if (panels) {
-            for (var id in Sage.DialogWorkspace.__instances) {
-                for (var i = 0; i < panels.length; i++) {
-                    var instance = Sage.DialogWorkspace.__instances[id];
-                    if (contains(panels[i], document.getElementById(instance._stateClientId))) {
-                        instance.enable();
-                        instance.handleEvents();
-                        break;
-                    }
-                }
-            }
-        }
-    });
-
-    //empty all state passing fields
-    //have to do this here instead of in handleEvents() due to something causing
-    //the original value to be reset after the pageLoaded() event
-    prm.add_endRequest(function(sender, args) {
-        for (var id in Sage.DialogWorkspace.__instances) {
-            var instance = Sage.DialogWorkspace.__instances[id];
-            instance.clearState();
-            instance.enable(); 
-        }
-
-        
-    });
-
-    Sage.DialogWorkspace.__requestManagerEventsInitialized = true;
-};
-
-Sage.DialogWorkspace.requestMask = function() {
-    Sage.DialogWorkspace.__maskCount = Sage.DialogWorkspace.__maskCount + 1
-};
-
-Sage.DialogWorkspace.prototype.init = function() {
-    this.initContext();
-    this.initDialog();
-
-    $("#" + this._contentClientId).show();
-
-    this.handleEvents();
-};
-
-Sage.DialogWorkspace.prototype.clearState = function() {
-    $("#" + this._stateClientId).val("");
-};
-
-Sage.DialogWorkspace.prototype.disable = function() {
-    if (!this._dialog)
-        return;
-
-    if (!this._dialog.isVisible())
-        return;
-
-    this._dialog.disable();
-};
-
-Sage.DialogWorkspace.prototype.enable = function() {
-    if (!this._dialog)
-        return;
-
-    if (!this._dialog.isVisible())
-        return;
-
-    this._dialog.enable();
-};
-
-Sage.DialogWorkspace.prototype.show = function(o) {
-    if (typeof o === "string")
-        o = { id: o }
-
-    o.event = "open";
-    o.from = o.from || "client";
-
-    var value = Sys.Serialization.JavaScriptSerializer.serialize(o);
-    $("#" + this._stateClientId).val(value);
-    __doPostBack(this._stateClientId, '');
-};
-
-Sage.DialogWorkspace.prototype.initContext = function() {
-    this._context = document.getElementById(this._clientId);
-};
-
-Sage.DialogWorkspace.prototype.initDialog = function() {
-    var self = this;
-    var content = new Ext.Panel({
-        cls: "dialog-workspace-content-panel",
-        id: this._contentClientId + "_panel",
-        contentEl: this._contentClientId,
-        border: false,
-        allowDomMove: false,
-        stateful: false
-    });
-    var wrapper = new Ext.Panel({
-        id: this._clientId + "_wrapper",
-        cls: "dialog-workspace-wrapper",
-        autoScroll: true,
-        border: false,
-        items: [content]
-    });
-    var dialog = new Sage.AspWindow({
-        id: this._clientId + "_window",
-        tools: [{
-            id: "help",
-            handler: function() {
-                if (self._dialogInfo.help && self._dialogInfo.help.url)
-                    window.open(self._dialogInfo.help.url, (self._dialogInfo.help.target || "help"));
-            }
-}],
-            items: [wrapper],
-            layout: "fit",
-            closeAction: "hide",
-            cls: "dialog-workspace",
-            plain: true,
-            stateful: false,
-            constrain: true,
-            //allowDomMove: false,
-            modal: true
-        });
-
-        dialog.on('show', function(panel) {
-            if (self._dialogInfo.help && self._dialogInfo.help.url)
-                panel.tools["help"].show();
-            else
-                panel.tools["help"].hide();
-
-            self.fireEvent('open', this);
-        });
-
-        dialog.on('beforehide', function(panel) {
-            if (self._closedOnServerSide)
-                return;
-
-            var evt = {
-                event: "close",
-                id: self._dialogInfo.id
-            };
-
-            var bindingManager = Sage.Services.getService('ClientBindingManagerService');
-            if (bindingManager)
-                bindingManager.rollbackCurrentTransaction();
-
-            self._dialogInfo = {};
-
-            var value = Sys.Serialization.JavaScriptSerializer.serialize(evt);
-            $("#" + self._stateClientId).val(value);
-
-            Sage.DialogWorkspace.requestMask();
-
-            __doPostBack(self._stateClientId, '');
-
-            return false;
-        });
-
-        dialog.on('hide', function(panel) {
-            self.fireEvent('close', this);
-            
-        });
-
-        dialog.on('resize', function(window, width, height) {
-            if (Ext.isString(dialog.layout)) {  // in ext3.2 resize may be called before afterrender, so we need the layout object here
-                dialog.layout = new Ext.Container.LAYOUTS[dialog.layout.toLowerCase()](dialog.layoutConfig || {});
-                dialog.setLayout(dialog.layout);
-            }
-            dialog.doLayout();
-        });
-
-        this._dialogPanel = content;
-        this._dialog = dialog;
-    };
-
-    Sage.DialogWorkspace.prototype.fitToViewport = function(size) {
-        var win = {
-            width: $(window).width(),
-            height: $(window).height()
-        };
-        var el = {
-            width: $(".dialog-workspace-content").width(),
-            height: $(".dialog-workspace-content").height()
-        };
-        var frame = {
-            width: 0, //this._dialog.getFrameWidth(), 
-            height: 0 //this._dialog.getFrameHeight()
-        };
-
-        if (el.width <= 0 || el.height <= 0)
-            el = { width: 0, height: 0 };
-
-        var out = {
-            width: (size.width + frame.width),
-            
-            
-            height: (size.height + frame.height),
-            left: false,
-            top: false,
-            scroll: false
-        };
-
-        if (out.height > win.height) {
-            out.height = win.height;
-            out.top = 0;
-            out.scroll = true; //can add adjustment to width for scroll here if necessary        
-        }
-
-        if (out.width > win.width) {
-            out.width = win.width;
-            out.left = 0;
-        }
-
-        return out;
-    };
-
-    Sage.DialogWorkspace.prototype.handleEvents = function () {
-        //alert($("#" + this._stateClientId).val());   
-
-        var value = $("#" + this._stateClientId).val();
-        var evt = {};
-        if (value)
-            evt = eval("(" + value + ")");
-
-        //clear event
-        $("#" + this._stateClientId).val("");
-
-        switch (evt.event) {
-            case "open":
-                if (this._dialog) {
-                    this._dialogInfo = evt;
-
-                    this._dialog.setTitle(this._dialogInfo.title);
-
-                    var size = this.fitToViewport({ width: evt.width, height: evt.height });
-
-                    this._dialog.setSize(size.width, size.height);
-
-                    if (size.scroll)
-                        this._dialog.addClass("dialog-workspace-scroll");
-                    else
-                        this._dialog.removeClass("dialog-workspace-scroll");
-
-                    this._dialog.doLayout();
-                    this._dialog.show();
-
-                    if (evt.centerDialog) {
-                        this._dialog.center();
-                        if (this._dialog.getPosition()[1] < 0)
-                            this._dialog.setPosition(this._dialog.getPosition()[0], 20);
-                    } else
-                        this._dialog.setPosition(evt.left, evt.top);
-                }
-                break;
-            case "close":
-                if (this._dialog) {
-                    this._closedOnServerSide = true;
-                    if (this._dialog.rendered) this._dialog.hide();
-                    this._dialogInfo = {};
-                    this._closedOnServerSide = false;
-                }
-                if (this.onClose) {
-                    for (var i = 0; i < this.onClose.length; i++) {
-                        this.onClose[i]();
-                    }
-                }
-                break;
-        }
-    };
-Sage.ContentPane = function(toggleBtn, contentArea, attr) {
-	this.contentArea = contentArea;
-	this.toggleButton = toggleBtn;
-	this.state = "open";
-	this.minImg = attr.minImg;
-	this.maxImg = attr.maxImg
-	this.minText = attr.minText;
-	this.maxText = attr.maxText;
-	var elem = YAHOO.util.Dom.get(toggleBtn);
-	YAHOO.util.Event.removeListener(toggleBtn, 'click');
-	YAHOO.util.Event.addListener(toggleBtn, 'click', this.toggle, this, true);
-	YAHOO.util.Dom.setStyle(toggleBtn, "cursor", "pointer");
-		
-	if (typeof(cookie) != "undefined") {
-		var st = cookie.getCookieParm(this.contentArea, "MainContentState");
-		if (st) {
-			if (st == "closed") {
-				this.close();
-			}
-		}
-	}
-}
-
-Sage.ContentPane.prototype.setState = function(state) {
-	this.state = state;
-	if (typeof(cookie) != "undefined") {
-		cookie.setCookieParm(this.state, this.contentArea, "MainContentState");
-	}
-}
-
-Sage.ContentPane.prototype.toggle = function() {
-	if (this.state == "open") {
-		this.close();
-	} else {
-		this.open();
-	}
-}
-
-Sage.ContentPane.prototype.close = function() {
-    
-	YAHOO.util.Dom.setStyle(this.contentArea + "_inner", "display", "none");
-	this.setState("closed");
-	var elem = document.getElementById(this.toggleButton);
-	if (elem) {
-		elem.src = this.maxImg;
-		elem.alt = this.maxText;
-		elem.title = this.maxText;
-	}
-}
-
-Sage.ContentPane.prototype.open = function() {
-    
-	YAHOO.util.Dom.setStyle(this.contentArea + "_inner", "display", "block");
-	this.setState("open");
-	var elem = document.getElementById(this.toggleButton);
-	if (elem) {
-		elem.src = this.minImg;
-		elem.alt = this.minText;
-		elem.title = this.minText;
-	}
-}
-
-Sage.ContentPaneAttr = function() {
-	this.minImg = "";
-	this.maxImg = "";
-	this.minText = "";
-	this.maxText = "";
-}
-
-var imgCollapse = new Image();
-imgCollapse.src = "images/collapsedark.gif";
-var imgExpand = new Image();
-imgExpand.src = "images/expanddark.gif";
 
 function toggleSmartPartVisiblity(contentID, img){
     var content = document.getElementById(contentID);
@@ -2094,3821 +707,1658 @@ function toggleSmartPartVisiblity(contentID, img){
     }
 }
 
+    require([
+        'dojo/aspect',
+        'dojo/ready',
+        'dojo/_base/lang',
+        'dijit/registry',
+        'dojo/dom-style',
+        'dojo/query',
+        'dojo/_base/array'
+    ], function (
+        aspect,
+        ready,
+        lang,
+        registry,
+        domStyle,
+        query,
+        array
+    ){
+    Sage.TabWorkspaceState = function (state) {
+        this._state = state;
+        this._wasTabUpdated = new Object;
+        this._hiddenTabs = new Object;
+        this._collections = ['MiddleTabs', 'MainTabs', 'MoreTabs'];
+        this._collectionActiveRef = { 'MainTabs': 'ActiveMainTab', 'MoreTabs': 'ActiveMoreTab' };
 
+        //sync the dictionary with the list
+        for (var i = 0; i < this._state.UpdatedTabs.length; i++)
+            this._wasTabUpdated[this._state.UpdatedTabs[i]] = true;
 
-Sage.TabWorkspaceState = function(state) {
-    this._state = state;
-    this._wasTabUpdated = new Object;
-    this._hiddenTabs = new Object;      
-    this._collections = ['MiddleTabs', 'MainTabs', 'MoreTabs'];
-    this._collectionActiveRef = {'MainTabs' : 'ActiveMainTab', 'MoreTabs' : 'ActiveMoreTab'};
-    
-    //sync the dictionary with the list
-    for (var i = 0; i < this._state.UpdatedTabs.length; i++)
-        this._wasTabUpdated[this._state.UpdatedTabs[i]] = true;
-    
-    for (var i = 0; i < this._state.HiddenTabs.length; i++)
-        this._hiddenTabs[this._state.HiddenTabs[i]] = true;    
-        
-};
+        for (var i = 0; i < this._state.HiddenTabs.length; i++)
+            this._hiddenTabs[this._state.HiddenTabs[i]] = true;
 
-Sage.TabWorkspaceState.MIDDLE_TABS = 'MiddleTabs';
-Sage.TabWorkspaceState.MAIN_TABS = 'MainTabs';
-Sage.TabWorkspaceState.MORE_TABS = 'MoreTabs';
+    };
 
-Sage.TabWorkspaceState.deserialize = function(value) {    
-    try
-    {
-        var state = Sys.Serialization.JavaScriptSerializer.deserialize(value);
-        return new Sage.TabWorkspaceState(state);
-    }
-    catch (e)
-    {
-        return null;
-    }
-};
+    Sage.TabWorkspaceState.MIDDLE_TABS = 'MiddleTabs';
+    Sage.TabWorkspaceState.MAIN_TABS = 'MainTabs';
+    Sage.TabWorkspaceState.MORE_TABS = 'MoreTabs';
 
-Sage.TabWorkspaceState.prototype.serialize = function() {
-    return Sys.Serialization.JavaScriptSerializer.serialize(this._state);
-};
+    Sage.TabWorkspaceState.deserialize = function (value) {
+        try {
+            var state = Sys.Serialization.JavaScriptSerializer.deserialize(value);
+            return new Sage.TabWorkspaceState(state);
+        }
+        catch (e) {
+            return null;
+        }
+    };
 
-Sage.TabWorkspaceState.prototype.getObject = function() {
-    return this._state;
-};
+    Sage.TabWorkspaceState.prototype.serialize = function () {
+        return Sys.Serialization.JavaScriptSerializer.serialize(this._state);
+    };
 
-Sage.TabWorkspaceState.prototype.getSectionFor = function(target) {
-    if (this.isMiddleTab(target))
-        return Sage.TabWorkspaceState.MIDDLE_TABS;
-    if (this.isMainTab(target))
-        return Sage.TabWorkspaceState.MAIN_TABS;
-    if (this.isMoreTab(target))
-        return Sage.TabWorkspaceState.MORE_TABS;
-    return false;
-};
+    Sage.TabWorkspaceState.prototype.getObject = function () {
+        return this._state;
+    };
 
-Sage.TabWorkspaceState.prototype._isTab = function(collection, target) {
-    if (typeof this._state[collection] != "object")
-        return;
-        
-    for (var i in this._state[collection])
-        if (this._state[collection][i] == target)
+    Sage.TabWorkspaceState.prototype.getSectionFor = function (target) {
+        if (this.isMiddleTab(target))
+            return Sage.TabWorkspaceState.MIDDLE_TABS;
+        if (this.isMainTab(target))
+            return Sage.TabWorkspaceState.MAIN_TABS;
+        if (this.isMoreTab(target))
+            return Sage.TabWorkspaceState.MORE_TABS;
+        return false;
+    };
+
+    Sage.TabWorkspaceState.prototype.isTabVisible = function (target) {
+        if (this.isMiddleTab(target)) {
             return true;
-    return false;
-};
-
-Sage.TabWorkspaceState.prototype._removeFromTabs = function(collection, target) {
-    if (typeof this._state[collection] != "object")
-        return;
-        
-    var result = [];
-    jQuery.each(this._state[collection], function(i, value) {
-        if (value != target)
-            result.push(value);
-    });
-    this._state[collection] = result;
-    
-    //if the collection is question has an active reference, and that value is set to the target, set it to null
-    if (typeof this._collectionActiveRef[collection] != 'undefined')
-        if (this._state[this._collectionActiveRef[collection]] == target)
-            this._state[this._collectionActiveRef[collection]] = null;
-};
-
-Sage.TabWorkspaceState.prototype._addToTabs = function(collection, target, at, step) {
-    if (typeof this._state[collection] != "object")
-        return;
-        
-    //remove it from the other collections
-    for (var other in this._collections)
-        if (other != collection)
-            this._removeFromTabs(this._collections[other], target);
-        
-    if (typeof at != 'undefined')
-    {
-        if (typeof at == 'number')
-        {
-            this._state[collection].splice(at, 0, target);
         }
-        else
-        {
-            var insertAt = this._state[collection].length;
-            jQuery.each(this._state[collection], function(i, value) {
-                if (value == at)
-                {
-                    insertAt = i;
-                    return false;
-                }
-            });
-            
-            if (typeof step == 'number')
-                insertAt = insertAt + step;
-            
-            this._state[collection].splice(insertAt, 0, target);
+        var tws = TabControl,
+        tabInfo = tws.getInfoForTab(target),
+        elem = $('#' + tabInfo.ElementId).get(0),
+        s = elem.style;
+        if (typeof elem === 'undefined') {
+            return false;
         }
-    }
-    else
-    {
-        this._state[collection].push(target);
-    }
-};
-
-Sage.TabWorkspaceState.prototype.isMiddleTab = function(target) { 
-    return this._isTab(Sage.TabWorkspaceState.MIDDLE_TABS, target); 
-};
-
-Sage.TabWorkspaceState.prototype.removeFromMiddleTabs = function(target) { 
-    this._removeFromTabs(Sage.TabWorkspaceState.MIDDLE_TABS, target); 
-};
-
-Sage.TabWorkspaceState.prototype.addToMiddleTabs = function(target, at, step) { 
-    this._addToTabs(Sage.TabWorkspaceState.MIDDLE_TABS, target, at, step); 
-};
-
-Sage.TabWorkspaceState.prototype.isMainTab = function(target) { 
-    return this._isTab(Sage.TabWorkspaceState.MAIN_TABS, target);
-};
-
-Sage.TabWorkspaceState.prototype.isTabVisible = function (tabId) {
-    if (this.isMiddleTab(tabId)) {
-        return true;
-    } else if (this.isMainTab(tabId)) {
-        return (this._state.ActiveMainTab === tabId);
-    } else if (this.isMoreTab(tabId)) {
-        return (this._state.ActiveMoreTab === tabId && (this.isMiddleTab(Sage.TabWorkspace.MORE_TAB_ID) || (this._state.ActiveMainTab === Sage.TabWorkspace.MORE_TAB_ID)));
-    }
-};
-
-Sage.TabWorkspaceState.prototype.removeFromMainTabs = function(target) { 
-    this._removeFromTabs(Sage.TabWorkspaceState.MAIN_TABS, target); 
-};
-
-Sage.TabWorkspaceState.prototype.addToMainTabs = function(target, at, step) { 
-    this._addToTabs(Sage.TabWorkspaceState.MAIN_TABS, target, at, step); 
-};
-
-Sage.TabWorkspaceState.prototype.setActiveMainTab = function(target) { 
-    this._state.ActiveMainTab = target; 
-};
-
-Sage.TabWorkspaceState.prototype.getActiveMainTab = function() { 
-    return this._state.ActiveMainTab; 
-};
-
-Sage.TabWorkspaceState.prototype.isMoreTab = function(target) { 
-    return this._isTab(Sage.TabWorkspaceState.MORE_TABS, target); 
-};
-
-Sage.TabWorkspaceState.prototype.removeFromMoreTabs = function(target) { 
-    this._removeFromTabs(Sage.TabWorkspaceState.MORE_TABS, target); 
-};
-
-Sage.TabWorkspaceState.prototype.addToMoreTabs = function(target, at, step) { 
-    this._addToTabs(Sage.TabWorkspaceState.MORE_TABS, target, at, step); 
-};
-
-Sage.TabWorkspaceState.prototype.setActiveMoreTab = function(target) { 
-    this._state.ActiveMoreTab = target; 
-};
-
-Sage.TabWorkspaceState.prototype.getActiveMoreTab = function() { 
-    return this._state.ActiveMoreTab; 
-};
-
-Sage.TabWorkspaceState.prototype.getMainTabs = function() {
-    return this._state.MainTabs;
-};
-
-Sage.TabWorkspaceState.prototype.getMoreTabs = function() {
-    return this._state.MoreTabs;
-};
-
-Sage.TabWorkspaceState.prototype.getMiddleTabs = function() {
-    return this._state.MiddleTabs;
-};
-
-Sage.TabWorkspaceState.prototype.getUpdatedTabs = function() {
-    return this._state.UpdatedTabs;
-};
-
-Sage.TabWorkspaceState.prototype.markTabUpdated = function(target) {
-    if (this._wasTabUpdated[target])
-        return;
-         
-    this._wasTabUpdated[target] = true;
-    this._state.UpdatedTabs.push(target);
-};
-
-Sage.TabWorkspaceState.prototype.wasTabUpdated = function(target) {
-    return this._wasTabUpdated[target];
-};
-
-Sage.TabWorkspaceState.prototype.clearUpdatedTabs = function() {
-    this._wasTabUpdated = new Object;
-    this._state.UpdatedTabs = [];
-};
-
-Sage.TabWorkspaceState.prototype.getHiddenTabs = function() {
-    return this._state.HiddenTabs;
-};
-Sage.TabWorkspaceState.prototype.InHideMode = function() {
-    return this._state.InHideMode;
-};
-Sage.TabWorkspace = function(config) {
-    this._id = config.id;
-    this._clientId = config.clientId;
-    this._afterPostBackActions = [];       
-    this._info = config.info;
-    this._state = new Sage.TabWorkspaceState(config.state);            
-    this._textSelectionDisabled = false;      
-    this._debug = false;     
-    this._regions = {}; 
-    this._middleRegionDropTolerance = 20;
-    this._offsetParent = false;
-    this._offsetParentScroll = -1;
-    
-    this.compileInfoLookups();
-    
-    Sage.TabWorkspace.superclass.constructor.apply(this);
-    
-    this.addEvents(
-        'maintabchange',
-        'moretabchange'        
-    );
-};
-
-Ext.extend(Sage.TabWorkspace, Ext.util.Observable);
-
-Sage.TabWorkspace.MORE_TAB_ID = "More";
-Sage.TabWorkspace.MAIN_AREA = "main";
-Sage.TabWorkspace.MORE_AREA = "more";
-Sage.TabWorkspace.MIDDLE_AREA = "middle";
-
-Sage.TabWorkspace.prototype.compileInfoLookups = function() {
-    this._info._byId = new Object;
-    this._info._byElementId = new Object;
-    this._info._byDropTargetId = new Object;
-    this._info._byButtonId = new Object;
-    this._info._byMoreButtonId = new Object;
-    for (var i = 0; i < this._info.Tabs.length; i++)
-    {
-        this._info._byId[this._info.Tabs[i].Id] = this._info.Tabs[i];
-        this._info._byElementId[this._info.Tabs[i].ElementId] = this._info.Tabs[i];
-        this._info._byDropTargetId[this._info.Tabs[i].DropTargetId] = this._info.Tabs[i];
-        this._info._byButtonId[this._info.Tabs[i].ButtonId] = this._info.Tabs[i];
-        this._info._byMoreButtonId[this._info.Tabs[i].MoreButtonId] = this._info.Tabs[i];
-    }
-};
-
-Sage.TabWorkspace.prototype.getInfoFor = function(tab) { return this._info._byId[tab]; };
-Sage.TabWorkspace.prototype.getInfoForTab = function(tabId) { return this._info._byId[tabId]; };
-Sage.TabWorkspace.prototype.getInfoForTabElement = function(elementId) { return this._info._byElementId[elementId]; };
-Sage.TabWorkspace.prototype.getInfoForTabDropTarget = function(dropTargetId) { return this._info._byDropTargetId[dropTargetId]; };
-Sage.TabWorkspace.prototype.getInfoForTabButton = function(buttonId) { return this._info._byButtonId[buttonId]; };
-Sage.TabWorkspace.prototype.getInfoForTabMoreButton = function(buttonId) { return this._info._byMoreButtonId[buttonId]; };
-Sage.TabWorkspace.prototype.getStateProxyTriggerId = function() { return this._info.ProxyTriggerId; };
-Sage.TabWorkspace.prototype.getStateProxyPayloadId = function() { return this._info.ProxyPayloadId; };
-Sage.TabWorkspace.prototype.getDragHelperContainerId = function() { return this._info.DragHelperContainerId; };
-Sage.TabWorkspace.prototype.getUseUIStateService = function() { return this._info.UseUIStateService; };
-Sage.TabWorkspace.prototype.getUIStateServiceKey = function() { return this._info.UIStateServiceKey; };
-Sage.TabWorkspace.prototype.getUIStateServiceProxyType = function() { return this._info.UIStateServiceProxyType; };
-Sage.TabWorkspace.prototype.getAllDropTargets = function() { return this._allDropTargets; };
-Sage.TabWorkspace.prototype.getAllMainButtons = function() { return this._allMainButtons; };
-Sage.TabWorkspace.prototype.getAllMoreButtons = function() { return this._allMoreButtons; };
-
-Sage.TabWorkspace.prototype.getElement = function() {
-    if (document.getElementById)
-        return document.getElementById(this._clientId);
-    return null;
-};
-
-Sage.TabWorkspace.prototype.getContext = function() { return this._context; };
-Sage.TabWorkspace.prototype.getState = function() { return this._state; };
-Sage.TabWorkspace.prototype.setState = function(state) { this._state = state; };
-
-Sage.TabWorkspace.prototype.resetState = function(state)
-{
-	if (typeof state === "undefined")
-	{
-		var stateProxy = $("#" + this.getStateProxyPayloadId(), this.getContext()).val();
-		if (stateProxy == "")
-		{
-			this.setState(this.getState());
-		}
-		else
-		{
-			this.setState(Sage.TabWorkspaceState.deserialize(stateProxy)); 
-		} 
-	}
-	else if (typeof state === "string")
-	{
-		this.setState(Sage.TabWorkspaceState.deserialize(state));
-	}
-	this.logDebug("Reset state...");
-};
-
-Sage.TabWorkspace.prototype.logDebug = function(text) {
-    if (this._debug)
-    {
-        var pad = function(value, length) {
-            value = value.toString();
-            while (value.length < length)
-                value = "0" + value;
-            return value;
-        };
-        var date = new Date();
-        var dateString = pad(date.getHours(),2) + ":" + pad(date.getMinutes(),2) + ":" + pad(date.getSeconds(),2) + "." + pad(date.getMilliseconds(),3);
-        $("#debug_log").append(dateString + " - " + text + "<br />");
-    }
-};
-
-Sage.TabWorkspace.prototype.registerAfterPostBackAction = function(action) {
-    this._afterPostBackActions.push(action);
-};
-
-Sage.TabWorkspace.prototype.init = function() { 
-    this.logDebug("[enter] init"); 
-    
-    //cache common lookups               
-    if (document.getElementById)
-        this._context = document.getElementById(this._clientId);    
-        
-    if (this._context)
-        this._offsetParent = $(this._context).offsetParent();
-    
-    this._allDropTargets = $("div.tws-drop-target", this._context);
-    this._allMainButtons = $("li.tws-tab-button", this._context);
-    this._allMoreButtons = $("li.tws-more-tab-button", this._context);
-    this._mainButtonContainer = $("div.tws-main-tab-buttons", this._context);
-    this._mainButtonContainerRegion = this.createRegionsFrom(this._mainButtonContainer)[0];
-    this._moreButtonContainer = $("div.tws-more-tab-buttons-container", this._context);
-    this._moreButtonContainerRegion = this.createRegionsFrom(this._moreButtonContainer)[0];
-    
-    this.getState().clearUpdatedTabs();
-    for (var i = 0; i < this.getState().getMiddleTabs().length; i++)
-        this.getState().markTabUpdated(this.getState().getMiddleTabs()[i]);
-        
-    if (this.getState().getActiveMainTab())
-        this.getState().markTabUpdated(this.getState().getActiveMainTab());         
-    
-    if (this.getState().getActiveMainTab() == Sage.TabWorkspace.MORE_TAB_ID) 
-        if (this.getState().getActiveMoreTab())
-            this.getState().markTabUpdated(this.getState().getActiveMoreTab());
-        
-    //store the helper height & width   
-    this._dragHelperHeight = $(".tws-tab-drag-helper", this.getContext()).height();
-    this._dragHelperWidth = $(".tws-tab-drag-helper", this.getContext()).width();  
-        
-    this.logDebug("[enter] initEvents");
-    this.initEvents();
-    this.logDebug("[leave] initEvents");
-    this.logDebug("[enter] initDragDrop");
-    this.initDragDrop();
-    this.logDebug("[leave] initDragDrop");
-    this.logDebug("[leave] init");
-    this.hideTabs();
-};
-
-Sage.TabWorkspace.prototype.initEvents = function() {
-    var self = this; //since jQuery overrides "this" in the closure        
-    
-    //setup the update events
-    //will need to refactor this to use add_endRequest instead
-    var prm = Sys.WebForms.PageRequestManager.getInstance();
-    prm.add_endRequest(function(sender, args) {  
-        self.setupAllTabElementDraggables();
-        self.hideTabs();
-    });   
-    
-    prm.add_beginRequest(function(sender, args) {
-        self.cleanupAllTabElementDraggables();
-    });
-};
-
-Sage.TabWorkspace.prototype.hideTabs = function() 
-{
-     if(!this.getState().InHideMode())
-     {
-        return;
-     } 
-     for (var i = 0; i < this.getState().getMiddleTabs().length; i++)
-     {
-        var tab =this.getState().getMiddleTabs()[i];                
-        this.unHideTab(tab);       
-     } 
-     
-     for (var i = 0; i < this.getState().getMoreTabs().length; i++)
-     {
-        var tab =this.getState().getMoreTabs()[i];                
-        this.unHideTab(tab);       
-     } 
-     
-     for (var i = 0; i < this.getState().getMainTabs().length; i++)
-     {
-        var tab =this.getState().getMainTabs()[i];                
-        this.unHideTab(tab);       
-     } 
-          
-     for (var i = 0; i < this.getState().getHiddenTabs().length; i++)
-     {
-        var tab =this.getState().getHiddenTabs()[i];                
-        this.hideTab(tab);       
-     }
-};
-
-Sage.TabWorkspace.prototype.hideTab = function(tab) {
-    this.logDebug("[enter] hideTab");
-    if (typeof tab === "string")
-        tab = this.getInfoFor(tab);
-       
-    if(tab == null){return;}
-            
-    switch (this.getState().getSectionFor(tab.Id))
-    {
-        case Sage.TabWorkspaceState.MAIN_TABS:                   
-            
-            $("#" + tab.ButtonId, this.getContext()).hide(); 
-            $("#" + tab.ElementId, this.getContext()).hide();
-            break;
-            
-        case Sage.TabWorkspaceState.MORE_TABS:
-              
-            $("#" + tab.MoreButtonId, this.getContext()).hide();
-            $("#" + tab.ElementId, this.getContext()).hide();
-            break;
-            
-        case Sage.TabWorkspaceState.MIDDLE_TABS:                 
-            $("#" + tab.ElementId, this.getContext()).hide();
-            break;
-     }  
-     
-};
-
-Sage.TabWorkspace.prototype.unHideTab = function(tab) {
-    this.logDebug("[enter] hideTab");
-    if (typeof tab === "string")
-        tab = this.getInfoFor(tab);
-    
-    if(tab == null){return;}
-       
-    switch (this.getState().getSectionFor(tab.Id))
-    {
-        case Sage.TabWorkspaceState.MAIN_TABS:                   
-            
-            $("#" + tab.ButtonId, this.getContext()).show();
-            if (this.getState().getActiveMainTab() == tab.Id)
-            {
-               $("#" + tab.ElementId, this.getContext()).show();       
-            }
-            
-            break;
-            
-        case Sage.TabWorkspaceState.MORE_TABS:
-                    
-            $("#" + tab.MoreButtonId, this.getContext()).show();
-            if (this.getState().getActiveMoreTab() == tab.Id)
-            {
-               $("#" + tab.ElementId, this.getContext()).show();       
-            }
-            break;
-            
-        case Sage.TabWorkspaceState.MIDDLE_TABS:                 
-                        
-             $("#" + tab.ElementId, this.getContext()).show();          
-                              
-            break;
-     }  
-     
-};
-
-
-Sage.TabWorkspace.prototype.disablePageTextSelection = function() {
-    if (jQuery.browser.msie)
-    {
-        if (!this._textSelectionDisabled)
-        {                
-            this._oldBodyOnDrag = document.body.ondrag;
-            this._oldBodyOnSelectStart = document.body.onselectstart;
-            
-            document.body.ondrag = function () { return false; };
-            document.body.onselectstart = function () { return false; };
-            
-            this._textSelectionDisabled = true;
+        if (this.isMainTab(target)) {
+            return (s.display !== 'none');
         }
-    }
-};
-
-Sage.TabWorkspace.prototype.enablePageTextSelection = function() {
-    if (jQuery.browser.msie)
-    {
-        if (this._textSelectionDisabled)
-        {        
-            document.body.ondrag = this._oldBodyOnDrag;
-            document.body.onselectstart = this._oldBodyOnSelectStart;
-            
-            this._textSelectionDisabled = false;
+        if (this.isMoreTab(target)) {
+            var moretabelem = $('#element_More').get(0),
+            morestyle = moretabelem.style;
+            return ((s.display !== 'none') && (morestyle.display !== 'none'));
         }
-    }
-};
-
-Sage.TabWorkspace.prototype.setDragDropHelperText = function(helper, text) {
-    if (typeof text != "string")
-        return;
-            
-    $(".tws-drag-helper-text", helper).html(text);
-}
-
-Sage.TabWorkspace.prototype.setupTabElementDraggable = function(tab) {
-    var self = this;
-        
-    var $query;      
-    if (typeof tab == 'string')
-        $query = $("#" + this.getInfoFor(tab).ElementId, this.getContext());
-    else if (typeof target == 'object')
-        $query = tab.ElementId;
-        
-    if ($query.is(".ui-draggable"))
-        return;
-           
-    if (typeof tab === "string")
-        this.logDebug("Setting up tab element draggable for " + tab + ".");
-    else
-        this.logDebug("Setting up tab element draggable for " + tab.Id + ".");
-            
-    $query.draggable({        
-        handle : ".tws-tab-view-header",
-        cursor : "move",
-        cursorAt : { top : self._dragHelperHeight / 2, left : self._dragHelperWidth / 2 },
-        zIndex : 15000,  
-        delay: 50,    
-        opacity : 0.5,
-        scroll: true,
-        refreshPositions: true,
-        appendTo : "#" + self.getDragHelperContainerId(),
-        helper : function() {             
-            return self.createDraggableHelper(); 
-        },
-        start : function(e, ui) {        
-            this._context = self.getInfoForTabElement(this.id);
-            this._overDraggable = false;
-            
-            $(ui.helper).data("over", 0);
-            
-            self.disablePageTextSelection();                          
-            self.setDragDropHelperText(ui.helper, this._context.Name);     
-        },
-        stop : function(e, ui) {
-            self.enablePageTextSelection();
-        }
-    });
-};
-
-Sage.TabWorkspace.prototype.cleanupTabElementDraggable = function(tab) {
-    var $query;      
-    if (typeof tab == 'string')
-        $query = $("#" + this.getInfoFor(tab).ElementId, this.getContext());
-    else if (typeof target == 'object')
-        $query = tab.ElementId;
-    
-    if (!$query.is(".ui-draggable"))
+    };
+    Sage.TabWorkspaceState.prototype._isTab = function (collection, target) {
+        if (typeof this._state[collection] != "object")
             return;
-            
-    if (typeof tab === "string")
-        this.logDebug("Cleaning up tab element draggable for " + tab + ".");
-    else
-        this.logDebug("Cleaning up tab element draggable for " + tab.Id + ".");
-    
-    $query.draggable("destroy");                        
-};
 
-Sage.TabWorkspace.prototype.setupAllTabElementDraggables = function() {
-    for (var i = 0; i < this.getState().getMiddleTabs().length; i++)
-        this.setupTabElementDraggable(this.getState().getMiddleTabs()[i]);
-        
-    if (this.getState().getActiveMainTab() && this.getState().getActiveMainTab() != Sage.TabWorkspace.MORE_TAB_ID)
-        this.setupTabElementDraggable(this.getState().getActiveMainTab());
-    
-    if (this.getState().getActiveMoreTab())
-        this.setupTabElementDraggable(this.getState().getActiveMoreTab());   
-};
+        for (var i in this._state[collection])
+            if (this._state[collection][i] == target)
+                return true;
+        return false;
+    };
 
-Sage.TabWorkspace.prototype.cleanupAllTabElementDraggables = function() {
-    //only updated tabs should have tab element draggables
-    for (var i = 0; i < this.getState().getUpdatedTabs().length; i++)
-        this.cleanupTabElementDraggable(this.getState().getUpdatedTabs()[i]);
-};
+    Sage.TabWorkspaceState.prototype._removeFromTabs = function (collection, target) {
+        if (typeof this._state[collection] != "object")
+            return;
 
-Sage.TabWorkspace.prototype.createMainInsertMarker = function(el, at) {          
-    if (el)
-    {
-        var marker = $("<div class=\"tws-insert-button-marker\"></div>").css({ top: (at.top - 24) + "px", left: (at.left - 12) + "px" });
-        $("div.tws-main-tab-buttons", this.getContext()).append(marker);
-        el._marker = marker;
-    }
-};
-
-Sage.TabWorkspace.prototype.cleanupMainInsertMarker = function(el) {
-    if (el && el._marker)
-    {
-        el._marker.remove();
-        el._marker = null;
-    }
-};
-
-Sage.TabWorkspace.prototype.createMoreInsertMarker = function(el, at) {          
-    if (el)
-    {
-        var marker = $("<div class=\"tws-insert-button-marker\"></div>").css({ top : (at.top - 12) + "px" });
-        $("div.tws-more-tab-buttons-container", this.getContext()).append(marker);
-        el._marker = marker;
-    }
-};
-
-Sage.TabWorkspace.prototype.cleanupMoreInsertMarker = function(el) {
-    if (el && el._marker)
-    {
-        el._marker.remove();
-        el._marker = null;
-    }
-};
-
-Sage.TabWorkspace.prototype.getContextFromUI = function(ui) {    
-    return ui.draggable.get(0)._context;  
-};
-
-Sage.TabWorkspace.prototype.getRegions = function(area) {
-    return this._regions[area];
-};
-
-Sage.TabWorkspace.prototype.createRegionsFrom = function(list) {
-    var regions = [];
-    list.each(function() {
-        var el = $(this);
-        regions.push({ 
-            x: el.offset().left,
-            y: el.offset().top,
-            width: el.width(),
-            height: el.height(),
-            el: this
+        var result = [];
+        jQuery.each(this._state[collection], function (i, value) {
+            if (value != target)
+                result.push(value);
         });
-    });
-    
-    return regions;
-};
+        this._state[collection] = result;
 
-Sage.TabWorkspace.prototype.testRegions = function(regions, pos, test) {
-    var list = (typeof regions === "string") ? this._regions[regions] : regions;
-    if (list && list.length && typeof test === "function")
-    {
-        for (var i = 0; i < list.length; i++)
-        {
-            if (test(list[i], pos))
-                return list[i].el;
+        //if the collection is question has an active reference, and that value is set to the target, set it to null
+        if (typeof this._collectionActiveRef[collection] != 'undefined')
+            if (this._state[this._collectionActiveRef[collection]] == target)
+                this._state[this._collectionActiveRef[collection]] = null;
+    };
+
+    Sage.TabWorkspaceState.prototype._addToTabs = function (collection, target, at, step) {
+        if (typeof this._state[collection] != "object")
+            return;
+
+        //remove it from the other collections
+        for (var other in this._collections)
+            if (other != collection)
+                this._removeFromTabs(this._collections[other], target);
+
+        if (typeof at != 'undefined') {
+            if (typeof at == 'number') {
+                this._state[collection].splice(at, 0, target);
+            }
+            else {
+                var insertAt = this._state[collection].length;
+                jQuery.each(this._state[collection], function (i, value) {
+                    if (value == at) {
+                        insertAt = i;
+                        return false;
+                    }
+                });
+
+                if (typeof step == 'number')
+                    insertAt = insertAt + step;
+
+                this._state[collection].splice(insertAt, 0, target);
+            }
         }
-    }
-    
-    return null;
-};
+        else {
+            this._state[collection].push(target);
+        }
+    };
 
-Sage.TabWorkspace.prototype.setDroppableOn = function(draggable, id, droppable) {
-    if (typeof draggable._droppables === "undefined")
-        draggable._droppables = {};
-        
-    draggable._droppables[id] = droppable;
-};
+    Sage.TabWorkspaceState.prototype.isMiddleTab = function (target) {
+        return this._isTab(Sage.TabWorkspaceState.MIDDLE_TABS, target);
+    };
 
-Sage.TabWorkspace.prototype.getDroppableFrom = function(draggable, id) {
-    if (draggable._droppables)
-        return draggable._droppables[id];
-};
+    Sage.TabWorkspaceState.prototype.removeFromMiddleTabs = function (target) {
+        this._removeFromTabs(Sage.TabWorkspaceState.MIDDLE_TABS, target);
+    };
 
-Sage.TabWorkspace.prototype.updateOffsetParentScroll = function() {
-    this._offsetParentScroll = $(this._offsetParent).scrollTop();
-};
+    Sage.TabWorkspaceState.prototype.addToMiddleTabs = function (target, at, step) {
+        this._addToTabs(Sage.TabWorkspaceState.MIDDLE_TABS, target, at, step);
+    };
 
-Sage.TabWorkspace.prototype.shouldUpdateRegions = function() {
-    if (this._offsetParent) 
-    {
-        if (this._offsetParentScroll != $(this._offsetParent).scrollTop())
-        {
-            this._offsetParentScroll = $(this._offsetParent).scrollTop();
+    Sage.TabWorkspaceState.prototype.isMainTab = function (target) {
+        return this._isTab(Sage.TabWorkspaceState.MAIN_TABS, target);
+    };
+
+    Sage.TabWorkspaceState.prototype.isTabVisible = function (tabId) {
+        if (this.isMiddleTab(tabId)) {
             return true;
+        } else if (this.isMainTab(tabId)) {
+            return (this._state.ActiveMainTab === tabId);
+        } else if (this.isMoreTab(tabId)) {
+            return (this._state.ActiveMoreTab === tabId && (this.isMiddleTab(Sage.TabWorkspace.MORE_TAB_ID) || (this._state.ActiveMainTab === Sage.TabWorkspace.MORE_TAB_ID)));
         }
-    }
-    
-    return false;
-};
+    };
 
-Sage.TabWorkspace.prototype.initDragDrop = function() {
-    var self = this;    
-    
-    
-    
-    
-    $("div.tws-middle-section", this.getContext()).droppable({
+    Sage.TabWorkspaceState.prototype.removeFromMainTabs = function (target) {
+        this._removeFromTabs(Sage.TabWorkspaceState.MAIN_TABS, target);
+    };
+
+    Sage.TabWorkspaceState.prototype.addToMainTabs = function (target, at, step) {
+        this._addToTabs(Sage.TabWorkspaceState.MAIN_TABS, target, at, step);
+    };
+
+    Sage.TabWorkspaceState.prototype.setActiveMainTab = function (target) {
+        this._state.ActiveMainTab = target;
+    };
+
+    Sage.TabWorkspaceState.prototype.getActiveMainTab = function () {
+        return this._state.ActiveMainTab;
+    };
+
+    Sage.TabWorkspaceState.prototype.isMoreTab = function (target) {
+        return this._isTab(Sage.TabWorkspaceState.MORE_TABS, target);
+    };
+
+    Sage.TabWorkspaceState.prototype.removeFromMoreTabs = function (target) {
+        this._removeFromTabs(Sage.TabWorkspaceState.MORE_TABS, target);
+    };
+
+    Sage.TabWorkspaceState.prototype.addToMoreTabs = function (target, at, step) {
+        this._addToTabs(Sage.TabWorkspaceState.MORE_TABS, target, at, step);
+    };
+
+    Sage.TabWorkspaceState.prototype.setActiveMoreTab = function (target) {
+        this._state.ActiveMoreTab = target;
+    };
+
+    Sage.TabWorkspaceState.prototype.getActiveMoreTab = function () {
+        return this._state.ActiveMoreTab;
+    };
+
+    Sage.TabWorkspaceState.prototype.getMainTabs = function () {
+        return this._state.MainTabs;
+    };
+
+    Sage.TabWorkspaceState.prototype.getMoreTabs = function () {
+        return this._state.MoreTabs;
+    };
+
+    Sage.TabWorkspaceState.prototype.getMiddleTabs = function () {
+        return this._state.MiddleTabs;
+    };
+
+    Sage.TabWorkspaceState.prototype.getUpdatedTabs = function () {
+        return this._state.UpdatedTabs;
+    };
+
+    Sage.TabWorkspaceState.prototype.markTabUpdated = function (target) {
+        if (this._wasTabUpdated[target])
+            return;
+
+        this._wasTabUpdated[target] = true;
+        this._state.UpdatedTabs.push(target);
+    };
+
+    Sage.TabWorkspaceState.prototype.wasTabUpdated = function (target) {
+        return this._wasTabUpdated[target];
+    };
+
+    Sage.TabWorkspaceState.prototype.clearUpdatedTabs = function () {
+        this._wasTabUpdated = new Object;
+        this._state.UpdatedTabs = [];
+    };
+
+    Sage.TabWorkspaceState.prototype.getHiddenTabs = function () {
+        return this._state.HiddenTabs;
+    };
+    Sage.TabWorkspaceState.prototype.InHideMode = function () {
+        return this._state.InHideMode;
+    };
+    Sage.TabWorkspace = function (config) {
+        this._id = config.id;
+        this._clientId = config.clientId;
+        this._afterPostBackActions = [];
+        this._info = config.info;
+        this._state = new Sage.TabWorkspaceState(config.state);
+        this._textSelectionDisabled = false;
+        this._debug = false;
+        this._regions = {};
+        this._middleRegionDropTolerance = 20;
+        this._offsetParent = false;
+        this._offsetParentScroll = -1;
+
+        this.compileInfoLookups();
+        var self = (TabControl) ? TabControl : this;
+        ready(lang.hitch(self, function () {
+            // These dual refresh calls are not a typo.  The dijit.layout.ContentPane
+            // is not affectively determining all of it's layout information on the
+            // first pass through resize.  Calling resize twice effectively renders
+            // the grid to fill it's container.
+            // - KBailes 3-28-12
+            var localTC = registry.byId('tabContent');
+
+            aspect.after(localTC, 'resize', lang.hitch(this, '_resize'));
+            aspect.after(this, 'dropToMiddleSection', lang.hitch(this, '_resize'));
+
+            aspect.after(this, 'dropToMoreSection', function () {
+                localTC.resize(); localTC.resize();
+            });
+            aspect.after(this, 'dropToMainSection', function () {
+                localTC.resize(); localTC.resize();
+            });
+            aspect.after(this, 'onReOpenTab', function () {
+                localTC.resize(); localTC.resize();
+            });
+        }));
+    };
+
+    Sage.TabWorkspace.MORE_TAB_ID = "More";
+    Sage.TabWorkspace.MAIN_AREA = "main";
+    Sage.TabWorkspace.MORE_AREA = "more";
+    Sage.TabWorkspace.MIDDLE_AREA = "middle";
+    Sage.TabWorkspace.prototype._resize = function () {
+        TabControl.setViewBodyHeight();
+    };
+    Sage.TabWorkspace.prototype.setViewBodyHeight = function () {
+        // Height of the entire tab workspace.
+        var tabContentHeight,
+        // Current state of the tab workspace.
+            tabState,
+        // Current active tab in the main tab area.
+            activeMainTab,
+        // Query for finding the element with the View Body (tws-tab-view-body) class.
+            viewBodyQuery,
+        // View Body element.
+            viewBody,
+        // Query for finding the element with the View Header(tws-tab-view-header) class.
+            viewHeaderQuery,
+        // View Header element.
+            viewHeader,
+        // Middle Section (tws-middle-section) element.
+            middleSection,
+        // Main Tab Button (tws-main-tab-buttons) element.
+            mainTabButtons,
+        // The calculated height of middleSection + mainTabButtons + viewHeader.
+            tabContentTop,
+        // The calculated height of tabContentHeight - tabContentTop - 24 //adjust for padding.
+            tabContentBottom,
+        // The final height to be applied to the View Body (tws-tab-view-body) element.
+            viewBodyHeight,
+        // Query for finding the Middle area elements with the View Body(tws-tab-view-body) class.
+            middleTabItemQuery,
+        // The Middle area elements containing a View Body.
+            middleTabItemViewBody,
+        // Adjust height for padding in specific area.
+            adjustForPadding,
+        // Minimum height for the grid container.  Main and Middle areas are the same.  
+        // More Area is variable based on the number of buttons.       
+            minHeight = 250;
+        tabState = this.getState();
+        tabContentHeight = registry.byId('tabContent').h;
+        //Resize for Active Main and More Tab Areas
+        //Get current tab
+        activeMainTab = tabState._state.ActiveMainTab;
+        if (activeMainTab) {
+            // More Tab Area settings.
+            if (activeMainTab === Sage.TabWorkspace.MORE_TAB_ID && tabState._state.ActiveMoreTab) {
+                activeMainTab = tabState._state.ActiveMoreTab;
+                adjustForPadding = 50;
+            }
+            // Main Tab Area settings.
+            else {
+                adjustForPadding = 25;
+            }
+            viewBodyQuery = ['#', 'element_', activeMainTab, ' .tws-tab-view-body'].join('');
+            viewBody = query(viewBodyQuery)[0];
+            viewHeaderQuery = ['#', 'element_', activeMainTab, ' .tws-tab-view-header'].join('');
+            viewHeader = query(viewHeaderQuery)[0];
+            middleSection = query('.tws-middle-section')[0];
+            mainTabButtons = query('.tws-main-tab-buttons')[0];
+            // Calculate the top of the Tab Worksapce
+            tabContentTop = middleSection.clientHeight + mainTabButtons.clientHeight + viewHeader.clientHeight;
+            // Calculate the bottom of the Tab Workspace
+            tabContentBottom = tabContentHeight - tabContentTop - adjustForPadding;
+            // Set the View Body height considering a minimum height.
+            viewBodyHeight = (tabContentBottom < minHeight) ? [minHeight, 'px'].join('') : [tabContentBottom, 'px'].join('');
+            if (viewBody) {
+                domStyle.set(viewBody, 'height', viewBodyHeight);
+            }
+        }
+        //Resize for Middle Tabs.  Fixed with no resizing.  
+        array.forEach(tabState._state.MiddleTabs, function (entry) {
+            middleTabItemQuery = ['#', 'element_', entry, ' .tws-tab-view-body'].join('');
+            // Get the View Body element for all tabs in the Middle area.
+            middleTabItemViewBody = query(middleTabItemQuery)[0];
+            if (middleTabItemViewBody.clientHeight < minHeight) {
+                domStyle.set(middleTabItemViewBody, 'height', [minHeight, 'px'].join(''));
+            }
+        });
+    };
+
+    Sage.TabWorkspace.prototype.compileInfoLookups = function () {
+        this._info._byId = new Object;
+        this._info._byElementId = new Object;
+        this._info._byDropTargetId = new Object;
+        this._info._byButtonId = new Object;
+        this._info._byMoreButtonId = new Object;
+        for (var i = 0; i < this._info.Tabs.length; i++) {
+            this._info._byId[this._info.Tabs[i].Id] = this._info.Tabs[i];
+            this._info._byElementId[this._info.Tabs[i].ElementId] = this._info.Tabs[i];
+            this._info._byDropTargetId[this._info.Tabs[i].DropTargetId] = this._info.Tabs[i];
+            this._info._byButtonId[this._info.Tabs[i].ButtonId] = this._info.Tabs[i];
+            this._info._byMoreButtonId[this._info.Tabs[i].MoreButtonId] = this._info.Tabs[i];
+        }
+    };
+
+    Sage.TabWorkspace.prototype.getInfoFor = function (tab) { return this._info._byId[tab]; };
+    Sage.TabWorkspace.prototype.getInfoForTab = function (tabId) { return this._info._byId[tabId]; };
+    Sage.TabWorkspace.prototype.getInfoForTabElement = function (elementId) { return this._info._byElementId[elementId]; };
+    Sage.TabWorkspace.prototype.getInfoForTabDropTarget = function (dropTargetId) { return this._info._byDropTargetId[dropTargetId]; };
+    Sage.TabWorkspace.prototype.getInfoForTabButton = function (buttonId) { return this._info._byButtonId[buttonId]; };
+    Sage.TabWorkspace.prototype.getInfoForTabMoreButton = function (buttonId) { return this._info._byMoreButtonId[buttonId]; };
+    Sage.TabWorkspace.prototype.getStateProxyTriggerId = function () { return this._info.ProxyTriggerId; };
+    Sage.TabWorkspace.prototype.getStateProxyPayloadId = function () { return this._info.ProxyPayloadId; };
+    Sage.TabWorkspace.prototype.getDragHelperContainerId = function () { return this._info.DragHelperContainerId; };
+    Sage.TabWorkspace.prototype.getUseUIStateService = function () { return this._info.UseUIStateService; };
+    Sage.TabWorkspace.prototype.getUIStateServiceKey = function () { return this._info.UIStateServiceKey; };
+    Sage.TabWorkspace.prototype.getUIStateServiceProxyType = function () { return this._info.UIStateServiceProxyType; };
+    Sage.TabWorkspace.prototype.getAllDropTargets = function () { return this._allDropTargets; };
+    Sage.TabWorkspace.prototype.getAllMainButtons = function () { return this._allMainButtons; };
+    Sage.TabWorkspace.prototype.getAllMoreButtons = function () { return this._allMoreButtons; };
+
+    Sage.TabWorkspace.prototype.getElement = function () {
+        if (document.getElementById)
+            return document.getElementById(this._clientId);
+        return null;
+    };
+
+    Sage.TabWorkspace.prototype.getContext = function () { return this._context; };
+    Sage.TabWorkspace.prototype.getState = function () { return this._state; };
+    Sage.TabWorkspace.prototype.setState = function (state) { this._state = state; };
+
+    Sage.TabWorkspace.prototype.resetState = function (state) {
+        if (typeof state === "undefined") {
+            var stateProxy = $("#" + this.getStateProxyPayloadId(), this.getContext()).val();
+            if (stateProxy == "") {
+                this.setState(this.getState());
+            }
+            else {
+                this.setState(Sage.TabWorkspaceState.deserialize(stateProxy));
+            }
+        }
+        else if (typeof state === "string") {
+            this.setState(Sage.TabWorkspaceState.deserialize(state));
+        }
+        this.logDebug("Reset state...");
+    };
+
+    Sage.TabWorkspace.prototype.logDebug = function (text) {
+        if (this._debug) {
+            var pad = function (value, length) {
+                value = value.toString();
+                while (value.length < length)
+                    value = "0" + value;
+                return value;
+            };
+            var date = new Date();
+            var dateString = pad(date.getHours(), 2) + ":" + pad(date.getMinutes(), 2) + ":" + pad(date.getSeconds(), 2) + "." + pad(date.getMilliseconds(), 3);
+            $("#debug_log").append(dateString + " - " + text + "<br />");
+        }
+    };
+
+    Sage.TabWorkspace.prototype.registerAfterPostBackAction = function (action) {
+        this._afterPostBackActions.push(action);
+    };
+
+    Sage.TabWorkspace.prototype.init = function () {
+        this.logDebug("[enter] init");
+
+        //cache common lookups               
+        if (document.getElementById)
+            this._context = document.getElementById(this._clientId);
+
+        if (this._context)
+            this._offsetParent = $(this._context).offsetParent();
+
+        this._allDropTargets = $("div.tws-drop-target", this._context);
+        this._allMainButtons = $("li.tws-tab-button", this._context);
+        this._allMoreButtons = $("li.tws-more-tab-button", this._context);
+        this._mainButtonContainer = $("div.tws-main-tab-buttons", this._context);
+        this._mainButtonContainerRegion = this.createRegionsFrom(this._mainButtonContainer)[0];
+        this._moreButtonContainer = $("div.tws-more-tab-buttons-container", this._context);
+        this._moreButtonContainerRegion = this.createRegionsFrom(this._moreButtonContainer)[0];
+
+        this.getState().clearUpdatedTabs();
+        for (var i = 0; i < this.getState().getMiddleTabs().length; i++)
+            this.getState().markTabUpdated(this.getState().getMiddleTabs()[i]);
+
+        if (this.getState().getActiveMainTab())
+            this.getState().markTabUpdated(this.getState().getActiveMainTab());
+
+        if (this.getState().getActiveMainTab() == Sage.TabWorkspace.MORE_TAB_ID)
+            if (this.getState().getActiveMoreTab())
+                this.getState().markTabUpdated(this.getState().getActiveMoreTab());
+
+        //store the helper height & width   
+        this._dragHelperHeight = $(".tws-tab-drag-helper", this.getContext()).height();
+        this._dragHelperWidth = $(".tws-tab-drag-helper", this.getContext()).width();
+
+        this.logDebug("[enter] initEvents");
+        this.initEvents();
+        this.logDebug("[leave] initEvents");
+        this.logDebug("[enter] initDragDrop");
+        this.initDragDrop();
+        this.logDebug("[leave] initDragDrop");
+        this.logDebug("[leave] init");
+        this.hideTabs();
+    };
+
+    Sage.TabWorkspace.prototype.initEvents = function () {
+        var self = this; //since jQuery overrides "this" in the closure        
+
+        //setup the update events
+        //will need to refactor this to use add_endRequest instead
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        prm.add_endRequest(function (sender, args) {
+            self.setupAllTabElementDraggables();
+            self.hideTabs();
+        });
+
+        prm.add_beginRequest(function (sender, args) {
+            self.cleanupAllTabElementDraggables();
+        });
+    };
+
+    Sage.TabWorkspace.prototype.hideTabs = function () {
+        if (!this.getState().InHideMode()) {
+            return;
+        }
+        for (var i = 0; i < this.getState().getMiddleTabs().length; i++) {
+            var tab = this.getState().getMiddleTabs()[i];
+            this.unHideTab(tab);
+        }
+
+        for (var i = 0; i < this.getState().getMoreTabs().length; i++) {
+            var tab = this.getState().getMoreTabs()[i];
+            this.unHideTab(tab);
+        }
+
+        for (var i = 0; i < this.getState().getMainTabs().length; i++) {
+            var tab = this.getState().getMainTabs()[i];
+            this.unHideTab(tab);
+        }
+
+        for (var i = 0; i < this.getState().getHiddenTabs().length; i++) {
+            var tab = this.getState().getHiddenTabs()[i];
+            this.hideTab(tab);
+        }
+    };
+
+    Sage.TabWorkspace.prototype.hideTab = function (tab) {
+        this.logDebug("[enter] hideTab");
+        if (typeof tab === "string")
+            tab = this.getInfoFor(tab);
+
+        if (tab == null) { return; }
+
+        switch (this.getState().getSectionFor(tab.Id)) {
+            case Sage.TabWorkspaceState.MAIN_TABS:
+
+                $("#" + tab.ButtonId, this.getContext()).hide();
+                $("#" + tab.ElementId, this.getContext()).hide();
+                break;
+
+            case Sage.TabWorkspaceState.MORE_TABS:
+
+                $("#" + tab.MoreButtonId, this.getContext()).hide();
+                $("#" + tab.ElementId, this.getContext()).hide();
+                break;
+
+            case Sage.TabWorkspaceState.MIDDLE_TABS:
+                $("#" + tab.ElementId, this.getContext()).hide();
+                break;
+        }
+
+    };
+
+    Sage.TabWorkspace.prototype.unHideTab = function (tab) {
+        this.logDebug("[enter] hideTab");
+        if (typeof tab === "string")
+            tab = this.getInfoFor(tab);
+
+        if (tab == null) { return; }
+
+        switch (this.getState().getSectionFor(tab.Id)) {
+            case Sage.TabWorkspaceState.MAIN_TABS:
+
+                $("#" + tab.ButtonId, this.getContext()).show();
+                if (this.getState().getActiveMainTab() == tab.Id) {
+                    $("#" + tab.ElementId, this.getContext()).show();
+                }
+
+                break;
+
+            case Sage.TabWorkspaceState.MORE_TABS:
+
+                $("#" + tab.MoreButtonId, this.getContext()).show();
+                if (this.getState().getActiveMoreTab() == tab.Id) {
+                    $("#" + tab.ElementId, this.getContext()).show();
+                }
+                break;
+
+            case Sage.TabWorkspaceState.MIDDLE_TABS:
+
+                $("#" + tab.ElementId, this.getContext()).show();
+
+                break;
+        }
+
+    };
+
+
+    Sage.TabWorkspace.prototype.disablePageTextSelection = function () {
+        if (jQuery.browser.msie) {
+            if (!this._textSelectionDisabled) {
+                this._oldBodyOnDrag = document.body.ondrag;
+                this._oldBodyOnSelectStart = document.body.onselectstart;
+
+                document.body.ondrag = function () { return false; };
+                document.body.onselectstart = function () { return false; };
+
+                this._textSelectionDisabled = true;
+            }
+        }
+    };
+
+    Sage.TabWorkspace.prototype.enablePageTextSelection = function () {
+        if (jQuery.browser.msie) {
+            if (this._textSelectionDisabled) {
+                document.body.ondrag = this._oldBodyOnDrag;
+                document.body.onselectstart = this._oldBodyOnSelectStart;
+
+                this._textSelectionDisabled = false;
+            }
+        }
+    };
+
+    Sage.TabWorkspace.prototype.setDragDropHelperText = function (helper, text) {
+        if (typeof text != "string")
+            return;
+
+        $(".tws-drag-helper-text", helper).html(text);
+    };
+    Sage.TabWorkspace.prototype.setupTabElementDraggable = function (tab) {
+        var self = this;
+
+        var $query;
+        if (typeof tab == 'string') {
+            tab = this.getInfoFor(tab);
+            if (tab == null) { return; }
+            $query = $("#" + tab.ElementId, this.getContext());
+        }
+        else if (typeof target == 'object')
+            $query = tab.ElementId;
+
+        if ($query.is(".ui-draggable"))
+            return;
+
+        if (typeof tab === "string")
+            this.logDebug("Setting up tab element draggable for " + tab + ".");
+        else
+            this.logDebug("Setting up tab element draggable for " + tab.Id + ".");
+
+        $query.draggable({
+            handle: ".tws-tab-view-header",
+            cursor: "move",
+            cursorAt: { top: self._dragHelperHeight / 2, left: self._dragHelperWidth / 2 },
+            zIndex: 15000,
+            delay: 50,
+            opacity: 0.5,
+            scroll: true,
+            refreshPositions: true,
+            appendTo: "#" + self.getDragHelperContainerId(),
+            helper: function () {
+                return self.createDraggableHelper();
+            },
+            start: function (e, ui) {
+                this._context = self.getInfoForTabElement(this.id);
+                this._overDraggable = false;
+
+                $(ui.helper).data("over", 0);
+
+                self.disablePageTextSelection();
+                self.setDragDropHelperText(ui.helper, this._context.Name);
+            },
+            stop: function (e, ui) {
+                self.enablePageTextSelection();
+            }
+        });
+    };
+
+    Sage.TabWorkspace.prototype.cleanupTabElementDraggable = function (tab) {
+        var $query;
+        if (typeof tab == 'string') {
+            tab = this.getInfoFor(tab);
+            if (tab == null) { return; }
+            $query = $("#" + tab.ElementId, this.getContext());
+        }
+        else if (typeof target == 'object')
+            $query = tab.ElementId;
+
+        if (!$query.is(".ui-draggable"))
+            return;
+
+        if (typeof tab === "string")
+            this.logDebug("Cleaning up tab element draggable for " + tab + ".");
+        else
+            this.logDebug("Cleaning up tab element draggable for " + tab.Id + ".");
+
+        $query.draggable("destroy");
+    };
+
+    Sage.TabWorkspace.prototype.setupAllTabElementDraggables = function () {
+        for (var i = 0; i < this.getState().getMiddleTabs().length; i++)
+            this.setupTabElementDraggable(this.getState().getMiddleTabs()[i]);
+
+        if (this.getState().getActiveMainTab() && this.getState().getActiveMainTab() != Sage.TabWorkspace.MORE_TAB_ID)
+            this.setupTabElementDraggable(this.getState().getActiveMainTab());
+
+        if (this.getState().getActiveMoreTab())
+            this.setupTabElementDraggable(this.getState().getActiveMoreTab());
+    };
+
+    Sage.TabWorkspace.prototype.cleanupAllTabElementDraggables = function () {
+        //only updated tabs should have tab element draggables
+        for (var i = 0; i < this.getState().getUpdatedTabs().length; i++)
+            this.cleanupTabElementDraggable(this.getState().getUpdatedTabs()[i]);
+    };
+
+    Sage.TabWorkspace.prototype.createMainInsertMarker = function (el, at) {
+        if (el) {
+            var marker = $("<div class=\"tws-insert-button-marker Global_Images icon_insert-arrow-down16x16 \"></div>").css({ top: (at.top - 10) + "px", left: (at.left - 8) + "px" });
+            $("div.tws-main-tab-buttons", this.getContext()).append(marker);
+            el._marker = marker;
+        }
+    };
+
+    Sage.TabWorkspace.prototype.cleanupMainInsertMarker = function (el) {
+        if (el && el._marker) {
+            el._marker.remove();
+            el._marker = null;
+        }
+    };
+
+    Sage.TabWorkspace.prototype.createMoreInsertMarker = function (el, at) {
+        if (el) {
+            var marker = $("<div class=\"tws-insert-button-marker Global_Images icon_insert-arrow-left16x16\"></div>").css({ top: (at.top - 8) + "px" });
+            $("div.tws-more-tab-buttons-container", this.getContext()).append(marker);
+            el._marker = marker;
+        }
+    };
+
+    Sage.TabWorkspace.prototype.cleanupMoreInsertMarker = function (el) {
+        if (el && el._marker) {
+            el._marker.remove();
+            el._marker = null;
+        }
+    };
+
+    Sage.TabWorkspace.prototype.getContextFromUI = function (ui) {
+        return ui.draggable.get(0)._context;
+    };
+
+    Sage.TabWorkspace.prototype.getRegions = function (area) {
+        return this._regions[area];
+    };
+
+    Sage.TabWorkspace.prototype.createRegionsFrom = function (list) {
+        var regions = [];
+        list.each(function () {
+            var el = $(this);
+            regions.push({
+                x: el.offset().left,
+                y: el.offset().top,
+                width: el.width(),
+                height: el.height(),
+                el: this
+            });
+        });
+
+        return regions;
+    };
+
+    Sage.TabWorkspace.prototype.testRegions = function (regions, pos, test) {
+        var list = (typeof regions === "string") ? this._regions[regions] : regions;
+        if (list && list.length && typeof test === "function") {
+            for (var i = 0; i < list.length; i++) {
+                if (test(list[i], pos))
+                    return list[i].el;
+            }
+        }
+
+        return null;
+    };
+
+    Sage.TabWorkspace.prototype.setDroppableOn = function (draggable, id, droppable) {
+        if (typeof draggable._droppables === "undefined")
+            draggable._droppables = {};
+
+        draggable._droppables[id] = droppable;
+    };
+
+    Sage.TabWorkspace.prototype.getDroppableFrom = function (draggable, id) {
+        if (draggable._droppables)
+            return draggable._droppables[id];
+    };
+
+    Sage.TabWorkspace.prototype.updateOffsetParentScroll = function () {
+        this._offsetParentScroll = $(this._offsetParent).scrollTop();
+    };
+
+    Sage.TabWorkspace.prototype.shouldUpdateRegions = function () {
+        if (this._offsetParent) {
+            if (this._offsetParentScroll != $(this._offsetParent).scrollTop()) {
+                this._offsetParentScroll = $(this._offsetParent).scrollTop();
+                return true;
+            }
+        }
+
+        return false;
+    };
+
+    Sage.TabWorkspace.prototype.initDragDrop = function () {
+        var self = this;
+
         
-        accept : ".tws-tab-button,.tws-more-tab-button,.tws-tab-element",
-        tolerance : "pointer",
-        activate : function(e, ui) {
-            self.logDebug("Activate MiddleSection");
+        
+        
+        $("div.tws-middle-section", this.getContext()).droppable({
             
-            //add our instance to the draggable
-            self.setDroppableOn(ui.draggable.get(0), Sage.TabWorkspace.MIDDLE_AREA, ui.options);
-                        
-            self._allDropTargets.filter("div.tws-middle-section div.tws-drop-target").addClass("tws-drop-target-active");
-        },    
-        deactivate : function(e, ui) {
-            self.logDebug("De-Activate MiddleSection");
-                        
-            self._allDropTargets.filter("div.tws-middle-section div.tws-drop-target").removeClass("tws-drop-target-active");
-            
-            ui.draggable.unbind('drag', ui.options.track);             
-            ui.options._targets = null;
-            ui.options._current = null;            
-        },
-        over : function(e, ui) {
-            self.logDebug("Over MiddleSection");
-                        
-            var regions = self.createRegionsFrom(self.getAllDropTargets().filter(":visible"));
-            var draggable = ui.draggable.get(0);
-            var pos = { y: e.pageY, x: e.pageX };  
-            var el = self.testRegions(regions, pos, function(r, p) { return (p.y > (r.y - self._middleRegionDropTolerance) && p.y <= (r.y + r.height + self._middleRegionDropTolerance)) });
-            
-            if (el)
-            {
-                $(el).addClass("tws-drop-target-hover");                 
-                $(ui.helper).data("over", $(ui.helper).data("over") + 1);     
-                $(ui.helper).addClass("tws-drag-helper-valid");                                   
-            }
+            accept: ".tws-tab-button,.tws-more-tab-button,.tws-tab-element",
+            tolerance: "pointer",
+            activate: function (e, ui) {
+                self.logDebug("Activate MiddleSection");
 
-            ui.options._targets = regions;
-            ui.options._currentTarget = (el) ? el : null;
-            ui.draggable.bind('drag', ui.options.track);
-        },
-        out : function(e, ui) {
-            self.logDebug("Out MiddleSection");
-            
-            var draggable = ui.draggable.get(0);
-            
-            self._allDropTargets.removeClass("tws-drop-target-hover");
-            
-            $(ui.helper).data("over", $(ui.helper).data("over") - 1);
-            if ($(ui.helper).data("over") <= 0)
-            {
-                $(ui.helper).data("over", 0);            
-                $(ui.helper).removeClass("tws-drag-helper-valid"); 
-            }
-                                                                        
-            ui.draggable.unbind('drag', ui.options.track);
-            ui.options._targets = null;
-            ui.options._currentTarget = null;
-        },
-        drop : function(e, ui) {
-            self.logDebug("Drop MiddleSection");
-            
-            var context = self.getContextFromUI(ui);    
-            var target = ui.options._currentTarget;
- 
-            self._allDropTargets.removeClass("tws-drop-target-hover");            
-            $(ui.helper).removeClass("tws-drag-helper-valid");
-            
-            if (target)           
-                self.dropToMiddleSection(context, target);                
-        },
-        track : function(e, ui) {          
-            var draggable = this;
-            var droppable = self.getDroppableFrom(draggable, Sage.TabWorkspace.MIDDLE_AREA);
-            var pos = { y: e.pageY, x: e.pageX };
-            var el = self.testRegions(droppable._targets, pos, function(r, p) { return (p.y > (r.y - self._middleRegionDropTolerance) && p.y <= (r.y + r.height + self._middleRegionDropTolerance)) });
+                //add our instance to the draggable
+                self.setDroppableOn(ui.draggable.get(0), Sage.TabWorkspace.MIDDLE_AREA, ui.options);
 
-            if (droppable._currentTarget != el)
-            {
-                var last = droppable._currentTarget;
-                if (last) 
-                {
-                    $(ui.helper).removeClass("tws-drag-helper-valid");
-                    $(last).removeClass("tws-drop-target-hover");
-                }
-                    
-                if (el)                                
-                {
-                    $(ui.helper).addClass("tws-drag-helper-valid");
+                self._allDropTargets.filter("div.tws-middle-section div.tws-drop-target").addClass("tws-drop-target-active");
+            },
+            deactivate: function (e, ui) {
+                self.logDebug("De-Activate MiddleSection");
+
+                self._allDropTargets.filter("div.tws-middle-section div.tws-drop-target").removeClass("tws-drop-target-active");
+
+                ui.draggable.unbind('drag', ui.options.track);
+                ui.options._targets = null;
+                ui.options._current = null;
+            },
+            over: function (e, ui) {
+                self.logDebug("Over MiddleSection");
+
+                var regions = self.createRegionsFrom(self.getAllDropTargets().filter(":visible"));
+                var draggable = ui.draggable.get(0);
+                var pos = { y: e.pageY, x: e.pageX };
+                var el = self.testRegions(regions, pos, function (r, p) { return (p.y > (r.y - self._middleRegionDropTolerance) && p.y <= (r.y + r.height + self._middleRegionDropTolerance)); });
+
+                if (el) {
                     $(el).addClass("tws-drop-target-hover");
+                    $(ui.helper).data("over", $(ui.helper).data("over") + 1);
+                    $(ui.helper).addClass("tws-drag-helper-valid");
+                    $('.tws-drag-helper-icon', ui.helper).addClass('icon_ok16x16');
+                    $('.tws-drag-helper-icon', ui.helper).removeClass('icon_no16x16');
                 }
-                
-                droppable._currentTarget = el;
+
+                ui.options._targets = regions;
+                ui.options._currentTarget = (el) ? el : null;
+                ui.draggable.bind('drag', ui.options.track);
+            },
+            out: function (e, ui) {
+                self.logDebug("Out MiddleSection");
+
+                var draggable = ui.draggable.get(0);
+
+                self._allDropTargets.removeClass("tws-drop-target-hover");
+
+                $(ui.helper).data("over", $(ui.helper).data("over") - 1);
+                if ($(ui.helper).data("over") <= 0) {
+                    $(ui.helper).data("over", 0);
+                    $(ui.helper).removeClass("tws-drag-helper-valid");
+                    $('.tws-drag-helper-icon', ui.helper).removeClass('icon_ok16x16');
+                    $('.tws-drag-helper-icon', ui.helper).addClass('icon_no16x16');
+                }
+
+                ui.draggable.unbind('drag', ui.options.track);
+                ui.options._targets = null;
+                ui.options._currentTarget = null;
+            },
+            drop: function (e, ui) {
+                self.logDebug("Drop MiddleSection");
+
+                var context = self.getContextFromUI(ui);
+                var target = ui.options._currentTarget;
+
+                self._allDropTargets.removeClass("tws-drop-target-hover");
+                $(ui.helper).removeClass("tws-drag-helper-valid");
+                $('.tws-drag-helper-icon', ui.helper).removeClass('icon_ok16x16');
+                $('.tws-drag-helper-icon', ui.helper).addClass('icon_no16x16');
+                if (target)
+                    self.dropToMiddleSection(context, target);
+            },
+            track: function (e, ui) {
+                var draggable = this;
+                var droppable = self.getDroppableFrom(draggable, Sage.TabWorkspace.MIDDLE_AREA);
+                var pos = { y: e.pageY, x: e.pageX };
+                var el = self.testRegions(droppable._targets, pos, function (r, p) { return (p.y > (r.y - self._middleRegionDropTolerance) && p.y <= (r.y + r.height + self._middleRegionDropTolerance)); });
+
+                if (droppable._currentTarget != el) {
+                    var last = droppable._currentTarget;
+                    if (last) {
+                        $(ui.helper).removeClass("tws-drag-helper-valid");
+                        $('.tws-drag-helper-icon', ui.helper).removeClass('icon_ok16x16');
+                        $('.tws-drag-helper-icon', ui.helper).addClass('icon_no16x16');
+                        $(last).removeClass("tws-drop-target-hover");
+                    }
+
+                    if (el) {
+                        $(ui.helper).addClass("tws-drag-helper-valid");
+                        $('.tws-drag-helper-icon', ui.helper).addClass('icon_ok16x16');
+                        $('.tws-drag-helper-icon', ui.helper).removeClass('icon_no16x16');
+                        $(el).addClass("tws-drop-target-hover");
+                    }
+
+                    droppable._currentTarget = el;
+                }
             }
-        }
-    });
-    
-    
-    
-    
-    $("div.tws-main-tab-buttons", this.getContext()).droppable({
-        accept : ".tws-tab-button,.tws-more-tab-button,.tws-tab-element",                      
-        tolerance : "pointer",
-        activate : function(e, ui) {
-            self.logDebug("Activate MainButtonBar");
-            
-            //not functional in ui 1.5 - is there an equivalent and is it needed?    
-            //ui.instance.proportions.width = ui.instance.element.width();
-            //ui.instance.proportions.height = ui.instance.element.height(); 
-            
-            self.updateMainAreaRegions(); 
-            
-            self.setDroppableOn(ui.draggable.get(0), Sage.TabWorkspace.MAIN_AREA, ui.options);                        
-        },
-        deactivate : function(e, ui) {
-            self.logDebug("De-Activate MainButtonBar");
-            
-            self.cleanupMainInsertMarker(ui.draggable.get(0));
-            
-            ui.draggable.unbind('drag', ui.options.track);
-            ui.options._targets = null;
-            ui.options._currentTarget = null;            
-        },
-        over : function(e, ui) {      
-            self.logDebug("Over main button bar event occured for " + self.getContextFromUI(ui).Id);                                             
-            
-            $(ui.helper).data("over", $(ui.helper).data("over") + 1);     
-            $(ui.helper).addClass("tws-drag-helper-valid");   
-            
-            var regions = self.getRegions(Sage.TabWorkspace.MAIN_AREA);
-            var pos = { y: e.pageY, x: e.pageX };  
-            var el = self.testRegions(regions, pos, function(r, p) {
-                return (p.x > r.x && p.x <= (r.x + r.width) &&
-                        p.y > r.y && p.y <= (r.y + r.height));
-            });
-            var position = {};
-                if (el)
-                    position = $(el, self.getContext()).position();
-                else
-                    position = $(".tws-tab-button-tail", self.getContext()).position();                        
-            
-            self.cleanupMainInsertMarker(ui.draggable.get(0)); 
-            self.createMainInsertMarker(ui.draggable.get(0), position);
-            
-            ui.options._targets = regions;
-            ui.options._currentTarget = null;
-            ui.draggable.bind('drag', ui.options.track);
-        },
-        out : function(e, ui) {
-            self.logDebug("Out MainButtonBar");
-            
-            $(ui.helper).data("over", $(ui.helper).data("over") - 1);
-            if ($(ui.helper).data("over") <= 0)
-            {
-                $(ui.helper).data("over", 0);     
-                $(ui.helper).removeClass("tws-drag-helper-valid"); 
-            }
-            
-            self.cleanupMainInsertMarker(ui.draggable.get(0));           
-                                    
-            ui.draggable.unbind('drag', ui.options.track);
-            ui.options._targets = null;
-            ui.options._currentTarget = null;
-        },
-        drop : function(e, ui) {    
-            self.logDebug("Drop to main event occured for " + self.getContextFromUI(ui).Id);   
-            
-            var context = self.getContextFromUI(ui);    
-            var target = (ui.options._currentTarget) ? ui.options._currentTarget : this;                                                                     
-            self.dropToMainSection(context, target);
-        },        
-        track : function(e, ui) {            
-            var draggable = this;
-            var droppable = self.getDroppableFrom(draggable, Sage.TabWorkspace.MAIN_AREA);
-            var pos = { y: e.pageY, x: e.pageX };  
-            var el = self.testRegions(droppable._targets, pos, function(r, p) {
-                return (p.x > r.x && p.x <= (r.x + r.width) &&
-                        p.y > r.y && p.y <= (r.y + r.height));
-            });
-           
-            if (droppable._currentTarget != el)
-            {
-                droppable._currentTarget = el;
+        });
+
+        
+        
+        
+        $("div.tws-main-tab-buttons", this.getContext()).droppable({
+            accept: ".tws-tab-button,.tws-more-tab-button,.tws-tab-element",
+            tolerance: "pointer",
+            activate: function (e, ui) {
+                self.logDebug("Activate MainButtonBar");
+
+                //not functional in ui 1.5 - is there an equivalent and is it needed?    
+                //ui.instance.proportions.width = ui.instance.element.width();
+                //ui.instance.proportions.height = ui.instance.element.height(); 
+
+                self.updateMainAreaRegions();
+
+                self.setDroppableOn(ui.draggable.get(0), Sage.TabWorkspace.MAIN_AREA, ui.options);
+            },
+            deactivate: function (e, ui) {
+                self.logDebug("De-Activate MainButtonBar");
+
+                self.cleanupMainInsertMarker(ui.draggable.get(0));
+
+                ui.draggable.unbind('drag', ui.options.track);
+                ui.options._targets = null;
+                ui.options._currentTarget = null;
+            },
+            over: function (e, ui) {
+                self.logDebug("Over main button bar event occured for " + self.getContextFromUI(ui).Id);
+
+                $(ui.helper).data("over", $(ui.helper).data("over") + 1);
+                $(ui.helper).addClass("tws-drag-helper-valid");
+                $('.tws-drag-helper-icon', ui.helper).addClass('icon_ok16x16');
+                $('.tws-drag-helper-icon', ui.helper).removeClass('icon_no16x16');
                 
+                var regions = self.getRegions(Sage.TabWorkspace.MAIN_AREA);
+                var pos = { y: e.pageY, x: e.pageX };
+                var el = self.testRegions(regions, pos, function (r, p) {
+                    return (p.x > r.x && p.x <= (r.x + r.width));
+                });
                 var position = {};
                 if (el)
-                    position = $(droppable._currentTarget, self.getContext()).position();
+                    position = $(el, self.getContext()).position();
                 else
                     position = $(".tws-tab-button-tail", self.getContext()).position();
-                
-                self.cleanupMainInsertMarker(draggable); 
-                self.createMainInsertMarker(draggable, position);
-            }            
-        }     
-    });        
-    
-    
-    
-    
-    $(".tws-more-tab-buttons", this.getContext()).droppable({
-        accept : ".tws-tab-button:not(#show_More),.tws-more-tab-button,.tws-tab-element:not(#element_More)",            
-        tolerance : "pointer",
-        activate : function(e, ui) {
-            self.logDebug("Activate MoreButtonBar");                       
-            
-            //fix for jQuery 1.5 and size of initially hidden droppables             
-                     
-            //not functional in ui 1.5 - is there an equivalent and is it needed?    
-            //ui.instance.proportions.width = ui.instance.element.width();
-            //ui.instance.proportions.height = ui.instance.element.height(); 
-            
-            self.updateMoreAreaRegions(); 
-            
-            self.setDroppableOn(ui.draggable.get(0), Sage.TabWorkspace.MORE_AREA, ui.options);
-        },
-        deactivate : function(e, ui) {
-            self.cleanupMoreInsertMarker(ui);    
-            
-            ui.draggable.unbind('drag', ui.options.track);
-            ui.options._targets = null;
-            ui.options._currentTarget = null; 
-        },
-        over : function(e, ui) {
-            self.logDebug("Over more button bar event occured for " + self.getContextFromUI(ui).Id);                                             
-            
-            $(ui.helper).data("over", $(ui.helper).data("over") + 1);     
-            $(ui.helper).addClass("tws-drag-helper-valid");   
-            
-            var regions = self.getRegions(Sage.TabWorkspace.MORE_AREA);
-            var pos = { y: e.pageY, x: e.pageX };  
-            var el = self.testRegions(regions, pos, function(r, p) { return (p.y > r.y && p.y <= (r.y + r.height)) }); 
-            var position = {};
+
+                self.cleanupMainInsertMarker(ui.draggable.get(0));
+                self.createMainInsertMarker(ui.draggable.get(0), position);
+
+                ui.options._targets = regions;
+                ui.options._currentTarget = null;
+                ui.draggable.bind('drag', ui.options.track);
+            },
+            out: function (e, ui) {
+                self.logDebug("Out MainButtonBar");
+
+                $(ui.helper).data("over", $(ui.helper).data("over") - 1);
+                if ($(ui.helper).data("over") <= 0) {
+                    $(ui.helper).data("over", 0);
+                    $(ui.helper).removeClass("tws-drag-helper-valid");
+                    $('.tws-drag-helper-icon', ui.helper).removeClass('icon_ok16x16');
+                    $('.tws-drag-helper-icon', ui.helper).addClass('icon_no16x16');
+                }
+
+                self.cleanupMainInsertMarker(ui.draggable.get(0));
+
+                ui.draggable.unbind('drag', ui.options.track);
+                ui.options._targets = null;
+                ui.options._currentTarget = null;
+            },
+            drop: function (e, ui) {
+                self.logDebug("Drop to main event occured for " + self.getContextFromUI(ui).Id);
+
+                var context = self.getContextFromUI(ui);
+                var target = (ui.options._currentTarget) ? ui.options._currentTarget : this;
+                self.dropToMainSection(context, target);
+            },
+            track: function (e, ui) {
+                var draggable = this;
+                var droppable = self.getDroppableFrom(draggable, Sage.TabWorkspace.MAIN_AREA);
+                var pos = { y: e.pageY, x: e.pageX };
+                var el = self.testRegions(droppable._targets, pos, function (r, p) {
+                    return (p.x > r.x && p.x <= (r.x + r.width));
+                });
+
+                if (droppable._currentTarget != el) {
+                    droppable._currentTarget = el;
+
+                    var position = {};
+                    if (el)
+                        position = $(droppable._currentTarget, self.getContext()).position();
+                    else
+                        position = $(".tws-tab-button-tail", self.getContext()).position();
+
+                    self.cleanupMainInsertMarker(draggable);
+                    self.createMainInsertMarker(draggable, position);
+                }
+            }
+        });
+
+        
+        
+        
+        $(".tws-more-tab-buttons", this.getContext()).droppable({
+            accept: ".tws-tab-button:not(#show_More),.tws-more-tab-button,.tws-tab-element:not(#element_More)",
+            tolerance: "pointer",
+            activate: function (e, ui) {
+                self.logDebug("Activate MoreButtonBar");
+
+                //fix for jQuery 1.5 and size of initially hidden droppables             
+
+                //not functional in ui 1.5 - is there an equivalent and is it needed?    
+                //ui.instance.proportions.width = ui.instance.element.width();
+                //ui.instance.proportions.height = ui.instance.element.height(); 
+
+                self.updateMoreAreaRegions();
+
+                self.setDroppableOn(ui.draggable.get(0), Sage.TabWorkspace.MORE_AREA, ui.options);
+            },
+            deactivate: function (e, ui) {
+                self.cleanupMoreInsertMarker(ui);
+
+                ui.draggable.unbind('drag', ui.options.track);
+                ui.options._targets = null;
+                ui.options._currentTarget = null;
+            },
+            over: function (e, ui) {
+                self.logDebug("Over more button bar event occured for " + self.getContextFromUI(ui).Id);
+
+                $(ui.helper).data("over", $(ui.helper).data("over") + 1);
+                $(ui.helper).addClass("tws-drag-helper-valid");
+                $('.tws-drag-helper-icon', ui.helper).addClass('icon_ok16x16');
+                $('.tws-drag-helper-icon', ui.helper).removeClass('icon_no16x16');
+
+
+                var regions = self.getRegions(Sage.TabWorkspace.MORE_AREA);
+                var pos = { y: e.pageY, x: e.pageX };
+                var el = self.testRegions(regions, pos, function (r, p) { return (p.y > r.y && p.y <= (r.y + r.height)); });
+                var position = {};
                 if (el)
                     position = $(el, self.getContext()).position();
                 else
                     position = $(".tws-more-tab-button-tail", self.getContext()).position();
-            
-            self.cleanupMoreInsertMarker(ui.draggable.get(0)); 
-            self.createMoreInsertMarker(ui.draggable.get(0), position); 
-            
-            ui.options._targets = regions;
-            ui.options._currentTarget = null;
-            ui.draggable.bind('drag', ui.options.track);                     
-        },
-        out : function(e, ui) {
-            $(ui.helper).data("over", $(ui.helper).data("over") - 1);
-            if ($(ui.helper).data("over") <= 0)
-            {
-                $(ui.helper).data("over", 0);     
-                $(ui.helper).removeClass("tws-drag-helper-valid"); 
-            }  
-            
-            self.cleanupMoreInsertMarker(ui.draggable.get(0)); 
-            
-            ui.draggable.unbind('drag', ui.options.track);
-            ui.options._targets = null;
-            ui.options._currentTarget = null;                      
-        },
-        drop : function(e, ui) {    
-            self.logDebug("Drop to more event occured for " + self.getContextFromUI(ui).Id);
-            
-            var context = self.getContextFromUI(ui);    
-            var target = (ui.options._currentTarget) ? ui.options._currentTarget : this;                                                                                                   
-            self.dropToMoreSection(context, target);
-        },          
-        track : function(e, ui) {            
-            var draggable = this; 
-            var droppable = self.getDroppableFrom(draggable, Sage.TabWorkspace.MORE_AREA);
-            var pos = { y: e.pageY, x: e.pageX };  
-            var el = self.testRegions(droppable._targets, pos, function(r, p) { return (p.y > r.y && p.y <= (r.y + r.height)) }); 
-                       
-            if (droppable._currentTarget != el)
-            {
-                droppable._currentTarget = el;
-                
-                var position = {};
-                if (el)
-                    position = $(droppable._currentTarget, self.getContext()).position();
-                else
-                    position = $(".tws-more-tab-button-tail", self.getContext()).position();
-                
-                self.cleanupMoreInsertMarker(draggable); 
-                self.createMoreInsertMarker(draggable, position);
-            }            
-        }  
-    });
-    
-    
-    
-        
-    $("li.tws-tab-button:not(li.tws-tab-button-tail)", this.getContext()).draggable({
-        cursor : "move",
-        cursorAt : { top : self._dragHelperHeight / 2, left : self._dragHelperWidth / 2 },
-        zIndex : 15000,       
-        appendTo : "#" + self.getDragHelperContainerId(),
-        //refreshPositions : true,
-        opacity: 0.5,
-        delay: 50,    
-        scroll: true,
-        refreshPositions: true,
-        helper : function() {             
-            return self.createDraggableHelper(); 
-        },
-        start : function(e, ui) {  
-            this._context = self.getInfoForTabButton(this.id);
-            this._overDraggable = false;
-            
-            $(ui.helper).data("over", 0);
-            
-            self.disablePageTextSelection();            
-            self.setDragDropHelperText(ui.helper, this._context.Name);  
-        },
-        stop : function(e, ui) {
-            self.enablePageTextSelection();
-        }
-    });
-    
-    
-    
-    
-    $("li.tws-more-tab-button:not(li.tws-more-tab-button-tail)", this.getContext()).draggable({
-        cursor : "move",
-        cursorAt : { top : self._dragHelperHeight / 2, left : self._dragHelperWidth / 2 },
-        zIndex : 15000,     
-        //refreshPositions : true,  
-        opacity: 0.5,  
-        delay: 50,   
-        scroll: true,
-        refreshPositions: true,
-        appendTo : "#" + self.getDragHelperContainerId(),
-        helper : function() {             
-            return self.createDraggableHelper(); 
-        },
-        start : function(e, ui) {  
-            this._context = self.getInfoForTabMoreButton(this.id);
-            this._overDraggable = false;
-            
-            $(ui.helper).data("over", 0);
-            
-            self.disablePageTextSelection();            
-            self.setDragDropHelperText(ui.helper, this._context.Name);  
-        },
-        stop : function(e, ui) {
-            self.enablePageTextSelection();
-        }
-    });       
-    
-    $("li.tws-tab-button:not(li.tws-tab-button-tail)", this.getContext()).click(function(e) {
-        var tab = self.getInfoForTabButton($(this).attr("id"));
-        
-        self.logDebug("Click event occured for " + tab.Id);
-        
-        self.showMainTab(tab.Id);
-        
-        if (e.ctrlKey)
-            this.forceUpdateFor(tab.Id);
-    });  
-    
-    $("li.tws-more-tab-button:not(li.tws-more-tab-button-tail)", this.getContext()).click(function(e) {
-        var tab = self.getInfoForTabMoreButton($(this).attr("id"));
-        
-        self.logDebug("Click event occured for " + tab.Id);
-        
-        self.showMoreTab(tab.Id);
-        
-        if (e.ctrlKey)
-            this.forceUpdateFor(tab.Id);    
-    });     
-    
-    this.updateAllRegions();
-    this.setupAllTabElementDraggables();   
-};
 
-Sage.TabWorkspace.prototype.createDraggableHelper = function() {
-    return $("<div class='tws-tab-drag-helper'><div class='tws-drag-helper-icon' /><div class='tws-drag-helper-text' /></div>");
-};
+                self.cleanupMoreInsertMarker(ui.draggable.get(0));
+                self.createMoreInsertMarker(ui.draggable.get(0), position);
 
-Sage.TabWorkspace.prototype.showMainTab = function(tab, triggerUpdate) { 
-    this.logDebug("[enter] showMainTab");
-    
-    if (typeof tab === "string")
-        tab = this.getInfoFor(tab);
-        
-    var previousMainTabId = this.getState().getActiveMainTab();
-    
-    //if we are already the active main tab, we do not have to do anything
-    if (this.getState().getActiveMainTab() == tab.Id)
-    {
-        //still optionally trigger an update
-        if (typeof triggerUpdate == 'undefined' || triggerUpdate)
-            this.triggerUpdateFor(tab.Id); 
-        return;
-    }
-                
-    //change state
-    this.getState().setActiveMainTab(tab.Id);
-      
-    
-    
-    this.showMainTabDom(tab);
-    
-    if (tab.Id == Sage.TabWorkspace.MORE_TAB_ID)
-        if (this.getState().getActiveMoreTab())
-            this.showMoreTabDom(this.getState().getActiveMoreTab());
-   
-    if (typeof triggerUpdate == 'undefined' || triggerUpdate)
-            this.triggerUpdateFor(tab.Id);     
-            
-    this.fireEvent('maintabchange', tab.Id, tab);     
-};
+                ui.options._targets = regions;
+                ui.options._currentTarget = null;
+                ui.draggable.bind('drag', ui.options.track);
+            },
+            out: function (e, ui) {
+                $(ui.helper).data("over", $(ui.helper).data("over") - 1);
+                if ($(ui.helper).data("over") <= 0) {
+                    $(ui.helper).data("over", 0);
+                    $(ui.helper).removeClass("tws-drag-helper-valid");
+                    $('.tws-drag-helper-icon', ui.helper).removeClass('icon_ok16x16');
+                    $('.tws-drag-helper-icon', ui.helper).addClass('icon_no16x16');
+                }
 
-Sage.TabWorkspace.prototype.showMainTabDom = function(tab) {
-    
-    if (typeof tab === "string")
-        tab = this.getInfoFor(tab);
-        
-    $(".tws-main-tab-content > .tws-tab-element", this.getContext()).hide();
-    $("#" + tab.ElementId, this.getContext()).show();
-    $(".tws-main-tab-buttons .tws-tab-button", this.getContext()).removeClass("tws-active-tab-button"); 
-    $("#" + tab.ButtonId, this.getContext()).addClass("tws-active-tab-button");
-};
+                self.cleanupMoreInsertMarker(ui.draggable.get(0));
 
-Sage.TabWorkspace.prototype.showMoreTab = function(tab, triggerUpdate) {
-    this.logDebug("[enter] showMoreTab");
-    
-    if (typeof tab === "string")
-        tab = this.getInfoFor(tab);
-    
-    if (this.getState().getActiveMoreTab() == tab.Id)
-    {
-        //still optionally trigger an update
-        if (typeof triggerUpdate == 'undefined' || triggerUpdate)
-            this.triggerUpdateFor(tab.Id); 
-        return;   
-    }
-    
-    this.getState().setActiveMoreTab(tab.Id);
-    
-    
-    
-    this.showMoreTabDom(tab);
-    
-    if (typeof triggerUpdate == 'undefined' || triggerUpdate)
-            this.triggerUpdateFor(tab.Id); 
-            
-    this.fireEvent('moretabchange', tab.Id, tab);
-};
+                ui.draggable.unbind('drag', ui.options.track);
+                ui.options._targets = null;
+                ui.options._currentTarget = null;
+            },
+            drop: function (e, ui) {
+                self.logDebug("Drop to more event occured for " + self.getContextFromUI(ui).Id);
 
-Sage.TabWorkspace.prototype.showMoreTabDom = function(tab) {
-    if (typeof tab === "string")
-        tab = this.getInfoFor(tab);
-    
-    $(".tws-more-tab-content .tws-tab-element", this.getContext()).hide();
-    $("#" + tab.ElementId, this.getContext()).show();
-    $(".tws-more-tab-buttons .tws-more-tab-button", this.getContext()).removeClass("tws-active-more-tab-button");
-    $("#" + tab.MoreButtonId, this.getContext()).addClass("tws-active-more-tab-button");
-};
+                var context = self.getContextFromUI(ui);
+                var target = (ui.options._currentTarget) ? ui.options._currentTarget : this;
+                self.dropToMoreSection(context, target);
+            },
+            track: function (e, ui) {
+                var draggable = this;
+                var droppable = self.getDroppableFrom(draggable, Sage.TabWorkspace.MORE_AREA);
+                var pos = { y: e.pageY, x: e.pageX };
+                var el = self.testRegions(droppable._targets, pos, function (r, p) { return (p.y > r.y && p.y <= (r.y + r.height)); });
 
-Sage.TabWorkspace.prototype.dropToMainSection = function(tab, target) {   
-    
-    
-    this.logDebug("[enter] dropToMainSection");
-      
-    //determine the drop position via ui.droppable
-    var $location;
-    if ($(target).is(".tws-main-tab-buttons"))    
-        $location = $(".tws-tab-button-tail", this.getContext());    
-    else    
-        $location = $(target, this.getContext());
-                             
-    switch (this.getState().getSectionFor(tab.Id))
-    {
-        case Sage.TabWorkspaceState.MAIN_TABS:                   
-            $location.before($("#" + tab.ButtonId, this.getContext()));
-            break;
-            
-        case Sage.TabWorkspaceState.MORE_TABS:
-            $("#" + tab.MoreButtonId, this.getContext()).hide();
-            $location.before($("#" + tab.ButtonId, this.getContext()).show());            
-            
-            //move the tab element
-            $(".tws-main-tab-content", this.getContext()).append($("#" + tab.ElementId));
-            //move the drop target
-            $(".tws-main-tab-content", this.getContext()).append($("#" + tab.DropTargetId));
-            break;
-            
-        case Sage.TabWorkspaceState.MIDDLE_TABS:                 
-            $location.before($("#" + tab.ButtonId, this.getContext()).show());
-            
-            //move the tab element
-            $(".tws-main-tab-content", this.getContext()).append($("#" + tab.ElementId));
-            //move the drop target
-            $(".tws-main-tab-content", this.getContext()).append($("#" + tab.DropTargetId));
-            
-            break;
-    }
-       
-    //add this tab to the main tabs
-    if ($location.is(".tws-tab-button-tail"))
-        this.getState().addToMainTabs(tab.Id);
-    else
-        this.getState().addToMainTabs(tab.Id, this.getInfoForTabButton($location.attr("id")).Id, 0);    
-        
-    //show this main tab
-    this.showMainTab(tab.Id);
-};
+                if (droppable._currentTarget != el) {
+                    droppable._currentTarget = el;
 
-Sage.TabWorkspace.prototype.dropToMoreSection = function(tab, target) {   
-    
-    
-    this.logDebug("[enter] dropToMoreSection"); 
-  
-    //determine the drop position via ui.droppable
-    var $location;
-    if ($(target).is(".tws-more-tab-buttons"))    
-        $location = $(".tws-more-tab-button-tail", this.getContext());    
-    else    
-        $location = $(target, this.getContext());
-                             
-    switch (this.getState().getSectionFor(tab.Id))
-    {
-        case Sage.TabWorkspaceState.MAIN_TABS:                   
-            $("#" + tab.ButtonId, this.getContext()).hide();
-            $location.before($("#" + tab.MoreButtonId, this.getContext()).show());            
-            
-            //move the tab element
-            $(".tws-more-tab-element .tws-more-tab-content-fixer", this.getContext()).before($("#" + tab.ElementId));
-            //move the drop target
-            $(".tws-more-tab-element .tws-more-tab-content-fixer", this.getContext()).before($("#" + tab.DropTargetId));
-            break;
-            
-        case Sage.TabWorkspaceState.MORE_TABS:
-            $location.before($("#" + tab.MoreButtonId, this.getContext()));
-            break;
-            
-        case Sage.TabWorkspaceState.MIDDLE_TABS:                 
-            $location.before($("#" + tab.MoreButtonId, this.getContext()).show());
-                        
-            //move the tab element
-            $(".tws-more-tab-element .tws-more-tab-content-fixer", this.getContext()).before($("#" + tab.ElementId));
-            //move the drop target
-            $(".tws-more-tab-element .tws-more-tab-content-fixer", this.getContext()).before($("#" + tab.DropTargetId));                        
-            break;
-    }
-       
-    //add this tab to the main tabs
-    if ($location.is(".tws-more-tab-button-tail"))
-        this.getState().addToMoreTabs(tab.Id);
-    else
-        this.getState().addToMoreTabs(tab.Id, this.getInfoForTabMoreButton($location.attr("id")).Id, 0);    
-        
-    //show this main tab
-    this.showMoreTab(tab.Id);
-};
+                    var position = {};
+                    if (el)
+                        position = $(droppable._currentTarget, self.getContext()).position();
+                    else
+                        position = $(".tws-more-tab-button-tail", self.getContext()).position();
 
-Sage.TabWorkspace.prototype.dropToMiddleSection = function(tab, target) {   
-    
-    
-    this.logDebug("[enter] dropToMiddleSection");
-     
-    var tabsToUpdate = [];
-    
-    //dropped to it's own drop target
-    if (tab.DropTargetId == target.id)
-        return;
-             
-    switch (this.getState().getSectionFor(tab.Id))
-    {
-        case Sage.TabWorkspaceState.MAIN_TABS:
-            //are we the last main tab? if so, do nothing
-            if (this.getState().getMainTabs().length == 1)
-                return;
-                
-            //are we the current active main tab?
-            if (this.getState().getActiveMainTab() == tab.Id)
-            {
-                var $newActiveTab = $("#" + tab.ButtonId, this.getContext()).prev(".tws-tab-button:visible:not(.tws-tab-button-tail)");
-                if ($newActiveTab.length <= 0)
-                    $newActiveTab = $("#" + tab.ButtonId, this.getContext()).next(".tws-tab-button:visible:not(.tws-tab-button-tail)");
-                    
-                if ($newActiveTab.length > 0)
-                {
-                    var newActiveTabId = this.getInfoForTabButton($newActiveTab.attr("id")).Id;
-                    this.showMainTab(newActiveTabId, false); //do not trigger an update
-                    tabsToUpdate.push(newActiveTabId);
-                }                               
-            }                      
-            
-            $("#" + tab.ButtonId, this.getContext()).hide();   
-                
-            //move the old drop target
-            $(target).after($("#" + tab.DropTargetId, this.getContext()));    
-            //show and move the tab element
-            $(target).after($("#" + tab.ElementId, this.getContext()).show());
-            
-            tabsToUpdate.push(tab.Id);     
-            break;
-            
-        case Sage.TabWorkspaceState.MORE_TABS:
-            //are we the current active more tab?
-            if (this.getState().getActiveMoreTab() == tab.Id)
-            {
-                //TODO: should we make a new more tab active?
+                    self.cleanupMoreInsertMarker(draggable);
+                    self.createMoreInsertMarker(draggable, position);
+                }
             }
-            
-            $("#" + tab.MoreButtonId, this.getContext()).hide();
-            
-            //move the old drop target
-            $(target).after($("#" + tab.DropTargetId, this.getContext()));    
-            //show and move the tab element
-            $(target).after($("#" + tab.ElementId, this.getContext()).show());
-            
-            tabsToUpdate.push(tab.Id);
-            break;
-            
-        case Sage.TabWorkspaceState.MIDDLE_TABS:
-            //move the old drop target
-            $(target).after($("#" + tab.DropTargetId, this.getContext()));    
-            //show and move the tab element
-            $(target).after($("#" + tab.ElementId, this.getContext()).show());
-            
-            tabsToUpdate.push(tab.Id);
-            break;
-    }     
-    
-    //update state  
-    if ($(target).hasClass("tws-middle-drop-target"))
-        this.getState().addToMiddleTabs(tab.Id, 0); //first
-    else  
-        this.getState().addToMiddleTabs(tab.Id, this.getInfoForTabDropTarget(target.id).Id, 1);              
-                    
-    this.triggerUpdateFor(tabsToUpdate);
-};
+        });
 
-Sage.TabWorkspace.prototype.deriveStateFromMarkup = function() {
-    var self = this;
-    var state = { 
-        MiddleTabs : [],
-        MainTabs : [],
-        MoreTabs : []        
+        
+        
+        
+        $("li.tws-tab-button:not(li.tws-tab-button-tail)", this.getContext()).draggable({
+            cursor: "move",
+            cursorAt: { top: self._dragHelperHeight / 2, left: self._dragHelperWidth / 2 },
+            zIndex: 15000,
+            appendTo: "#" + self.getDragHelperContainerId(),
+            //refreshPositions : true,
+            opacity: 0.5,
+            delay: 50,
+            scroll: true,
+            refreshPositions: true,
+            helper: function () {
+                return self.createDraggableHelper();
+            },
+            start: function (e, ui) {
+                this._context = self.getInfoForTabButton(this.id);
+                this._overDraggable = false;
+
+                $(ui.helper).data("over", 0);
+
+                self.disablePageTextSelection();
+                self.setDragDropHelperText(ui.helper, this._context.Name);
+            },
+            stop: function (e, ui) {
+                self.enablePageTextSelection();
+            }
+        });
+
+        
+        
+        
+        $("li.tws-more-tab-button:not(li.tws-more-tab-button-tail)", this.getContext()).draggable({
+            cursor: "move",
+            cursorAt: { top: self._dragHelperHeight / 2, left: self._dragHelperWidth / 2 },
+            zIndex: 15000,
+            //refreshPositions : true,  
+            opacity: 0.5,
+            delay: 50,
+            scroll: true,
+            refreshPositions: true,
+            appendTo: "#" + self.getDragHelperContainerId(),
+            helper: function () {
+                return self.createDraggableHelper();
+            },
+            start: function (e, ui) {
+                this._context = self.getInfoForTabMoreButton(this.id);
+                this._overDraggable = false;
+
+                $(ui.helper).data("over", 0);
+
+                self.disablePageTextSelection();
+                self.setDragDropHelperText(ui.helper, this._context.Name);
+            },
+            stop: function (e, ui) {
+                self.enablePageTextSelection();
+            }
+        });
+
+        $("li.tws-tab-button:not(li.tws-tab-button-tail)", this.getContext()).click(function (e) {
+            var tab = self.getInfoForTabButton($(this).attr("id"));
+
+            self.logDebug("Click event occured for " + tab.Id);
+
+            self.showMainTab(tab.Id);
+
+            if (e.ctrlKey)
+                this.forceUpdateFor(tab.Id);
+        });
+
+        $("li.tws-more-tab-button:not(li.tws-more-tab-button-tail)", this.getContext()).click(function (e) {
+            var tab = self.getInfoForTabMoreButton($(this).attr("id"));
+
+            self.logDebug("Click event occured for " + tab.Id);
+
+            self.showMoreTab(tab.Id);
+
+            if (e.ctrlKey)
+                this.forceUpdateFor(tab.Id);
+        });
+
+        this.updateAllRegions();
+        this.setupAllTabElementDraggables();
     };
-    
-    $(".tws-middle-section .tws-tab-element", this.getContext()).each(function() {
-        state.MiddleTabs.push(self.getInfoForTabElement($(this).attr("id")).Id);
-    });
-    
-    $(".tws-main-section .tws-main-tab-buttons .tws-tab-button:visible", this.getContext()).each(function() { 
-        var tab = self.getInfoForTabButton($(this).attr("id"));
-        state.MainTabs.push(tab.Id);
-        
-        if ($(this).hasClass("tws-active-tab-button", this.getContext()))
-            state.ActiveMainTab = tab.Id;
-    });
-    
-    return state;
-};
 
+    Sage.TabWorkspace.prototype.createDraggableHelper = function () {
+        return $("<div class='tws-tab-drag-helper'><div class='tws-drag-helper-icon Global_Images icon_no16x16' /><div class='tws-drag-helper-text' /></div>");
+    };
 
-Sage.TabWorkspace.prototype.updateVisibleDroppables = function() {
-    this.logDebug("[enter] enableAllVisibleDroppables");
-    
-    $("div.tws-drop-target:visible", this.getContext()).droppable("enable");   
-    
-    //fix for jQuery 1.5 and size of initially hidden droppables
-    $.ui.ddmanager.prepareOffsets();
+    Sage.TabWorkspace.prototype.showMainTab = function (tab, triggerUpdate) {
+        this.logDebug("[enter] showMainTab");
 
-    this.logDebug("[leave] enableAllVisibleDroppables");
-};
+        if (typeof tab === "string")
+            tab = this.getInfoFor(tab);
 
-Sage.TabWorkspace.prototype.updateAllRegions = function() {
-    this.updateMainAreaRegions();
-    this.updateMoreAreaRegions();
-    this.updateMiddleAreaRegions();
-};
+        var previousMainTabId = this.getState().getActiveMainTab();
 
-Sage.TabWorkspace.prototype.updateMainAreaRegions = function() { 
-    //validate the container region and the area region list
-    var region = this.createRegionsFrom(this._mainButtonContainer)[0];
-        
-    this._regions[Sage.TabWorkspace.MAIN_AREA] = this.createRegionsFrom(this._allMainButtons.filter(":visible")); 
-    this._mainButtonContainerRegion = region;
-};
-Sage.TabWorkspace.prototype.updateMoreAreaRegions = function() {
-    //validate the container region and the area region list
-    var region = this.createRegionsFrom(this._moreButtonContainer)[0];
-         
-    this._regions[Sage.TabWorkspace.MORE_AREA] = this.createRegionsFrom(this._allMoreButtons.filter(":visible")); 
-    this._moreButtonContainerRegion = region;
-};
-Sage.TabWorkspace.prototype.updateMiddleAreaRegions = function() { 
-    this._regions[Sage.TabWorkspace.MIDDLE_AREA] = this.createRegionsFrom(this._allDropTargets.filter(":visible")); 
-};
-
-Sage.TabWorkspace.prototype.updateContextualFeedback = function() {
-    
-    if (this.getState().getMoreTabs().length <= 0)
-        $(".tws-more-tab-message", this.getContext()).empty().append(TabWorkspaceResource.More_Tab_Empty_Message).show();
-    else if (this.getState().getActiveMoreTab() == null) 
-        $(".tws-more-tab-message", this.getContext()).empty().append(TabWorkspaceResource.More_Tab_No_Selection_Message).show();
-    else
-        $(".tws-more-tab-message", this.getContext()).hide();
-        
-    
-    if (this.getState().getMiddleTabs().length <= 0)
-    {
-        $(".tws-middle-section", this.getContext()).addClass("tws-middle-section-empty");
-        $(".tws-middle-drop-target span", this.getContext()).empty().append(TabWorkspaceResource.Middle_Pane_Empty_Drop_Target_Message);
-    }
-    else
-    {
-        $(".tws-middle-section", this.getContext()).removeClass("tws-middle-section-empty");
-        $(".tws-middle-drop-target span", this.getContext()).empty().append(TabWorkspaceResource.Middle_Pane_Drop_Target_Message);
-    }
-};
-
-Sage.TabWorkspace.prototype.updateStateProxy = function() {
-    var serializedState = this.getState().serialize();
-    $("#" + this.getStateProxyPayloadId()).val(serializedState);
-}
-
-Sage.TabWorkspace.prototype.triggerUpdateFor = function(tabs, data) {
-
-    this.updateContextualFeedback();
-    this.updateAllRegions(); 
-    
-    var tabsToUpdate = [];
-    var shouldSendState = false;
-    var stateSent = false;
-    var self = this;
-    
-    if (typeof tabs == 'string')
-    {
-        //check to see if we need to update the tab.  never update the more tab, but do send state.
-        if (tabs == Sage.TabWorkspace.MORE_TAB_ID)
-        {
-            //if we are the more tab, see if we need to update the active more tab
-            var activeMoreTab = this.getState().getActiveMoreTab();
-            if (activeMoreTab && !this.getState().wasTabUpdated(activeMoreTab))
-            {
-                this.getState().markTabUpdated(activeMoreTab);
-                tabsToUpdate.push(activeMoreTab);
-            }
-            else
-            {
-                shouldSendState = true;
-            }
+        //if we are already the active main tab, we do not have to do anything
+        if (this.getState().getActiveMainTab() == tab.Id) {
+            //still optionally trigger an update
+            if (typeof triggerUpdate == 'undefined' || triggerUpdate)
+                this.triggerUpdateFor(tab.Id);
+            return;
         }
+
+        //change state
+        this.getState().setActiveMainTab(tab.Id);
+
+        
+
+        this.showMainTabDom(tab);
+
+        if (tab.Id == Sage.TabWorkspace.MORE_TAB_ID)
+            if (this.getState().getActiveMoreTab())
+                this.showMoreTabDom(this.getState().getActiveMoreTab());
+
+        if (typeof triggerUpdate == 'undefined' || triggerUpdate)
+            this.triggerUpdateFor(tab.Id);
+    };
+
+    Sage.TabWorkspace.prototype.showMainTabDom = function (tab) {
+
+        if (typeof tab === "string")
+            tab = this.getInfoFor(tab);
+
+        $(".tws-main-tab-content > .tws-tab-element", this.getContext()).hide();
+        $("#" + tab.ElementId, this.getContext()).show();
+        $(".tws-main-tab-buttons .tws-tab-button", this.getContext()).removeClass("tws-active-tab-button");
+        $("#" + tab.ButtonId, this.getContext()).addClass("tws-active-tab-button");
+    };
+
+    Sage.TabWorkspace.prototype.showMoreTab = function (tab, triggerUpdate) {
+        this.logDebug("[enter] showMoreTab");
+
+        if (typeof tab === "string")
+            tab = this.getInfoFor(tab);
+
+        if (this.getState().getActiveMoreTab() == tab.Id) {
+            //still optionally trigger an update
+            if (typeof triggerUpdate == 'undefined' || triggerUpdate)
+                this.triggerUpdateFor(tab.Id);
+            return;
+        }
+
+        this.getState().setActiveMoreTab(tab.Id);
+
+        
+
+        this.showMoreTabDom(tab);
+
+        if (typeof triggerUpdate == 'undefined' || triggerUpdate)
+            this.triggerUpdateFor(tab.Id);
+    };
+
+    Sage.TabWorkspace.prototype.showMoreTabDom = function (tab) {
+        if (typeof tab === "string")
+            tab = this.getInfoFor(tab);
+
+        $(".tws-more-tab-content .tws-tab-element", this.getContext()).hide();
+        $("#" + tab.ElementId, this.getContext()).show();
+        $(".tws-more-tab-buttons .tws-more-tab-button", this.getContext()).removeClass("tws-active-more-tab-button");
+        $("#" + tab.MoreButtonId, this.getContext()).addClass("tws-active-more-tab-button");
+    };
+
+    Sage.TabWorkspace.prototype.dropToMainSection = function (tab, target) {
+        
+
+        this.logDebug("[enter] dropToMainSection");
+
+        //determine the drop position via ui.droppable
+        var $location;
+        if ($(target).is(".tws-main-tab-buttons"))
+            $location = $(".tws-tab-button-tail", this.getContext());
         else
-        {        
-            if (!this.getState().wasTabUpdated(tabs) && (tabs != Sage.TabWorkspace.MORE_TAB_ID))        
-            {            
-                //mark the tab as updated so when the state gets sent the server knows the control is "active"
-                this.getState().markTabUpdated(tabs); 
-                tabsToUpdate.push(tabs);            
-            }
-            else
-            {
-                shouldSendState = true;
-            }
+            $location = $(target, this.getContext());
+
+        switch (this.getState().getSectionFor(tab.Id)) {
+            case Sage.TabWorkspaceState.MAIN_TABS:
+                $location.before($("#" + tab.ButtonId, this.getContext()));
+                break;
+
+            case Sage.TabWorkspaceState.MORE_TABS:
+                $("#" + tab.MoreButtonId, this.getContext()).hide();
+                $location.before($("#" + tab.ButtonId, this.getContext()).show());
+
+                //move the tab element
+                $(".tws-main-tab-content", this.getContext()).append($("#" + tab.ElementId));
+                //move the drop target
+                $(".tws-main-tab-content", this.getContext()).append($("#" + tab.DropTargetId));
+                break;
+
+            case Sage.TabWorkspaceState.MIDDLE_TABS:
+                $location.before($("#" + tab.ButtonId, this.getContext()).show());
+
+                //move the tab element
+                $(".tws-main-tab-content", this.getContext()).append($("#" + tab.ElementId));
+                //move the drop target
+                $(".tws-main-tab-content", this.getContext()).append($("#" + tab.DropTargetId));
+
+                break;
         }
-    }
-    else
-    {
-        for (var i = 0; i < tabs.length; i++)
-        {
+
+        //add this tab to the main tabs
+        if ($location.is(".tws-tab-button-tail"))
+            this.getState().addToMainTabs(tab.Id);
+        else
+            this.getState().addToMainTabs(tab.Id, this.getInfoForTabButton($location.attr("id")).Id, 0);
+
+        //show this main tab
+        this.showMainTab(tab.Id);
+    };
+
+    Sage.TabWorkspace.prototype.dropToMoreSection = function (tab, target) {
+        
+
+        this.logDebug("[enter] dropToMoreSection");
+
+        //determine the drop position via ui.droppable
+        var $location;
+        if ($(target).is(".tws-more-tab-buttons"))
+            $location = $(".tws-more-tab-button-tail", this.getContext());
+        else
+            $location = $(target, this.getContext());
+
+        switch (this.getState().getSectionFor(tab.Id)) {
+            case Sage.TabWorkspaceState.MAIN_TABS:
+                $("#" + tab.ButtonId, this.getContext()).hide();
+                $location.before($("#" + tab.MoreButtonId, this.getContext()).show());
+
+                //move the tab element
+                $(".tws-more-tab-element .tws-more-tab-content-fixer", this.getContext()).before($("#" + tab.ElementId));
+                //move the drop target
+                $(".tws-more-tab-element .tws-more-tab-content-fixer", this.getContext()).before($("#" + tab.DropTargetId));
+                break;
+
+            case Sage.TabWorkspaceState.MORE_TABS:
+                $location.before($("#" + tab.MoreButtonId, this.getContext()));
+                break;
+
+            case Sage.TabWorkspaceState.MIDDLE_TABS:
+                $location.before($("#" + tab.MoreButtonId, this.getContext()).show());
+
+                //move the tab element
+                $(".tws-more-tab-element .tws-more-tab-content-fixer", this.getContext()).before($("#" + tab.ElementId));
+                //move the drop target
+                $(".tws-more-tab-element .tws-more-tab-content-fixer", this.getContext()).before($("#" + tab.DropTargetId));
+                break;
+        }
+
+        //add this tab to the main tabs
+        if ($location.is(".tws-more-tab-button-tail"))
+            this.getState().addToMoreTabs(tab.Id);
+        else
+            this.getState().addToMoreTabs(tab.Id, this.getInfoForTabMoreButton($location.attr("id")).Id, 0);
+
+        //show this main tab
+        this.showMoreTab(tab.Id);
+    };
+
+    Sage.TabWorkspace.prototype.dropToMiddleSection = function (tab, target) {
+        
+
+        this.logDebug("[enter] dropToMiddleSection");
+
+        var tabsToUpdate = [];
+
+        //dropped to it's own drop target
+        if (tab.DropTargetId == target.id)
+            return;
+
+        switch (this.getState().getSectionFor(tab.Id)) {
+            case Sage.TabWorkspaceState.MAIN_TABS:
+                //are we the last main tab? if so, do nothing
+                if (this.getState().getMainTabs().length == 1)
+                    return;
+
+                //are we the current active main tab?
+                if (this.getState().getActiveMainTab() == tab.Id) {
+                    var $newActiveTab = $("#" + tab.ButtonId, this.getContext()).prev(".tws-tab-button:visible:not(.tws-tab-button-tail)");
+                    if ($newActiveTab.length <= 0)
+                        $newActiveTab = $("#" + tab.ButtonId, this.getContext()).next(".tws-tab-button:visible:not(.tws-tab-button-tail)");
+
+                    if ($newActiveTab.length > 0) {
+                        var newActiveTabId = this.getInfoForTabButton($newActiveTab.attr("id")).Id;
+                        this.showMainTab(newActiveTabId, false); //do not trigger an update
+                        tabsToUpdate.push(newActiveTabId);
+                    }
+                }
+
+                $("#" + tab.ButtonId, this.getContext()).hide();
+
+                //move the old drop target
+                $(target).after($("#" + tab.DropTargetId, this.getContext()));
+                //show and move the tab element
+                $(target).after($("#" + tab.ElementId, this.getContext()).show());
+
+                tabsToUpdate.push(tab.Id);
+                break;
+
+            case Sage.TabWorkspaceState.MORE_TABS:
+                //are we the current active more tab?
+                if (this.getState().getActiveMoreTab() == tab.Id) {
+                    //TODO: should we make a new more tab active?
+                }
+
+                $("#" + tab.MoreButtonId, this.getContext()).hide();
+
+                //move the old drop target
+                $(target).after($("#" + tab.DropTargetId, this.getContext()));
+                //show and move the tab element
+                $(target).after($("#" + tab.ElementId, this.getContext()).show());
+
+                tabsToUpdate.push(tab.Id);
+                break;
+
+            case Sage.TabWorkspaceState.MIDDLE_TABS:
+                //move the old drop target
+                $(target).after($("#" + tab.DropTargetId, this.getContext()));
+                //show and move the tab element
+                $(target).after($("#" + tab.ElementId, this.getContext()).show());
+
+                tabsToUpdate.push(tab.Id);
+                break;
+        }
+
+        //update state  
+        if ($(target).hasClass("tws-middle-drop-target"))
+            this.getState().addToMiddleTabs(tab.Id, 0); //first
+        else
+            this.getState().addToMiddleTabs(tab.Id, this.getInfoForTabDropTarget(target.id).Id, 1);
+
+        this.triggerUpdateFor(tabsToUpdate);
+    };
+
+    Sage.TabWorkspace.prototype.deriveStateFromMarkup = function () {
+        var self = this;
+        var state = {
+            MiddleTabs: [],
+            MainTabs: [],
+            MoreTabs: []
+        };
+
+        $(".tws-middle-section .tws-tab-element", this.getContext()).each(function () {
+            state.MiddleTabs.push(self.getInfoForTabElement($(this).attr("id")).Id);
+        });
+
+        $(".tws-main-section .tws-main-tab-buttons .tws-tab-button:visible", this.getContext()).each(function () {
+            var tab = self.getInfoForTabButton($(this).attr("id"));
+            state.MainTabs.push(tab.Id);
+
+            if ($(this).hasClass("tws-active-tab-button", this.getContext()))
+                state.ActiveMainTab = tab.Id;
+        });
+
+        return state;
+    };
+
+
+    Sage.TabWorkspace.prototype.updateVisibleDroppables = function () {
+        this.logDebug("[enter] enableAllVisibleDroppables");
+
+        $("div.tws-drop-target:visible", this.getContext()).droppable("enable");
+
+        //fix for jQuery 1.5 and size of initially hidden droppables
+        $.ui.ddmanager.prepareOffsets();
+
+        this.logDebug("[leave] enableAllVisibleDroppables");
+    };
+
+    Sage.TabWorkspace.prototype.updateAllRegions = function () {
+        this.updateMainAreaRegions();
+        this.updateMoreAreaRegions();
+        this.updateMiddleAreaRegions();
+    };
+
+    Sage.TabWorkspace.prototype.updateMainAreaRegions = function () {
+        //validate the container region and the area region list
+        var region = this.createRegionsFrom(this._mainButtonContainer)[0];
+        
+        this._regions[Sage.TabWorkspace.MAIN_AREA] = this.createRegionsFrom(this._allMainButtons.filter(":visible"));
+        this._mainButtonContainerRegion = region;
+    };
+    Sage.TabWorkspace.prototype.updateMoreAreaRegions = function () {
+        //validate the container region and the area region list
+        var region = this.createRegionsFrom(this._moreButtonContainer)[0];
+        
+        this._regions[Sage.TabWorkspace.MORE_AREA] = this.createRegionsFrom(this._allMoreButtons.filter(":visible"));
+        this._moreButtonContainerRegion = region;
+    };
+    Sage.TabWorkspace.prototype.updateMiddleAreaRegions = function () {
+        this._regions[Sage.TabWorkspace.MIDDLE_AREA] = this.createRegionsFrom(this._allDropTargets.filter(":visible"));
+    };
+
+    Sage.TabWorkspace.prototype.updateContextualFeedback = function () {
+        
+        if (this.getState().getMoreTabs().length <= 0)
+            $(".tws-more-tab-message", this.getContext()).empty().append(TabWorkspaceResource.More_Tab_Empty_Message).show();
+        else if (this.getState().getActiveMoreTab() == null)
+            $(".tws-more-tab-message", this.getContext()).empty().append(TabWorkspaceResource.More_Tab_No_Selection_Message).show();
+        else
+            $(".tws-more-tab-message", this.getContext()).hide();
+
+        
+        if (this.getState().getMiddleTabs().length <= 0) {
+            $(".tws-middle-section", this.getContext()).addClass("tws-middle-section-empty");
+            $(".tws-middle-drop-target span", this.getContext()).empty().append(TabWorkspaceResource.Middle_Pane_Empty_Drop_Target_Message);
+        }
+        else {
+            $(".tws-middle-section", this.getContext()).removeClass("tws-middle-section-empty");
+            $(".tws-middle-drop-target span", this.getContext()).empty().append(TabWorkspaceResource.Middle_Pane_Drop_Target_Message);
+        }
+    };
+
+    Sage.TabWorkspace.prototype.updateStateProxy = function () {
+        var serializedState = this.getState().serialize();
+        $("#" + this.getStateProxyPayloadId()).val(serializedState);
+    };
+
+    Sage.TabWorkspace.prototype.onReOpenTab = function() { };
+
+    Sage.TabWorkspace.prototype.triggerUpdateFor = function (tabs, data) {
+
+        this.updateContextualFeedback();
+        this.updateAllRegions();
+
+        var tabsToUpdate = [];
+        var shouldSendState = false;
+        var stateSent = false;
+        var self = this;
+
+        if (typeof tabs == 'string') {
             //check to see if we need to update the tab.  never update the more tab, but do send state.
-            if (tabs[i] == Sage.TabWorkspace.MORE_TAB_ID)
-            {
+            if (tabs == Sage.TabWorkspace.MORE_TAB_ID) {
                 //if we are the more tab, see if we need to update the active more tab
                 var activeMoreTab = this.getState().getActiveMoreTab();
-                if (activeMoreTab && !this.getState().wasTabUpdated(activeMoreTab))
-                {
+                if (activeMoreTab && !this.getState().wasTabUpdated(activeMoreTab)) {
                     this.getState().markTabUpdated(activeMoreTab);
                     tabsToUpdate.push(activeMoreTab);
                 }
-                else
-                {
+                else {
                     shouldSendState = true;
                 }
             }
-            else 
-            {
-                if (!this.getState().wasTabUpdated(tabs[i]) && (tabs[i] != Sage.TabWorkspace.MORE_TAB_ID))
-                {
+            else {
+                if (!this.getState().wasTabUpdated(tabs) && (tabs != Sage.TabWorkspace.MORE_TAB_ID)) {
                     //mark the tab as updated so when the state gets sent the server knows the control is "active"
-                    this.getState().markTabUpdated(tabs[i]); 
-                    tabsToUpdate.push(tabs[i]);
+                    this.getState().markTabUpdated(tabs);
+                    tabsToUpdate.push(tabs);
                 }
-                else
-                {
+                else {
                     shouldSendState = true;
                 }
             }
         }
-    }
-                
-    if (typeof tabs == 'string')
-        this.logDebug("Update requested for: " + tabs);
-    else
-        this.logDebug("Updates requested for: " + tabs.join(", "));
-    
-    var serializedState = this.getState().serialize();
-    $("#" + this.getStateProxyPayloadId()).val(serializedState);
-                            
-    for (var i = 0; i < tabsToUpdate.length; i++)
-    {
-        this.logDebug("Triggering update for " + tabsToUpdate[i]);
-    
-        tab = tabsToUpdate[i];                                        
-        //this.cleanupTabElement(tab);        
-        
-        $("#" + this.getInfoFor(tab).UpdatePayloadId).val(serializedState);
-        __doPostBack(this.getInfoFor(tab).UpdateTriggerId, "");
-        
-        stateSent = true;              
-    }
-    
-    var forceProxyCall = false;
-    if (shouldSendState && !stateSent && this.getUseUIStateService())
-    {    
-        this.logDebug("Sending state update via UIStateService.");
-                
-        $.ajax({
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            url: "UIStateService.asmx/StoreTabWorkspaceState",
-            data: Ext.util.JSON.encode({
-                key: this.getUIStateServiceKey(),
-                state: this.getState().getObject()
-            }),
-            dataType: "json",
-            error: function (request, status, error) {
-                self.logDebug("State update via UIStateService failed.");   
-                self.logDebug("Sending state update via proxy.");
-                        
-                $("#" + self.getStateProxyPayloadId()).val(serializedState);
-                __doPostBack(self.getStateProxyTriggerId(), ""); 
-                
-                stateSent = true;     
-            },
-            success: function(data, status) {
-                stateSent = true;            
-            }
-        });
-    }
-    
-    //if the state needs to be sent, and hasn't been, and the UI state service us not being used, or has failed
-    //send it via the proxy
-    if (shouldSendState && !stateSent && (!this.getUseUIStateService() || forceProxyCall))
-    {
-        this.logDebug("Sending state update via proxy.");
-        
-        //$("#" + this.getStateProxyPayloadId()).val(serializedState);
-        __doPostBack(this.getStateProxyTriggerId(), "");
-        
-        stateSent = true;
-    }    
-};
-
-Sage.Analytics = {
-    //our colors
-    colorPalette: {
-        'blue 0': 'dfe8f6', //widget bg color. will not be returned in getColors()
-        'blue 6': '00a1de',
-        'green 3': 'c1d59f',
-        'pink 5': 'a44e81',
-        'orange 2': 'f8d6aa',
-        'blue 4': '55c0e9',
-        'green 6': '69923a',
-        'pink 2': 'e2afcd',
-        'orange 7': 'af6200',
-        'blue 3': '80d0ef',
-        'green 8': '35491d',
-        'pink 4': 'c55e9b',
-        'orange 3': 'f4c180',
-        'blue 7': '0079a7',
-        'green 5': '86a85c',
-        'pink 8': '421f34',
-        'orange 6': 'e98300',
-        'blue 2': 'aae0f4',
-        'green 7': '4f6e2c',
-        'pink 3': 'd486b4',
-        'orange 8': '754200',
-        'blue 5': '2bb1e4',
-        'green 2': 'd6e3bf',
-        'pink 6': '833f67',
-        'orange 5': 'ed982b',
-        'blue 8': '00516f',
-        'green 4': 'a4bf7d',
-        'pink 7': '632f4e',
-        'orange 4': 'f0ac55'
-    },
-
-    //method used by individual widgets display() methods
-    //to dictate differential inheritance
-    //@param base is the base type used for the new object
-    createObject: function (base) {
-        var O = function () { };
-        O.prototype = base;
-        return new O();
-    },
-    now: function () {
-        var minutes, value = new Date(),
-        renderer = Ext.util.Format.dateRenderer(ConvertToPhpDateTimeFormat(getContextByKey('userDateFmtStr') +
-            " " + getContextByKey('userTimeFmtStr')));
-        return renderer(value);
-    },
-    //create a function to return an array object
-    //populated with the color items in our palette
-    //@param num is the number of colors you want back (in an array)
-    getColors: function (num) {
-
-        if (!num) { return; }
-
-        var lookupLg = ['blue 6', 'green 3', 'pink 5', 'orange 2', 'blue 4', 'green 6',
-            'pink 2', 'orange 7', 'blue 3', 'green 8', 'pink 4', 'orange 3',
-            'blue 7', 'green 5', 'pink 8', 'orange 6', 'blue 2', 'green 7',
-            'pink 3', 'orange 8', 'blue 5', 'green 2', 'pink 6', 'orange 5',
-            'blue 8', 'green 4', 'pink 7', 'orange 4'],
-
-        lookupSm = ['green 5', 'blue 3', 'green 7', 'blue 6',
-            'green 3', 'blue 7'],
-        ret = [], i, j;
-
-        //the palette for num <= 6 is different than a larger set.
-        if (num <= 6) {
-            for (i = 0; i < num; i++) {
-                ret[i] = Sage.Analytics.colorPalette[lookupSm[i]];
-            }
-        }
         else {
-            for (j = 0; j < num; j++) {
-                ret[j] = Sage.Analytics.colorPalette[lookupLg[j]];
-            }
-        }
-        return ret;
-    },
-
-    //looping template functions need to get a single color at a time
-    //by passing in an Int
-    //@param idx the index passed in by the looping function
-    getColor: function (idx) {
-        var lookup = ['blue 6', 'green 3', 'pink 5', 'orange 2', 'blue 4', 'green 6',
-            'pink 2', 'orange 7', 'blue 3', 'green 8', 'pink 4', 'orange 3',
-            'blue 7', 'green 5', 'pink 8', 'orange 6', 'blue 2', 'green 7',
-            'pink 3', 'orange 8', 'blue 5', 'green 2', 'pink 6', 'orange 5',
-            'blue 8', 'green 4', 'pink 7', 'orange 4'];
-        return Sage.Analytics.colorPalette[lookup[idx]];
-    },
-    //an incremental counter used by generateString()
-    counter: 1,
-    //so that dynamically generated elements can get a 
-    //unique number appended to their name, ie 'wgt1', 'wgt2'...
-    //@param str a string passed in to which a number will be appended
-    generateString: function (str) {
-        return str + Sage.Analytics.counter++;
-    },
-    //objects methods will return various repetitive html/javascript elements
-    //for our widget types
-    markup: {
-        //@param ttl is the title for the editor window
-        //@param editorFields is an object containing the fields on the editor
-        //@param scope is 'this' from the editor's perspective
-        //@param ok is an optional callback function for custom fields
-        //to fire when the OK button is pressed
-        //@param urls is an object containing urls for data call
-        //any/all of these will be in the init object
-        editorWindow: function (init) {
-            var $items = [], prop, cust,
-            //hoist the most referred to...
-            editorFields = init.editorFields,
-            urls = init.urls,
-            scope = init.scope;
-            //generate the markup for the items array
-            for (prop in editorFields) {
-                if (editorFields.hasOwnProperty(prop)) {
-                    switch (prop) {
-                        case 'entityField':
-                            //entityField requires a different signature
-                            $items.push(this[prop](editorFields[prop], editorFields.groupField,
-                                editorFields.dimensionField, editorFields.metricField,
-                                urls.group, urls.dimension, urls.metric, scope));
-                            break;
-                        case 'customFields':
-                            for (cust in editorFields.customFields) {
-                                if (editorFields.customFields.hasOwnProperty(cust)) {
-                                    // note scope not needed as callbacks defined in the widget
-                                    $items.push(this.customField(editorFields.customFields[cust]));
-                                }
+            for (var i = 0; i < tabs.length; i++) {
+                //check to see if we need to update the tab.  never update the more tab, but do send state.
+                if (tabs[i] == Sage.TabWorkspace.MORE_TAB_ID) {
+                    //if we are the more tab, see if we need to update the active more tab
+                    var activeMoreTab = this.getState().getActiveMoreTab();
+                    if (activeMoreTab && !this.getState().wasTabUpdated(activeMoreTab)) {
+                        this.getState().markTabUpdated(activeMoreTab);
+                        tabsToUpdate.push(activeMoreTab);
+                    }
+                    else {
+                        shouldSendState = true;
+                    }
+                }
+                else {
+                    if (!this.getState().wasTabUpdated(tabs[i]) && (tabs[i] != Sage.TabWorkspace.MORE_TAB_ID)) {
+                        //mark the tab as updated so when the state gets sent the server knows the control is "active"
+                        this.getState().markTabUpdated(tabs[i]);
+                        tabsToUpdate.push(tabs[i]);
+                    }
+                    else {
+                        if(this.getState().isMiddleTab(tabs[i])) {
+                            // Override the height of the middle section to 'auto' if it is more than just a grid,
+                            // otherwise the height of this content may overlap the tabs section
+                            var middleSectionDiv = $('.tws-middle-section .tws-tab-view-body .formtable');
+                            if(middleSectionDiv.length > 0) {
+                                $('.tws-middle-section .tws-tab-view-body')[0].style.height = 'auto';
                             }
-                            break;
-                        //radioNames should set disabled state of truncate fields  
-                        case 'radioNames':
-                            $items.push(this[prop](editorFields[prop], editorFields.radioTruncate,
-                                editorFields.truncField, scope));
-                            break;
-                        case 'radioTruncate':
-                            $items.push(this[prop](editorFields[prop],
-                                editorFields.truncField, scope));
-                            break;
-                        default:
-                            $items.push(this[prop](editorFields[prop], scope));
+                        }
+                        shouldSendState = true;
                     }
                 }
             }
-            //send the window back to editor()
-            return new Ext.Window({
-                id: scope.config.editorWindow,
-                title: init.title,
-                tools: [{
-                    id: 'help',
-                    handler: function () {
-                        window.open(String.format(getContextByKey('WebHelpUrlFmt'), 'Using_Widgets'), 'MCWebHelp');
-                    }
-                }],
-                width: init.width || 500,
-                //IE8 is wrapping labels in ext 2.* radiogroups. This will adjust for that
-                //until a better fix is found
-                height: init.height || (function () {
-                    return Ext.isIE8 ? 400 : 350;
-                } ()),
-                layout: init.layout || 'fit',
-                closeAction: init.closeAction || 'close',
-                items: new Ext.FormPanel({
-                    labelAlign: init.labelAlign || 'left',
-                    labelWidth: init.labelWidth || 125,
-                    layout: 'form',
-                    border: init.border || false,
-                    style: init.style || 'padding:5px',
-                    items: $items,
-                    buttons: [{
-                        text: 'OK',
-                        handler: function () {
-                            //if OK callback exists, call it and return
-                            if (init.ok && typeof (init.ok) === 'function') {
-                                return init.ok(scope);
-                            }
-                            //get references to the required fields
-                            var win = Ext.getCmp(scope.config.editorWindow),
-                            eField = Ext.getCmp(editorFields.entityField),
-                            gField = Ext.getCmp(editorFields.groupField),
-                            dField = Ext.getCmp(editorFields.dimensionField),
-                            mField = Ext.getCmp(editorFields.metricField),
-                            callWidget = Ext.getCmp(scope.config.panel), //return focus here
-                            att, prop, uri = [], flag = true;
-                            //set the flag if needed fields are blank
-                            if (!eField.validate() || !gField.validate() ||
-                                !dField.validate() || !mField.validate()) {
-                                flag = false;
-                            }
-                            //get the input VALUE of present fields
-                            if (editorFields.titleField) { scope.config.title = Ext.getCmp(editorFields.titleField).getValue(); }
-                            if (editorFields.captionField) { scope.config.subtitle = Ext.getCmp(editorFields.captionField).getValue(); }
-                            if (editorFields.xAxisField) { scope.config.xAxisName = Ext.getCmp(editorFields.xAxisField).getValue(); }
-                            if (editorFields.yAxisField) { scope.config.yAxisName = Ext.getCmp(editorFields.yAxisField).getValue(); }
-                            if (editorFields.goalField) { scope.config.goal = Ext.getCmp(editorFields.goalField).getValue(); }
-                            if (editorFields.truncField) { scope.config.truncNum = Ext.getCmp(editorFields.truncField).getValue(); }
+        }
 
-                            //assemble the url ['datasource'] to call for the data
-                            uri.push('slxdata.ashx/slx/crm/-/analytics?');
-                            if (scope.config.entity) { uri.push('entity=', encodeURI(scope.config.entity), '&'); }
-                            if (scope.config.groupname) { uri.push('groupname=', encodeURI(scope.config.groupname), '&'); }
-                            if (scope.config.dimension) { uri.push('dimension=', encodeURI(scope.config.dimension), '&'); }
-                            if (scope.config.metric) { uri.push('metric=', encodeURI(scope.config.metric), '&'); }
-                            if (scope.config.limit) { uri.push('limit=', encodeURI(scope.config.limit), '&'); }
-                            //for pie...
-                            if (scope.config.combineother === 'true') {
-                                uri.push('combineother=true');
-                            }
-                            //check for user overrides here
-                            for (prop in scope.definition.qsParams) {
-                                if (scope.definition.qsParams.hasOwnProperty(prop)) {
-                                    uri.push('&', prop, '=', encodeURI(scope.definition.qsParams[prop]));
-                                }
-                            }
-                            //join the finished datasource
-                            scope.config.datasource = uri.join('');
-                            //call to init() for changes if required fields aren't blank
-                            if (flag) {
-                                //keep the _options object up to date for persisting
-                                //the reverse of the setData for-in loop
-                                for (att in scope.config) {
-                                    //filter out unwanted...
-                                    if (scope.config.hasOwnProperty(att)) {
-                                        if (!scope.definition.filterList[att]) {
-                                            scope._options[att] = scope.config[att];
-                                        }
-                                    }
-                                }
-                                scope.config.edited = true;
-                                //save the page
-                                scope.fireEvent('persist');
-                                //redraw
-                                scope.init();
-                                //close the editor
-                                win.close();
-                                //return focus to the calling widget panel
-                                callWidget.focus();
-                            }
-                            //when the if() is skipped the first offending field will be shown
-                        },
-                        scope: scope
-                    },
-                    {
-                        text: Sage.Analytics.WidgetResource.cancel,
-                        handler: function () {
-                            var win = Ext.getCmp(scope.config.editorWindow),
-                            callWidget = Ext.getCmp(scope.config.panel);
-                            win.close();
-                            callWidget.focus();
-                        }
-                    }] //end buttons              
-                })
-            });
-        },
-        titleField: function (id, scope) {
-            return {
-                id: id,
-                xtype: 'textfield',
-                fieldLabel: Sage.Analytics.WidgetResource.lblTitle,
-                anchor: '97%',
-                listeners: {
-                    'render': {
-                        fn: function () {
-                            //need a ref to the textfield
-                            var txtField = Ext.getCmp(id);
-                            //check if a title exists
-                            if (scope.config.title) {
-                                txtField.setRawValue(scope.config.title);
-                            }
-                        },
-                        scope: scope
-                    }
-                }
-            };
-        }, //end titlefield
-        //allow for user defined field types
-        //@param obj is an object containing
-        //setup info for the custom field being made
-        customField: function (obj) {
-            var ret = {}, prop;
-            for (prop in obj) {
-                if (obj.hasOwnProperty(prop)) {
-                    ret[prop] = obj[prop];
-                }
-            }
-            return ret;
-        }, //end custom field
-        entityField: function (id, gcid, dcid, mcid, groupListURL, dimensionURL, metricURL, scope) {
-            return {
-                id: id,
-                xtype: 'combo',
-                forceSelection: true,
-                triggerAction: 'all',
-                fieldLabel: Sage.Analytics.WidgetResource.lblEntity,
-                anchor: '97%',
-                allowBlank: false,
-                emptyText: Sage.Analytics.WidgetResource.emptyEntity,
-                store: new Ext.data.JsonStore({
-                    autoLoad: true,
-                    url: 'slxdata.ashx/slx/crm/-/groups/context/entityList?filter=analytics',
-                    root: 'items',
-                    totalProperty: 'total_count',
-                    fields: ['fullName', 'displayName'],
-                    listeners: {
-                        'load': {
-                            fn: function ($this, records, options) {
-                                //is there data for entity here?
-                                var ent, win = Ext.getCmp(scope.config.editorWindow),
-                                //get a ref to the combo box
-                                combo = Ext.getCmp(id),
-                                //the @len var will save lookup time for large datasets 
-                                len = records.length, i;
-                                win.el.unmask();
-                                ent = scope.config.entity;
-                                if (ent) {
-                                    //iterate over records[].data and locate entity k:v
-                                    for (i = 0; i < len; i++) {
-                                        if (records[i].data.fullName === ent) {
-                                            //set the display name of the matching fullname
-                                            combo.el.removeClass('x-form-empty-field');
-                                            combo.setRawValue(records[i].data.displayName);
-                                            combo.fireEvent('change', combo, ent);
-                                        }
-                                    }
-                                }
-                            },
-                            scope: scope
-                        }
-                    }
-                }),
-                valueField: 'fullName',
-                displayField: 'displayName',
-                mode: 'local',
-                listeners: {
-                    'change': function (combo, newVal, oldVal) {
-                        var entityName = newVal.replace("Sage.Entity.Interfaces.I", ""),
-                        grpCombo = Ext.getCmp(gcid),
-                        gstore = grpCombo.getStore(),
-                        dimensionCombo = Ext.getCmp(dcid),
-                        dstore = dimensionCombo.getStore(),
-                        metricCombo = Ext.getCmp(mcid),
-                        mstore = metricCombo.getStore();
-                        gstore.proxy.conn.url = String.format(groupListURL, entityName);
-                        gstore.load();
-                        dstore.proxy.conn.url = String.format(dimensionURL, entityName);
-                        dstore.load();
-                        mstore.proxy.conn.url = String.format(metricURL, entityName);
-                        mstore.load();
-                    },
-                    'select': {
-                        fn: function (combo, record, index) {
-                            var gCombo = Ext.getCmp(gcid),
-                            dCombo = Ext.getCmp(dcid),
-                            mCombo = Ext.getCmp(mcid);
-                            scope.config.entity = record.get(combo.valueField);
-                            gCombo.setValue('');
-                            dCombo.setValue('');
-                            mCombo.setValue('');
-                        },
-                        scope: scope
-                    } //end select
-                } //end ecid listeners
-            };
-        }, //end entityfield
-        groupField: function (id, scope) {
-            return {
-                id: id,
-                xtype: 'combo',
-                forceSelection: true,
-                triggerAction: 'all',
-                fieldLabel: Sage.Analytics.WidgetResource.lblGroup,
-                anchor: '97%',
-                allowBlank: false,
-                emptyText: Sage.Analytics.WidgetResource.emptyGroup,
-                store: new Ext.data.JsonStore({
-                    autoLoad: false,
-                    url: 'slxdata.ashx/slx/crm/-/groups/context/grouplist/Account',
-                    root: 'items',
-                    totalProperty: 'total_count',
-                    fields: ['groupId', 'groupName', 'displayName', 'isAdHoc'],
-                    listeners: {
-                        'load': {
-                            fn: function ($this, records, options) {
-                                //is there data for entity here?
-                                var grp,
-                                //get a ref to the combo box
-                                combo = Ext.getCmp(id),
-                                //the @len var will save lookup time for large datasets 
-                                len = records.length, i;
-                                grp = scope._options.groupname;
-                                if (grp) {
-                                    //iterate over records[].data and locate entity k:v
-                                    for (i = 0; i < len; i++) {
-                                        if (records[i].data.groupName === grp) {
-                                            //set the display name of the matching fullname
-                                            combo.el.removeClass('x-form-empty-field');
-                                            combo.setRawValue(records[i].data.displayName);
-                                            combo.fireEvent('change', combo, grp);
-                                        }
-                                    }
-                                }
-                            },
-                            scope: scope
-                        }
-                    }
-                }),
-                valueField: 'groupName',
-                displayField: 'displayName',
-                mode: 'local',
-                listeners: {
-                    'select': {
-                        fn: function (combo, record, index) {
-                            //the VALUES will be stored not the display names
-                            scope.config.groupname = Ext.util.Format.htmlEncode(record.get(combo.valueField));
-                            scope.config.groupid = record.get('groupId');
-                        },
-                        scope: scope
-                    }
-                } //end listeners
-            };
-        }, //end groupfield
-        dimensionField: function (id, scope) {
-            return {
-                id: id,
-                xtype: 'tooltipcombo',
-                forceSelection: true,
-                triggerAction: 'all',
-                fieldLabel: Sage.Analytics.WidgetResource.lblDimension,
-                anchor: '97%',
-                allowBlank: false,
-                emptyText: Sage.Analytics.WidgetResource.emptyDimension,
-                store: new Ext.data.JsonStore({
-                    autoLoad: false,
-                    url: 'slxdata.ashx/slx/crm/-/analytics/dimension/Opportunity',
-                    root: 'items',
-                    totalProperty: 'total_count',
-                    fields: ['name', 'displayName', 'analyticsDescription'],
-                    listeners: {
-                        'load': {
-                            fn: function ($this, records, options) {
-                                //is there data for entity here?
-                                var dim,
-                                //get a ref to the combo box
-                                combo = Ext.getCmp(id),
-                                //the @len var will save lookup time for large datasets
-                                len = records.length, i;
-                                dim = scope._options.dimension;
-                                if (dim) {
-                                    //iterate over records[].data and locate entity k:v
-                                    for (i = 0; i < len; i++) {
-                                        if (records[i].data.name === dim) {
-                                            //set the display name of the matching fullname
-                                            combo.el.removeClass('x-form-empty-field');
-                                            combo.setRawValue(records[i].data.displayName);
-                                            combo.fireEvent('change', combo, dim);
-                                        }
-                                    }
-                                }
-                            },
-                            scope: scope
-                        }
-                    }
-                }),
-                valueField: 'name',
-                displayField: 'displayName',
-                tooltipField: 'analyticsDescription',
-                mode: 'local',
-                tipDisplayMode: 'inline',
-                listeners: {
-                    'select': {
-                        fn: function (combo, record, index) {
-                            //the VALUES will be stored not the display names
-                            scope.config.dimension = record.get(combo.valueField);
-                        },
-                        scope: scope
-                    }
-                }
-            };
-        }, //end dimensionField
-        metricField: function (id, scope) {
-            return {
-                id: id,
-                xtype: 'tooltipcombo',
-                forceSelection: true,
-                triggerAction: 'all',
-                fieldLabel: Sage.Analytics.WidgetResource.lblMetric,
-                anchor: '97%',
-                allowBlank: false,
-                emptyText: Sage.Analytics.WidgetResource.emptyMetric,
-                store: new Ext.data.JsonStore({
-                    autoLoad: false,
-                    url: 'slxdata.ashx/slx/crm/-/analytics/metric/Opportunity',
-                    root: 'items',
-                    totalProperty: 'total_count',
-                    fields: ['name', 'displayName', 'analyticsDescription'],
-                    listeners: {
-                        'load': {
-                            fn: function ($this, records, options) {
-                                //is there data for entity here?
-                                var met,
-                                //get a ref to the combo box
-                                combo = Ext.getCmp(id),
-                                //the @len var will save lookup time for large datasets 
-                                len = records.length, i;
-                                met = scope._options.metric;
-                                if (met) {
-                                    //iterate over records[].data and locate entity k:v
-                                    for (i = 0; i < len; i++) {
-                                        if (records[i].data.name === met) {
-                                            //set the display name of the matching fullname
-                                            combo.el.removeClass('x-form-empty-field');
-                                            combo.setRawValue(records[i].data.displayName);
-                                            combo.fireEvent('change', combo, met);
-                                        }
-                                    }
-                                }
-                            },
-                            scope: scope
-                        }
-                    }
-                }),
-                valueField: 'name',
-                displayField: 'displayName',
-                tooltipField: 'analyticsDescription',
-                mode: 'local',
-                tipDisplayMode: 'inline',
-                listeners: {
-                    'select': {
-                        fn: function (combo, record, index) {
-                            //the VALUES will be stored not the display names
-                            scope.config.metric = record.get(combo.valueField);
-                        },
-                        scope: scope
-                    }
-                }
-            };
-        }, //end metricfield
-        captionField: function (id, scope) {
-            return {
-                id: id,
-                xtype: 'textfield',
-                fieldLabel: Sage.Analytics.WidgetResource.lblCaption,
-                anchor: '97%',
-                listeners: {
-                    'render': {
-                        fn: function () {
-                            //need a ref to the textfield
-                            var txtField = Ext.getCmp(id);
-                            //check if a title exists
-                            if (scope.config.subtitle) {
-                                txtField.setRawValue(scope.config.subtitle);
-                            }
-                        },
-                        scope: scope
-                    }
-                }
-            };
-        }, //end captionfield
-        xAxisField: function (id, scope) {
-            return {
-                id: id,
-                xtype: 'textfield',
-                fieldLabel: Sage.Analytics.WidgetResource.lblXaxis,
-                anchor: '97%',
-                listeners: {
-                    'render': {
-                        fn: function () {
-                            //need a ref to the textfield
-                            var txtField = Ext.getCmp(id);
-                            //check if a title exists
-                            if (scope.config.xAxisName) {
-                                txtField.setRawValue(scope.config.xAxisName);
-                            }
-                        },
-                        scope: scope
-                    }
-                }
-            };
-        }, //end xAxis
-        yAxisField: function (id, scope) {
-            return {
-                id: id,
-                xtype: 'textfield',
-                fieldLabel: Sage.Analytics.WidgetResource.lblYaxis,
-                anchor: '97%',
-                listeners: {
-                    'render': {
-                        fn: function () {
-                            //need a ref to the textfield
-                            var txtField = Ext.getCmp(id);
-                            //check if a title exists
-                            if (scope.config.yAxisName) {
-                                txtField.setRawValue(scope.config.yAxisName);
-                            }
-                        },
-                        scope: scope
-                    }
-                }
-            };
-        }, //end yaxis
-        goalField: function (id, scope) {
-            return {
-                id: id,
-                xtype: 'numberfield',
-                fieldLabel: Sage.Analytics.WidgetResource.lblGoal,
-                anchor: '97%',
-                listeners: {
-                    'render': {
-                        fn: function () {
-                            //need a ref to the textfield
-                            var txtField = Ext.getCmp(id);
-                            //check if a title exists
-                            if (scope.config.goal) {
-                                txtField.setRawValue(scope.config.goal);
-                            }
-                        }
-                    },
-                    scope: scope
-                }
-            };
-        }, //end goalField
-        truncField: function (id, scope) {
-            return {
-                id: id,
-                xtype: 'numberfield',
-                fieldLabel: Sage.Analytics.WidgetResource.lblMaxLength,
-                anchor: '97%',
-                listeners: {
-                    'render': {
-                        fn: function () {
-                            //need a ref to the textfield
-                            var txtField = Ext.getCmp(id);
-                            //check if a title exists
-                            if (scope.config.truncNum) {
-                                txtField.setRawValue(scope.config.truncNum);
-                            }
-                        }
-                    },
-                    scope: scope
-                }
-            };
-        }, //end goalField
-        radioNames: function (id, rdo, txt, scope) {
-            return {
-                xtype: 'radiogroup',
-                id: id,
-                fieldLabel: Sage.Analytics.WidgetResource.lblNames,
-                items: [
-                    { boxLabel: Sage.Analytics.WidgetResource.yes, name: 'rdLabels', inputValue: 'true' },
-                    { boxLabel: Sage.Analytics.WidgetResource.no, name: 'rdLabels', inputValue: 'false' }
-                ],
-                listeners: {
-                    'change': {
-                        fn: function ($this, checked, loaded) {
-                            scope.config.showLabels = checked.inputValue;
-                            var rdoTrunc = Ext.getCmp(rdo),
-                            txtTrunc = Ext.getCmp(txt);
-                            if (checked.inputValue === 'true') {
-                                rdoTrunc.enable();
-                                txtTrunc.enable();
-                            } else {
-                                rdoTrunc.disable();
-                                txtTrunc.disable();
-                            }
-                        },
-                        scope: scope
-                    },
-                    'render': {
-                        fn: function () {
-                            var rdoGroup = Ext.getCmp(id),
-                            rdoTrunc = Ext.getCmp(rdo),
-                            txtTrunc = Ext.getCmp(txt);
-                            if (scope._options.showLabels === 'true') {
-                                rdoGroup.setValue([true, false]);
-                                if (rdoTrunc.disabled) { rdoTrunc.enable(); }
-                                if (txtTrunc.disabled) { txtTrunc.enable(); }
-                            }
-                            else {
-                                rdoGroup.setValue([false, true]);
-                                if (!rdoTrunc.disabled) { rdoTrunc.disable(); }
-                                if (!txtTrunc.disabled) { txtTrunc.disable(); }
-                            }
-                        },
-                        scope: scope
-                    }
-                }
-            };
-        }, //end radioNames
-        radioTruncate: function (id, txt, scope) {
-            return {
-                xtype: 'radiogroup',
-                id: id,
-                fieldLabel: Sage.Analytics.WidgetResource.lblTruncate,
-                items: [
-                    { boxLabel: Sage.Analytics.WidgetResource.yes, name: 'rdTrunc', inputValue: 'true' },
-                    { boxLabel: Sage.Analytics.WidgetResource.no, name: 'rdTrunc', inputValue: 'false' }
-                ],
-                listeners: {
-                    'change': {
-                        fn: function ($this, checked, loaded) {
-                            var txtTrunc = Ext.getCmp(txt);
-                            scope.config.truncLabels = checked.inputValue;
-                            if (checked.inputValue === 'true') {
-                                txtTrunc.enable();
-                            } else {
-                                txtTrunc.disable();
-                            }
-                        },
-                        scope: scope
-                    },
-                    'render': {
-                        fn: function () {
-                            var rdoGroup = Ext.getCmp(id),
-                            txtTrunc = Ext.getCmp(txt);
-                            if (scope._options.truncLabels === 'true') {
-                                rdoGroup.setValue([true, false]);
-                                txtTrunc.enable();
-                            }
-                            else {
-                                rdoGroup.setValue([false, true]);
-                                txtTrunc.disable();
-                            }
-                        },
-                        scope: scope
-                    }
-                }
-            };
-        }, //end radioTrunc
-        radioSlices: function (id, scope) {
-            return {
-                xtype: 'radiogroup',
-                id: id,
-                fieldLabel: Sage.Analytics.WidgetResource.lblSlices,
-                items: [
-                    { boxLabel: Sage.Analytics.WidgetResource.five, name: 'rdSlices', inputValue: '5' },
-                    { boxLabel: Sage.Analytics.WidgetResource.ten, name: 'rdSlices', inputValue: '10' }
-                ],
-                listeners: {
-                    'change': {
-                        fn: function ($this, checked, loaded) {
-                            scope.config.limit = checked.inputValue;
-                        },
-                        scope: scope
-                    },
-                    'render': {
-                        fn: function () {
-                            var rdoGroup = Ext.getCmp(id);
-                            rdoGroup.setValue(scope._options.limit);
-                        },
-                        scope: scope
-                    }
-                } //end listeners
-            };
-        }, //end radioSlices
-        radioOther: function (id, scope) {
-            return {
-                xtype: 'radiogroup',
-                id: id,
-                fieldLabel: Sage.Analytics.WidgetResource.lblOther,
-                items: [
-                    { boxLabel: Sage.Analytics.WidgetResource.yes, name: 'rdOther', inputValue: 'true' },
-                    { boxLabel: Sage.Analytics.WidgetResource.no, name: 'rdOther', inputValue: 'false' }
-                ],
-                listeners: {
-                    'change': {
-                        fn: function ($this, checked, loaded) {
-                            scope.config.combineother = checked.inputValue;
-                        },
-                        scope: scope
-                    },
-                    'render': {
-                        fn: function () {
-                            var rdoGroup = Ext.getCmp(id);
-                            if (scope.config.combineother === 'true') {
-                                rdoGroup.setValue([true, false]);
-                            }
-                            else {
-                                rdoGroup.setValue([false, true]);
-                            }
-                        },
-                        scope: scope
-                    }
-                } //end listeners
-            };
-        },
-        radioLegend: function (id, scope) {
-            return {
-                xtype: 'radiogroup',
-                id: id,
-                fieldLabel: Sage.Analytics.WidgetResource.lblLegend,
-                items: [
-                    { boxLabel: Sage.Analytics.WidgetResource.yes, name: 'rdLegend', inputValue: 'true' },
-                    { boxLabel: Sage.Analytics.WidgetResource.no, name: 'rdLegend', inputValue: 'false' }
-                ],
-                listeners: {
-                    'change': {
-                        fn: function ($this, checked, loaded) {
-                            scope.config.showLegend = checked.inputValue;
-                        },
-                        scope: scope
-                    },
-                    'render': {
-                        fn: function () {
-                            var rdoGroup = Ext.getCmp(id);
-                            if (scope.config.showLegend === 'true') {
-                                rdoGroup.setValue([true, false]);
-                            }
-                            else {
-                                rdoGroup.setValue([false, true]);
-                            }
-                        },
-                        scope: scope
-                    }
-                } //end listeners
-            };
-        } //end radiolegend
-    }, //end markup object
-    //@param coll is either an array of strings or a single string
-    //@param num is the max length desired for the string(s)
-    //return it/them at max length with '...'
-    truncate: function (val, num) {
-        var i = 0, len = val.length, res = [];
-        //num needs to be an int
-        if (typeof num === 'string') {
-            num = parseInt(num, 10);
-        }
-        //we might just be truncating a string, not an array of them
-        if (typeof val === 'string') {
-            //don't slice and append to strings smaller than num
-            return val.length > num ? val.slice(0, num) + '...' : val;
-        }
-        //good browsers will provide higher-order functions (fast)
-        if (val.map && typeof val.map === 'function') {
-            //map calls the anon func with val[i], i, and val
-            return val.map(function (v, i, c) {
-                return v.length > num ? v.slice(0, num) + '...' : v;
-            });
-        }
-        //fallback for IE
-        else {
-            for (i; i < len; i++) {
-                res.push(val[i].slice(0, num) + '...');
-            }
-            return res;
-        }
-    }, //end truncate
-    //return a localized value if it exists
-    localize: function (val) {
-        function keyify(key) {
-            return key ? key.replace(/[^a-zA-Z0-9]/g, '_') : "";
-        }
-        return Sage.Analytics.WidgetResource[keyify(val)] ? Sage.Analytics.WidgetResource[keyify(val)] : val;
-    }, //end localize
-    //stored definitions of widgets 
-    WidgetDefinitions: {}
-};  //end Sage.Analytics
-
-Sage.TaskPaneItem = function(workspace, options) {
-    this._workspace = workspace;
-    this._options = options;
-    this._events = {};
-};
-
-Sage.TaskPaneItem.prototype.getWorkspace = function() { return this._workspace; };
-Sage.TaskPaneItem.prototype.getId = function() { return this._options.Id; };
-Sage.TaskPaneItem.prototype.getClientId = function() { return this._options.ClientId; };
-Sage.TaskPaneItem.prototype.getTitle = function() { return this._options.Title; };
-Sage.TaskPaneItem.prototype.getDescription = function() { return this._options.Description; };
-Sage.TaskPaneItem.prototype.getIsCollapsed = function() { return this._options.IsCollapsed; };
-Sage.TaskPaneItem.prototype.setIsCollapsed = function(v) { this._options.IsCollapsed = v; };
-Sage.TaskPaneItem.prototype.getElement = function() { return document.getElementById(this.getClientId()); };
-Sage.TaskPaneItem.prototype.addListener = function(event, listener, context) {
-    this._events[event] = this._events[event] || [];
-    this._events[event].push({
-        listener: listener,
-        context: context
-    });
-};
-Sage.TaskPaneItem.prototype.removeListener = function(event, listener, context) {
-    if (this._events[event])
-    {
-        if (listener) 
-        {
-            for (var i = 0; i < this._events[event].length; i++)
-                if (this._events[event][i].listener == listener)
-                    break;
-                
-            this._listeners[event].splice(i, 1); //remove first
-        }
+        if (typeof tabs == 'string')
+            this.logDebug("Update requested for: " + tabs);
         else
-            this._listeners[event] = []; //remove all
-    }    
-};
-Sage.TaskPaneItem.prototype.purgeListeners = function() {
-    this._events = {};
-};
-Sage.TaskPaneItem.prototype.fireEvent = function(event, args) {
-    if (this._events[event])
-        for (var i = 0; i < this._events[event].length; i++)
-            this._events[event][i].listener.apply(this._events[event][i].context || this._events[event][i].listener, args);  
-};
-Sage.TaskPaneItem.prototype.toggle = function() {
-    var collapsed = this.getIsCollapsed();
-    
-    if (collapsed)
-    {    
-        $(this.getElement())
-            .removeClass("task-pane-item-collapsed")
-            .find(".task-pane-item-toggler")
-            .attr("title", TaskPaneResources.Minimize)
-            .find("img")
-            .attr("src", this.getWorkspace().getOptions().MinimizeImage);               
-        collapsed = false;
-    }
-    else
-    {
-        $(this.getElement())
-            .addClass("task-pane-item-collapsed")
-            .find(".task-pane-item-toggler")
-            .attr("title", TaskPaneResources.Maximize)
-            .find("img")
-            .attr("src", this.getWorkspace().getOptions().MaximizeImage);
-        collapsed = true;
-    }
-    
-    this.fireEvent("toggled", [this, {collapsed: collapsed}]);
-    
-    //TODO: notify workspace of state change
-    this.setIsCollapsed(collapsed);
-    this.getWorkspace().persistState();
-};
+            this.logDebug("Updates requested for: " + tabs.join(", "));
 
-Sage.TaskPaneWorkspace = function(options) {
-    this._options = options;  
-    this._cache = {};
-    this._items = [];    
-    this._lookup = {
-        byId: {},
-        byClientId: {}
+        var serializedState = this.getState().serialize();
+        $("#" + this.getStateProxyPayloadId()).val(serializedState);
+
+        for (var i = 0; i < tabsToUpdate.length; i++) {
+            this.logDebug("Triggering update for " + tabsToUpdate[i]);
+
+            tab = tabsToUpdate[i];
+            //this.cleanupTabElement(tab);        
+
+            $("#" + this.getInfoFor(tab).UpdatePayloadId).val(serializedState);
+            __doPostBack(this.getInfoFor(tab).UpdateTriggerId, "");
+
+            stateSent = true;
+        }
+
+        if (tabsToUpdate.length === 0) {
+            this.onReOpenTab();
+        }
+
+        var forceProxyCall = false;
+        if (shouldSendState && !stateSent && this.getUseUIStateService()) {
+            this.logDebug("Sending state update via proxy.");
+            __doPostBack(this.getStateProxyTriggerId(), "");
+            stateSent = true;
+        }
     };
-    
-    for (var i = 0; i < options.Items.length; i++)
-    {
-        var item = new Sage.TaskPaneItem(this, options.Items[i]);  
-        this._lookup.byId[item.getId()] = item;
-        this._lookup.byClientId[item.getClientId()] = item;
-        
-        this._items.push(item);
-    }
-    
-    Sage.TaskPaneWorkspace.registerInstance({id: options.Id, clientId: options.ClientId}, this);
-};
 
-Sage.TaskPaneWorkspace.__instances = {byId: {}, byClientId: {}}; 
-Sage.TaskPaneWorkspace.registerInstance = function(options, instance) { 
-    Sage.TaskPaneWorkspace.__instances.byId[options.id] = instance;
-    Sage.TaskPaneWorkspace.__instances.byClientId[options.clientId] = instance;   
-}; 
-
-Sage.TaskPaneWorkspace.getInstance = function(id) {
-    return Sage.TaskPaneWorkspace.__instances.byId[id];  
-};
-
-Sage.TaskPaneWorkspace.getInstanceFromClientId = function(clientId) {
-    return Sage.TaskPaneWorkspace.__instances.byClientId[clientId];
-};
-
-Sage.TaskPaneWorkspace.prototype.getId = function() { return this._options.Id; };
-Sage.TaskPaneWorkspace.prototype.getClientId = function() { return this._options.ClientId; };
-Sage.TaskPaneWorkspace.prototype.getUIStateServiceKey = function() { return this._options.UIStateServiceKey; };
-Sage.TaskPaneWorkspace.prototype.getUIStateServiceProxyType = function() { return this._options.UIStateServiceProxyType; };
-Sage.TaskPaneWorkspace.prototype.getOptions = function() { return this._options; };
-Sage.TaskPaneWorkspace.prototype.getContext = function() { return this._context; };
-Sage.TaskPaneWorkspace.prototype.getCache = function() { return this._cache; };
-Sage.TaskPaneWorkspace.prototype.getItems = function() { return this._items; };
-Sage.TaskPaneWorkspace.prototype.getItem = function(id) { return this._lookup.byId[id]; };
-Sage.TaskPaneWorkspace.prototype.getItemFromClientId = function(id) { return this._lookup.byClientId[id]; };
-
-Sage.TaskPaneWorkspace.prototype.initRequestManagerEvents = function() {
-    var prm = Sys.WebForms.PageRequestManager.getInstance();
-    prm.add_pageLoading(function(sender, args) {
-        var panels = args.get_panelsUpdating();
-        if (panels)
-        {            
-            for (var i = 0; i < panels.length; i++)
-            {
-                var $parent = $(panels[i]).parent(".task-pane");
-                if ($parent.length > 0)
-                {
-                    var id = $parent.attr("id");
-                    var instance = Sage.TaskPaneWorkspace.getInstanceFromClientId(id);
-                    if (instance)
-                    {
-                        instance.purgeListeners();                        
-                    }       
-                }
-            }            
-        }
-    });
-    prm.add_pageLoaded(function(sender, args) {        
-        var panels = args.get_panelsUpdated();
-        if (panels)
-        {            
-            for (var i = 0; i < panels.length; i++)
-            {
-                var $parent = $(panels[i]).parent(".task-pane");
-                if ($parent.length > 0)
-                {
-                    var id = $parent.attr("id");
-                    var instance = Sage.TaskPaneWorkspace.getInstanceFromClientId(id);
-                    if (instance)
-                    {
-                        instance.initContext();
-                        instance.initCaches();
-                        instance.initInteractions();
-                        instance.updateVisualStyles();
-                    }       
-                }
-            }            
-        }
-    });   
-};
-
-Sage.TaskPaneWorkspace.prototype.init = function() {
-    var self = this;
-    
-    this.initRequestManagerEvents();
-    this.initContext();
-    this.initCaches();
-    this.initInteractions();
-        
-    this.updateVisualStyles();  
-};
-
-Sage.TaskPaneWorkspace.prototype.purgeListeners = function() {
-    for (var i = 0; i < this._items.length; i++)
-        this._items[i].purgeListeners();
-};
-
-Sage.TaskPaneWorkspace.prototype.initContext = function() {
-    if (document.getElementById)
-        this._context = document.getElementById(this.getClientId());
-};
-
-Sage.TaskPaneWorkspace.prototype.initCaches = function() {
-    this._cache.items = $(".task-pane-item:not(.ui-sortable-helper)", this._context);
-    this._cache.headers = $(".task-pane-item-header:not(.ui-sortable-helper)", this._context);
-};
-
-Sage.TaskPaneWorkspace.prototype.initInteractions = function() {
-    var self = this;
-    
-    jQuery.each(this.getItems(), function() {
-        $(this.getElement()).find(".task-pane-item-toggler").bind("click", this, function(e) {
-            e.data.toggle();
-        });    
-    });   
-    
-    
-    var container = this.getOptions().SortDragContainer || $(this._context).parent().attr("id");    
-    if (container)
-        container = "#" + container;          
-    else
-        container = "parent";  
-            
-    if (this.getItems().length > 0)
-    {
-        $(".task-pane-item-container", this._context).sortable({
-            axis: "y",
-            items: ".task-pane-item",
-            handle: ".task-pane-item-handle",
-            revert: false,
-            containment: container,
-            helper: function(e, el) {
-                var handle = $(el).find(".task-pane-item-handle");
-                var clone = handle.clone()
-                    .addClass("task-pane-drag-helper")
-                    .css("width", handle.width() + "px");
-                
-                return clone.get(0);
-            },
-            delay: 50,
-            scroll: true,
-            update: function(e, ui) {
-                self.initCaches(); //re-sync caches
-                self.updateVisualStyles();
-                self.persistState();
-            }
-        });
-    }
-};
-
-Sage.TaskPaneWorkspace.prototype.updateVisualStyles = function() {
-    //set first & last styling
-    this._cache.items.removeClass("task-pane-item-first task-pane-item-last");
-    this._cache.items.filter(":first").addClass("task-pane-item-first");
-    this._cache.items.filter(":last").addClass("task-pane-item-last");
-};
-
-Sage.TaskPaneWorkspace.prototype.buildState = function() {
-    var self = this;
-    var state = {
-        Order: [],
-        Collapsed: []
+});
+//Manage the instances of dojo object connections
+//This service is for non-dojo nodes.  Use this in order to leverage dojo.connect to replace YAHOO.util.Event
+Sage.ObjectConnectionService = function () {
+    //TODO: Test multiple listeners.  Likely need to convert to an array and update usages.
+    this.objectConnections = {};
+    this.add = function (conn, id) {
+        this.objectConnections[id] = conn;
     };
-    this._cache.items.each(function() {
-        var item = self.getItemFromClientId(this.id); 
-        
-        state.Order.push(item.getId());
-        if ($(this).hasClass("task-pane-item-collapsed"))  
-            state.Collapsed.push(item.getId());       
-    });
-    
-    return state;
+    this.remove = function (id) {
+        delete this.objectConnections[id];
+    };
+    this.disconnect = function (id) {
+        dojo.disconnect(this.objectConnections[id]);
+    };
+    this.disconnectAll = function () {
+        for (var i in this.objectConnections) {
+            dojo.disconnect(this.objectConnections[i]);
+        }
+    };
+    this.removeAll = function() {
+        for (var i in this.objectConnections) {
+            delete this.objectConnections[i];
+        }
+    };
 };
 
-Sage.TaskPaneWorkspace.prototype.persistState = function() {
-    $.ajax({
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-        url: "UIStateService.asmx/StoreTaskPaneWorkspaceState",
-        data: Ext.util.JSON.encode({
-            key: this.getUIStateServiceKey(),
-            state: this.buildState()
-        }),
-        dataType: "json",
-        error: function (request, status, error) {            
-        },
-        success: function(data, status) {            
-        }
-    });
-};
-
-
-Sage.SalesLogix.DashboardPage = Ext.extend(function (options, pageNum, dashboard) {
-    var self = this;
-    this.cellCount = 0;
-    this.pageNumber = pageNum;
-    this.dashboard = dashboard;
-    this.dirty = false;
-    function addCol(c) {
-        function addCell(widget, col) {
-            var cell = self.createCellObject(widget['@family'], widget['@name'], self.pageNumber, col);
-            cell.widgetObject._options = widget['options'];
-            return cell;
-        }
-        var col = self.createColumnObject(c['@width']);
-        if (c.Widgets != null) {
-            if (Ext.isArray(c.Widgets.Widget)) {
-                for (var i = 0; i < c.Widgets.Widget.length; i++)
-                    col.items.push(addCell(c.Widgets.Widget[i], col));
-            } else {
-                col.items.push(addCell(c.Widgets.Widget, col));
-            }
-        }
-        return col;
-    }
-
-    if (typeof options.Columns === 'undefined') {
-        options = Sys.Serialization.JavaScriptSerializer.deserialize(options).Dashboard;
-    }
-    this._options = options;
-    this._columns = [];
-    if (Ext.isArray(options.Columns.Column)) {
-        for (var idx = 0; idx < options.Columns.Column.length; idx++) {
-            var c = options.Columns.Column[idx];
-            this._columns.push(addCol(c));
-        }
-    } else {
-        this._columns.push(addCol(options.Columns.Column));
-    }
-    this.items = this._columns;
-    this.title = options['@title'];
-    this.name = options['@name'];
-    this.family = options['@family'];
-},
-    {
-        xtype: 'portal',
-        region: 'center',
-        margins: '35 5 5 0',
-        border: false,
-        visible: true,
-        listeners: {
-            drop: function () {
-                AutoLogout.resetTimer();
-                this.dirty = true;
-                this.save();
-            }
-        },
-
-        createColumnObject: function (width) {
-            return { columnWidth: parseFloat(width) > 1 ? parseFloat(width) / 100 : parseFloat(width),
-                style: 'padding:10px 0px 10px 10px',
-                items: []
-            }
-        },
-
-        createCellObject: function (family, name, portalNum, column) {
-            var currentDashboardPage = this;
-            var id = String.format("cell_{0}_page_{1}_display", ++this.cellCount, portalNum);
-            var cell = {
-                id: id,
-                stateful: false,
-                cls: 'sage-widget-panel',
-                title: name + (this.cellCount),
-                tools: [
-                    { id: 'refresh',
-                        handler: function (e, target, panel) {
-                            panel.widgetObject.refresh();
-                        },
-                        qtip: DashboardResource.Refresh
-                    },
-                    { id: 'gear',
-                        qtip: 'Edit',
-                        handler: function (e, target, panel) {
-                            //pass the widget a unique id for the editor window
-                            panel.widgetObject.editor(Sage.Analytics.generateString('dwEditor'));
-                        }
-                    },
-                    { id: 'close',
-                        qtip: DashboardResource.Close,
-                        handler: function (e, target, panel) {
-                            panel.ownerCt.remove(panel, false);
-                            panel.hide();
-                            currentDashboardPage.dirty = true;
-                            currentDashboardPage.save();
-                        }
-                    }
-                ],
-                collapsible: false,
-                style: 'padding:0px 0px 10px 0px',
-                location: { dashboard: portalNum, cellitem: id },
-                autoDestroy: false,
-                bbar: []
-            };
-            var widgetObject = new Sage.Analytics.DashboardWidget({ name: name, family: family, cell: cell,
-                listeners: {
-                    afterdisplay: function () {
-                        mainViewport.findById("center_panel_center").doLayout();
-                    },
-                    persist: function () {
-                        if (this.config.edited) { currentDashboardPage.dirty = true; }
-                        currentDashboardPage.save();
-                    }
-                } //end listeners
-            });
-            cell.widgetObject = widgetObject;
-            return cell;
-        },
-
-        init: function () { },
-
-        loadWidgets: function () {
-            var panel = mainViewport.findById("portal_panel_" + this.dashboardPagesIndex);
-            var curcols = panel.items.items;
-            for (var i = 0; i < curcols.length; i++) {
-                if (curcols[i].items) {
-                    for (var j = 0; j < curcols[i].items.items.length; j++) {
-                        if (!curcols[i].items.items[j].widgetObject.config.loaded) {
-                            curcols[i].items.items[j].widgetObject.init();
-                        }
-                    }
-                }
-            }
-        },
-
-        toSerializeableObject: function () {
-            var pageObject = DashboardPages[this.dashboardPagesIndex];
-            if (typeof pageObject.Dashboard === 'undefined') {
-                pageObject = Sys.Serialization.JavaScriptSerializer.deserialize(pageObject);
-            }
-            pageObject.Dashboard['@title'] = this.title;
-            var curcols = mainViewport.findById("portal_panel_" + this.dashboardPagesIndex).items.items;
-            for (var i = 0; i < curcols.length; i++) {
-                if (i === pageObject.Dashboard.Columns.Column.length)
-                    pageObject.Dashboard.Columns.Column.push({});
-                pageObject.Dashboard.Columns.Column[i]['@width'] = curcols[i].columnWidth;
-                pageObject.Dashboard.Columns.Column[i].Widgets = {};
-                pageObject.Dashboard.Columns.Column[i].Widgets.Widget = [];
-                if (curcols[i].items) {
-                    for (var j = 0; j < curcols[i].items.items.length; j++) {
-                        var widget = curcols[i].items.items[j].widgetObject;
-                        var newobj = {};
-                        newobj["@name"] = widget.config.name;
-                        newobj["@family"] = widget.config.family;
-                        newobj["options"] = widget._options;
-                        delete newobj["options"].cell;
-                        pageObject.Dashboard.Columns.Column[i].Widgets.Widget.push(newobj);
-                    }
-                }
-            }
-            while (curcols.length < pageObject.Dashboard.Columns.Column.length) {
-                pageObject.Dashboard.Columns.Column.remove(pageObject.Dashboard.Columns.Column.length - 1);
-            }
-            return pageObject;
-        },
-
-        save: function (callback) {
-            var self = this;
-            if (!self.dirty) {
-                if (typeof callback === "function") callback();
-                return;
-            }
-            self.dirty = false;
-            var thisPageSerialized = Sys.Serialization.JavaScriptSerializer.serialize(this.toSerializeableObject());
-            for (var i = 0; i < DashboardPages.length; i++) {
-                if (Sys.Serialization.JavaScriptSerializer.deserialize(DashboardPages[i]).Dashboard["@name"] == self.name) {
-                    DashboardPages[i] = thisPageSerialized;
-                    break;
-                }
-            }
-            $.ajax({
-                type: "POST",
-                    url: String.format("slxdata.ashx/slx/crm/-/dashboard/page?name={0}&family={1}", this.name, this.family),
-                    data: thisPageSerialized,
-                    processData: false,
-                error: function (request, status, error) {
-                    Ext.Msg.alert(DashboardResource.Warning, request.responseText);
-                },
-                success: function (data, status) {
-                        if (data != "Success") {
-                            Ext.Msg.confirm(DashboardResource.Warning, data + "<br>" + DashboardResource.PersonalCopy,
-                            function (btn) {
-                                if (btn == 'yes') {
-                                    self.createCopy();
-                                }
-                            }
-                        );
-                        return;
-                    }
-                    if (typeof callback === "function") callback(data, status);
-                }
-            });
-        },
-
-        share: function (callback) {
-            var self = this;
-            this.save(function () {
-                var win = new Ext.Window({ title: DashboardResource.Share,
-                    width: parseInt(DashboardResource.Popup_Width),
-                    height: parseInt(DashboardResource.Popup_Height),
-                    layout: 'fit',
-                    autoScroll: true,
-                    tools: [{ id: 'help',
-                        handler: function (evt, toolEl, panel) {
-                            window.open('help/WebClient_CSH.htm#Working_with_the_Dashboard', "MCWebHelp");
-                        }
-                    }],
-                    buttons: [
-                                {
-                                    text: DashboardResource.Ok,
-                                    handler: function (t, e) {
-                                        var ownerarray = [];  //self.shareOwners.split(',');
-                                        var items = Ext.getCmp('ReleasedGrid').store.data.items;
-                                        for (var i = 0; i < items.length; i++) {
-                                            ownerarray.push(items[i].data.Id);
-                                        }
-                                        if (ownerarray.length == 0) ownerarray.push("unrelease");
-                                        $.ajax({
-                                            type: "POST",
-                                            url: String.format("slxdata.ashx/slx/crm/-/dashboard/release?name={0}&family={1}",
-                                                self.name,
-                                                self.family),
-                                            data: Sys.Serialization.JavaScriptSerializer.serialize(ownerarray),
-                                            processData: false,
-                                            error: function (request, status, error) {
-                                                Ext.Msg.alert(DashboardResource.Warning, request.responseText);
-                                            },
-                                            success: function (data, status) {
-                                                if (data != "Success") {
-                                                    Ext.Msg.alert(DashboardResource.Warning, data);
-                                                    return;
-                                                }
-                                                if (typeof callback === "function") callback(data, status);
-                                            }
-                                        });
-                                        win.close();
-                                    }
-                                }, {
-                                    text: DashboardResource.Cancel,
-                                    handler: function (t, e) {
-                                        win.close();
-                                    }
-                                }
-                            ]
-                });
-
-                $.ajax({
-                    type: "GET",
-                    url: "slxdata.ashx/slx/crm/-/dashboard/release",
-                    cache: false,
-                    data: { name: self.name,
-                        family: self.family
-                    },
-                    error: function (request, status, error) {
-                        Ext.Msg.alert(DashboardResource.Warning, request.responseText);
-                    },
-                    success: function (data, status) {
-                        var storedata = {};
-                        //var res = Ext.DomQuery.select("string", data)[0].textContent || Ext.DomQuery.select("string", data)[0].text;
-                        storedata.items = Sys.Serialization.JavaScriptSerializer.deserialize(data);
-                        var grid = new Ext.grid.GridPanel({
-                            buttonAlign: 'center',
-                            store: new Ext.data.JsonStore({
-                                autoDestroy: true,
-                                fields: ['Id', 'Text'],
-                                root: 'items',
-                                data: storedata
-                            }),
-                            colModel: new Ext.grid.ColumnModel({
-                                defaults: {
-                                    //width: 120,
-                                    sortable: false
-                                },
-                                columns: [
-                                    { header: Sage.Analytics.WidgetResource.releasedTo, dataIndex: 'Text' }
-                                ]
-                            }),
-                            sm: new Ext.grid.RowSelectionModel({ singleSelect: false }),
-                            //width: 140,
-                            //height: 250,
-                            frame: true,
-                            id: 'ReleasedGrid',
-                            buttons: [{
-                                text: Sage.Analytics.WidgetResource.everyone,
-                                handler: function () {
-                                    var grid = Ext.getCmp('ReleasedGrid');
-                                    var found = false;
-                                    for (var i = 0; i < grid.store.data.items.length; i++) {
-                                        if (grid.store.data.items[i].data.Id === "SYST00000001") found = true;
-                                    }
-                                    if (!found) {
-                                        var rec = new grid.store.recordType({ "Id": "SYST00000001", "Text": "Everyone" });
-                                        grid.store.add(rec);
-                                    }
-                                }
-                            },
-                                {
-                                    text: Sage.Analytics.WidgetResource.add,
-                                    handler: function () {
-                                        var vURL = 'OwnerAssign.aspx';
-                                        window.open(vURL, "OwnerAssign", "resizable=yes,centerscreen=yes,width=500,height=450,status=no,toolbar=no,scrollbars=yes");
-                                    }
-                                },
-                                {
-                                    text: Sage.Analytics.WidgetResource.remove,
-                                    handler: function () {
-                                        var grid = Ext.getCmp('ReleasedGrid');
-                                        var selected = grid.getSelectionModel().getSelections();
-                                        for (var i = 0; i < selected.length; i++) {
-                                            grid.store.remove(selected[i]);
-                                        }
-                                    }
-                                }
-                            ]
-                        });
-                        win.add(grid);
-                        win.show();
-                    }
-                });
-            });
-        },
-
-        createCopy: function () {
-            var self = this;
-            Ext.Msg.prompt(DashboardResource.Copy_Tab, String.format('{0}:', DashboardResource.Name), function (btn, text) {
-                if ((btn == 'ok') && (text.length > 0)) {
-                    text = Ext.util.Format.htmlEncode(text);
-                    var pageObject = self.toSerializeableObject();
-                    pageObject.Dashboard['@name'] = text;
-                    pageObject.Dashboard['@title'] = text;
-                    DashboardPages.push(Sys.Serialization.JavaScriptSerializer.serialize(pageObject));
-                    mainViewport.findById("center_panel_center").removeAll();
-                    slxDashboard = new Sage.SalesLogix.Dashboard(self.dashboard._options);
-                    slxDashboard.init();
-                    mainViewport.findById("portal_panel_" + (DashboardPages.length - 1)).dirty = true;
-                    mainViewport.findById("portal_panel_" + (DashboardPages.length - 1)).save();
-                    mainViewport.findById("dashboard_panel").activate("portal_panel_" + (DashboardPages.length - 1));
-                }
-            });
-        },
-
-        createTabContextMenu: function (portalNum) {
-            var currentDashboardPage = this;
-            var tcmenu = new Ext.menu.Menu({ items: [
-                new Ext.menu.Item({
-                    text: DashboardResource.New_Tab,
-                    icon: false,
-                    handler: function () {
-                        Ext.Msg.prompt(DashboardResource.New_Tab, String.format('{0}:', DashboardResource.Name), function (btn, text) {
-                            if ((btn == 'ok') && (text.length > 0)) {
-                                text = Ext.util.Format.htmlEncode(text);
-                                var DefaultPageString = String.format(currentDashboardPage.dashboard.defaultPageString, text);
-                                DashboardPages.push(DefaultPageString);
-                                mainViewport.findById("center_panel_center").removeAll();
-                                slxDashboard = new Sage.SalesLogix.Dashboard(currentDashboardPage.dashboard._options);
-                                slxDashboard.init();
-                                mainViewport.findById("portal_panel_" + (DashboardPages.length - 1)).dirty = true;
-                                mainViewport.findById("portal_panel_" + (DashboardPages.length - 1)).save();
-                                mainViewport.findById("dashboard_panel").activate("portal_panel_" + (DashboardPages.length - 1));
-                            }
-                        });
-                    }
-                }),
-                new Ext.menu.Item({
-                    text: DashboardResource.Copy_Tab,
-                    handler: function () {
-                        currentDashboardPage.createCopy();
-                    }
-                }),
-                new Ext.menu.Item({ text: DashboardResource.Add_Content, handler: function () {
-                    var win = new Ext.Window({ title: DashboardResource.Add_New_Content,
-                        width: parseInt(DashboardResource.Popup_Width),
-                        height: parseInt(DashboardResource.Popup_Height),
-                        layout: 'fit',
-                        margins: { top: 10 },
-                        buttons: [
-                            {
-                                text: DashboardResource.Cancel, handler: function (t, e) {
-                                    currentDashboardPage.save();
-                                    win.close();
-                                }
-                            }
-                        ],
-                        tools: [{ id: 'help',
-                            handler: function (evt, toolEl, panel) {
-                                window.open('help/WebClient_CSH.htm#Introducing_Widgets', "MCWebHelp");
-                            }
-                        }]
-                    });
-                    if (DashboardWidgetsList.length == 0) {
-                        win.add(new Ext.Panel({ html: String.format("<p>{0}</p>", DashboardResource.NoUnusedContent) }));
-                    } else {
-                        var scrollpanel = new Ext.Panel({  //without a separate panel ie7 won't scroll
-                            autoScroll: true,
-                            layout: 'anchor',
-                            layoutConfig: { defaultAnchor: '-25' },
-                            border: false
-                        });
-                        win.add(scrollpanel);
-                    }
-                    for (var widgetid in DashboardWidgetsList) {
-                        if (widgetid === 'Default') continue;
-                        // Default Widget is a stub example for creating new widgets.  
-                        // Click New and copy this content into a new editor to customize.  
-                        // Default Widgets do not appear as an item in the client dashboard Add Content menu.
-
-                        scrollpanel.add(new Ext.Panel({
-                            cls: 'addContentPanels', //for styling
-                            margins: { top: 10 },
-                            border: false,
-                            layout: 'anchor',
-                            layoutConfig: { defaultAnchor: '100% 100%' },
-                            items: [
-                                { xtype: 'label',
-                                    text: Sage.Analytics.localize(widgetid),
-                                    style: "margin-left:18px;margin-top:16px;display:block;font-weight:bold"
-                                },
-                                { xtype: 'label',
-                                    text: Sage.Analytics.localize(DashboardWidgetsList[widgetid])
-                                    , style: "margin-left: 18px; display: block"
-                                },
-                                { xtype: 'button',
-                                    text: DashboardResource.Add,
-                                    name: widgetid,
-                                    style: "margin-left: 18px;",
-                                    listeners: { click: function (t, checked) {
-                                        cell = currentDashboardPage.createCellObject(t.family, t.name, portalNum, 0);
-                                        mainViewport.findById("portal_panel_" + portalNum).items.items[0].add(cell);
-                                        mainViewport.findById("center_panel_center").doLayout();
-                                        cell.widgetObject.init(true);
-                                        currentDashboardPage.dirty = true;
-                                        currentDashboardPage.save();
-                                        win.close(); //close the add content menu after button push
-                                    }
-                                    }
-                                }
-                                ]
-                        }));
-                    }
-                    if (typeof idPopupWindow != "undefined") {
-                        win.on("show", function () { idPopupWindow(); });
-                    }
-                    win.show();
-                }
-                }),
-                new Ext.menu.Item({ text: DashboardResource.Hide,
-                    handler: function () {
-                        mainViewport.findById("dashboard_panel").hideTabStripItem(portalNum);
-                        currentDashboardPage.dashboard._options.hiddenPages.push(currentDashboardPage.name);
-                        if (currentDashboardPage.name === currentDashboardPage.dashboard._options.defpage) {
-                            currentDashboardPage.dashboard._options.defpage = '';
-                        }
-                        currentDashboardPage.dashboard._options.dirty = true;
-                        currentDashboardPage.dashboard.ActivateVisible();
-                    }
-                }),
-                new Ext.menu.Item({ text: DashboardResource.Show, handler: function () {
-                    var win = new Ext.Window({ title: DashboardResource.Show,
-                        width: parseInt(DashboardResource.Popup_Width),
-                        height: parseInt(DashboardResource.Popup_Height),
-                        buttons: [
-                            { text: DashboardResource.Ok, handler: function (t, e) { win.close(); } }
-                        ]
-                    });
-                    for (var i = 0; i < currentDashboardPage.dashboard._options.hiddenPages.length; i++) {
-                        var newPanel = new Ext.Panel({ border: false, style: 'padding:10px' }); //was hbox
-                        newPanel.add(new Ext.Button({
-                            text: DashboardResource.Show,
-                            name: currentDashboardPage.dashboard._options.hiddenPages[i],
-                            panel: newPanel,
-                            style: 'display:inline'
-                        })).on("click", function (b) {
-                            currentDashboardPage.dashboard._options.hiddenPages.remove(b.name);
-                            currentDashboardPage.dashboard._options.dirty = true;
-                            var panel = mainViewport.findById("dashboard_panel");
-                            var tabid = "";
-                            for (var i = 0; i < panel.items.items.length; i++) {
-                                if (panel.items.items[i].name === b.name)
-                                    tabid = panel.items.items[i].id;
-                            }
-                            mainViewport.findById("dashboard_panel").unhideTabStripItem(tabid);
-                            win.remove(b.panel);
-                        });
-                        newPanel.add(new Ext.form.Label({ text: currentDashboardPage.dashboard._options.hiddenPages[i],
-                            margins: "5",
-                            style: 'display:inline;margin-left:10px'
-                        }));
-                        win.add(newPanel);
-                    }
-                    win.show();
-                }
-                }),
-                new Ext.menu.Item({
-                    text: DashboardResource.Delete_Tab,
-                    handler: function () {
-                        var confirm = Ext.Msg.confirm(DashboardResource.Delete_Tab, DashboardResource.ConfirmDelete, function (result) {
-                            if (result == "yes") {
-                                $.ajax({
-                                    type: "DELETE",
-                                    url: String.format("slxdata.ashx/slx/crm/-/dashboard/page?name={0}&family={1}",
-                                        currentDashboardPage.name,
-                                        currentDashboardPage.family),
-                                    error: function (request, status, error) {
-                                        Ext.Msg.alert(DashboardResource.Warning, request.responseText);
-                                    },
-                                    success: function (data, status) {
-                                        if (data != "Success") {
-                                            Ext.Msg.alert(DashboardResource.Warning, data);
-                                            return;
-                                        }
-                                        currentDashboardPage.dashboard.deletePortal(portalNum);
-                                    }
-                                });
-                            }
-                        });
-                    }
-                }),
-                 new Ext.menu.Item({ text: DashboardResource.Edit_Options, handler: function () {
-                     var opWin = new Ext.Window({ title: DashboardResource.Edit_Options,
-                         width: parseInt(DashboardResource.Popup_Width),
-                         height: parseInt(DashboardResource.Popup_Height),
-                         buttons:
-                            [{ text: DashboardResource.Ok, handler: function (t, e) {
-                                if ($("#PortalName")[0].value.length > 0) {
-                                    var newName = Ext.util.Format.htmlEncode($("#PortalName")[0].value);
-                                    if (currentDashboardPage.name != newName) {
-                                        currentDashboardPage.name = newName;
-                                    }
-                                    var newTitle = Ext.util.Format.htmlEncode($("#PortalName")[0].value);
-                                    if (currentDashboardPage.title != newTitle) {
-                                        currentDashboardPage.title = newTitle;
-                                        mainViewport.findById("portal_panel_" + portalNum).setTitle(newTitle);
-                                    }
-                                }
-                                var dp = mainViewport.findById("dashboard_panel");
-                                dp.setWidth(dp.getSize().width - 1); //firing resize without changing anything doesn't recalc
-                                dp.setWidth(dp.getSize().width + 1);
-                                opWin.close();
-                                currentDashboardPage.save();
-                                currentDashboardPage.dashboard.updateUserOptions();
-                            }
-                            }
-                        ]
-                     });
-                     opWin.add(new Ext.Panel({
-                         style: 'margin: 15px 5px;',
-                         //layout: 'hbox',
-                         items: [{ xtype: 'label',
-                             text: DashboardResource.Title + ':  ',
-                             border: false,
-                             style: 'line-height: 22px'
-                         },
-                         { xtype: 'textfield',
-                             id: "PortalName",
-                             value: currentDashboardPage.title,
-                             border: false,
-                             listeners: { 'blur': function (t) {
-                                 if (t.el.dom.value != currentDashboardPage.title)
-                                     currentDashboardPage.dirty = true;
-                             }
-                             }
-                         }
-                         ],
-                         border: false
-                     }));
-                     opWin.add(new Ext.Panel({
-                         html: String.format("<div style='margin: 5px 5px'>{0}:</div>", DashboardResource.ChooseTemplate)
-                        , border: false
-                     }));
-
-                     var layouts = [
-                       { name: DashboardResource.TwoColSplit, layout: [.49, .49], imgUrl: 'images/icons/2col.gif' },
-                     //{ name: DashboardResource.ThreeCol, layout: [.33, .33, .34], imgUrl: 'images/icons/3col.gif' },
-                       {name: DashboardResource.TwoColLeft, layout: [.65, .33], imgUrl: 'images/icons/2col_bigL.gif' },
-                       { name: DashboardResource.TwoColRight, layout: [.33, .65], imgUrl: 'images/icons/2col_bigR.gif' }
-                     //{ name: DashboardResource.OneCol, layout: [.99], imgUrl: 'images/icons/1col.gif' }
-                     ];
-                     for (var i = 0; i < layouts.length; i++) {
-                         var isCurLayout = layouts[i].layout.length === currentDashboardPage.items.length;
-                         if (isCurLayout) {
-                             for (var j = 0; j < layouts[i].layout.length; j++) {
-                                 if (layouts[i].layout[j] != currentDashboardPage.items[j].columnWidth) {
-                                     isCurLayout = false;
-                                 }
-                             }
-                         }
-                         opWin.add(new Ext.form.Radio({ boxLabel: String.format("<img src='{1}'> {0}", layouts[i].name, layouts[i].imgUrl),
-                             name: "Layout",
-                             id: String.format("layout_{0}_id", i),
-                             layout: layouts[i].layout,
-                             style: { marginLeft: '15px' },
-                             boxMinHeight: '34px',
-                             checked: isCurLayout
-                         })).on("check", function (t, checked) {
-                             if (checked) {
-                                 if (t.layout[0] != currentDashboardPage.items[0].columnWidth) currentDashboardPage.dirty = true;
-                                 var curcols = mainViewport.findById("portal_panel_" + currentDashboardPage.pageNumber).items.items;
-                                 for (var j = 0; j < t.layout.length; j++) {
-                                     if (curcols.length > j) {
-                                         curcols[j].columnWidth = t.layout[j];
-                                     } else {
-                                         mainViewport.findById("portal_panel_" + currentDashboardPage.pageNumber).add(currentDashboardPage.createColumnObject(t.layout[j]));
-                                     }
-                                 }
-                                 while (curcols.length > t.layout.length) {
-                                     mainViewport.findById("portal_panel_" + currentDashboardPage.pageNumber).remove(currentDashboardPage.items.length - 1);
-                                 }
-                                 currentDashboardPage.items = curcols;
-                                 mainViewport.findById("center_panel_center").doLayout(true);
-                             }
-                         });
-                     }
-                     var makeDefPanel = new Ext.Panel({ //needed for ie7 to align correctly
-                         style: { marginTop: '20px', marginLeft: '5px' },
-                         border: false
-                     });
-                     makeDefPanel.add(new Ext.form.Checkbox({ boxLabel: DashboardResource.Make_Default,
-                         boxLabelStyle: { marginTop: '20px' },
-                         checked: (currentDashboardPage.dashboard._options.defpage == currentDashboardPage.name)
-                     })).on("check", function (t, checked) {
-                         if (checked != currentDashboardPage.dashboard._options.defpage == currentDashboardPage.name) currentDashboardPage.dashboard._options.dirty = true;
-                         if (checked) {
-                             currentDashboardPage.dashboard._options.defpage = currentDashboardPage.name;
-                         } else {
-                             currentDashboardPage.dashboard._options.defpage = '';
-                         }
-                     });
-                     opWin.add(makeDefPanel);
-
-                     if (typeof idPopupWindow != "undefined") {
-                         opWin.on("show", function () { idPopupWindow(); });
-                     }
-                     opWin.show();
-                 }
-                 }),
-                new Ext.menu.Item({ text: DashboardResource.Share, handler: function () {
-                    currentDashboardPage.share();
-                }
-                }),
-                new Ext.menu.Separator(),
-                new Ext.menu.Item({ text: DashboardResource.Help, handler: function () {
-                    window.open('help/WebClient_CSH.htm#Working_with_the_Dashboard', "MCWebHelp");
-                }
-                })
-
-                ]
-            });
-
-            if (typeof idMenuItems != "undefined") {
-                tcmenu.on("show", function () { idMenuItems(); });
-            }
-            return tcmenu;
-        }
-    }
-);
-
-
-function ShareGroup_CallBack(ownerResultXML) {
-    if (ownerResultXML) {
-        var xmlDoc = getXMLDoc(ownerResultXML);
-        var list = xmlDoc.documentElement.childNodes;
-        var grid = Ext.getCmp('ReleasedGrid');
-        for (var i = 0; i < list.length; i++) {
-            var found = false;
-            var val = getNodeText(list[i].getElementsByTagName("value")[0]);
-            var name = getNodeText(list[i].getElementsByTagName("name")[0]);
-            for (var i = 0; i < grid.store.data.items.length; i++) {
-                if (grid.store.data.items[i].data.Id === val) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                var rec = new grid.store.recordType({ "Id": val, "Text": name });
-                grid.store.add(rec);
-            }
-        }
-    }
-}
-
-
-
- 
-Ext.Container.prototype.bufferResize = false;
-Ext.ux.Portal = Ext.extend(Ext.Panel, {
-    layout: 'column',
-    autoScroll: true,
-    cls: 'x-portal',
-    defaultType: 'portalcolumn',
-
-    initComponent: function() {
-        Ext.ux.Portal.superclass.initComponent.call(this);
-        this.addEvents({
-            validatedrop: true,
-            beforedragover: true,
-            dragover: true,
-            beforedrop: true,
-            drop: true
-        });
-    },
-
-    initEvents: function() {
-        Ext.ux.Portal.superclass.initEvents.call(this);
-        this.dd = new Ext.ux.Portal.DropZone(this, this.dropConfig);
-    }
-});
-
-Ext.reg('portal', Ext.ux.Portal);
-
-
-Ext.ux.Portal.DropZone = function(portal, cfg) {
-    this.portal = portal;
-    Ext.dd.ScrollManager.register(portal.body);
-    Ext.ux.Portal.DropZone.superclass.constructor.call(this, portal.bwrap.dom, cfg);
-    portal.body.ddScrollConfig = this.ddScrollConfig;
-};
-
-Ext.extend(Ext.ux.Portal.DropZone, Ext.dd.DropZone, {   //Ext.dd.DropTarget
-    ddScrollConfig: {
-        vthresh: 50,
-        hthresh: -1,
-        animate: true,
-        increment: 200
-    },
-
-    createEvent: function(dd, e, data, col, c, pos) {
-        return {
-            portal: this.portal,
-            panel: data.panel,
-            columnIndex: col,
-            column: c,
-            position: pos,
-            data: data,
-            source: dd,
-            rawEvent: e,
-            status: this.dropAllowed
-        };
-    },
-
-    notifyOver: function(dd, e, data) {
-        var xy = e.getXY(), portal = this.portal, px = dd.proxy;
-
-        // case column widths
-        if (!this.grid) {
-            this.grid = this.getGrid();
-        }
-
-        // handle case scroll where scrollbars appear during drag
-        var cw = portal.body.dom.clientWidth;
-        if (!this.lastCW) {
-            this.lastCW = cw;
-        } else if (this.lastCW != cw) {
-            this.lastCW = cw;
-            portal.doLayout();
-            this.grid = this.getGrid();
-        }
-
-        // determine column
-        var col = 0, xs = this.grid.columnX, cmatch = false;
-        for (var len = xs.length; col < len; col++) {
-            if (xy[0] < (xs[col].x + xs[col].w)) {
-                cmatch = true;
-                break;
-            }
-        }
-        // no match, fix last index
-        if (!cmatch) {
-            col--;
-        }
-
-        // find insert position
-        var p, match = false, pos = 0,
-            c = portal.items.itemAt(col),
-            items = c.items.items;
-
-        for (var len = items.length; pos < len; pos++) {
-            p = items[pos];
-            var h = p.el.getHeight();
-            if (h !== 0 && (p.el.getY() + (h / 2)) > xy[1]) {
-                match = true;
-                break;
-            }
-        }
-
-        var overEvent = this.createEvent(dd, e, data, col, c,
-                match && p ? pos : c.items.getCount());
-
-        if (portal.fireEvent('validatedrop', overEvent) !== false &&
-           portal.fireEvent('beforedragover', overEvent) !== false) {
-
-            // make sure proxy width is fluid
-            px.getProxy().setWidth('auto');
-
-            if (p) {
-                px.moveProxy(p.el.dom.parentNode, match ? p.el.dom : null);
-            } else {
-                px.moveProxy(c.el.dom, null);
-            }
-
-            this.lastPos = { c: c, col: col, p: match && p ? pos : false };
-            this.scrollPos = portal.body.getScroll();
-
-            portal.fireEvent('dragover', overEvent);
-
-            return overEvent.status; ;
-        } else {
-            return overEvent.status;
-        }
-
-    },
-
-    notifyOut: function() {
-        delete this.grid;
-    },
-
-    notifyDrop: function(dd, e, data) {
-        delete this.grid;
-        if (!this.lastPos) {
-            return;
-        }
-        var c = this.lastPos.c, col = this.lastPos.col, pos = this.lastPos.p;
-
-        var dropEvent = this.createEvent(dd, e, data, col, c,
-            pos !== false ? pos : c.items.getCount());
-
-        if (this.portal.fireEvent('validatedrop', dropEvent) !== false &&
-           this.portal.fireEvent('beforedrop', dropEvent) !== false) {
-
-            dd.proxy.getProxy().remove();
-            dd.panel.el.dom.parentNode.removeChild(dd.panel.el.dom);
-
-            if (pos !== false) {
-                c.insert(pos, dd.panel);
-            } else {
-                c.add(dd.panel);
-            }
-
-            c.doLayout();
-
-            this.portal.fireEvent('drop', dropEvent);
-
-            // scroll position is lost on drop, fix it
-            var st = this.scrollPos.top;
-            if (st) {
-                var d = this.portal.body.dom;
-                setTimeout(function() {
-                    d.scrollTop = st;
-                }, 10);
-            }
-
-        }
-        delete this.lastPos;
-    },
-
-    // internal cache of body and column coords
-    getGrid: function() {
-        var box = this.portal.bwrap.getBox();
-        box.columnX = [];
-        this.portal.items.each(function(c) {
-            box.columnX.push({ x: c.el.getX(), w: c.el.getWidth() });
-        });
-        return box;
-    }
-});
-
-
-Ext.ux.PortalColumn = Ext.extend(Ext.Container, {
-    layout: 'anchor',
-    autoEl: 'div',
-    defaultType: 'portlet',
-    cls: 'x-portal-column'
-});
-Ext.reg('portalcolumn', Ext.ux.PortalColumn);
-
-Ext.ux.Portlet = Ext.extend(Ext.Panel, {
-    anchor: '100%',
-    frame: true,
-    collapsible: true,
-    draggable: true,
-    cls: 'x-portlet'
-});
-Ext.reg('portlet', Ext.ux.Portlet);
-
-
-//A FUNCTIONAL CONSTRUCTOR FOR WIDGET OBJECTS
-Sage.Analytics.DashboardWidget = Ext.extend(Ext.util.Observable, {
-    constructor: function (options) {
-        this.config = {};
-        //append the values from options
-        this.config.name = options.name || '';
-        this.config.family = options.family || '';
-        this.config.cell = options.cell;
-        this.config.panel = options.cell.id;
-        this.guid = Sage.Analytics.generateString('wgt');
-        this._options = options || {};
-        this.listeners = options.listeners;
-        this.addEvents({
-            "afterdisplay": true,
-            "persist": true
-        });
-        Sage.Analytics.DashboardWidget.superclass.constructor.call(this, options);
-    },
-    //what to call if no global widgetdefinition exists for a widget name
-    getWidgetDefinition: function (forceEditor) {
-        var that = this;
-        $.ajax({
-            type: "GET",
-            url: "slxdata.ashx/slx/crm/-/dashboard/widget",
-            data: { name: this.config.name,
-                family: this.config.family
-            },
-            dataType: "xml",
-            error: function (request, status, error) {
-            },
-            success: function (data, status) {
-                var res = {};
-                if (Ext.isIE) {
-                    res.html = data.selectSingleNode("Module/Content").text;
-                    res.title = data.selectSingleNode("Module/ModulePrefs").attributes.getNamedItem('title').text;
-                } else {
-                    res.html = data.evaluate("Module/Content", data, null, XPathResult.ANY_TYPE, null).iterateNext().textContent;
-                    res.title = data.evaluate("Module/ModulePrefs", data, null, XPathResult.ANY_TYPE, null).iterateNext().attributes.title.textContent;
-                }
-                Sage.Analytics.WidgetDefinitions[that.config.name] = Sys.Serialization.JavaScriptSerializer.deserialize(res.html);
-                Sage.Analytics.WidgetDefinitions[that.config.name].title = res.title;
-                that.load(false, (forceEditor === true));
-            }
-        });
-    }, //end getWidgetDefinition
-    //check for the existance of the widget type in the widgetdefinitions global object
-    //go get a def from the db if not
-    init: function (forceEditor) {
-        if (!Sage.Analytics.WidgetDefinitions[this.config.name]) {
-            this.getWidgetDefinition((forceEditor === true));
-        } else {
-            this.load(false, (forceEditor === true));
-        }
-    }, //end init
-    //the display logic for widgets
-    load: function (simple, forceEditor) {
-        //where am I?
-        var panel = Ext.ComponentMgr.get(this.config.panel), $getData;
-        //short-circuit for simple redraws
-        if (simple) {
-            return this.definition.html(this.config, panel);
-        }
-        //set loading here
-        if (!this.config.loaded || !this.definition.isStatic) {
-            if (panel.body) {
-                panel.body.dom.innerHTML = '<div style="padding:10px;"><div class="loading-indicator">' +
-                    Sage.Analytics.WidgetResource.loading + '</div></div>';
-            }
-        }
-        if (!this.config.defined && Sage.Analytics.WidgetDefinitions[this.config.name]) {
-            this.config.defined = true;
-            if (this.config.defined && !this.definition) {
-                //we have a definition, but not defined yet...
-                //DO NOT put the definition in the config
-                this.definition =
-                    Sage.Analytics.createObject(Sage.Analytics.WidgetDefinitions[this.config.name]);
-                //hoist the editor up to 'this'
-                this.editor = this.definition.editor;
-                if (typeof (this.editor) !== 'function') {
-                    this.editor = function () { this.fireEvent('persist'); };
-                }
-            }
-        }
-        if (!this.definition.isStatic) {
-            //I am not a static widget, therefore I will have, or need, a datasource
-            if ((!this._options.datasource) || (forceEditor === true)) {
-                //I am a new widget in need of a datasource
-                this.editor(Sage.Analytics.generateString('dwEditor')); //callback here? scope issues if yes
-            }
-            //I am a saved widget or I am being edited
-            if (this._options.datasource) {
-                $getData = this.setData();
-                //hand off to the widget def to render itself
-                $getData(panel, this.config, this.definition);
-            }
-        }
-        else {
-            //a static widget, display it
-            this.setData();
-            //is panel avail?
-            if (panel) {
-                //should static widgets respond to resize?
-                panel.update(this.definition.html(this.config, panel), false);
-                this.config.loaded = true;
-                panel.setTitle(Sage.Analytics.localize(this.config.title) || '');
-                this.fireEvent("afterdisplay");
-                if (forceEditor === true) {
-                    this.editor(Sage.Analytics.generateString('dwEditor'));
-                }
-            }
-        }
-    }, //end load
-    //many checks for existing data as a widget may pass thru here in various states.
-    //i.e. on creation or after being edited etc...
-    //the method sets various attributes in preping a widget for display
-    setData: function () {
-        var self = this;
-        //set the name and family if init() didn't
-        if (this.config.name === '') { this.config.name = this.definition.name; }
-        if (this.config.family === '') { this.config.family = this.definition.family; }
-        //set the data from a persisted object
-        var att;
-        //set all ._options to config
-        for (att in this._options) {
-            //filter out unwanted...
-            if (att && this._options.hasOwnProperty(att)) {
-                this.config[att] = this._options[att];
-            }
-        }
-        if (this.config.datasource) {
-            var getData = function (panel, config, def, $resize) {
-                $.ajax({
-                    dataType: 'json',
-                    cache: false,
-                    url: config.datasource,
-                    success: function (data) {
-                        //the template will need the returned object
-                        config.data = data;
-                        if (panel) {
-                            //hand off to widget def to render itself
-                            def.html(config, panel);
-                        }
-                        self.fireEvent("afterdisplay");
-                    },
-                    error: function (a, b, c) {
-                        var markup = '<div class="widget-exception">' +
-                        Sage.Analytics.WidgetResource.noData + '</div>';
-                        panel.removeAll(true);
-                        panel.setTitle('');
-                        panel.body.dom.innerHTML = '';
-                        panel.add({
-                            cls: 'sage-widget-no-border',
-                            html: markup
-                        });
-                        panel.doLayout();
-                        if (panel.getInnerWidth()) {
-                            panel.body.setStyle('width', panel.getInnerWidth() - 2);
-                        }
-                    }
-                }); //end .ajax 
-            }; //end var getdata
-            return getData;
-        }
-    }, //end setData
-    //refresh action for all widgets
-    refresh: function (simple) { //the 'simple' arg will only be true in calls to refresh which do not require a data refresh
-        this.load(simple);
-    }
-}); //end dashboardwidget object
-
-Sage.UserOptionsService = {
-    optionUrlFmt : "slxdata.ashx/slx/crm/-/useroptions/{0}/{1}",
-    getCommonOption : function(name, category, callback) {
-        $.ajax({
-            url : String.format(Sage.UserOptionsService.optionUrlFmt, category, name),
-            type : "GET",
-            cache : false,
-            contentType : "application/json",
-            datatype : "json",
-            success: function(resp) {
-                callback(Sys.Serialization.JavaScriptSerializer.deserialize(resp));
-            }
-        });
-    }
-};
-Sage.RoleSecurityService = function (actionList) {
-    this._actionList = actionList;
-    // Implement callback when SData call is finished
-    //this._consumerCallback = {};
-    this._userID = "";
-    this._actionName = "";
-}
-
-Sage.RoleSecurityService.prototype.hasAccess = function (actionName) { // callback
-    // this._consumerCallback = callback;
-    this._actionName = actionName;
-    this._userID = Sage.Utility.getClientContextByKey('userID');
-    var rval = false;
-
-    //If the current user is Administrator, then return true always.
-    if (dojo.trim(this._userID.toUpperCase()) === 'ADMIN') {
-        rval = true;
-    }
-    else {
-        var aLen = this._actionList.length;
-        for (var i = 0; i < aLen; i++) {
-            if (this._actionList[i].toUpperCase() === this._actionName.toUpperCase()) {
-                rval = true;
-                break;
-            }
-        }
-    }
-    //this._consumerCallback(rval);  
-    return rval;
-}
-
+Sage.Services.addService("ObjectConnectionService", new Sage.ObjectConnectionService());
 Sage.IntegrationContractService = function () {
     this.isIntegrationEnabled = false;
     this.localAppId = "";
-    var data = document.getElementById("__IntegrationContractService");
-    if (typeof data !== "undefined" && data != null) {
+    var data = dojo.byId("__IntegrationContractService");
+    if (data) {
         var obj = dojo.fromJson(data.value);
         this.isIntegrationEnabled = obj.IsIntegrationEnabled;
         this.localAppId = obj.LocalAppId;
@@ -5924,12 +2374,11 @@ Sage.IntegrationContractService.prototype.getCurrentOperatingCompanyId = functio
         var dtNow = new Date();
         var sUrl = dojo.replace("slxdata.ashx/slx/crm/-/context/getcurrentoperatingcompanyid?time={0}&entityType={1}&entityId={2}",
             [encodeURIComponent(dtNow.getTime().toString()), encodeURIComponent(context.EntityType), encodeURIComponent(context.EntityId)]);
-        var response = $.ajax({
-            async: false,
+        var response = dojo.xhrGet({
             url: sUrl,
-            dataType: 'json',
+            handleAs: 'json',
             error: function (error) {
-                Ext.Msg.show({ title: "Sage SalesLogix", msg: error.StatusText, buttons: Ext.Msg.OK, icon: Ext.MessageBox.ERROR });
+                console.error(error);
                 return "";
             }
         });
@@ -5952,7 +2401,7 @@ function isMultiCurrencyEnabled() {
     if (service != null && typeof service !== "undefined") {
         return service.isMultiCurrencyEnabled;
     }
-    return false; 
+    return false;
 }
 
 function accountingSystemHandlesSO() {
@@ -5962,3 +2411,2122 @@ function accountingSystemHandlesSO() {
     }
     return false;
 }
+require([
+        'dojo/dnd/Moveable',
+        'dojo/dom',
+        'dojo/on',
+        'dojo/query',
+        'dojo/dom-class',
+        'dojo/dom-style',
+        'dojo/dom-geometry',
+        'dojo/_base/lang'
+    ], function(
+        Moveable,
+        dom,
+        on,
+        query,
+        domClass,
+        domStyle,
+        domGeom,
+        lang
+    ){
+
+    String.prototype.trim = function() {
+        return this.replace( /^\s+|\s+$/g , '');
+    };
+
+    window.slxdatagrid = function(gridID) {
+        this.gridID = gridID;
+        this.containerId = gridID + '_container';
+        this.expandAllCell = null;
+        this.expandable = false;
+        this.table = null;
+        this.expandclassname = 'slxgridrowexpand';
+        this.expandnoiconclassname = 'slxgridrowexpandnoicon';
+        this.collapseclassname = 'slxgridrowcollapse';
+        this.collapsenoiconclassname = 'slxgridrowcollapsenoicon';
+        this.contentdivclassname = 'cellcontents';
+        this.pagerclassname = 'gridPager';
+        this.collapsedheight = '16px';
+        this.wids = [];
+        this.key = '';
+        this.expandHandle = null;
+
+        this.__idIndexer = 0;
+        this.HeaderRow = null;
+        var tbl = dom.byId(gridID);
+        if (tbl) {
+            this.table = tbl;
+            if (tbl.getAttribute('key')) {
+                this.key = tbl.getAttribute('key');
+            }
+
+            if ((tbl.rows.length > 0) && (tbl.rows[0].cells.length > 0)) {
+                var cell = (domClass.contains(tbl.rows[0], this.pagerclassname)) ?
+                    tbl.rows[1].cells[0] : tbl.rows[0].cells[0];
+
+                this.expandable = (domClass.contains(cell, this.expandclassname) ||
+                    domClass.contains(cell, this.expandnoiconclassname) ||
+                        domClass.contains(cell, this.collapseclassname) ||
+                            domClass.contains(cell, this.collapsenoiconclassname));
+                // set up listeners for click events on row expanders
+                if (this.expandable) {
+                    this.expandAllCell = cell;
+                    if (this.expandHandle) {
+                        this.expandHandle.remove();
+                    }
+
+                    this.expandHandle = on(cell, 'click', lang.hitch(this, this.expandCollapseAll), true);
+                }
+            }
+
+            this.setHeaderRow();
+            this.initColWidths();
+            this.setSortIDs();
+            this.attachResizeEvent();
+
+        }
+    };
+
+    slxdatagrid.prototype.GridKey = function() {
+        return this.gridID + this.key;
+    };
+
+    slxdatagrid.prototype.dispose = function() {
+        this.table = null;
+        this.expandAllCell = null;
+    };
+
+    slxdatagrid.prototype.getColIndexStart = function() {
+        return (this.expandable) ? 1 : 0;
+    };
+
+    slxdatagrid.prototype.setSortIDs = function() {
+        if ((this.table.rows.length > 0) && (this.HeaderRow)) {
+            var idx = (this.table.id.lastIndexOf('_') > 0) ? this.table.id.lastIndexOf('_') + 1 : 0;
+            var idRoot = this.table.id.substring(idx);
+            for (var i = 0; i < this.HeaderRow.cells.length; i++) {
+                var links = query('A', dom.byId(this.HeaderRow.cells[i]));
+                for (var j = 0; j < links.length; j++) {
+                    links[j].id = idRoot + this.__idIndexer++;
+                }
+            }
+        }
+    };
+
+    // ----------------------- row expand/collapse section---------------------------------------------------------------- //
+    slxdatagrid.prototype.expandCollapseAll = function () {
+        var i;
+        if (domClass.contains(this.expandAllCell, this.expandclassname)) {
+            //expand all
+            for (i = 1; i < this.table.rows.length; i++) {
+                this.expandRow(this.table.rows[i]);
+            }
+
+            domClass.remove(this.expandAllCell, this.expandclassname);
+            domClass.add(this.expandAllCell, this.collapseclassname);
+        } else if (domClass.contains(this.expandAllCell, this.collapseclassname)) {
+            //collapse all
+            for (i = 1; i < this.table.rows.length; i++) {
+                this.collapseRow(this.table.rows[i]);
+            }
+
+            domClass.remove(this.expandAllCell, this.collapseclassname);
+            domClass.add(this.expandAllCell, this.expandclassname);
+        }
+    };
+
+    function expandCollapseRow() {
+        var row = this.gridobj.getRow(this.idx);
+        this.gridobj.toggleRow(row);
+    }
+
+    slxdatagrid.prototype.toggleRow = function(row) {
+        if (row) {
+            if (domClass.contains(row.cells[0], this.expandclassname) ||
+                domClass.contains(row.cells[0], this.expandnoiconclassname)) {
+                this.expandRow(row);
+            } else if (domClass.contains(row.cells[0], this.collapseclassname) ||
+                domClass.contains(row.cells[0], this.collapsenoiconclassname)) {
+                this.collapseRow(row);
+            }
+        }
+    };
+
+    slxdatagrid.prototype.expandRow = function(row) {
+
+        if (row) {
+            var cell = row.cells[0];
+            if (domClass.contains(cell, this.collapseclassname) || (!domClass.contains(cell, this.expandclassname) && !domClass.contains(cell, this.expandnoiconclassname))) {
+                return;
+            }
+
+            var collapseH = this.collapsedheight.replace('px', '');
+
+            for (var i = this.getColIndexStart(); i < row.cells.length; i++) {
+                cell = row.cells[i];
+                if (cell.childNodes[0]) {
+                    if (domClass.contains(cell.childNodes[0], this.contentdivclassname)) {
+                        if (cell.childNodes[0].scrollHeight > collapseH) {
+                            domStyle.set(cell.childNodes[0], 'height', '100%');
+                        }
+                    }
+                }
+            }
+            var expandoCell = row.cells[0];
+
+            if (domClass.contains(expandoCell, this.expandclassname)) {
+                domClass.remove(expandoCell, this.expandclassname);
+                domClass.add(expandoCell, this.collapseclassname);
+            } else {
+                domClass.remove(expandoCell, this.expandnoiconclassname);
+                domClass.add(expandoCell, this.collapsenoiconclassname);
+            }
+        }
+    };
+
+    slxdatagrid.prototype.collapseRow = function(row) {
+        if (row) {
+            var cell = row.cells[0];
+            if (domClass.contains(cell, this.expandclassname) || (!domClass.contains(cell, this.collapseclassname) && !domClass.contains(cell, this.collapsenoiconclassname))) {
+                return;
+            }
+            var collapseH = this.collapsedheight.replace('px', '');
+            var setH = collapseH;
+            for (var i = this.getColIndexStart(); i < row.cells.length; i++) {
+                cell = row.cells[i];
+                if (cell.childNodes[0]) {
+                    if (domClass.contains(cell.childNodes[0], this.contentdivclassname)) {
+                        setH = (collapseH < cell.childNodes[0].scrollHeight) ? collapseH : cell.childNodes[0].scrollHeight;
+                        domStyle.set(cell.childNodes[0], 'height', setH + 'px');
+                    }
+                }
+            }
+
+            var expandoCell = row.cells[0];
+
+            if (domClass.contains(expandoCell, this.collapseclassname)) {
+                domClass.remove(expandoCell, this.collapseclassname);
+                domClass.add(expandoCell, this.expandclassname);
+            } else {
+                domClass.remove(expandoCell, this.collapsenoiconclassname);
+                domClass.add(expandoCell, this.expandnoiconclassname);
+            }
+        }
+    };
+
+    slxdatagrid.prototype.getRow = function(idx) {
+        if ((this.table) && (this.table.rows.length > idx)) {
+            return this.table.rows[idx];
+        }
+        return null;
+    };
+
+    // ----------------------- end row expand/collapse section---------------------------------------------------------------- //
+
+    // ----------------------- start column resize section-------------------------------------------------------------------- //
+
+    // ------------remembering column widths...
+
+    slxdatagrid.prototype.initColWidths = function() {
+        if (this.HeaderRow) {
+            if (this.getWidthsFromCookie()) {
+                if (this.expandable) {
+                    this.setWidth(0, '20', false);
+                }
+                for (var i = this.getColIndexStart(); i < this.HeaderRow.cells.length; i++) {
+                    this.setWidth(i, this.wids[i], false);
+                }
+            } else {
+                this.fillSpace();
+            }
+        }
+    };
+
+    slxdatagrid.prototype.fillSpace = function() {
+        if (this.HeaderRow) {
+            if (this.expandable) {
+                this.setWidth(0, '20', false);
+            }
+
+            var cont = dom.byId(this.containerId);
+            var container = this.getRegion(cont);
+            var containerW = container.right - container.left;
+
+            var tbl = this.getRegion(this.table);
+            this.doResize();
+            var spaceWidth = container.right - tbl.right;
+
+            var divCols = this.HeaderRow.cells.length;
+            if (this.expandable) {
+                divCols--;
+            }
+
+            var increaseBy = Math.round(spaceWidth / divCols);
+            increaseBy--;
+            this.getCurrentWidths();
+            var start = (this.expandable) ? 1 : 0;
+            if (increaseBy > 3) {
+                for (var i = start; i < this.HeaderRow.cells.length; i++) {
+                    var newtableregion = this.getRegion(this.table);
+                    if (newtableregion.right > container.right - increaseBy) {
+                        increaseBy = container.right - newtableregion.right - 2;
+                    }
+                    if (newtableregion.right > container.right - 4) {
+                        return;
+                    }
+                    var newWidth = this.wids[i] + increaseBy;
+                    if (this.wids[i]) {
+                        this.setWidth(i, newWidth, false);
+                        //did we grow too big?
+                        //this takes care of IE6
+                        if (cont.scrollWidth > containerW) {
+                            this.setWidth(i, newWidth - (cont.scrollWidth - containerW), false);
+                            return;
+                        }
+                        //now to take care of FireFox and IE7
+                        newtableregion = this.getRegion(this.table);
+                        var tblWidth = newtableregion.right - newtableregion.left - 2;
+                        if (tblWidth >= containerW) {
+                            var newNewWidth = newWidth - (tblWidth - containerW + 5);
+                            this.setWidth(i, newNewWidth, false);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    slxdatagrid.prototype.getCurrentWidths = function() {
+        if (this.HeaderRow) {
+            this.wids = [];
+            for (var i = 0; i < this.HeaderRow.cells.length; i++) {
+                this.wids.push(this.getColumnWidth(i));
+            }
+        }
+    };
+
+    slxdatagrid.prototype.getColumnWidth = function(colIndex) {
+        if (this.HeaderRow) {
+            if (this.HeaderRow.cells[colIndex]) {
+                var region = this.getRegion(this.HeaderRow.cells[colIndex]);
+                return region.right - region.left;
+            }
+        }
+        return 0;
+    };
+
+    slxdatagrid.prototype.getRegion = function(node) {
+        var pos = domGeom.position(node, true);
+
+        // Transform our position object into what the old YAHOO.util.Region object looked like
+        var results = {
+            bottom: pos.y - pos.h,
+            left: pos.x,
+            right: pos.x + pos.w,
+            top: pos.y
+        };
+
+        return results;
+    };
+
+    slxdatagrid.prototype.getWidthsFromCookie = function () {
+        var widthcookie =  cookie.getCookie('GRIDCW');
+        if (widthcookie) {
+            var grids = widthcookie.split('||');
+            for (var i = 0; i < grids.length; i++) {
+                var widthdef = grids[i].split('!');
+                if (widthdef[0] == this.GridKey()) {
+                    if (widthdef[1]) {
+                        this.wids = widthdef[1].split(':');
+                        return true;
+                    }
+                }
+            }
+        }
+        //if we get here, it means we don't have the widths in the cookie
+        //this.getCurrentWidths(); // add the current widths to the wids array.
+        return false;
+    };
+
+    slxdatagrid.prototype.setWidthsToCookie = function() {
+        this.getCurrentWidths(); // make sure the wids array is up-to-date.
+        var widthcookie = cookie.getCookie('GRIDCW');
+        if (widthcookie) {
+            var grids = widthcookie.split('||');
+            widthcookie = '';
+            var needtoadd = true;
+            for (var i = 0; i < grids.length; i++) {
+                var widthdef = grids[i].split('!');
+                if (widthdef[0] == this.GridKey()) {
+                    widthdef[1] = this.generateWidthCookieString();
+                    needtoadd = false;
+                }
+                widthcookie += (i > 0) ? '||' : '';
+                widthcookie += widthdef[0] + '!' + widthdef[1];
+            }
+            if (needtoadd) {
+                widthcookie += (widthcookie !== '') ? '||' : '';
+                widthcookie += this.GridKey() + '!' + this.generateWidthCookieString();
+            }
+        } else {
+            widthcookie = this.GridKey() + '!' + this.generateWidthCookieString();
+        }
+        document.cookie = 'GRIDCW=' + widthcookie;
+    };
+
+    slxdatagrid.prototype.generateWidthCookieString = function() {
+        var str = '';
+        for (var i = 0; i < this.wids.length; i++) {
+            str += (i > 0) ? ':' : '';
+            var num = this.wids[i];
+            num = Math.round(num);
+            str += num;
+        }
+
+        return str;
+    };
+
+    slxdatagrid.prototype.setWidth = function(colIdx, width, persist) {
+        if (!isNaN(width)) {
+            width = width + 'px';
+        }
+
+        if (this.HeaderRow) {
+            for (var r = 0; r < this.table.rows.length; r++) {
+                if (this.table.rows[r].cells[colIdx]) {
+                    var cell = dom.byId(this.table.rows[r].cells[colIdx]);
+                    cell.style.width = width;
+                    cell.style.position = '';
+                }
+            }
+
+            if (persist) {
+                this.setWidthsToCookie();
+            }
+        }
+    };
+
+    slxdatagrid.prototype.setHeaderRow = function() {
+        for (var r = 0; r < this.table.rows.length; r++) {
+            if (this.table.rows[r].getAttribute('HeaderRow')) {
+                this.HeaderRow = this.table.rows[r];
+                return;
+            }
+        }
+    };
+
+    slxdatagrid.prototype.doResize = function() {
+        var cont = dom.byId(this.containerId);
+        var container = this.getRegion(cont);
+
+        var tbl = this.getRegion(this.table);
+
+        if ((tbl.right - tbl.left) > (container.right - container.left)) {
+            if (cont.style.height === '') {
+                var tblheight = tbl.bottom - tbl.top;
+                dom.byId(this.containerId).style.height = (tblheight + 20) + 'px';
+            }
+        }
+    };
+
+    slxdatagrid.prototype.attachResizeEvent = function() {
+        var viewport = window['mainViewport'];
+        var panel = (viewport ? viewport.findById('center_panel_center') : false);
+
+        if (panel) {
+            panel.on('resize', function(panel, adjWidth, adjHeight, width, height) {
+                this.doResize();
+            }, this);
+        }
+    };
+
+    slxdatagridcolumn = function(headerColId, datagrid, colIdx) {
+        if (headerColId) {
+            this.datagrid = datagrid;
+            this.colIndex = colIdx;
+            this.headerColId = headerColId;
+            this.handleElId = headerColId;
+            this.isMoving = false;
+
+            var node = dom.byId(headerColId);
+            if (node) {
+                this.domNode = node;
+                this.position = domGeom.position(this.domNode);
+
+                this.moveable = new Moveable(node);
+
+                // dojo drag events
+                this.onMoveHandle = this.moveable.on('Move', lang.hitch(this, this.onMove));
+                this.onFirstMoveHandle = this.moveable.on('FirstMove', lang.hitch(this, this.onFirstMove));
+                this.onMoveStopHandle = this.moveable.on('MoveStop', lang.hitch(this, this.onMoveStop));
+
+                // dom mouse events
+                this.onmouseoverHandle = on(node, 'mouseover', lang.hitch(this, this.onmouseover));
+                this.onmouseoutHandle = on(node, 'mouseout', lang.hitch(this, this.onmouseout));
+            }
+        }
+    };
+
+    slxdatagridcolumn.prototype.refreshPosition = function() {
+        var node = dom.byId(this.headerColId);
+        if (node) {
+            this.domNode = node;
+            this.position = domGeom.position(this.domNode);
+        }
+    };
+
+    slxdatagridcolumn.prototype.dispose = function() {
+        this.datagrid = null;
+        this.onMoveHandle.remove();
+        this.onFirstMoveHandle.remove();
+        this.onMoveStopHandle.remove();
+        this.onmouseoverHandle.remove();
+        this.onmouseoutHandle.remove();
+
+        this.moveable.destroy();
+    };
+
+    slxdatagridcolumn.prototype.onFirstMove = function(mover, e) {
+        this.startWidth = mover.node.offsetWidth;
+        this.startPosX = e.clientX;
+        this.startTop = mover.node.style.top;
+        this.startLeft = mover.node.style.left;
+    };
+
+    slxdatagridcolumn.prototype.onMove = function(mover, leftTop, e) {
+        this.isMoving = true;
+
+        // Lock in left/top positions
+        mover.node.style.top = this.startTop;
+        mover.node.style.left = this.startLeft;
+
+        var newWidth = e.clientX - this.position.x;
+        newWidth = newWidth * 1.1;
+        domStyle.set(mover.node, 'width', (newWidth + 'px'));
+
+        this.datagrid.setWidth(this.colIndex, mover.node.style.width, true);
+        this.refreshPosition();
+
+        this.isMoving = false;
+    };
+
+    slxdatagridcolumn.prototype.onMoveStop = function() {
+        this.isMoving = false;
+    };
+
+    slxdatagridcolumn.prototype.onmouseover = function(e) {
+        if (!this.isMoving && this.isDraggableRegion(e.clientX)) {
+            this.domNode.style.cursor = 'col-resize';
+        } else {
+            this.domNode.style.cursor = '';
+        }
+    };
+
+    slxdatagridcolumn.prototype.isDraggableRegion = function(clientX) {
+        this.refreshPosition();
+
+        var rightPos = this.position.x + this.position.w;
+        var padding = 6;
+
+        // We must fall in between the rows
+        if (clientX > (rightPos - padding) && clientX < (rightPos + padding)) {
+            return true;
+        }
+
+        return false;
+    };
+
+    slxdatagridcolumn.prototype.onmouseout = function() {
+        this.domNode.style.cursor = '';
+    };
+});
+var resizeTimerID = null;
+function Timeline_onResize() {
+    if (resizeTimerID == null) {
+        resizeTimerID = window.setTimeout(function() {
+            resizeTimerID = null;
+            tl.layout();
+        }, 500);
+    }
+}
+
+function Timeline_init(timeline_object, tab) {
+    var method = timeline_object.onLoad;
+    var delay = 750;
+    $("#show_"+tab).click(function(){window.setTimeout(method, delay);});
+    $("#more_" + tab).click(function () { window.setTimeout(method, delay); });
+
+    if ($("#more_"+tab).length > 0) {
+        $("#show_More").click(function(){window.setTimeout(method, delay);});
+    }
+
+    $(".tws-main-tab-buttons").click(function() { closeTimelineBubble(); });
+    $(".tws-more-tab-buttons-container").click(function () { closeTimelineBubble(); });
+
+    if (document.body.addEventListener) {
+        document.body.addEventListener('onresize', Timeline_onResize, false);
+    }  else if (document.body.attachEvent) {
+        document.body.attachEvent('onresize', Timeline_onResize);
+    }
+
+//    var svc = Sage.Services.getService("GroupManagerService");  
+//    if (svc) {
+//        svc.addListener(Sage.GroupManagerService.CURRENT_GROUP_POSITION_CHANGED, function(sender, evt) {
+//            method();
+//        });
+    //    }
+    dojo.subscribe('/group/context/changed', timeline_object, timeline_object.onLoad);
+
+    if (document.getElementById(timeline_object.ParentElement) != null) {
+        if (document.getElementById(timeline_object.ParentElement).hasChildNodes()) {
+            method();
+        } else {
+            window.setTimeout(method, delay);
+        }
+    }
+}
+
+function closeTimelineBubble() {
+    //Use the Timeline's ajax wrapper to find and close the bubble popup.
+    SimileAjax.WindowManager.popAllLayers();    
+}
+
+function Timeline_RecalculateHeight() {
+    $("div.timeline-container").each(function (i, elem) {
+        var container = elem;
+        if (container.hasChildNodes() && (container.clientHeight > 0)) {
+            var largest = (container.clientHeight > 0) ? container.clientHeight - 55 : 300 - 55;
+            var changed = false;
+            var bands = $(".timeline-band-0 .timeline-band-events .timeline-band-layer-inner");
+            for (var i = 0; i < bands.length; i++) {
+                var div = bands[i];
+                if (div && (div.lastChild)) {
+                    for (var j = 0; j < div.childNodes.length; j++) {
+                        if (div.childNodes[j].offsetTop > largest) {
+                            largest = div.childNodes[j].offsetTop;
+                            changed = true;
+                        }
+                    }
+                }
+            }
+
+            if (changed) {
+                var navbandheight = $(".timeline-band-1")[0].style.height;
+                container.style.height = parseInt(largest + parseInt(navbandheight, 10) + 30, 10) + "px";
+                $(".timeline-band-0")[0].style.height = parseInt(largest + 30, 10) + "px";
+                $(".timeline-band-1")[0].style.top = parseInt(largest + 30, 10) + "px";
+                $(".timeline-band-1")[0].style.height = navbandheight;
+                if (container.parent) {
+                    container.parent.style.height = container.style.height;
+                }
+            }
+
+            window.setTimeout(function () { Timeline_RecalculateHeight(); }, 2000);
+        }
+    });
+}
+
+function Timeline_IEFix() {
+    var divs = $(".timeline-band-layer-inner div");
+    if (divs) {
+        divs.each(function(i, el) {
+            if(el.innerHTML !== '') {
+                $(el).width('auto');
+            }
+        });
+    }
+}
+
+function Timeline_GetMashupData(mashupName, queryName, timeLine, eventSource) {
+    dojo.require('Sage.Utility');
+    var service = Sage.Utility.getSDataService('mashups');
+    var request = new Sage.SData.Client.SDataNamedQueryRequest(service);
+    var clientService = Sage.Services.getService("ClientEntityContext");
+    var clientContext = clientService.getContext();
+    var entityId = clientContext.EntityId;
+
+    request.setApplicationName('$app');
+    request.setResourceKind('mashups');
+    request.uri.setCollectionPredicate("'" + mashupName + "'");
+    request.setQueryName('execute');
+    request.setQueryArg('_resultName', queryName);
+    request.setQueryArg('_EntityId', entityId);
+
+    request.read({
+        success: function (data) {
+            var events = [];
+            var json = {
+                events: []
+            };
+
+            var item;
+            var len = data.$resources.length;
+            for (var i = 0; i < len; i++) {
+                item = data.$resources[i];
+                json.events.push({
+                    start: Sage.Utility.Convert.toDateFromString(item.Start),
+                    end: Sage.Utility.Convert.toDateFromString(item.End),
+                    title: item.Title,
+                    description: item.Description,
+                    isDuration: true,
+                    link: item.Link,
+                    icon: item.Icon,
+                    color: item.Color,
+                    image: item.Thumbnail
+                });
+            }
+
+            eventSource.loadJSON(json, document.location.href);
+            if (dojo.isIE === 9) {
+                Timeline_IEFix();
+                $(".timeline-container").mousedown(function() {
+                    Timeline_IEFix();
+                });
+                $(".timeline-container").mouseup(function() {
+                    Timeline_IEFix();
+                });
+            }
+        },
+        failure: function (data) {
+        }
+    });
+}
+
+ 
+var Base64 = {
+ 
+	// private property
+	_keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+ 
+	// public method for encoding
+	encode : function (input) {
+		var output = "";
+		var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+		var i = 0;
+ 
+		input = Base64._utf8_encode(input);
+ 
+		while (i < input.length) {
+ 
+			chr1 = input.charCodeAt(i++);
+			chr2 = input.charCodeAt(i++);
+			chr3 = input.charCodeAt(i++);
+ 
+			enc1 = chr1 >> 2;
+			enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+			enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+			enc4 = chr3 & 63;
+ 
+			if (isNaN(chr2)) {
+				enc3 = enc4 = 64;
+			} else if (isNaN(chr3)) {
+				enc4 = 64;
+			}
+ 
+			output = output +
+			this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
+			this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
+ 
+		}
+ 
+		return output;
+	},
+ 
+	// public method for decoding
+	decode : function (input) {
+		var output = "";
+		var chr1, chr2, chr3;
+		var enc1, enc2, enc3, enc4;
+		var i = 0;
+ 
+		input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+ 
+		while (i < input.length) {
+ 
+			enc1 = this._keyStr.indexOf(input.charAt(i++));
+			enc2 = this._keyStr.indexOf(input.charAt(i++));
+			enc3 = this._keyStr.indexOf(input.charAt(i++));
+			enc4 = this._keyStr.indexOf(input.charAt(i++));
+ 
+			chr1 = (enc1 << 2) | (enc2 >> 4);
+			chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+			chr3 = ((enc3 & 3) << 6) | enc4;
+ 
+			output = output + String.fromCharCode(chr1);
+ 
+			if (enc3 != 64) {
+				output = output + String.fromCharCode(chr2);
+			}
+			if (enc4 != 64) {
+				output = output + String.fromCharCode(chr3);
+			}
+ 
+		}
+ 
+		output = Base64._utf8_decode(output);
+ 
+		return output;
+ 
+	},
+ 
+	// private method for UTF-8 encoding
+	_utf8_encode : function (string) {
+		string = string.replace(/\r\n/g,"\n");
+		var utftext = "";
+ 
+		for (var n = 0; n < string.length; n++) {
+ 
+			var c = string.charCodeAt(n);
+ 
+			if (c < 128) {
+				utftext += String.fromCharCode(c);
+			}
+			else if((c > 127) && (c < 2048)) {
+				utftext += String.fromCharCode((c >> 6) | 192);
+				utftext += String.fromCharCode((c & 63) | 128);
+			}
+			else {
+				utftext += String.fromCharCode((c >> 12) | 224);
+				utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+				utftext += String.fromCharCode((c & 63) | 128);
+			}
+ 
+		}
+ 
+		return utftext;
+	},
+ 
+	// private method for UTF-8 decoding
+	_utf8_decode : function (utftext) {
+		var string = "";
+		var i = 0;
+		var c = c1 = c2 = 0;
+ 
+		while ( i < utftext.length ) {
+ 
+			c = utftext.charCodeAt(i);
+ 
+			if (c < 128) {
+				string += String.fromCharCode(c);
+				i++;
+			}
+			else if((c > 191) && (c < 224)) {
+				c2 = utftext.charCodeAt(i+1);
+				string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+				i += 2;
+			}
+			else {
+				c2 = utftext.charCodeAt(i+1);
+				c3 = utftext.charCodeAt(i+2);
+				string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+				i += 3;
+			}
+ 
+		}
+ 
+		return string;
+	}
+ 
+};
+// ========================================================================
+//  XML.ObjTree -- XML source code from/to JavaScript object like E4X
+// ========================================================================
+
+if ( typeof(XML) == 'undefined' ) XML = function() {};
+
+//  constructor
+
+XML.ObjTree = function () {
+    return this;
+};
+
+//  class variables
+
+XML.ObjTree.VERSION = "0.24";
+
+//  object prototype
+
+XML.ObjTree.prototype.xmlDecl = '<?xml version="1.0" encoding="UTF-8" ?>\n';
+XML.ObjTree.prototype.attr_prefix = '-';
+XML.ObjTree.prototype.overrideMimeType = 'text/xml';
+
+//  method: parseXML( xmlsource )
+
+XML.ObjTree.prototype.parseXML = function ( xml ) {
+    var root;
+    if ( window.DOMParser ) {
+        var xmldom = new DOMParser();
+//      xmldom.async = false;           // DOMParser is always sync-mode
+        var dom = xmldom.parseFromString( xml, "application/xml" );
+        if ( ! dom ) return;
+        root = dom.documentElement;
+    } else if ( window.ActiveXObject ) {
+        xmldom = new ActiveXObject('Microsoft.XMLDOM');
+        xmldom.async = false;
+        xmldom.loadXML( xml );
+        root = xmldom.documentElement;
+    }
+    if ( ! root ) return;
+    return this.parseDOM( root );
+};
+
+//  method: parseHTTP( url, options, callback )
+
+XML.ObjTree.prototype.parseHTTP = function ( url, options, callback ) {
+    var myopt = {};
+    for( var key in options ) {
+        myopt[key] = options[key];                  // copy object
+    }
+    if ( ! myopt.method ) {
+        if ( typeof(myopt.postBody) == "undefined" &&
+             typeof(myopt.postbody) == "undefined" &&
+             typeof(myopt.parameters) == "undefined" ) {
+            myopt.method = "get";
+        } else {
+            myopt.method = "post";
+        }
+    }
+    if ( callback ) {
+        myopt.asynchronous = true;                  // async-mode
+        var __this = this;
+        var __func = callback;
+        var __save = myopt.onComplete;
+        myopt.onComplete = function ( trans ) {
+            var tree;
+            if ( trans && trans.responseXML && trans.responseXML.documentElement ) {
+                tree = __this.parseDOM( trans.responseXML.documentElement );
+            } else if ( trans && trans.responseText ) {
+                tree = __this.parseXML( trans.responseText );
+            }
+            __func( tree, trans );
+            if ( __save ) __save( trans );
+        };
+    } else {
+        myopt.asynchronous = false;                 // sync-mode
+    }
+    var trans;
+    if ( typeof(HTTP) != "undefined" && HTTP.Request ) {
+        myopt.uri = url;
+        var req = new HTTP.Request( myopt );        // JSAN
+        if ( req ) trans = req.transport;
+    } else if ( typeof(Ajax) != "undefined" && Ajax.Request ) {
+        var req = new Ajax.Request( url, myopt );   // ptorotype.js
+        if ( req ) trans = req.transport;
+    }
+//  if ( trans && typeof(trans.overrideMimeType) != "undefined" ) {
+//      trans.overrideMimeType( this.overrideMimeType );
+//  }
+    if ( callback ) return trans;
+    if ( trans && trans.responseXML && trans.responseXML.documentElement ) {
+        return this.parseDOM( trans.responseXML.documentElement );
+    } else if ( trans && trans.responseText ) {
+        return this.parseXML( trans.responseText );
+    }
+}
+
+//  method: parseDOM( documentroot )
+
+XML.ObjTree.prototype.parseDOM = function ( root ) {
+    if ( ! root ) return;
+
+    this.__force_array = {};
+    if ( this.force_array ) {
+        for( var i=0; i<this.force_array.length; i++ ) {
+            this.__force_array[this.force_array[i]] = 1;
+        }
+    }
+
+    var json = this.parseElement( root );   // parse root node
+    if ( this.__force_array[root.nodeName] ) {
+        json = [ json ];
+    }
+    if ( root.nodeType != 11 ) {            // DOCUMENT_FRAGMENT_NODE
+        var tmp = {};
+        tmp[root.nodeName] = json;          // root nodeName
+        json = tmp;
+    }
+    return json;
+};
+
+//  method: parseElement( element )
+
+XML.ObjTree.prototype.parseElement = function ( elem ) {
+    //  COMMENT_NODE
+    if ( elem.nodeType == 7 ) {
+        return;
+    }
+
+    //  TEXT_NODE CDATA_SECTION_NODE
+    if ( elem.nodeType == 3 || elem.nodeType == 4 ) {
+        var bool = elem.nodeValue.match( /[^\x00-\x20]/ );
+        if ( bool == null ) return;     // ignore white spaces
+        return elem.nodeValue;
+    }
+
+    var retval;
+    var cnt = {};
+
+    //  parse attributes
+    if ( elem.attributes && elem.attributes.length ) {
+        retval = {};
+        for ( var i=0; i<elem.attributes.length; i++ ) {
+            var key = elem.attributes[i].nodeName;
+            if ( typeof(key) != "string" ) continue;
+            var val = elem.attributes[i].nodeValue;
+            if ( ! val ) continue;
+            key = this.attr_prefix + key;
+            if ( typeof(cnt[key]) == "undefined" ) cnt[key] = 0;
+            cnt[key] ++;
+            this.addNode( retval, key, cnt[key], val );
+        }
+    }
+
+    //  parse child nodes (recursive)
+    if ( elem.childNodes && elem.childNodes.length ) {
+        var textonly = true;
+        if ( retval ) textonly = false;        // some attributes exists
+        for ( var i=0; i<elem.childNodes.length && textonly; i++ ) {
+            var ntype = elem.childNodes[i].nodeType;
+            if ( ntype == 3 || ntype == 4 ) continue;
+            textonly = false;
+        }
+        if ( textonly ) {
+            if ( ! retval ) retval = "";
+            for ( var i=0; i<elem.childNodes.length; i++ ) {
+                retval += elem.childNodes[i].nodeValue;
+            }
+        } else {
+            if ( ! retval ) retval = {};
+            for ( var i=0; i<elem.childNodes.length; i++ ) {
+                var key = elem.childNodes[i].nodeName;
+                if ( typeof(key) != "string" ) continue;
+                var val = this.parseElement( elem.childNodes[i] );
+                if ( ! val ) continue;
+                if ( typeof(cnt[key]) == "undefined" ) cnt[key] = 0;
+                cnt[key] ++;
+                this.addNode( retval, key, cnt[key], val );
+            }
+        }
+    }
+    return retval;
+};
+
+//  method: addNode( hash, key, count, value )
+
+XML.ObjTree.prototype.addNode = function ( hash, key, cnts, val ) {
+    if ( this.__force_array[key] ) {
+        if ( cnts == 1 ) hash[key] = [];
+        hash[key][hash[key].length] = val;      // push
+    } else if ( cnts == 1 ) {                   // 1st sibling
+        hash[key] = val;
+    } else if ( cnts == 2 ) {                   // 2nd sibling
+        hash[key] = [ hash[key], val ];
+    } else {                                    // 3rd sibling and more
+        hash[key][hash[key].length] = val;
+    }
+};
+
+//  method: writeXML( tree )
+
+XML.ObjTree.prototype.writeXML = function ( tree ) {
+    var xml = this.hash_to_xml( null, tree );
+    return this.xmlDecl + xml;
+};
+
+//  method: hash_to_xml( tagName, tree )
+
+XML.ObjTree.prototype.hash_to_xml = function ( name, tree ) {
+    var elem = [];
+    var attr = [];
+    for( var key in tree ) {
+        if ( ! tree.hasOwnProperty(key) ) continue;
+        var val = tree[key];
+        if ( key.charAt(0) != this.attr_prefix ) {
+            if ( typeof(val) == "undefined" || val == null ) {
+                elem[elem.length] = "<"+key+" />";
+            } else if ( typeof(val) == "object" && val.constructor == Array ) {
+                elem[elem.length] = this.array_to_xml( key, val );
+            } else if ( typeof(val) == "object" ) {
+                elem[elem.length] = this.hash_to_xml( key, val );
+            } else {
+                elem[elem.length] = this.scalar_to_xml( key, val );
+            }
+        } else {
+            attr[attr.length] = " "+(key.substring(1))+'="'+(this.xml_escape( val ))+'"';
+        }
+    }
+    var jattr = attr.join("");
+    var jelem = elem.join("");
+    if ( typeof(name) == "undefined" || name == null ) {
+        // no tag
+    } else if ( elem.length > 0 ) {
+        if ( jelem.match( /\n/ )) {
+            jelem = "<"+name+jattr+">\n"+jelem+"</"+name+">\n";
+        } else {
+            jelem = "<"+name+jattr+">"  +jelem+"</"+name+">\n";
+        }
+    } else {
+        jelem = "<"+name+jattr+" />\n";
+    }
+    return jelem;
+};
+
+//  method: array_to_xml( tagName, array )
+
+XML.ObjTree.prototype.array_to_xml = function ( name, array ) {
+    var out = [];
+    for( var i=0; i<array.length; i++ ) {
+        var val = array[i];
+        if ( typeof(val) == "undefined" || val == null ) {
+            out[out.length] = "<"+name+" />";
+        } else if ( typeof(val) == "object" && val.constructor == Array ) {
+            out[out.length] = this.array_to_xml( name, val );
+        } else if ( typeof(val) == "object" ) {
+            out[out.length] = this.hash_to_xml( name, val );
+        } else {
+            out[out.length] = this.scalar_to_xml( name, val );
+        }
+    }
+    return out.join("");
+};
+
+//  method: scalar_to_xml( tagName, text )
+
+XML.ObjTree.prototype.scalar_to_xml = function ( name, text ) {
+    if ( name == "#text" ) {
+        return this.xml_escape(text);
+    } else {
+        return "<"+name+">"+this.xml_escape(text)+"</"+name+">\n";
+    }
+};
+
+//  method: xml_escape( text )
+
+XML.ObjTree.prototype.xml_escape = function ( text ) {
+    return String(text).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+};
+
+
+
+
+(function(){var d=Sage,a=Sage.namespace("Sage.SData.Client.Ajax");var f=function(g){return((g>=200&&g<300)||g===304)};var b=function(k,j){if(k.readyState==4){if(f(k.status)){if(j.success){j.success.call(j.scope||this,k,j)}}else{if(k.status===0){var i=false;try{i=(k.statusText==="")}catch(g){i=true}if(i){var h=j.aborted||j.failure;if(h){h.call(j.scope||this,k,j)}}else{if(j.failure){j.failure.call(j.scope||this,k,j)}}}else{if(j.failure){j.failure.call(j.scope||this,k,j)}}}}};var c=function(h,g){h.onreadystatechange=function(){b.call(h,h,g)}};var e=function(h){var g=[];for(var i in h){g.push(encodeURIComponent(i)+"="+encodeURIComponent(h[i]))}return g.join("&")};Sage.apply(Sage.SData.Client.Ajax,{request:function(j){var j=d.apply({},j);j.params=d.apply({},j.params);j.headers=d.apply({},j.headers);if(j.cache!==false){j.params[j.cacheParam||"_t"]=(new Date()).getTime()}j.method=j.method||"GET";var g=e(j.params);if(g){j.url=j.url+(/\?/.test(j.url)?"&":"?")+g}var i=new XMLHttpRequest();if(j.user){i.open(j.method,j.url,j.async!==false,j.user,j.password);i.withCredentials=true}else{i.open(j.method,j.url,j.async!==false)}try{i.setRequestHeader("Accept",j.accept||"*).join(";"+f+",")+";"+f}return e},executeRequest:function(f,e,g){if(this.json){f.setQueryArg("format","json")}var h=b.apply({async:e.async,headers:{},method:"GET",url:f.build()},{scope:this,success:function(i,j){var k=this.processFeed(i);this.fireEvent("requestcomplete",f,j,k);if(e.success){e.success.call(e.scope||this,k)}},failure:function(i,j){this.fireEvent("requestexception",f,j,i);if(e.failure){e.failure.call(e.scope||this,i,j)}},aborted:function(i,j){this.fireEvent("requestaborted",f,j,i);if(e.aborted){e.aborted.call(e.scope||this,i,j)}}},g);b.apply(h.headers,this.createHeadersForRequest(f),f.completeHeaders);if(f.extendedHeaders.Accept){h.headers.Accept=this.extendAcceptRequestHeader(h.headers.Accept,f.extendedHeaders.Accept)}if(this.userName&&this.useCredentialedRequest){h.user=this.userName;h.password=this.password}this.fireEvent("beforerequest",f,h);if(typeof h.result!=="undefined"){if(e.success){e.success.call(e.scope||this,h.result)}return}return d.Ajax.request(h)},abortRequest:function(e){d.Ajax.cancel(e)},readFeed:function(f,e){e=e||{};if(this.batchScope){this.batchScope.add({url:f.build(),method:"GET"});return}var g={headers:{Accept:this.json?"application/json,**"}};if(e.httpMethodOverride){if(this.json){f.setQueryArg("format","json")}g.headers["X-HTTP-Method-Override"]="GET";g.method="POST";g.body=f.build();g.url=f.build(true)}return this.executeRequest(f,e,g)},readEntry:function(f,e){e=e||{};if(this.batchScope){this.batchScope.add({url:f.build(),method:"GET"});return}var g=b.apply({},{success:function(i){var h=i["$resources"][0]||false;if(e.success){e.success.call(e.scope||this,h)}}},e);return this.executeRequest(f,g,{headers:{Accept:this.json?"application/json,**"}})},createEntry:function(h,g,f){f=f||{};if(this.batchScope){this.batchScope.add({url:h.build(),entry:g,method:"POST"});return}var j=b.apply({},{success:function(l){var k=l["$resources"][0]||false;if(f.success){f.success.call(f.scope||this,k)}}},f);var i=b.apply({},{method:"POST"});if(this.isJsonEnabled()){b.apply(i,{body:JSON.stringify(g),headers:{"Content-Type":"application/json"}})}else{var e=new XML.ObjTree();e.attr_prefix="@";b.apply(i,{body:e.writeXML(this.formatEntry(g)),headers:{"Content-Type":"application/atom+xml;type=entry",Accept:"application/atom+xml;type=entry,**";i.body=e.writeXML(this.formatEntry(g))}return this.executeRequest(h,k,i)},deleteEntry:function(g,f,e){e=e||{};if(this.batchScope){this.batchScope.add({url:g.build(),method:"DELETE",etag:!(e&&e.ignoreETag)&&f["$etag"]});return}var i={},h={method:"DELETE",headers:i};if(f["$etag"]&&!(e&&e.ignoreETag)){i["If-Match"]=f["$etag"]}return this.executeRequest(g,e,h)},executeServiceOperation:function(h,g,f){var j=b.apply({},{success:function(m){var l=m["$resources"][0]||false,k=l&&l.response,o=k&&k["$resources"],n=o&&o[0];if(n&&n["$name"]){l.response={};l.response[n["$name"]]=n}if(f.success){f.success.call(f.scope||this,l)}}},f);var i=b.apply({},{method:"POST"});if(this.isJsonEnabled()){b.apply(i,{body:JSON.stringify(g),headers:{"Content-Type":"application/json"}})}else{var e=new XML.ObjTree();e.attr_prefix="@";b.apply(i,{body:e.writeXML(this.formatEntry(g)),headers:{"Content-Type":"application/atom+xml;type=entry",Accept:"application/atom+xml;type=entry,**"}})}return this.executeRequest(e,n,j)},parseFeedXml:function(f){var e=new XML.ObjTree();e.attr_prefix="@";return e.parseXML(f)},isIncludedReference:function(f,e,g){return g.hasOwnProperty("@sdata:key")},isIncludedCollection:function(h,f,i){if(i.hasOwnProperty("@sdata:key")){return false}if(i.hasOwnProperty("@sdata:uri")||i.hasOwnProperty("@sdata:url")){return true}var j,g;for(var e in i){if(e[0]==="@"){continue}j=i[e];break}if(j){if(b.isArray(j)){g=j[0]}else{g=j}if(g&&g.hasOwnProperty("@sdata:key")){return true}}return false},convertEntity:function(j,e,g,f){f=f||{};f["$name"]=e;f["$key"]=g["@sdata:key"];f["$url"]=g["@sdata:uri"];f["$uuid"]=g["@sdata:uuid"];for(var m in g){if(m[0]==="@"){continue}var n=c.exec(m),h=n?n[1]:false,i=n?n[2]:m,k=g[m];if(typeof k==="object"){if(k.hasOwnProperty("@xsi:nil")){var l=null}else{if(this.isIncludedReference(h,i,k)){var l=this.convertEntity(h,i,k)}else{if(this.isIncludedCollection(h,i,k)){var l=this.convertEntityCollection(h,i,k)}else{l=this.convertCustomEntityProperty(h,i,k)}}}k=l}f[i]=k}return f},convertEntityCollection:function(k,e,g){for(var n in g){if(n[0]==="@"){continue}var o=c.exec(n),h=o?o[1]:false,j=o?o[2]:n,l=g[n];if(b.isArray(l)){var m=[];for(var f=0;f<l.length;f++){m.push(this.convertEntity(k,j,l[f]))}return{"$resources":m}}else{return{"$resources":[this.convertEntity(k,j,l)]}}break}return null},convertCustomEntityProperty:function(f,e,g){return g},formatEntity:function(g,f,i){i=i||{};if(f["$key"]){i["@sdata:key"]=f["$key"]}for(var e in f){if(e[0]==="$"){continue}var h=f[e];if(h==null){h={"@xsi:nil":"true"}}else{if(typeof h==="object"&&h.hasOwnProperty("$resources")){h=this.formatEntityCollection(g,h)}else{if(typeof h==="object"){h=this.formatEntity(g,h)}}}i[e]=h}return i},formatEntityCollection:function(h,k){var e={};for(var g=0;g<k["$resources"].length;g++){var j=k["$resources"][g],f=j["$name"],l=(e[f]=e[f]||[]);l.push(this.formatEntity(h,k["$resources"][g]))}return e},convertEntry:function(j){var e={};e["$descriptor"]=j.title;e["$etag"]=j["http:etag"];e["$httpStatus"]=j["http:httpStatus"];var l=j["sdata:payload"];for(var h in l){if(l.hasOwnProperty(h)==false){continue}var k=h.split(":"),i,g,f=l[h];if(k.length==2){i=k[0];g=k[1]}else{if(k.length<2){i=false;g=h}else{continue}}this.convertEntity(i,g,f,e)}return e},formatEntry:function(f,g){var e={};if(!g){e["@xmlns:sdata"]="http://schemas.sage.com/sdata/2008/1";e["@xmlns:xsi"]="http://www.w3.org/2001/XMLSchema-instance";e["@xmlns:http"]="http://schemas.sage.com/sdata/http/2008/1";e["@xmlns"]="http://www.w3.org/2005/Atom"}if(f["$httpMethod"]){e["http:httpMethod"]=f["$httpMethod"]}if(f["$ifMatch"]){e["http:ifMatch"]=f["$ifMatch"]}if(f["$etag"]){e["http:etag"]=f["$etag"]}if(f["$url"]){e.id=f["$url"]}e["sdata:payload"]={};e["sdata:payload"][f["$name"]]={"@xmlns":"http://schemas.sage.com/dynamic/2007"};this.formatEntity(false,f,e["sdata:payload"][f["$name"]]);return{entry:e}},convertFeed:function(g){var e={};if(g["opensearch:totalResults"]){e["$totalResults"]=parseInt(g["opensearch:totalResults"])}if(g["opensearch:startIndex"]){e["$startIndex"]=parseInt(g["opensearch:startIndex"])}if(g["opensearch:itemsPerPage"]){e["$itemsPerPage"]=parseInt(g["opensearch:itemsPerPage"])}if(g.link){e["$link"]={};for(var f=0;f<g.link.length;f++){e["$link"][g.link[f]["@rel"]]=g.link[f]["@href"]}if(e["$link"]["self"]){e["$url"]=e["$link"]["self"]}}e["$resources"]=[];if(b.isArray(g.entry)){for(var f=0;f<g.entry.length;f++){e["$resources"].push(this.convertEntry(g.entry[f]))}}else{if(typeof g.entry==="object"){e["$resources"].push(this.convertEntry(g.entry))}}return e},formatFeed:function(g){var e={};e["@xmlns:sdata"]="http://schemas.sage.com/sdata/2008/1";e["@xmlns:xsi"]="http://www.w3.org/2001/XMLSchema-instance";e["@xmlns:http"]="http://schemas.sage.com/sdata/http/2008/1";e["@xmlns"]="http://www.w3.org/2005/Atom";if(g["$url"]){e.id=g["$url"]}e.entry=[];for(var f=0;f<g["$resources"].length;f++){e.entry.push(this.formatEntry(g["$resources"][f],true)["entry"])}return{feed:e}},processFeed:function(e){if(!e.responseText){return null}var g=e.getResponseHeader&&e.getResponseHeader("Content-Type");if((g==="application/json")||(!g&&this.isJsonEnabled())){var f=JSON.parse(e.responseText);if(f.hasOwnProperty("$resources")){return f}else{return{"$resources":[f]}}}else{var f=this.parseFeedXml(e.responseText);if(f.hasOwnProperty("feed")){return this.convertFeed(f.feed)}else{if(f.hasOwnProperty("entry")){return{"$resources":[this.convertEntry(f.entry)]}}else{return false}}}}})})();
+
+(function(r){var q=/^\s+|\s+$/g,p=/(,)/,i=/'/g,h=/\n/g,k=/&/g,m=/</g,l=/>/g,j=/"/g,c={},e={},g="is,ie".split(p).length!=3,a={tags:{begin:"{%",end:"%}"},allowWith:false},d=function(b,c,d){if(d)for(var a in d)b[a]=d[a];if(c)for(var a in c)b[a]=c[a];return b},n=function(a){return typeof a!=="string"?a:a.replace(k,"&amp;").replace(m,"&lt;").replace(l,"&gt;").replace(j,"&quot;")},o=function(a){return a.replace(i,"\\'").replace(h,"\\n")},t=function(a){return a.replace(q,"")},s=function(b,m){var f=m.tags.begin,h=m.tags.end;if(!g){var l=f+h,n=e[l]||(e[l]=new RegExp(f+"(.*?)"+h));return b.split(n)}var j=0,k=0,a=[];while((j=b.indexOf(f,k))!=-1&&(k=b.indexOf(h,j))!=-1){a[a.length]=j;a[a.length]=k}for(var d=[],i=0,c=0;c<a.length;c++){d[d.length]=b.substr(i,a[c]-i);i=a[c]+(c%2?h.length:f.length)}d.push(b.substr(i));return d},f=function(f,i){if(f.join)f=f.join("");if(c[f])return c[f];for(var i=d({},i,a),b=s(f,i),e=1;e<b.length;e+=2)if(b[e].length>0){var j=b[e].charAt(0),g=b[e].substr(1);switch(j){case"=":b[e]="__r.push("+g+");";break;case":":b[e]="__r.push(__s.encode("+g+"));";break;case"!":b[e]="__r.push("+t(g)+".apply(__v, __c));"}}for(var e=0;e<b.length;e+=2)b[e]="__r.push('"+o(b[e])+"');";b.unshift("var __r = [], $ = __v, $$ = __c, __s = Simplate;",a.allowWith?"with ($ || {}) {":"");b.push(a.allowWith?"}":"","return __r.join('');");var h;try{h=new Function("__v, __c",b.join(""))}catch(k){h=function(){return k.message}}return c[f]=h},b=function(a,b){this.fn=f(a,b)};d(b,{options:a,encode:n,make:f});d(b.prototype,{apply:function(b,a){return this.fn.call(a||this,b,a||b)}});r.Simplate=b})(window)
+
+dhtmlx=function(a){for(var b in a)dhtmlx[b]=a[b];return dhtmlx};
+dhtmlx.extend_api=function(a,b,c){var d=window[a];if(d)window[a]=function(a){if(a&&typeof a=="object"&&!a.tagName&&!(a instanceof Array)){var c=d.apply(this,b._init?b._init(a):arguments),g;for(g in dhtmlx)if(b[g])this[b[g]](dhtmlx[g]);for(g in a)if(b[g])this[b[g]](a[g]);else g.indexOf("on")==0&&this.attachEvent(g,a[g])}else c=d.apply(this,arguments);b._patch&&b._patch(this);return c||this},window[a].prototype=d.prototype,c&&dhtmlXHeir(window[a].prototype,c)};
+dhtmlxAjax={get:function(a,b){var c=new dtmlXMLLoaderObject(!0);c.async=arguments.length<3;c.waitCall=b;c.loadXML(a);return c},post:function(a,b,c){var d=new dtmlXMLLoaderObject(!0);d.async=arguments.length<4;d.waitCall=c;d.loadXML(a,!0,b);return d},getSync:function(a){return this.get(a,null,!0)},postSync:function(a,b){return this.post(a,b,null,!0)}};
+function dtmlXMLLoaderObject(a,b,c,d){this.xmlDoc="";this.async=typeof c!="undefined"?c:!0;this.onloadAction=a||null;this.mainObject=b||null;this.waitCall=null;this.rSeed=d||!1;return this}
+dtmlXMLLoaderObject.prototype.waitLoadFunction=function(a){var b=!0;return this.check=function(){if(a&&a.onloadAction!=null&&(!a.xmlDoc.readyState||a.xmlDoc.readyState==4)&&b){b=!1;if(typeof a.onloadAction=="function")a.onloadAction(a.mainObject,null,null,null,a);if(a.waitCall)a.waitCall.call(this,a),a.waitCall=null}}};
+dtmlXMLLoaderObject.prototype.getXMLTopNode=function(a,b){if(this.xmlDoc.responseXML){var c=this.xmlDoc.responseXML.getElementsByTagName(a);c.length==0&&a.indexOf(":")!=-1&&(c=this.xmlDoc.responseXML.getElementsByTagName(a.split(":")[1]));var d=c[0]}else d=this.xmlDoc.documentElement;if(d)return this._retry=!1,d;if(_isIE&&!this._retry){var e=this.xmlDoc.responseText,b=this.xmlDoc;this._retry=!0;this.xmlDoc=new ActiveXObject("Microsoft.XMLDOM");this.xmlDoc.async=!1;this.xmlDoc.loadXML(e);return this.getXMLTopNode(a,
+b)}dhtmlxError.throwError("LoadXML","Incorrect XML",[b||this.xmlDoc,this.mainObject]);return document.createElement("DIV")};dtmlXMLLoaderObject.prototype.loadXMLString=function(a){try{var b=new DOMParser;this.xmlDoc=b.parseFromString(a,"text/xml")}catch(c){this.xmlDoc=new ActiveXObject("Microsoft.XMLDOM"),this.xmlDoc.async=this.async,this.xmlDoc.loadXML(a)}this.onloadAction(this.mainObject,null,null,null,this);if(this.waitCall)this.waitCall(),this.waitCall=null};
+dtmlXMLLoaderObject.prototype.loadXML=function(a,b,c,d){this.rSeed&&(a+=(a.indexOf("?")!=-1?"&":"?")+"a_dhx_rSeed="+(new Date).valueOf());this.filePath=a;this.xmlDoc=!_isIE&&window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");if(this.async)this.xmlDoc.onreadystatechange=new this.waitLoadFunction(this);this.xmlDoc.open(b?"POST":"GET",a,this.async);d?(this.xmlDoc.setRequestHeader("User-Agent","dhtmlxRPC v0.1 ("+navigator.userAgent+")"),this.xmlDoc.setRequestHeader("Content-type",
+"text/xml")):b&&this.xmlDoc.setRequestHeader("Content-type","application/x-www-form-urlencoded");this.xmlDoc.setRequestHeader("X-Requested-With","XMLHttpRequest");this.xmlDoc.send(c);this.async||(new this.waitLoadFunction(this))()};dtmlXMLLoaderObject.prototype.destructor=function(){return this.xmlDoc=this.mainObject=this.onloadAction=null};
+dtmlXMLLoaderObject.prototype.xmlNodeToJSON=function(a){for(var b={},c=0;c<a.attributes.length;c++)b[a.attributes[c].name]=a.attributes[c].value;b._tagvalue=a.firstChild?a.firstChild.nodeValue:"";for(c=0;c<a.childNodes.length;c++){var d=a.childNodes[c].tagName;d&&(b[d]||(b[d]=[]),b[d].push(this.xmlNodeToJSON(a.childNodes[c])))}return b};function callerFunction(a,b){return this.handler=function(c){if(!c)c=window.event;a(c,b);return!0}}function getAbsoluteLeft(a){return getOffset(a).left}
+function getAbsoluteTop(a){return getOffset(a).top}function getOffsetSum(a){for(var b=0,c=0;a;)b+=parseInt(a.offsetTop),c+=parseInt(a.offsetLeft),a=a.offsetParent;return{top:b,left:c}}
+function getOffsetRect(a){var b=a.getBoundingClientRect(),c=document.body,d=document.documentElement,e=window.pageYOffset||d.scrollTop||c.scrollTop,f=window.pageXOffset||d.scrollLeft||c.scrollLeft,g=d.clientTop||c.clientTop||0,h=d.clientLeft||c.clientLeft||0,i=b.top+e-g,k=b.left+f-h;return{top:Math.round(i),left:Math.round(k)}}function getOffset(a){return a.getBoundingClientRect&&!_isChrome?getOffsetRect(a):getOffsetSum(a)}
+function convertStringToBoolean(a){typeof a=="string"&&(a=a.toLowerCase());switch(a){case "1":case "true":case "yes":case "y":case 1:case !0:return!0;default:return!1}}function getUrlSymbol(a){return a.indexOf("?")!=-1?"&":"?"}function dhtmlDragAndDropObject(){if(window.dhtmlDragAndDrop)return window.dhtmlDragAndDrop;this.dragStartObject=this.dragStartNode=this.dragNode=this.lastLanding=0;this.tempDOMM=this.tempDOMU=null;this.waitDrag=0;window.dhtmlDragAndDrop=this;return this}
+dhtmlDragAndDropObject.prototype.removeDraggableItem=function(a){a.onmousedown=null;a.dragStarter=null;a.dragLanding=null};dhtmlDragAndDropObject.prototype.addDraggableItem=function(a,b){a.onmousedown=this.preCreateDragCopy;a.dragStarter=b;this.addDragLanding(a,b)};dhtmlDragAndDropObject.prototype.addDragLanding=function(a,b){a.dragLanding=b};
+dhtmlDragAndDropObject.prototype.preCreateDragCopy=function(a){if(!((a||event)&&(a||event).button==2)){if(window.dhtmlDragAndDrop.waitDrag)return window.dhtmlDragAndDrop.waitDrag=0,document.body.onmouseup=window.dhtmlDragAndDrop.tempDOMU,document.body.onmousemove=window.dhtmlDragAndDrop.tempDOMM,!1;window.dhtmlDragAndDrop.waitDrag=1;window.dhtmlDragAndDrop.tempDOMU=document.body.onmouseup;window.dhtmlDragAndDrop.tempDOMM=document.body.onmousemove;window.dhtmlDragAndDrop.dragStartNode=this;window.dhtmlDragAndDrop.dragStartObject=
+this.dragStarter;document.body.onmouseup=window.dhtmlDragAndDrop.preCreateDragCopy;document.body.onmousemove=window.dhtmlDragAndDrop.callDrag;window.dhtmlDragAndDrop.downtime=(new Date).valueOf();a&&a.preventDefault&&a.preventDefault();return!1}};
+dhtmlDragAndDropObject.prototype.callDrag=function(a){if(!a)a=window.event;dragger=window.dhtmlDragAndDrop;if(!((new Date).valueOf()-dragger.downtime<100)){if(a.button==0&&_isIE)return dragger.stopDrag();if(!dragger.dragNode&&dragger.waitDrag){dragger.dragNode=dragger.dragStartObject._createDragNode(dragger.dragStartNode,a);if(!dragger.dragNode)return dragger.stopDrag();dragger.dragNode.onselectstart=function(){return!1};dragger.gldragNode=dragger.dragNode;document.body.appendChild(dragger.dragNode);
+document.body.onmouseup=dragger.stopDrag;dragger.waitDrag=0;dragger.dragNode.pWindow=window;dragger.initFrameRoute()}if(dragger.dragNode.parentNode!=window.document.body){var b=dragger.gldragNode;if(dragger.gldragNode.old)b=dragger.gldragNode.old;b.parentNode.removeChild(b);var c=dragger.dragNode.pWindow;if(_isIE){var d=document.createElement("Div");d.innerHTML=dragger.dragNode.outerHTML;dragger.dragNode=d.childNodes[0]}else dragger.dragNode=dragger.dragNode.cloneNode(!0);dragger.dragNode.pWindow=
+window;dragger.gldragNode.old=dragger.dragNode;document.body.appendChild(dragger.dragNode);c.dhtmlDragAndDrop.dragNode=dragger.dragNode}dragger.dragNode.style.left=a.clientX+15+(dragger.fx?dragger.fx*-1:0)+(document.body.scrollLeft||document.documentElement.scrollLeft)+"px";dragger.dragNode.style.top=a.clientY+3+(dragger.fy?dragger.fy*-1:0)+(document.body.scrollTop||document.documentElement.scrollTop)+"px";var e=a.srcElement?a.srcElement:a.target;dragger.checkLanding(e,a)}};
+dhtmlDragAndDropObject.prototype.calculateFramePosition=function(a){if(window.name){for(var b=parent.frames[window.name].frameElement.offsetParent,c=0,d=0;b;)c+=b.offsetLeft,d+=b.offsetTop,b=b.offsetParent;if(parent.dhtmlDragAndDrop){var e=parent.dhtmlDragAndDrop.calculateFramePosition(1);c+=e.split("_")[0]*1;d+=e.split("_")[1]*1}if(a)return c+"_"+d;else this.fx=c;this.fy=d}return"0_0"};
+dhtmlDragAndDropObject.prototype.checkLanding=function(a,b){a&&a.dragLanding?(this.lastLanding&&this.lastLanding.dragLanding._dragOut(this.lastLanding),this.lastLanding=a,this.lastLanding=this.lastLanding.dragLanding._dragIn(this.lastLanding,this.dragStartNode,b.clientX,b.clientY,b),this.lastLanding_scr=_isIE?b.srcElement:b.target):a&&a.tagName!="BODY"?this.checkLanding(a.parentNode,b):(this.lastLanding&&this.lastLanding.dragLanding._dragOut(this.lastLanding,b.clientX,b.clientY,b),this.lastLanding=
+0,this._onNotFound&&this._onNotFound())};
+dhtmlDragAndDropObject.prototype.stopDrag=function(a,b){dragger=window.dhtmlDragAndDrop;if(!b){dragger.stopFrameRoute();var c=dragger.lastLanding;dragger.lastLanding=null;c&&c.dragLanding._drag(dragger.dragStartNode,dragger.dragStartObject,c,_isIE?event.srcElement:a.target)}dragger.lastLanding=null;dragger.dragNode&&dragger.dragNode.parentNode==document.body&&dragger.dragNode.parentNode.removeChild(dragger.dragNode);dragger.dragNode=0;dragger.gldragNode=0;dragger.fx=0;dragger.fy=0;dragger.dragStartNode=
+0;dragger.dragStartObject=0;document.body.onmouseup=dragger.tempDOMU;document.body.onmousemove=dragger.tempDOMM;dragger.tempDOMU=null;dragger.tempDOMM=null;dragger.waitDrag=0};dhtmlDragAndDropObject.prototype.stopFrameRoute=function(a){a&&window.dhtmlDragAndDrop.stopDrag(1,1);for(var b=0;b<window.frames.length;b++)try{window.frames[b]!=a&&window.frames[b].dhtmlDragAndDrop&&window.frames[b].dhtmlDragAndDrop.stopFrameRoute(window)}catch(c){}try{parent.dhtmlDragAndDrop&&parent!=window&&parent!=a&&parent.dhtmlDragAndDrop.stopFrameRoute(window)}catch(d){}};
+dhtmlDragAndDropObject.prototype.initFrameRoute=function(a,b){if(a)window.dhtmlDragAndDrop.preCreateDragCopy({}),window.dhtmlDragAndDrop.dragStartNode=a.dhtmlDragAndDrop.dragStartNode,window.dhtmlDragAndDrop.dragStartObject=a.dhtmlDragAndDrop.dragStartObject,window.dhtmlDragAndDrop.dragNode=a.dhtmlDragAndDrop.dragNode,window.dhtmlDragAndDrop.gldragNode=a.dhtmlDragAndDrop.dragNode,window.document.body.onmouseup=window.dhtmlDragAndDrop.stopDrag,window.waitDrag=0,!_isIE&&b&&(!_isFF||w<1.8)&&window.dhtmlDragAndDrop.calculateFramePosition();
+try{parent.dhtmlDragAndDrop&&parent!=window&&parent!=a&&parent.dhtmlDragAndDrop.initFrameRoute(window)}catch(c){}for(var d=0;d<window.frames.length;d++)try{window.frames[d]!=a&&window.frames[d].dhtmlDragAndDrop&&window.frames[d].dhtmlDragAndDrop.initFrameRoute(window,!a||b?1:0)}catch(e){}};w=_OperaRv=x=_isChrome=_isMacOS=_isKHTML=_isOpera=_isIE=_isFF=!1;navigator.userAgent.indexOf("Macintosh")!=-1&&(_isMacOS=!0);navigator.userAgent.toLowerCase().indexOf("chrome")>-1&&(_isChrome=!0);
+if(navigator.userAgent.indexOf("Safari")!=-1||navigator.userAgent.indexOf("Konqueror")!=-1){var x=parseFloat(navigator.userAgent.substr(navigator.userAgent.indexOf("Safari")+7,5));if(x>525){_isFF=!0;var w=1.9}else _isKHTML=!0}else navigator.userAgent.indexOf("Opera")!=-1?(_isOpera=!0,_OperaRv=parseFloat(navigator.userAgent.substr(navigator.userAgent.indexOf("Opera")+6,3))):navigator.appName.indexOf("Microsoft")!=-1?(_isIE=!0,navigator.appVersion.indexOf("MSIE 8.0")!=-1&&document.compatMode!="BackCompat"&&
+(_isIE=8)):(_isFF=!0,w=parseFloat(navigator.userAgent.split("rv:")[1]));
+dtmlXMLLoaderObject.prototype.doXPath=function(a,b,c,d){if(_isKHTML||!_isIE&&!window.XPathResult)return this.doXPathOpera(a,b);if(_isIE)return b||(b=this.xmlDoc.nodeName?this.xmlDoc:this.xmlDoc.responseXML),b||dhtmlxError.throwError("LoadXML","Incorrect XML",[b||this.xmlDoc,this.mainObject]),c!=null&&b.setProperty("SelectionNamespaces","xmlns:xsl='"+c+"'"),d=="single"?b.selectSingleNode(a):b.selectNodes(a)||[];else{var e=b;b||(b=this.xmlDoc.nodeName?this.xmlDoc:this.xmlDoc.responseXML);b||dhtmlxError.throwError("LoadXML",
+"Incorrect XML",[b||this.xmlDoc,this.mainObject]);b.nodeName.indexOf("document")!=-1?e=b:(e=b,b=b.ownerDocument);var f=XPathResult.ANY_TYPE;if(d=="single")f=XPathResult.FIRST_ORDERED_NODE_TYPE;var g=[],h=b.evaluate(a,e,function(){return c},f,null);if(f==XPathResult.FIRST_ORDERED_NODE_TYPE)return h.singleNodeValue;for(var i=h.iterateNext();i;)g[g.length]=i,i=h.iterateNext();return g}};function z(){if(!this.catches)this.catches=[];return this}z.prototype.catchError=function(a,b){this.catches[a]=b};
+z.prototype.throwError=function(a,b,c){if(this.catches[a])return this.catches[a](a,b,c);if(this.catches.ALL)return this.catches.ALL(a,b,c);alert("Error type: "+a+"\nDescription: "+b);return null};window.dhtmlxError=new z;
+dtmlXMLLoaderObject.prototype.doXPathOpera=function(a,b){var c=a.replace(/[\/]+/gi,"/").split("/"),d=null,e=1;if(!c.length)return[];if(c[0]==".")d=[b];else if(c[0]=="")d=(this.xmlDoc.responseXML||this.xmlDoc).getElementsByTagName(c[e].replace(/\[[^\]]*\]/g,"")),e++;else return[];for(;e<c.length;e++)d=this._getAllNamedChilds(d,c[e]);c[e-1].indexOf("[")!=-1&&(d=this._filterXPath(d,c[e-1]));return d};
+dtmlXMLLoaderObject.prototype._filterXPath=function(a,b){for(var c=[],b=b.replace(/[^\[]*\[\@/g,"").replace(/[\[\]\@]*/g,""),d=0;d<a.length;d++)a[d].getAttribute(b)&&(c[c.length]=a[d]);return c};
+dtmlXMLLoaderObject.prototype._getAllNamedChilds=function(a,b){var c=[];_isKHTML&&(b=b.toUpperCase());for(var d=0;d<a.length;d++)for(var e=0;e<a[d].childNodes.length;e++)_isKHTML?a[d].childNodes[e].tagName&&a[d].childNodes[e].tagName.toUpperCase()==b&&(c[c.length]=a[d].childNodes[e]):a[d].childNodes[e].tagName==b&&(c[c.length]=a[d].childNodes[e]);return c};function dhtmlXHeir(a,b){for(var c in b)typeof b[c]=="function"&&(a[c]=b[c]);return a}
+function dhtmlxEvent(a,b,c){a.addEventListener?a.addEventListener(b,c,!1):a.attachEvent&&a.attachEvent("on"+b,c)}dtmlXMLLoaderObject.prototype.xslDoc=null;dtmlXMLLoaderObject.prototype.setXSLParamValue=function(a,b,c){if(!c)c=this.xslDoc;if(c.responseXML)c=c.responseXML;var d=this.doXPath("/xsl:stylesheet/xsl:variable[@name='"+a+"']",c,"http://www.w3.org/1999/XSL/Transform","single");if(d!=null)d.firstChild.nodeValue=b};
+dtmlXMLLoaderObject.prototype.doXSLTransToObject=function(a,b){if(!a)a=this.xslDoc;if(a.responseXML)a=a.responseXML;if(!b)b=this.xmlDoc;if(b.responseXML)b=b.responseXML;if(_isIE){d=new ActiveXObject("Msxml2.DOMDocument.3.0");try{b.transformNodeToObject(a,d)}catch(c){d=b.transformNode(a)}}else{if(!this.XSLProcessor)this.XSLProcessor=new XSLTProcessor,this.XSLProcessor.importStylesheet(a);var d=this.XSLProcessor.transformToDocument(b)}return d};
+dtmlXMLLoaderObject.prototype.doXSLTransToString=function(a,b){var c=this.doXSLTransToObject(a,b);return typeof c=="string"?c:this.doSerialization(c)};dtmlXMLLoaderObject.prototype.doSerialization=function(a){if(!a)a=this.xmlDoc;if(a.responseXML)a=a.responseXML;if(_isIE)return a.xml;else{var b=new XMLSerializer;return b.serializeToString(a)}};
+dhtmlxEventable=function(a){a.dhx_SeverCatcherPath="";a.attachEvent=function(a,c,d){a="ev_"+a.toLowerCase();this[a]||(this[a]=new this.eventCatcher(d||this));return a+":"+this[a].addEvent(c)};a.callEvent=function(a,c){a="ev_"+a.toLowerCase();return this[a]?this[a].apply(this,c):!0};a.checkEvent=function(a){return!!this["ev_"+a.toLowerCase()]};a.eventCatcher=function(a){var c=[],d=function(){for(var d=!0,f=0;f<c.length;f++)if(c[f]!=null)var g=c[f].apply(a,arguments),d=d&&g;return d};d.addEvent=function(a){typeof a!=
+"function"&&(a=eval(a));return a?c.push(a)-1:!1};d.removeEvent=function(a){c[a]=null};return d};a.detachEvent=function(a){if(a!=!1){var c=a.split(":");this[c[0]].removeEvent(c[1])}};a.detachAllEvents=function(){for(var a in this)a.indexOf("ev_")==0&&delete this[a]}};
+function dataProcessor(a){this.serverProcessor=a;this.action_param="!nativeeditor_status";this.object=null;this.updatedRows=[];this.autoUpdate=!0;this.updateMode="cell";this._tMode="GET";this.post_delim="_";this._waitMode=0;this._in_progress={};this._invalid={};this.mandatoryFields=[];this.messages=[];this.styles={updated:"font-weight:bold;",inserted:"font-weight:bold;",deleted:"text-decoration : line-through;",invalid:"background-color:FFE0E0;",invalid_cell:"border-bottom:2px solid red;",clear:"font-weight:normal;text-decoration:none;"};
+this.enableUTFencoding(!0);dhtmlxEventable(this);return this}
+dataProcessor.prototype={setTransactionMode:function(a,b){this._tMode=a;this._tSend=b},escape:function(a){return this._utf?encodeURIComponent(a):escape(a)},enableUTFencoding:function(a){this._utf=convertStringToBoolean(a)},setDataColumns:function(a){this._columns=typeof a=="string"?a.split(","):a},getSyncState:function(){return!this.updatedRows.length},enableDataNames:function(a){this._endnm=convertStringToBoolean(a)},enablePartialDataSend:function(a){this._changed=convertStringToBoolean(a)},setUpdateMode:function(a,
+b){this.autoUpdate=a=="cell";this.updateMode=a;this.dnd=b},ignore:function(a,b){this._silent_mode=!0;a.call(b||window);this._silent_mode=!1},setUpdated:function(a,b,c){if(!this._silent_mode){var d=this.findRow(a),c=c||"updated",e=this.obj.getUserData(a,this.action_param);e&&c=="updated"&&(c=e);b?(this.set_invalid(a,!1),this.updatedRows[d]=a,this.obj.setUserData(a,this.action_param,c),this._in_progress[a]&&(this._in_progress[a]="wait")):this.is_invalid(a)||(this.updatedRows.splice(d,1),this.obj.setUserData(a,
+this.action_param,""));b||this._clearUpdateFlag(a);this.markRow(a,b,c);b&&this.autoUpdate&&this.sendData(a)}},_clearUpdateFlag:function(){},markRow:function(a,b,c){var d="",e=this.is_invalid(a);e&&(d=this.styles[e],b=!0);if(this.callEvent("onRowMark",[a,b,c,e])&&(d=this.styles[b?c:"clear"]+d,this.obj[this._methods[0]](a,d),e&&e.details)){d+=this.styles[e+"_cell"];for(var f=0;f<e.details.length;f++)if(e.details[f])this.obj[this._methods[1]](a,f,d)}},getState:function(a){return this.obj.getUserData(a,
+this.action_param)},is_invalid:function(a){return this._invalid[a]},set_invalid:function(a,b,c){c&&(b={value:b,details:c,toString:function(){return this.value.toString()}});this._invalid[a]=b},checkBeforeUpdate:function(){return!0},sendData:function(a){if(!this._waitMode||!(this.obj.mytype=="tree"||this.obj._h2)){this.obj.editStop&&this.obj.editStop();if(typeof a=="undefined"||this._tSend)return this.sendAllData();if(this._in_progress[a])return!1;this.messages=[];if(!this.checkBeforeUpdate(a)&&this.callEvent("onValidatationError",
+[a,this.messages]))return!1;this._beforeSendData(this._getRowData(a),a)}},_beforeSendData:function(a,b){if(!this.callEvent("onBeforeUpdate",[b,this.getState(b),a]))return!1;this._sendData(a,b)},serialize:function(a,b){if(typeof a=="string")return a;if(typeof b!="undefined")return this.serialize_one(a,"");else{var c=[],d=[],e;for(e in a)a.hasOwnProperty(e)&&(c.push(this.serialize_one(a[e],e+this.post_delim)),d.push(e));c.push("ids="+this.escape(d.join(",")));return c.join("&")}},serialize_one:function(a,
+b){if(typeof a=="string")return a;var c=[],d;for(d in a)a.hasOwnProperty(d)&&c.push(this.escape((b||"")+d)+"="+this.escape(a[d]));return c.join("&")},_sendData:function(a,b){if(a){if(!this.callEvent("onBeforeDataSending",b?[b,this.getState(b),a]:[null,null,a]))return!1;b&&(this._in_progress[b]=(new Date).valueOf());var c=new dtmlXMLLoaderObject(this.afterUpdate,this,!0),d=this.serverProcessor+(this._user?getUrlSymbol(this.serverProcessor)+["dhx_user="+this._user,"dhx_version="+this.obj.getUserData(0,
+"version")].join("&"):"");this._tMode!="POST"?c.loadXML(d+(d.indexOf("?")!=-1?"&":"?")+this.serialize(a,b)):c.loadXML(d,!0,this.serialize(a,b));this._waitMode++}},sendAllData:function(){if(this.updatedRows.length){this.messages=[];for(var a=!0,b=0;b<this.updatedRows.length;b++)a&=this.checkBeforeUpdate(this.updatedRows[b]);if(!a&&!this.callEvent("onValidatationError",["",this.messages]))return!1;if(this._tSend)this._sendData(this._getAllData());else for(b=0;b<this.updatedRows.length;b++)if(!this._in_progress[this.updatedRows[b]]&&
+!this.is_invalid(this.updatedRows[b])&&(this._beforeSendData(this._getRowData(this.updatedRows[b]),this.updatedRows[b]),this._waitMode&&(this.obj.mytype=="tree"||this.obj._h2)))break}},_getAllData:function(){for(var a={},b=!1,c=0;c<this.updatedRows.length;c++){var d=this.updatedRows[c];!this._in_progress[d]&&!this.is_invalid(d)&&this.callEvent("onBeforeUpdate",[d,this.getState(d)])&&(a[d]=this._getRowData(d,d+this.post_delim),b=!0,this._in_progress[d]=(new Date).valueOf())}return b?a:null},setVerificator:function(a,
+b){this.mandatoryFields[a]=b||function(a){return a!=""}},clearVerificator:function(a){this.mandatoryFields[a]=!1},findRow:function(a){for(var b=0,b=0;b<this.updatedRows.length;b++)if(a==this.updatedRows[b])break;return b},defineAction:function(a,b){if(!this._uActions)this._uActions=[];this._uActions[a]=b},afterUpdateCallback:function(a,b,c,d){var e=a,f=c!="error"&&c!="invalid";f||this.set_invalid(a,c);if(this._uActions&&this._uActions[c]&&!this._uActions[c](d))return delete this._in_progress[e];this._in_progress[e]!=
+"wait"&&this.setUpdated(a,!1);var g=a;switch(c){case "update":case "updated":case "inserted":case "insert":b!=a&&(this.obj[this._methods[2]](a,b),a=b);break;case "delete":case "deleted":return this.obj.setUserData(a,this.action_param,"true_deleted"),this.obj[this._methods[3]](a),delete this._in_progress[e],this.callEvent("onAfterUpdate",[a,c,b,d])}this._in_progress[e]!="wait"?(f&&this.obj.setUserData(a,this.action_param,""),delete this._in_progress[e]):(delete this._in_progress[e],this.setUpdated(b,
+!0,this.obj.getUserData(a,this.action_param)));this.callEvent("onAfterUpdate",[a,c,b,d])},afterUpdate:function(a,b,c,d,e){e.getXMLTopNode("data");if(e.xmlDoc.responseXML){for(var f=e.doXPath("//data/action"),g=0;g<f.length;g++){var h=f[g],i=h.getAttribute("type"),k=h.getAttribute("sid"),j=h.getAttribute("tid");a.afterUpdateCallback(k,j,i,h)}a.finalizeUpdate()}},finalizeUpdate:function(){this._waitMode&&this._waitMode--;(this.obj.mytype=="tree"||this.obj._h2)&&this.updatedRows.length&&this.sendData();
+this.callEvent("onAfterUpdateFinish",[]);this.updatedRows.length||this.callEvent("onFullSync",[])},init:function(a){this.obj=a;this.obj._dp_init&&this.obj._dp_init(this)},setOnAfterUpdate:function(a){this.attachEvent("onAfterUpdate",a)},enableDebug:function(){},setOnBeforeUpdateHandler:function(a){this.attachEvent("onBeforeDataSending",a)},setAutoUpdate:function(a,b){a=a||2E3;this._user=b||(new Date).valueOf();this._need_update=!1;this._loader=null;this._update_busy=!1;this.attachEvent("onAfterUpdate",
+function(a,b,c,g){this.afterAutoUpdate(a,b,c,g)});this.attachEvent("onFullSync",function(){this.fullSync()});var c=this;window.setInterval(function(){c.loadUpdate()},a)},afterAutoUpdate:function(a,b){return b=="collision"?(this._need_update=!0,!1):!0},fullSync:function(){if(this._need_update==!0)this._need_update=!1,this.loadUpdate();return!0},getUpdates:function(a,b){if(this._update_busy)return!1;else this._update_busy=!0;this._loader=this._loader||new dtmlXMLLoaderObject(!0);this._loader.async=
+!0;this._loader.waitCall=b;this._loader.loadXML(a)},_v:function(a){return a.firstChild?a.firstChild.nodeValue:""},_a:function(a){for(var b=[],c=0;c<a.length;c++)b[c]=this._v(a[c]);return b},loadUpdate:function(){var a=this,b=this.obj.getUserData(0,"version"),c=this.serverProcessor+getUrlSymbol(this.serverProcessor)+["dhx_user="+this._user,"dhx_version="+b].join("&"),c=c.replace("editing=true&","");this.getUpdates(c,function(){var b=a._loader.doXPath("//userdata");a.obj.setUserData(0,"version",a._v(b[0]));
+var c=a._loader.doXPath("//update");if(c.length){a._silent_mode=!0;for(var f=0;f<c.length;f++){var g=c[f].getAttribute("status"),h=c[f].getAttribute("id"),i=c[f].getAttribute("parent");switch(g){case "inserted":a.callEvent("insertCallback",[c[f],h,i]);break;case "updated":a.callEvent("updateCallback",[c[f],h,i]);break;case "deleted":a.callEvent("deleteCallback",[c[f],h,i])}}a._silent_mode=!1}a._update_busy=!1;a=null})}};
+if(window.dhtmlXGridObject)dhtmlXGridObject.prototype._init_point_connector=dhtmlXGridObject.prototype._init_point,dhtmlXGridObject.prototype._init_point=function(){var a=function(a){a=a.replace(/(\?|\&)connector[^\f]*/g,"");return a+(a.indexOf("?")!=-1?"&":"?")+"connector=true"+(this.hdr.rows.length>0?"&dhx_no_header=1":"")},b=function(b){return a.call(this,b)+(this._connector_sorting||"")+(this._connector_filter||"")},c=function(a,c,d){this._connector_sorting="&dhx_sort["+c+"]="+d;return b.call(this,
+a)},d=function(a,c,d){for(var h=0;h<c.length;h++)c[h]="dhx_filter["+c[h]+"]="+encodeURIComponent(d[h]);this._connector_filter="&"+c.join("&");return b.call(this,a)};this.attachEvent("onCollectValues",function(a){return this._con_f_used[a]?typeof this._con_f_used[a]=="object"?this._con_f_used[a]:!1:!0});this.attachEvent("onDynXLS",function(){this.xmlFileUrl=b.call(this,this.xmlFileUrl);return!0});this.attachEvent("onBeforeSorting",function(a,b,d){if(b=="connector"){var h=this;this.clearAndLoad(c.call(this,
+this.xmlFileUrl,a,d),function(){h.setSortImgState(!0,a,d)});return!1}return!0});this.attachEvent("onFilterStart",function(a,b){return this._con_f_used.length?(this.clearAndLoad(d.call(this,this.xmlFileUrl,a,b)),!1):!0});this.attachEvent("onXLE",function(){});this._init_point_connector&&this._init_point_connector()},dhtmlXGridObject.prototype._con_f_used=[],dhtmlXGridObject.prototype._in_header_connector_text_filter=function(a,b){this._con_f_used[b]||(this._con_f_used[b]=1);return this._in_header_text_filter(a,
+b)},dhtmlXGridObject.prototype._in_header_connector_select_filter=function(a,b){this._con_f_used[b]||(this._con_f_used[b]=2);return this._in_header_select_filter(a,b)},dhtmlXGridObject.prototype.load_connector=dhtmlXGridObject.prototype.load,dhtmlXGridObject.prototype.load=function(a,b,c){if(!this._colls_loaded&&this.cellType){for(var d=[],e=0;e<this.cellType.length;e++)(this.cellType[e].indexOf("co")==0||this._con_f_used[e]==2)&&d.push(e);d.length&&(arguments[0]+=(arguments[0].indexOf("?")!=-1?"&":
+"?")+"connector=true&dhx_colls="+d.join(","))}return this.load_connector.apply(this,arguments)},dhtmlXGridObject.prototype._parseHead_connector=dhtmlXGridObject.prototype._parseHead,dhtmlXGridObject.prototype._parseHead=function(a,b,c){this._parseHead_connector.apply(this,arguments);if(!this._colls_loaded){for(var d=this.xmlLoader.doXPath("./coll_options",arguments[0]),e=0;e<d.length;e++){var f=d[e].getAttribute("for"),g=[],h=null;this.cellType[f]=="combo"&&(h=this.getColumnCombo(f));this.cellType[f].indexOf("co")==
+0&&(h=this.getCombo(f));for(var i=this.xmlLoader.doXPath("./item",d[e]),k=0;k<i.length;k++){var j=i[k].getAttribute("value");if(h){var l=i[k].getAttribute("label")||j;h.addOption?h.addOption([[j,l]]):h.put(j,l);g[g.length]=l}else g[g.length]=j}this._con_f_used[f*1]&&(this._con_f_used[f*1]=g)}this._colls_loaded=!0}};
+if(window.dataProcessor)dataProcessor.prototype.init_original=dataProcessor.prototype.init,dataProcessor.prototype.init=function(a){this.init_original(a);a._dataprocessor=this;this.setTransactionMode("POST",!0);this.serverProcessor+=(this.serverProcessor.indexOf("?")!=-1?"&":"?")+"editing=true"};dhtmlxError.catchError("LoadXML",function(a,b,c){c[0].status!=0&&alert(c[0].responseText)});window.dhtmlXScheduler=window.scheduler={version:3};dhtmlxEventable(scheduler);
+scheduler.init=function(a,b,c){b=b||new Date;c=c||"week";scheduler.date.init();this._obj=typeof a=="string"?document.getElementById(a):a;this._els=[];this._scroll=!0;this._quirks=_isIE&&document.compatMode=="BackCompat";this._quirks7=_isIE&&navigator.appVersion.indexOf("MSIE 8")==-1;this.get_elements();this.init_templates();this.set_actions();dhtmlxEvent(window,"resize",function(){window.clearTimeout(scheduler._resize_timer);scheduler._resize_timer=window.setTimeout(function(){scheduler.callEvent("onSchedulerResize",
+[])&&scheduler.update_view()},100)});this.set_sizes();scheduler.callEvent("onSchedulerReady",[]);this.setCurrentView(b,c)};scheduler.xy={nav_height:22,min_event_height:40,scale_width:50,bar_height:20,scroll_width:18,scale_height:20,month_scale_height:20,menu_width:25,margin_top:0,margin_left:0,editor_width:140};scheduler.keys={edit_save:13,edit_cancel:27};
+scheduler.set_sizes=function(){var a=this._x=this._obj.clientWidth-this.xy.margin_left,b=this._y=this._obj.clientHeight-this.xy.margin_top,c=this._table_view?0:this.xy.scale_width+this.xy.scroll_width,d=this._table_view?-1:this.xy.scale_width;this.set_xy(this._els.dhx_cal_navline[0],a,this.xy.nav_height,0,0);this.set_xy(this._els.dhx_cal_header[0],a-c,this.xy.scale_height,d,this.xy.nav_height+(this._quirks?-1:1));var e=this._els.dhx_cal_navline[0].offsetHeight;if(e>0)this.xy.nav_height=e;var f=this.xy.scale_height+
+this.xy.nav_height+(this._quirks?-2:0);this.set_xy(this._els.dhx_cal_data[0],a,b-(f+2),0,f+2)};scheduler.set_xy=function(a,b,c,d,e){a.style.width=Math.max(0,b)+"px";a.style.height=Math.max(0,c)+"px";if(arguments.length>3)a.style.left=d+"px",a.style.top=e+"px"};
+scheduler.get_elements=function(){for(var a=this._obj.getElementsByTagName("DIV"),b=0;b<a.length;b++){var c=a[b].className;this._els[c]||(this._els[c]=[]);this._els[c].push(a[b]);var d=scheduler.locale.labels[a[b].getAttribute("name")||c];if(d)a[b].innerHTML=d}};
+scheduler.set_actions=function(){for(var a in this._els)if(this._click[a])for(var b=0;b<this._els[a].length;b++)this._els[a][b].onclick=scheduler._click[a];this._obj.onselectstart=function(){return!1};this._obj.onmousemove=function(a){scheduler._on_mouse_move(a||event)};this._obj.onmousedown=function(a){scheduler._on_mouse_down(a||event)};this._obj.onmouseup=function(a){scheduler._on_mouse_up(a||event)};this._obj.ondblclick=function(a){scheduler._on_dbl_click(a||event)}};
+scheduler.select=function(a){if(!this._table_view&&this.getEvent(a)._timed&&this._select_id!=a)this.editStop(!1),this.unselect(),this._select_id=a,this.updateEvent(a)};scheduler.unselect=function(a){if(!(a&&a!=this._select_id)){var b=this._select_id;this._select_id=null;b&&this.updateEvent(b)}};scheduler.getState=function(){return{mode:this._mode,date:this._date,min_date:this._min_date,max_date:this._max_date,editor_id:this._edit_id,lightbox_id:this._lightbox_id,new_event:this._new_event}};
+scheduler._click={dhx_cal_data:function(a){var b=a?a.target:event.srcElement,c=scheduler._locate_event(b),a=a||event;if(!(c&&!scheduler.callEvent("onClick",[c,a])||scheduler.config.readonly))if(c){scheduler.select(c);var d=b.className;if(d.indexOf("_icon")!=-1)scheduler._click.buttons[d.split(" ")[1].replace("icon_","")](c)}else scheduler._close_not_saved()},dhx_cal_prev_button:function(){scheduler._click.dhx_cal_next_button(0,-1)},dhx_cal_next_button:function(a,b){scheduler.setCurrentView(scheduler.date.add(scheduler.date[scheduler._mode+
+"_start"](scheduler._date),b||1,scheduler._mode))},dhx_cal_today_button:function(){scheduler.setCurrentView(new Date)},dhx_cal_tab:function(){var a=this.getAttribute("name"),b=a.substring(0,a.search("_tab"));scheduler.setCurrentView(scheduler._date,b)},buttons:{"delete":function(a){var b=scheduler.locale.labels.confirm_deleting;(!b||confirm(b))&&scheduler.deleteEvent(a)},edit:function(a){scheduler.edit(a)},save:function(){scheduler.editStop(!0)},details:function(a){scheduler.showLightbox(a)},cancel:function(){scheduler.editStop(!1)}}};
+scheduler.addEventNow=function(a,b,c){var d={};a&&a.constructor.toString().match(/object/i)!==null&&(d=a,a=null);var e=(this.config.event_duration||this.config.time_step)*6E4;a||(a=Math.round((new Date).valueOf()/e)*e);var f=new Date(a);if(!b){var g=this.config.first_hour;g>f.getHours()&&(f.setHours(g),a=f.valueOf());b=a+e}var h=new Date(b);f.valueOf()==h.valueOf()&&h.setTime(h.valueOf()+e);d.start_date=d.start_date||f;d.end_date=d.end_date||h;d.text=d.text||this.locale.labels.new_event;d.id=this._drag_id=
+this.uid();this._drag_mode="new-size";this._loading=!0;this.addEvent(d);this.callEvent("onEventCreated",[this._drag_id,c]);this._loading=!1;this._drag_event={};this._on_mouse_up(c)};
+scheduler._on_dbl_click=function(a,b){b=b||a.target||a.srcElement;if(!this.config.readonly){var c=b.className.split(" ")[0];switch(c){case "dhx_scale_holder":case "dhx_scale_holder_now":case "dhx_month_body":case "dhx_wa_day_data":if(!scheduler.config.dblclick_create)break;var d=this._mouse_coords(a),e=this._min_date.valueOf()+(d.y*this.config.time_step+(this._table_view?0:d.x)*1440)*6E4,e=this._correct_shift(e);this.addEventNow(e,null,a);break;case "dhx_body":case "dhx_wa_ev_body":case "dhx_cal_event_line":case "dhx_cal_event_clear":var f=
+this._locate_event(b);if(!this.callEvent("onDblClick",[f,a]))break;this.config.details_on_dblclick||this._table_view||!this.getEvent(f)._timed?this.showLightbox(f):this.edit(f);break;case "":if(b.parentNode)return scheduler._on_dbl_click(a,b.parentNode);default:var g=this["dblclick_"+c];g&&g.call(this,a)}}};
+scheduler._mouse_coords=function(a){var b,c=document.body,d=document.documentElement;b=a.pageX||a.pageY?{x:a.pageX,y:a.pageY}:{x:a.clientX+(c.scrollLeft||d.scrollLeft||0)-c.clientLeft,y:a.clientY+(c.scrollTop||d.scrollTop||0)-c.clientTop};b.x-=getAbsoluteLeft(this._obj)+(this._table_view?0:this.xy.scale_width);b.y-=getAbsoluteTop(this._obj)+this.xy.nav_height+(this._dy_shift||0)+this.xy.scale_height-this._els.dhx_cal_data[0].scrollTop;b.ev=a;var e=this["mouse_"+this._mode];if(e)return e.call(this,
+b);if(this._table_view){for(var f=0,f=1;f<this._colsS.heights.length;f++)if(this._colsS.heights[f]>b.y)break;b.y=(Math.max(0,Math.ceil(b.x/this._cols[0])-1)+Math.max(0,f-1)*7)*1440/this.config.time_step;b.x=0}else b.x=Math.max(0,Math.ceil(b.x/this._cols[0])-1),b.y=Math.max(0,Math.ceil(b.y*60/(this.config.time_step*this.config.hour_size_px))-1)+this.config.first_hour*(60/this.config.time_step);return b};
+scheduler._close_not_saved=function(){if((new Date).valueOf()-(scheduler._new_event||0)>500&&scheduler._edit_id){var a=scheduler.locale.labels.confirm_closing;(!a||confirm(a))&&scheduler.editStop(scheduler.config.positive_closing)}};scheduler._correct_shift=function(a,b){return a-=((new Date(scheduler._min_date)).getTimezoneOffset()-(new Date(a)).getTimezoneOffset())*6E4*(b?-1:1)};
+scheduler._on_mouse_move=function(a){if(this._drag_mode){var b=this._mouse_coords(a);if(!this._drag_pos||b.custom||this._drag_pos.x!=b.x||this._drag_pos.y!=b.y){this._edit_id!=this._drag_id&&this._close_not_saved();this._drag_pos=b;if(this._drag_mode=="create"){this._close_not_saved();this._loading=!0;var c=this._min_date.valueOf()+(b.y*this.config.time_step+(this._table_view?0:b.x)*1440)*6E4,c=this._correct_shift(c);if(!this._drag_start){this._drag_start=c;return}var d=c;if(d==this._drag_start)return;
+this._drag_id=this.uid();this.addEvent(new Date(this._drag_start),new Date(d),this.locale.labels.new_event,this._drag_id,b.fields);this.callEvent("onEventCreated",[this._drag_id,a]);this._loading=!1;this._drag_mode="new-size"}var e=this.getEvent(this._drag_id);if(this._drag_mode=="move")c=this._min_date.valueOf()+(b.y*this.config.time_step+b.x*1440)*6E4,!b.custom&&this._table_view&&(c+=this.date.time_part(e.start_date)*1E3),c=this._correct_shift(c),d=e.end_date.valueOf()-(e.start_date.valueOf()-c);
+else{c=e.start_date.valueOf();if(this._table_view)d=this._min_date.valueOf()+b.y*this.config.time_step*6E4+(b.custom?0:864E5),this._mode=="month"&&(d=this._correct_shift(d,!1));else if(d=this.date.date_part(new Date(e.end_date)).valueOf()+b.y*this.config.time_step*6E4,this._els.dhx_cal_data[0].style.cursor="s-resize",this._mode=="week"||this._mode=="day")d=this._correct_shift(d);if(this._drag_mode=="new-size")if(d<=this._drag_start)var f=b.shift||(this._table_view&&!b.custom?864E5:0),c=d-(b.shift?
+0:f),d=this._drag_start+(f||this.config.time_step*6E4);else c=this._drag_start;else d<=c&&(d=c+this.config.time_step*6E4)}var g=new Date(d-1),h=new Date(c);if(this._table_view||g.getDate()==h.getDate()&&g.getHours()<this.config.last_hour||scheduler._wa&&scheduler._wa._dnd)e.start_date=h,e.end_date=new Date(d),this.config.update_render?this.update_view():this.updateEvent(this._drag_id);this._table_view&&this.for_rendered(this._drag_id,function(a){a.className+=" dhx_in_move"})}}else if(scheduler.checkEvent("onMouseMove")){var i=
+this._locate_event(a.target||a.srcElement);this.callEvent("onMouseMove",[i,a])}};scheduler._on_mouse_context=function(a,b){return this.callEvent("onContextMenu",[this._locate_event(b),a])};
+scheduler._on_mouse_down=function(a,b){if(!this.config.readonly&&!this._drag_mode){b=b||a.target||a.srcElement;if(a.button==2||a.ctrlKey)return this._on_mouse_context(a,b);switch(b.className.split(" ")[0]){case "dhx_cal_event_line":case "dhx_cal_event_clear":if(this._table_view)this._drag_mode="move";break;case "dhx_header":case "dhx_title":case "dhx_wa_ev_body":this._drag_mode="move";break;case "dhx_footer":this._drag_mode="resize";break;case "dhx_scale_holder":case "dhx_scale_holder_now":case "dhx_month_body":case "dhx_matrix_cell":this._drag_mode=
+"create";break;case "":if(b.parentNode)return scheduler._on_mouse_down(a,b.parentNode);default:this._drag_id=this._drag_mode=null}if(this._drag_mode){var c=this._locate_event(b);!this.config["drag_"+this._drag_mode]||!this.callEvent("onBeforeDrag",[c,this._drag_mode,a])?this._drag_mode=this._drag_id=0:(this._drag_id=c,this._drag_event=scheduler._lame_copy({},this._copy_event(this.getEvent(this._drag_id)||{})))}this._drag_start=null}};
+scheduler._on_mouse_up=function(a){if(this._drag_mode&&this._drag_id){this._els.dhx_cal_data[0].style.cursor="default";var b=this.getEvent(this._drag_id);if(this._drag_event._dhx_changed||!this._drag_event.start_date||b.start_date.valueOf()!=this._drag_event.start_date.valueOf()||b.end_date.valueOf()!=this._drag_event.end_date.valueOf()){var c=this._drag_mode=="new-size";if(this.callEvent("onBeforeEventChanged",[b,a,c]))if(c&&this.config.edit_on_create){this.unselect();this._new_event=new Date;if(this._table_view||
+this.config.details_on_create)return this._drag_mode=null,this.showLightbox(this._drag_id);this._drag_pos=!0;this._select_id=this._edit_id=this._drag_id}else this._new_event||this.callEvent(c?"onEventAdded":"onEventChanged",[this._drag_id,this.getEvent(this._drag_id)]);else c?this.deleteEvent(b.id,!0):(this._drag_event._dhx_changed=!1,scheduler._lame_copy(b,this._drag_event),this.updateEvent(b.id))}this._drag_pos&&this.render_view_data()}this._drag_pos=this._drag_mode=null};
+scheduler.update_view=function(){this._reset_scale();if(this._load_mode&&this._load())return this._render_wait=!0;this.render_view_data()};
+scheduler.setCurrentView=function(a,b){a=a||this._date;b=b||this._mode;if(this.callEvent("onBeforeViewChange",[this._mode,this._date,b,a])){var c="dhx_cal_data",d=this._mode==b&&this.config.preserve_scroll?this._els[c][0].scrollTop:!1;if(this[this._mode+"_view"]&&b&&this._mode!=b)this[this._mode+"_view"](!1);this._close_not_saved();var e="dhx_multi_day";this._els[e]&&(this._els[e][0].parentNode.removeChild(this._els[e][0]),this._els[e]=null);this._mode=b;this._date=a;this._table_view=this._mode==
+"month";for(var f=this._els.dhx_cal_tab,g=0;g<f.length;g++)f[g].className="dhx_cal_tab"+(f[g].getAttribute("name")==this._mode+"_tab"?" active":"");var h=this[this._mode+"_view"];h?h(!0):this.update_view();if(typeof d=="number")this._els[c][0].scrollTop=d;this.callEvent("onViewChange",[this._mode,this._date])}};
+scheduler._render_x_header=function(a,b,c,d){var e=document.createElement("DIV");e.className="dhx_scale_bar";this.set_xy(e,this._cols[a]-1,this.xy.scale_height-2,b,0);e.innerHTML=this.templates[this._mode+"_scale_date"](c,this._mode);d.appendChild(e)};
+scheduler._reset_scale=function(){if(this.templates[this._mode+"_date"]){var a=this._els.dhx_cal_header[0],b=this._els.dhx_cal_data[0],c=this.config;a.innerHTML="";b.scrollTop=0;b.innerHTML="";var d=(c.readonly||!c.drag_resize?" dhx_resize_denied":"")+(c.readonly||!c.drag_move?" dhx_move_denied":"");if(d)b.className="dhx_cal_data"+d;this._cols=[];this._colsS={height:0};this._dy_shift=0;this.set_sizes();var e=parseInt(a.style.width),f=0,g,h,i,k;h=this.date[this._mode+"_start"](new Date(this._date.valueOf()));
+g=i=this._table_view?scheduler.date.week_start(h):h;k=this.date.date_part(new Date);var j=scheduler.date.add(h,1,this._mode),l=7;if(!this._table_view){var o=this.date["get_"+this._mode+"_end"];o&&(j=o(h));l=Math.round((j.valueOf()-h.valueOf())/864E5)}this._min_date=g;this._els.dhx_cal_date[0].innerHTML=this.templates[this._mode+"_date"](h,j,this._mode);for(var m=0;m<l;m++){this._cols[m]=Math.floor(e/(l-m));this._render_x_header(m,f,g,a);if(!this._table_view){var n=document.createElement("DIV"),p=
+"dhx_scale_holder";g.valueOf()==k.valueOf()&&(p="dhx_scale_holder_now");n.className=p+" "+this.templates.week_date_class(g,k);this.set_xy(n,this._cols[m]-1,c.hour_size_px*(c.last_hour-c.first_hour),f+this.xy.scale_width+1,0);b.appendChild(n);this.callEvent("onScaleAdd",[n,g])}g=this.date.add(g,1,"day");e-=this._cols[m];f+=this._cols[m];this._colsS[m]=(this._cols[m-1]||0)+(this._colsS[m-1]||(this._table_view?0:this.xy.scale_width+2));this._colsS.col_length=l+1}this._max_date=g;this._colsS[l]=this._cols[l-
+1]+this._colsS[l-1];if(this._table_view)this._reset_month_scale(b,h,i);else{this._reset_hours_scale(b,h,i);if(c.multi_day){var q="dhx_multi_day";this._els[q]&&(this._els[q][0].parentNode.removeChild(this._els[q][0]),this._els[q]=null);var v=this._els.dhx_cal_navline[0],s=v.offsetHeight+this._els.dhx_cal_header[0].offsetHeight+1,r=document.createElement("DIV");r.className=q;r.style.visibility="hidden";this.set_xy(r,this._colsS[this._colsS.col_length-1]+this.xy.scroll_width,0,0,s);b.parentNode.insertBefore(r,
+b);var u=r.cloneNode(!0);u.className=q+"_icon";u.style.visibility="hidden";this.set_xy(u,this.xy.scale_width,0,0,s);r.appendChild(u);this._els[q]=[r,u];this._els[q][0].onclick=this._click.dhx_cal_data}if(this.config.mark_now){var t=new Date;if(t<this._max_date&&t>this._min_date&&t.getHours()>=this.config.first_hour&&t.getHours()<this.config.last_hour){var A=this.locate_holder_day(t),B=t.getHours()*60+t.getMinutes(),y=document.createElement("DIV");y.className="dhx_now_time";y.style.top=Math.round((B*
+6E4-this.config.first_hour*36E5)*this.config.hour_size_px/36E5)%(this.config.hour_size_px*24)+1+"px";b.childNodes[A].appendChild(y)}}}}};
+scheduler._reset_hours_scale=function(a){var b=document.createElement("DIV");b.className="dhx_scale_holder";for(var c=new Date(1980,1,1,this.config.first_hour,0,0),d=this.config.first_hour*1;d<this.config.last_hour;d++){var e=document.createElement("DIV");e.className="dhx_scale_hour";e.style.height=this.config.hour_size_px-(this._quirks?0:1)+"px";e.style.width=this.xy.scale_width+"px";e.innerHTML=scheduler.templates.hour_scale(c);b.appendChild(e);c=this.date.add(c,1,"hour")}a.appendChild(b);if(this.config.scroll_hour)a.scrollTop=
+this.config.hour_size_px*(this.config.scroll_hour-this.config.first_hour)};
+scheduler._reset_month_scale=function(a,b,c){var d=scheduler.date.add(b,1,"month"),e=new Date;this.date.date_part(e);this.date.date_part(c);var f=Math.ceil(Math.round((d.valueOf()-c.valueOf())/864E5)/7),g=[],h=Math.floor(a.clientHeight/f)-22;this._colsS.height=h+22;for(var i=this._colsS.heights=[],k=0;k<=7;k++)g[k]=" style='height:"+h+"px; width:"+((this._cols[k]||0)-1)+"px;' ";var j=0;this._min_date=c;for(var l="<table cellpadding='0' cellspacing='0'>",k=0;k<f;k++){l+="<tr>";for(var o=0;o<7;o++){l+=
+"<td";var m="";c<b?m="dhx_before":c>=d?m="dhx_after":c.valueOf()==e.valueOf()&&(m="dhx_now");l+=" class='"+m+" "+this.templates.month_date_class(c,e)+"' ";l+="><div class='dhx_month_head'>"+this.templates.month_day(c)+"</div><div class='dhx_month_body' "+g[o]+"></div></td>";c=this.date.add(c,1,"day")}l+="</tr>";i[k]=j;j+=this._colsS.height}l+="</table>";this._max_date=c;a.innerHTML=l;return c};
+scheduler.getLabel=function(a,b){for(var c=this.config.lightbox.sections,d=0;d<c.length;d++)if(c[d].map_to==a)for(var e=c[d].options,f=0;f<e.length;f++)if(e[f].key==b)return e[f].label;return""};scheduler.updateCollection=function(a,b){var c=scheduler.serverList(a);if(!c)return!1;c.splice(0,c.length);c.push.apply(c,b||[]);scheduler.callEvent("onOptionsLoad",[]);scheduler.resetLightbox();return!0};scheduler._lame_copy=function(a,b){for(var c in b)a[c]=b[c];return a};
+scheduler.date={init:function(){for(var a=scheduler.locale.date.month_short,b=scheduler.locale.date.month_short_hash={},c=0;c<a.length;c++)b[a[c]]=c;a=scheduler.locale.date.month_full;b=scheduler.locale.date.month_full_hash={};for(c=0;c<a.length;c++)b[a[c]]=c},date_part:function(a){a.setHours(0);a.setMinutes(0);a.setSeconds(0);a.setMilliseconds(0);return a},time_part:function(a){return(a.valueOf()/1E3-a.getTimezoneOffset()*60)%86400},week_start:function(a){var b=a.getDay();scheduler.config.start_on_monday&&
+(b===0?b=6:b--);return this.date_part(this.add(a,-1*b,"day"))},month_start:function(a){a.setDate(1);return this.date_part(a)},year_start:function(a){a.setMonth(0);return this.month_start(a)},day_start:function(a){return this.date_part(a)},add:function(a,b,c){var d=new Date(a.valueOf());switch(c){case "day":d.setDate(d.getDate()+b);if(a.getDate()==d.getDate()&&b){do d.setTime(d.getTime()+36E5);while(a.getDate()==d.getDate())}break;case "week":d.setDate(d.getDate()+7*b);break;case "month":d.setMonth(d.getMonth()+
+b);break;case "year":d.setYear(d.getFullYear()+b);break;case "hour":d.setHours(d.getHours()+b);break;case "minute":d.setMinutes(d.getMinutes()+b);break;default:return scheduler.date["add_"+c](a,b,c)}return d},to_fixed:function(a){return a<10?"0"+a:a},copy:function(a){return new Date(a.valueOf())},date_to_str:function(a,b){a=a.replace(/%[a-zA-Z]/g,function(a){switch(a){case "%d":return'"+scheduler.date.to_fixed(date.getDate())+"';case "%m":return'"+scheduler.date.to_fixed((date.getMonth()+1))+"';case "%j":return'"+date.getDate()+"';
+case "%n":return'"+(date.getMonth()+1)+"';case "%y":return'"+scheduler.date.to_fixed(date.getFullYear()%100)+"';case "%Y":return'"+date.getFullYear()+"';case "%D":return'"+scheduler.locale.date.day_short[date.getDay()]+"';case "%l":return'"+scheduler.locale.date.day_full[date.getDay()]+"';case "%M":return'"+scheduler.locale.date.month_short[date.getMonth()]+"';case "%F":return'"+scheduler.locale.date.month_full[date.getMonth()]+"';case "%h":return'"+scheduler.date.to_fixed((date.getHours()+11)%12+1)+"';
+case "%g":return'"+((date.getHours()+11)%12+1)+"';case "%G":return'"+date.getHours()+"';case "%H":return'"+scheduler.date.to_fixed(date.getHours())+"';case "%i":return'"+scheduler.date.to_fixed(date.getMinutes())+"';case "%a":return'"+(date.getHours()>11?"pm":"am")+"';case "%A":return'"+(date.getHours()>11?"PM":"AM")+"';case "%s":return'"+scheduler.date.to_fixed(date.getSeconds())+"';case "%W":return'"+scheduler.date.to_fixed(scheduler.date.getISOWeek(date))+"';default:return a}});b&&(a=a.replace(/date\.get/g,
+"date.getUTC"));return new Function("date",'return "'+a+'";')},str_to_date:function(a,b){for(var c="var temp=date.split(/[^0-9a-zA-Z]+/g);",d=a.match(/%[a-zA-Z]/g),e=0;e<d.length;e++)switch(d[e]){case "%j":case "%d":c+="set[2]=temp["+e+"]||1;";break;case "%n":case "%m":c+="set[1]=(temp["+e+"]||1)-1;";break;case "%y":c+="set[0]=temp["+e+"]*1+(temp["+e+"]>50?1900:2000);";break;case "%g":case "%G":case "%h":case "%H":c+="set[3]=temp["+e+"]||0;";break;case "%i":c+="set[4]=temp["+e+"]||0;";break;case "%Y":c+=
+"set[0]=temp["+e+"]||0;";break;case "%a":case "%A":c+="set[3]=set[3]%12+((temp["+e+"]||'').toLowerCase()=='am'?0:12);";break;case "%s":c+="set[5]=temp["+e+"]||0;";break;case "%M":c+="set[1]=scheduler.locale.date.month_short_hash[temp["+e+"]]||0;";break;case "%F":c+="set[1]=scheduler.locale.date.month_full_hash[temp["+e+"]]||0;"}var f="set[0],set[1],set[2],set[3],set[4],set[5]";b&&(f=" Date.UTC("+f+")");return new Function("date","var set=[0,0,1,0,0,0]; "+c+" return new Date("+f+");")},getISOWeek:function(a){if(!a)return!1;
+var b=a.getDay();b===0&&(b=7);var c=new Date(a.valueOf());c.setDate(a.getDate()+(4-b));var d=c.getFullYear(),e=Math.round((c.getTime()-(new Date(d,0,1)).getTime())/864E5),f=1+Math.floor(e/7);return f},getUTCISOWeek:function(a){return this.getISOWeek(a)}};
+scheduler.locale={date:{month_full:"January,February,March,April,May,June,July,August,September,October,November,December".split(","),month_short:"Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec".split(","),day_full:"Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday".split(","),day_short:"Sun,Mon,Tue,Wed,Thu,Fri,Sat".split(",")},labels:{dhx_cal_today_button:"Today",day_tab:"Day",week_tab:"Week",month_tab:"Month",new_event:"New event",icon_save:"Save",icon_cancel:"Cancel",icon_details:"Details",
+icon_edit:"Edit",icon_delete:"Delete",confirm_closing:"",confirm_deleting:"Event will be deleted permanently, are you sure?",section_description:"Description",section_time:"Time period",full_day:"Full day",confirm_recurring:"Do you want to edit the whole set of repeated events?",section_recurring:"Repeat event",button_recurring:"Disabled",button_recurring_open:"Enabled",agenda_tab:"Agenda",date:"Date",description:"Description",year_tab:"Year",week_agenda_tab:"Agenda"}};
+scheduler.config={default_date:"%j %M %Y",month_date:"%F %Y",load_date:"%Y-%m-%d",week_date:"%l",day_date:"%D, %F %j",hour_date:"%H:%i",month_day:"%d",xml_date:"%m/%d/%Y %H:%i",api_date:"%d-%m-%Y %H:%i",hour_size_px:42,time_step:5,start_on_monday:1,first_hour:0,last_hour:24,readonly:!1,drag_resize:1,drag_move:1,drag_create:1,dblclick_create:1,edit_on_create:1,details_on_create:0,click_form_details:0,cascade_event_display:!1,cascade_event_count:4,cascade_event_margin:30,drag_lightbox:!0,preserve_scroll:!0,
+server_utc:!1,positive_closing:!1,icons_edit:["icon_save","icon_cancel"],icons_select:["icon_details","icon_edit","icon_delete"],buttons_left:["dhx_save_btn","dhx_cancel_btn"],buttons_right:["dhx_delete_btn"],lightbox:{sections:[{name:"description",height:200,map_to:"text",type:"textarea",focus:!0},{name:"time",height:72,type:"time",map_to:"auto"}]},repeat_date_of_end:"01.01.2010"};scheduler.templates={};
+scheduler.init_templates=function(){var a=scheduler.date.date_to_str,b=scheduler.config,c=function(a,b){for(var c in b)a[c]||(a[c]=b[c])};c(scheduler.templates,{day_date:a(b.default_date),month_date:a(b.month_date),week_date:function(a,b){return scheduler.templates.day_date(a)+" &ndash; "+scheduler.templates.day_date(scheduler.date.add(b,-1,"day"))},day_scale_date:a(b.default_date),month_scale_date:a(b.week_date),week_scale_date:a(b.day_date),hour_scale:a(b.hour_date),time_picker:a(b.hour_date),event_date:a(b.hour_date),
+month_day:a(b.month_day),xml_date:scheduler.date.str_to_date(b.xml_date,b.server_utc),load_format:a(b.load_date,b.server_utc),xml_format:a(b.xml_date,b.server_utc),api_date:scheduler.date.str_to_date(b.api_date),event_header:function(a,b){return scheduler.templates.event_date(a)+" - "+scheduler.templates.event_date(b)},event_text:function(a,b,c){return c.text},event_class:function(){return""},month_date_class:function(){return""},week_date_class:function(){return""},event_bar_date:function(a){return scheduler.templates.event_date(a)+
+" "},event_bar_text:function(a,b,c){return c.text}});this.callEvent("onTemplatesReady",[])};scheduler.uid=function(){if(!this._seed)this._seed=(new Date).valueOf();return this._seed++};scheduler._events={};scheduler.clearAll=function(){this._events={};this._loaded={};this.clear_view()};
+scheduler.addEvent=function(a,b,c,d,e){if(!arguments.length)return this.addEventNow();var f=a;if(arguments.length!=1)f=e||{},f.start_date=a,f.end_date=b,f.text=c,f.id=d;f.id=f.id||scheduler.uid();f.text=f.text||"";if(typeof f.start_date=="string")f.start_date=this.templates.api_date(f.start_date);if(typeof f.end_date=="string")f.end_date=this.templates.api_date(f.end_date);var g=(this.config.event_duration||this.config.time_step)*6E4;f.start_date.valueOf()==f.end_date.valueOf()&&f.end_date.setTime(f.end_date.valueOf()+
+g);f._timed=this.is_one_day_event(f);var h=!this._events[f.id];this._events[f.id]=f;this.event_updated(f);this._loading||this.callEvent(h?"onEventAdded":"onEventChanged",[f.id,f])};scheduler.deleteEvent=function(a,b){var c=this._events[a];if(b||this.callEvent("onBeforeEventDelete",[a,c])&&this.callEvent("onConfirmedBeforeEventDelete",[a,c]))c&&(delete this._events[a],this.unselect(a),this.event_updated(c)),this.callEvent("onEventDeleted",[a])};scheduler.getEvent=function(a){return this._events[a]};
+scheduler.setEvent=function(a,b){this._events[a]=b};scheduler.for_rendered=function(a,b){for(var c=this._rendered.length-1;c>=0;c--)this._rendered[c].getAttribute("event_id")==a&&b(this._rendered[c],c)};scheduler.changeEventId=function(a,b){if(a!=b){var c=this._events[a];if(c)c.id=b,this._events[b]=c,delete this._events[a];this.for_rendered(a,function(a){a.setAttribute("event_id",b)});if(this._select_id==a)this._select_id=b;if(this._edit_id==a)this._edit_id=b;this.callEvent("onEventIdChange",[a,b])}};
+(function(){for(var a="text,Text,start_date,StartDate,end_date,EndDate".split(","),b=function(a){return function(b){return scheduler.getEvent(b)[a]}},c=function(a){return function(b,c){var d=scheduler.getEvent(b);d[a]=c;d._changed=!0;d._timed=this.is_one_day_event(d);scheduler.event_updated(d,!0)}},d=0;d<a.length;d+=2)scheduler["getEvent"+a[d+1]]=b(a[d]),scheduler["setEvent"+a[d+1]]=c(a[d])})();scheduler.event_updated=function(a){this.is_visible_events(a)?this.render_view_data():this.clear_event(a.id)};
+scheduler.is_visible_events=function(a){return a.start_date<this._max_date&&this._min_date<a.end_date};scheduler.is_one_day_event=function(a){var b=a.end_date.getDate()-a.start_date.getDate();return b?(b<0&&(b=Math.ceil((a.end_date.valueOf()-a.start_date.valueOf())/864E5)),b==1&&!a.end_date.getHours()&&!a.end_date.getMinutes()&&(a.start_date.getHours()||a.start_date.getMinutes())):a.start_date.getMonth()==a.end_date.getMonth()&&a.start_date.getFullYear()==a.end_date.getFullYear()};
+scheduler.get_visible_events=function(){var a=[],b=this["filter_"+this._mode],c;for(c in this._events)if(this.is_visible_events(this._events[c])&&(this._table_view||this.config.multi_day||this._events[c]._timed))(!b||b(c,this._events[c]))&&a.push(this._events[c]);return a};
+scheduler.render_view_data=function(a,b){if(!a){if(this._not_render){this._render_wait=!0;return}this._render_wait=!1;this.clear_view();a=this.get_visible_events()}if(this.config.multi_day&&!this._table_view){for(var c=[],d=[],e=0;e<a.length;e++)a[e]._timed?c.push(a[e]):d.push(a[e]);this._rendered_location=this._els.dhx_multi_day[0];this._table_view=!0;this.render_data(d,b);this._table_view=!1;this._rendered_location=this._els.dhx_cal_data[0];this._table_view=!1;this.render_data(c,b)}else this._rendered_location=
+this._els.dhx_cal_data[0],this.render_data(a,b)};scheduler.render_data=function(a,b){for(var a=this._pre_render_events(a,b),c=0;c<a.length;c++)this._table_view?this.render_event_bar(a[c]):this.render_event(a[c])};
+scheduler._pre_render_events=function(a,b){var c=this.xy.bar_height,d=this._colsS.heights,e=this._colsS.heights=[0,0,0,0,0,0,0],f=this._els.dhx_cal_data[0],a=this._table_view?this._pre_render_events_table(a,b):this._pre_render_events_line(a,b);if(this._table_view)if(b)this._colsS.heights=d;else{var g=f.firstChild;if(g.rows){for(var h=0;h<g.rows.length;h++){e[h]++;if(e[h]*c>this._colsS.height-22){for(var i=g.rows[h].cells,k=0;k<i.length;k++)i[k].childNodes[1].style.height=e[h]*c+"px";e[h]=(e[h-1]||
+0)+i[0].offsetHeight}e[h]=(e[h-1]||0)+g.rows[h].cells[0].offsetHeight}e.unshift(0);if(g.parentNode.offsetHeight<g.parentNode.scrollHeight&&!g._h_fix){for(h=0;h<g.rows.length;h++){var j=g.rows[h].cells[6].childNodes[0],l=j.offsetWidth-scheduler.xy.scroll_width+"px";j.style.width=l;j.nextSibling.style.width=l}g._h_fix=!0}}else if(!a.length&&this._els.dhx_multi_day[0].style.visibility=="visible"&&(e[0]=-1),a.length||e[0]==-1){var o=g.parentNode.childNodes,m=(e[0]+1)*c+1+"px";f.style.top=this._els.dhx_cal_navline[0].offsetHeight+
+this._els.dhx_cal_header[0].offsetHeight+parseInt(m)+"px";f.style.height=this._obj.offsetHeight-parseInt(f.style.top)-(this.xy.margin_top||0)+"px";var n=this._els.dhx_multi_day[0];n.style.height=m;n.style.visibility=e[0]==-1?"hidden":"visible";n=this._els.dhx_multi_day[1];n.style.height=m;n.style.visibility=e[0]==-1?"hidden":"visible";n.className=e[0]?"dhx_multi_day_icon":"dhx_multi_day_icon_small";this._dy_shift=(e[0]+1)*c;e[0]=0}}return a};
+scheduler._get_event_sday=function(a){return Math.floor((a.start_date.valueOf()-this._min_date.valueOf())/864E5)};
+scheduler._pre_render_events_line=function(a,b){a.sort(function(a,b){return a.start_date.valueOf()==b.start_date.valueOf()?a.id>b.id?1:-1:a.start_date>b.start_date?1:-1});for(var c=[],d=[],e=0;e<a.length;e++){var f=a[e],g=f.start_date.getHours(),h=f.end_date.getHours();f._sday=this._get_event_sday(f);c[f._sday]||(c[f._sday]=[]);if(!b){f._inner=!1;for(var i=c[f._sday];i.length&&i[i.length-1].end_date<=f.start_date;)i.splice(i.length-1,1);for(var k=!1,j=0;j<i.length;j++)if(i[j].end_date.valueOf()<f.start_date.valueOf()){k=
+!0;f._sorder=i[j]._sorder;i.splice(j,1);f._inner=!0;break}if(i.length)i[i.length-1]._inner=!0;if(!k)if(i.length)if(i.length<=i[i.length-1]._sorder){if(i[i.length-1]._sorder)for(j=0;j<i.length;j++){var l=!1;for(k=0;k<i.length;k++)if(i[k]._sorder==j){l=!0;break}if(!l){f._sorder=j;break}}else f._sorder=0;f._inner=!0}else{l=i[0]._sorder;for(j=1;j<i.length;j++)if(i[j]._sorder>l)l=i[j]._sorder;f._sorder=l+1;f._inner=!1}else f._sorder=0;i.push(f);i.length>(i.max_count||0)?(i.max_count=i.length,f._count=
+i.length):f._count=f._count?f._count:1}if(g<this.config.first_hour||h>=this.config.last_hour)if(d.push(f),a[e]=f=this._copy_event(f),g<this.config.first_hour&&(f.start_date.setHours(this.config.first_hour),f.start_date.setMinutes(0)),h>=this.config.last_hour&&(f.end_date.setMinutes(0),f.end_date.setHours(this.config.last_hour)),f.start_date>f.end_date||g==this.config.last_hour)a.splice(e,1),e--}if(!b){for(e=0;e<a.length;e++)a[e]._count=c[a[e]._sday].max_count;for(e=0;e<d.length;e++)d[e]._count=c[d[e]._sday].max_count}return a};
+scheduler._time_order=function(a){a.sort(function(a,c){return a.start_date.valueOf()==c.start_date.valueOf()?a._timed&&!c._timed?1:!a._timed&&c._timed?-1:a.id>c.id?1:-1:a.start_date>c.start_date?1:-1})};
+scheduler._pre_render_events_table=function(a,b){this._time_order(a);for(var c=[],d=[[],[],[],[],[],[],[]],e=this._colsS.heights,f,g=this._cols.length,h=0;h<a.length;h++){var i=a[h],k=f||i.start_date,j=i.end_date;if(k<this._min_date)k=this._min_date;if(j>this._max_date)j=this._max_date;var l=this.locate_holder_day(k,!1,i);i._sday=l%g;var o=this.locate_holder_day(j,!0,i)||g;i._eday=o%g||g;i._length=o-l;i._sweek=Math.floor((this._correct_shift(k.valueOf(),1)-this._min_date.valueOf())/(864E5*g));var m=
+d[i._sweek],n;for(n=0;n<m.length;n++)if(m[n]._eday<=i._sday)break;if(!i._sorder||!b)i._sorder=n;if(i._sday+i._length<=g)f=null,c.push(i),m[n]=i,e[i._sweek]=m.length-1;else{var p=this._copy_event(i);p._length=g-i._sday;p._eday=g;p._sday=i._sday;p._sweek=i._sweek;p._sorder=i._sorder;p.end_date=this.date.add(k,p._length,"day");c.push(p);m[n]=p;f=p.end_date;e[i._sweek]=m.length-1;h--}}return c};scheduler._copy_dummy=function(){this.start_date=new Date(this.start_date);this.end_date=new Date(this.end_date)};
+scheduler._copy_event=function(a){this._copy_dummy.prototype=a;return new this._copy_dummy};scheduler._rendered=[];scheduler.clear_view=function(){for(var a=0;a<this._rendered.length;a++){var b=this._rendered[a];b.parentNode&&b.parentNode.removeChild(b)}this._rendered=[]};scheduler.updateEvent=function(a){var b=this.getEvent(a);this.clear_event(a);b&&this.is_visible_events(b)&&this.render_view_data([b],!0)};
+scheduler.clear_event=function(a){this.for_rendered(a,function(a,c){a.parentNode&&a.parentNode.removeChild(a);scheduler._rendered.splice(c,1)})};
+scheduler.render_event=function(a){var b=scheduler.xy.menu_width;if(!(a._sday<0)){var c=scheduler.locate_holder(a._sday);if(c){var d=a.start_date.getHours()*60+a.start_date.getMinutes(),e=a.end_date.getHours()*60+a.end_date.getMinutes()||scheduler.config.last_hour*60,f=Math.round((d*6E4-this.config.first_hour*36E5)*this.config.hour_size_px/36E5)%(this.config.hour_size_px*24)+1,g=Math.max(scheduler.xy.min_event_height,(e-d)*this.config.hour_size_px/60)+1,h=Math.floor((c.clientWidth-b)/a._count),i=
+a._sorder*h+1;a._inner||(h*=a._count-a._sorder);if(this.config.cascade_event_display)var k=this.config.cascade_event_count,j=this.config.cascade_event_margin,i=a._sorder%k*j,l=a._inner?(a._count-a._sorder-1)%k*j/2:0,h=Math.floor(c.clientWidth-b-i-l);var o=this._render_v_bar(a.id,b+i,f,h,g,a._text_style,scheduler.templates.event_header(a.start_date,a.end_date,a),scheduler.templates.event_text(a.start_date,a.end_date,a));this._rendered.push(o);c.appendChild(o);i=i+parseInt(c.style.left,10)+b;if(this._edit_id==
+a.id){o.style.zIndex=1;h=Math.max(h-4,scheduler.xy.editor_width);o=document.createElement("DIV");o.setAttribute("event_id",a.id);this.set_xy(o,h,g-20,i,f+14);o.className="dhx_cal_editor";var m=document.createElement("DIV");this.set_xy(m,h-6,g-26);m.style.cssText+=";margin:2px 2px 2px 2px;overflow:hidden;";o.appendChild(m);this._els.dhx_cal_data[0].appendChild(o);this._rendered.push(o);m.innerHTML="<textarea class='dhx_cal_editor'>"+a.text+"</textarea>";if(this._quirks7)m.firstChild.style.height=g-
+12+"px";this._editor=m.firstChild;this._editor.onkeypress=function(a){if((a||event).shiftKey)return!0;var b=(a||event).keyCode;b==scheduler.keys.edit_save&&scheduler.editStop(!0);b==scheduler.keys.edit_cancel&&scheduler.editStop(!1)};this._editor.onselectstart=function(a){return(a||event).cancelBubble=!0};m.firstChild.focus();this._els.dhx_cal_data[0].scrollLeft=0;m.firstChild.select()}if(this._select_id==a.id){if(this.config.cascade_event_display&&this._drag_mode)o.style.zIndex=1;for(var n=this.config["icons_"+
+(this._edit_id==a.id?"edit":"select")],p="",q=a.color?"background-color:"+a.color+";":"",v=a.textColor?"color:"+a.textColor+";":"",s=0;s<n.length;s++)p+="<div class='dhx_menu_icon "+n[s]+"' style='"+q+""+v+"' title='"+this.locale.labels[n[s]]+"'></div>";var r=this._render_v_bar(a.id,i-b+1,f,b,n.length*20+26,"","<div style='"+q+""+v+"' class='dhx_menu_head'></div>",p,!0);r.style.left=i-b+1;this._els.dhx_cal_data[0].appendChild(r);this._rendered.push(r)}}}};
+scheduler._render_v_bar=function(a,b,c,d,e,f,g,h,i){var k=document.createElement("DIV"),j=this.getEvent(a),l="dhx_cal_event",o=scheduler.templates.event_class(j.start_date,j.end_date,j);o&&(l=l+" "+o);var m=j.color?"background-color:"+j.color+";":"",n=j.textColor?"color:"+j.textColor+";":"",p='<div event_id="'+a+'" class="'+l+'" style="position:absolute; top:'+c+"px; left:"+b+"px; width:"+(d-4)+"px; height:"+e+"px;"+(f||"")+'">';p+='<div class="dhx_header" style=" width:'+(d-6)+"px;"+m+'" >&nbsp;</div>';
+p+='<div class="dhx_title" style="'+m+""+n+'">'+g+"</div>";p+='<div class="dhx_body" style=" width:'+(d-(this._quirks?4:14))+"px; height:"+(e-(this._quirks?20:30))+"px;"+m+""+n+'">'+h+"</div>";p+='<div class="dhx_footer" style=" width:'+(d-8)+"px;"+(i?" margin-top:-1px;":"")+""+m+""+n+'" ></div></div>';k.innerHTML=p;return k.firstChild};scheduler.locate_holder=function(a){return this._mode=="day"?this._els.dhx_cal_data[0].firstChild:this._els.dhx_cal_data[0].childNodes[a]};
+scheduler.locate_holder_day=function(a,b){var c=Math.floor((this._correct_shift(a,1)-this._min_date)/864E5);b&&this.date.time_part(a)&&c++;return c};
+scheduler.render_event_bar=function(a){var b=this._rendered_location,c=this._colsS[a._sday],d=this._colsS[a._eday];d==c&&(d=this._colsS[a._eday+1]);var e=this.xy.bar_height,f=this._colsS.heights[a._sweek]+(this._colsS.height?this.xy.month_scale_height+2:2)+a._sorder*e,g=document.createElement("DIV"),h=a._timed?"dhx_cal_event_clear":"dhx_cal_event_line",i=scheduler.templates.event_class(a.start_date,a.end_date,a);i&&(h=h+" "+i);var k=a.color?"background-color:"+a.color+";":"",j=a.textColor?"color:"+
+a.textColor+";":"",l='<div event_id="'+a.id+'" class="'+h+'" style="position:absolute; top:'+f+"px; left:"+c+"px; width:"+(d-c-15)+"px;"+j+""+k+""+(a._text_style||"")+'">';a._timed&&(l+=scheduler.templates.event_bar_date(a.start_date,a.end_date,a));l+=scheduler.templates.event_bar_text(a.start_date,a.end_date,a)+"</div>";l+="</div>";g.innerHTML=l;this._rendered.push(g.firstChild);b.appendChild(g.firstChild)};
+scheduler._locate_event=function(a){for(var b=null;a&&!b&&a.getAttribute;)b=a.getAttribute("event_id"),a=a.parentNode;return b};scheduler.edit=function(a){if(this._edit_id!=a)this.editStop(!1,a),this._edit_id=a,this.updateEvent(a)};scheduler.editStop=function(a,b){if(!(b&&this._edit_id==b)){var c=this.getEvent(this._edit_id);if(c){if(a)c.text=this._editor.value;this._editor=this._edit_id=null;this.updateEvent(c.id);this._edit_stop_event(c,a)}}};
+scheduler._edit_stop_event=function(a,b){this._new_event?(b?this.callEvent("onEventAdded",[a.id,a]):this.deleteEvent(a.id,!0),this._new_event=null):b&&this.callEvent("onEventChanged",[a.id,a])};scheduler.getEvents=function(a,b){var c=[],d;for(d in this._events){var e=this._events[d];e&&e.start_date<b&&e.end_date>a&&c.push(e)}return c};scheduler._loaded={};
+scheduler._load=function(a,b){a=a||this._load_url;a+=(a.indexOf("?")==-1?"?":"&")+"timeshift="+(new Date).getTimezoneOffset();this.config.prevent_cache&&(a+="&uid="+this.uid());var c,b=b||this._date;if(this._load_mode){for(var d=this.templates.load_format,b=this.date[this._load_mode+"_start"](new Date(b.valueOf()));b>this._min_date;)b=this.date.add(b,-1,this._load_mode);c=b;for(var e=!0;c<this._max_date;)c=this.date.add(c,1,this._load_mode),this._loaded[d(b)]&&e?b=this.date.add(b,1,this._load_mode):
+e=!1;var f=c;do c=f,f=this.date.add(c,-1,this._load_mode);while(f>b&&this._loaded[d(f)]);if(c<=b)return!1;for(dhtmlxAjax.get(a+"&from="+d(b)+"&to="+d(c),function(a){scheduler.on_load(a)});b<c;)this._loaded[d(b)]=!0,b=this.date.add(b,1,this._load_mode)}else dhtmlxAjax.get(a,function(a){scheduler.on_load(a)});this.callEvent("onXLS",[]);return!0};
+scheduler.on_load=function(a){this._loading=!0;var b;b=this._process?this[this._process].parse(a.xmlDoc.responseText):this._magic_parser(a);this._not_render=!0;for(var c=0;c<b.length;c++)this.callEvent("onEventLoading",[b[c]])&&this.addEvent(b[c]);this._not_render=!1;this._render_wait&&this.render_view_data();this._loading=!1;this._after_call&&this._after_call();this._after_call=null;this.callEvent("onXLE",[])};scheduler.json={};
+scheduler.json.parse=function(a){if(typeof a=="string")eval("scheduler._temp = "+a+";"),a=scheduler._temp;for(var b=[],c=0;c<a.length;c++)a[c].start_date=scheduler.templates.xml_date(a[c].start_date),a[c].end_date=scheduler.templates.xml_date(a[c].end_date),b.push(a[c]);return b};scheduler.parse=function(a,b){this._process=b;this.on_load({xmlDoc:{responseText:a}})};scheduler.load=function(a,b,c){if(typeof b=="string")this._process=b,b=c;this._load_url=a;this._after_call=b;this._load(a,this._date)};
+scheduler.setLoadMode=function(a){a=="all"&&(a="");this._load_mode=a};scheduler.refresh=function(){alert("not implemented")};scheduler.serverList=function(a,b){return b?this.serverList[a]=b.slice(0):this.serverList[a]=this.serverList[a]||[]};scheduler._userdata={};
+scheduler._magic_parser=function(a){var b;if(!a.getXMLTopNode){var c=a.xmlDoc.responseText,a=new dtmlXMLLoaderObject(function(){});a.loadXMLString(c)}b=a.getXMLTopNode("data");if(b.tagName!="data")return[];for(var d=a.doXPath("//coll_options"),e=0;e<d.length;e++){var f=d[e].getAttribute("for"),g=this.serverList[f];if(g){g.splice(0,g.length);for(var h=a.doXPath(".//item",d[e]),i=0;i<h.length;i++){for(var k=h[i],j=k.attributes,l={key:h[i].getAttribute("value"),label:h[i].getAttribute("label")},o=0;o<
+j.length;o++){var m=j[o];if(!(m.nodeName=="value"||m.nodeName=="label"))l[m.nodeName]=m.nodeValue}g.push(l)}}}d.length&&scheduler.callEvent("onOptionsLoad",[]);for(var n=a.doXPath("//userdata"),e=0;e<n.length;e++){var p=this.xmlNodeToJSON(n[e]);this._userdata[p.name]=p.text}var q=[];b=a.doXPath("//event");for(e=0;e<b.length;e++)q[e]=this.xmlNodeToJSON(b[e]),q[e].text=q[e].text||q[e]._tagvalue,q[e].start_date=this.templates.xml_date(q[e].start_date),q[e].end_date=this.templates.xml_date(q[e].end_date);
+return q};scheduler.xmlNodeToJSON=function(a){for(var b={},c=0;c<a.attributes.length;c++)b[a.attributes[c].name]=a.attributes[c].value;for(c=0;c<a.childNodes.length;c++){var d=a.childNodes[c];d.nodeType==1&&(b[d.tagName]=d.firstChild?d.firstChild.nodeValue:"")}if(!b.text)b.text=a.firstChild?a.firstChild.nodeValue:"";return b};
+scheduler.attachEvent("onXLS",function(){if(this.config.show_loading===!0){var a;a=this.config.show_loading=document.createElement("DIV");a.className="dhx_loading";a.style.left=Math.round((this._x-128)/2)+"px";a.style.top=Math.round((this._y-15)/2)+"px";this._obj.appendChild(a)}});scheduler.attachEvent("onXLE",function(){var a;if((a=this.config.show_loading)&&typeof a=="object")this._obj.removeChild(a),this.config.show_loading=!0});
+scheduler.ical={parse:function(a){var b=a.match(RegExp(this.c_start+"[^\u000c]*"+this.c_end,""));if(b.length){b[0]=b[0].replace(/[\r\n]+(?=[a-z \t])/g," ");b[0]=b[0].replace(/\;[^:\r\n]*/g,"");for(var c=[],d,e=RegExp("(?:"+this.e_start+")([^\u000c]*?)(?:"+this.e_end+")","g");d=e.exec(b);){for(var f={},g,h=/[^\r\n]+[\r\n]+/g;g=h.exec(d[1]);)this.parse_param(g.toString(),f);if(f.uid&&!f.id)f.id=f.uid;c.push(f)}return c}},parse_param:function(a,b){var c=a.indexOf(":");if(c!=-1){var d=a.substr(0,c).toLowerCase(),
+e=a.substr(c+1).replace(/\\\,/g,",").replace(/[\r\n]+$/,"");d=="summary"?d="text":d=="dtstart"?(d="start_date",e=this.parse_date(e,0,0)):d=="dtend"&&(d="end_date",e=b.start_date&&b.start_date.getHours()==0?this.parse_date(e,24,0):this.parse_date(e,23,59));b[d]=e}},parse_date:function(a,b,c){var d=a.split("T");d[1]&&(b=d[1].substr(0,2),c=d[1].substr(2,2));var e=d[0].substr(0,4),f=parseInt(d[0].substr(4,2),10)-1,g=d[0].substr(6,2);return scheduler.config.server_utc&&!d[1]?new Date(Date.UTC(e,f,g,b,
+c)):new Date(e,f,g,b,c)},c_start:"BEGIN:VCALENDAR",e_start:"BEGIN:VEVENT",e_end:"END:VEVENT",c_end:"END:VCALENDAR"};scheduler.formSection=function(a){for(var b=this.config.lightbox.sections,c=0;c<b.length;c++)if(b[c].name==a)break;var d=b[c],e=document.getElementById(d.id).nextSibling;return{getValue:function(a){return scheduler.form_blocks[d.type].get_value(e,a||{},d)},setValue:function(a,b){return scheduler.form_blocks[d.type].set_value(e,a,b||{},d)}}};
+scheduler.form_blocks={template:{render:function(a){var b=(a.height||"30")+"px";return"<div class='dhx_cal_ltext dhx_cal_template' style='height:"+b+";'></div>"},set_value:function(a,b){a.innerHTML=b||""},get_value:function(a){return a.innerHTML||""},focus:function(){}},textarea:{render:function(a){var b=(a.height||"130")+"px";return"<div class='dhx_cal_ltext' style='height:"+b+";'><textarea></textarea></div>"},set_value:function(a,b){a.firstChild.value=b||""},get_value:function(a){return a.firstChild.value},
+focus:function(a){var b=a.firstChild;b.select();b.focus()}},select:{render:function(a){for(var b=(a.height||"23")+"px",c="<div class='dhx_cal_ltext' style='height:"+b+";'><select style='width:100%;'>",d=0;d<a.options.length;d++)c+="<option value='"+a.options[d].key+"'>"+a.options[d].label+"</option>";c+="</select></div>";return c},set_value:function(a,b){if(typeof b=="undefined")b=(a.firstChild.options[0]||{}).value;a.firstChild.value=b||""},get_value:function(a){return a.firstChild.value},focus:function(a){var b=
+a.firstChild;b.select&&b.select();b.focus()}},time:{render:function(){var a=scheduler.config,b=this.date.date_part(new Date),c=1440,d=0;scheduler.config.limit_time_select&&(c=60*a.last_hour+1,d=60*a.first_hour,b.setHours(a.first_hour));for(var e="<select>",f=d,g=b.getDate();f<c;){var h=this.templates.time_picker(b);e+="<option value='"+f+"'>"+h+"</option>";b.setTime(b.valueOf()+this.config.time_step*6E4);var i=b.getDate()!=g?1:0,f=i*1440+b.getHours()*60+b.getMinutes()}e+="</select> <select>";for(f=
+1;f<32;f++)e+="<option value='"+f+"'>"+f+"</option>";e+="</select> <select>";for(f=0;f<12;f++)e+="<option value='"+f+"'>"+this.locale.date.month_full[f]+"</option>";e+="</select> <select>";b=b.getFullYear()-5;for(f=0;f<10;f++)e+="<option value='"+(b+f)+"'>"+(b+f)+"</option>";e+="</select> ";return"<div style='height:30px;padding-top:0px;font-size:inherit;' class='dhx_section_time'>"+e+"<span style='font-weight:normal; font-size:10pt;'> &nbsp;&ndash;&nbsp; </span>"+e+"</div>"},set_value:function(a,
+b,c){function d(a,b,c){a[b+0].value=Math.round((c.getHours()*60+c.getMinutes())/scheduler.config.time_step)*scheduler.config.time_step;a[b+1].value=c.getDate();a[b+2].value=c.getMonth();a[b+3].value=c.getFullYear()}var e=a.getElementsByTagName("select");if(scheduler.config.full_day){if(!a._full_day){var f="<label class='dhx_fullday'><input type='checkbox' name='full_day' value='true'> "+scheduler.locale.labels.full_day+"&nbsp;</label></input>";scheduler.config.wide_form||(f=a.previousSibling.innerHTML+
+f);a.previousSibling.innerHTML=f;a._full_day=!0}var g=a.previousSibling.getElementsByTagName("input")[0],h=scheduler.date.time_part(c.start_date)===0&&scheduler.date.time_part(c.end_date)===0&&c.end_date.valueOf()-c.start_date.valueOf()<1728E5;g.checked=h;for(var i in e)e[i].disabled=g.checked;g.onclick=function(){if(g.checked){var a=new Date(c.start_date),b=new Date(c.end_date);scheduler.date.date_part(a);b=scheduler.date.add(a,1,"day")}for(var f in e)e[f].disabled=g.checked;d(e,0,a||c.start_date);
+d(e,4,b||c.end_date)}}if(scheduler.config.auto_end_date&&scheduler.config.event_duration)for(var k=function(){c.start_date=new Date(e[3].value,e[2].value,e[1].value,0,e[0].value);c.end_date.setTime(c.start_date.getTime()+scheduler.config.event_duration*6E4);d(e,4,c.end_date)},j=0;j<4;j++)e[j].onchange=k;d(e,0,c.start_date);d(e,4,c.end_date)},get_value:function(a,b){s=a.getElementsByTagName("select");b.start_date=new Date(s[3].value,s[2].value,s[1].value,0,s[0].value);b.end_date=new Date(s[7].value,
+s[6].value,s[5].value,0,s[4].value);if(b.end_date<=b.start_date)b.end_date=scheduler.date.add(b.start_date,scheduler.config.time_step,"minute")},focus:function(a){a.getElementsByTagName("select")[0].focus()}}};
+scheduler.showCover=function(a){if(a){a.style.display="block";var b=window.pageYOffset||document.body.scrollTop||document.documentElement.scrollTop,c=window.pageXOffset||document.body.scrollLeft||document.documentElement.scrollLeft,d=window.innerHeight||document.documentElement.clientHeight;a.style.top=b?Math.round(b+Math.max((d-a.offsetHeight)/2,0))+"px":Math.round(Math.max((d-a.offsetHeight)/2,0)+9)+"px";a.style.left=document.documentElement.scrollWidth>document.body.offsetWidth?Math.round(c+(document.body.offsetWidth-
+a.offsetWidth)/2)+"px":Math.round((document.body.offsetWidth-a.offsetWidth)/2)+"px"}this.show_cover()};scheduler.showLightbox=function(a){if(a&&this.callEvent("onBeforeLightbox",[a])){var b=this._get_lightbox();this.showCover(b);this._fill_lightbox(a,b);this.callEvent("onLightbox",[a])}};
+scheduler._fill_lightbox=function(a,b){var c=this.getEvent(a),d=b.getElementsByTagName("span");scheduler.templates.lightbox_header?(d[1].innerHTML="",d[2].innerHTML=scheduler.templates.lightbox_header(c.start_date,c.end_date,c)):(d[1].innerHTML=this.templates.event_header(c.start_date,c.end_date,c),d[2].innerHTML=(this.templates.event_bar_text(c.start_date,c.end_date,c)||"").substr(0,70));for(var e=this.config.lightbox.sections,f=0;f<e.length;f++){var g=document.getElementById(e[f].id).nextSibling,
+h=this.form_blocks[e[f].type];h.set_value.call(this,g,c[e[f].map_to],c,e[f]);e[f].focus&&h.focus.call(this,g)}scheduler._lightbox_id=a};scheduler._lightbox_out=function(a){for(var b=this.config.lightbox.sections,c=0;c<b.length;c++){var d=document.getElementById(b[c].id),d=d?d.nextSibling:d,e=this.form_blocks[b[c].type],f=e.get_value.call(this,d,a,b[c]);b[c].map_to!="auto"&&(a[b[c].map_to]=f)}return a};
+scheduler._empty_lightbox=function(){var a=scheduler._lightbox_id,b=this.getEvent(a),c=this._get_lightbox();this._lightbox_out(b);b._timed=this.is_one_day_event(b);this.setEvent(b.id,b);this._edit_stop_event(b,!0);this.render_view_data()};scheduler.hide_lightbox=function(){this.hideCover(this._get_lightbox());this._lightbox_id=null;this.callEvent("onAfterLightbox",[])};scheduler.hideCover=function(a){if(a)a.style.display="none";this.hide_cover()};
+scheduler.hide_cover=function(){this._cover&&this._cover.parentNode.removeChild(this._cover);this._cover=null};scheduler.show_cover=function(){this._cover=document.createElement("DIV");this._cover.className="dhx_cal_cover";var a=document.height!==void 0?document.height:document.body.offsetHeight,b=document.documentElement?document.documentElement.scrollHeight:0;this._cover.style.height=Math.max(a,b)+"px";document.body.appendChild(this._cover)};
+scheduler.save_lightbox=function(){if(!this.checkEvent("onEventSave")||this.callEvent("onEventSave",[this._lightbox_id,this._lightbox_out({id:this._lightbox_id}),this._new_event]))this._empty_lightbox(),this.hide_lightbox()};scheduler.startLightbox=function(a,b){this._lightbox_id=a;this.showCover(b)};scheduler.endLightbox=function(a,b){this._edit_stop_event(scheduler.getEvent(this._lightbox_id),a);a&&scheduler.render_view_data();this.hideCover(b)};
+scheduler.resetLightbox=function(){scheduler._lightbox&&scheduler._lightbox.parentNode.removeChild(scheduler._lightbox);scheduler._lightbox=null};scheduler.cancel_lightbox=function(){this.callEvent("onEventCancel",[this._lightbox_id,this._new_event]);this.endLightbox(!1);this.hide_lightbox()};
+scheduler._init_lightbox_events=function(){this._get_lightbox().onclick=function(a){var b=a?a.target:event.srcElement;if(!b.className)b=b.previousSibling;if(b&&b.className)switch(b.className){case "dhx_save_btn":scheduler.save_lightbox();break;case "dhx_delete_btn":var c=scheduler.locale.labels.confirm_deleting;if(!c||confirm(c))scheduler.deleteEvent(scheduler._lightbox_id),scheduler._new_event=null,scheduler.hide_lightbox();break;case "dhx_cancel_btn":scheduler.cancel_lightbox();break;default:if(b.getAttribute("dhx_button"))scheduler.callEvent("onLightboxButton",
+[b.className,b,a]);else if(b.className.indexOf("dhx_custom_button_")!=-1){var d=b.parentNode.getAttribute("index"),e=scheduler.form_blocks[scheduler.config.lightbox.sections[d].type],f=b.parentNode.parentNode;e.button_click(d,b,f,f.nextSibling)}}};this._get_lightbox().onkeydown=function(a){switch((a||event).keyCode){case scheduler.keys.edit_save:if((a||event).shiftKey)break;scheduler.save_lightbox();break;case scheduler.keys.edit_cancel:scheduler.cancel_lightbox()}}};
+scheduler.setLightboxSize=function(){var a=this._lightbox;if(a){var b=a.childNodes[1];b.style.height="0px";b.style.height=b.scrollHeight+"px";a.style.height=b.scrollHeight+50+"px";b.style.height=b.scrollHeight+"px"}};scheduler._init_dnd_events=function(){dhtmlxEvent(document.body,"mousemove",scheduler._move_while_dnd);dhtmlxEvent(document.body,"mouseup",scheduler._finish_dnd);scheduler._init_dnd_events=function(){}};
+scheduler._move_while_dnd=function(a){if(scheduler._dnd_start_lb){if(!document.dhx_unselectable)document.body.className+=" dhx_unselectable",document.dhx_unselectable=!0;var b=scheduler._get_lightbox(),c=a&&a.target?[a.pageX,a.pageY]:[event.clientX,event.clientY];b.style.top=scheduler._lb_start[1]+c[1]-scheduler._dnd_start_lb[1]+"px";b.style.left=scheduler._lb_start[0]+c[0]-scheduler._dnd_start_lb[0]+"px"}};
+scheduler._ready_to_dnd=function(a){var b=scheduler._get_lightbox();scheduler._lb_start=[parseInt(b.style.left,10),parseInt(b.style.top,10)];scheduler._dnd_start_lb=a&&a.target?[a.pageX,a.pageY]:[event.clientX,event.clientY]};scheduler._finish_dnd=function(){if(scheduler._lb_start)scheduler._lb_start=scheduler._dnd_start_lb=!1,document.body.className=document.body.className.replace(" dhx_unselectable",""),document.dhx_unselectable=!1};
+scheduler._get_lightbox=function(){if(!this._lightbox){var a=document.createElement("DIV");a.className="dhx_cal_light";scheduler.config.wide_form&&(a.className+=" dhx_cal_light_wide");scheduler.form_blocks.recurring&&(a.className+=" dhx_cal_light_rec");/msie|MSIE 6/.test(navigator.userAgent)&&(a.className+=" dhx_ie6");a.style.visibility="hidden";var b=this._lightbox_template,c=this.config.buttons_left;scheduler.locale.labels.dhx_save_btn=scheduler.locale.labels.icon_save;scheduler.locale.labels.dhx_cancel_btn=
+scheduler.locale.labels.icon_cancel;scheduler.locale.labels.dhx_delete_btn=scheduler.locale.labels.icon_delete;for(var d=0;d<c.length;d++)b+="<div class='dhx_btn_set'><div dhx_button='1' class='"+c[d]+"'></div><div>"+scheduler.locale.labels[c[d]]+"</div></div>";c=this.config.buttons_right;for(d=0;d<c.length;d++)b+="<div class='dhx_btn_set' style='float:right;'><div dhx_button='1' class='"+c[d]+"'></div><div>"+scheduler.locale.labels[c[d]]+"</div></div>";b+="</div>";a.innerHTML=b;if(scheduler.config.drag_lightbox)a.firstChild.onmousedown=
+scheduler._ready_to_dnd,a.firstChild.onselectstart=function(){return!1},a.firstChild.style.cursor="pointer",scheduler._init_dnd_events();document.body.insertBefore(a,document.body.firstChild);this._lightbox=a;for(var e=this.config.lightbox.sections,b="",d=0;d<e.length;d++){var f=this.form_blocks[e[d].type];if(f){e[d].id="area_"+this.uid();var g="";e[d].button&&(g="<div class='dhx_custom_button' index='"+d+"'><div class='dhx_custom_button_"+e[d].button+"'></div><div>"+this.locale.labels["button_"+
+e[d].button]+"</div></div>");this.config.wide_form&&(b+="<div class='dhx_wrap_section'>");b+="<div id='"+e[d].id+"' class='dhx_cal_lsection'>"+g+this.locale.labels["section_"+e[d].name]+"</div>"+f.render.call(this,e[d]);b+="</div>"}}var h=a.getElementsByTagName("div");h[1].innerHTML=b;this.setLightboxSize();this._init_lightbox_events(this);a.style.display="none";a.style.visibility="visible"}return this._lightbox};scheduler._lightbox_template="<div class='dhx_cal_ltitle'><span class='dhx_mark'>&nbsp;</span><span class='dhx_time'></span><span class='dhx_title'></span></div><div class='dhx_cal_larea'></div>";
+scheduler._dp_init=function(a){a._methods=["setEventTextStyle","","changeEventId","deleteEvent"];this.attachEvent("onEventAdded",function(b){!this._loading&&this.validId(b)&&a.setUpdated(b,!0,"inserted")});this.attachEvent("onConfirmedBeforeEventDelete",function(b){if(this.validId(b)){var c=a.getState(b);if(c=="inserted"||this._new_event)return a.setUpdated(b,!1),!0;if(c=="deleted")return!1;if(c=="true_deleted")return!0;a.setUpdated(b,!0,"deleted");return!1}});this.attachEvent("onEventChanged",function(b){!this._loading&&
+this.validId(b)&&a.setUpdated(b,!0,"updated")});a._getRowData=function(a){var c=this.obj.getEvent(a),d={},e;for(e in c)e.indexOf("_")!=0&&(d[e]=c[e]&&c[e].getUTCFullYear?this.obj.templates.xml_format(c[e]):c[e]);return d};a._clearUpdateFlag=function(){};a.attachEvent("insertCallback",scheduler._update_callback);a.attachEvent("updateCallback",scheduler._update_callback);a.attachEvent("deleteCallback",function(a,c){this.obj.setUserData(c,this.action_param,"true_deleted");this.obj.deleteEvent(c)})};
+scheduler.setUserData=function(a,b,c){a?this.getEvent(a)[b]=c:this._userdata[b]=c};scheduler.getUserData=function(a,b){return a?this.getEvent(a)[b]:this._userdata[b]};scheduler.setEventTextStyle=function(a,b){this.for_rendered(a,function(a){a.style.cssText+=";"+b});var c=this.getEvent(a);c._text_style=b;this.event_updated(c)};scheduler.validId=function(){return!0};
+scheduler._update_callback=function(a){var b=scheduler.xmlNodeToJSON(a.firstChild);b.text=b.text||b._tagvalue;b.start_date=scheduler.templates.xml_date(b.start_date);b.end_date=scheduler.templates.xml_date(b.end_date);scheduler.addEvent(b)};
+
+
+(function () {
+
+    //=============================
+    //SalesLogix 8.0 -Customization
+    //=============================
+
+    
+    scheduler.templates.event_class = function (start, end, event) {
+        var eventClass = "";
+        if (event.current_event)
+            eventClass = "currentEvent";
+
+        return eventClass;
+    };
+
+    //===============
+    //Default Customization
+    //===============
+    function B() {
+        for (var a = scheduler.get_visible_events(), b = [], c = 0; c < this.y_unit.length; c++) b[c] = [];
+        b[f] || (b[f] = []);
+        for (c = 0; c < a.length; c++) {
+            for (var f = this.order[a[c][this.y_property]], d = 0; this._trace_x[d + 1] && a[c].start_date >= this._trace_x[d + 1]; ) d++;
+            for (; this._trace_x[d] && a[c].end_date > this._trace_x[d]; ) b[f][d] || (b[f][d] = []), b[f][d].push(a[c]), d++
+        }
+        return b
+    }
+    function v(a, b, c) {
+        var f = 0,
+            d = b ? a.end_date : a.start_date;
+        if (d.valueOf() > scheduler._max_date.valueOf()) d = scheduler._max_date;
+        var i = d - scheduler._min_date_timeline;
+        if (i < 0) k = 0;
+        else {
+            var g = Math.round(i / (c * scheduler._cols[0]));
+            if (g > scheduler._cols.length) g = scheduler._cols.length;
+            for (var e = 0; e < g; e++) f += scheduler._cols[e];
+            var j = scheduler.date.add(scheduler._min_date_timeline, scheduler.matrix[scheduler._mode].x_step * g, scheduler.matrix[scheduler._mode].x_unit),
+                i = d - j,
+                k = Math.floor(i / c)
+        }
+        f += b ? k - 14 : k + 1;
+        return f
+    }
+    function C(a) {
+        var b = "<table style='table-layout:fixed;' cellspacing='0' cellpadding='0'>",
+            c = [];
+        scheduler._load_mode && scheduler._load();
+        if (this.render == "cell") c = B.call(this);
+        else for (var f = scheduler.get_visible_events(), d = 0; d < f.length; d++) {
+            var i = this.order[f[d][this.y_property]];
+            c[i] || (c[i] = []);
+            c[i].push(f[d])
+        }
+        for (var g = 0, e = 0; e < scheduler._cols.length; e++) g += scheduler._cols[e];
+        var j = new Date;
+        this._step = j = (scheduler.date.add(j, this.x_step * this.x_size, this.x_unit) - j) / g;
+        this._summ = g;
+        var k = scheduler._colsS.heights = [];
+        this._events_height = {};
+        for (e = 0; e < this.y_unit.length; e++) {
+            var h = this._logic(this.render, this.y_unit[e], this);
+            scheduler._merge(h, {
+                height: this.dy
+            });
+            if (this.section_autoheight && this.y_unit.length * h.height < a.offsetHeight) h.height = Math.max(h.height, Math.floor((a.offsetHeight - 1) / this.y_unit.length));
+            scheduler._merge(h, {
+                tr_className: "",
+                style_height: "height:" + h.height + "px;",
+                style_width: "width:" + (this.dx - 1) + "px;",
+                td_className: "dhx_matrix_scell" + (scheduler.templates[this.name + "_scaley_class"](this.y_unit[e].key, this.y_unit[e].label, this) ? " " + scheduler.templates[this.name + "_scaley_class"](this.y_unit[e].key, this.y_unit[e].label, this) : ""),
+                td_content: scheduler.templates[this.name + "_scale_label"](this.y_unit[e].key, this.y_unit[e].label, this.y_unit[e]),
+                summ_width: "width:" + g + "px;",
+                table_className: ""
+            });
+            var o = "";
+            if (c[e] && this.render != "cell") {
+                c[e].sort(function (a, d) {
+                    return a.start_date > d.start_date ? 1 : -1
+                });
+                for (var l = [], d = 0; d < c[e].length; d++) {
+                    for (var m = c[e][d], n = 0; l[n] && l[n].end_date > m.start_date; ) n++;
+                    l[n] = m;
+                    o += scheduler.render_timeline_event.call(this, m, n)
+                }
+            }
+            if (this.fit_events) {
+                var w = this._events_height[this.y_unit[e].key] || 0;
+                h.height = w > h.height ? w : h.height;
+                h.style_height = "height:" + h.height + "px;"
+            }
+            b += "<tr class='" + h.tr_className + "' style='" + h.style_height + "'><td class='" + h.td_className + "' style='" + h.style_width + " height:" + (h.height - 1) + "px;'>" + h.td_content + "</td>";
+            if (this.render == "cell") for (d = 0; d < scheduler._cols.length; d++) b += "<td class='dhx_matrix_cell " + scheduler.templates[this.name + "_cell_class"](c[e][d], this._trace_x[d], this.y_unit[e]) + "' style='width:" + (scheduler._cols[d] - 1) + "px'><div style='width:" + (scheduler._cols[d] - 1) + "px'>" + scheduler.templates[this.name + "_cell_value"](c[e][d]) + "</div></td>";
+            else {
+                b += "<td><div style='" + h.summ_width + " " + h.style_height + " position:relative;' class='dhx_matrix_line'>";
+                b += o;
+                b += "<table class='" + h.table_className + "' cellpadding='0' cellspacing='0' style='" + h.summ_width + " " + h.style_height + "' >";
+                for (d = 0; d < scheduler._cols.length; d++) {
+                    //var nextItem = this._trace_x[d + 1]; //d != scheduler._cols.length - 1 ? this._trace_x[d + 1] : false;
+                    //b += "<td class='dhx_matrix_cell " + scheduler.templates[this.name + "_cell_class"](c[e], this._trace_x[d], this.y_unit[e], nextItem) + "' style='width:" + (scheduler._cols[d] - 1) + "px'><div style='width:" + (scheduler._cols[d] - 1) + "px'></div></td>";
+                    b += "<td class='dhx_matrix_cell " + scheduler.templates[this.name + "_cell_class"](c[e], this._trace_x[d], this.y_unit[e]) + "' style='width:" + (scheduler._cols[d] - 1) + "px'><div style='width:" + (scheduler._cols[d] - 1) + "px'></div></td>";
+                }
+                b += "</table>";
+                b += "</div></td>"
+            }
+            b += "</tr>"
+        }
+        b += "</table>";
+        this._matrix = c;
+        a.innerHTML = b;
+        scheduler._rendered = [];
+        for (var q = document.getElementsByTagName("DIV"), e = 0; e < q.length; e++) q[e].getAttribute("event_id") && scheduler._rendered.push(q[e]);
+        for (e = 0; e < a.firstChild.rows.length; e++) k.push(a.firstChild.rows[e].offsetHeight)
+    }
+    function D(a) {
+        var b = scheduler.xy.scale_height,
+            c = this._header_resized || scheduler.xy.scale_height;
+        scheduler._cols = [];
+        scheduler._colsS = {
+            height: 0
+        };
+        this._trace_x = [];
+        var f = scheduler._x - this.dx - 18,
+            d = [this.dx],
+            i = scheduler._els.dhx_cal_header[0];
+        i.style.width = d[0] + f + "px";
+        for (var g = scheduler._min_date_timeline = scheduler._min_date, e = 0; e < this.x_size; e++) this._trace_x[e] = new Date(g), g = scheduler.date.add(g, this.x_step, this.x_unit), scheduler._cols[e] = Math.floor(f / (this.x_size - e)), f -= scheduler._cols[e], d[e + 1] = d[e] + scheduler._cols[e];
+        a.innerHTML = "<div></div>";
+        if (this.second_scale) {
+            for (var j = this.second_scale.x_unit, k = [this._trace_x[0]], h = [], o = [this.dx, this.dx], l = 0, m = 0; m < this._trace_x.length; m++) {
+                var n = this._trace_x[m],
+                    w = E(j, n, k[l]);
+                w && (++l, k[l] = n, o[l + 1] = o[l]);
+                var q = l + 1;
+                h[l] = scheduler._cols[m] + (h[l] || 0);
+                o[q] += scheduler._cols[m]
+            }
+            a.innerHTML = "<div></div><div></div>";
+            var p = a.firstChild;
+            p.style.height = c + "px";
+            var v = a.lastChild;
+            v.style.position = "relative";
+            for (var r = 0; r < k.length; r++) {
+                var t = k[r],
+                    u = scheduler.templates[this.name + "_second_scalex_class"](t),
+                    x = document.createElement("DIV");
+                x.className = "dhx_scale_bar dhx_second_scale_bar" + (u ? " " + u : "");
+                scheduler.set_xy(x, h[r] - 1, c - 3, o[r], 0);
+                x.innerHTML = scheduler.templates[this.name + "_second_scale_date"](t);
+                p.appendChild(x)
+            }
+        }
+        scheduler.xy.scale_height = c;
+        for (var a = a.lastChild, s = 0; s < this._trace_x.length; s++) {
+            g = this._trace_x[s];
+            scheduler._render_x_header(s, d[s], g, a);
+            var y = scheduler.templates[this.name + "_scalex_class"](g);
+            y && (a.lastChild.className += " " + y)
+        }
+        scheduler.xy.scale_height = b;
+        var z = this._trace_x;
+        a.onclick = function (a) {
+            var d = A(a);
+            d && scheduler.callEvent("onXScaleClick", [d.x, z[d.x], a || event])
+        };
+        a.ondblclick = function (a) {
+            var d = A(a);
+            d && scheduler.callEvent("onXScaleDblClick", [d.x, z[d.x],
+            a || event])
+        }
+    }
+    function E(a, b, c) {
+        switch (a) {
+            case "day":
+                return !(b.getDate() == c.getDate() && b.getMonth() == c.getMonth() && b.getFullYear() == c.getFullYear());
+            case "week":
+                return !(scheduler.date.getISOWeek(b) == scheduler.date.getISOWeek(c) && b.getFullYear() == c.getFullYear());
+            case "month":
+                return !(b.getMonth() == c.getMonth() && b.getFullYear() == c.getFullYear());
+            case "year":
+                return b.getFullYear() != c.getFullYear();
+            default:
+                return !1
+        }
+    }
+    function p(a) {
+        if (a) {
+            scheduler.set_sizes();
+            t();
+            var b = scheduler._min_date;
+            D.call(this, scheduler._els.dhx_cal_header[0]);
+            C.call(this, scheduler._els.dhx_cal_data[0]);
+            scheduler._min_date = b;
+            scheduler._els.dhx_cal_date[0].innerHTML = scheduler.templates[this.name + "_date"](scheduler._min_date, scheduler._max_date);
+            scheduler._table_view = !0
+        }
+    }
+    function u() {
+        if (scheduler._tooltip) scheduler._tooltip.style.display = "none", scheduler._tooltip.date = ""
+    }
+    function F(a, b, c) {
+        if (a.render == "cell") {
+            var f = b.x + "_" + b.y,
+                d = a._matrix[b.y][b.x];
+            if (!d) return u();
+            d.sort(function (a, d) {
+                return a.start_date > d.start_date ? 1 : -1
+            });
+            if (scheduler._tooltip) {
+                if (scheduler._tooltip.date == f) return;
+                scheduler._tooltip.innerHTML = ""
+            } else {
+                var i = scheduler._tooltip = document.createElement("DIV");
+                i.className = "dhx_tooltip";
+                document.body.appendChild(i);
+                i.onclick = scheduler._click.dhx_cal_data
+            }
+            for (var g = "", e = 0; e < d.length; e++) {
+                var j = d[e].color ? "background-color:" + d[e].color + ";" : "",
+                    k = d[e].textColor ? "color:" + d[e].textColor + ";" : "";
+                g += "<div class='dhx_tooltip_line' event_id='" + d[e].id + "' style='" + j + "" + k + "'>";
+                g += "<div class='dhx_tooltip_date'>" + (d[e]._timed ? scheduler.templates.event_date(d[e].start_date) : "") + "</div>";
+                g += "<div class='dhx_event_icon icon_details'>&nbsp;</div>";
+                g += scheduler.templates[a.name + "_tooltip"](d[e].start_date, d[e].end_date, d[e]) + "</div>"
+            }
+            scheduler._tooltip.style.display = "";
+            scheduler._tooltip.style.top = "0px";
+            scheduler._tooltip.style.left = document.body.offsetWidth - c.left - scheduler._tooltip.offsetWidth < 0 ? c.left - scheduler._tooltip.offsetWidth + "px" : c.left + b.src.offsetWidth + "px";
+            scheduler._tooltip.date = f;
+            scheduler._tooltip.innerHTML = g;
+            scheduler._tooltip.style.top = document.body.offsetHeight - c.top - scheduler._tooltip.offsetHeight < 0 ? c.top - scheduler._tooltip.offsetHeight + b.src.offsetHeight + "px" : c.top + "px"
+        }
+    }
+    function t() {
+        dhtmlxEvent(scheduler._els.dhx_cal_data[0], "mouseover", function (a) {
+            var b = scheduler.matrix[scheduler._mode];
+            if (b) {
+                var c = scheduler._locate_cell_timeline(a),
+                    a = a || event,
+                    f = a.target || a.srcElement;
+                if (c) return F(b, c, getOffset(c.src))
+            }
+            u()
+        });
+        t = function () { }
+    }
+    function G(a) {
+        for (var b = a.parentNode.childNodes, c = 0; c < b.length; c++) if (b[c] == a) return c;
+        return -1
+    }
+    function A(a) {
+        for (var a = a || event,
+        b = a.target ? a.target : a.srcElement; b && b.tagName != "DIV"; ) b = b.parentNode;
+        if (b && b.tagName == "DIV") {
+            var c = b.className.split(" ")[0];
+            if (c == "dhx_scale_bar") return {
+                x: G(b),
+                y: -1,
+                src: b,
+                scale: !0
+            }
+        }
+    }
+    scheduler.matrix = {};
+    scheduler._merge = function (a, b) {
+        for (var c in b) typeof a[c] == "undefined" && (a[c] = b[c])
+    };
+    scheduler.createTimelineView = function (a) {
+        scheduler._merge(a, {
+            section_autoheight: !0,
+            name: "matrix",
+            x: "time",
+            y: "time",
+            x_step: 1,
+            x_unit: "hour",
+            y_unit: "day",
+            y_step: 1,
+            x_start: 0,
+            x_size: 24,
+            y_start: 0,
+            y_size: 7,
+            render: "cell",
+            dx: 200,
+            dy: 50,
+            fit_events: !0,
+            second_scale: !1,
+            _logic: function (a, b, c) {
+                var e = {};
+                scheduler.checkEvent("onBeforeViewRender") && (e = scheduler.callEvent("onBeforeViewRender", [a, b, c]));
+                return e
+            }
+        });
+        scheduler.checkEvent("onTimelineCreated") && scheduler.callEvent("onTimelineCreated", [a]);
+        var b = scheduler.render_data;
+        scheduler.render_data = function (d, c) {
+            if (this._mode == a.name) if (c) for (var f = 0; f < d.length; f++) this.clear_event(d[f]), this.render_timeline_event.call(this.matrix[this._mode], d[f], 0, !0);
+            else p.call(a, !0);
+            else return b.apply(this,
+            arguments)
+        };
+        scheduler.matrix[a.name] = a;
+        scheduler.templates[a.name + "_cell_value"] = function (a) {
+            return a ? a.length : ""
+        };
+        scheduler.templates[a.name + "_cell_class"] = function (evs, current, y, next) {
+            // if (evs && evs.length > 0) {
+            //                var evStartTime = scheduler.config.currentEventStartTime; // evs[0].start_date;
+            //                var evEndTime = scheduler.config.currentEventEndTime;// evs[0].end_date;
+            //                if ((evStartTime.valueOf() >= current.valueOf() && evStartTime.valueOf() <= next.valueOf()) ||
+            //                    (current.valueOf() > evStartTime.valueOf() && evEndTime.valueOf() > current.valueOf()) ) {
+            //                    return "currentEvent";
+            //                }
+            //  }
+            return "";
+        };
+        scheduler.templates[a.name + "_scalex_class"] = function () {
+            return ""
+        };
+        scheduler.templates[a.name + "_second_scalex_class"] = function () {
+            return ""
+        };
+        scheduler.templates[a.name + "_scaley_class"] = function () {
+            return ""
+        };
+        scheduler.templates[a.name + "_scale_label"] = function (a, b) {
+            return b
+        };
+        scheduler.templates[a.name + "_tooltip"] = function (a, b, c) {
+            return c.text
+        };
+        scheduler.templates[a.name + "_date"] = function (a, b) {
+            return scheduler.templates.day_date(a);
+           // return a.getDay() == b.getDay() && b - a < 864E5 ? scheduler.templates.day_date(a) : scheduler.templates.week_date(a, b);
+        };
+        scheduler.templates[a.name + "_scale_date"] = scheduler.date.date_to_str(a.x_date || scheduler.config.hour_date);
+        scheduler.templates[a.name + "_second_scale_date"] = scheduler.date.date_to_str(a.second_scale && a.second_scale.x_date ? a.second_scale.x_date : scheduler.config.hour_date);
+        scheduler.date["add_" + a.name] = function (b, c) {
+            return scheduler.date.add(b, (a.x_length || a.x_size) * c * a.x_step, a.x_unit)
+        };
+        scheduler.date[a.name + "_start"] = scheduler.date[a.x_unit + "_start"] || scheduler.date.day_start;
+        scheduler.attachEvent("onSchedulerResize", function () {
+            return this._mode == a.name ? (p.call(a, !0), !1) : !0
+        });
+        scheduler.attachEvent("onOptionsLoad", function () {
+            a.order = {};
+            scheduler.callEvent("onOptionsLoadStart", []);
+            for (var b = 0; b < a.y_unit.length; b++) a.order[a.y_unit[b].key] = b;
+            scheduler.callEvent("onOptionsLoadFinal", []);
+            scheduler._date && a.name == scheduler._mode && scheduler.setCurrentView(scheduler._date,
+            scheduler._mode)
+        });
+        scheduler.callEvent("onOptionsLoad", [a]);
+        scheduler[a.name + "_view"] = function () {
+            scheduler.renderMatrix.apply(a, arguments)
+        };
+        if (a.render != "cell") {
+            var c = new Date,
+                f = scheduler.date.add(c, a.x_step, a.x_unit).valueOf() - c.valueOf();
+            scheduler["mouse_" + a.name] = function (b) {
+                var c = this._drag_event;
+                if (this._drag_id) c = this.getEvent(this._drag_id), this._drag_event._dhx_changed = !0;
+                b.x -= a.dx;
+                for (var g = 0, e = 0, j = 0; e < this._cols.length - 1; e++) if (g += this._cols[e], g > b.x) break;
+                for (g = 0; j < this._colsS.heights.length; j++) if (g += this._colsS.heights[j], g > b.y) break;
+                b.fields = {};
+                a.y_unit[j] || (j = a.y_unit.length - 1);
+                b.fields[a.y_property] = c[a.y_property] = a.y_unit[j].key;
+                b.x = 0;
+                this._drag_mode == "new-size" && c.start_date * 1 == this._drag_start * 1 && e++;
+                var k = e >= a._trace_x.length ? scheduler.date.add(a._trace_x[a._trace_x.length - 1], a.x_step, a.x_unit) : a._trace_x[e];
+                b.y = Math.round((k - this._min_date) / (6E4 * this.config.time_step));
+                b.custom = !0;
+                b.shift = f;
+                return b
+            }
+        }
+    };
+    scheduler.render_timeline_event = function (a, b, c) {
+        var f = v(a, !1, this._step),
+            d = v(a, !0,
+            this._step),
+            i = scheduler.xy.bar_height,
+            g = 2 + b * i,
+            e = i + g - 2,
+            j = a[this.y_property];
+        if (!this._events_height[j] || this._events_height[j] < e) this._events_height[j] = e;
+        var k = scheduler.templates.event_class(a.start_date, a.end_date, a),
+            k = "dhx_cal_event_line " + (k || ""),
+            h = a.color ? "background-color:" + a.color + ";" : "",
+            o = a.textColor ? "color:" + a.textColor + ";" : "",
+            l = '<div event_id="' + a.id + '" class="' + k + '" style="' + h + "" + o + "position:absolute; top:" + g + "px; left:" + f + "px; width:" + Math.max(0, d - f) + "px;" + (a._text_style || "") + '">' + scheduler.templates.event_bar_text(a.start_date,
+            a.end_date, a) + "</div>";
+        if (c) {
+            var m = document.createElement("DIV");
+            m.innerHTML = l;
+            var n = this.order[j],
+                p = scheduler._els.dhx_cal_data[0].firstChild.rows[n].cells[1].firstChild;
+            scheduler._rendered.push(m.firstChild);
+            p.appendChild(m.firstChild)
+        } else return l
+    };
+    scheduler.renderMatrix = function (a) {
+        scheduler._els.dhx_cal_data[0].scrollTop = 0;
+        var b = scheduler.date[this.name + "_start"](scheduler._date);
+        scheduler._min_date = scheduler.date.add(b, this.x_start * this.x_step, this.x_unit);
+        scheduler._max_date = scheduler.date.add(scheduler._min_date,
+        this.x_size * this.x_step, this.x_unit);
+        scheduler._table_view = !0;
+        if (this.second_scale) {
+            if (a && !this._header_resized) this._header_resized = scheduler.xy.scale_height, scheduler.xy.scale_height *= 2, scheduler._els.dhx_cal_header[0].className += " dhx_second_cal_header";
+            if (!a && this._header_resized) {
+                scheduler.xy.scale_height /= 2;
+                this._header_resized = !1;
+                var c = scheduler._els.dhx_cal_header[0];
+                c.className = c.className.replace(/ dhx_second_cal_header/gi, "")
+            }
+        }
+        p.call(this, a)
+    };
+    scheduler._locate_cell_timeline = function (a) {
+        for (var a = a || event, b = a.target ? a.target : a.srcElement; b && b.tagName != "TD"; ) b = b.parentNode;
+        if (b && b.tagName == "TD") {
+            var c = b.className.split(" ")[0];
+            if (c == "dhx_matrix_cell") if (scheduler._isRender("cell")) return {
+                x: b.cellIndex - 1,
+                y: b.parentNode.rowIndex,
+                src: b
+            };
+            else {
+                for (var f = b.parentNode; f && f.tagName != "TD"; ) f = f.parentNode;
+                return {
+                    x: b.cellIndex,
+                    y: f.parentNode.rowIndex,
+                    src: b
+                }
+            } else if (c == "dhx_matrix_scell") return {
+                x: -1,
+                y: b.parentNode.rowIndex,
+                src: b,
+                scale: !0
+            }
+        }
+        return !1
+    };
+    var H = scheduler._click.dhx_cal_data;
+    scheduler._click.dhx_cal_data = function (a) {
+        var b = H.apply(this, arguments),
+            c = scheduler.matrix[scheduler._mode];
+        if (c) {
+            var f = scheduler._locate_cell_timeline(a);
+            f && (f.scale ? scheduler.callEvent("onYScaleClick", [f.y, c.y_unit[f.y], a || event]) : scheduler.callEvent("onCellClick", [f.x, f.y, c._trace_x[f.x], (c._matrix[f.y] || {})[f.x] || [], a || event]))
+        }
+        return b
+    };
+    scheduler.dblclick_dhx_matrix_cell = function (a) {
+        var b = scheduler.matrix[scheduler._mode];
+        if (b) {
+            var c = scheduler._locate_cell_timeline(a);
+            c && (c.scale ? scheduler.callEvent("onYScaleDblClick", [c.y,
+            b.y_unit[c.y], a || event]) : scheduler.callEvent("onCellDblClick", [c.x, c.y, b._trace_x[c.x], (b._matrix[c.y] || {})[c.x] || [], a || event]))
+        }
+    };
+    scheduler.dblclick_dhx_matrix_scell = function (a) {
+        return scheduler.dblclick_dhx_matrix_cell(a)
+    };
+    scheduler._isRender = function (a) {
+        return scheduler.matrix[scheduler._mode] && scheduler.matrix[scheduler._mode].render == a
+    };
+    scheduler.attachEvent("onCellDblClick", function (a, b, c, f, d) {
+        if (!(this.config.readonly || d.type == "dblclick" && !this.config.dblclick_create)) {
+            var i = scheduler.matrix[scheduler._mode],
+                g = {};
+            g.start_date = i._trace_x[a];
+            g.end_date = i._trace_x[a + 1] ? i._trace_x[a + 1] : scheduler.date.add(i._trace_x[a], i.x_step, i.x_unit);
+            g[scheduler.matrix[scheduler._mode].y_property] = i.y_unit[b].key;
+            scheduler.addEventNow(g, null, d)
+        }
+    });
+    scheduler.attachEvent("onBeforeDrag", function () {
+        return scheduler._isRender("cell") ? !1 : !0
+    })
+})();
+
+if(typeof infosoftglobal == "undefined") var infosoftglobal = new Object();
+if(typeof infosoftglobal.FusionChartsUtil == "undefined") infosoftglobal.FusionChartsUtil = new Object();
+infosoftglobal.FusionCharts = function(swf, id, w, h, debugMode, registerWithJS, c, scaleMode, lang, detectFlashVersion, autoInstallRedirect){
+	if (!document.getElementById) { return; }
+	
+	//Flag to see whether data has been set initially
+	this.initialDataSet = false;
+	
+	//Create container objects
+	this.params = new Object();
+	this.variables = new Object();
+	this.attributes = new Array();
+	
+	//Set attributes for the SWF
+	if(swf) { this.setAttribute('swf', swf); }
+	if(id) { this.setAttribute('id', id); }
+
+	w=w.toString().replace(/\%$/,"%25");
+	if(w) { this.setAttribute('width', w); }
+	h=h.toString().replace(/\%$/,"%25");
+	if(h) { this.setAttribute('height', h); }
+
+	
+	//Set background color
+	if(c) { this.addParam('bgcolor', c); }
+	
+	//Set Quality	
+	this.addParam('quality', 'high');
+
+	//Render HTML OVER flash
+	this.addParam('WMode', 'transparent');
+	
+	//Add scripting access parameter
+	this.addParam('allowScriptAccess', 'always');
+	
+	//Pass width and height to be appended as chartWidth and chartHeight
+	this.addVariable('chartWidth', w);
+	this.addVariable('chartHeight', h);
+
+	//Whether in debug mode
+	debugMode = debugMode ? debugMode : 0;
+	this.addVariable('debugMode', debugMode);
+	//Pass DOM ID to Chart
+	this.addVariable('DOMId', id);
+	//Whether to registed with JavaScript
+	registerWithJS = registerWithJS ? registerWithJS : 0;
+	this.addVariable('registerWithJS', registerWithJS);
+	
+	//Scale Mode of chart
+	scaleMode = scaleMode ? scaleMode : 'noScale';
+	this.addVariable('scaleMode', scaleMode);
+	
+	//Application Message Language
+	lang = lang ? lang : 'EN';
+	this.addVariable('lang', lang);
+	
+	//Whether to auto detect and re-direct to Flash Player installation
+	this.detectFlashVersion = detectFlashVersion?detectFlashVersion:1;
+	this.autoInstallRedirect = autoInstallRedirect?autoInstallRedirect:1;
+	
+	//Ger Flash Player version 
+	this.installedVer = infosoftglobal.FusionChartsUtil.getPlayerVersion();
+	
+	if (!window.opera && document.all && this.installedVer.major > 7) {
+		// Only add the onunload cleanup if the Flash Player version supports External Interface and we are in IE
+		infosoftglobal.FusionCharts.doPrepUnload = true;
+	}
+}
+
+infosoftglobal.FusionCharts.prototype = {
+	setAttribute: function(name, value){
+		this.attributes[name] = value;
+	},
+	getAttribute: function(name){
+		return this.attributes[name];
+	},
+	addParam: function(name, value){
+		this.params[name] = value;
+	},
+	getParams: function(){
+		return this.params;
+	},
+	addVariable: function(name, value){
+		this.variables[name] = value;
+	},
+	getVariable: function(name){
+		return this.variables[name];
+	},
+	getVariables: function(){
+		return this.variables;
+	},
+	getVariablePairs: function(){
+		var variablePairs = new Array();
+		var key;
+		var variables = this.getVariables();
+		for(key in variables){
+			variablePairs.push(key +"="+ variables[key]);
+		}
+		return variablePairs;
+	},
+	getSWFHTML: function() {
+		var swfNode = "";
+		if (navigator.plugins && navigator.mimeTypes && navigator.mimeTypes.length) { 
+			// netscape plugin architecture			
+			swfNode = '<embed type="application/x-shockwave-flash" src="'+ this.getAttribute('swf') +'" width="'+ this.getAttribute('width') +'" height="'+ this.getAttribute('height') +'"  ';
+			swfNode += ' id="'+ this.getAttribute('id') +'" name="'+ this.getAttribute('id') +'" ';
+			var params = this.getParams();
+			 for(var key in params){ swfNode += [key] +'="'+ params[key] +'" '; }
+			var pairs = this.getVariablePairs().join("&");
+			 if (pairs.length > 0){ swfNode += 'flashvars="'+ pairs +'"'; }
+			swfNode += '/>';
+		} else { // PC IE			
+			swfNode = '<object id="'+ this.getAttribute('id') +'" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="'+ this.getAttribute('width') +'" height="'+ this.getAttribute('height') +'">';
+			swfNode += '<param name="movie" value="'+ this.getAttribute('swf') +'" />';
+			var params = this.getParams();
+			for(var key in params) {
+			 swfNode += '<param name="'+ key +'" value="'+ params[key] +'" />';
+			}
+			var pairs = this.getVariablePairs().join("&");			
+			if(pairs.length > 0) {swfNode += '<param name="flashvars" value="'+ pairs +'" />';}
+			swfNode += "</object>";
+		}
+		return swfNode;
+	},
+	setDataURL: function(strDataURL){
+		//This method sets the data URL for the chart.
+		//If being set initially
+		if (this.initialDataSet==false){
+			this.addVariable('dataURL',strDataURL);
+			//Update flag
+			this.initialDataSet = true;
+		}else{
+			//Else, we update the chart data using External Interface
+			//Get reference to chart object
+			var chartObj = infosoftglobal.FusionChartsUtil.getChartObject(this.getAttribute('id'));
+			
+			if (!chartObj.setDataURL)
+			{
+				__flash__addCallback(chartObj, "setDataURL");
+			}
+			
+			chartObj.setDataURL(strDataURL);
+		}
+	},
+	//This function :
+	//fixes the double quoted attributes to single quotes
+	//Encodes all quotes inside attribute values
+	//Encodes % to %25 and & to %26;
+	encodeDataXML: function(strDataXML){
+		
+			var regExpReservedCharacters=["\\$","\\+"];
+			var arrDQAtt=strDataXML.match(/=\s*\".*?\"/g);
+			if (arrDQAtt){
+				for(var i=0;i<arrDQAtt.length;i++){
+					var repStr=arrDQAtt[i].replace(/^=\s*\"|\"$/g,"");
+					repStr=repStr.replace(/\'/g,"%26apos;");
+					var strTo=strDataXML.indexOf(arrDQAtt[i]);
+					var repStrr="='"+repStr+"'";
+					var strStart=strDataXML.substring(0,strTo);
+					var strEnd=strDataXML.substring(strTo+arrDQAtt[i].length);
+					var strDataXML=strStart+repStrr+strEnd;
+				}
+			}
+			
+			strDataXML=strDataXML.replace(/\"/g,"%26quot;");
+			strDataXML=strDataXML.replace(/%(?![\da-f]{2}|[\da-f]{4})/ig,"%25");
+			strDataXML=strDataXML.replace(/\&/g,"%26");
+
+			return strDataXML;
+
+	},
+	setDataXML: function(strDataXML){
+		//If being set initially
+		if (this.initialDataSet==false){
+			//This method sets the data XML for the chart INITIALLY.
+			this.addVariable('dataXML',this.encodeDataXML(strDataXML));
+			//Update flag
+			this.initialDataSet = true;
+		}else{
+			//Else, we update the chart data using External Interface
+			//Get reference to chart object
+			var chartObj = infosoftglobal.FusionChartsUtil.getChartObject(this.getAttribute('id'));
+			chartObj.setDataXML(strDataXML);
+		}
+	},
+	setTransparent: function(isTransparent){
+		//I don't think this is ever called, moved addparam to init -RR
+	},
+	
+	render: function(elementId){
+		//First check for installed version of Flash Player - we need a minimum of 6
+		if((this.detectFlashVersion==1) && (this.installedVer.major < 6)){
+			if (this.autoInstallRedirect==1){
+				//If we can auto redirect to install the player?
+				var installationConfirm = window.confirm("You need Adobe Flash Player 6 (or above) to view the charts. It is a free and lightweight installation from Adobe.com. Please click on Ok to install the same.");
+				if (installationConfirm){
+					window.location = "http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash";
+				}else{
+					return false;
+				}
+			}else{
+				//Else, do not take an action. It means the developer has specified a message in the DIV (and probably a link).
+				//So, expect the developers to provide a course of way to their end users.
+				//window.alert("You need Adobe Flash Player 8 (or above) to view the charts. It is a free and lightweight installation from Adobe.com. ");
+				return false;
+			}			
+		}else{
+			//Render the chart
+			var n = (typeof elementId == 'string') ? document.getElementById(elementId) : elementId;
+			n.innerHTML = this.getSWFHTML();
+			
+			//Added <FORM> compatibility
+			//Check if it's added in Mozilla embed array or if already exits 
+			if(!document.embeds[this.getAttribute('id')] && !window[this.getAttribute('id')])
+		      	window[this.getAttribute('id')]=document.getElementById(this.getAttribute('id')); 
+				//or else document.forms[formName/formIndex][chartId]			
+			return true;		
+		}
+	}
+}
+
+
+infosoftglobal.FusionChartsUtil.getPlayerVersion = function(){
+	var PlayerVersion = new infosoftglobal.PlayerVersion([0,0,0]);
+	if(navigator.plugins && navigator.mimeTypes.length){
+		var x = navigator.plugins["Shockwave Flash"];
+		if(x && x.description) {
+			PlayerVersion = new infosoftglobal.PlayerVersion(x.description.replace(/([a-zA-Z]|\s)+/, "").replace(/(\s+r|\s+b[0-9]+)/, ".").split("."));
+		}
+	}else if (navigator.userAgent && navigator.userAgent.indexOf("Windows CE") >= 0){ 
+		//If Windows CE
+		var axo = 1;
+		var counter = 3;
+		while(axo) {
+			try {
+				counter++;
+				axo = new ActiveXObject("ShockwaveFlash.ShockwaveFlash."+ counter);
+				PlayerVersion = new infosoftglobal.PlayerVersion([counter,0,0]);
+			} catch (e) {
+				axo = null;
+			}
+		}
+	} else { 
+		// Win IE (non mobile)
+		// Do minor version lookup in IE, but avoid Flash Player 6 crashing issues
+		try{
+			var axo = new ActiveXObject("ShockwaveFlash.ShockwaveFlash.7");
+		}catch(e){
+			try {
+				var axo = new ActiveXObject("ShockwaveFlash.ShockwaveFlash.6");
+				PlayerVersion = new infosoftglobal.PlayerVersion([6,0,21]);
+				axo.AllowScriptAccess = "always"; // error if player version < 6.0.47 (thanks to Michael Williams @ Adobe for this code)
+			} catch(e) {
+				if (PlayerVersion.major == 6) {
+					return PlayerVersion;
+				}
+			}
+			try {
+				axo = new ActiveXObject("ShockwaveFlash.ShockwaveFlash");
+			} catch(e) {}
+		}
+		if (axo != null) {
+			PlayerVersion = new infosoftglobal.PlayerVersion(axo.GetVariable("$version").split(" ")[1].split(","));
+		}
+	}
+	return PlayerVersion;
+}
+infosoftglobal.PlayerVersion = function(arrVersion){
+	this.major = arrVersion[0] != null ? parseInt(arrVersion[0]) : 0;
+	this.minor = arrVersion[1] != null ? parseInt(arrVersion[1]) : 0;
+	this.rev = arrVersion[2] != null ? parseInt(arrVersion[2]) : 0;
+}
+// ------------ Fix for Out of Memory Bug in IE in FP9 ---------------//
+
+infosoftglobal.FusionChartsUtil.cleanupSWFs = function() {
+	var objects = document.getElementsByTagName("OBJECT");
+	for (var i = objects.length - 1; i >= 0; i--) {
+		objects[i].style.display = 'none';
+		for (var x in objects[i]) {
+			if (typeof objects[i][x] == 'function') {
+				objects[i][x] = function(){};
+			}
+		}
+	}
+}
+// Fixes bug in fp9
+if (infosoftglobal.FusionCharts.doPrepUnload) {
+	if (!infosoftglobal.unloadSet) {
+		infosoftglobal.FusionChartsUtil.prepUnload = function() {
+			__flash_unloadHandler = function(){};
+			__flash_savedUnloadHandler = function(){};
+			window.attachEvent("onunload", infosoftglobal.FusionChartsUtil.cleanupSWFs);
+		}
+		window.attachEvent("onbeforeunload", infosoftglobal.FusionChartsUtil.prepUnload);
+		infosoftglobal.unloadSet = true;
+	}
+}
+
+if (!document.getElementById && document.all) { document.getElementById = function(id) { return document.all[id]; }}
+
+if (Array.prototype.push == null) { Array.prototype.push = function(item) { this[this.length] = item; return this.length; }}
+
+
+infosoftglobal.FusionChartsUtil.getChartObject = function(id)
+{
+  var chartRef=null;
+  if (navigator.appName.indexOf("Microsoft Internet")==-1) {
+    if (document.embeds && document.embeds[id])
+      chartRef = document.embeds[id]; 
+	else
+	chartRef  = window.document[id];
+  }
+  else {
+    chartRef = window[id];
+  }
+  if (!chartRef)
+	chartRef  = document.getElementById(id);
+  
+  return chartRef;
+}
+
+infosoftglobal.FusionChartsUtil.updateChartXML = function(chartId, strXML){
+	//Get reference to chart object				
+	var chartObj = infosoftglobal.FusionChartsUtil.getChartObject(chartId);		
+	//Set dataURL to null
+	chartObj.SetVariable("_root.dataURL","");
+	//Set the flag
+	chartObj.SetVariable("_root.isNewData","1");
+	//Set the actual data
+	chartObj.SetVariable("_root.newData",strXML);
+	//Go to the required frame
+	chartObj.TGotoLabel("/", "JavaScriptHandler"); 
+}
+
+
+
+var getChartFromId = infosoftglobal.FusionChartsUtil.getChartObject;
+var updateChartXML = infosoftglobal.FusionChartsUtil.updateChartXML;
+var FusionCharts = infosoftglobal.FusionCharts;

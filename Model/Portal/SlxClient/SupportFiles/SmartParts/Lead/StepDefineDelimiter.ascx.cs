@@ -1,16 +1,6 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using log4net;
-using Sage.Platform.WebPortal.SmartParts;
-using System.Collections.Generic;
-using System.Text;
 using Sage.Entity.Interfaces;
 using Sage.Platform.WebPortal.Services;
 using Sage.Platform.Application;
@@ -21,7 +11,6 @@ using Sage.SalesLogix.Services.Import;
 /// </summary>
 public partial class StepDefineDelimiter : UserControl
 {
-    private IWebDialogService _DialogService;
     static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodInfo.GetCurrentMethod().DeclaringType);
 
     #region Public Methods
@@ -31,17 +20,7 @@ public partial class StepDefineDelimiter : UserControl
     /// </summary>
     /// <value>The dialog service.</value>
     [ServiceDependency]
-    public IWebDialogService DialogService
-    {
-        set
-        {
-            _DialogService = value;
-        }
-        get
-        {
-            return _DialogService;
-        }
-    }
+    public IWebDialogService DialogService { get; set; }
 
     #endregion
 
@@ -79,10 +58,10 @@ public partial class StepDefineDelimiter : UserControl
         }
         else
         {
-            log.Warn(GetLocalResourceObject("error_MissingImportFile".ToString()));
+            log.Warn(GetLocalResourceObject("error_MissingImportFile").ToString());
         }
     }
-    
+
     /// <summary>
     /// Gets the import manager.
     /// </summary>
@@ -104,14 +83,7 @@ public partial class StepDefineDelimiter : UserControl
             {
                 options.Delimiter = GetSelectedDelimiter();
             }
-            if (!lbxQualifier.SelectedValue.ToString().Equals("None"))
-            {
-                options.Qualifier = Convert.ToChar(lbxQualifier.SelectedValue);
-            }
-            else
-            {
-                options.Qualifier = '\x000';
-            }
+            options.Qualifier = !lbxQualifier.SelectedValue.Equals("None") ? Convert.ToChar(lbxQualifier.SelectedValue) : '\x000';
             options.FirstRowColHeader = chkFirstRow.Checked;
         }
         return importManager;
@@ -125,14 +97,13 @@ public partial class StepDefineDelimiter : UserControl
     {
         if (rdbTab.Checked)
             return 't';
-        else if (rdbComma.Checked)
+        if (rdbComma.Checked)
             return ',';
-        else if (rdbSemiColon.Checked)
+        if (rdbSemiColon.Checked)
             return ';';
-        else if (rdbSpace.Checked)
+        if (rdbSpace.Checked)
             return ' ';
-        else
-            return ',';
+        return ',';
     }
 
     /// <summary>
@@ -159,4 +130,3 @@ public partial class StepDefineDelimiter : UserControl
 
     #endregion
 }
-

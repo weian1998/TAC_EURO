@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <codeTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="7067c649-cd9a-4498-9e87-c5851ae8a8b3" name="Default-ResXClass-SalesLogix" templateType="ResXClass" templateEngineType="T4">
-  <template><![CDATA[<#@ template language="C#v3.5" #>
+  <template><![CDATA[<#@ template language="C#v4.0" #>
 using System;
 using System.Resources;
 using Sage.Platform.Orm.Attributes;

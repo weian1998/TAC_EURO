@@ -16,12 +16,12 @@ Sage.SimpleXmlReader = function(xml) {
 };
 
 Sage.SimpleXmlReader.prototype.getNodeText = function(node) {
-    return (Ext.isIE) ? node.text : node.textContent;
+    return (dojo.isIE) ? node.text : node.textContent;
 };
 
 Sage.SimpleXmlReader.prototype.loadXml = function(xml) {
     this.xmlDocument = null;
-    if (Ext.isIE) {
+    if (dojo.isIE) {
         var oXmlDocument = new ActiveXObject("Microsoft.XMLDOM");
         oXmlDocument.async = false;
         oXmlDocument.loadXML(xml);
@@ -43,7 +43,7 @@ Sage.SimpleXmlReader.prototype.loadXml = function(xml) {
 };
 
 Sage.SimpleXmlReader.prototype.selectChildNodes = function(path) {
-    if (Ext.isIE) {
+    if (dojo.isIE) {
         return this.xmlDocument.selectNodes(path);
     }
     else {
@@ -63,7 +63,7 @@ Sage.SimpleXmlReader.prototype.selectChildNodes = function(path) {
 };
 
 Sage.SimpleXmlReader.prototype.selectSingleNode = function(path, node) {
-    if (Ext.isIE) {
+    if (dojo.isIE) {
         if (node) {
             return node.selectSingleNode(path);
         }
@@ -85,7 +85,7 @@ Sage.SimpleXmlReader.prototype.selectSingleNode = function(path, node) {
 Sage.SimpleXmlReader.prototype.selectSingleNodeText = function(path, node) {
     var oNode = this.selectSingleNode(path, node);
     if (oNode != null) {
-        return (Ext.isIE) ? oNode.text : oNode.textContent;
+        return (dojo.isIE) ? oNode.text : oNode.textContent;
     }
     else {
         throw new Error(String.format("The node could not be located for the path '{0}' in Sage.SimpleXmlReader.selectSingleNodeText().", path));

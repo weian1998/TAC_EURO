@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Отчеты" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" class="" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Troubleshooting Reports</title>
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Reporting/reporttroubleshooting.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor197"></a>Устранение ошибок Sage SalesLogix Web Reporting</h1>
+        <p>Ниже представлен список наиболее распространенных ошибок в Sage SalesLogix Web Reporting:</p>
+        <p class="Infinitive">Некорректный ID отчета</p>
+        <p>Ошибка появляется в случае, если Менеджер отчетов запрашивает с сервера отчет, которого нет в базе. Она возникает также в случае, если Менеджер Групп и сервер отчетов связаны с разными базами. Если все настроено верно, ошибка никогда не возникнет.</p>
+        <p class="Infinitive">Отсутствует возможность создавать отчеты на Web сервере</p>
+        <p>Ошибка возникнет в случае, если Сервер Отчетов не будет искать отчеты в базе и будет записывать их во временный файл Ниже представлены возможные причины случившегося:</p>
+        <ul style="list-style-type: disc;">
+            <li class="Bullets" value="1">Пользователь не имеет достаточных прав.</li>
+            <li class="Bullets" value="2">Идентификация COM+ пакета пользователя не имеет достаточных прав на чтение/запись.</li>
+            <li class="Bullets" value="3">Испорчены плагины для отчетов.</li>
+            <li class="Bullets" value="4">Отчет в настоящее время блокируется другим пользователем (Это можно предотвратить с помощью COM+ приложения).</li>
+        </ul>
+        <p class="Infinitive">Сообщение об ошибке вида: "error: &lt; error msg&gt;</p>
+        <p>Эта ошибка возникает время от времени. Эта ошибка возникает, когда сервер отчетов выбрасывает приложение с ошибкой, представленной выше. Сообщение будет в точности сообщением с ошибкой в коде.</p>
+        <p class="Infinitive">Ошибка Http запроса</p>
+        <p>Ошибка возникает в случае, когда сервер не запущен. Это проблема настройки, в результате которой Web Host не может обратиться к Web серверу.</p>
+        <p class="Infinitive">Некорректный CEReport XML</p>
+        <p>Ошибка возникает в случае, когда запрос сделан на сервер и IE отображает ошибочную страницу (т.е. страницу 403). Это происходит, потому что URL отчета некорректно определен или Сервер Ответов неправильно сконфигуирован.</p>
+        <p class="Infinitive">$ является недопустимым целым числом</p>
+        <p>Строка подключения в серверу отчетов еще не размножена. Пользователь должен будет открыть Web Менеджера и размножить строку подключения, используя ADO подключение в конфигурации сервера.</p>
+        <p class="Infinitive">Выбранный фильтр группы содержит данные Unicode в условии, и не может быть использован для отчетов. Чтобы просмотреть отчет, удалите эту группу из фильтра или выберите другую группу.</p>
+        <p class="Topic-Text-Numbered">Вы получите это сообщение если используете фильтр группы, и эта группа содержит данные Unicode. Чтобы просмотреть отчет, нужно удалить группу или выбрать другую.</p>
+        <p class="RelatedTopics">См. также</p>
+        <p><a href="reportoverview.htm" target="_self">Обзор отчетов</a>
+        </p>
+        <div style="width: 100%;position: relative;">
+            <p>&#160;</p>
+        </div>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="e42c3e4c-d5c8-4839-8f95-a19a99f9b78e">
   <ItemId>menuItemLookupResource</ItemId>
-  <NavUrl>javascript:showMainLookupFor('RESOURCELIST','ResourceList.aspx');</NavUrl>
+  <NavUrl>javascript:Sage.Utility.Groups.showMainLookupFor('RESOURCELIST','ResourceList.aspx');</NavUrl>
   <LargeImageUrl />
   <SmallImageUrl />
   <ContextMenuId />

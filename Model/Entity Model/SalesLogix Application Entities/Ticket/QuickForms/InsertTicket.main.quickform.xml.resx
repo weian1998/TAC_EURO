@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="e0e9c811-e491-4a18-9457-7fc52c012e9f.Message" xml:space="preserve">
     <value>Cannot automatically Punch In to Ticket. Required information is missing.</value>
@@ -144,12 +144,6 @@
   <data name="cmdAccountService.ToolTip" xml:space="preserve">
     <value>Account Service Information</value>
   </data>
-  <data name="txtSubject.Caption" xml:space="preserve">
-    <value>Subject:</value>
-  </data>
-  <data name="txtResolution.Caption" xml:space="preserve">
-    <value>Resolution:</value>
-  </data>
   <data name="chkClosedOnFirst.Caption" xml:space="preserve">
     <value>Resolved 1st Call</value>
   </data>
@@ -158,12 +152,6 @@
   </data>
   <data name="chkAddKnowledge.Caption" xml:space="preserve">
     <value>Approved for SpeedSearch</value>
-  </data>
-  <data name="hzsDetails.Caption" xml:space="preserve">
-    <value>Details</value>
-  </data>
-  <data name="hzsComments.Caption" xml:space="preserve">
-    <value>Comments</value>
   </data>
   <data name="dtpNeededByDate.Caption" xml:space="preserve">
     <value>Needed Date:</value>
@@ -297,15 +285,6 @@
   <data name="1223001d-078d-4c9a-a61d-244831f43085.Title" xml:space="preserve">
     <value>SalesLogix</value>
   </data>
-  <data name="txtNotes.Caption" xml:space="preserve">
-    <value>Internal:</value>
-  </data>
-  <data name="cmdIntDateStamp.ToolTip" xml:space="preserve">
-    <value>User Date Stamp</value>
-  </data>
-  <data name="txtDescriptions.Caption" xml:space="preserve">
-    <value>Description:</value>
-  </data>
   <data name="119d394c-cef4-4b1e-aa83-e9a9c005df4e.Title" xml:space="preserve">
     <value>SalesLogix</value>
   </data>
@@ -350,41 +329,5 @@
   </data>
   <data name="cmdPunchOut.Caption" xml:space="preserve">
     <value>Punch Out</value>
-  </data>
-  <data name="lueStandardProblem.ButtonToolTip" xml:space="preserve">
-    <value>Find</value>
-  </data>
-  <data name="lueStandardResolution.ButtonToolTip" xml:space="preserve">
-    <value>Find</value>
-  </data>
-  <data name="lueStandardProblem.LookupProperties.Area.PropertyHeader" xml:space="preserve">
-    <value>Area</value>
-  </data>
-  <data name="lueStandardProblem.LookupProperties.Category.PropertyHeader" xml:space="preserve">
-    <value>Category</value>
-  </data>
-  <data name="lueStandardProblem.LookupProperties.Description.PropertyHeader" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="lueStandardProblem.LookupProperties.Issue.PropertyHeader" xml:space="preserve">
-    <value>Issue</value>
-  </data>
-  <data name="lueStandardResolution.LookupProperties.Description.PropertyHeader" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="cmdSpeedSearchProblem.ToolTip" xml:space="preserve">
-    <value>SpeedSearch</value>
-  </data>
-  <data name="cmdSpeedSearch.ToolTip" xml:space="preserve">
-    <value>SpeedSearch</value>
-  </data>
-  <data name="cmdDescDateStamp.ToolTip" xml:space="preserve">
-    <value>Add problem timestamp</value>
-  </data>
-  <data name="cmdResDateStamp.ToolTip" xml:space="preserve">
-    <value>Add resolution timestamp</value>
-  </data>
-  <data name="pklITTicketLevel.Caption" xml:space="preserve">
-    <value>IT TicketLevel</value>
   </data>
 </root>

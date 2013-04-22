@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ItemNumber_Header" xml:space="preserve">
+    <value>Элемент №</value>
+  </data>
+  <data name="Err_TotalCost" xml:space="preserve">
+    <value>Невозможно определить общую стоимость.</value>
+  </data>
+  <data name="Lookup_FirstName_PropertyHeader" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="HandleFulfillmentLocally.Text" xml:space="preserve">
+    <value>Обработать заполнение локально</value>
+  </data>
+  <data name="SelectTemplate_label.Text" xml:space="preserve">
+    <value>Выберите шаблон:</value>
+  </data>
+  <data name="SDataRequestFailed" xml:space="preserve">
+    <value>Не удалось выполнить запрос SData</value>
+  </data>
+  <data name="SendBy_label.Text" xml:space="preserve">
+    <value>Отправлено:</value>
+  </data>
+  <data name="DescriptionIsRequired" xml:space="preserve">
+    <value>Требуется описание</value>
+  </data>
+  <data name="SelectOpportunity" xml:space="preserve">
+    <value>ОК</value>
+  </data>
+  <data name="Cost_Header" xml:space="preserve">
+    <value>Цена</value>
+  </data>
+  <data name="Template_label.Text" xml:space="preserve">
+    <value>Шаблон:</value>
+  </data>
+  <data name="PageDescription.Text" xml:space="preserve">
+    <value>Планировать запрос на инф. материалы</value>
+  </data>
+  <data name="FulfillFailed" xml:space="preserve">
+    <value>Запрос на инф. материалы не может быть заполнен.</value>
+  </data>
+  <data name="Description_label.Text" xml:space="preserve">
+    <value>Описание:</value>
+  </data>
+  <data name="LitWarning_MaxOneBillion" xml:space="preserve">
+    <value>Не может быть запланировано более одного миллиарда событий одновременно.</value>
+  </data>
+  <data name="GroupDataError" xml:space="preserve">
+    <value>Данные группы не могут быть восстановлены.</value>
+  </data>
+  <data name="TotalCost" xml:space="preserve">
+    <value>Общая стоимость:</value>
+  </data>
+  <data name="LitWarning_UnableToParseQuantity" xml:space="preserve">
+    <value>Невозможно проанализировать кол-во.</value>
+  </data>
+  <data name="Lookup_Mobile_PropertyHeader" xml:space="preserve">
+    <value>Мобильный тел.</value>
+  </data>
+  <data name="OnlyCoverLetter.Text" xml:space="preserve">
+    <value>только сопроводительное письмо</value>
+  </data>
+  <data name="NoContactSelected" xml:space="preserve">
+    <value>Нет выбранных контактов</value>
+  </data>
+  <data name="FindOpportunity" xml:space="preserve">
+    <value>Найти сделку</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Загрузка...</value>
+  </data>
+  <data name="CloseButton.Text" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="ErrorSubmittingRequest" xml:space="preserve">
+    <value>Запрос тнформационных материалов не сохранен.</value>
+  </data>
+  <data name="LitWarning_QtyGreaterThanZero" xml:space="preserve">
+    <value>Общее кол-во должно быть больше 0.</value>
+  </data>
+  <data name="RequestedByOn.Text" xml:space="preserve">
+    <value>Запросил {0} на {1}</value>
+  </data>
+  <data name="NoItemSelected" xml:space="preserve">
+    <value>Нет выбранных элементов информационных материалов</value>
+  </data>
+  <data name="btnCancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="optRequestForContact.Text" xml:space="preserve">
+    <value>Контакт</value>
+  </data>
+  <data name="Name_lz.HeaderText" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="LitWarning_DescriptionLessThan64" xml:space="preserve">
+    <value>Поле описание должно быть меньше чем 64 символа.</value>
+  </data>
+  <data name="optRequestForOpportunity.Text" xml:space="preserve">
+    <value>Сделка</value>
+  </data>
+  <data name="XContactsSelected" xml:space="preserve">
+    <value>{0} выбранны контакт(ы)</value>
+  </data>
+  <data name="Lookup_LastName_PropertyHeader" xml:space="preserve">
+    <value>Фамилия</value>
+  </data>
+  <data name="SubmissionInProgress" xml:space="preserve">
+    <value>Отправка запроса...</value>
+  </data>
+  <data name="LitWarning_SelectContact" xml:space="preserve">
+    <value>Должен быть выбран контакт</value>
+  </data>
+  <data name="PrintLiteratureList_label.Text" xml:space="preserve">
+    <value>Печать инф. материалов:</value>
+  </data>
+  <data name="ItemsSelected" xml:space="preserve">
+    <value>Выбранные элементы:</value>
+  </data>
+  <data name="LitWarning_SelectTemplate" xml:space="preserve">
+    <value>Вы должны выбрать шаблон, прежде чем продолжать.</value>
+  </data>
+  <data name="FulfillCanceled" xml:space="preserve">
+    <value>Заполнение запроса на инф. материалы было отменено.</value>
+  </data>
+  <data name="Lookup_NameLF_PropertyHeader" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="ItemFamily_Header" xml:space="preserve">
+    <value>Семейство</value>
+  </data>
+  <data name="optRequestForGroup.Text" xml:space="preserve">
+    <value>Группа</value>
+  </data>
+  <data name="AttachmentList.Text" xml:space="preserve">
+    <value>только вложенный список</value>
+  </data>
+  <data name="Lookup_Account_PropertyHeader" xml:space="preserve">
+    <value>Субъект</value>
+  </data>
+  <data name="btnItemsFilter.AlternateText" xml:space="preserve">
+    <value>Фильтр</value>
+  </data>
+  <data name="WithCoverLetter.Text" xml:space="preserve">
+    <value>с сопроводительным письмом</value>
+  </data>
+  <data name="QuantityRequested" xml:space="preserve">
+    <value>Требуемое кол-во</value>
+  </data>
+  <data name="PageDescription.Title" xml:space="preserve">
+    <value>Планировать запрос на инф. материалы</value>
+  </data>
+  <data name="Quantity_Header" xml:space="preserve">
+    <value>Кол-во</value>
+  </data>
+  <data name="Lookup_City_PropertyHeader" xml:space="preserve">
+    <value>Город</value>
+  </data>
+  <data name="Lookup_Work_PropertyHeader" xml:space="preserve">
+    <value>Раб. телефон</value>
+  </data>
+  <data name="FindContact" xml:space="preserve">
+    <value>Найти контакт</value>
+  </data>
+  <data name="LitWarning_MustSelectTemplate" xml:space="preserve">
+    <value>Вы должны выбрать шаблон.</value>
+  </data>
+  <data name="CoverLetter" xml:space="preserve">
+    <value>Обложка:</value>
+  </data>
+  <data name="RequestedFor_label.Text" xml:space="preserve">
+    <value>Запросил для:</value>
+  </data>
+  <data name="SelectContact" xml:space="preserve">
+    <value>ОК</value>
+  </data>
+  <data name="btnItemsFilter.Tooltip" xml:space="preserve">
+    <value>Доступные элементы фильтра</value>
+  </data>
+  <data name="TemplateFindIcon_AlternateText" xml:space="preserve">
+    <value>Найти</value>
+  </data>
+  <data name="SendByDateUndefined" xml:space="preserve">
+    <value>Дата отправки не была определена.</value>
+  </data>
+  <data name="Calendar" xml:space="preserve">
+    <value>Календарь</value>
+  </data>
+  <data name="lblRequestFor.Text" xml:space="preserve">
+    <value>Запрос:</value>
+  </data>
+  <data name="LitWarning_SendByDate" xml:space="preserve">
+    <value>Дата отправления должна быть больше сегодняшней.</value>
+  </data>
+  <data name="btnSaveLitRequest_rsc.ToolTip" xml:space="preserve">
+    <value>Планировать запрос на инф. материалы</value>
+  </data>
+  <data name="Lookup_State_PropertyHeader" xml:space="preserve">
+    <value>Область</value>
+  </data>
+  <data name="Lookup_Description_PropertyHeader" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="SendVia_label.Text" xml:space="preserve">
+    <value>Отправить по:</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Эл. почта</value>
+  </data>
+  <data name="AvailableItems" xml:space="preserve">
+    <value>Доступные элементы</value>
+  </data>
+  <data name="ItemName_Header" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="SeparatePage.Text" xml:space="preserve">
+    <value>на отдельной странице</value>
+  </data>
+  <data name="SearchBy" xml:space="preserve">
+    <value>Поиск по:</value>
+  </data>
+  <data name="NoRecordFound" xml:space="preserve">
+    <value>Записи не найдены</value>
+  </data>
+  <data name="RequestFor_rsc.ToolTip" xml:space="preserve">
+    <value>Найти</value>
+  </data>
+  <data name="Priority_label.Text" xml:space="preserve">
+    <value>Приоритет:</value>
+  </data>
+  <data name="Lookup_Email_PropertyHeader" xml:space="preserve">
+    <value>Эл. почта</value>
+  </data>
+</root>

@@ -1,0 +1,5 @@
+﻿define(
+    {
+      displayNameText: "Zone combinée"
+    }
+);

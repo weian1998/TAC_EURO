@@ -112,115 +112,22 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AttachmentList.Text" xml:space="preserve">
     <value>only attachment list</value>
-  </data>
-  <data name="BoundFieldResource1.AccessibleHeaderText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BoundFieldResource1.FooterText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BoundFieldResource1.HeaderText" xml:space="preserve">
-    <value>Family</value>
-  </data>
-  <data name="BoundFieldResource2.AccessibleHeaderText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BoundFieldResource2.FooterText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BoundFieldResource2.HeaderText" xml:space="preserve">
-    <value>Cost</value>
-  </data>
-  <data name="BoundFieldResource3.AccessibleHeaderText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BoundFieldResource3.FooterText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="BoundFieldResource3.HeaderText" xml:space="preserve">
-    <value>LiteratureID</value>
-  </data>
-  <data name="btnSaveLitRequest_rsc.AlternateText" xml:space="preserve">
-    <value />
   </data>
   <data name="btnSaveLitRequest_rsc.ToolTip" xml:space="preserve">
     <value>Schedule Literature Request</value>
   </data>
   <data name="CloseButton.Text" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Close</value>
   </data>
   <data name="Description_label.Text" xml:space="preserve">
     <value>Description:</value>
-  </data>
-  <data name="Description_label.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="DescriptionResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="DescriptionResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="EmptyRow_lz.Caption" xml:space="preserve">
-    <value />
-  </data>
-  <data name="EmptyRow_lz.EmptyDataText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="EmptyRow_lz.EmptyTableRowText" xml:space="preserve">
-    <value>No records match the selection criteria.</value>
-  </data>
-  <data name="EmptyRow_lz.SortAscImageUrl" xml:space="preserve">
-    <value />
-  </data>
-  <data name="EmptyRow_lz.SortDescImageUrl" xml:space="preserve">
-    <value />
-  </data>
-  <data name="EmptyRow_lz.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblRequestedByResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblRequestedByResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ListItemResource1.Value" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ListItemResource2.Value" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ListItemResource3.Value" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ListItemResource4.Value" xml:space="preserve">
-    <value />
-  </data>
-  <data name="LitRequest_CToolsResource1.GroupingText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="LitRequest_CToolsResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="LitRequest_LToolsResource1.GroupingText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="LitRequest_LToolsResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="LitRequest_RToolsResource1.GroupingText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="LitRequest_RToolsResource1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="LitWarning_DescriptionLessThan64" xml:space="preserve">
     <value>Length of Description field must be less than 64 characters.</value>
@@ -246,41 +153,32 @@
   <data name="LitWarning_UnableToParseQuantity" xml:space="preserve">
     <value>Unable to parse quantity.</value>
   </data>
-  <data name="lnkLiteratureRequestHelpResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Lookup_Account.PropertyHeader" xml:space="preserve">
+  <data name="Lookup_Account_PropertyHeader" xml:space="preserve">
     <value>Account</value>
   </data>
-  <data name="Lookup_City.PropertyHeader" xml:space="preserve">
+  <data name="Lookup_City_PropertyHeader" xml:space="preserve">
     <value>City</value>
   </data>
-  <data name="Lookup_Email.PropertyHeader" xml:space="preserve">
+  <data name="Lookup_Email_PropertyHeader" xml:space="preserve">
     <value>E-mail</value>
   </data>
-  <data name="Lookup_FirstName.PropertyHeader" xml:space="preserve">
+  <data name="Lookup_FirstName_PropertyHeader" xml:space="preserve">
     <value>First Name</value>
   </data>
-  <data name="Lookup_LastName.PropertyHeader" xml:space="preserve">
+  <data name="Lookup_LastName_PropertyHeader" xml:space="preserve">
     <value>Last Name</value>
   </data>
-  <data name="Lookup_Mobile.PropertyHeader" xml:space="preserve">
+  <data name="Lookup_Mobile_PropertyHeader" xml:space="preserve">
     <value>Mobile</value>
   </data>
-  <data name="Lookup_NameLF.PropertyHeader" xml:space="preserve">
+  <data name="Lookup_NameLF_PropertyHeader" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="Lookup_State.PropertyHeader" xml:space="preserve">
+  <data name="Lookup_State_PropertyHeader" xml:space="preserve">
     <value>State</value>
   </data>
-  <data name="Lookup_Work.PropertyHeader" xml:space="preserve">
+  <data name="Lookup_Work_PropertyHeader" xml:space="preserve">
     <value>Work Phone</value>
-  </data>
-  <data name="Name_lz.AccessibleHeaderText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Name_lz.FooterText" xml:space="preserve">
-    <value />
   </data>
   <data name="Name_lz.HeaderText" xml:space="preserve">
     <value>Name</value>
@@ -297,28 +195,10 @@
   <data name="PrintLiteratureList_label.Text" xml:space="preserve">
     <value>Print Literature List:</value>
   </data>
-  <data name="PrintLiteratureList_label.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PrintLiteratureListResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Priority_label.Text" xml:space="preserve">
     <value>Priority:</value>
   </data>
-  <data name="Priority_label.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PriorityResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="QuantityRequested_lz.AccessibleHeaderText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="QuantityRequested_lz.FooterText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="QuantityRequested_lz.HeaderText" xml:space="preserve">
+  <data name="QuantityRequested" xml:space="preserve">
     <value>Quantity Requested</value>
   </data>
   <data name="RequestedByOn.Text" xml:space="preserve">
@@ -327,38 +207,17 @@
   <data name="RequestedFor_label.Text" xml:space="preserve">
     <value>Requested for:</value>
   </data>
-  <data name="RequestedFor_label.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="RequestFor_rsc.ToolTip" xml:space="preserve">
     <value>Find</value>
   </data>
   <data name="SelectTemplate_label.Text" xml:space="preserve">
     <value>Select Template:</value>
   </data>
-  <data name="SelectTemplate_label.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="SendBy_label.Text" xml:space="preserve">
     <value>Send by:</value>
   </data>
-  <data name="SendBy_label.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SendByResource1.DateFormat" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SendByResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="SendVia_label.Text" xml:space="preserve">
     <value>Send via:</value>
-  </data>
-  <data name="SendVia_label.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SendViaResource1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="SeparatePage.Text" xml:space="preserve">
     <value>on a separate page</value>
@@ -366,17 +225,11 @@
   <data name="Template_label.Text" xml:space="preserve">
     <value>Template:</value>
   </data>
-  <data name="Template_label.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="TemplateFindIcon.AlternateText" xml:space="preserve">
+  <data name="TemplateFindIcon_AlternateText" xml:space="preserve">
     <value>Find</value>
   </data>
   <data name="WithCoverLetter.Text" xml:space="preserve">
     <value>with cover letter</value>
-  </data>
-  <data name="Public" xml:space="preserve">
-    <value>Public</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>E-mail</value>
@@ -395,5 +248,104 @@
   </data>
   <data name="Err_TotalCost" xml:space="preserve">
     <value>The total cost could not be determined.</value>
+  </data>
+  <data name="optRequestForOpportunity.Text" xml:space="preserve">
+    <value>Opportunity</value>
+  </data>
+  <data name="Lookup_Description_PropertyHeader" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="btnItemsFilter.AlternateText" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="ItemsSelected" xml:space="preserve">
+    <value>Items Selected:</value>
+  </data>
+  <data name="TotalCost" xml:space="preserve">
+    <value>Total Cost:</value>
+  </data>
+  <data name="lblRequestFor.Text" xml:space="preserve">
+    <value>Request for:</value>
+  </data>
+  <data name="NoContactSelected" xml:space="preserve">
+    <value>No contact selected</value>
+  </data>
+  <data name="optRequestForContact.Text" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="optRequestForGroup.Text" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="XContactsSelected" xml:space="preserve">
+    <value>{0} contact(s) selected</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="AvailableItems" xml:space="preserve">
+    <value>Available Items</value>
+  </data>
+  <data name="btnItemsFilter.Tooltip" xml:space="preserve">
+    <value>Filter available items</value>
+  </data>
+  <data name="Cost_Header" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="ItemFamily_Header" xml:space="preserve">
+    <value>Family</value>
+  </data>
+  <data name="ItemName_Header" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Quantity_Header" xml:space="preserve">
+    <value>Qty</value>
+  </data>
+  <data name="ItemNumber_Header" xml:space="preserve">
+    <value>Item #</value>
+  </data>
+  <data name="SearchBy" xml:space="preserve">
+    <value>Search By:</value>
+  </data>
+  <data name="NoItemSelected" xml:space="preserve">
+    <value>No literature item selected</value>
+  </data>
+  <data name="SubmissionInProgress" xml:space="preserve">
+    <value>Submitting Request...</value>
+  </data>
+  <data name="SDataRequestFailed" xml:space="preserve">
+    <value>SData Request Failed</value>
+  </data>
+  <data name="DescriptionIsRequired" xml:space="preserve">
+    <value>Description is required</value>
+  </data>
+  <data name="ErrorSubmittingRequest" xml:space="preserve">
+    <value>Literature Request could not be saved.</value>
+  </data>
+  <data name="FindContact" xml:space="preserve">
+    <value>Lookup Contact</value>
+  </data>
+  <data name="FindOpportunity" xml:space="preserve">
+    <value>Lookup Opportunity</value>
+  </data>
+  <data name="SelectContact" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="SelectOpportunity" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="NoRecordFound" xml:space="preserve">
+    <value>No record found</value>
+  </data>
+  <data name="Calendar" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
+  <data name="CoverLetter" xml:space="preserve">
+    <value>Cover:</value>
+  </data>
+  <data name="GroupDataError" xml:space="preserve">
+    <value>The group data could not be retrieved.</value>
+  </data>
+  <data name="SendByDateUndefined" xml:space="preserve">
+    <value>The send by date has not been defined.</value>
   </data>
 </root>

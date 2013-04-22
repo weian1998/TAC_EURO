@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Operator_StartsWith" xml:space="preserve">
+    <value>Начинается с</value>
+  </data>
+  <data name="GroupNoAccess" xml:space="preserve">
+    <value>Фильтр содержит группу к которой у вас нет доступа.</value>
+  </data>
+  <data name="RMA" xml:space="preserve">
+    <value>Возврат</value>
+  </data>
+  <data name="Operator_IsNot" xml:space="preserve">
+    <value>Не</value>
+  </data>
+  <data name="Operator_IsAfter" xml:space="preserve">
+    <value>После</value>
+  </data>
+  <data name="localizeThisMonth.Text" xml:space="preserve">
+    <value>В этом месяце</value>
+  </data>
+  <data name="ConditionsToggle_Edit" xml:space="preserve">
+    <value>Редактировать &gt;&gt;</value>
+  </data>
+  <data name="DateRange_LastQuarter" xml:space="preserve">
+    <value>Прошлый квартал</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>Субъект</value>
+  </data>
+  <data name="CurrentRecord" xml:space="preserve">
+    <value>[Текущая запись]</value>
+  </data>
+  <data name="localizeConditions.Text" xml:space="preserve">
+    <value>Условия</value>
+  </data>
+  <data name="Marketing" xml:space="preserve">
+    <value>Маркетинг</value>
+  </data>
+  <data name="localizeReleasedTo.Text" xml:space="preserve">
+    <value>Доступно:</value>
+  </data>
+  <data name="ConditionsTH_Condition" xml:space="preserve">
+    <value>Значение условия</value>
+  </data>
+  <data name="localizeSelectNameReport.Text" xml:space="preserve">
+    <value>Выберите название отчета:</value>
+  </data>
+  <data name="Condition_User" xml:space="preserve">
+    <value>Пользователь</value>
+  </data>
+  <data name="localizeQuarterToDate.Text" xml:space="preserve">
+    <value>С начала квартала</value>
+  </data>
+  <data name="NoConditions" xml:space="preserve">
+    <value>Вы должны добавить условия, прежде чем сохранить фильтр</value>
+  </data>
+  <data name="localizeThisYear.Text" xml:space="preserve">
+    <value>В этом году</value>
+  </data>
+  <data name="DateRange_LastWeek" xml:space="preserve">
+    <value>Последняя неделя</value>
+  </data>
+  <data name="DateRange_MonthToDate" xml:space="preserve">
+    <value>Текущий месяц</value>
+  </data>
+  <data name="localizeOfFollowingConditions.Text" xml:space="preserve">
+    <value>из следующих условий:</value>
+  </data>
+  <data name="localizeMonthToDate.Text" xml:space="preserve">
+    <value>Текущий месяц</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Имя Пользователя</value>
+  </data>
+  <data name="Operator_Contains" xml:space="preserve">
+    <value>Содержит</value>
+  </data>
+  <data name="AllRecords" xml:space="preserve">
+    <value>[Все записи]</value>
+  </data>
+  <data name="Operator_IsLessThan" xml:space="preserve">
+    <value>Меньше чем</value>
+  </data>
+  <data name="Any" xml:space="preserve">
+    <value>Любое</value>
+  </data>
+  <data name="Condition_DateRange" xml:space="preserve">
+    <value>Временной диапазон</value>
+  </data>
+  <data name="ConditionsTH_Field" xml:space="preserve">
+    <value>Поле</value>
+  </data>
+  <data name="ConditionsTH_Table" xml:space="preserve">
+    <value>Таблица</value>
+  </data>
+  <data name="ConditionsTH_Operator" xml:space="preserve">
+    <value>Оператор</value>
+  </data>
+  <data name="localizeLastYear.Text" xml:space="preserve">
+    <value>Последний год</value>
+  </data>
+  <data name="localizeDateRange.Text" xml:space="preserve">
+    <value>Временной диапазон</value>
+  </data>
+  <data name="RemoveCondition" xml:space="preserve">
+    <value>Исключить условие</value>
+  </data>
+  <data name="localizeYearToDate.Text" xml:space="preserve">
+    <value>Год до сегодняшнего дня</value>
+  </data>
+  <data name="Operator_IsInTheRange" xml:space="preserve">
+    <value>В диапазоне</value>
+  </data>
+  <data name="Operator_IsBefore" xml:space="preserve">
+    <value>До</value>
+  </data>
+  <data name="localizeMatchBy.Text" xml:space="preserve">
+    <value>Поиск по</value>
+  </data>
+  <data name="ConditionsToggle_Hide" xml:space="preserve">
+    <value>&lt;&lt;&lt; Скрыть</value>
+  </data>
+  <data name="localizeShowRecordsThatMatch.Text" xml:space="preserve">
+    <value>Показать записи, которые соответствуют</value>
+  </data>
+  <data name="Operator_EndsWith" xml:space="preserve">
+    <value>Заканчивается на</value>
+  </data>
+  <data name="Activities" xml:space="preserve">
+    <value>Дела</value>
+  </data>
+  <data name="localizeNotConfigured.Text" xml:space="preserve">
+    <value>Веб отчетность не настроена. Пожалуйста, обратитесь к вашему SalesLogix администратору.</value>
+  </data>
+  <data name="Condition_Query" xml:space="preserve">
+    <value>Запрос</value>
+  </data>
+  <data name="DateRange_QuarterToDate" xml:space="preserve">
+    <value>С начала квартала</value>
+  </data>
+  <data name="localizeViewSqlButton.Text" xml:space="preserve">
+    <value>Просмотр SQL</value>
+  </data>
+  <data name="DateRange_YearToDate" xml:space="preserve">
+    <value>Год до сегодняшнего дня</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>История</value>
+  </data>
+  <data name="localizeGroupName.Text" xml:space="preserve">
+    <value>Название группы</value>
+  </data>
+  <data name="Ticket" xml:space="preserve">
+    <value>Заявка</value>
+  </data>
+  <data name="DateRange_ThisWeek" xml:space="preserve">
+    <value>На этой неделе</value>
+  </data>
+  <data name="DateRange_SpecificDates" xml:space="preserve">
+    <value>Точная дата</value>
+  </data>
+  <data name="localizeGroup.Text" xml:space="preserve">
+    <value>Группа</value>
+  </data>
+  <data name="localizeOperator.Text" xml:space="preserve">
+    <value>Оператор</value>
+  </data>
+  <data name="localizeCurrentCondition.Text" xml:space="preserve">
+    <value>Текущий</value>
+  </data>
+  <data name="localizeSelectUser.Text" xml:space="preserve">
+    <value>Выберите польз.:</value>
+  </data>
+  <data name="localizeSelectTypeReport.Text" xml:space="preserve">
+    <value>Выберите тип отчета:</value>
+  </data>
+  <data name="Operator_IsGreaterThan" xml:space="preserve">
+    <value>Больше чем</value>
+  </data>
+  <data name="localizeSaveConditionAs.Text" xml:space="preserve">
+    <value>Сохранить условие как:</value>
+  </data>
+  <data name="localizeLastMonth.Text" xml:space="preserve">
+    <value>Прошлый месяц</value>
+  </data>
+  <data name="Labels" xml:space="preserve">
+    <value>Метки</value>
+  </data>
+  <data name="localizeRange.Text" xml:space="preserve">
+    <value>Диапазон</value>
+  </data>
+  <data name="localizeUserCondition.Text" xml:space="preserve">
+    <value>Пользователь</value>
+  </data>
+  <data name="DateRange_ThisMonth" xml:space="preserve">
+    <value>В этом месяце</value>
+  </data>
+  <data name="localizeLastWeek.Text" xml:space="preserve">
+    <value>Последняя неделя</value>
+  </data>
+  <data name="localizeMatch.Text" xml:space="preserve">
+    <value>Выполняются</value>
+  </data>
+  <data name="DateRange_ThisYear" xml:space="preserve">
+    <value>В этом году</value>
+  </data>
+  <data name="InitError" xml:space="preserve">
+    <value>Возникла ошибка при установке данных отчета.</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="localizeViewReport.Text" xml:space="preserve">
+    <value>Просмотр отчета</value>
+  </data>
+  <data name="FilterExists" xml:space="preserve">
+    <value>У вас уже есть фильтр с именем 'FILTERNAME'.  Хотите заменить его?</value>
+  </data>
+  <data name="localizeSaveConditionSetButton.Text" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="ConditionsTH_Type" xml:space="preserve">
+    <value>Тип</value>
+  </data>
+  <data name="CurrentGroup" xml:space="preserve">
+    <value>[Текущая группа]</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Контакт</value>
+  </data>
+  <data name="DateRange_ThisQuarter" xml:space="preserve">
+    <value>В этот квартал</value>
+  </data>
+  <data name="localizeTable.Text" xml:space="preserve">
+    <value>Таблица</value>
+  </data>
+  <data name="Opportunity" xml:space="preserve">
+    <value>Сделка</value>
+  </data>
+  <data name="localizeViewXmlButton.Text" xml:space="preserve">
+    <value>Просмотр XML</value>
+  </data>
+  <data name="AddCondition" xml:space="preserve">
+    <value>Добавить условие</value>
+  </data>
+  <data name="localizeThisWeek.Text" xml:space="preserve">
+    <value>На этой неделе</value>
+  </data>
+  <data name="DateRange_LastYear" xml:space="preserve">
+    <value>Последний год</value>
+  </data>
+  <data name="Operator_Is" xml:space="preserve">
+    <value>это</value>
+  </data>
+  <data name="Condition_Group" xml:space="preserve">
+    <value>Группа</value>
+  </data>
+  <data name="localizeThisQuarter.Text" xml:space="preserve">
+    <value>В этот квартал</value>
+  </data>
+  <data name="localizePublic.Text" xml:space="preserve">
+    <value>Общий доступ</value>
+  </data>
+  <data name="localizeUser.Text" xml:space="preserve">
+    <value>Пользователь</value>
+  </data>
+  <data name="FilterNameRequired" xml:space="preserve">
+    <value>Пожалуйста, укажите название фильтра и сохраните снова.</value>
+  </data>
+  <data name="localizeQuery.Text" xml:space="preserve">
+    <value>Запрос</value>
+  </data>
+  <data name="Defect" xml:space="preserve">
+    <value>Дефект</value>
+  </data>
+  <data name="Contract" xml:space="preserve">
+    <value>Контракт</value>
+  </data>
+  <data name="localizeField.Text" xml:space="preserve">
+    <value>Поле</value>
+  </data>
+  <data name="localizeSpecDates.Text" xml:space="preserve">
+    <value>Точная дата</value>
+  </data>
+  <data name="localizeValue.Text" xml:space="preserve">
+    <value>Значение</value>
+  </data>
+  <data name="DateRange_LastMonth" xml:space="preserve">
+    <value>Прошлый месяц</value>
+  </data>
+  <data name="ActionCouldNotBeCompleted" xml:space="preserve">
+    <value>Действие не может быть завершено.</value>
+  </data>
+  <data name="localizeClearFilterButton.Text" xml:space="preserve">
+    <value>Очистить все</value>
+  </data>
+  <data name="localizeLastQuarter.Text" xml:space="preserve">
+    <value>Прошлый квартал</value>
+  </data>
+</root>

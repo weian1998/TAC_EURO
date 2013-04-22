@@ -4,7 +4,7 @@
 // {{MadCap}} //////////////////////////////////////////////////////////////////
 // Copyright: MadCap Software, Inc - www.madcapsoftware.com ////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-// <version>7.0.0.0</version>
+// <version>8.0.0.0</version>
 ////////////////////////////////////////////////////////////////////////////////
 */
 
@@ -272,33 +272,9 @@ footnoteBlock
 
 a.MCToggler_0
 {
-	color: #0000ff;
-	margin-top: 3pt;
 	text-decoration: none;
-}
-
-a.MCToggler_0:link
-{
-	color: #0000ff;
 	margin-top: 3pt;
-	text-decoration: none;
-}
-
-a.MCToggler_0:visited
-{
 	color: #0000ff;
-	margin-top: 3pt;
-	text-decoration: none;
-}
-
-a.MCToggler_0:hover
-{
-	
-}
-
-a.MCToggler_0:focus
-{
-	
 }
 
 span.MCExpanding_0
@@ -308,30 +284,8 @@ span.MCExpanding_0
 
 a.MCExpandingHead_0
 {
-	text-decoration: none;
 	color: #0000ff;
-}
-
-a.MCExpandingHead_0:link
-{
 	text-decoration: none;
-	color: #0000ff;
-}
-
-a.MCExpandingHead_0:visited
-{
-	text-decoration: none;
-	color: #0000ff;
-}
-
-a.MCExpandingHead_0:hover
-{
-	
-}
-
-a.MCExpandingHead_0:focus
-{
-	
 }
 
 span.MCExpandingBody_0
@@ -346,31 +300,127 @@ div.MCDropDown_0
 
 a.MCDropDownHotSpot_0
 {
-	text-decoration: none;
-	color: #0000ff;
-	font-size: inherit;
 	font-color: #008b8b;
+	font-size: inherit;
+	color: #0000ff;
+	text-decoration: none;
+}
+
+div.MCDropDownHead_0
+{
+	margin-top: 3pt;
+	color: #0000ff;
+	text-decoration: none;
+}
+
+a.expandingHead_1
+{
+	color: #0000ff;
+	text-decoration: none;
+	font-weight: normal;
+}
+
+a.toggler_1
+{
+	text-decoration: none;
+	margin-top: 3pt;
+	color: #0000ff;
+	font-weight: normal;
+}
+
+a.MCDropDownHotSpot_dropspot_0
+{
+	font-color: #008b8b;
+	font-size: inherit;
+	color: #008080;
+	text-decoration: none;
+	cursor: Hand;
+	x-text-box: blink;
+	font-variant: normal;
+	font-family: inherit;
+	font-weight: normal;
+	font-style: normal;
+}
+
+a.MCTextPopupSpot_0
+{
+	color: blue;
+}
+
+span.MCTextPopupBody_0
+{
+	position: absolute;
+	overflow: auto;
+	filter: alpha( opacity = 0 );
+	-moz-opacity: 0.0;
+	z-index: 2;
+	color: #000000;
+	background-color: #dcdcdc;
+	border: solid 1px #000000;
+	margin: 0px;
+	padding: 5px;
+}
+
+a.MCToggler_0:link
+{
+	text-decoration: none;
+	margin-top: 3pt;
+	color: #0000ff;
+}
+
+a.MCToggler_0:visited
+{
+	text-decoration: none;
+	margin-top: 3pt;
+	color: #0000ff;
+}
+
+a.MCToggler_0:focus
+{
+	
+}
+
+a.MCToggler_0:hover
+{
+	
+}
+
+a.MCExpandingHead_0:link
+{
+	color: #0000ff;
+	text-decoration: none;
+}
+
+a.MCExpandingHead_0:visited
+{
+	color: #0000ff;
+	text-decoration: none;
+}
+
+a.MCExpandingHead_0:focus
+{
+	
+}
+
+a.MCExpandingHead_0:hover
+{
+	
 }
 
 a.MCDropDownHotSpot_0:link
 {
-	text-decoration: none;
-	color: #0000ff;
-	font-size: inherit;
 	font-color: #008b8b;
+	font-size: inherit;
+	color: #0000ff;
+	text-decoration: none;
 }
 
 a.MCDropDownHotSpot_0:visited
 {
-	text-decoration: none;
-	color: #0000ff;
-	font-size: inherit;
 	font-color: #008b8b;
-}
-
-a.MCDropDownHotSpot_0:hover
-{
-	
+	font-size: inherit;
+	color: #0000ff;
+	text-decoration: none;
 }
 
 a.MCDropDownHotSpot_0:focus
@@ -378,37 +428,23 @@ a.MCDropDownHotSpot_0:focus
 	
 }
 
-div.MCDropDownHead_0
+a.MCDropDownHotSpot_0:hover
 {
-	text-decoration: none;
-	color: #0000ff;
-	margin-top: 3pt;
-}
-
-a.expandingHead_1
-{
-	font-weight: normal;
-	text-decoration: none;
-	color: #0000ff;
+	
 }
 
 a.expandingHead_1:link
 {
-	font-weight: normal;
-	text-decoration: none;
 	color: #0000ff;
+	text-decoration: none;
+	font-weight: normal;
 }
 
 a.expandingHead_1:visited
 {
-	font-weight: normal;
-	text-decoration: none;
 	color: #0000ff;
-}
-
-a.expandingHead_1:hover
-{
-	
+	text-decoration: none;
+	font-weight: normal;
 }
 
 a.expandingHead_1:focus
@@ -416,33 +452,25 @@ a.expandingHead_1:focus
 	
 }
 
-a.toggler_1
+a.expandingHead_1:hover
 {
-	font-weight: normal;
-	color: #0000ff;
-	margin-top: 3pt;
-	text-decoration: none;
+	
 }
 
 a.toggler_1:link
 {
-	font-weight: normal;
-	color: #0000ff;
-	margin-top: 3pt;
 	text-decoration: none;
+	margin-top: 3pt;
+	color: #0000ff;
+	font-weight: normal;
 }
 
 a.toggler_1:visited
 {
-	font-weight: normal;
-	color: #0000ff;
-	margin-top: 3pt;
 	text-decoration: none;
-}
-
-a.toggler_1:hover
-{
-	
+	margin-top: 3pt;
+	color: #0000ff;
+	font-weight: normal;
 }
 
 a.toggler_1:focus
@@ -450,51 +478,37 @@ a.toggler_1:focus
 	
 }
 
-a.MCDropDownHotSpot_dropspot_0
+a.toggler_1:hover
 {
-	font-style: normal;
-	font-weight: normal;
-	font-family: inherit;
-	font-variant: normal;
-	x-text-box: blink;
-	cursor: Hand;
-	text-decoration: none;
-	color: #008080;
-	font-size: inherit;
-	font-color: #008b8b;
+	
 }
 
 a.MCDropDownHotSpot_dropspot_0:link
 {
-	font-style: normal;
-	font-weight: normal;
-	font-family: inherit;
-	font-variant: normal;
-	x-text-box: blink;
-	cursor: Hand;
-	text-decoration: none;
-	color: #008080;
-	font-size: inherit;
 	font-color: #008b8b;
+	font-size: inherit;
+	color: #008080;
+	text-decoration: none;
+	cursor: Hand;
+	x-text-box: blink;
+	font-variant: normal;
+	font-family: inherit;
+	font-weight: normal;
+	font-style: normal;
 }
 
 a.MCDropDownHotSpot_dropspot_0:visited
 {
-	font-style: normal;
-	font-weight: normal;
-	font-family: inherit;
-	font-variant: normal;
-	x-text-box: blink;
-	cursor: Hand;
-	text-decoration: none;
-	color: #008080;
-	font-size: inherit;
 	font-color: #008b8b;
-}
-
-a.MCDropDownHotSpot_dropspot_0:hover
-{
-	
+	font-size: inherit;
+	color: #008080;
+	text-decoration: none;
+	cursor: Hand;
+	x-text-box: blink;
+	font-variant: normal;
+	font-family: inherit;
+	font-weight: normal;
+	font-style: normal;
 }
 
 a.MCDropDownHotSpot_dropspot_0:focus
@@ -502,9 +516,9 @@ a.MCDropDownHotSpot_dropspot_0:focus
 	
 }
 
-a.MCTextPopupSpot_0
+a.MCDropDownHotSpot_dropspot_0:hover
 {
-	color: blue;
+	
 }
 
 a.MCTextPopupSpot_0:link
@@ -517,27 +531,13 @@ a.MCTextPopupSpot_0:visited
 	color: blue;
 }
 
-a.MCTextPopupSpot_0:hover
-{
-	
-}
-
 a.MCTextPopupSpot_0:focus
 {
 	
 }
 
-span.MCTextPopupBody_0
+a.MCTextPopupSpot_0:hover
 {
-	position: absolute;
-	overflow: auto;
-	filter: alpha( opacity = 0 );
-	-moz-opacity: 0.0;
-	z-index: 2;
-	padding: 5px;
-	margin: 0px;
-	border: solid 1px #000000;
-	background-color: #dcdcdc;
-	color: #000000;
+	
 }
 

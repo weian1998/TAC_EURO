@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Web.UI;
+using Sage.Platform.Diagnostics;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.Platform.Application;
 using Sage.Entity.Interfaces;
@@ -9,7 +10,7 @@ using Sage.Platform.WebPortal.Services;
 using Sage.Platform.Application.UI;
 using Sage.SalesLogix.Address;
 
-public partial class SmartParts_Account_UpdateAccountOptions : EntityBoundSmartPartInfoProvider
+public partial class SmartParts_Account_UpdateAccountOptions : EntityBoundSmartPart
 {
     private bool _Saved = false;
     private IAccount _Account;
@@ -91,27 +92,6 @@ public partial class SmartParts_Account_UpdateAccountOptions : EntityBoundSmartP
                 handleException(ex);
             }
         }
-    }
-
-    /// <summary>
-    /// Tries to retrieve smart part information compatible with type
-    /// smartPartInfoType.
-    /// </summary>
-    /// <param name="smartPartInfoType">Type of information to retrieve.</param>
-    /// <returns>
-    /// The <see cref="T:Sage.Platform.Application.UI.ISmartPartInfo"/> instance or null if none exists in the smart part.
-    /// </returns>
-    public override ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
-    {
-        ToolsSmartPartInfo tinfo = new ToolsSmartPartInfo();
-
-        foreach (Control c in AddressForm_LTools.Controls)
-            tinfo.LeftTools.Add(c);
-        foreach (Control c in AddressForm_CTools.Controls)
-            tinfo.CenterTools.Add(c);
-        foreach (Control c in AddressForm_RTools.Controls)
-            tinfo.RightTools.Add(c);
-        return tinfo;
     }
 
     /// <summary>
@@ -205,24 +185,16 @@ public partial class SmartParts_Account_UpdateAccountOptions : EntityBoundSmartP
     /// <param name="e">The e.</param>
     private void handleException(Exception e)
     {
-        StringBuilder sb = new StringBuilder();
-        sb.Append(e.Message);
-        Exception innerEx = e.InnerException;
-        int check = 0;
-        while (innerEx != null)
+        string sSlxErrorId = null;
+        var sMsg = ErrorHelper.GetClientErrorHtmlMessage(e, ref sSlxErrorId);
+        if (!string.IsNullOrEmpty(sSlxErrorId))
         {
-            if (innerEx is ValidationException)
-            {
-                sb.Remove(0, sb.Length);
-                sb.Append(innerEx.Message);
-                break;
-            }
-            sb.Append(": <br />");
-            sb.Append(innerEx.Message);
-            innerEx = innerEx.InnerException;
-            if (check++ > 3) break;
+            log.Error(
+                ErrorHelper.AppendSlxErrorId(
+                    "There was an error in SmartParts_Account_UpdateAccountOptions", sSlxErrorId), e);
         }
-        DialogService.ShowMessage(sb.ToString());
+        DialogService.ShowHtmlMessage(sMsg, ErrorHelper.IsDevelopmentContext() ? 600 : -1,
+                                      ErrorHelper.IsDevelopmentContext() ? 800 : -1);
     }
 
     /// <summary>

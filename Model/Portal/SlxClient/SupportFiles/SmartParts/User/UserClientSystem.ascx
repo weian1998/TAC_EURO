@@ -10,7 +10,7 @@
     <asp:Panel ID="UserClientSystem_LTools" runat="server"></asp:Panel>
     <asp:Panel ID="UserClientSystem_CTools" runat="server"></asp:Panel>
     <asp:Panel ID="UserClientSystem_RTools" runat="server">
-        <asp:ImageButton runat="server" ID="btnSave" OnClick="Save_OnClick" ToolTip="<%$ resources: btnSave.ToolTip %>" 
+        <asp:ImageButton runat="server" ID="btnSave" OnClick="Save_OnClick" OnClientClick="sessionStorage.clear();" ToolTip="<%$ resources: btnSave.ToolTip %>" 
             ImageUrl="~/images/icons/Save_16x16.gif" />
         <SalesLogix:PageLink ID="lnkUserClientSystemHelp" runat="server" LinkType="HelpFileName"
             ToolTip="<%$ resources:Portal, Help_ToolTip %>" Target="Help" NavigateUrl="User_Detail_View_Client_System_Tab.htm"
@@ -35,7 +35,7 @@
                 <asp:Label ID="ownAccount_lbl" AssociatedControlID="ownAccount" runat="server" Text="<%$ resources: ownAccount.Caption %>" ></asp:Label>
             </div>
             <div class="textcontrol owner">
-                <SalesLogix:OwnerControl runat="server" ID="ownAccount" Types="STU" />
+                <SalesLogix:OwnerControl runat="server" ID="ownAccount" ButtonTooltip="<%$ resources: ownAccount.ButtonToolTip %>" Types="STU" />
             </div>
         </td>
     </tr>
@@ -59,43 +59,57 @@
             </div>
             <br />
         </td>
-    </tr>
+    </tr>    
     <tr>
-		<td>
-			<div class="lbl">
-				<asp:Label ID="lblEmailTemplate" runat="server" Text="<%$ resources: EmailTemplate.Caption %>" ></asp:Label>
-			</div>
-			<div class="textcontrol">
-				<input runat="server" type="text" id="txtEmailTemplateName" />
-				<asp:image runat="server" id="EmailTemplateFindIcon" ImageUrl="~/images/icons/find_16x16.gif" />
-				<input runat="server" type="hidden" id="txtEmailTemplateId" />
-			</div>
-		</td>
-     </tr>
-     <tr>
         <td>
-			<div class="lbl">
-				<asp:Label ID="lblLetterTemplate" runat="server" Text="<%$ resources: LetterTemplate.Caption %>" ></asp:Label>
-			</div>
-			<div class="textcontrol">
-				<input runat="server" type="text" id="txtLetterTemplateName" />
-				<asp:image runat="server" id="LetterTemplateFindIcon" ImageUrl="~/images/icons/find_16x16.gif" />
-				<input runat="server" type="hidden" id="txtLetterTemplateId" />
-			</div>
-		</td>
-     </tr>
-    <tr>
-		<td>
-			<div class="lbl">
-				<asp:Label ID="lblFaxTemplate" runat="server" Text="<%$ resources: FaxTemplate.Caption %>" ></asp:Label>
-			</div>
-			<div class="textcontrol">
-				<input runat="server" type="text" id="txtFaxTemplateName" />
-				<asp:image runat="server" id="FaxTemplateFindIcon" ImageUrl="~/images/icons/find_16x16.gif" />
-				<input runat="server" type="hidden" id="txtFaxTemplateId" />
-			</div>
-		</td>
-     </tr>
+			<span class="lbl"><asp:Label ID="lblType" runat="server" Text="Type:" 
+                meta:resourcekey="lblTypeResource"></asp:Label></span>
+            <span class="textcontrol"> 
+            <asp:DropDownList ID="cboTemplateType" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" shouldPublishMarkDirty="false" runat="server"
+                AutoPostBack="True">
+                <asp:ListItem Selected="True" Value="CONTACT" Text="Contact" meta:resourcekey="listItemContactResource">Contact</asp:ListItem>
+                <asp:ListItem Value="LEAD" Text="Lead" meta:resourcekey="listItemLeadResource">Lead</asp:ListItem>
+            </asp:DropDownList>
+            </span>
+        </td>
+    </tr>
+        <tr>
+            <td>
+				<span class="lbl"><asp:Label ID="lblEmailBaseTemplate" runat="server" Text="<%$ resources: EmailTemplate.Caption %>"></asp:Label></span>
+                <span class="textcontrol">
+					<span runat="server" id="EmailSpan">
+						<asp:TextBox ID="txtEmailBaseTemplate" runat="server"></asp:TextBox>
+						<img ID="txtEmailBaseTemplateImg" runat="server" alt="<%$ resources: txtEmailBaseTemplate.Caption %>" title="<%$ resources: txtEmailBaseTemplate.Caption %>" src="~/images/icons/find_16x16.png" class="optionsImageClass" onclick="javascript:getTemplate('Email');"  />
+						<asp:HiddenField ID="txtEmailBaseTemplateId" runat="server"></asp:HiddenField>
+					</span>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+				<span class="lbl"><asp:Label ID="lblLetterBaseTemplate" runat="server" Text="<%$ resources: LetterTemplate.Caption %>"></asp:Label></span>
+				<span class="textcontrol">
+					<span runat="server" id="LetterSpan">
+						<asp:TextBox ID="txtLetterBaseTemplate" runat="server"></asp:TextBox>
+						<img ID="txtLetterBaseTemplateImg" runat="server" alt="<%$ resources: txtLetterBaseTemplate.Caption %>" title="<%$ resources: txtLetterBaseTemplate.Caption %>" src="~/images/icons/find_16x16.png" class="optionsImageClass" onclick="javascript:getTemplate('Letter');" />
+						<asp:HiddenField ID="txtLetterBaseTemplateId" runat="server"></asp:HiddenField>
+					</span>
+				</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+				<span class="lbl"><asp:Label ID="lblFaxBaseTemplate" runat="server" Text="<%$ resources: FaxTemplate.Caption %>"></asp:Label></span>
+				<span class="textcontrol">
+					<span runat="server" id="FaxSpan">
+						<asp:TextBox ID="txtFaxBaseTemplate" runat="server"></asp:TextBox>
+						<img ID="txtFaxBaseTemplateImg" runat="server" alt="<%$ resources: txtFaxBaseTemplate.Caption %>" title="<%$ resources: txtFaxBaseTemplate.Caption %>" src="~/images/icons/find_16x16.png" class="optionsImageClass" onclick="javascript:getTemplate('Fax');"  />					
+						<asp:HiddenField ID="txtFaxBaseTemplateId" runat="server"></asp:HiddenField>
+					</span>
+			   </span>
+			</td>
+			<td></td>
+        </tr>
      <tr>
         <td>
             <div class="slxlabel alignleft checkbox">
@@ -104,14 +118,4 @@
             </div>
         </td>
     </tr>
-     <tr>
-		<td colspan="2" style="padding-top:20px;">
-            <div id="TemplatePanel" style="display:none">
-                <div class="hd"><asp:Label ID="lblSelectTemplate" runat="server" Text="<%$ resources: SelectTemplate.Caption %>"></asp:Label></div> 
-	            <div id="treeDiv1" class="LitTree"></div>
-	        </div> 
-            <asp:TextBox ID="templateXml" style="display:none" runat="server"></asp:TextBox>
-            <input type="hidden" id="clientdata" runat="server" />		
-		</td>
-     </tr>
 </table>

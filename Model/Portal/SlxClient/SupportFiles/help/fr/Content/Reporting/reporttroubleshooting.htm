@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Rapports" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" class="" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Dépannage des rapports</title>
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Reporting/reporttroubleshooting.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Ouvrir une rubrique avec la recherche, la table des matières et l'index</a>
+        </p>
+        <h1><a name="kanchor194"></a>Dépannage de Sage SalesLogix Web Reporting</h1>
+        <p>Voici une liste des messages d'erreur les plus courants dans Sage SalesLogix Web Reporting.</p>
+        <p class="Infinitive">ID de rapport non valide</p>
+        <p>Ce message d'erreur s'affiche si le Gestionnaire de rapports demande un rapport du serveur qui n'existe pas dans la base de données. Ce message d'erreur peut aussi apparaître si le Gestionnaire de rapports consulte une autre base de données que le serveur de rapports. Si la configuration est correcte, ce message d'erreur ne devrait jamais apparaître.</p>
+        <p class="Infinitive">Impossible de créer un rapport sur le serveur Web</p>
+        <p>Ce message d'erreur s'affiche si le serveur de rapports n'est pas en mesure d'accéder au rapport dans la base de données et de le copier dans un fichier temporaire. Un certain nombre d'éléments peuvent causer ce problème&#160;:</p>
+        <ul style="list-style-type: disc;">
+            <li class="Bullets" value="1">Un utilisateur anonyme ne dispose pas des droits suffisants.</li>
+            <li class="Bullets" value="2">L'utilisateur du lot COM+ ne dispose pas des droits d'accès suffisants en lecture/écriture.</li>
+            <li class="Bullets" value="3">Le plugin du rapport est endommagé.</li>
+            <li class="Bullets" value="4">Le fichier du rapport est actuellement verrouillé par un autre utilisateur (l'application COM+ devrait empêcher que cela ne se produise).</li>
+        </ul>
+        <p class="Infinitive">Message d'erreur d'exception spécifique. Erreur&#160;: &lt; msg erreur&gt;</p>
+        <p>Il est normal que ce message d'erreur s'affiche occasionnellement. Cela se produit lorsque le serveur de rapports renvoie une application qui ne rentre pas dans le champ de l'erreur détaillée ci-dessus. Ce message apparaît exactement de cette manière, à l'exception du code.</p>
+        <p class="Infinitive">Echec de la requête Http</p>
+        <p>Ce message d'erreur s'affiche généralement lorsque le serveur de rapports n'est pas en cours d'exécution. Il s'agit d'un problème de configuration entraînant une impossibilité de communication entre l'hôte Web et le serveur Web.</p>
+        <p class="Infinitive">CEReport XML non valide</p>
+        <p>Ce message d'erreur s'affiche lorsqu'une requête est effectuée au serveur de rapports et qu'une page d'erreur apparaît dans Internet Explorer (page d'erreur&#160;403 par exemple). Ceci peut être dû à une mauvaise URL de rapport ou à une mauvaise configuration du serveur de rapports.</p>
+        <p class="Infinitive">$ n'est pas une valeur de nombre entier valide</p>
+        <p>La chaîne de connexion du serveur de rapports n'a pas encore été propagée. L'utilisateur doit ouvrir Web Manager et propager la chaîne de connexion en appliquant la connexion ADO au profil du serveur.</p>
+        <p class="Infinitive">Le filtre de groupe sélectionné contient des données Unicode dans l'instruction de condition, et ne peut être utilisé pour des rapports. Pour exécuter le rapport, supprimez ce groupe du filtre ou sélectionnez un groupe différent.</p>
+        <p class="Topic-Text-Numbered">Vous obtiendrez ce message si vous utilisez un filtre de groupe et que ce groupe contient des données Unicode. Pour exécuter le rapport, vous devez supprimer le groupe ou sélectionner un groupe différent.</p>
+        <p class="RelatedTopics">Rubriques connexes</p>
+        <p><a href="reportoverview.htm" target="_self">Présentation des rapports</a>
+        </p>
+        <div style="width: 100%;position: relative;">
+            <p>&#160;</p>
+        </div>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Dites-nous comment améliorer l'aide</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

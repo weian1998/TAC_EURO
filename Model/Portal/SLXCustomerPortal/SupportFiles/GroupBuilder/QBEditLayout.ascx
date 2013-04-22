@@ -11,25 +11,25 @@
 					<td><asp:Localize ID="localizeFieldName" runat="server" Text="<%$ resources: localizeFieldName.Text %>" /></td>
 					<td class="borderr">
 						<input type="text" style="width:200" id="txtFieldName_EditLayout"> 
-					<td align="center"><input type="button" id="btnOK" onclick="QBEditLayout_OK_Click()" style="width:60px" tabindex="25" value='<asp:Localize runat="server" Text="<%$ resources: localizeOK.Text %>" />' /></td>
+					<td align="center"><input type="button" id="btnOK" onclick="QueryBuilderMain.QBEditLayout_OK_Click()" style="width:auto" tabindex="25" value='<asp:Localize runat="server" Text="<%$ resources: localizeOK.Text %>" />' /></td>
 				</tr>
 				<tr>
 					<td><asp:Localize ID="localizeCaption" runat="server" Text="<%$ resources: localizeCaption.Text %>" /></td>
 					<td class="borderr">
 						<input type="text" style="width:200" id="txtCaption"></td>
-					<td align="center"><input type="button" id="btnCancel" onclick="QBEditLayout_Cancel_Click()" style="width:60px" tabindex="30" value='<asp:Localize runat="server" Text="<%$ resources: localizeCancel.Text %>" />' /></td>
+					<td align="center"><input type="button" id="btnCancel" onclick="QueryBuilderMain.QBEditLayout_Cancel_Click()" style="width:auto" tabindex="30" value='<asp:Localize runat="server" Text="<%$ resources: localizeCancel.Text %>" />' /></td>
 				</tr>
 				<tr>
 					<td><asp:Localize ID="localizeVisible" runat="server" Text="<%$ resources: localizeVisible.Text %>" /></td>
 					<td class="borderr">
 						<input type="checkbox" id="chkVisible">
 					</td>
-					<td align="center"></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td><asp:Localize ID="localizeWidth" runat="server" Text="<%$ resources: localizeWidth.Text %>" /></td>
 					<td class="borderr">
-						<input type="text" id="txtWidth" name="txtWidth" style="width:110" onkeypress="forceNumInput()"/>
+						<input type="text" id="txtWidth" name="txtWidth" onkeydown="return Sage.Utility.restrictToNumber(event);" />
 					</td>
 				</tr>
 				<tr>
@@ -96,3 +96,5 @@
 		</td>
 	</tr>
 </table>
+
+<script src="jscript/Sage/GroupBuilder/querybuilder.js" type="text/javascript"></script>

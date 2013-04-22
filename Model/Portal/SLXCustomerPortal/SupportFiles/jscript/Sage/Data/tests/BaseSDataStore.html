@@ -1,0 +1,186 @@
+<html>
+    <head>
+        <title>Sage.Data Tests</title>
+        <script type="text/javascript" src="../../UI/Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: false,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/sinon/sinon-1.3.4.js"></script>
+        <!--[if IE]>
+        <script type="text/javascript" src="../../../Libraries/sinon/sinon-ie-1.3.4.js"></script>
+        <![endif]-->
+
+        <script type="text/javascript">
+        require([
+            'doh',
+            'Sage/Data/BaseSDataStore'
+        ], function(
+            doh,
+            BaseSDataStore
+        ) {
+            doh.register("Sage.Data.tests.BaseSDataStore", [
+                function testContextQueryAsString() {
+                    // Test where clause where query is a string
+                    var store,
+                        request,
+                        query = 'foo';
+                        
+                    Sage.SData.Client.SDataResourceCollectionRequest = sinon.stub();
+                    request = Sage.SData.Client.SDataResourceCollectionRequest;
+                    request.returns({
+                        setResourceKind: sinon.stub(),
+                        setStartIndex: sinon.stub(),
+                        setCount: sinon.stub(),
+                        setQueryArg: function (arg, val) {
+                            if (arg === 'where') {
+                                doh.t(val === query);
+                            }
+                        },
+                        read: sinon.stub()
+                    });
+                    
+                    store = new BaseSDataStore({
+                    });
+                    store.fetch({
+                        query: query
+                    });
+                },
+                function testContextQueryAsObject() {
+                    // Test where clause where query is an object with a "conditions" property string
+                    var store,
+                        request,
+                        query = {
+                            conditions: 'foo'
+                        };
+                        
+                    Sage.SData.Client.SDataResourceCollectionRequest = sinon.stub();
+                    request = Sage.SData.Client.SDataResourceCollectionRequest;
+                    request.returns({
+                        setResourceKind: sinon.stub(),
+                        setStartIndex: sinon.stub(),
+                        setCount: sinon.stub(),
+                        setQueryArg: function (arg, val) {
+                            if (arg === 'where') {
+                                doh.t(val === query.conditions);
+                            }
+                        },
+                        read: sinon.stub()
+                    });
+                    
+                    store = new BaseSDataStore({
+                    });
+                    store.fetch({
+                        query: query
+                    });
+                },
+                function testContextQueryAsObjectMulti() {
+                    // Test where clause where query is an object with a "fn" property function, a "conditions" property string, and
+                    // a property with another name that gets turned into a LIKE
+                    var store,
+                        request,
+                        query = {
+                            fn: function () {
+                                doh.t(this.scopper); // was scope set to this context?
+                                return 'bar';
+                            },
+                            conditions: 'foo',
+                            something: 'fiz*', // * will get replaced to %
+                            scope: {
+                                scopper: true // scope should be used as context for this on fn call, ignored elsewhere
+                            }
+                        };
+                        
+                    Sage.SData.Client.SDataResourceCollectionRequest = sinon.stub();
+                    request = Sage.SData.Client.SDataResourceCollectionRequest;
+                    request.returns({
+                        setResourceKind: sinon.stub(),
+                        setStartIndex: sinon.stub(),
+                        setCount: sinon.stub(),
+                        setQueryArg: function (arg, val) {
+                            if (arg === 'where') {
+                                doh.t(val === 'bar and foo and something like \'fiz%\'');
+                            }
+                        },
+                        read: sinon.stub()
+                    });
+                    
+                    store = new BaseSDataStore({});
+                    store.fetch({
+                        query: query
+                    });
+                },
+                function testContextQueryAsFunction() {
+                    // Test where clause where query is function that returns the query as a string
+                    var store,
+                        request,
+                        query = function () {
+                            return 'foo';
+
+                        };
+                        
+                    Sage.SData.Client.SDataResourceCollectionRequest = sinon.stub();
+                    request = Sage.SData.Client.SDataResourceCollectionRequest;
+                    request.returns({
+                        setResourceKind: sinon.stub(),
+                        setStartIndex: sinon.stub(),
+                        setCount: sinon.stub(),
+                        setQueryArg: function (arg, val) {
+                            if (arg === 'where') {
+                                doh.t(val === 'foo');
+                            }
+                        },
+                        read: sinon.stub()
+                    });
+                    
+                    store = new BaseSDataStore({});
+                    store.fetch({
+                        query: query
+                    });
+                },
+                function testContextQueryIsUndefined() {
+                    // Test where query is undefined. Assert that "where" clause is not set
+                    var store,
+                        request,
+                        mock;
+                        
+                    Sage.SData.Client.SDataResourceCollectionRequest = sinon.stub();
+                    request = Sage.SData.Client.SDataResourceCollectionRequest;
+                    mock = sinon.mock();
+
+                    request.returns({
+                        setResourceKind: sinon.stub(),
+                        setStartIndex: sinon.stub(),
+                        setCount: sinon.stub(),
+                        setQueryArg: mock,
+                        read: sinon.stub()
+                    });
+                    
+                    try {
+                        mock.once(); // setQueryArg should only be called once, to set the start index
+
+                        store = new BaseSDataStore({});
+                        store.fetch({});
+
+                        mock.verify();
+                    } catch (err) {
+                        console.error(err);
+                        doh.t(false);
+                    }
+                }
+            ]);
+            
+            //Execute D.O.H. in this remote file.
+            doh.run();
+        });
+        </script>
+    </head>
+    <body>
+        <form>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,112 @@
+﻿<html>
+    <head>
+        <title>Sage.Data Tests</title>
+        <script type="text/javascript" src="../../UI/Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: { 'Sage': '../../../jscript/Sage' }
+            };
+        </script>
+        <script type="text/javascript" src="../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/sinon/sinon-1.3.4.js"></script>
+        <!--[if IE]>
+        <script type="text/javascript" src="../../../Libraries/sinon/sinon-ie-1.3.4.js"></script>
+        <![endif]-->
+
+        <script type="text/javascript">
+            require([
+            'dojo/parser',
+            'doh',
+            'Sage/Data/WritableSDataStore'
+        ], function (
+            parser,
+            doh,
+            WritableSDataStore
+        ) {
+            doh.register("Sage.Data.tests.WritableSDataStore", [
+                function testGetSingleResourceRequestResourceKind() {
+                    //test getSingleResourceRequest method when constructor is missing select definition
+                    var store,
+                        singleResourceRequest,
+                        resourceKind = 'accounts';
+
+                    Sage.SData.Client.SDataSingleResourceRequest = sinon.stub();
+                    singleResourceRequest = Sage.SData.Client.SDataSingleResourceRequest;
+                    singleResourceRequest.returns({
+                        setResourceKind: function (val) {
+                            doh.t(val === resourceKind);
+                        },
+                        setQueryArg: sinon.stub(),
+                        setResourceSelector: sinon.stub()
+                    });
+
+                    store = new WritableSDataStore({ resourceKind: resourceKind });
+                    store.getSingleResourceRequest();
+                },
+                function testGetSingleResourceRequestResourceKey() {
+                    //test getSingleResourceRequest method when constructor is missing select definition
+                    var store,
+                        singleResourceRequest,
+                        resourceKind = 'accounts',
+                        key = 'KEY';
+
+
+                    Sage.SData.Client.SDataSingleResourceRequest = sinon.stub();
+                    singleResourceRequest = Sage.SData.Client.SDataSingleResourceRequest;
+                    singleResourceRequest.returns({
+                        setResourceKind: sinon.stub(),
+                        setQueryArg: sinon.stub(),
+                        setResourceSelector: function (val) {
+                            doh.t(val === "'" + key + "'");
+                        }
+                    });
+
+                    store = new WritableSDataStore({ resourceKind: resourceKind });
+                    store.getSingleResourceRequest(key);
+                },
+                function testGetSingleResourceRequestResourceSelectInclude() {
+                    //test getSingleResourceRequest method when constructor is missing select definition
+                    var store,
+                        singleResourceRequest,
+                        resourceKind = 'accounts',
+                        select = ['one', 'two', 'three'],
+                        include = ['four', 'five', 'six'];
+
+
+                    Sage.SData.Client.SDataSingleResourceRequest = sinon.stub();
+                    singleResourceRequest = Sage.SData.Client.SDataSingleResourceRequest;
+                    singleResourceRequest.returns({
+                        setResourceKind: sinon.stub(),
+                        setQueryArg: function (arg, val) {
+                            if (arg === 'select') {
+                                doh.t(val === select.join(','));
+                            }
+                            if (arg === 'include') {
+                                doh.t(val === include.join(','));
+                            }
+                        },
+                        setResourceSelector: sinon.stub()
+                    });
+
+                    store = new WritableSDataStore({
+                        resourceKind: resourceKind,
+                        select: select,
+                        include: include
+                    });
+                    store.getSingleResourceRequest();
+                }
+            ]);
+
+            //Execute D.O.H. in this remote file.
+            doh.run();
+        });
+        </script>
+    </head>
+    <body>
+        <form>
+        </form>
+    </body>
+</html>

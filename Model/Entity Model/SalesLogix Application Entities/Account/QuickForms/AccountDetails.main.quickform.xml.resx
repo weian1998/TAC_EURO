@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="btnSaveAccount.Caption" xml:space="preserve">
     <value>Save</value>
@@ -159,6 +159,9 @@
   <data name="pklType.Caption" xml:space="preserve">
     <value>Type:</value>
   </data>
+  <data name="pklSubType.Caption" xml:space="preserve">
+    <value>Sub Type:</value>
+  </data>
   <data name="Status.Caption" xml:space="preserve">
     <value>Status:</value>
   </data>
@@ -192,37 +195,10 @@
   <data name="WebAddress.ButtonToolTip" xml:space="preserve">
     <value>WWW</value>
   </data>
-  <data name="lueOwner2.LookupProperties.Myseccodeid.PropertyHeader" xml:space="preserve">
-    <value>Myseccodeid</value>
+  <data name="cmdReset.Caption" xml:space="preserve">
+    <value>Reset</value>
   </data>
-  <data name="NumDesigners.Caption" xml:space="preserve">
-    <value>Num  Designers:</value>
-  </data>
-  <data name="TaxID.Caption" xml:space="preserve">
-    <value>TaxID:</value>
-  </data>
-  <data name="TaxExempt.Caption" xml:space="preserve">
-    <value>TaxExempt:</value>
-  </data>
-  <data name="txtClientNotes.Caption" xml:space="preserve">
-    <value>Client Notes</value>
-  </data>
-  <data name="Rating.Caption" xml:space="preserve">
-    <value>Rating:</value>
-  </data>
-  <data name="Specialty.Caption" xml:space="preserve">
-    <value>Specialty:</value>
-  </data>
-  <data name="lueOwner2.Caption" xml:space="preserve">
-    <value>Owner:</value>
-  </data>
-  <data name="lueOwner2.LookupProperties.Teamname.PropertyHeader" xml:space="preserve">
-    <value>Teamname</value>
-  </data>
-  <data name="QFSLXLookup.LookupProperties.Username.PropertyHeader" xml:space="preserve">
-    <value>Username</value>
-  </data>
-  <data name="QFSLXLookup.Caption" xml:space="preserve">
-    <value>Acct Mgr:</value>
+  <data name="cmdReset.ToolTip" xml:space="preserve">
+    <value>Reset</value>
   </data>
 </root>

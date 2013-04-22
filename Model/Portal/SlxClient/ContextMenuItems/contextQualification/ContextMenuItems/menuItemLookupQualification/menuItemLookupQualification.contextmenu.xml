@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="0d43427b-5188-415a-99a9-6fbc5677b374">
   <ItemId>menuItemLookupQualification</ItemId>
-  <NavUrl>javascript:showMainLookupFor('QualificationCategory','QualificationCategory.aspx');</NavUrl>
+  <NavUrl>javascript:Sage.Utility.Groups.showMainLookupFor('QUALIFICATION_CATEGORY','QualificationCategory.aspx')</NavUrl>
   <LargeImageUrl />
   <SmallImageUrl />
   <ContextMenuId />

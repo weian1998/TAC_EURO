@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="dgUserAccessToOthersCal.238fd737-b385-4b5e-8dfa-3f5c55d3f6c2.ConfirmationMessage" xml:space="preserve">
+    <value>Voulez-vous vraiment supprimer cet utilisateur ?</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.fb65a91a-ef1f-4c41-8ae0-37d3e81bf639.ColumnHeading" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="grdUserAccess.Text" xml:space="preserve">
+    <value>Espace réservé d'agenda utilisateur</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.22d00d42-8dc7-4947-b9ae-a53984307aaf.ColumnHeading" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.0dbdc4cc-1b7c-46db-9b42-3ab2a102e294.ColumnHeading" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.5fa91176-9ccc-41c8-82fb-e9761d463e4d.ColumnHeading" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="cmdAddUser.ToolTip" xml:space="preserve">
+    <value>Ajouter un agenda que cet utilisateur peut visualiser.</value>
+  </data>
+  <data name="Error_CalendarAccessAlreadyExists" xml:space="preserve">
+    <value>L'utilisateur sélectionné a déjà accès à cet agenda.</value>
+  </data>
+  <data name="lueAddUser.LookupProperties.UserInfo.Department.PropertyHeader" xml:space="preserve">
+    <value>Service</value>
+  </data>
+  <data name="lueAddUser.LookupProperties.UserInfo.Title.PropertyHeader" xml:space="preserve">
+    <value>Titre</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.d1ed6797-afe8-486c-8e13-551e3683f780.ColumnHeading" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.b2231dc0-8ecc-46b0-8b27-4cfde56a1235.ColumnHeading" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.54360a25-e3f0-4107-9c01-6b1b33807087.ColumnHeading" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.8445fa2f-39fb-4347-99d1-f3e1d04c9957.ColumnHeading" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="6a2e5292-45a2-43b6-84e2-f9aa10ed85c1.DuplicateAssociationMessage" xml:space="preserve">
+    <value>Les droits d'accès à l'agenda existent déjà pour l'utilisateur sélectionné.</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.8447738e-4863-4bac-8a47-4e4da47a19e5.Text" xml:space="preserve">
+    <value>Retirer</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.238fd737-b385-4b5e-8dfa-3f5c55d3f6c2.Text" xml:space="preserve">
+    <value>Retirer</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.bebdf843-0a40-4c6b-8b88-7ecb1c98770b.ColumnHeading" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="lblTabDescription.Text" xml:space="preserve">
+    <value>L'utilisateur ne peut accéder qu'aux agendas suivants :</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.ad82a042-596c-4fcf-aea3-f395a64de350.ColumnHeading" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.b9d09394-f7f3-4a04-a066-30d43da012d6.ColumnHeading" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="lueAddUser.LookupProperties.UserInfo.Region.PropertyHeader" xml:space="preserve">
+    <value>Région</value>
+  </data>
+  <data name="lueAddUser.LookupProperties.UserInfo.UserName.PropertyHeader" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.fb9d7cfd-3957-4c38-8b72-dafa76129dd0.Text" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.81e80b5c-59d6-48b0-ada6-120caef3bc60.ColumnHeading" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.3651781c-1d05-419a-82a3-354a0d106189.ColumnHeading" xml:space="preserve">
+    <value>Synchronisation</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.049ac24a-1ecd-46fd-ab61-9c27a8dc9e5f.ColumnHeading" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="lueAddUser.LookupProperties.Type.PropertyHeader" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="cmdAddUser.Caption" xml:space="preserve">
+    <value>Ajouter un utilisateur</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.6307603a-7e2c-4c6e-9238-ddab6043fab5.ColumnHeading" xml:space="preserve">
+    <value>Synchronisation</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.5cc276e4-3dfd-45a3-9f9d-ef3b68f53fd7.ColumnHeading" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="lueAddUser.ButtonToolTip" xml:space="preserve">
+    <value>Ajouter un utilisateur</value>
+  </data>
+  <data name="lueAddUser.ToolTip" xml:space="preserve">
+    <value>Ajouter un accès à l'agenda d'un autre utilisateur</value>
+  </data>
+  <data name="dgUserAccessToOthersCal.ff3ee19f-68e5-4697-b21b-14f41573b2aa.ColumnHeading" xml:space="preserve">
+    <value>Titre</value>
+  </data>
+</root>

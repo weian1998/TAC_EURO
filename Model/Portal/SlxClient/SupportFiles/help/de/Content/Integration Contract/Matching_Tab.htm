@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="de" xml:lang="de" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Registerkarte "Abgleich"</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Integration Contract/Matching_Tab.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Thema mit den Registerkarten "Suchen", "Inhalt" und "Index" öffnen</a>
+        </p>
+        <h1>Registerkarte "Abgleich"</h1>
+        <p><a name="kanchor486"></a>Auf der Registerkarte <B>Abgleich</B> können Sie die Optionen für das Bestimmen von Übereinstimmungen zwischen Sage SalesLogix und integrierten Buchhaltungssystemen konfigurieren. Die hier ausgewählten Optionen bestimmen, wie die Daten, die von Benutzern in Sage SalesLogix eingegeben werden, mit im Buchhaltungssystem vorhandenen Systemen abgeglichen werden. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="search criteria">Weitere Informationen...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a></p>
+        <p MadCap:targetName="search criteria" style="display: none;">Diese Einstellungen dienen zum Erstellen der standardmäßigen Abgleichkriterien für alle Benutzer, die Buchhaltungsdaten verknüpfen. Durch Festlegen zu eingrenzender Suchkriterien werden den Benutzern ggf. nicht genügend Ergebnisse zurückgegeben,wodurch sie ggf. Duplikate erstellen.</p>
+        <p class="Infinitive">So nehmen Sie die Konfiguration vor</p>
+        <ol>
+            <li value="1">Öffnen Sie die <a href="Accounting_Integration_Detail_View.htm" target="_self">Buchhaltungsintegration-Detailansicht</a>.</li>
+            <li value="2">Klicken Sie auf die Registerkarte <span class="SLXBold">Abgleich</span>.</li>
+            <li value="3">Klicken Sie auf den Hyperlink <span class="SLXBold">Bearbeiten</span> für die Ressource, für die Sie Übereinstimmungskriterien festlegen oder ändern möchten.</li>
+            <li value="4">Vervollständigen Sie im Dialog <span class="SLXBold">Übereinstimmungskriterien bearbeiten</span> folgende Angaben:
+        <ol style="list-style-type: lower-alpha;"><li value="1">Wählen Sie im Feld <span class="SLXBold">Eigenschaft</span> eine Eigenschaft aus, für die Werte verglichen werden sollen. <br /><a name="kanchor487"></a>Ihre Buchhaltungssysteme müssen das Filtern für diese Eigenschaft unterstützen. Andernfalls bekommen Benutzer, die versuchen Firmen hochzustufen, erst Übereinstimmungen angezeigt, wenn sie ihre Suche ändern. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="4a para 3;4a para2;4a bul">Weitere Informationen...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a><ul><li MadCap:targetName="4a bul" value="1" style="display: none;">Geben Sie in Ihrem Browser den Buchhaltungs-Feed-URL, den Sie beim Einrichten der <a href="Setup_Accounting_Integration.htm">Buchhaltungsintegration</a> festgelegt haben, gefolgt von <span class="SLXBold">/$schema</span> ein, und stellen Sie sicher, dass das Attribut <span class="SLXBold">Filtern möglich</span> der Eigenschaft auf <span class="SLXBold">Wahr</span> eingestellt ist.
+   
+        <p MadCap:targetName="4a para2" xml:space="preserve" class="TopicTextIndent3" style="display: none;">URL-Beispiel:</p><p class="TopicTextIndent3" MadCap:targetName="4a para 3" style="display: none;">http://Server:Port/Virtuelles_SDATA-Verzeichnis/<i>Anwendung</i>/gcrm/<i>aktives_Unternehmen</i>/$schema</p></li></ul></li><li value="2">Wählen Sie im Feld <span class="SLXBold">Operator</span> einen Operator aus, um die Übereinstimmungsbedingung zu vervollständigen.</li><ul><li value="1"><span class="SLXBold">Gleich</span> - Der Eigenschaftswert in beiden Systemen muss für eine Übereinstimmung identisch sein. Aberle ist beispielsweise keine Übereinstimmung mit Aberle GmbH.</li><li value="2"><span class="SLXBold">Beginnt mit</span> - Der Eigenschaftswert in beiden Systemen muss mit demselben Wert beginnen.</li><li value="3"><span class="SLXBold">Enthält</span> - Der Eigenschaftswert in beiden Systemen muss denselben Wert enthalten. Aberle ist dann beispielsweise eine Übereinstimmung mit "Aberle GmbH" und "Aberle weltweit".</li></ul><li value="3">Klicken Sie zum Hinzufügen zusätzlicher Übereinstimmungskriterien auf <img src="../image/plus.gif" />.</li><li value="4">Klicken Sie zum Entfernen von Übereinstimmungskriterien auf <img src="../image/minus.gif" />.</li><li value="5">Klicken Sie auf <span class="SLXBold">OK</span>.</li></ol></li>
+        </ol>
+        <p class="RelatedTopics">Verwandte Themen</p>
+        <p><a href="Synchronization_Tab.htm" target="_self">Registerkarte "Synchronisierung"</a>
+        </p>
+        <p><a href="Accounting_Systems_Tab.htm" target="_self">Registerkarte "Buchhaltungssysteme"</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Haben Sie Vorschläge zur Verbesserung der Hilfe?</a>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

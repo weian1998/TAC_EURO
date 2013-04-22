@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Administration|Buchhaltungsintegration|Konfigurieren der Buchhaltungsintegration" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="de" xml:lang="de" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Buchhaltungsintegration-Detailansicht</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Integration Contract/Accounting_Integration_Detail_View.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Thema mit den Registerkarten "Suchen", "Inhalt" und "Index" öffnen</a>
+        </p>
+        <h1>Buchhaltungsintegration-Detailansicht</h1>
+        <p><a name="kanchor58"></a>In der Buchhaltungsintegration-Detailansicht können Sie die Verbindungen zwischen Sage SalesLogix und Ihren Buchhaltungssystemen konfigurieren.</p>
+        <p>Die Buchhaltungsintegration ist aktiviert, sobald der Sage SalesLogix-Endpunkt und mindestens ein Zielendpunkt konfiguriert und aktiviert sind. Wenn auf der Registerkarte <span class="SLXBold">Buchhaltungssysteme</span> keine Feeds aktiviert sind, ist die Integration deaktiviert.</p>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <col style="width: 45px;" />
+            <col />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p class="Tip-Note-Text" style="margin-bottom: 0;">Wenn Sie die Buchhaltungsintegration aktivieren bzw. deaktivieren, wird die Änderung erst wirksam, nachdem Sie sich von Sage SalesLogix abgemeldet und wieder angemeldet haben.</p>
+                </td>
+            </tr>
+        </table>
+        <p>Legen Sie die Feed-Details für Sage SalesLogix fest, und konfigurieren Sie anschließend den Feed für jedes integrierte Buchhaltungssystem. </p>
+        <p class="Infinitive">So nehmen Sie die Festlegung vor</p>
+        <ol>
+            <li value="1">Klicken Sie im Menü <span class="SLXBold">Administration</span> auf <span class="SLXBold">Integrations-Setup</span>.</li>
+            <li value="2">Geben Sie in das Feld <span class="SLXBold">SalesLogix-Feed</span> den SData-URL zum GCRM-Feed ein. <br /> Verwenden Sie folgendes Format: http://Server:Port/<i>Virtuelles_SDATA-Verzeichnis</i>/slx/gcrm/-/<i>&#160;</i><ul start="1"><li value="1">Geben Sie für <i>Virtuelles_SDATA-Verzeichnis</i> das Verzeichnis ein, in dem Sie Ihr SData-Portal bereitgestellt haben.<br />Das Standardverzeichnis lautet "SData".<br />Beispiel: http://localhost:3333/sdata/slx/gcrm/-/</li></ul></li>
+            <li value="3">Geben Sie in das Feld <span class="SLXBold">Benutzername</span> den Benutzernamen für die Sage SalesLogix-Datenbank ein, mit der das Buchhaltungssystem eine Verbindung herstellen soll.</li>
+            <li value="4">Geben Sie in das Feld <span class="SLXBold">Passwort</span> das Passwort für den Benutzernamen ein.</li>
+            <li value="5">Geben Sie in das Feld <span class="SLXBold">Anzeigename</span> einen Anzeigenamen für den Feed ein.</li>
+            <li value="6">Aktivieren Sie bei Bedarf die Option <span class="SLXBold">Hochstufen von Firmen auf einzelnes Buchhaltungssystem beschränken</span>, um die Integration auf Sage SalesLogix und ein Buchhaltungssystem zu beschränken.</li>
+            <li value="7">Aktivieren Sie bei Bedarf die Option <span class="SLXBold">Verwaltung von Verkaufsaufträgen durch Buchhaltungssystem zulassen</span>, damit in Sage SalesLogix keine <a href="../Sales Orders/salesorderoverview.htm" target="_self">Verkaufsaufträge</a> erstellt oder bearbeitet werden können. Bei Aktivierung dieser Option muss das Buchhaltungssystem zum Verwalten von Verkaufsaufträgen verwendet werden. </li>
+            <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+                <col style="width: 45px;" />
+                <col />
+                <tr>
+                    <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                        <p style="text-align: center;margin-bottom: 0;" align="center">
+                            <img src="../image/note.gif" />
+                        </p>
+                    </td>
+                    <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                        <p>Diese Option ist bei bestimmten Integrationslösungen, etwa bei der Integration mit X3, erforderlich.</p>
+                    </td>
+                </tr>
+            </table>
+            <li value="8">Klicken Sie auf <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Speichern<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>.</li>
+            <li value="9">Auf der Registerkarte <a href="Accounting_Systems_Tab.htm" target="_self">Buchhaltungssysteme</a> können Sie die Feed-Details für die Buchhaltungssysteme konfigurieren.</li>
+            <li value="10">Auf der Registerkarte <a href="Synchronization_Tab.htm" target="_self">Synchronisierung</a> können Sie Synchronisierungsintervalle festlegen.</li>
+            <li value="11">Auf der Registerkarte <a href="Matching_Tab.htm" target="_self">Abgleich</a> können Sie globale standardmäßige Übereinstimmungskriterien für Benutzer festlegen, die Verknüpfungen erstellen.</li>
+        </ol>
+        <p class="RelatedTopics">Vorgehensweise</p>
+        <p><a href="Linking_Records.htm" target="_self">Verknüpfen von Datensätzen</a>
+        </p>
+        <p><a href="FindSchemaDifferences.htm" target="_self">Überprüfen der Datenintegrität mit integrierten Buchhaltungssystemen</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Haben Sie Vorschläge zur Verbesserung der Hilfe?</a>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

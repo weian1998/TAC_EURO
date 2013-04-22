@@ -1,0 +1,257 @@
+<html>
+    <head>
+        <title>Sage.UI.Controls Browser Tests</title>
+        <style type="text/css">
+        /* Hide dojo validation controls */
+        .dijitValidationContainer, .dijitBackgroundIframe {
+            visibility: hidden;
+        }
+        </style>
+        <link rel="stylesheet" type="text/css" href="../../../../../Libraries/dojo/dijit/themes/claro/claro.css" />
+        <script type="text/javascript" src="mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+
+        <script type="text/javascript" src="../../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript" src="../../../../../Libraries/sinon/sinon-1.3.4.js"></script>
+
+        <script type="text/javascript">
+            require([
+                "dojo/parser",
+                "doh",
+                "dojo/ready",
+                "dojo/_base/Deferred",
+                "Sage/Data/BaseSDataStore",
+                "Sage/UI/Controls/SingleSelectPickList"
+            ], function(
+                parser,
+                doh,
+                ready,
+                Deferred,
+                BaseSDataStore,
+                SingleSelectPickList
+            ) {
+                ready(function () {
+                    var pickListData = [
+                        {
+                            items: {
+                                '$resources': [
+                                    {
+                                        '$key': 1,
+                                        'code': 'MI',
+                                        'number': 1,
+                                        'text': 'Michigan'
+                                    },
+                                    {
+                                        '$key': 2,
+                                        'code': 'AZ',
+                                        'number': 2,
+                                        'text': 'Arizona'
+                                    }
+                                ]
+                            }
+                        }
+                    ];
+
+                    doh.register("Sage.UI.Controls.tests.SingleSelectPickList", [
+                        function testGetPickListDataDefault() {
+                            var store = sinon.stub(new BaseSDataStore()),
+                                pickList,
+                                def = new Deferred();
+
+                            pickList = new SingleSelectPickList({
+                                dataStore: store
+                            });
+                            
+                            pickList.getFromLocalStorage = function () {
+                            };
+                            pickList.saveToLocalStorage = function () {
+                            };
+
+                            pickList.getPickListData(def);
+                            store.fetch.yieldTo('onComplete', pickListData);
+
+                            def.then(function(d){
+                                // Sorting is enabled by default
+                                // Check that we got data back OK for this deferred and the first result is AZ.
+                                doh.t(d.items.$resources[0].code === 'AZ');
+                            });
+                        },
+                        function testMissingPicklist() {
+                            var store = sinon.stub(new BaseSDataStore()),
+                                pickList,
+                                def = new Deferred();
+
+                            pickList = new SingleSelectPickList({
+                                dataStore: store
+                            });
+
+                            pickList.getFromLocalStorage = function () {
+                            };
+                            pickList.saveToLocalStorage = function () {
+                            };
+                            
+                            pickList.getPickListData(def);
+                            store.fetch.yieldTo('onComplete', []);
+
+                            def.then(function(d){
+                                // We should get back a string with a message telling us the picklist does not exist.
+                                doh.t(typeof d === 'string');
+                            });
+                        },
+                        function testStoreAsID() {
+                            // Test store by id, used in return lookup dialogs.
+                            var store = sinon.stub(new BaseSDataStore()),
+                                pickList,
+                                def = new Deferred(),
+                                val;
+
+                            pickList = new SingleSelectPickList({
+                                dataStore: store,
+                                storeMode: 'id',
+                                clientId: 'pickListAsId'
+                            }, 'pickListAsId');
+
+                            pickList.getFromLocalStorage = function () {
+                            };
+                            pickList.saveToLocalStorage = function () {
+                            };
+
+                            pickList._loadData();
+                            store.fetch.yieldTo('onComplete', pickListData);
+
+                            // Second value
+                            pickList.comboBox.set('value', 'Arizona');
+                            pickList._onBlur();
+                            
+                            // Ensure our hidden input got set
+                            val = dojo.byId('pickListAsId_Code').value;
+                            doh.t(val === '2');
+
+                            // First value
+                            pickList.comboBox.set('value', 'Michigan');
+                            pickList._onBlur();
+                            
+                            // Ensure our hidden input got set
+                            val = dojo.byId('pickListAsId_Code').value;
+                            doh.t(val === '1');
+                        },
+                        function testStoreAsText() {
+                            // Test store by id, used in return lookup dialogs.
+                            var store = sinon.stub(new BaseSDataStore()),
+                                pickList,
+                                def = new Deferred(),
+                                val;
+
+                            pickList = new SingleSelectPickList({
+                                dataStore: store,
+                                storeMode: 'text',
+                                clientId: 'pickListAsText'
+                            }, 'pickListAsText');
+
+                            pickList.getFromLocalStorage = function () {
+                            };
+                            pickList.saveToLocalStorage = function () {
+                            };
+
+                            //pickList.getPickListData(def);
+                            pickList._loadData();
+                            store.fetch.yieldTo('onComplete', pickListData);
+
+                            // Get the first value
+                            pickList.comboBox.set('value', 'Michigan');
+                            pickList._onBlur();
+                            val = pickList.get('value');
+                            doh.t(val === 'Michigan');
+                            
+                            // Ensure our hidden input got set
+                            val = dojo.byId('pickListAsText_Text').value;
+                            doh.t(val === 'Michigan');
+
+                            // Second value
+                            pickList.comboBox.set('value', 'Arizona');
+                            pickList._onBlur();
+                            val = pickList.get('value');
+                            doh.t(val === 'Arizona');
+                            
+                            // Ensure our hidden input got set
+                            val = dojo.byId('pickListAsText_Text').value;
+                            doh.t(val === 'Arizona');
+                        },
+                        function testItemMustExist() {
+                            // Test store by id, used in return lookup dialogs.
+                            var store = sinon.stub(new BaseSDataStore()),
+                                pickList,
+                                def = new Deferred(),
+                                val;
+
+                            pickList = new SingleSelectPickList({
+                                dataStore: store,
+                                storeMode: 'text',
+                                clientId: 'pickListItemMustExist',
+                                itemMustExist: true
+                            }, 'pickListItemMustExist');
+
+                            pickList.getFromLocalStorage = function () {};
+                            pickList.saveToLocalStorage = function () {};
+
+                            //pickList.getPickListData(def);
+                            pickList._loadData();
+                            store.fetch.yieldTo('onComplete', pickListData);
+
+                            // Set a value that does not exist in the list,
+                            // ensure our value doesn't stick and the hidden input
+                            // does not get set to it.
+                            pickList.lastValidValue = 'Arizona';
+                            pickList.comboBox.set('value', 'DoesNotExist');
+                            pickList._onBlur();
+                            
+                            pickList.comboBox.on('change', function () {
+                                val = pickList.get('value');
+                                doh.t(val === pickList.lastValidValue);
+                                
+                                // Ensure our hidden input did not get set to the wrong value
+                                pickList._onBlur();
+                                val = dojo.byId('pickListItemMustExist_Text').value;
+                                doh.t(val !== 'DoesNotExist');
+                            });
+                        }
+                        
+                        // TODO: Test canEditText and maxLength
+                    ]);
+
+                    //Execute D.O.H. in this remote file.
+                    doh.run();
+                });
+            });
+
+        </script>
+    </head>
+    <body class="claro">
+        <form>
+            <!-- PickList storeMode as Text -->
+            <span>storeMode: text</span>
+            <input id="pickListAsText_Text" type="hidden" />
+            <input id="pickListAsText_Code" type="hidden" />
+            <div id="pickListAsText"></div>
+            
+            <!-- PickList storeMode as ID -->
+            <span>storeMode: id<span>
+            <input id="pickListAsId_Text" type="hidden" />
+            <input id="pickListAsId_Code" type="hidden" />
+            <div id="pickListAsId"></div>
+            
+            <!-- Item Must Exist -->
+            <span>storeMode: text, ItemMustExist: true<span>
+            <input id="pickListItemMustExist_Text" type="hidden" />
+            <input id="pickListItemMustExist_Code" type="hidden" />
+            <div id="pickListItemMustExist"></div>
+        </form>
+    </body>
+</html>

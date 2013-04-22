@@ -16,6 +16,11 @@
 	padding-right : 2px;
 }
 
+.alignleft.checkbox label 
+{
+    display: inline-block;
+    width: 40%;
+}
 
 /* the class for areas that conain input type=radio  */
 .radio
@@ -25,6 +30,7 @@
 .radio INPUT
 {
 	margin : 2px;
+	margin-top: 0px;
 }
 
 /* areas that contain "text" controls - including composite controls that include a text control  */
@@ -35,16 +41,14 @@
 	white-space : nowrap;
 }
 
-.twocoltextcontrol
+.width90
 {
-	float : left;
-	white-space : nowrap;
-	width : 78%;
+	width : 90% !important;
 }
 
 .textcontrol INPUT, .textcontrol TEXTAREA {	
 	color: #000000;
-	font-size: 90%;
+	font-size: 12px;
 	width : 95%;
 	background-color: #FFFFFF;
 	border: 1px solid #A8A9BE;
@@ -52,19 +56,44 @@
 	margin : .1em 0em;
 	vertical-align : middle;
 	padding-left : 5px;
+    text-overflow: ellipsis;
 }
 
-.textcontrol SELECT 
+.textcontrol SELECT ,
+.textcontrol > table
 {
-	color: #000000;
-	font-size: 90%;
-	width : 98%;
-	background-color: #FFFFFF;
-	border: 1px solid #A8A9BE;
-	font-style: normal;
+	width : 100%;
 	margin : .08em 0em;
 	vertical-align : middle;
 	padding-left : 5px;
+}
+
+.textcontrol > .dijitSelect
+{
+	height: 18px;
+	width: 100%;	
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.TimeZoneList
+{
+	height: 18px;
+	width: 50%;	
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.TimeZoneList .dijitArrowButton
+{
+	width: 16px;	
+}
+
+.textcontrol > .dijitSelect .dijitArrowButton
+{
+	width: 16px;
 }
 
 
@@ -72,11 +101,12 @@ INPUT[disabled], .textcontrol INPUT[disabled], .textcontrol TEXTAREA[disabled],
 .dependency INPUT[disabled], .dependency TEXTAREA[disabled]
 {
 	background-color : #f2f2f2;
-	color : #444444;
+	color : #8B8B8B;
 	border: 1px solid #C8C9DE;
 	filter : Gray  Alpha(Opacity=80);
 	cursor : default;
 	opacity : 0.8;
+	text-shadow: none;
 }
 SELECT[disabled]
 {
@@ -89,7 +119,24 @@ SELECT[disabled]
 .textcontrol INPUT[readonly], .textcontrol TEXTAREA[readonly],
 .dependency INPUT[readonly], .dependency TEXTAREA[readonly]
 {
-	background-color : #f2f2f2;
+    background-color : #f2f2f2; /*original*/
+    color : #444444;
+    border: 1px solid #C8C9DE;
+    cursor : default;
+    opacity : 0.8;
+    width: 100%;
+    -moz-box-sizing: border-box;
+    box-sizing:border-box;
+}
+
+div.dijitTextBoxReadOnly.dijitValidationTextBoxReadOnly.dijitReadOnly,
+div.dijitTextBoxDisabled.dijitDisabled,
+div.dijitTextBoxReadOnly.dijitComboBoxReadOnly.dijitReadOnly
+{
+	background-color : #f2f2f2 !important; 
+    color : #8B8B8B !important;
+    cursor : default;
+	border: 1px solid #C8C9DE;
 }
 
 .textcontrol IMG 
@@ -110,9 +157,15 @@ SELECT
 	vertical-align : middle;
 }
 
-.twocoltextcontrol INPUT, .twocoltextcontrol TEXTAREA, .twocoltextcontrol SELECT {	
+.twocoltextcontrol INPUT,
+.twocoltextcontrol TEXTAREA,
+.twocoltextcontrol SELECT,
+.threecoltextcontrol INPUT,
+.threecoltextcontrol TEXTAREA,
+.threecoltextcontrol SELECT
+{	
 	color: #000000;
-	font-size: 90%;
+	font-size: 12px;
 	width : 95%;
 	background-color: #FFFFFF;
 	border: 1px solid #A8A9BE;
@@ -123,17 +176,17 @@ SELECT
 .slxcontrol
 {
 	color: #000000;
-	font-size: 90%;
+	font-size: 12px;
 	width : 55%;
 	background-color: #FFFFFF;
-	border: 1px solid #A8A9BE;
+	border: 1px solid #aaa;
 	font-style: normal;
 	margin : .1em 0em;
 }
 
 .slxlinkcontrol 
 {
-	font-size : 90%;
+	font-size : 12px;
 	width : 48%;
 	font-style: normal;
 	margin : .2em 0em 0em .1em;
@@ -145,24 +198,22 @@ SELECT
 
 .slxtext
 {
-	font-size: 90%;
+	font-size: 12px;
 	font-style: normal;
-	border: 1px solid #A8A9BE;
+	border: 1px solid #aaa;
 }
 
 .slxbutton 
 {
-	font-weight: normal;
-	font-size : 85%;
 	color: #000000;
-	border : solid 1px #7E9CB8;
+	border : solid 1px #aaa;
 	background-color: #E1E1DC;
 	cursor : pointer;
     text-align: center;
     display: inline-block;
     white-space: nowrap;
-    padding-left: 6px;
-    padding-right: 6px;
+	padding-left: 3px;
+	padding-right: 3px;
 	padding-top: 1px;
 	padding-bottom: 1px;
 	margin: 3px;
@@ -189,6 +240,19 @@ SELECT
 {
 	vertical-align : top;
 	padding-left : 5px;
+	padding-bottom: 5px; /*5px spacing between form elements*/
+}
+
+.tws-tab-view-body > .formtable 
+{
+    margin: 0px 0px 0px 0px;    
+    height: auto;
+}
+
+.optionsTable td
+{
+    padding-top:5px;
+    padding-bottom:5px;   
 }
 
 
@@ -198,23 +262,23 @@ SELECT
 	width : 20%;
 	float : left;
 	text-align:left;
-	font-size : 85%;
-	font-weight : bold;
+	font-size : 12px;
+	/*font-weight : bold;*/
 	padding-top : .3em;
 }
 
 .slxlabel
 {
-	font-size : 85%;
-	font-weight : bold;
+	font-size : 12px;
+	/*font-weight : bold;*/
 }
 .lbl 
 {
 
 	float : left;
 	text-align:left;
-	font-size : 85%;
-	font-weight : bold;
+	font-size : 12px;
+	/*font-weight : bold;*/
 	padding-top : .3em;
     width: 40%;
 }
@@ -223,22 +287,27 @@ SELECT
 {
 	float : right;
 	text-align:left;
-	font-size : 85%;
+	font-size : 11px;
 	font-weight :normal;
 	padding-top : .3em;
     width: 60%;
 }
 
+.errorText {
+    font-weight: bold;
+    color: red;
+    font-style: italic;
+}
 
 .colspan3
 {
-	width : 11.5%;
+	width : 13.1%;
 }
 
 .formtable .lblright 
 {
-	font-size : 85%;
-	font-weight : bold;
+	font-size : 11px;
+	/*font-weight : bold;*/
 	padding-top : .3em;
 }
 
@@ -246,8 +315,8 @@ SELECT
 {
 	width : 75%;
 	display : block;
-	font-size : 85%;
-	font-weight : bold;
+	font-size : 11px;
+	/*font-weight : bold;*/
 	padding-top : .3em;
 }
 
@@ -255,7 +324,9 @@ SELECT
 .alignleft 
 {
 	text-align : left;
-	clear : both;
+	/* clear : both; <- If control is on left and label is on right, this causes issues
+                    Haven't noticed anything weird style-wise with this not set,
+                    but alternative should be found if it does cause problems */
 }
 
 .alignright 
@@ -267,6 +338,14 @@ SELECT
 {
 	text-align : center;
 }
+.valignbottom 
+{
+    vertical-align: bottom;
+}
+.valigntop 
+{
+    vertical-align: top;
+}
 
 .controlslist .alignleft 
 {
@@ -274,7 +353,15 @@ SELECT
 }
 .controlslist .lbl 
 {
-    padding : 0px;
+    padding-top : 3px;
+}
+.controlslist .padleft 
+{
+    padding : 2px;
+}
+.controlslist .lookup
+{
+    padding-bottom : 3px;
 }
 
 HR 
@@ -297,9 +384,9 @@ HR
 }
 .timezone .TimeZoneLabel
 {
-	font-size : 90%;
+	font-size : 12px;
 	background-color: #FFFFFF;
-	border: 1px solid #A8A9BE;
+	border: 1px solid #aaa;
 	font-style: normal;
 	margin : .2em 0em 0em .1em;
 	float : left;
@@ -323,10 +410,10 @@ HR
 .dependency INPUT 
 {
 	color: #000000;
-	font-size: 90%;
+	font-size: 11px;
 	width : 47%;
 	background-color: #FFFFFF;
-	border: 1px solid #A8A9BE;
+	border: 1px solid #aaa;
 	font-style: normal;
 	margin : .1em 0em;
 	padding-left : 5px;
@@ -343,6 +430,11 @@ HR
 	padding: 10px;
 }
 
+.formtable .qfButtonContainer {
+    padding-left: 3px;
+    display: inline;
+}
+
 .slx-tab-panel
 {
     width: 100%;
@@ -357,9 +449,13 @@ HR
 {
     border-style:solid;
     border-width:1px;
-    border-color: #99BBE8;
+    border-color: #A4BF7D;
     padding:2px;
     width:80%;
+}
+
+.Bevel.ExtendWidth {
+    width: 100%;
 }
 
 input[type="radio"], input[type="checkbox"]
@@ -371,14 +467,14 @@ input[type="radio"], input[type="checkbox"]
 {
     float: left;
     text-align: left;
-    font-size: 115%;
+    font-size: 15px;
 }
 
 .wizardsectiontext
 {
     float: left;
     text-align: left;
-    font-size: 100%;
+    font-size: 12px;
 }
 
 .padBottom
@@ -399,4 +495,375 @@ input[type="radio"], input[type="checkbox"]
 .italictext
 {
     font-style : italic;
+}
+
+.dijitToolbarLabel 
+{
+    padding: 0px 4px 0px 8px;
+}
+
+.numericReducedWidth {
+    width: 40%;
+}
+
+
+
+
+/* specific to Form Manager page ------------------------------------------------- */
+
+.wysEditor .gridContainerZone 
+{
+    vertical-align: top;
+}
+
+.wysEditor 
+{
+    width:95%;
+    border: 1px solid #88A85C;
+    border-collapse: collapse;
+    margin: 10px;
+}
+
+.wysEditor .gridContainerTable 
+{
+    width: 100%;
+}
+
+.wysEditor .cpane
+{
+    background-color: #EAF1DF;
+	border:1px solid #88A85C;
+	font:bold 12px Arial;
+	color:#666;
+	margin: 10px;
+}
+
+.wysEditor .cpane.spanright
+{
+    margin-right: 0px;
+    border-right-width: 0px;
+}
+
+.wysEditor .cpane.spanleft
+{
+    margin-left: 0px;
+    border-left-width: 0px;
+}
+.wysEditor .cpane.spanleft .formMgr_ControlRepresentation .dragger
+{
+    background-image: url(../images/clear.gif);
+}
+.wysEditor .cpane.spanleft .formMgr_ControlRepresentation INPUT
+{
+    visibility: hidden;
+}
+
+.wysEditor .cpane.spacer 
+{
+    /* visibility: hidden; */
+    background-color: transparent;
+    border: 1px dashed #D6E3BF;
+}
+.wysEditor .cpane.spacer INPUT
+{
+    visibility: hidden;
+}
+
+.wysEditor .dropIndicator
+{
+	border:2px dashed #BFBFBF;
+	margin: 10px;
+}
+
+
+
+.formMgr_ControlRepresentation 
+{
+    color: #35491D;
+    width: 100%;
+    z-index: 5000;
+}
+
+.formMgr_ControlRepresentation.selected 
+{
+    background-color: #F8D6AA;
+}
+
+.formMgr_ControlRepresentation TD
+{
+    vertical-align: top;
+    padding-top: 5px;
+}
+
+.formMgr_ControlRepresentation .dragger
+{
+    width: 16px;
+    background-image: url(../images/icons/drag_handler_16x16.png);
+    background-repeat: no-repeat;
+    background-position: 0px 5px;
+}
+
+.formMgr_ControlRepresentation .lock
+{
+    width: 16px;
+    background-image: url(../images/clear.gif);
+    background-repeat: no-repeat;
+    background-position: 0px 5px;
+}
+
+.formMgr_ControlRepresentation.locked .lock 
+{
+    background-image: url(../images/icons/Private_16x16.png);
+}
+
+.formMgr_ControlRepresentation .caption 
+{
+    text-align: right;
+    padding-right: 4px;
+}
+
+.formMgr_ControlRepresentation .ctrlcontainer 
+{
+    width: 120px;
+}
+
+.formMgr_ControlRepresentation .ctrlcontainer INPUT 
+{
+    width: 114px;
+}
+
+.formMgr_ControlRepresentation .ctrlbtncontainer 
+{
+    width: 20px;
+    background-image: url(../images/clear.gif);
+    background-repeat: no-repeat;
+    background-position: 0px 5px;
+}
+
+.formMgr_ControlRepresentation.picklist .ctrlbtncontainer
+{
+    background-image: url(../images/icons/elipses.gif);
+}
+
+.formMgr_ControlRepresentation.url .ctrlbtncontainer 
+{
+    background-image: url(../images/icons/url.gif);
+}
+
+.formMgr_ControlRepresentation.email .ctrlbtncontainer 
+{
+    background-image: url(../images/icons/Send_Write_email_16x16.png);
+}
+
+.formMgr_ControlRepresentation.combobox .ctrlbtncontainer 
+{
+    background-image: url(../images/icons/);
+}
+
+.formMgr_ControlRepresentation.lookup .ctrlbtncontainer,
+.formMgr_ControlRepresentation.user .ctrlbtncontainer,
+.formMgr_ControlRepresentation.owner .ctrlbtncontainer
+{
+    background-image: url(../images/icons/Find_16x16.png);
+}
+
+.formMgr_ControlRepresentation.personname .ctrlbtncontainer,
+.formMgr_ControlRepresentation.address .ctrlbtncontainer  
+{
+    background-image: url(../images/icons/Edit_Item_16x16.gif);
+}
+
+.formMgr_ControlRepresentation.datetimepicker .ctrlbtncontainer 
+{
+    background-image: url(../images/icons/Calendar_16x16.gif);
+}
+
+.formMgr_ControlRepresentation.horizontalseparator 
+{
+    height : 3px;
+}
+
+.formMgr_ControlRepresentation.label INPUT,
+.formMgr_ControlRepresentation.horizontalseparator INPUT
+{
+    visibility:hidden;
+    width: 1px;
+}
+
+.formMgr_ControlRepresentation.label .ctrlcontainer 
+{
+    width: 1px;
+}
+
+.formMgr_ControlRepresentation.label .caption
+{
+    text-align: center;
+}
+
+
+.controlPropForm 
+{
+	width:100%;
+}
+
+.controlPropForm LABEL
+{
+	font:bold 12px Arial;
+	color:#666;
+}
+
+.wysEditor .layoutEditorTitleBar 
+{
+    background-color: #EAF1DF;
+    height: 25px;
+    width: 100%;
+    border-bottom:1px solid #88A85C;
+	color:#666;
+}
+
+.layoutEditorTitleBar .title 
+{
+	font:bold 14px Arial;
+	padding: 3px 0px 0px 3px;
+}
+
+
+/* add a field wizard */		
+
+
+
+
+.aafWizardContainer
+{
+    width:640px;
+    height:400px;
+}
+.sageWizardContainer .aafWizardContent
+{
+    padding:10px 5px 5px;
+    height:340px;
+}
+.sageWizardContainer .dijitContentPane 
+{
+    height: 370px !important;
+}
+
+.aafWizardContainer .aafWizardContent .caption 
+{
+    font-weight: bold;
+    padding: 0px 0px 10px;
+}
+.aafWizardContainer .aafWizardContent .description 
+{
+    color: #A4BF7D;
+    font-weight: normal;
+}
+.aafWizardContainer .aafWizardContent .wizGrid 
+{
+    height: 220px;
+    width: 620px;
+    border: 1px solid #A4BF7D;
+}
+.aafWizardContainer .aafWizardContent .highlight 
+{
+    font-weight: bold;
+}
+.aafWizardContainer .aafWizardContent .infoTable 
+{
+    padding: 4px 0px;
+}
+
+
+.newPropertyDialog 
+{
+    
+}
+
+.newPropertyDialog .tabs
+{
+    height: 300px;
+    width: 600px;
+}
+.newPropertyDialog .dataTypeForm 
+{
+    padding: 10px 0px 0px 20px;
+}
+/* end Form Manager page specific styles ----------------------------------------- */
+
+/* default wizard styles ................................. */
+
+.sageWizardButtons 
+{
+    text-align: right;
+}
+
+.sageWizardContainer 
+{
+    
+}
+
+.sageWizard 
+{
+    
+}
+
+/* end wizard styles .............................. */
+
+.right-controls-list-with-padding 
+{
+    padding-top: 5px;
+    text-align: right;
+    width: 90%;
+}
+
+/* specific to Schedule Process dialog ------------------------------------------------- */
+
+.SPformtable 
+{
+	margin : 15px 0px;
+	width : 100%;
+}
+
+.SPformtable TD 
+{
+	vertical-align : top;
+	padding-left : 20px;
+	padding-right : 20px;
+}
+
+.SPformtable .qfActionContainer
+{
+	text-align: right;
+	width: 98%; /* to match general field widths */
+	padding: 10px;
+}
+
+.SPcontrol
+{
+	float : right;
+	width : 50%;
+	white-space : nowrap;
+}
+
+.SPcontrol SELECT ,
+.SPcontrol > table
+{
+	width : 100%;
+	margin : .08em 0em;
+	vertical-align : middle;
+	padding-left : 1px;
+}
+
+.SPcontrol > .dijitSelect
+{
+	height: 18px;
+	width: 100%;	
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.SPcontrol > .dijitSelect .dijitArrowButton
+{
+	width: 16px;
 }

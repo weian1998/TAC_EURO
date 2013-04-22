@@ -1,0 +1,1494 @@
+﻿/*<meta />*/
+
+p.MyStyle
+{
+	font-family: Arial;
+	font-size: 12pt;
+	margin: 0px;
+	mc-hyphenate: never;
+}
+
+img
+{
+	border: none;
+	mc-hyphenate: never;
+}
+
+a.Popup
+{
+	mc-hyphenate: never;
+}
+
+h1
+{
+	font-family: Verdana, Tahoma, Arial;
+	font-variant: normal;
+	font-weight: bold;
+	text-transform: none;
+	border-bottom-style: Inset;
+	border-bottom-width: 2px;
+	text-decoration: none;
+	color: #4f6e2c;
+	font-size: medium;
+	border-bottom: none 0 1.0pt;
+	border-bottom-color: #ffffff;
+	mc-hyphenate: never;
+	page-break-after: avoid;
+	page-break-before: auto;
+	padding-top: 4pt;
+	padding-bottom: 3pt;
+}
+
+li.Bullets
+{
+	font-family: Verdana, Tahoma, Arial;
+	list-style-type: disc;
+	color: #000000;
+	margin-left: 0.0pt;
+	margin-top: 3pt;
+	margin-bottom: 3pt;
+	mc-hyphenate: never;
+	font-size: x-small;
+}
+
+li.Tip-Note-Heading
+{
+	font-family: Verdana, Tahoma, Arial;
+	font-weight: bold;
+	background-image: none;
+	text-transform: uppercase;
+	color: #000000;
+	margin-left: auto;
+	mc-hyphenate: never;
+	font-size: x-small;
+}
+
+li.Tip-Note-Text
+{
+	font-family: Verdana, Tahoma, Arial;
+	background-image: none;
+	margin-top: 6.0pt;
+	margin-bottom: 6.0pt;
+	mc-next-tag: p;
+	mc-hyphenate: never;
+	font-size: x-small;
+}
+
+li.Topic-Text-Bulleted-2
+{
+	font-family: Verdana, Tahoma, Arial;
+	font-weight: normal;
+	list-style-type: disc;
+	list-style-position: outside;
+	margin-left: 16pt;
+	margin-top: 3pt;
+	margin-bottom: 3pt;
+	mc-hyphenate: never;
+	font-size: x-small;
+}
+
+li.Topic-Text-Indent
+{
+	font-family: Verdana, Tahoma, Arial;
+	margin-left: 30.0pt;
+	margin-bottom: 3pt;
+	margin-top: 0pt;
+	mc-next-class: Topic-Text-Numbered;
+	mc-next-tag: p;
+	left: 20px;
+	mc-hyphenate: never;
+	font-size: x-small;
+}
+
+li.Topic-Text-Indent2
+{
+	font-family: Verdana, Tahoma, Arial;
+	margin-left: 64px;
+	margin-top: 0pt;
+	margin-bottom: 3pt;
+	mc-hyphenate: never;
+	font-size: x-small;
+}
+
+li.Topic-Text-Lettered
+{
+	font-family: Verdana, Tahoma, Arial;
+	text-align: left;
+	list-style-type: lower-alpha;
+	list-style-position: outside;
+	margin-left: 20pt;
+	margin-top: 6pt;
+	margin-bottom: 0pt;
+	mc-next-class: Topic-Text-Lettered;
+	mc-next-tag: p;
+	left: 20px;
+	mc-hyphenate: never;
+	font-size: x-small;
+}
+
+li.Topic-Text-Numbered
+{
+	font-family: Verdana, Tahoma, Arial;
+	list-style-type: decimal;
+	list-style-position: outside;
+	margin-left: 0.0pt;
+	margin-bottom: 0.0pt;
+	margin-top: 6pt;
+	mc-next-class: Topic-Text-Numbered;
+	mc-next-tag: p;
+	mc-hyphenate: never;
+	font-size: x-small;
+}
+
+p
+{
+	color: #000000;
+	font-family: Verdana, Tahoma, Arial;
+	margin-top: 6pt;
+	margin-bottom: 0;
+	mc-hyphenate: never;
+	font-size: x-small;
+}
+
+p.HowDoI
+{
+	margin-top: 0pt;
+	margin-left: 0pt;
+	mc-hyphenate: never;
+}
+
+p.Infinitive
+{
+	font-family: Verdana, Tahoma, Arial;
+	font-style: normal;
+	font-weight: bold;
+	color: #000000;
+	margin-bottom: 0pt;
+	font-variant: normal;
+	margin-top: 9pt;
+	mc-next-class: Topic-Text-Numbered;
+	mc-next-tag: p;
+	text-decoration: none;
+	left: 0px;
+	mc-hyphenate: never;
+	font-size: x-small;
+}
+
+p.RelatedTopics
+{
+	font-family: Verdana, Tahoma, Arial;
+	font-weight: bold;
+	text-align: left;
+	color: #000000;
+	font-size: xx-small;
+	font-variant: normal;
+	margin-top: 12pt;
+	text-transform: capitalize;
+	mc-next-tag: p;
+	mc-hyphenate: never;
+}
+
+p.subheading
+{
+	font-family: Verdana, Tahoma, Arial;
+	font-weight: bold;
+	color: #000000;
+	text-transform: uppercase;
+	margin-top: 16px;
+	margin-bottom: 3pt;
+	mc-hyphenate: never;
+	font-size: x-small;
+}
+
+p.Tip-Note-Heading
+{
+	font-family: Verdana, Tahoma, Arial;
+	font-weight: bold;
+	font-size: xx-small;
+	background-image: none;
+	text-transform: uppercase;
+	color: #000000;
+	margin-left: auto;
+	mc-hyphenate: never;
+}
+
+p.Tip-Note-Text
+{
+	font-family: Verdana, Tahoma, Arial;
+	background-image: none;
+	margin-top: 6.0pt;
+	margin-bottom: 6.0pt;
+	mc-next-tag: p;
+	mc-hyphenate: never;
+	font-size: x-small;
+}
+
+h2
+{
+	font-family: Verdana, Tahoma, Arial;
+	text-transform: none;
+	font-weight: bold;
+	border-bottom-color: #ffffff;
+	border-bottom-style: none;
+	border-bottom-width: 0px;
+	border-bottom: none 0;
+	margin-bottom: 0in;
+	margin: 0in;
+	margin-left: 0in;
+	mc-hyphenate: never;
+	left: 0in;
+	font-variant: normal;
+	padding-left: 0pt;
+	padding-top: 4pt;
+	padding-bottom: 3pt;
+	color: #000000;
+	font-size: medium;
+}
+
+body
+{
+	font-family: Verdana, Tahoma, Arial;
+	list-style-image: none;
+	mc-hyphenate: never;
+	font-size: x-small;
+}
+
+h3
+{
+	font-family: Verdana, Tahoma, Arial;
+	border-bottom: groove #259ac0 1.0pt;
+	padding-bottom: 4.0pt;
+	text-transform: none;
+	border-bottom-style: Inset;
+	border-bottom-width: 2px;
+	border-bottom-color: #ccffff;
+	text-decoration: none;
+	mc-hyphenate: never;
+	color: #4f6e2c;
+	font-size: medium;
+	font-weight: bold;
+}
+
+span.SLXBold
+{
+	font-weight: bold;
+	font-style: normal;
+	mc-hyphenate: never;
+}
+
+h4
+{
+	font-weight: bold;
+	left: 2in;
+	padding-left: 0.5in;
+	font-size: x-small;
+	mc-heading-level: 0;
+	mc-hyphenate: never;
+}
+
+p.ChapterTitle
+{
+	border-color: #000000;
+	border-left-color: #ffffff;
+	border-right-color: #ffffff;
+	border-top-color: #ffffff;
+	font-size: medium;
+	font-weight: bold;
+	margin-bottom: 1.3em;
+	padding-bottom: 0.5em;
+	text-align: right;
+	mc-heading-level: 1;
+	mc-hyphenate: never;
+	border-bottom-color: #ffffff;
+	border-bottom-style: none;
+	border-bottom-width: 0px;
+	color: #696969;
+	mc-auto-number-format: 'Chapter {chapnum}{A}';
+}
+
+p.TOC1
+{
+	mc-hyphenate: never;
+}
+
+@media print
+{
+	MadCap|tocProxy
+	{
+		border-top-color: #ffffff;
+	}
+
+	li
+	{
+		list-style-type: inherit;
+		list-style: inherit;
+	}
+
+	ol
+	{
+		list-style: decimal;
+	}
+}
+
+MadCap|tocProxy
+{
+	border-top-color: #ffffff;
+	border-top-width: 0px;
+	mc-hyphenate: never;
+}
+
+p.BookTitle
+{
+	font-weight: bold;
+	left: 0.5in;
+	margin-left: 0.5in;
+	mc-hyphenate: never;
+	color: #000000;
+	font-size: small;
+}
+
+p.ChapterContents
+{
+	border-color: #000000;
+	border-left-color: #ffffff;
+	border-right-color: #ffffff;
+	border-top-color: #ffffff;
+	font-size: medium;
+	font-weight: bold;
+	margin-bottom: 1.3em;
+	padding-bottom: 0.5em;
+	text-align: right;
+	mc-heading-level: 0;
+	border-bottom-width: 4px;
+	border-bottom-style: double;
+	mc-hyphenate: never;
+	color: #000000;
+}
+
+MadCap|pageFooter.OddPage
+{
+	mc-hyphenate: never;
+}
+
+MadCap|pageFooter.FirstPage
+{
+	mc-hyphenate: never;
+}
+
+MadCap|pageFooter.EvenPage
+{
+	mc-hyphenate: never;
+}
+
+MadCap|pageFooter
+{
+	mc-hyphenate: never;
+}
+
+MadCap|pageHeader.OddPage
+{
+	mc-hyphenate: never;
+}
+
+MadCap|pageHeader.FirstPage
+{
+	mc-hyphenate: never;
+}
+
+MadCap|pageHeader.EvenPage
+{
+	mc-hyphenate: never;
+}
+
+MadCap|pageHeader
+{
+	mc-hyphenate: never;
+}
+
+MadCap|helpControlMenuItem.Highlighted
+{
+	mc-hyphenate: never;
+}
+
+MadCap|helpControlMenuItem
+{
+	mc-hyphenate: never;
+}
+
+MadCap|helpControlMenu
+{
+	mc-hyphenate: never;
+}
+
+MadCap|shortcut
+{
+	mc-hyphenate: never;
+}
+
+MadCap|popupBody
+{
+	mc-hyphenate: never;
+}
+
+MadCap|popupHead
+{
+	mc-hyphenate: never;
+}
+
+MadCap|popup:hover
+{
+	mc-hyphenate: never;
+}
+
+MadCap|popup:focus
+{
+	mc-hyphenate: never;
+}
+
+MadCap|popup
+{
+	mc-hyphenate: never;
+}
+
+MadCap|toggler:hover
+{
+	mc-hyphenate: never;
+}
+
+MadCap|toggler:focus
+{
+	mc-hyphenate: never;
+}
+
+MadCap|toggler
+{
+	mc-hyphenate: never;
+	color: #000000;
+}
+
+MadCap|expandingBody
+{
+	mc-hyphenate: never;
+}
+
+MadCap|expandingHead:hover
+{
+	mc-hyphenate: never;
+}
+
+MadCap|expandingHead:focus
+{
+	mc-hyphenate: never;
+}
+
+MadCap|expandingHead
+{
+	mc-hyphenate: never;
+}
+
+MadCap|expanding
+{
+	mc-hyphenate: never;
+}
+
+MadCap|dropDownBody
+{
+	mc-hyphenate: never;
+}
+
+MadCap|dropDownHotspot:hover
+{
+	mc-hyphenate: never;
+}
+
+MadCap|dropDownHotspot:focus
+{
+	mc-hyphenate: never;
+}
+
+MadCap|dropDownHotspot
+{
+	mc-hyphenate: never;
+}
+
+MadCap|dropDownHead
+{
+	mc-hyphenate: never;
+	color: #000000;
+}
+
+MadCap|dropDown
+{
+	mc-hyphenate: never;
+	font-size: x-small;
+}
+
+MadCap|annotation
+{
+	mc-hyphenate: never;
+}
+
+MadCap|xref.TOCPageNumber
+{
+	mc-hyphenate: never;
+}
+
+MadCap|xref.ListOfPageNumber
+{
+	mc-hyphenate: never;
+}
+
+MadCap|xref.IndexPageNumber
+{
+	mc-hyphenate: never;
+}
+
+MadCap|xref.ConceptPageNumber
+{
+	mc-hyphenate: never;
+}
+
+MadCap|xref:hover
+{
+	mc-hyphenate: never;
+}
+
+MadCap|xref:focus
+{
+	mc-hyphenate: never;
+}
+
+MadCap|xref
+{
+	mc-hyphenate: never;
+}
+
+MadCap|glossaryTerm.Popup
+{
+	mc-hyphenate: never;
+}
+
+MadCap|glossaryTerm.Hyperlink
+{
+	mc-hyphenate: never;
+}
+
+MadCap|glossaryTerm.Expanding
+{
+	mc-hyphenate: never;
+}
+
+MadCap|glossaryTerm:hover
+{
+	mc-hyphenate: never;
+}
+
+MadCap|glossaryTerm:focus
+{
+	mc-hyphenate: never;
+}
+
+MadCap|glossaryTerm
+{
+	mc-hyphenate: never;
+}
+
+MadCap|relatedTopics:hover
+{
+	mc-hyphenate: never;
+}
+
+MadCap|relatedTopics:focus
+{
+	mc-hyphenate: never;
+}
+
+MadCap|relatedTopics
+{
+	mc-hyphenate: never;
+}
+
+MadCap|keywordLink:hover
+{
+	mc-hyphenate: never;
+}
+
+MadCap|keywordLink:focus
+{
+	mc-hyphenate: never;
+}
+
+MadCap|keywordLink
+{
+	mc-hyphenate: never;
+}
+
+MadCap|conceptLink:hover
+{
+	mc-hyphenate: never;
+}
+
+MadCap|conceptLink:focus
+{
+	mc-hyphenate: never;
+}
+
+MadCap|conceptLink
+{
+	mc-hyphenate: never;
+}
+
+MadCap|footnote
+{
+	mc-hyphenate: never;
+}
+
+MadCap|endnoteBlock
+{
+	mc-hyphenate: never;
+}
+
+MadCap|endnotesBlock
+{
+	mc-hyphenate: never;
+}
+
+MadCap|footnoteBlock
+{
+	mc-hyphenate: never;
+}
+
+MadCap|footnotesBlock
+{
+	mc-hyphenate: never;
+}
+
+MadCap|section
+{
+	mc-hyphenate: never;
+}
+
+MadCap|conditionalText
+{
+	mc-hyphenate: never;
+}
+
+MadCap|snippetBlock
+{
+	mc-hyphenate: never;
+}
+
+MadCap|snippetText
+{
+	mc-hyphenate: never;
+}
+
+MadCap|endnotesProxy
+{
+	mc-hyphenate: never;
+}
+
+MadCap|relationshipsItem
+{
+	mc-hyphenate: never;
+}
+
+MadCap|relationshipsHeading.task
+{
+	mc-hyphenate: never;
+}
+
+MadCap|relationshipsHeading.reference
+{
+	mc-hyphenate: never;
+}
+
+MadCap|relationshipsHeading.concept
+{
+	mc-hyphenate: never;
+}
+
+MadCap|relationshipsHeading
+{
+	mc-hyphenate: never;
+}
+
+MadCap|relationshipsProxy
+{
+	mc-hyphenate: never;
+}
+
+MadCap|glossaryProxy
+{
+	mc-hyphenate: never;
+}
+
+MadCap|conceptsProxy
+{
+	mc-hyphenate: never;
+}
+
+MadCap|listOfProxy
+{
+	mc-hyphenate: never;
+}
+
+MadCap|indexProxy
+{
+	mc-hyphenate: never;
+}
+
+MadCap|miniTocProxy
+{
+	mc-hyphenate: never;
+}
+
+MadCap|topicToolbarProxy
+{
+	mc-hyphenate: never;
+}
+
+MadCap|breadcrumbsProxy
+{
+	mc-hyphenate: never;
+}
+
+MadCap|bodyProxy
+{
+	mc-hyphenate: never;
+}
+
+MadCap|variable
+{
+	mc-hyphenate: never;
+}
+
+MadCap|concept
+{
+	mc-hyphenate: never;
+}
+
+MadCap|keyword
+{
+	mc-hyphenate: never;
+}
+
+br:before
+{
+	mc-hyphenate: never;
+}
+
+br
+{
+	mc-hyphenate: never;
+}
+
+s
+{
+	mc-hyphenate: never;
+}
+
+button
+{
+	mc-hyphenate: never;
+}
+
+colgroup
+{
+	mc-hyphenate: never;
+}
+
+noframes
+{
+	mc-hyphenate: never;
+}
+
+frameset
+{
+	mc-hyphenate: never;
+}
+
+frame
+{
+	mc-hyphenate: never;
+}
+
+form
+{
+	mc-hyphenate: never;
+}
+
+fieldset
+{
+	mc-hyphenate: never;
+}
+
+style
+{
+	mc-hyphenate: never;
+}
+
+head
+{
+	mc-hyphenate: never;
+}
+
+area
+{
+	mc-hyphenate: never;
+}
+
+map
+{
+	mc-hyphenate: never;
+}
+
+col
+{
+	mc-hyphenate: never;
+}
+
+var
+{
+	mc-hyphenate: never;
+}
+
+tt
+{
+	mc-hyphenate: never;
+}
+
+sub
+{
+	mc-hyphenate: never;
+}
+
+sup
+{
+	mc-hyphenate: never;
+}
+
+strong
+{
+	mc-hyphenate: never;
+}
+
+strike
+{
+	mc-hyphenate: never;
+}
+
+samp
+{
+	mc-hyphenate: never;
+}
+
+o
+{
+	mc-hyphenate: never;
+}
+
+u
+{
+	mc-hyphenate: never;
+}
+
+small
+{
+	mc-hyphenate: never;
+}
+
+kbd
+{
+	mc-hyphenate: never;
+}
+
+ins
+{
+	mc-hyphenate: never;
+}
+
+i
+{
+	mc-hyphenate: never;
+}
+
+em
+{
+	mc-hyphenate: never;
+}
+
+del
+{
+	mc-hyphenate: never;
+}
+
+cite
+{
+	mc-hyphenate: never;
+}
+
+code
+{
+	mc-hyphenate: never;
+}
+
+big
+{
+	mc-hyphenate: never;
+}
+
+b
+{
+	mc-hyphenate: never;
+}
+
+acronym
+{
+	mc-hyphenate: never;
+}
+
+abbr
+{
+	mc-hyphenate: never;
+}
+
+ol
+{
+	mc-hyphenate: never;
+}
+
+ul
+{
+	mc-hyphenate: never;
+}
+
+dir
+{
+	mc-hyphenate: never;
+}
+
+menu
+{
+	mc-hyphenate: never;
+}
+
+center
+{
+	mc-hyphenate: never;
+}
+
+dt
+{
+	mc-hyphenate: never;
+}
+
+dd
+{
+	mc-hyphenate: never;
+}
+
+dl
+{
+	mc-hyphenate: never;
+}
+
+pre
+{
+	mc-hyphenate: never;
+}
+
+blockquote
+{
+	mc-hyphenate: never;
+}
+
+address
+{
+	mc-hyphenate: never;
+}
+
+caption
+{
+	mc-hyphenate: never;
+}
+
+td
+{
+	mc-hyphenate: never;
+}
+
+th
+{
+	mc-hyphenate: never;
+}
+
+tfoot
+{
+	mc-hyphenate: never;
+}
+
+tbody
+{
+	mc-hyphenate: never;
+}
+
+thead
+{
+	mc-hyphenate: never;
+}
+
+tr
+{
+	mc-hyphenate: never;
+}
+
+table
+{
+	mc-hyphenate: never;
+}
+
+html.topic
+{
+	mc-hyphenate: never;
+}
+
+html.task
+{
+	mc-hyphenate: never;
+}
+
+html.reference
+{
+	mc-hyphenate: never;
+}
+
+html.concept
+{
+	mc-hyphenate: never;
+}
+
+html
+{
+	mc-hyphenate: never;
+}
+
+div.GlossaryPageTerm
+{
+	mc-hyphenate: never;
+}
+
+div.GlossaryPageHeading
+{
+	mc-hyphenate: never;
+}
+
+div.GlossaryPageEntry
+{
+	mc-hyphenate: never;
+}
+
+div.GlossaryPageDefinition
+{
+	mc-hyphenate: never;
+}
+
+div
+{
+	mc-hyphenate: never;
+}
+
+h6
+{
+	mc-hyphenate: never;
+}
+
+h5
+{
+	mc-hyphenate: never;
+}
+
+hr
+{
+	mc-hyphenate: never;
+}
+
+script
+{
+	mc-hyphenate: never;
+}
+
+object
+{
+	mc-hyphenate: never;
+}
+
+textarea
+{
+	mc-hyphenate: never;
+}
+
+input
+{
+	mc-hyphenate: never;
+}
+
+select
+{
+	mc-hyphenate: never;
+}
+
+span.state
+{
+	mc-hyphenate: never;
+}
+
+span.SeeIndexTerms
+{
+	mc-hyphenate: never;
+}
+
+span.SeeIndex
+{
+	mc-hyphenate: never;
+}
+
+span.SeeAlsoIndexTerms
+{
+	mc-hyphenate: never;
+}
+
+span.SeeAlsoIndex
+{
+	mc-hyphenate: never;
+}
+
+span.boolean
+{
+	mc-hyphenate: never;
+}
+
+span
+{
+	mc-hyphenate: never;
+}
+
+li
+{
+	mc-hyphenate: never;
+}
+
+a.MCBreadcrumbsLink
+{
+	mc-hyphenate: never;
+}
+
+a.GlossaryPageTerm
+{
+	mc-hyphenate: never;
+}
+
+a:visited
+{
+	mc-hyphenate: never;
+}
+
+a:link
+{
+	mc-hyphenate: never;
+}
+
+a:hover
+{
+	mc-hyphenate: never;
+}
+
+a:focus
+{
+	mc-hyphenate: never;
+}
+
+a
+{
+	mc-hyphenate: never;
+}
+
+p.TOC9
+{
+	mc-hyphenate: never;
+}
+
+p.TOC8
+{
+	mc-hyphenate: never;
+}
+
+p.TOC7
+{
+	mc-hyphenate: never;
+}
+
+p.TOC6
+{
+	mc-hyphenate: never;
+}
+
+p.TOC5
+{
+	mc-hyphenate: never;
+}
+
+p.TOC4
+{
+	mc-hyphenate: never;
+}
+
+p.TOC3
+{
+	mc-hyphenate: never;
+}
+
+p.TOC2
+{
+	mc-hyphenate: never;
+}
+
+p.MiniTOC9
+{
+	mc-hyphenate: never;
+}
+
+p.MiniTOC8
+{
+	mc-hyphenate: never;
+}
+
+p.MiniTOC7
+{
+	mc-hyphenate: never;
+}
+
+p.MiniTOC6
+{
+	mc-hyphenate: never;
+}
+
+p.MiniTOC5
+{
+	mc-hyphenate: never;
+}
+
+p.MiniTOC4
+{
+	mc-hyphenate: never;
+}
+
+p.MiniTOC3
+{
+	mc-hyphenate: never;
+}
+
+p.MiniTOC2
+{
+	mc-hyphenate: never;
+}
+
+p.MiniTOC1
+{
+	mc-hyphenate: never;
+}
+
+p.ListOf
+{
+	mc-hyphenate: never;
+}
+
+p.IndexHeading
+{
+	mc-hyphenate: never;
+}
+
+p.Index9
+{
+	mc-hyphenate: never;
+}
+
+p.Index8
+{
+	mc-hyphenate: never;
+}
+
+p.Index7
+{
+	mc-hyphenate: never;
+}
+
+p.Index6
+{
+	mc-hyphenate: never;
+}
+
+p.Index5
+{
+	mc-hyphenate: never;
+}
+
+p.Index4
+{
+	mc-hyphenate: never;
+}
+
+p.Index3
+{
+	mc-hyphenate: never;
+}
+
+p.Index2
+{
+	mc-hyphenate: never;
+}
+
+p.Index1
+{
+	mc-hyphenate: never;
+}
+
+p.ConceptContext
+{
+	mc-hyphenate: never;
+}
+
+p.Concept
+{
+	mc-hyphenate: never;
+}
+
+p.Topic-Text-Indent
+{
+	font-family: inherit;
+	margin-left: 30.0pt;
+	font-size: inherit;
+	margin-bottom: 3pt;
+	margin-top: 0pt;
+}
+
+p.Topic-Text-Indent2
+{
+	font-family: inherit;
+	font-size: inherit;
+	margin-left: 64px;
+	margin-top: 0pt;
+	margin-bottom: 3pt;
+}
+
+p.TopicTextIndent3
+{
+	margin-left: 64pt;
+	margin-top: 0pt;
+	margin-bottom: 3pt;
+	font-size: x-small;
+}
+
+li.Bullet3
+{
+	font-family: inherit;
+	font-weight: normal;
+	list-style-type: disc;
+	list-style-position: outside;
+	margin-top: 3pt;
+	margin-bottom: 3pt;
+	margin-left: 32pt;
+	font-size: x-small;
+}
+
+p.PageBreakAfter
+{
+	page-break-after: always;
+	font-size: 4px;
+	color: #a52a2a;
+}
+
+p.FrontMatterTitle
+{
+	font-size: small;
+	font-weight: bold;
+}
+
+p.ChapterAppendixName
+{
+	font-size: medium;
+	text-align: right;
+	border-bottom: double 4px;
+	padding-bottom: 6px;
+}
+
+p.AppendixTitle
+{
+	color: #696969;
+	font-size: medium;
+	font-weight: bold;
+	text-align: right;
+	mc-auto-number-format: '{chapnum}{A}';
+}
+
+MadCap|xref.AppChapNumAndName
+{
+	font-family: Verdana;
+	font-size: inherit;
+	text-decoration: none;
+	mc-format: '{quote}{paratext}{quote} auf Seite {page}';
+}
+
+MadCap|xref.H1
+{
+	mc-format: '{quote}{h1}{quote}';
+}
+
+MadCap|xref.H1andpage
+{
+	mc-format: '{quote}{h1}{quote} auf Seite {page}';
+}
+
+MadCap|xref.H2
+{
+	text-decoration: none;
+	font-size: inherit;
+	mc-format: '{quote}{h2}{quote}';
+}
+
+MadCap|xref.H2andpage
+{
+	text-decoration: none;
+	font-size: inherit;
+	mc-format: '{quote}{h2}{quote} auf Seite {page}';
+}
+
+MadCap|xref.H3
+{
+	text-decoration: none;
+	font-size: inherit;
+	mc-format: '{quote}{h3}{quote}';
+}
+
+MadCap|xref.H3andpage
+{
+	text-decoration: none;
+	font-size: inherit;
+	mc-format: '{quote}{h3}{quote} auf Seite {page}';
+}
+
+MadCap|xref.JustPage
+{
+	text-decoration: none;
+	font-size: inherit;
+	mc-format: '{page}';
+}
+
+MadCap|xref.StepNumber
+{
+	text-decoration: none;
+	font-size: inherit;
+	color: #000000;
+	mc-format: '{paranumonly}';
+}
+

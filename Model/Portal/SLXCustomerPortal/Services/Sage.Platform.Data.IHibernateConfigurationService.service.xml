@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
-<PortalService xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="50F0E7E4-588F-4ca4-BB02-BB81D22AAEB1">
+<PortalService xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="50f0e7e4-588f-4ca4-bb02-bb81d22aaeb1">
   <InstanceId>50aee28ef9d5445085310fab78bae875</InstanceId>
   <ServiceType>Sage.Platform.WebPortal.Services.WebHibernateConfigurationService, Sage.Platform.WebPortal</ServiceType>
   <RegisterAs>Sage.Platform.Data.IHibernateConfigurationService, Sage.Platform</RegisterAs>
   <Properties />
+  <Scope>Application</Scope>
 </PortalService>

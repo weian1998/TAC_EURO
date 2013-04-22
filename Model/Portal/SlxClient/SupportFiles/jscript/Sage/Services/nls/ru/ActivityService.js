@@ -1,0 +1,32 @@
+﻿define(
+        ({
+            txtErrorActionMsg:'К сожалению, действие не удалось т.к. произошла ошибка.',
+            txtActivity:'Дело',
+            txtActivities:'Дела',
+            txtActionDeleteActivites: 'Удалить дела',
+            txtActionDeleteActivitiesQuestion: 'Будут удалены только те дела на которые у вас есть права на удаление. <P> Вы уверены, что хотите удалить {0} выбранные {1}?',
+            txtAlarm:'оповещение',
+            txtAlarms:'оповещения',
+            txtActionSnoozeAlarm:'Отложить оповещение',
+            txtActionSnoozeQuestion: 'Вы уверены, что хотите отложить {0} выбранные {1} для {2} ?',
+            txtActionSnoozeAllQuestion:'Вы уверены, что хотите отложить все {0} для {1} ?',
+            txtActionDismissAlarms:'Отклонение оповещений',
+            txtActionDismissAlarmsQuestion:'Вы уверены, что хотите отклонить {0} выбранные {1}?',
+            txtEvent:'событие',
+            txtEvents:'события',
+            txtActionDeleteEvents: 'Удаление событий',
+            txtActionDeleteEventsQuestion:'Будут удалены только те события на которые у вас есть права на удаление. <P> Вы уверены, что хотите удалить {0} выбранные {1}?',
+            txtConfirmation:'подтверждение',
+            txtConfirmations:'подтверждения',
+            txtActionAcceptConfirmations:'Принятие подтверждений',
+            txtActionAcceptConfirmQuestion:'Вы уверены, что хотите принять {0} выбранные {1}? Это действие распространяется только на новые подтверждения. Все остальные будут игнорироваться. ',
+            txtDeclineConfirmations:'Отклонение подтверждений',
+            txtActionDeclineConfrimQuestion:'Вы уверены, что хотите отклонить {0} выбранные {1}? Это действие распространяется только на новые подтверждения. Все остальные будут игнорироваться. ',
+            txtActionRemoveConfirmations:'Удалить подтверждения',
+            txtActionRemoveConfirmationsQuestion:'Вы уверены, что хотите удалить {0} выбранные {1}? Это действие на распространяется на новые подтверждения. Все остальные будут удалены. ',
+            txtLiteratureRequest:'Запрос на информационные материалы',
+            txtLiteratureRequests:'Запросы на информационные материалы',
+            txtActionDeleteLiteratureRequests:'Удаление запросов на информационные материалы',
+            txtActionDeleteLiteratureRequestsQuestion:'Будут удалены только запросы информационных материалов на которые у вас есть разрешение. <P> Вы уверены что хотите удалить {0} выбранные {1}?'
+         })
+);

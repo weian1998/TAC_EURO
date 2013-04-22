@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="twentyFiveMinutes" xml:space="preserve">
+    <value>25 Minuten</value>
+  </data>
+  <data name="meeting" xml:space="preserve">
+    <value>Meeting</value>
+  </data>
+  <data name="sixHours" xml:space="preserve">
+    <value>6 Stunden</value>
+  </data>
+  <data name="fourDays" xml:space="preserve">
+    <value>4 Tage</value>
+  </data>
+  <data name="eighteenHours" xml:space="preserve">
+    <value>18 Stunden</value>
+  </data>
+  <data name="contactAccount" xml:space="preserve">
+    <value>Kontakt/Firma</value>
+  </data>
+  <data name="ninePointFiveHours" xml:space="preserve">
+    <value>9,5 Stunden</value>
+  </data>
+  <data name="fourHours" xml:space="preserve">
+    <value>4 Stunden</value>
+  </data>
+  <data name="alarms" xml:space="preserve">
+    <value>Alarme</value>
+  </data>
+  <data name="twoHours" xml:space="preserve">
+    <value>2 Stunden</value>
+  </data>
+  <data name="tenHours" xml:space="preserve">
+    <value>10 Stunden</value>
+  </data>
+  <data name="fortyFiveMinutes" xml:space="preserve">
+    <value>45 Minuten</value>
+  </data>
+  <data name="nineteenHours" xml:space="preserve">
+    <value>19 Stunden</value>
+  </data>
+  <data name="twentyOnePointFiveHours" xml:space="preserve">
+    <value>21,5 Stunden</value>
+  </data>
+  <data name="fifteenPointFiveHours" xml:space="preserve">
+    <value>15,5 Stunden</value>
+  </data>
+  <data name="twentyTwoHours" xml:space="preserve">
+    <value>22 Stunden</value>
+  </data>
+  <data name="fourPointFiveHours" xml:space="preserve">
+    <value>4,5 Stunden</value>
+  </data>
+  <data name="thirtyMinutes" xml:space="preserve">
+    <value>30 Minuten</value>
+  </data>
+  <data name="accountContact" xml:space="preserve">
+    <value>Firma/Kontakt</value>
+  </data>
+  <data name="sixteenPointFiveHours" xml:space="preserve">
+    <value>16,5 Stunden</value>
+  </data>
+  <data name="elevenHours" xml:space="preserve">
+    <value>11 Stunden</value>
+  </data>
+  <data name="pastDue" xml:space="preserve">
+    <value>Überfällig</value>
+  </data>
+  <data name="seventeenPointFiveHours" xml:space="preserve">
+    <value>17,5 Stunden</value>
+  </data>
+  <data name="toDo" xml:space="preserve">
+    <value>Aufgabe</value>
+  </data>
+  <data name="week" xml:space="preserve">
+    <value>Woche</value>
+  </data>
+  <data name="allOpen" xml:space="preserve">
+    <value>Alle offenen Aktivitäten</value>
+  </data>
+  <data name="eightPointFiveHours" xml:space="preserve">
+    <value>8,5 Stunden</value>
+  </data>
+  <data name="literature" xml:space="preserve">
+    <value>Literatur</value>
+  </data>
+  <data name="seventeenHours" xml:space="preserve">
+    <value>17 Stunden</value>
+  </data>
+  <data name="eightHours" xml:space="preserve">
+    <value>8 Stunden</value>
+  </data>
+  <data name="fourteenPointFiveHours" xml:space="preserve">
+    <value>14,5 Stunden</value>
+  </data>
+  <data name="fiveMinutes" xml:space="preserve">
+    <value>5 Minuten</value>
+  </data>
+  <data name="oneWeek" xml:space="preserve">
+    <value>1 Woche</value>
+  </data>
+  <data name="account" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="contact" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
+  <data name="fifteenMinutes" xml:space="preserve">
+    <value>15 Minuten</value>
+  </data>
+  <data name="threeHours" xml:space="preserve">
+    <value>3 Stunden</value>
+  </data>
+  <data name="workWeek" xml:space="preserve">
+    <value>Arbeitswoche</value>
+  </data>
+  <data name="none" xml:space="preserve">
+    <value>Keine</value>
+  </data>
+  <data name="fiveHours" xml:space="preserve">
+    <value>5 Stunden</value>
+  </data>
+  <data name="day" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="twelveHours" xml:space="preserve">
+    <value>12 Stunden</value>
+  </data>
+  <data name="sixPointFiveHours" xml:space="preserve">
+    <value>6,5 Stunden</value>
+  </data>
+  <data name="sevenHours" xml:space="preserve">
+    <value>7 Stunden</value>
+  </data>
+  <data name="twentyTwoPointFiveHours" xml:space="preserve">
+    <value>22,5 Stunden</value>
+  </data>
+  <data name="oneDay" xml:space="preserve">
+    <value>1 Tag</value>
+  </data>
+  <data name="oneHour" xml:space="preserve">
+    <value>1 Stunde</value>
+  </data>
+  <data name="Prompt" xml:space="preserve">
+    <value>Abfragen</value>
+  </data>
+  <data name="thirteenPointFiveHours" xml:space="preserve">
+    <value>13,5 Stunden</value>
+  </data>
+  <data name="twentyThreePointFiveHours" xml:space="preserve">
+    <value>23,5 Stunden</value>
+  </data>
+  <data name="confirmations" xml:space="preserve">
+    <value>Bestätigungen</value>
+  </data>
+  <data name="threePointFiveHours" xml:space="preserve">
+    <value>3,5 Stunden</value>
+  </data>
+  <data name="elevenPointFiveHours" xml:space="preserve">
+    <value>11,5 Stunden</value>
+  </data>
+  <data name="twentyPointFiveHours" xml:space="preserve">
+    <value>20,5 Stunden</value>
+  </data>
+  <data name="thirteenHours" xml:space="preserve">
+    <value>13 Stunden</value>
+  </data>
+  <data name="tenPointFiveHours" xml:space="preserve">
+    <value>10,5 Stunden</value>
+  </data>
+  <data name="fourteenHours" xml:space="preserve">
+    <value>14 Stunden</value>
+  </data>
+  <data name="no" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="threeDays" xml:space="preserve">
+    <value>3 Tage</value>
+  </data>
+  <data name="yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="twentyThreeHours" xml:space="preserve">
+    <value>23 Stunden</value>
+  </data>
+  <data name="myActivities" xml:space="preserve">
+    <value>Eigene Aktivitäten</value>
+  </data>
+  <data name="fifteenHours" xml:space="preserve">
+    <value>15 Stunden</value>
+  </data>
+  <data name="neither" xml:space="preserve">
+    <value>Keiner</value>
+  </data>
+  <data name="twoWeeks" xml:space="preserve">
+    <value>2 Wochen</value>
+  </data>
+  <data name="twentyMinutes" xml:space="preserve">
+    <value>20 Minuten</value>
+  </data>
+  <data name="onePointFiveHours" xml:space="preserve">
+    <value>1,5 Stunden</value>
+  </data>
+  <data name="nineHours" xml:space="preserve">
+    <value>9 Stunden</value>
+  </data>
+  <data name="month" xml:space="preserve">
+    <value>Monat</value>
+  </data>
+  <data name="phoneCall" xml:space="preserve">
+    <value>Anruf</value>
+  </data>
+  <data name="tenMinutes" xml:space="preserve">
+    <value>10 Minuten</value>
+  </data>
+  <data name="twoDays" xml:space="preserve">
+    <value>2 Tage</value>
+  </data>
+  <data name="sixteenHours" xml:space="preserve">
+    <value>16 Stunden</value>
+  </data>
+  <data name="pointFiveDays" xml:space="preserve">
+    <value>0,5 Tage</value>
+  </data>
+  <data name="twentyOneHours" xml:space="preserve">
+    <value>21 Stunden</value>
+  </data>
+  <data name="sevenPointFiveHours" xml:space="preserve">
+    <value>7,5 Stunden</value>
+  </data>
+  <data name="twentyHours" xml:space="preserve">
+    <value>20 Stunden</value>
+  </data>
+  <data name="DoNotPrompt" xml:space="preserve">
+    <value>Nicht nachfragen</value>
+  </data>
+  <data name="events" xml:space="preserve">
+    <value>Ereignisse</value>
+  </data>
+  <data name="fivePointFiveHours" xml:space="preserve">
+    <value>5,5 Stunden</value>
+  </data>
+  <data name="twelvePointFiveHours" xml:space="preserve">
+    <value>12,5 Stunden</value>
+  </data>
+  <data name="nineteenPointFiveHours" xml:space="preserve">
+    <value>19,5 Stunden</value>
+  </data>
+  <data name="zeroMinutes" xml:space="preserve">
+    <value>0 Minuten</value>
+  </data>
+  <data name="eighteenPointFiveHours" xml:space="preserve">
+    <value>18,5 Stunden</value>
+  </data>
+  <data name="twoPointFiveHours" xml:space="preserve">
+    <value>2,5 Stunden</value>
+  </data>
+</root>

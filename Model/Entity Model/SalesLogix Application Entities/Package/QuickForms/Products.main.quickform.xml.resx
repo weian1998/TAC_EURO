@@ -112,26 +112,11 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lueProducts.ButtonToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lueProducts.LookupProperties.Name.PropertyHeader" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="lueProducts.LookupProperties.ActualId.PropertyHeader" xml:space="preserve">
-    <value>SKU</value>
-  </data>
-  <data name="lueProducts.LookupProperties.Status.PropertyHeader" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="lueProducts.LookupProperties.Family.PropertyHeader" xml:space="preserve">
-    <value>Family</value>
-  </data>
   <data name="fc28c017-d0ac-4f11-a09c-63f036646ec7.Caption" xml:space="preserve">
     <value>Actual Id</value>
   </data>
@@ -144,49 +129,58 @@
   <data name="0f39740e-9cfa-4e90-8290-919c18eb594f.Caption" xml:space="preserve">
     <value>Status</value>
   </data>
-  <data name="QFDataGrid.ca3e71b2-710d-442a-911d-f82896281b67.ColumnHeading" xml:space="preserve">
-    <value>SKU</value>
-  </data>
-  <data name="QFDataGrid.7f49f584-ad1e-4b70-8ff3-126a1764bdad.ColumnHeading" xml:space="preserve">
-    <value>Family</value>
-  </data>
   <data name="QFDataGrid.d2f61e0e-91d2-4f04-a0a7-ddb57a54e349.ColumnHeading" xml:space="preserve">
     <value>Name</value>
-  </data>
-  <data name="QFDataGrid.485b1beb-2bce-4847-a5b7-139e254fac4b.ColumnHeading" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="QFDataGrid.32233c89-e288-45d1-b83a-05b85e253399.ColumnHeading" xml:space="preserve">
-    <value>Product</value>
-  </data>
-  <data name="QFDataGrid.EmptyTableRowText" xml:space="preserve">
-    <value>No records match the selection criteria.</value>
-  </data>
-  <data name="lueProducts.ToolTip" xml:space="preserve">
-    <value>Add Product</value>
-  </data>
-  <data name="QFDataGrid.58b2bcc5-6405-4089-892e-858acf84ba5d.ColumnHeading" xml:space="preserve">
-    <value>Quantity</value>
   </data>
   <data name="9ca26532-c25e-4476-8f59-20332b450a1d.DialogTitleOverride" xml:space="preserve">
     <value>Edit Product</value>
   </data>
-  <data name="34b9e5c6-928f-4e00-9e05-222d42f5abb9.DialogTitleOverride" xml:space="preserve">
-    <value>Edit Product</value>
+  <data name="lueAddProduct.ButtonToolTip" xml:space="preserve">
+    <value>Associate Product</value>
   </data>
-  <data name="QFDataGrid.a494805d-0dd5-42f1-be87-d1434402dca4.Text" xml:space="preserve">
-    <value>Edit</value>
+  <data name="lueAddProduct.DialogButtonText" xml:space="preserve">
+    <value>Add Selected</value>
   </data>
-  <data name="QFDataGrid.9639f9d6-2624-40ff-ac9c-bdafd2a024d5.ColumnHeading" xml:space="preserve">
-    <value />
+  <data name="lueAddProduct.LookupDialogTitle" xml:space="preserve">
+    <value>Lookup Product</value>
   </data>
-  <data name="QFDataGrid.9639f9d6-2624-40ff-ac9c-bdafd2a024d5.ConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to remove this item?</value>
+  <data name="lueAddProduct.LookupProperties.Name.PropertyHeader" xml:space="preserve">
+    <value>Name</value>
   </data>
-  <data name="QFDataGrid.9639f9d6-2624-40ff-ac9c-bdafd2a024d5.Text" xml:space="preserve">
+  <data name="lueAddProduct.LookupProperties.Family.PropertyHeader" xml:space="preserve">
+    <value>Family</value>
+  </data>
+  <data name="lueAddProduct.LookupProperties.Status.PropertyHeader" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="lueAddProduct.LookupProperties.ActualId.PropertyHeader" xml:space="preserve">
+    <value>SKU</value>
+  </data>
+  <data name="grdProducts.Save.ToolTip" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="grdProducts.Cancel.ToolTip" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="grdProducts.Delete.ToolTip" xml:space="preserve">
     <value>Remove</value>
   </data>
-  <data name="daac1067-856f-4f0d-9feb-996a4bb88438.DialogTitleOverride" xml:space="preserve">
-    <value>Edit Package Product</value>
+  <data name="grdProducts.63070c7b-2051-481c-9405-fe6ad87623a5.ColumnHeading" xml:space="preserve">
+    <value>Product</value>
   </data>
+  <data name="grdProducts.ed7f9593-9015-4ea6-9a4a-e57d50365177.ColumnHeading" xml:space="preserve">
+    <value>SKU</value>
+  </data>
+  <data name="grdProducts.52b53a4c-380f-4645-96a8-f03da36569e7.ColumnHeading" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="grdProducts.5804d8a4-c6ca-44d2-bede-e053dde97439.ColumnHeading" xml:space="preserve">
+    <value>Family</value>
+  </data>
+  <data name="grdProducts.EmptyTableRowText" xml:space="preserve">
+    <value>No records match the selection criteria.</value>
+  </data>
+  <data name="grdProducts.c08798ea-cd3a-4223-989a-7b24d51b7cf6.ColumnHeading" xml:space="preserve">
+    <value>Status</value>
+  </data> 
 </root>

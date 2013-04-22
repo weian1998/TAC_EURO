@@ -1,17 +1,14 @@
 using System;
 using System.Web.UI;
 using Sage.Platform.Application;
-using Sage.SalesLogix.Web;
+using Sage.Platform.Data;
 using Sage.SalesLogix.WebUserOptions;
 using Sage.Platform.Application.UI;
 using Sage.Entity.Interfaces;
-using Sage.SalesLogix.DelphiBridge;
-using System.Text.RegularExpressions;
 
 public partial class ChangePasswordOptionsPage : System.Web.UI.UserControl, ISmartPartInfoProvider
 {
     private string curUser;
-    private Sage.SalesLogix.Security.SLXUserService slxUserService;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -27,8 +24,8 @@ public partial class ChangePasswordOptionsPage : System.Web.UI.UserControl, ISma
             _confirmPassword.Text = options.NewPassword;  // default is empty
         }
         //}
-        slxUserService = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>() as Sage.SalesLogix.Security.SLXUserService;
-         curUser = slxUserService.GetUser().Id.ToString();
+        var userService = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>(true);
+        curUser = userService.UserId;
 
              if (curUser.ToString().Trim() != "ADMIN")
              {
@@ -39,6 +36,8 @@ public partial class ChangePasswordOptionsPage : System.Web.UI.UserControl, ISma
              else
              {
                  PrefsPasswordHelpLink.NavigateUrl = "prefspassadmin.aspx";
+                 lblCurrentPassword.Visible = false;
+                 _currentPassword.Visible = false;
                  if (this.User.LookupResultValue == null)
                  {
                      this.User.LookupResultValue = curUser;
@@ -49,93 +48,91 @@ public partial class ChangePasswordOptionsPage : System.Web.UI.UserControl, ISma
 
     protected void _changePassword_Click(object sender, EventArgs e)
     {
+        // ***  10.06.11   kw    Moving the logic for validating the password to the User.Rules business rule 
+        // ***
         var optionSvc = ApplicationContext.Current.Services.Get<Sage.SalesLogix.Services.ISystemOptionsService>(true);
-        SByte minPasswordLength = optionSvc.MinPasswordLength;
-        bool noBlankPassword = optionSvc.NoBlankPassword;
-        bool alphaNumPassword = optionSvc.AlphaNumPassword;
-        bool noNameInPassword = optionSvc.NoNameInPassword;
 
-        Regex objAlphaNumericPattern = new Regex("[a-zA-Z][0-9]");
-        string changingUser = string.Empty;
-        
-        // Get the user name of the person who's getting their password changed
-         Sage.Entity.Interfaces.IUser us = User.LookupResultValue as IUser;
-
-         if (us != null)
-         {
-             changingUser = us.UserName;
-         }
-         else
-         {
-             changingUser = slxUserService.UserName;
-         }
-
+        // get the new password 
         string newPassword = _newPassword.Text;
-        if (Convert.ToInt32(minPasswordLength) != 0)
-        {
-            if (newPassword.Length < Convert.ToInt32(minPasswordLength))
-            {
-                lblMessage.Text = string.Format(GetLocalResourceObject("minPasswordLength").ToString(), minPasswordLength); //   "Password length must be {0} chars or greater!"
-                return;
-            }
-            if (alphaNumPassword && !objAlphaNumericPattern.IsMatch(newPassword))
-            {
-                lblMessage.Text = GetLocalResourceObject("alphaNumPassword").ToString();// "Passwords must be alphanumeric!";
-                return;
-            }
-
-        }
-        else if (noBlankPassword && newPassword.Length == 0)
-        {
-            lblMessage.Text = GetLocalResourceObject("noBlankPassword").ToString();//Passwords can not be blank!";
-            return; 
-        }
-        
-        if (noNameInPassword && newPassword.ToUpper().Contains(changingUser.ToUpper()))
-        {
-            if (curUser.ToUpper().Contains("ADMIN") && !changingUser.ToUpper().Contains("ADMIN"))
-                lblMessage.Text = GetLocalResourceObject("noNameInPasswordAdmin").ToString(); // "Passwords cannot contain the user name!";
-            else
-                lblMessage.Text = GetLocalResourceObject("noNameInPasswordUser").ToString(); //"Passwords cannot contain your user name!";
-            return;
-        }
-
-        // save values
+     
+        // if the value in the new password textbox and the confirm textbox match, attempt to save
         if (newPassword == _confirmPassword.Text)
         {
-            ChangePasswordOptions options = new ChangePasswordOptions();
-            options.NewPassword = newPassword;
+            // set up the change pwd options
+            ChangePasswordOptions options = ChangePasswordOptions.CreateNew();
 
-            string curUser = slxUserService.GetUser().Id.ToString();
-            if (curUser.ToString().Trim() != "ADMIN")
+            // Check to see if the current user is ADMIN or just normal user
+            var slxUserService = (Sage.SalesLogix.Security.ISlxUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>(true);
+            var currentUser = slxUserService.GetUser();
+            if (currentUser.UserName.ToString().Trim().ToUpper() == "ADMIN")
             {
-                options.UserId = curUser;
+                // Get the user name of the person selected from the lookup to change their password
+                Sage.Entity.Interfaces.IUser us = User.LookupResultValue as IUser;
+                if (us == null) us = currentUser;
+                // validate the new password against all system pwd options
+                try
+                {
+                    us.ValidateUserPassword(newPassword);
+                }
+                catch (ValidationException ex)
+                {
+                    lblMessage.Text = ex.Message;
+                    return;
+                }
+
+                // passed validation, assign new pwd
+                options.NewPassword = newPassword;
+                options.UserId = us.Id.ToString();
+                options.Save();
+                // If Admin is changing their password then re-authenticate
+                if (us.UserName == currentUser.UserName)
+                {
+                    var data = (Sage.SalesLogix.SLXDataService) ApplicationContext.Current.Services.Get<IDataService>(true);
+                    var auth = (Sage.SalesLogix.Web.SLXWebAuthenticationProvider) data.AuthenticationProvider;
+                    auth.AuthenticateWithContext(currentUser.UserName, newPassword);
+                }
             }
             else
             {
-                options.UserId = ((IUser)this.User.LookupResultValue).Id.ToString();
-            }
-            options.Save();
+                // regular user attempting to change their own password
+                if (!currentUser.ValidateCurrentPassword(_currentPassword.Text)) 
+                {
+                    lblMessage.Text = this.GetLocalResourceObject("currentPasswordValidationFailure").ToString();
+                    return;
+                }
+                // validate the new password against all system pwd options
+                try
+                {
+                    currentUser.ValidateUserPassword(newPassword);
+                }
+                catch (ValidationException ex)
+                {
+                    lblMessage.Text = ex.Message;
+                    return;
+                }
 
-            var webAuthProvider = ApplicationContext.Current.Services.Get<IAuthenticationProvider>() as SLXWebAuthenticationProvider;
-            if (webAuthProvider != null)
-            {
-                // reset the authentication token, otherwise the OleDb connection string will be out of sync until the next logon
-                webAuthProvider.AuthenticateWithContext(changingUser, newPassword);
+                // passed validation, assign new pwd
+                options.NewPassword = newPassword;
+                options.UserId = currentUser.Id.ToString();
+                options.Save();
+                //re-authenticate user with new password
+                var data = (Sage.SalesLogix.SLXDataService)ApplicationContext.Current.Services.Get<IDataService>(true);
+                var auth = (Sage.SalesLogix.Web.SLXWebAuthenticationProvider)data.AuthenticationProvider;
+                auth.AuthenticateWithContext(currentUser.UserName, newPassword);
+
             }
 
-            if (_newPassword.Text.Length == 0)
+            lblMessage.Text = this.GetLocalResourceObject("passwordChangeSuccess").ToString();
+            if (string.IsNullOrEmpty(newPassword))
             {
-                lblMessage.Text = GetLocalResourceObject("PasswordBlank").ToString();
+                lblMessage.Text = this.GetLocalResourceObject("PasswordBlank").ToString();
             }
-            else
-            {
-                lblMessage.Text = string.Empty;
-            }
+
         }
         else
         {
-            lblMessage.Text = GetLocalResourceObject("PasswordNotMatch").ToString();
+            _newPassword.Text = string.Empty;
+            lblMessage.Text = this.GetLocalResourceObject("PasswordNotMatch").ToString();
         }
     }
 

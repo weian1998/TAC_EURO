@@ -1,0 +1,843 @@
+.design-panel-toolbar
+{
+    border-top: none 0px black;
+}
+
+.design-panel-toolbar + .dijitGutter
+{
+    display: none;
+}
+
+.design-panel-surface
+{
+    border-top: none 0px black !important;
+}
+
+.design-panel-hidden
+{
+    height: 80px;
+}
+
+.design-panel-editor
+{
+    height: 240px;
+}
+
+.design-surface
+{
+    overflow: auto;
+    padding: 5px;
+    background: #FBFDF0;
+    outline: none;
+}
+
+.design-surface > div
+{
+    display: none;
+}
+
+.design-surface-region-debug
+{
+    background: rgba(0, 0, 255, 0.1);
+}
+
+.design-surface-table
+{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.design-surface-row
+{
+    height: 36px;
+}
+
+.design-surface-cell
+{
+    background: #fff;
+    border: solid 1px #aaa;
+    padding: 0;
+    vertical-align: top;
+    position: relative;
+    overflow: hidden;
+}
+
+.design-surface-cell > div
+{
+    border: solid 3px transparent;
+    overfow: hidden;
+}
+
+.design-surface-cell-selected > div
+{
+    border: solid 3px #D5EFFA;
+    background: #D5EFFA;
+}
+
+.design-surface-cell-empty
+{
+    background: #ccc;
+}
+
+.design-surface-cell > .dojoDndItemBefore
+{
+    border-top: solid 3px #ed982b !important;
+    border-bottom: solid 3px transparent !important;
+}
+
+.design-surface-cell > .dojoDndItemAfter
+{
+    border-bottom: solid 3px #ed982b !important;
+    border-top: solid 3px transparent !important;
+}
+
+.design-surface-cell-empty.dojoDndContainerOver
+{
+    background: #ed982b;
+}
+
+.design-surface-cell > div > *
+{
+    outline: none;
+}
+
+.design-surface-selector-row
+{
+    height: 18px;
+}
+
+.design-surface-row > .design-surface-selector-cell:first-child,
+.design-surface-selector-row > .design-surface-selector-cell:first-child
+{
+    width: 18px;
+}
+
+.design-surface-selector-cell
+{
+    border: solid 1px #aaa;
+
+    background-color: #f2f2f2;
+    background-image: linear-gradient(top, #f2f2f2, #e6e6e6);
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #f2f2f2),
+        color-stop(1, #e6e6e6)
+    );
+    background-image: -moz-linear-gradient(top, #f2f2f2, #e6e6e6);
+    background-position: 0 0;
+
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#f2f2f2, endColorstr=#e6e6e6)";
+}
+
+.design-surface-selector-cell.design-surface-cell-selected
+{
+    background: #D5EFFA;
+}
+
+.design-hidden-container
+{
+    overflow: auto;
+    background: #FBFDF0;
+    outline: none;
+}
+
+.design-hidden-container-content
+{
+    padding: 5px;
+}
+
+.design-hidden-container-content > div
+{
+    float: left;
+    margin: 0 5px 5px 0;
+    border: solid 1px #aaa;
+    padding: 5px;
+    background: #fff;
+    outline: none;
+}
+
+.design-hidden-container-header
+{
+    padding: 0 5px !important;
+    background-color: #f2f2f2 !important;
+    background-image: linear-gradient(top, #f2f2f2, #e6e6e6) !important;
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #f2f2f2),
+        color-stop(1, #e6e6e6)
+    ) !important;
+    background-image: -moz-linear-gradient(top, #f2f2f2, #e6e6e6) !important;
+    background-position: 0 0 !important;
+
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#f2f2f2, endColorstr=#e6e6e6)" !important;
+    border-top: none 0px black !important;
+    border-bottom: solid 1px #aaa !important;
+}
+
+.design-hidden-item-selected
+{
+    background: #D5EFFA !important;
+}
+
+.design-editor-container > .dijitTabPaneWrapper
+{
+    padding: 0px;
+    overflow: hidden;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.design-textbox,
+.design-picklist,
+.design-combobox,
+.design-checkbox,
+.design-currency,
+.design-datetimepicker,
+.design-numeric,
+.design-owner,
+.design-user
+{
+    height: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.design-textbox:after,
+.design-picklist:after,
+.design-combobox:after,
+.design-checkbox:after,
+.design-currency:after,
+.design-datetimepicker:after,
+.design-numeric:after,
+.design-owner:after,
+.design-user:after
+{
+    content: "";
+    display: table;
+    clear: both;
+}
+.design-textbox-caption,
+.design-checkbox-caption,
+.design-combobox-caption,
+.design-currency-caption,
+.design-datetimepicker-caption,
+.design-numeric-caption,
+.design-picklist-caption,
+.design-owner-caption,
+.design-user-caption
+{
+    float: left;
+    width: 49%;
+    line-height: 28px;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.design-checkbox-caption
+{
+    padding-left: 18px;
+}
+
+.design-textbox-caption-right,
+.design-picklist-caption-right,
+.design-combobox-caption-right,
+.design-checkbox-caption-right,
+.design-currency-caption-right,
+.design-datetimepicker-caption-right,
+.design-numeric-caption-right,
+.design-owner-caption-right,
+.design-user-caption-right
+{
+    text-align: right;
+}
+.design-textbox-caption-center,
+.design-picklist-caption-center,
+.design-combobox-caption-center,
+.design-checkbox-caption-center,
+.design-currency-caption-center,
+.design-datetimepicker-caption-center,
+.design-numeric-caption-center,
+.design-owner-caption-center,
+.design-user-caption-center
+{
+    text-align: center;
+}
+
+.design-textbox-field,
+.design-combobox-field,
+.design-currency-field,
+.design-checkbox-field,
+.design-datetimepicker-field,
+.design-numeric-field,
+.design-picklist-field,
+.design-owner-field,
+.design-user-field
+{
+    float: right;
+    width: 49%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #bbb;
+    border: solid 1px #aaa;
+    height: 100%;
+    padding: 3px;
+    padding-right: 25px;
+}
+
+.design-checkbox-field
+{
+    padding-right: 3px;
+}
+
+.design-textbox-field > span,
+.design-combobox-field > span,
+.design-currency-field > span,
+.design-datetimepicker-field > span,
+.design-picklist-field > span,
+.design-numeric-field > span,
+.design-owner-field > span,
+.design-user-field > span
+{
+    font-style: italic;
+    font-size: 12px !important;
+	line-height:20px;
+    color: #bbb;
+}
+
+.design-url > .design-textbox-field > .design-url-icon
+{
+    position: absolute;
+    background-image: url(../images/icons/url.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    right: 6px;
+    top: 6px;
+    width: 16px;
+    height: 16px;
+}
+
+.design-phone > .design-textbox-field > .design-phone-icon
+{
+    position: absolute;
+    background-image: url(../images/icons/Call_16x16.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    right: 6px;
+    top: 6px;
+    width: 16px;
+    height: 16px;
+}
+.design-email > .design-textbox-field > .design-email-icon
+{
+    position: absolute;
+    background-image: url(../images/icons/Send_Write_email_16x16.png);
+    background-repeat: no-repeat;
+    background-position: center right;
+    right: 6px;
+    top: 6px;
+    width: 16px;
+    height: 16px;
+}
+
+.design-property-editor
+{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0px !important;
+}
+
+.design-property-editor table
+{
+    table-layout: fixed;
+}
+
+.design-property-editor .tableContainer-labelCell
+{
+    width: 150px;
+    min-width: 150px;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.design-property-editor .tableContainer-valueCell
+{
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-right: 18px;
+}
+
+.design-property-editor .tableContainer-valueCell > .dijitTextBox
+{
+    display: block;
+}
+
+.design-property-editor .dijitSelect
+{
+    margin: 0;
+}
+
+.design-checkbox > .design-checkbox-icon
+{
+    position: absolute;
+    background-image: url(../libraries/dojo/dijit/themes/claro/form/images/checkboxRadioButtonStates.png);
+    background-repeat: no-repeat;
+    background-position: -15px;
+    left: 0px;
+    top: 6px;
+    width: 15px;
+    height: 16px;
+}
+.design-checkbox > .design-checkbox-icon-checked
+{
+    background-position: -0px;
+}
+
+.design-picklist > .design-picklist-field > .design-picklist-icon
+{
+    position: absolute;
+    background-color: #efefef;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #999;
+    text-align: center;
+    right: 6px;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+}
+
+.design-combobox > .design-combobox-field > .design-combobox-icon
+{
+    position: absolute;
+    background-image: url(../libraries/dojo/dijit/themes/claro/form/images/commonFormArrows.png);
+    background-repeat: no-repeat;
+    background-position: -70px 60%;
+    background-color: #FFF;
+    border: 1px solid #bbb;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    right: 6px;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+}
+
+.design-user > .design-user-field > .design-user-icon,
+.design-owner > .design-owner-field > .design-owner-icon
+{
+    position: absolute;
+    background-image: url(../images/icons/Find_16x16.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    right: 6px;
+    top: 6px;
+    width: 16px;
+    height: 16px;
+}
+
+.design-datetimepicker > .design-datetimepicker-field > .design-datetimepicker-icon
+{
+    position: absolute;
+    background-image: url(../images/icons/Calendar_16x16.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    right: 6px;
+    top: 6px;
+    width: 16px;
+    height: 16px;
+}
+
+.design-surface-dnd-avatar
+{
+    width: 250px;
+    height: 28px;
+    position: relative;
+}
+
+.design-property-panel
+{
+    border: 1px #B5BCC7 solid;
+}
+
+.design-property-panel-search
+{
+    position: relative;
+    height: 32px;
+    display: none;
+}
+
+.design-property-panel-search > input
+{
+    width: 32px;
+    height: 32px;
+    background: url(../images/icons/Find_16x16.gif) no-repeat center center;
+    border: none 0 black;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.design-property-panel-search > div
+{
+    width: auto;
+    height: 32px;
+    margin-right: 32px;
+    margin-left: 2px;
+}
+
+.design-property-panel-search > div > input
+{
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+    width: 100%;
+    margin: 4px 0 0 2px;
+}
+
+.design-property-panel-tree
+{
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: auto;
+    position: absolute;
+    top: 0; /* 32px; */
+    bottom: 0;
+    padding: 5px;
+    line-height: 1.4em;
+    left: 0;
+    right: 0;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.design-property-panel-tree ul
+{
+    margin: 0;
+    padding: 0;
+}
+
+.design-property-panel-tree li
+{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* overflow: hidden; */
+    cursor: pointer;
+}
+
+.design-property-panel-tree li > ul
+{
+    margin: 0 0 0 32px;
+}
+
+.design-property > span
+{
+    vertical-align: middle;
+    padding-left: 5px;
+}
+
+.design-property > ul
+{
+    display: none;
+}
+
+.design-property-expanded > ul
+{
+    display: block;
+}
+
+.design-property-loading > li
+{
+    padding-left: 25px;
+    background: url(../libraries/dojo/dijit/themes/claro/images/loadingAnimation.gif) no-repeat left center;
+}
+
+.design-property-expando
+{
+    display: inline-block;
+    background-image: url(../libraries/dojo/dijit/themes/claro/images/treeExpandImages.png);
+    width: 16px;
+    height: 16px;
+    background-position: -17px 0;
+    vertical-align: middle;
+}
+
+.design-property-expanded > .design-property-expando
+{
+    background-position: -53px 0;
+}
+
+.design-property-icon
+{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(../images/icons/DataSourcesToolWindow_DefaultNode.png);
+    vertical-align: middle;
+}
+
+.design-property[data-property-category="standard"] > .design-property-expando
+{
+    visibility: hidden;
+}
+
+.design-property[data-property-category="relationship"] > .design-property-icon,
+.design-property[data-property-category="extended"] > .design-property-icon
+{
+    background-image: url(../images/icons/DataSourcesToolWindow_ObjectNode.png);
+}
+
+.design-property[data-property-type=""] { }
+
+.design-property[data-property-type="31e8638d-4232-4c61-8827-d94132a33887"] > .design-property-icon
+{
+    background-image: url(../images/icons/Send_Write_email_16x16.png);
+}
+
+.design-property[data-property-type="b71918bf-fac1-4b62-9ed5-0b0294bc9900"] > .design-property-icon
+{
+    background-image: url(../images/icons/elipses.gif);
+}
+
+.design-property[data-property-type="1f08f2eb-87c8-443b-a7c2-a51f590923f5"] > .design-property-icon
+{
+    background-image: url(../images/icons/Calendar_16x16.gif) !important;
+}
+
+.design-property[data-property-type="85f2bba5-1fb7-4ecf-941a-d98d4739c305"] > .design-property-icon
+{
+    background-image: url(../images/icons/Call_16x16.gif);
+}
+
+.design-property[data-property-type="3edc7c52-e711-431d-b150-969d88ebabf4"] > .design-property-icon,
+.design-property[data-property-type="92432b4d-8206-4a96-ba7b-e4cbd374f148"] > .design-property-icon,
+.design-property[data-property-type="95ca9d52-6f0b-4a96-bd40-43583f41faf8"] > .design-property-icon
+{
+    background-image: url(../libraries/dojo/dijit/themes/claro/form/images/checkboxRadioButtonStates.png);
+    background-position: -0px;
+    width: 15px;
+    height: 15px;
+}
+
+.design-surface-dnd-avatar > .design-property
+{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.design-datagrid,
+.design-editablegrid
+{
+    height: 100%;
+    vertical-align: middle;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.design-datagrid-table,
+.design-editablegrid-table
+{
+    height: 100%;
+    width: 100%;
+    border-collapse: collapse;
+    border-width: 0px;
+    overflow: auto;
+}
+
+.design-datagrid-table TH,
+.design-editablegrid TH
+{
+    border: solid 1px #D0D0D0;
+    padding: 3px;
+    font-weight: normal;
+    font-size: 11px;
+}
+
+.design-editor-container-toolbar + .dijitGutter
+{
+    display: none;
+}
+
+.design-editor-title
+{
+    float: left;
+    padding: 0px 5px;
+}
+
+.design-property-editor > fieldset
+{
+    margin: 3px 8px 12px 8px;
+    padding: 0 0 12px 8px;
+    border: 1px #ddd solid;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.design-property-editor > fieldset > legend
+{
+    color: #000;
+    padding: 0 2px 0 0;
+}
+
+.design-panel-loading-indicator,
+.design-panel-saving-indicator
+{
+    text-align: center;
+    padding: 1em;
+}
+
+.design-panel-loading-indicator > span,
+.design-panel-saving-indicator > span
+{
+    background: url(../libraries/dojo/dijit/themes/claro/images/loadingAnimation.gif) no-repeat left center;
+    padding-left: 25px;
+}
+
+.design-panel > .design-surface > .design-panel-loading-indicator,
+.design-panel > .design-surface > .design-panel-saving-indicator
+{
+    display: none;
+}
+
+.design-panel-loading > .design-surface > .design-panel-loading-indicator
+{
+    display: block;
+}
+
+.design-panel-saving > .design-surface > .design-panel-saving-indicator
+{
+    display: block;
+}
+
+.editor-content-half
+{
+    width: 49%;
+    float: left;
+}
+
+.editor-content-half:last-child
+{
+    float: right;
+}
+
+.editor-field
+{
+    padding-top: .3em;
+}
+
+/* Since all child elements are floats, use clearfix to enforce height calculations */
+.editor-field:after
+{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.editor-field > label
+{
+    width: 40%;
+    padding-top: .3em;
+    float: left;
+}
+.editor-field > div,
+.editor-field > table
+{
+    width: 50%;
+    float: left;
+    white-space: nowrap;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* Hide text until http://bugs.dojotoolkit.org/ticket/14282 is fixed and generateText is set to false */
+.dojoDndAvatar > tbody > tr:first-child > td:first-child > span
+{
+    display: none;
+}
+
+.editor-field .dijitSelectLabel
+{
+    padding-left: 1px;
+}
+.editor-field > .dijitCheckBox
+{
+    margin-top: .3em !important;
+}
+
+.design-surface-selector-row > .design-surface-selector-cell:first-child
+{
+    visibility: hidden;
+}
+
+.editor-field .dijitTextBoxDisabled input
+{
+    color: #000 !important;
+}
+
+.editor-field .dijitSelect .dijitArrowButton
+{
+    width: 1.5em;
+}
+
+.design-visible-false
+{
+    background-color: #ededed;
+}
+
+.design-panel-culture-label
+{
+    float: left;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.design-panel-culture
+{
+    float: left;
+    margin-top: 4px !important;
+}

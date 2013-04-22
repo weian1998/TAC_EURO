@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="beeaf553-7b92-4279-9abd-b80a048ceea2" lastModifiedUtc="2007-12-21T21:06:12.9214736Z" cardinality="1:M" parentEntityId="ebfd715e-2b2f-4e5e-8c6d-cfc0d9b4ae52" childEntityId="e7a70408-03cb-4667-890b-39de33fb739b" cascadeOption="SaveUpdateDelete">
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="beeaf553-7b92-4279-9abd-b80a048ceea2" lastModifiedUtc="2012-07-25T14:32:59.8967951Z" parentEntityId="ebfd715e-2b2f-4e5e-8c6d-cfc0d9b4ae52" childEntityId="e7a70408-03cb-4667-890b-39de33fb739b" cascadeOption="SaveUpdateDelete">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
@@ -12,7 +12,7 @@
       <RelationshipDataType />
     </SystemDataType>
   </parentProperty>
-  <childProperty id="6733c1f7-ac42-48ce-be72-8c0b4e5c1283" lastModifiedUtc="2007-12-21T21:06:12.9214736Z" name="Account" audited="false" displayCategory="Intermediate" isNullable="false" include="true">
+  <childProperty id="6733c1f7-ac42-48ce-be72-8c0b4e5c1283" lastModifiedUtc="2012-07-25T14:32:59.8967951Z" name="Account" audited="true" isNullable="false">
     <ExtendedPropertiesCollection>
       <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
     </ExtendedPropertiesCollection>

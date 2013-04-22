@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0"?>
-<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmDistinctEntityFilter" id="f72790be-a32c-47c4-997c-818d8c0eb7dc" lastModifiedUtc="2010-06-18T23:38:28.0036198Z" filterName="ReturnedBy" propertyName="ReturnedBy.NameLF" dataPath="RMA:RETURNEDBYCONTACTID=CONTACTID.CONTACT!NameLF" characters="0">
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmDistinctEntityFilter" id="f72790be-a32c-47c4-997c-818d8c0eb7dc" lastModifiedUtc="2010-06-18T23:38:28.0036198Z" filterName="ReturnedBy" propertyName="ReturnedBy.NameLF" characters="0">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmDistinctEntityFilter" />

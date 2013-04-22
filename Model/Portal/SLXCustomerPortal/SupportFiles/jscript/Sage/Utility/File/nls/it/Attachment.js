@@ -1,0 +1,5 @@
+﻿define(
+    ({
+        percentComplete: 'Caricamento, attendere...'
+    })
+);

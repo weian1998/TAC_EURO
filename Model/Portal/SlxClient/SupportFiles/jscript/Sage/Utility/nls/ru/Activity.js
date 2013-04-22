@@ -1,0 +1,30 @@
+﻿define(
+        ({
+            ToDo: 'Дело',
+            PhoneCall: 'Звонок',
+            Meeting: 'Встреча',
+            Personal: 'Личные',
+            Literature: 'Инф. материалы',
+            Fax: 'Факс',
+            Letter: 'Письмо',
+            Note: 'Заметка',
+            Email: 'Эл. почта',
+            Document: 'Документ',
+            DatabaseChange: 'Изменение БД',
+            Event: 'Событие',
+            ScheduledEvent: 'Запланированное событие',
+            Contact: 'Контакт',
+            Lead: 'Наводка',
+            New: 'Создать',
+            Change: 'Изменить',
+            Deleted: 'Удалено',
+            Confirm: 'Подтвердить',
+            Decline: 'Отклонить',
+            Unknown: 'Неизвестен',
+            Leader: 'Руководитель',
+            Complete: 'Завершить',
+            confirmTypeChanged: 'Изменено',
+            confirmTypeConfirmed: 'Подтверждено',
+            confirmTypeDeleted: 'Удалено'
+        })
+);

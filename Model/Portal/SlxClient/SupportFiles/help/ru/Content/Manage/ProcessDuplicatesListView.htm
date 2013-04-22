@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Списочное представление Обработки записей-дубликатов</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Manage/ProcessDuplicatesListView.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1>Списочное представление Обработки записей-дубликатов</h1>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <tr>
+                <td style="width: 10%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="10%">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/adminonly.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p>Только системный администратор и пользователи с соответствующей <a href="../Admin_security/What_are_Roles_and_Secured_Actions.htm" target="_self">ролью</a> могут иметь доступ к этим функциям.</p>
+                </td>
+            </tr>
+        </table>
+        <p><a name="kanchor574"></a>Списочное представление Обработки записей-дубликатов отображает все потенциальные дубликаты, которые были найдены в результате выполнения задач Мастера дубликатов. Вы можете использовать это представление для того чтобы установить, является ли запись дубликатом.</p>
+        <p>Представление содержит следующие колонки:</p>
+        <ul>
+            <li class="Bullets" value="1"><b>Исходная сущность</b> - объект в Sage SalesLogix, являющийся потенциальным дубликатом.</li>
+            <li class="Bullets" value="2"><b>Тип исходной сущности</b> - сущность, которую обрабатывала задача.</li>
+            <li class="Bullets" value="3"><b>Статус</b> - статус работы по сделке. Статус Возможный дубликат отображает, что запись не была обработана. Статус Не дубликат или Объединено отображает, что дубликат был обработан и больше не является дубликатом или был объединен с соответствующей записью.</li>
+            <li class="Bullets" value="4"><b>Счет</b> - вероятность того, что запись является дубликатом.</li>
+            <li class="Bullets" value="5"><b>Результирующая сущность</b> - объект, который был соотнесен с исходной сущностью как возможный дубликат.</li>
+            <li class="Bullets" value="6"><b>Тип результирующей сущности</b> - тип записи.</li>
+            <li class="Bullets" value="7"><b>Количество результатов</b> - число возможных дубликатов в задаче.</li>
+            <li class="Bullets" value="8"><b>Номер задачи</b> - задача, в которой был обнаружен потенциальный дубликат.</li>
+            <li class="Bullets" value="9"><b>Дата результата</b> - дата выполнения задачи.</li>
+        </ul>
+        <p class="RelatedTopics">Как выполнить?</p>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_803679801_0" onclick="FMCDropDown( this ); return false;">Открыть списочное представление Проверить на историю дубликатов<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_803679801_0" style="display: none;">
+                <ul style="list-style-type: disc;">
+                    <li value="1">В меню <b>Инструменты</b> выберите пункт <span class="SLXBold">Обработка записей-дубликатов</span><span class="SLXBold">&#160;</span>.</li>
+                </ul>
+            </div>
+        </div>
+        <p class="HowDoI">
+            <MadCap:conditionalText MadCap:conditions="Output.WebClient"><a href="../Lookups/Using_Lookup.htm" target="_self">Используйте Поиск для нахождения записей</a> <![CDATA[ ]]></MadCap:conditionalText>
+        </p>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_803679801_1" onclick="FMCDropDown( this ); return false;">Открыть детальное представление Проверить на историю дубликатов<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_803679801_1" style="display: none;">
+                <ul style="list-style-type: disc;">
+                    <li value="1">Нажмите номер задачи, чтобы открыть <a href="DedupResults.htm" target="_self">детальное представление Проверить на историю дубликатов</a>  .</li>
+                </ul>
+            </div>
+        </div>
+        <p class="HowDoI"><a href="../Groups/querygroupsoverview.htm" target="_self"><a href="../Groups/querygroupsoverview.htm" target="_self">Просмотреть группы</a></a>
+        </p>
+        <p class="RelatedTopics">См. также</p>
+        <p><a href="ResolvingDuplicates.htm" target="_self">Разрешение Дубликатов</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

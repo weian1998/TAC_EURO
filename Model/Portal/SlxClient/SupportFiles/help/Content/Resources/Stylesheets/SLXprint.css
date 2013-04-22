@@ -317,6 +317,17 @@ p.TOC1
 	{
 		border-top-color: #ffffff;
 	}
+
+	li
+	{
+		list-style-type: inherit;
+		list-style: inherit;
+	}
+
+	ol
+	{
+		list-style: decimal;
+	}
 }
 
 MadCap|tocProxy

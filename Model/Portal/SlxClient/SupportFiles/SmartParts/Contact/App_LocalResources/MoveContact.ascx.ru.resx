@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LookupPropertyAccount.Text" xml:space="preserve">
+    <value>Субъект</value>
+  </data>
+  <data name="LookupPropertyEmail.Text" xml:space="preserve">
+    <value>Эл. почта</value>
+  </data>
+  <data name="lblReassign.Text" xml:space="preserve">
+    <value>Переназначение</value>
+  </data>
+  <data name="rdgOptionsDoNotMoveActivtyInfo.Text" xml:space="preserve">
+    <value>Не перемещать дела</value>
+  </data>
+  <data name="LookupPropertyStatus.Text" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="LookupPropertyMobile.Text" xml:space="preserve">
+    <value>Мобильный тел.</value>
+  </data>
+  <data name="lblMoveToAcctLbl.Text" xml:space="preserve">
+    <value>Кому</value>
+  </data>
+  <data name="chkUseSourceAddressPhn.Caption" xml:space="preserve">
+    <value>Используйте информацию о новом адресе и телефонном номере субъекта.</value>
+  </data>
+  <data name="lblReassignToContact.Text" xml:space="preserve">
+    <value>Перезакрепить контакт:</value>
+  </data>
+  <data name="lblReassignSupportItems.Text" xml:space="preserve">
+    <value>Открытые заявки, возвраты и контракты</value>
+  </data>
+  <data name="rdgOptionsMoveActivtyInfo.Text" xml:space="preserve">
+    <value>Переместить дела в новый субъект</value>
+  </data>
+  <data name="lblMoveSourceLbl.Text" xml:space="preserve">
+    <value>Переместить</value>
+  </data>
+  <data name="LookupPropertyWork.Text" xml:space="preserve">
+    <value>Рабочий</value>
+  </data>
+  <data name="error_ReassignValueNotSpecified.Text" xml:space="preserve">
+    <value>* Для продолжения Вы должны указать переназначаемый контакт.</value>
+  </data>
+  <data name="rdgOptionsMoveNotesHistory.Text" xml:space="preserve">
+    <value>Перенести заметкиисторию в новый субъект</value>
+  </data>
+  <data name="LookupPropertyLastName.Text" xml:space="preserve">
+    <value>Фамилия</value>
+  </data>
+  <data name="cmdCancel.Text" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="ConfirmMove.Text" xml:space="preserve">
+    <value>Вы уверены, что вы хотите переместить контакт и выбранные элементы?</value>
+  </data>
+  <data name="cmdOK.Text" xml:space="preserve">
+    <value>Ок</value>
+  </data>
+  <data name="lblSourceAccount.Text" xml:space="preserve">
+    <value>Субъект:</value>
+  </data>
+  <data name="lblSingleContact.Text" xml:space="preserve">
+    <value>{0} является единственным контактом, связанным с  {1}.</value>
+  </data>
+  <data name="lblTargetAccount.Text" xml:space="preserve">
+    <value>Субъект:</value>
+  </data>
+  <data name="lblMoveOptions.Text" xml:space="preserve">
+    <value>Параметры</value>
+  </data>
+  <data name="lblAddressPhone.Text" xml:space="preserve">
+    <value>Адрес и телефон</value>
+  </data>
+  <data name="LookupPropertyType.Text" xml:space="preserve">
+    <value>Тип</value>
+  </data>
+  <data name="lblReassignClosedItems.Text" xml:space="preserve">
+    <value>закрытые или выполненные запросы информационных материалов и сделок</value>
+  </data>
+  <data name="LookupPropertySubType.Text" xml:space="preserve">
+    <value>Подтип</value>
+  </data>
+  <data name="lblReassignInfo.Text" xml:space="preserve">
+    <value>При перемещении контакта следующие элементы необходимо либо переместить с контактом, либо переназначить на контакт, связанный со старым субъектом.</value>
+  </data>
+  <data name="cmdCancel_Close.Text" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="lblMoveFromLbl.Text" xml:space="preserve">
+    <value>От</value>
+  </data>
+  <data name="lblCantMoveItemsInfo.Text" xml:space="preserve">
+    <value>Следующие элементы нельзя переместить. Они должны быть переназначены на контакт исходного субъекта.</value>
+  </data>
+  <data name="rdgOptionsDoNotMoveNotesHistory.Text" xml:space="preserve">
+    <value>Не перемещать текущие элементы</value>
+  </data>
+  <data name="error_ReassignValueDuplicate.Text" xml:space="preserve">
+    <value>* Пожалуйста, выберите конечный контакт, отличающийся от исходного контакта.</value>
+  </data>
+  <data name="error_DuplicateTargetAccount.Text" xml:space="preserve">
+    <value>Пожалуйста, выберите конечный субъект, отличающийся от исходного</value>
+  </data>
+  <data name="LookupPropertyFirstName.Text" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="lblHeader.Text" xml:space="preserve">
+    <value>Эта страница служит для перемещения контакт с одного субъекта на другой и для перемещения или переназначения связанных записей.</value>
+  </data>
+  <data name="LookupPropertyMainPhone.Text" xml:space="preserve">
+    <value>Основной тел.</value>
+  </data>
+  <data name="associationsExist.Text" xml:space="preserve">
+    <value>Извините, вы не можете перенести этот контакт, потому что он уже связан с: {1}</value>
+  </data>
+  <data name="lblReassignOpenItems.Text" xml:space="preserve">
+    <value>открытые или активные документы, запросы информационных материалов, сделки и заказы на продажу</value>
+  </data>
+  <data name="error_NoTargetAccount.Text" xml:space="preserve">
+    <value>Пожалуйста, прежде чем продолжить, выберите конечный субъект.</value>
+  </data>
+  <data name="lblMoveTicketsReturnsContracts.Text" xml:space="preserve">
+    <value>Заявки, возвраты, контракты и заказы на продажу</value>
+  </data>
+  <data name="lblSourceContact.Text" xml:space="preserve">
+    <value>Контакт:</value>
+  </data>
+  <data name="ContactMove_ContactHasChanged" xml:space="preserve">
+    <value>Контакт был изменен и должен быть сохранен, прежде чем его можно будет перенести в новый субъект.</value>
+  </data>
+</root>

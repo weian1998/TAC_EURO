@@ -112,45 +112,45 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="grdAssets.EmptyTableRowText" xml:space="preserve">
-    <value>No records match the selection criteria.</value>
-  </data>
-  <data name="grdAssets.91b7d4c2-d2f8-4c5c-9407-5698bdc156b7.ColumnHeading" xml:space="preserve">
-    <value>Product</value>
-  </data>
-  <data name="grdAssets.fcbeef78-d47f-433e-bc24-2624d212b071.ColumnHeading" xml:space="preserve">
-    <value>Serial Number</value>
-  </data>
-  <data name="grdAssets.fe932d20-4d61-44f3-966f-e3197ebf56e0.ColumnHeading" xml:space="preserve">
-    <value>SKU</value>
-  </data>
-  <data name="grdAssets.115e7b2c-38f5-4361-a2b5-a7078001fccc.ColumnHeading" xml:space="preserve">
-    <value>Evaluation</value>
-  </data>
-  <data name="grdAssets.d2f87aac-ae4d-40b6-85d2-c80ac2d751f6.Text" xml:space="preserve">
+  <data name="grdAssets.Delete.ToolTip" xml:space="preserve">
     <value>Remove</value>
   </data>
-  <data name="grdAssets.d2f87aac-ae4d-40b6-85d2-c80ac2d751f6.ConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to remove the association with the selected Asset?</value>
+  <data name="grdAssets.64b4b79d-3d5d-4684-b2d6-58e254ecb5a5.ColumnHeading" xml:space="preserve">
+    <value>Product</value>
   </data>
-  <data name="lueAssociateAsset.ToolTip" xml:space="preserve">
-    <value>Associate Asset</value>
-  </data>
-  <data name="lueAssociateAsset.LookupProperties.SerialNumber.PropertyHeader" xml:space="preserve">
+  <data name="grdAssets.59d0704d-d027-49f4-a56d-8db1a962b742.ColumnHeading" xml:space="preserve">
     <value>Serial Number</value>
   </data>
-  <data name="lueAssociateAsset.LookupProperties.ProductName.PropertyHeader" xml:space="preserve">
-    <value>Product Name</value>
-  </data>
-  <data name="lueAssociateAsset.LookupProperties.ActualId.PropertyHeader" xml:space="preserve">
+  <data name="grdAssets.89c9ff56-1550-42ee-9c64-5fa5c4d78310.ColumnHeading" xml:space="preserve">
     <value>SKU</value>
   </data>
-  <data name="lueAssociateAsset.LookupProperties..PropertyHeader" xml:space="preserve">
-    <value />
+  <data name="grdAssets.a9e5110a-2983-4163-960a-6713b24a1180.ColumnHeading" xml:space="preserve">
+    <value>Evaluation</value>
+  </data>
+  <data name="grdAssets.71c49a91-4d57-4214-99a2-ceadda55e3c0.ColumnHeading" xml:space="preserve">
+    <value>Evaluation</value>
+  </data>
+  <data name="lueAddAsset.LookupProperties.ActualId.PropertyHeader" xml:space="preserve">
+    <value>SKU</value>
+  </data>
+  <data name="lueAddAsset.LookupProperties.ProductName.PropertyHeader" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
+  <data name="lueAddAsset.LookupProperties.SerialNumber.PropertyHeader" xml:space="preserve">
+    <value>Serial Number</value>
+  </data>
+  <data name="lueAddAsset.DialogButtonText" xml:space="preserve">
+    <value>Add Selected</value>
+  </data>
+  <data name="lueAddAsset.ButtonToolTip" xml:space="preserve">
+    <value>Associate Asset</value>
+  </data>
+  <data name="lueAddAsset.LookupDialogTitle" xml:space="preserve">
+    <value>Lookup Asset</value>
   </data>
 </root>

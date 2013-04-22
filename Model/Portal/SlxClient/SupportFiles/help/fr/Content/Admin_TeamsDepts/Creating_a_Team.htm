@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Administration|Equipes et services" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Création d'une équipe</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Admin_TeamsDepts/Creating_a_Team.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Ouvrir une rubrique avec la recherche, la table des matières et l'index</a>
+        </p>
+        <h1><a name="kanchor32"></a>Création d'une équipe</h1>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <tr>
+                <td style="width: 10%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="10%">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/adminonly.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p>L'administrateur système et les utilisateurs dotés d'un <a href="../Admin_security/What_are_Roles_and_Secured_Actions.htm" target="_self">rôle</a> approprié peuvent accéder à ces fonctionnalités.</p>
+                </td>
+            </tr>
+        </table>
+        <p>Une équipe peut être constituée d'utilisateurs, d'équipes et de services. Lorsque vous créez une équipe, vous devez désigner une personne comme propriétaire de cette équipe.</p>
+        <p>Lorsque vous accordez à un utilisateur le droit de créer et d'assurer le suivi des équipes, vous devez tenir compte des règles suivantes.             </p>
+        <p class="Infinitive">Un utilisateur ne peut jamais&#160;:</p>
+        <ul>
+            <li class="Bullets" value="1">s'auto-ajouter à une équipe existante&#160;;</li>
+            <li class="Bullets" value="2">s'auto-supprimer d'une équipe&#160;;</li>
+            <li class="Bullets" value="3">supprimer l'administrateur système d'une équipe&#160;;</li>
+            <li class="Bullets" value="4">supprimer une équipe.</li>
+        </ul>
+        <p><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="team2;team3;team1">En savoir plus sur la sécurité d'équipe...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <p MadCap:targetName="team1" style="display: none;">Lorsqu'un utilisateur est ajouté à une équipe, sa sécurité au sein de cette équipe est définie par défaut sur le profil défini sur l'<a href="../Admin_useradmin/User_Detail_View_Security_Tab.htm" target="_self">onglet Sécurité</a>. Le profil de sécurité peut être modifié sur chaque équipe dont l'utilisateur est membre. Cette opération n'a aucune incidence sur le profil par défaut de l'utilisateur, pas plus que sur le profil de toute autre équipe dont cet utilisateur est membre.</p>
+        <p MadCap:targetName="team3" style="display: none;">Si un utilisateur possède plusieurs profils de sécurité (par exemple, l'utilisateur est ajouté à une équipe en tant qu'équipe ou service imbriqué(e), mais il est également un membre direct de l'équipe parent), les profils de sécurité partagent le même code de sécurité (propriétaire). Lorsque les droits d'accès de sécurité d'un champ sont déterminés, plusieurs profils peuvent être renvoyés. Dans le client Web, l'accès est déterminé en combinant les droits d'accès maximum de tous les profils attribués à cet utilisateur et propriétaire.</p>
+        <p class="Infinitive">Pour créer</p>
+        <ol>
+            <li class="Topic-Text-Numbered" value="1">Dans le menu <span class="SLXBold">Administration</span>, cliquez sur <span class="SLXBold">Nouvelle équipe</span>.</li>
+            <li class="Topic-Text-Numbered" value="2">Dans le champ <span class="SLXBold">Nom</span>, tapez le nom de l'équipe.</li>
+            <li class="Topic-Text-Numbered" value="3">Dans la zone <span class="SLXBold">Propriétaire</span>, sélectionnez un propriétaire d'équipe. Une équipe peut avoir plusieurs propriétaires.</li>
+            <li class="Topic-Text-Numbered" value="4">Dans la zone <span class="SLXBold">Profil de sécurité par défaut</span>, sélectionnez un profil par défaut pour l'équipe. Ce profil est appliqué lorsque l'équipe est ajoutée à une autre équipe.</li>
+            <li class="Topic-Text-Numbered" value="5">Cochez la case <span class="SLXBold">Ajouter automatiquement le responsable de l'utilisateur à l'équipe</span> si vous souhaitez ajouter le responsable de l'utilisateur à l'équipe lorsque vous ajoutez un nouveau membre à une équipe.</li>
+            <li class="Topic-Text-Numbered" value="6">Cliquez sur <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Enregistrer<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>.</li>
+            <li class="Topic-Text-Numbered" value="7"><a href="Adding_Team_Members.htm" target="_self">Ajouter des membres à une équipe</a>.</li>
+            <li class="Topic-Text-Numbered" value="8">Si nécessaire, <a href="Editing_a_Security_Profile_Within_a_Team.htm" target="_self">modifiez les droits de sécurité</a> de chaque membre de l'équipe.</li>
+            <li class="Topic-Text-Numbered" value="9">Cliquez sur <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Enregistrer<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>.</li>
+        </ol>
+        <p class="RelatedTopics">Rubriques connexes</p>
+        <p><a href="Working_with_Teams.htm" target="_self">Utilisation des équipes</a>
+        </p>
+        <p><a href="Copying_a_Team.htm" target="_self">Copie d'une équipe</a>
+        </p>
+        <p><a href="Team_Owner_Profile.htm" target="_self">Profil de propriétaire d'équipe</a>
+        </p>
+        <p><a href="Team_Hierarchy.htm" target="_self">Hiérarchie de l'équipe</a>
+        </p>
+        <div style="width: 100%;position: relative;">
+            <p>&#160;</p>
+        </div>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Dites-nous comment améliorer l'aide</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

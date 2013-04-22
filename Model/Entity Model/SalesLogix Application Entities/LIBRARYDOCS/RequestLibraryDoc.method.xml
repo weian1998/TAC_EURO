@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="60fec2f0-7d6b-4151-a293-fdb7438a7199" lastModifiedUtc="2012-05-10T21:29:36.6250402Z" name="RequestLibraryDoc" returnType="Boolean" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="ae983722-188d-4560-9d31-abba9f51e31e" lastModifiedUtc="2012-05-10T21:30:14.2177991Z" targetType="Sage.SalesLogix.Library.DocumentRules, Sage.SalesLogix.BusinessRules" targetMethod="RequestLibraryDoc" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

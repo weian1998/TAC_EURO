@@ -87,6 +87,10 @@
             <SalesLogix:ResourceKeyName Key="SelectFolderCaption" />
             <SalesLogix:ResourceKeyName Key="SelectFolderTitle" />
             <SalesLogix:ResourceKeyName Key="Error_DesktopIntegration" />            
+            <SalesLogix:ResourceKeyName Key="Confirm" />  
+            <SalesLogix:ResourceKeyName Key="Yes" />  
+            <SalesLogix:ResourceKeyName Key="No" />  
+            <SalesLogix:ResourceKeyName Key="ERR_InvalidXmlData" />
         </Keys>
     </SalesLogix:ScriptResourceProvider>
 
@@ -98,8 +102,8 @@
     <asp:ScriptManagerProxy ID="scriptManagerProxy" runat="server" ></asp:ScriptManagerProxy>&nbsp;
 </div>
 
-<div id="spProcessView" style="display:none;">
-    <table border="0" cellpadding="2" cellspacing="2" width="50%" style="margin:10px;padding:25px;background-color:AliceBlue;border:solid 1px #a8a9be;">
+<div id="spProcessView"  class="salesProcess-message"   style="display:none;" >
+    <table border="0" cellpadding="2" cellspacing="2" width="50%">
         <tr>
             <td>
                 <div id="spStatus" style="display:none;"></div>
@@ -108,8 +112,8 @@
         </tr>
         <tr>
             <td>
-                <div id="spSelectContactDiv" style="display:none">
-                    <table border="0" cellpadding="2" cellspacing="2" width="100%" style="background-color:AliceBlue;">
+                <div id="spSelectContactDiv" style="display:none" class="salesProcess-select">
+                    <table border="0" cellpadding="2" cellspacing="2" width="100%" >
                         <tr>
                             <td>
                                 <span class="lbl">
@@ -122,8 +126,8 @@
                                         SeedProperty="Opportunity.Id" LookupBindingMode="String" ReturnPrimaryKey="true"                                        
                                         LookupEntityTypeName="Sage.Entity.Interfaces.IOpportunityContact, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" >
                                         <LookupProperties>
-                                            <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueOppContact_Name %>" PropertyName="Contact.NameLF" PropertyFormat="None" UseAsResult="False" ></SalesLogix:LookupProperty>                                                                                    
-                                            <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueOppContact_Account %>" PropertyName="Contact.AccountName" PropertyFormat="None" UseAsResult="False" ></SalesLogix:LookupProperty>
+                                            <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueOppContact_Name %>" PropertyName="Contact.NameLF" PropertyType="System.String" PropertyFormat="None" UseAsResult="False" ></SalesLogix:LookupProperty>                                                                                    
+                                            <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueOppContact_Account %>" PropertyName="Contact.AccountName" PropertyType="System.String" PropertyFormat="None" UseAsResult="False" ></SalesLogix:LookupProperty>
                                             <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueOppContact_Primary %>" PropertyName="IsPrimary" PropertyType="System.Boolean" PropertyFormat="None" UseAsResult="False" ></SalesLogix:LookupProperty>
                                             <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueOppContact_Influence %>" PropertyName="Influence" PropertyType="System.String" PropertyFormat="None" UseAsResult="False" ></SalesLogix:LookupProperty>
                                             <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueOppContact_Role %>" PropertyName="SalesRole" PropertyType="System.String" PropertyFormat="None" UseAsResult="False" ></SalesLogix:LookupProperty>
@@ -141,8 +145,8 @@
                         </tr>
                     </table>
                 </div>
-                <div id="spSelectUserDiv" style="display:none">
-                    <table border="0" cellpadding="2" cellspacing="2" width="100%" style="background-color:AliceBlue;">
+                <div id="spSelectUserDiv" style="display:none" class="SalesProcess Select">
+                    <table border="0" cellpadding="2" cellspacing="2" width="100%" >
                         <col width="50%" /> 
                         <tr>
                             <td>
@@ -177,18 +181,19 @@
                     <asp:Label ID="lblSalesProces" runat="server" width="100%" Text="<%$ resources: lblSalesProcess.Text %>" AssociatedControlID="ddlSalesProcess" ></asp:Label>&nbsp;
                 </span>
                 <span class="textcontrol">
-                    <asp:DropDownList runat="server" ID="ddLSalesProcess" OnSelectedIndexChanged="ddLSalesProcess_SelectedIndexChanged" AutoPostBack="false"></asp:DropDownList>
+                    <asp:DropDownList runat="server" ID="ddLSalesProcess" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" shouldPublishMarkDirty="false" OnSelectedIndexChanged="ddLSalesProcess_SelectedIndexChanged" AutoPostBack="false"></asp:DropDownList>
                 </span>
             </td>
             <td rowspan="2" valign="top">
-                 <table id="SSSnapShot" style="border:solid 1px #a8a9be; background-color:White; width:99%" border="0" cellpadding="0" cellspacing="0">
-                     <tr>
-                        <th style="background-color:AliceBlue;border-bottom:solid 1px #a8a9be; padding-left: 5px;">
+                 <div class="salesProcess-snapShot" >
+                 <table id="SSSnapShot" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                       <th>
                            <b><asp:Label ID="lblSalesProcessSnapShot" Text="<%$ resources: lblSalesProcessSnapShot.Text %>" runat="server" ></asp:Label></b>
                         </th>
                     </tr>
                      <tr>
-                        <td style="float: left; vertical-align: middle; overflow: hidden; text-align: left">
+                          <td style="float: left; vertical-align: middle; overflow: hidden; text-align: left">
                            <b><asp:Label ID="lblCurrentStage" runat="server" Text="<%$ resources: lblCurrentStage.Text %>"></asp:Label></b> =
                            <asp:Label ID="valueCurrnetStage" runat="server" Text=""></asp:Label>&nbsp; 
                            <b><asp:Label ID="lblDaysInStage" runat="server" Text="<%$ resources: lblDaysInStage.Text %>"></asp:Label></b> =
@@ -208,6 +213,7 @@
                         </td>
                     </tr> 
                 </table>
+                </div>
              </td>
         </tr>
         <tr>
@@ -217,7 +223,7 @@
                  <asp:Label runat="server" id="btnStagesHide" style="color:#0000CC;display:none;" Text="<%$ resources: linkManageStages.Text %>"></asp:Label>
                </span>
                <span class="textcontrol">
-                 <asp:DropDownList runat="server" ID="ddlStages" OnSelectedIndexChanged="ddlStages_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                 <asp:DropDownList runat="server" ID="ddlStages" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" shouldPublishMarkDirty="false" OnSelectedIndexChanged="ddlStages_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                 </span> 
                 
             </td>

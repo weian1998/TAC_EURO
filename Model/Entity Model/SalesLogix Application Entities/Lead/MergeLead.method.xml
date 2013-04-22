@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="c0a396f0-50b4-455c-9256-3d58dba5bad7" lastModifiedUtc="2011-09-15T16:11:56.4993693Z" name="MergeLead" returnType="Boolean" methodType="Rule" actionType="None" returnMode="Object">
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="c0a396f0-50b4-455c-9256-3d58dba5bad7" lastModifiedUtc="2011-09-22T16:29:34.6584846Z" name="MergeLead" returnType="Boolean" methodType="Rule" actionType="None" returnMode="Object">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
@@ -9,39 +9,39 @@
   </parameter>
   <preExecuteTargets />
   <methodTargets>
-    <methodTarget id="6a3d15d4-8078-4c7f-a18f-ef541b6953bc" lastModifiedUtc="2011-09-15T16:11:54.2193693Z" targetType="Sage.SalesLogix.Lead.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeLead" active="true">
+    <methodTarget id="6a3d15d4-8078-4c7f-a18f-ef541b6953bc" lastModifiedUtc="2011-09-22T16:29:34.6134801Z" targetType="Sage.SalesLogix.Lead.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeLead" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>
     </methodTarget>
   </methodTargets>
   <postExecuteTargets>
-    <methodTarget id="b5b05de4-6e05-4530-a979-d6ea10c0a59b" lastModifiedUtc="2011-09-15T17:25:53.4815341Z" targetType="Sage.SalesLogix.Lead.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeLead_MoveCampaignTargets" active="true">
+    <methodTarget id="b5b05de4-6e05-4530-a979-d6ea10c0a59b" lastModifiedUtc="2011-09-22T16:29:34.6254813Z" targetType="Sage.SalesLogix.Lead.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeLead_MoveCampaignTargets" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>
     </methodTarget>
-    <methodTarget id="da7b7759-9a36-4f63-b8ae-557f3421e4f5" lastModifiedUtc="2011-09-15T17:26:09.2631121Z" targetType="Sage.SalesLogix.Lead.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeLead_MoveResponses" active="true">
+    <methodTarget id="da7b7759-9a36-4f63-b8ae-557f3421e4f5" lastModifiedUtc="2011-09-22T16:29:34.6314819Z" targetType="Sage.SalesLogix.Lead.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeLead_MoveResponses" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>
     </methodTarget>
-    <methodTarget id="4ce1a80f-3ae3-4ce9-b8aa-2dea7afd6d33" lastModifiedUtc="2011-09-15T17:27:19.6621513Z" targetType="Sage.SalesLogix.Lead.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeLead_MoveActivities" active="true">
+    <methodTarget id="4ce1a80f-3ae3-4ce9-b8aa-2dea7afd6d33" lastModifiedUtc="2011-09-22T16:29:34.6364824Z" targetType="Sage.SalesLogix.Lead.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeLead_MoveActivities" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>
     </methodTarget>
-    <methodTarget id="ce5dffc7-3ea7-4721-9776-866d632517d0" lastModifiedUtc="2011-09-15T17:28:07.8329679Z" targetType="Sage.SalesLogix.Lead.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeLead_MoveAttachments" active="true">
+    <methodTarget id="ce5dffc7-3ea7-4721-9776-866d632517d0" lastModifiedUtc="2011-09-22T16:29:34.6414829Z" targetType="Sage.SalesLogix.Lead.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeLead_MoveAttachments" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>
     </methodTarget>
-    <methodTarget id="537850ea-2c39-4094-9f7f-fc51e9b8bf58" lastModifiedUtc="2011-09-15T18:12:22.0110072Z" targetType="Sage.SalesLogix.Lead.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeLead_MoveHistory" active="true">
+    <methodTarget id="537850ea-2c39-4094-9f7f-fc51e9b8bf58" lastModifiedUtc="2011-09-22T16:29:34.6474835Z" targetType="Sage.SalesLogix.Lead.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeLead_MoveHistory" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>
     </methodTarget>
-    <methodTarget id="ec22e55a-cd8b-42a4-9474-14a33dc5641c" lastModifiedUtc="2011-09-15T18:20:24.7765611Z" targetType="Sage.SalesLogix.Lead.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeLead_MoveLeadQualification" active="true">
+    <methodTarget id="ec22e55a-cd8b-42a4-9474-14a33dc5641c" lastModifiedUtc="2011-09-22T16:29:34.6534841Z" targetType="Sage.SalesLogix.Lead.Rules, Sage.SalesLogix.BusinessRules" targetMethod="MergeLead_MoveLeadQualification" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>

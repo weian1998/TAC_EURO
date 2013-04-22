@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="3695fea1-51ed-4694-b06b-0a9d12e0eb18" lastModifiedUtc="2011-04-14T12:56:57.4741514Z" manageSchema="false" tableName="COMMODITYGROUP" name="CommodityGroup" isExtension="false" audited="false" secure="false" uniqueIdentifierPropertyId="c46c6e98-4902-4a9c-ab17-4bbc9dd794fe" lastUpdatedPropertyId="e10be317-9135-4217-abf2-fc06c77498cd" onBeforeInsertMethodId="4c47bcfc-9945-49ac-a77e-bbe4b8ebae9e" onAfterInsertMethodId="5e3055fd-77f3-4889-816f-27d48eebf4d0" onBeforeUpdateMethodId="f30b3238-91e0-4ba1-8128-77a3ed84fd68" onAfterUpdateMethodId="878951af-c6d4-4cb7-8312-14c2ed5aa3f8" onBeforeDeleteMethodId="f5b4a822-79fe-4468-b6ff-47c8e3b83853" onAfterDeleteMethodId="a6ed1cbc-cc89-4e67-9628-e4e03870477f" onCreateId="b9145a4c-3c3d-43e8-8d9e-487efab38b3a">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="3695fea1-51ed-4694-b06b-0a9d12e0eb18" lastModifiedUtc="2011-04-14T12:56:57.4741514Z" manageSchema="true" tableName="COMMODITYGROUP" name="CommodityGroup" isExtension="false" audited="false" secure="false" uniqueIdentifierPropertyId="c46c6e98-4902-4a9c-ab17-4bbc9dd794fe" lastUpdatedPropertyId="e10be317-9135-4217-abf2-fc06c77498cd" onBeforeInsertMethodId="4c47bcfc-9945-49ac-a77e-bbe4b8ebae9e" onAfterInsertMethodId="5e3055fd-77f3-4889-816f-27d48eebf4d0" onBeforeUpdateMethodId="f30b3238-91e0-4ba1-8128-77a3ed84fd68" onAfterUpdateMethodId="878951af-c6d4-4cb7-8312-14c2ed5aa3f8" onBeforeDeleteMethodId="f5b4a822-79fe-4468-b6ff-47c8e3b83853" onAfterDeleteMethodId="a6ed1cbc-cc89-4e67-9628-e4e03870477f" onCreateId="b9145a4c-3c3d-43e8-8d9e-487efab38b3a">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
@@ -89,7 +89,7 @@
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
       <SystemDataType guid="3ca925e1-4b76-4621-a39c-a0d4cb7327d5">
-        <GuidDataType />
+        <GuidDataType storage="String" />
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="5d33ba3f-5c50-4605-bcb4-47fea5004b52" lastModifiedUtc="2010-12-13T16:46:54.0004991Z" name="AppId" audited="false" columnName="APPID" maxLength="12" precision="0" scale="0" ordinal="9" isReadOnly="false">

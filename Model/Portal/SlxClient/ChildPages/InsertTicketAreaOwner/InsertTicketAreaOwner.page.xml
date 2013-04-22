@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PortalPage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="abb1faf3-f5c4-4f36-909c-269e1e8c29c4">
+  <PageAlias>InsertTicketAreaOwner</PageAlias>
+  <SmallImage>[Localization!Global_Images:TicketAreaOwner_16x16]</SmallImage>
+  <LargeImage>[Localization!Global_Images:TicketAreaOwner_24x24]</LargeImage>
+  <TemplateUrl>Masters\base.master</TemplateUrl>
+  <InheritTemplate>false</InheritTemplate>
+  <InheritsFrom>Sage.Platform.WebPortal.EntityPage, Sage.Platform.WebPortal</InheritsFrom>
+  <Properties>
+    <Property Name="EntityTypeName" TypeConverter="">Sage.Entity.Interfaces.ITicketAreaOwner, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</Property>
+  </Properties>
+  <TemplateProperties />
+  <IsDefaultPage>false</IsDefaultPage>
+  <ExcludedGlobalModules />
+  <AppliedSecurity>Entities/TicketAreaOwner/Add</AppliedSecurity>
+  <IncludeScript />
+</PortalPage>

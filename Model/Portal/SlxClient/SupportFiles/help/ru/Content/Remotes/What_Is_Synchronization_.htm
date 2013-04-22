@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="copyright" />
+        <meta name="window-type" content="(w95sec)" /><title>What Is Synchronization?</title>
+        <link href="../Resources/TableStyles/TableStyle.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Remotes/What_Is_Synchronization_.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1 value="SalesLogix Sales Help (03/19/2002) for v6.2 © 1997-2004 Best Software, Inc. and Sage Technologies Limited" MadCap:conditions="Output.Legacy LAN,Output.WebClient"><a name="kanchor675"></a>Что такое синхронизация?<a name="kanchor676"></a></h1>
+        <p><a name="kanchor677"></a>
+        </p>
+        <table wrapperparagraphselector="P" style="margin-top: 14pt;width: 98%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="98%">
+            <col style="width: 7.994%;" />
+            <col style="width: 92.006%;" />
+            <tr>
+                <td style="width: 7.994%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="7.994%">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/remotes.gif" />
+                    </p>
+                </td>
+                <td style="width: 92.006%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="92.006%">
+                    <p class="Tip-Note-Text" style="margin-bottom: 0;"><span class="SLXBold">Только для удаленных пользователей</span>
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <p MadCap:conditions="Output.Legacy LAN,Output.WebClient">Если в вашей компании есть Удаленные пользователи, которые не могут быть постоянно подключены к центральной компьютерной сети, такой как локальная сеть или on-line система, изменения вносимые ими в их базы данных будут несоответствовать информации в Центральной базе данных. Синхронизация регулирует эти изменения, применяет изменения для рабочей базы данных и создает файлы, которые удаленные пользователи могут принимать для обновления удаленных баз данных.</p>
+        <h1 MadCap:conditions="Output.GSLAN" class="Print">Понимание синхронизации</h1>
+        <p>
+            <MadCap:conditionalText MadCap:conditions="Output.WebClient,Output.GSLAN">Синхронизация - это обмен файлами между удаленными и головным офисами.</MadCap:conditionalText>
+            <MadCap:conditionalText MadCap:conditions="Output.WebClient"> Сетевые пользователи вносят изменения непосредственно в рабочую базу данных. Удаленные пользователи вносят изменения в удаленные базы данных, а затем соединяются с основным офисом для отправки содержащих эти изменения файлов и приема новых файлов, содержащих внесенные в рабочую базу данных изменения. Пользователи удаленного офиса вносят изменения непосредственно в базу данных удаленного офиса. Затем удаленный офис связывается с основным офисом для отправки и приема файлов, как в случае с удаленными пользователями. Сервер синхронизации принимает файлы, присланные удаленными пользователями и офисами, разрешает возникающие конфликты, вносит удаленные изменения в основную базу данных, и создает файлы для удаленных пользователей и офисов, описывающие изменения в базе данных.</MadCap:conditionalText>
+            <MadCap:conditionalText MadCap:conditions="Output.GSLAN"> Следующие примеры демонстрируют процесс синхронизации.</MadCap:conditionalText>
+        </p>
+        <ul MadCap:conditions="Output.GSLAN">
+            <li value="1">Сетевой пользователь, работая на компьютере подключенном к сети вашей компании вносит изменения напрямую в основную базу данных.</li>
+            <li value="2">Удаленный пользователь, работая на компьютере подключенном к сети вашей компании вносит изменения напрямую в основную базу данных.</li>
+            <li value="3">Пользователи удаленного офиса вносят изменения в базу данных удаленного офиса (как сетевые пользователи). Удаленный офис подключается к головному офису, чтобы отправить и получить файлы также, как и удаленные пользователи.</li>
+            <li value="4">Синхронизация использует файлы полученные от удаленных пользователей и офисов, для разрешения конфликтов и применения изменений к базе данных головного офиса, затем создает файлы для удаленных пользователей и офисов.</li>
+        </ul>
+        <p MadCap:conditions="Output.WebClient">Обмен файлами и обновление базы данных, осуществляемые во время синхронизации, в настоящее время не доступны через web. Внесенные web-пользователями изменения базы данных обрабатываются системой синхронизации как изменения Сетевых Пользователей. Для поддержания в актуальном состоянии субъектов, курируемых их командами, удаленные пользователи также могут использовать Web клиент для просмотра субъектов. Доступ к субъектом определяется настройками прав доступа, устанавливаемыми системным администратором.</p>
+        <p class="RelatedTopics">См. также</p>
+        <p MadCap:conditions="Output.WebClient"><a href="What_Is_Conflict_Resolution__.htm" target="_self">Разрешение конфликтов</a>
+        </p>
+        <p MadCap:conditions="Output.WebClient"><a href="../Accounts/What_Are_Accounts.htm" target="_self">Обзор субъектов</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

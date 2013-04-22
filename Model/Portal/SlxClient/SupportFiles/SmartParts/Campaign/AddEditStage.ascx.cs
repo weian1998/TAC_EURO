@@ -1,15 +1,9 @@
 using System;
-using System.Data;
 using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Sage.Platform.WebPortal.SmartParts;
-using Sage.Platform.Application;
 using Sage.Entity.Interfaces;
-using Sage.Platform;
-using Sage.Platform.Orm;
-using Sage.Platform.Repository;
-using System.Collections.Generic;
 using Sage.Platform.ComponentModel;
 using Sage.SalesLogix.CampaignStage;
 using Sage.Platform.Application.UI;
@@ -19,11 +13,9 @@ using Sage.Platform.WebPortal;
 
 public partial class SmartParts_Campaign_AddEditStage : EntityBoundSmartPartInfoProvider
 {
-    private ICampaignStage _stage = null;
+    private ICampaignStage _stage;
     private string _mode = string.Empty;
-    private IPersistentEntity _parentEntity = null;
-    private IComponentReference _parentEntityReference = null;
-    private Type _relatedEntityType = null;
+    private IPersistentEntity _parentEntity;
 
     /// <summary>
     /// Gets the type of the entity.
@@ -32,15 +24,6 @@ public partial class SmartParts_Campaign_AddEditStage : EntityBoundSmartPartInfo
     public override Type EntityType
     {
         get { return typeof(ICampaignStage); }
-    }
-
-    /// <summary>
-    /// Gets the type of the related entity.
-    /// </summary>
-    /// <value>The type of the related entity.</value>
-    public Type RelatedEntityType
-    {
-        get { return _relatedEntityType; }
     }
 
     /// <summary>
@@ -71,7 +54,10 @@ public partial class SmartParts_Campaign_AddEditStage : EntityBoundSmartPartInfo
     /// </summary>
     protected override void OnWireEventHandlers()
     {
-        txtCode.Attributes.Add("onChange", string.Format("javascript: return CS_OnCodeChange(this,'{0}');",PortalUtil.JavaScriptEncode(GetLocalResourceObject("CodeChangeMSG").ToString())));
+        cmdSave.Click += new EventHandler(cmdSave_OnClick);
+        cmdSave.Click += new EventHandler(DialogService.CloseEventHappened);
+        cmdCancel.Click += new EventHandler(DialogService.CloseEventHappened);
+        txtCode.Attributes.Add("onChange", "javascript: return Sage.UI.Forms.AddEditStage.CS_OnCodeChange(this);");
         base.OnWireEventHandlers();
     }
 
@@ -81,10 +67,8 @@ public partial class SmartParts_Campaign_AddEditStage : EntityBoundSmartPartInfo
     protected override void OnFormBound()
     {
         base.OnFormBound();
-        ClientBindingMgr.RegisterDialogCancelButton(cmdCancel);
-        this._parentEntity = GetParentEntity() as Sage.Platform.Orm.Interfaces.IPersistentEntity;
-        this._parentEntityReference = this._parentEntity as Sage.Platform.ComponentModel.IComponentReference;
-        _stage = (ICampaignStage)this.BindingSource.Current;
+        _parentEntity = GetParentEntity() as IPersistentEntity;
+        _stage = (ICampaignStage)BindingSource.Current;
         if (DialogService.DialogParameters.Count > 0)
         {
             object mode;
@@ -101,10 +85,7 @@ public partial class SmartParts_Campaign_AddEditStage : EntityBoundSmartPartInfo
     /// </summary>
     private void IntRegisterClientScripts()
     {
-        string script = GetLocalResourceObject("AddEditStage_ClientScript").ToString();
-        StringBuilder sb = new StringBuilder(script);
-        sb.Replace("@ModeID", Mode.ClientID);
-        ScriptManager.RegisterStartupScript(Page, this.GetType(), "AddEditStageScript", sb.ToString(), false);
+        ScriptManager.RegisterClientScriptInclude(this, GetType(), "AddEditStage", Page.ResolveUrl("~/SmartParts/Campaign/AddEditStage.js"));
     }
 
     /// <summary>
@@ -115,37 +96,27 @@ public partial class SmartParts_Campaign_AddEditStage : EntityBoundSmartPartInfo
     public override ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
     {
         ToolsSmartPartInfo tinfo = new ToolsSmartPartInfo();
-        if (this.BindingSource != null)
+        if (BindingSource != null)
         {
-            if (this.BindingSource.Current != null)
+            if (BindingSource.Current != null)
             {
-                if (_stage.Id != null)
-                {
-                    if (_mode == "Complete")
-                    {
-                        tinfo.Title = GetLocalResourceObject("DialogTitleComplete").ToString();
-                    }
-                    else
-                    {
-                        tinfo.Title = GetLocalResourceObject("DialogTitleEdit").ToString();
-                    }
-                }
-                else
-                {
-                    tinfo.Title = GetLocalResourceObject("DialogTitleAdd").ToString();
-                }
+                tinfo.Title = _stage.Id != null
+                                  ? (_mode == "Complete"
+                                         ? GetLocalResourceObject("DialogTitleComplete").ToString()
+                                         : GetLocalResourceObject("DialogTitleEdit").ToString())
+                                  : GetLocalResourceObject("DialogTitleAdd").ToString();
             }
         }
 
-        foreach (Control c in this.Form_LTools.Controls)
+        foreach (Control c in Form_LTools.Controls)
         {
             tinfo.LeftTools.Add(c);
         }
-        foreach (Control c in this.Form_CTools.Controls)
+        foreach (Control c in Form_CTools.Controls)
         {
             tinfo.CenterTools.Add(c);
         }
-        foreach (Control c in this.Form_RTools.Controls)
+        foreach (Control c in Form_RTools.Controls)
         {
             tinfo.RightTools.Add(c);
         }
@@ -177,21 +148,10 @@ public partial class SmartParts_Campaign_AddEditStage : EntityBoundSmartPartInfo
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void cmdSave_OnClick(object sender, EventArgs e)
     {
-        ICampaignStage stage = this.BindingSource.Current as ICampaignStage;
+        ICampaignStage stage = BindingSource.Current as ICampaignStage;
         stage.Save();
         IPanelRefreshService refresher = PageWorkItem.Services.Get<IPanelRefreshService>();
         refresher.RefreshAll();
-        DialogService.CloseEventHappened(sender, e); //Close Dialog
-    }
-
-    /// <summary>
-    /// Handles the OnClick event of the cmdCancel control.
-    /// </summary>
-    /// <param name="sender">The source of the event.</param>
-    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-    protected void cmdCancel_OnClick(object sender, EventArgs e)
-    {
-        DialogService.CloseEventHappened(sender, e); //Close Dialog
     }
 
     /// <summary>

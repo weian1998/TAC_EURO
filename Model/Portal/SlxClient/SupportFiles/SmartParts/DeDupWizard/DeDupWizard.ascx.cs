@@ -2,12 +2,12 @@ using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using Telerik.WebControls;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.Platform.Application.UI;
 using Sage.Entity.Interfaces;
 using Sage.SalesLogix.Services.PotentialMatch;
 using Sage.Platform.WebPortal.Services;
+using Telerik.Web.UI;
 
 public partial class DeDupWizard : EntityBoundSmartPartInfoProvider
 {
@@ -181,23 +181,21 @@ public partial class DeDupWizard : EntityBoundSmartPartInfoProvider
     /// <param name="step">The step.</param>
     protected void SetStep(WizardStep step)
     {
-        if (step != null)
+        if (step == null) return;
+        switch (step.ID)
         {
-            switch (step.ID)
-            {
-                case "cmdSelectSource":
-                    SetStepControls(lblStep1Name, divStep1, step, IsVisited(visitedStep1.Value));
-                    break;
-                case "cmdManageDuplicates":
-                    SetStepControls(lblStep2Name, divStep2, step, IsVisited(visitedStep2.Value));
-                    break;
-                case "cmdReview":
-                    SetStepControls(lblStep3Name, divStep3, step, IsVisited(visitedStep3.Value));
-                    break;
-                case "cmdProcess":
-                    SetStepControls(lblStep4Name, divStep4, step, IsVisited(visitedStep4.Value));
-                    break;
-            }
+            case "cmdSelectSource":
+                SetStepControls(lblStep1Name, divStep1, step, !string.IsNullOrEmpty(visitedStep1.Value));
+                break;
+            case "cmdManageDuplicates":
+                SetStepControls(lblStep2Name, divStep2, step, !string.IsNullOrEmpty(visitedStep2.Value));
+                break;
+            case "cmdReview":
+                SetStepControls(lblStep3Name, divStep3, step, !string.IsNullOrEmpty(visitedStep3.Value));
+                break;
+            case "cmdProcess":
+                SetStepControls(lblStep4Name, divStep4, step, !string.IsNullOrEmpty(visitedStep4.Value));
+                break;
         }
     }
 
@@ -241,20 +239,6 @@ public partial class DeDupWizard : EntityBoundSmartPartInfoProvider
     }
 
     /// <summary>
-    /// Determines whether the specified value is visited.
-    /// </summary>
-    /// <param name="value">The value.</param>
-    /// <returns>
-    /// 	<c>true</c> if the specified value is visited; otherwise, <c>false</c>.
-    /// </returns>
-    private static bool IsVisited(string value)
-    {
-        if (string.IsNullOrEmpty(value))
-            return false;
-        return true;
-    }
-
-    /// <summary>
     /// Sets the step contorls.
     /// </summary>
     /// <param name="lblStepName">Name of the LBL step.</param>
@@ -268,19 +252,19 @@ public partial class DeDupWizard : EntityBoundSmartPartInfoProvider
             lblStepName.Text = step.Title;
             if (wzdDeDup.ActiveStep.ID == step.ID)
             {
-                lblStepName.Attributes.Add("class", "lblActive");
+                lblStepName.CssClass = "lblWizardActive";
                 lblStepName.Enabled = true;
             }
             else
             {
                 if (visited)
                 {
-                    lblStepName.Attributes.Add("class", "lblVisited");
+                    lblStepName.CssClass = "lblWizardVisited";
                     lblStepName.Enabled = true;
                 }
                 else
                 {
-                    lblStepName.Attributes.Add("class", "lblNotVisited");
+                    lblStepName.CssClass = "lblWizardNotVisited";
                     lblStepName.Enabled = false;
                 }
             }
@@ -289,10 +273,10 @@ public partial class DeDupWizard : EntityBoundSmartPartInfoProvider
         if (divStep != null)
         {
             if (wzdDeDup.ActiveStep.ID == step.ID)
-                divStep.Attributes.Add("class", "Active");
+                divStep.Attributes.Add("class", "wizardActive");
             else
             {
-                divStep.Attributes.Add("class", visited ? "Visited" : "NotVisited");
+                divStep.Attributes.Add("class", visited ? "wizardVisited" : "wizardNotVisited");
             }
         }
     }

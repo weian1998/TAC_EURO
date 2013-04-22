@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Администрирование|Команды и Отделы" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Создание Команд</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Admin_TeamsDepts/Creating_a_Team.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor32"></a>Создание Команд</h1>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <tr>
+                <td style="width: 10%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="10%">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/adminonly.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p>Только системный администратор и пользователи с соответствующей <a href="../Admin_security/What_are_Roles_and_Secured_Actions.htm" target="_self">ролью</a> могут иметь доступ к этим функциям.</p>
+                </td>
+            </tr>
+        </table>
+        <p>Команда может состоять из пользователей, команд и отделов. При создании команды, необходимо выбрать одного человека в качестве руководителя команды.</p>
+        <p>При определении способности пользователя создавать и поддерживать команды, учитывайте следующие правила.    <![CDATA[             ]]></p>
+        <p class="Infinitive">Пользователь никогда не может</p>
+        <ul>
+            <li value="1">
+                <p>Добавить самого себя к существующей команде.</p>
+            </li>
+            <li value="2">
+                <p>Удалить самого себя из команды.</p>
+            </li>
+            <li value="3">
+                <p>Удалить системного администратора из команды.</p>
+            </li>
+            <li value="4">
+                <p>Удалить команду.</p>
+            </li>
+        </ul>
+        <p><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="team2;team3;team1">Узнать больше о безопасности команды...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <p MadCap:targetName="team1" style="display: none;">Когда пользователь добавляется в команду, его безопасность определяется профилем, указанным на <a href="../Admin_useradmin/User_Detail_View_Security_Tab.htm" target="_self">Закладке Безопасность</a>. Профиль безопасности может быть изменен для каждой команды, участником которой является пользователь. Изменение профиля безопасности пользователя в одной команде не влияет на стандартный профиль пользователя, или профиль любой другой команды, участником которой является пользователь.</p>
+        <p MadCap:targetName="team3" style="display: none;">Если у пользователя более чем один профиль безопасности (например, пользователь добавлен в команду как вложенная команда или отдел, и также является прямым участником команды-родителя), профили безопасности имеют одного и того же владельца. При определении прав доступа относительно поля, могут возвращаться различные профили.  В Web Клиенте, доступ определяется комбинацией максимального доступа всех профилей, приписанных к этому пользователю и владельцу.</p>
+        <p class="Infinitive">Чтобы создать</p>
+        <ol>
+            <li class="Topic-Text-Numbered" value="1">В меню  <span class="SLXBold">Администрирование</span>выберите <span class="SLXBold">Новая Команда</span>.</li>
+            <li class="Topic-Text-Numbered" value="2">В поле <span class="SLXBold">Имя</span> введите название команды.</li>
+            <li class="Topic-Text-Numbered" value="3">В поле <span class="SLXBold">Руководитель</span> выберите руководителя команды. Команды могут иметь несколько руководителей.</li>
+            <li class="Topic-Text-Numbered" value="4">В поле <span class="SLXBold">Стандартный профиль безопасности</span> выберите стандартный профиль для команды. Этот профиль применяется, когда команда добавляется к другой команде.</li>
+            <li class="Topic-Text-Numbered" value="5">Отметьте флажок <span class="SLXBold">Автоматическое добавление менеджера пользователя в команду</span>, если вы хотите добавить менеджера пользователя к команде при добавлении нового участника команды.</li>
+            <li class="Topic-Text-Numbered" value="6">Нажмите    <![CDATA[ ]]><span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Сохранить<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>.</li>
+            <li class="Topic-Text-Numbered" value="7"><a href="Adding_Team_Members.htm" target="_self">Добавьте участников команды</a>.</li>
+            <li class="Topic-Text-Numbered" value="8">При необходимости, <a href="Editing_a_Security_Profile_Within_a_Team.htm" target="_self">редактируйте права доступа</a> нового пользователя, добавленного в команду.</li>
+            <li class="Topic-Text-Numbered" value="9">Нажмите    <![CDATA[ ]]><span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Сохранить<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>.</li>
+        </ol>
+        <p>Если вы используете Sage SalesLogix Exchange Link, для связи дел и контаков между вашей базой данных Sage SalesLogix и Microsoft Exchange Server, и вы измените команду, вы должны убедиться, что ваши настройки Exchange Link остаются правильными.</p>
+        <p>Для получения дополнительной информации смотрите в справке Sage SalesLogix Exchange Link тему под названием "Устранение неполадок ссылок после изменения Команд".</p>
+        <p class="RelatedTopics">См. также</p>
+        <p><a href="Working_with_Teams.htm" target="_self">Работа с Командами</a>
+        </p>
+        <p><a href="Copying_a_Team.htm" target="_self">Копирование Команды</a>
+        </p>
+        <p><a href="Team_Owner_Profile.htm" target="_self">Профиль Руководителя команды</a>
+        </p>
+        <p><a href="Team_Hierarchy.htm" target="_self">Иерархия Команд</a>
+        </p>
+        <div style="width: 100%;position: relative;">
+            <p>&#160;</p>
+        </div>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

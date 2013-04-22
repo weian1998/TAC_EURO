@@ -1,0 +1,25 @@
+<div class="address-container" id="{%= $.clientId %}" >
+    <!--
+    -- IMPORTANT: Comments in a widget template must be placed inside the root node.
+    Simplate template
+    https://github.com/mmorton/simplate
+    https://github.com/mmorton/simplate/blob/master/demo/index.html
+    Basic formatting example: {%= $.id %}
+    -->
+    <textarea id="{%= $.clientId %}_displayText" class="address-textarea" style="height:{%= $.height %};"
+        data-dojo-type="Sage.UI.Controls.SimpleTextarea" readonly="readonly" dragRestriction="true"  tabindex="{%= $.tabIndex %}"
+    {% if ($.enabled && !$.readOnly) { %}
+        data-dojo-attach-event="onDblClick: showDialog, ondijitclick: showDialog"
+    {% } %}
+        slxchangehook="true" >{%= $.displayValue %}</textarea>
+    {% if ($.enabled && !$.readOnly) { %}
+    <img alt="{%= $.imageData.imageEditAltText %}" data-dojo-attach-event="ondijitclick: showDialog" class="address-edit-button"
+         src="{%= $.imageData.imageEditUrl %}" title="{%= $.imageData.imageEditToolTip %}" id="{%= $.clientId %}-Button" 
+          tabindex="{%= $.tabIndex %}" />
+    {% } %}
+    {% if ($.enabled && $.showButton) { %}
+    <img alt="{%= $.imageData.imageMapQuestAltText %}" data-dojo-attach-event="ondijitclick: showMap" class="address-map-button"
+         src="{%= $.imageData.imageMapQuestUrl %}" title="{%= $.imageData.imageMapQuestToolTip %}" id="{%= $.clientId %}-MapQuest" 
+          tabindex="{%= $.tabIndex %}" />
+    {% } %}
+</div>

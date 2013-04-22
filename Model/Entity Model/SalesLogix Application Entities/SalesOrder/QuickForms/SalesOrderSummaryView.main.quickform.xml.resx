@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="pklType.Caption" xml:space="preserve">
     <value>Type:</value>
@@ -158,5 +158,17 @@
   </data>
   <data name="agcProducts.PopupCaptionFmt" xml:space="preserve">
     <value>Products for {0}</value>
+  </data>
+  <data name="agcProducts_grid.eaeba8a1-59c0-4f6e-88f2-726d5605fe14.ColumnHeading" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
+  <data name="agcProducts_grid.7caca3b2-6efc-492b-9593-275b9c2ea72e.ColumnHeading" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="agcProducts_grid.890cdf4a-2a3a-4734-bfc2-1d6dfab1ff48.ColumnHeading" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="agcProducts_grid.25fb9628-13de-468d-9c6c-fc88d16d05ca.ColumnHeading" xml:space="preserve">
+    <value>Price</value>
   </data>
 </root>

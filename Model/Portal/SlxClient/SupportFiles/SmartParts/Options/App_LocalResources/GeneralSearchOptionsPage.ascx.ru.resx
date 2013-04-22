@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="lblAutoLogoffResource1.Text" xml:space="preserve">
+    <value>Включить автоматический выход:</value>
+  </data>
+  <data name="UseActiveReportingResource.Text" xml:space="preserve">
+    <value>Использовать активную отчетность (требует ActiveX и Crystal Runtime)</value>
+  </data>
+  <data name="listItemContactResource.Text" xml:space="preserve">
+    <value>Контакт</value>
+  </data>
+  <data name="PageDescription.Title" xml:space="preserve">
+    <value>Общие</value>
+  </data>
+  <data name="lblPromptForUnsavedData.Text" xml:space="preserve">
+    <value>Запрос для несохраненных данных:</value>
+  </data>
+  <data name="MailMergeServiceError" xml:space="preserve">
+    <value>Не может быть загружен сервис рассылки почты. Это может произойти если не установлен Sage SalesLogix Desktop Integration или установлен неверно.</value>
+  </data>
+  <data name="PromptForUnsavedData" xml:space="preserve">
+    <value>Запрос на сохраненные данные</value>
+  </data>
+  <data name="EnhanceSalesLogix" xml:space="preserve">
+    <value>Расширить SalesLogix...</value>
+  </data>
+  <data name="UseActiveMailResource.Text" xml:space="preserve">
+    <value>Использ. ActiveMail (требуется ActiveX)</value>
+  </data>
+  <data name="adhoc_group_format" xml:space="preserve">
+    <value>{0} ({1} Контакты)</value>
+  </data>
+  <data name="LPRate_rsc.PropertyHeader" xml:space="preserve">
+    <value>Курс</value>
+  </data>
+  <data name="lblSearchOptionsResource1.Text" xml:space="preserve">
+    <value>Параметры поиска</value>
+  </data>
+  <data name="msgMenuRangeMessage" xml:space="preserve">
+    <value>Вы должны ввести число от 0 до 10 для значения из Меню Составить - Последние шаблоны.</value>
+  </data>
+  <data name="btnFlushCache1.Text" xml:space="preserve">
+    <value>Очистить кэш</value>
+  </data>
+  <data name="lblDefaultAccountSearchResource1.Text" xml:space="preserve">
+    <value>Поиск субъекта по умолчанию:</value>
+  </data>
+  <data name="ExtendedFeaturesResource2.Text" xml:space="preserve">
+    <value>Может потребоваться загрузка расширенных функций -</value>
+  </data>
+  <data name="lblLogToHistoryResource1.Text" xml:space="preserve">
+    <value>Записать в историю:</value>
+  </data>
+  <data name="tooltipFind" xml:space="preserve">
+    <value>Найти</value>
+  </data>
+  <data name="lblDefaultOppSearchResource1.Text" xml:space="preserve">
+    <value>Поиск сделки по умолч.:</value>
+  </data>
+  <data name="lblGenOptionsResource1.Text" xml:space="preserve">
+    <value>Основные параметры</value>
+  </data>
+  <data name="lblFaxBaseTemplateResource1.Text" xml:space="preserve">
+    <value>Шаблон факса:</value>
+  </data>
+  <data name="clearSavedListData" xml:space="preserve">
+    <value>Обновление данных справочника</value>
+  </data>
+  <data name="lblIntellisyncOptions.Text" xml:space="preserve">
+    <value>Настройки Intellisync:</value>
+  </data>
+  <data name="lblFaxProviderResource1.Text" xml:space="preserve">
+    <value>Провайдер факса:</value>
+  </data>
+  <data name="lblMyCurrencyResource1.Text" xml:space="preserve">
+    <value>Моя валюта:</value>
+  </data>
+  <data name="chkUnsavedDataWarning.Text" xml:space="preserve">
+    <value>Предупреждать при выходе с учетом несохраненных данных</value>
+  </data>
+  <data name="lblIntellisyncResource1.Text" xml:space="preserve">
+    <value>Группа контакта Intellisync:</value>
+  </data>
+  <data name="lblCheckboxEnabledResource.Text" xml:space="preserve">
+    <value>Отображать флажки в Группах:</value>
+  </data>
+  <data name="_saveResource1.Text" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="lblEnhancementsInstalled.Text" xml:space="preserve">
+    <value>Улучшения установлены</value>
+  </data>
+  <data name="lblEmailBaseTemplateResource1.Text" xml:space="preserve">
+    <value>Основной шаблон для e-mail:</value>
+  </data>
+  <data name="PageDescription.Text" xml:space="preserve">
+    <value>Общие</value>
+  </data>
+  <data name="ExtendedFeaturesResource1.Text" xml:space="preserve">
+    <value>Искать еще...</value>
+  </data>
+  <data name="lblMailMergeTemplateOptions.Text" xml:space="preserve">
+    <value>Настройки шаблона слияния:</value>
+  </data>
+  <data name="lblEmailOptionsResource1.Text" xml:space="preserve">
+    <value>Параметры эл. почты:</value>
+  </data>
+  <data name="GeneralOptionsHelpLinkResource1.ToolTip" xml:space="preserve">
+    <value>Помощь</value>
+  </data>
+  <data name="lblLetterBaseTemplateResource1.Text" xml:space="preserve">
+    <value>Базовый шаблон письма:</value>
+  </data>
+  <data name="lblTimeZoneOptions.Text" xml:space="preserve">
+    <value>Параметры часового пояса:</value>
+  </data>
+  <data name="listItemLeadResource.Text" xml:space="preserve">
+    <value>Наводка</value>
+  </data>
+  <data name="FindOutMore" xml:space="preserve">
+    <value>Искать еще...</value>
+  </data>
+  <data name="_promptContactNotFoundResource1.Text" xml:space="preserve">
+    <value>&lt;span id='lblPromptConNotFound'&gt;Запрос контакта или наводки не найден&lt;/span&gt;</value>
+  </data>
+  <data name="EnhancementsAreInstalled" xml:space="preserve">
+    <value>Расширения установлены</value>
+  </data>
+  <data name="lblRecentTemplatesResource1.Text" xml:space="preserve">
+    <value>Меню Составить - Последние шаблоны:</value>
+  </data>
+  <data name="_promptDuplicateContactsResource1.Text" xml:space="preserve">
+    <value>&lt;span id='lblPromptForDup'&gt;Запрос дубликата контакта или наводки&lt;/span&gt;</value>
+  </data>
+  <data name="lblShowOnStartupResource1.Text" xml:space="preserve">
+    <value>Показывать при запуске:</value>
+  </data>
+  <data name="lblInstallEnhancements.Text" xml:space="preserve">
+    <value>Установить улучшения</value>
+  </data>
+  <data name="lblTypeResource.Text" xml:space="preserve">
+    <value>Тип:</value>
+  </data>
+  <data name="ClickToDownload" xml:space="preserve">
+    <value>Кликните для загрузки расширения продукта.</value>
+  </data>
+  <data name="cmdSave_rsc.ToolTip" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="lblLogOffAfterResource1.Text" xml:space="preserve">
+    <value>Выход после</value>
+  </data>
+  <data name="lblDefaultContactSearchResource1.Text" xml:space="preserve">
+    <value>Поиск контакта по умолчанию:</value>
+  </data>
+  <data name="lblCurrentTimezone.Text" xml:space="preserve">
+    <value>Установите Ваш часовой пояс:</value>
+  </data>
+  <data name="lblAccessibilityOptions.Text" xml:space="preserve">
+    <value>Специальные возможности:</value>
+  </data>
+  <data name="lblDefaultOwnerResource1.Text" xml:space="preserve">
+    <value>Доступ/Команда по умолч.:</value>
+  </data>
+</root>

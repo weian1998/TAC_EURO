@@ -183,6 +183,9 @@
   <data name="lblSlices" xml:space="preserve">
     <value>Number of Slices</value>
   </data>
+  <data name="lblLimit" xml:space="preserve">
+    <value>Limit</value>
+  </data>
   <data name="lblTitle" xml:space="preserve">
     <value>Title</value>
   </data>
@@ -190,10 +193,10 @@
     <value>Truncate Names</value>
   </data>
   <data name="lblXaxis" xml:space="preserve">
-    <value>X-Axis Label</value>
+    <value>X-Axis</value>
   </data>
   <data name="lblYaxis" xml:space="preserve">
-    <value>Y-Axis Label</value>
+    <value>Y-Axis</value>
   </data>
   <data name="loading" xml:space="preserve">
     <value>Loading, please wait...</value>
@@ -243,13 +246,13 @@
   <data name="numberOfActivites" xml:space="preserve">
     <value>Number of Activities</value>
   </data>
-  <data name="numberOfRecords" xml:space="preserve">
-    <value>Number of records</value>
+  <data name="lblNumberOfRecords" xml:space="preserve">
+    <value>Number of Records</value>
   </data>
   <data name="recentlyViewed" xml:space="preserve">
     <value>Recently Viewed</value>
   </data>
-  <data name="target" xml:space="preserve">
+  <data name="lblTarget" xml:space="preserve">
     <value>Target</value>
   </data>
   <data name="timeless" xml:space="preserve">
@@ -261,8 +264,8 @@
   <data name="viewAllActivities" xml:space="preserve">
     <value>View all my activities for today</value>
   </data>
-  <data name="visibleRecords" xml:space="preserve">
-    <value>Visible records</value>
+  <data name="lblVisibleRecords" xml:space="preserve">
+    <value>Visible Records</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Welcome</value>
@@ -277,10 +280,10 @@
     <value>Sage SalesLogix manages all aspects of the sales cycle over the Web.  In addition to tracking contacts, accounts, leads, opportunities, tickets and  activities, users have access to tools for reporting, automating processes, and creating emails, faxes, and letters using mail merge.</value>
   </data>
   <data name="Access_to_Sage_SalesLogix_Online_Support" xml:space="preserve">
-    <value>Access to Sage SalesLogix Online Support</value>
+    <value>Access Sage SalesLogix Online Support</value>
   </data>
   <data name="Access_to_Sage_SalesLogix_University" xml:space="preserve">
-    <value>Access to Sage SalesLogix University</value>
+    <value>Access Sage SalesLogix University</value>
   </data>
   <data name="Be_a_part_of_the_Sage_SalesLogix_Community" xml:space="preserve">
     <value>Be a part of the Sage SalesLogix Community</value>
@@ -315,7 +318,7 @@
   <data name="Leads_Created" xml:space="preserve">
     <value>Leads Created</value>
   </data>
-  <data name="Links" xml:space="preserve">
+  <data name="lblLinks" xml:space="preserve">
     <value>Links</value>
   </data>
   <data name="My_Activity_trend" xml:space="preserve">
@@ -438,16 +441,52 @@
   <data name="Widget_description_goes_here" xml:space="preserve">
     <value>Widget description goes here</value>
   </data>
-  <data name="add" xml:space="preserve">
+  <data name="Invalid_character" xml:space="preserve">
+    <value>Invalid character</value>
+  </data>
+  <data name="lblAdd" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="everyone" xml:space="preserve">
-    <value>Everyone</value>
+  <data name="lblDelete" xml:space="preserve">
+    <value>Delete</value>
   </data>
-  <data name="releasedTo" xml:space="preserve">
-    <value>Released to</value>
+  <data name="lblDisplayLabels" xml:space="preserve">
+    <value>Display Labels</value>
   </data>
-  <data name="remove" xml:space="preserve">
-    <value>Remove</value>
+  <data name="lblLabelLength" xml:space="preserve">
+    <value>Label Length</value>
+  </data>
+  <data name="lblSubtitle" xml:space="preserve">
+    <value>Subtitle</value>
+  </data>
+  <data name="lblTruncateLabels" xml:space="preserve">
+    <value>Truncate Labels</value>
+  </data>
+  <data name="NoRecordsSelected" xml:space="preserve">
+    <value>There are no records selected.</value>
+  </data>
+  <data name="txtDeleteConfirm" xml:space="preserve">
+    <value>Are you sure you want to delete these {0} items?</value>
+  </data>
+  <data name="txtNoActivities" xml:space="preserve">
+    <value>No activities to display.</value>
+  </data>
+  <data name="txtDefaultWidgetEditorAlert" xml:space="preserve">
+    <value>Editor button clicked!</value>
+  </data>
+  <data name="welcomeGettingStarted" xml:space="preserve">
+    <value>Getting Started Guide</value>
+  </data>
+  <data name="welcomeQuickReference" xml:space="preserve">
+    <value>Quick Reference Card</value>
+  </data>
+  <data name="welcomeWebClientHelp" xml:space="preserve">
+    <value>Web Client Online Help</value>
+  </data>
+  <data name="activitiesDestination" xml:space="preserve">
+    <value>View Activities</value>
+  </data>
+  <data name="lblLoading" xml:space="preserve">
+    <value>Loading...</value>
   </data>
 </root>

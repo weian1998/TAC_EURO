@@ -7,7 +7,7 @@
         <SalesLogix:ResourceKeyName Key="${qfcontrol.ControlId}.DialogButtonText" />
 		##write column header strings...
 		#foreach($lprop in $qfcontrol.LookupProperties)
-		<SalesLogix:ResourceKeyName Key="${qfcontrol.ControlId}.LookupProperties.${lprop.PropertyHeader}.PropertyHeader" />
+		<SalesLogix:ResourceKeyName Key="${qfcontrol.ControlId}.LookupProperties.${lprop.PropertyName}.PropertyHeader" />
 		 #end  ##foreach
     </Keys>
 </SalesLogix:ScriptResourceProvider>

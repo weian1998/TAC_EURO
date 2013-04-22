@@ -1,16 +1,12 @@
 <?xml version="1.0"?>
-<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="02abd3f6-1cfd-4245-a2fa-54b7cceccc52" lastModifiedUtc="2011-07-29T17:36:32.4307856Z" parentEntityId="03da3a53-eab7-4bb2-bd1b-9c0c988b66d2" childEntityId="897f4970-c7f6-4667-9dd3-dfb814b03f3a">
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="02abd3f6-1cfd-4245-a2fa-54b7cceccc52" lastModifiedUtc="2009-05-19T22:35:06.7449014Z" parentEntityId="03da3a53-eab7-4bb2-bd1b-9c0c988b66d2" childEntityId="897f4970-c7f6-4667-9dd3-dfb814b03f3a">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
   </ExtendedPropertiesCollection>
-  <parentProperty id="87413a4d-7e77-4d64-8983-ddf704cde2cc" lastModifiedUtc="2011-07-29T17:36:32.4307856Z" name="SalesOrderItems" audited="false" include="false">
+  <parentProperty id="87413a4d-7e77-4d64-8983-ddf704cde2cc" lastModifiedUtc="2009-05-19T22:34:58.5390809Z" name="SalesOrderItems" audited="false">
     <ExtendedPropertiesCollection>
-      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty">
-        <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
-          <OrmEntityPropertySDataExtension generate="true" />
-        </extender>
-      </extendee>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
     </ExtendedPropertiesCollection>
     <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
       <RelationshipDataType />
@@ -18,11 +14,7 @@
   </parentProperty>
   <childProperty id="628271cf-6647-4ca3-b853-fd4ecaec1aa1" lastModifiedUtc="2009-05-19T22:35:02.9965266Z" name="Product" audited="false">
     <ExtendedPropertiesCollection>
-      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty">
-        <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
-          <OrmEntityPropertySDataExtension generate="true" />
-        </extender>
-      </extendee>
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
     </ExtendedPropertiesCollection>
     <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
       <RelationshipDataType />

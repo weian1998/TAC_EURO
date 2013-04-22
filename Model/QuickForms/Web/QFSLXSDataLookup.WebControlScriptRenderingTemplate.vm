@@ -9,6 +9,7 @@
 {
   id : '${qfcontrol.ControlId}',
   btnToolTip :  ${stringObjectName}['$generator.ConvertResourceKeyToScriptReference("${qfcontrol.ControlId}.ButtonTooltip")']  ||  '${qfcontrol.ButtonTooltip}', 
+  btnIcon: #if ($qfcontrol.LookupImage != "") '$generator.getImageResourceURL( "${qfcontrol.LookupImage}" )'  #else  'images/icons/plus_16x16.gif'   #end,
   dialogButtonText : ${stringObjectName}['$generator.ConvertResourceKeyToScriptReference("${qfcontrol.ControlId}.DialogButtonText")']  ||  '${qfcontrol.DialogButtonText}', 
   displayMode : 4, //$ {qf control . LookupDisplayMode}  When adding other dijit templates, need to convert control to use enum values
   dialogTitle : ${stringObjectName}['$generator.ConvertResourceKeyToScriptReference("${qfcontrol.ControlId}.LookupDialogTitle")']  ||  '${qfcontrol.LookupDialogTitle}',
@@ -16,47 +17,66 @@
   #if ($qfcontrol.LookupDialogWidth > 0) dialogWidth : '${qfcontrol.LookupDialogWidth}', #end
   structure : [
      {
-       defaultCell: { width: 8, editable: false, styles: 'text-align: right;' },
+       defaultCell: { width: 8, editable: false, styles: 'text-align: left;' },
        cells: [
 	       {
         field: '$key',
         editable: false,
         hidden: true,
         id: 'id',
+		excludeFromFilters: true,
         formatter: function (value, rowIdx, grid) {
             var anchor = ['<div id=', value, ' >', value, '</ div>'].join('');
 		return anchor;
         }
     },
 #set($comma = "")
+#set($cols = $qfcontrol.LookupProperties.Count - 1)
+#set($width = 36)
+#if($cols > 1) 
+	#set($width = 36 / $cols )
+#end
+#if($width < 8) #set($width = 8) #end
 #foreach($lprop in $qfcontrol.LookupProperties)
          $comma
 		 {
-		   name: ${stringObjectName}['$generator.ConvertResourceKeyToScriptReference("${qfcontrol.ControlId}.LookupProperties.${lprop.PropertyHeader}.PropertyHeader"))']  || '$lprop.PropertyHeader',
+		   name: ${stringObjectName}['$generator.ConvertResourceKeyToScriptReference("${qfcontrol.ControlId}.LookupProperties.${lprop.PropertyName}.PropertyHeader")']  || '$lprop.PropertyHeader',
 		   field: '$lprop.PropertyName',
 		   propertyType: '$lprop.PropertyType',
+		   #if($lprop.PropertyType == "System.Decimal")
+				styles: 'text-align: right', 
+		   #end
+		#if ($lprop.PropertyFormat != "" && $lprop.PropertyFormat != "None")
+		   type: Sage.Utility.SDataLookup.setFormatType({
+		             propertyFormat: '${lprop.PropertyFormat}'
+		        }),
+		#end
 		   excludeFromFilters: $generator.GetJavascriptBoolString($lprop.ExcludeFromFilters),		   
-		   sortable: true,
 		   #if($lprop.HideCondition != "")
 		       //Set to the value of the visibleCondition property
 			   hidden: ${lprop.HideCondition}(),
 	       #end
 #if($comma != ",")
 		   width: 17,
-		   styles: 'text-align: left;',
-#end
-		   formatter: function (value, rowIdx, grid) {
-				return Sage.Utility.SDataLookupChildObjectFormatter({
-					value: value, rowIdx: rowIdx, grid: grid,
-		            fieldName: '$lprop.PropertyName', 
-#if($comma != ",")
-					includeButton: true, 
 #else
-					includeButton: false, 
+		   width: $width,
 #end
+#if ($qfcontrol.ChildEntity != "")
+		   formatter: function (value, rowIdx, grid) {
+				return Sage.Utility.SDataLookup.childObjectFormatter({
+					value: value, rowIdx: rowIdx, grid: grid,
+					fieldName: '$lprop.PropertyName', 
+	## Add button only on first item to restrict child Entity tree expansion to the first level.  
+	#if($comma != ",")
+					includeButton: true, 
+	#else
+					includeButton: false, 
+	#end
 					childentity: '${qfcontrol.ChildEntity}'
 		        });
-		   }
+		   },
+#end
+		   sortable: $generator.GetJavascriptBoolString($lprop.IsSortable)
          }
 #set($comma = ",")
 #end
@@ -64,6 +84,8 @@
      }  ## end of the object in the 'structure' array
   ], ## end of 'structure' array
   storeOptions: {
+      ## Pick up the first lookup prop as default sort column
+      sort: [ { attribute: '${qfcontrol.LookupProperties.get_Item(0).PropertyName}' } ],    
     resourceKind : '$generator.GetSDataPathName(${qfcontrol.LookupResourceName})',
 	select : ${qfcontrol.LookupSelectList}
   },

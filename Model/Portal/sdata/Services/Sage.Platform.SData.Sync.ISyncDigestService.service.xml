@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <PortalService xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="0ebfff29-970b-409a-94ac-e09c540315f9">
   <InstanceId>e3ee9bf3078a4bb5a9158cfe1e7ea4fb</InstanceId>
-  <ServiceType>Sage.SalesLogix.Web.SData.SyncDigestService, Sage.SalesLogix.Web</ServiceType>
+  <ServiceType>Sage.SalesLogix.IntegrationContract.SyncDigestService, Sage.SalesLogix.IntegrationContract</ServiceType>
   <RegisterAs>Sage.Platform.SData.Sync.ISyncDigestService, Sage.Platform</RegisterAs>
   <Properties />
+  <Scope>Application</Scope>
 </PortalService>

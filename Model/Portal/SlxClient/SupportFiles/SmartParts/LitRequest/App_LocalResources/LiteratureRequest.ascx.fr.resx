@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ItemNumber_Header" xml:space="preserve">
+    <value>Élément #</value>
+  </data>
+  <data name="Err_TotalCost" xml:space="preserve">
+    <value>Le coût total n’a pas pu être déterminé.</value>
+  </data>
+  <data name="Lookup_FirstName_PropertyHeader" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="HandleFulfillmentLocally.Text" xml:space="preserve">
+    <value>Gérer la demande en local</value>
+  </data>
+  <data name="SelectTemplate_label.Text" xml:space="preserve">
+    <value>Sélectionner un modèle :</value>
+  </data>
+  <data name="SDataRequestFailed" xml:space="preserve">
+    <value>Échec de la requête SData</value>
+  </data>
+  <data name="SendBy_label.Text" xml:space="preserve">
+    <value>Envoyer par :</value>
+  </data>
+  <data name="DescriptionIsRequired" xml:space="preserve">
+    <value>La description est requise</value>
+  </data>
+  <data name="SelectOpportunity" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Cost_Header" xml:space="preserve">
+    <value>Coût</value>
+  </data>
+  <data name="Template_label.Text" xml:space="preserve">
+    <value>Modèle :</value>
+  </data>
+  <data name="PageDescription.Text" xml:space="preserve">
+    <value>Planifier une demande de documentation</value>
+  </data>
+  <data name="FulfillFailed" xml:space="preserve">
+    <value>La demande de documentation n'a pas pu être complétée.</value>
+  </data>
+  <data name="Description_label.Text" xml:space="preserve">
+    <value>Description :</value>
+  </data>
+  <data name="LitWarning_MaxOneBillion" xml:space="preserve">
+    <value>Impossible de planifier plus d'un milliard d'éléments à la fois.</value>
+  </data>
+  <data name="GroupDataError" xml:space="preserve">
+    <value>Impossible de récupérer les données du groupe.</value>
+  </data>
+  <data name="TotalCost" xml:space="preserve">
+    <value>Coût total :</value>
+  </data>
+  <data name="LitWarning_UnableToParseQuantity" xml:space="preserve">
+    <value>Impossible d'analyser la quantité.</value>
+  </data>
+  <data name="Lookup_Mobile_PropertyHeader" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="OnlyCoverLetter.Text" xml:space="preserve">
+    <value>lettre d'accompagnement uniquement</value>
+  </data>
+  <data name="NoContactSelected" xml:space="preserve">
+    <value>Aucun contact sélectionné</value>
+  </data>
+  <data name="FindOpportunity" xml:space="preserve">
+    <value>Rechercher une opportunité</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Chargement ...</value>
+  </data>
+  <data name="CloseButton.Text" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="ErrorSubmittingRequest" xml:space="preserve">
+    <value>La demande de documentation n'a pas pu être enregistrée.</value>
+  </data>
+  <data name="LitWarning_QtyGreaterThanZero" xml:space="preserve">
+    <value>La quantité totale doit être supérieure à zéro.</value>
+  </data>
+  <data name="RequestedByOn.Text" xml:space="preserve">
+    <value>Demandé par {0} le {1}</value>
+  </data>
+  <data name="NoItemSelected" xml:space="preserve">
+    <value>Aucune documentation sélectionnée</value>
+  </data>
+  <data name="btnCancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="optRequestForContact.Text" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Name_lz.HeaderText" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="LitWarning_DescriptionLessThan64" xml:space="preserve">
+    <value>La longueur du champ Description ne doit pas dépasser 64 caractères.</value>
+  </data>
+  <data name="optRequestForOpportunity.Text" xml:space="preserve">
+    <value>Opportunité</value>
+  </data>
+  <data name="XContactsSelected" xml:space="preserve">
+    <value>{0} contact(s) sélectionné(s)</value>
+  </data>
+  <data name="Lookup_LastName_PropertyHeader" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="SubmissionInProgress" xml:space="preserve">
+    <value>Soumission de la requête en cours...</value>
+  </data>
+  <data name="LitWarning_SelectContact" xml:space="preserve">
+    <value>Vous devez sélectionner un contact</value>
+  </data>
+  <data name="PrintLiteratureList_label.Text" xml:space="preserve">
+    <value>Imprimer la liste de documentation :</value>
+  </data>
+  <data name="ItemsSelected" xml:space="preserve">
+    <value>Éléments sélectionnés :</value>
+  </data>
+  <data name="LitWarning_SelectTemplate" xml:space="preserve">
+    <value>Vous devez sélectionner un modèle avant de poursuivre.</value>
+  </data>
+  <data name="FulfillCanceled" xml:space="preserve">
+    <value>La réalisation de la demande de documentation a été annulée.</value>
+  </data>
+  <data name="Lookup_NameLF_PropertyHeader" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="ItemFamily_Header" xml:space="preserve">
+    <value>Famille</value>
+  </data>
+  <data name="optRequestForGroup.Text" xml:space="preserve">
+    <value>Groupe</value>
+  </data>
+  <data name="AttachmentList.Text" xml:space="preserve">
+    <value>liste des pièces jointes uniquement</value>
+  </data>
+  <data name="Lookup_Account_PropertyHeader" xml:space="preserve">
+    <value>Compte</value>
+  </data>
+  <data name="btnItemsFilter.AlternateText" xml:space="preserve">
+    <value>Filtrer</value>
+  </data>
+  <data name="WithCoverLetter.Text" xml:space="preserve">
+    <value>avec lettre d'accompagnement</value>
+  </data>
+  <data name="QuantityRequested" xml:space="preserve">
+    <value>Quantité demandée</value>
+  </data>
+  <data name="PageDescription.Title" xml:space="preserve">
+    <value>Planifier une demande de documentation</value>
+  </data>
+  <data name="Quantity_Header" xml:space="preserve">
+    <value>QTE</value>
+  </data>
+  <data name="Lookup_City_PropertyHeader" xml:space="preserve">
+    <value>Ville</value>
+  </data>
+  <data name="Lookup_Work_PropertyHeader" xml:space="preserve">
+    <value>Téléphone professionnel</value>
+  </data>
+  <data name="FindContact" xml:space="preserve">
+    <value>Rechercher un contact</value>
+  </data>
+  <data name="LitWarning_MustSelectTemplate" xml:space="preserve">
+    <value>Vous devez sélectionner un modèle.</value>
+  </data>
+  <data name="CoverLetter" xml:space="preserve">
+    <value>Page de garde :</value>
+  </data>
+  <data name="RequestedFor_label.Text" xml:space="preserve">
+    <value>Demander pour :</value>
+  </data>
+  <data name="SelectContact" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="btnItemsFilter.Tooltip" xml:space="preserve">
+    <value>Filtrer les éléments disponibles</value>
+  </data>
+  <data name="TemplateFindIcon_AlternateText" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="SendByDateUndefined" xml:space="preserve">
+    <value>La date d'expédition n'a pas été définie.</value>
+  </data>
+  <data name="Calendar" xml:space="preserve">
+    <value>Agenda</value>
+  </data>
+  <data name="lblRequestFor.Text" xml:space="preserve">
+    <value>Objet de la demande :</value>
+  </data>
+  <data name="LitWarning_SendByDate" xml:space="preserve">
+    <value>La date d'envoi doit être dans le futur.</value>
+  </data>
+  <data name="btnSaveLitRequest_rsc.ToolTip" xml:space="preserve">
+    <value>Planifier une demande de documentation</value>
+  </data>
+  <data name="Lookup_State_PropertyHeader" xml:space="preserve">
+    <value>Département</value>
+  </data>
+  <data name="Lookup_Description_PropertyHeader" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="SendVia_label.Text" xml:space="preserve">
+    <value>Envoyer via :</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Envoyer par e-mail</value>
+  </data>
+  <data name="AvailableItems" xml:space="preserve">
+    <value>Éléments disponibles</value>
+  </data>
+  <data name="ItemName_Header" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="SeparatePage.Text" xml:space="preserve">
+    <value>sur une page distincte</value>
+  </data>
+  <data name="SearchBy" xml:space="preserve">
+    <value>Rechercher par :</value>
+  </data>
+  <data name="NoRecordFound" xml:space="preserve">
+    <value>Enregistrement introuvable</value>
+  </data>
+  <data name="RequestFor_rsc.ToolTip" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="Priority_label.Text" xml:space="preserve">
+    <value>Priorité :</value>
+  </data>
+  <data name="Lookup_Email_PropertyHeader" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+</root>

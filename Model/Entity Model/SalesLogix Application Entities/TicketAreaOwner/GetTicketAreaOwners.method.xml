@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="43e829fd-d533-4648-8fb1-1ce771c1c2dc" lastModifiedUtc="2011-08-30T22:38:02.1312022Z" name="GetTicketAreaOwners" returnType="Object" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <description />
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="b99e841c-3fc9-493b-85bb-49675681ce8a" lastModifiedUtc="2011-09-21T15:19:17.7017676Z" targetType="Sage.SalesLogix.TicketAreaOwner.Rules, Sage.SalesLogix.BusinessRules" targetMethod="GetTicketAreaOwners" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

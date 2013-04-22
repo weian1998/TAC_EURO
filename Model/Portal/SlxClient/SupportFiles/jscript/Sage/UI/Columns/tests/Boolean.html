@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <title>Sage.UI Browser Tests</title>
+        <link rel="stylesheet" type="text/css" href="../../../../../Libraries/dojo/dijit/themes/claro/claro.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../../Libraries/dojo/dojox/grid/enhanced/resources/claroEnhancedGrid.css" />
+        <script type="text/javascript" src="../../Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript">
+        require([
+            "dojo/parser",
+            "doh",
+            "dojox/grid/EnhancedGrid",
+            "dojox/grid/enhanced/plugins/Pagination",
+            "dojo/data/ItemFileWriteStore",
+            "Sage/UI/Columns/Boolean"
+        ], function (
+            parser,
+            doh,
+            DataGrid,
+            Pagination,
+            ItemFileWriteStore,
+            Boolean
+        ) {                
+            function loadGrid(id, layout) {
+                var data = {
+                  identifier: 'id',
+                  items: []
+                };
+                var rows = 500000;
+                for(var i=0; i<rows; i++){
+                  data.items.push(dojo.mixin({ id: i+1 }, false));
+                }
+                var store = new ItemFileWriteStore({data: data});
+
+                /*create a new grid:*/
+                var grid = new DataGrid({
+                    id: id + '_grid',
+                    store: store,
+                    structure: layout,
+                    plugins: {
+                        pagination: {
+                            pageSizes: ["50", "100"],
+                            description: false,
+                            sizeSwitch: true,
+                            pageStepper: true,
+                            gotoButton: false,
+                            maxPageStep: 3,
+                            position: "top"
+                        }
+                    }
+                }, document.createElement('div'));
+
+                /*append the new grid to the div*/
+                dojo.byId(id).appendChild(grid.domNode);
+
+                /*Call startup() to render the grid*/
+                grid.startup();
+            }
+            
+            dojo.ready(function(){
+                doh.register("Sage.UI.Columns.tests.Boolean", [
+                    function testFalseValue() {
+                        var layout = [[
+                          {
+                              'name': 'Column 1',
+                              'field': 'id',
+                              'width': '100px'
+                          },
+                          {
+                              'name': 'Column 2',
+                              'field': 'col2',
+                              'width': '100%',
+                              type: Boolean
+                          }
+                        ]];
+                        loadGrid('grid1', layout);
+                        var grid = dijit.byId('grid1_grid');
+                        var cell = grid.getCell(1);
+                    }
+                ]);
+                
+                //Execute D.O.H. in this remote file.
+                doh.run();
+            });
+        });
+        </script>
+    </head>
+    <body class="claro">
+        <form>
+            <p>Grid w/ Boolean Column</p>
+            <div id="grid1" style="height: 250px; width: 400px"></div>
+        </form>
+    </body>
+</html>

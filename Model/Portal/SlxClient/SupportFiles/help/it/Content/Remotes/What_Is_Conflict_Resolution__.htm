@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" class="" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="copyright" value="SalesLogix Sales Help (03/19/2002) for v6.2 © 1997-2004 Best Software, Inc. and Sage Technologies Limited" />
+        <meta name="window-type" content="(w95sec)" /><title>Comprendere la Risoluzione di Conflitti</title>
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Remotes/What_Is_Conflict_Resolution__.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1 MadCap:conditions="Output.Legacy LAN,Output.WebClient">Comprendere la Risoluzione di Conflitti</h1>
+        <p MadCap:conditions="Output.WebClient">Gli utenti di rete e remoti potrebbero avere entrambi l'esigenza di effettuare modifiche allo stesso record. Le modifiche di un utente di rete vengono applicate direttamente al database dell'ufficio principale. Gli utenti remoti modificano il loro database locale, e <a href="What_Is_Synchronization_.htm" target="_self">sincronizzano</a> con l'ufficio principale dove applicano le loro modifiche.</p>
+        <p><a name="kanchor669"></a>Dato che i record che risiedono sia sul database dell'ufficio principale che su quelli remoti possono essere inseriti o modificati in maniera indipendente, è necessario strutturare un meccanismo in grado di decidere quali modifiche siano valide. La componente risoluzione dei conflitti della sincronizzazione decide quali modifiche vincono.</p>
+        <p>L'amministratore può identificare fino a tre criteri per determinare quali utenti vincono in presenza di un conflitto.<MadCap:conditionalText MadCap:conditions="Output.WebClient,Output.Legacy LAN"> Dopo aver analizzato le due transazioni conflittuali, si verifica una vincita, perdita o pareggio. In caso di pareggio, viene utilizzato il successivo criterio per cercare di risolvere il pareggio. Generalmente, se tutte le altre opzioni sono soddisfatte e le transazioni sono ancora in conflitto, il sistema fa prevalere la modifica più recente.</MadCap:conditionalText></p>
+        <p>I conflitti sono risolti quando le modifiche sono applicate al database di rete e non al database remoto.</p>
+        <p class="Infinitive" MadCap:conditions="Output.WebClient,Output.Legacy LAN">Possibili criteri di regole di conflitto</p>
+        <ul style="list-style-type: disc;" MadCap:conditions="Output.Legacy LAN,Output.WebClient">
+            <li value="1">Il proprietario del record vince (Regola: è il proprietario del record)</li>
+            <li value="2">Chiunque abbia fatto le modifiche più recenti vince. (Regola: ha apportato le modifiche più recenti)</li>
+            <li value="3">Vince l'utente del client di rete SalesLogix. (Regola: è un Client di Rete)</li>
+            <li value="4">Vince l'utente remoto di SalesLogix. (Regola: E' un utente Remoto)</li>
+        </ul>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Comunicaci come possiamo migliorare la guida</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

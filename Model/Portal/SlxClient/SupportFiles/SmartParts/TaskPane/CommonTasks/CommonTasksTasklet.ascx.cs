@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Web;
@@ -11,7 +13,9 @@ using NHibernate;
 using Sage.Entity.Interfaces;
 using Sage.Platform;
 using Sage.Platform.Application;
+using Sage.Platform.Application.Services;
 using Sage.Platform.Application.UI;
+using Sage.Platform.Diagnostics;
 using Sage.Platform.Orm;
 using Sage.Platform.Security;
 using Sage.Platform.WebPortal;
@@ -22,12 +26,15 @@ using Sage.SalesLogix.Client.GroupBuilder;
 using Sage.SalesLogix.Client.Reports;
 using Sage.SalesLogix.PickLists;
 using Sage.SalesLogix.SelectionService;
+using Sage.SalesLogix.Services;
 using Sage.SalesLogix.Web.Controls;
 using Sage.SalesLogix.Web.SelectionService;
-using GroupLayoutItem = Sage.SalesLogix.Client.GroupBuilder.GroupLayoutItem;
+using log4net;
 
 public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserControl, ISmartPartInfoProvider
 {
+    private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
     #region Initialize Items
 
     [ServiceDependency]
@@ -185,12 +192,6 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
     {
         tskExportToExcel.Command += tskExportToExcel_Command;
         ScriptManager.GetCurrent(Page).RegisterPostBackControl(FindControl("tskExportToExcel"));
-        if (!IsPostBack)
-        {
-            GroupContext groupContext = GroupContext.GetGroupContext();
-            if ((groupContext != null) && (groupContext.CurrentGroupInfo != null))
-                divLeadAssignOwner.Visible = (groupContext.CurrentGroupInfo.TableName.ToUpper().Equals("LEAD"));
-        }
     }
 
     void tskExportToExcel_Command(object sender, CommandEventArgs e)
@@ -212,6 +213,21 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
             // Is reporting enabled?
             _reportingEnabled = (!string.IsNullOrEmpty(ReportingUtil.GetReportingUrl()));
 
+            if (!_reportingEnabled)
+            {
+                var systemInfo = ApplicationContext.Current.Services.Get<ISystemOptionsService>();
+                const int dbRemote = 2;
+                if (systemInfo != null && systemInfo.DbType.Equals(dbRemote))
+                {
+                    var userOptions = ApplicationContext.Current.Services.Get<IUserOptionsService>(true);
+                    var sUseActiveReporting = userOptions.GetCommonOption("UseActiveReporting", "Reporting");
+                    if (!string.IsNullOrEmpty(sUseActiveReporting) && sUseActiveReporting.ToUpperInvariant().StartsWith("T"))
+                    {
+                        _reportingEnabled = true;
+                    }
+                }
+            }
+
             // If the current group is an AdHoc group, then we need to display further AdHoc options.  We use GroupContext to determine this.
             DetermineAdHocStatus();
 
@@ -231,7 +247,7 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
             items.DataBind();
 
             selectionText.Text = GetLocalResourceObject("SelectionText_DisplayCaption").ToString();
-
+            clearText.Text = GetLocalResourceObject("ClearText_DisplayCaption").ToString();
             SAG.Update();
         }
     }
@@ -252,7 +268,7 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
     /// <param name="targetResponse">The target response.</param>
     private void ShowResponseView(ITargetResponse targetResponse)
     {
-        //TODO: Can these dilaog calls be placed in the Link Handler?
+        //TODO: Can these dialog calls be placed in the Link Handler?
         if (DialogService != null)
         {
             string caption = GetLocalResourceObject("AddResponse_DialogCaption").ToString();
@@ -283,26 +299,23 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         if (tasksByEntityList.ContainsKey(currentEntity)) length = tasksByEntityList[currentEntity].GetLength(0);
         for (int i = 0; i < length; i++)
         {
+            var taskKey = tasksByEntityList[currentEntity].GetValue(i, 0).ToString();
             //Menu display conditions based on current Group and Context
-            if (tasksByEntityList[currentEntity].GetValue(i, 0).ToString() == "tskRemoveFromGroup" && !_currentIsAdHoc)
+            if (taskKey == "tskRemoveFromGroup" && !_currentIsAdHoc)
             {
             }
-            else if (tasksByEntityList[currentEntity].GetValue(i, 0).ToString() == "tskAddToGroup" && !_contextHasAdHoc)
+            else if (taskKey == "tskAddToGroup" && !_contextHasAdHoc)
             {
             }
             else
             {
                 // make sure the current user has access to this item's secured action
-                bool showItem = true;
-                if (tasksByEntityList[currentEntity].GetLength(1) == 5 && !string.IsNullOrEmpty(tasksByEntityList[currentEntity].GetValue(i, 4).ToString()) && !HasAccess(tasksByEntityList[currentEntity].GetValue(i, 4).ToString()))
-                    showItem = false;
-
-                showItem = ShowTask(currentEntity, tasksByEntityList[currentEntity].GetValue(i, 0).ToString());
-
+                var showItem = true;
+                showItem = ShowTask(currentEntity, taskKey);
                 if (showItem)
                 {
                     TaskItem item = new TaskItem();
-                    item.Id = tasksByEntityList[currentEntity].GetValue(i, 0).ToString();
+                    item.Id = taskKey;
                     item.Name = tasksByEntityList[currentEntity].GetValue(i, 1).ToString();
                     item.Action = tasksByEntityList[currentEntity].GetValue(i, 2).ToString();
                     item.PostbackFull = tasksByEntityList[currentEntity].GetValue(i, 3).ToString();
@@ -316,7 +329,7 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
 
     private List<TaskItem> CreateDetailViewTasks(string currentEntity)
     {
-        List<TaskItem> items = new List<TaskItem>();
+        var items = new List<TaskItem>();
 
         string lastUserId = string.Empty;
         IUser user = null;
@@ -330,44 +343,43 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         if (tasksByEntity.ContainsKey(currentEntity)) length = tasksByEntity[currentEntity].GetLength(0);
         for (int i = 0; i < length; i++)
         {
+            var taskKey = tasksByEntity[currentEntity].GetValue(i, 0).ToString();
             //Menu display conditions based on current Group, Context, and UserOptions
-            if (tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskRemoveFromGroup" && !_currentIsAdHoc) { }
+            if (taskKey == "tskRemoveFromGroup" && !_currentIsAdHoc) { }
             // do not display
-            else if (tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskAddToGroup" && !_contextHasAdHoc) { }
+            else if (taskKey == "tskAddToGroup" && !_contextHasAdHoc) { }
             // do not display
-            else if (tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskSendEmail" && !CanShowReportOrEmail()) { }
+            else if (taskKey == "tskSOEmail" && !CanShowReportOrEmail()) { }
             // do not display
-            else if (tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskDetailReport" && (!_reportingEnabled || !CanShowReportOrEmail())) { }
+            else if (taskKey == "tskDetailReport" && (!_reportingEnabled || !CanShowReportOrEmail())) { }
             //only want to add the sales order item if the accounting system does not handle sales orders)
-            else if (tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskAddSalesOrder" && (BusinessRuleHelper.AccountingSystemHandlesSO())) { }
+            else if (taskKey == "tskAddSalesOrder" && (BusinessRuleHelper.AccountingSystemHandlesSO())) { }
             // do not display
-            else if (lastUserId.Trim() == "ADMIN" && (tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskCopyUser" ||
-                                               tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskCopyUserProfile" ||
-                                               tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskReplaceTeamMember")) { }
+            else if (lastUserId.Trim() == "ADMIN" && (taskKey == "tskCopyUser" ||
+                                               taskKey == "tskCopyUserProfile" ||
+                                               taskKey == "tskReplaceTeamMember")) { }
             // do not display
             else if (user != null && user.Type == UserType.Retired &&
-                     (tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskCopyUser" ||
-                      tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskCopyUserProfile" ||
-                      tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskReplaceTeamMember")) { }
+                     (taskKey == "tskCopyUser" ||
+                      taskKey == "tskCopyUserProfile" ||
+                      taskKey == "tskReplaceTeamMember")) { }
             // do not display
-            else if (user != null && user.Type == UserType.Template && tasksByEntity[currentEntity].GetValue(i, 0).ToString() == "tskReplaceTeamMember") { }
+            else if (user != null && user.Type == UserType.Template && taskKey == "tskReplaceTeamMember") { }
             // do not display
             else
             {
                 // make sure the current user has access to this item's secured action
-                bool showItem = true;
-                if (tasksByEntity[currentEntity].GetLength(1) == 5 && !string.IsNullOrEmpty(tasksByEntity[currentEntity].GetValue(i, 4).ToString()) && !HasAccess(tasksByEntity[currentEntity].GetValue(i, 4).ToString()))
-                    showItem = false;
-
-                showItem = ShowTask(currentEntity, tasksByEntity[currentEntity].GetValue(i, 0).ToString());
-
+                var showItem = true;
+                showItem = ShowTask(currentEntity, taskKey);
                 if (showItem)
                 {
-                    TaskItem item = new TaskItem();
-                    item.Id = tasksByEntity[currentEntity].GetValue(i, 0).ToString();
-                    item.Name = tasksByEntity[currentEntity].GetValue(i, 1).ToString();
-                    item.Action = tasksByEntity[currentEntity].GetValue(i, 2).ToString();
-                    item.PostbackFull = tasksByEntity[currentEntity].GetValue(i, 3).ToString();
+                    var item = new TaskItem
+                    {
+                        Id = taskKey,
+                        Name = tasksByEntity[currentEntity].GetValue(i, 1).ToString(),
+                        Action = tasksByEntity[currentEntity].GetValue(i, 2).ToString(),
+                        PostbackFull = tasksByEntity[currentEntity].GetValue(i, 3).ToString()
+                    };
                     items.Add(item);
                 }
             }
@@ -382,10 +394,15 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
     private bool ShowTask(string entityName, string taskKey)
     {
         bool showTask = true;
-        string securedActionKey = string.Empty;
-        if (tasksSecurityMap.TryGetValue(taskKey, out securedActionKey))
+        string securedActionKey;
+        var key = entityName + taskKey;
+        if (!tasksSecurityMap.ContainsKey(key))
         {
-            IRoleSecurityService srv = ApplicationContext.Current.Services.Get<IRoleSecurityService>(true);
+            key = taskKey;
+        }
+        if (tasksSecurityMap.TryGetValue(key, out securedActionKey))
+        {
+            var srv = ApplicationContext.Current.Services.Get<IRoleSecurityService>(true);
             if (srv != null)
             {
                 showTask = srv.HasAccess(securedActionKey);
@@ -420,22 +437,6 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
                 }
             }
         }
-    }
-
-    private bool HasAccess(string appliedSecurity)
-    {
-        bool result = false;
-        if (!string.IsNullOrEmpty(appliedSecurity) && RoleSecurityService != null)
-            result = RoleSecurityService.HasAccess(appliedSecurity);
-
-        return result;
-    }
-
-    private Dictionary<string, string> ParseAttributes(string attributes)
-    {
-        Dictionary<string, string> attributeList = new Dictionary<string, string>();
-
-        return attributeList;
     }
 
     /// <summary>
@@ -493,18 +494,6 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
             case "tskReplaceTeam":
                 ShowReplaceOwner();
                 break;
-            case "tskInsertNote":
-                Link.NewNote();
-                break;
-            case "tskNewMeeting":
-                Link.ScheduleMeeting();
-                break;
-            case "tskNewPhoneCall":
-                Link.SchedulePhoneCall();
-                break;
-            case "tskNewToDo":
-                Link.ScheduleToDo();
-                break;
             case "tskAddNewPickList":
                 AddNewPickList();
                 break;
@@ -549,7 +538,7 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         string lastId = GetLastEntityId();
 
         if (!string.IsNullOrEmpty(lastId))
-            Link.DeleteTeam(new List<string>() { lastId });
+            Link.DeleteTeam(new List<string> { lastId });
     }
 
     private void DeleteDepartment()
@@ -557,7 +546,7 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         string lastId = GetLastEntityId();
 
         if (!string.IsNullOrEmpty(lastId))
-            Link.DeleteDepartment(new List<string>() { lastId });
+            Link.DeleteDepartment(new List<string> { lastId });
     }
 
     /// <summary>
@@ -568,7 +557,7 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         string lastId = GetLastEntityId();
 
         if (!string.IsNullOrEmpty(lastId))
-            Link.CopyUser(new List<string>() { lastId });
+            Link.CopyUser(new List<string> { lastId });
     }
 
     private string GetLastEntityId()
@@ -581,7 +570,7 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         string lastId = GetLastEntityId();
 
         if (!string.IsNullOrEmpty(lastId))
-            Link.CopyUserProfile(new List<string>() { lastId });
+            Link.CopyUserProfile(new List<string> { lastId });
     }
 
     private void ReplaceTeamMember()
@@ -597,7 +586,7 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
 
         if (lastId != null)
         {
-            Link.CopyTeam(new List<string>() { lastId.ToString() });
+            Link.CopyTeam(new List<string> { lastId.ToString() });
         }
     }
 
@@ -608,7 +597,7 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
 
         if (lastId != null)
         {
-            Link.CopyDepartment(new List<string>() { lastId.ToString() });
+            Link.CopyDepartment(new List<string> { lastId.ToString() });
         }
     }
 
@@ -630,7 +619,7 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         string lastId = GetLastEntityId();
 
         if (!string.IsNullOrEmpty(lastId))
-            Link.RemoveFromAllTeams(new List<string>() { lastId });
+            Link.RemoveFromAllTeams(new List<string> { lastId });
     }
 
     private void AddUserToTeam()
@@ -638,7 +627,7 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         string lastId = GetLastEntityId();
 
         if (!string.IsNullOrEmpty(lastId))
-            Link.AddToTeam(new List<string>() { lastId });
+            Link.AddToTeam(new List<string> { lastId });
     }
 
     private void AddNewPickList()
@@ -664,6 +653,7 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         GroupContextService groupContextService = ApplicationContext.Current.Services.Get<IGroupContextService>() as GroupContextService;
         CachedGroup currentGroup = groupContextService.GetGroupContext().CurrentGroupInfo.CurrentGroup;
         GroupInfo gInfo = currentGroup.GroupInformation;
+        gInfo.ApplyFiltersFromConfiguration();
 
         HttpCookie cFormat = Request.Cookies["format"];
 
@@ -678,25 +668,11 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
                 foreach (GroupLayoutItem gl in gInfo.GetGroupLayout().Items)
                 {
                     Layout item = new Layout();
-                    if (gl.Format.Equals("Owner") || gl.Format.Equals("User"))
-                    {
-                        item.ColumnName = gl.Alias + "NAME";
-                    }
-                    else
-                    {
-                        item.ColumnName = gl.Alias;
-                    }
-
+                    item.ColumnName = gl.Format.Equals("Owner") || gl.Format.Equals("User")
+                                          ? gl.Alias + "NAME"
+                                          : gl.Alias;
                     item.ColumnCaption = gl.Caption;
-
-                    if ((gl.Visible ?? false) && (gl.Width != 0))
-                    {
-                        item.Visible = true;
-                    }
-                    else
-                    {
-                        item.Visible = false;
-                    }
+                    item.Visible = (gl.Visible ?? false) && (gl.Width != 0);
 
                     item.FormatType = gl.Format;
                     item.FormatString = gl.FormatString;
@@ -705,7 +681,7 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
                     if (!layout.ContainsKey(item.ColumnName))
                     {
                         layout.Add(item.ColumnName, item);
-                    }
+                    }                   
                 }
 
                 if (passedArgument != "cancel")
@@ -725,20 +701,17 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
                         return;
                     }
 
-                    if (passedArgument == "selectAll")
-                    {
-                    }
-                    else
+                    if (passedArgument != "selectAll")
                     {
                         //Get the selection service and remove un selected records.
                         //the passArgument has is the selection key.
                         ISelectionService srv = SelectionServiceRequest.GetSelectionService();
                         ISelectionContext selectionContext = srv.GetSelectionContext(passedArgument);
-
                         RemoveUnSelectedRows(selectionContext, GroupTableSelections);
                     }
                     //remove hidden columns
                     SetLayout(GroupTableSelections, layout);
+                    RemoveHiddenColumnsFromLayouts(layout);
 
                     if (cFormat != null)
                     {
@@ -757,7 +730,17 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         }
         catch (Exception ex)
         {
-            DialogService.ShowMessage(ex.Message);
+            string sSlxErrorId = null;
+            var sMsg = ErrorHelper.GetClientErrorHtmlMessage(ex, ref sSlxErrorId);
+            if (!string.IsNullOrEmpty(sSlxErrorId))
+            {
+                log.Error(
+                    ErrorHelper.AppendSlxErrorId(
+                        "The call to SmartParts_TaskPane_CommonTasks_CommonTasksTasklet.ExportToFile() failed",
+                        sSlxErrorId), ex);
+            }
+            DialogService.ShowHtmlMessage(sMsg, ErrorHelper.IsDevelopmentContext() ? 600 : -1,
+                                          ErrorHelper.IsDevelopmentContext() ? 800 : -1);
         }
     }
 
@@ -767,11 +750,12 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         {
             using (ISession session = new SessionScopeWrapper())
             {
-                IQuery query = session.CreateQuery("select P.ItemId from PickList P where P.PickListId = :id order by P.Text");
-                query
-                    .SetAnsiString("id", "PICKLISTLIST")
-                    .SetCacheable(true);
-                selections = query.List<string>();
+                selections = session.QueryOver<PickList>()
+                    .Where(x => x.PickListId == "PICKLISTLIST")
+                    .OrderBy(x => x.Text).Asc
+                    .Select(x => x.ItemId)
+                    .Cacheable()
+                    .List<string>();
             }
         }
 
@@ -932,18 +916,18 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         }
     }
 
-    private void SetLayout(DataTable dataTable, IDictionary<string, Layout> layout)
+    private void SetLayout(DataTable dataTable, IDictionary<string, Layout> layouts)
     {
         for (int i = dataTable.Columns.Count - 1; i >= 0; i--)
         {
             DataColumn col = dataTable.Columns[i];
-            Layout item = null;
-            layout.TryGetValue(col.ColumnName, out item);
-            if (item != null)
+            Layout layout;
+            layouts.TryGetValue(col.ColumnName, out layout);
+            if (layout != null)
             {
-                if (item.Visible)
-                {
-                    col.Caption = item.ColumnCaption;
+                if (layout.Visible)
+                {                   
+                    col.Caption = layout.ColumnCaption;
                 }
                 else
                 {
@@ -955,12 +939,27 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
                 dataTable.Columns.Remove(col);
             }
         }
-        dataTable.AcceptChanges();
+
+        dataTable.AcceptChanges();        
+    }
+
+    private static void RemoveHiddenColumnsFromLayouts(IDictionary<string, Layout> layouts)
+    {
+        var hidden = (from layout in layouts.Values where layout.Visible == false select layout.ColumnName).ToList();
+
+        foreach (var hiddenLayout in hidden)
+        {
+            Layout layout;
+            if (layouts.TryGetValue(hiddenLayout, out layout))
+            {
+                layouts.Remove(hiddenLayout);
+            }
+        }
     }
 
     private static void RemoveUnSelectedRows(ISelectionContext selectionContext, DataTable table)
     {
-        if (selectionContext == null)
+        if (selectionContext == null || selectionContext.SelectionInfo.Mode == "selectAll")
             return;
 
         // Clean up the table to include only our client side selections
@@ -989,59 +988,6 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         table.AcceptChanges();
     }
 
-    private void RemoveUnSelectedRowsById(string selections, DataTable table)
-    {
-        // Clean up the table to include only our client side selections
-        bool keep;
-        string[] arraySelections = selections.Split(',');
-
-        foreach (DataRow row in table.Rows)
-        {
-            keep = false;
-            foreach (string sel in arraySelections)
-            {
-                string[] s = sel.Split(':');
-                if (row[0].ToString() == s[1])
-                {
-                    keep = true;
-                }
-            }
-            if (!keep)
-            {
-                row.Delete();
-            }
-        }
-        table.AcceptChanges();
-    }
-
-    private void RemoveUnSelectedRowsByNumber(string selections, DataTable table)
-    {
-        // Clean up the table to include only our client side selections
-        bool keep;
-        string[] arraySelections = selections.Split(',');
-
-        int i = 1;
-        foreach (DataRow row in table.Rows)
-        {
-            keep = false;
-            foreach (string sel in arraySelections)
-            {
-                string[] s = sel.Split(':');
-                if (i.ToString() == s[0])
-                {
-                    keep = true;
-                    continue;
-                }
-            }
-            if (!keep)
-            {
-                row.Delete();
-            }
-            i++;
-        }
-        table.AcceptChanges();
-    }
-
     private void ToTab(DataTable table, IDictionary<string, Layout> layout)
     {
         Response.Clear();
@@ -1052,9 +998,9 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
                               DateTime.Now,
                               Server.UrlEncode(GetLocalResourceObject("ExportToFile_FileName").ToString())));
         Response.ContentType = "application/csv";
-        Response.ContentEncoding = Encoding.Unicode;
+        Response.ContentEncoding = Encoding.UTF8;
         Response.Flush();
-        using (StreamWriter writer = new StreamWriter(Response.OutputStream, Encoding.Unicode))
+        using (StreamWriter writer = new StreamWriter(Response.OutputStream, Encoding.UTF8))
         {
             WriteTabFormat(table, writer, layout);
             writer.Flush();
@@ -1073,9 +1019,9 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
                               DateTime.Now,
                               Server.UrlEncode(GetLocalResourceObject("ExportToFile_FileName").ToString())));
         Response.ContentType = "application/csv";
-        Response.ContentEncoding = Encoding.GetEncoding(1252);
+        Response.ContentEncoding = Encoding.UTF8;
         Response.Flush();
-        using (StreamWriter writer = new StreamWriter(Response.OutputStream, Encoding.GetEncoding(1252)))
+        using (StreamWriter writer = new StreamWriter(Response.OutputStream, Encoding.UTF8))
         {
             WriteCsvFormat(table, writer, layout);
             writer.Flush();
@@ -1084,26 +1030,11 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         Response.End();
     }
 
-    protected int GetSelectionCount()
-    {
-        int count = 0;
-        ISelectionService ss = SelectionServiceRequest.GetSelectionService();
-        if (ss != null)
-        {
-            ISelectionContext sc = ss.GetSelectionContext("Test");
-            if (sc != null)
-            {
-                return sc.GetSelectionCount();
-            }
-        }
-        return count;
-    }
-
     private string EncodeTabValue(string value)
     {
         if (String.IsNullOrEmpty(value))
             return String.Empty;
-        return value.Replace("\t", " ").Replace("\r\n", "").Replace("\n", "");
+        return value.Replace("\t", " ").Replace("\r\n", " ").Replace("\n", " ");
     }
 
     private string EncodeCsvValue(string value)
@@ -1238,44 +1169,18 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         {
             return value;
         }
-
-        string boolValue = string.Empty;
-        if ((value.ToUpper() == "T") || (value.ToUpper() == "Y") || (value.ToUpper() == "1") || (value.ToUpper() == "+"))
-        {
-            if (string.IsNullOrEmpty(layout.FormatString))
-            {
-                if (GetLocalResourceObject("ExportToFile_BoolenYes") != null)
-                {
-                    boolValue = GetLocalResourceObject("ExportToFile_BoolenYes").ToString();
-                }
-                else
-                {
-                    boolValue = "Yes";
-                }
-            }
-            else
-            {
-                boolValue = layout.FormatString.Split('/')[0];
-            }
-        }
-        else
-        {
-            if (string.IsNullOrEmpty(layout.FormatString))
-            {
-                if (GetLocalResourceObject("ExportToFile_BoolenNo") != null)
-                {
-                    boolValue = GetLocalResourceObject("ExportToFile_BoolenNo").ToString();
-                }
-                else
-                {
-                    boolValue = "No";
-                }
-            }
-            else
-            {
-                boolValue = layout.FormatString.Split('/')[1];
-            }
-        }
+        string boolValue = (value.ToUpper() == "T") || (value.ToUpper() == "Y") || (value.ToUpper() == "1") ||
+                           (value.ToUpper() == "+")
+                               ? (string.IsNullOrEmpty(layout.FormatString)
+                                      ? (GetLocalResourceObject("ExportToFile_BoolenYes") != null
+                                             ? GetLocalResourceObject("ExportToFile_BoolenYes").ToString()
+                                             : "Yes")
+                                      : layout.FormatString.Split('/')[0])
+                               : (string.IsNullOrEmpty(layout.FormatString)
+                                      ? (GetLocalResourceObject("ExportToFile_BoolenNo") != null
+                                             ? GetLocalResourceObject("ExportToFile_BoolenNo").ToString()
+                                             : "No")
+                                      : layout.FormatString.Split('/')[1]);
         return boolValue;
     }
 
@@ -1303,7 +1208,7 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         EntityPage page = Page as EntityPage;
         if (page != null && page.EntityContext != null)
         {
-            if (page.EntityContext.EntityType.Equals(typeof (ISalesOrder)))
+            if (page.EntityContext.EntityType.Equals(typeof(ISalesOrder)))
             {
                 return EntityFactory.GetRepository<ISalesOrder>().Get(page.EntityContext.EntityID);
             }
@@ -1316,7 +1221,7 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         EntityPage page = Page as EntityPage;
         if (page != null && page.EntityContext != null)
         {
-            return page.EntityContext.EntityType.Equals(typeof (ISalesOrder));
+            return page.EntityContext.EntityType.Equals(typeof(ISalesOrder));
         }
         return false;
     }
@@ -1326,20 +1231,21 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
     private void FillListViewDictionaries()
     {
         string[,] accountListTasks =
-            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-             {"tskPromote", "TaskText_Promote", "javascript:promoteGroupToDashboard();", "false"},
-             {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+             {"tskPromote", "TaskText_Promote", "javascript:Sage.Utility.Dashboard.promoteGroupToDashboard();", "false"},
+             {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("IAccount", accountListTasks);
 
         string[,] contactListTasks =
-            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-             {"tskPromote", "TaskText_Promote", "javascript:promoteGroupToDashboard();", "false"},
-             {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+             {"tskPromote", "TaskText_Promote", "javascript:Sage.Utility.Dashboard.promoteGroupToDashboard();", "false"},
+             {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" },
+             {"tskWriteEmailToGroupSelection", "TaskText_WriteEmailToGroupSelection", "javascript:commonTaskActions.writeEmailToGroupSelection();", "false" }
             };
         tasksByEntityList.Add("IContact", contactListTasks);
 
@@ -1347,76 +1253,75 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         tasksByEntityList.Add("Activities", activitiesListTasks);
 
         string[,] opportunitiesListTasks =
-            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-             {"tskPromote", "TaskText_Promote", "javascript:promoteGroupToDashboard();", "false"},
-             {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+             {"tskPromote", "TaskText_Promote", "javascript:Sage.Utility.Dashboard.promoteGroupToDashboard();", "false"},
+             {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("IOpportunity", opportunitiesListTasks);
 
         string[,] leadsListTasks =
-            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-             {"tskPromote", "TaskText_Promote", "javascript:promoteGroupToDashboard();", "false"},
-             {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false"},
-             //{"tskAssignOwner", "TaskText_AssignOwner", "javascript:leadAssignOwner();", "true"},
-             //{"tskDeleteLeads", "TaskText_DeleteLeads", "javascript:leadDeleteRecords();", "true" }
+            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+             {"tskPromote", "TaskText_Promote", "javascript:Sage.Utility.Dashboard.promoteGroupToDashboard();", "false"},
+             {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false"},
+             {"tskWriteEmailToGroupSelection", "TaskText_WriteEmailToGroupSelection", "javascript:commonTaskActions.writeEmailToGroupSelection();", "false" }
             };
         tasksByEntityList.Add("ILead", leadsListTasks);
 
         string[,] campaignsListTasks =
-            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-             {"tskPromote", "TaskText_Promote", "javascript:promoteGroupToDashboard();", "false"},
-             {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+             {"tskPromote", "TaskText_Promote", "javascript:Sage.Utility.Dashboard.promoteGroupToDashboard();", "false"},
+             {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("ICampaign", campaignsListTasks);
 
         string[,] ticketsListTasks =
-            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-             {"tskPromote", "TaskText_Promote", "javascript:promoteGroupToDashboard();", "false"},
-             {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+             {"tskPromote", "TaskText_Promote", "javascript:Sage.Utility.Dashboard.promoteGroupToDashboard();", "false"},
+             {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("ITicket", ticketsListTasks);
 
         string[,] defectsListTasks =
-            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdocList(Ext.EventObject);", "false"},
-             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-             {"tskPromote", "TaskText_Promote", "javascript:promoteGroupToDashboard();", "false"},
-             {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdocList(event);", "false"},
+             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+             {"tskPromote", "TaskText_Promote", "javascript:Sage.Utility.Dashboard.promoteGroupToDashboard();", "false"},
+             {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("IDefect", defectsListTasks);
 
         string[,] returnsListTasks =
-            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-             {"tskPromote", "TaskText_Promote", "javascript:promoteGroupToDashboard();", "false"},
-             {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+             {"tskPromote", "TaskText_Promote", "javascript:Sage.Utility.Dashboard.promoteGroupToDashboard();", "false"},
+             {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("IReturn", returnsListTasks);
 
         string[,] contractsTasksList =
-            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-             {"tskPromote", "TaskText_Promote", "javascript:promoteGroupToDashboard();", "false"},
-             {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+             {"tskPromote", "TaskText_Promote", "javascript:Sage.Utility.Dashboard.promoteGroupToDashboard();", "false"},
+             {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("IContract", contractsTasksList);
 
         string[,] salesOrderListTasks =
-            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-             {"tskPromote", "TaskText_Promote", "javascript:promoteGroupToDashboard();", "false"},
-             {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+            {{"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+             {"tskPromote", "TaskText_Promote", "javascript:Sage.Utility.Dashboard.promoteGroupToDashboard();", "false"},
+             {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("ISalesOrder", salesOrderListTasks);
 
@@ -1425,80 +1330,80 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
 
         string[,] userListTasks =
             {
-                {"tskAddToTeam", "AddToTeamCaption", "javascript:PrepareSelectedRecords(AddToTeam); return false;", "false" },
+                {"tskAddToTeam", "AddToTeamCaption", "javascript:commonTaskActions.prepareSelectedRecords(commonTaskActions.addToTeam); return false;", "false" },
                 {"tskRemoveFromAllTeams", "RemoveFromAllTeamsCaption",
-                    string.Format("javascript:if(confirm('{0}')) PrepareSelectedRecords(RemoveFromAllTeams); return false;",
+                    string.Format("javascript:if(confirm('{0}')) commonTaskActions.prepareSelectedRecords(commonTaskActions.removeFromAllTeams); return false;",
                     PortalUtil.JavaScriptEncode(GetLocalResourceObject("ConfirmRemoveFromAllTeamsMsg").ToString())), "false" },
                 {"tskUserSep0", "Item_Separator", "","false"}, // separator
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("IUser", userListTasks);
 
         string[,] teamListTasks =
             {
-                {"tskAddToTeam", "AddToTeamCaption", "javascript:PrepareSelectedRecords(AddToTeam); return false;", "false" },
+                {"tskAddToTeam", "AddToTeamCaption", "javascript:commonTaskActions.prepareSelectedRecords(commonTaskActions.addToTeam); return false;", "false" },
                 {"tskRemoveFromAllTeams", "RemoveFromAllTeamsCaption",
-                    string.Format("javascript:if(confirm('{0}')) PrepareSelectedRecords(RemoveFromAllTeams); return false;",
+                    string.Format("javascript:if(confirm('{0}')) commonTaskActions.prepareSelectedRecords(commonTaskActions.removeFromAllTeams); return false;",
                     PortalUtil.JavaScriptEncode(GetLocalResourceObject("ConfirmRemoveFromAllTeamsMsg").ToString())), "false" },
                 {"tskUserSep0", "Item_Separator", "","false"}, // separator
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("ITeam", teamListTasks);
 
         string[,] departmentListTasks =
             {
 
-                {"tskAddToTeam", "AddToTeamCaption", "javascript:PrepareSelectedRecords(AddToTeam); return false;", "false" },
+                {"tskAddToTeam", "AddToTeamCaption", "javascript:commonTaskActions.prepareSelectedRecords(commonTaskActions.addToTeam); return false;", "false" },
                 {"tskRemoveFromAllTeams", "RemoveFromAllTeamsCaption",
-                    string.Format("javascript:if(confirm('{0}')) PrepareSelectedRecords(RemoveFromAllTeams); return false;",
+                    string.Format("javascript:if(confirm('{0}')) commonTaskActions.prepareSelectedRecords(commonTaskActions.removeFromAllTeams); return false;",
                     PortalUtil.JavaScriptEncode(GetLocalResourceObject("ConfirmRemoveFromAllTeamsMsg").ToString())), "false" },
                 {"tskUserSep0", "Item_Separator", "","false"}, // separator
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("IDepartment", departmentListTasks);
 
         string[,] productListTasks =
             {
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("IProduct", productListTasks);
 
         string[,] packageListTasks =
             {
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("IPackage", packageListTasks);
 
         string[,] competitorListTasks =
             {
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("ICompetitor", competitorListTasks);
 
         string[,] leadsourceListTasks =
             {
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("ILeadSource", leadsourceListTasks);
 
@@ -1506,81 +1411,81 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
             {
                 {"tskAddNewPickList", "TaskPickList_AddPickList", "", "false"},
                 {"tskUserSep0", "Item_Separator", "","false"}, // separator
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("IPickListView", pickListTasks);
         string[,] roleListTasks =
             {
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("IRole", roleListTasks);
 
         string[,] litItemListTasks =
             {
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("ILiteratureItem", litItemListTasks);
 
         string[,] litRequestListTasks =
             {
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("ILitRequest", litRequestListTasks);
 
         string[,] Resources =
             {
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("IResourceList", Resources);
 
         string[,] Qualifications =
             {
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("IQualificationCategory", Qualifications);
 
         string[,] SecuredActions =
             {
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("ISecuredAction", SecuredActions);
 
         string[,] StandardProblems =
             {
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("ITicketProblemType", StandardProblems);
 
         string[,] StandardResolutions =
             {
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:saveSelectionsAsNewGroup();","false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeSelectionsFromGroup();","false"},
-                {"tskExportToExcel", "TaskText_Export", "javascript:exportToExcel();", "false" }
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskSaveAsNewGroup","TaskText_SaveAsNew","javascript:commonTaskActions.saveSelectionsAsNewGroup();","false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeSelectionsFromGroup();","false"},
+                {"tskExportToExcel", "TaskText_Export", "javascript:commonTaskActions.exportToExcel();", "false" }
             };
         tasksByEntityList.Add("ITicketSolutionType", StandardResolutions);
     }
@@ -1588,47 +1493,46 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
     private void FillDetailPageDictionaries()
     {
         string[,] accountDetailTasks =
-            {{"tskDetailReport","TaskText_DetailReport","javascript:ShowDefaultReport();","false"},
-             {"","TaskText_Email","javascript:EmailSend();","false"},
+            {{"tskDetailReport","TaskText_DetailReport","javascript:commonTaskActions.showDetailReport();","false"},
+             {"tskEmail","TaskText_Email","javascript:commonTaskActions.emailSend();","false"},
             {"tskMailMerge","TaskText_MailMerge","javascript:ExecuteWriteAction(WriteAction.waWriteMailMerge, null);","false"},
-             {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"},
+             {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"},
              {"tskAddResponse","TaskText_ResponseToCampaign","","false"},
-             {"tskInsertNote","TaskText_AddNote","","false"},
-             {"tskNewMeeting","TaskText_Meeting","","false"},
-             {"tskNewPhoneCall","TaskText_PhoneCall","","false"},
-             {"tskNewToDo","TaskText_ToDo","","false"}};
+             {"tskInsertNote","TaskText_AddNote","javascript:Sage.Link.newNote();","false"},
+             {"tskNewMeeting","TaskText_Meeting","javascript:Sage.Link.scheduleActivity('Meeting');","false"},
+             {"tskNewPhoneCall","TaskText_PhoneCall","javascript:Sage.Link.scheduleActivity('PhoneCall');","false"},
+             {"tskNewToDo","TaskText_ToDo","javascript:Sage.Link.scheduleActivity('ToDo');","false"}};
         tasksByEntity.Add("IAccount", accountDetailTasks);
 
         string[,] contactDetailTasks =
-            {{"tskDetailReport","TaskText_DetailReport","javascript:ShowDefaultReport();","false"},
-             {"","TaskText_Email","javascript:EmailSend();","false"},
+            {{"tskDetailReport","TaskText_DetailReport","javascript:commonTaskActions.showDetailReport();","false"},
+             {"tskEmail","TaskText_Email","javascript:commonTaskActions.emailSend();","false"},
              {"tskMailMerge","TaskText_MailMerge","javascript:ExecuteWriteAction(WriteAction.waWriteMailMerge, null);","false"},
-             {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"},
+             {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"},
              {"tskAddResponse","TaskText_ResponseToCampaign","","false"},
-             {"tskInsertNote","TaskText_AddNote","","false"},
-             {"tskNewMeeting","TaskText_Meeting","","false"},
-             {"tskNewPhoneCall","TaskText_PhoneCall","","false"},
-             {"tskNewToDo","TaskText_ToDo","","false"}};
+             {"tskInsertNote","TaskText_AddNote","javascript:Sage.Link.newNote();","false"},
+             {"tskNewMeeting","TaskText_Meeting","javascript:Sage.Link.scheduleActivity('Meeting');","false"},
+             {"tskNewPhoneCall","TaskText_PhoneCall","javascript:Sage.Link.scheduleActivity('PhoneCall');","false"},
+             {"tskNewToDo","TaskText_ToDo","javascript:Sage.Link.scheduleActivity('ToDo');","false"}};
         tasksByEntity.Add("IContact", contactDetailTasks);
 
         string[,] opportunityDetailTasks =
-            {{"tskDetailReport","TaskText_DetailReport","javascript:ShowDefaultReport();","false"},
-             {"","TaskText_Email","javascript:EmailSend();","false"},
+            {{"tskDetailReport","TaskText_DetailReport","javascript:commonTaskActions.showDetailReport();","false"},
+             {"tskEmail","TaskText_Email","javascript:commonTaskActions.emailSend();","false"},
              {"tskMailMerge","TaskText_MailMerge","javascript:ExecuteWriteAction(WriteAction.waWriteMailMerge, null);","false"},
-             {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"},
-             //PENDING {"tskAddResponse","TaskText_ResponseToCampaign",""},
-             {"tskInsertNote","TaskText_AddNote","","false"},
-             {"tskNewMeeting","TaskText_Meeting","","false"},
-             {"tskNewPhoneCall","TaskText_PhoneCall","","false"},
-             {"tskNewToDo","TaskText_ToDo","","false"},
+             {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"},
+             {"tskInsertNote","TaskText_AddNote","javascript:Sage.Link.newNote();","false"},
+             {"tskNewMeeting","TaskText_Meeting","javascript:Sage.Link.scheduleActivity('Meeting');","false"},
+             {"tskNewPhoneCall","TaskText_PhoneCall","javascript:Sage.Link.scheduleActivity('PhoneCall');","false"},
+             {"tskNewToDo","TaskText_ToDo","javascript:Sage.Link.scheduleActivity('ToDo');","false"},
              {"tskAddSalesOrder","TaskText_SalesOrder","javascript:window.location='InsertSalesOrder.aspx?modeid=Insert&opp=yes';","false"}};
         tasksByEntity.Add("IOpportunity", opportunityDetailTasks);
 
         string[,] activityDetailTasks =
-            {{"","TaskText_Email","email","false"},
+            {{"tskEmail","TaskText_Email","email","false"},
              {"tskMailMerge","TaskText_MailMerge","javascript:ExecuteWriteAction(WriteAction.waWriteMailMerge, null);","false"},
              {"tskNewMeeting","TaskText_Meeting","","false"},
              {"tskNewPhoneCall","TaskText_PhoneCall","","false"},
@@ -1636,83 +1540,82 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         tasksByEntity.Add("IActivty", activityDetailTasks);
 
         string[,] leadDetailTasks =
-            {{"","TaskText_Email","javascript:EmailSend();","false"},
+            {{"tskEmail","TaskText_Email","javascript:commonTaskActions.emailSend();","false"},
              {"tskMailMerge","TaskText_MailMerge","javascript:ExecuteWriteAction(WriteAction.waWriteMailMerge, null);","false"},
-             {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"},
-             //{"TaskText_ResponseToCampaign","addResponseToCampaign"},
-             {"tskInsertNote","TaskText_AddNote","","false"},
-             {"tskNewMeeting","TaskText_Meeting","","false"},
-             {"tskNewPhoneCall","TaskText_PhoneCall","","false"},
-             {"tskNewToDo","TaskText_ToDo","","false"}};
+             {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"},
+             {"tskInsertNote","TaskText_AddNote","javascript:Sage.Link.newNote();","false"},
+             {"tskNewMeeting","TaskText_Meeting","javascript:Sage.Link.scheduleActivity('Meeting');","false"},
+             {"tskNewPhoneCall","TaskText_PhoneCall","javascript:Sage.Link.scheduleActivity('PhoneCall');","false"},
+             {"tskNewToDo","TaskText_ToDo","javascript:Sage.Link.scheduleActivity('ToDo');","false"}};
         tasksByEntity.Add("ILead", leadDetailTasks);
 
         string[,] campaignDetailTasks =
-            {{"Email","TaskText_Email","javascript:EmailSend();","false"},
+            {{"tskEmail","TaskText_Email","javascript:commonTaskActions.emailSend();","false"},
              {"tskMailMerge","TaskText_MailMerge","javascript:ExecuteWriteAction(WriteAction.waWriteMailMerge, null);","false"},
-             {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"},
-             {"tskInsertNote","TaskText_AddNote","","false"},
-             {"tskNewMeeting","TaskText_Meeting","","false"},
-             {"tskNewPhoneCall","TaskText_PhoneCall","","false"},
-             {"tskNewToDo","TaskText_ToDo","","false"}};
+             {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"},
+      {"tskInsertNote","TaskText_AddNote","javascript:Sage.Link.newNote();","false"},
+             {"tskNewMeeting","TaskText_Meeting","javascript:Sage.Link.scheduleActivity('Meeting');","false"},
+             {"tskNewPhoneCall","TaskText_PhoneCall","javascript:Sage.Link.scheduleActivity('PhoneCall');","false"},
+             {"tskNewToDo","TaskText_ToDo","javascript:Sage.Link.scheduleActivity('ToDo');","false"}};
         tasksByEntity.Add("ICampaign", campaignDetailTasks);
 
         string[,] ticketDetailTasks =
-            {{"tskDetailReport","TaskText_DetailReport","javascript:ShowDefaultReport();","false"},
-             {"cmdEmail","TaskText_Email","javascript:EmailSend();","false"},
+            {{"tskDetailReport","TaskText_DetailReport","javascript:commonTaskActions.showDetailReport();","false"},
+             {"tskEmail","TaskText_Email","javascript:commonTaskActions.emailSend();","false"},
              {"tskMailMerge","TaskText_MailMerge","javascript:ExecuteWriteAction(WriteAction.waWriteMailMerge, null);","false"},
-             {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"},
-             {"tskInsertNote","TaskText_AddNote","","false"},
-             {"tskNewMeeting","TaskText_Meeting","","false"},
-             {"tskNewPhoneCall","TaskText_PhoneCall","","false"},
-             {"tskNewToDo","TaskText_ToDo","","false"}};
+             {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"},
+      {"tskInsertNote","TaskText_AddNote","javascript:Sage.Link.newNote();","false"},
+             {"tskNewMeeting","TaskText_Meeting","javascript:Sage.Link.scheduleActivity('Meeting');","false"},
+             {"tskNewPhoneCall","TaskText_PhoneCall","javascript:Sage.Link.scheduleActivity('PhoneCall');","false"},
+             {"tskNewToDo","TaskText_ToDo","javascript:Sage.Link.scheduleActivity('ToDo');","false"}};
         tasksByEntity.Add("ITicket", ticketDetailTasks);
 
         string[,] defectDetailTasks =
-            {{"tskDetailReport","TaskText_DetailReport","javascript:ShowDefaultReport();","false"},
-             {"","TaskText_Email","javascript:EmailSend();","false"},
+            {{"tskDetailReport","TaskText_DetailReport","javascript:commonTaskActions.showDetailReport();","false"},
+             {"tskEmail","TaskText_Email","javascript:commonTaskActions.emailSend();","false"},
              {"tskMailMerge","TaskText_MailMerge","javascript:ExecuteWriteAction(WriteAction.waWriteMailMerge, null);","false"},
-             {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"},
-             {"tskInsertNote","TaskText_AddNote","","false"},
-             {"tskNewMeeting","TaskText_Meeting","","false"},
-             {"tskNewPhoneCall","TaskText_PhoneCall","","false"},
-             {"tskNewToDo","TaskText_ToDo","","false"}};
+             {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"},
+             {"tskInsertNote","TaskText_AddNote","javascript:Sage.Link.newNote();","false"},
+             {"tskNewMeeting","TaskText_Meeting","javascript:Sage.Link.scheduleActivity('Meeting');","false"},
+             {"tskNewPhoneCall","TaskText_PhoneCall","javascript:Sage.Link.scheduleActivity('PhoneCall');","false"},
+             {"tskNewToDo","TaskText_ToDo","javascript:Sage.Link.scheduleActivity('ToDo');","false"}};
         tasksByEntity.Add("IDefect", defectDetailTasks);
 
         string[,] returnDetailTasks =
-            {{"","TaskText_Email","javascript:EmailSend();","false"},
+            {{"tskEmail","TaskText_Email","javascript:commonTaskActions.emailSend();","false"},
              {"tskMailMerge","TaskText_MailMerge","javascript:ExecuteWriteAction(WriteAction.waWriteMailMerge, null);","false"},
-             {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"},
-             {"tskInsertNote","TaskText_AddNote","","false"},
-             {"tskNewMeeting","TaskText_Meeting","","false"},
-             {"tskNewPhoneCall","TaskText_PhoneCall","","false"},
-             {"tskNewToDo","TaskText_ToDo","","false"}};
+             {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"},
+      {"tskInsertNote","TaskText_AddNote","javascript:Sage.Link.newNote();","false"},
+             {"tskNewMeeting","TaskText_Meeting","javascript:Sage.Link.scheduleActivity('Meeting');","false"},
+             {"tskNewPhoneCall","TaskText_PhoneCall","javascript:Sage.Link.scheduleActivity('PhoneCall');","false"},
+             {"tskNewToDo","TaskText_ToDo","javascript:Sage.Link.scheduleActivity('ToDo');","false"}};
         tasksByEntity.Add("IReturn", returnDetailTasks);
 
         string[,] contractDetailTasks =
-            {{"","TaskText_Email","javascript:EmailSend();","false"},
+            {{"tskEmail","TaskText_Email","javascript:commonTaskActions.emailSend();","false"},
              {"tskMailMerge","TaskText_MailMerge","javascript:ExecuteWriteAction(WriteAction.waWriteMailMerge, null);","false"},
-             {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"},
-             {"tskInsertNote","TaskText_AddNote","","false"},
-             {"tskNewMeeting","TaskText_Meeting","","false"},
-             {"tskNewPhoneCall","TaskText_PhoneCall","","false"},
-             {"tskNewToDo","TaskText_ToDo","","false"}};
+             {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"},
+             {"tskInsertNote","TaskText_AddNote","javascript:Sage.Link.newNote();","false"},
+             {"tskNewMeeting","TaskText_Meeting","javascript:Sage.Link.scheduleActivity('Meeting');","false"},
+             {"tskNewPhoneCall","TaskText_PhoneCall","javascript:Sage.Link.scheduleActivity('PhoneCall');","false"},
+             {"tskNewToDo","TaskText_ToDo","javascript:Sage.Link.scheduleActivity('ToDo');","false"}};
         tasksByEntity.Add("IContract", contractDetailTasks);
 
         string[,] salesOrderDetailTasks =
-            {{"tskDetailReport","TaskText_DetailReport","javascript:ShowDefaultReport();","false"},
-             {"tskSendEmail","TaskText_Email","javascript:EmailSend();","false"},
-             {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-             {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"},
-             {"tskInsertNote","TaskText_AddNote","","false"},
-             {"tskNewMeeting","TaskText_Meeting","","false"},
-             {"tskNewPhoneCall","TaskText_PhoneCall","","false"},
-             {"tskNewToDo","TaskText_ToDo","","false"}};
+            {{"tskDetailReport","TaskText_DetailReport","javascript:commonTaskActions.showDetailReport();","false"},
+             {"tskSOEmail","TaskText_Email","javascript:commonTaskActions.emailSend();","false"},
+             {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+             {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"},
+             {"tskInsertNote","TaskText_AddNote","javascript:Sage.Link.newNote();","false"},
+             {"tskNewMeeting","TaskText_Meeting","javascript:Sage.Link.scheduleActivity('Meeting');","false"},
+             {"tskNewPhoneCall","TaskText_PhoneCall","javascript:Sage.Link.scheduleActivity('PhoneCall');","false"},
+             {"tskNewToDo","TaskText_ToDo","javascript:Sage.Link.scheduleActivity('ToDo');","false"}};
         tasksByEntity.Add("ISalesOrder", salesOrderDetailTasks);
 
         string[,] codePickListTasks = { { "tskAddNewPickList", "TaskText_AddNewPickList", "", "false" } };
@@ -1725,8 +1628,8 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
                 {"tskReplaceTeamMember", "ReplaceOnAllTeamsCaption", "", "false" },
                 //AdHoc group Management
                 {"tskUserSep0", "Item_Separator", "","false"}, // separator
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"}
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"}
             };
         tasksByEntity.Add("IUser", userDetailTasks);
 
@@ -1738,8 +1641,8 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
                 {"tskReplaceTeamMember", "ReplaceOnAllTeamsCaption", "", "false" },
                 //AdHoc group Management
                 {"tskUserSep0", "Item_Separator", "","false"}, // separator
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"}
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"}
             };
         tasksByEntity.Add("ITeam", teamDetailTasks);
 
@@ -1751,56 +1654,56 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
                 {"tskReplaceTeamMember", "ReplaceOnAllTeamsCaption", "", "false" },
                 //AdHoc group Management
                 {"tskUserSep0", "Item_Separator", "","false"}, // separator
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"}
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"}
             };
         tasksByEntity.Add("IDepartment", departmentDetailTasks);
 
         string[,] roleDetailTasks =
             {
                 //AdHoc group Management
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"}
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"}
             };
         tasksByEntity.Add("IRole", roleDetailTasks);
 
         string[,] competitorDetailTasks =
             {
                 //AdHoc group Management
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"}
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"}
             };
         tasksByEntity.Add("ICompetitor", competitorDetailTasks);
 
         string[,] leadSourceDetailTasks =
             {
                 //AdHoc group Management
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"}
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"}
             };
         tasksByEntity.Add("ILeadSource", leadSourceDetailTasks);
 
         string[,] productDetailTasks =
             {
                 //AdHoc group Management
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"}
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"}
             };
         tasksByEntity.Add("IProduct", productDetailTasks);
 
         string[,] packageDetailTasks =
             {
                 //AdHoc group Management
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"}
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"}
             };
         tasksByEntity.Add("IPackage", packageDetailTasks);
 
         string[,] litItemDetailTasks =
             {
                 //AdHoc group Management
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"}
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"}
             };
         tasksByEntity.Add("ILiteratureItem", litItemDetailTasks);
 
@@ -1809,16 +1712,16 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
                 {"tskAddNewPickList", "TaskPickList_AddPickList", "", "false"},
                 //AdHoc group Management
                 {"tskUserSep0", "Item_Separator", "","false"}, // separator
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"}
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"}
             };
         tasksByEntity.Add("IPickListView", pickListDetailTasks);
 
         string[,] litRequestDetailTasks =
             {
                 //AdHoc group Management
-                {"tskAddToGroup", "TaskText_AddToGroup","javascript:showAdHocList(Ext.EventObject);", "false"},
-                {"tskRemoveFromGroup","TaskText_Remove","javascript:removeCurrentFromGroup();","false"}
+                {"tskAddToGroup", "TaskText_AddToGroup","javascript:commonTaskActions.showAdHocList(event);", "false"},
+                {"tskRemoveFromGroup","TaskText_Remove","javascript:commonTaskActions.removeCurrentFromGroup();","false"}
             };
         tasksByEntity.Add("ILitRequest", litRequestDetailTasks);
     }
@@ -1828,6 +1731,21 @@ public partial class SmartParts_TaskPane_CommonTasks_CommonTasksTasklet : UserCo
         //To-Do break out according to Entity;
         IDictionary<string, string> maps = new Dictionary<string, string>();
         maps.Add("tskExportToExcel", "Entities/Group/ExportToFile");
+        maps.Add("tskAddSalesOrder", "Entities/SalesOrder/Add");
+        maps.Add("tskAddResponse", "Entities/Campaign/Edit");
+        //maps.Add("tskAddToGroup", "Entities/Group/AddToGroup");
+        //maps.Add("tskRemoveFromGroup", "Entities/Group/RemoveFromGroup");
+        //maps.Add("tskSaveAsNewGroup", "Entities/Group/SaveAsNew");
+        //maps.Add("tskPromote", "Entities/Group/Promote");
+        //maps.Add("tskEmail", "Entities/Group/Email");
+        //maps.Add("tskWriteEmailToGroupSelection", "Entities/Group/Email");
+        //maps.Add("tskMailMerge", "Entities/Group/MailMerge");
+        //maps.Add("IAccounttskDetailReport", "Entities/Account/Report");
+        //maps.Add("IContacttskDetailReport", "Entities/Contact/Report");
+        //maps.Add("IOpportunitytskDetailReport", "Entities/Opportunity/Report");
+        //maps.Add("ITickettskDetailReport", "Entities/Ticket/Report");
+        //maps.Add("IDefecttskDetailReport", "Entities/Defect/Report");
+        //maps.Add("ISalesOrdertskDetailReport", "Entities/SalesOrder/Report");
         return maps;
     }
 

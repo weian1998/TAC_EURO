@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Sage.Entity.Interfaces;
@@ -7,27 +8,25 @@ using Sage.Platform.Application;
 using Sage.Platform.Application.Services;
 using Sage.Platform.Application.UI;
 using Sage.Platform.Application.UI.Web;
+using Sage.Platform.Security;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.SalesLogix;
 using Sage.SalesLogix.WebUserOptions;
 using Sage.Platform.Data;
-using System.Data.OleDb;
-using System.Data;
 using System.Collections.Generic;
 using Sage.SalesLogix.Security;
 
+// ReSharper disable CheckNamespace
+// ReSharper disable ConvertToAutoProperty
+
+//EntityBoundSmartPartInfoProvider
 public partial class GeneralSearchOptionsPage : UserControl, ISmartPartInfoProvider
 {
-
-    private IPageWorkItemLocator _locator;
     [ServiceDependency]
-    public IPageWorkItemLocator Locator
-    {
-        get { return _locator; }
-        set { _locator = value; }
-    }
+    public IPageWorkItemLocator Locator { get; set; }
 
-    private const string _optionsMapPath = @"App_Data\LookupValues";
+    private const string _optionsMapPath = @"App_Data\LookupValues";  
+    private GeneralSearchOptions _options;
 
     /// <summary>
     /// Handles the PreRender event of the Page control.
@@ -36,43 +35,46 @@ public partial class GeneralSearchOptionsPage : UserControl, ISmartPartInfoProvi
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void Page_PreRender(object sender, EventArgs e)
     {
-        GeneralSearchOptions options;
-        options = GeneralSearchOptions.Load(Server.MapPath(_optionsMapPath));
+        var _UserOptions = ApplicationContext.Current.Services.Get<IUserOptionsService>();
         // set defaults
-        Utility.SetSelectedValue(_showOnStartup, GetStartupValFromUrl(options.ShowOnStartup));
-        if (options.DefaultOwnerTeam != string.Empty)
-            _defaultOwnerTeam.LookupResultValue = EntityFactory.GetById<IOwner>(options.DefaultOwnerTeam);
-        Utility.SetSelectedValue(_logToHistory, "T");
+        Utility.SetSelectedValue(_showOnStartup, GetStartupValFromUrl(_options.ShowOnStartup));
+        if (_options.DefaultOwnerTeam != string.Empty)
+            _defaultOwnerTeam.LookupResultValue = EntityFactory.GetById<IOwner>(_options.DefaultOwnerTeam);        
         const string falseValues = "F,FALSE,N,NO,0";
-        if (falseValues.IndexOf(options.LogToHistory.ToUpperInvariant()) > -1)
-            Utility.SetSelectedValue(_logToHistory, "F");
+        Utility.SetSelectedValue(_logToHistory,
+                                 falseValues.IndexOf(_options.LogToHistory.ToUpperInvariant(),
+                                                     StringComparison.InvariantCultureIgnoreCase) > -1
+                                     ? "F"
+                                     : "T");
+        //-----------------------------------------------------------------------
         //Defect 1-80914 
-        //  DThompson - "Please only hide the options for now.  We may re-enable them in Sawgrass depending on the direction we choose to take."
-        //_promptDuplicateContacts.Checked = options.PromptForDuplicateContacts;
-        //_promptContactNotFound.Checked = options.PromptForContactNotFound;
-        _useActiveReporting.Checked = options.UseActiveReporting;
-        _autoLogoff.Checked = options.AutoLogoff;
-        _logoffDuration.Text = options.LogoffDuration.ToString();
-        Utility.SetSelectedValue(_logoffUnits, options.LogoffUnits);
-        txtEmailBaseTemplateId.Text = options.EmailBaseTemplate;
-        txtLetterBaseTemplateId.Text = options.LetterBaseTemplate;
-        txtFaxBaseTemplateId.Text = options.FaxBaseTemplate;
-        txtRecentTemplates.Text = options.RecentTemplates;
-        txtFaxProvider.Text = options.FaxProvider;
-        chkPromptForUnsavedData.Checked = options.PromptForUnsavedData;
+        // Please only hide the options for now.  We may re-enable them in Sawgrass depending on the direction we choose to take.
+        // These options are hidden; if we do not set them...the options will be overwritten with the default values.
+        _promptDuplicateContacts.Checked = _options.PromptForDuplicateContacts;
+        _promptContactNotFound.Checked = _options.PromptForContactNotFound;
+        _useActiveReporting.Checked = _options.UseActiveReporting;
+        _autoLogoff.Checked = _options.AutoLogoff;
+        _logoffDuration.Text = _options.LogoffDuration.ToString(CultureInfo.InvariantCulture);
+        Utility.SetSelectedValue(_logoffUnits, _options.LogoffUnits);
 
-        txtEmailBaseTemplate.Text = Utility.GetSingleValue("Name", "Plugin", "PluginId", txtEmailBaseTemplateId.Text);
-        txtLetterBaseTemplate.Text = Utility.GetSingleValue("Name", "Plugin", "PluginId", txtLetterBaseTemplateId.Text);
-        txtFaxBaseTemplate.Text = Utility.GetSingleValue("Name", "Plugin", "PluginId", txtFaxBaseTemplateId.Text);
+        txtRecentTemplates.Text = _options.RecentTemplates;
+        txtFaxProvider.Value = _options.FaxProvider;
+        chkPromptForUnsavedData.Checked = _options.PromptForUnsavedData;
 
         var systemInfo = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.SalesLogix.Services.ISystemOptionsService>(true);
         if (systemInfo.MultiCurrency)
         {
+            bool allowCurrencyChange = !_UserOptions.GetCommonOptionLocked("Currency", "General");
             lblMyCurrency.Visible = true;
             luMyCurrency.Visible = true;
-            if (!String.IsNullOrEmpty(options.MyCurrencyCode))
+            if (!String.IsNullOrEmpty(_options.MyCurrencyCode) && luMyCurrency.LookupResultValue == null)
             {
-                luMyCurrency.LookupResultValue = EntityFactory.GetById<IExchangeRate>(options.MyCurrencyCode);
+                luMyCurrency.LookupResultValue = EntityFactory.GetById<IExchangeRate>(_options.MyCurrencyCode);
+            }
+
+            if (!allowCurrencyChange)
+            {
+                luMyCurrency.ReadOnly = true;
             }
         }
         else
@@ -80,10 +82,11 @@ public partial class GeneralSearchOptionsPage : UserControl, ISmartPartInfoProvi
             lblMyCurrency.Visible = false;
             luMyCurrency.Visible = false;
         }
-        txtEmailBaseTemplateId.Attributes.Add("style", "display:none");
-        txtLetterBaseTemplateId.Attributes.Add("style", "display:none");
-        txtFaxBaseTemplateId.Attributes.Add("style", "display:none");
+        txtEmailBaseTemplate.Attributes.Add("style", "height:22px; -moz-box-sizing:border-box; box-sizing:border-box; width:100%;");
+        txtLetterBaseTemplate.Attributes.Add("style", "height:22px; -moz-box-sizing:border-box; box-sizing:border-box; width:100%;");
+        txtFaxBaseTemplate.Attributes.Add("style", "height:22px; -moz-box-sizing:border-box; box-sizing:border-box; width:100%;");
         txtRecentTemplates.Attributes.Add("onchange", "javascript:checkMenuRange()");
+        lblFaxProvider.Attributes.Add("style", "display:none");
 
         var optionSvc = ApplicationContext.Current.Services.Get<Sage.SalesLogix.Services.ISystemOptionsService>(true);
         int dbType = optionSvc.DbType;
@@ -94,7 +97,6 @@ public partial class GeneralSearchOptionsPage : UserControl, ISmartPartInfoProvi
             _useActiveReporting.Attributes.Add("style", "display:none");
         }
 
-        IUserOptionsService _UserOptions = ApplicationContext.Current.Services.Get<IUserOptionsService>();
         string _group = _UserOptions.GetCommonOption("SyncGroup", "Intellisync");
         _defaultOwnerTeam.Enabled = !_UserOptions.GetCommonOptionLocked("InsertSecCodeID", "General");
 
@@ -105,6 +107,10 @@ public partial class GeneralSearchOptionsPage : UserControl, ISmartPartInfoProvi
         }
         else
             _intellisyncGroup.Enabled = true;
+
+        string checkboxEnabledValue = _UserOptions.GetCommonOption("GroupCheckboxEnabled", "GroupGridView");
+        bool checkboxEnabled = Utility.StringToBool(checkboxEnabledValue);
+        cbCheckboxEnabled.Checked = checkboxEnabled;
 
         bool AllowUserToChange = !_UserOptions.GetCommonOptionLocked("DefaultMemoTemplate", "General");
         txtEmailBaseTemplate.Enabled = AllowUserToChange;
@@ -117,6 +123,7 @@ public partial class GeneralSearchOptionsPage : UserControl, ISmartPartInfoProvi
             txtFaxBaseTemplateImg.Attributes.Add("onclick", "");
         }
         LoadScript();
+        LoadTemplateOptions();
     }
 
     private void BindShowOnStartup()
@@ -127,23 +134,46 @@ public partial class GeneralSearchOptionsPage : UserControl, ISmartPartInfoProvi
             _showOnStartup.Items.Add(new ListItem(string.Empty, string.Empty));
             foreach (ListItem ni in StartupItems())
             {
-                ListItem navitem = new ListItem(ni.Text, ni.Text);
+                var navitem = new ListItem(ni.Text, ni.Text);
                 _showOnStartup.Items.Add(navitem);
             }
         }
     }
 
-    private List<ListItem> StartupItems()
+    private void BindLogoffUnits()
+    {
+        if (_logoffUnits.Items.Count == 0)
+        {
+            _logoffUnits.DataSource = _options.LogoffUnitsList;
+            _logoffUnits.DataTextField = _options.DataTextField;
+            _logoffUnits.DataValueField = _options.DataValueField;            
+        }
+    }
+
+    private void BindLogToHistory()
+    {
+        if (_logToHistory.Items.Count == 0)
+        {
+            _logToHistory.DataSource = _options.LogToHistoryLookupList;
+            _logToHistory.DataTextField = _options.DataTextField;
+            _logToHistory.DataValueField = _options.DataValueField;            
+        }
+    }
+
+    private IEnumerable<ListItem> StartupItems()
     {
         var res = new List<ListItem>();
         IWorkspace nb = ((UIWorkItem)Locator).Workspaces["NavBar"];
-        foreach (object sp in nb.SmartParts)
+        if (nb != null)
         {
-            foreach (NavItem ni in ((NavItemCollection)(sp)).Items)
+            foreach (object sp in nb.SmartParts)
             {
-                ListItem navitem = new ListItem(ni.Text, ni.NavURL);
-                if (!res.Contains(navitem))
-                    res.Add(navitem);
+                foreach (NavItem ni in ((NavItemCollection)(sp)).Items)
+                {
+                    var navitem = new ListItem(ni.Text, ni.NavURL);
+                    if (!res.Contains(navitem))
+                        res.Add(navitem);
+                }
             }
         }
         return res;
@@ -175,29 +205,23 @@ public partial class GeneralSearchOptionsPage : UserControl, ISmartPartInfoProvi
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void Page_Load(object sender, EventArgs e)
-    {      
+    {
         Page.Header.Controls.Add(new LiteralControl("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/SlxOptions.css\" />"));
-        GeneralSearchOptions options;
         try
         {
-            options = GeneralSearchOptions.Load(Server.MapPath(_optionsMapPath));
+            _options = GeneralSearchOptions.Load(Server.MapPath(_optionsMapPath));
         }
         catch
         {
             // temporary, as the service throws an exception for options not found
             // the service is not yet complete, but this allows testing of the UI
-            options = GeneralSearchOptions.CreateNew(Server.MapPath(_optionsMapPath));
+            _options = GeneralSearchOptions.CreateNew(Server.MapPath(_optionsMapPath));
         }
-
-        _logToHistory.DataSource = options.LogToHistoryLookupList;
-        _logToHistory.DataTextField = options.DataTextField;
-        _logToHistory.DataValueField = options.DataValueField;
-        _logoffUnits.DataSource = options.LogoffUnitsList;
-        _logoffUnits.DataTextField = options.DataTextField;
-        _logoffUnits.DataValueField = options.DataValueField;
 
         LoadIntellisyncOptions();
         BindShowOnStartup();
+        BindLogoffUnits();
+        BindLogToHistory();
         Page.DataBind();
     }
 
@@ -226,13 +250,18 @@ function showSDIIsInstalledMsg() {
     /// </summary>
     private void LoadIntellisyncOptions()
     {
-        List<ListItem> intellisyncGroups = GetUserSyncGroups();
+        if (_intellisyncGroup.Items.Count == 0)
+        {
+            List<ListItem> intellisyncGroups = GetUserSyncGroups();
 
-        // Insert an empty item
-        intellisyncGroups.Insert(0, new ListItem("", ""));
+            // Insert an empty item
+            intellisyncGroups.Insert(0, new ListItem("", ""));
 
-        _intellisyncGroup.DataSource = intellisyncGroups;
-        _intellisyncGroup.DataBind();
+            _intellisyncGroup.DataSource = intellisyncGroups;
+            _intellisyncGroup.DataTextField = "Text";
+            _intellisyncGroup.DataValueField = "Value";
+            _intellisyncGroup.DataBind();
+        }
     }
 
     /// <summary>
@@ -241,34 +270,40 @@ function showSDIIsInstalledMsg() {
     /// <returns></returns>
     private List<ListItem> GetUserSyncGroups()
     {
-
-        List<ListItem> results = new List<ListItem>();
-        string _userID = string.Empty;
+        var results = new List<ListItem>();
+        var userId = string.Empty;
 
         // Get the associated user
-        SLXUserService _userService = ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>() as SLXUserService;
-        if (_userService != null)
-            _userID = _userService.UserId;
+        var userService = ApplicationContext.Current.Services.Get<IUserService>();
+        if (userService != null)
+            userId = userService.UserId;
 
-        string _format = (string)GetLocalResourceObject("adhoc_group_format");
+        var format = (string)GetLocalResourceObject("adhoc_group_format");
 
         // Load up all of the adhoc groups
-        IDataService _dataService = ApplicationContext.Current.Services.Get<IDataService>();
+        var dataService = ApplicationContext.Current.Services.Get<IDataService>();
 
-        if (_dataService != null && !string.IsNullOrEmpty(_userID))
+        if (dataService != null && !string.IsNullOrEmpty(userId) && format != null)
         {
-            using (var conn = _dataService.GetOpenConnection())
+            using (var conn = dataService.GetOpenConnection())
+            using (var cmd = conn.CreateCommand())
             {
-                string SQL = "SELECT PLUGINID, NAME, (SELECT COUNT (*) FROM ADHOCGROUP WHERE GroupID = PluginID) AS ContactCount FROM PLUGIN WHERE TYPE = 8 AND FAMILY = 'Contact' AND PluginID IN (SELECT DISTINCT GroupID FROM ADHOCGROUP)	AND UserID = '{0}' ";
-                SQL = string.Format(SQL, _userID);
+                cmd.CommandText =
+                    @"SELECT A1.PLUGINID, A1.NAME, (SELECT COUNT(GROUPID) AS TotalCount
+                      FROM ADHOCGROUP WHERE (GROUPID = A1.PLUGINID)) AS ContactCount
+                      FROM PLUGIN A1 WHERE (A1.TYPE = 8) AND (A1.PLUGINID IN (
+                        SELECT A2.PLUGINID
+                        FROM PLUGIN A2
+                        WHERE (A2.PLUGINID = A2.DATACODE))) AND (A1.USERID = ?) AND (UPPER(A1.FAMILY) = 'CONTACT')
+                      ORDER BY A1.NAME";
+                cmd.Parameters.Add(cmd.CreateParameter("USERID", userId));
 
-                var adapter = new OleDbDataAdapter(SQL, conn as OleDbConnection);
-                DataTable _table = new DataTable();
-                adapter.Fill(_table);
-
-                foreach (DataRow row in _table.Rows)
+                using (var reader = cmd.ExecuteReader())
                 {
-                    results.Add(new ListItem(string.Format(_format, (string)row[1], row[2]), (string)row[0]));
+                    while (reader.Read())
+                    {
+                        results.Add(new ListItem(string.Format(format, reader[1], reader[2]), (string) reader[0]));
+                    }
                 }
             }
         }
@@ -297,47 +332,131 @@ function showSDIIsInstalledMsg() {
                 throw new ValidationException(htxtMenuRangeMessage.Value);
         }
         // save values
-        GeneralSearchOptions options = new GeneralSearchOptions(Server.MapPath(_optionsMapPath));
-        options.ShowOnStartup = GetStartupUrl(_showOnStartup.SelectedValue);
-        options.DefaultOwnerTeam = _defaultOwnerTeam.LookupResultValue.ToString();
-        options.LogToHistory = _logToHistory.SelectedValue;
+        _options.ShowOnStartup = GetStartupUrl(_showOnStartup.SelectedValue);
+        _options.DefaultOwnerTeam = _defaultOwnerTeam.LookupResultValue.ToString();
+        _options.LogToHistory = _logToHistory.SelectedValue;
+        //-----------------------------------------------------------------------
         //Defect 1-80914 
         //  DThompson - "Please only hide the options for now.  We may re-enable them in Sawgrass depending on the direction we choose to take."
-        //options.PromptForDuplicateContacts = _promptDuplicateContacts.Checked;
-        //options.PromptForContactNotFound = _promptContactNotFound.Checked;
-        options.UseActiveReporting = _useActiveReporting.Checked;
-        options.AutoLogoff = _autoLogoff.Checked;
-        options.LogoffDuration = Convert.ToInt32(_logoffDuration.Text);
-        options.LogoffUnits = _logoffUnits.SelectedValue;
-        options.EmailBaseTemplate = txtEmailBaseTemplateId.Text;
-        options.LetterBaseTemplate = txtLetterBaseTemplateId.Text;
-        options.FaxBaseTemplate = txtFaxBaseTemplateId.Text;
-        options.RecentTemplates = txtRecentTemplates.Text;
+        // These options are hidden; if we do not set them...the options will be overwritten with the default values.
+        _options.PromptForDuplicateContacts = _promptDuplicateContacts.Checked;
+        _options.PromptForContactNotFound = _promptContactNotFound.Checked;
+        //-----------------------------------------------------------------------
+        _options.UseActiveReporting = _useActiveReporting.Checked;
+        _options.AutoLogoff = _autoLogoff.Checked;
+        _options.LogoffDuration = Convert.ToInt32(_logoffDuration.Text);
+        _options.LogoffUnits = _logoffUnits.SelectedValue;
+        _options.RecentTemplates = txtRecentTemplates.Text;
+        _options.PromptForUnsavedData = chkPromptForUnsavedData.Checked;
 
-        options.PromptForUnsavedData = chkPromptForUnsavedData.Checked;
-
-        if (FaxProviderSelectedValue.Value != "undefined")
-        {
-            options.FaxProvider = FaxProviderSelectedValue.Value;
-        }
-        else
-        {
-            options.FaxProvider = txtFaxProvider.Text;
-        }
+        _options.FaxProvider = FaxProviderSelectedValue.Value != "undefined" ? FaxProviderSelectedValue.Value : txtFaxProvider.Value;
         if (luMyCurrency.LookupResultValue != null)
         {
-            options.MyCurrencyCode = ((IExchangeRate)(luMyCurrency.LookupResultValue)).Id.ToString();
+            _options.MyCurrencyCode = ((IExchangeRate)(luMyCurrency.LookupResultValue)).Id.ToString();
         }
 
         // Saves the intellisync group
-        IUserOptionsService _UserOptions = ApplicationContext.Current.Services.Get<IUserOptionsService>();
+        var _UserOptions = ApplicationContext.Current.Services.Get<IUserOptionsService>();
 
         if (_intellisyncGroup.SelectedItem != null)
         {
 
             _UserOptions.SetCommonOption("SyncGroup", "Intellisync", _intellisyncGroup.SelectedValue, false);
-            options.Save();
         }
+
+        _UserOptions.SetCommonOption("GroupCheckboxEnabled", "GroupGridView",
+                                     cbCheckboxEnabled.Checked.ToString(CultureInfo.InvariantCulture), false);
+
+        SaveTemplateOptions();
+
+        _options.Save();
+    }
+
+    /// <summary>
+    /// Loads the view.
+    /// </summary>
+    private void LoadTemplateOptions()
+    {
+        var userService = ApplicationContext.Current.Services.Get<IUserService>(true) as ISlxUserService;
+        if (userService != null)
+        {
+            var user = userService.GetUser();
+            var userId = user.Id.ToString();
+            var userOptions = Locator.GetPageWorkItem().BuildTransientItem<UserOptionsService>();            
+            userOptions.SetUserId(userId);
+
+            switch (htxtSelectedTemplateType.Value)
+            {
+                case "LEAD":
+                    txtEmailBaseTemplate.Text = userOptions.GetCommonOption("DefaultLeadMemoTemplate", "General");
+                    txtEmailBaseTemplateId.Value = userOptions.GetCommonOption("DefaultLeadMemoTemplateID", "General");
+                    txtLetterBaseTemplate.Text = userOptions.GetCommonOption("DefaultLeadLetterTemplate", "General");
+                    txtLetterBaseTemplateId.Value = userOptions.GetCommonOption("DefaultLeadLetterTemplateID", "General");
+                    txtFaxBaseTemplate.Text = userOptions.GetCommonOption("DefaultLeadFaxTemplate", "General");
+                    txtFaxBaseTemplateId.Value = userOptions.GetCommonOption("DefaultLeadFaxTemplateID", "General");
+                    break;
+                default:
+                    txtEmailBaseTemplate.Text = userOptions.GetCommonOption("DefaultMemoTemplate", "General");
+                    txtEmailBaseTemplateId.Value = userOptions.GetCommonOption("DefaultMemoTemplateID", "General");
+                    txtLetterBaseTemplate.Text = userOptions.GetCommonOption("DefaultLetterTemplate", "General");
+                    txtLetterBaseTemplateId.Value = userOptions.GetCommonOption("DefaultLetterTemplateID", "General");
+                    txtFaxBaseTemplate.Text = userOptions.GetCommonOption("DefaultFaxTemplate", "General");
+                    txtFaxBaseTemplateId.Value = userOptions.GetCommonOption("DefaultFaxTemplateID", "General");
+                    break;
+            }
+
+            if ((user.Type == UserType.WebViewer) || (user.Type == UserType.AddOn))
+            {
+                txtFaxBaseTemplate.Attributes.Add("DISABLED", "");
+                txtFaxBaseTemplate.Attributes["onclick"] = "";
+
+                txtLetterBaseTemplate.Attributes.Add("DISABLED", "");
+                txtLetterBaseTemplate.Attributes["onclick"] = "";
+
+                txtEmailBaseTemplate.Attributes.Add("DISABLED", "");
+                txtEmailBaseTemplate.Attributes["onclick"] = "";
+            }
+        }
+    }
+
+    private void SaveTemplateOptions()
+    {
+        var userService = ApplicationContext.Current.Services.Get<IUserService>(true) as ISlxUserService;
+        if (userService != null)
+        {
+            var user = userService.GetUser();
+            var userId = user.Id.ToString();
+            var userOptions = Locator.GetPageWorkItem().BuildTransientItem<UserOptionsService>();
+            userOptions.SetUserId(userId);
+            switch (htxtSelectedTemplateType.Value)
+            {
+                case "LEAD":
+                    userOptions.SetCommonOption("DefaultLeadMemoTemplate", "General", txtEmailBaseTemplate.Text, false);
+                    userOptions.SetCommonOption("DefaultLeadMemoTemplateID", "General", txtEmailBaseTemplateId.Value,
+                                                false);
+                    userOptions.SetCommonOption("DefaultLeadLetterTemplate", "General", txtLetterBaseTemplate.Text,
+                                                false);
+                    userOptions.SetCommonOption("DefaultLeadLetterTemplateID", "General", txtLetterBaseTemplateId.Value,
+                                                false);
+                    userOptions.SetCommonOption("DefaultLeadFaxTemplate", "General", txtFaxBaseTemplate.Text, false);
+                    userOptions.SetCommonOption("DefaultLeadFaxTemplateID", "General", txtFaxBaseTemplateId.Value, false);
+                    break;
+                default:
+                    userOptions.SetCommonOption("DefaultMemoTemplate", "General", txtEmailBaseTemplate.Text, false);
+                    userOptions.SetCommonOption("DefaultMemoTemplateID", "General", txtEmailBaseTemplateId.Value, false);
+                    userOptions.SetCommonOption("DefaultLetterTemplate", "General", txtLetterBaseTemplate.Text, false);
+                    userOptions.SetCommonOption("DefaultLetterTemplateID", "General", txtLetterBaseTemplateId.Value,
+                                                false);
+                    userOptions.SetCommonOption("DefaultFaxTemplate", "General", txtFaxBaseTemplate.Text, false);
+                    userOptions.SetCommonOption("DefaultFaxTemplateID", "General", txtFaxBaseTemplateId.Value, false);
+                    break;
+            }
+        }
+    }
+
+    protected void HandleTemplateTypeChanged(Object sender, EventArgs e)
+    {
+        htxtSelectedTemplateType.Value = cboTemplateType.SelectedValue;
     }
 
     /// <summary>
@@ -347,9 +466,13 @@ function showSDIIsInstalledMsg() {
     /// <returns></returns>
     public ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
     {
-        ToolsSmartPartInfo tinfo = new ToolsSmartPartInfo();
-        tinfo.Description = GetLocalResourceObject("PageDescription.Text").ToString();
-        tinfo.Title = GetLocalResourceObject("PageDescription.Title").ToString();
+        var tinfo = new ToolsSmartPartInfo();
+        var localResourceObject = GetLocalResourceObject("PageDescription.Text");
+        if (localResourceObject != null)
+            tinfo.Description = localResourceObject.ToString();
+        var resourceObject = GetLocalResourceObject("PageDescription.Title");
+        if (resourceObject != null)
+            tinfo.Title = resourceObject.ToString();
         foreach (Control c in LitRequest_RTools.Controls)
         {
             tinfo.RightTools.Add(c);
@@ -364,7 +487,7 @@ function showSDIIsInstalledMsg() {
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void btnFlushCache_Click(object sender, EventArgs e)
     {
-        IUserOptionsService _UserOptions = ApplicationContext.Current.Services.Get<IUserOptionsService>();
+        var _UserOptions = ApplicationContext.Current.Services.Get<IUserOptionsService>();
         _UserOptions.ClearCache();
     }
 }

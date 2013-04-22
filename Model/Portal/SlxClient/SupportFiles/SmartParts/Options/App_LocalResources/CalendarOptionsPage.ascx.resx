@@ -112,45 +112,12 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="_dayEndResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="_dayStartResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="_defaultCalendarViewResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="_defaultIntervalResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="_saveResource1.Text" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="_saveResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="_showHistoryOnDayViewResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="_showHistoryOnMonthViewResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="_showHistoryOnWeekViewResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="_showOnActivitiesResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="_viewCalendarForResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="_viewCalendarForResource1.ToolTip" xml:space="preserve">
+  <data name="ddlDefaultCalendarView.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="btnSaveResource1.AlternateText" xml:space="preserve">
@@ -171,44 +138,44 @@
   <data name="ddlDefaultActivityTypeResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="lblCalendarOptionsResource1.Text" xml:space="preserve">
+  <data name="lblCalendarOptions.Text" xml:space="preserve">
     <value>Calendar Options</value>
   </data>
   <data name="lblCalendarOptionsResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="lblDayEndResource1.Text" xml:space="preserve">
+  <data name="lblDayEnd.Text" xml:space="preserve">
     <value>Day End:</value>
   </data>
   <data name="lblDayEndResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="lblDayStartResource1.Text" xml:space="preserve">
+  <data name="lblDayStart.Text" xml:space="preserve">
     <value>Day Start:</value>
   </data>
   <data name="lblDayStartResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="lblDefaultActivityTypeResource1.Text" xml:space="preserve">
+  <data name="lblDefaultActivityType.Text" xml:space="preserve">
     <value>Default Activity Type:</value>
   </data>
   <data name="lblDefaultActivityTypeResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="lblDefCalViewResource1.Text" xml:space="preserve">
+  <data name="lblDefCalView.Text" xml:space="preserve">
     <value>Default Calendar View:</value>
   </data>
   <data name="lblDefCalViewResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="lblDefIntervalResource1.Text" xml:space="preserve">
+  <data name="lblDefInterval.Text" xml:space="preserve">
     <value>Default Interval:</value>
   </data>
   <data name="lblDefIntervalResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="lblShowActivResource1.Text" xml:space="preserve">
-    <value>Show on Activities:</value>
+  <data name="lblDisplayContactAccount.Text" xml:space="preserve">
+    <value>Contact/Account:</value>
   </data>
   <data name="lblShowActivResource1.ToolTip" xml:space="preserve">
     <value />
@@ -219,22 +186,22 @@
   <data name="lblShowHistResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="lblViewCalForResource1.Text" xml:space="preserve">
+  <data name="lblViewCalFor.Text" xml:space="preserve">
     <value>View Calendar For:</value>
   </data>
   <data name="lblViewCalForResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="ListItemResource1.Text" xml:space="preserve">
-    <value>None</value>
+  <data name="ATListItem1.None.Text" xml:space="preserve">
+    <value />
   </data>
-  <data name="ListItemResource2.Text" xml:space="preserve">
+  <data name="ATListItem2.PhoneCall.Text" xml:space="preserve">
     <value>Phone Call</value>
   </data>
-  <data name="ListItemResource3.Text" xml:space="preserve">
+  <data name="ATListItem3.Meeting.Text" xml:space="preserve">
     <value>Meeting</value>
   </data>
-  <data name="ListItemResource4.Text" xml:space="preserve">
+  <data name="ATListItem4.ToDo.Text" xml:space="preserve">
     <value>To-Do</value>
   </data>
   <data name="LitRequest_RToolsResource1.GroupingText" xml:space="preserve">
@@ -275,5 +242,95 @@
   </data>
   <data name="DayOfWeek_Wednesday.Text" xml:space="preserve">
     <value>Wednesday</value>
+  </data>
+  <data name="lblNumberOfEvents.Text" xml:space="preserve">
+    <value>Num of Events on Day/Week:</value>
+  </data>
+  <data name="chkRememberSelectedUsers.Checkbox" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ddlDayStartResource1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ddlDefaultCalendarViewResource1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ddlDefaultIntervalResource1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ddlFirstDayOfWeekResource1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ddlNumberOfEventsResource1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ddlShowHistoryOnDayViewResource1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ddlDisplayContactAccountResource1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ddlUserListResource1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkFri.Caption" xml:space="preserve">
+    <value>Fri</value>
+  </data>
+  <data name="chkMon.Caption" xml:space="preserve">
+    <value>Mon</value>
+  </data>
+  <data name="chkSat.Caption" xml:space="preserve">
+    <value>Sat</value>
+  </data>
+  <data name="chkSun.Caption" xml:space="preserve">
+    <value>Sun</value>
+  </data>
+  <data name="chkThu.Caption" xml:space="preserve">
+    <value>Thu</value>
+  </data>
+  <data name="chkTue.Caption" xml:space="preserve">
+    <value>Tue</value>
+  </data>
+  <data name="chkWed.Caption" xml:space="preserve">
+    <value>Wed</value>
+  </data>
+  <data name="ddlRememberSelectedUsersResource1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ddlWeekBarsResource1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblFirstWeekOfYear.Text" xml:space="preserve">
+    <value>First week of year:</value>
+  </data>
+  <data name="lblRememberSelectedUsers.Text" xml:space="preserve">
+    <value>Remember Selected Users:</value>
+  </data>
+  <data name="lblWeekBars.Text" xml:space="preserve">
+    <value>Week Bars:</value>
+  </data>
+  <data name="lblWorkWeek.Text" xml:space="preserve">
+    <value>Work Week:</value>
+  </data>
+  <data name="lblRememberSelectedUsersNo.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="lblRememberSelectedUsersYes.Text" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="chkOpportunity.Caption" xml:space="preserve">
+    <value>Opportunity</value>
+  </data>
+  <data name="chkPhoneNumber.Caption" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+  <data name="chkRegarding.Caption" xml:space="preserve">
+    <value>Regarding</value>
+  </data>
+  <data name="chkTime.Caption" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="lblShowOnActivities.Text" xml:space="preserve">
+    <value>Show on Activities:</value>
   </data>
 </root>

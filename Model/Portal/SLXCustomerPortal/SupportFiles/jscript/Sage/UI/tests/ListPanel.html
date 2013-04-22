@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <title>Sage.UI Browser Tests</title>
+        <script type="text/javascript" src="../Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript">
+        dojo.provide("Sage.UI.tests.ListPanel");
+        
+        dojo.require('dojo.parser');
+        dojo.require("doh.runner");
+        dojo.require("Sage.UI.tests.ListPanelTestConfigProvider");
+        dojo.require("Sage.UI.ListPanel");
+        dojo.require("Sage.UI.ImageButton");
+        dojo.require("Sage.UI.SummaryDetailPane");
+        dojo.require("dijit.layout.BorderContainer");
+        dojo.require("dijit.layout.ContentPane");
+            
+        dojo.ready(function(){
+            doh.register("Sage.UI.tests.ListPanel", [
+                function testLifeCycle() {
+                },
+                function testBigGroupList() {
+                    var groupsProvider = new Sage.UI.tests.ListPanelTestConfigProvider({
+                            service: {
+                                get: function() {
+                                }
+                            },
+                            detailConfiguration: false,
+                            summaryOptions: ''
+                        }),
+                        panel = new Sage.UI.ListPanel({
+                            id: 'list',
+                            configurationProvider: groupsProvider,
+                            detailType: 'Sage.UI.SummaryDetailPane',
+                            helpTopicName: '',
+                            region: 'center'
+                        }),
+                        container = dijit.byId('centerContent');
+                    
+                    container.addChild(panel);
+                    container.layout();
+                }
+            ]);
+            
+            //Execute D.O.H. in this remote file.
+            doh.run();
+        });
+        </script>
+    </head>
+    <body>
+        <form>
+             <!-- inner border container center -->
+                <div data-dojo-type="dijit.layout.BorderContainer" persist="true" splitter="true" gutters="false" liveSplitters="true" region="center" id="centerContent">
+                    <div data-dojo-type="dijit.layout.ContentPane" region="center" id="tabContent" splitter="true">
+
+                    </div>
+                </div>
+                <!-- end inner border container center -->
+        </form>
+    </body>
+</html>

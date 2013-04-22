@@ -2,20 +2,16 @@
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls" TagPrefix="SalesLogix" %>
 
 <table cellpadding="0" cellspacing="0" class="tbodylt">
-	<tr>
-	    <td colspan="2">
-    		<table cellpadding="2" cellspacing="0" class="theader">
-				<tr>
-					<td class="header" align="left" style="height: 34px" >
-					    <asp:Localize ID="localizeViewSQL" runat="server" Text="<%$ resources: localizeShowGroups.Text %>" />
-					</td>
-					<td class="header" align="right" style="height: 34px">
-			            <SalesLogix:PageLink ID="ShowGroupsHelpLink" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="showgroup.aspx" ImageUrl="~/images/icons/Help_16x16.gif"></SalesLogix:PageLink>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
+	
+     <tr>
+    <td colspan="2">
+	    <div style="position:relative;">
+        <div style="position:absolute; top:-23px; right:45px; ">
+			      <SalesLogix:PageLink ID="ShowGroupsHelpLink" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="showgroup.aspx" ImageUrl="~/images/icons/Help_16x16.png"></SalesLogix:PageLink>
+			</div>
+            </div>
+    </td>
+</tr> 
 	<tr>
 		<td class="padding">
 			<div id="groupsGrid" runat="server" >
@@ -28,3 +24,6 @@
 	</tr>
 </table>
 
+<script src="jscript/Sage/GroupBuilder/querybuilder.js" type="text/javascript"></script>
+<script src="jscript/Sage/GroupBuilder/mainlib.js" type="text/javascript"></script>
+<script src="jscript/Sage/GroupBuilder/ShowGroups.js" type="text/javascript"></script>

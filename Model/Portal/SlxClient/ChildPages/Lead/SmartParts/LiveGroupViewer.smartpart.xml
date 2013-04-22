@@ -7,6 +7,7 @@
   <ShowInMode>List</ShowInMode>
   <Properties>
     <Property Name="SummaryConfigFile" TypeConverter="">LeadSummary</Property>
+    <Property Name="ListContextMenu" TypeConverter="">LeadListContextMenu</Property>
     <Property Name="HelpTopic" TypeConverter="">leadlistview</Property>
   </Properties>
   <AllowRoles />

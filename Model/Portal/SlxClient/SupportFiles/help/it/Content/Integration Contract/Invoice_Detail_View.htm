@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Vista Dettaglio Fattura</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/TableStyle.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Integration Contract/Invoice_Detail_View.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1>Vista Dettaglio Fattura</h1>
+        <p>La vista Dettaglio Fattura mostra informazioni di sola lettura dal proprio sistema di contabilità. </p>
+        <p class="Infinitive">Per visualizzare</p>
+        <ol>
+            <li class="Topic-Text-Numbered" value="1">Dalla vista <a href="../Accounts/Using_the_Account_Detail_View.htm" target="_self">Dettaglio Azienda</a>, fare clic sulla scheda <span class="SLXBold">Fatture</span>.</li>
+            <li class="Topic-Text-Numbered" value="2">Fare clic sul numero dell fattura che si vuole visualizzare. Saranno mostrate le seguenti informazioni:</li>
+        </ol>
+        <ul>
+            <li class="Topic-Text-Bulleted-2" value="1"><span class="SLXBold">Fattura</span> - il numero della fattura.</li>
+            <li class="Topic-Text-Bulleted-2" value="2"><span class="SLXBold">Azienda</span> - l'azienda a cui è associata la fattura.</li>
+            <li class="Topic-Text-Bulleted-2" value="3"><span class="SLXBold">Stato</span> - Lo stato della fattura.</li>
+            <li class="Topic-Text-Bulleted-2" value="4"><span class="SLXBold">Importo Fattura</span> - l'importo totale della fattura.</li>
+        </ul>
+        <ol>
+            <li class="Topic-Text-Numbered" value="3">Fare clic su una delle seguenti schede per visualizzare ulteriori informazioni.</li>
+        </ol>
+        <ul>
+            <li class="Topic-Text-Bulleted-2" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="Details">Scheda Dettagli<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <table class="TableStyle-TableStyle" style="mc-table-style: url('../Resources/TableStyles/TableStyle.css');caption-side: top;margin-left: 0;margin-right: auto;display: none;" cellspacing="0" MadCap:targetName="Details">
+            <col style="width: 166px;" class="Column-Column1" />
+            <col style="width: 407px;" class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Campo </th>
+                    <th class="HeadD-Column1-Header1">Descrizione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Data Fattura</td>
+                    <td class="BodyD-Column1-Body1">La data di creazione della fattura</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Data Scadenza</td>
+                    <td class="BodyD-Column1-Body1">La data di scadenza della fattura.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Num. Ordine Cliente</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>Il numero d'ordine di acquisto del cliente.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Percentuale di Sconto al Saldo</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>La percentuale di sconto applicabile alla fattura se questa è stata pagata entro un determinato periodo di tempo.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Modalità di Pagamento</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>Le modalità applicabili allo sconto al saldo. Ad esempio il numero di giorni.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Valuta Compagnia Operante</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>Il tipo di valuta della compagnia operante.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Data del Tasso di Cambio</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>La data di tasso di cambio utilizzata per convertire la valuta della fattura in quella della società operante la fattura (se le due valute sono differenti).</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Tasso di Cambio</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>Il tasso di cambio utilizzato per convertire la valuta della fattura in quella della società operante la fattura (se le due valute sono differenti).</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Valuta</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>La valuta utilizzata nella fattura.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Sconto</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>Qualsiasi sconto applicabile alla fattura.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Percentuale di Sconto</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>Qualsiasi percentuale di sconto applicabile alla fattura.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Spedizione</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>Il costo totale della spedizione.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Tasse</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>L'importo totale delle tasse.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Commenti</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>Qualsiasi annotazione associata alla fattura.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Costo Totale</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>Il costo totale della fattura.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Profitto Totale</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>Il profitto totale ottenuto dalla fattura (totale netto meno il costo totale).</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Listino Prezzi</td>
+                    <td class="BodyD-Column1-Body1">Il nome del listino prezzi da cui si ricava il prezzo.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">Venditore</td>
+                    <td class="BodyA-Column1-Body1">
+                        <p>Il nome del venditore associato alla fattura.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="addresses">Scheda Indirizzi<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent2" MadCap:targetName="addresses" style="display: none;">La scheda Indirizzi visualizza l'indirizzo e il tipo di indirizzo (spedizione, fatturazione, etc.).</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="InvoiceLines">Scheda Righe Fattura<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <table class="TableStyle-TableStyle" style="mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;display: none;" cellspacing="0" MadCap:targetName="InvoiceLines">
+            <col style="width: 146px;" class="Column-Column1" />
+            <col style="width: 364px;" class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Campo</th>
+                    <th class="HeadD-Column1-Header1">Descrizione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Numero</td>
+                    <td class="BodyD-Column1-Body1">Il numero di riga. Il numero di riga usato per la progressione delle righe.   </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Tipo di Riga</td>
+                    <td class="BodyD-Column1-Body1">Il tipo di riga.       </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Stato</td>
+                    <td class="BodyD-Column1-Body1">Lo stato della riga.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Merce</td>
+                    <td class="BodyD-Column1-Body1">Il tipo di merce usato per la riga (se presente).     </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Variante</td>
+                    <td class="BodyD-Column1-Body1">La variante della merce (ad esempio, colore o taglia).   </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Dimensioni</td>
+                    <td class="BodyD-Column1-Body1">Le dimensioni della merce.  </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Unità</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>La scala utilizzata per misurare la quantità di merce. Per esempio "Cadauno" oppure "Confezione da 10".</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Quantità</td>
+                    <td class="BodyD-Column1-Body1">La quantità della riga.         </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Prezzo Iniziale</td>
+                    <td class="BodyD-Column1-Body1">Il prezzo iniziale della riga (prima di applicare gli sconti).  </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Prezzo Attuale</td>
+                    <td class="BodyD-Column1-Body1">Il prezzo attuale della riga (dopo aver applicato sconti o modifiche).         </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Totale Netto</td>
+                    <td class="BodyD-Column1-Body1">Il valore totale dell'ordine inclusi gli sconti ed escluse le tasse.   </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Totale Addebiti</td>
+                    <td class="BodyD-Column1-Body1">Il valore totale di qualsiasi addebito applicato alla riga (ad esempio interessi oppure oneri finanziari).    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Totale Sconto</td>
+                    <td class="BodyD-Column1-Body1">Il totale di tutti gli sconti applicati alla riga.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Totale Tasse</td>
+                    <td class="BodyD-Column1-Body1">Le tasse applicabili alla riga.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">Totale Lordo</td>
+                    <td class="BodyA-Column1-Body1">
+                        <p>Il valore totale della riga inclusi sconti, tasse e oneri.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="Payments">Scheda Pagamenti<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <table class="TableStyle-TableStyle" style="mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;display: none;" cellspacing="0" MadCap:targetName="Payments">
+            <col style="width: 146px;" class="Column-Column1" />
+            <col style="width: 366px;" class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Campo</th>
+                    <th class="HeadD-Column1-Header1">Descrizione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Data</td>
+                    <td class="BodyD-Column1-Body1">La data della ricevuta. </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Nome</td>
+                    <td class="BodyD-Column1-Body1">Il nome della ricevuta.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Tipo</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>Il tipo di ricevuta. Ad esempio pagamento anticipato, acconto e così via.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Stato</td>
+                    <td class="BodyD-Column1-Body1">Lo stato della ricevuta. Ad esempio approvata, in sospeso, autorizzata e così via.     </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Totale Netto</td>
+                    <td class="BodyD-Column1-Body1">L'importo totale della ricevuta.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Sconti</td>
+                    <td class="BodyD-Column1-Body1">Il valore di tutti gli sconti tolti dalla ricevuta.  </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Addebiti</td>
+                    <td class="BodyD-Column1-Body1">Il valore totale di tutti gli addebiti applicati alla ricevuta. Ad esempio oneri finanziari o interessi.        </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Tasse</td>
+                    <td class="BodyD-Column1-Body1">Il valore di tutte le tasse incluse nella ricevuta.    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Totale Lordo</td>
+                    <td class="BodyD-Column1-Body1">Il valore della ricevuta se sono incluse tasse e sconti. Ad esempio l'importo totale ricevuto.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Valuta</td>
+                    <td class="BodyD-Column1-Body1">La valuta della ricevuta.       </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Tipo Pagamento</td>
+                    <td class="BodyD-Column1-Body1">Il metodo di pagamento della ricevuta. Ad esempio contanti, assegno, carta di credito, etc.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Riferimento Pagamento</td>
+                    <td class="BodyD-Column1-Body1">Il riferimento al tipo di pagamento associato alla ricevuta. Ad esempio il numero dell'assegno, della carta di credito, etc.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">Data Elaborazione</td>
+                    <td class="BodyA-Column1-Body1">La data in cui è stata processata la ricevuta.   </td>
+                </tr>
+            </tbody>
+        </table>
+        <p><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="Deliveries">Scheda Consegne<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <table class="TableStyle-TableStyle" style="mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;display: none;" cellspacing="0" MadCap:targetName="Deliveries">
+            <col style="width: 146px;" class="Column-Column1" />
+            <col style="width: 367px;" class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Campo</th>
+                    <th class="HeadD-Column1-Header1">Descrizione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Numero</td>
+                    <td class="BodyD-Column1-Body1">Il numero d'ordine delle vendite.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Tipo</td>
+                    <td class="BodyD-Column1-Body1">Il tipo di consegna.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Stato</td>
+                    <td class="BodyD-Column1-Body1">Lo stato della consegna. Ad esempio Parziale o Completa.     </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Data Richiesta</td>
+                    <td class="BodyD-Column1-Body1">La data di consegna richiesta. </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Data Attuale</td>
+                    <td class="BodyD-Column1-Body1">La data attuale di consegna.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Ora Attuale</td>
+                    <td class="BodyD-Column1-Body1">L'ora attuale di consegna.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Quantità Richiesta</td>
+                    <td class="BodyD-Column1-Body1">La quantità totale di prodotto richiesta nella consegna dell'ordine di vendita (dagli ordini associati).</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Quantità Consegnata</td>
+                    <td class="BodyD-Column1-Body1">La quantità totale di merce consegnata.  </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Metodo</td>
+                    <td class="BodyD-Column1-Body1">
+                        <p>Il metodo di consegna. Ad esempio Corriere, Collezione, etc. Questo metodo può essere diverso da quello richiesto nell'ordine di vendita.</p>
+                    </td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Trasportatore</td>
+                    <td class="BodyD-Column1-Body1">L'addetto alla consegna dell'ordine di vendita.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Riferimento Trasportatore</td>
+                    <td class="BodyD-Column1-Body1">Il numero di riferimento utilizzato dal trasportatore durante l'operazione di consegna.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">Ragione del Ritardo</td>
+                    <td class="BodyA-Column1-Body1">Il motivo dell'eventuale ritardo nella consegna.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Comunicaci come possiamo migliorare la guida</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

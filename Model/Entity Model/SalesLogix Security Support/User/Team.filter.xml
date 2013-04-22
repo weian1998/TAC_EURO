@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0"?>
-<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="452deb9a-e9d3-4c5d-9743-fc931d29b946" lastModifiedUtc="2010-01-15T19:43:02.3280563Z" filterName="Team" propertyName="Defaultseccodeid" characters="0">
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="452deb9a-e9d3-4c5d-9743-fc931d29b946" lastModifiedUtc="2010-01-15T19:43:02.3280563Z" filterName="Team" propertyName="DefaultOwner.OwnerJoinAsChild.ParentOwnerId" characters="0">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRangeEntityFilter" />

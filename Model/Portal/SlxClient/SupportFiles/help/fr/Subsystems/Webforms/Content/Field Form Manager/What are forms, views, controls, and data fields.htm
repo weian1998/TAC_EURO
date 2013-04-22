@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Personnalisation de l'espace de travail" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="fr" xml:lang="fr" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebForms.xml" MadCap:SearchType="Stem">
+    <head><title>Que sont les formulaires, vues, contrôles et champs de données&#160;?</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebForms_CSH.htm#Field Form Manager/What are forms, views, controls, and data fields.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Ouvrir une rubrique avec la recherche, la table des matières et l'index</a>
+        </p>
+        <h1>Que sont les formulaires, vues, contrôles et champs de données&#160;?</h1>
+        <p class="subheading">Formulaires et vues</p>
+        <p>Les formulaires sont des parties réutilisables assemblées de différentes façons pour créer différentes <span class="MCPopup"><a href="javascript:void(0);" MadCap:src="Popups/View.htm" onclick="FMCPopup( event, this ); return false;" MadCap:width="4in" MadCap:height="auto" class="MCPopupSpot">vues</a></span> Sage SalesLogix&#160;; ils sont les constituants élémentaires de toutes les vues Sage SalesLogix. Par exemple, la vue Détails du compte est constituée d'un formulaire comportant le volet des détails et d'autres formulaires comportant les onglets. </p>
+        <p>Un formulaire peut être utilisé dans plusieurs vues. Par exemple, le formulaire InsérerContrats est utilisé dans la vue Détails des contrats et dans la vue Insérer des contrats. </p>
+        <p>Il existe deux types de formulaires&#160;: les formulaires personnalisés et les <span class="MCPopup"><a href="javascript:void(0);" MadCap:src="Popups/Quick_Forms_def.htm" onclick="FMCPopup( event, this ); return false;" MadCap:width="4in" MadCap:height="auto" class="MCPopupSpot">Quick Forms</a></span>. </p>
+        <p>Des modifications simples peuvent être apportées à une vue en modifiant les formulaires la composant à l'aide du <span class="MyVariablesFormDesignerName">Concepteur de formulaire</span>. Par exemple, vous pouvez modifier les légendes et déplacer les objets sur un formulaire.  Lors de l'enregistrement des modifications apportées à un formulaire, toutes les vues le contenant sont également modifiées. <a name="kanchor14"></a>Les modifications que vous effectuez affectent tous les utilisateurs du système, car les définitions de formulaire et de vue sont partagées.   <a href="Working_with_forms.htm">En savoir plus...</a></p>
+        <p class="subheading">Contrôles</p>
+        <p>Chaque élément d'un formulaire, tel qu'un bouton ou une zone de saisie quelconque est appelé «&#160;contrôle&#160;». Il existe environ 30 sortes de contrôles différents utilisés sur les formulaires Sage SalesLogix. </p>
+        <p>Certains types de contrôle entraînent une action. Par exemple, les contrôles de bouton qui enregistrent les données et les contrôles de lien qui ouvrent une vue.</p>
+        <p> Plusieurs types de contrôles affichent des données provenant de la base de données SalesLogix, permettant aux utilisateurs de les voir ou de les modifier. Par exemple, ce contrôle de liste de sélection permet aux utilisateurs de voir et de modifier l'état d'un compte.</p>
+        <blockquote>
+            <p>
+                <img src="../image/status_text_box.gif" />
+            </p>
+        </blockquote>
+        <p>Tous les types de contrôle que nous avons présentés jusqu'à maintenant sont des contrôles visuels&#160;; c'est à dire qu'ils sont destinés à apparaître sur des formulaires. Un petit nombre de contrôles sont <span class="MCPopup"><a href="javascript:void(0);" MadCap:src="Popups/Non-visual_Control.htm" onclick="FMCPopup( event, this ); return false;" MadCap:width="4in" MadCap:height="auto" class="MCPopupSpot">non-visuels</a></span>.</p>
+        <p>Le <span class="MyVariablesFormDesignerName">Concepteur de formulaire</span> affiche la présentation des contrôles sur un formulaire et vous permet de faire glisser et de déposer les contrôles à différents endroits.</p>
+        <p class="subheading">Propriétés de contrôle</p>
+        <p>Les propriétés de contrôle sont des paramètres qui définissent l'apparence et le comportement des contrôles. Par exemple, la propriété Image d'un contrôle Button indique que l'icône doit apparaître sur le bouton. Les contrôles de liste de sélection possèdent une propriété appelée Autoriser les sélections multiples. Deux propriétés communes à presque tous les contrôles sont Légende et Info-bulle.</p>
+        <p>Lorsque vous sélectionnez un contrôle sur la surface de conception du <span class="MyVariablesFormDesignerName">Concepteur de formulaire</span>, les propriétés de ce contrôle apparaissent sur les onglets d'où vous pouvez modifier nombre de leurs valeurs.  </p>
+        <table wrapperparagraphselector="P" style="float: alignleft;left: 0px;top: 96px;width: 655px;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="655">
+            <col style="width: 6.224%;">
+            </col>
+            <col style="width: 93.776%;">
+            </col>
+            <tr valign="middle">
+                <td style="width: 6.224%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="6.224%">
+                    <img src="../image/note.gif" style="border: none;width: 24px;height: 24px;float: none;border-style: none;border-style: none;" width="24" height="24" border="0">
+                    </img>
+                </td>
+                <td style="width: 93.776%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="93.776%">Des propriétés de contrôle supplémentaires peuvent être accessibles avec l'application Architect.</td>
+            </tr>
+        </table>
+        <p MadCap:conditions="" class="subheading">Champs de données
+</p>
+        <p MadCap:conditions="">Les champs de données sont les types individuels d'informations que les utilisateurs affichent et modifient, concernant les comptes, les contacts, etc. Par exemple, Nom du compte et Etat sont des champs de données. Un contrôle qui affiche des données provenant de la base de données SalesLogix, est capable de le faire car il est lié au champ de données correspondant dans la base de données.</p>
+        <p MadCap:conditions="">Le <span class="MyVariablesFormDesignerName">Concepteur de formulaire</span> affiche le champ de données auquel un contrôle est lié.</p>
+        <p class="RelatedTopics">Rubriques connexes</p>
+        <p><a href="Working_with_forms.htm">Utilisation des formulaires</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Dites-nous comment améliorer l'aide</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

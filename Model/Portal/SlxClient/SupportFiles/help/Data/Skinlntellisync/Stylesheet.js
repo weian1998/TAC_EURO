@@ -169,7 +169,6 @@ CMCXmlParser._FilePathToXmlStringMap.Add(
 	'                <StyleClass Name=\"TopicRatings\">' +
 	'                    <Properties>' +
 	'                        <Property Name=\"EmptyIcon\">url(\'resources:WebHelp/Default.flwht/Images/Rating0.gif\')</Property>' +
-	'                        <Property Name=\"HalfFullIcon\">url(\'resources:WebHelp/Default.flwht/Images/RatingGold50.gif\')</Property>' +
 	'                        <Property Name=\"FullIcon\">url(\'resources:WebHelp/Default.flwht/Images/RatingGold100.gif\')</Property>' +
 	'                        <Property Name=\"RatingSubmittedMessage\">Thank you for submitting your rating!</Property>' +
 	'                        <Property Name=\"ControlType\">TopicRatings</Property>' +

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <codeTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="4B652A4D-E92E-4a36-9025-39F624170D67" name="Default-SDataSchema-SalesLogix" templateType="sdata-schema" templateEngineType="T4">
-  <template><![CDATA[<#@ template language="C#v3.5" #>
+  <template><![CDATA[<#@ template language="C#v4.0" #>
 <#@ assembly name="System.Core.dll" #>
 <#@ assembly name="Microsoft.Unity.dll" #>
 <#@ assembly name="Sage.Platform.dll" #>

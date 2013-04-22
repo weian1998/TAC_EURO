@@ -166,7 +166,7 @@
 								<span id="oneValue"><input type="text" id="stdValue" name="stdValue" /></span>
 								<span id="twoValue"><input type="text" id="txtFrom" name="txtFrom" />&nbsp;-&nbsp;<input type="text" id="txtTo" name="txtTo" /></span>										
 								<span id="oneDateValue">
-									<SalesLogix:DateTimePicker ID="DateTimePickerOne" runat="server" DisplayTime="False" DateText="">
+									<SalesLogix:DateTimePicker ShouldPublishMarkDirty="False" ID="DateTimePickerOne" runat="server" DisplayTime="False" DateText="">
                             </SalesLogix:DateTimePicker>
 								
 								</span>
@@ -206,14 +206,16 @@
 							<div id="user" class="fieldgroup">
 								<div ><label id="labelUser"><asp:Localize ID="localizeUserCondition" runat="server" Text="<%$ resources: localizeUserCondition.Text %>" /></label></div>
 								<div>
-								   	<span id="CurrentUserLabel"><asp:Localize ID="localizeCurrentCondition" runat="server" Text="<%$ resources: localizeCurrentCondition.Text %>" />&nbsp;</span><input type="checkbox" id="chkCurrentUser" checked onclick="ToggleUserSelection(this);"/>
+								   	<span id="CurrentUserLabel">&nbsp;<asp:Localize ID="localizeCurrentCondition" runat="server" Text="<%$ resources: localizeCurrentCondition.Text %>" />&nbsp;</span><input type="checkbox" id="chkCurrentUser" checked onclick="ToggleUserSelection(this);"/>
 									<div id="SpecificUser" style="display:none">
 									    <span id="SpecificUserLabel"><asp:Localize ID="localizeSelectUser" runat="server" Text="<%$ resources: localizeSelectUser.Text %>" />&nbsp;</span>
-									    <SalesLogix:LookupControl runat="server" ID="SelUser" Enabled="true" LookupEntityName="User" LookupEntityTypeName="Sage.SalesLogix.Security.User, Sage.SalesLogix.Security" AutoPostBack="false"> 
+									    <span class="textcontrol" style="width: 150px">
+                                        <SalesLogix:LookupControl runat="server" ID="SelUser" Enabled="true" LookupEntityName="User" LookupEntityTypeName="Sage.SalesLogix.Security.User, Sage.SalesLogix.Security" AutoPostBack="false"> 
 	                                        <LookupProperties> 
-		                                        <SalesLogix:LookupProperty PropertyHeader="User Name" PropertyName="UserName" UseAsResult="True"></SalesLogix:LookupProperty> 
+		                                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources:UserName %>" PropertyName="UserName" UseAsResult="True"></SalesLogix:LookupProperty> 
 	                                        </LookupProperties> 
                                         </SalesLogix:LookupControl>
+                                        </span>
 								    </div>
 								</div>
 							</div>
@@ -222,16 +224,16 @@
 						
 						<div id="datePickers" class="fieldgroup">
 							<div ><label id="DATEFROM"></label></div>
-							<SalesLogix:DateTimePicker ID="DateTimePickerFrom" runat="server" DisplayTime="False" DateText="">
+							<SalesLogix:DateTimePicker ShouldPublishMarkDirty="False" ID="DateTimePickerFrom" runat="server" DisplayTime="False" DateText="">
                             </SalesLogix:DateTimePicker>
-                            <SalesLogix:DateTimePicker ID="DateTimePickerTo" runat="server" DisplayTime="False" DateText="">
+                            <SalesLogix:DateTimePicker ShouldPublishMarkDirty="False" ID="DateTimePickerTo" runat="server" DisplayTime="False" DateText="">
                             </SalesLogix:DateTimePicker>
 						</div>
 						
 					</div>
 					<div id="conditionbuttons">
 					  	<div class="fieldgroup">
-							<img src="images/add.gif" id="Img1" class="imgBtn" onclick="addCondition();" 
+							<img src="ImageResource.axd?scope=global&type=Global_Images&key=plus_16x16" style="cursor: pointer" id="Img1" width="16" height="16" onclick="addCondition();" 
 							    alt='<asp:Localize ID="localizeAddButton" runat="server" Text="<%$ resources: AddCondition %>" />' />
 						</div>
 					</div>
@@ -259,7 +261,7 @@
 						<input type="text" id="txtConditionName" name="txtConditionName" onkeyup="txtConditionName_change()" maxlength="64"/>
 						<input type="button" id="saveConditionSet" name="saveConditionSet" onclick="saveConditions();" 
 						    value='<asp:Localize ID="localizeSaveConditionSetButton" runat="server" Text="<%$ resources: localizeSaveConditionSetButton.Text %>" />' />
-						<img src="images/delete.gif" id="deletebutton" align="absmiddle" class="imgBtn" onclick="deleteCondition();" 
+						<img src="ImageResource.axd?scope=global&type=Global_Images&key=Delete_16x16" style="cursor: pointer" width="16" height="16" id="deletebutton" align="absmiddle" onclick="deleteCondition();" 
 						    alt='<asp:Localize ID="localizeDeleteButton" runat="server" Text="<%$ resources: RemoveCondition %>" />' />
 						<input type="checkbox" id="isPublic" name="isPublic" onclick="saveConditions()" /><label id="PUBLIC" for="isPublic"><asp:Localize ID="localizePublic" runat="server" Text="<%$ resources: localizePublic.Text %>" /></label>
 						<input type="button" id="clearfilter" name="clearfilter" onclick="clearCurrentFilters();" 

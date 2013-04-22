@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="OwnerDescription.Caption" xml:space="preserve">
     <value>Owner Description</value>
@@ -135,15 +135,6 @@
   <data name="lueTeams.LookupProperties.Owner.OwnerDescription.PropertyHeader" xml:space="preserve">
     <value>Team</value>
   </data>
-  <data name="grdOwnerJoins.EmptyTableRowText" xml:space="preserve">
-    <value>This department is not a member of any teams</value>
-  </data>
-  <data name="grdOwnerJoins.48b863eb-263e-47fb-a682-2690851d9444.ColumnHeading" xml:space="preserve">
-    <value>Team</value>
-  </data>
-  <data name="grdOwnerJoins.343425e8-3283-4aee-bd3b-7584b4a70e7f.ColumnHeading" xml:space="preserve">
-    <value>Security Profile</value>
-  </data>
   <data name="grdOwnerJoins.40046390-4ef0-44b8-80b7-bfb3f042b579.ColumnHeading" xml:space="preserve">
     <value>Created</value>
   </data>
@@ -156,34 +147,40 @@
   <data name="grdOwnerJoins.ef4b6bef-4e49-44e8-8d08-421d5e4d0919.Text" xml:space="preserve">
     <value>Remove</value>
   </data>
-  <data name="grdOwnerJoins.343425e8-3283-4aee-bd3b-7584b4a70e7f.DestinationFormatString" xml:space="preserve">
-    <value>javascript:Link.editSecurityProfile('{0}','{1}','{2}');</value>
-  </data>
   <data name="grdOwnerJoins.40046390-4ef0-44b8-80b7-bfb3f042b579.FormatString" xml:space="preserve">
     <value>{0:d}</value>
   </data>
   <data name="grdOwnerJoins.f9d4fb50-33f7-433f-af74-abda2a5fc2d3.FormatString" xml:space="preserve">
     <value>{0:g}</value>
   </data>
-  <data name="grdOwnerJoins.c8e6d87d-3d81-45a9-af6d-824ddc993971.ConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to remove this department from the team?</value>
-  </data>
-  <data name="grdOwnerJoins.c8e6d87d-3d81-45a9-af6d-824ddc993971.Text" xml:space="preserve">
-    <value>Remove</value>
-  </data>
   <data name="lueTeams.ButtonToolTip" xml:space="preserve">
     <value>Add department to team</value>
   </data>
-  <data name="grdOwnerJoins.441178cc-f8f2-4254-89f1-2a072a2bdda0.ColumnHeading" xml:space="preserve">
-    <value>Created</value>
-  </data>
-  <data name="grdOwnerJoins.7ad005ce-53ca-41b8-b335-731ed2b5bc91.ColumnHeading" xml:space="preserve">
-    <value>Last Modified</value>
-  </data>
-  <data name="grdOwnerJoins.affa44ed-5a4c-4a9f-9d00-f283def9be5f.ColumnHeading" xml:space="preserve">
-    <value>Modified By</value>
-  </data>
   <data name="lueTeams.LookupDialogTitle" xml:space="preserve">
     <value>Lookup Team</value>
+  </data>
+  <data name="grdTeams.463701ca-8ff2-43c1-a864-c673dec0100b.ColumnHeading" xml:space="preserve">
+    <value>Team Name</value>
+  </data>
+  <data name="grdTeams.btnRemoveFromTeam.ToolTip" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="grdTeams.0dbef834-f6a7-4e0e-b7ef-710ee9b6b938.ColumnHeading" xml:space="preserve">
+    <value>Team</value>
+  </data>
+  <data name="grdTeams.d6016bfc-0528-4763-8c5e-891b3981be43.ColumnHeading" xml:space="preserve">
+    <value>Security Profile</value>
+  </data>
+  <data name="grdTeams.d81642fa-d355-4f94-b430-3d2a517c507d.ColumnHeading" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="grdTeams.289c9959-b3a3-4c90-a911-c12882cccecb.ColumnHeading" xml:space="preserve">
+    <value>Last Modified</value>
+  </data>
+  <data name="grdTeams.ba2d83bf-74cc-4580-b255-e69b2ca9008e.ColumnHeading" xml:space="preserve">
+    <value>Modified By</value>
+  </data>
+  <data name="ConfirmRemoveFromTeamText.Value" xml:space="preserve">
+    <value>Remove from selected team(s)?</value>
   </data>
 </root>

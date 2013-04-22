@@ -6,14 +6,14 @@
 <table cellpadding="0" cellspacing="0" class="tbodylt">
 	<tr>
 		<td colspan="2">
-			<table cellpadding="2" cellspacing="0" class="theader">
-				<tr>
-					<td class="header" colspan="3" align="left" ><label id="ADDCALCULATEDFIELD"><asp:Localize  runat="server" Text="<%$ resources: localizeAddCalcField.Text %>" /></label></td>							
-					<td class="header" align="right">    
-						<SalesLogix:PageLink ID="AddCalcFieldHelpLink" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="queryaddeditcalcfields.aspx" ImageUrl="~/images/icons/Help_16x16.gif"></SalesLogix:PageLink>
-					</td>
-				</tr>
-			</table>
+			
+            <div style="position:relative;">
+        <div style="position:absolute; top:-23px; right:45px; ">
+			      <SalesLogix:PageLink ID="AddCalcFieldHelpLink" runat="server" LinkType="HelpFileName" ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="queryaddeditcalcfields.aspx" ImageUrl="~/images/icons/Help_16x16.png"></SalesLogix:PageLink>
+			</div>
+            </div>         
+            
+            
 		</td>
 	</tr>
 	<tr>
@@ -58,16 +58,18 @@
 								<tr>
 									<td><asp:Localize ID="localizeBaseTable" runat="server" Text="<%$ resources: localizeBaseTable.Text %>" /></td>
 									<td>
-										<asp:DropDownList Runat="server" AutoPostBack="True" ID="lstBaseTable" CssClass="W2"></asp:DropDownList>
+                                    	<span class="textcontrol" style="width:316px;">
+										<asp:DropDownList Runat="server" AutoPostBack="True" ID="lstBaseTable" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" shouldPublishMarkDirty="false" maxHeight="175"></asp:DropDownList></span>
 									</td>
 								</tr>
 								<tr>
 									<td><asp:Localize ID="localizeCalcType" runat="server" Text="<%$ resources: localizeCalcType.Text %>" /></td>
 									<td>
-										<select id="selCalcType" class="W2">
+                                    	<span class="textcontrol" style="width:316px;">
+										<select id="selCalcType" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" shouldPublishMarkDirty="false">
 											<option value="S"><asp:Localize ID="localizeString" runat="server" Text="<%$ resources: localizeString.Text %>" /></option>
 											<option value="N"><asp:Localize ID="localizeNumeric" runat="server" Text="<%$ resources: localizeNumeric.Text %>" /></option>
-										</select>
+										</select></span>
 									</td>
 								</tr>
 								<tr>
@@ -104,4 +106,6 @@
 		</td>
 	</tr>
 </table>
-	
+
+<script src="jscript/Sage/GroupBuilder/querybuilder.js" type="text/javascript"></script>
+<script src="jscript/Sage/GroupBuilder/addCalcField.js" type="text/javascript"></script>

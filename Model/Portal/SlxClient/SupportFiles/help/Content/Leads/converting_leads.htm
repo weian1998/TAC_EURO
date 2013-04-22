@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Converting Leads</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Leads/converting_leads.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor514"></a>Converting Leads</h1>
+        <p>Once lead information has been qualified, a lead can be converted to 
+ a contact and account. The Convert Lead dialog box displays any contacts 
+ or accounts with matching information. Leads with matching information 
+ can be merged with an existing contact, added to an existing account, 
+ or the lead can be added as a new contact and account.
+ You can change the filter criteria used to find matching records.</p>
+        <table wrapperparagraphselector="P" style="margin-top: 14pt;width: 98%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="98%">
+            <col style="width: 7.75%;" />
+            <col style="width: 92.25%;" />
+            <tr>
+                <td style="width: 7.75%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="7.75%">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="width: 92.25%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="92.25%">
+                    <p class="Tip-Note-Text" style="margin-bottom: 0;">Sage SalesLogix can only search for duplicate records that you have permission to view. A duplicate record that you are not able to access may still exist.</p>
+                </td>
+            </tr>
+        </table>
+        <p class="Infinitive">To convert a qualified lead</p>
+        <ol>
+            <li value="1">Open 
+ the <a href="using_the_lead_detail_view.htm">Lead Detail</a> view for 
+ the lead you want to convert, and then click <span class="SLXBold">Convert 
+ Qualified Lead</span>.<br />The Convert Lead view opens with lead information displayed at the 
+ top of the view and any matching contact and account information displayed 
+ below.</li>
+            <li MadCap:conditions="Output.WebClient" value="2">Under <span class="SLXBold">Match Filters</span>, select the filter check boxes that you want to apply.</li>
+            <li MadCap:conditions="Output.WebClient" value="3">Select one of the following <span class="SLXBold">Options</span>:<ul><li MadCap:conditions="Output.WebClient" value="1"><span class="SLXBold">Match all selected filters</span> - A record is a duplicate, only if it matches all of the selected filters.</li><li MadCap:conditions="Output.WebClient" value="2"><span class="SLXBold">Match any of the selected filters</span> - A record is a duplicate, if it matches any of the selected filters.</li></ul></li>
+            <li MadCap:conditions="Output.WebClient" value="4">To perform an <a href="leadimportadvancedmatch.htm">Advanced Search</a> click <span class="SLXBold">Advanced Options</span>.</li>
+            <li MadCap:conditions="Output.WebClient" value="5">Click <span class="SLXBold">Update Potential Matches</span>.</li>
+            <li MadCap:conditions="Output.WebClient" value="6">Click the <span class="SLXBold">Conflicts</span> drop-down arrow to determine how to resolve any conflicting information.<ul><li MadCap:conditions="Output.WebClient" value="1">Select <span class="SLXBold">Account wins</span> if you want existing contact information to win.</li><li MadCap:conditions="Output.WebClient" value="2">Select <span class="SLXBold">Lead wins</span> if you want conflicting information to be replaced by lead information.</li></ul></li>
+            <li value="7">If you want to create an opportunity, <MadCap:conditionalText MadCap:conditions="Output.WebClient"> select the <span class="SLXBold">Create Opportunity after Lead conversion or merge</span> check box.</MadCap:conditionalText><br />All of the leads activities, history and notes will associated with the new opportunity.</li>
+            <li value="8">Do one of the following:<ul><li value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="match">Merge the lead with a matching contact<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a><ol style="list-style-type: lower-alpha; display: none;" MadCap:targetName="match"><li MadCap:conditions="Output.WebClient" value="1">In the <span class="SLXBold">Matched Contact/Lead Records</span> grid, click <span class="SLXBold">Merge</span> next to the  record you want to merge with.</li><li MadCap:conditions="Output.WebClient" value="2">Complete the steps for <a href="leadmergerecords.htm">merging records</a>.</li></ol></li><li value="2"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="matchacctlan;matchacctweb">Add a contact to a matching account<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a><ul MadCap:targetName="matchacctweb" style="display: none;"><li MadCap:conditions="Output.WebClient" value="1">In the<span class="SLXBold"> Matched Account Records</span> grid, click <span class="SLXBold">Add Contact</span> next to the account you want to add a contact to.<br />The lead is added as a contact to the selected account and the Contact Detail view opens.</li></ul></li><li value="3"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="convert">Continue converting the lead to a new contact/account<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a><ul><li MadCap:targetName="convert" value="1" style="display: none;">Click <span class="SLXBold">Convert</span>.</li></ul></li></ul></li>
+        </ol>
+        <p class="RelatedTopics">Related Topics</p>
+        <p MadCap:conditions="Output.Legacy LAN,Output.WebClient"><a href="What_are_Leads_.htm">What are Leads?</a>
+        </p>
+        <p MadCap:conditions="Output.Legacy LAN,Output.WebClient"><a href="Qualifying_Leads.htm">Qualifying a Lead</a>
+        </p>
+        <div style="width: 100%;position: relative;">
+            <p>&#160;</p>
+        </div>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="window-type" content="(w95sec)" /><title>Contact Detail View Web Access Tab</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Contacts/Contact_Detail_View_Web_Access_Tab.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor390"></a><a name="kanchor391"></a><a name="kanchor392"></a>Закладка Web-доступ в карточке детального представления Контакта</h1>
+        <p>Закладка Web-доступ в карточке детального представления Контакта доступна пользователям с правами администратора и тем пользователям, у которых есть разрешение на определение прав доступа к контактам на Customer Portal. Когда контакту предоставляется доступ в систему, он может регистрироваться в Customer Portal, просматривать заявки по своему Субъекту, добавлять новые, изменять статус существующих, а также закрывать заявки. Клиенты могут просматривать и добавлять информацию только по собственным субъектам.</p>
+        <p>Перед тем, как регистрироваться в Customer Portal, клиент должен быть заведен как контакт в системе SalesLogix Client. Необходимо помнить, что имя пользователя и пароль являются чувствительными к регистру; каждый контакт должен иметь уникальное имя пользователя.</p>
+        <table wrapperparagraphselector="P" style="margin-top: 14pt;border-spacing: 0px;margin-left: 0;margin-right: auto;caption-side: top;" cellspacing="0">
+            <col />
+            <col />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p class="Tip-Note-Text" style="margin-bottom: 0;">От вашего уровня доступа зависит, какой функционал системы будет вам доступен. Для изменения прав доступа обратитесь к вашему администратору.<MadCap:conditionalText MadCap:conditions="Output.WebClient,Output.Customer Portal"> Для пользователей с типом WebViewer могут быть доступны не все функции системы.</MadCap:conditionalText></p>
+                </td>
+            </tr>
+        </table>
+        <p class="Infinitive" style="font-weight: bold;">Для получения доступа к Customer Portal</p>
+        <ol style="list-style-type: decimal;">
+            <li value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="step1 bul">Открыть детальное представление контакта<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>.<ul MadCap:targetName="step1 bul" style="display: none;"><li MadCap:conditions="Output.WebClient" value="1">На навигационной панели нажмите  <span class="SLXBold">Контакты</span> и используйте <a href="../Lookups/Using_Lookup.htm" target="_self">поиск</a> для поиска контакта, а затем откройте детальное представление <span class="SLXBold">Контакта</span>.</li></ul></li>
+            <li value="2">Откройте закладку  <span class="SLXBold">Web-Доступ</span>. Если закладка не отображается, то откройте закладку <a href="../Common Tabs/moretabs.htm" MadCap:conditions="Output.Customer Portal,Output.WebClient,Output.SendSLX Tray App,Output.Legacy LAN,Output.SpeedSearchClient,Output.Intellisync,Output.IntegrationContract,Output.AOI,Output.Mail Merge,Output.Query Builder">Все закладки</a>.</li>
+            <li value="3">Для установки доступа к Порталу заказчика, установите флаг в поле  <span class="SLXBold">Web-доступ </span>.</li>
+            <li value="4">В поле <span class="SLXBold">Имя пользователя</span> введите Имя пользователя для данного контакта. Это Имя пользователя будет использоваться при регистрации в Портале заказчика.</li>
+            <li value="5">В поле <span class="SLXBold">Новый пароль</span> введите пароль. Пароль не должен содержать более 8 символов. Клиент будет использовать данный пароль для входа в Портал заказчика.</li>
+            <li value="6">В поле <span class="SLXBold">Повторите новый пароль</span> введите новый пароль еще раз.</li>
+            <li MadCap:conditions="Output.WebClient" value="7">В поле <span class="SLXBold">Подсказка пароля</span> введите подсказку на тот случай, если контакт забудет пароль. Подсказка должна содержать не более 64 символов.</li>
+            <li MadCap:conditions="Output.WebClient" value="8">Нажмите    <![CDATA[ ]]><span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Сохранить<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span></li>
+        </ol>
+        <p class="Infinitive">Для удаления доступа к Порталу заказчика</p>
+        <ol>
+            <li value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="step1 bul">OОткрыть детальное представление контакта<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>.<ul MadCap:targetName="step1 bul" style="display: none;"><li MadCap:conditions="Output.WebClient" value="1">На навигационной панели нажмите  <span class="SLXBold">Контакты</span> и используйте <a href="../Lookups/Using_Lookup.htm" target="_self">поиск</a> для поиска контакта, а затем откройте детальное представление <span class="SLXBold">Контакта</span>.</li></ul></li>
+            <li value="2">Снимите флаг <span class="SLXBold">Web-доступ</span>. Удаление доступа к Порталу Заказчика не удалит контакт из базы данных, а лишь отключит возможность контакта для входа на Портал Заказчика. При снятии доступа у контакта к Порталу заказчика, введенные контактом заявки удалены не будут.</li>
+        </ol>
+        <p class="RelatedTopics">См. также</p>
+        <p><a href="Using_the_Contact_Detail_View.htm">Использование детального представления Контакта</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

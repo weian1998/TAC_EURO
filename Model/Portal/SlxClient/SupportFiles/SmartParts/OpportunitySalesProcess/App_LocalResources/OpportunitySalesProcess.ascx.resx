@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ActvityNotePadNotSupported" xml:space="preserve">
     <value>Activity Note Pad not in availble in Web.</value>
@@ -145,7 +145,7 @@
     <value>You have cancled or a contact was not found selected for this action.</value>
   </data>
   <data name="ChangeSalesProcess" xml:space="preserve">
-    <value>Steps in the '{0}'  Sales Process have all ready been completed. Do you still want to change to the '{1}' Sales Process?</value>
+    <value>Steps in the '${0}'  Sales Process have all ready been completed. Do you still want to change to the '${1}' Sales Process?</value>
   </data>
   <data name="GettingAcctMgr" xml:space="preserve">
     <value>Getting Account Manager ...</value>
@@ -157,7 +157,7 @@
     <value>Getting opportunity contact ...</value>
   </data>
   <data name="InitAction" xml:space="preserve">
-    <value>Initalizing action.</value>
+    <value>Initializing action.</value>
   </data>
   <data name="InitActivity" xml:space="preserve">
     <value>Initializing Activity wait ...</value>
@@ -175,7 +175,7 @@
     <value>Invalid path.</value>
   </data>
   <data name="LabelTemplateNotFound" xml:space="preserve">
-    <value>The label template {0} : {1} was not found.</value>
+    <value>The label template ${0} : ${1} was not found.</value>
   </data>
   <data name="MailMergeCompleted" xml:space="preserve">
     <value>Mail merge has completed processing ...</value>
@@ -199,7 +199,7 @@
     <value>There are no contacts associated to the opportunity.</value>
   </data>
   <data name="PerformingActivity" xml:space="preserve">
-    <value>Performing action activity {1}.</value>
+    <value>Performing action activity ${0}.</value>
   </data>
   <data name="PerformingContactProc" xml:space="preserve">
     <value>Performing action contact process.</value>
@@ -256,7 +256,7 @@
     <value>To Do</value>
   </data>
   <data name="WordTemplateNotFound" xml:space="preserve">
-    <value>The word template {0} : {1} was not found.</value>
+    <value>The word template ${0} : ${1} was not found.</value>
   </data>
   <data name="MustSelectContact" xml:space="preserve">
     <value>You must select a contact before you can continue.</value>
@@ -307,7 +307,8 @@
     <value>Mail merge completed.</value>
   </data>
   <data name="MSG_ProcessActionResult" xml:space="preserve">
-    <value>For step &lt;b&gt;{0}&lt;/b&gt; : &lt;br&gt; {1}</value>
+    <value>For step |B|{0}|/B| :
+{1}</value>
   </data>
   <data name="MSG_WebActionNotSupported" xml:space="preserve">
     <value>Web Actions are no longer supported.</value>
@@ -356,5 +357,20 @@
   </data>
   <data name="lueOppContact_Name" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="MSG_WebFormsNotSupported" xml:space="preserve">
+    <value>Web forms is not supported.</value>
+  </data>
+  <data name="ERR_InvalidXmlData" xml:space="preserve">
+    <value>The data returned from server is invalid.</value>
   </data>
 </root>

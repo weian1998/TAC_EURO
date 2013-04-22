@@ -1,5 +1,11 @@
 /*<meta />*/
 
+/* Use for product name on the title page; heading not in TOC */
+
+/* Use for the former product name on the title page; heading not in TOC */
+
+/* Use for the book title on title page; heading not in TOC */
+
 h1
 {
 	font-family: Verdana, Tahoma, Arial;
@@ -23,6 +29,7 @@ h1
 	padding-bottom: 5px;
 	font-size: large;
 	background-image: url('../../image/OriginalOrganic.bmp');
+	text-indent: 0px;
 }
 
 p
@@ -34,11 +41,59 @@ p
 	margin-bottom: 0;
 }
 
+p.title-product1
+{
+	text-align: left;
+	font-family: Arial;
+	font-weight: bold;
+	font-size: 36pt;
+	line-height: 37pt;
+	color: rgb(0, 132, 105);
+	mc-hyphenate: never;
+	margin-top: 0pt;
+	margin-bottom: 0pt;
+}
+
+p.title-product2
+{
+	text-align: left;
+	font-family: Arial;
+	font-weight: bold;
+	font-size: 28pt;
+	line-height: 26pt;
+	color: rgb(0, 132, 105);
+	mc-hyphenate: never;
+	margin-top: .25in;
+	margin-bottom: 0pt;
+}
+
+p.title-document
+{
+	text-align: left;
+	font-family: Arial;
+	font-weight: bold;
+	font-size: 24pt;
+	line-height: 26pt;
+	color: rgb(77, 79, 83);
+	mc-hyphenate: never;
+	margin-top: .25in;
+	margin-bottom: 0pt;
+}
+
+p.title_image
+{
+	line-height: .65in;
+	margin-top: 0pt;
+	margin-bottom: 0pt;
+}
+
 li
 {
 	color: #000000;
 	font-size: inherit;
 	font-family: inherit;
+	margin-top: 6pt;
+	list-style-type: inherit;
 }
 
 h2
@@ -174,6 +229,15 @@ li.BulletCheckbox2
 	font-style: inherit;
 	font: inherit;
 	font-weight: bold;
+}
+
+.TableVert
+{
+	color: #000000;
+	background-color: #a4bf7d;
+	writing-mode: tb-rl;
+	filter: flipv;
+	vertical-align: middle;
 }
 
 p.subheading
@@ -378,97 +442,6 @@ span.expandtext
 	font-family: inherit;
 	font-size: inherit;
 	color: #000000;
-	text-decoration: none;
-}
-
-a:link
-{
-	font-family: inherit;
-	font-weight: normal;
-	font-size: inherit;
-	color: #0000ff;
-	text-decoration: underline;
-	padding: 0px;
-}
-
-a:visited
-{
-	font-family: inherit;
-	font-style: normal;
-	font-weight: normal;
-	font-size: inherit;
-	color: #9400d3;
-	text-decoration: underline;
-}
-
-a:hover
-{
-	font-family: inherit;
-	font-style: normal;
-	font-weight: normal;
-	font-size: inherit;
-	text-decoration: none;
-	color: #0000ff;
-}
-
-a:active
-{
-	font-weight: normal;
-	font-size: inherit;
-	text-decoration: none;
-	color: #0000ff;
-	font-family: inherit;
-}
-
-a.dropspot:visited
-{
-	cursor: Hand;
-	x-text-box: blink;
-	font-variant: normal;
-	font-family: inherit;
-	font-size: inherit;
-	font-weight: normal;
-	font-style: normal;
-	color: #008080;
-	text-decoration: none;
-}
-
-a.dropspot:active
-{
-	cursor: Hand;
-	x-text-box: blink;
-	font-variant: normal;
-	font-family: inherit;
-	font-size: inherit;
-	font-weight: normal;
-	font-style: normal;
-	color: #008080;
-	text-decoration: none;
-}
-
-a.dropspot:hover
-{
-	cursor: Hand;
-	x-text-box: blink;
-	font-variant: normal;
-	font-family: inherit;
-	font-size: inherit;
-	font-weight: normal;
-	font-style: normal;
-	color: #008080;
-	text-decoration: none;
-}
-
-a.dropspot:link
-{
-	cursor: Hand;
-	x-text-box: blink;
-	font-variant: normal;
-	font-family: inherit;
-	font-size: inherit;
-	font-weight: normal;
-	font-style: normal;
-	color: #008080;
 	text-decoration: none;
 }
 
@@ -840,6 +813,7 @@ MadCap|shortcut
 MadCap|xref
 {
 	mc-disabled: false;
+	mc-format: '{u}{color blue}widget{/color}{/u}';
 }
 
 MadCap|xref.ConceptPageNumber
@@ -1033,11 +1007,6 @@ p.HowDoI
 	margin-top: 3pt;
 }
 
-a:focus
-{
-	color: #0000ff;
-}
-
 li.Bullet3
 {
 	font-family: inherit;
@@ -1060,6 +1029,37 @@ ul
 {
 	margin-top: 0em;
 	margin-bottom: 0em;
+	list-style-type: disc;
+}
+
+ul ul
+{
+	list-style-type: disc;
+}
+
+ul ul ul
+{
+	list-style-type: disc;
+}
+
+ol ul
+{
+	list-style-type: disc;
+}
+
+ol ul ul
+{
+	list-style-type: disc;
+}
+
+ul ol ul
+{
+	list-style-type: disc;
+}
+
+ol ol ul
+{
+	list-style-type: disc;
 }
 
 li.Lettered3
@@ -1222,20 +1222,680 @@ p.NoteIndent1
 MadCap|xref.BookmarkinDoc
 {
 	mc-format: '{quote}{paratext}{quote} on page {page}';
+	MadCap|xref: ;
+	text-decoration: none;
+	mc-format: '{quote}{h1}{quote}';
+}
+
+html.PopupNoFooter
+{
+	mc-master-page: url('../MasterPages/NoFooter.flmsp');
 }
 
 @media print
 {
 	p.BookTitle
 	{
-		font-size: larger;
+		text-indent: 0px;
+		font-size: 18pt;
+		margin-left: 0in;
+		orphans: 0;
+		widows: 0;
+		page-break-inside: avoid;
+		page-break-after: avoid;
+	}
+
+	MadCap|miniTocProxy.GSWeb
+	{
+		
+	}
+
+	h1
+	{
+		background-repeat: no-repeat;
+		display: block;
+		background-position: none;
+		border-bottom: none;
+		mc-heading-level: 2;
+		padding-left: 0px;
+		border-bottom-style: none;
+		border-bottom-width: 0;
+		border-bottom-color: #a4bf7d;
+		font-family: inherit;
+		margin-right: 0;
+		margin-left: 0in;
+		page-break-after: avoid;
+		text-indent: 0in;
+		page-break-before: auto;
+		padding-bottom: 0pt;
+		padding-top: 0pt;
+		margin-top: 23pt;
+		margin-bottom: 5pt;
+		mc-short-line-method: inherit;
+		left: 0px;
+		font-size: 14pt;
+		background-image: url('../../image/OriginalOrganic.bmp');
+	}
+
+	h2
+	{
+		color: #000000;
+		mc-heading-level: 3;
+		text-align: left;
+		margin-left: 0in;
+		padding-bottom: 0pt;
+		margin: 0;
+		margin-top: 21pt;
+		margin-bottom: 6pt;
+		font-size: 12pt;
+		text-indent: 0.0in;
+	}
+
+	MadCap|dropDownHotspot
+	{
+		color: #000000;
+	}
+
+	MadCap|toggler
+	{
+		color: #000000;
+	}
+
+	h3
+	{
+		font-weight: bold;
+		mc-heading-level: 4;
+		font-size: 10pt;
+		margin: 0;
+		margin-bottom: 4pt;
+		padding-bottom: 0pt;
+		margin-top: 14pt;
+	}
+
+	body
+	{
+		text-indent: 0in;
+		mc-hyphenate: never;
+		font-size: 9pt;
+		font-family: Verdana;
+	}
+
+	a:link
+	{
+		color: #000000;
+		text-decoration: none;
+	}
+
+	a:visited
+	{
+		color: #000000;
+	}
+
+	a:hover
+	{
+		color: #000000;
+	}
+
+	a:focus
+	{
+		color: #000000;
+	}
+
+	a:active
+	{
+		color: #000000;
+	}
+
+	p.ChapterTitle
+	{
+		mc-auto-number-format: 'Chapter {chapnum}';
+		margin-left: 0in;
+	}
+
+	li
+	{
+		margin-top: 6pt;
+		list-style-type: inherit;
+		margin-left: 0in;
+		page-break-inside: avoid;
+		column-break-inside: avoid;
+		widows: 2;
+		orphans: 2;
+	}
+
+	.TableBold
+	{
+		vertical-align: inherit;
+	}
+
+	p.IndexHeading
+	{
+		mc-index-headings: true;
+		text-transform: uppercase;
+		text-align: left;
+		font-size: 13pt;
+		margin-top: 2pt;
+		margin-bottom: 0pt;
+	}
+
+	p.Index2
+	{
+		text-indent: 0.25pt;
+		mc-leader-offset: auto;
+		mc-leader-align: left;
+		margin-top: 1pt;
+	}
+
+	p.Index3
+	{
+		text-indent: 0.5pt;
+		mc-leader-offset: auto;
+		mc-leader-align: left;
+		margin-top: 1pt;
+	}
+
+	td.FMText
+	{
+		font-family: inherit;
+		font-size: 8pt;
+	}
+
+	MadCap|indexProxy
+	{
+		text-align: left;
+		border: none;
+		border-top-width: 0px;
+		border-top: double;
+	}
+
+	MadCap|xref
+	{
+		mc-format: '{color black}See{/color} {quote}{paratext}{quote} {pageref}';
+	}
+
+	p.Infinitive
+	{
+		orphans: 0;
+		page-break-after: avoid;
+		widows: 0;
+		page-break-before: avoid;
+	}
+
+	MadCap|xref.H1andpage
+	{
+		mc-format: '{color black} See {/color} {color blue}{quote}{h1}{quote} {pageref}{/color}';
+	}
+
+	MadCap|xref.H2andpage
+	{
+		mc-format: '{color black} See{/color} {color blue}{quote}{h2}{quote} {pageref}{/color}';
+	}
+
+	MadCap|xref.H3andpage
+	{
+		mc-format: '{color black} See{/color} {color blue}{quote}{h3}{quote} {pageref}{/color}';
+	}
+
+	p.ChapterNumber
+	{
+		text-align: right;
+		border-bottom-width: 4px;
+		mc-heading-level: 1;
+		font-size: 20pt;
+		margin-left: -1in;
+		orphans: 0;
+		widows: 0;
+		page-break-after: avoid;
+		font-weight: bold;
+		color: #000000;
+		border-bottom: double;
+		mc-auto-number-format: '{color gray}Chapter {chapnum} {/color}';
+	}
+
+	p.Appendix
+	{
+		font-size: 20pt;
+		mc-auto-number-format: '{color gray}Appendix {A} {/color} ';
+		text-align: right;
+		border-bottom: double;
+		border-bottom-width: 4px;
+		mc-heading-level: 1;
+		margin-left: 0in;
+		page-break-after: avoid;
+		orphans: 0;
+		widows: 0;
+	}
+
+	p.ChapterNoNumber
+	{
+		border-bottom: double;
+		border-bottom-width: 4px;
+		mc-heading-level: 1;
+		font-size: 20pt;
+		margin-left: -1in;
+		text-align: right;
+		orphans: 0;
+		widows: 0;
+		page-break-after: avoid;
+		font-weight: bold;
+	}
+
+	p.NoTOC
+	{
+		text-align: right;
+		border-bottom: double;
+		border-bottom-width: 4px;
+		mc-heading-level: 0;
+		font-size: 20pt;
+		margin-left: 0in;
+		orphans: 0;
+		widows: 0;
+		page-break-after: avoid;
+		font-weight: bold;
+	}
+
+	p.Figure
+	{
+		margin-left: 30pt;
+		padding-right: 1em;
+		margin-right: 10px;
+		page-break-before: avoid;
+		mc-auto-number-format: '{b}Figure {Gn+}  {/b}';
+		orphans: 0;
+		widows: 0;
+	}
+
+	h4
+	{
+		mc-heading-level: 0;
+	}
+
+	h5
+	{
+		mc-heading-level: 0;
+	}
+
+	h6
+	{
+		font-size: large;
+		text-align: right;
+		border-bottom: double;
+		border-bottom-width: 4px;
+		mc-heading-level: 1;
+	}
+
+	p.TOC1
+	{
+		font-weight: bold;
+		color: #808080;
+		font-size: 12pt;
+		text-indent: 0in;
+		margin-left: 0in;
+		page-break-after: avoid;
+	}
+
+	p.TOC2
+	{
+		font-weight: bold;
+		font-size: 9pt;
+		margin-left: 1in;
+	}
+
+	p.TOC4
+	{
+		text-indent: 15px;
+		font-size: 9pt;
+		margin-left: 1.10in;
+	}
+
+	p.MiniTOC2
+	{
+		font-weight: bold;
+	}
+
+	MadCap|tocProxy
+	{
+		border-top: none;
+	}
+
+	p.Index1
+	{
+		mc-leader-offset: auto;
+		mc-leader-align: left;
+		margin-top: 1pt;
+	}
+
+	span.VersionDate
+	{
+		color: #a9a9a9;
+	}
+
+	p.title-document
+	{
+		font-size: inherit;
+		line-height: inherit;
+		margin-top: 3pt;
+		font-family: Foco;
+	}
+
+	p.ChapterAppendixName
+	{
+		font-size: 20pt;
+		margin-left: 0in;
+		orphans: 0;
+		widows: 0;
+		page-break-after: avoid;
+		font-weight: bold;
+	}
+
+	p.FrontMatterTitle
+	{
+		font-size: 18pt;
+		margin-left: 0in;
+	}
+
+	p
+	{
+		margin-left: 0in;
+		orphans: 3;
+		widows: 3;
+	}
+
+	p.AppendixTitle
+	{
+		margin-left: 0in;
+		orphans: 0;
+		widows: 0;
+		page-break-after: avoid;
+	}
+
+	p.ChapterContents
+	{
+		margin-left: 0in;
+		orphans: 0;
+		widows: 0;
+		page-break-after: avoid;
+	}
+
+	p.ChapterHeadLeft
+	{
+		margin-left: 0in;
+	}
+
+	p.Tip-Note-Text
+	{
+		margin-left: 0in;
+	}
+
+	h2.pagebreak
+	{
+		page-break-before: always;
+		margin-left: -1in;
+		font-size: 12pt;
+		text-indent: 0.5in;
+	}
+
+	img
+	{
+		page-break-before: avoid;
+	}
+
+	html.PopupNoFooter
+	{
+		mc-master-page: url('../MasterPages/NoFooter.flmsp');
+	}
+
+	p.BetaRelease
+	{
+		text-align: center;
+		font-size: 36pt;
+		font-family: Arial;
+		color: #dcdcdc;
+	}
+
+	span.strike
+	{
+		text-decoration: line-through;
+	}
+
+	h1.Print
+	{
+		text-indent: -1in;
+		font-family: inherit;
+		font-size: 14pt;
+		background-image: none;
+	}
+
+	h2.Print
+	{
+		margin-left: -1in;
+		font-size: 12pt;
+		text-indent: 0.5in;
+	}
+
+	p.Note
+	{
+		page-break-inside: avoid;
+		page-break-before: avoid;
+	}
+
+	td
+	{
+		orphans: 2;
+		widows: 2;
+		page-break-after: auto;
+		page-break-before: auto;
+		page-break-inside: avoid;
+	}
+
+	p.TOC3
+	{
+		font-size: 9pt;
+		margin-left: 1in;
+	}
+
+	ol ul
+	{
+		page-break-inside: avoid;
+	}
+
+	p.title-product1
+	{
+		font-family: Foco;
+	}
+
+	p.title-product2
+	{
+		font-family: Foco;
+	}
+
+	ol
+	{
+		orphans: 2;
+		widows: 2;
+	}
+
+	ul
+	{
+		orphans: 2;
+		widows: 2;
+	}
+
+	table
+	{
+		orphans: 2;
+		widows: 2;
+	}
+
+	tr
+	{
+		orphans: 2;
+		widows: 2;
+		page-break-inside: avoid;
+	}
+
+	h3.pagebreak
+	{
+		page-break-before: always;
+	}
+
+	span.Gray
+	{
+		color: #808080;
+	}
+
+	p.header
+	{
+		color: #808080;
+	}
+
+	MadCap|xref.IndexPageNumber
+	{
+		color: #0000ff;
+	}
+
+	h1.pagebreak
+	{
+		page-break-before: always;
+		font-size: 14pt;
+		text-indent: -1in;
+		background-image: none;
+	}
+
+	p.PageBreakAfter
+	{
+		orphans: 0;
+		widows: 0;
+		font-size: 12pt;
 	}
 }
 
-p.Figure
+@media non-print
 {
-	mc-auto-number-format: '{b}Figure {n+}{/b}';
-	margin-left: 30pt;
-	padding-right: 1em;
+	span.strike
+	{
+		text-decoration: line-through;
+	}
+}
+
+span.strike
+{
+	text-decoration: line-through;
+}
+
+a.Popup
+{
+	mc-popup-width: 4in;
+}
+
+ol ol
+{
+	list-style-type: lower-alpha;
+}
+
+ul ol
+{
+	list-style-type: lower-alpha;
+}
+
+span.strike
+{
+	text-decoration: line-through;
+}
+
+a:link
+{
+	font-family: inherit;
+	font-weight: normal;
+	font-size: inherit;
+	color: #0000ff;
+	text-decoration: underline;
+	padding: 0px;
+}
+
+a:visited
+{
+	font-family: inherit;
+	font-style: normal;
+	font-weight: normal;
+	font-size: inherit;
+	color: #9400d3;
+	text-decoration: underline;
+}
+
+a:focus
+{
+	color: #0000ff;
+}
+
+a:hover
+{
+	font-family: inherit;
+	font-style: normal;
+	font-weight: normal;
+	font-size: inherit;
+	text-decoration: none;
+	color: #0000ff;
+}
+
+a:active
+{
+	font-weight: normal;
+	font-size: inherit;
+	text-decoration: none;
+	color: #0000ff;
+	font-family: inherit;
+}
+
+a.dropspot:link
+{
+	cursor: Hand;
+	x-text-box: blink;
+	font-variant: normal;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: normal;
+	font-style: normal;
+	color: #008080;
+	text-decoration: none;
+}
+
+a.dropspot:visited
+{
+	cursor: Hand;
+	x-text-box: blink;
+	font-variant: normal;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: normal;
+	font-style: normal;
+	color: #008080;
+	text-decoration: none;
+}
+
+a.dropspot:hover
+{
+	cursor: Hand;
+	x-text-box: blink;
+	font-variant: normal;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: normal;
+	font-style: normal;
+	color: #008080;
+	text-decoration: none;
+}
+
+a.dropspot:active
+{
+	cursor: Hand;
+	x-text-box: blink;
+	font-variant: normal;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: normal;
+	font-style: normal;
+	color: #008080;
+	text-decoration: none;
 }
 

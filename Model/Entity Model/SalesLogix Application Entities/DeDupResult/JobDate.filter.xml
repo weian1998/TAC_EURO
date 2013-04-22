@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0"?>
-<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="a864f25c-90d9-4725-bca2-adc49dd27df9" lastModifiedUtc="2010-09-28T21:07:24.4167051Z" filterName="JobDate" propertyName="CreateDate" dataPath="DEDUPRESULT:CREATEDATE" characters="1">
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="a864f25c-90d9-4725-bca2-adc49dd27df9" lastModifiedUtc="2011-12-01T12:00:07.1069347Z" filterName="JobDate" propertyName="CreateDate" characters="1">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRangeEntityFilter" />
   </ExtendedPropertiesCollection>
-  <ranges id="f3d59d91-ad7c-4780-a2e7-4be080fd13d9" rangeName="SlxWeekly" lower="-7" upper="0" />
-  <ranges id="ac4690aa-75d6-4759-9604-ca340a5c9723" rangeName="SlxMonthly" lower="-1" upper="0" />
-  <ranges id="08465e22-6769-4b31-9c30-eb17b8ff5fa1" rangeName="SlxYearly" lower="-12" upper="0" />
+  <ranges id="f3d59d91-ad7c-4780-a2e7-4be080fd13d9" rangeName="LastWeek" lower=":lastweekstart" upper=":lastweekend" />
+  <ranges id="ac4690aa-75d6-4759-9604-ca340a5c9723" rangeName="LastMonth" lower=":lastmonthstart" upper=":lastmonthend" />
+  <ranges id="08465e22-6769-4b31-9c30-eb17b8ff5fa1" rangeName="LastYear" lower=":lastyearstart" upper=":lastyearend" />
 </entityFilter>

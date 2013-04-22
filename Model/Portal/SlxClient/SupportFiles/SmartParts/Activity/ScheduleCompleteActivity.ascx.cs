@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Text;
 using Sage.Entity.Interfaces;
 using Sage.Platform;
 using Sage.Platform.Application;
@@ -63,7 +64,8 @@ public partial class SmartParts_Activity_ScheduleCompleteActivity : EntityBoundS
         }
 
         btnContinue.Enabled = NewUnscheduledActivity.Checked;
-        OpenActivities.Visible = false;
+        //OpenActivities.Visible = false;
+        divResults.Visible = false;
 
         if (CompleteScheduledActivity.Checked)
         {
@@ -71,7 +73,7 @@ public partial class SmartParts_Activity_ScheduleCompleteActivity : EntityBoundS
             Session["entityName"] = lookup != null ? lookup.LookupEntityName : null;
             Session["entityId"] = lookup != null ? GetId(lookup.LookupResultValue) : null;
             OpenActivities.DataBind();
-            OpenActivities.Visible = OpenActivities.Rows.Count > 0;
+            divResults.Visible = true; // OpenActivities.Rows.Count > 0;
         }
         if (Account.LookupResultValue != null)
         {
@@ -82,6 +84,111 @@ public partial class SmartParts_Activity_ScheduleCompleteActivity : EntityBoundS
             Company.Text = string.Empty;
         }
 
+        ScriptManager.RegisterClientScriptInclude(this, GetType(), "ScheduleCompleteActivity", Page.ResolveUrl("~/SmartParts/Activity/ScheduleCompleteActivity.js"));
+            var script = new StringBuilder();   
+            if (Page.IsPostBack)
+            {
+                script.Append(" Sage.UI.Forms.ScheduleCompleteActivity.init(" + GetWorkSpace() + " );");
+            }
+            else 
+            {
+                script.Append("dojo.ready(function () {Sage.UI.Forms.ScheduleCompleteActivity.init(" + GetWorkSpace() + ");");
+            }
+            ScriptManager.RegisterStartupScript(this, GetType(), "initialize_ScheduleCompleteActivity", script.ToString(), true);
+    }
+
+    private string GetWorkSpace() 
+    {
+        
+               
+        StringBuilder sb =  new StringBuilder();
+        sb.Append("{");
+        sb.AppendFormat("rdoContactID:'{0}',", rbContact.ClientID);
+        sb.AppendFormat("rdoLeadID:'{0}',", rbContact.ClientID);
+        sb.AppendFormat("rdoTypeID:'{0}',", ActivityTypeButtonList.ClientID);
+        sb.AppendFormat("luAccountID:'{0}',", Account.ClientID);
+        sb.AppendFormat("luContactID:'{0}',", Contact.ClientID);
+        sb.AppendFormat("luOpportunityID:'{0}',", Opportunity.ClientID);
+        sb.AppendFormat("luTicketID:'{0}',",Ticket.ClientID);
+        sb.AppendFormat("luLeadID:'{0}',", LeadId.ClientID);
+        sb.AppendFormat("btnCancelID:'{0}',", CancelButton.ClientID);
+        sb.AppendFormat("divResultID:'{0}',", divResults.ClientID);
+        sb.AppendFormat("txtCompanyID:'{0}',", Company.ClientID);
+        sb.AppendFormat("resultHeight:'{0}'", "200");
+       
+      
+        sb.Append("}");       
+        
+        return sb.ToString();
+    }
+
+    private string GetArgs()
+    {
+                
+
+        string activityType = ActivityTypeButtonList.SelectedValue;
+        string accountId = "";
+        string accountName = "";
+        string contactId = "";
+        string contactName = "";
+        string oppId = "";
+        string oppName = "";
+        string ticketId = "";
+        string ticketNumber = "";
+        string leadId = "";
+
+
+        if (Account.LookupResultValue != null)
+        {
+            Account account = Account.LookupResultValue as Account;
+            if (account != null)
+                accountId = account.Id;
+        }
+
+        if (Contact.LookupResultValue != null)
+        {
+            Contact contact = Contact.LookupResultValue as Contact;
+            if (contact != null)
+                contactId = contact.Id;
+        }
+
+        if (Opportunity.LookupResultValue != null)
+        {
+            Opportunity opportunity = Opportunity.LookupResultValue as Opportunity;
+            if (opportunity != null)
+                oppId = opportunity.Id;
+        }
+
+        if (Ticket.LookupResultValue != null)
+        {
+            Ticket ticket = Ticket.LookupResultValue as Ticket;
+            if (ticket != null)
+                ticketId = ticket.Id;
+        }
+        if (LeadId.LookupResultValue != null)
+        {
+            Lead lead = LeadId.LookupResultValue as Lead;
+            if (lead != null)
+            {
+                leadId = lead.Id;
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.Append("{");
+        sb.AppendFormat("Type:'{0}',", activityType);
+        sb.AppendFormat("AccountId:'{0}',", accountId);
+        sb.AppendFormat("AccountName:'{0}',", accountName);
+        sb.AppendFormat("ContactId:'{0}',", contactId);
+        sb.AppendFormat("ContactName:'{0}',", contactName);
+        sb.AppendFormat("OpportunityId:'{0}',", oppId);
+        sb.AppendFormat("OpportunityName:'{0}',", oppName);
+        sb.AppendFormat("TicketId:'{0}',", ticketId);
+        sb.AppendFormat("TicketNumber:'{0}',", ticketNumber);
+        sb.AppendFormat("LeadId:'{0}'", leadId);
+        sb.Append("}");
+
+        return sb.ToString();
     }
 
     private void ResetForm()
@@ -244,7 +351,9 @@ public partial class SmartParts_Activity_ScheduleCompleteActivity : EntityBoundS
 
     protected static string BuildCompleteActivityNavigateURL(object ActivityID)
     {
-        return string.Format("javascript:Link.completeActivity('{0}')", ActivityID);
+        //return string.Format("javascript:Link.completeActivity('{0}')", ActivityID);
+        return string.Format("javascript:Sage.UI.Forms.ScheduleCompleteActivity.completeActivity('{0}')", ActivityID);
+       
     }
 
     #endregion
@@ -282,7 +391,7 @@ public partial class SmartParts_Activity_ScheduleCompleteActivity : EntityBoundS
         {
             Account.LookupResultValue = opportunity.Account;
             Ticket.LookupResultValue = null;
-            SetContactFromPrimary(opportunity.Account.Contacts);
+            SetPrimaryContactFromOppContacts(opportunity);           
         }
     }
 
@@ -303,11 +412,34 @@ public partial class SmartParts_Activity_ScheduleCompleteActivity : EntityBoundS
         LeadId.LookupResultValue = null;
     }
 
+    private void SetPrimaryContactFromOppContacts(Opportunity opportunity)
+    {
+        IContact contact = GetPrimaryOppContact(opportunity.Contacts);
+        if (contact == null) 
+        {
+            contact = GetPrimaryContact(opportunity.Account.Contacts);
+        }
+        Contact.LookupResultValue = contact; 
+        LeadId.LookupResultValue = null;
+    }
+
     private Contact GetPrimaryContact(IEnumerable<IContact> contacts)
     {
         foreach (Contact c in contacts)
-            if (c.IsPrimary.HasValue && (bool)c.IsPrimary)
+            if (c.IsPrimary ?? false)
                 return c;
+        return null;
+    }
+
+    private IContact GetPrimaryOppContact(IEnumerable<IOpportunityContact> oppContacts)
+    {
+        foreach (IOpportunityContact oc in oppContacts)
+        {
+            if (oc.IsPrimary ?? false)
+            {
+                return oc.Contact;
+            }
+        }
         return null;
     }
 
@@ -321,61 +453,7 @@ public partial class SmartParts_Activity_ScheduleCompleteActivity : EntityBoundS
         }
     }
 
-    protected void btnContinue_Click(object sender, EventArgs e)
-    {
-        string activityType = ActivityTypeButtonList.SelectedValue;
-        string accountId = "";
-        string contactId = "";
-        string oppId = "";
-        string ticketId = "";
-        string leadId = "";
-
-        if (Account.LookupResultValue != null)
-        {
-            Account account = Account.LookupResultValue as Account;
-            if (account != null)
-                accountId = account.Id;
-        }
-
-        if (Contact.LookupResultValue != null)
-        {
-            Contact contact = Contact.LookupResultValue as Contact;
-            if (contact != null)
-                contactId = contact.Id;
-        }
-
-        if (Opportunity.LookupResultValue != null)
-        {
-            Opportunity opportunity = Opportunity.LookupResultValue as Opportunity;
-            if (opportunity != null)
-                oppId = opportunity.Id;
-        }
-
-        if (Ticket.LookupResultValue != null)
-        {
-            Ticket ticket = Ticket.LookupResultValue as Ticket;
-            if (ticket != null)
-                ticketId = ticket.Id;
-        }
-        if (LeadId.LookupResultValue != null)
-        {
-            Lead lead = LeadId.LookupResultValue as Lead;
-            if (lead != null)
-            {
-                leadId = lead.Id;
-            }
-        }
-
-        Dictionary<string, string> args = new Dictionary<string, string>();
-        args.Add("type", activityType);
-        args.Add("aid", accountId);
-        args.Add("cid", contactId);
-        args.Add("oid", oppId);
-        args.Add("tid", ticketId);
-        args.Add("lid", leadId);
-
-        Link.ScheduleCompleteActivity(args);
-    }
+  
 
     #endregion
 

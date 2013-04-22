@@ -1,12 +1,16 @@
 <?xml version="1.0"?>
-<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="5cef9e90-9531-4fde-9b0d-d005ad80168d" lastModifiedUtc="2009-11-25T17:29:43.4496892Z" parentEntityId="dc325abd-e993-433c-9f19-b94bc8b0bde3" childEntityId="8556c77c-14da-4b12-958b-99ce4670a273">
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="5cef9e90-9531-4fde-9b0d-d005ad80168d" lastModifiedUtc="2012-05-18T17:58:17.0744919Z" parentEntityId="dc325abd-e993-433c-9f19-b94bc8b0bde3" childEntityId="8556c77c-14da-4b12-958b-99ce4670a273" cascadeOption="SaveUpdateDelete">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
   </ExtendedPropertiesCollection>
-  <parentProperty id="5cad7b7b-d100-47d6-b016-eacbeca70d13" lastModifiedUtc="2009-11-25T17:10:16.8946892Z" name="LitRequestItems" audited="false">
+  <parentProperty id="5cad7b7b-d100-47d6-b016-eacbeca70d13" lastModifiedUtc="2012-05-18T17:58:17.0744919Z" name="LitRequestItems" audited="false">
     <ExtendedPropertiesCollection>
-      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty">
+        <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+          <OrmEntityPropertySDataExtension generate="true" />
+        </extender>
+      </extendee>
     </ExtendedPropertiesCollection>
     <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
       <RelationshipDataType />
@@ -14,7 +18,11 @@
   </parentProperty>
   <childProperty id="9349ba8a-2686-4877-8735-09ea9bd1c0d7" lastModifiedUtc="2009-11-25T17:29:43.4496892Z" name="LitRequest" audited="false">
     <ExtendedPropertiesCollection>
-      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty">
+        <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+          <OrmEntityPropertySDataExtension generate="true" />
+        </extender>
+      </extendee>
     </ExtendedPropertiesCollection>
     <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
       <RelationshipDataType />

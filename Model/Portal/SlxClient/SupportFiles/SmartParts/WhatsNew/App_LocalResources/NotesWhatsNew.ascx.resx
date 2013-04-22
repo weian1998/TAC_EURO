@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Account_Company" xml:space="preserve">
     <value>Account/Company</value>
@@ -158,5 +158,20 @@
   </data>
   <data name="Notes_Caption" xml:space="preserve">
     <value>Notes</value>
+  </data>
+  <data name="Meeting_Type" xml:space="preserve">
+    <value>Meeting</value>
+  </data>
+  <data name="Note_Type" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="Personal_Type" xml:space="preserve">
+    <value>Personal Activity</value>
+  </data>
+  <data name="Phone_Type" xml:space="preserve">
+    <value>Phone Call</value>
+  </data>
+  <data name="ToDo_Type" xml:space="preserve">
+    <value>To-Do</value>
   </data>
 </root>

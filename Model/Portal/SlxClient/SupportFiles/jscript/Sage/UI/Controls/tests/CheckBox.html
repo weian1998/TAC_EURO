@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>Sage.UI.Controls Browser Tests</title>
+        <style type="text/css">
+        /* Hide dojo validation controls */
+        .dijitValidationContainer, .dijitBackgroundIframe {
+            visibility: hidden;
+        }
+        </style>
+        <link rel="stylesheet" type="text/css" href="../../../../../Libraries/dojo/dijit/themes/claro/claro.css" />
+        <script type="text/javascript" src="mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript">
+            dojo.provide("Sage.UI.Controls.tests.CheckBox");
+            dojo.require("dojo.parser");
+            dojo.require("doh.runner");
+            dojo.require("dijit.form.ComboBox");
+            dojo.require("dijit.form.Button");
+            dojo.require("dijit.form.DropDownButton");
+            dojo.require("dijit.form.CheckBox");
+            dojo.require("dijit.TooltipDialog");
+            dojo.require("dojox.form.DropDownStack");
+            dojo.require("Sage.UI.Controls.CheckBox");
+
+            dojo.ready(function () {
+                doh.register("Sage.UI.Controls.tests.CheckBox", [
+                function testShow() {
+                }
+            ]);
+
+                //Execute D.O.H. in this remote file.
+                doh.run();
+            });
+        </script>
+    </head>
+    <body class="claro">
+        <form>
+
+
+        </form>
+    </body>
+</html>

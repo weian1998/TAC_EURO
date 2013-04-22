@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Lookup name="FirstWeekOfYear">
+  <LookupValue id="0" text="Week containing January 1." default="true"></LookupValue>
+  <LookupValue id="1" text="First full week following January 1." default="false"></LookupValue>
+  <LookupValue id="2" text="First week containing at least 4 days." default="false"></LookupValue>
+</Lookup>
+

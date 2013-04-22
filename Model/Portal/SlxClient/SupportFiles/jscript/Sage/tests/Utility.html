@@ -1,0 +1,287 @@
+<html>
+    <head>
+        <title>Sage.UI Browser Tests</title>
+        <link rel="stylesheet" type="text/css" href="../../../css/sage-styles.css" />
+        <link rel="stylesheet" type="text/css" href="../../../Libraries/dojo/dijit/themes/claro/claro.css" />
+        <!--[if IE]>
+	    <link rel="stylesheet" type="text/css" href="../../../css/layout-ie.css" />
+        <![endif]--> 
+        <script type="text/javascript" src="../UI/Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript" src="../../../Libraries/sinon/sinon-1.3.4.js"></script>
+        <!--[if IE]>
+        <script type="text/javascript" src="../../../Libraries/sinon/sinon-ie-1.3.4.js"></script>
+        <![endif]-->
+        
+        <script type="text/javascript">
+            require([
+            'dojo/parser',
+            'doh',
+            'Sage/Utility',
+            'Sage/UI/Controls/Select',
+            'dijit/form/ValidationTextBox'
+        ], function (
+            parser,
+            doh,
+            Utility,
+            Select,
+            ValidationTextBox
+        ) {
+            doh.register("Sage.tests.Utility", [
+                function testGetValue() {
+                    var foo = {
+                        bar: 10,
+                        biz: {
+                            bang: 20
+                        }
+                    },
+                    results;
+
+                    // Test simple property getter
+                    results = Utility.getValue(foo, 'bar');
+                    doh.t(results === 10);
+
+                    // Test nested path
+                    results = Utility.getValue(foo, 'biz.bang');
+                    doh.t(results === 20);
+
+                    // Test default value
+                    results = Utility.getValue(foo, 'biz.doesnotexist', 30);
+                    doh.t(results === 30);
+                },
+                function testSetValue() {
+                    var foo = {
+                        bar: null,
+                        biz: {
+                            bang: null
+                        }
+                    },
+                    results;
+
+                    // Test simple property setter
+                    results = Utility.setValue(foo, 'bar', 10);
+                    doh.t(results.bar === 10);
+
+                    // Test nested path
+                    results = Utility.setValue(foo, 'biz.bang', 20);
+                    doh.t(results.biz.bang === 20);
+                },
+                function testRestrictDecimalDigit() {
+                    var val = '1.20',
+                        results;
+
+                    results = Utility.restrictDecimalDigit(val, 2, '.');
+                    doh.t(results === val);
+
+                    results = Utility.restrictDecimalDigit(val, 3, '.');
+                    doh.t(results === val);
+
+                    results = Utility.restrictDecimalDigit(val, 1, '.');
+                    doh.t(results === '1.2');
+
+                    results = Utility.restrictDecimalDigit('100', 2, '.');
+                    doh.t(results === '100');
+                },
+                function testMaximizeDecimalDigit() {
+                    var val = '1.20',
+                        results;
+
+                    results = Utility.maximizeDecimalDigit(val, 2, '.');
+                    doh.t(results === val);
+
+                    results = Utility.maximizeDecimalDigit(val, 3, '.');
+                    doh.t(results === '1.200');
+
+                    results = Utility.maximizeDecimalDigit(val, 1, '.');
+                    doh.t(results === '1.20');
+
+                    results = Utility.maximizeDecimalDigit('100', 2, '.');
+                    doh.t(results === '100.00');
+                },
+                function testRestrictToNumber() {
+                    var e = {
+                        charCode: 48,
+                        keyCode: 48,
+                        keyChar: '-',
+                        shiftKey: false
+                    },
+                        type = {
+                            currency: 'currency',
+                            number: 'number',
+                            percent: 'percent'
+                        },
+                        results;
+
+                    results = Utility.restrictToNumber(e, type.number);
+                    doh.t(results);
+
+                    e.shiftKey = true;
+                    results = Utility.restrictToNumber(e, type.number);
+                    e.shiftKey = false;
+                    doh.f(results);
+                },
+                function testPopulateTimeZoneList() {
+                    var results,
+                        controlId = 'timeZoneSelect',
+                        select = dijit.byId(controlId);
+
+                    // TODO: Refactor Timezone_populatelist to take a dom node instead of an id,
+                    // this will allow us to remove the jQuery selector stubs.
+                    $ = sinon.stub();
+                    $.withArgs("#" + controlId + " #TimezoneList").returns([
+                        dojo.byId(controlId)
+                    ]);
+
+                    $.withArgs("#" + controlId).returns({
+                        find: function () {
+                            return {
+                                filter: function () {
+                                    return [0];
+                                }
+                            };
+                        }
+                    });
+
+                    dojo.xhrGet = sinon.stub();
+                    dojo.xhrGet.yieldsTo('load', [
+                        { Displayname: 'foo1', Keyname: 'foo1' },
+                        { Displayname: 'foo2', Keyname: 'foo2' },
+                        { Displayname: 'foo3', Keyname: 'foo3' }
+                    ]);
+
+                    Utility.Timezone_populatelist(controlId, false /*autoPostback*/);
+
+                    // This function should populate a select with timezones..
+                    doh.t(select.options.length === 3);
+                    doh.t(select.options[0].value === 'foo1');
+                },
+                function testGetInvalidInputMatches() {
+                    var s = 'Hello<!World</Hello<World<?Hello&#World<aHello<AWorld';
+                    var matches = Utility.getInvalidInputMatches(s);
+                    doh.t(dojo.isArray(matches) === true, 'matches is not an array');
+                    if (dojo.isArray(matches)) {
+                        doh.t(matches.length === 7, 'matches length is not 7');
+                        if (matches.length === 7) {
+                            doh.t(matches[0] === '<!', '<! failed.');
+                            doh.t(matches[1] === '</', '</ failed.');
+                            doh.t(matches[2] === '<W', '<W failed.');
+                            doh.t(matches[3] === '<?', '<? failed.');
+                            doh.t(matches[4] === '&#', '$# failed.');
+                            doh.t(matches[5] === '<a', '<a failed.');
+                            doh.t(matches[6] === '<A', '<A failed.');
+                        }
+                    }
+                },
+                function testIsSafeForPosting() {
+                    var result = Utility.isSafeForPosting('Hello<!World');
+                    doh.t(result === false);
+                    result = Utility.isSafeForPosting('Hello<?World');
+                    doh.t(result === false);
+                    result = Utility.isSafeForPosting('Hello</World');
+                    doh.t(result === false);
+                    result = Utility.isSafeForPosting('Hello<AWorld');
+                    doh.t(result === false);
+                    result = Utility.isSafeForPosting('Hello<zWorld');
+                    doh.t(result === false);
+                    result = Utility.isSafeForPosting('Hello&#World');
+                    doh.t(result === false);
+                    result = Utility.isSafeForPosting('Hello World');
+                    doh.t(result === true);
+                    result = Utility.isSafeForPosting('Hello World<');
+                    doh.t(result === true);
+                    result = Utility.isSafeForPosting('Hello World<a');
+                    doh.t(result === false);
+                    result = Utility.isSafeForPosting('Hello World&');
+                    doh.t(result === true);
+                    result = Utility.isSafeForPosting('Hello World#');
+                    doh.t(result === true);
+                    result = Utility.isSafeForPosting('Hello#&World');
+                    doh.t(result === true);
+                    result = Utility.isSafeForPosting(new Date());
+                    doh.t(result === false);
+                    result = Utility.isSafeForPosting(null);
+                    doh.t(result === true);
+                    result = Utility.isSafeForPosting(undefined);
+                    doh.t(result === false);
+                },
+                function testJoinInvalidInputRegExpWith() {
+                    var control = new ValidationTextBox();
+                    var regex = "[\\\\/:\"*?<>|\r\n]";
+                    regex = Utility.joinInvalidInputRegExpWith(regex);
+                    control.regExp = regex;
+                    control.set('value', 'Hello:World.txt');
+                    doh.t(control.state === 'Error');
+                    control.set('value', 'Hello World.txt');
+                    doh.t(control.state === '');
+                    control.set('value', 'Hello &# World.txt');
+                    doh.t(control.state === 'Error');
+                    control.set('value', 'Hello < World.txt');
+                    doh.t(control.state === 'Error');
+                },
+                function testInvalidInputRegExp() {
+                    var control = new ValidationTextBox();
+                    control.regExp = Utility.regexp.invalidInput;
+                    control.set('value', 'Hello<!World');
+                    doh.t(control.state === 'Error');
+                    control.set('state', '');
+                    control.set('value', 'Hello</World');
+                    doh.t(control.state === 'Error');
+                    control.set('state', '');
+                    control.set('value', 'Hello<?World');
+                    doh.t(control.state === 'Error');
+                    control.set('state', '');
+                    control.set('value', 'Hello&#World');
+                    doh.t(control.state === 'Error');
+                    control.set('state', '');
+                    control.set('value', 'Hello<World');
+                    doh.t(control.state === 'Error');
+                    control.set('state', '');
+                    control.set('value', 'Hello<world');
+                    doh.t(control.state === 'Error');
+                    control.set('state', '');
+                    control.set('value', 'Hello\\r\\nWorld');
+                    doh.t(control.state === '');
+                    control.set('state', '');
+                    control.set('value', 'Hello\\r\\nWorld<x');
+                    doh.t(control.state === 'Error');
+                },
+                function testRegExpPatterns() {
+                    // This test is to provide change notification of the regular expression patterns.
+                    doh.t(Utility.regexp.invalidInput === '^((?!(<([!\\/?A-Za-z])|(&#))).)*$', 'Utility.regexp.invalidInput failed');
+                    doh.t(Utility.regexp.invalidInputFmt === '^((?!(<([!\\/?A-Za-z])|(&#)|(${0}))).)*$', 'Utility.regexp.invalidInputFmt failed');
+                    doh.t(Utility.regexp.invalidInputMatch === '<[!\\/?A-Za-z]|&#', 'Utility.regexp.invalidInputMatch failed');
+                },
+                function testMakeSafeForPosting() {
+                    var result = Utility.makeSafeForPosting('Hello&#World');
+                    doh.t(result === 'Hello& #World', 'Hello& #World is not safe for posting');
+                    result = Utility.makeSafeForPosting('Hello&#World Hello&#World Hello&#World', 'Hello&#World Hello&#World Hello&#World is not safe for posting');
+                    doh.t(result === 'Hello& #World Hello& #World Hello& #World', 'Hello& #World Hello& #World Hello& #World is not safe for posting');
+                    result = Utility.makeSafeForPosting('Hello<!World Hello</World Hello<?World', 'Hello<!World Hello</World Hello<?World is not safe for posting');
+                    doh.t(result === 'Hello< !World Hello< /World Hello< ?World', 'Hello< !World Hello< /World Hello< ?World is not safe for posting');
+                    result = Utility.makeSafeForPosting('Hello<aWorld Hello<AWorld Hello<zWorld', 'Hello<aWorld Hello<AWorld Hello<zWorld is not safe for posting');
+                    doh.t(result === 'Hello< aWorld Hello< AWorld Hello< zWorld', 'Hello< aWorld Hello< AWorld Hello< zWorld is not safe for posting.'); 
+                }
+            ]);
+
+            //Execute D.O.H. in this remote file.
+            doh.run();
+        });
+        </script>
+    </head>
+    <body>
+        <form>
+            Timezone populate test:
+            <select id="timeZoneSelect" data-dojo-type="Sage.UI.Controls.Select" class="select-control">
+                <option></option>
+            </select>
+        </form>
+    </body>
+</html>

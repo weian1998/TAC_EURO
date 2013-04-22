@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <title>Sage.UI Browser Tests</title>
+        <link rel="stylesheet" type="text/css" href="../../../../../Libraries/dojo/dijit/themes/claro/claro.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../../Libraries/dojo/dojox/grid/enhanced/resources/claroEnhancedGrid.css" />
+        <script type="text/javascript" src="../../Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/sinon/sinon-1.3.4.js"></script>
+        <!--[if IE]>
+        <script type="text/javascript" src="../../../Libraries/sinon/sinon-ie-1.3.4.js"></script>
+        <![endif]-->
+        <script type="text/javascript">
+        require([
+            "dojo/ready",
+            "dojo/parser",
+            "doh",
+            "Sage/Data/BaseSDataStore",
+            "dojox/grid/DataGrid",
+            "dojo/data/ItemFileWriteStore",
+            "Sage/UI/Columns/UserType",
+            "dojo/i18n!Sage/UI/nls/UserType"
+        ], function(
+            ready,
+            parser,
+            doh,
+            BaseSDataStore,
+            DataGrid,
+            ItemFileWriteStore,
+            UserType,
+            nls
+        ) {
+            ready(function () {
+                function loadGrid() {
+                    var data = {
+                      identifier: 'id',
+                      items: []
+                    };
+                    var data_list = [
+                      { col1: "normal", col2: 'A'},
+                      { col1: "important", col2: 'C'},
+                      { col1: "important", col2: 'W'}
+                    ];
+                    var rows = 60;
+                    for(var i=0, l=data_list.length; i<rows; i++){
+                      data.items.push(dojo.mixin({ id: i+1 }, data_list[i%l]));
+                    }
+                    var store = new ItemFileWriteStore({data: data});
+
+                    /*set up layout*/
+                    var layout = [[
+                      {'name': 'Column 1', 'field': 'id', 'width': '100px'},
+                      {'name': 'Column 2', 'field': 'col2', 'width': '100%', type: UserType}
+                    ]];
+
+                    /*create a new grid:*/
+                    var grid = new DataGrid({
+                        id: 'grid',
+                        store: store,
+                        structure: layout,
+                        rowSelector: '20px'},
+                      document.createElement('div'));
+
+                    /*append the new grid to the div*/
+                    dojo.byId("grid1").appendChild(grid.domNode);
+
+                    /*Call startup() to render the grid*/
+                    grid.startup();
+                }
+                
+                doh.register("Sage.UI.Columns.tests.UserType", [
+                    function testValue() {
+                        try {
+                            loadGrid();
+                            var grid = dijit.byId('grid');
+                            grid.selection.select(1);
+                            var selected = grid.selection.getSelected();
+                            doh.t(selected.length > 0);
+                            doh.t(selected[0].col2[0] === 'C');
+                            var cell = grid.getCell(1);
+                            var value = grid.store.getValue(grid.getItem(1), 'col2');
+                            doh.t(cell.formatter(value,1) === nls.concurrentText);
+                        } catch (err) {
+                            console.error(err);
+                            doh.t(false);
+                        }
+                    }
+                ]);
+                
+                //Execute D.O.H. in this remote file.
+                doh.run();
+            });
+        });
+        </script>
+    </head>
+    <body class="claro">
+        <form>
+            <div id="grid1" style="height: 500px; width: 800px"></div>
+        </form>
+    </body>
+</html>

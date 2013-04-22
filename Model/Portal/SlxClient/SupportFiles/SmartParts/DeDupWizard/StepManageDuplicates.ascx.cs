@@ -3,14 +3,15 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Sage.Platform.Application;
 using Sage.Platform.WebPortal.Services;
-using Sage.Entity.Interfaces;
 using Sage.SalesLogix.Services.PotentialMatch;
 
 public partial class StepManageDuplicates : UserControl
 {
-    private IDeDupJobProcess _job;
+    #region Public Properties
+
     public string JobId { get; set; }
 
+    private IDeDupJobProcess _job;
     /// <summary>
     /// Gets or sets the job.
     /// </summary>
@@ -20,8 +21,6 @@ public partial class StepManageDuplicates : UserControl
         get { return _job ?? (_job = GetJob()); }
         set { _job = value; }
     }
-    
-    #region Public Properties
 
     /// <summary>
     /// Gets or sets an instance of the Dialog Service.
@@ -39,39 +38,28 @@ public partial class StepManageDuplicates : UserControl
     /// </summary>
     public void SetMatchOptions()
     {
-        if (Job != null)
+        if (Job == null) return;
+        if (Job.MatchDuplicateProvider != null)
         {
-            if (Job.MatchDuplicateProvider != null)
+            foreach (ListItem item in chklstFilters.Items)
             {
-                foreach (ListItem item in chklstFilters.Items)
+                MatchPropertyFilterMap propertyFilter = Job.MatchDuplicateProvider.GetPropertyFilter(item.Value);
+                if (propertyFilter.Required || (item.Selected && item.Enabled))
                 {
-
-                    MatchPropertyFilterMap propertyFilter = Job.MatchDuplicateProvider.GetPropertyFilter(item.Value);
-                    if (propertyFilter.Required || (item.Selected && item.Enabled))
-                    {
-                        Job.MatchDuplicateProvider.SetActiveFilter(item.Value, true);
-                    }
-                    else
-                    {
-                        Job.MatchDuplicateProvider.SetActiveFilter(item.Value, false);
-                    }
-
+                    Job.MatchDuplicateProvider.SetActiveFilter(item.Value, true);
+                }
+                else
+                {
+                    Job.MatchDuplicateProvider.SetActiveFilter(item.Value, false);
                 }
 
-                foreach (ListItem item in chkListMatchTypes.Items)
-                {
-                    if (item.Selected)
-                    {
-                        Job.MatchDuplicateProvider.SetTargetActive(Type.GetType(item.Value), true);
-                    }
-                    else
-                    {
-                        Job.MatchDuplicateProvider.SetTargetActive(Type.GetType(item.Value), false);
-                    }
-                }
-
-                Page.Session["duplicateProvider"] = Job.MatchDuplicateProvider;
             }
+
+            foreach (ListItem item in chkListMatchTypes.Items)
+            {
+                Job.MatchDuplicateProvider.SetTargetActive(Type.GetType(item.Value), item.Selected);
+            }
+            Page.Session["duplicateProvider"] = Job.MatchDuplicateProvider;
         }
     }
 
@@ -104,137 +92,99 @@ public partial class StepManageDuplicates : UserControl
 
     private void LoadView()
     {
-        if (Job != null)
+        if (Job == null) return;
+        if (Job.MatchDuplicateProvider == null) return;
+        if (Page.Session["DeDupJobInit"] == null)
         {
-            if (Job.MatchDuplicateProvider != null)
-            {
-                
-                if (Page.Session["DeDupJobInit"] == null)
-                {
-                    Mode.Value = "Initialized";
-                    Page.Session["DeDupJobInit"] = true;
-                    LoadMatchType(Job, true);
-                    LoadFilter(Job, true);
-                }
-                else 
-                {
-                    LoadMatchType(Job, false);
-                    LoadFilter(Job, false);
-                
-                }               
-            }
+            Mode.Value = "Initialized";
+            Page.Session["DeDupJobInit"] = true;
+            LoadMatchType(Job, true);
+            LoadFilter(Job, true);
+        }
+        else 
+        {
+            LoadMatchType(Job, false);
+            LoadFilter(Job, false);
         }
     }
 
     private void LoadMatchType(IDeDupJobProcess job, bool initialize)
     {
-
-        if (job.MatchDuplicateProvider != null)
+        if (job.MatchDuplicateProvider == null) return;
+        if ((chkListMatchTypes.Items.Count <= 0) || initialize)
         {
-
-            if ((chkListMatchTypes.Items.Count <= 0) || initialize)
+            chkListMatchTypes.Items.Clear();
+            foreach (MatchSearchTarget target in job.MatchDuplicateProvider.GetSearchTargets())
             {
-                chkListMatchTypes.Items.Clear();
-                foreach (MatchSearchTarget target in job.MatchDuplicateProvider.GetSearchTargets())
+                ListItem item = new ListItem();
+                //If resource does not exist then use the Xml value. Item is prefixed with "Filter" to better identify resource items
+                object resource = GetLocalResourceObject("Target." + target.TargetType.Name);
+                if (resource != null)
                 {
-                    ListItem item = new ListItem();
-                    //If resource does not exist then use the Xml value. Item is prefixed with "Filter" to better identify resource items
-                    object resource = GetLocalResourceObject("Target." + target.TargetType.Name);
-                    if (resource != null)
-                    {
-                        item.Text = resource.ToString();
-                    }
-                    else
-                    {
-                        string typeName = target.TargetType.Name;
-                        
-                        // Remove the qualifying Interface prefix on the type
-                        typeName = typeName.Substring(1); 
-                        
-                        item.Text = typeName;
-                    }
-
-
-                    item.Value = target.TargetType.AssemblyQualifiedName;
-                    item.Selected = target.IsActive;
-                    item.Enabled = true;
-
-                    chkListMatchTypes.Items.Add(item);
+                    item.Text = resource.ToString();
                 }
-            }
-            else
-            {
-
+                else
+                {
+                    string typeName = target.TargetType.Name;
+                    // Remove the qualifying Interface prefix on the type
+                    typeName = typeName.Substring(1);
+                    item.Text = typeName;
+                }
+                item.Value = target.TargetType.AssemblyQualifiedName;
+                item.Selected = target.IsActive;
+                item.Enabled = true;
+                chkListMatchTypes.Items.Add(item);
             }
         }
-
-
     }
 
     private void LoadFilter(IDeDupJobProcess job, bool initialize)
     {
-
-        if (job.MatchDuplicateProvider != null)
+        if (job.MatchDuplicateProvider == null) return;
+        if ((chklstFilters.Items.Count <= 0) || initialize)
         {
-
-            if ((chklstFilters.Items.Count <= 0) || initialize)
+            chklstFilters.Items.Clear();
+            foreach (MatchPropertyFilterMap propertyFilter in job.MatchDuplicateProvider.GetFilters())
             {
-                chklstFilters.Items.Clear();
-                foreach (MatchPropertyFilterMap propertyFilter in job.MatchDuplicateProvider.GetFilters())
+                ListItem item = new ListItem();
+                // If resource does not exist then use the XML value. Item is prefixed with "Filter" to better identify resource items
+                object resourceValue = GetLocalResourceObject("Filter." + propertyFilter.PropertyName);
+                item.Text = resourceValue != null && resourceValue.ToString() != ""
+                                ? resourceValue.ToString()
+                                : propertyFilter.DisplayName;
+
+                if (propertyFilter.Required)
                 {
-                    ListItem item = new ListItem();
-                 
-                    // If resource does not exist then use the XML value. Item is prefixed with "Filter" to better identify resource items
-                    object resourceValue = GetLocalResourceObject("Filter." + propertyFilter.PropertyName);
-                    if (resourceValue != null && resourceValue.ToString() != "")
-                    {
-                        item.Text = resourceValue.ToString();
-                    }
-                    else
-                    {
-                        item.Text = propertyFilter.DisplayName;
-                    }
-
-                    if (propertyFilter.Required)
-                    {
-                        // Required folders are selected and disabled by default
-                        item.Value = propertyFilter.PropertyName;
-                        item.Selected = true;
-                        item.Enabled = false;
-                    }
-                    else
-                    {
-                        item.Value = propertyFilter.PropertyName;
-                        item.Selected = propertyFilter.Enabled;
-                        item.Enabled = true;
-                    }
-
-                    chklstFilters.Items.Add(item);
+                    // Required folders are selected and disabled by default
+                    item.Value = propertyFilter.PropertyName;
+                    item.Selected = true;
+                    item.Enabled = false;
                 }
-            }
-            else
-            {
-                foreach (ListItem item in chklstFilters.Items)
+                else
                 {
-                    
-                    MatchPropertyFilterMap propertyFilter = job.MatchDuplicateProvider.GetPropertyFilter(item.Value);
-
+                    item.Value = propertyFilter.PropertyName;
+                    item.Selected = propertyFilter.Enabled;
                     item.Enabled = true;
+                }
+                chklstFilters.Items.Add(item);
+            }
+        }
+        else
+        {
+            foreach (ListItem item in chklstFilters.Items)
+            {
+                MatchPropertyFilterMap propertyFilter = job.MatchDuplicateProvider.GetPropertyFilter(item.Value);
+                item.Enabled = true;
+                if (propertyFilter == null) continue;
+                if (propertyFilter.Required)
+                {
+                    item.Selected = true;
+                    item.Enabled = false;
 
-                    if (propertyFilter != null)
-                    {
-                        if (propertyFilter.Required)
-                        {
-                            
-                            item.Selected = true;
-                            item.Enabled = false;
-
-                        } else if ((!item.Enabled) || (!propertyFilter.Enabled))
-                        {
-                            item.Selected = false;
-                        }
-
-                    }
+                }
+                else if ((!item.Enabled) || (!propertyFilter.Enabled))
+                {
+                    item.Selected = false;
                 }
             }
         }

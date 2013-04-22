@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Sage.UI Browser Tests</title>
+        <script type="text/javascript" src="../../Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript">
+        dojo.provide("Sage.UI.Alarms.tests.AlarmPane");
+        
+        dojo.require('dojo.parser');
+        dojo.require("doh.runner");
+        dojo.require("Sage.UI.Alarms.AlarmPane");
+            
+        dojo.ready(function(){
+            doh.register("Sage.UI.Alarms.tests.AlarmPane", [
+                function testLifeCycle() {
+                }
+            ]);
+            
+            //Execute D.O.H. in this remote file.
+            doh.run();
+        });
+        </script>
+    </head>
+    <body>
+        <form>
+        </form>
+    </body>
+</html>

@@ -7,7 +7,6 @@ using Sage.Platform.Application.UI;
 using Sage.Platform.ComponentModel;
 using Sage.Platform.WebPortal.SmartParts;
 using Sage.SalesLogix.Services.Integration;
-using ApplicationException = Sage.Common.Exceptions.ApplicationException;
 using SmartPartInfoProvider = Sage.Platform.WebPortal.SmartParts.SmartPartInfoProvider;
 
 public partial class MergeChildren : SmartPartInfoProvider
@@ -115,7 +114,7 @@ public partial class MergeChildren : SmartPartInfoProvider
             _mergeContactsStateInfo.SelectedRowSourceIndex != null)
         {
             IntegrationManager.MatchingInfoAddMatchedChildPair(_mergeContactsStateInfo.SelectedSourceId,
-                                                               _mergeContactsStateInfo.SelectedTargetId);
+                                                               _mergeContactsStateInfo.SelectedTargetId);            
             IList<ComponentView> matchedContacts = IntegrationManager.MatchedContacts;
             string[] propertyNames = new[]
                                          {
@@ -130,12 +129,12 @@ public partial class MergeChildren : SmartPartInfoProvider
                                           };
             ComponentView view = new ComponentView(propertyNames, propertyValues);
             matchedContacts.Add(view);
-            IntegrationManager.SourceContacts.RemoveAt((int) _mergeContactsStateInfo.SelectedRowSourceIndex);
-            IntegrationManager.TargetContacts.RemoveAt((int) _mergeContactsStateInfo.SelectedRowTargetIndex);
+            IntegrationManager.SourceContacts.RemoveAt((int)_mergeContactsStateInfo.SelectedRowSourceIndex);
+            IntegrationManager.TargetContacts.RemoveAt((int)_mergeContactsStateInfo.SelectedRowTargetIndex);
         }
         else
         {
-            throw new ApplicationException(GetLocalResourceObject("Error_SourceTargetNotSelected").ToString());
+            throw new Sage.Platform.Application.ValidationException(GetLocalResourceObject("Error_SourceTargetNotSelected").ToString());
         }
     }
 

@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0"?>
-<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="b0a50771-888f-4546-9d09-69736ea2588e" lastModifiedUtc="2009-12-02T23:36:08.2660016Z" filterName="Requester" propertyName="RequestUser.UserInfo.UserName" characters="0">
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmDistinctEntityFilter" id="b0a50771-888f-4546-9d09-69736ea2588e" lastModifiedUtc="2012-02-16T15:49:38.2263249Z" filterName="Requester" propertyName="RequestUser.UserInfo.UserName" characters="0">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
-    <extendee type="Sage.Platform.Orm.Entities.OrmRangeEntityFilter" />
+    <extendee type="Sage.Platform.Orm.Entities.OrmDistinctEntityFilter" />
   </ExtendedPropertiesCollection>
-  <ranges id="32672138-eff7-405a-9475-aaad4ba6249c" rangeName="SlxCalendarUsers" />
 </entityFilter>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="27833f09-5273-4313-a0a2-b5c27f354680">
   <ItemId>menuItemLookupOpportunity</ItemId>
-  <NavUrl>javascript:showMainLookupFor('OPPORTUNITY','Opportunity.aspx');</NavUrl>
+  <NavUrl>javascript:Sage.Utility.Groups.showMainLookupFor('OPPORTUNITY','Opportunity.aspx');</NavUrl>
   <LargeImageUrl />
   <SmallImageUrl />
   <ContextMenuId />

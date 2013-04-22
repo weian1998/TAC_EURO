@@ -1,9 +1,8 @@
-﻿
-Sage.IntegrationContractService = function () {
+﻿Sage.IntegrationContractService = function () {
     this.isIntegrationEnabled = false;
     this.localAppId = "";
-    var data = document.getElementById("__IntegrationContractService");
-    if (typeof data !== "undefined" && data != null) {
+    var data = dojo.byId("__IntegrationContractService");
+    if (data) {
         var obj = dojo.fromJson(data.value);
         this.isIntegrationEnabled = obj.IsIntegrationEnabled;
         this.localAppId = obj.LocalAppId;
@@ -19,12 +18,11 @@ Sage.IntegrationContractService.prototype.getCurrentOperatingCompanyId = functio
         var dtNow = new Date();
         var sUrl = dojo.replace("slxdata.ashx/slx/crm/-/context/getcurrentoperatingcompanyid?time={0}&entityType={1}&entityId={2}",
             [encodeURIComponent(dtNow.getTime().toString()), encodeURIComponent(context.EntityType), encodeURIComponent(context.EntityId)]);
-        var response = $.ajax({
-            async: false,
+        var response = dojo.xhrGet({
             url: sUrl,
-            dataType: 'json',
+            handleAs: 'json',
             error: function (error) {
-                Ext.Msg.show({ title: "Sage SalesLogix", msg: error.StatusText, buttons: Ext.Msg.OK, icon: Ext.MessageBox.ERROR });
+                console.error(error);
                 return "";
             }
         });
@@ -47,7 +45,7 @@ function isMultiCurrencyEnabled() {
     if (service != null && typeof service !== "undefined") {
         return service.isMultiCurrencyEnabled;
     }
-    return false; 
+    return false;
 }
 
 function accountingSystemHandlesSO() {

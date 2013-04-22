@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="btnConnect.Text" xml:space="preserve">
     <value>Try to Connect ...</value>
@@ -127,16 +127,16 @@
     <value>Failed to connect to Intellisync using credentials.</value>
   </data>
   <data name="lblPassword.Text" xml:space="preserve">
-    <value>Password</value>
+    <value>Password:</value>
   </data>
   <data name="lblUserId.Text" xml:space="preserve">
     <value>User Name:</value>
   </data>
   <data name="LoginDescription.Text" xml:space="preserve">
-    <value>Test a users login credentials by entering their user id and password in the text areas provided. Pressing the 'Try to Connect' button will submit a login request to the server</value>
+    <value>Test a user’s logon credentials by entering their user name and password in the text areas provided. Then click Try to Connect to submit a log on request to the server.</value>
   </data>
   <data name="LoginTitle.Text" xml:space="preserve">
-    <value>Test User Login</value>
+    <value>Test User Logon Credentials</value>
   </data>
   <data name="SuccessMessage" xml:space="preserve">
     <value>Successfully connected using credentials.</value>

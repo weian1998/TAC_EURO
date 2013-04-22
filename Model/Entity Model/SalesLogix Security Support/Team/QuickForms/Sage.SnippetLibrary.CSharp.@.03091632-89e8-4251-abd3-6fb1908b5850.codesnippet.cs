@@ -91,12 +91,12 @@ namespace Sage.BusinessRules.CodeSnippets
 
 
             // get the selected owner of the team.  This will be a user
-            IUserInfo teamOwnerUser = form.DefaultOwner.LookupResultValue as IUserInfo;
+            IUser teamOwnerUser = form.DefaultOwner.LookupResultValue as IUser;
             if (teamOwnerUser != null)
             {
                 // add the team owner as a member of the team
 				IOwnerSecurityProfile ownerSecurityProfile = EntityFactory.GetById<IOwnerSecurityProfile>("PROF00000003");
-                team.AddMemberWithSecurityProfile(teamOwnerUser.User.DefaultOwner, ownerSecurityProfile);
+                team.AddMemberWithSecurityProfile(teamOwnerUser.DefaultOwner, ownerSecurityProfile);
             }
 
             HttpContext.Current.Response.Redirect(string.Format("~/Team.aspx?entityId={0}", ownerTeam.Id.ToString()), false);

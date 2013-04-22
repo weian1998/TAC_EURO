@@ -1,0 +1,32 @@
+﻿define(
+        ({
+            txtErrorActionMsg:'Désolé, cette action a échoué car une erreur est survenue.',
+            txtActivity:'activité',
+            txtActivities:'activités',
+            txtActionDeleteActivites: 'Supprimer des activités',
+            txtActionDeleteActivitiesQuestion: 'Seules les activités que vous avez l\'autorisation de supprimer seront supprimées.<P>Voulez-vous vraiment supprimer le/la {0} {1} sélectionné(e) ?',
+            txtAlarm:'alarme',
+            txtAlarms:'alarmes',
+            txtActionSnoozeAlarm:'Alarme de mise en veille',
+            txtActionSnoozeQuestion: 'Voulez-vous vraiment mettre en veille le/la {0} {1} sélectionné(e) pour {2} ?',
+            txtActionSnoozeAllQuestion:'Voulez-vous vraiment mettre en veille tous les {0} pour {1} ?',
+            txtActionDismissAlarms:'Annuler les alarmes',
+            txtActionDismissAlarmsQuestion:'Voulez-vous vraiment annuler la {0} {1} sélectionnée ?',
+            txtEvent:'événement',
+            txtEvents:'événements',
+            txtActionDeleteEvents: 'Supprimer les événements',
+            txtActionDeleteEventsQuestion:'Seuls les événements que vous avez l\'autorisation de supprimer seront supprimés.<P>Voulez-vous vraiment supprimer le {0} {1} sélectionné ?',
+            txtConfirmation:'confirmations',
+            txtConfirmations:'confirmations',
+            txtActionAcceptConfirmations:'Accepter les confirmations',
+            txtActionAcceptConfirmQuestion:'Voulez-vous vraiment accepter les {0} {1} sélectionnés ? Cette action ne peut être effectuée que sur les nouvelles confirmations. Toutes les autres seront ignorées. ',
+            txtDeclineConfirmations:'Refuser les confirmations',
+            txtActionDeclineConfrimQuestion:'Voulez-vous vraiment refuser la {0} {1} sélectionnée ? Cette action peut uniquement être effectuée sur les nouvelles confirmations. Toutes les autres seront ignorées. ',
+            txtActionRemoveConfirmations:'Supprimer les confirmations',
+            txtActionRemoveConfirmationsQuestion:'Voulez-vous vraiment supprimer la {0} {1} sélectionnée ? Cette action ne peut pas être effectuée sur les nouvelles confirmations. Toutes les autres seront supprimées. ',
+            txtLiteratureRequest:'demande de documentation',
+            txtLiteratureRequests:'demandes de documentation',
+            txtActionDeleteLiteratureRequests:'Supprimer les demandes de documentation',
+            txtActionDeleteLiteratureRequestsQuestion:'Seules les demandes de documentation que vous avez l\'autorisation de supprimer seront supprimées. <P> Voulez-vous vraiment supprimer la {0} {1} sélectionnée ?'
+         })
+);

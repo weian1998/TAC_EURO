@@ -1,6 +1,5 @@
 <script language="javascript" type="text/javascript">
 	var _IsCompleted = false;
-	//YAHOO.util.Event.addListener(window, 'load', setupUpdateScripts);
 
 	function setupUpdateScripts()
 	{

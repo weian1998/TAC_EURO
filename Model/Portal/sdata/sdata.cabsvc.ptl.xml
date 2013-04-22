@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<CabServicePortal xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="73c2d444-e18c-43b0-9543-4022b8632e3a">
+  <PortalAlias>sdata</PortalAlias>
+  <PortalReferences />
+  <DeploymentActions>
+    <ActionType TypeName="Sage.SalesLogix.Web.AdminModule.SLXClientConnectionStringDeploymentAction, Sage.SalesLogix.Web.AdminModule">
+      <Properties />
+    </ActionType>
+    <ActionType TypeName="Sage.Platform.Deployment.AdminModule.EntityDeploymentAction, Sage.Platform.Deployment.AdminModule">
+      <Properties />
+    </ActionType>
+    <ActionType TypeName="Sage.Platform.Deployment.AdminModule.CabPortalDeploymentAction, Sage.Platform.Deployment.AdminModule">
+      <Properties />
+    </ActionType>	  
+  </DeploymentActions>
+  <AuthenticationProvider />
+</CabServicePortal>

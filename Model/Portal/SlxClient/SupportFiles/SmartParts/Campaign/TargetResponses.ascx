@@ -5,7 +5,7 @@
 <%@ Register Assembly="Sage.Platform.WebPortal" Namespace="Sage.Platform.WebPortal.SmartParts" TagPrefix="SalesLogix" %>
 
 <SalesLogix:SmartPartToolsContainer runat="server" ID="TargetResponses_LTools" ToolbarLocation="left">
-    <asp:LinkButton runat="server" ID="tr_lnkFilters" OnClientClick="tr_ShowHideFilters()" Text="<%$ resources: lnkShowFilters.Text %>"></asp:LinkButton>&nbsp;
+    <asp:LinkButton runat="server" ID="tr_lnkFilters" OnClientClick="ShowHideFilters()" Text="<%$ resources: lnkShowFilters.Text %>"></asp:LinkButton>&nbsp;
 </SalesLogix:SmartPartToolsContainer>
 
 <SalesLogix:SmartPartToolsContainer runat="server" ID="TargetResponses_RTools" ToolbarLocation="right">
@@ -51,7 +51,7 @@
                         Text="<%$ resources: chkLeadSource.Caption %>" />
                 </div>
                 <div class="textcontrol select">
-                    <asp:ListBox runat="server" ID="lbxLeadSource" SelectionMode="Single" Rows="1" EnableViewState="true" 
+                    <asp:ListBox runat="server" ID="lbxLeadSource" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" shouldPublishMarkDirty="false" SelectionMode="Single" Rows="1" EnableViewState="true" 
                         OnSelectedIndexChanged="lbxLeadSource_SelectedIndexChanged" >
                     </asp:ListBox>
                 </div>
@@ -62,7 +62,7 @@
                         Text="<%$ resources: chkStage.Caption %>"  />
                 </div>
                 <div class="textcontrol select">
-                    <asp:ListBox runat="server" ID="lbxStage" SelectionMode="Single" Rows="1" EnableViewState="true" OnSelectedIndexChanged="lbxStage_SelectedIndexChanged" >
+                    <asp:ListBox runat="server" ID="lbxStage" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" shouldPublishMarkDirty="false" SelectionMode="Single" Rows="1" EnableViewState="true" OnSelectedIndexChanged="lbxStage_SelectedIndexChanged" >
                     </asp:ListBox>
                 </div>            
             </td>
@@ -78,7 +78,7 @@
                         Text="<%$ resources: chkMethod.Caption %>" />
                 </div>
                                 <div class="textcontrol select">
-                    <asp:ListBox runat="server" ID="lbxMethods" SelectionMode="Single" Rows="1" EnableViewState="true" OnSelectedIndexChanged="lbxMethods_SelectedIndexChanged">
+                    <asp:ListBox runat="server" ID="lbxMethods" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" shouldPublishMarkDirty="false" SelectionMode="Single" Rows="1" EnableViewState="true" OnSelectedIndexChanged="lbxMethods_SelectedIndexChanged">
                     </asp:ListBox>
                 </div>  
             </td>
@@ -123,9 +123,9 @@
                 OnRowCommand="grdResponses_RowCommand" OnRowDeleting="grdResponses_RowDeleting" OnRowDataBound="grdResponses_RowDataBound"
                 OnRowEditing="grdResponses_RowEditing" UseSLXPagerTemplate="false" AllowPaging="true" OnPageIndexChanging="grdResponses_changing" >
                 <Columns>
-                    <asp:BoundField DataField="LeadSource" HeaderText="<%$ resources: grdResponses.LeadSource.ColumnHeading %>" />
-                    <asp:BoundField DataField="Target" HeaderText="<%$ resources: grdResponses.Name.ColumnHeading %>" />
-                    <asp:BoundField DataField="Type" HeaderText="<%$ resources: grdResponses.Type.ColumnHeading %>" />
+                    <asp:BoundField ReadOnly="True" DataField="LeadSource" HeaderText="<%$ resources: grdResponses.LeadSource.ColumnHeading %>" />
+                    <asp:BoundField ReadOnly="True" DataField="Target" HeaderText="<%$ resources: grdResponses.Name.ColumnHeading %>" />
+                    <asp:BoundField ReadOnly="True" DataField="Type" HeaderText="<%$ resources: grdResponses.Type.ColumnHeading %>" />
                     <asp:TemplateField SortExpression="ResponseDate" HeaderText="<%$ resources: grdResponses.ResponseDate.ColumnHeading %>" >
                         <ItemTemplate>
                             <SalesLogix:DateTimePicker runat="server" ID="dteResponseDate" DisplayTime="False" DisplayMode="AsText"
@@ -133,9 +133,9 @@
                             </SalesLogix:DateTimePicker>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:BoundField DataField="Method" HeaderText="<%$ resources: grdResponses.Method.ColumnHeading %>" />                    
-                    <asp:BoundField DataField="Stage" HeaderText="<%$ resources: grdResponses.Stage.ColumnHeading %>" />
-                    <asp:BoundField DataField="Comments" HeaderText="<%$ resources: grdResponses.Comments.ColumnHeading %>" />
+                    <asp:BoundField ReadOnly="True" DataField="Method" HeaderText="<%$ resources: grdResponses.Method.ColumnHeading %>" />                    
+                    <asp:BoundField ReadOnly="True" DataField="Stage" HeaderText="<%$ resources: grdResponses.Stage.ColumnHeading %>" />
+                    <asp:BoundField ReadOnly="True" DataField="Comments" HeaderText="<%$ resources: grdResponses.Comments.ColumnHeading %>" />
                     <asp:ButtonField CommandName="Add" Text="<%$ resources: grdResponses.Add.Column %>" />
                     <asp:ButtonField CommandName="Edit" Text="<%$ resources: grdResponses.Edit.Column %>" />
                     <asp:ButtonField CommandName="Delete" Text="<%$ resources: grdResponses.Delete.Column %>" />

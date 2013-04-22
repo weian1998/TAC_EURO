@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="67ea071b-91a0-4550-a8ee-d0193abd46bd">
   <ItemId>menuItemCreateNewReturnGroup</ItemId>
-  <NavUrl>javascript:groupManager.CreateGroup('RETURN');</NavUrl>
+  <NavUrl>javascript:Sage.Groups.GroupManager.CreateGroup('RETURN');</NavUrl>
   <LargeImageUrl />
   <SmallImageUrl />
   <ContextMenuId />

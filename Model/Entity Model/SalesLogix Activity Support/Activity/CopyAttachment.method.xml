@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="5eac89d8-2f94-4875-b8fd-5cb9ce604863" lastModifiedUtc="2012-08-29T21:14:03.671214Z" name="CopyAttachment" returnType="IAttachment" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="e08614bd-f5c1-4f97-a3a7-e183e89e4078" paramName="sourceAttachment" sequence="0" paramType="IAttachment" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="061e47a7-7af4-40f1-a5f9-95712574f07c" lastModifiedUtc="2012-08-29T21:13:53.359614Z" targetType="Sage.SalesLogix.Activity.BusinessRules.Activity.Rules, Sage.SalesLogix.Activity" targetMethod="CopyAttachment" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

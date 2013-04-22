@@ -41,9 +41,7 @@
 			        </div>
 			    </td>
 			</tr>
-			<tr>
-				<td colspan="2" class="divline">&nbsp;</td>
-			</tr>
+			
 			<tr>
 				<td class="pad" colspan="2">
 					<input id="btnOk" class="btn" onclick="ok_onclick();" type="button" value='<asp:Localize ID="localizeOk" runat="server" Text="<%$ resources: localizeOk.Text %>" />' /> 
@@ -56,3 +54,5 @@
 </table>
 <asp:textbox id="txtGroupID" CssClass="dispnone" runat="server"></asp:textbox><asp:textbox id="txtEveryone" CssClass="dispnone" runat="server"></asp:textbox>
 
+<script src="jscript/Sage/GroupBuilder/querybuilder.js" type="text/javascript"></script>
+<script src="jscript/Sage/GroupBuilder/ShareGroup.js" type="text/javascript"></script>

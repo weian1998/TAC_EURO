@@ -1,0 +1,211 @@
+<html>
+    <head>
+        <title>Sage.UI Browser Tests</title>
+        <script type="text/javascript" src="../../Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript" src="../../../../../Libraries/sinon/sinon-1.3.4.js"></script>
+        
+        <script type="text/javascript">
+require([
+                "dojo/parser",
+                "doh",
+                "dojo/ready",
+                "Sage/UI/Filters/FilterManager"
+            ], function(
+                parser,
+                doh,
+                ready,
+                FilterManager
+            ) {
+                ready(function () {
+                    var numericType = '47f90249-e4c8-4564-9ae6-e1fa9904f8b8',
+                        stringType = 'ccc0f01d-7ba5-408e-8526-a3f942354b3a',
+                        dateType = '1f08f2eb-87c8-443b-a7c2-a51f590923f5';
+                        
+                    doh.register("Sage.UI.Filters.tests.FilterManager", [
+                        function testLoad() {
+                            try {
+                                var f = new FilterManager();
+                            } catch (e) {
+                                console.error(e);
+                                doh.t(false);
+                            }
+                        },
+                        function testTransformSpecialDates() {
+                            // Ensure all the special date values (:todaystart for example),
+                            // can be translated through the _transformDate function
+                            var f = new FilterManager(),
+                                prop;
+                            
+                            for (prop in f.specialDates) {
+                                if (f.specialDates.hasOwnProperty(prop)) {
+                                    doh.t(/^\d{4}\-/.test(f._transformDate(prop)));
+                                }
+                            }
+                        },
+                        function testResolveProperty() {
+                            var f = new FilterManager();
+                            
+                            // No owner with a resolveProperty function,
+                            // we should just get back the property we passed in
+                            doh.t(f.resolveProperty('foo') === 'foo');
+                            
+                            // _owner that implements a resolveProperty function will get called/returned instead
+                            f._owner = {
+                                resolveProperty: function (property) {
+                                    return property + '_test';
+                                }
+                            };
+                            
+                            doh.t(f.resolveProperty('foo') === 'foo_test');
+                        },
+                        function testResolveTimelessProperty() {
+                            var f = new FilterManager();
+
+                            // Timeless with no owner/configuration configured should return false
+                            doh.t(f.resolveTimelessProperty('foo') === false);
+                        },
+                        function testResolveDataType() {
+                            var f = new FilterManager();
+                            // TODO: Refactor data types into static object in FilterManager or elsewhere
+                            doh.t(f.resolveDataType('47f90249-e4c8-4564-9ae6-e1fa9904f8b8') === 'numeric');
+                        },
+                        function testCreateRangeFragmentNumeric() {
+                            var f = new FilterManager(),
+                                results,
+                                def = {
+                                    propertyDataTypeId: '',
+                                    details: {
+                                        rangeFilter: {
+                                            characters: 1
+                                        }
+                                    }
+                                },
+                                applied = {
+                                    'label': {
+                                        upper: 'A',
+                                        lower: 'A'
+                                    }
+                                };
+
+                            // Test numeric type
+                            def.details.rangeFilter.characters = 1;
+                            def.propertyDataTypeId = numericType;
+                            results = f.createRangeFragment(def, 'foo', applied);
+                            doh.t(results === '(foo in (A))');
+                            
+                            // Between
+                            applied.label.upper = 10;
+                            applied.label.lower = 1;
+                            results = f.createRangeFragment(def, 'foo', applied);
+                            doh.t(results === '(foo between 1 and 10)');
+                            
+                            // Test upper null
+                            applied.label.upper = null;
+                            applied.label.lower = 1;
+                            results = f.createRangeFragment(def, 'foo', applied);
+                            doh.t(results === '(foo ge 1)');
+                            
+                            // Test lower null
+                            applied.label.lower = null;
+                            applied.label.upper = 10;
+                            results = f.createRangeFragment(def, 'foo', applied);
+                            doh.t(results === '(foo le 10)');
+                            
+                            // Test two conditions joined with or
+                            applied.bar = {
+                                lower: 1,
+                                upper: 10
+                            };
+                            
+                            results = f.createRangeFragment(def, 'foo', applied);
+                            doh.t(results === '(foo le 10) or (foo between 1 and 10)');
+                        },
+                        function testCreateRangeFragmentStrings() {
+                            var f = new FilterManager(),
+                                results,
+                                def = {
+                                    propertyDataTypeId: '',
+                                    details: {
+                                        rangeFilter: {
+                                            characters: 1
+                                        }
+                                    }
+                                },
+                                applied = {
+                                    'label': {
+                                        upper: 'A',
+                                        lower: 'A'
+                                    }
+                                };
+                            
+                            // Test string type
+                            def.propertyDataTypeId = stringType;
+                            results = f.createRangeFragment(def, 'foo', applied);
+                            doh.t(results === '(substring(foo, 1, 1) in ("A"))');
+                            
+                            def.details.rangeFilter.characters = 2;
+                            applied.label.upper = 'Ab';
+                            applied.label.lower = 'Ab';
+                            results = f.createRangeFragment(def, 'foo', applied);
+                            doh.t(results === '(substring(foo, 1, 2) in ("Ab"))');
+                            
+                            def.details.rangeFilter.characters = 2;
+                            applied.label.upper = 'a1';
+                            applied.label.lower = 'a6';
+                            results = f.createRangeFragment(def, 'foo', applied);
+                            doh.t(results === '(substring(foo, 1, 2) between "a6" and "a1")');
+                            
+                            // 0 chars
+                            def.details.rangeFilter.characters = 0;
+                            applied.label.upper = 'b';
+                            applied.label.lower = 'c';
+                            results = f.createRangeFragment(def, 'foo', applied);
+                            doh.t(results === '(substring(foo, 1, 1) between "c" and "b")');
+                            
+                            // upper and lower null
+                            def.details.rangeFilter.characters = 0;
+                            applied.label.upper = null;
+                            applied.label.lower = null;
+                            results = f.createRangeFragment(def, 'foo', applied);
+                            doh.t(results === false);
+                            
+                            // Test upper null string
+                            applied.label.upper = null;
+                            applied.label.lower = 'Z';
+                            results = f.createRangeFragment(def, 'foo', applied);
+                            doh.t(results === '(substring(foo, 1, 1) ge "Z")');
+                            
+                            // Test lower null string
+                            applied.label.lower = null;
+                            applied.label.upper = 'A';
+                            results = f.createRangeFragment(def, 'foo', applied);
+                            doh.t(results === '(substring(foo, 1, 1) le "A")');
+                        },
+                        function testCreateDistinctFragment() {
+                            var f = new FilterManager();
+                        },
+                        function testCreateLookupFragment() {
+                            var f = new FilterManager();
+                        }
+                    ]);
+
+                    //Execute D.O.H. in this remote file.
+                    doh.run();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <form>
+        </form>
+    </body>
+</html>

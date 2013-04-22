@@ -1,7 +1,14 @@
 ﻿<?xml version="1.0"?>
-<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmDistinctEntityFilter" id="2bfd0444-5297-4a78-b440-2aca7c48c567" lastModifiedUtc="2008-11-12T17:48:02.8881925Z" filterName="Notification" propertyName="Type" characters="0">
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="2bfd0444-5297-4a78-b440-2aca7c48c567" lastModifiedUtc="2012-03-14T20:01:29.6204387Z" filterName="Notification" propertyName="Type" characters="0">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
-    <extendee type="Sage.Platform.Orm.Entities.OrmDistinctEntityFilter" />
+    <extendee type="Sage.Platform.Orm.Entities.OrmRangeEntityFilter" />
   </ExtendedPropertiesCollection>
+  <ranges id="6a2323ab-0964-4a7d-bd59-a4b85481ac8a" rangeName="New" lower="New" upper="New" />
+  <ranges id="6027c3bc-00e7-4efe-b88f-b7520cdd0262" rangeName="Change" lower="Change" upper="Change" />
+  <ranges id="f73e6455-3786-493f-a064-ab0731e25983" rangeName="Deleted" lower="Deleted" upper="Deleted" />
+  <ranges id="084f5387-1382-485f-a4f6-89a16eed22e9" rangeName="Confirm" lower="Confirm" upper="Confirm" />
+  <ranges id="ff2096ee-7b56-4dff-a7df-37e903493a98" rangeName="Decline" lower="Decline" upper="Decline" />
+  <ranges id="dac06684-ea32-428b-8881-50e8a2797b2a" rangeName="UnKnown" lower="Unknown" upper="Unknown" />
+  <ranges id="a4665439-b10c-4ed0-9ff0-521f0fefdc77" rangeName="Leader" lower="Leader" upper="Leader" />
 </entityFilter>

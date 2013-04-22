@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<CabServicePortal xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="0fa2d760-ccdc-4f7a-a07b-467d9fad8269">
+  <PortalAlias>ProcessHost</PortalAlias>
+  <PortalReferences />
+  <DeploymentActions>
+    <ActionType TypeName="Sage.SalesLogix.Web.AdminModule.SLXClientConnectionStringDeploymentAction, Sage.SalesLogix.Web.AdminModule">
+      <Properties />
+    </ActionType>
+    <ActionType TypeName="Sage.Platform.Deployment.AdminModule.EntityDeploymentAction, Sage.Platform.Deployment.AdminModule">
+      <Properties />
+    </ActionType>
+    <ActionType TypeName="Sage.Platform.Deployment.AdminModule.CabPortalDeploymentAction, Sage.Platform.Deployment.AdminModule">
+      <Properties />
+    </ActionType>	  
+  </DeploymentActions>
+  <TemplateUrl>Masters\default.master</TemplateUrl>
+  <AuthenticationProvider>Sage.SalesLogix.Web.SLXWebAuthenticationProvider, Sage.SalesLogix.Web</AuthenticationProvider>
+</CabServicePortal>

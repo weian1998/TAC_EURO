@@ -2,11 +2,7 @@
 using System.Text;
 using System.Web.UI;
 using Sage.Entity.Interfaces;
-using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
-using Sage.Platform.Security;
-using Sage.Platform.WebPortal;
-using Sage.Platform.WebPortal.Services;
 using Sage.Platform.WebPortal.SmartParts;
 
 /// <summary>
@@ -14,15 +10,6 @@ using Sage.Platform.WebPortal.SmartParts;
 /// </summary>
 public partial class SmartParts_Account_CustomerPayments : EntityBoundSmartPartInfoProvider
 {
-    private bool _runActivating;
-
-    /// <summary>
-    /// Gets or sets the role security service.
-    /// </summary>
-    /// <value>The role security service.</value>
-    [ServiceDependency]
-    public IRoleSecurityService RoleSecurityService { get; set; }
-
     /// <summary>
     /// Gets the type of the entity.
     /// </summary>
@@ -36,56 +23,47 @@ public partial class SmartParts_Account_CustomerPayments : EntityBoundSmartPartI
     {
     }
 
-    protected override void OnActivating()
-    {
-        _runActivating = true;
-    }
-
     private void DoActivating()
     {
-        ScriptManager.RegisterClientScriptInclude(this, GetType(), "ICCustomerPayments", Page.ResolveUrl("~/SmartParts/Account/ICCustomerPayments.js"));
-        var script = new StringBuilder();
-        script.Append(Page.IsPostBack
-                          ? "payment = new Sage.UI.Forms.ICCustomerPayments(); payment.init({workspace: '" + getMyWorkspace() + "'});"
-                          : "dojo.ready(function() {dojo.parser.parse(dojo.query('#element_ICCustomerPayments td.tws-tab-view-body')[0]); payment = new Sage.UI.Forms.ICCustomerPayments(); payment.init({workspace: '" + getMyWorkspace() + "'}); });");
-        ScriptManager.RegisterStartupScript(this, GetType(), "initialize_ICCustomerPayments", script.ToString(), true);
         IAccount account = BindingSource.Current as IAccount;
-        if (account != null && account.GlobalSyncId.HasValue)
+        string operatingCompanyId = String.Empty;
+        string globalSyncId = String.Empty;
+        if (account != null && account.GlobalSyncId != null && account.OperatingCompany != null)
         {
-            var clientContextService = PageWorkItem.Services.Get<ClientContextService>();
-            if (clientContextService != null)
-            {
-                if (clientContextService.CurrentContext.ContainsKey("OperatingCompany"))
-                {
-                    clientContextService.CurrentContext["OperatingCompany"] = account.OperatingCompany.Id.ToString();
-                }
-                else
-                {
-                    clientContextService.CurrentContext.Add("OperatingCompany", account.OperatingCompany.Id.ToString());
-                }
-                if (clientContextService.CurrentContext.ContainsKey("GlobalSyncId"))
-                {
-                    clientContextService.CurrentContext["GlobalSyncId"] = account.GlobalSyncId.ToString();
-                }
-                else
-                {
-                    clientContextService.CurrentContext.Add("GlobalSyncId", account.GlobalSyncId.ToString());
-                }
-            }
-            //else
-            //{
-            //    clientContextService.CurrentContext.Remove("OperatingCompany");
-            //    clientContextService.CurrentContext.Remove("GlobalSyncId");
-            //}
+            operatingCompanyId = account.OperatingCompany.Id.ToString();
+            globalSyncId = account.GlobalSyncId.ToString();
         }
+
+        var script = new StringBuilder();
+        script.AppendLine(
+            @"require([
+            'dojo/ready',
+            'Sage/MainView/IntegrationContract/CustomerPaymentsRTDV'
+        ], function (ready, CustomerPaymentsRTDV) {");
+
+        var baseScript = string.Format(
+            "window.setTimeout(function() {{ window.customerPaymentsRTDV = new CustomerPaymentsRTDV({{ 'workspace': '{0}', 'tabId': '{1}', 'placeHolder': '{2}', 'operatingCompanyId': '{3}', 'globalSyncId': '{4}' }}); customerPaymentsRTDV.loadCustomerPayments(); }}, 1);",
+            getMyWorkspace(),
+            ID,
+            sdgrdPayments_Grid.ClientID,
+            operatingCompanyId,
+            globalSyncId);
+
+        if (!Page.IsPostBack)
+        {
+            script.AppendFormat("ready(function() {{ {0}; }} );", baseScript);
+        }
+        else
+        {
+            script.AppendLine(baseScript);
+        }
+        script.AppendLine("});"); // end require
+        ScriptManager.RegisterStartupScript(this, GetType(), "CustomerPaymentsRTDV", script.ToString(), true);
     }
 
     protected override void OnFormBound()
     {
-        EntityPage epage = Page as EntityPage;
-        if (epage != null)
-            _runActivating = (epage.IsNewEntity || _runActivating);
-        if (_runActivating) DoActivating();
+        DoActivating();
     }
 
     /// <summary>

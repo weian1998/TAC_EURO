@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <codeTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="99be1b14-a8f6-4b61-8d33-b5f7592b011b" name="Default-ResX-SalesLogix" templateType="ResX" templateEngineType="T4">
-  <template><![CDATA[<#@ template language="C#v3.5" #>
+  <template><![CDATA[<#@ template language="C#v4.0" #>
 <#@ output extension="xml" #>
 <#@ assembly name="Microsoft.Unity.dll" #>
 <#@ assembly name="Sage.Platform.Orm.CodeGen.dll" #>

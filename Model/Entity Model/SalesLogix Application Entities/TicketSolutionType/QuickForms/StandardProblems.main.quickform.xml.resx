@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Area.Caption" xml:space="preserve">
     <value>Area</value>
@@ -132,43 +132,52 @@
   <data name="grdTicketProblemTypes.f4dc573f-efcd-4717-ba53-7e1db3cd975c.ColumnHeading" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="grdTicketProblemTypes.c819e2b2-76fa-4a54-b15c-32353cfe4c7b.ColumnHeading" xml:space="preserve">
-    <value>Notes</value>
-  </data>
-  <data name="lueStandardProblem.ButtonToolTip" xml:space="preserve">
-    <value>Associate problem.</value>
-  </data>
-  <data name="lueStandardProblem.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lueStandardProblem.LookupProperties.Area.PropertyHeader" xml:space="preserve">
-    <value>Area</value>
-  </data>
-  <data name="lueStandardProblem.LookupProperties.Description.PropertyHeader" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="grdTicketProblemTypes.88a9d95a-ed3b-4719-ad81-49454b33d843.ColumnHeading" xml:space="preserve">
-    <value>Area</value>
-  </data>
-  <data name="grdTicketProblemTypes.ac9b8d8c-1615-4c6b-a414-023e0953984a.ColumnHeading" xml:space="preserve">
-    <value>Category</value>
-  </data>
-  <data name="grdTicketProblemTypes.1671eafa-a945-44ce-9d83-d262335f2e03.ColumnHeading" xml:space="preserve">
-    <value>Issue</value>
-  </data>
-  <data name="grdTicketProblemTypes.141d4a31-a54c-4e55-af2b-047f4567f2bc.ColumnHeading" xml:space="preserve">
-    <value>Description</value>
-  </data>
   <data name="70e52f2a-8e40-4874-8a68-7bc7eafcce26.DuplicateAssociationMessage" xml:space="preserve">
     <value>This item is already associated.</value>
-  </data>
-  <data name="grdTicketProblemTypes.19676fa6-934b-4e81-ad80-0f781cd6c0b9.Text" xml:space="preserve">
-    <value>Remove</value>
   </data>
   <data name="lueStandardProblem.LookupDialogTitle" xml:space="preserve">
     <value>Find Standard Problem</value>
   </data>
-  <data name="grdTicketProblemTypes.19676fa6-934b-4e81-ad80-0f781cd6c0b9.ConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to remove the associated problem?</value>
+  <data name="QFSDataGrid.Delete.ToolTip" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="QFSDataGrid.60265654-16c8-4eed-b375-1c3a3bbc040b.ColumnHeading" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="QFSDataGrid.08152593-e4a5-4b97-a8c6-fdbd26960f83.ColumnHeading" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="QFSDataGrid.f4f354df-e285-41c2-bf0f-3b17d235d0e7.ColumnHeading" xml:space="preserve">
+    <value>Issue</value>
+  </data>
+  <data name="QFSDataGrid.94fea8be-6ba0-47b0-86cc-fd3d87210149.ColumnHeading" xml:space="preserve">
+    <value>Area</value>
+  </data>
+  <data name="QFSDataGrid.40f3fb19-647e-49a3-8729-111e27ef8fb5.ColumnHeading" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="btnAddRelationship.LookupProperties.Area.PropertyHeader" xml:space="preserve">
+    <value>Area</value>
+  </data>
+  <data name="btnAddRelationship.LookupProperties.Category.PropertyHeader" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="btnAddRelationship.LookupProperties.Description.PropertyHeader" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="btnAddRelationship.LookupProperties.Issue.PropertyHeader" xml:space="preserve">
+    <value>Issue</value>
+  </data>
+  <data name="btnAddRelationship.LookupProperties.Notes.PropertyHeader" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="btnAddRelationship.ButtonToolTip" xml:space="preserve">
+    <value>Associate Problem</value>
+  </data>
+  <data name="btnAddRelationship.DialogButtonText" xml:space="preserve">
+    <value>Add Selected</value>
+  </data>
+  <data name="btnAddRelationship.LookupDialogTitle" xml:space="preserve">
+    <value>Lookup Standard Problem</value>
   </data>
 </root>

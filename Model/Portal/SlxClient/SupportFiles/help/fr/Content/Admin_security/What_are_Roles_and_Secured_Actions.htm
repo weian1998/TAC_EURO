@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Administration|Sécurité" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Que sont les Rôles et les Actions sécurisées&#160;?</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Admin_security/What_are_Roles_and_Secured_Actions.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Ouvrir une rubrique avec la recherche, la table des matières et l'index</a>
+        </p>
+        <h1>Que sont les Rôles et les Actions sécurisées&#160;?</h1>
+        <p><a name="kanchor41"></a>Un rôle determine les fonctionnalités auxquelles un utilisateur peut accéder dans le Client Web. Les rôles sont des actions sécurisées qui contrôlent l'accès à des éléments de l'interface utilisateur tels que&#160;: pages, menus, éléments de menu, barres d'outils et boutons. Lorsque vous contrôlez l'accès à des éléments individualisés de l'interface utilisateur, vous pouvez contrôler l'accès à des actions tels que les modifications, les suppressions ou les impressions. Les éléments sécurisés courants sont tous des éléments de l'interface utilisateur, qui donnent accès aux comptes, aux contacts et aux opportunités.</p>
+        <p>Vous pouvez sécuriser un élément de l'interface utilisateur en affectant une action sécurisée à sa propriété Sécurité appliquée dans l'application Architect. Une fois qu'une application sécurisée est appliquée à un élément de l'interface utilisateur, seuls les utilisateurs auxquels a été attribué un rôle qui comprend l'action sécurisée peuvent voir et utiliser cet élément. Par exemple, Entities/Account/Save est l'action sécurisée affectée à la propriété Sécurité appliquée pour action du bouton Enregistrer sur la vue Détails du compte. Lorsque ce bouton se charge à l'exécution, la valeur d'affichage change selon que l'utilisateur possède ou non l'autorisation d'effectuer l'action.</p>
+        <p>Un élément de l'interface utilisateur dans le Client Web qui est sécurisé restreint l'accès à tous les utilisateurs jusqu'à ce qu'un rôle soit attribué à l'utilisateur et lui en autorise l'accès. Pour sécuriser des éléments dans le Client Web à l'aide de rôles, vous devez ajouter des actions sécurisées à ces éléments, ajouter l'action sécurisée à un rôle et attribuer ce rôle à l'utilisateur.    <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="example;roles steps">En savoir plus... <img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a></p>
+        <p MadCap:targetName="example" style="display: none;">Les éléments sont sécurisés dans l'application Architect en leur attribuant une action sécurisée ou en appliquant une sécurité. La valeur de la propriété Sécurité appliquée est le nom de l'action sécurisée. Pour sécuriser un élément dans l'IU et permettre aux utilisateurs d'accéder à cet élément, vous devez&#160;:</p>
+        <ol MadCap:targetName="roles steps" style="display: none;">
+            <li class="Topic-Text-Numbered" value="1">Déterminer quelle action sécurisée vous souhaitez utiliser pour sécuriser l'élément. Si nécessaire, vous pouvez créer une nouvelle action sécurisée dans le Client Web.</li>
+            <li class="Topic-Text-Numbered" value="2">Ajouter une action sécurisée à la propriété Sécurité appliquée de l'élément dans l'application Architect. Pour plus d'informations, consultez la rubrique «&#160;Comprendre les actions sécurisées&#160;» dans l'aide de l'application Architect.</li>
+            <li class="Topic-Text-Numbered" value="3">Ajouter l'action sécurisée pour cet élément à un rôle dans le client Web.</li>
+            <li class="Topic-Text-Numbered" value="4">Affecter des utilisateurs au rôle.</li>
+        </ol>
+        <p class="subheading">Rôles par défaut</p>
+        <p><a name="DefaultRoles"></a>Par défaut, les utilisateurs créés dans le client Web se voient attribuer le rôle d'Utilisateur standard. Cela permet l'accès à toutes les fonctions non administratives dans le client Web. Si vous supprimez un utilisateur de ce rôle, l'utilisateur n'aura plus accès aux éléments sécurisés tant que vous ne lui attribuerez pas un nouveau rôle. </p>
+        <p>
+        </p>
+        <p>Les rôles par défaut sont les suivants&#160;:</p>
+        <ul>
+            <li value="1"><span class="SLXBold">Administrateur</span>&#160;: permet d'ajouter, de modifier et de supprimer des autorisations à des fonctions d'administration comme les utilisateurs, les équipes, les services, les listes de sélection, les produits, les lots, la recherche de doublons, le traitement des doublons et l'historique de la recherche de doublons. Permet également de modifier les quick forms dans le concepteur de formulaire Web.</li>
+            <li value="2"><span class="SLXBold">Responsable qualité des données</span>&#160;: permet d'ajouter, de modifier et de supprimer des autorisations pour les fonctions Recherche des doublons, Traiter les doublons et Historique de la recherche des doublons.</li>
+            <li value="3"><span class="SLXBold">Utilisateur standard</span> - Vous permet de visualiser, d'ajouter, de modifier et de supprimer des autorisations aux entités non administratives du client Web telles que les comptes, les contacts, les opportunités, les lots, les produits, les commandes et les leads.<br />Si vous avez des utilisateurs existants ou que vous créez de nouveaux utilisateurs dans l'Administrateur, vous devez attribuer les utilisateurs au <a href="Assigning_Users_To_Standard_Role.htm" target="_self">rôle Utilisateur standard</a>.</li>
+        </ul>
+        <ul>
+            <li value="1"><span class="SLXBold">Processeur commande et devis</span>&#160;: permet d'ajouter et d'afficher des autorisations accordées à des contacts et à des comptes, et de supprimer des autorisations pour des bons de commandes.</li>
+            <li MadCap:conditions="Output.IntegrationContract" value="2"><span class="SLXBold">Verrouillage du prix du contrat d'intégration</span>&#160;: permet d'accorder l'autorisation de verrouiller le prix d'un produit sur un bon de commande. (Intégration de la comptabilité uniquement)</li>
+        </ul>
+        <table wrapperparagraphselector="P" style="margin-top: 14pt;border-spacing: 0px;margin-left: 0;margin-right: auto;caption-side: top;" cellspacing="0">
+            <col />
+            <col />
+            <tr>
+                <td style="width: 10%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="10%">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <ul>
+                        <li class="Bullets" value="1">La sécurité dans le client réseau est définie à l'aide de la sécurité des fonctionnalités, de la sécurité des fonctions et des rôles administratifs. La sécurité Web combine tous les éléments réseau dans un seul modèle de sécurité&#160;: un rôle. Vous ne pouvez pas utiliser le modèle de sécurité réseau pour un utilisateur qui est connecté au client Web ou le modèle de sécurité Web pour un utilisateur qui est connecté au client réseau.</li>
+                        <li class="Bullets" value="2">L'utilisateur admin peut accéder à tous les éléments de l'interfacce utilisateur, pour toutes les actions sécurisées.</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <p class="RelatedTopics">Procédure</p>
+        <p><a href="Creating_a_Role.htm" target="_self">Créer un rôle</a>
+        </p>
+        <p><a href="CreatingASecuredAction.htm" target="_self">Créer une action sécurisée</a>
+        </p>
+        <p><a href="Role_Users_Tab.htm" target="_self">Affecter un rôle à des utilisateurs</a>
+        </p>
+        <p><a href="EditingOrDeletingASecuredAction.htm" target="_self">Modifier ou supprimer une action sécurisée</a>
+        </p>
+        <p><a href="Assigning_Users_To_Standard_Role.htm" target="_self">Affecter des utilisateurs au rôle d'Utilisateur standard</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Dites-nous comment améliorer l'aide</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

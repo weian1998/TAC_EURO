@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Запуск Утилиты Обновления Записей E-mail и Телефона Субъекта.</title>
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Integration Contract/Account_Integration_Phone_Email_Utility.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor467"></a>Запуск Утилиты Обновления Записей E-mail и Телефона Субъекта.</h1>
+        <p>До установки конечных точек вашей Учетной Интеграции, вы должны запустить утилиту обновления записей E-mail и Телефона Субъекта. Данная утилита создает запись в таблице ERPPHONENUMBER или ERPEMAILADDRESS  для каждого телефонного номера и столбца email в таблицах СУБЪЕКТ и КОНТАКТ.  Данные записи соответствуют оригинальному значению столбца сущности, в которой они инициировались.     </p>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <col style="width: 45px;" />
+            <col />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p align="center" class="Topic-Text-Indent">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p class="Tip-Note-Text" style="margin-bottom: 0;">Проверка Подлинности Windows должна настраиваться для пользователя с правами администратора до запуска утилиты  обновления E-mail и Телефона Субъекта. Для получения более подробных действий смотрите тему "Использование Проверки Подлинности Windows" в Справке Администратора.</p>
+                </td>
+            </tr>
+        </table>
+        <p class="Infinitive">Для запуска утилиты обновления записей E-mail и телефона субъекта.</p>
+        <ol>
+            <li value="1">На вашей рабочей станции администратора, найдите файлы <span class="SLXBold">ICLegacyPhoneEmailUpdater.exe</span> и <span class="SLXBold">ICLegacyPhoneEmailUpdater.config</span>.
+<br />Конфигурационные файлы по умолчанию находятся в ...\Program Files\SalesLogix
+</li>
+            <li value="2">Дважды щелкните на <span class="SLXBold">ICLegacyPhoneEmailUpdater.config</span> , чтобы открыть файл в текстовом редакторе по вашему выбору.</li>
+            <li value="3">Прокрутите до раздела <span class="SLXBold">&lt;connectionStrings&gt;</span> и измените значение  <span class="SLXBold">Initial Catalog</span> с  <span class="SLXBold">SALESLOGIX_EVAL</span> на  псевдоним вашей базы данных.<br /> Например:<br />&lt;connectionStrings&gt;
+    &lt;clear/&gt;
+    &lt;add name="Default" connectionString="Provider=SLXOLEDB.1;Persist Security Info=True;Initial Catalog=MyDatabaseAlias;Data Source=localhost;Extended Properties=&amp;quot;PORT=1706;LOG=ON;CASEINSENSITIVEFIND=ON;AUTOINCBATCHSIZE=1;SVRCERT=12345;ACTIVITYSECURITY=OFF;TIMEZONE=NONE&amp;quot;"/&gt;
+  &lt;/connectionStrings&gt;
+</li>
+            <li value="4">Дважды щелкните на <span class="SLXBold">ICLegacyPhoneEmailUpdater.exe</span> для запуска утилиты.
+</li>
+            <li value="5">Щелкните <span class="SLXBold">Создать Телефонные Записи ERP</span> для создания телефонных записей.
+</li>
+            <li value="6">Щелкните <span class="SLXBold">Создать  E-mail Записи ERP</span> для создания записей e-mail.
+</li>
+            <li value="7">Нажмите кнопку <span class="SLXBold">Закрыть</span>.
+</li>
+        </ol>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,150 +1,7 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeFile="LeadSearchAndConvert.ascx.cs" Inherits="LeadSearchAndConvert" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.HighLevelTypes" Namespace="Sage.SalesLogix.HighLevelTypes" TagPrefix="SalesLogix" %>
 <%@ Register Src="~/SmartParts/Lead/MatchOptions.ascx" TagName="MatchOptions" TagPrefix="SalesLogix" %>
 
-<style type="text/css">
-.activeTab .tableft
-{
-	background-image : url("./images/blue/TabCurrentLeft.gif");
-	float : left;
-	height : 24px;
-	width : 7px;
-}
-.activeTab .tabcenter
-{
-	background-image : url("./images/blue/TabCurrentCenter.gif");
-	float : left;
-	height : 24px;
-	cursor : pointer;
-	vertical-align : middle;
-}
-.activeTab .tabright
-{
-	background-image : url("./images/blue/TabCurrentRight.gif");
-	float : left;
-	height : 24px;
-	width : 7px;
-}
-.inactiveTab .tableft
-{
-	background-image : url("./images/blue/TabLeft.gif");
-	float : left;
-	height : 24px;
-	width : 7px;
-}
-.inactiveTab .tabcenter
-{
-	background-image : url("./images/blue/TabCenter.gif");
-	float : left;
-	height : 24px;
-	cursor : pointer;
-	vertical-align : middle;
-}
-.inactiveTab .tabright
-{
-	background-image : url("./images/blue/TabRight.gif");
-	float : left;
-	height : 24px;
-	width : 7px;
-}
-
-.filterArea
-{
-   border-style:solid; 
-   border-width:1px; 
-   border-color:#99BBE8;
-
-   /*
-   width:95%;
-   margin-left:20px; 
-   margin-right:20px;
-   */       
-}
-.infoArea
-{
-   border-style:solid; 
-   border-width:1px; 
-   border-color:#99BBE8;
-   background-color: White;
-   padding: 4px;
-   /*
-   margin-left:20px; 
-   margin-right:20px;
-   width:95%;  
-   */      
-}
-
-.infoArea td
-{
-	vertical-align: top;
-}
-
-.leadConvertSection
-{
-	padding: 3px 3px 3px 3px;
-}
-
-.leadConvertSection .formtable 
-{
-	margin: 0;
-}
-
-.resultTableContainer
-{
-	padding: 0 3px 0 3px;
-}
-
-.resultArea
-{
-   border-style:solid; 
-   border-width:1px; 
-   border-color:#99BBE8;
-   /*
-   margin-left:20px; 
-   margin-right:20px;
-   padding-bottom:10px;
-   padding-left:10px; 
-   padding-right:10px; 
-   */
-   overflow:auto; 
-   height:210px; 
-   /* width:95%; */
-}
-
-.resultAreaWrapper
-{
-	min-height: 0;
-	_height: 1%;
-}
-
-.mergeArea
-{
-   border-style:solid; 
-   border-width:1px; 
-   border-color:#99BBE8;
-   /*
-   margin-left:20px; 
-   margin-right:20px;
-   */
-   overflow:auto;  
-   height:470px; 
-         
-}
-
-#MergeRecords .qfActionContainer
-{
-	padding: 10px 0 0 0;
-}
-
-.mergeAreaWrapper
-{
-	min-height: 0;
-	_height: 1%;
-	padding: 2px;
-}
-
-</style>
 <asp:HiddenField ID="Mode" runat="server" Value="View" />
 <asp:HiddenField ID="UpdateIndex" runat="server" Value="True" />
 <div style="display:none">
@@ -152,17 +9,14 @@
         <SalesLogix:PageLink ID="lnkMatchOptionsHelp" runat="server" LinkType="HelpFileName"
             ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="leadmergerecords.aspx"
             ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16">
-        &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
         </SalesLogix:PageLink>
     </asp:Panel>
-    <input id="txtSelectedTab" runat="server" type="hidden" />
 </div>
 
 <asp:Panel runat="server" ID="pnlSearchForDuplicates" Visible="true">
-    <div class="leadConvertSection">
-    <div class="infoArea">
-    <table id="SourceSnapShot" style="background-color:White; width:100%" border="0" cellpadding="0" cellspacing="0">
-        <col /><col width="33%" /><col width="33%" />
+    <table id="SourceSnapShot" border="0" cellpadding="0" cellspacing="0" class="Bevel ExtendWidth">
+        <col width="33%" /><col width="33%" />
         <tr>            
             <td colspan="3">
                 <span class="lbl">
@@ -218,28 +72,39 @@
             </td>
         </tr>
     </table>
+
+    <div class="tws tws-main-section">
+        <div class="tws tws-main-section tws-main-tab-buttons">
+            <ul>
+                <li runat="server" class="tws-tab-button tws-active-tab-button" id="tabFilters">
+                    <a class="tws-tab-button-left" href="#" click="return false;">
+                        <em class="tws-tab-button-right">
+                            <span class="tws-tab-button-middle">
+                                <span>
+                                    <asp:Localize ID="lclTabFilters" runat="server" Text="<%$ resources: lblMatchFilters.Caption %>"></asp:Localize>
+                                </span>
+                            </span>
+                        </em>
+                    </a>
+                </li>
+                <li runat="server" class="tws-tab-button" id="tabOptions">
+                    <a class="tws-tab-button-left" href="#" click="return false;">
+                        <em class="tws-tab-button-right">
+                            <span class="tws-tab-button-middle">
+                                <span>
+                                    <asp:Localize ID="lclTabOptions" runat="server" Text="<%$ resources: cmdSearchOptions.Caption %>"></asp:Localize>
+                                </span>
+                            </span>
+                        </em>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-    </div>
-    <div class="leadConvertSection">
-    <div id="tabStripArea">
-        <asp:Panel id="tabFilters" runat="server" CssClass="activeTab">
-            <div class="tableft">&nbsp;</div>
-                <div class="tabcenter">
-                    <asp:Localize ID="lclTabFilters" runat="server" Text="<%$ resources:lblMatchFilters.Caption %>"></asp:Localize>
-                </div>
-            <div class="tabright">&nbsp;</div>
-        </asp:Panel>
-        <asp:Panel id="tabOptions" runat="server" CssClass="inactiveTab">
-            <div class="tableft">&nbsp;</div>
-            <div class="tabcenter">
-                <asp:Localize ID="lclTabOptions" runat="server" Text="<%$ resources:cmdSearchOptions.Caption %>"></asp:Localize>
-            </div>
-            <div class="tabright">&nbsp;</div>
-        </asp:Panel>
-    </div>
+
     <div style="clear: both;"></div>
-    <div runat="server" id="divFilters" class="filterArea">
-        <table id="tblFilters" style="width: 100%;" border="0" cellpadding="0" cellspacing="0">
+    <div runat="server" id="divFilters">
+        <table id="tblFilters" border="0" cellpadding="0" cellspacing="0" class="Bevel ExtendWidth">
             <colgroup>
                 <col width="1%" />
                 <col width="4%" />
@@ -278,7 +143,6 @@
                 <td></td>
                 <td></td>
                 <td colspan="2">
-                    <br />
                     <span class="slxlabel">
                         <asp:Label ID="lblMatchFilters" runat="server" Text="<%$ resources: lblMatchFilters.Caption %>"></asp:Label>
                     </span>
@@ -297,9 +161,7 @@
                 <td></td>
                 <td></td>
                 <td colspan="2">
-                    <asp:CheckBoxList ID="chklstFilters" runat="server" RepeatColumns="3" RepeatDirection="Horizontal" Width="100%">
-                    </asp:CheckBoxList>
-                    <br />
+                    <asp:CheckBoxList ID="chklstFilters" runat="server" RepeatColumns="5" RepeatDirection="Horizontal" Width="100%"></asp:CheckBoxList>
                 </td>
             </tr>
             <tr>
@@ -322,61 +184,34 @@
     </div>
     
     <div runat="server" id="divOptions" style="display:none;">
-        <div class="filterArea">
+        <div class="Bevel ExtendWidth">
             <SalesLogix:MatchOptions id="MatchOptions" runat="server" OnLoad="SetOptions" ></SalesLogix:MatchOptions>
         </div>
-    </div>    
-   
     </div>
-    
-    <div class="leadConvertSection">
-     <div id="divUpdateMatches" style="">
+
+    <br/>
+     <div id="divUpdateMatches">
         <asp:Button runat="server" ID="cmdUpdateMatches" CssClass="slxbutton" Text="<%$ resources: cmdUpdateMatches.Caption %>" onclick="cmdUpdateMatches_Click" />
     </div>
-    </div>
-    
-    <div class="leadConvertSection">
-    <div class="resultArea">
-    <div class="resultAreaWrapper">
-    <table id="tblResults" width="100%" border="0" cellpadding="0" cellspacing="0">        
+    <br/>
+
+    <table id="tblResults" border="0" cellpadding="0" cellspacing="0" class="Bevel ExtendWidth">
         <tr>
-            
             <td>
-                <br />
-                <div class="resultTableContainer">
                 <span class="slxlabel">
                     <asp:Label ID="lblMatchesFound" runat="server" Text="<%$ resources: lblMatchesFound.Caption %>"></asp:Label>
                 </span>
-                </div>
             </td>
-            
         </tr>
-        <tr>            
+        <tr>
             <td>
-                <div class="resultTableContainer">
-                <SalesLogix:SlxGridView ID="grdMatches" runat="server" 
-                    AllowPaging="false" 
-                    DataKeyNames="Id,EntityType" 
-                    Width="100%"
-                    height="100%"
-                    AllowSorting="false" 
-                    AlternatingRowStyle-CssClass="rowdk" 
-                    ShowEmptyTable="true" 
-                    UseSLXPagerTemplate="false"
-                    AutoGenerateColumns="false" 
-                    CellPadding="4" 
-                    CssClass="datagrid" 
-                    EnableViewState="false" 
-                    ExpandableRows="False"
-                    EmptyTableRowText="<%$ resources: grdMatches.EmptyTableRowText %>" 
-                    GridLines="Both" 
-                    OnRowCommand="grdMatches_OnRowCommand" 
-                    OnSelectedIndexChanged="grdMatches_SelectedIndexChanged" 
-                    PageSize="5"
-                    PagerStyle-CssClass="gridPager" 
-                    ResizableColumns="true" 
-                    RowStyle-CssClass="rowlt" 
-                    SelectedRowStyle-CssClass="rowSelected" >
+                <SalesLogix:SlxGridView ID="grdMatches" runat="server" ResizableColumns="false" PageSize="5"
+                    AllowPaging="false" DataKeyNames="Id,EntityType" Width="100%" height="120px" AllowSorting="false"
+                    ShowEmptyTable="true" UseSLXPagerTemplate="false" AutoGenerateColumns="false" CellPadding="4"
+                    CssClass="datagrid" EmptyTableRowText="<%$ resources: grdMatches.EmptyTableRowText %>"
+                    EnableViewState="false" ExpandableRows="False" GridLines="Both" PagerStyle-CssClass="gridPager"
+                    OnRowCommand="grdMatches_OnRowCommand" OnSelectedIndexChanged="grdMatches_SelectedIndexChanged"
+                    AlternatingRowStyle-CssClass="rowdk" SelectedRowStyle-CssClass="rowSelected" RowStyle-CssClass="rowlt">
                     <Columns>
                         <asp:ButtonField CommandName="Merge" Text="<%$ resources: grdMatches.Merge.ColumnHeading %>" />
                         <asp:BoundField DataField="Id" Visible="false" />
@@ -403,49 +238,24 @@
                         </asp:TemplateField>
                     </Columns>
                 </SalesLogix:SlxGridView>
-                </div>
             </td>
-            
         </tr>
         <tr>
-            
             <td>
                 <br />
-                <div class="resultTableContainer">
                 <span class="slxlabel">
                     <asp:Label ID="lblAccountMatches" runat="server" Text="<%$ resources: lblAccountMatches.Caption %>"></asp:Label>
                 </span>
-                </div>
             </td>
-            
         </tr>
         <tr>
-            
             <td>
-                <div class="resultTableContainer">
-                <SalesLogix:SlxGridView ID="grdAccountMatches" runat="server" 
-                    AllowPaging="false" 
-                    AllowSorting="false"
-                    AlternatingRowStyle-CssClass="rowdk" 
-                    AutoGenerateColumns="false" 
-                    CellPadding="4" 
-                    CssClass="datagrid" 
-                    DataKeyNames="Id" 
-                    EmptyTableRowText="<%$ resources: grdMatches.EmptyTableRowText %>" 
-                    Width="100%"
-                    Height="100%"
-                    PageSize="5" 
-                    GridLines="None" 
-                    OnRowCommand="grdAccountMatches_OnRowCommand"
-                    ExpandableRows="False" 
-                    OnSelectedIndexChanged="grdAccountMatches_SelectedIndexChanged" 
-                    PagerStyle-CssClass="gridPager" 
-                    EnableViewState="false" 
-                    ResizableColumns="True" 
-                    RowStyle-CssClass="rowlt"
-                    SelectedRowStyle-CssClass="rowSelected" 
-                    ShowEmptyTable="true" 
-                    UseSLXPagerTemplate="false">
+                <SalesLogix:SlxGridView ID="grdAccountMatches" runat="server" AllowPaging="false" AllowSorting="false" ExpandableRows="False"
+                    CellPadding="4" CssClass="datagrid" DataKeyNames="Id" EmptyTableRowText="<%$ resources: grdMatches.EmptyTableRowText %>"
+                    Width="100%" Height="120px" PageSize="5" GridLines="Vertical" AutoGenerateColumns="false" EnableViewState="false"
+                    OnRowCommand="grdAccountMatches_OnRowCommand" OnSelectedIndexChanged="grdAccountMatches_SelectedIndexChanged"
+                    ResizableColumns="false" RowStyle-CssClass="rowlt" ShowEmptyTable="true" UseSLXPagerTemplate="false"
+                    SelectedRowStyle-CssClass="rowSelected" AlternatingRowStyle-CssClass="rowdk" PagerStyle-CssClass="gridPager">
                     <Columns>
                         <asp:ButtonField CommandName="Add Contact" Text="<%$ resources: grdAccount.AddContact.ColumnHeading %>" />
                         <asp:BoundField DataField="Id" Visible="false" />
@@ -463,36 +273,24 @@
                         <asp:BoundField DataField="Type" HeaderText="<%$ resources: grdAccountMatches.Type.ColumnHeading %>" />
                     </Columns>
                 </SalesLogix:SlxGridView>
-                </div>
             </td>
-            
         </tr>
-        
     </table>
-    </div>
-    </div>
-    </div>
     
-    <div class="leadConvertSection">
-    <table border="0" cellpadding="1" cellspacing="0" class="formtable">
-        <colgroup>
-            <col width="70%" />
-            <col width="30%" />
-        </colgroup>
+    <table border="0" cellpadding="1" cellspacing="0" width="100%">
+        <col width="50%" /><col width="50%" />
         <tr>
             <td>
-                <span class="slxlabel">
-                    <asp:Label ID="lblAccountConflicts" runat="server" Text="<%$ resources: lblAccountConflicts.Caption %>"></asp:Label>
-                </span>
-                <div class="textcontrol select">
-                    <asp:DropDownList ID="ddlAccountConflicts" runat="server">
+                <div class="lbl alignleft">
+                    <asp:Label ID="lblAccountConflicts" runat="server" Text="<%$ resources: lblAccountConflicts.Caption %>" AssociatedControlID="ddlAccountConflicts"></asp:Label>
+                </div>
+                <div class="textcontrol select" width="70%">
+                    <asp:DropDownList ID="ddlAccountConflicts" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" shouldPublishMarkDirty="false" runat="server">
                         <asp:ListItem Text="<%$ resources: ddlAccountConflicts_Item_AccountWins %>" Value="ACCOUNTWINS"></asp:ListItem>
                         <asp:ListItem Text="<%$ resources: ddlAccountConflicts_Item_LeadWins %>" Value="LEADWINS"></asp:ListItem>
                     </asp:DropDownList>
                 </div>
             </td>
-        </tr>
-        <tr>
             <td>
                 <span>
                     <asp:CheckBox ID="chkCreateOpportunity" runat="server" />
@@ -502,22 +300,20 @@
                         Text="<%$ resources: lblCreateOpportunity.Caption %>"> </asp:Label>
                 </span>
             </td>
-            <td align="right">
-                <asp:Panel ID="ctrlstAddCancel" runat="server" CssClass="controlslist qfActionContainer">
-                    <asp:Button ID="cmdInsert" runat="server" OnClick="cmdInsert_Click" Text="<%$ resources: cmdInsert.Caption %>" CssClass="slxbutton" />
-                    <asp:Button ID="cmdConvert" runat="server" OnClick="cmdConvert_Click" Text="<%$ resources: cmdConvert.Caption %>" CssClass="slxbutton" />
-                    <asp:Button ID="cmdCancel" runat="server" Text="<%$ resources: cmdCancel.Caption %>" CssClass="slxbutton" />
-                </asp:Panel>
-            </td>
         </tr>
     </table>
+    <div style="padding-right:20px; text-align:right" >
+       <asp:Panel runat="server" ID="pnlCancel" CssClass="controlslist qfActionContainer">
+            <asp:Button ID="cmdInsert" runat="server" OnClick="cmdInsert_Click" Text="<%$ resources: cmdInsert.Caption %>" CssClass="slxbutton" />
+            <asp:Button ID="cmdConvert" runat="server" OnClick="cmdConvert_Click" Text="<%$ resources: cmdConvert.Caption %>" CssClass="slxbutton" />
+            <asp:Button ID="cmdCancel" runat="server" Text="<%$ resources: cmdCancel.Caption %>" CssClass="slxbutton" />
+        </asp:Panel>
     </div>
 </asp:Panel>
 
 <%--Layout for the Merge Records view--%>
 <asp:Panel runat="server" ID="pnlMergeRecords" Visible="false">
-    <div class="leadConvertSection">
-    <div id="MergeRecords">  
+    <div id="MergeRecords">
         <asp:HiddenField ID="hdfSourceID" runat="server" />
         <asp:HiddenField ID="hdfSourceType" runat="server" />
         <table width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -528,38 +324,24 @@
             </tr>
         </table>
         <br />
-        <div class="mergeArea">
-        <div class="mergeAreaWrapper">
-        <table style="width: 100%;" cellpadding="0" cellspacing="0" border="0">
-           <tr>
-                <td style="">                   
-                    <SalesLogix:SlxGridView runat="server" ID="grdMerge" 
-                        AllowPaging="false"
-                        GridLines= "Both" 
-                        AutoGenerateColumns="False"
-                        AlternatingRowStyle-CssClass="rowdk" 
-                        RowStyle-CssClass="rowlt" 
-                        CellPadding="4"
-                        CssClass="datagrid" 
-                        OnRowDataBound="grdMerge_RowDataBound" 
-                        OnSelectedIndexChanged="grdMerge_SelectedIndexChanged" 
-                        EnableViewState="false" 
-                        ExpandableRows="false"
-                        ResizableColumns="false" 
-                        PageSize="5" 
-                        Width = "100%" 
-                        Height="100%" 
-                        DataKeyNames="PropertyMapId">
-                        <Columns >                     
+        <table cellpadding="0" cellspacing="0" border="0" class="Bevel ExtendWidth">
+            <tr>
+                <td>
+                    <SalesLogix:SlxGridView runat="server" ID="grdMerge" AllowPaging="false" GridLines="Both" CssClass="datagrid"
+                        AutoGenerateColumns="False" DataKeyNames="PropertyMapId" CellPadding="4" PageSize="5"
+                        OnRowDataBound="grdMerge_RowDataBound" OnSelectedIndexChanged="grdMerge_SelectedIndexChanged"
+                        EnableViewState="false" ExpandableRows="false" ResizableColumns="false" Height="450px" Width="100%"
+                        AlternatingRowStyle-CssClass="rowdk" RowStyle-CssClass="rowlt">
+                        <Columns>
                             <asp:BoundField DataField="PropertyMapId" Visible="false" />
                             <asp:BoundField DataField="Description" HeaderText="Property"/>
                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
                                 <HeaderTemplate>
-                                    <%# CreateRecordRadioButton("Source") %> 
+                                    <%# CreateRecordRadioButton("Source") %>
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <%# CreatePropertyRadioButton(Container.DataItem, "Source") %> 
-                                </ItemTemplate>                             
+                                    <%# CreatePropertyRadioButton(Container.DataItem, "Source") %>
+                                </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField>
                                 <HeaderTemplate>
@@ -567,15 +349,15 @@
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label runat="server" ID="SourceValue" Text='<%# Eval("SourceValue") %>' />
-                                </ItemTemplate>                        
-                            </asp:TemplateField>                
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
                                 <HeaderTemplate>
-                                    <%# CreateRecordRadioButton("Target")%> 
+                                    <%# CreateRecordRadioButton("Target")%>
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <%# CreatePropertyRadioButton(Container.DataItem, "Target")%> 
-                                </ItemTemplate>   
+                                    <%# CreatePropertyRadioButton(Container.DataItem, "Target")%>
+                                </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField>
                                 <HeaderTemplate>
@@ -583,30 +365,21 @@
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label runat="server" ID="TargetValue" Text='<%# Eval("TargetValue") %>' />
-                                </ItemTemplate>                        
+                                </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
-                        <HeaderStyle BackColor="#F3F3F3" BorderColor="Transparent" Font-Bold="True" Font-Size="Small" />
                         <RowStyle CssClass="rowlt" />
                         <AlternatingRowStyle CssClass="rowdk" />
                     </SalesLogix:SlxGridView>
-                </td>  
-            </tr>            
-        </table>
-        </div>
-        </div>
-        <table width="100%">
-             <tr>
-                <td align="right" style="">
-                    <asp:Panel runat="server" ID="ctrlstButtons" CssClass="controlslist qfActionContainer">
-                        <asp:Button runat="server" ID="btnMerge" CssClass="slxbutton" Onclick="btnMerge_Click" ToolTip="Merge" Text="<%$ resources: cmdMerge.Caption %>" />
-                        <asp:Button runat="server" ID="btnCancel" CssClass="slxbutton" ToolTip="Cancel" Text="<%$ resources: cmdCancel.Caption %>" onclick="btnCancel_Click" />
-                    </asp:Panel>
                 </td>
-            </tr>        
+            </tr>
         </table>
-    </div>
+        <br/>
+        <div style="padding-right:20px; text-align:right" >
+            <asp:Panel runat="server" ID="ctrlstButtons" CssClass="controlslist qfActionContainer">
+                <asp:Button runat="server" ID="btnMerge" CssClass="slxbutton" Onclick="btnMerge_Click" ToolTip="Merge" Text="<%$ resources: cmdMerge.Caption %>" />
+                <asp:Button runat="server" ID="btnCancel" CssClass="slxbutton" ToolTip="Cancel" Text="<%$ resources: cmdCancel.Caption %>" onclick="btnCancel_Click" />
+            </asp:Panel>
+        </div>
     </div>
 </asp:Panel>
-
-

@@ -9,12 +9,11 @@
  </div>   
 #end #end
   <div #if(${qfcontrol.ColumnSpan} > 1 || ${qfcontrol.ControlLabelPlacement} == "top") class="twocoltextcontrol select" #else class="textcontrol select" #end > 
-<asp:ListBox runat="server" ID="${qfcontrol.ControlId}" #if(${qfcontrol.IsReadOnly} || (!$qfcontrol.Enabled))Enabled="false" #end
+<asp:ListBox runat="server" ID="${qfcontrol.ControlId}" #if(${qfcontrol.IsReadOnly} || (!$qfcontrol.Enabled))Disabled="true" #end
 #if($qfcontrol.ToolTip != "") ToolTip="<%$ resources: ${qfcontrol.ControlId}.ToolTip %>" #end
 #if($qfcontrol.HotKey != "")AccessKey="$qfcontrol.HotKey" #end
-#if($qfcontrol.MultiSelect)SelectionMode="Multiple" Rows="4" #else SelectionMode="Single" Rows="1" #end
+#if($qfcontrol.MultiSelect)SelectionMode="Multiple" Rows="4" #if($qfcontrol.StyleScheme != "") CssClass="$qfcontrol.StyleScheme" #end #else SelectionMode="Single" Rows="1" data-dojo-type="dijit.form.Select"  CssClass="select-control #if($qfcontrol.StyleScheme != "") $qfcontrol.StyleScheme #end" #end
 #if($qfcontrol.TabIndex > 0)TabIndex="$qfcontrol.TabIndex" #end
-#if($qfcontrol.StyleScheme != "")CssClass="$qfcontrol.StyleScheme" #end
 #if($qfcontrol.HasActionCode)AutoPostBack="true" #end
 #if(!$qfcontrol.Visible)Visible="false" #end
 #if((($qfcontrol.TextField != "") || ($qfcontrol.ValueField != "")) && ($qfcontrol.DataSource != ""))

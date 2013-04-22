@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Проверка работоспособности Intellisync</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Intellisync/Intellisync_Health_Check.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor495"></a>Проверка работоспособности Intellisync</h1>
+        <p>Intellisync for SalesLogix includes a troubleshooting option called Intellisync Health
+Check. You can troubleshoot logging into the portal, and check the version of the
+assemblies. In most cases, checking the assembly versions is only done at the request
+of Sage Technical Support.
+
+
+</p>
+        <p>You can access the Intellisync Health Check from the IIS Manager, the Intellisync
+portal and the <span class="MCPopup"><a href="javascript:void(0);" MadCap:src="../Remotes/slxpersonalwebserver.htm" onclick="FMCPopup( event, this ); return false;" class="MCPopupSpot">Sage SalesLogix Personal Web Server</a></span>. </p>
+        <p class="Infinitive">To access from IIS Manager</p>
+        <ol>
+            <li class="Topic-Text-Numbered" value="1">Click <span class="SLXBold">Start</span>, point to <span class="SLXBold">Programs</span>, then point to <span class="SLXBold">Administrative Tools</span>.</li>
+            <li class="Topic-Text-Numbered" value="2">Click <span class="SLXBold">Internet Information Services (IIS) Manager</span>.</li>
+            <li class="Topic-Text-Numbered" value="3">Expand the machine name, expand <span class="SLXBold">Web Sites</span>, then expand <span class="SLXBold">SalesLogix</span>.</li>
+            <li class="Topic-Text-Numbered" value="4">Double click <span class="SLXBold">SLXIntellisync</span>.</li>
+            <li class="Topic-Text-Numbered" value="5">Выполните одно из следующих действий:</li>
+        </ol>
+        <ul>
+            <li class="Topic-Text-Bulleted-2" value="1">Windows 2003: In the list of files in the right pane, right-click Default.aspx and
+click Browse.
+</li>
+            <li class="Topic-Text-Bulleted-2" value="2">Windows 2008: In the list of files in the right pane, right-click Default Document,
+point to Manage Application, and then click Browse.
+The browser displays the Intellisync portal. If it does not display, ensure the settings
+are configured correctly and that the portal has been deployed.
+
+
+</li>
+        </ul>
+        <ol>
+            <li value="6" class="Topic-Text-Numbered">In the browser, click <span class="SLXBold">Diagnostics</span>, and do one of the following:</li>
+        </ol>
+        <ul>
+            <li class="Topic-Text-Bulleted-2" value="1">To test user credentials, type the User Name and Password for the user you want to
+test and then click Try to Connect.
+A request is submitted to the server to test whether the credentials are valid for
+the portal. A message indicates whether the test is successful. <br /></li>
+            <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+                <col style="width: 45px;" />
+                <col />
+                <tr>
+                    <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                        <p style="text-align: center;margin-bottom: 0;" align="center">
+                            <img src="../image/note.gif" />
+                        </p>
+                    </td>
+                    <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                        <p class="Tip-Note-Text" style="margin-bottom: 0;">This test only determines whether the credentials are successful in logging into
+the portal. This does not test whether there is a working database connection.
+</p>
+                    </td>
+                </tr>
+            </table>
+        </ul>
+        <ul>
+            <li class="Topic-Text-Bulleted-2" value="1">To view the assemblies and their version number, click the forward and back buttons
+at the bottom of the list. 
+
+
+</li>
+        </ul>
+        <p class="Infinitive">To access from the portal</p>
+        <ol>
+            <li class="Topic-Text-Numbered" value="1">Open the Intellisync portal. 
+</li>
+        </ol>
+        <p class="Topic-Text-Indent">For example, type the portal URL into the browser using the format: http://server:port/portal
+name/default.aspx
+
+
+</p>
+        <ol MadCap:continue="true">
+            <li class="Topic-Text-Numbered" value="2">Click <span class="SLXBold">Diagnostics</span>.
+</li>
+        </ol>
+        <ol style="list-style-type: decimal;" MadCap:continue="true">
+            <li class="Topic-Text-Numbered" value="3">Do one of the following:</li>
+        </ol>
+        <ul style="list-style-type: disc;">
+            <li class="Topic-Text-Bulleted-2" value="1">To view assemblies and their version number, click the forward and back buttons at the bottom of the list.</li>
+            <li class="Topic-Text-Bulleted-2" value="2">To test user credentials, enter the <span class="SLXBold">User Name</span> and <span class="SLXBold">Password</span> for the user you want to test and then click <span class="SLXBold">Try to Connect</span>.</li>
+        </ul>
+        <p class="Topic-Text-Indent2">A request is submitted to the server to test if the user can log on to the Intellisync
+portal. A message indicates if the test was successful.</p>
+        <p class="Infinitive">To access from the Personal Web Server
+
+
+</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="1stalpha;1stp">To test user credentials<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <ol style="list-style-type: lower-alpha; display: none;" MadCap:targetName="1stalpha">
+            <li class="Topic-Text-Lettered" value="1">Right-click the <span class="SLXBold">Sage SalesLogix Personal Web Server</span> icon in the system tray, and
+click <span class="SLXBold">Properties</span>.
+
+
+</li>
+            <li class="Topic-Text-Lettered" value="2">In the <span class="SLXBold">Sage SalesLogix Personal Web Server</span> dialog box, click <span class="SLXBold">Manage</span>. 
+
+
+</li>
+            <li class="Topic-Text-Lettered" value="3">Enter the <span class="SLXBold">User Name</span> and <span class="SLXBold">Password</span> for the user you want to test. 
+
+
+</li>
+            <li class="Topic-Text-Lettered" value="4">Click <span class="SLXBold">Test Connection</span>. </li>
+        </ol>
+        <p class="Topic-Text-Indent2" MadCap:targetName="1stp" style="display: none;">A request is submitted to the server to test if the user can log on to the Intellisync
+portal. A message indicates whether the test is successful.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="2ndalpha;2ndp">To view assemblies and their version number<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <ol style="list-style-type: lower-alpha; display: none;" MadCap:targetName="2ndalpha">
+            <li class="Topic-Text-Lettered" value="1">Right-click the <span class="SLXBold">Sage SalesLogix Personal Web Server</span> icon in the system tray, and click <span class="SLXBold">Properties</span>.</li>
+            <li class="Topic-Text-Lettered" value="2">In the <span class="SLXBold">Sage SalesLogix Personal Web Server</span> dialog box, select the Intellisync portal in the Web Site box.</li>
+            <li class="Topic-Text-Lettered" value="3">Click <span class="SLXBold">Details</span>.</li>
+        </ol>
+        <p class="Topic-Text-Indent2" MadCap:targetName="2ndp" style="display: none;">View the installed assemblies for the Intellisync portal and their version number.</p>
+        <ul>
+            <li value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="3rdalpha">To compare portal versions<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <ol style="list-style-type: lower-alpha; display: none;" MadCap:targetName="3rdalpha">
+            <li class="Topic-Text-Lettered" value="1">Right-click the <span class="SLXBold">Sage SalesLogix Personal Web Server</span> icon in the system tray, and click <span class="SLXBold">Side by Side Versions</span>.</li>
+            <li class="Topic-Text-Lettered" value="2">View the version of the sage.saleslogix.dll file for each installed portal.</li>
+        </ol>
+        <p class="RelatedTopics">См. также</p>
+        <p>Troubleshooting with Logging</p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

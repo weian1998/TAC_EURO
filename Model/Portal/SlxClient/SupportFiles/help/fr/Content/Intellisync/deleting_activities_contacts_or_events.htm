@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Suppression d'activités, de contacts ou d'événements</title>
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../ehlpdhtm.js">
+        </script>
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Intellisync/deleting_activities_contacts_or_events.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Ouvrir une rubrique avec la recherche, la table des matières et l'index</a>
+        </p>
+        <h1><a name="kanchor493"></a>Suppression d'activités, de contacts, ou d'événements</h1>
+        <p>Intellisync for SalesLogix n'autorise pas  MS Outlook<span MadCap:conditions="Primary.Lotus_Notes"> ou Lotus Notes </span>à supprimer des activités, des contacts ou des événements de la base de données Sage SalesLogix. Vous devez supprimer ces enregistrements manuellement après la synchronisation.</p>
+        <p class="Infinitive">Marquage d'éléments supprimés</p>
+        <p style="margin-top: 1.00pt;">Lorsqu'un élément est supprimé de , MS Outlook <span MadCap:conditions="Primary.Lotus_Notes">ou Lotus Notes </span>, la balise<span style="font-size: 9pt;"> I</span>SYNC_DEL est ajoutée à l'enregistrement de l'activité, du contact ou de l'événement Sage SalesLogix comme suit :</p>
+        <ul style="list-style-type: disc;">
+            <li class="Bullets" value="1">Pour les activités, la balise ISYNC_DEL est insérée dans le champ Priorité.</li>
+            <li class="Bullets" value="2">Pour les contacts, la balise ISYNC_DEL est insérée dans le champ Description.</li>
+            <li class="Bullets" value="3">Pour les événements, la balise ISYNC_DEL est insérée dans le champ Type.</li>
+        </ul>
+        <p> La demande d'obtention de liste Activités/tâches à faire filtre les enregistrements ayant la valeur de champ ISYNC_DEL afin qu'ils ne soient pas synchronisés, mais les enregistrements doivent être supprimés manuellement dans SalesLogix pour une suppression permanente.</p>
+        <p class="Infinitive">Affichage des éléments supprimés</p>
+        <ul>
+            <li class="Bullets" value="1">Pour voir toutes les activités qui ont été supprimées de MS Outlook<span MadCap:conditions="Primary.Lotus_Notes">ou de Lotus Notes </span>, triez la liste des activités par code de priorité et recherchez ISYNC DEL.
+            </li>
+            <li class="Bullets" value="2">Pour voir tous les contacts qui ont été supprimés de MS Outlook<span MadCap:conditions="Primary.Lotus_Notes">ou de Lotus Notes</span>, triez la liste des contacts par le champ Description et recherchez ISYNC DEL.
+            </li>
+            <li class="Bullets" value="3">Pour voir tous les événement qui ont été supprimés de MS Outlook<span MadCap:conditions="Primary.Lotus_Notes">ou de Lotus Notes</span>, triez la liste des événement par le champ Type et recherchez ISYNC DEL. 
+            </li>
+        </ul>
+        <p class="Infinitive">Suppression manuelle d'un élément marqué</p>
+        <p>Vous pouvez supprimer les activités, contacts ou événements de Sage SalesLogix si vous le souhaitez.</p>
+        <ol style="list-style-type: decimal;">
+            <li class="Topic-Text-Numbered" value="1">Localisez l'élément comme décrit dans <span class="SLXBold">Affichage des éléments supprimés</span>.</li>
+            <li class="Topic-Text-Numbered" value="2">Sélectionnez l'élément, cliquez avec le bouton droit puis cliquez sur <span class="SLXBold">Supprimer</span>.</li>
+        </ol>
+        <p class="RelatedTopics">Rubriques connexes</p>
+        <p><a href="Intellisync_for_SalesLogix.htm" target="_self">Intellisync for SalesLogix</a>
+        </p>
+        <p><a href="using_intellisync.htm" target="_self">Utilisation d'Intellisync</a>
+        </p>
+        <p><a href="understanding_data_exchange.htm" target="_self">Présentation de l'échange de données</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Dites-nous comment améliorer l'aide</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

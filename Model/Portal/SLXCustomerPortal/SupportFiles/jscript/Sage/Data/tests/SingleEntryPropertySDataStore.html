@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <title>Sage.Data Tests</title>
+        <script type="text/javascript" src="../../UI/Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript" src="../../../../Libraries/sinon/sinon-1.3.4.js"></script>
+        <!--[if IE]>
+        <script type="text/javascript" src="../../../Libraries/sinon/sinon-ie-1.3.4.js"></script>
+        <![endif]-->
+
+        <script type="text/javascript">
+        require([
+            'dojo/parser',
+            'doh',
+            'Sage/Data/SingleEntryPropertySDataStore'
+        ], function(
+            parser,
+            doh,
+            SingleEntryPropertySDataStore
+        ) {
+            doh.register("Sage.Data.tests.SingleEntryPropertySDataStore", [
+                function testEnsureSetResourcePropertyIsCalled() {
+                    // 
+                    var store,
+                        request,
+                        mock;
+                        
+                    Sage.SData.Client.SDataResourcePropertyRequest = sinon.stub();
+                    request = Sage.SData.Client.SDataResourcePropertyRequest;
+                    mock = sinon.mock();
+
+                    request.returns({
+                        setResourceKind: sinon.stub(),
+                        setQueryArg: sinon.stub(),
+                        setResourceProperty: mock,
+                        readFeed: sinon.stub()
+                    });
+                    
+                    try {
+                        mock.once();
+
+                        store = new SingleEntryPropertySDataStore({
+                            resourceKind: 'something',
+                            propertyName: 'foo'
+                        });
+                        store.fetch({
+                            start: 0,
+                            count: 25
+                        });
+
+                        mock.verify();
+                    } catch (err) {
+                        console.error(err);
+                        doh.t(false);
+                    }
+                }
+            ]);
+            
+            //Execute D.O.H. in this remote file.
+            doh.run();
+        });
+        </script>
+    </head>
+    <body>
+        <form>
+        </form>
+    </body>
+</html>

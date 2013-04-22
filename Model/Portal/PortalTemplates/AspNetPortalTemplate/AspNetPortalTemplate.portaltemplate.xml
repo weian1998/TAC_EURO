@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PortalTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="e58be7bd-b3c6-4a4b-a809-148fe6ec251e">
+  <TemplateName>AspNetPortalTemplate</TemplateName>
+  <TemplateTitle>ASP.NET Portal Template</TemplateTitle>
+  <TemplateDescription>Creates an ASP.NET portal application. Use this template type when creating a new portal that does not require the Sage SalesLogix ASP.NET framework.</TemplateDescription>
+  <Services />
+  <Modules />
+  <DeploymentActions>
+      <ActionType TypeName="Sage.SalesLogix.Web.AdminModule.SLXClientConnectionStringDeploymentAction, Sage.SalesLogix.Web.AdminModule">
+        <Properties />
+      </ActionType>
+      <ActionType TypeName="Sage.Platform.Deployment.AdminModule.AspNetDeploymentAction, Sage.Platform.Deployment.AdminModule">
+        <Properties />
+      </ActionType>	  
+  </DeploymentActions>
+  <TemplateUrl />
+  <AuthenticationProvider />
+  <StorageProvider />
+  <LinkedFolderDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="SupportFiles" Source="\Portal\PortalTemplates\AspNetPortalTemplate\SupportFiles">
+    <Filters />
+    <Files />
+  </LinkedFolderDefinition>
+</PortalTemplate>

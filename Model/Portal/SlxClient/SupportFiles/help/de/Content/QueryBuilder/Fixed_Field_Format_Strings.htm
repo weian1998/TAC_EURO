@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="de" xml:lang="de" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Formatzeichenfolgen "Festes Feld"</title>
+        <link href="../Resources/TableStyles/TableStyle.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilder/Fixed_Field_Format_Strings.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Thema mit den Registerkarten "Suchen", "Inhalt" und "Index" öffnen</a>
+        </p>
+        <h1><a name="kanchor639"></a>Formatzeichenfolgen für feste Felder<a name="kanchor640"></a></h1>
+        <p>In der unten stehenden Tabelle werden die Optionen der Formatzeichenfolgen für Festkommafelder aufgeführt. Welche <a href="Format_String.htm">Zeichenfolgenformate</a> gültig sind, hängt vom ausgewählten <a href="Format_Type.htm">Formattyp</a> ab.</p>
+        <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Option</th>
+                    <th class="HeadD-Column1-Header1">Beschreibung</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">e</td>
+                    <td class="BodyD-Column1-Body1">Systematisch. Beim Feldformat handelt es sich um einen Gleitkommawert. Der Wert wird in eine Zeichenfolge folgenden Formats konvertiert: "-d,ddd...E+ddd". Die Ergebniszeichenfolge beginnt mit einem Minuszeichen, wenn die Zahl negativ ist. Vor dem Dezimalkomma steht immer eine Ziffer. Die Gesamtzahl der Ziffern in dieser Zeichenfolge (einschließlich der Ziffer vor dem Dezimalkomma) wird vom Bezeichner in der Formatzeichenfolge angegeben. Wenn kein Genauigkeitsbezeichner angegeben ist, wird von einer Standardgenauigkeit von 15 ausgegangen. Dem Exponentenzeichen "E" in der Zeichenfolge folgt immer ein Plus- oder Minuszeichen sowie mindestens drei Ziffern.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">f</td>
+                    <td class="BodyD-Column1-Body1">Festkomma. Der Wert wird als Festkommafeld angezeigt. Beim Feldformat muss es sich um einen Gleitkommawert handeln. Der Wert wird in eine Zeichenfolge folgenden Formats konvertiert "-ddd,ddd...". Die Ergebniszeichenfolge beginnt mit einem Minuszeichen, wenn die Zahl negativ ist. Die Anzahl von Ziffern nach dem Dezimalkomma wird vom Bezeichner in der Formatzeichenfolge angegeben. Wenn kein Genauigkeitsbezeichner angegeben ist, wird standardmäßig von 2 Ziffern ausgegangen.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">g</td>
+                    <td class="BodyD-Column1-Body1">Allgemein. Beim Feldformat muss es sich um einen Gleitkommawert handeln. Der Wert wird in die kürzeste mögliche Dezimalzeichenfolge mit Hilfe des Formats "Festkomma" oder "systematisch" konvertiert. Die Anzahl der signifikanten Ziffern in der daraus resultierenden Zeichenfolge wird vom Genauigkeitsbezeichner in der Formatzeichenfolge angegeben. Wenn kein Genauigkeitsbezeichner angegeben ist, wird von einer Standardgenauigkeit von 15 ausgegangen. Nachfolgende Nullen werden aus der Zeichenfolge entfernt; ein Dezimalkomma wird nur bei Bedarf angezeigt. Die Zeichenfolge verwendet das Festkommaformat, wenn die Anzahl der Ziffern links des Dezimalkommas kleiner oder gleich der angegebenen Genauigkeit ist und wenn der Wert größer oder gleich 0,00001 ist. Andernfalls verwendet die Zeichenfolge das Format "systematisch".</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">n</td>
+                    <td class="BodyA-Column1-Body1">Nummer. Beim Feldformat muss es sich um einen Gleitkommawert handeln. Der Wert wird in eine Zeichenfolge folgenden Formats konvertiert: "-d.ddd.ddd,ddd...". Das "n"-Format entspricht dem "f"-Format, mit der Ausnahme, dass die Zeichenfolge tausend Trennzeichen enthält.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="RelatedTopics">Verwandte Themen</p>
+        <p MadCap:conditions="Output.WebClient"><a href="Using_SalesLogix_Query_Builder.htm">Abfrage-Assistent-Übersicht</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Haben Sie Vorschläge zur Verbesserung der Hilfe?</a>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

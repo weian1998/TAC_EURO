@@ -41,11 +41,10 @@ namespace Sage.BusinessRules.CodeSnippets
     {
         public static void lueAddTeam_OnChangeStep( ITeamMembership form,  EventArgs args)
         {
-            IOwner teamOwner = form.lueAddTeam.LookupResultValue as IOwner;
+            ITeam teamOwner = form.lueAddTeam.LookupResultValue as ITeam;
 			// get security profile for member
 			IUser member = form.CurrentEntity as IUser;			
-			ITeam team = EntityFactory.GetById<ITeam>(teamOwner.Id);
-			team.AddMember(member.DefaultOwner);
+			teamOwner.AddMember(member.DefaultOwner);
 			
 			var panelRefresh = form.Services.Get<IPanelRefreshService>();
 			panelRefresh.RefreshTabWorkspace();

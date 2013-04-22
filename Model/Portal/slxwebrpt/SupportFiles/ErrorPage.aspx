@@ -4,12 +4,21 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
-    <title>Untitled Page</title>
+    <link rel="stylesheet" type="text/css" href="css/sageStyles.css" />
+    <style type="text/css">
+        .msg { padding: 50px 50px; width: 700px; }
+        .header { font-size : 150%; color: #01795E; }
+    </style>
+    <title meta:resourcekey="ErrorPageTitle">Sage SalesLogix Web Reporting</title>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-        <asp:TextBox ID="TextBox1" runat="server" Height="26px" Width="159px"></asp:TextBox></div>
+    <div class="msg">
+        <asp:Label CssClass="header" ID="lblTitle" runat="server" meta:resourcekey="CannotCompleteRequest" Text="We're sorry, your request could not be completed."></asp:Label>
+        <br />
+        <br />
+        <asp:Label ID="lblMessage" runat="server" Text="We're sorry, you've encountered an error. If applicable, please try again."></asp:Label>
+    </div>
     </form>
 </body>
 </html>

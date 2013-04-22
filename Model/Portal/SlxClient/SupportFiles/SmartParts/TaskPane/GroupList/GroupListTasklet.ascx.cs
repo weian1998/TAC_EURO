@@ -130,19 +130,6 @@ public partial class SmartParts_TaskPane_GroupList_GroupListTasklet : System.Web
                 }
             }
         }
-
-        StringBuilder resources = new StringBuilder();
-        resources.AppendFormat("Sage.TaskPane.GroupListTasklet.Resources = {0};", JsonConvert.SerializeObject(new ClientResourcesRepresentation(this)));
-
-        ScriptManager.RegisterStartupScript(Page, typeof(Page), "taskpane-grouplist-resources", resources.ToString(), true);
-
-        /*
-        ScriptManager.RegisterClientScriptInclude(Page, typeof(Control), "Ext_BufferedGridView", ResolveUrl("~/Libraries/Ext3/ux/widgets/grid/BufferedGridView.js"));
-        ScriptManager.RegisterClientScriptInclude(Page, typeof(Control), "Ext_BufferedRowSelectionModel", ResolveUrl("~/Libraries/Ext3/ux/widgets/grid/BufferedRowSelectionModel.js"));
-        ScriptManager.RegisterClientScriptInclude(Page, typeof(Control), "Ext_BufferedStore", ResolveUrl("~/Libraries/Ext3/ux/widgets/grid/BufferedStore.js"));
-        ScriptManager.RegisterClientScriptInclude(Page, typeof(Control), "Ext_BufferedGridToolbar", ResolveUrl("~/Libraries/Ext3/ux/widgets/BufferedGridToolbar.js"));
-        ScriptManager.RegisterClientScriptInclude(Page, typeof(Control), "Ext_BufferedJsonReader", ResolveUrl("~/Libraries/Ext3/ux/data/BufferedJsonReader.js"));
-        */
     }
 
     /// <summary>

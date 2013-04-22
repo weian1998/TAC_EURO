@@ -1,8 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="357" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
     <!-- saved from url=(0014)about:internet -->
-    <head><title>Fixed Field Format Strings</title>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Fixed Field Format Strings</title>
         <link href="../Resources/TableStyles/TableStyle.css" rel="stylesheet" />
         <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
         <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
@@ -10,35 +11,35 @@
         </script>
     </head>
     <body>
-        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilder/Fixed_Field_Format_Strings.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilder/Fixed_Field_Format_Strings.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
         </p>
-        <h1><a name="kanchor616"></a>Fixed Field Format Strings<a name="kanchor617"></a></h1>
+        <h1><a name="kanchor641"></a>Fixed Field Format Strings<a name="kanchor642"></a></h1>
         <p>The table below lists the format string options for fixed fields. Valid 
  <a href="Format_String.htm">string formats</a> depend on the <a href="Format_Type.htm">format 
  type</a> you select.</p>
-        <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle_TableStyle" cellspacing="0">
+        <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
             <thead>
-                <tr>
-                    <th class="TableStyle_TableStyle_Head_0_0_RowSep_ColSep">Option</th>
-                    <th class="TableStyle_TableStyle_Head_0_0_RowSep_ColEnd">Description</th>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Option</th>
+                    <th class="HeadD-Column1-Header1">Description</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">e</td>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Scientific. The format of the field will be a floating-point value. The value is  converted to a string of the form "-d.ddd...E+ddd". The resulting string starts  with a minus sign if the number is negative. One digit always precedes the  decimal point. The total number of digits in the resulting string (including the  one before the decimal point) is given by the precision specifier in the format  string; a default precision of 15 is assumed if no precision specifier is  present. The "E" exponent character in the resulting string is always followed  by a plus or minus sign and at least three digits</td>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">e</td>
+                    <td class="BodyD-Column1-Body1">Scientific. The format of the field will be a floating-point value. The value is  converted to a string of the form "-d.ddd...E+ddd". The resulting string starts  with a minus sign if the number is negative. One digit always precedes the  decimal point. The total number of digits in the resulting string (including the  one before the decimal point) is given by the precision specifier in the format  string; a default precision of 15 is assumed if no precision specifier is  present. The "E" exponent character in the resulting string is always followed  by a plus or minus sign and at least three digits</td>
                 </tr>
-                <tr>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">f</td>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">Fixed. The value is displayed as a fixed field. The format of the field must be  a floating-point value. The value is converted to a string of the form  "-ddd.ddd...". The resulting string starts with a minus sign if the number is  negative. The number of digits after the decimal point is given by the precision  specifier in the format string; a default of 2 decimal digits is assumed if no  precision specifier is present.</td>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">f</td>
+                    <td class="BodyD-Column1-Body1">Fixed. The value is displayed as a fixed field. The format of the field must be  a floating-point value. The value is converted to a string of the form  "-ddd.ddd...". The resulting string starts with a minus sign if the number is  negative. The number of digits after the decimal point is given by the precision  specifier in the format string; a default of 2 decimal digits is assumed if no  precision specifier is present.</td>
                 </tr>
-                <tr>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColSep">g</td>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowSep_ColEnd">General. The format of the field must be a floating-point value. The value is  converted to the shortest possible decimal string using fixed or scientific  format. The number of significant digits in the resulting string is given by the  precision specifier in the format string; a default precision of 15 is assumed  if no precision specifier is present. Trailing zeros are removed from the  resulting string, and a decimal point appears only if necessary. The resulting  string uses fixed point format if the number of digits to the left of the  decimal point in the value is less than or equal to the specified precision, and  if the value is greater than or equal to 0.00001. Otherwise the resulting string  uses scientific format.</td>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">g</td>
+                    <td class="BodyD-Column1-Body1">General. The format of the field must be a floating-point value. The value is  converted to the shortest possible decimal string using fixed or scientific  format. The number of significant digits in the resulting string is given by the  precision specifier in the format string; a default precision of 15 is assumed  if no precision specifier is present. Trailing zeros are removed from the  resulting string, and a decimal point appears only if necessary. The resulting  string uses fixed point format if the number of digits to the left of the  decimal point in the value is less than or equal to the specified precision, and  if the value is greater than or equal to 0.00001. Otherwise the resulting string  uses scientific format.</td>
                 </tr>
-                <tr>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowEnd_ColSep">n</td>
-                    <td class="TableStyle_TableStyle_Body_0_0_RowEnd_ColEnd">Number. The format of the field must be a floating-point value. The value is  converted to a string of the form "-d,ddd,ddd.ddd...". The "n" format  corresponds to the "f" format, except the resulting string contains thousand  separators.</td>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">n</td>
+                    <td class="BodyA-Column1-Body1">Number. The format of the field must be a floating-point value. The value is  converted to a string of the form "-d,ddd,ddd.ddd...". The "n" format  corresponds to the "f" format, except the resulting string contains thousand  separators.</td>
                 </tr>
             </tbody>
         </table>
@@ -49,7 +50,7 @@
         <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
             <col style="width: 100%;" />
             <tbody>
-                <tr MadCap:conditions="Output.WebClient,Output.Customer Portal">
+                <tr MadCap:conditions="">
                     <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
                         <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
                     </td>

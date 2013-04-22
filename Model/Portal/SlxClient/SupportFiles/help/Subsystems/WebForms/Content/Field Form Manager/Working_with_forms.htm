@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Customizing the Work Space" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebForms.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Working with Forms</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebForms_CSH.htm#Field Form Manager/Working_with_forms.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor1"></a>Form Designer - Working with Forms</h1>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <col style="width: 41px;" />
+            <col />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/adminonly.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">The system administrator and users with the appropriate <a href="../../../../Content/Admin_security/What_are_Roles_and_Secured_Actions.htm" target="_self">role</a> can access these features.</td>
+            </tr>
+        </table>
+        <p>You can make simple changes to a view by editing its component <a href="What are forms, views, controls, and data fields.htm">forms</a> with the <span class="MyVariablesFormDesignerName">Form Designer</span>. For example, you can change captions, move things around, and add and hide information.  </p>
+        <p>When you save the form changes, all the views that contain the form change as well.</p>
+        <p>Changes you make affect everyone on the system because form and view definitions are shared.</p>
+        <p><span class="MCPopup"><a href="javascript:void(0);" MadCap:src="Popups/Quick_Forms_def.htm" onclick="FMCPopup( event, this ); return false;" MadCap:width="4in" MadCap:height="auto" class="MCPopupSpot">Quick Forms</a></span> can be edited with the <span class="MyVariablesFormDesignerName">Form Designer</span> in the Sage SalesLogix Web Client or the Application Architect. Custom forms cannot be edited with  the <span class="MyVariablesFormDesignerName">Form Designer</span>. Each form that can be edited with the <span class="MyVariablesFormDesignerName">Form Designer</span> displays the Edit Form button <img src="../image/form_manager_16x16.png" /> in its toolbar to users with access to the feature.</p>
+        <p class="RelatedTopics">How Do I?</p>
+        <h5 style="margin-bottom: 0.5em;">General</h5>
+        <p>Open the <span class="MyVariablesFormDesignerName">Form Designer</span></p>
+        <div class="MCDropDown">
+            <div id="MCDropDownBody_953222719_0" class="MCDropDownBody">
+                <ol>
+                    <li value="1"><a name="kanchor2"></a>Open a Web Client view such as the Account Details view in your browser.<br />Note that each of the forms in the view has a toolbar.</li>
+                    <li value="2">In the toolbar of the form you want to edit, CTRL-click  Edit Form <img src="../image/form_manager_16x16.png" />.<br />Another browser tab opens with <span class="MyVariablesFormDesignerName">Form Designer</span>.</li>
+                    <li value="3">Click the new browser tab.<br />The <span class="MyVariablesFormDesignerName">Form Designer</span> displays the control layout of the form. You can switch between the new tab with the <span class="MyVariablesFormDesignerName">Form Designer</span> and the other tab with the Web Client view to repeatedly make changes and view the results.</li>
+                </ol>
+                <blockquote>
+                    <p MadCap:conditions="Primary.FormManagerListView">Alternatively, use the <a href="formmgrlistview.htm">Form Manager List view</a> to open the <span class="MyVariablesFormDesignerName">Form Designer</span>.</p>
+                </blockquote>
+            </div>
+        </div>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_3725443491_0" onclick="FMCDropDown( this ); return false;" name="Edit_a_form">Edit a form<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_3725443491_0" style="display: none;">
+                <ol>
+                    <li value="1">Open the form in the <span class="MyVariablesFormDesignerName">Form Designer</span>.</li>
+                    <li value="2">Click the <a name="kanchor4"></a><span class="SLXBold">Usage</span> tab and note which views contain this form. Changes to the form will affect all of these views. If you do not see a Usage tab, click the empty space in the upper left corner of the <span class="MyVariablesFormDesignerName">Form Designer</span> surface.</li>
+                    <li value="3">Make changes to the form such as:<ul><li value="1">Change captions<a name="kanchor5"></a> and other control properties</li><li value="2">Move and hide controls</li><li value="3">Add controls (Add data fields to a form)</li><li value="4">Change form, row, and column properties</li></ul></li>
+                </ol>
+                <ol start="4">
+                    <li value="4">Click <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Save<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>.<br />Changes take effect immediately.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_3725443491_1" onclick="FMCDropDown( this ); return false;">View the changes<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_3725443491_1" style="display: none;">
+                <ul>
+                    <li value="1">Switch to the original browser tab  and press  <span class="SLXBold">F5</span>. You can switch between these tabs to repeatedly make changes and view the results.</li>
+                    <li value="2">Alternatively, browse to any view that contains the form you edited.</li>
+                </ul>
+                <blockquote>
+                    <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+                        <tr>
+                            <td style="width: 10%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="10%">
+                                <p style="text-align: center;margin-bottom: 0;" align="center">
+                                    <img src="../image/caution.gif" />
+                                </p>
+                            </td>
+                            <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                                <p>You can view changes to summary view quick forms after a build and deploy is done in Application Architect. Refer to "Building the Web Platform" in the Application Architect help for more information.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </blockquote>
+            </div>
+        </div>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_3725443491_2" onclick="FMCDropDown( this ); return false;">Undo my last changes<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_3725443491_2" style="display: none;">
+                <ul>
+                    <li value="1">On the browser tab  for the <span class="MyVariablesFormDesignerName">Form Designer</span>, press <span class="SLXBold">F5</span> to revert to the last saved version of the form.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_3725443491_3" onclick="FMCDropDown( this ); return false;" name="kanchor6">Release my changes to other users<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_3725443491_3" style="display: none;">
+                <ul>
+                    <li value="1">When you save changes, they affect everyone on your system immediately. If someone has the view open already, they must press <span class="SLXBold">F5</span> to refresh the page. </li>
+                    <li value="2"> If you want to release the changes to another system, you must use Application Architect. Refer to "Working with the Bundle Model" in the Application Architect help for more information.</li>
+                </ul>
+            </div>
+        </div>
+        <h5 style="margin-bottom: 0.5em;">Controls</h5>
+        <p class="HowDoI"><a href="Editing_control_properties.htm" name="kanchor7">View and edit control property values</a>
+        </p>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_3725443491_4" onclick="FMCDropDown( this ); return false;" name="kanchor8">Move a control<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_3725443491_4" style="display: none;">
+                <ol>
+                    <li value="1">Click a control and drag it.</li>
+                    <li value="2">Drop it on any location that is highlighted when the cursor hovers over it.<br />Existing controls are moved automatically if necessary.<br /></li>
+                </ol>
+            </div>
+        </div>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_3725443491_5" onclick="FMCDropDown( this ); return false;" name="kanchor9">Delete a control<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_3725443491_5" style="display: none;">
+                <ul>
+                    <li value="1">The <span class="MyVariablesFormDesignerName">Form Designer</span> permits you to hide controls but not delete them. Use Sage SalesLogix Application Architect if you must delete a control.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_3725443491_6" onclick="FMCDropDown( this ); return false;" name="kanchor10">Hide a control<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_3725443491_6" style="display: none;">
+                <ol>
+                    <li value="1">Select the control, and click the <span class="SLXBold">Advanced</span> tab.</li>
+                    <li value="2">In the <span class="SLXBold">Appearance</span> <![CDATA[ ]]>group, clear the <span class="SLXBold">Visible</span> property box.</li>
+                    <li value="3">If you want to be able to reuse the space occupied by the hidden control, move it to another location such as the bottom of the page. Use Sage SalesLogix Application Architect if you must delete a control.</li>
+                </ol>
+            </div>
+        </div>
+        <p class="HowDoI"><a href="Adding_data_field.htm">Add a  control/data field</a> <![CDATA[ ]]><a name="kanchor11"></a></p>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_3725443491_7" onclick="FMCDropDown( this ); return false;">Change the size of a control<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_3725443491_7" style="display: none;">
+                <ol>
+                    <li value="1">Select the control, and click the <span class="SLXBold">Layout</span> tab.</li>
+                    <li value="2">In the <span class="SLXBold">Size</span> group, change the <span class="SLXBold">Row Span</span> or <span class="SLXBold">Column Span</span> properties as necessary.<br />For example, on the AccountDetails form, Desc. of Business spans two rows.&#160;Note that some types of controls have a constant display size regardless of the number of spaces they occupy.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_3725443491_8" onclick="FMCDropDown( this ); return false;">Change the label on a control<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_3725443491_8" style="display: none;">
+                <ol>
+                    <li value="1">Select the control, and click the <span class="SLXBold">Basic</span> tab.</li>
+                    <li value="2">In the <span class="SLXBold">Appearance</span> group, change the <span class="SLXBold">Caption</span> property as necessary.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_3725443491_9" onclick="FMCDropDown( this ); return false;">Make a control's data read only<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_3725443491_9" style="display: none;">
+                <ol>
+                    <li value="1">Select the control, and click the <span class="SLXBold">Basic</span> tab.</li>
+                    <li value="2">In the <span class="SLXBold">Behavior</span> group, check the <span class="SLXBold">Read Only</span> box.</li>
+                </ol>
+            </div>
+        </div>
+        <h5 style="margin-bottom: 0.5em;">Forms</h5>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_3725443491_10" onclick="FMCDropDown( this ); return false;" name="kanchor12">View and edit form property values<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_3725443491_10" style="display: none;">
+                <ol>
+                    <li value="1">Click on the <span class="MyVariablesFormDesignerName">Form Designer</span> surface anywhere outside of an occupied space, for example in the upper left corner.<br />The <a href="Form_properties.htm">form properties</a> display in the tabbed area.</li>
+                    <li value="2">View and change property values as necessary.  For example, <span class="SLXBold">Active Control</span> is the control you want the user's cursor to start on when the view first displays.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_3725443491_11" onclick="FMCDropDown( this ); return false;" name="kanchor13">Determine where a form is used<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_3725443491_11" style="display: none;">
+                <ol>
+                    <li value="1">Click on the <span class="MyVariablesFormDesignerName">Form Designer</span> surface anywhere outside of an occupied space, for example in the upper left corner.<br />The <a href="Form_properties.htm">form properties</a> display in the tabbed area</li>
+                    <li value="2">Click the <span class="SLXBold">Usage</span> tab.<br />All the views that contain the form are listed.<br /></li>
+                </ol>
+            </div>
+        </div>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_3725443491_12" onclick="FMCDropDown( this ); return false;">Change the width of a column of controls<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_3725443491_12" style="display: none;">
+                <ol>
+                    <li value="1">Click the column selector above a column.<br />The column properties display in the tabbed area.</li>
+                    <li value="2">In the <span class="SLXBold">Appearance </span>group, change <span class="SLXBold">Width</span>.</li>
+                    <li value="3">Repeat for each column.<p>If <span class="SLXBold">Size Type</span> is Percent,  the total of all column widths is normalized to 100.</p></li>
+                </ol>
+            </div>
+        </div>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_3725443491_13" onclick="FMCDropDown( this ); return false;">Add or delete an empty row or column <img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_3725443491_13" style="display: none;">
+                <ol>
+                    <li value="1">Right-click the selection rectangle to the left of a row or above a column.</li>
+                    <li value="2">Use the context menu to delete or insert an empty row or column.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="MCDropDown_0">
+            <div class="MCDropDownHead_0"><a class="MCDropDownHotSpot_0" href="javascript:void(0);" id="MCDropDownHotSpot_3725443491_14" onclick="FMCDropDown( this ); return false;">Add  a form<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCDropDownIcon" /></a>
+            </div>
+            <div class="MCDropDownBody" id="MCDropDownBody_3725443491_14" style="display: none;">
+                <ul>
+                    <li value="1"><a name="kanchor14"></a>Use Application Architect to add forms. For more information, refer to the Application Architect help topic, "Create a New Form".</li>
+                </ul>
+            </div>
+        </div>
+        <p class="RelatedTopics">Related Topics</p>
+        <p><a href="What are forms, views, controls, and data fields.htm">What are Forms, Views, Controls, and Data Fields?</a>
+        </p>
+        <p><a href="Supporting_a_multi-language_environment.htm">Supporting a multi-language environment</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

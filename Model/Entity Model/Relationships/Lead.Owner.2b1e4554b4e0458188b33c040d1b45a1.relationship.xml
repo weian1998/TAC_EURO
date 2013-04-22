@@ -1,11 +1,15 @@
 <?xml version="1.0"?>
-<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="2b1e4554-b4e0-4581-88b3-3c040d1b45a1" cardinality="M:1" parentEntityId="27f9e8e9-34d8-4eaf-8fd7-c70d133e6f90" childEntityId="dfca3267-2f5b-4970-813b-5aeb9ea75649">
+<relationship xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="2b1e4554-b4e0-4581-88b3-3c040d1b45a1" lastModifiedUtc="2012-07-25T14:32:59.5437749Z" cardinality="M:1" parentEntityId="27f9e8e9-34d8-4eaf-8fd7-c70d133e6f90" childEntityId="dfca3267-2f5b-4970-813b-5aeb9ea75649">
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRelationship" />
   </ExtendedPropertiesCollection>
-  <parentProperty id="811d6664-d091-4cb1-b258-6651c36004d2" name="Owner" audited="false" displayCategory="Intermediate" isNullable="false" include="true">
+  <parentProperty id="811d6664-d091-4cb1-b258-6651c36004d2" lastModifiedUtc="2012-07-25T14:32:59.5437749Z" name="Owner" audited="true" isNullable="false">
     <ExtendedPropertiesCollection>
-      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty" />
+      <extendee type="Sage.Platform.Orm.Entities.OrmRelationProperty">
+        <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+          <OrmEntityPropertySDataExtension generate="true" />
+        </extender>
+      </extendee>
     </ExtendedPropertiesCollection>
     <SystemDataType guid="2f770d03-c93c-4605-8ae8-7cdae04830d7">
       <RelationshipDataType />

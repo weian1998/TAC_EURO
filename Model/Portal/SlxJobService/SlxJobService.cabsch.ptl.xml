@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<CabSchedulerPortal xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="485f0498-3e0c-45be-8643-9d27d84eb0f5">
+  <PortalAlias>SlxJobService</PortalAlias>
+  <PortalReferences />
+  <DeploymentActions>
+    <ActionType TypeName="Sage.SalesLogix.Web.AdminModule.SLXClientConnectionStringDeploymentAction, Sage.SalesLogix.Web.AdminModule">
+      <Properties />
+    </ActionType>
+    <ActionType TypeName="Sage.Platform.Deployment.AdminModule.EntityDeploymentAction, Sage.Platform.Deployment.AdminModule">
+      <Properties />
+    </ActionType>
+    <ActionType TypeName="Sage.Platform.Deployment.AdminModule.CabPortalDeploymentAction, Sage.Platform.Deployment.AdminModule">
+      <Properties />
+    </ActionType>	  
+  </DeploymentActions>
+  <AuthenticationProvider>Sage.SalesLogix.Scheduling.AuthenticationProvider, Sage.SalesLogix</AuthenticationProvider>
+  <StorageProvider>Sage.Platform.Application.ThreadContextRootWorkItemStorageProvider, Sage.Platform.Application</StorageProvider>
+</CabSchedulerPortal>

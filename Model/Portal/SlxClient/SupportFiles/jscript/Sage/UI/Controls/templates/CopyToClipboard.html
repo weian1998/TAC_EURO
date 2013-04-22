@@ -1,0 +1,23 @@
+<div>
+    <div data-dojo-type="dijit.Dialog" dojoAttachPoint="dialogNode">
+        
+        <span>${helpText}</span>
+        <div style="width: 550px; height: 400px;">
+            <div data-dojo-type="dijit.layout.TabContainer" dojoAttachPoint="tabNode" style="width: 100%; height: 100%;">
+                <div data-dojo-type="dijit.layout.ContentPane" title="${textTab}">
+                    <div dojoAttachPoint="contentNode"></div>
+                </div>
+            
+                <div data-dojo-type="dijit.layout.ContentPane" title="${sourceTab}">
+                    <textarea dojoAttachPoint="textNode" data-dojo-type="dijit.form.SimpleTextarea" style="width: 100%; height: 95%;"></textarea>
+                </div>
+            </div>
+        </div>
+            
+        <div style="float:right;padding-bottom:8px;">
+            <button data-dojo-type="dijit.form.Button" type="submit" dojoAttachEvent="onClick:_closeClicked">
+                ${closeText}
+            </button>
+        </div>
+    </div>
+</div>

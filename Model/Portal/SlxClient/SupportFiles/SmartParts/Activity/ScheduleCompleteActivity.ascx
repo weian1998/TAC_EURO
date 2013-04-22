@@ -16,9 +16,18 @@
     font-weight : bold;
 }
 
+.resultArea
+{
+   height:200px;
+   width:100%; 
+   overflow:scroll;     
+         
+}
+
 </style>
 <div style="display:none">
 <asp:Panel ID="ScheduleCompleteActivity_LTools" runat="server">
+ 
 </asp:Panel>
 <asp:Panel ID="ScheduleCompleteActivity_CTools" runat="server">
 </asp:Panel>
@@ -29,8 +38,8 @@
 
 <div style="margin:5px">
 <span id="TitleBar">
-    <asp:Image runat="server" ID="TitleBarImage" ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=complete_activity_24x24" />
-    <asp:Label runat="server" ID="TitleBarLabel" Text="<%$ resources: TitleBarLabel.Text %>" />
+  <asp:Image runat="server" ID="TitleBarImage" ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=complete_activity_24x24" />
+  <asp:Label runat="server" ID="TitleBarLabel" Text="<%$ resources: TitleBarLabel.Text %>" />
 </span>
 <table>
     <tr>
@@ -120,10 +129,10 @@
                     LookupEntityName="Opportunity" OverrideSeedOnSearch="true" SeedProperty="Account.Id"
                     LookupEntityTypeName="Sage.Entity.Interfaces.IOpportunity, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"  >
                     <LookupProperties>
-                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: Opportunity.AccountManager.PropertyHeader %>" 
-                            PropertyName="AccountManager.UserInfo.UserName" PropertyFormat="User" ExcludeFromFilters="true" UseAsResult="True" />    
                         <SalesLogix:LookupProperty PropertyHeader="<%$ resources: Opportunity.Description.PropertyHeader %>" 
-                            PropertyName="Description" PropertyFormat="None" UseAsResult="True" />                                            
+                            PropertyName="Description" PropertyFormat="None" UseAsResult="True" />
+                         <SalesLogix:LookupProperty PropertyHeader="<%$ resources: Opportunity.AccountManager.PropertyHeader %>" 
+                            PropertyName="AccountManager.UserInfo.UserName" PropertyFormat="User"  UseAsResult="True" />                                             
                         <SalesLogix:LookupProperty PropertyHeader="<%$ resources: Opportunity.Account.AccountName.PropertyHeader %>" 
                             PropertyName="Account.AccountName" PropertyFormat="None" UseAsResult="True" />
                         <SalesLogix:LookupProperty PropertyHeader="<%$ resources: Opportunity.Stage.PropertyHeader %>" 
@@ -230,16 +239,14 @@
         <td>
            <asp:RadioButtonList ID="ActivityTypeButtonList" runat="server" RepeatDirection="horizontal">
                 <asp:ListItem Text="<%$ resources: ActivityType.ListItemPhoneCall.Text %>" Value="atPhoneCall" Selected="true" ActivityTypeID="Phone"></asp:ListItem>
-                <asp:ListItem Text="<%$ resources: ActivityType.ListItemMeeting.Text %>"  Value="atMeeting" ActivityTypeID="Meeting"></asp:ListItem>
+                <asp:ListItem Text="<%$ resources: ActivityType.ListItemMeeting.Text %>"  Value="atAppointment" ActivityTypeID="Meeting"></asp:ListItem>
                 <asp:ListItem Text="<%$ resources: ActivityType.ListItemToDo.Text %>" Value="atToDo" ActivityTypeID="ToDo"></asp:ListItem>
             </asp:RadioButtonList>
         </td>
     </tr>
     <tr>
         <td colspan="2">
-            <asp:Button ID="btnContinue" runat="server" 
-                Text="<%$ resources: btnContinue.Text %>" 
-                OnClick="btnContinue_Click" />
+            <asp:Button ID="btnContinue" runat="server" Text="<%$ resources: btnContinue.Text %>" OnClientClick="Sage.UI.Forms.ScheduleCompleteActivity.completeNew();" />
         </td>
     </tr>
 </table>
@@ -250,9 +257,12 @@
     Text="<%$ resources: CompleteScheduledActivity.Text %>" 
     AutoPostBack="True" />
 <br />
+<div id="divResults" runat="server" class="resultArea"> 
+
 <SalesLogix:SlxGridView ID="OpenActivities" runat="server" AutoGenerateColumns="False" 
     CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="datagrid"  
-    AllowSorting="true" OnSorting="OpenActivities_Sorting" DataSourceID="OpenActivitiesDS" ShowSortIcon="True">
+    AllowSorting="true" OnSorting="OpenActivities_Sorting" DataSourceID="OpenActivitiesDS" ShowSortIcon="True"
+    ShowEmptyTable="true">
     <Columns>
         <asp:TemplateField HeaderText="<%$ resources: TemplateFieldComplete.HeaderText %>">
             <ItemTemplate>
@@ -278,6 +288,7 @@
      </Columns>
 </SalesLogix:SlxGridView>
 
+</div>
 <asp:ObjectDataSource ID="OpenActivitiesDS" runat="server" 
     SelectMethod="GetActivitiesForUser" 
     TypeName="ActivityFacade">
@@ -287,8 +298,13 @@
     </SelectParameters>
 </asp:ObjectDataSource>
 
+<br />
+
 <div style="float:right;">
     <asp:Button ID="CancelButton" runat="server" Text="<%$ resources: CancelText %>" />
 </div>
 
 </div>
+<script type="text/javascript">  
+
+</script>

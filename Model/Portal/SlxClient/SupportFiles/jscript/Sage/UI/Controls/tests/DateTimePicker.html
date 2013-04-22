@@ -1,0 +1,375 @@
+<html>
+    <head>
+        <title>Sage.UI.Controls Browser Tests</title>
+        <style type="text/css">
+        /* Hide dojo validation controls */
+        .dijitValidationContainer, .dijitBackgroundIframe {
+            visibility: hidden;
+        }
+        </style>
+        <link rel="stylesheet" type="text/css" href="../../../../../Libraries/dojo/dijit/themes/claro/claro.css" />
+        <script type="text/javascript" src="mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript">
+            require([
+                "dojo/parser",
+                "doh",
+                "dojo/ready",
+                "dojo/_base/Deferred",
+                "Sage/Data/BaseSDataStore",
+                "Sage/UI/Controls/DateTimePicker",
+            //"dojox/robot/recorder",// Press ctrl-alt-enter to start/stop recording
+            //"dojo/robot",
+                "dijit/registry",
+                "dojo/dom",
+                "dojo/aspect"
+            ], function (
+                parser,
+                doh,
+                ready,
+                Deferred,
+                BaseSDataStore,
+                DateTimePicker,
+            //recorder,
+            //robot,
+                registry,
+                dom,
+                aspect
+            ) {
+                ready(function () {
+                    doh.register("Sage.UI.Controls.tests.DateTimePicker", [
+                        function testShow() {
+                            //try {
+                            var wid = registry.byId('testShowing');
+                            wid.openDropDown();
+                            //}catch(e) {
+                            //    console.log(e);
+                            //doh.t(false);
+                            //}
+
+                            //doh.t(true);
+
+                            //wid.destroy();
+                        },
+                        function testOKClickedEvent() {
+                            var wid = registry.byId('testEvents1');
+                            var count = 0;
+                            dojo.connect(wid, 'onOKClicked', wid, function () {
+                                count = 10;
+                            });
+
+                            wid.onOKClicked(); // pretend we clicked it
+
+                            doh.t(count === 10);
+                            //wid.destroy();
+                        },
+                        function testCancelClickedEvent() {
+                            var wid = registry.byId('testEvents2');
+                            var count = 0;
+                            dojo.connect(wid, 'onCancelClicked', wid, function () {
+                                count = 10;
+                            });
+
+                            wid.onCancelClicked(); // pretend we clicked it
+
+                            doh.t(count === 10);
+                            //wid.destroy();
+                        },
+                        function testTimeHidden() {
+                            var wid = registry.byId('testTimeHidden');
+                            wid.openDropDown();
+
+                            var vis = wid.dropDown.timeZoneContainer.style['visibility'];
+                            var dis = wid.dropDown.timeZoneContainer.style['display'];
+
+                            doh.t(vis === 'hidden');
+                            doh.t(dis === 'none');
+
+                            //wid.destroy();
+                        },
+                        function testDateHidden() {
+                            var wid = registry.byId('testDateHidden');
+                            wid.openDropDown();
+
+                            var vis = wid.dropDown.dateContainer.style['visibility'];
+                            var dis = wid.dropDown.dateContainer.style['display'];
+
+                            doh.t(vis === 'hidden');
+                            doh.t(dis === 'none');
+
+                            wid.destroy();
+                        },
+                        function testDynamicMode() {
+                            var wid = registry.byId('testDynamicMode');
+                            wid.openDropDown();
+
+                            var vis = wid.dropDown.timeZoneContainer.style['visibility'];
+                            var dis = wid.dropDown.timeZoneContainer.style['display'];
+
+                            doh.t(vis === 'hidden');
+                            doh.t(dis === 'none');
+
+                            wid.set('displayTime', true);
+
+                            var vis1 = wid.dropDown.timeZoneContainer.style['visibility'];
+                            var dis1 = wid.dropDown.timeZoneContainer.style['display'];
+                            //wid.DisplayTime = true;
+
+                            doh.t(vis1 != 'hidden');
+                            doh.t(dis1 != 'none');
+
+                            wid.destroy();
+                        },
+                         function testClickOutSide() {
+                             var wid = registry.byId('testPopupCloseOutside');
+                             wid.openDropDown();
+
+                             doh.t(wid._opened === true, 'widget not opened');
+
+                             var testDiv = dom.byId("testDivPopupClose");
+                             aspect.after(testDiv, 'click', function () {
+                                 // TODO: Why is _opened failing and not getting updated?
+                                 //doh.t(wid._opened === false, 'widget opened');
+                             });
+                             testDiv.click();
+                             wid.destroy();
+                         },
+                        function testClickInside() {
+                            var wid = registry.byId('testPopupCloseInside');
+                            wid.openDropDown();
+
+                            doh.t(wid._opened === true);
+
+                            wid.domNode.firstChild.click();
+
+                            doh.t(wid._opened === true);
+
+                            wid.destroy();
+                        },
+                        function testDateValueOnBlur() {
+                            var wid = registry.byId('testDateValueOnBlur');
+
+                            //***********Test Date format for different cultures******************************
+
+                            //locale : en-us (mm/dd/yyyy hh:mm AM/PM)------------------
+                                //Test date and Time
+                                var testDate = new Date("11/16/2002 11:00 AM");
+                                wid.focusNode.value = "11/16/2002 11:00 AM";
+                                wid.triggerOnFocusBlur("en-us");
+
+                                doh.t(wid.value.getDate() == testDate.getDate());
+
+                                //Test date only
+                                testDate = new Date("11/16/2002");
+                                wid.focusNode.value = "11/16/2002";
+                                wid.triggerOnFocusBlur("en-us");
+
+                                doh.t(wid.value.getDate() == testDate.getDate());
+
+                                //Test invalid date
+                                testDate = new Date("10/19/2002");
+                                wid.focusNode.value = "19/10/2002";
+                                wid.triggerOnFocusBlur("en-us");
+
+                                doh.t(wid.value.getDate() != testDate.getDate());
+
+                                //Test invalid date
+                                testDate = new Date("10/14/2002");
+                                wid.focusNode.value = "10-14-2002";
+                                wid.triggerOnFocusBlur("en-us");
+
+                                doh.t(wid.value.getDate() != testDate.getDate());
+
+
+                            //locale : fr-fr (dd/mm/yyyy hh:mm AM/PM)-------------------
+                                //Test date and Time
+                                testDate = new Date("11/18/2002 02:00 PM");
+                                wid.focusNode.value = "18/11/2002 14:00";
+                                wid.triggerOnFocusBlur("fr-fr");
+
+                                doh.t(wid.value.getDate() == testDate.getDate());
+
+                                //Test date only
+                                testDate = new Date("11/16/2002");
+                                wid.focusNode.value = "16/11/2002";
+                                wid.triggerOnFocusBlur("fr-fr");
+
+                                doh.t(wid.value.getDate() == testDate.getDate());
+
+                                //Test invalid date
+                                testDate = new Date("10/21/2002");
+                                wid.focusNode.value = "10/21/2002";
+                                wid.triggerOnFocusBlur("fr-fr");
+
+                                doh.t(wid.value.getDate() != testDate.getDate());
+
+                            //locale : de (dd.mm.yyyy hh:mm)---------------------------
+                                //Test date and Time
+                                testDate = new Date("11/16/2002 11:00 AM");
+                                wid.focusNode.value = "16.11.2002 11:00";
+                                wid.triggerOnFocusBlur("de");
+
+                                doh.t(wid.value.getDate() == testDate.getDate());
+
+                                //Test date only
+                                testDate = new Date("10/14/2002");
+                                wid.focusNode.value = "14.10.2002";
+                                wid.triggerOnFocusBlur("de");
+
+                                doh.t(wid.value.getDate() == testDate.getDate());
+
+                                //Test invalid date
+                                testDate = new Date("17/11/2002");
+                                wid.focusNode.value = "11.17.2002";
+                                wid.triggerOnFocusBlur("de");
+
+                                doh.t(wid.value.getDate() != testDate.getDate());
+
+
+                            //****Test 2 digit Years, the datetimepicker should accept 2 digit years***
+                            //2 digit Years scenario 1:
+                            testDate = new Date("11/16/2003");
+                            wid.focusNode.value = "11/16/03";
+                            wid.triggerOnFocusBlur("en-us");
+
+                            doh.t(wid.value.getDate() == testDate.getDate());
+
+                            //2 digit Years scenario 2:
+                            testDate = new Date("11/16/2031");
+                            wid.focusNode.value = "11/16/31";
+                            wid.triggerOnFocusBlur("en-us");
+
+                            doh.t(wid.value.getDate() == testDate.getDate());
+
+                            //2 digit Years scenario 3:
+                            testDate = new Date("11/16/1932");
+                            wid.focusNode.value = "11/16/32";
+                            wid.triggerOnFocusBlur("en-us");
+
+                            doh.t(wid.value.getDate() == testDate.getDate());
+
+
+                           wid.destroy();
+                        },
+                        function testReadOnly() {
+                            var options = {
+                                "textAlign": "left",
+                                "displayDate": true,
+                                "displayTime": true,
+                                "initialDate": "\/Date(1037430000000-0700)\/",
+                                "initialTime": "\/Date(1037430000000-0700)\/",
+                                "initialTextValue": "11/16/2002 12:00 AM",
+                                "dateFormat": "M/d/yyyy h:mm tt",
+                                "enabled": true,
+                                "readOnly": true,
+                                "renderAsHyperlink": false,
+                                "id": "testDateReadOnly"
+                            },
+                                control;
+                            try {
+                                // run the lifecycle on it.
+                                control = new DateTimePicker(options, 'testDateReadOnly');
+                                control.startup();
+                                control.destroy();
+
+                                control = new DateTimePicker(options, 'testDateReadOnly');
+                                control.startup();
+                                control.destroy();
+                            } catch (err) {
+                                console.error(err);
+                                doh.t(false);
+                            }
+                        }
+
+
+                    ]);
+
+                    //Execute D.O.H. in this remote file.
+                    doh.run();
+                });
+            });
+        </script>
+    </head>
+    <body class="claro">
+        <form>
+            <label for="testShowing">Test openDropDown/loading</label>
+            <div id="testShowing" data-dojo-type="Sage.UI.Controls.DateTimePicker">
+            </div>
+            
+            <br />
+            
+            <label for="testEvents1">Test onOKClicked</label>
+            <div id="testEvents1" data-dojo-type="Sage.UI.Controls.DateTimePicker">
+            </div>
+            
+            <br />
+            
+            <label for="testEvents2">Test onCancelClicked</label>
+            <div id="testEvents2" data-dojo-type="Sage.UI.Controls.DateTimePicker">
+            </div>
+            
+            <br />
+            
+            <label for="testTimeHidden">Test time hidden/disabled</label>
+            <div id="testTimeHidden" data-dojo-type="Sage.UI.Controls.DateTimePicker" displayTime="false">
+            </div>
+            
+            <br />
+            
+            <label for="testDateHidden">Test date hidden/disabled</label>
+            <div id="testDateHidden" data-dojo-type="Sage.UI.Controls.DateTimePicker" displayDate="false">
+            </div>
+            
+            <br />
+            
+            <label for="testDateChangedNotTime">Test DateChanged</label>
+            <div id="testDateChangedNotTime" data-dojo-type="Sage.UI.Controls.DateTimePicker">
+            </div>
+            
+            <br />
+            
+            <label for="testDateDisabled">Test Disabled</label>
+            <div id="testDateDisabled" data-dojo-type="Sage.UI.Controls.DateTimePicker" data-dojo-props="disabled:true">
+            </div>
+            
+             <br />
+            
+            <label for="testDynamicMode">Test Dynamic mode switch</label>
+            <div id="testDiv"></div>
+            <div id="testDynamicMode" data-dojo-type="Sage.UI.Controls.DateTimePicker" dojoAttachPoint="dtp_testDate" displayTime="false">
+            </div>
+            
+            <br />
+            
+            <label for="testPopupCloseOutside">Test Popup close Outside</label>
+            <div id="testDivPopupClose">test data</div>
+            <div id="testPopupCloseOutside" data-dojo-type="Sage.UI.Controls.DateTimePicker" displayTime="false">
+            </div>
+            
+            <br />
+            
+             <label for="testPopupCloseInside">Test Popup close Inside</label>
+            <div id="testPopupCloseInside" data-dojo-type="Sage.UI.Controls.DateTimePicker" displayTime="false">
+            </div>
+            
+            <br />
+            
+             <label for="testDateValueOnBlur">Test Date formatting</label>
+            <div id="testDateValueOnBlur" data-dojo-type="Sage.UI.Controls.DateTimePicker" displayTime="true" readOnly="false">
+            </div>
+            
+            <br />
+            
+            <label for="testDateReadOnly">Test ReadOnly (destroyed in test - won't be visible)</label>
+            <div id="testDateReadOnly">
+            </div>
+        </form>
+    </body>
+</html>

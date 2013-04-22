@@ -112,19 +112,13 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="d8c1cb43-3194-4218-b6eb-291b7081b96d.DuplicateAssociationMessage" xml:space="preserve">
     <value>This role is already associated to this user.</value>
-  </data>
-  <data name="grdUserRoles.bdec36d5-c8ff-4eaa-b2c7-1472fee6f1a0.ColumnHeading" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="grdUserRoles.2d81796b-0d05-45c4-847c-ecddc4000942.ColumnHeading" xml:space="preserve">
-    <value>Description</value>
   </data>
   <data name="lueAddRole.LookupProperties.RoleName.PropertyHeader" xml:space="preserve">
     <value>Name</value>
@@ -132,16 +126,34 @@
   <data name="lueAddRole.LookupProperties.RoleDescription.PropertyHeader" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="grdUserRoles.d3f2e020-a9ce-4384-89cd-8e2e4d7351c9.Text" xml:space="preserve">
-    <value>Remove</value>
-  </data>
-  <data name="grdUserRoles.d3f2e020-a9ce-4384-89cd-8e2e4d7351c9.ConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to remove this role?</value>
-  </data>
   <data name="lueAddRole.ButtonToolTip" xml:space="preserve">
     <value>Add Role</value>
   </data>
-  <data name="grdUserRoles.EmptyTableRowText" xml:space="preserve">
-    <value>No roles found for this user.</value>
+  <data name="grdRoles.b495e985-92d7-43cf-b279-9b67507ef789.ColumnHeading" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="grdRoles.67620def-0232-4382-ad67-e8cdd30779af.ColumnHeading" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="grdRoles.Delete.ToolTip" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="grdRoles_AddRelationTool.LookupProperties.RoleDescription.PropertyHeader" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="grdRoles_AddRelationTool.LookupProperties.RoleName.PropertyHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="grdRoles_AddRelationTool.ButtonToolTip" xml:space="preserve">
+    <value>Add Role</value>
+  </data>
+  <data name="grdRoles_AddRelationTool.DialogButtonText" xml:space="preserve">
+    <value>Add Selected</value>
+  </data>
+  <data name="grdRoles_AddRelationTool_LookupDialogTitle" xml:space="preserve">
+    <value>Lookup Role</value>
+  </data>
+  <data name="grdRoles_AddRelationTool.LookupDialogTitle" xml:space="preserve">
+    <value>Lookup Role</value>
   </data>
 </root>

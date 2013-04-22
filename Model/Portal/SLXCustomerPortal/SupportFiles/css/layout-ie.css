@@ -1,0 +1,15 @@
+﻿#GroupTabs
+{
+	bottom: -2px !important;
+}
+
+#activityEditor_tc_EditActivity_tablist .dijitTabListWrapper
+{
+    border-bottom: 1px solid #B5BCC7 !important;
+    height: 31px !important;
+}
+
+div.dijitMenuPopup[dijitPopupParent="_listContextmenu"] > table
+{
+	padding: 0;
+}

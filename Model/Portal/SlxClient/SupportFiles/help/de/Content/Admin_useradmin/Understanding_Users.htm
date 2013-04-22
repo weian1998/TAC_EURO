@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Administration|Benutzerverwaltung" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="de" xml:lang="de" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Grundlegendes zu Benutzern</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Admin_useradmin/Understanding_Users.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Thema mit den Registerkarten "Suchen", "Inhalt" und "Index" öffnen</a>
+        </p>
+        <h1>Grundlegendes zu Benutzern</h1>
+        <p><a name="kanchor36"></a>Benutzer sind die Personen, die auf Ihre Sage SalesLogix-Datenbank zugreifen dürfen. Jeder Benutzer hat ein Profil, in dem z.&#160;B. folgende Informationen festgelegt werden: Benutzername, Titel, Manager, Teammitgliedschaft, Abteilungsmitgliedschaft und Sicherheitszugriff.</p>
+        <p>Sie können die folgenden Benutzertypen hinzufügen:</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="network">Network<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="network" style="display: none;">Ein Benutzer, der hauptsächlich über eine direkte Netzwerkverbindung mit der Datenbank auf Sage SalesLogix zugreift.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="concurrent1;concurrent2;concurrent3;concurrent4">Gleichzeitig<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="concurrent1" style="display: none;"> Diese Lizenzen ermöglichen einen Zugriff auf Sage SalesLogix, sind aber nicht einzelnen Benutzern zugeordnet. Die Anzahl der Benutzer, die zur gleichen Zeit auf die Software zugreifen, darf nicht über die Anzahl der gewährten Lizenzen für gleichzeitige Benutzer hinausgehen. Wenn Sie beispielsweise 100 Lizenzen für gleichzeitige Benutzer haben, können Sie eine beliebige Anzahl gleichzeitiger Benutzer erstellen. Allerdings können nur 100 dieser Benutzer zum gleichen Zeitpunkt bei SalesLogix angemeldet sein.</p>
+        <p class="Topic-Text-Indent" MadCap:targetName="concurrent2" style="display: none;">Gleichzeitige Benutzer können sich beim Web-Client, Sage SalesLogix-Client, Administrator, Architect, SpeedSearch-Client, Sync-Client (nur Remote Office) und Remote Office anmelden.  Bei jeder Anmeldung wird eine Lizenz für gleichzeitige Benutzer in Anspruch genommen.  Gleichzeitige Benutzer, die sich beim SpeedSearch-Client anmelden, nehmen unabhängig von der Zugriffsmethode keine Lizenz für gleichzeitige Benutzer in Anspruch.</p>
+        <p class="Topic-Text-Indent" MadCap:targetName="concurrent3" style="display: none;">Lizenzen für gleichzeitige Benutzer können zwischen dem Host und einem bzw. allen Remote Offices aufgeteilt werden. Diese Zuweisung kann jederzeit in Administrator (<B>Systeme &gt; Büros &gt; Remote Office bearbeiten</B> &gt; Registerkarte <B>Sync-Optionen</B>) geändert werden. Wenn Sie einem Remote Office Lizenzen für gleichzeitige Benutzer zuweisen, geht der Host davon aus, dass zu jedem Zeitpunkt alle Remote Office-Lizenzen in Anspruch genommen werden. Wenn Sie z.&#160;B. über eine Lizenz für 30 gleichzeitige Benutzer verfügen und einem Remote Office 10 dieser Lizenzen zuweisen, zieht der Host die 10 Lizenzen automatisch ab und lässt nur noch 20 Benutzer in der Hauptniederlassung gleichzeitig auf die Anwendungen zugreifen.</p>
+        <p class="Topic-Text-Indent" MadCap:targetName="concurrent4" style="display: none;">Der Lizenztyp <B>Gleichzeitiger Benutzer</B> kann Remote-Benutzern nicht zugewiesen werden.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="remote1;remote2">Remote<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="remote1" style="display: none;">Remote-Clients haben einen Teilbestand der Hauptstandortdatenbank auf ihrem Computer (z.&#160;B. auf einem Laptop) und gleichen mithilfe der Synchronisierung Änderungen zwischen ihrer Datenbank und der am Hauptstandort ab. Beachten Sie, dass Remote-Benutzer niemals eine Verbindung mit dem Remote-Office, sondern immer mit der Hauptniederlassung herstellen.</p>
+        <p class="Topic-Text-Indent" MadCap:targetName="remote2" style="display: none;">Wenn Ihre Einrichtung weniger als fünf Remote-Benutzer hat und es nicht wichtig ist, ob diese Benutzer gemeinsamen oder unmittelbaren Zugriff auf dieselben Firmen haben, kann jeder Benutzer als Remote-Benutzer konfiguriert werden. Beispiele für Remote-Benutzer sind Vertriebsmitarbeiter im Außendienst oder einzelne Regionalvertreter an abgelegenen Standorten.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="template1;template2;template3">Vorlage<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="template1" style="display: none;">Benutzervorlagen können erstellt werden, um Einstellungen zu definieren, die Sie bei der Erstellung neuer Benutzer verwenden möchten. Sie können beispielsweise eine Benutzervorlage erstellen, die alle Optionen für gleichzeitige Benutzer enthält. Wenn Sie dann einen neuen gleichzeitigen Benutzer erstellen, können Sie die Vorlage für gleichzeitige Benutzer mit vordefinierten Profileinstellungen verwenden.</p>
+        <ul>
+            <li class="Topic-Text-Bulleted-2" MadCap:targetName="template2" value="1" style="display: none;">Benutzervorlagen haben weder Einfluss auf die Lizenzanzahl, noch werden sie in der Benutzerliste angezeigt.</li>
+            <li class="Topic-Text-Bulleted-2" MadCap:targetName="template3" value="2" style="display: none;">Eine Benutzervorlage ist kein aktiver Benutzer und kann sich nicht bei Sage SalesLogix anmelden.</li>
+            <li class="Bullets" value="3"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="webOnly">Nur Web<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="webOnly" style="display: none;">Benutzer, die nur über Zugriff auf den Sage SalesLogix Web-Client verfügen und die Informationen ihren Zugriffsrechten entsprechend anzeigen, hinzufügen, löschen oder bearbeiten können. Dieser Benutzertyp kann sich nicht beim Sage SalesLogix-Client anmelden.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="add_on">Add-on-Benutzer<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="add_on" style="display: none;">Mithilfe des Add-on-Benutzers können Sie für Client-Schnittstellen von Drittanbietern einen Benutzer mit Zugriff auf den Sage SalesLogix OLE DB Provider erstellen. Dieser Benutzer kann sich bei keiner der Sage SalesLogix-Anwendungen anmelden.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="webViewer1;webViewer2;webViewer3">WebViewer<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="webViewer1" style="display: none;">WebViewer-Benutzer haben schreibgeschützten Zugriff auf Firmen, Kontakte, Verkaufschancen und Tickets. Je nach Firmen- und Kalendersicherheit können WebViewer-Benutzer Aktivitäten, Notizen und Historien hinzufügen, bearbeiten und löschen, jedoch keine Prozesse verwenden. Dieser Benutzertyp kann sich nicht beim Sage SalesLogix-Client anmelden.</p>
+        <p class="Topic-Text-Indent" MadCap:targetName="webViewer2" style="display: none;">Ein WebViewer-Benutzer kann Folgendes weder sein noch tun:</p>
+        <ul MadCap:targetName="webViewer3" style="display: none;">
+            <li class="Topic-Text-Bulleted-2" value="1">Vorgesetzter</li>
+            <li class="Topic-Text-Bulleted-2" value="2">Zugriffsberechtigter für ein Team</li>
+            <li class="Topic-Text-Bulleted-2" value="3">Andere Benutzer auf der Registerkarte <B>Benutzerteammitglieder</B> anzeigen</li>
+        </ul>
+        <p>Darüber hinaus unterstützt Sage SalesLogix mehrere besondere Benutzertypen:</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="systemadmin">Systemadministrator<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="systemadmin" style="display: none;">Ein Benutzer mit Zugriff auf alle Funktionen von Sage SalesLogix. Der Systemadministrator meldet sich als "admin" an.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="adminstrative">Verwaltung<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="adminstrative" style="display: none;">Ein Benutzer, der Aufgaben durchführen kann, die normalerweise dem Systemadministrator vorbehalten sind. Benutzer mit Zugriff auf Verwaltungsfunktionen werden mithilfe administrativer Rollen in Administrator oder von Rollen im Web Client definiert. Verwaltungsbenutzer melden sich mit ihrem Benutzernamen an (z.&#160;B. Leo oder Daniel). Der Systemadministrator bleibt der einzige Benutzer, der über vollständigen Zugriff auf alle Funktionen im System verfügt.</p>
+        <ul>
+            <li class="Bullets" value="1"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="retired">Inaktiv<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+            </li>
+        </ul>
+        <p class="Topic-Text-Indent" MadCap:targetName="retired" style="display: none;">Dieser Benutzertyp bietet Ihnen eine Möglichkeit, die Aktivitätshistorie von Benutzern beizubehalten, die aus Ihrem Unternehmen ausscheiden. Ausgeschiedene bzw. entfernte Benutzer werden insofern wie deaktivierte Benutzer behandelt, als ihre Kontaktaktivitäten auch dann in der Datenbank gespeichert bleiben, wenn sie selbst nicht mehr auf das System zugreifen können. Allerdings verwenden deaktivierte Benutzer weiterhin Lizenzen, während ausgeschiedene Benutzer keine Lizenzen mehr in Anspruch nehmen.</p>
+        <p class="RelatedTopics">Verwandte Themen</p>
+        <p><a href="Adding_a_User.htm" target="_self">Hinzufügen von Benutzern</a>
+        </p>
+        <p MadCap:conditions="Output.WebClient"><a href="Creating_a_Copy_of_a_User.htm" target="_self">Kopieren von Benutzern</a>
+        </p>
+        <p MadCap:conditions="Output.WebClient"><a href="User_Detail_View.htm" target="_self">Benutzerdetailansicht</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Haben Sie Vorschläge zur Verbesserung der Hilfe?</a>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

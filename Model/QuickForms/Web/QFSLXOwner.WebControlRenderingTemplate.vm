@@ -8,7 +8,7 @@
    <asp:Label ID="${qfcontrol.LabelId}" AssociatedControlID="${qfcontrol.ControlId}" runat="server" Text="<%$ resources: ${qfcontrol.ControlId}.Caption %>" #if(!$qfcontrol.Visible)Visible="false" #end></asp:Label>
  </div>   
 #end #end
-  <div #if(${qfcontrol.ColumnSpan} > 1 || ${qfcontrol.ControlLabelPlacement} == "top") class="twocoltextcontrol owner" #else class="textcontrol owner" #end > 
+  <div #if(${qfcontrol.ColumnSpan} == 2 || ${qfcontrol.ControlLabelPlacement} == "top") class="twocoltextcontrol" #elseif(${qfcontrol.ColumnSpan} > 2) class="threecoltextcontrol" #else class="textcontrol" #end > 
 <SalesLogix:OwnerControl runat="server" ID="${qfcontrol.ControlId}" #if($qfcontrol.IsReadOnly)ReadOnly="true" #end
 #if(!$qfcontrol.Enabled)Enabled="false" #end
 #if($qfcontrol.ToolTip != "") ToolTip="<%$ resources: ${qfcontrol.ControlId}.ToolTip %>" #end
@@ -19,7 +19,6 @@
 #if($qfcontrol.TabIndex > 0)TabIndex="$qfcontrol.TabIndex" #end
 #if($IsPrintView)DisplayMode="AsText" #end
 #if($qfcontrol.StyleScheme != "")CssClass="$qfcontrol.StyleScheme" #end
-#if($qfcontrol.MultiSelect)MultiSelect="true" #end
 #if($qfcontrol.Types != "")Types="$qfcontrol.Types" #end
 #if(!$qfcontrol.Visible)Visible="false" #end
 #if($qfcontrol.Text != "")Text='<%$ resources: ${qfcontrol.ControlId}.Text %>' #end />

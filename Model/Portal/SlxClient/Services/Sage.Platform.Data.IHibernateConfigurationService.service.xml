@@ -4,4 +4,5 @@
   <ServiceType>Sage.Platform.WebPortal.Services.WebHibernateConfigurationService, Sage.Platform.WebPortal</ServiceType>
   <RegisterAs>Sage.Platform.Data.IHibernateConfigurationService, Sage.Platform</RegisterAs>
   <Properties />
+  <Scope>Application</Scope>
 </PortalService>

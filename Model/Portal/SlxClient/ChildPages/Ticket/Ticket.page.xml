@@ -10,7 +10,6 @@
     <Property Name="EntityTypeName" TypeConverter="">Sage.Entity.Interfaces.ITicket, Sage.Entity.Interfaces</Property>
   </Properties>
   <TemplateProperties>
-    <Property Name="IncludeMoreTabsTab" TypeConverter="">False</Property>
     <Property Name="DefaultVisibleTabCount" TypeConverter="">8</Property>
   </TemplateProperties>
   <IsDefaultPage>false</IsDefaultPage>

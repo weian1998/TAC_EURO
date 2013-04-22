@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <Tasklet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="52f98c35-6cd4-42a9-9cd6-3fe70fb1ddd3">
   <SmartPart>SmartParts\TaskPane\AdminTasks\UserTasklet.ascx</SmartPart>
+  <DisplayMode>List</DisplayMode>
   <EntityNames>User</EntityNames>
   <UseCustomRendering>false</UseCustomRendering>
 </Tasklet>

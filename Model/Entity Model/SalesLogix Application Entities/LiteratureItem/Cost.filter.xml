@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0"?>
-<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="c29be307-37b6-4a4c-8ca2-c19ac1f9ac36" lastModifiedUtc="2010-05-11T16:42:45.8601916Z" filterName="Cost" propertyName="Cost" characters="0">
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="c29be307-37b6-4a4c-8ca2-c19ac1f9ac36" lastModifiedUtc="2012-03-05T21:32:17.6110591Z" filterName="Cost" propertyName="Cost" characters="0">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRangeEntityFilter" />
   </ExtendedPropertiesCollection>
-  <ranges id="8310e4ab-d2e6-4566-9a29-71aa5541a3c6" rangeName="0 - 0.5" upper=".5" />
-  <ranges id="352a8a7f-cb34-4fac-be0c-b6259f448e0f" rangeName="0.5 - 1.0" lower=".51" upper="1" />
+  <ranges id="8310e4ab-d2e6-4566-9a29-71aa5541a3c6" rangeName="0 - 0.5" upper="0.5" />
+  <ranges id="352a8a7f-cb34-4fac-be0c-b6259f448e0f" rangeName="0.5 - 1.0" lower="0.51" upper="1" />
   <ranges id="2507739e-12b6-456b-9035-e8cdafd7bb13" rangeName="1.0 - 2.0" lower="1.01" upper="2" />
   <ranges id="0e2aebb3-7426-42cd-9a22-8e56bd5f908b" rangeName="2.0 - 5.0" lower="2.01" upper="5" />
   <ranges id="f0088e9f-f09a-43b1-995f-47b419b9def3" rangeName="5.0 - 10.0" lower="5.01" upper="10" />

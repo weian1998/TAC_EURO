@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Modifier ou supprimer une action sécurisée</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Admin_security/EditingOrDeletingASecuredAction.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Ouvrir une rubrique avec la recherche, la table des matières et l'index</a>
+        </p>
+        <h1>Modifier ou supprimer une action sécurisée</h1>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <col style="width: 38px;" />
+            <col />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/adminonly.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p>L'administrateur système et les utilisateurs dotés d'un <a href="What_are_Roles_and_Secured_Actions.htm" target="_self">rôle</a> approprié peuvent accéder à ces fonctionnalités.L'administrateur système et les utilisateurs dotés d'un rôle administrateur peuvent accéder à ces fonctionnalités.</p>
+                </td>
+            </tr>
+        </table>
+        <p>Si vous effacez ou renommez une action sécurisée, celle-ci est découplée de tous les éléments auxquels elle était affectée dans l'application Architect. Bien que la relation n'existe plus, l'élément reste toujours sécurisé jusqu'à ce que vous supprimiez manuellement l'action sécurisée de la propriété Sécurité appliquée du contrôle dans l'application Architect.          <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="ActionExample">En savoir plus...<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a></p>
+        <p MadCap:targetName="ActionExample" style="display: none;">Par exemple, vous avez créé une action sécurisée nommée Impression/Rapports et ajouté cette action au bouton Imprimer de la vue Rapports.  Si vous supprimez l'action sécurisée Impression/Rapports, Impression/Rapports s'affiche encore dans la propriété Sécurité appliquée du contrôle du bouton Imprimer dans l'application Architect, bien que l'action n'existe plus. Lorsqu'un utilisateur accède à la vue Rapports, il ne peut pas accéder au bouton Imprimer car il n'a pas été affecté à un rôle qui contient l'action sécurisée Impression/Rapports. L'utilisateur admin peut accéder à tous les éléments de l'interfacce utilisateur, pour toutes les actions sécurisées.</p>
+        <p>Si vous souhaitez supprimer la sécurité de l'élément, supprimez l'action sécurisée, puis supprimez manuellement l'action de la propriété Sécurité appliquée du contrôle dans l'application Architect.</p>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <col style="width: 38px;" />
+            <col />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/caution.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p>Sage vous recommande d'enregistrer les informations concernant l'onglet <a href="SecuredActionLocationsTab.htm" target="_self">Emplacements</a> de l'action sécurisée avant de renommer ou de supprimer une action.</p>
+                </td>
+            </tr>
+        </table>
+        <p class="RelatedTopics">Procédure</p>
+        <p class="HowDoI"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="edit">Modifier une action sécurisée<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <ol MadCap:targetName="edit" style="display: none;">
+            <li class="Topic-Text-Numbered" value="1">Ouvrez la vue <a href="SecuredActionDetailView.htm" target="_self">Détails des actions sécurisées</a> pour l'action que vous souhaitez modifier.</li>
+            <li class="Topic-Text-Numbered" value="2">Utilisez l'onglet <a href="SecuredActionRolesTab.htm" target="_self">Rôles</a> pour ajouter l'action sécurisée à un rôle, ou pour l'en supprimer.</li>
+            <li class="Topic-Text-Numbered" value="3">Cliquez sur <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Enregistrer<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>.</li>
+        </ol>
+        <p class="HowDoI"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="delete">Supprimer une action sécurisée<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <ol MadCap:targetName="delete" style="display: none;">
+            <li class="Topic-Text-Numbered" value="1">Ouvrez la vue <a href="SecuredActionDetailView.htm" target="_self">Détails des actions sécurisées</a> pour l'action que vous souhaitez supprimer.</li>
+            <li class="Topic-Text-Numbered" value="2">Cliquez sur <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Supprimer<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/Delete.gif" /></span></span>.</li>
+            <li class="Topic-Text-Numbered" value="3">Pour confirmer la suppression, cliquez sur <b>OK</b>.</li>
+        </ol>
+        <p><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="recover">Récupérer une action sécurisée<img style="border: none;margin-left: 5px;" src="../SkinSupport/DropDownClosed.gif" MadCap:altsrc="../SkinSupport/DropDownOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/DropDownOpen.gif' ); }" class="MCTogglerIcon" /></a>
+        </p>
+        <p MadCap:targetName="recover" style="display: none;">Si vous supprimez (ou renommez) accidentellement une action sécurisée, vous pouvez créer une nouvelle action sécurisée, portant le même nom, qui liera de nouveau l'action à tous les contrôles qui l'utilisent dans l'application Architect. Si vous avez supprimé manuellement l'action de la propriété Sécurité appliquée sur le contrôle dans l'application Architect, l'action ne pourra plus être liée au contrôle. Le nom de la nouvelle action sécurisée doit être EXACTEMENT le même que celui de l'action sécurisée précédente.</p>
+        <p class="RelatedTopics">Rubriques connexes</p>
+        <p><a target="_self" href="What_are_Roles_and_Secured_Actions.htm">Que sont les Rôles et les Actions sécurisées&#160;?</a>
+        </p>
+        <p><a href="CreatingASecuredAction.htm" target="_self">Création d'une action sécurisée</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Dites-nous comment améliorer l'aide</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="b7cb79aa-aeb3-4024-8218-ae778eff3dfc">
+  <ItemId>gtcShare</ItemId>
+  <NavUrl>javascript:Sage.Groups.GroupManager.ShareGroup('${groupId}')</NavUrl>
+  <LargeImageUrl />
+  <SmallImageUrl />
+  <ContextMenuId />
+  <Target />
+  <AppliedSecurity />
+</MenuDropDownItem>

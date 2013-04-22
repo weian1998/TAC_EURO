@@ -13,32 +13,44 @@ function sp_DoMailMerge(xml, contactId, userId, leaderId) {
             sp_ShowMessage(OppSPMessages.MailMergeSuccess);
         }
         else {
-            alert(OppSPMessages.MailMergeFailed);
+            sp_Error(OppSPMessages.MailMergeFailed);
         }
     }
     return bSuccess;
 }
 
-function sp_GetMailMergeInfo(xml, contactId, leaderId) {
+function sp_IsStringNullOrEmpty(value) {
+    if (typeof value === "undefined") {
+        return true;
+    }
+    if (value == null)
+        return true;
+    return (value == "");
+}
 
-    var oService = GetMailMergeService();
+function sp_IsDate(value) {
+    if (typeof value === "undefined") {
+        return false;
+    }
+    if (value == null)
+        return false;
+    return Object.prototype.toString.call(value).indexOf('Date') != -1;
+}
+
+function sp_GetMailMergeInfo(xml, contactId, leaderId) {
+    var oService = Sage.MailMerge.Helper.GetMailMergeService();
     if (!oService) {
-        Ext.Msg.show({
-            title: "Sage SalesLogix",
-            msg: OppSPMessages.Error_DesktopIntegration,
-            buttons: Ext.Msg.OK,
-            icon: Ext.MessageBox.ERROR
+        require(['Sage/UI/Dialogs'], function (Dialogs) {
+            Dialogs.showError(OppSPMessages.Error_DesktopIntegration);
         });
         return null;
     }
 
     var sMoTemplateName;
     var sMoTemplateFamily;
-    var sMoAuthorType;
-    var sMoAuthorValue;
+    var sMoDoNotSolicit;
     var sMoMergeWith;
     var sMoEditAfter;
-    var sMoDoNotSolict;
     var oMoNode;
 
     /* Merge Options Out Put Node */
@@ -62,7 +74,7 @@ function sp_GetMailMergeInfo(xml, contactId, leaderId) {
     var sHoAttachToEachContact;
     var sHoAddHistToEachContact;
     var sHoResult;
-    var sHoRegrading;
+    var sHoRegarding;
     var sHoCategory;
     var sHoNotes;
 
@@ -74,58 +86,45 @@ function sp_GetMailMergeInfo(xml, contactId, leaderId) {
     var sFaScheduleDaysFromToday;
     var sFaTimeless;
     var sFaDuration;
-    var sFaAutoSchedule;
-    var sFaLeader;
-    var sFaLeaderType;
-    var sFaLeaderValue;
     var sFaRegarding;
     var sFaCategory;
     var sFaHours;
     var sFaMinutes;
+    var sFaNotes;
 
     /* Followup Activity  alarm */
     var oFaAlarmNode;
     var sFaSetAlarm;
     var sFaLeadDuration;
-    var sFaLeadUnit
+    var sFaLeadUnit;
 
     /* Other */
     var sContactId;
     var sOpportunityId;
-    var sAccountId;
     var sPluginId;
-    var sPluginName;
-    var sPluginFamily;
-    var sPrinterName;
-    var sTo;
-    var sCC;
-    var sBCC;
+    var sCC = "";
+    var sBCC = "";
     var sHasEmailNodes;
     var sFilePath;
 
     /* Setting the Mail Merger Schedule Followup Options */
     var dtCurDate;
-    var dtDateTime;
     var dtStartTime;
     var iDuration = 0;
     var iFromToday = 0;
     var iHours = 0;
     var iMinutes = 0;
     var iLeadDuration;
-    var iLeadDurationMin;
-    var iLeadUnits;
     var dblLeadDurationDay;
     var dtAlarmTime;
 
     sOpportunityId = sp_GetOpportunity();
 
-    oXmlReader = new Sage.SimpleXmlReader(xml);
+    var oXmlReader = new Sage.SimpleXmlReader(xml);
 
     oMoNode = oXmlReader.selectSingleNode("//MergeAction/MergeOptions");
     sMoTemplateName = oXmlReader.selectSingleNodeText("Template/Name", oMoNode);
     sMoTemplateFamily = oXmlReader.selectSingleNodeText("Template/Family", oMoNode);
-    sMoAuthorType = oXmlReader.selectSingleNodeText("Author/Type", oMoNode);
-    sMoAuthorValue = oXmlReader.selectSingleNodeText("Author/Value", oMoNode);
     sMoMergeWith = oXmlReader.selectSingleNodeText("MergeWith", oMoNode);
     sMoEditAfter = oXmlReader.selectSingleNodeText("EditAfter", oMoNode);
     sMoDoNotSolicit = oXmlReader.selectSingleNodeText("DoNotSolicit", oMoNode);
@@ -169,9 +168,6 @@ function sp_GetMailMergeInfo(xml, contactId, leaderId) {
     sFaScheduleDaysFromToday = oXmlReader.selectSingleNodeText("ScheduleDaysFromToday", oFaNode);
     sFaTimeless = oXmlReader.selectSingleNodeText("Timeless", oFaNode);
     sFaDuration = oXmlReader.selectSingleNodeText("Duration", oFaNode);
-    sFaAutoSchedule = oXmlReader.selectSingleNodeText("AutoSchedule", oFaNode);
-    sFaLeaderType = oXmlReader.selectSingleNodeText("Leader/Type", oFaNode);
-    sFaLeaderValue = oXmlReader.selectSingleNodeText("Leader/Value", oFaNode);
     sFaRegarding = oXmlReader.selectSingleNodeText("Regarding", oFaNode);
     sFaCategory = oXmlReader.selectSingleNodeText("Category", oFaNode);
     sFaNotes = oXmlReader.selectSingleNodeText("Notes", oFaNode);
@@ -183,7 +179,7 @@ function sp_GetMailMergeInfo(xml, contactId, leaderId) {
     sFaLeadDuration = oXmlReader.selectSingleNodeText("LeadDuration", oFaAlarmNode);
     sFaLeadUnit = oXmlReader.selectSingleNodeText("LeadUnit", oFaAlarmNode);
 
-    oMailMergeInfo = new oService.MailMergeInformation();
+    var oMailMergeInfo = new oService.MailMergeInformation();
     oMailMergeInfo.RunAs = RunAs.raSalesProcess;
 
     if (sMoDoNotSolicit == "T") {
@@ -199,14 +195,14 @@ function sp_GetMailMergeInfo(xml, contactId, leaderId) {
 
     sPluginId = sp_Service("GetPluginId", sMoTemplateName + "," + sMoTemplateFamily + ",25");
     if (sPluginId == "") {
-        alert(sp_Format(OppSPMessages.WordTemplateNotFound, sMoTemplateName, sMoTemplateFamily));
+        sp_Error(sp_Format(OppSPMessages.WordTemplateNotFound, sMoTemplateName, sMoTemplateFamily));
         return null;
     }
     oMailMergeInfo.EditBefore = false;
     oMailMergeInfo.TemplatePluginId = sPluginId;
     oMailMergeInfo.TemplatePluginName = sMoTemplateName;
 
-    sXml = "";
+    var sXml = "";
     if (sMoOutPutType.toUpperCase() == "EMAIL") {
         switch (sMoMergeWith.toUpperCase()) {
             case "PRIMARYOPPCONTACT":
@@ -232,26 +228,25 @@ function sp_GetMailMergeInfo(xml, contactId, leaderId) {
         sHasEmailNodes = oEmailXmlReader.selectSingleNodeText("/Email/EmailNodes");
         sContactId = oEmailXmlReader.selectSingleNodeText("/Email/SelectedContactID");
         if (sHasEmailNodes == "T") {
-            sTo = oEmailXmlReader.selectSingleNodeText("/Email/TO");
             sCC = oEmailXmlReader.selectSingleNodeText("/Email/CC");
             sBCC = oEmailXmlReader.selectSingleNodeText("/Email/BCC");
         }
 
-        if (!Ext.isEmpty(sCC)) {
-            sMoCC = (Ext.isEmpty(sMoCC)) ? sCC : sMoCC + ";" + sCC;
+        if (!sp_IsStringNullOrEmpty(sCC)) {
+            sMoCC = (sp_IsStringNullOrEmpty(sMoCC)) ? sCC : sMoCC + ";" + sCC;
         }
-        if (!Ext.isEmpty(sBCC)) {
-            sMoBCC = (Ext.isEmpty(sMoBCC)) ? sBCC : sMoBCC + ";" + sBCC;            
+        if (!sp_IsStringNullOrEmpty(sBCC)) {
+            sMoBCC = (sp_IsStringNullOrEmpty(sMoBCC)) ? sBCC : sMoBCC + ";" + sBCC;
         }
         if (sContactId == "") {
-            alert(OppSPMessages.CanceledOrContactNotFound);
+            sp_Alert(OppSPMessages.CanceledOrContactNotFound);
             return null;
         }
     } else {
         sContactId = contactId;
         oMailMergeInfo.MergeWith = MergeWith.withEntityIds;
         if (sContactId == "") {
-            alert(OppSPMessages.CanceledOrContactNotFound); /* "You have cancled || a contact was ! found selected for this action." */
+            sp_Alert(OppSPMessages.CanceledOrContactNotFound); /* "You have cancled || a contact was ! found selected for this action." */
             return null;
         }
     }
@@ -292,7 +287,7 @@ function sp_GetMailMergeInfo(xml, contactId, leaderId) {
                 oMailMergeInfo.DoPrintLabels = true;
                 sPluginId = sp_Service("GetPluginId", sMoLabelName + "," + sMoLabelFamily + ",19");
                 if (sPluginId == "") {
-                    alert(sp_Format(OppSPMessages.LabelTemplateNotFound, sMoLabelName, sMoLabelFamily)); /* "The label template " + sMoLabelFamily + ":" + sMoLabelName + " was ! found." */
+                    sp_Error(sp_Format(OppSPMessages.LabelTemplateNotFound, sMoLabelName, sMoLabelFamily)); /* "The label template " + sMoLabelFamily + ":" + sMoLabelName + " was ! found." */
                     return null;
                 }
                 oMailMergeInfo.LabelId = sPluginId;
@@ -318,7 +313,7 @@ function sp_GetMailMergeInfo(xml, contactId, leaderId) {
             oMailMergeInfo.OutputTo = OutputType.otFile;
             sFilePath = sp_GetFilePath(oService);
             if (sFilePath == "") {
-                alert(OppSPMessages.SelectFolder); /* "You must select a folder to use for this merge." */
+                sp_Alert(OppSPMessages.SelectFolder); /* "You must select a folder to use for this merge." */
                 return null;
             }
             oMailMergeInfo.FileDirectory = sFilePath;
@@ -332,7 +327,7 @@ function sp_GetMailMergeInfo(xml, contactId, leaderId) {
     }
     if (sHoAttachToEachContact == "T") {
         oMailMergeInfo.DoAttachments = true;
-    } else { 
+    } else {
         oMailMergeInfo.DoAttachments = false;
     }
     if (sHoPromptUser == "T") {
@@ -345,7 +340,7 @@ function sp_GetMailMergeInfo(xml, contactId, leaderId) {
     oMailMergeInfo.HistoryInfoNotes = sHoNotes;
     oMailMergeInfo.HistoryInfoRegarding = sHoRegarding;
     oMailMergeInfo.HistoryInfoResult = sHoResult;
-    
+
     dtCurDate = new Date();
     if (sFaScheduleDaysFromToday != "") {
         iFromToday = Number(sFaScheduleDaysFromToday);
@@ -438,7 +433,7 @@ function sp_GetMailMergeInfo(xml, contactId, leaderId) {
             break;
     }
     oMailMergeInfo.DoScheduleFollowUp = (oMailMergeInfo.ScheduleFollowUpType != FollowUp.fuNone);
-    if ((sFaPromptUser = "T") && (sFaType.toUpperCase() != "NONE")) {
+    if ((sFaPromptUser == "T") && (sFaType.toUpperCase() != "NONE")) {
         oMailMergeInfo.PromptFollowUpActivity = true;
     } else {
         oMailMergeInfo.PromptFollowUpActivity = false;
@@ -483,10 +478,13 @@ function sp_PopEmailAddress(contactId, service) {
     sOpportunityName = "";
 
     sXml = sp_Service("GETOPPCONTACTSEMAIL", sOpportunityId);
+    if (typeof sXml === "undefined" || !(typeof sXml === "string")) {
+        sp_Error(OppSPMessages.ERR_InvalidXmlData);
+        return "";
+    }
     var oXmlReader = new Sage.SimpleXmlReader(sXml);
 
     var oSelectEmailInfo = new Sage.SelectEmailInfo();
-
     oConNodes = oXmlReader.selectChildNodes("/CONTACTS/CONTACT");
     for (var i = 0; i < oConNodes.length; i++) {
         oConNode = oConNodes[i];
@@ -504,7 +502,7 @@ function sp_PopEmailAddress(contactId, service) {
         }
     }
 
-    bDone = false;
+    var bDone = false;
     while (!bDone) {
         var oSelectedInfo = service.SelectEmailNames(oSelectEmailInfo, MaxTo.maxOne);
         if (((oSelectedInfo != null) && (oSelectedInfo.Recipients.length > 0))) {
@@ -525,7 +523,7 @@ function sp_PopEmailAddress(contactId, service) {
             }
             if (sSelectedContactId == "") {
                 bDone = false;
-                alert(OppSPMessages.MustBeAtLeastOne); /* "There must be at least one name in the TO box. */
+                sp_Alert(OppSPMessages.MustBeAtLeastOne); /* "There must be at least one name in the TO box. */
             } else {
                 bDone = true;
             }
@@ -548,14 +546,14 @@ function sp_PopEmailAddress(contactId, service) {
 
 function sp_GetOppContactEmail(promptFor, service) {
     var iOppCount;
-    var sOppContactId;    
+    var sOppContactId;
     var sXml = "";
 
     iOppCount = Number(sp_GetOppContactCount());
     sOppContactId = sp_GetPrimaryOppContact();
     sp_ShowMessage(OppSPMessages.SelectEMailAddr); /* "Selecting the contacts to mail to ..." */
     if (iOppCount < 1) {
-        alert(OppSPMessages.NoContactAssociated); /* "There are no contacts associated to the opportunity for this step." */
+        sp_Error(OppSPMessages.NoContactAssociated); /* "There are no contacts associated to the opportunity for this step." */
         sXml = "";
     } else {
         if (promptFor) {
@@ -588,7 +586,7 @@ function sp_GetOppContactEmail(promptFor, service) {
 function sp_SetDateForWeekEnd(aDate) {
     var dtNew;
 
-    if (Ext.isDate(aDate)) {
+    if (sp_IsDate(aDate)) {
         dtNew = aDate;
         var iWeekDay = dtNew.getDay();
         switch (iWeekDay) {

@@ -1,5 +1,5 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeFile="InsertTargetProgress.ascx.cs" Inherits="InsertTargetProgress" %>
-<%@ Register TagPrefix="radU" Namespace="Telerik.WebControls" Assembly="RadUpload.NET2" %>
+<%@ Register TagPrefix="radU" Namespace="Telerik.Web.UI" Assembly="Telerik.Web.UI" %>
 		
 <div style="display:none">
     <asp:Panel ID="pnlInsertTargets_LTools" runat="server"></asp:Panel>
@@ -9,11 +9,10 @@
     <asp:Button runat="server" ID="cmdClose" OnClick="cmdClose_OnClick"/>
 </div>
 
-
 <radU:RadProgressManager ID="radProcessProgressMgr" runat="server" />
 <br />
 
-<radu:radprogressarea ProgressIndicators="TotalProgressBar, TotalProgress" id="radInsertProcessArea" runat="server" OnClientProgressUpdating="OnUpdateProgress">
+<radU:radprogressarea ProgressIndicators="TotalProgressBar, TotalProgress" id="radInsertProcessArea" runat="server" OnClientProgressUpdating="OnUpdateProgress">
     <progresstemplate>
        <table width="100%">
        <tr>
@@ -29,7 +28,6 @@
                         <asp:Label ID="PrimaryValue" runat="server"></asp:Label>&nbsp;
                         <!-- Total number of records to insert -->
                         <asp:Label ID="PrimaryTotal" runat="server"></asp:Label>
-                        
                     </td>
                 </tr>
                 <tr>
@@ -52,13 +50,11 @@
                         <asp:Label ID="SecondaryTotal" runat="server"></asp:Label>
                     </td>
                 </tr>
-                
             </table>
-            
         </div>
         </td>
             </tr>
             </table>
     </progresstemplate>
-</radu:radprogressarea>
+</radU:radprogressarea>
 <br />

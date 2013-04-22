@@ -145,6 +145,7 @@ public partial class SmartParts_HisWhatsNew_HisWhatsNew : UserControl, ISmartPar
         const string phoneURL = "~/images/icons/Call_16x16.gif";
         const string todoURL = "~/images/icons/To_Do_16x16.gif";
         const string personalURL = "~/images/icons/Personal_16x16.gif";
+        const string noteURL = "~/images/icons/Note_16x16.gif";
 
         switch (type.ToString())
         {
@@ -156,6 +157,8 @@ public partial class SmartParts_HisWhatsNew_HisWhatsNew : UserControl, ISmartPar
                 return todoURL;
             case "atPersonal":
                 return personalURL;
+            case "atNote":
+                return noteURL;
             default:
                 return meetingURL;
         }
@@ -190,7 +193,7 @@ public partial class SmartParts_HisWhatsNew_HisWhatsNew : UserControl, ISmartPar
     /// <returns></returns>
     protected string GetActivityLink(object Id)
     {
-        return string.Format("javascript:Link.editHistory('{0}');", Id);
+        return string.Format("javascript:Sage.Link.editHistory('{0}');", Id);
     }
 
     /// <summary>

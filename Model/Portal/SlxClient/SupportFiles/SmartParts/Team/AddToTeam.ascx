@@ -1,28 +1,23 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeFile="AddToTeam.ascx.cs" Inherits="AddToTeam" %>
-<%@ Register Assembly="Sage.SalesLogix.Client.GroupBuilder" Namespace="Sage.SalesLogix.Client.GroupBuilder" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.PickList" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.DependencyLookup" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.Lookup" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.Timeline" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.HighLevelTypes" Namespace="Sage.SalesLogix.HighLevelTypes" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.Platform.WebPortal" Namespace="Sage.Platform.WebPortal.SmartParts" TagPrefix="SalesLogix" %>
+<%@ Register TagPrefix="SalesLogix" Namespace="Sage.Platform.WebPortal.SmartParts" Assembly="Sage.Platform.WebPortal" %>
 
 <asp:HiddenField ID="hfMode" runat="server" Value="" /> 
 <asp:HiddenField ID="hfContext" runat="server" Value="" /> 
 
+<SalesLogix:SmartPartToolsContainer runat="server" ID="AddUsers_Tools" ToolbarLocation="Right">
+    <SalesLogix:PageLink ID="lnkAddUsersHelp" runat="server" LinkType="HelpFileName"
+        ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="Adding_Team_Members.htm" 
+        ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16"></SalesLogix:PageLink>
+ </SalesLogix:SmartPartToolsContainer>           
 
-<div style="display:none">
-    <asp:Panel ID="AddUsers_RTools" runat="server">
-        <SalesLogix:PageLink ID="lnkAddUsersHelp" runat="server" LinkType="HelpFileName"
-            ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="Adding_Team_Members.htm" ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16">&nbsp;&nbsp;&nbsp;&nbsp;</SalesLogix:PageLink>
-    </asp:Panel>    
-</div>
-<asp:Panel  runat="server" ID="pnlTarget"  BorderStyle="Solid" BorderWidth="1" BorderColor="#99bbe8" BackColor="#dfe8f6">
+<asp:Panel  runat="server" ID="pnlTarget">
 <table border="0" cellpadding="0" cellspacing="0" class="formtable">         
          <col width="85%" />           
       <tr>
-        <td style="font-size:85%">
+        <td style="font-size:12px">
             <asp:Label ID="lblDescription"  runat="server" Text="" ></asp:Label>
          </td>
      </tr>            
@@ -59,9 +54,9 @@
         </td>
      </tr>      
     <tr>
-      <td align="right" style="padding-right:40px">
-         <asp:Button class="slxbutton" runat="server" ID="btnOk" Text="<%$ resources: btnOk.Caption %>" OnClick="OK_Click"  />
-         <asp:Button class="slxbutton" runat="server" ID="btnCancel" Text="<%$ resources: btnCancel.Caption %>"  OnClick="CANCEL_Click"  />
+      <td class="qfActionContainer">
+         <asp:Button CssClass="slxbutton" runat="server" ID="btnOk" Text="<%$ resources: btnOk.Caption %>" OnClick="OK_Click"  />
+         <asp:Button CssClass="slxbutton" runat="server" ID="btnCancel" Text="<%$ resources: btnCancel.Caption %>"  OnClick="CANCEL_Click"  />
        </td>
     </tr>  
 </table>

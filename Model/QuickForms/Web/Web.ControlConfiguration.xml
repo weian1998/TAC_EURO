@@ -943,6 +943,17 @@
         <Properties />
       </RenderedControlType>
     </WebControlRenderingProvider>
+    
+    <WebControlRenderingProvider>
+      <TemplateName>QFRichEdit.WebControlRenderingTemplate.vm</TemplateName>
+      <PropertyMaps />
+      <QuickFormControlType TypeName="Sage.SalesLogix.QuickForms.QFControls.QFRichEdit, Sage.SalesLogix.QuickForms.QFControls">
+        <Properties />
+      </QuickFormControlType>
+      <RenderedControlType TypeName="Sage.SalesLogix.Web.Controls.RichEditControl, Sage.SalesLogix.Web.Controls">
+        <Properties />
+      </RenderedControlType>
+    </WebControlRenderingProvider> 
     <WebControlRenderingProvider>
       <TemplateName>QFSparkLine.WebControlRenderingTemplate.vm</TemplateName>
       <PropertyMaps />
@@ -958,6 +969,28 @@
       <JavaScriptTemplateName>QFSDataGrid.WebControlScriptRenderingTemplate.vm</JavaScriptTemplateName>
       <PropertyMaps />
       <QuickFormControlType TypeName="Sage.SalesLogix.QuickForms.QFControls.SDataGrid.QFSDataGrid, Sage.SalesLogix.QuickForms.QFControls">
+        <Properties />
+      </QuickFormControlType>
+      <RenderedControlType TypeName="System.Web.UI.LiteralControl, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+        <Properties />
+      </RenderedControlType>
+    </WebControlRenderingProvider>   
+    
+    <WebControlRenderingProvider>
+      <TemplateName>QFSDataGrid.WebControlRenderingTemplate.vm</TemplateName>
+      <JavaScriptTemplateName>QFSDataGrid.WebControlScriptRenderingTemplate.vm</JavaScriptTemplateName>
+      <PropertyMaps />
+      <QuickFormControlType TypeName="Sage.SalesLogix.QuickForms.QFControls.SDataGrid.QFSDataGrid, Sage.SalesLogix.QuickForms.QFControls">
+        <Properties />
+      </QuickFormControlType>
+      <RenderedControlType TypeName="System.Web.UI.LiteralControl, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+        <Properties />
+      </RenderedControlType>
+    </WebControlRenderingProvider>
+    <WebControlRenderingProvider>
+      <TemplateName>QFSilverLightHost.WebControlRenderingTemplate.vm</TemplateName>
+      <PropertyMaps />
+      <QuickFormControlType TypeName="Sage.SalesLogix.QuickForms.QFControls.QFSilverlightHost, Sage.SalesLogix.QuickForms.QFControls">
         <Properties />
       </QuickFormControlType>
       <RenderedControlType TypeName="System.Web.UI.LiteralControl, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

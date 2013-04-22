@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Comprendere la Priorità di Sicurezza a Livello di Campo</title>
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Admin_useradmin/Understanding_Field_Level_Security_Precedence.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1>Comprendere la Priorità di Sicurezza a Livello di Campo</h1>
+        <p><a name="kanchor314"></a>Quando nel Client Web si utilizza la sicurezza a livello di campo l'accesso maggiore ha la precedenza sull'accesso minore. L'accesso è determinato dalla combinazione del massimo accesso di tutti i profili assegnati a quell'utente e proprietario.</p>
+        <p>Se un utente dispone di più di un profilo di sicurezza (ad esempio, è aggiunto ad un team come team nidificato o dipartimento ed è inoltre un membro diretto del team padre), i profili di sicurezza condividono lo stesso codice sec (proprietario). Nel momento in cui sono determinati i diritti d'accesso a un campo possono essere restituiti più profili. </p>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <col style="width: 45px;" />
+            <col />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p class="Tip-Note-Text" style="margin-bottom: 0;">I profili di sicurezza sono creati e gestiti in Administrator.</p>
+                </td>
+            </tr>
+        </table>
+        <p MadCap:conditions="">Sono disponibili i seguenti profili:</p>
+        <ul>
+            <li class="Bullets" MadCap:conditions="" value="1"><span class="SLXBold">Sola Lettura Predefinito</span> - imposta l'accesso a tutte le tabelle e a tutti i campi, visibili nel Responsabile Profilo Sicurezza, a Sola Lettura.</li>
+            <li class="Bullets" MadCap:conditions="" value="2"><span class="SLXBold">Lettura/Scrittura Predefinito</span> - imposta l'accesso a tutte le tabelle e tutti i campi, visibili nel Responsabile Profilo Sicurezza, a Lettura/Scrittura, ad eccezione del campo SecCodeID della tabella Azienda. L'utente, in tal modo, non può riassegnare la proprietà dell'azienda.</li>
+            <li class="Bullets" MadCap:conditions="" value="3"><span class="SLXBold">Profilo Proprietario Team</span> - imposta l'accesso a tutte le tabelle e a tutti i campi, visibili nel Responsabile Profilo Sicurezza, a Lettura/Scrittura Consente, così, all'utente di riassegnare la proprietà dell'azienda. Non è possibile assegnare il <a href="../Admin_TeamsDepts/Team_Owner_Profile.htm" target="_self">Profilo Proprietario Team</a> a utenti WebViewer.</li>
+        </ul>
+        <div style="width: 100%;position: relative;">
+            <p>&#160;</p>
+        </div>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Comunicaci come possiamo migliorare la guida</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Résolution des doublons</title>
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Manage/ResolvingDuplicates.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Ouvrir une rubrique avec la recherche, la table des matières et l'index</a>
+        </p>
+        <h1>Résolution des doublons</h1>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <tr>
+                <td style="width: 10%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="10%">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/adminonly.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p>L'administrateur système et les utilisateurs dotés d'un <a href="../Admin_security/What_are_Roles_and_Secured_Actions.htm" target="_self">rôle</a> approprié peuvent accéder à ces fonctionnalités.</p>
+                </td>
+            </tr>
+        </table>
+        <p>A chaque exécution de l'Assistant de recherche des doublons, une tâche d'historique de la recherche des doublons est créée et identifie les doublons potentiels. Les doublons potentiels s'affichent dans la vue Détails de la tâche d'historique de la recherche des doublons et dans la vue de liste Traiter les doublons. Vous pouvez utiliser l'historique de la recherche des doublons ou la vue de liste Traiter les doublons pour résoudre les doublons potentiels.</p>
+        <ul>
+            <li class="Bullets" value="1">La vue Détails de l'historique de la recherche des doublons contient le groupe de doublons potentiels d'une tâche.</li>
+            <li class="Bullets" value="2">La vue de liste Traiter les doublons affiche tous les doublons potentiels existants dans le système. Cette vue affiche les tâches dans lesquelles les doublons ont été trouvés, mais ne regroupe pas les doublons potentiels par tâche.</li>
+        </ul>
+        <p class="Infinitive">Pour résoudre les doublons</p>
+        <ol>
+            <li class="Topic-Text-Numbered" value="1">Ouvrez la vue <a href="DedupResults.htm" target="_self">Détails de l'historique de la recherche des doublons</a> associée à la tâche dont vous souhaitez résoudre les doublons. </li>
+            <li class="Topic-Text-Numbered" value="2">Sur l'onglet <b>Résultats de la tâche</b>, sélectionnez un doublon potentiel et cliquez sur le lien <b>Résoudre</b>. Les informations présentes sur cet onglet peuvent vous aider à déterminer si l'enregistrement est un doublon ou s'il a besoin d'être résolu.</li>
+        </ol>
+        <ul>
+            <li class="Topic-Text-Bulleted-2" value="1"><b>Enregistrement de recherche</b>&#160;: le nom de l'enregistrement détecté comme doublon potentiel au sein de l'entité. Par exemple, si la recherche des doublons a été exécutée sur des comptes, l'enregistrement de recherche affiche le nom du compte.</li>
+            <li class="Topic-Text-Bulleted-2" value="2"><b>Etat de résolution</b>&#160;: l'état de l'enregistrement indiquant s'il s'agit d'un doublon potentiel, si les données ont été fusionnées ou s'il a été déterminé qu'il ne s'agit pas d'un doublon.</li>
+            <li class="Topic-Text-Bulleted-2" value="3"><b>Score</b>&#160;: la probabilité que cet enregistrement soit un doublon. Plus le score est élevé, plus la probabilité que l'enregistrement soit un doublon est élevée.</li>
+            <li class="Topic-Text-Bulleted-2" value="4"><b>Meilleure correspondance</b>&#160;: l'entité qui correspondant le mieux à l'enregistrement.</li>
+            <li class="Topic-Text-Bulleted-2" value="5"><b>Type d'enregistrement</b>&#160;: le type d'entité.</li>
+            <li class="Topic-Text-Bulleted-2" value="6"><b>Correspondances trouvées</b>&#160;: le nombre de correspondances potentielles pour cette entité.</li>
+        </ul>
+        <ol>
+            <li class="Topic-Text-Numbered" value="3">Dans la boîte de dialogue <span class="SLXBold">Résoudre les doublons</span>, sélectionnez un enregistrement, et effectuez l'une des actions suivantes&#160;:</li>
+        </ol>
+        <ul>
+            <li class="Topic-Text-Bulleted-2" value="1">Cliquez sur <span class="SLXBold">N'est pas un doublon</span> pour chaque enregistrement qui n'est pas un doublon.</li>
+            <li class="Topic-Text-Bulleted-2" value="2">Cliquez sur <span class="SLXBold">Fusionner</span> et suivez les instructions de la boîte de dialogue <a href="../Integration Contract/Merge_Data.htm" target="_self">Fusionner des données</a> pour effectuer la fusion des enregistrements.</li>
+        </ul>
+        <p class="RelatedTopics">Rubriques connexes</p>
+        <p><a href="ProcessDuplicatesListView.htm" target="_self">Vue de liste Traiter les doublons</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Dites-nous comment améliorer l'aide</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

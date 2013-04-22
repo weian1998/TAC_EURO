@@ -1,0 +1,251 @@
+<html>
+    <head>
+        <title>Sage.UI.Controls Browser Tests</title>
+        <style type="text/css">
+        /* Hide dojo validation controls */
+        .dijitValidationContainer, .dijitBackgroundIframe {
+            visibility: hidden;
+        }
+        </style>
+        <link rel="stylesheet" type="text/css" href="../../../../../Libraries/dojo/dijit/themes/claro/claro.css" />
+        <script type="text/javascript" src="mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+
+        <script type="text/javascript" src="../../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript" src="../../../../../Libraries/sinon/sinon-1.3.4.js"></script>
+
+        <script type="text/javascript">
+            require([
+                "dojo/parser",
+                "doh",
+                "dojo/ready",
+                "dojo/_base/Deferred",
+                "Sage/Data/BaseSDataStore",
+                "Sage/UI/Controls/PickList"
+            ], function(
+                parser,
+                doh,
+                ready,
+                Deferred,
+                BaseSDataStore,
+                PickList
+            ) {
+                ready(function () {
+                    var pickListData = [
+                        {
+                            items: {
+                                '$resources': [
+                                    {
+                                        '$key': 1,
+                                        'code': 'MI',
+                                        'number': 1,
+                                        'text': 'Michigan'
+                                    },
+                                    {
+                                        '$key': 2,
+                                        'code': 'AZ',
+                                        'number': 2,
+                                        'text': 'Arizona'
+                                    }
+                                ]
+                            }
+                        }
+                    ];
+
+                    doh.register("Sage.UI.Controls.tests.PickList", [
+                        function testGetPickListDataDefault() {
+                            var store = sinon.stub(new BaseSDataStore()),
+                                pickList,
+                                def = new Deferred();
+                            Sage.SData.Client.SDataServiceOperationRequest = sinon.stub();
+                            request = Sage.SData.Client.SDataServiceOperationRequest;
+                            request.returns({
+                                execute: sinon.stub(),
+                                setOperationName: sinon.stub()
+                            });
+
+                            pickList = new PickList({
+                                dataStore: store
+                            });
+
+                            pickList.getFromLocalStorage = sinon.mock(); 
+                            pickList.saveToLocalStorage = sinon.mock(); 
+
+                            pickList.saveToLocalStorage.once();
+                            
+                            pickList.getPickListData(def);
+                            store.fetch.yieldTo('onComplete', pickListData);
+
+                            def.then(function(d){
+                                // Sorting is enabled by default
+                                // Check that we got data back OK for this deferred and the first result is AZ.
+                                doh.t(d.items.$resources[0].code === 'AZ');
+                            });
+
+                            pickList.saveToLocalStorage.verify();
+                        },
+                        function testMissingPicklist() {
+                            var store = sinon.stub(new BaseSDataStore()),
+                                pickList,
+                                def = new Deferred();
+                            Sage.SData.Client.SDataServiceOperationRequest = sinon.stub();
+                            request = Sage.SData.Client.SDataServiceOperationRequest;
+                            request.returns({
+                                execute: sinon.stub(),
+                                setOperationName: sinon.stub()
+                            });
+
+                            pickList = new PickList({
+                                dataStore: store
+                            });
+                            
+                            pickList.getFromLocalStorage = function () {};
+                            pickList.saveToLocalStorage = function () {};
+                            
+                            pickList.getPickListData(def);
+                            store.fetch.yieldTo('onComplete', []);
+
+                            def.then(function(d){
+                                // We should get back a string with a message telling us the picklist does not exist.
+                                doh.t(typeof d === 'string');
+                            });
+
+                        },
+                        function testGetPickListCache() {
+                            var store = sinon.stub(new BaseSDataStore()),
+                                pickList,
+                                def = new Deferred();
+                            Sage.SData.Client.SDataServiceOperationRequest = sinon.stub();
+                            request = Sage.SData.Client.SDataServiceOperationRequest;
+                            request.returns({
+                                execute: sinon.stub(),
+                                setOperationName: sinon.stub()
+                            });
+
+                            pickList = new PickList({
+                                dataStore: store
+                            });
+
+                            pickList.pickListName = 'testPickList';
+
+                            // Purge picklist local storage
+                            pickList.clear(pickList._storageNameSpace);
+
+                            // Wrap a spy around our local storage methdos so we can determine how many times they were called
+                            sinon.spy(pickList, "getFromLocalStorage");
+                            sinon.spy(pickList, "saveToLocalStorage");
+
+                            // Test getting the picklist data through the store (empty cache)
+                            pickList.getPickListData(def);
+                            store.fetch.yieldTo('onComplete', pickListData);
+
+                            def.then(function(d){
+                                // Sorting is enabled by default
+                                // Check that we got data back OK for this deferred and the first result is AZ.
+                                doh.t(d.items.$resources[0].code === 'AZ');
+                            });
+
+                            // Test getting the data through local storage (we are not yielding on the store here)
+                            def = new Deferred();
+                            pickList.getPickListData(def);
+
+                            def.then(function(d){
+                                // Sorting is enabled by default
+                                // Check that we got data back OK for this deferred and the first result is AZ.
+                                doh.t(d.items.$resources[1].code === 'MI');
+                            });
+
+                            // After getting the data through the store, and through local storage:
+                            // We should have called get twice (each time to check if it had cached data),
+                            // and save once (when it had data to cache after the first call).
+                            doh.t(pickList.getFromLocalStorage.callCount === 2);
+                            doh.t(pickList.saveToLocalStorage.callCount === 1);
+
+                            // Cleanup
+                            pickList.clear(pickList._storageNameSpace);
+                            pickList.saveToLocalStorage.restore(); // Restore spy function
+                            pickList.getFromLocalStorage.restore(); // Restore spy function
+                        },
+                        function testPickListCacheExpires() {
+                            var store = sinon.stub(new BaseSDataStore()),
+                                pickList,
+                                def = new Deferred(),
+                                request;
+
+
+                            pickList = new PickList({
+                                dataStore: store
+                            });
+
+                            pickList.pickListName = 'testPickList';
+
+                            // Purge picklist local storage
+                            pickList.clear(pickList._storageNameSpace);
+
+                            // Test getting the picklist data through the store (empty cache)
+                            pickList.getPickListData(def);
+                            store.fetch.yieldTo('onComplete', pickListData);
+
+                            def.then(function(d){
+                                // Sorting is enabled by default
+                                // Check that we got data back OK for this deferred and the first result is AZ.
+                                doh.t(d.items.$resources[0].code === 'AZ');
+                            });
+
+                            // Test getting the data through local storage (we are not yielding on the store here)
+                            Sage.SData.Client.SDataServiceOperationRequest = sinon.stub();
+                            request = Sage.SData.Client.SDataServiceOperationRequest;
+                            request.returns({
+                                execute: sinon.stub().yieldsTo('success', {
+                                    response: {
+                                        lastModifiedDate: '\/Date(' + Date.now() + ')\/'
+                                    }
+                                }),
+                                setOperationName: sinon.stub()
+                            });
+
+                            pickList = new PickList({
+                                dataStore: store
+                            });
+
+                            // Wrap a spy around our local storage methdos so we can determine how many times they were called
+                            sinon.spy(pickList, "getFromLocalStorage");
+                            sinon.spy(pickList, "saveToLocalStorage");
+
+                            def = new Deferred();
+                            pickList.getPickListData(def);
+
+                            def.then(function(d){
+                                // Sorting is enabled by default
+                                // Check that we got data back OK for this deferred and the first result is AZ.
+                                doh.t(d.items.$resources[1].code === 'MI');
+                            });
+
+                            // Cleanup
+                            pickList.clear(pickList._storageNameSpace);
+                            pickList.saveToLocalStorage.restore(); // Restore spy function
+                            pickList.getFromLocalStorage.restore(); // Restore spy function
+                        }
+                    ]);
+
+                    //Execute D.O.H. in this remote file.
+                    doh.run();
+                });
+            });
+
+        </script>
+    </head>
+    <body class="claro">
+        <form>
+
+
+        </form>
+    </body>
+</html>

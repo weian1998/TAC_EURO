@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="grdTickets.EmptyTableRowText" xml:space="preserve">
     <value>No records match the selection criteria.</value>
@@ -185,5 +185,11 @@
   </data>
   <data name="memResolution.Caption" xml:space="preserve">
     <value>Resolution</value>
+  </data>
+  <data name="lueAssociateTicket.ButtonToolTip" xml:space="preserve">
+    <value>Associate Ticket</value>
+  </data>
+  <data name="09ad58d5-bbc2-4661-9958-358b728c3728.DuplicateAssociationMessage" xml:space="preserve">
+    <value>This Ticket has already been associated with the defect.</value>
   </data>
 </root>

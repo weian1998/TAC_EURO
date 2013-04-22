@@ -4,4 +4,6 @@
   <ServiceType>Sage.Platform.WebPortal.Services.TransactionManagerService, Sage.Platform.WebPortal</ServiceType>
   <RegisterAs>Sage.Platform.Application.Services.ITransactionManagerService, Sage.Platform.Application</RegisterAs>
   <AddOnDemand>false</AddOnDemand>
+  <Properties />
+  <Scope>Application</Scope>
 </PortalService>

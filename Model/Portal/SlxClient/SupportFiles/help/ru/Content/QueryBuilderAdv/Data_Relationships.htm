@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Data Relationships</title>
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilderAdv/Data_Relationships.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor649"></a>Отношения Данных</h1>
+        <p>Реляционная база данных содержит несколько таблиц. Структура базы данных определяется тем, как эти таблица связаны друг с другом. Поскольку данные заводятся на основании отношений таблиц, важно разобраться в отношении между таблицами перед добавлением собственных таблиц и полей в базу данных. Это также полезно при создании запросов для поиска, групп, правил и шаблонов подписки, и т. п.</p>
+        <p>Когда вы создаете собственную (определенную пользователем) таблицу, следующие поля добавляются автоматически:</p>
+        <ul>
+            <li class="Bullets" value="1">CreateUser
+            </li>
+            <li class="Bullets" value="2">CreateDate
+            </li>
+            <li class="Bullets" value="3">ModifyUser
+            </li>
+            <li class="Bullets" value="4">ModifyDate
+            </li>
+        </ul>
+        <p>Поскольку каждая таблица также должна иметь как минимум один основной ключ, Sage SalesLogix добавляет поле основного ключа в пользовательскую таблицу (если таблица имеет связь Один к Нулю, Одному или Многим с другой таблицей), и поле основного ключа связанной таблицы. Заданные пользователем поля могут быть добавлены при необходимости.</p>
+        <p class="Infinitive">Отношения Таблиц</p>
+        <p>Отношение одной таблицы к другой основано на содержании в обеих таблицах как минимум одного одинакового поля. Чаще всего имена полей одинаковы, хотя это не всегда так. Например, таблицы ACCOUNT и CONTACT связаны, потому что каждая из них имеет поле называющееся AccountID с одинаковым значением. Однако, таблица ACCOUNT также связана с таблицей USERINFO через поле AccountManagerID в таблице ACCOUNT, и поле UserID в таблице USERINFO. Хотя эти таблицы имеют поля с разными названиям, их значения одинаковы.</p>
+        <p>Связь между двумя таблицами называется <a href="Joining_Tables.htm">связь</a> 
+ и устанавливается при помощи поля, существующего в обеих таблицах. Когда две таблицы связаны, каждая таблица может иметь другое <a href="Table_Relationship_Types.htm">отношение</a>. 
+ Отношения таблиц важны при создании запросов. Запросы, использующие две таблицы, могут возвращать различные результаты в зависимости от того, какая таблица является основной в отношении.</p>
+        <p class="RelatedTopics">См. также</p>
+        <p class="Topic-Text-Numbered"><a href="../QueryBuilder/Using_SalesLogix_Query_Builder.htm" target="_self">Краткий обзор Построителя запросов</a>
+        </p>
+        <p class="Topic-Text-Numbered"><a href="Table_Relationship_Types.htm">Типы Отношений Таблиц</a>
+        </p>
+        <p class="Topic-Text-Numbered"><a href="Join_Types.htm">Типы Связей</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

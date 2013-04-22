@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Serienbrief" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="de" xml:lang="de" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Verfassen und Senden einer Faxnachricht</title>
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Mail_Merge/Writing_and_Sending_a_Fax_Message.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Thema mit den Registerkarten "Suchen", "Inhalt" und "Index" öffnen</a>
+        </p>
+        <h1><a name="kanchor198"></a>Verfassen und Senden einer Faxnachricht</h1>
+        <p>Im Folgenden wird erläutert, wie eine Faxnachricht an einen einzelnen Kontakt oder Interessenten verfasst und gesendet wird. Wenn Sie eine Faxnachricht an mehrere Kontakte oder Interessenten senden möchten, verwenden Sie die Funktion <a href="Using_Mail_Merge.htm">Seriendruck</a>.</p>
+        <table wrapperparagraphselector="P" style="margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col />
+            <col />
+            <tr MadCap:conditions="Output.WebClient">
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p>Wenn das Menü <span class="SLXBold">Verfassen</span> nicht zur Verfügung steht, müssen Sie die Sage SalesLogix-Desktopintegration herunterladen.<MadCap:conditionalText MadCap:conditions="Output.Mail Merge,Output.WebClient,Targeted.WebHelp-slxgetstarted sub-set"> Sie können die <a href="../General/desktopintegration.htm" target="_self">Installation der Sage SalesLogix-Desktopintegration</a> vom Web Client-Anmeldebildschirm aus durchführen</MadCap:conditionalText>.&#160;</p>
+                </td>
+            </tr>
+        </table>
+        <p class="Infinitive">So verfassen und senden Sie eine Faxnachricht:</p>
+        <ol>
+            <li value="1">Zeigen Sie im Menü <span class="SLXBold">Verfassen</span> auf <span class="SLXBold">Fax aus Vorlage</span> und wählen Sie eine Vorlage aus der Liste mit den zuletzt verwendeten Vorlagen aus, oder klicken Sie auf <span class="SLXBold">Weitere Vorlagen</span>, <a href="../Templates/Managing_and_Selecting_Templates.htm">um eine andere Vorlage auszuwählen</a>. Wenn Sie aufgefordert werden, die Vorlage der Liste mit den zuletzt verwendeten Vorlagen hinzuzufügen, klicken Sie auf <span class="SLXBold">Ja</span>, um die Vorlage hinzuzufügen, andernfalls auf <span class="SLXBold">Nein</span>.
+                      <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%"><col style="width: 45px;" /><col /><tr><td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top"><p style="text-align: center;margin-bottom: 0;" align="center"><img src="../image/note.gif" /></p></td><td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%"><p class="Tip-Note-Text" style="margin-bottom: 0;">Wenn auf dem Rechner kein kompatibler Fax-Dienst eingerichtet wurde, ist die Option <B>Weitere Vorlagen</B> deaktiviert.</p></td></tr></table></li>
+            <li value="2">
+                <p>Der nächste Schritt hängt davon ab, wo sich der Fokus in <span class="MyVariablesClient Name">Sage SalesLogix Web Client</span> befindet.<ul><li value="1">Wenn der Fokus auf einem bestimmten Kontakt oder Interessenten liegt, wird der Seriendruck fortgesetzt.</li><li MadCap:conditions="Output.WebClient" value="2">Ist zurzeit kein bestimmter Kontakt oder Interessent aktiv, verwenden Sie das Dialogfeld <span class="SLXBold">Kontakt auswählen</span> bzw. <span class="SLXBold">Interessent auswählen</span>, um <a href="../Lookups/findlookup.htm">einen Kontakt oder Interessenten auszuwählen</a>.</li><li value="3">Wenn Sie den Fokus auf eine Firma oder eine Verkaufschance gesetzt haben, werden Sie im Dialogfeld <span class="SLXBold" MadCap:conditions="Output.WebClient">Kontakt auswählen</span> aufgefordert, einen Kontakt auszuwählen.</li><li value="4">Liegt sich der Fokus auf einem Ticket, wird das Dokument mit dem verbundenen Kontakt zusammengeführt.</li></ul></p>
+            </li>
+            <li value="3">Im Dialogfeld <a href="Selecting_Type_of_Address.htm">Adresstyp auswählen</a> wird angezeigt, ob der Kontakt über mehr als nur eine Adresse verfügt und ob die Vorlage Seriendruckfelder aus der Adresstabelle enthält.</li>
+            <li value="4">Bearbeiten Sie die Vorlage bei Bedarf im Dialogfeld <span class="SLXBold">Fax-Editor</span>.</li>
+            <li value="5">Schließen Sie den Fax-Editor.</li>
+            <li value="6">Geben Sie einen Betreff in das Feld <span class="SLXBold">Betreff</span> im Dialogfeld <span class="SLXBold">Faxoptionen</span> ein.</li>
+            <li value="7">Führen Sie im Feld <span class="SLXBold">Deckblatt</span> einen der folgenden Schritte aus:<ul><li value="1">Behalten Sie das nun angezeigte Standarddeckblatt bei. </li><li value="2">Klicken Sie auf den Pfeil und anschließend auf ein anderes Deckblatt.</li><li value="3">Klicken Sie auf den Pfeil und anschließend auf <span class="SLXBold">Kein Deckblatt</span>.</li></ul></li>
+        </ol>
+        <ol start="8">
+            <li value="8">Um eine Nachricht auf dem Deckblatt einzufügen, führen Sie eine der folgenden Aktionen durch:<ul start="8"><li value="8">Kurze Nachrichten können in das Feld <b>Nachrichten</b> eingegeben werden.</li><li value="9">Klicken Sie bei einer längeren Mitteilung auf <span class="SLXBold">Nachricht</span>. Geben Sie im Dialog <span class="SLXBold">Nachricht bearbeiten</span> die Mitteilung ein, und klicken Sie dann auf <span class="SLXBold">OK</span>.</li></ul></li>
+        </ol>
+        <ol start="9">
+            <li value="9">(Optional) Um den standardmäßigen Versandtermin der Faxnachricht zu ändern, klicken Sie auf <span style="font-weight: bold;">Übermittlungsoptionen</span><span class="SLXBold"></span>. Legen Sie die gewünschten Übermittlungsoptionen fest und klicken Sie auf <span class="SLXBold">OK</span>. </li>
+            <li value="10">Klicken Sie auf <span class="SLXBold">Senden</span>.</li>
+            <li value="11">
+                <p>
+                    <MadCap:conditionalText MadCap:conditions="Output.WebClient">Im Dialogfeld <span class="SLXBold">Aktivität abschließen</span> können Sie die <a href="Setting_History_Options_for_Mail_Merge.htm">Historieninformationen bearbeiten</a>, Notizen schreiben oder eine <a href="Setting_Follow-up_Activity_Date_and_Time.htm">Folgeaktivität planen</a>. Klicken Sie anschließend auf <span class="SLXBold">Abschließen</span>.</MadCap:conditionalText>
+                </p>
+            </li>
+            <li MadCap:conditions="Output.WebClient" value="12">Wenn Sie eine Folgeaktivität geplant haben, füllen Sie das Dialogfeld <span class="SLXBold">Aktivität planen</span> aus und klicken Sie auf <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Speichern<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>..</li>
+        </ol>
+        <p class="RelatedTopics">Verwandte Themen</p>
+        <p><a href="About_the_Write_Menu.htm" target="_self">Übersicht über die Seriendruckfunktion</a>
+        </p>
+        <div style="width: 100%;position: relative;">
+            <p>&#160;</p>
+        </div>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Haben Sie Vorschläge zur Verbesserung der Hilfe?</a>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

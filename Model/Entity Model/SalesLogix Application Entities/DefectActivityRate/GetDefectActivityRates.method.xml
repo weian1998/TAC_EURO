@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="5cf42d6b-8984-49d2-a325-c054050d6a7d" lastModifiedUtc="2011-09-06T15:45:38.5794992Z" name="GetDefectActivityRates" returnType="Object" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="b5516887-5992-47dd-804a-f0aa02be4cee" lastModifiedUtc="2011-09-21T04:57:23.2143947Z" targetType="Sage.SalesLogix.DefectActivityRate.Rules, Sage.SalesLogix.BusinessRules" targetMethod="GetDefectActivityRates" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

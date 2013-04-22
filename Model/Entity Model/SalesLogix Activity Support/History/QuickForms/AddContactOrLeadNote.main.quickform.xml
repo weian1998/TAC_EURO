@@ -25,8 +25,8 @@ note.Type = Sage.Entity.Interfaces.HistoryType.atNote;
                 
 bool found = false;
 bool bLead = false;
-Sage.SalesLogix.Security.SLXUserService slxUserService = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>() as Sage.SalesLogix.Security.SLXUserService;
-if (slxUserService != null) note.UserId = slxUserService.GetUser().Id.ToString();
+var userService = Sage.Platform.Application.ApplicationContext.Current.Services.Get<Sage.Platform.Security.IUserService>();
+if (userService != null) note.UserId = userService.UserId;
 	
 foreach (Sage.Platform.Application.EntityHistory hist in EntityContext.EntityHistory)
 {
@@ -159,8 +159,7 @@ if (String.IsNullOrEmpty(ContactOrLead.SelectedValue))
 
 	// Populate UserId dropdown based on calendar security
 	UserId.Items.Clear();
-	foreach (Sage.SalesLogix.Activity.UserCalendar uc in 
-		Sage.SalesLogix.Activity.UserCalendar.GetCurrentUserCalendarList())
+	foreach (var uc in Sage.SalesLogix.Activity.UserCalendar.GetCurrentUserCalendarList())
 	{
 		// Must have Add access to add Note for user
 		if (uc.AllowAdd == true)
@@ -222,7 +221,7 @@ if (String.IsNullOrEmpty(ContactOrLead.SelectedValue))
       </Properties>
       <ControlDefinition>
         <Properties>
-          <Property name="Control" type="Sage.Platform.QuickForms.QFControls.QFRadioGroup, Sage.Platform.QuickForms.QFControls"><QFRadioGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>3</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>ContactOrLead</ControlId><DataBindings /><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><SelectedIndex>0</SelectedIndex><Items><Item><Key>ContactOrLead_item0.Text</Key><Value>Contact</Value></Item><Item><Key>ContactOrLead_item1.Text</Key><Value>Lead</Value></Item><Item><Key>ContactOrLead_item0.Value</Key><Value>Contact</Value></Item><Item><Key>ContactOrLead_item1.Value</Key><Value>Lead</Value></Item><Item><Key>ContactOrLead_item2.Value</Key><Value>Lead</Value></Item></Items><OnChangeAction><ResourceKey>ContactOrLead</ResourceKey><RootActionName>CSharpSnippetAction</RootActionName><Action><CSharpCodeSnippet><![CDATA[	Sage.SalesLogix.Activity.History history = this.BindingSource.Current as Sage.SalesLogix.Activity.History;
+          <Property name="Control" type="Sage.Platform.QuickForms.QFControls.QFRadioGroup, Sage.Platform.QuickForms.QFControls"><QFRadioGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Column>0</Column><Row>3</Row><IsReadOnly>false</IsReadOnly><HotKey>0</HotKey><TabIndex>0</TabIndex><ControlId>ContactOrLead</ControlId><DataBindings /><ControlLabelPlacement>left</ControlLabelPlacement><CaptionAlignment>left</CaptionAlignment><StyleScheme /><SelectedIndex>0</SelectedIndex><Items><Item><Key>ContactOrLead_item0.Text</Key><Value>Contact</Value></Item><Item><Key>ContactOrLead_item0.Value</Key><Value>Contact</Value></Item><Item><Key>ContactOrLead_item1.Value</Key><Value>Lead</Value></Item></Items><OnChangeAction><ResourceKey>ContactOrLead</ResourceKey><RootActionName>CSharpSnippetAction</RootActionName><Action><CSharpCodeSnippet><![CDATA[	Sage.SalesLogix.Activity.History history = this.BindingSource.Current as Sage.SalesLogix.Activity.History;
 	Duration.Enabled = !history.Timeless;
     StartDate.DisplayTime = !history.Timeless;
     StartDate.Timeless = history.Timeless; 

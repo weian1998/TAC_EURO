@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Lookup name="DefaultActivityAlarmValues">
+  <LookupValue id="0" text="None" localizedId="none" default="true"></LookupValue>
+  <LookupValue id="5" text="5 minutes" localizedId="fiveMinutes" default="false"></LookupValue>
+  <LookupValue id="10" text="10 minutes" localizedId="tenMinutes" default="false"></LookupValue>
+  <LookupValue id="15" text="15 minutes" localizedId="fifteenMinutes" default="false"></LookupValue>
+  <LookupValue id="30" text="30 minutes" localizedId="thirtyMinutes" default="false"></LookupValue>
+  <LookupValue id="60" text="1 hour" localizedId="oneHour" default="false"></LookupValue>
+  <LookupValue id="120" text="2 hours" localizedId="twoHours" default="false"></LookupValue>
+  <LookupValue id="180" text="3 hours" localizedId="threeHours" default="false"></LookupValue>
+  <LookupValue id="240" text="4 hours" localizedId="fourHours" default="false"></LookupValue>
+  <LookupValue id="300" text="5 hours" localizedId="fiveHours" default="false"></LookupValue>
+  <LookupValue id="360" text="6 hours" localizedId="sixHours" default="false"></LookupValue>
+  <LookupValue id="420" text="7 hours" localizedId="sevenHours" default="false"></LookupValue>
+  <LookupValue id="480" text="8 hours" localizedId="eightHours" default="false"></LookupValue>
+  <LookupValue id="540" text="9 hours" localizedId="nineHours" default="false"></LookupValue>
+  <LookupValue id="600" text="10 hours" localizedId="tenHours" default="false"></LookupValue>
+  <LookupValue id="660" text="11 hours" localizedId="elevenHours" default="false"></LookupValue>
+  <LookupValue id="720" text="0.5 days" localizedId="pointFiveDays" default="false"></LookupValue>
+  <LookupValue id="1080" text="18 hours" localizedId="eighteenHours" default="false"></LookupValue>
+  <LookupValue id="1440" text="1 day" localizedId="oneDay" default="false"></LookupValue>
+  <LookupValue id="2880" text="2 days" localizedId="twoDays" default="false"></LookupValue>
+  <LookupValue id="4320" text="3 days" localizedId="threeDays" default="false"></LookupValue>
+  <LookupValue id="5760" text="4 days" localizedId="fourDays" default="false"></LookupValue>
+  <LookupValue id="10080" text="1 week" localizedId="oneWeek" default="false"></LookupValue>
+  <LookupValue id="20160" text="2 weeks" localizedId="twoWeeks" default="false"></LookupValue>
+</Lookup>

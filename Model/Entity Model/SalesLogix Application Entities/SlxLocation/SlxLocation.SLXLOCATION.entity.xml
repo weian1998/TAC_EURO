@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="ac541bcf-9889-4c0e-a23c-dac649648f52" lastModifiedUtc="2010-07-28T22:45:43.4579218Z" manageSchema="false" tableName="SLXLOCATION" name="SlxLocation" isExtension="false" audited="false" uniqueIdentifierPropertyId="c9f9e0a7-fd6c-4651-9001-15e7e39b059a" lastUpdatedPropertyId="0e2c35dd-f48e-4fd1-921c-01dc02144a12" onBeforeInsertMethodId="b0157259-cbbc-4986-89eb-fd5400af7d7b" onAfterInsertMethodId="75061b0a-9258-4e51-a993-b4e9c3102f32" onBeforeUpdateMethodId="bc60c1d6-e1f5-4a53-8f8d-5316739b60a6" onAfterUpdateMethodId="5710e384-c04b-4fff-8c60-2f4f8f9bf132" onBeforeDeleteMethodId="81aec912-cd59-4948-8505-a9ba5d9d8ed4" onAfterDeleteMethodId="54889c91-0873-4a43-94cf-043ccb590fe0" onCreateId="1776d004-c010-4478-9355-758a627fc541">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="ac541bcf-9889-4c0e-a23c-dac649648f52" lastModifiedUtc="2010-07-28T22:45:43.4579218Z" manageSchema="true" tableName="SLXLOCATION" name="SlxLocation" isExtension="false" audited="false" uniqueIdentifierPropertyId="c9f9e0a7-fd6c-4651-9001-15e7e39b059a" lastUpdatedPropertyId="0e2c35dd-f48e-4fd1-921c-01dc02144a12" onBeforeInsertMethodId="b0157259-cbbc-4986-89eb-fd5400af7d7b" onAfterInsertMethodId="75061b0a-9258-4e51-a993-b4e9c3102f32" onBeforeUpdateMethodId="bc60c1d6-e1f5-4a53-8f8d-5316739b60a6" onAfterUpdateMethodId="5710e384-c04b-4fff-8c60-2f4f8f9bf132" onBeforeDeleteMethodId="81aec912-cd59-4948-8505-a9ba5d9d8ed4" onAfterDeleteMethodId="54889c91-0873-4a43-94cf-043ccb590fe0" onCreateId="1776d004-c010-4478-9355-758a627fc541">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
@@ -28,7 +28,7 @@
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
       <SystemDataType guid="3ca925e1-4b76-4621-a39c-a0d4cb7327d5">
-        <GuidDataType />
+        <GuidDataType storage="String" />
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="85bea77d-4687-4088-8040-f226eaa63f49" lastModifiedUtc="2010-04-20T00:01:01.9189608Z" name="AppId" audited="false" columnName="APPID" maxLength="12" precision="0" scale="0" ordinal="2" isReadOnly="false">

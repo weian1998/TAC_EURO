@@ -112,13 +112,13 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Copyright" xml:space="preserve">
-    <value>Copyright 1997-2011</value>
+    <value>Copyright 1997-2012</value>
   </data>
   <data name="FindOutMore" xml:space="preserve">
     <value>Find out more...</value>
@@ -147,22 +147,19 @@
   <data name="UserNameRequired" xml:space="preserve">
     <value>User Name is required.</value>
   </data>
-  <data name="UseActiveMailResource.Text" xml:space="preserve">
-    <value>Use ActiveMail (requires ActiveX)</value>
-  </data>
   <data name="asterisk" xml:space="preserve">
     <value>*</value>
   </data>
   <data name="VersionLabelResource1.Text" xml:space="preserve">
     <value>Version</value>
   </data>
-  <data name="ClickToDownload" xml:space="preserve">
-    <value>Click to download product enhancements.</value>
+  <data name="EnhancementsInstall" xml:space="preserve">
+    <value>Install Enhancements</value>
   </data>
-  <data name="EnhanceSalesLogix" xml:space="preserve">
-    <value>Enhance SalesLogix...</value>
+  <data name="EnhancementsInstalled" xml:space="preserve">
+    <value>Enhancements Installed</value>
   </data>
-  <data name="EnhancementsAreInstalled" xml:space="preserve">
-    <value>Enhancements have been installed</value>
+  <data name="InvalidUserNameValidation" xml:space="preserve">
+    <value>The User Name cannot be validated.</value>
   </data>
 </root>

@@ -1,13 +1,6 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using log4net;
 using System.Collections.Generic;
 using Sage.Entity.Interfaces;
@@ -24,7 +17,6 @@ public partial class StepMapFields : UserControl, ISmartPartInfoProvider
 {
     private Int32 _iRowMatchToIdx;
     private Int32 _iRowMatchFromIdx;
-    private IWebDialogService _dialogService;
 
     static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodInfo.GetCurrentMethod().DeclaringType);
 
@@ -35,11 +27,15 @@ public partial class StepMapFields : UserControl, ISmartPartInfoProvider
     /// </summary>
     /// <value>The dialog service.</value>
     [ServiceDependency]
-    public IWebDialogService DialogService
-    {
-        get { return _dialogService; }
-        set { _dialogService = value; }
-    }
+    public IWebDialogService DialogService { get; set; }
+
+    /// <summary>
+    /// Gets or sets the entity context.
+    /// </summary>
+    /// <value>The entity context.</value>
+    /// <returns>The specified <see cref="T:System.Web.HttpContext"></see> object associated with the current request.</returns>
+    [ServiceDependency]
+    public IContextService ContextService { get; set; }
 
     /// <summary>
     /// Gets the smart part info.
@@ -64,12 +60,12 @@ public partial class StepMapFields : UserControl, ISmartPartInfoProvider
         if (importManager != null)
         {
             GetImportTemplateList(importManager.Options);
-            string template = cboTemplates.SelectedValue.ToString();
+            string template = cboTemplates.SelectedValue;
             cmdSave.Enabled = (!template.Equals(GetLocalResourceObject("cboTemplates.None.Item").ToString()) && !String.IsNullOrEmpty(template));
             cmdSaveAs.Enabled = true;
             IList<SourceFieldMap> sourceList = GetSourceList(importManager);
             grdSource.DataSource = sourceList;
-            IList<ImportTargetProperty> targetList = importManager.GetTargetPropertyDispalyList(chkShowAllTargets.Checked, false);
+            IList<ImportTargetProperty> targetList = importManager.GetTargetPropertyDisplayList(chkShowAllTargets.Checked, false);
             grdTarget.DataSource = targetList;
             grdTarget.DataBind();
             grdSource.DataBind();
@@ -97,8 +93,10 @@ public partial class StepMapFields : UserControl, ISmartPartInfoProvider
         else if (e.Row.RowType == DataControlRowType.DataRow)
         {
             _iRowMatchFromIdx++;
-            e.Row.Attributes.Add("onclick", String.Format("onGridViewRowSelected('{0}', '{1}', '{2}')", _iRowMatchFromIdx.ToString(),
-                                                          grdSource.ClientID, txtMatchFromRowIndx.ClientID));
+            e.Row.Attributes.Add("onclick",
+                                 String.Format("importLeadsWizard.onGridViewRowSelected('{0}', '{1}', '{2}')",
+                                               _iRowMatchFromIdx.ToString(),
+                                               grdSource.ClientID, txtMatchFromRowIndx.ClientID));
         }
     }
 
@@ -116,8 +114,10 @@ public partial class StepMapFields : UserControl, ISmartPartInfoProvider
         else if (e.Row.RowType == DataControlRowType.DataRow)
         {
             _iRowMatchToIdx++;
-            e.Row.Attributes.Add("onclick", String.Format("onGridViewRowSelected('{0}', '{1}', '{2}')", _iRowMatchToIdx.ToString(),
-                                                          grdTarget.ClientID, txtMatchToRowIndx.ClientID));
+            e.Row.Attributes.Add("onclick",
+                                 String.Format("importLeadsWizard.onGridViewRowSelected('{0}', '{1}', '{2}')",
+                                               _iRowMatchToIdx.ToString(),
+                                               grdTarget.ClientID, txtMatchToRowIndx.ClientID));
         }
     }
 
@@ -137,27 +137,25 @@ public partial class StepMapFields : UserControl, ISmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void cboTemplates_SelectedIndexChanged(object sender, EventArgs e)
     {
+        if (cboTemplates.SelectedValue.Equals("None")) return;
         ImportManager importManager = Page.Session["importManager"] as ImportManager;
-        if (!cboTemplates.SelectedValue.ToString().Equals(GetLocalResourceObject("cboTemplates.None.Item").ToString()))
+        string errorMessage = String.Empty;
+        //Owner and Lead Source values are saved into the template and we don't necessarily want to overwrite these values so we'll
+        //reassign them after the template is done loading.
+        ImportTargetProperty tpOwner = importManager.EntityManager.GetEntityProperty("Owner");
+        String ownerId = tpOwner.DefaultValue.ToString();
+        ImportTargetProperty tpLeadSource = importManager.EntityManager.GetEntityProperty("LeadSource");
+        String leadSourceId = tpLeadSource.DefaultValue.ToString();
+        if (!importManager.AddImportMapsFromTemplate(importManager, cboTemplates.SelectedItem.Value, out errorMessage))
         {
-            string errorMessage = String.Empty;
-            //Owner and Lead Source values are saved into the template and we don't necessarily want to overwrite these values so we'll
-            //reassign them after the template is done loading.
-            ImportTargetProperty tpOwner = importManager.EntityManager.GetEntityProperty("Owner");
-            String ownerId = tpOwner.DefaultValue.ToString();
-            ImportTargetProperty tpLeadSource = importManager.EntityManager.GetEntityProperty("LeadSource");
-            String leadSourceId = tpLeadSource.DefaultValue.ToString();
-            if (!importManager.AddImportMapsFromTemplate(importManager, cboTemplates.SelectedItem.Value, out errorMessage))
-            {
-                DialogService.ShowMessage(errorMessage);
-            }
-            else
-            {
-                importManager.Options.Template = cboTemplates.SelectedItem.Text;
-                SetDefaultTargetPropertyValue("Owner", ownerId, importManager);
-                SetDefaultTargetPropertyValue("LeadSource", leadSourceId, importManager);
-                Page.Session["importManager"] = importManager;
-            }
+            DialogService.ShowMessage(errorMessage);
+        }
+        else
+        {
+            importManager.Options.Template = cboTemplates.SelectedItem.Text;
+            SetDefaultTargetPropertyValue("Owner", ownerId, importManager);
+            SetDefaultTargetPropertyValue("LeadSource", leadSourceId, importManager);
+            Page.Session["importManager"] = importManager;
         }
     }
 
@@ -196,10 +194,6 @@ public partial class StepMapFields : UserControl, ISmartPartInfoProvider
                 templateManager.TargetPropertyDefaults = importManager.TargetPropertyDefaults;
                 templateManager.SaveTemplate(cboTemplates.SelectedItem.Value);
             }
-            else
-            {
-                log.Warn(String.Format(GetLocalResourceObject("error_templateManager").ToString(), String.Empty));
-            }
         }
         catch (Exception ex)
         {
@@ -228,14 +222,12 @@ public partial class StepMapFields : UserControl, ISmartPartInfoProvider
     private void GetImportTemplateList(ImportOptions options)
     {
         cboTemplates.Items.Clear();
-        cboTemplates.Items.Add(GetLocalResourceObject("cboTemplates.None.Item").ToString());
+        ListItem item = new ListItem {Text = GetLocalResourceObject("cboTemplates.None.Item").ToString(), Value = "None"};
+        cboTemplates.Items.Add(item);
         IList<IImportTemplate> list = ImportRules.GetImportTemplates();
-        ListItem item;
         foreach (IImportTemplate template in list)
         {
-            item = new ListItem();
-            item.Text = template.TemplateName;
-            item.Value = template.Id.ToString();
+            item = new ListItem {Text = template.TemplateName, Value = template.Id.ToString()};
             if (options != null && item.Text.Equals(options.Template))
                 item.Selected = true;
             cboTemplates.Items.Add(item);
@@ -250,8 +242,8 @@ public partial class StepMapFields : UserControl, ISmartPartInfoProvider
     protected void chkShowAllTargets_CheckedChanged(object sender, EventArgs e)
     {
     }
-      
-    
+
+
     /// <summary>
     /// Handles the Click event of the cmdMatch control.
     /// </summary>
@@ -321,41 +313,22 @@ public partial class StepMapFields : UserControl, ISmartPartInfoProvider
                 }
                 list.Add(sfm);
             }
-        
+
         }
-        return list;    
+        return list;
     }
-        
 
     public class SourceFieldMap
     {
-        private int _FieldIndex = -1;
-        private string _FieldName = string.Empty;
-        private string _SLXTargetProperty =string.Empty;
         public SourceFieldMap()
-        { 
-        
-        }
-        public int FieldIndex
         {
-            get { return _FieldIndex; }
-            set { _FieldIndex = value; }
-
-        }
-        public string FieldName
-        {
-            get { return _FieldName; }
-            set { _FieldName = value; }
-
-        }
-        public string SLXTargetProperty
-        {
-            get { return _SLXTargetProperty; }
-            set { _SLXTargetProperty = value; }
-
+            SLXTargetProperty = String.Empty;
+            FieldName = String.Empty;
+            FieldIndex = -1;
         }
 
+        public int FieldIndex { get; set; }
+        public string FieldName { get; set; }
+        public string SLXTargetProperty { get; set; }
     }
-
-
 }

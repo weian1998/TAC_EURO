@@ -1,0 +1,116 @@
+<html>
+    <head>
+        <title>Sage.UI Browser Tests</title>
+        <link rel="stylesheet" type="text/css" href="../../../../../Libraries/dojo/dijit/themes/claro/claro.css" />
+        <link rel="stylesheet" type="text/css" href="../../../../../Libraries/dojo/dojox/grid/enhanced/resources/claroEnhancedGrid.css" />
+        <script type="text/javascript" src="../../Controls/tests/mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript">
+        require([
+            "dojo/parser",
+            "doh",
+            "dojox/grid/DataGrid",
+            "dojo/data/ItemFileWriteStore",
+            "Sage/UI/Columns/CheckBox"
+        ], function (
+            parser,
+            doh,
+            DataGrid,
+            ItemFileWriteStore,
+            CheckBox
+        ) {                
+            function loadGrid(id, val, layout) {
+                var data = {
+                  identifier: 'id',
+                  items: []
+                };
+                var data_list = [
+                  { col1: "normal", col2: val}
+                ];
+                var rows = 1;
+                for(var i=0, l=data_list.length; i<rows; i++){
+                  data.items.push(dojo.mixin({ id: i+1 }, data_list[i%l]));
+                }
+                var store = new ItemFileWriteStore({data: data});
+
+                /*create a new grid:*/
+                var grid = new DataGrid({
+                    id: id + '_grid',
+                    store: store,
+                    structure: layout,
+                    rowSelector: '20px'},
+                  document.createElement('div'));
+
+                /*append the new grid to the div*/
+                dojo.byId(id).appendChild(grid.domNode);
+
+                /*Call startup() to render the grid*/
+                grid.startup();
+            }
+            
+            dojo.ready(function(){
+                doh.register("Sage.UI.Columns.tests.CheckBox", [
+                    function testCheckBoxCellChecked() {
+                        var layout = [[
+                          {
+                              'name': 'Column 1',
+                              'field': 'id',
+                              'width': '100px'
+                          },
+                          {
+                              'name': 'Column 2',
+                              'field': 'col2',
+                              'width': '100%',
+                              type: CheckBox
+                          }
+                        ]];
+                        loadGrid('grid1', true, layout);
+                        var grid = dijit.byId('grid1_grid');
+						var value = grid.store.getValue(grid.getItem(0), 'col2');
+                        doh.t(value);
+                    },
+					function testCheckBoxCellUnchecked() {
+                        var layout = [[
+                          {
+                              'name': 'Column 1',
+                              'field': 'id',
+                              'width': '100px'
+                          },
+                          {
+                              'name': 'Column 2',
+                              'field': 'col2',
+                              'width': '100%',
+                              type: CheckBox
+                          }
+                        ]];
+                        loadGrid('grid2', false, layout);
+                        var grid = dijit.byId('grid2_grid');
+						var value = grid.store.getValue(grid.getItem(0), 'col2');
+                        doh.f(value);
+                    }
+                ]);
+                
+                //Execute D.O.H. in this remote file.
+                doh.run();
+            });
+        });
+        </script>
+    </head>
+    <body class="claro">
+        <form>
+            <p>Grid w/ CheckBox Column (Checked)</p>
+            <div id="grid1" style="height: 250px; width: 400px"></div>
+			
+			<p>Grid w/ CheckBox Column (Unchecked)</p>
+            <div id="grid2" style="height: 250px; width: 400px"></div>
+        </form>
+    </body>
+</html>

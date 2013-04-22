@@ -2,20 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.OleDb;
-using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using Sage.Entity.Interfaces;
 using Sage.Platform;
 using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
 using Sage.Platform.Configuration;
 using Sage.Platform.Data;
+using Sage.Platform.Orm;
 using Sage.Platform.Orm.Attributes;
 using Sage.Platform.Repository;
 using Sage.Platform.Security;
@@ -26,15 +24,13 @@ using Sage.SalesLogix.Orm;
 using Sage.SalesLogix.Security;
 using Sage.SalesLogix.Services.SpeedSearch;
 using Sage.SalesLogix.Services.SpeedSearch.SearchSupport;
-using Sage.SalesLogix.Web;
 using AttributeCollection = System.ComponentModel.AttributeCollection;
-using Sage.Platform.Orm;
 
 public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvider
 {
 
     // This controls which of two paging mechanisms is used to handle switching between
-    // pages of search results (i.e., items 1-10, 11-20, etc.).  
+    // pages of search results (i.e., items 1-10, 11-20, etc.).
     //
     // If true, SearchResults are stored in a session variable, so when a different page
     // is requested, the results are available.  This is easy and quick, but can require
@@ -61,6 +57,8 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
     private EntityBase _ResultEntity = null;
     private string _ResultProperty = string.Empty;
     private string _ChildPropertyName = string.Empty;
+    private string type = string.Empty;
+    private string terms = string.Empty;
 
     #region Services
     private ConfigurationManager _Context;
@@ -133,20 +131,27 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
             }
             _Context = ApplicationContext.Current.Services.Get<ConfigurationManager>();
             m_SLXUserService = ApplicationContext.Current.Services.Get<IUserService>() as SLXUserService;
-            if (m_SLXUserService is WebPortalUserService)
+            if (m_SLXUserService is IWebPortalUserService)
             {
                 _UserType = 0;
             }
             SearchResultsGrid.PageIndexChanged +=
                 new DataGridPageChangedEventHandler(SearchResultsGrid_PageIndexChanged);
-            btnAdvanced.NavigateUrl = string.Format("javascript:ToggleAdvanced('{0}')", btnAdvanced.ClientID);
             LoadIndexes();
             CreateIndexControls();
             GenerateScript();
-
+            // instance of the context
             IContextService context = Sage.Platform.Application.ApplicationContext.Current.Services.Get<IContextService>(true);
+            // check for query string values first
+            if (Request.QueryString["terms"] != null)
+            {
+                // push it into the front of the process
+                terms = Request.QueryString["terms"];
+                context.SetContext("SearchRequestText", terms);
+            }
             if (context.HasContext("SearchRequestText"))
             {
+                InitializeState();
                 SearchRequest.Text = (string)context.GetContext("SearchRequestText");
                 context.RemoveContext("SearchRequestText");
                 SearchButton_Click(null, null);
@@ -185,49 +190,32 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
     private void GenerateScript()
     {
         StringBuilder script = new StringBuilder();
-        script.AppendLine("function ToggleAdvanced(hyperLinkId)");
-        script.AppendLine("{");
-        script.AppendLine("    var advDiv = document.getElementById(\"Advanced\");");
-        script.AppendLine("    var btnAdv = document.getElementById(hyperLinkId);");
-        script.AppendLine("    if (advDiv.style.display == \"block\")");
-        script.AppendLine("    {");
-        script.AppendLine("        advDiv.style.display = \"none\";");
-        script.AppendLine("        btnAdv.innerHTML = \"" + EscapeJavaScript(Localize("SpeedSearch_href_Advanced.Text", "Advanced")) + "\";");
-        script.AppendLine("    }");
-        script.AppendLine("    else");
-        script.AppendLine("    {");
-        script.AppendLine("        advDiv.style.display = \"block\";");
-        script.AppendLine("        btnAdv.innerHTML = \"" + EscapeJavaScript(Localize("SpeedSearch_href_Standard.Text", "Standard")) + "\";");
-        script.AppendLine("    }");
+        script.AppendLine("function ToggleAdvanced(hyperLinkId) {");
+        script.AppendLine("    var adv = document.getElementById('Advanced');");
+        script.AppendFormat("    var btn = document.getElementById('{0}');", btnAdvanced.ClientID);
+        script.AppendFormat("    adv.style.display === 'none' ? btn.innerHTML = '{0}' : btn.innerHTML = '{1}';", GetLocalResourceObject("SpeedSearch_href_Standard.Text"), GetLocalResourceObject("SpeedSearch_href_Advanced.Text"));
+        script.AppendLine("    adv.style.display === 'none' ? adv.style.display = 'block' : adv.style.display = 'none';");
         script.AppendLine("}");
-        script.AppendLine("function GetPreviewDoc(id, preview)");
-        script.AppendLine("{");
-        script.AppendLine("        var vdocId = id;");
-        script.AppendLine("        if (preview == \"false\")");
-        script.AppendLine("        {");
-        script.AppendLine("            vdocId = \"NoAccess\";");
-        script.AppendLine("        }");
-        script.AppendFormat("        var vURL = \"SLXSearchDocHandler.aspx?docid=\" + vdocId + \"&clientid={0}\";", ClientID);
-        script.AppendLine();
-        script.AppendLine("        if (typeof(xmlhttp) == \"undefined\")");
-        script.AppendLine("        {");
-        script.AppendLine("            xmlhttp = YAHOO.util.Connect.createXhrObject().conn;");
-        script.AppendLine("        }");
-        script.AppendLine("        xmlhttp.open(\"GET\", vURL, false);");
-        script.AppendLine("        xmlhttp.send(null);");
-        script.AppendLine("        var results = xmlhttp.responseText;");
-        script.AppendLine("        if (results == \"NOTAUTHENTICATED\")");
-        script.AppendLine("        {");
-        script.AppendLine("            window.location.reload(true);");
-        script.AppendLine("            return;");
-        script.AppendLine("        }");
-        script.AppendLine("        var vwin = window.open();");
-        script.AppendLine("        var oNewDoc = vwin.document.open(\"text/html\", \"Preview\");");
-        script.AppendLine("        oNewDoc.write(results);");
-        script.AppendLine("        oNewDoc.close();");
+        script.AppendLine("function GetPreviewDoc(id, preview) {");
+        script.AppendLine("    var vdocId = id;");
+        script.AppendLine("    if (preview === \"false\") {");
+        script.AppendLine("        vdocId = \"NoAccess\";");
+        script.AppendLine("    }");
+        script.AppendFormat("  var vURL = \"SLXSearchDocHandler.aspx?docid=\" + vdocId + \"&clientid={0}\";", ClientID);
+        script.AppendLine("    var xhrArgs = {");
+        script.AppendLine("        url: vURL, handleAs: 'text', load: function(results) {");
+        script.AppendLine("            if (results === 'NOTAUTHENTICATED') {return window.location.reload(true);}");
+        script.AppendLine("            var vwin = window.open();");
+        script.AppendLine("            if (vwin)");
+        script.AppendLine("            {");
+        script.AppendLine("                var oNewDoc = vwin.document.open('text/html', 'Preview');");
+        script.AppendLine("                oNewDoc.write(results); oNewDoc.close();");
+        script.AppendFormat("            }} else {{ alert('{0}'); }}", GetLocalResourceObject("SpeedSearch_Preview_Blocked_Error"));
+        script.AppendLine("        }, error: function(error) {alert('Error:' + error);}");
+        script.AppendLine("    };");
+        script.AppendLine("    var deferred = dojo.xhrGet(xhrArgs);");
         script.AppendLine("}");
-        script.AppendLine("function MarkUsed(docId, index, identifier, dbid, id)");
-        script.AppendLine("{");
+        script.AppendLine("function MarkUsed(docId, index, identifier, dbid, id) {");
         script.AppendFormat("    var info = document.getElementById('{0}');", MarkUsedInfo.ClientID); //<%= MarkUsedInfo.ClientID %>
         script.AppendFormat("    var currentIdx = document.getElementById('{0}');", currentIndex.ClientID); //<%= currentIndex.ClientID %>
         script.AppendLine("    currentIdx.value = id;");
@@ -242,8 +230,7 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
         script.AppendLine("        document.forms(0).submit();");
         script.AppendLine("    }");
         script.AppendLine("}");
-        script.AppendLine("function ReturnResult(id)");
-        script.AppendLine("{");
+        script.AppendLine("function ReturnResult(id) {");
         script.AppendFormat("        var postBackBtn = document.getElementById(\"{0}\");", btnReturnResult.ClientID);
         script.AppendFormat("        var returnResultAction = document.getElementById(\"{0}\");", ReturnResultAction.ClientID);
         script.AppendFormat("        var currentIdx = document.getElementById(\"{0}\");", currentIndex.ClientID);
@@ -254,12 +241,10 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
         script.AppendLine("        postBackBtn.click();");
         script.AppendLine("        currentIdx.value = \"\";");
         script.AppendLine("}");
-        script.AppendLine("function HandleEnterKeyEvent(e)");
-        script.AppendLine("{");
+        script.AppendLine("function HandleEnterKeyEvent(e) {");
         script.AppendLine("    if (!e) var e = window.event;");
         script.AppendLine("    if (e.keyCode == 13) //Enter");
         script.AppendLine("    {");
-        //script.AppendLine("    //debugger; ");
         script.AppendLine("        e.returnValue = false;");
         script.AppendLine("        e.cancelBubble = true;");
         script.AppendLine("        if (e.stopPropagation) e.stopPropagation();");
@@ -338,7 +323,7 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
         if (_Indexes != null)
         {
             Literal outerDiv = new Literal();
-            outerDiv.Text = "<div style='border:inset 1px;overflow-y:scroll;height:160px;'>";
+            outerDiv.Text = "<div style='border:solid 1px #cccccc;overflow-y:scroll;height:160px;'>";
             PlaceHolder1.Controls.Add(outerDiv);
 
             int itemCount = 0;
@@ -371,7 +356,7 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
                     if (!_SearchFilters.ContainsKey("File Name"))
                     {
                         SlxFieldDefinition fd = new SlxFieldDefinition();
-                        fd.DisplayName = "name";
+                        fd.DisplayName = "filename";
                         fd.FieldType = 1;
                         fd.IndexType = 0;
                         _SearchFilters.Add("File Name", fd);
@@ -402,9 +387,9 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
                 cb.Text = Localize(IndexDefinitionToResourceKey(id), id.IndexName);
                 cb.LabelAttributes.Add("id", "lblIndex" + itemCount.ToString());
                 cb.Checked = true;
-                cb.CssClass = "slxlabel";
+                //cb.CssClass = "dijitCheckBoxInput";
                 cb.Style.Add(HtmlTextWriterStyle.MarginLeft, "5px");
-                cb.ForeColor = Color.Navy;
+                //cb.ForeColor = Color.Navy;
                 PlaceHolder1.Controls.Add(cb);
 
                 Literal endRowDiv = new Literal();
@@ -442,10 +427,10 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
         string name = definition.DisplayName;
         //string name = definition.TextPath;
 
-        //fix custom created ones from above (so the keys are more descriptive).      
+        //fix custom created ones from above (so the keys are more descriptive).
         switch (name)
         {
-            case "name":
+            case "filename":
                 name = "File Name";
                 break;
             case "date":
@@ -462,7 +447,7 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
     private void CreateFilterControls()
     {
         Literal outerDiv = new Literal();
-        outerDiv.Text = "<div style='border:inset 1px;overflow-y:scroll;height:160px;'><table style='width:100%'>";
+        outerDiv.Text = "<div style='border:solid 1px #B3B3B3;overflow-y:scroll;height:160px;'><table style='width:100%'>";
         PlaceHolder2.Controls.Add(outerDiv);
 
         // Add Frequently Used filter to the top.
@@ -473,8 +458,8 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
 
         Label freqlbl = new Label();
         freqlbl.Text = GetLocalResourceObject("SpeedSearch_Label_FrequentlyUsed").ToString();
-        freqlbl.CssClass = "slxlabel";
-        freqlbl.ForeColor = Color.Navy;
+        //freqlbl.CssClass = "slxlabel";
+        //freqlbl.ForeColor = Color.Navy;
         freqlbl.Style.Add(HtmlTextWriterStyle.MarginLeft, "5px");
         PlaceHolder2.Controls.Add(freqlbl);
 
@@ -485,7 +470,7 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
         CheckBox cb = new CheckBox();
         cb.ID = "FreqUsed";
         cb.Checked = false;
-        cb.CssClass = "slxtext";
+        //cb.CssClass = "dijitCheckBoxInput";
         PlaceHolder2.Controls.Add(cb);
 
         Literal freqEndCol = new Literal();
@@ -504,8 +489,8 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
             Label lbl = new Label();
             lbl.ID = "lblFilterField" + idx.ToString();
             lbl.Text = Localize(FieldDefinitionToResourceKey(_SearchFilters[key]), key.Replace('_', ' '));
-            lbl.CssClass = "slxlabel";
-            lbl.ForeColor = Color.Navy;
+            //lbl.CssClass = "slxlabel";
+            //lbl.ForeColor = Color.Navy;
             lbl.Style.Add(HtmlTextWriterStyle.MarginLeft, "5px");
             PlaceHolder2.Controls.Add(lbl);
 
@@ -524,8 +509,8 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
             {
                 lbl2.Text = Localize("SpeedSearch_Filter_Like", "Like");
             }
-            lbl2.CssClass = "slxlabel";
-            lbl2.ForeColor = Color.Navy;
+            //lbl2.CssClass = "slxlabel";
+            //lbl2.ForeColor = Color.Navy;
             PlaceHolder2.Controls.Add(lbl2);
 
             Literal nextCol2 = new Literal();
@@ -535,7 +520,7 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
             TextBox txt = new TextBox();
             txt.Width = new Unit("90%");
             txt.ID = fd.DisplayName;
-            txt.CssClass = "slxtext";
+            //txt.CssClass = "slxtext";
             PlaceHolder2.Controls.Add(txt);
 
             Literal endCol = new Literal();
@@ -600,27 +585,13 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
         _State.Thesaurus = SearchFlags.Items[1].Selected;
         _State.SoundsLike = SearchFlags.Items[2].Selected;
         _State.MaxResults = int.Parse(MaxResults.SelectedValue);
-        //SpeedSearchWebService.SpeedSearchService ss = new SpeedSearchWebService.SpeedSearchService();
-        //ss.Url = ConfigurationManager.AppSettings.Get("SpeedSearchWebService.SpeedSearchService");
         SpeedSearchService ss = new SpeedSearchService();
         SpeedSearchQuery ssq = BuildQuery();
-        if (Session[ClientID + "_SearchQry"] != null)
-        {
-            Session[ClientID + "_SearchQry"] = ssq.GetAsXml();
-        }
-        else
-        {
-            Session[ClientID + "_SearchQry"] = ssq.GetAsXml();
-        }
+
+        Session[ClientID + "_SearchQry"] = ssq.GetAsXml();
         string xml = ss.DoSpeedSearch(ssq.GetAsXml());
-        if (Session[ClientID] != null)
-        {
-            Session[ClientID] = xml;
-        }
-        else
-        {
-            Session[ClientID] = xml;
-        }
+        Session[ClientID] = xml;
+
         initResults(xml);
         if (!_Context.IsConfigurationTypeRegistered(typeof(SpeedSearchState)))
         {
@@ -660,20 +631,29 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
     {
         SpeedSearchQuery ssq = new SpeedSearchQuery();
         ssq.SearchText = SearchRequest.Text;
+        if (string.IsNullOrEmpty(ssq.SearchText))
+        {
+            throw new UserObservableException(GetLocalResourceObject("SpeedSearch_Error_Keyword_Required").ToString());
+        }
         ssq.SearchType = SearchType.SelectedIndex;
         ssq.IncludeStemming = SearchFlags.Items[0].Selected;
         ssq.IncludeThesaurus = SearchFlags.Items[1].Selected;
         ssq.IncludePhonic = SearchFlags.Items[2].Selected;
         ssq.WhichPage = whichResultsPage;
         ssq.ItemsPerPage = 10;
+        _State.SelectedIndexes.Clear();
         for (int i = 0; i < _Indexes.Count; i++)
         {
             CheckBox thisIndex = (CheckBox)PlaceHolder1.FindControl("Index" + i.ToString());
             if ((thisIndex != null) && (thisIndex.Checked))
             {
-                ssq.Indexes.Add(_Indexes[i].IndexName);
+                ssq.Indexes.Add(new SpeedSearchIndex(_Indexes[i].IndexName, _Indexes[i].Type.Value, _Indexes[i].IsSecure ?? false));
                 _State.SelectedIndexes.Add(i);
             }
+        }
+        if (ssq.Indexes.Count == 0)
+        {
+            throw new UserObservableException(GetLocalResourceObject("SpeedSearch_Error_Index_Required").ToString());
         }
         CheckBox freqfilter = (CheckBox)PlaceHolder2.FindControl("FreqUsed");
         if ((freqfilter != null) && (freqfilter.Checked))
@@ -726,14 +706,7 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
         if (resultSet == null)
         {
             SearchResultsGrid.DataSource = ResultsToDataSet();
-            if (Session[ClientID] != null)
-            {
-                Session[ClientID + "DataSet"] = SearchResultsGrid.DataSource;
-            }
-            else
-            {
-                Session[ClientID + "DataSet"] = SearchResultsGrid.DataSource;
-            }
+            Session[ClientID + "DataSet"] = SearchResultsGrid.DataSource;
         }
         SearchResultsGrid.PageSize = ItemsPerPage;
         SearchResultsGrid.CurrentPageIndex = whichResultsPage;
@@ -787,7 +760,7 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
         dataTable.Columns.Add(new DataColumn("DisplayName")); //2
         dataTable.Columns.Add(new DataColumn("HighlightLink")); //3
         dataTable.Columns.Add(new DataColumn("DirectLink")); //4
-        dataTable.Columns.Add(new DataColumn("Date")); //5 
+        dataTable.Columns.Add(new DataColumn("Date")); //5
         dataTable.Columns.Add(new DataColumn("Size")); //6
         dataTable.Columns.Add(new DataColumn("Synopsis")); //7
         dataTable.Columns.Add(new DataColumn("Source")); //8
@@ -816,6 +789,15 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
             {
                 row[2] = item.DisplayName;
                 row[3] = item.FileName;
+                if (item.IndexRetrievedFrom.Contains("\\Attachment"))
+                {
+                    var pathEndIdx = item.FileName.LastIndexOf("\\");
+                    if ((item.FileName.Length > pathEndIdx +13) && (item.FileName[pathEndIdx +1] == '!'))
+                    {
+                        var key = item.FileName.Substring(pathEndIdx + 2, 12);
+                        row[3] = string.Format("javascript:Sage.Utility.File.Attachment.getAttachment('{0}')", key);
+                    }
+                }
                 row[18] = "true";
             }
             else
@@ -831,6 +813,12 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
                 if (_DisplayLink)
                 {
                     row[18] = "true";
+                    if (tableName == "TICKETPROBLEMSOLUTIONTYPE")
+                    {
+                        var problemSolution = EntityFactory.GetById<ITicketProblemSolutionType>(key);
+                        tableName = "TICKETPROBLEMTYPE";
+                        key = problemSolution.TicketProblemType.Id.ToString();
+                    }
                     string path = Page.ResolveUrl(string.Format("{0}.aspx", tableName));
                     path = Page.MapPath(path);
                     bool pageexists = File.Exists(path);
@@ -839,7 +827,7 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
                         row[3] = string.Format("javascript:Link.entityDetail('{1}', '{0}')", key, tableName);
                     }
                 }
-                else if (m_SLXUserService is WebPortalUserService)
+                else if (m_SLXUserService is IWebPortalUserService)
                 {
                     row[18] = "true";
                 }
@@ -933,28 +921,28 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
         {
             string SQL = "INSERT INTO INDEXSTATS (DOCUMENTID, SEARCHINDEX, IDENTIFIER, CUSTOMERHITCOUNT, EMPLOYEEHITCOUNT, TOTALCOUNT, LASTHITDATE, DBID) VALUES (?,?,?,?,?,?,?,?)";
             IDataService service = Sage.Platform.Application.ApplicationContext.Current.Services.Get<IDataService>();
-            using (var conn = service.GetOpenConnection() as OleDbConnection)
-            using (var cmd = conn.CreateCommand(SQL) as OleDbCommand)
+            using (var conn = service.GetOpenConnection())
+            using (var cmd = conn.CreateCommand(SQL))
             {
                 if (cmd != null)
                 {
                     cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@DOCUMENTID", items[0]);
-                    cmd.Parameters.AddWithValue("@SEARCHINDEX", items[1]);
-                    cmd.Parameters.AddWithValue("@IDENTIFIER", items[2]);
+                    cmd.Parameters.Add(cmd.CreateParameter("@DOCUMENTID", items[0]));
+                    cmd.Parameters.Add(cmd.CreateParameter("@SEARCHINDEX", items[1]));
+                    cmd.Parameters.Add(cmd.CreateParameter("@IDENTIFIER", items[2]));
                     if (_UserType == 0)
                     {
-                        cmd.Parameters.AddWithValue("@CUSTOMERHITCOUNT", 1);
-                        cmd.Parameters.AddWithValue("@EMPLOYEEHITCOUNT", 0);
+                        cmd.Parameters.Add(cmd.CreateParameter("@CUSTOMERHITCOUNT", 1));
+                        cmd.Parameters.Add(cmd.CreateParameter("@EMPLOYEEHITCOUNT", 0));
                     }
                     else
                     {
-                        cmd.Parameters.AddWithValue("@CUSTOMERHITCOUNT", 0);
-                        cmd.Parameters.AddWithValue("@EMPLOYEEHITCOUNT", 1);
+                        cmd.Parameters.Add(cmd.CreateParameter("@CUSTOMERHITCOUNT", 0));
+                        cmd.Parameters.Add(cmd.CreateParameter("@EMPLOYEEHITCOUNT", 1));
                     }
-                    cmd.Parameters.AddWithValue("@TOTALCOUNT", 1);
-                    cmd.Parameters.AddWithValue("@LASTHITDATE", DateTime.Now.ToUniversalTime());
-                    cmd.Parameters.AddWithValue("@DBID", items[3]);
+                    cmd.Parameters.Add(cmd.CreateParameter("@TOTALCOUNT", 1));
+                    cmd.Parameters.Add(cmd.CreateParameter("@LASTHITDATE", DateTime.Now.ToUniversalTime()));
+                    cmd.Parameters.Add(cmd.CreateParameter("@DBID", items[3]));
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -973,11 +961,6 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
             crit.Add(ef.And(accessExp, ef.Eq("Enabled", true)));
             crit.AddOrder(ef.Asc("IndexName"));
             IList<IIndexDefinition> tempIndexes = crit.List<IIndexDefinition>();
-
-            //c.Add(NHibernate.Expression.Expression.Eq("Enabled", true));
-            //c.Add(Expression.Le("UserAccess", _UserType));
-            //c.AddOrder(Order.Asc("IndexName"));
-            //List<IndexDefinition> tempIndexes = (List<IndexDefinition>)c.List<IndexDefinition>();
 
             Assembly interfaceAsm = Assembly.GetAssembly(typeof(IIndexDefinition));
             Type[] types = interfaceAsm.GetTypes();
@@ -1020,30 +1003,20 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
 
     private string GetEntityDisplay(Type entity, string value, string displayName)
     {
-        bool okToDisplay;
+        bool okToDisplay = true;
         EntityBase Result = null;
         string displayValue = string.Empty;
-        if ((entity.Name.Equals("Activity")) || (entity.Name.Equals("IActivity")))
-        {
-            okToDisplay = ActivitySecurity(value);
-            if (okToDisplay)
-            {
-                Result = (EntityBase)EntityFactory.GetById(entity, value);
-            }
-        }
-        else
+        Result = (EntityBase)EntityFactory.GetById(entity, value);
+
+        if ((_UserType == 0) && ((entity.Name.Equals("Ticket")) || (entity.Name.Equals("ITicket"))))
         {
             IRepository notifRep = EntityFactory.GetRepository(entity);
             IQueryable qry = (IQueryable)notifRep;
             IExpressionFactory ef = qry.GetExpressionFactory();
             ICriteria crit = qry.CreateCriteria().Add(ef.Eq("Id", value));
             IList<EntityBase> results;
-            if ((_UserType == 0) && ((entity.Name.Equals("Ticket")) || (entity.Name.Equals("ITicket"))))
-            {
-                string portalUser =
-                    ((WebPortalUserService)m_SLXUserService).GetPortalUser().Contact.Account.Id.ToString();
-                crit.CreateAlias("Account", "A").Add(ef.Eq("A.Id", portalUser));
-            }
+            string portalUser = ((IWebPortalUserService)m_SLXUserService).GetPortalUser().Contact.Account.Id.ToString();
+            crit.CreateAlias("Account", "A").Add(ef.Eq("A.Id", portalUser));
             results = crit.List<EntityBase>();
             okToDisplay = (results.Count > 0);
             if (okToDisplay)
@@ -1062,7 +1035,7 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
             return string.Format(GetLocalResourceObject("SpeedSearch_Result_NoLongerExists").ToString(), entity.Name.Substring(1).ToUpper(), displayValue);
         }
         _DisplayLink = true;
-        return GetEntityDisplayName(entity) + ": " + Result;
+        return String.Format("<b>{0}</b>: {1}", GetEntityDisplayName(entity), Result);
     }
 
     private string GetEntityDisplayName(Type entity)
@@ -1077,19 +1050,6 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
         else
             return entity.Name.ToUpper();
     }
-
-    private bool ActivitySecurity(string id)
-    {
-        string SQL = string.Format("SELECT ACTIVITYID, NULL \"$ACTIVITYSECURITY$\" FROM ACTIVITY WHERE ACTIVITYID = '{0}'", id);
-        IDataService service = Sage.Platform.Application.ApplicationContext.Current.Services.Get<IDataService>();
-        using (var conn = service.GetOpenConnection())
-        using (var cmd = conn.CreateCommand(SQL))
-        using (var reader = cmd.ExecuteReader())
-        {
-            return reader.Read();
-        }
-    }
-
 
     private Type GetEntityFromTable(string table)
     {
@@ -1163,13 +1123,11 @@ public partial class SmartParts_SpeedSearch : UserControl, ISmartPartInfoProvide
     public ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
     {
         ToolsSmartPartInfo tinfo = new ToolsSmartPartInfo();
-        tinfo.Description = GetLocalResourceObject("SpeedSearch_Description").ToString();
-        tinfo.Title = GetLocalResourceObject("SpeedSearch_Title").ToString();
-        foreach (Control c in this.SpeedSearch_RTools.Controls)
+        foreach (Control c in SpeedSearch_RTools.Controls)
         {
             tinfo.RightTools.Add(c);
         }
-        tinfo.ImagePath = Page.ResolveClientUrl("images/icons/Speed_Search_24x24.gif"); return tinfo;
+        return tinfo;
     }
 
     #endregion

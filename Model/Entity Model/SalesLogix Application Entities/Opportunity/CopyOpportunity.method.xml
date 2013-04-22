@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="144f6ab8-b13c-44a0-8792-24d0b1b7b5a4" lastModifiedUtc="2011-10-25T19:46:29.6780636Z" name="CopyOpportunity" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="e4329f64-da9e-497b-9ade-9915d1958ac7" paramName="copyFromOpportunity" sequence="0" paramType="Object">
+      <description>The Opportunity used for the copy.</description>
+    </OrmEntityMethodParam>
+  </parameter>
+  <preExecuteTargets>
+    <methodTarget id="1e03df99-29a7-4846-a454-5d0fc70b4b59" lastModifiedUtc="2011-10-25T20:03:45.052135Z" targetType="Sage.SalesLogix.Opportunity.Rules, Sage.SalesLogix.BusinessRules" targetMethod="CopyContactsFromOpportunity" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="a78902cf-4a57-49fb-a074-9313ebd0d6ef" lastModifiedUtc="2011-10-25T20:04:23.814135Z" targetType="Sage.SalesLogix.Opportunity.Rules, Sage.SalesLogix.BusinessRules" targetMethod="CopyProductsFromOpportunity" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="33263344-d24c-49cd-85b9-19a758ab036b" lastModifiedUtc="2011-10-25T20:04:39.689135Z" targetType="Sage.SalesLogix.Opportunity.Rules, Sage.SalesLogix.BusinessRules" targetMethod="CopyCompetitorsFromOpportunity" active="false">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </preExecuteTargets>
+  <methodTargets>
+    <methodTarget id="2788ed48-830e-40d3-999f-e5e59e19239e" lastModifiedUtc="2011-10-25T19:46:04.0945055Z" targetType="Sage.SalesLogix.Opportunity.Rules, Sage.SalesLogix.BusinessRules" targetMethod="CopyOpportunity" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

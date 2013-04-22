@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Sage.Entity.Interfaces;
 using Sage.Platform;
 using Sage.Platform.Orm;
 using Sage.Platform.Repository;
 using Sage.Platform.WebPortal.SmartParts;
+using Enumerable = System.Linq.Enumerable;
 
 /// <summary>
 /// The SmartParts_Lead_LeadQualifications class is used to display and update LeadQualification entities for the current Lead entity.
@@ -49,19 +51,8 @@ public partial class SmartParts_Lead_LeadQualifications : EntityBoundSmartPart
     protected override void OnPreRender(EventArgs e)
     {
         base.OnPreRender(e);
-        const string cOnChange = "onchange";
-        const string cConfirmChange = "javascript:confirmChange();";
-        cboQualifications.Attributes.Add(cOnChange, cConfirmChange);
-    }
-
-    /// <summary>
-    /// Called after the Page_Load event of the base EntityBoundSmartPart class.
-    /// </summary>
-    /// <param name="sender">The sender.</param>
-    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-    protected override void InnerPageLoad(object sender, EventArgs e)
-    {
         LoadQualificationCategories();
+        cboQualifications.Attributes.Add("onchange", "javascript:confirmChange();");
     }
 
     /// <summary>
@@ -156,31 +147,22 @@ public partial class SmartParts_Lead_LeadQualifications : EntityBoundSmartPart
     /// </summary>
     /// <param name="checkbox">The checkbox.</param>
     /// <param name="textbox">The textbox.</param>
-    /// <param name="Id">The Id.</param>
-    protected static void AddQualficationIdAttributeTo(CheckBox checkbox, TextBox textbox, string Id)
+    /// <param name="id">The Id.</param>
+    protected static void AddQualficationIdAttributeTo(CheckBox checkbox, TextBox textbox, string id)
     {
-        checkbox.Attributes.Add(cQualificationId, Id);
-        textbox.Attributes.Add(cQualificationId, Id);
+        checkbox.Attributes.Add(cQualificationId, id);
+        textbox.Attributes.Add(cQualificationId, id);
     }
 
     /// <summary>
     /// Finds the LeadQualification entity within the LeadQualication collection that matches the Qualification.
     /// </summary>
     /// <param name="qualication">The Qualifiation.</param>
-    /// <param name="lead_qualifications">The LeadQualifications.</param>
+    /// <param name="leadQualifications">The LeadQualifications.</param>
     /// <returns></returns>
-    protected static ILeadQualification FindLeadQualification(IQualification qualication, IList<ILeadQualification> lead_qualifications)
+    protected static ILeadQualification FindLeadQualification(IQualification qualication, IList<ILeadQualification> leadQualifications)
     {
-        ILeadQualification result = null;
-        foreach (ILeadQualification lead_qual in lead_qualifications)
-        {
-            if (lead_qual.Qualification.Equals(qualication))
-            {
-                result = lead_qual;
-                break;
-            }
-        }
-        return result;
+        return Enumerable.FirstOrDefault(leadQualifications, leadQual => leadQual.Qualification.Equals(qualication));
     }
 
     /// <summary>
@@ -208,18 +190,15 @@ public partial class SmartParts_Lead_LeadQualifications : EntityBoundSmartPart
     {
         using (new SessionScopeWrapper())
         {
-            ILeadQualification result;
             IRepository<ILeadQualification> rep = EntityFactory.GetRepository<ILeadQualification>();
             IQueryable qry = (IQueryable)rep;
             IExpressionFactory ep = qry.GetExpressionFactory();
             ICriteria crt = qry.CreateCriteria();
             IJunction all = ep.Conjunction();
-            const string cLead = "Lead";
-            all.Add(ep.Eq(cLead, lead));
-            const string cQualification = "Qualification";
-            all.Add(ep.Eq(cQualification, qualification));
+            all.Add(ep.Eq("Lead", lead));
+            all.Add(ep.Eq("Qualification", qualification));
             crt.Add(all);
-            result = crt.UniqueResult<ILeadQualification>();
+            ILeadQualification result = crt.UniqueResult<ILeadQualification>();
             return result;
         }
     }
@@ -235,18 +214,15 @@ public partial class SmartParts_Lead_LeadQualifications : EntityBoundSmartPart
     {
         using (new SessionScopeWrapper())
         {
-            IList<ILeadQualification> list;
             IRepository<ILeadQualification> rep = EntityFactory.GetRepository<ILeadQualification>();
             IQueryable qry = (IQueryable)rep;
             IExpressionFactory ep = qry.GetExpressionFactory();
             ICriteria crt = qry.CreateCriteria();
             IJunction all = ep.Conjunction();
-            const string cLead = "Lead";
-            all.Add(ep.Eq(cLead, lead));
-            const string cQualification = "Qualification";
-            all.Add(ep.In(cQualification, (System.Collections.ICollection)qualifications));
+            all.Add(ep.Eq("Lead", lead));
+            all.Add(ep.In("Qualification", (System.Collections.ICollection)qualifications));
             crt.Add(all);
-            list = crt.List<ILeadQualification>();
+            IList<ILeadQualification> list = crt.List<ILeadQualification>();
             return list;
         }
     }
@@ -259,14 +235,12 @@ public partial class SmartParts_Lead_LeadQualifications : EntityBoundSmartPart
     {
         using (new SessionScopeWrapper())
         {
-            IList<IQualificationCategory> list;
             IRepository<IQualificationCategory> rep = EntityFactory.GetRepository<IQualificationCategory>();
             IQueryable qry = (IQueryable)rep;
             IExpressionFactory ep = qry.GetExpressionFactory();
             ICriteria crt = qry.CreateCriteria();
-            const string cCategoryName = "CategoryName";
-            crt.AddOrder(ep.Asc(cCategoryName));
-            list = crt.List<IQualificationCategory>();
+            crt.AddOrder(ep.Asc("CategoryName"));
+            IList<IQualificationCategory> list = crt.List<IQualificationCategory>();
             return list;
         }
     }
@@ -280,16 +254,13 @@ public partial class SmartParts_Lead_LeadQualifications : EntityBoundSmartPart
     {
         using (new SessionScopeWrapper())
         {
-            IList<IQualification> list;
             IRepository<IQualification> rep = EntityFactory.GetRepository<IQualification>();
             IQueryable qry = (IQueryable)rep;
             IExpressionFactory ep = qry.GetExpressionFactory();
             ICriteria crt = qry.CreateCriteria();
-            const string cQualificationCategory = "QualificationCategory";
-            crt.Add(ep.Eq(cQualificationCategory, qualificationCategory));
-            const string cSortPosition = "SortPosition";
-            crt.AddOrder(ep.Asc(cSortPosition));
-            list = crt.List<IQualification>();
+            crt.Add(ep.Eq("QualificationCategory", qualificationCategory));
+            crt.AddOrder(ep.Asc("SortPosition"));
+            IList<IQualification> list = crt.List<IQualification>();
             return list;
         }
     }
@@ -300,76 +271,48 @@ public partial class SmartParts_Lead_LeadQualifications : EntityBoundSmartPart
     protected void LoadLeadQualifications()
     {
         ILead lead = GetCurrentLead();
-        IQualificationCategory currentCategory = null;
-        if (lead != null)
-        {
-            currentCategory = lead.QualificationCategory;
-        }
-        if (currentCategory == null)
-        {
-            /* Set the list to the first category?...or the last selected category? */
-            ListItem selected_item = cboQualifications.SelectedItem;
-            if (selected_item != null)
-            {
-                currentCategory = EntityFactory.GetById<IQualificationCategory>(selected_item.Value);
-            }
-        }
-        else
-        {
-            ListItem item;
-            item = cboQualifications.Items.FindByValue(currentCategory.Id.ToString());
-            if (item != null)
-            {
-                cboQualifications.SelectedValue = item.Value;
-            }
-        }
-        ILeadQualification lead_qual;
+        IQualificationCategory currentCategory = lead.QualificationCategory;
         IList<IQualification> qualifications = GetQualifications(currentCategory);
-        IList<ILeadQualification> lead_qualifications = GetLeadQualifications(currentCategory, qualifications, lead);
-        string strChkStyle;
-        string strTxtStyle;
-        string strNotes;
-        bool bChecked;
-        bool bShowNotes;
-        bool bVisible;
-        string qualId;
-        int sortPos;
-        string desc;
+        IList<ILeadQualification> leadQualifications = GetLeadQualifications(currentCategory, qualifications, lead);
 
-        for(int i = 0; i < 8; i++)
+        for (int i = 0; i < 8; i++)
         {
+            string strChkStyle;
+            string strTxtStyle;
+            string strNotes;
+            bool bChecked;
+            string qualId;
+            int sortPos;
+            string desc;
             if (i < qualifications.Count)
             {
                 IQualification qual = qualifications[i];
-
-                bVisible = qual.Visible.HasValue ? qual.Visible.Value : false;
+                bool bVisible = qual.Visible ?? false;
                 if (bVisible)
                 {
-                    lead_qual = FindLeadQualification(qual, lead_qualifications);
-                    bChecked = (lead_qual != null)
-                                   ? (lead_qual.Checked.HasValue ? lead_qual.Checked.Value : false)
-                                   : false;
-                    strNotes = (lead_qual != null) ? lead_qual.Notes : string.Empty;
-                    bShowNotes = qual.ShowNotes.HasValue ? qual.ShowNotes.Value : false;
+                    ILeadQualification leadQual = FindLeadQualification(qual, leadQualifications);
+                    bChecked = (leadQual != null) && (leadQual.Checked ?? false);
+                    strNotes = (leadQual != null) ? leadQual.Notes : string.Empty;
+                    bool bShowNotes = qual.ShowNotes ?? false;
 
                     strChkStyle = (bVisible) ? string.Empty : cDisplayNone;
                     strTxtStyle = (bShowNotes) ? string.Empty : cDisplayNone;
                     qualId = qual.Id.ToString();
                     sortPos = qual.SortPosition.Value;
                     desc = qual.Description;
-                    System.Web.UI.HtmlControls.HtmlTableRow container = (System.Web.UI.HtmlControls.HtmlTableRow)this.FindControl("container" + (i + 1));
+                    HtmlTableRow container = (HtmlTableRow) FindControl("container" + (i + 1));
                     container.Style[HtmlTextWriterStyle.Display] = "table-row";
                 }
                 else
                 {
-                    System.Web.UI.HtmlControls.HtmlTableRow container = (System.Web.UI.HtmlControls.HtmlTableRow)this.FindControl("container" + (i + 1));
+                    HtmlTableRow container = (HtmlTableRow) FindControl("container" + (i + 1));
                     container.Style[HtmlTextWriterStyle.Display] = "None";
                     continue;
                 }
             }
             else
             {
-                System.Web.UI.HtmlControls.HtmlTableRow container = (System.Web.UI.HtmlControls.HtmlTableRow)this.FindControl("container" + (i + 1));
+                HtmlTableRow container = (HtmlTableRow) FindControl("container" + (i + 1));
                 container.Style[HtmlTextWriterStyle.Display] = "None";
                 continue;
             }
@@ -449,7 +392,7 @@ public partial class SmartParts_Lead_LeadQualifications : EntityBoundSmartPart
                     AddQualficationIdAttributeTo(chkQualificationSelected8, txtQualificationDescription8, qualId);
                     break;
                 default:
-                    System.Web.UI.HtmlControls.HtmlTableRow container = (System.Web.UI.HtmlControls.HtmlTableRow)this.FindControl("container" + i);
+                    HtmlTableRow container = (HtmlTableRow) FindControl("container" + i);
                     container.Visible = false;
                     break;
             }
@@ -461,17 +404,45 @@ public partial class SmartParts_Lead_LeadQualifications : EntityBoundSmartPart
     /// </summary>
     protected void LoadQualificationCategories()
     {
-        if (Visible & !IsPostBack)
+        ILead lead = GetCurrentLead();
+        if (Visible && !IsPostBack)
         {
-            if (cboQualifications.DataSource == null)
+            cboQualifications.Items.Clear();
+            cboQualifications.AppendDataBoundItems = true;
+            IList<IQualificationCategory> list = GetQualificationCategories();
+            bool isSelected;
+            ListItem listItem = new ListItem
             {
-                IList<IQualificationCategory> list = GetQualificationCategories();
-                cboQualifications.DataSource = list;
-                const string cCategoryName = "CategoryName";
-                cboQualifications.DataTextField = cCategoryName;
-                const string cId = "Id";
-                cboQualifications.DataValueField = cId;
-                cboQualifications.DataBind();
+                Text = GetLocalResourceObject("qualification_Category_None").ToString(),
+                Value = String.Empty,
+                Selected = lead.QualificationCategory == null
+            };
+            cboQualifications.Items.Add(listItem);
+            foreach (IQualificationCategory qualificationCategory in list)
+            {
+                isSelected = lead.QualificationCategory != null && (lead.QualificationCategory.Id.ToString() == qualificationCategory.Id.ToString());
+                listItem = new ListItem
+                                        {
+                                            Text = qualificationCategory.CategoryName,
+                                            Value = qualificationCategory.Id.ToString(),
+                                            Selected = isSelected
+                                        };
+                cboQualifications.Items.Add(listItem);
+            }
+        }
+        else if (Visible)
+        {
+            if (lead.QualificationCategory != null)
+            {
+                ListItem item = cboQualifications.Items.FindByValue(lead.QualificationCategory.Id.ToString());
+                if (item != null)
+                {
+                    cboQualifications.SelectedValue = item.Value;
+                }
+            }
+            else
+            {
+                cboQualifications.SelectedValue = String.Empty;
             }
         }
     }
@@ -514,19 +485,19 @@ public partial class SmartParts_Lead_LeadQualifications : EntityBoundSmartPart
                     ILead lead = GetCurrentLead();
                     if (lead != null)
                     {
-                        ILeadQualification lead_qual = GetLeadQualification(lead, qualification);
-                        if (lead_qual != null)
+                        ILeadQualification leadQual = GetLeadQualification(lead, qualification);
+                        if (leadQual != null)
                         {
-                            lead_qual.Checked = cb.Checked;
-                            lead_qual.Save();
+                            leadQual.Checked = cb.Checked;
+                            leadQual.Save();
                         }
                         else
                         {
-                            ILeadQualification new_qual = EntityFactory.Create<ILeadQualification>();
-                            new_qual.Lead = lead;
-                            new_qual.Qualification = qualification;
-                            new_qual.Checked = cb.Checked;
-                            new_qual.Save();
+                            ILeadQualification newQual = EntityFactory.Create<ILeadQualification>();
+                            newQual.Lead = lead;
+                            newQual.Qualification = qualification;
+                            newQual.Checked = cb.Checked;
+                            newQual.Save();
                         }
                     }
                 }
@@ -542,31 +513,29 @@ public partial class SmartParts_Lead_LeadQualifications : EntityBoundSmartPart
     protected void txtQualificationDescription_TextChanged(object sender, EventArgs e)
     {
 		TextBox tb = sender as TextBox;
-        if (tb != null)
+        if (tb == null) return;
+        string id = tb.Attributes[cQualificationId];
+        if (!string.IsNullOrEmpty(id))
         {
-            string Id = tb.Attributes[cQualificationId];
-            if (!string.IsNullOrEmpty(Id))
+            IQualification qualification = EntityFactory.GetById<IQualification>(id);
+            if (qualification != null)
             {
-                IQualification qualification = EntityFactory.GetById<IQualification>(Id);
-                if (qualification != null)
+                ILead lead = GetCurrentLead();
+                if (lead != null)
                 {
-                    ILead lead = GetCurrentLead();
-                    if (lead != null)
+                    ILeadQualification leadQual = GetLeadQualification(lead, qualification);
+                    if (leadQual != null)
                     {
-                        ILeadQualification lead_qual = GetLeadQualification(lead, qualification);
-                        if (lead_qual != null)
-                        {
-                            lead_qual.Notes = tb.Text;
-                            lead_qual.Save();
-                        }
-                        else
-                        {                            
-                            ILeadQualification new_qual = EntityFactory.Create<ILeadQualification>();
-                            new_qual.Lead = lead;
-                            new_qual.Qualification = qualification;
-                            new_qual.Notes = tb.Text;
-                            new_qual.Save();
-                        }
+                        leadQual.Notes = tb.Text;
+                        leadQual.Save();
+                    }
+                    else
+                    {                            
+                        ILeadQualification newQual = EntityFactory.Create<ILeadQualification>();
+                        newQual.Lead = lead;
+                        newQual.Qualification = qualification;
+                        newQual.Notes = tb.Text;
+                        newQual.Save();
                     }
                 }
             }
@@ -580,51 +549,45 @@ public partial class SmartParts_Lead_LeadQualifications : EntityBoundSmartPart
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void cboQualifications_SelectedIndexChanged(object sender, EventArgs e)
     {
-        ListItem item = cboQualifications.SelectedItem;
-        if (item != null)
+        using (NHibernate.ISession session = new SessionScopeWrapper())
         {
-            using (NHibernate.ISession session = new SessionScopeWrapper())
+            ILead lead = GetCurrentLead();
+            if (lead != null)
             {
-                ILead lead = GetCurrentLead();
-                if (lead != null)
+                IQualificationCategory currentCategory = lead.QualificationCategory;
+                if (currentCategory != null)
                 {
-                    IQualificationCategory currentCategory = lead.QualificationCategory;
-                    if (currentCategory != null)
+                    IList<IQualification> qualifications = GetQualifications(currentCategory);
+                    if (qualifications != null)
                     {
-                        IList<IQualification> qualifications = GetQualifications(currentCategory);
-                        if (qualifications != null)
+                        IList<ILeadQualification> leadQualifications = GetLeadQualifications(currentCategory,
+                                                                                             qualifications, lead);
+                        if (leadQualifications != null)
                         {
-                            IList<ILeadQualification> lead_qualifications = GetLeadQualifications(currentCategory, qualifications, lead);
-                            if (lead_qualifications != null)
+                            if (leadQualifications.Count > 0)
                             {
-                                if (lead_qualifications.Count > 0)
+                                string confirmation = htxtConfirmation.Value;
+                                if (!string.IsNullOrEmpty(confirmation))
                                 {
-                                    string confirmation = htxtConfirmation.Value;
-                                    if (!string.IsNullOrEmpty(confirmation))
+                                    const string cFalse = "false";
+                                    if (confirmation.ToLower() == cFalse)
                                     {
-                                        const string cFalse = "false";
-                                        if (confirmation.ToLower() == cFalse)
-                                        {
-                                            cboQualifications.SelectedValue = currentCategory.Id.ToString();
-                                            return;
-                                        }
+                                        cboQualifications.SelectedValue = currentCategory.Id.ToString();
+                                        return;
                                     }
-                                    foreach (ILeadQualification lead_qual in lead_qualifications)
-                                    {
-                                        lead_qual.Delete();
-                                    }
-                                    lead_qualifications.Clear();
                                 }
+                                foreach (ILeadQualification leadQual in leadQualifications)
+                                {
+                                    leadQual.Delete();
+                                }
+                                leadQualifications.Clear();
                             }
                         }
                     }
-                    IQualificationCategory category = EntityFactory.GetById<IQualificationCategory>(item.Value);
-                    if (category != null)
-                    {
-                        lead.QualificationCategory = category;
-                        session.Update(lead);
-                    }
                 }
+                IQualificationCategory category = EntityFactory.GetById<IQualificationCategory>(cboQualifications.SelectedValue);
+                lead.QualificationCategory = category;
+                session.Update(lead);
             }
         }
     }

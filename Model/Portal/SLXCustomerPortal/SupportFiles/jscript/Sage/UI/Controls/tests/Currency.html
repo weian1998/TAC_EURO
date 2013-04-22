@@ -1,0 +1,163 @@
+<html>
+    <head>
+        <title>Sage.UI.Controls.test.Currency Browser Tests</title>
+        <script type="text/javascript" src="mocks.js"></script>
+        <script pin="pin" type="text/javascript">
+            var dojoConfig = {
+                parseOnLoad: true,
+                isDebug: true,
+                paths: {'Sage' : '../../../jscript/Sage'}
+            };
+        </script>
+        <script type="text/javascript" src="../../../../../Libraries/dojo/dojo/dojo.js"></script>
+        <script type="text/javascript" src="../../../../../Libraries/Simplate.js"></script>
+        <script type="text/javascript">
+        dojo.provide("Sage.UI.Controls.tests.Currency");
+
+        dojo.require("doh.runner");
+        dojo.require("dojo.parser");
+        dojo.require("dojo.currency");
+        dojo.require("dojo.string");
+        dojo.require("dijit.form.CurrencyTextBox");
+        dojo.require("Sage.UI.Controls.Currency");
+        dojo.require("dojo.i18n");
+        dojo.requireLocalization("dojo.cldr", "currency", "en");
+
+        dojo.ready(function () {
+            doh.register('Sage.UI.Controls.tests.Currency', [
+                function testDefaultValues() {
+                    var txt = dijit.byId('ct100_NumberTextBox1');
+                    var defaultFocus = dojo.byId('defaultFocus');
+                    var focusNode = txt.focusNode;
+
+                    defaultFocus.focus();
+
+                    focusNode.focus();
+                    focusNode.set('value', 100.00);
+
+                    defaultFocus.focus(); // lose focus and let dojo format the textbox
+
+                    doh.t(focusNode.displayedValue.trim() === '$100.00');
+                },
+                function testMultiCurrency() {
+                    var id = 'ct100_multiCurrencyTextBox';
+                    var txt = dijit.byId(id);
+                    var defaultFocus = dojo.byId('defaultFocus');
+                    var focusNode = txt.focusNode;
+
+                    defaultFocus.focus();
+
+                    focusNode.focus();
+                    focusNode.set('value', 300);
+
+                    defaultFocus.focus(); // lose focus and let dojo format the textbox
+
+                    // Assert the value does not have a currency symbol (turned off for multicurrency)
+                    var val = focusNode.displayedValue.trim();
+                    doh.t(val === '300.00');
+
+                    // Multicurrency puts the currentCode in a label next to the textbox, check for it
+                    var label = dojo.byId(id + '_ISOLabel');
+                    doh.t(label !== null);
+
+                    // make sure the label says USD
+                    doh.t(label.innerHTML.trim() === 'USD');
+                },
+                function testReadOnlyOrDisabled() {
+                    var id = 'ct100_readOnlyTextBox';
+                    var txt = dijit.byId(id);
+                    var defaultFocus = dojo.byId('defaultFocus');
+                    var focusNode = txt.focusNode;
+
+                    doh.f(focusNode.enabled);
+                },
+                function testDecimalPlaces() {
+                    var id = 'ct100_testDecimalPlaces';
+                    var txt = dijit.byId(id);
+                    var defaultFocus = dojo.byId('defaultFocus');
+                    var focusNode = txt.focusNode;
+
+                    doh.t(focusNode.textbox.value.trim() === '100');
+                }
+            ]);
+
+            //Execute D.O.H. in this remote file.
+            doh.run();
+        });
+        </script>
+    </head>
+    <body>
+        <form action="">
+            <input id="defaultFocus" type="text" />
+
+             <hr />
+
+            <!-- Default params with value of 100 -->
+            <input id="ct100_NumberTextBox1"
+                data-dojo-type="Sage.UI.Controls.Currency" 
+                constraints="{places: 2, type: 'currency', currency: 'USD', locale: 'en-us'}"
+                name="ct100$NumberTextBox1"
+                value="100.00"
+                currentCode="USD"
+                exchangeRate="1"
+                multiCurrency="false"
+                lang="en-us"
+                maxLength="6"
+                visible="true"
+                enabled="true"
+                tabindex="0" />
+
+            <hr />
+
+            <!-- test multi currency -->
+            <input id="ct100_multiCurrencyTextBox" 
+                data-dojo-type="Sage.UI.Controls.Currency" 
+                constraints="{places: 2, type: 'currency', currency: 'USD', locale: 'en-us'}"
+                name="ct100$multiCurrencyTextBox"
+                value="100.00"
+                currentCode="USD"
+                exchangeRate=".70"
+                multiCurrency="true"
+                lang="en-us"
+                maxLength="6"
+                visible="true"
+                enabled="true"
+                tabindex="1" />
+
+            <hr />
+
+            <!-- Test readonly -->
+            <input id="ct100_readOnlyTextBox" 
+                data-dojo-type="Sage.UI.Controls.Currency" 
+                constraints="{places: 2, type: 'currency', currency: 'USD', locale: 'en-us'}"
+                name="ct100$readOnlyTextBox"
+                value="100.00"
+                currentCode="USD"
+                exchangeRate=".70"
+                multiCurrency="true"
+                lang="en-us"
+                maxLength="6"
+                visible="true"
+                enabled="false"
+                tabindex="2" />
+
+            <hr />
+
+            <!-- Test 0 decimal places, which is not a default -->
+            <input id="ct100_testDecimalPlaces" 
+                data-dojo-type="Sage.UI.Controls.Currency" 
+                constraints="{places: 0, type: 'currency', currency: 'USD', locale: 'en-us'}"
+                name="ct100$testDecimalPlaces"
+                value="100.00"
+                currentCode="USD"
+                exchangeRate="1"
+                multiCurrency="true"
+                lang="en-us"
+                maxLength="6"
+                visible="true"
+                enabled="true"
+                tabindex="3" />
+            
+        </form>
+    </body>
+</html>

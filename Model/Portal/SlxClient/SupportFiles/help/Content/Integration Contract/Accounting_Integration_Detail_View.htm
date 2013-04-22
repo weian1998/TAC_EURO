@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="357" MadCap:disableMasterStylesheet="true" MadCap:tocPath="Administration|Accounting Integration|Configuring Accounting Integration" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Administration|Accounting Integration|Configuring Accounting Integration" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
     <!-- saved from url=(0014)about:internet -->
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Accounting Integration Detail View</title>
@@ -11,10 +11,10 @@
         </script>
     </head>
     <body>
-        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#Integration Contract/Accounting_Integration_Detail_View.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Integration Contract/Accounting_Integration_Detail_View.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
         </p>
         <h1>Accounting Integration Detail View</h1>
-        <p><a name="kanchor44"></a>Use the Accounting Integration Detail view to configure the connections between Sage SalesLogix and your accounting system(s).</p>
+        <p><a name="kanchor58"></a>Use the Accounting Integration Detail view to configure the connections between Sage SalesLogix and your accounting system(s).</p>
         <p>Accounting Integration is enabled when the Sage SalesLogix endpoint and at least one target endpoint are configured and enabled. If no feeds are enabled on the Accounting Systems tab, then integration is disabled.</p>
         <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
             <col style="width: 45px;" />
@@ -33,26 +33,33 @@
         <p>Set your feed details for Sage SalesLogix, then configure the feed for each integrated accounting system. </p>
         <p class="Infinitive">To set</p>
         <ol>
-            <li class="Topic-Text-Numbered" value="1">On the <span class="SLXBold">Administration</span> menu, click <span class="SLXBold">Integration Setup</span>.</li>
-            <li class="Topic-Text-Numbered" value="2">In the <span class="SLXBold">SalesLogix Feed</span> box, type the SData URL to the GCRM feed. </li>
-        </ol>
-        <p class="Topic-Text-Indent">Use the format: http://server:port/<i>sdatavirtualdir</i>/slx/gcrm/-/<i>&#160;</i></p>
-        <ul>
-            <li class="Topic-Text-Bulleted-2" value="1">Set <i>sdatavirtualdir</i> to the directory to which you deployed your SData portal.</li>
-        </ul>
-        <p class="Topic-Text-Indent2">The default directory is "SData".</p>
-        <p class="Topic-Text-Indent2">For example, http://localhost:3333/sdaata/slx/gcrm/-/</p>
-        <ol start="3">
-            <li class="Topic-Text-Numbered" value="3">In the <span class="SLXBold">User Name</span> box, type the user name for the Sage SalesLogix database that the accounting system connects to.</li>
-            <li class="Topic-Text-Numbered" value="4">In the <span class="SLXBold">Password</span> box, type the password for the user name.</li>
-            <li class="Topic-Text-Numbered" value="5">In the <span class="SLXBold">Display Name</span> box, type the display name for the feed.</li>
-            <li class="Topic-Text-Numbered" value="6">Click <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Save<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>.</li>
-            <li class="Topic-Text-Numbered" value="7">If necessary, select the <span class="SLXBold">Restrict account promotion to single accounting system</span> option to limit your integration to Sage SalesLogix and one accounting system.</li>
-        </ol>
-        <ol MadCap:continue="true">
-            <li class="Topic-Text-Numbered" value="8">Use the <a href="Accounting_Systems_Tab.htm" target="_self">Accounting Systems</a> tab to configure the feed details for your accounting system(s).</li>
-            <li class="Topic-Text-Numbered" value="9">Use the <a href="Synchronization_Tab.htm" target="_self">Synchronization</a> tab to configure synchronization intervals.</li>
-            <li class="Topic-Text-Numbered" value="10">Use the <a href="Matching_Tab.htm" target="_self">Matching</a> tab to set global default matching criteria for users creating links.</li>
+            <li value="1">On the <span class="SLXBold">Administration</span> menu, click <span class="SLXBold">Integration Setup</span></li>
+            <li value="2">In the <span class="SLXBold">SalesLogix Feed</span> box, type the SData URL that Sage SalesLogix uses to share
+information between systems. <ol><li value="1">&#160;Do one of the following:
+<ul><li value="1">If your implementation does not use the default port (port 80), use format http://server:port/sdatavirtualdir/<i>application</i>/<i>contract</i>/<i>operatingcompany</i>/-/</li><li value="2"> If your implementation uses port 80, omit the port number from the URL. The Sync Service automatically strips the default port from the URL which causes matching issues and errors. Avoid this by using format http://server/sdatavirutaldir/<i>application</i>/<i>contract</i>/<i>operatingcompany</i>/-/</li></ul></li><li value="2">Set <i>application</i> to slx.</li><li value="3">Set <i>contract</i> to gcrm.</li><li value="4"><p>Set <i>operatingcompany</i> to - to the operating company in your accounting application that you are integrating with.(Sage SalesLogix does not have an operating company).</p></li></ol></li>
+            <li value="3">In the <span class="SLXBold">User Name</span> box, type the user name for the Sage SalesLogix database that the accounting system connects to.</li>
+            <li value="4">In the <span class="SLXBold">Password</span> box, type the password for the user name.</li>
+            <li value="5">In the <span class="SLXBold">Display Name</span> box, type the display name for the feed.</li>
+            <li value="6">If necessary, select the <span class="SLXBold">Restrict account promotion to single accounting system</span> option to limit your integration to Sage SalesLogix and one accounting system.</li>
+            <li value="7">If necessary, select the <span class="SLXBold">Allow accounting system to manage Sales Orders</span> option to remove the ability to create and edit <a href="../Sales Orders/salesorderoverview.htm" target="_self">sales orders</a> in Sage SalesLogix. When you select this option, your accounting system must be used to manage sales orders. </li>
+            <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+                <col style="width: 45px;" />
+                <col />
+                <tr>
+                    <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                        <p style="text-align: center;margin-bottom: 0;" align="center">
+                            <img src="../image/note.gif" />
+                        </p>
+                    </td>
+                    <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                        <p>This option is required for certain integrations, for example with X3.</p>
+                    </td>
+                </tr>
+            </table>
+            <li value="8">Click <span class="MCExpanding_0"><a href="javascript:void(0);" class="MCExpandingHead_0" onclick="FMCExpand( this ); return false;">Save<img style="border: none;margin-left: 5px;" src="../SkinSupport/ExpandClosed.gif" MadCap:altsrc="../SkinSupport/ExpandOpen.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/ExpandOpen.gif' ); }" class="MCExpandingIcon" /></a><span class="MCExpandingBody_0" style="display: none;"><img src="../image/update.gif" /></span></span>.</li>
+            <li value="9">Use the <a href="Accounting_Systems_Tab.htm" target="_self">Accounting Systems</a> tab to configure the feed details for your accounting system(s).</li>
+            <li value="10">Use the <a href="Synchronization_Tab.htm" target="_self">Synchronization</a> tab to configure synchronization intervals.</li>
+            <li value="11">Use the <a href="Matching_Tab.htm" target="_self">Matching</a> tab to set global default matching criteria for users creating links.</li>
         </ol>
         <p class="RelatedTopics">How Do I?</p>
         <p><a href="Linking_Records.htm" target="_self">Link Records</a>
@@ -63,7 +70,7 @@
         <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
             <col style="width: 100%;" />
             <tbody>
-                <tr MadCap:conditions="Output.WebClient,Output.Customer Portal">
+                <tr MadCap:conditions="">
                     <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
                         <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
                     </td>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="00c8df5c-9b5b-4362-b2a2-b67e5a7c6e81" lastModifiedUtc="2011-09-19T22:35:38.0213099Z" name="GetActivityPastDueForMashup" returnType="Object" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="7ffde115-be7c-4ff4-a06d-cd190e018c94" paramName="UserId" sequence="0" paramType="String" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="2831c675-e33a-49e1-83dd-23465515159d" lastModifiedUtc="2011-09-19T22:35:26.0716265Z" targetType="Sage.SalesLogix.Activity.Activity, Sage.SalesLogix.Activity" targetMethod="GetMashupActivityPastDue" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

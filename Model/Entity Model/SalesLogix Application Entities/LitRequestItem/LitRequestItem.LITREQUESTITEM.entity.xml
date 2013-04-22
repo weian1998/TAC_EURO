@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="8556c77c-14da-4b12-958b-99ce4670a273" lastModifiedUtc="2011-03-25T16:23:10.6687719Z" manageSchema="false" tableName="LITREQUESTITEM" name="LitRequestItem" isExtension="false" audited="false" secure="false" lastUpdatedPropertyId="39ea057e-5d79-457b-aeda-85f340146f6b" onBeforeInsertMethodId="99461c16-0864-4f1f-a3ad-3435279c2050" onAfterInsertMethodId="22faf9e0-9e29-4507-becc-a6b00bca6888" onBeforeUpdateMethodId="6b1fef2e-0ea7-4cef-aa77-1712b3c2a7ca" onAfterUpdateMethodId="31d60bbe-260d-43ff-9eab-87033bfa2406" onBeforeDeleteMethodId="2eec4391-b86c-4ba5-ba5a-1b2b1b041763" onAfterDeleteMethodId="c035c0cf-dad3-495f-8072-fba0f8dede86" onCreateId="511b480d-b64a-4769-b10e-fa7c7dc08887">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="8556c77c-14da-4b12-958b-99ce4670a273" lastModifiedUtc="2011-12-11T19:40:39.9634994Z" manageSchema="true" tableName="LITREQUESTITEM" name="LitRequestItem" isExtension="false" audited="false" onBeforeInsertMethodId="99461c16-0864-4f1f-a3ad-3435279c2050" onAfterInsertMethodId="22faf9e0-9e29-4507-becc-a6b00bca6888" onBeforeUpdateMethodId="6b1fef2e-0ea7-4cef-aa77-1712b3c2a7ca" onAfterUpdateMethodId="31d60bbe-260d-43ff-9eab-87033bfa2406" onBeforeDeleteMethodId="2eec4391-b86c-4ba5-ba5a-1b2b1b041763" onAfterDeleteMethodId="c035c0cf-dad3-495f-8072-fba0f8dede86" onCreateId="511b480d-b64a-4769-b10e-fa7c7dc08887">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
@@ -10,6 +10,9 @@
           <IsHistoryTable>false</IsHistoryTable>
         </OrmEntityMetadataExtension>
       </extender>
+      <extender guid="76aa0e24-2c8f-3b71-a1f9-ca6db3db4459">
+        <OrmEntitySDataExtension generateFeed="true" pathName="literatureRequestItems" lastUpdatedPropertyId="39ea057e-5d79-457b-aeda-85f340146f6b" feedType="Dynamic" canPost="true" canPut="true" canDelete="true" />
+      </extender>
     </extendee>
   </ExtendedPropertiesCollection>
   <keyProperties>
@@ -19,7 +22,11 @@
   <properties>
     <property xsi:type="OrmFieldProperty" id="c7e6acfc-6947-4906-b0ed-305d6cb01c52" lastModifiedUtc="2009-12-15T22:18:53.7855512Z" name="LitreqId" audited="false" isNullable="false" columnName="LITREQID" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
         <StandardIdDataType />
@@ -27,7 +34,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="22509fcd-0144-4321-bfc0-31be9a97d3a9" lastModifiedUtc="2009-12-15T22:19:23.9745512Z" name="LiteratureId" audited="false" isNullable="false" columnName="LITERATUREID" maxLength="12" precision="0" scale="0" ordinal="1" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
         <StandardIdDataType />
@@ -35,7 +46,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="07c22c00-2d8d-4818-8da4-d205a7e31f90" lastModifiedUtc="2009-12-07T22:38:57.839Z" name="Qty" audited="false" columnName="QTY" maxLength="0" precision="10" scale="0" ordinal="2" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="47f90249-e4c8-4564-9ae6-e1fa9904f8b8">
         <IntegerDataType />
@@ -43,7 +58,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="39ea057e-5d79-457b-aeda-85f340146f6b" lastModifiedUtc="2009-11-25T16:49:01.3006892Z" name="ModifyDate" audited="false" columnName="MODIFYDATE" maxLength="0" precision="0" scale="0" ordinal="3" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
         <DateTimeDataType />
@@ -51,7 +70,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="e411755a-ecf2-4e7c-814d-2519800ac0bb" lastModifiedUtc="2009-11-25T16:49:01.3056892Z" name="ModifyUser" audited="false" columnName="MODIFYUSER" maxLength="12" precision="0" scale="0" ordinal="4" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
         <StandardIdDataType />
@@ -59,7 +82,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="b2d5f164-ae7f-4411-b4f3-97e3bc8de170" lastModifiedUtc="2009-11-25T16:49:01.3086892Z" name="CreateDate" audited="false" columnName="CREATEDATE" maxLength="0" precision="0" scale="0" ordinal="5" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="1f08f2eb-87c8-443b-a7c2-a51f590923f5">
         <DateTimeDataType />
@@ -67,7 +94,11 @@
     </property>
     <property xsi:type="OrmFieldProperty" id="1828d079-7af9-4884-aade-4dcb1a0ed7d7" lastModifiedUtc="2009-11-25T16:49:01.3116892Z" name="CreateUser" audited="false" columnName="CREATEUSER" maxLength="12" precision="0" scale="0" ordinal="6" isReadOnly="false">
       <ExtendedPropertiesCollection>
-        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
+        <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
+          <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">
+            <OrmEntityPropertySDataExtension generate="true" />
+          </extender>
+        </extendee>
       </ExtendedPropertiesCollection>
       <SystemDataType guid="30053f5a-8d40-4db1-b185-1e4128eb26cc">
         <StandardIdDataType />

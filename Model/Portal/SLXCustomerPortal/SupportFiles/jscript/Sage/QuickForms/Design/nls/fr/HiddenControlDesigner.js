@@ -1,0 +1,5 @@
+﻿define(
+    {
+      displayNameText: "Texte masqué"
+    }
+);

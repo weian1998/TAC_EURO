@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<PortalService xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="c867ac79-a870-404c-b7fa-5ffb1c29ffb6">
+  <InstanceId>7a8af01d683848d7832bf1b8648bd898</InstanceId>
+  <ServiceType>Sage.Platform.Orm.Services.SessionFactoryEntityMappingInfoService, Sage.Platform</ServiceType>
+  <RegisterAs>Sage.Platform.Application.Services.IEntityMappingInfoService, Sage.Platform.Application</RegisterAs>
+  <Properties />
+  <Scope>Application</Scope>
+</PortalService>

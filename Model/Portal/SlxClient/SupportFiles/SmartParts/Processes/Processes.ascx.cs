@@ -1,42 +1,16 @@
 using System;
-using System.Data;
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
-
 using Sage.Entity.Interfaces;
 
 using Sage.Platform;
-using Sage.Platform.Application;
-using Sage.Platform.Application.UI.Web;
-using Sage.Platform.Configuration;
-using Sage.Platform.Orm;
-using Sage.Platform.Orm.Entities;
 using Sage.Platform.Repository;
-using Sage.Platform.Security;
-using Sage.Platform.WebPortal.Services;
-using Sage.Platform.WebPortal.Workspaces;
-
-using Sage.SalesLogix.Security;
-using Sage.SalesLogix.Services.SpeedSearch;
-using Sage.SalesLogix.Services.SpeedSearch.SearchSupport;
-using Sage.SalesLogix.SpeedSearch;
-using Sage.SalesLogix.Web;
 using Sage.SalesLogix.Web.Controls;
 using Sage.Platform.Application.UI;
 
-public partial class SmartParts_Processes_Processes : System.Web.UI.UserControl, ISmartPartInfoProvider
+public partial class SmartParts_Processes_Processes : UserControl, ISmartPartInfoProvider
 {
-    public SmartParts_Processes_Processes()
-    {
-    }
-
     protected void Page_Load(object sender, EventArgs e)
     {
         RegisterClientScripts();
@@ -44,7 +18,10 @@ public partial class SmartParts_Processes_Processes : System.Web.UI.UserControl,
 
     protected string BuildProcessesNavigateURL(object ID, object action)
     {
-        return Page.ResolveClientUrl(string.Format("javascript:ChangeStatusClick('{0}','{1}','{2}','{3}','{4}')", ID.ToString(), action.ToString(), btnChangeStatus.ClientID, hfCurrentId.ClientID, hfAction.ClientID));
+        return
+            Page.ResolveClientUrl(string.Format("javascript:ChangeStatusClick('{0}','{1}','{2}','{3}','{4}')", ID,
+                                                action, btnChangeStatus.ClientID, hfCurrentId.ClientID,
+                                                hfAction.ClientID));
     }
 
     private void RegisterClientScripts()
@@ -60,13 +37,12 @@ public partial class SmartParts_Processes_Processes : System.Web.UI.UserControl,
                                             document.getElementById(btnId).click();
                                         }";
 
-        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "ChangeStatusClick", changeStatusScript, true);
+        ScriptManager.RegisterClientScriptBlock(Page, GetType(), "ChangeStatusClick", changeStatusScript, true);
     }
 
     protected override void OnPreRender(EventArgs e)
     {
-        if (!this.Visible) return;
-
+        if (!Visible) return;
         // select list of processes
         SlxGridView1.DataSource = GetProcessList();
         SlxGridView1.DataBind();
@@ -83,28 +59,23 @@ public partial class SmartParts_Processes_Processes : System.Web.UI.UserControl,
         crit = crit.CreateAlias("Contact", "C");
 
         // build criteria based on currently selected tab
-        switch (this.ID)
+        switch (ID)
         { 
             case "Starting":
                 crit = crit.Add(ep.And(ep.Eq("Suspended", 0), ep.Eq("Status", 2)));
                 break;
-
             case "InProcess":
                 crit = crit.Add(ep.And(ep.Eq("Suspended", 0), ep.Eq("Status", 1)));
                 break;
-
             case "Suspended":
                 crit = crit.Add(ep.Eq("Suspended", 1));
                 break;
-
             case "Waiting":
                 crit = crit.Add(ep.And(ep.Eq("Suspended", 0), ep.Eq("Status", -2)));
                 break;
-
             case "Completed":
                 crit = crit.Add(ep.And(ep.Eq("Suspended", 0), ep.Eq("Status", -100)));
                 break;
-
             case "Aborted":
                 crit = crit.Add(ep.Eq("Status", -101));
                 break;
@@ -133,12 +104,12 @@ public partial class SmartParts_Processes_Processes : System.Web.UI.UserControl,
 
     protected bool IsGreenVisible()
     {
-        return this.ID == "Suspended";
+        return ID == "Suspended";
     }
 
     protected bool IsYellowVisible()
     {
-        return this.ID == "Starting" || this.ID == "InProcess" || this.ID == "Waiting";
+        return ID == "Starting" || ID == "InProcess" || ID == "Waiting";
     }
 
     protected bool IsRedVisible()
@@ -148,13 +119,9 @@ public partial class SmartParts_Processes_Processes : System.Web.UI.UserControl,
 
     protected string GetStatusText()
     {
-        if (this.ID == "Completed")
-			return GetLocalResourceObject("Completed").ToString();
-
-        if (this.ID == "Aborted")
-            return GetLocalResourceObject("Aborted").ToString();
-
-        return "";
+        return ID == "Completed"
+                   ? GetLocalResourceObject("Completed").ToString()
+                   : (ID == "Aborted" ? GetLocalResourceObject("Aborted").ToString() : "");
     }
 
     protected void btnChangeStatus_Click(object sender, EventArgs e)
@@ -174,17 +141,14 @@ public partial class SmartParts_Processes_Processes : System.Web.UI.UserControl,
             case "Abort":             // Abort process
                 nStatus = -101;
                 break;
-
             case "Suspend":          // Suspend process
                 bSuspended = true;
                 nStatus = process.Status ?? 0;
                 break;
-
             case "Resume":           // Resume process
                 nStatus = process.Status ?? 0;
                 break;
         }
-
         process.UpdateStatus(nStatus, bSuspended);
     }
 

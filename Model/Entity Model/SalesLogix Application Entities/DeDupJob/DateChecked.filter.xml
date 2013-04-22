@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0"?>
-<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="1ffb7968-4c55-44ed-8e77-372b3ec27fbf" lastModifiedUtc="2010-09-28T21:08:34.1537051Z" filterName="DateChecked" propertyName="CompletedDate" dataPath="DEDUPJOB:COMPLETEDDATE" characters="1">
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="1ffb7968-4c55-44ed-8e77-372b3ec27fbf" lastModifiedUtc="2011-12-01T12:01:10.8605812Z" filterName="DateChecked" propertyName="CompletedDate" characters="1">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmRangeEntityFilter" />
   </ExtendedPropertiesCollection>
-  <ranges id="8e1cde3a-e389-4804-a08a-c2c9ac80aaa5" rangeName="SlxWeekly" lower="-7" upper="0" />
-  <ranges id="45ffc79d-41aa-4771-8191-d75e5fd1599f" rangeName="SlxMonthly" lower="-1" upper="0" />
-  <ranges id="c1e67f51-d476-4719-b5c2-8d66a39470d0" rangeName="SlxYearly" lower="-12" upper="0" />
+  <ranges id="8e1cde3a-e389-4804-a08a-c2c9ac80aaa5" rangeName="LastWeek" lower=":lastweekstart" upper=":lastweekend" />
+  <ranges id="45ffc79d-41aa-4771-8191-d75e5fd1599f" rangeName="LastMonth" lower=":lastmonthstart" upper=":lastmonthend" />
+  <ranges id="c1e67f51-d476-4719-b5c2-8d66a39470d0" rangeName="LastYear" lower=":lastyearstart" upper=":lastyearend" />
 </entityFilter>

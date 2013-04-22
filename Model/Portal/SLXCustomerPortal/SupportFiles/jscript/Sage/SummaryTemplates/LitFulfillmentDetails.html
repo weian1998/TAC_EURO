@@ -1,0 +1,23 @@
+[
+"<table style=\"width:100%;\" class=\"datagrid\">"
+"<col style=\"width:33%\" />"
+"<col style=\"width:33%\" />"
+"<col style=\"width:33%\" />"
+"<thead><tr>"
+"<th style=\"font-weight:bold;\">Item Name</th>"
+"<th style=\"font-weight:bold;\">Family</th>"
+"<th style=\"font-weight:bold;\">Quantity</th>"
+"</tr></thead>"
+"<tpl for=\"items\">"
+"<tr>"
+"<td>{%= Sage.Utility.htmlEncode($.entity.literatureitem_itemname) %}</td>"
+"<td>{%= Sage.Utility.htmlEncode($.entity.literatureitem_itemfamily) %}</td>"
+"<td>{%= Sage.Utility.htmlEncode($.entity.qty) %}</td>"
+"</tr>"
+"</tpl>"
+"</table>"
+]
+
+
+
+

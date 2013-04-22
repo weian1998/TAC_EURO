@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="1fe64790-c703-443c-a293-2e28de7589d0">
   <ItemId>menuItemCreateNewGroup</ItemId>
-  <NavUrl>javascript:groupManager.CreateGroup('PICKLISTVIEW');</NavUrl>
+  <NavUrl>javascript:Sage.Groups.GroupManager.CreateGroup('PICKLISTVIEW');</NavUrl>
   <LargeImageUrl />
   <SmallImageUrl />
   <ContextMenuId />

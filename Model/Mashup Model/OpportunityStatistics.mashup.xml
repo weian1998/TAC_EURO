@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<mashup id="27b8b915-0ff3-4baf-a873-2e365a768e69" name="OpportunityStatistics">
+  <processors>
+    <processor type="Sage.Platform.Mashups.Processors.SnippetProcessor, Sage.Platform.Mashups">
+      <snippetProcessor id="aad3d802-ce48-44b0-b101-a9bf4a2b7de3" name="OpportunityStatisticsMashup" location="20, 40" expanded="true" width="300" continueOnError="false" methodName="Opportunity.GetOpportunityStatisticsForMashup">
+        <parameters>
+          <parameter id="514bb32c-b590-462d-9428-8088b9a25276" name="selectionKey" expression="selectionKey" />
+        </parameters>
+      </snippetProcessor>
+    </processor>
+  </processors>
+  <parameters />
+  <links />
+</mashup>

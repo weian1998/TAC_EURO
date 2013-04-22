@@ -1,6 +1,7 @@
 <%@ Master Language="C#" %>
 <%@ Register Assembly="Sage.Platform.WebPortal" Namespace="Sage.Platform.WebPortal.SmartParts" TagPrefix="smartParts" %>
 <%@ Register Assembly="Sage.Platform.WebPortal" Namespace="Sage.Platform.WebPortal.Workspaces" TagPrefix="workSpace" %>
+<%@ Register Assembly="Sage.SalesLogix.Client.GroupBuilder" Namespace="Sage.SalesLogix.Client.GroupBuilder" TagPrefix="SalesLogix" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <script type="text/C#" runat="server">
@@ -15,47 +16,108 @@
 	public void Page_Load(object sender, EventArgs e)
 	{
 		Page.Title = GetLocalResourceObject("DialogPageTitle").ToString();
+        ClientGroupContextService clientGroupContext = new ClientGroupContextService();
+        Page.Form.Controls.Add(clientGroupContext);
+        Page.Header.DataBind();
 	}
 </script>
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head id="Head1" runat="server">
+    <%-- IE Should use the latest version available  --%>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    
 	<title>Sage SalesLogix</title>
-	<link rel="stylesheet" type="text/css" href="~/css/YUI/fonts.css" />
-	<link rel="stylesheet" type="text/css" href="~/css/YUI/reset.css" /> 
-    <link rel="stylesheet" type="text/css" href="~/Libraries/ext/resources/css/ext-all.css" />    
-    <link rel="stylesheet" type="text/css" href="~/css/YUI/container.css" />
-       
-    <script pin="pin" type="text/javascript" src="Libraries/jQuery/jquery.js"></script>
-    <script pin="pin" type="text/javascript" src="Libraries/jQuery/jquery.selectboxes.js"></script>
-    <script pin="pin" type="text/javascript" src="Libraries/jQuery/jquery-ui.js"></script>
-    <script pin="pin" type="text/javascript" src="Libraries/ext/adapter/jquery/ext-jquery-adapter.js"></script>
-    <script pin="pin" type="text/javascript" src="Libraries/ext/ext-all.js"></script>
-    <script pin="pin" type="text/javascript" src="Libraries/Ext/ux/ext-ux-combined.js"></script>
-    <script pin="pin" type="text/javascript" src="Libraries/ext/ext-tablegrid.js"></script>      
-    <script pin="pin" type="text/javascript" src="Libraries/ext/ext-overrides.js"></script>
+    
+    <script pin="pin" language="JavaScript" src="Libraries/jQuery/jquery.js" type="text/javascript"></script>
+    <script pin="pin" language="JavaScript" src="Libraries/jQuery/jquery-ui.js" type="text/javascript"></script>
 
-    <script pin="pin" type="text/javascript" src="jscript/YUI/yui-combined-min.js"></script>     
-    <script pin="pin" type="text/javascript" src="jscript/sage-platform/sage-platform.js"></script>
-    <script pin="pin" type="text/javascript" src="jscript/sage-controls/sage-controls.js"></script>
-    <script pin="pin" type="text/javascript" src="jscript/sage-common/sage-common.js"></script>
-    <link rel="stylesheet" type="text/css" href="~/css/sage-styles.css" />      
+<script pin="pin" type="text/javascript">
+    var djConfig = {
+        parseOnLoad: false,
+        isDebug: false,
+        locale: '<%# Global.Locale %>',
+        modulePaths: { 'Sage': '../../../jscript/Sage' }
+    };
+</script>
+    <script pin="pin" language="JavaScript" src="Libraries/dojo/dojo/dojo.js"></script>    
+    <script pin="pin" type="text/javascript">
+        window.Sage = window.Sage || {};
+        window.Sage.__namespace = true; //allows child namespaces to be registered via Type.registerNamespace(...)
+    </script>
+
+    <%-- Flattened NLS bundles from dojo build (Comment these out for development)--%>
+    <script pin="pin" type="text/javascript" src="Libraries/dojo/dojox/nls/dojox_<%# Global.Locale %>.js"></script>
+    <script pin="pin" type="text/javascript" src="Libraries/dojo/dijit/nls/dijit_<%# Global.Locale %>.js"></script>
+    <script pin="pin" type="text/javascript" src="jscript/Sage/nls/Sage_<%# Global.Locale %>.js"></script> 
+
+    <%-- Combined dijit/dojox/Sage and all deps (Comment out for development) --%>
+    <script pin="pin" src="jscript/Sage/Sage-Combined.js" type="text/javascript"></script>
+
+    <%--  Built layers from dojo build (Uncomment to load each layer individual if needed)
+    <script pin="pin" type="text/javascript" src="Libraries/dojo/dijit/dijit.js"></script>
+    <script pin="pin" type="text/javascript" src="Libraries/dojo/dojox/dojox.js"></script>
+    <script pin="pin" type="text/javascript" src="jscript/Sage/Sage.js"></script>--%>
+
+    <%--Sage Platform (Uncomment to load for development)
+    <script pin="pin" src="jscript/sage-platform/sage-platform-servicecontainer.js" type="text/javascript"></script>
+    <script pin="pin" src="jscript/sage-platform/gears_init.js" type="text/javascript"></script>
+    <script pin="pin" src="jscript/sage-platform/sage-platform-maincontentworkspace.js" type="text/javascript"></script>
+    <script pin="pin" src="jscript/sage-platform/sage-platform-standardworkspace.js" type="text/javascript"></script>
+    <script pin="pin" src="jscript/sage-platform/sage-platform-tabworkspace.js" type="text/javascript"></script>
+    <script pin="pin" src="jscript/sage-platform/sage-platform-objectconnectionservice.js" type="text/javascript"></script>
+    <script pin="pin" src="jscript/sage-platform/sage-platform-integrationcontractservice.js" type="text/javascript"></script>
+    <script pin="pin" src="jscript/sage-platform/sage-controls-slxgridview.js" type="text/javascript"></script>
+    <script pin="pin" src="jscript/sage-platform/sage-controls-timeline.js" type="text/javascript"></script>--%>
+
+    <%-- Third Party Libs (Uncomment to load for development)
+    <script pin="pin" src="Libraries/sdata/Base64.js" type="text/javascript"></script>
+    <script pin="pin" src="Libraries/sdata/ObjTree.js" type="text/javascript"></script>
+    <script pin="pin" src="Libraries/sdata/sdata-client.js" type="text/javascript"></script>
+    <script pin="pin" src="Libraries/Simplate.js" type="text/javascript"></script>
+    <script pin="pin" src="Libraries/dhtmlxScheduler_v30/dhtmlxscheduler.js" type="text/javascript"></script>
+    <script pin="pin" src="Libraries/dhtmlxScheduler_v30/ext/dhtmlxscheduler_timeline.js" type="text/javascript"></script>
+    <script pin="pin" src="jscript/FusionCharts.js" type="text/javascript"></script>
+    <script pin="pin" src="Libraries/jQuery/jquery.js" type="text/javascript"></script>
+    <script pin="pin" src="Libraries/jQuery/jquery-ui.js" type="text/javascript"></script>--%>
     
 
+    <script pin="pin" type="text/javascript" src="jscript/sage-common/sage-common.js"></script>
+    <script pin="pin" type="text/javascript" src="jscript/timeobjs.js"></script>
+	<%-- legacy --%>    
+    <link rel="stylesheet" type="text/css" href="~/css/sage-styles.css" />   
+    <!-- dojo -->
+    <link rel="stylesheet" type="text/css" href="~/Libraries/dojo/dijit/themes/claro/claro.css" />    
+    <link rel="stylesheet" type="text/css" href="~/Libraries/dojo/dojox/grid/enhanced/resources/claroEnhancedGrid.css" /> 
+    <!-- style -->
+    <link rel="stylesheet" type="text/css" href="~/css/layout.css"/>  
+    <!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="~/css/layout-ie.css" />
+    <![endif]--> 
+    <link rel="stylesheet" type="text/css" href="~/css/theme.css"/>   
+    <!-- temporary -->
+    <link rel="stylesheet" type="text/css" href="~/css/sageStyles.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/Global_Images.css"/>
+
+    <%-- Ripped and merged from querybuilder dll --%>
+    <link rel="stylesheet" type="text/css" href="~/css/GroupBuilder/main.css"/>
+
+
+<script pin="pin" type="text/javascript">
+    dojo.require('dojo.parser');
+    dojo.ready(function () {
+        dojo.parser.parse();
+    });
+</script>
      <script type="text/javascript">
-        function ScheduleActivity(ActivityType) {
-            var vURL = 'activity.aspx?modeid=Insert&type=' + ActivityType;
-            window.open(vURL, 'EditActivity','resizable=yes,centerscreen=yes,width=950,height=425,status=no,toolbar=no,scrollbars=yes');
-        }  
+         function ScheduleActivity(ActivityType) {
+             var vURL = 'activity.aspx?modeid=Insert&type=' + ActivityType;
+             window.open(vURL, 'EditActivity', 'resizable=yes,centerscreen=yes,width=950,height=425,status=no,toolbar=no,scrollbars=yes');
+         }  
     </script>
     
 </head>
-<body>
-    <script pin="pin" type="text/javascript">       
-    Ext.BLANK_IMAGE_URL = 'libraries/ext/resources/images/default/s.gif';
-    Ext._stringFormat = String.format;
-    </script> 
-    
+<body class="claro">  
 	<form id="mainform" runat="server" method="post" >
 		<div class="ContentArea">
 			<!-- all page content goes here  -->
@@ -66,10 +128,11 @@
             </asp:UpdatePanel>
 		</div>
 	</form>
-	
-	<script type="text/javascript">   
-    String.format = Ext._stringFormat;
-    </script>
     
+<script type="text/javascript">
+    dojo.require('Sage.Utility');
+
+</script>    
+       
 </body>
 </html>

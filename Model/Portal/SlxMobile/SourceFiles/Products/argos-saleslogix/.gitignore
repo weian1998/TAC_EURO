@@ -1,0 +1,46 @@
+# visual studio
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+*.lib
+*.sbr
+*.sdf
+ipch/
+obj/
+[Bb]in
+[Dd]ebug*/
+[Rr]elease*/
+
+# tooling
+_ReSharper*/
+*.resharper.user
+[Tt]est[Rr]esult*
+.idea/
+
+# os junk files
+Thumbs.db
+*.DS_Store
+
+# merge tool backups
+*.orig
+
+# build output
+deploy/
+
+# module development shells
+index-dev-*.html

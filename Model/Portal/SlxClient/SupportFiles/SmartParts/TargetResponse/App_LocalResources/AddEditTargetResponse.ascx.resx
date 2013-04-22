@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="cmdSave.Caption" xml:space="preserve">
     <value>Save</value>
@@ -324,12 +324,8 @@
   <data name="lueAddProduct.ToolTip" xml:space="preserve">
     <value>Add Product</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="AddEditTargetResponse_ClientScript" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>AddEditTargetResponse_ClientScript.js;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="pklResponseStatus.Caption" xml:space="preserve">
-    <value>Status</value>
+    <value>Status:</value>
   </data>
   <data name="lueContact.LookupProperties.City.PropertyHeader" xml:space="preserve">
     <value>City</value>
@@ -351,5 +347,14 @@
   </data>
   <data name="LeadSource.LUPF.Status" xml:space="preserve">
     <value>Active</value>
+  </data>
+  <data name="error_NoContact.Text" xml:space="preserve">
+    <value>Please enter a contact.</value>
+  </data>
+  <data name="error_NoLead.Text" xml:space="preserve">
+    <value>Please enter a Lead.</value>
+  </data>
+  <data name="lueLeadSource.LookupProperties.Status.PropertyHeader" xml:space="preserve">
+    <value>Status</value>
   </data>
 </root>

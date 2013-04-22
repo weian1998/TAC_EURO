@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PortalTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="e58be7bd-b3c6-4a4b-a809-148fe6ec251e">
+  <TemplateName>MobilePortalTemplate</TemplateName>
+  <TemplateTitle>Mobile Portal Template</TemplateTitle>
+  <TemplateDescription>Template for a mobile application entity portal</TemplateDescription>
+  <Services />
+  <Modules />
+  <DeploymentActions>
+      <ActionType TypeName="Sage.SalesLogix.Web.AdminModule.SLXClientConnectionStringDeploymentAction, Sage.SalesLogix.Web.AdminModule">
+        <Properties />
+      </ActionType>
+      <ActionType TypeName="Sage.Platform.Mobile.AdminModule.MobileDeploymentAction, Sage.Platform.Mobile.AdminModule">
+        <Properties />
+      </ActionType>
+  </DeploymentActions>
+  <TemplateUrl>Masters\default.master</TemplateUrl>
+  <AuthenticationProvider>Sage.SalesLogix.Web.SLXWebAuthenticationProvider, Sage.SalesLogix.Web</AuthenticationProvider>
+  <LinkedFolderDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="SourceFiles" Source="\Portal\PortalTemplates\MobilePortalTemplate\SourceFiles">
+    <Filters />
+    <Files />
+  </LinkedFolderDefinition>
+</PortalTemplate>

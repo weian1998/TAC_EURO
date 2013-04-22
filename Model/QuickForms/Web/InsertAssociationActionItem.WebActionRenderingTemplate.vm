@@ -18,7 +18,7 @@
     	
 		var entity = BindingSource.Current as ${generator.entitytypename};
 
-		if (transformer != null && entity != null)
+		if (transformer != null && entity != null && entity.${qfcontrol.RelateToPropertyName}.Count == 0)
 		{
 			foreach (Sage.Integration.Entity.Feeds.${childEntityName}Entry entry in feed.Entries)
 			{

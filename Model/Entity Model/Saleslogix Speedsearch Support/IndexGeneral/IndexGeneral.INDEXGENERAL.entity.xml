@@ -124,7 +124,7 @@
         <IntegerDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="8b8928b3-f969-454b-9f16-f418b2188bf5" lastModifiedUtc="0001-01-01T00:00:00" name="SiteCode" audited="false" isNullable="false" columnName="SITECODE" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="8b8928b3-f969-454b-9f16-f418b2188bf5" lastModifiedUtc="2012-06-04T15:06:27.4674261Z" name="SiteCode" audited="false" isNullable="false" include="false" columnName="SITECODE" maxLength="12" precision="0" scale="0" ordinal="0" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>

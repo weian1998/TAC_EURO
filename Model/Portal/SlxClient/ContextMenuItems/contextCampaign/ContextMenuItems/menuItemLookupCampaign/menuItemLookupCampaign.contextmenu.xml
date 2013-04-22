@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="866e30d0-84b9-4567-970a-37e7ef99991a">
   <ItemId>menuItemLookupCampaign</ItemId>
-  <NavUrl>javascript:showMainLookupFor('CAMPAIGN','Campaign.aspx');</NavUrl>
+  <NavUrl>javascript:Sage.Utility.Groups.showMainLookupFor('CAMPAIGN','Campaign.aspx');</NavUrl>
   <LargeImageUrl />
   <SmallImageUrl />
   <ContextMenuId />

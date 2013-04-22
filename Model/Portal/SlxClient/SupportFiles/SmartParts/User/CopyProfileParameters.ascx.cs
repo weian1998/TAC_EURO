@@ -77,9 +77,14 @@ public partial class CopyProfileParameters : UserControl
         set 
         {
             if (value == false)
+            {
                 lblMessage.Style[HtmlTextWriterStyle.Display] = "inline";
+                lblMessage.Style[HtmlTextWriterStyle.MarginLeft] = "38px";
+            }
             else
+            {
                 lblMessage.Style[HtmlTextWriterStyle.Display] = "none";
+            }
         } 
     }
     public RadioButton UserRadioButton

@@ -2,15 +2,12 @@
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.Lookup" TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.HighLevelTypes" Namespace="Sage.SalesLogix.HighLevelTypes" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.PickList" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.DependencyLookup" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.Platform.WebPortal" Namespace="Sage.Platform.WebPortal.SmartParts" TagPrefix="SalesLogix" %>
 
 <div style="display:none">
-    <asp:Panel ID="Form_LTools" runat="server"></asp:Panel>
-    <asp:Panel ID="Form_CTools" runat="server"></asp:Panel>
-    <asp:Panel ID="Form_RTools" runat="server">
-        <SalesLogix:PageLink ID="lnkAddResponse" runat="server" LinkType="HelpFileName" Target="Help" NavigateUrl="leadimporttarget.aspx"
+    <asp:Panel ID="ImportActionAddTarget_LTools" runat="server"></asp:Panel>
+    <asp:Panel ID="ImportActionAddTarget_CTools" runat="server"></asp:Panel>
+    <asp:Panel ID="ImportActionAddTarget_RTools" runat="server">
+        <SalesLogix:PageLink ID="lnkAddActionTargetHelp" runat="server" LinkType="HelpFileName" Target="Help" NavigateUrl="leadimporttarget.htm"
             ToolTip="<%$ resources: Portal, Help_ToolTip %>" ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16">
         </SalesLogix:PageLink>
     </asp:Panel>
@@ -23,23 +20,23 @@
                 <asp:Label ID="lblCampaign" runat="server" Text="<%$ resources: lblCampaign.Caption %>"></asp:Label>
             </span>
             <div class="textcontrol lookup">
-                <SalesLogix:LookupControl runat="server" ID="lueCampaigns" LookupEntityName="Campaign" AutoPostBack="false"
+                <SalesLogix:LookupControl runat="server" ID="lueCampaigns" LookupEntityName="Campaign" AutoPostBack="false" ButtonToolTip="<%$ resources: lueCampaign.ToolTip %>"
                     LookupEntityTypeName="Sage.Entity.Interfaces.ICampaign, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" >
                     <LookupProperties>
                         <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueCampaign.LookupProperties.Status.PropertyHeader %>"
-                            PropertyName="Status" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
+                            PropertyName="Status" PropertyType="System.String" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
                         </SalesLogix:LookupProperty>
                         <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueCampaign.LookupProperties.CampaignCode.PropertyHeader %>"
-                            PropertyName="CampaignCode" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
+                            PropertyName="CampaignCode" PropertyType="System.String" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
                         </SalesLogix:LookupProperty>
                         <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueCampaign.LookupProperties.CampaignName.PropertyHeader %>"
-                            PropertyName="CampaignName" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
+                            PropertyName="CampaignName" PropertyType="System.String" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
                         </SalesLogix:LookupProperty>
-                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueCampaign.LookupProperties.StartDate.PropertyHeader %>"
-                            PropertyName="StartDate" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
+                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueCampaign.LookupProperties.StartDate.PropertyHeader %>" UseAsResult="True"
+                            PropertyName="StartDate" PropertyType="System.DateTime" PropertyFormat="DateTime" ExcludeFromFilters="False">
                         </SalesLogix:LookupProperty>
-                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueCampaign.LookupProperties.EndDate.PropertyHeader %>"
-                            PropertyName="EndDate" PropertyFormat="None" UseAsResult="True" ExcludeFromFilters="False">
+                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueCampaign.LookupProperties.EndDate.PropertyHeader %>" UseAsResult="True"
+                            PropertyName="EndDate" PropertyType="System.DateTime" PropertyFormat="DateTime" ExcludeFromFilters="False">
                         </SalesLogix:LookupProperty>
                     </LookupProperties>
                     <LookupPreFilters>
@@ -48,17 +45,10 @@
             </div>
         </td>
     </tr>
-        <tr>
-       <td><br /></td>
-       
-    </tr>
-    <tr>
-        <td align="right">
-            
-            <div style="padding: 10px 10px 0px 10px;">
-                <asp:Button runat="server" ID="btnSave" CssClass="slxbutton" Text="<%$ resources: cmdSave.Caption %>" style="width:70px; margin: 0 5px 0 0;" />
-                <asp:Button runat="server" ID="btnCancel" CssClass="slxbutton" Text="<%$ resources: cmdCancel.Caption %>" style="width:70px;" />
-            </div>
-        </td>
-    </tr>    
 </table>
+<div style="padding-right:20px; text-align:right">
+    <asp:Panel runat="server" ID="pnlCancel" CssClass="controlslist qfActionContainer">
+        <asp:Button runat="server" ID="btnSave" CssClass="slxbutton" Text="<%$ resources: cmdSave.Caption %>" />
+        <asp:Button runat="server" ID="btnCancel" CssClass="slxbutton" Text="<%$ resources: cmdCancel.Caption %>" />
+    </asp:Panel>
+</div>

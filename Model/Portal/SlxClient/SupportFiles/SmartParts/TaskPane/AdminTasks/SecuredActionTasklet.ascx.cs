@@ -2,33 +2,61 @@ using System;
 using System.Collections.Generic;
 using Sage.Entity.Interfaces;
 using Sage.Platform;
-using Sage.SalesLogix.Client.GroupBuilder.Controls;
+using System.Web.UI;
+using Sage.Platform.Application.UI;
+using Sage.Platform.Application;
+using Sage.Platform.WebPortal.Services;
+using Sage.Platform.WebPortal.SmartParts;
+using Sage.SalesLogix.SelectionService;
+using Sage.SalesLogix.Web.SelectionService;
+using Sage.Platform.WebPortal;
+using Sage.Platform.Security;
 
-public partial class SecuredActionTaskletControl : TaskletControl
+public partial class SecuredActionTaskletControl : UserControl, ISmartPartInfoProvider
 {
-    protected override void ProcessRequest(string commandName, string selectionInfoKey)
+    /// <summary>
+    /// Gets or sets the dialog service.
+    /// </summary>
+    /// <value>The dialog service.</value>
+    [ServiceDependency]
+    public IWebDialogService DialogService { get; set; }
+
+    protected void tskAddSecuredActionsToRole_Click(object sender, EventArgs e)
     {
-        if (CurrentEntityType == "ISecuredAction")
+        DialogService.DialogParameters.Clear();
+        DialogService.DialogParameters.Add("selectedIds", GetSelectedRecords());
+        DialogService.DialogParameters.Add("targetEntityType", typeof(ISecuredAction));
+        DialogService.EntityType = typeof(IRole);
+        DialogService.EntityID = EntityFactory.GetRepository<IRole>().FindAll()[0].Id.ToString();
+        DialogService.SetSpecs(180, 350, "SelectRole", GetLocalResourceObject("selectrole_dialogtitle").ToString());
+        DialogService.ShowDialog();
+    }
+
+    private List<String> GetSelectedRecords()
+    {
+        ISelectionService srv = SelectionServiceRequest.GetSelectionService();
+        ISelectionContext selectionContext = srv.GetSelectionContext(hfSelections.Value);
+        if (selectionContext != null)
         {
-            IList<string> selIdList = base.GetSelectedIds(selectionInfoKey);
-            switch (commandName)
-            {
-                case "AddSecuredActionsToRole":
-                    AddSecuredActionsToRole(selIdList);
-                    break;
-            }
+            return selectionContext.GetSelectedIds();
         }
+        //if none selected, assume it is the current one
+        EntityPage page = Page as EntityPage;
+        if (page != null && page.EntityContext != null)
+        {
+            return new List<string> { page.EntityContext.EntityID.ToString() };
+        }
+        return null;
     }
 
-    protected void AddSecuredActionsToRole(IList<string> targetIdList)
+    /// <summary>
+    /// Gets the smart part info.
+    /// </summary>
+    /// <param name="smartPartInfoType">Type of the smart part info.</param>
+    /// <returns></returns>
+    public ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
     {
-        Dialog.DialogParameters.Clear();
-        Dialog.DialogParameters.Add("selectedIds", targetIdList);
-        Dialog.DialogParameters.Add("targetEntityType", typeof(ISecuredAction));
-        Dialog.EntityType = typeof(IRole);
-        Dialog.EntityID = EntityFactory.GetRepository<IRole>().FindAll()[0].Id.ToString();
-        Dialog.SetSpecs(180, 350, "SelectRole", GetLocalResourceObject("selectrole_dialogtitle").ToString());
-        Dialog.ShowDialog();
+        ToolsSmartPartInfo tinfo = new ToolsSmartPartInfo();
+        return tinfo;
     }
-
 }

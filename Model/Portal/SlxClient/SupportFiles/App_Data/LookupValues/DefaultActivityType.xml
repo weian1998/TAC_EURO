@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Lookup name="DefaultActivityType">
+  <LookupValue id="Choose" text="None" localizedId="none" default="false"></LookupValue>
+  <LookupValue id="Meeting" text="Meeting" localizedId="meeting" default="true"></LookupValue>
+  <LookupValue id="Phone Call" text="Phone Call" localizedId="phoneCall" default="false"></LookupValue>
+  <LookupValue id="To-Do" text="To-Do" localizedId="toDo" default="false"></LookupValue>  
+</Lookup>

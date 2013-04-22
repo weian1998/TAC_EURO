@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="9f6274b6-7cbd-4162-8336-e36d81e0108c" lastModifiedUtc="2012-02-22T17:21:44.3141404Z" name="SetUserTimeZone" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="74e8c738-23ec-4bec-8754-707b9863c63f" paramName="userTimeZone" sequence="0" paramType="String" />
+    <OrmEntityMethodParam id="f91e8f73-9087-4478-80fc-cc95b22e8615" paramName="isCustomerPortal" sequence="0" paramType="String" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="0c19edfa-ade9-43bb-866b-3fa6350d4a63" lastModifiedUtc="2012-02-23T17:43:45.3052412Z" targetType="Sage.SalesLogix.User.Rules, Sage.SalesLogix.BusinessRules" targetMethod="UpdateTimeZone" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

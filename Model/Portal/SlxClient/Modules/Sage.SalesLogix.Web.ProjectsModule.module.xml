@@ -3,6 +3,7 @@
   <InstanceId>f45bde9dce154b21b2651dad60735105</InstanceId>
   <ModuleTypeName>Sage.SalesLogix.Web.ProjectsModule, Sage.SalesLogix.Web</ModuleTypeName>
   <RunInMode />
+  <Properties Name="EnableAutoReload" TypeConverter="">True</Properties>
   <AllowRoles />
-  <Scope>Session</Scope>
+  <Scope>Application</Scope>
 </WebModule>

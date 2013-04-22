@@ -63,3 +63,5 @@
 	</tr>
 </table>
 
+<script src="jscript/Sage/GroupBuilder/querybuilder.js" type="text/javascript"></script>
+<script src="jscript/Sage/GroupBuilder/OwnerAssign.js" type="text/javascript"></script>

@@ -1,22 +1,68 @@
 <?xml version="1.0"?>
-<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="180610d0-7b47-4eda-998f-4aa401be5f44" name="MoveContact" returnType="string" methodType="Rule" actionType="Create" returnMode="Object" isInstance="true">
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="180610d0-7b47-4eda-998f-4aa401be5f44" lastModifiedUtc="2012-01-19T22:12:48.7927466Z" name="MoveContact" returnType="Boolean" methodType="Rule" actionType="Create" returnMode="Object">
+  <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
   </ExtendedPropertiesCollection>
   <parameter>
-    <OrmEntityMethodParam paramName="toAccount" sequence="0" paramType="IAccount" />
-    <OrmEntityMethodParam paramName="copyContact" sequence="0" paramType="Boolean" />
-    <OrmEntityMethodParam paramName="useNewAccountInfo" sequence="0" paramType="Boolean" />
-    <OrmEntityMethodParam paramName="copyHistory" sequence="0" paramType="Boolean" />
-    <OrmEntityMethodParam paramName="copyActivities" sequence="0" paramType="Boolean" />
-    <OrmEntityMethodParam paramName="openItemsContact" sequence="0" paramType="IContact" />
-    <OrmEntityMethodParam paramName="completedItemsContact" sequence="0" paramType="IContact" />
+    <OrmEntityMethodParam id="34330e3b-70bc-4296-a51c-22c39fccf145" paramName="moveContactArguments" sequence="0" paramType="Object">
+      <description>Contains the options to be followed when moving a contact</description>
+    </OrmEntityMethodParam>
   </parameter>
+  <preExecuteTargets />
   <methodTargets>
-    <methodTarget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="7a8c593c-4348-4011-990b-055719c0ea10" targetType="Sage.SalesLogix.Contact.Rules, Sage.SalesLogix.BusinessRules" sequence="0" targetMethod="MoveContact" active="true">
+    <methodTarget id="5b1bd70d-dfeb-4c5e-8d0a-e5e41b08fafd" lastModifiedUtc="2012-01-19T22:48:17.1031166Z" targetType="Sage.SalesLogix.Contact.MoveContact, Sage.SalesLogix.BusinessRules" targetMethod="Move_Contact" active="true">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
       </ExtendedPropertiesCollection>
     </methodTarget>
   </methodTargets>
+  <postExecuteTargets>
+    <methodTarget id="c88c588e-ed9a-4309-92d0-0cc75ae9a87e" lastModifiedUtc="2012-02-03T20:44:01.7425305Z" targetType="Sage.SalesLogix.Contact.MoveContact, Sage.SalesLogix.BusinessRules" targetMethod="MoveContactActivities" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="9691f45b-a62f-478a-92d3-4a57a2d6c762" lastModifiedUtc="2012-02-03T20:44:09.8153377Z" targetType="Sage.SalesLogix.Contact.MoveContact, Sage.SalesLogix.BusinessRules" targetMethod="MoveContactHistoryItems" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="d9ac420d-c9fe-4ec6-9241-4448c8a65578" lastModifiedUtc="2012-01-20T20:42:38.3604534Z" targetType="Sage.SalesLogix.Contact.MoveContact, Sage.SalesLogix.BusinessRules" targetMethod="MoveContactLitRequests" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="aed8ae68-3c6d-4d91-a779-49f7c7a45e30" lastModifiedUtc="2012-01-20T20:43:08.3204491Z" targetType="Sage.SalesLogix.Contact.MoveContact, Sage.SalesLogix.BusinessRules" targetMethod="MoveContactOpportunities" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="fbb4d589-7ec1-4fc7-b5e6-d4b136aac194" lastModifiedUtc="2012-01-20T20:43:33.3979566Z" targetType="Sage.SalesLogix.Contact.MoveContact, Sage.SalesLogix.BusinessRules" targetMethod="MoveContactSalesOrders" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="d3f1b683-a4a6-4595-aa25-8634781d5d70" lastModifiedUtc="2012-01-20T20:44:32.4698632Z" targetType="Sage.SalesLogix.Contact.MoveContact, Sage.SalesLogix.BusinessRules" targetMethod="MoveContactTickets" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="17fe336a-f0a1-46b8-83df-9505cc306a75" lastModifiedUtc="2012-01-20T20:44:45.0381199Z" targetType="Sage.SalesLogix.Contact.MoveContact, Sage.SalesLogix.BusinessRules" targetMethod="MoveContactReturns" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="06cd8c16-da54-4f77-b1ad-85f4af2bfc9f" lastModifiedUtc="2012-01-20T20:45:03.820998Z" targetType="Sage.SalesLogix.Contact.MoveContact, Sage.SalesLogix.BusinessRules" targetMethod="MoveContactContracts" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+    <methodTarget id="a9c0d3c0-0e41-433f-bd76-d8141ab4eb46" lastModifiedUtc="2012-01-20T20:45:30.8897046Z" targetType="Sage.SalesLogix.Contact.MoveContact, Sage.SalesLogix.BusinessRules" targetMethod="MoveContactAttachments" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </postExecuteTargets>
+  <postFlushTargets />
 </method>

@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="UserName.Caption" xml:space="preserve">
     <value>Username</value>
@@ -156,20 +156,11 @@
   <data name="grdUsers.8155a75c-aec9-4d6f-966c-8beef5cec533.ColumnHeading" xml:space="preserve">
     <value>Manager Id</value>
   </data>
-  <data name="grdUsers.b1fb8fd3-5797-46ef-a22a-3b33df0e0e5b.ColumnHeading" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="grdUsers.24640bbd-fe42-447f-ac10-a414dec4ef52.ColumnHeading" xml:space="preserve">
-    <value>Manager</value>
-  </data>
   <data name="grdUsers.ba15e853-4a08-46db-9582-2b00899f9a24.ConfirmationMessage" xml:space="preserve">
     <value>Are you sure you want to remove this member?</value>
   </data>
   <data name="grdUsers.ba15e853-4a08-46db-9582-2b00899f9a24.Text" xml:space="preserve">
     <value>Delete</value>
-  </data>
-  <data name="grdUsers.EmptyTableRowText" xml:space="preserve">
-    <value>No members found</value>
   </data>
   <data name="grdUsers.ade1c1dd-d83a-4261-a6ea-f004594559f1.ColumnHeading" xml:space="preserve">
     <value>Created</value>
@@ -198,22 +189,49 @@
   <data name="grdUsers.1fd0e20a-ef4b-4ec4-bbb5-2f5168e1a513.FormatString" xml:space="preserve">
     <value>{0:g}</value>
   </data>
-  <data name="grdUsers.848c8af4-eb1f-4390-9c6b-0c5defe06383.Text" xml:space="preserve">
-    <value>Remove</value>
-  </data>
-  <data name="grdUsers.848c8af4-eb1f-4390-9c6b-0c5defe06383.ConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to remove this member from the department?</value>
-  </data>
-  <data name="grdUsers.36c46c18-056a-4340-b701-11cca2035e5a.ColumnHeading" xml:space="preserve">
-    <value>Created</value>
-  </data>
-  <data name="grdUsers.87de2774-1993-43a2-9108-9e0190edfaff.ColumnHeading" xml:space="preserve">
-    <value>Last Modified</value>
-  </data>
-  <data name="grdUsers.657954fb-75be-4b50-a7ee-3fac30788c82.ColumnHeading" xml:space="preserve">
-    <value>Modified By</value>
+  <data name="ConfirmRemoveFromTeamText.Value" xml:space="preserve">
+    <value>Remove selected member(s) from department?</value>
   </data>
   <data name="lueAddDepartmentMember.LookupDialogTitle" xml:space="preserve">
     <value>Lookup User</value>
+  </data>
+  <data name="lueAddDepartmentMember.LookupProperties.Type.PropertyHeader" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="grdMembers.btnRemoveFromTeam.ToolTip" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="grdMembers.1029b5b9-8bbf-4005-b5de-5dc67f72beaa.ColumnHeading" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="grdMembers.ba2d83bf-74cc-4580-b255-e69b2ca9008e.ColumnHeading" xml:space="preserve">
+    <value>Modified By</value>
+  </data>
+  <data name="grdMembers.463701ca-8ff2-43c1-a864-c673dec0100b.ColumnHeading" xml:space="preserve">
+    <value>Team Name</value>
+  </data>
+  <data name="grdMembers.0dbef834-f6a7-4e0e-b7ef-710ee9b6b938.ColumnHeading" xml:space="preserve">
+    <value>Team</value>
+  </data>
+  <data name="grdMembers.289c9959-b3a3-4c90-a911-c12882cccecb.ColumnHeading" xml:space="preserve">
+    <value>Last Modified</value>
+  </data>
+  <data name="grdMembers.d81642fa-d355-4f94-b430-3d2a517c507d.ColumnHeading" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="grdMembers.d6016bfc-0528-4763-8c5e-891b3981be43.ColumnHeading" xml:space="preserve">
+    <value>Security Profile</value>
+  </data>
+  <data name="grdMembers.bfba721b-8b97-4afa-b081-accd61df6887.ColumnHeading" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="grdMembers.8b6e5251-3e4b-459a-8114-471c7a34b5ff.ColumnHeading" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="grdMembers.2c3a38c1-f716-4f5a-b700-f40e7987882c.ColumnHeading" xml:space="preserve">
+    <value>Manager</value>
+  </data>
+  <data name="lueAddDepartmentMember.LookupProperties.UserInfo.NameLF.PropertyHeader" xml:space="preserve">
+    <value>User Name</value>
   </data>
 </root>

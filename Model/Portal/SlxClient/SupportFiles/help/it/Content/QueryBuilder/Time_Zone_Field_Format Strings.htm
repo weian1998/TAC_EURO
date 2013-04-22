@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:medium="non-print" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Stringhe Formato per campi Fuso Orario</title>
+        <link href="../Resources/TableStyles/TableStyle.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilder/Time_Zone_Field_Format Strings.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor635"></a>Stringhe Formato per campi Fuso Orario</h1>
+        <p>La tabella seguente elenca le opzioni stringhe formato per i campi Fuso Orario. Formati Stringa validi dipendono dal tipo formato selezionato.
+
+
+</p>
+        <p>Se non viene specificato alcun formato stringa per un campo Fuso Orario, il valore viene formattato usando il nome visualizzato per il fuso orario corrispondente. Ad esempio: (GMT-06:00) Fuso Centrale (US &amp; Canada).</p>
+        <table wrapperparagraphselector="P" style="width: 80%;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="80%">
+            <col style="width: 45px;" />
+            <col />
+            <tr>
+                <td style="padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top">
+                    <p style="text-align: center;margin-bottom: 0;" align="center">
+                        <img src="../image/note.gif" />
+                    </p>
+                </td>
+                <td style="width: 90%;padding-left: 6px;padding-top: 6px;padding-right: 6px;padding-bottom: 6px;" valign="top" width="90%">
+                    <p class="Tip-Note-Text" style="margin-bottom: 0;">Un formato stringa deve cominciare con il segno % e terminare con un carattere.
+
+
+</p>
+                    <p class="Tip-Note-Text" style="margin-bottom: 0;">[%] [tipo]</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: auto;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Opzione</th>
+                    <th class="HeadD-Column1-Header1">Descrizione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">
+                        <p>B</p>
+                    </td>
+                    <td class="BodyD-Column1-Body1">Il valore viene formattato usando il bias per il fuso orario corrispondente (ad es. 420). Il bias è la differenza in minuti tra l'ora di Greenwich (UTC) e il fuso orario.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">DB</td>
+                    <td class="BodyD-Column1-Body1">Il valore viene formattato usando il bias del giorno per il fuso orario corrispondente (ad es. -60).  Il bias del giorno è la fifferenza in minuti tra l'ora standard e l'ora del giorno.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">SB</td>
+                    <td class="BodyD-Column1-Body1">Il valore viene formattato usando il bias standard per il fuso orario corrispondente (ad es. 0).  Questo valore viene utilizzato per le ore legali.  Qusto valore è generalmente 0.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">SN</td>
+                    <td class="BodyD-Column1-Body1">Il valore viene formattato usando il nome standard per il fuso orario corrispondente (ad es. Orario Standard Centrale).  Questo valore è generalmente lo stesso del valore archiviato nel campo FUSOORARIO.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">DN</td>
+                    <td class="BodyA-Column1-Body1">Il valore viene formattato usando il nome luce giorno per il fuso orario  (ad es. Orario Luce Giorno Centrale).  Se il fuso orario non osserva il DST allora il valore verrà formattato come "N/A".</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Comunicaci come possiamo migliorare la guida</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

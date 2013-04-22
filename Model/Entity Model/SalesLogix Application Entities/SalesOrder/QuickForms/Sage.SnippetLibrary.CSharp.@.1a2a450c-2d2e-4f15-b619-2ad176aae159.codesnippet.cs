@@ -60,7 +60,7 @@ namespace Sage.BusinessRules.CodeSnippets
 					}
 					else
 					{
-						dialogService.SetSpecs(20, 20, 250, 700, "EditSalesOrderItem", dialogCaption, true);
+						dialogService.SetSpecs(20, 20, 325, 700, "EditSalesOrderItem", dialogCaption, true);
 					}
                     dialogService.DialogParameters.Add("CustomProductSalesOrder", salesOrder);
                     dialogService.EntityType = typeof(ISalesOrderItem);

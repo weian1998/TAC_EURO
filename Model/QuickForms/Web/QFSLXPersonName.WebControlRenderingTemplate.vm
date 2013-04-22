@@ -8,8 +8,9 @@
    <asp:Label ID="${qfcontrol.LabelId}" AssociatedControlID="${qfcontrol.ControlId}" runat="server" Text="<%$ resources: ${qfcontrol.ControlId}.Caption %>" #if(!$qfcontrol.Visible)Visible="false" #end></asp:Label>
  </div>
 #end #end
-  <div #if(${qfcontrol.ColumnSpan} > 1 || ${qfcontrol.ControlLabelPlacement} == "top") class="twocoltextcontrol person" #else class="textcontrol person" #end >
+  <div #if(${qfcontrol.ColumnSpan} == 2 || ${qfcontrol.ControlLabelPlacement} == "top") class="twocoltextcontrol" #elseif(${qfcontrol.ColumnSpan} > 2) class="threecoltextcontrol" #else class="textcontrol" #end >
     <SalesLogix:FullName runat="server" ID="${qfcontrol.ControlId}" #if($qfcontrol.IsReadOnly)ReadOnly="true" #end
+#if($qfcontrol.Required)Required="true" #end
 #if(!$qfcontrol.Enabled)Enabled="false" #end
 #if($qfcontrol.ToolTip != "")ToolTip="<%$ resources: ${qfcontrol.ControlId}.ToolTip %>" #end
 #if($qfcontrol.ButtonToolTip != "")ButtonToolTip="<%$ resources: ${qfcontrol.ControlId}.ButtonToolTip %>" #end

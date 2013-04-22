@@ -126,16 +126,14 @@ public partial class MatchOptions : EntityBoundSmartPartInfoProvider
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Visible)
-        {
-            RegisterClientScript();
-            chkUseFuzzy.Attributes.Add("onclick", "javascript:OnUseFuzzyCheckedChanged()");
-            txtDuplicate_Low.Attributes.Add("onblur", "javascript:OnDuplicateScoreChange()");
-            txtPossibleDuplicate_Low.Attributes.Add("onblur", "javascript:OnDuplicatePossibleChange()");
-            tblDupScores.Visible = true;
-            cmdCancel.Visible = true;
-            cmdOK.Visible = true;
-        }
+        if (!Visible) return;
+        RegisterClientScript();
+        chkUseFuzzy.Attributes.Add("onclick", "javascript:OnUseFuzzyCheckedChanged()");
+        txtDuplicate_Low.Attributes.Add("onblur", "javascript:OnDuplicateScoreChange()");
+        txtPossibleDuplicate_Low.Attributes.Add("onblur", "javascript:OnDuplicatePossibleChange()");
+        tblDupScores.Visible = true;
+        cmdCancel.Visible = true;
+        cmdOK.Visible = true;
     }
 
     /// <summary>
@@ -180,18 +178,16 @@ public partial class MatchOptions : EntityBoundSmartPartInfoProvider
     protected void LoadForm()
     {
         MatchAdvancedOptions advancedOptions = GetOptions();
-        if (advancedOptions != null)
-        {
-            txtDuplicate_Low.Text = Convert.ToString(advancedOptions.DuplicateBottomThreshhold);
-            txtPossibleDuplicate_Low.Text = Convert.ToString(advancedOptions.PossibleDuplicateBottomThreshhold);
-            lblPossibleDuplicate_High.Text = Convert.ToString(advancedOptions.PossibleDuplicateTopThreshhold);
-            lblNoDuplicate_High.Text = Convert.ToString(advancedOptions.NotDuplicateTopThreshhold);
-            chkUseStemming.Checked = advancedOptions.IncludeStemming;
-            chkUsePhonic.Checked = advancedOptions.IncludePhonic;
-            chkUseSynonym.Checked = advancedOptions.IncludeThesaurus;
-            chkUseFuzzy.Checked = advancedOptions.IncludeFuzzy;
-            lbxFuzzyLevel.SelectedValue = advancedOptions.FuzzyLevel.ToString();
-        }
+        if (advancedOptions == null) return;
+        txtDuplicate_Low.Text = Convert.ToString(advancedOptions.DuplicateBottomThreshhold);
+        txtPossibleDuplicate_Low.Text = Convert.ToString(advancedOptions.PossibleDuplicateBottomThreshhold);
+        lblPossibleDuplicate_High.Text = Convert.ToString(advancedOptions.PossibleDuplicateTopThreshhold);
+        lblNoDuplicate_High.Text = Convert.ToString(advancedOptions.NotDuplicateTopThreshhold);
+        chkUseStemming.Checked = advancedOptions.IncludeStemming;
+        chkUsePhonic.Checked = advancedOptions.IncludePhonic;
+        chkUseSynonym.Checked = advancedOptions.IncludeThesaurus;
+        chkUseFuzzy.Checked = advancedOptions.IncludeFuzzy;
+        lbxFuzzyLevel.SelectedValue = advancedOptions.FuzzyLevel.ToString();
     }
 
     /// <summary>

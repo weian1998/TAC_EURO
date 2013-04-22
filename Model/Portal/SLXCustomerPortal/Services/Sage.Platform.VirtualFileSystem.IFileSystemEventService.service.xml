@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<PortalService xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="26d04409-2f74-4dec-8cb6-68f7e28fbce1">
+  <InstanceId>290a9b4b993d47599dbdd1de694a1dbb</InstanceId>
+  <ServiceType>Sage.Platform.VirtualFileSystem.Watcher.FileSystemEventHost, Sage.Platform.VirtualFileSystem</ServiceType>
+  <RegisterAs>Sage.Platform.VirtualFileSystem.IFileSystemEventService, Sage.Platform.VirtualFileSystem</RegisterAs>
+  <AddOnDemand>false</AddOnDemand>
+  <Properties />
+  <Scope>Application</Scope>
+</PortalService>

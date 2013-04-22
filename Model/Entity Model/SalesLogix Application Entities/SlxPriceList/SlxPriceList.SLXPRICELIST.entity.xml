@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="7740d003-6202-4158-a96e-eb93dfa0493b" lastModifiedUtc="2011-01-05T20:55:23.5816576Z" manageSchema="false" tableName="SLXPRICELIST" name="SlxPriceList" displayPropertyId="d5495ed4-4b76-4672-a0e8-a28369d483a6" isExtension="false" audited="false" generateSDataFeed="true" sDataPathName="slxPriceLists" uniqueIdentifierPropertyId="50478bd5-3185-40af-a0fc-95e9f1ca4ad0" lastUpdatedPropertyId="fc9019d5-ebf2-461b-8fd4-dd6cd9605e10" onBeforeInsertMethodId="e17312ab-3838-4866-80e2-d9af8544f162" onAfterInsertMethodId="66a164ce-0b37-4dd4-ab99-5ff54a67c58b" onBeforeUpdateMethodId="39db3183-850c-4444-9b85-ad4c96788df8" onAfterUpdateMethodId="b6d60ce2-efb5-4994-9ddd-22c978d48520" onBeforeDeleteMethodId="8a20918d-ca16-47c2-93ee-8a1857a63040" onAfterDeleteMethodId="cedacba2-7a3f-4074-9960-8fdeac860b50" onCreateId="c80e8f3e-f5f6-4cd4-866c-09c94a837c03">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="7740d003-6202-4158-a96e-eb93dfa0493b" lastModifiedUtc="2011-01-05T20:55:23.5816576Z" manageSchema="true" tableName="SLXPRICELIST" name="SlxPriceList" displayPropertyId="d5495ed4-4b76-4672-a0e8-a28369d483a6" isExtension="false" audited="false" generateSDataFeed="true" sDataPathName="slxPriceLists" uniqueIdentifierPropertyId="50478bd5-3185-40af-a0fc-95e9f1ca4ad0" lastUpdatedPropertyId="fc9019d5-ebf2-461b-8fd4-dd6cd9605e10" onBeforeInsertMethodId="e17312ab-3838-4866-80e2-d9af8544f162" onAfterInsertMethodId="66a164ce-0b37-4dd4-ab99-5ff54a67c58b" onBeforeUpdateMethodId="39db3183-850c-4444-9b85-ad4c96788df8" onAfterUpdateMethodId="b6d60ce2-efb5-4994-9ddd-22c978d48520" onBeforeDeleteMethodId="8a20918d-ca16-47c2-93ee-8a1857a63040" onAfterDeleteMethodId="cedacba2-7a3f-4074-9960-8fdeac860b50" onCreateId="c80e8f3e-f5f6-4cd4-866c-09c94a837c03">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
@@ -30,7 +30,7 @@
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>
       <SystemDataType guid="3ca925e1-4b76-4621-a39c-a0d4cb7327d5">
-        <GuidDataType />
+        <GuidDataType storage="String" />
       </SystemDataType>
     </property>
     <property xsi:type="OrmFieldProperty" id="d8c421bd-cf0b-4089-88cd-3b72eda3cd09" lastModifiedUtc="2010-04-29T00:23:10.4626605Z" name="AppId" audited="false" columnName="APPID" maxLength="12" precision="0" scale="0" ordinal="2" isReadOnly="false">

@@ -42,7 +42,7 @@ Is used by Sync to view all status and error message for a given sync.</descript
         <StandardIdDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="d8d315d8-6809-4184-b2df-7d1d9b1942a0" lastModifiedUtc="2010-09-29T21:29:10.5626Z" name="LogLevel" description="Off = 2147483647, Emergency = 120000, Fatal = 110000, Alert = 100000, Critical = 90000, Severe = 80000, Error = 70000, Warn = 60000, Notice = 50000, Info = 40000, Debug = 30000, Fine = 30000, Trace = 20000, Finer = 20000, Verbose = 10000, Finest = 10000, All = -2147483648" audited="false" columnName="LOGLEVEL" maxLength="0" precision="10" scale="0" ordinal="3" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="d8d315d8-6809-4184-b2df-7d1d9b1942a0" lastModifiedUtc="2010-09-29T21:29:10.5626Z" name="LogLevel" description="Off = 2147483647, Emergency = 120000, Fatal = 110000, Alert = 100000, Critical = 90000, Severe = 80000, Error = 70000, Warn = 60000, Notice = 50000, Info = 40000, Debug = 30000, Fine = 30000, Trace = 20000, Finer = 20000, Verbose = 10000, Finest = 10000, All = -2147483648" audited="false" columnName="LOGLEVEL" maxLength="24" precision="10" scale="0" ordinal="3" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty" />
       </ExtendedPropertiesCollection>

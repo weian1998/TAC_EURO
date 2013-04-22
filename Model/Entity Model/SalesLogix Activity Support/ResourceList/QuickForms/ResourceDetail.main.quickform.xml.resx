@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Name.Caption" xml:space="preserve">
     <value>Name:</value>
@@ -179,5 +179,17 @@
   </data>
   <data name="btnDelete.ActionConfirmationMessage" xml:space="preserve">
     <value>Are you sure you want to delete this resource?</value>
+  </data>
+  <data name="cbIsLocation.Caption" xml:space="preserve">
+    <value>Is Location</value>
+  </data>
+  <data name="txtDescription.Caption" xml:space="preserve">
+    <value>Location / Description:</value>
+  </data>
+  <data name="lueCoordinator.LookupProperties.Type.PropertyHeader" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="lueCoordinator.LookupProperties..PropertyHeader" xml:space="preserve">
+    <value />
   </data>
 </root>

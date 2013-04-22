@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="222b20b7-fab5-4c31-8527-949f5a26df32" lastModifiedUtc="2012-05-14T14:32:33.3387097Z" name="SnoozeAlarm" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="a7ad521b-df92-486d-9dbf-2158f6468f23" paramName="timeSpan" sequence="0" paramType="TimeSpan" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="402247e3-b0a7-4485-8c53-baaaf8453ae7" lastModifiedUtc="2012-05-14T14:31:59.1037516Z" targetType="Sage.SalesLogix.Activity.BusinessRules.UserActivity.Rules, Sage.SalesLogix.Activity" targetMethod="SnoozeAlarm" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="64f3fc6c-c2c0-4de5-818e-e3cb24ea5e01" lastModifiedUtc="2012-01-11T22:44:33.4871608Z" name="Decline" methodType="Rule" actionType="None" returnMode="None">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="35f6adcc-d8ad-4b9d-9961-32cec7b520a9" lastModifiedUtc="2012-01-11T22:44:30.4708592Z" targetType="Sage.SalesLogix.Activity.BusinessRules.UserNotificationRules, Sage.SalesLogix.Activity" targetMethod="Decline" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

@@ -1,14 +1,16 @@
-using Sage.Platform.Application;
-using Sage.Platform;
-using Sage.Entity.Interfaces;
 using System;
+using System.Collections;
+using System.Data;
+using System.Drawing;
+using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Text;
 using NHibernate;
-using System.Collections;
-using Sage.Platform.Framework;
+using Sage.Entity.Interfaces;
+using Sage.Platform;
+using Sage.Platform.Application;
 using Sage.Platform.Application.UI;
+using Sage.Platform.Framework;
 using Sage.Platform.Security;
 using Sage.Platform.WebPortal.Services;
 using Sage.Platform.WebPortal.SmartParts;
@@ -16,6 +18,7 @@ using Sage.Platform.WebPortal.SmartParts;
 public partial class SmartParts_Lead_LeadMarketing : EntityBoundSmartPartInfoProvider
 {
     #region Public Properties
+
     /// <summary>
     /// Gets the type of the entity.
     /// </summary>
@@ -35,6 +38,7 @@ public partial class SmartParts_Lead_LeadMarketing : EntityBoundSmartPartInfoPro
     #endregion
 
     #region Protected Methods
+
     /// <summary>
     /// Derived components should override this method to wire up event handlers.
     /// </summary>
@@ -42,7 +46,7 @@ public partial class SmartParts_Lead_LeadMarketing : EntityBoundSmartPartInfoPro
     {
         if (ScriptManager.GetCurrent(Page) != null)
         {
-            AddResponse.Click += new ImageClickEventHandler(AddResponse_Click);
+            AddResponse.Click += AddResponse_Click;
         }
         base.OnWireEventHandlers();
     }
@@ -84,8 +88,8 @@ public partial class SmartParts_Lead_LeadMarketing : EntityBoundSmartPartInfoPro
         {
             LinkButton deleteCommand = (LinkButton)e.Row.Cells[2].Controls[0];
             LinkButton removeCommand = (LinkButton)e.Row.Cells[3].Controls[0];
-            System.Data.DataRowView row = (System.Data.DataRowView)e.Row.DataItem;
-            
+            var row = (DataRowView)e.Row.DataItem;
+
             deleteCommand.Enabled = !String.IsNullOrEmpty(row["ResponseId"].ToString());
             if (deleteCommand.Enabled)
             {
@@ -95,7 +99,7 @@ public partial class SmartParts_Lead_LeadMarketing : EntityBoundSmartPartInfoPro
             }
             else
             {
-                e.Row.Cells[2].ForeColor = System.Drawing.Color.Gray;
+                e.Row.Cells[2].ForeColor = Color.Gray;
             }
 
             removeCommand.Enabled = !row["Status"].ToString().Equals(GetLocalResourceObject("TargetStatus_Removed").ToString());
@@ -109,7 +113,7 @@ public partial class SmartParts_Lead_LeadMarketing : EntityBoundSmartPartInfoPro
             }
             else
             {
-                e.Row.Cells[3].ForeColor = System.Drawing.Color.Gray;
+                e.Row.Cells[3].ForeColor = Color.Gray;
             }
         }
     }
@@ -196,6 +200,7 @@ public partial class SmartParts_Lead_LeadMarketing : EntityBoundSmartPartInfoPro
     protected void LeadMarketing_RowEditing(object sender, GridViewEditEventArgs e)
     {
         grdLeadMarketing.SelectedIndex = e.NewEditIndex;
+        e.Cancel = true;
     }
 
     /// <summary>
@@ -206,9 +211,11 @@ public partial class SmartParts_Lead_LeadMarketing : EntityBoundSmartPartInfoPro
     protected void LeadMarketing_Sorting(object sender, GridViewSortEventArgs e)
     {
     }
+
     #endregion
 
     #region Private Methods
+
     /// <summary>
     /// Gets the order by clause.
     /// </summary>
@@ -247,21 +254,21 @@ public partial class SmartParts_Lead_LeadMarketing : EntityBoundSmartPartInfoPro
                     }
                     IQuery q = session.CreateQuery(qry.ToString());
 
-                    q.SetAnsiString("leadId", lead.Id.ToString());
+                    q.SetParameter("leadId", lead.Id);
 
                     IList result;
                     using (new SparseQueryScope())
                         result = q.List();
-                    System.Data.DataTable dt = new System.Data.DataTable();
+                    var dt = new DataTable();
                     dt.Columns.Add("CampaignName");
                     dt.Columns.Add("CampaignCode");
                     dt.Columns.Add("Status");
                     dt.Columns.Add("Stage");
-                    System.Data.DataColumn col = new System.Data.DataColumn("StartDate", typeof(DateTime));
+                    var col = new DataColumn("StartDate", typeof(DateTime));
                     dt.Columns.Add(col);
-                    col = new System.Data.DataColumn("EndDate", typeof(DateTime));
+                    col = new DataColumn("EndDate", typeof(DateTime));
                     dt.Columns.Add(col);
-                    col = new System.Data.DataColumn("ResponseDate", typeof(DateTime));
+                    col = new DataColumn("ResponseDate", typeof(DateTime));
                     dt.Columns.Add(col);
                     dt.Columns.Add("ResponseMethod");
                     dt.Columns.Add("TargetId");
@@ -354,6 +361,7 @@ public partial class SmartParts_Lead_LeadMarketing : EntityBoundSmartPartInfoPro
             }
         }
     }
+
     #endregion
 
     #region ISmartPartInfoProvider Members
@@ -368,7 +376,7 @@ public partial class SmartParts_Lead_LeadMarketing : EntityBoundSmartPartInfoPro
     /// </returns>
     public override ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
     {
-        Sage.Platform.WebPortal.SmartParts.ToolsSmartPartInfo tinfo = new ToolsSmartPartInfo();
+        var tinfo = new ToolsSmartPartInfo();
         foreach (Control c in LeadMarketing_RTools.Controls)
         {
             tinfo.RightTools.Add(c);

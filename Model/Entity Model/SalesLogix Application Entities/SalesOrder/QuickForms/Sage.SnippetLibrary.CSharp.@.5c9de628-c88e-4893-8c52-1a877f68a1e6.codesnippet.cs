@@ -49,7 +49,7 @@ namespace Sage.BusinessRules.CodeSnippets
 			Sage.Platform.WebPortal.Services.IWebDialogService dialogService =  smartpart.DialogService;
 			if (dialogService != null)
             {
-                dialogService.SetSpecs(20, 20, 265, 800, "QuickInsertAccountContact", "", true);
+                dialogService.SetSpecs(20, 20, 300, 800, "QuickInsertAccountContact", "", true);
                 dialogService.EntityType = typeof(IContact);
                 dialogService.ShowDialog();
             }		

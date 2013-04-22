@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Web;
 using System.Web.UI;
 using Sage.Entity.Interfaces;
 using Sage.Platform;
@@ -17,7 +18,6 @@ using Sage.SalesLogix.Services;
 
 public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoProvider
 {
-
     /// <summary>
     /// Gets the type of the entity.
     /// </summary>
@@ -125,7 +125,7 @@ public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoPr
                 colOpenSalesPotential.Style.Add(HtmlTextWriterStyle.PaddingRight, "0px");
                 colPotentialLost.Style.Add(HtmlTextWriterStyle.PaddingRight, "0px");
             }
-            if (opportunity.Status.Equals(GetLocalResourceObject("Status_ClosedWon").ToString()))
+            if (GetOpportunityStatusMatch(opportunity, "ClosedWon"))
             {
                 rowActualWon.Visible = true;
                 rowReasonWon.Visible = true;
@@ -141,7 +141,7 @@ public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoPr
                 lblCompetitors.Text = String.Format(GetLocalResourceObject("lblCompetitorsReplaced.Caption").ToString(),
                                                     GetOpportunityCompetitors());
             }
-            else if (opportunity.Status.Equals(GetLocalResourceObject("Status_ClosedLost").ToString()))
+            else if (GetOpportunityStatusMatch(opportunity, "ClosedLost"))
             {
                 rowPotentialLost.Visible = true;
                 rowClosedLost.Visible = true;
@@ -172,8 +172,9 @@ public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoPr
                 rowCompetitors.Visible = false;
                 lblSummary.Text = String.Format(GetLocalResourceObject("lblSummary.Caption").ToString(),
                                                 opportunity.DaysOpen);
-                lblSummaryActivity.Text = String.Format(GetLocalResourceObject("lblSummaryActivity.Caption").ToString(),
-                                                        opportunity.DaysSinceLastActivity);
+                lblSummaryActivity.Text =
+                    String.Format(GetLocalResourceObject("lblSummaryActivity.Caption").ToString(),
+                                  opportunity.DaysSinceLastActivity);
             }
             if (ShowSalesProcessInfo(opportunity))
             {
@@ -237,7 +238,6 @@ public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoPr
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void OnClickSalesPotentialBaseRate(object sender, EventArgs e)
     {
-
         var rateType = Sage.Platform.Controls.ExchangeRateTypeEnum.BaseRate;
         EditSalesPotential(rateType);
     }
@@ -249,11 +249,8 @@ public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoPr
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void OnClickSalesPotentialEntityRate(object sender, EventArgs e)
     {
-
-
         var rateType = Sage.Platform.Controls.ExchangeRateTypeEnum.EntityRate;
         EditSalesPotential(rateType);
-
     }
 
     /// <summary>
@@ -263,15 +260,9 @@ public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoPr
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void OnClickSalesPotentialMyRate(object sender, EventArgs e)
     {
-
-
         var rateType = Sage.Platform.Controls.ExchangeRateTypeEnum.MyRate;
         EditSalesPotential(rateType);
-
-
     }
-
-
 
     /// <summary>
     /// Called when [click actual amount].
@@ -318,8 +309,7 @@ public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoPr
             IOpportunity opportunity = BindingSource.Current as IOpportunity;
             if (opportunity != null)
             {
-                string scriptFmtString = @"dojo.require('Sage.Utility');Sage.Utility.writeEmail('{0}', '{1}', '{2}');";
-
+                string scriptFmtString = @"dojo.require('Sage.Utility.Email');Sage.Utility.Email.writeEmail('{0}', '{1}', '{2}');";
                 string emailTo = String.Empty;
                 string subject = PortalUtil.JavaScriptEncode(String.Format(GetLocalResourceObject("lblEmailSubject.Caption").ToString(),
                                   opportunity.Description, opportunity.Account.AccountName));
@@ -332,20 +322,18 @@ public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoPr
         }
         catch (Exception ex)
         {
-            log.Error(ex.Message);
+            log.Error(ex);
         }
     }
 
     private string CheckForNullValue(object value)
     {
         string outValue = String.Format(GetLocalResourceObject("lblNone.Caption").ToString());
-
         if (value != null)
         {
             if (value.ToString().Length > 0)
                 outValue = value.ToString();
         }
-
         return outValue;
     }
 
@@ -357,69 +345,69 @@ public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoPr
     private string FormatEmailBody(IOpportunity opportunity)
     {
         IContextService context = ApplicationContext.Current.Services.Get<IContextService>(true);
-        TimeZone timeZone = (TimeZone)context.GetContext("TimeZone");
+        TimeZone timeZone = (TimeZone) context.GetContext("TimeZone");
         string datePattern = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
 
         string oppProducts = String.Empty;
-        bool oppWon = opportunity.Status.Equals(GetLocalResourceObject("Status_ClosedWon").ToString());
-        bool oppLost = opportunity.Status.Equals(GetLocalResourceObject("Status_ClosedLost").ToString());
-        string emailBody = String.Format("{0} \x0D\x0A", GetLocalResourceObject("lblEmailInfo.Caption"));
-        emailBody += String.Format("{0} {1} \x0D\x0A", GetLocalResourceObject("lblEmailOppDesc.Caption"),
+        bool oppWon = GetOpportunityStatusMatch(opportunity, "ClosedWon");
+        bool oppLost = GetOpportunityStatusMatch(opportunity, "ClosedLost");
+        string emailBody = String.Format("{0} \r\n", GetLocalResourceObject("lblEmailInfo.Caption"));
+        emailBody += String.Format("{0} {1} \r\n", GetLocalResourceObject("lblEmailOppDesc.Caption"),
                                    CheckForNullValue(opportunity.Description));
-        emailBody += String.Format("{0} {1} \x0D\x0A", GetLocalResourceObject("lblEmailOppAccount.Caption"),
+        emailBody += String.Format("{0} {1} \r\n", GetLocalResourceObject("lblEmailOppAccount.Caption"),
                                    CheckForNullValue(opportunity.Account != null
                                                          ? opportunity.Account.AccountName
                                                          : String.Empty));
-        emailBody += String.Format("{0} {1} \x0D\x0A", GetLocalResourceObject("EmailOppAcctMgr.Caption"),
+        emailBody += String.Format("{0} {1} \r\n", GetLocalResourceObject("EmailOppAcctMgr.Caption"),
                                    CheckForNullValue(opportunity.AccountManager));
-        emailBody += String.Format("{0} {1} \x0D\x0A", GetLocalResourceObject("EmailOppReseller.Caption"),
+        emailBody += String.Format("{0} {1} \r\n", GetLocalResourceObject("EmailOppReseller.Caption"),
                                    CheckForNullValue(opportunity.Reseller));
-        emailBody += String.Format("{0} {1} \x0D\x0A", GetLocalResourceObject("EmailOppEstClose.Caption"),
+        emailBody += String.Format("{0} {1} \r\n", GetLocalResourceObject("EmailOppEstClose.Caption"),
                                    opportunity.EstimatedClose.HasValue
-                                       ? timeZone.UTCDateTimeToLocalTime((DateTime)opportunity.EstimatedClose).ToString
+                                       ? timeZone.UTCDateTimeToLocalTime((DateTime) opportunity.EstimatedClose).ToString
                                              (datePattern)
                                        : String.Empty);
-        emailBody += String.Format("{0} {1} \x0D\x0A", GetLocalResourceObject("EmailOppCloseProb.Caption"),
+        emailBody += String.Format("{0} {1} \r\n", GetLocalResourceObject("EmailOppCloseProb.Caption"),
                                    CheckForNullValue(opportunity.CloseProbability));
-        emailBody += String.Format("{0} {1} \x0D\x0A\x0D\x0A", GetLocalResourceObject("EmailOppComments.Caption"),
+        emailBody += String.Format("{0} {1} \r\n\r\n", GetLocalResourceObject("EmailOppComments.Caption"),
                                    CheckForNullValue(opportunity.Notes));
-        emailBody += String.Format("{0} \x0D\x0A", GetLocalResourceObject("EmailOppValue.Caption"));
+        emailBody += String.Format("{0} \r\n", GetLocalResourceObject("EmailOppValue.Caption"));
         //emailBody += BusinessRuleHelper.AccountingSystemHandlesSO()
-        //                 ? String.Format("{0} {1} \x0D\x0A", GetLocalResourceObject("EmailOppPotential.Caption"),
+        //                 ? String.Format("{0} {1} \r\n", GetLocalResourceObject("EmailOppPotential.Caption"),
         //                                 curERPOpenBaseSalesPotential.FormattedText)
-        //                 : String.Format("{0} {1} \x0D\x0A", GetLocalResourceObject("EmailOppPotential.Caption"),
+        //                 : String.Format("{0} {1} \r\n", GetLocalResourceObject("EmailOppPotential.Caption"),
         //                                 curOpenBaseSalesPotential.FormattedText);
-        emailBody += String.Format("{0} {1} \x0D\x0A\x0D\x0A", GetLocalResourceObject("EmailOppWeighted.Caption"),
+        emailBody += String.Format("{0} {1} \r\n\r\n", GetLocalResourceObject("EmailOppWeighted.Caption"),
                                    curBaseWeighted.FormattedText);
-        emailBody += String.Format("{0} \x0D\x0A", GetLocalResourceObject("EmailOppSummary.Caption"));
+        emailBody += String.Format("{0} \r\n", GetLocalResourceObject("EmailOppSummary.Caption"));
         if (oppWon || oppLost)
         {
-            emailBody += String.Format("{0} \x0D\x0A",
+            emailBody += String.Format("{0} \r\n",
                                        String.Format(
                                            GetLocalResourceObject("EmailOppWonLostSummary.Caption").ToString(),
                                            dtpClosedWonSummary.Text,
                                            Convert.ToString(opportunity.DaysOpen)));
             emailBody += oppWon
-                             ? String.Format("{0} \x0D\x0A",
+                             ? String.Format("{0} \r\n",
                                              String.Format(
                                                  GetLocalResourceObject("EmailOppReasonWon.Caption").ToString(),
                                                  CheckForNullValue(opportunity.Reason)))
-                             : String.Format("{0} \x0D\x0A",
+                             : String.Format("{0} \r\n",
                                              String.Format(
                                                  GetLocalResourceObject("EmailOppReasonLost.Caption").ToString(),
                                                  CheckForNullValue(opportunity.Reason)));
         }
         else
         {
-            emailBody += String.Format("{0} \x0D\x0A",
+            emailBody += String.Format("{0} \r\n",
                                        String.Format(GetLocalResourceObject("EmailOppStageSummary.Caption").ToString(),
                                                      CheckForNullValue(opportunity.Stage)));
         }
-        emailBody += String.Format("{0} \x0D\x0A\x0D\x0A",
+        emailBody += String.Format("{0} \r\n\r\n",
                                    String.Format(GetLocalResourceObject("lblEmailOppType.Caption").ToString(),
                                                  CheckForNullValue(opportunity.Type)));
 
-        emailBody += String.Format("{0} \x0D\x0A", GetLocalResourceObject("EmailOppProducts.Caption"));
+        emailBody += String.Format("{0} \r\n", GetLocalResourceObject("EmailOppProducts.Caption"));
 
         oppProducts = Enumerable.Aggregate(opportunity.Products, oppProducts,
                                            (current, oppProduct) =>
@@ -427,21 +415,22 @@ public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoPr
                                            String.Format("{0} ({1}); ", oppProduct.Product, oppProduct.Quantity));
 
         if (!string.IsNullOrEmpty(oppProducts))
-            emailBody += String.Format("{0} \x0D\x0A\x0D\x0A", CheckForNullValue(oppProducts.Substring(0, oppProducts.Length - 2)));
+            emailBody += String.Format("{0} \r\n\r\n", CheckForNullValue(oppProducts.Substring(0, oppProducts.Length - 2)));
 
         if (oppWon || oppLost)
-            emailBody += String.Format("{0} \x0D\x0A{1} \x0D\x0A\x0D\x0A", GetLocalResourceObject("EmailOppCompetitors.Caption"),
+            emailBody += String.Format("{0} \r\n{1} \r\n\r\n", GetLocalResourceObject("EmailOppCompetitors.Caption"),
                                        GetOpportunityCompetitors());
 
-        emailBody += String.Format("{0} \x0D\x0A", GetLocalResourceObject("EmailOppContacts.Caption"));
+        emailBody += String.Format("{0} \r\n", GetLocalResourceObject("EmailOppContacts.Caption"));
         emailBody = Enumerable.Aggregate(opportunity.Contacts, emailBody,
                                          (current, oppContact) =>
                                          current +
-                                         String.Format("{0} \x0D\x0A",
+                                         String.Format("{0} \r\n",
                                                        String.Format("{0}, {1}; {2}", oppContact.Contact.Name,
                                                                      oppContact.Contact.Title, oppContact.SalesRole)));
-        return PortalUtil.JavaScriptEncode(emailBody);
+        return HttpUtility.JavaScriptStringEncode(emailBody);
     }
+
     /// <summary>
     /// Shows the sales process info.
     /// </summary>
@@ -450,7 +439,8 @@ public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoPr
     private bool ShowSalesProcessInfo(IOpportunity opportunity)
     {
         bool result = false;
-        if ((opportunity.Status.Equals(GetLocalResourceObject("Status_Open").ToString())) || (opportunity.Status.Equals(GetLocalResourceObject("Status_Inactive").ToString())))
+        if (GetOpportunityStatusMatch(opportunity, "Open") ||
+            GetOpportunityStatusMatch(opportunity, "Inactive"))
         {
             IRepository<ISalesProcesses> rep = EntityFactory.GetRepository<ISalesProcesses>();
             IQueryable qry = (IQueryable)rep;
@@ -552,29 +542,24 @@ public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoPr
             }
             DialogService.ShowDialog();
         }
-
     }
 
     private void EditActualAmount(Sage.Platform.Controls.ExchangeRateTypeEnum exchangeRateType)
     {
-
         if (DialogService != null)
         {
             IOpportunity entity = BindingSource.Current as IOpportunity;
-            if ((entity != null) && (entity.Status.Equals(GetLocalResourceObject("Status_ClosedWon").ToString())))
+            if (GetOpportunityStatusMatch(entity, "ClosedWon"))
             {
                 DialogService.SetSpecs(200, 200, 400, 600, "OpportunityClosedWon", "", true);
-
             }
-            else if ((entity != null) && (entity.Status.Equals(GetLocalResourceObject("Status_ClosedLost").ToString())))
+            else if (GetOpportunityStatusMatch(entity, "ClosedLost"))
             {
                 DialogService.SetSpecs(200, 200, 400, 600, "OpportunityClosedLost", "", true);
-
             }
             else
             {
                 DialogService.SetSpecs(200, 200, 200, 300, "UpdateSalesPotential", "", true);
-
             }
 
             if (BusinessRuleHelper.IsMultiCurrencyEnabled())
@@ -589,7 +574,23 @@ public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoPr
             }
             DialogService.ShowDialog();
         }
+    }
 
+    private bool GetOpportunityStatusMatch(IOpportunity opportunity, string statusType)
+    {
+        if (opportunity == null) return false;
+        switch (statusType)
+        {
+            case "ClosedWon":
+                return ReferenceEquals(opportunity.Status, GetLocalResourceObject("Status_ClosedWon")) || opportunity.Status == "Closed - Won";
+            case "ClosedLost":
+                return ReferenceEquals(opportunity.Status, GetLocalResourceObject("Status_ClosedLost")) || opportunity.Status == "Closed - Lost";
+            case "Open":
+                return ReferenceEquals(opportunity.Status, GetLocalResourceObject("Status_Open")) || opportunity.Status == "Open";
+            case "Inactive":
+                return ReferenceEquals(opportunity.Status, GetLocalResourceObject("Status_Inactive")) || opportunity.Status == "Inactive";
+        }
+        return false;
     }
 
     private void GetExchageRateData(Sage.Platform.Controls.ExchangeRateTypeEnum exchangeRateType, out string exchangeRateCode, out double exchangeRate)
@@ -598,14 +599,12 @@ public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoPr
         double? _exchangeRate = 0.0;
         if (exchangeRateType == Sage.Platform.Controls.ExchangeRateTypeEnum.EntityRate)
         {
-
             IOpportunity opp = BindingSource.Current as IOpportunity;
             _exchangeRateCode = opp.ExchangeRateCode;
             _exchangeRate = opp.ExchangeRate;
         }
         if (exchangeRateType == Sage.Platform.Controls.ExchangeRateTypeEnum.MyRate)
         {
-
             _exchangeRateCode = BusinessRuleHelper.GetMyCurrencyCode();
             IExchangeRate myExchangeRate = EntityFactory.GetById<IExchangeRate>(String.IsNullOrEmpty(_exchangeRateCode) ? "USD" : _exchangeRateCode);
             if (myExchangeRate != null)
@@ -615,7 +614,6 @@ public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoPr
         }
         if (exchangeRateType == Sage.Platform.Controls.ExchangeRateTypeEnum.BaseRate)
         {
-
             var optionSvc = ApplicationContext.Current.Services.Get<ISystemOptionsService>(true);
             _exchangeRateCode = optionSvc.BaseCurrency;
             IExchangeRate er = EntityFactory.GetById<IExchangeRate>(String.IsNullOrEmpty(_exchangeRateCode) ? "USD" : _exchangeRateCode);
@@ -625,9 +623,7 @@ public partial class SmartParts_OpportunitySnapShot : EntityBoundSmartPartInfoPr
                 _exchangeRate = 1;
             }
         }
-
         exchangeRateCode = _exchangeRateCode;
-        exchangeRate = System.Convert.ToDouble(_exchangeRate);
+        exchangeRate = Convert.ToDouble(_exchangeRate);
     }
-
 }

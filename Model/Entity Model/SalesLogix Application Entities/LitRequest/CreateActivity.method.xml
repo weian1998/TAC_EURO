@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="b1268967-b56f-451d-b964-bcf74d1f4af0" lastModifiedUtc="2011-07-21T03:42:31.3179748Z" name="CreateActivity" returnType="String" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter />
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="e36c8a8a-ebb2-4bac-a735-fe1de9c67bf1" lastModifiedUtc="2011-07-21T03:42:30.8564161Z" targetType="Sage.SalesLogix.LitRequest.Rules, Sage.SalesLogix.BusinessRules" targetMethod="CreateActivity" active="true" description="Create the activity record for the literature request.&#xD;&#xA;This also updates the litreqid to match the activity's.">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

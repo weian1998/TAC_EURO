@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="c06d4219-c569-4fea-8992-0f1cf6b69927" lastModifiedUtc="2011-08-30T16:42:28.5792044Z" name="CopyNewContact" returnType="IContact" methodType="Rule" actionType="None" returnMode="Object">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmEntityMethod" />
+  </ExtendedPropertiesCollection>
+  <parameter>
+    <OrmEntityMethodParam id="8d13dca1-b1e1-42d0-ae13-7c684b5ec8d6" paramName="targetAccount" sequence="0" paramType="IAccount" />
+    <OrmEntityMethodParam id="5b66b869-5492-446e-a2ce-b7a6f97e0ce9" paramName="copyOptions" sequence="0" paramType="Object" />
+    <OrmEntityMethodParam id="3a755152-3388-4214-986f-784463f64838" paramName="session" sequence="0" paramType="Object" />
+  </parameter>
+  <preExecuteTargets />
+  <methodTargets>
+    <methodTarget id="f459581e-7c2c-4f75-baf6-74d7a5eb3fee" lastModifiedUtc="2011-08-30T20:32:14.5460896Z" targetType="Sage.SalesLogix.Contact.Rules, Sage.SalesLogix.BusinessRules" targetMethod="CopyNewContact" active="true">
+      <ExtendedPropertiesCollection>
+        <extendee type="Sage.Platform.Orm.Entities.OrmMethodTarget" />
+      </ExtendedPropertiesCollection>
+    </methodTarget>
+  </methodTargets>
+  <postExecuteTargets />
+  <postFlushTargets />
+</method>

@@ -1,0 +1,60 @@
+<div class="dateTimePicker">
+        <div dojoAttachPoint="tooltipContainer">
+        
+            <div dojoAttachPoint="dateContainer" class="dateTimePicker-dateContainer">
+               
+                    <input id="${id}-Calendar" data-dojo-type="Sage.UI.Calendar"
+                        style="width:inherit;"
+                        textAlign="${textAlign}"
+                           type="text" 
+                           tabindex="0"
+                           displayMode="popup"
+                           dojoAttachPoint="dateNode"
+                           dojoAttachEvent="onValueSelected:_onValueSelected,onBlur:_onCalendarBlur">
+               
+            </div>
+            
+            <div dojoAttachPoint="timeZoneContainer" class="dateTimePicker-timeZoneContainer">
+               
+                    <label for="${id}-TimeStart">${timeStartText}</label><br />
+                    <input id="${id}-TimeTextBox" data-dojo-type="dijit.form.TimeTextBox" 
+                           style="width:16em;"
+                           textAlign="${textAlign}"
+                           tabindex="0"
+                           type="text" dojoAttachPoint="timeNode">
+                    <br /><br/>
+                    <label for="${id}-TzCalculator">${timeZoneCalculatorText}</label>
+                    <div id="timeZoneCalucaltor" class="dateTimePicker-timeZoneCalculator">
+                       <p style="width:auto;margin-top:auto">
+                            <label for="${id}-TzSelectSource">${timeZoneSourceText}</label><br />
+                            <select id="${id}-TzSelectSource" data-dojo-type="dijit.form.ComboBox"  dojoAttachPoint="timeZoneSourceComboNode" style="width:15em;">
+                            </select>
+                            <br />
+                            <label for="${id}-TzSelectDest">${timeZoneDestText}</label><br />
+                           <select id="${id}-TzSelectDest" data-dojo-type="dijit.form.ComboBox"  dojoAttachPoint="timeZoneDestComboNode" style="width:15em;">
+                           </select>
+                           <br/>
+                            <span id="${id}-ConvertResults" dojoAttachPoint="convertResultsNode" style="float:left;padding-top:5px;">
+                        </span>
+                        </p><br/>
+                        <button id="${id}-Convert" data-dojo-type="dijit.form.Button" dojoAttachPoint="timeZoneConvertButtonNode" type="button" style="float:right" dojoAttachEvent="onClick:_convertClicked">
+                            ${convertText}
+                        </button>
+                       
+                        
+                    </div>
+               
+                <div class="button-bar alignright" style="clear: both">
+                    <button id="${id}-OKButton" tabindex="0" data-dojo-type="dijit.form.Button" dojoAttachPoint="OKButtonNode" type="button" dojoAttachEvent="onClick:_okClicked">
+                        ${okText}
+                    </button>
+                    <button id="${id}-CancelButton" tabindex="0" data-dojo-type="dijit.form.Button" dojoAttachPoint="CancelButtonNode" type="button" dojoAttachEvent="onClick:_cancelClicked">
+                        ${cancelText}
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+    
+</div>
+

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="ru" xml:lang="ru" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Правила автоматического слияния при импорте</title>
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="../../WebClient_CSH.htm#Leads/leadmergerules.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Open topic with Search, TOC, and Index</a>
+        </p>
+        <h1><a name="kanchor523"></a>Правила автоматического слияния при импорте</h1>
+        <p>Во время импорта наводок у вас есть возможность автоматически объединить дубликаты записей, которые находятся с помощью выбранных вами <a href="leadimportdupe.htm">критериев поиска совпадений</a>. Дубликаты наводок могут быть объединены с существующими контактами или наводками. Эти записи объединяются в соответствии со следующими правилами:</p>
+        <ul style="list-style-type: disc;">
+            <li class="Bullets" value="1">Если в настройках разрешения конфликта указано, что существующая запись выигрывает:</li>
+            <li class="Topic-Text-Bulleted-2" value="2">Записи объединяются и никакая информация по наводке не используется. Это также применимо к полям Субъекта.</li>
+            <li class="Topic-Text-Bulleted-2" value="3">Если в импортируемой записи заполнены поля, значения которых в существующей записи пусты, в итоговой записи, поля будут пустыми.</li>
+            <li class="Bullets" value="4">Если в настройках разрешения конфликта указано, что импортируемая запись выигрывает:</li>
+            <li class="Topic-Text-Bulleted-2" value="5">Информация импортируемоей наводки замещает существующую (по наводке, контакту или субъекту).</li>
+            <li class="Topic-Text-Bulleted-2" value="6">Если некоторые поля наводки не содержат информацию, а для существующей записи поля заполнены, то в итоговой записи поля сохранятся. Это также применимо к полям Субъекта.</li>
+            <li class="Topic-Text-Bulleted-2" value="7">Когда объединяются две наводки, адресная информация импортируемоей наводки заменит существующую информацию. Адрес существующей наводки будет сохранен в виде замечания в истории наводки.</li>
+            <li class="Topic-Text-Bulleted-2" value="8">Адресная информаци наводки никогда не замещает адреса контакта или субъекта. На основе адреса импортируемой наводки может быть добавлен новый адрес. Новый адрес не будет основным для контакта или субъекта, основной адрес или адрес доставки контакта или субъекта не будет изменен.</li>
+        </ul>
+        <p class="RelatedTopics">См. также</p>
+        <p><a href="importing_leads_from_a_list.htm">Импорт наводок</a>
+        </p>
+        <p><a href="What_are_Leads_.htm">Краткий обзор Наводок</a>
+        </p>
+        <div style="width: 100%;position: relative;">
+            <p>&#160;</p>
+        </div>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Tell us how we can make the Help better</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

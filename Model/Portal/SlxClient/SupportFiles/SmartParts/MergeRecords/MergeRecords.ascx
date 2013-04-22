@@ -3,11 +3,10 @@
 <%@ Register Assembly="Sage.SalesLogix.HighLevelTypes" Namespace="Sage.SalesLogix.HighLevelTypes" TagPrefix="SalesLogix" %>
 
 <input runat="server" id="txtShowAll" value="false" enableviewstate="true" type="hidden" />
-
 <div style="display:none">
     <asp:Panel ID="MergeRecords_RTools" runat="server">
         <SalesLogix:PageLink ID="lnkMergeRecordsHelp" runat="server" LinkType="HelpFileName"
-            ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="mergerecordslistview.aspx"
+            ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="MCWebHelp" NavigateUrl="mergerecordslistview.htm"
             ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16">
         &nbsp;&nbsp;&nbsp;&nbsp;
         </SalesLogix:PageLink>
@@ -88,7 +87,6 @@
                     </Columns>
                     <HeaderStyle HorizontalAlign="Center" BackColor="#F3F3F3" BorderColor="Transparent" Font-Bold="True" Font-Size="Small" />
                 </SalesLogix:SlxGridView>
-                <br />
             </td>
             <td></td>
         </tr>
@@ -100,7 +98,7 @@
         <col width="25%" />
         <tr runat="server" id="rowStandardButtons">
             <td></td>
-            <td>
+            <td class="vertical-align:middle">
                 <asp:LinkButton runat="server" ID="lnkShowAll" OnClientClick="ShowAll_Click()" OnClick="lnkShowAll_OnClick"
                     Text="<%$ resources: lnkShowAll.Caption %>">
                 </asp:LinkButton>
@@ -114,7 +112,7 @@
         </tr>
         <tr runat="server" id="rowWizardButtons" visible="false">
             <td></td>
-            <td>
+            <td class="vertical-align:middle">
                 <asp:LinkButton runat="server" ID="lnkShowAllWizard" OnClientClick="ShowAll_Click()" OnClick="lnkShowAll_OnClick"
                     Text="<%$ resources: lnkShowAll.Caption %>">
                 </asp:LinkButton>

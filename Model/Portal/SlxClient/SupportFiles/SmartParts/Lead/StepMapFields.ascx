@@ -16,34 +16,30 @@
             <span class="slxlabel">
                 <asp:Label ID="lblHeader" runat="server" Text="<%$ resources:lblHeader.Caption %>" Width="650px"></asp:Label>
             </span>
-            <br />
-            <br />
-            <br />
+            <br/>
+            <br/>
         </td>
     </tr>
     <tr>
-        <td style="height: 62px"></td>
-        <td align="left" style="height: 62px" >
+        <td></td>
+        <td>
             <span class="lbl">
-                <asp:Label ID="lblTemplates" AssociatedControlID="cboTemplates" runat="server"
-                    Text="<%$ resources: lblTemplates.Caption %>">
-                </asp:Label>
+                <asp:Label ID="lblTemplates" AssociatedControlID="cboTemplates" runat="server" Text="<%$ resources: lblTemplates.Caption %>"></asp:Label>
             </span>
             <span class="textcontrol">
-                <asp:ListBox runat="server" ID="cboTemplates" SelectionMode="Single" Rows="1" AutoPostBack="true" OnSelectedIndexChanged="cboTemplates_SelectedIndexChanged" >
-                    <asp:ListItem Selected="true" Text="<%$ resources: cboTemplates.None.Item %>" Value="None"></asp:ListItem>
+                <asp:ListBox runat="server" ID="cboTemplates" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" shouldPublishMarkDirty="false" SelectionMode="Single" Rows="1" AutoPostBack="true"
+                    OnSelectedIndexChanged="cboTemplates_SelectedIndexChanged" >
                 </asp:ListBox>
             </span>
-            <br />
+            <br/>
+            <br/>
         </td>
     </tr>
     <tr>
         <td></td>
         <td>
             <span class="slxlabel">
-                <asp:Label ID="lblMatches" AssociatedControlID="lblMatches" runat="server" 
-                    Text="<%$ resources: lblMatches.Caption %>">
-                </asp:Label>
+                <asp:Label ID="lblMatches" AssociatedControlID="lblMatches" runat="server" Text="<%$ resources: lblMatches.Caption %>"></asp:Label>
             </span>
         </td>
         <td></td>
@@ -93,8 +89,7 @@
     </tr>
     <tr>
         <td>
-            <br />
-            <br />
+            <br/>
         </td>
         <td></td>
         <td></td>
@@ -102,12 +97,10 @@
     <tr>
         <td></td>
         <td colspan="3">
-            
             <asp:Button runat="server" ID="cmdSave" OnClick="SaveTemplate_OnClick" Enabled="false" CssClass="slxbutton" 
                 Text="<%$ resources: cmdSave.Caption %>" ToolTip="<%$ resources: cmdSave.ToolTip %>" />
             <asp:Button runat="server" ID="cmdSaveAs" OnClick="SaveAsTemplate_OnClick" Enabled="false" CssClass="slxbutton"
                 Text="<%$ resources: cmdSaveAs.Caption %>" ToolTip="<%$ resources: cmdSaveAs.ToolTip %>" />
-           
         </td>    
     </tr>
  </table>

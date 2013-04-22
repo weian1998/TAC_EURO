@@ -112,54 +112,51 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="grdAssets.EmptyTableRowText" xml:space="preserve">
-    <value>No records match the selection criteria.</value>
-  </data>
-  <data name="grdAssets.f1e9ce1f-d9ff-4e2b-9c7e-57b57b5edf06.ColumnHeading" xml:space="preserve">
-    <value>Product Name</value>
-  </data>
-  <data name="grdAssets.f565d9f1-15dc-4663-a79b-3f0cc0e47a32.ColumnHeading" xml:space="preserve">
-    <value>SKU</value>
-  </data>
-  <data name="grdAssets.1a4a5470-7fda-4f2b-9423-255baf8ee098.ColumnHeading" xml:space="preserve">
-    <value>Serial #</value>
-  </data>
-  <data name="grdAssets.6f753df9-ac61-493e-abc1-a17926e88081.ColumnHeading" xml:space="preserve">
-    <value>Qty</value>
-  </data>
-  <data name="grdAssets.53142d43-9231-4f19-a431-9a08c431b5eb.ColumnHeading" xml:space="preserve">
-    <value>Contact</value>
-  </data>
-  <data name="grdAssets.88f3d2e8-485d-4614-b3f8-6920cf0876a7.ColumnHeading" xml:space="preserve">
-    <value>Location</value>
-  </data>
-  <data name="grdAssets.ee6f6e25-568d-413b-a0ca-1ff091c7dabf.ColumnHeading" xml:space="preserve">
+  <data name="grdAssets.6beb1b27-2f6b-4f69-98a3-0f01cf7090a2.ColumnHeading" xml:space="preserve">
     <value>Asset #</value>
   </data>
-  <data name="grdAssets.9898fa15-d10b-431c-ab57-bab1c9edd980.Text" xml:space="preserve">
-    <value>Edit</value>
+  <data name="grdAssets.92a21ea1-16f7-4fb0-9753-1d8b021e03e0.ColumnHeading" xml:space="preserve">
+    <value>Location</value>
   </data>
-  <data name="df8592dc-2a24-4218-8aa5-9005426fc5a8.DialogTitleOverride" xml:space="preserve">
-    <value>Edit Account Product</value>
+  <data name="grdAssets.f9145a88-007e-49e9-bd62-572a2f48d501.ColumnHeading" xml:space="preserve">
+    <value>Contact</value>
   </data>
-  <data name="cmdAddAsset.Caption" xml:space="preserve">
-    <value>Insert</value>
+  <data name="grdAssets.2d388020-65ff-4d69-92e9-000e482fd94d.ColumnHeading" xml:space="preserve">
+    <value>Qty</value>
   </data>
-  <data name="cmdAddAsset.ToolTip" xml:space="preserve">
-    <value>Insert New Asset</value>
+  <data name="grdAssets.6728e16d-efef-4879-8d68-65f599ecbf35.ColumnHeading" xml:space="preserve">
+    <value>Serial #</value>
   </data>
-  <data name="grdAssets.8abb22fa-52a9-4326-b653-b4e93baeaf43.Text" xml:space="preserve">
+  <data name="grdAssets.c48be44d-1fcc-4e50-8eda-778820212af3.ColumnHeading" xml:space="preserve">
+    <value>SKU</value>
+  </data>
+  <data name="grdAssets.59e59e62-db7d-4146-adda-cd7d7136745b.ColumnHeading" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
+  <data name="grdAssets.Delete.ToolTip" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="grdAssets.8abb22fa-52a9-4326-b653-b4e93baeaf43.ConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to remove the selected Account Asset.</value>
+  <data name="grdAssets.Save.ToolTip" xml:space="preserve">
+    <value>Save</value>
   </data>
-  <data name="4bfccca1-e8e0-4b16-914f-3a63caf85273.DialogTitleOverride" xml:space="preserve">
-    <value>Insert New Asset</value>
+  <data name="grdAssets.Cancel.ToolTip" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="btnAddAsset.ToolTip" xml:space="preserve">
+    <value>Add Asset</value>
+  </data>
+  <data name="grdAssets.a4124a04-6c17-4e29-a35c-27f340e36dc5.ColumnHeading" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="grdAssets.c9b81fd8-e256-463f-a1c8-24aa2cd769e4.ColumnHeading" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="grdAssets.EmptyTableRowText" xml:space="preserve">
+    <value>No records match the selection criteria.</value>
   </data>
 </root>

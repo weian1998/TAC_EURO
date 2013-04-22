@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="btnSaveResource1.Text" xml:space="preserve">
     <value>Save</value>
@@ -180,13 +180,34 @@
   <data name="lblAutoFitColumnsDescriptionResource1.Text" xml:space="preserve">
     <value>Automatically resize columns to fit inside the screen space.  This will prevent horizontal scrolling.</value>
   </data>
+  <data name="lblCheckboxEnabledResource.Text" xml:space="preserve">
+    <value>Checkbox Enabled</value>
+  </data>
   <data name="lblGroupTabGridOptionsResource1.Text" xml:space="preserve">
     <value>Grid Options</value>
   </data>
   <data name="lblGroupTabGridOptionsResources1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="lblLookupLayoutGroup1.Text" xml:space="preserve">
+  <data name="lblLookupLayoutGroup1" xml:space="preserve">
     <value>Default Lookup Layout:</value>
+  </data>
+  <data name="condContains.Text" xml:space="preserve">
+    <value>Contains</value>
+  </data>
+  <data name="condEquals.Text" xml:space="preserve">
+    <value>Equal to</value>
+  </data>
+  <data name="condNotEquals.Text" xml:space="preserve">
+    <value>Not Equal to</value>
+  </data>
+  <data name="condStartingWith.Text" xml:space="preserve">
+    <value>Starting With</value>
+  </data>
+  <data name="lblLookupDefaultCondition.Text" xml:space="preserve">
+    <value>Default Lookup Condition:</value>
+  </data>
+  <data name="lblGeneralLookupOptionsResource.Text" xml:space="preserve">
+    <value>General Lookup Options</value>
   </data>
 </root>

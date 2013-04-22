@@ -9,33 +9,17 @@
 	<title>Sage SalesLogix</title>
     
 	<link type="text/css" href="../css/SlxBase.css" rel="stylesheet" />
-	<style type="text/css">
-        .LoginArea 
-		{ 
-			width : 100%; 
-			padding-top: 6.0em;
-		}
-        
-        body {
-			background-color : white;
-        }
 
-        DIV#CenterHead 
-        {
-			padding-left : 25em;
-			background : url(images/Lozenge.gif) no-repeat top left;
-			height : 48px;
-		}
-		
-		DIV.footerText 
-		{
-			padding-top : 5em;
-			padding-left : 8em;
-			color : #333333;
-		}
- 
+
+    <style type="text/css">
+         body {
+			background-color : #eeeeee;
+			background-image: none;
+			 font-family: Arial,Helvetica,sans-serif;
+			 font-size:13px;
+        }       
+       
     </style>
-
 </head>
 <body>
 	<form id="Form1" runat="server" method="post" >

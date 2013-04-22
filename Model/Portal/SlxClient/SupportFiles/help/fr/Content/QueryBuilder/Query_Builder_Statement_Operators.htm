@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="105" MadCap:lastWidth="602" MadCap:disableMasterStylesheet="true" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="WebHelp" lang="en-us" xml:lang="en-us" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="WebClient.xml" MadCap:SearchType="Stem">
+    <!-- saved from url=(0014)about:internet -->
+    <head><title>Opérateurs d'instruction de Query Builder</title>
+        <link href="../Resources/TableStyles/TableStyle.css" rel="stylesheet" />
+        <link href="../Resources/TableStyles/Borders.css" rel="stylesheet" />
+        <link href="../Resources/Stylesheets/SALESLOGIX.CSS" rel="stylesheet" />
+        <script src="../SkinSupport/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink" style="display: none;"><a href="../../WebClient_CSH.htm#QueryBuilder/Query_Builder_Statement_Operators.htm" style="font-family: Verdana;color: #ffffff;background-color: #cad59f;">Ouvrir une rubrique avec la recherche, la table des matières et l'index</a>
+        </p>
+        <h1>Opérateurs d'instruction de Query Builder<a name="kanchor637"></a></h1>
+        <p>Lorsque vous ajoutez une instruction conditionnelle, vous devez sélectionner un opérateur. L'opérateur permet de déterminer si un enregistrement répond ou non aux critères définis dans une instruction conditionnelle. Lorsque vous ajoutez une instruction conditionnelle, l'opérateur par défaut et les autres opérateurs disponibles dépendent du <a href="Query_Builder_Field_Type_Conventions.htm">type de champ</a>.</p>
+        <p>Le tableau suivant décrit tous les opérateurs possibles.</p>
+        <table style="width: 90%;mc-table-style: url('../Resources/TableStyles/TableStyle.css');margin-left: 0;margin-right: auto;" class="TableStyle-TableStyle" cellspacing="0">
+            <thead>
+                <tr class="Head-Header1">
+                    <th class="HeadE-Column1-Header1">Opérateur</th>
+                    <th class="HeadD-Column1-Header1">Sélectionne un enregistrement si le champ correspondant contient une valeur :</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">commençant par</td>
+                    <td class="BodyD-Column1-Body1">qui commence par la valeur définie dans la zone La valeur est.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">contient</td>
+                    <td class="BodyD-Column1-Body1">qui contient la chaîne définie dans la zone La valeur est.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(=) égal à</td>
+                    <td class="BodyD-Column1-Body1">égale à la valeur définie dans la zone La valeur est.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(&lt;&gt;) non égal à</td>
+                    <td class="BodyD-Column1-Body1">non égale à la valeur définie dans la zone La valeur est.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(&lt;) inférieur à</td>
+                    <td class="BodyD-Column1-Body1">inférieure à la valeur définie dans la zone La valeur est.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(&lt;=) inférieur ou égal à</td>
+                    <td class="BodyD-Column1-Body1">inférieure ou égale à la valeur définie dans la zone La valeur est.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(&gt;) supérieur à</td>
+                    <td class="BodyD-Column1-Body1">supérieure à la valeur définie dans la zone La valeur est.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">(&gt;=) supérieur ou égal à</td>
+                    <td class="BodyD-Column1-Body1">supérieure ou égale à la valeur définie dans la zone La valeur est.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">In</td>
+                    <td class="BodyD-Column1-Body1">qui contient une des chaînes définies dans la zone La valeur est, telle qu'une instruction OR littérale intégrée. Vous devez utiliser les guillemets pour chaque valeur indiquant ce qui doit être recherché.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Ne contient pas de données</td>
+                    <td class="BodyD-Column1-Body1">nulle (ne contient aucune valeur).</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">Contient des données</td>
+                    <td class="BodyD-Column1-Body1">non nulle (contient une valeur quelconque).</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyE-Column1-Body1">dans les xxx derniers jours</td>
+                    <td class="BodyD-Column1-Body1">est une date comprise dans les «&#160;xxx&#160;» derniers jours (passé). Saisissez soit un nombre entier soit deux séparés par une virgule pour une plage de dates.</td>
+                </tr>
+                <tr class="Body-Body1">
+                    <td class="BodyB-Column1-Body1">dans les xxx prochains jours</td>
+                    <td class="BodyA-Column1-Body1">est une date comprise dans les «&#160;xxx&#160;» prochains jours (futur). Saisissez soit un nombre entier soit deux séparés par une virgule pour une plage de dates.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="RelatedTopics">Rubriques connexes</p>
+        <p><a href="Using_SalesLogix_Query_Builder.htm" target="_self">Présentation de Query Builder</a>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;mc-table-style: url('../Resources/TableStyles/Borders.css');width: 100%;border-left-style: solid;border-left-width: 0px;border-left-color: #000000;border-right-style: solid;border-right-width: 0px;border-right-color: #000000;border-top-style: solid;border-top-width: 0px;border-top-color: #000000;border-bottom-style: solid;border-bottom-width: 0px;border-bottom-color: #000000;margin-left: 0;margin-right: auto;" class="TableStyle_Borders" cellspacing="0">
+            <col style="width: 100%;" />
+            <tbody>
+                <tr MadCap:conditions="">
+                    <td style="font-size: 8pt;border-left-style: solid;border-left-width: 0px;border-right-style: solid;border-right-width: 0px;border-top-style: solid;border-top-width: 2px;border-top-color: #cad59f;border-bottom-style: solid;border-bottom-width: 0px;" class="TableStyle_Borders_Body_0_0_RowEnd_ColEnd">
+                        <p style="font-family: Verdana;font-size: 8pt;"><a href="../General/feedback.htm">Dites-nous comment améliorer l'aide</a>.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

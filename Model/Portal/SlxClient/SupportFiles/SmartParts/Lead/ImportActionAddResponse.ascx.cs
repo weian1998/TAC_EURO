@@ -1,18 +1,8 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using Sage.Platform.WebPortal.Services;
 using Sage.Platform.Application.UI;
-using Sage.Platform.Application;
 using Sage.Platform.WebPortal.SmartParts;
-using log4net;
 using Sage.SalesLogix.Services.Import.Actions;
 using Sage.SalesLogix.Services.Import;
 using Sage.Entity.Interfaces;
@@ -20,10 +10,6 @@ using Sage.Platform;
 
 public partial class ImportActionAddResponse :EntityBoundSmartPartInfoProvider 
 {
-
-    private ActionAddResponse _action;
-    
-
     #region Public Methods
 
     /// <summary>
@@ -39,11 +25,7 @@ public partial class ImportActionAddResponse :EntityBoundSmartPartInfoProvider
     /// Gets or sets the action.
     /// </summary>
     /// <value>The action.</value>
-    public ActionAddResponse Action
-    {
-        get { return _action; }
-        set { _action = value; }
-    }
+    public ActionAddResponse Action { get; set; }
 
     /// <summary>
     /// Gets the smart part info.
@@ -53,16 +35,15 @@ public partial class ImportActionAddResponse :EntityBoundSmartPartInfoProvider
     public override ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
     {
         ToolsSmartPartInfo tinfo = new ToolsSmartPartInfo();
-
-        foreach (Control c in this.Form_LTools.Controls)
+        foreach (Control c in ImportActionAddResponse_LTools.Controls)
         {
             tinfo.LeftTools.Add(c);
         }
-        foreach (Control c in this.Form_CTools.Controls)
+        foreach (Control c in ImportActionAddResponse_CTools.Controls)
         {
             tinfo.CenterTools.Add(c);
         }
-        foreach (Control c in this.Form_RTools.Controls)
+        foreach (Control c in ImportActionAddResponse_RTools.Controls)
         {
             tinfo.RightTools.Add(c);
         }
@@ -90,66 +71,55 @@ public partial class ImportActionAddResponse :EntityBoundSmartPartInfoProvider
         ImportManager importManager = GetImportManager();
         Action = importManager.ActionManager.GetAction("AddResponse") as ActionAddResponse;
         Action.HydrateChanges();
-        if (Action != null)
+        if (Action == null) return;
+        if (!Action.Initialized)
+        {
+            dtpResponseDate.DateTimeValue = DateTime.UtcNow;
+            pklResponseStatus.PickListValue = GetLocalResourceObject("DefaultResponseStatus").ToString();
+            ImportTargetProperty tpLeadSource = importManager.EntityManager.GetEntityProperty("LeadSource");
+            if (tpLeadSource != null && !String.IsNullOrEmpty(tpLeadSource.DefaultValue.ToString()))
+            {
+                ILeadSource ls = EntityFactory.GetById<ILeadSource>(tpLeadSource.DefaultValue);
+                if (ls != null)
+                {
+                    lueResponseLeadSource.LookupResultValue = ls;
+                    lueResponseLeadSource.Text = ls.Description;
+                }
+            }
+            txtComments.Text = Action.Response.Comments;
+            pklResponseMethod.PickListValue = Action.Response.ResponseMethod;
+            lueCampaign.LookupResultValue = Action.Response.Campaign;
+            lbxStages.SelectedValue = Action.Response.Stage;
+            pklInterest.PickListValue = Action.Response.Interest;
+            pklInterestLevel.PickListValue = Action.Response.InterestLevel;
+
+            if (Mode.Value == "")
+            {
+                Action.Initialized = true;
+                Mode.Value = "ADD";
+            }
+        }
+        else
         {
 
-
-            if (!Action.Initialized)
+            if (!String.IsNullOrEmpty(Action.Response.LeadSource))
             {
-
-                dtpResponseDate.DateTimeValue = DateTime.UtcNow;
-                pklResponseStatus.PickListValue = GetLocalResourceObject("DefaultResponseStatus").ToString();
-                //if (String.IsNullOrEmpty(Action.Response.LeadSource))
-                //{
-                    ImportTargetProperty tpLeadSource = importManager.EntityManager.GetEntityProperty("LeadSource");
-                    if (tpLeadSource != null && !String.IsNullOrEmpty(tpLeadSource.DefaultValue.ToString()))
-                    {
-                        ILeadSource ls = EntityFactory.GetById<ILeadSource>(tpLeadSource.DefaultValue);
-                        if (ls != null)
-                        {
-                            lueResponseLeadSource.LookupResultValue = ls;
-                            lueResponseLeadSource.Text = ls.Description;
-                        }
-                    }
-                //}
-                txtComments.Text = Action.Response.Comments;
-                pklResponseMethod.PickListValue = Action.Response.ResponseMethod;
-                lueCampaign.LookupResultValue = Action.Response.Campaign;
-                lbxStages.SelectedValue = Action.Response.Stage;
-                pklInterest.PickListValue = Action.Response.Interest;
-                pklInterestLevel.PickListValue = Action.Response.InterestLevel;
-
-                if (Mode.Value == "")
+                ILeadSource ls = EntityFactory.GetById<ILeadSource>(Action.Response.LeadSource);
+                if (ls != null)
                 {
-                    Action.Initialized = true;
-                    Mode.Value = "ADD";
+                    lueResponseLeadSource.LookupResultValue = ls;
+                    lueResponseLeadSource.Text = ls.Description;
                 }
             }
-            else
-            {
-                                
-                if (!String.IsNullOrEmpty(Action.Response.LeadSource))
-                {
 
-                    ILeadSource ls = EntityFactory.GetById<ILeadSource>(Action.Response.LeadSource);
-                    if (ls != null)
-                    {
-                        lueResponseLeadSource.LookupResultValue = ls;
-                        lueResponseLeadSource.Text = ls.Description;
-                    }
-
-                }
-                                
-                txtComments.Text = Action.Response.Comments;
-                //lueResponseLeadSource.LookupResultValue = Action.Response.LeadSource;
-                dtpResponseDate.DateTimeValue = Action.Response.ResponseDate;
-                pklResponseStatus.PickListValue = Action.Response.Status;
-                pklResponseMethod.PickListValue = Action.Response.ResponseMethod;
-                lueCampaign.LookupResultValue = Action.Response.Campaign;
-                lbxStages.SelectedValue = Action.Response.Stage;
-                pklInterest.PickListValue = Action.Response.Interest;
-                pklInterestLevel.PickListValue = Action.Response.InterestLevel;
-            }
+            txtComments.Text = Action.Response.Comments;
+            dtpResponseDate.DateTimeValue = Action.Response.ResponseDate;
+            pklResponseStatus.PickListValue = Action.Response.Status;
+            pklResponseMethod.PickListValue = Action.Response.ResponseMethod;
+            lueCampaign.LookupResultValue = Action.Response.Campaign;
+            lbxStages.SelectedValue = Action.Response.Stage;
+            pklInterest.PickListValue = Action.Response.Interest;
+            pklInterestLevel.PickListValue = Action.Response.InterestLevel;
         }
     }
 
@@ -161,14 +131,9 @@ public partial class ImportActionAddResponse :EntityBoundSmartPartInfoProvider
         ImportManager importManager = GetImportManager();
         Action = importManager.ActionManager.GetAction("AddResponse") as ActionAddResponse;
         Action.Response.Comments = txtComments.Text;
-        if (lueResponseLeadSource.LookupResultValue != null)
-        {
-            Action.Response.LeadSource = ((ILeadSource)lueResponseLeadSource.LookupResultValue).Id.ToString(); //lueResponseLeadSource.Text;
-        }
-        else 
-        {
-            Action.Response.LeadSource = string.Empty;//System.Convert.ToString(lueResponseLeadSource.LookupResultValue);
-        }
+        Action.Response.LeadSource = lueResponseLeadSource.LookupResultValue != null
+                                         ? ((ILeadSource) lueResponseLeadSource.LookupResultValue).Id.ToString()
+                                         : String.Empty;
         Action.Response.ResponseDate = dtpResponseDate.DateTimeValue;
         Action.Response.Status = pklResponseStatus.PickListValue;
         Action.Response.ResponseMethod = pklResponseMethod.PickListValue;
@@ -211,10 +176,7 @@ public partial class ImportActionAddResponse :EntityBoundSmartPartInfoProvider
     private ImportManager GetImportManager()
     {
         ImportManager importManager = Page.Session["importManager"] as ImportManager;
-        if (importManager != null)
-        {
-        }
-        else
+        if (importManager == null)
         {
             DialogService.ShowMessage("error_ImportManager_NotFound");
         }
@@ -247,6 +209,7 @@ public partial class ImportActionAddResponse :EntityBoundSmartPartInfoProvider
             ClientBindingMgr.RegisterBoundControl(pklInterest);
             ClientBindingMgr.RegisterBoundControl(pklInterestLevel);
             ClientBindingMgr.RegisterBoundControl(lueCampaign);
+            ClientBindingMgr.RegisterDialogCancelButton(btnCancel);
         }
         if (Visible)
         {

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="84fea591-3acb-40a8-8b6c-d14f4973b7d6" lastModifiedUtc="2011-04-08T15:48:54.0033136Z" name="cmdOK_OnClick" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="AddEditAccountingSystem">
+<method xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmOtherMethod" id="84fea591-3acb-40a8-8b6c-d14f4973b7d6" lastModifiedUtc="2012-08-23T20:51:12.8622769Z" name="cmdOK_OnClick" methodType="Other" actionType="None" returnMode="None" isInstance="false" containerName="AddEditAccountingSystem">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmOtherMethod" />
@@ -10,7 +10,7 @@
   </parameter>
   <preExecuteTargets />
   <methodTargets>
-    <methodTarget xsi:type="OrmMethodTargetSnippet" id="65187d54-0f92-48d2-8899-47e4817416f1" lastModifiedUtc="2011-04-08T15:48:42.3883136Z" targetType="Sage.BusinessRules.CodeSnippets.AddEditAccountingSystemEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="cmdOK_OnClickStep" active="true" codeSnippetId="17fcd96c-11d5-4f93-b3af-dd201789d02c">
+    <methodTarget xsi:type="OrmMethodTargetSnippet" id="65187d54-0f92-48d2-8899-47e4817416f1" lastModifiedUtc="2012-08-23T23:08:40.6810251Z" targetType="Sage.BusinessRules.CodeSnippets.AddEditAccountingSystemEventHandlers, Sage.SnippetLibrary.CSharp" targetMethod="cmdOK_OnClickStep" active="true" codeSnippetId="17fcd96c-11d5-4f93-b3af-dd201789d02c">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmMethodTargetSnippet" />
       </ExtendedPropertiesCollection>

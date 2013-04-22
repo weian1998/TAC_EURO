@@ -7,6 +7,7 @@
   <ShowInMode>List</ShowInMode>
   <Properties>
     <Property Name="SummaryConfigFile" TypeConverter="">ReturnSummary</Property>
+    <Property Name="ListContextMenu" TypeConverter="">GroupListContextMenu</Property>
     <Property Name="HelpTopic" TypeConverter="">returnlistview</Property>
   </Properties>
   <AllowRoles />

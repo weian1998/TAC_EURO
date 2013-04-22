@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<PortalService xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="0a21894e-30e1-4407-be52-1e039b117c14">
+  <InstanceId>1f89bfd225ca41139b7aadf80b5472cc</InstanceId>
+  <ServiceType>Sage.Platform.QuickForms.WebFormGen.Web.IFileSystemVirtualPathMapper, Sage.Platform.QuickForms.WebFormGen</ServiceType>
+  <RegisterAs>Sage.Platform.QuickForms.WebFormGen.Web.IVirtualPathMapper, Sage.Platform.QuickForms.WebFormGen</RegisterAs>
+  <AddOnDemand>false</AddOnDemand>
+  <Properties />
+  <Scope>Application</Scope>
+</PortalService>

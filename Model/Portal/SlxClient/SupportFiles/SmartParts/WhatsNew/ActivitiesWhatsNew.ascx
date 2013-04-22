@@ -5,9 +5,6 @@
 <%@ Register Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
     Namespace="System.Web.UI" TagPrefix="asp" %>
 
-<asp:HiddenField runat="server" ID="hActId" />
-<asp:HiddenField runat="server" ID="hOccurrenceDate" />
-<div style="display: none"><asp:Button runat="server" ID="hEditAct" OnClick="hEditAct_Click" /></div>
 
 <asp:ObjectDataSource
     ID="ActivitiesNewObjectDataSource" 
@@ -83,10 +80,7 @@
     <PagerStyle CssClass="gridPager" />
 	<PagerSettings Mode="NumericFirstLast" FirstPageImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Start_16x16" LastPageImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=End_16x16" />
 </SalesLogix:SlxGridView>
-<br/>
-<div class="mainContentHeader">
-    <asp:Label runat="server" ID="lblModAcct" Text= />
-</div>
+
 <SalesLogix:SlxGridView Caption="<%$ resources : ModifiedActivities_Caption %>" ID="grdModifiedActivities" CssClass="datagrid"
     AlternatingRowStyle-CssClass="rowdk" RowStyle-CssClass="rowlt" GridLines="none" runat="server" AutoGenerateColumns="False"
     DataKeyNames="Id" CellPadding="4" ShowEmptyTable="True" AllowPaging="true" AllowSorting="true" PageSize="10" OnSorting="Sorting"

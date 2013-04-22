@@ -9,9 +9,8 @@
     <asp:Panel ID="Form_LTools" runat="server"></asp:Panel>
     <asp:Panel ID="Form_CTools" runat="server"></asp:Panel>
     <asp:Panel ID="Form_RTools" runat="server">
-        <SalesLogix:PageLink ID="lnkHelp" runat="server" LinkType="HelpFileName"
-            ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="campaignaddeditcomptasks.aspx"
-            ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16">
+        <SalesLogix:PageLink ID="lnkHelp" runat="server" LinkType="HelpFileName" ImageUrl="~/ImageResource.axd?scope=global&type=Global_Images&key=Help_16x16"
+            ToolTip="<%$ resources: Portal, Help_ToolTip %>" Target="Help" NavigateUrl="campaignaddeditcomptasks.aspx">
         </SalesLogix:PageLink>
     </asp:Panel>
     <asp:TextBox runat="server" ID="txtOwnerName" />
@@ -26,7 +25,7 @@
                 <asp:Label ID="lblDescription" AssociatedControlID="txtDecription" runat="server" Text="<%$ resources: lblDescription.Text %>"></asp:Label>
             </div>
             <div class="twocoltextcontrol" style="width:80%">
-                <asp:TextBox runat="server" ID="txtDecription" MaxLength="64" />
+                <asp:TextBox runat="server" ID="txtDecription" MaxLength="64" dojoType="Sage.UI.Controls.TextBox"></asp:TextBox>
             </div>
         </td>
     </tr>
@@ -74,7 +73,7 @@
                 <asp:Label ID="lblPercent" AssociatedControlID="txtPercentComplete" runat="server" Text="<%$ resources: lblPercentComplete.Text %>"></asp:Label>
             </div>
             <div class="textcontrol">
-                <asp:TextBox runat="server" ID="txtPercentComplete" />
+                <asp:TextBox runat="server" ID="txtPercentComplete" dojoType="Sage.UI.Controls.TextBox"></asp:TextBox>
             </div>
         </td>
         <td></td>
@@ -156,13 +155,23 @@
                 <asp:Label ID="lblAssignTo1" runat="server" Text="<%$ resources: lblAssignTo.Text %>"></asp:Label>
             </div>
             <div>
-                <asp:RadioButtonList id="rdlAssignTo" runat="server">
-                    <asp:ListItem Text="<%$ resources: rdlUserTeam.Text %>" Value="0"></asp:ListItem>
-                    <asp:ListItem Text="<%$ resources: rdlDepartment.Text %>" Value="1"></asp:ListItem>
-                    <asp:ListItem Text="<%$ resources: rdlContact.Text %>" Value="2"></asp:ListItem>
-                    <asp:ListItem Text="<%$ resources: rdlOther.Text %>" Value="3"></asp:ListItem>
-                    <asp:ListItem Text="<%$ resources: rdlNone.Text %>" Value="4"></asp:ListItem>
-                </asp:RadioButtonList>
+                <asp:RadioButton runat="server" ID="rdbUser" GroupName="AssignTo" Text="<%$ resources: rdlUserTeam.Text %>" Value="0" CssClass="radio" Checked="True"></asp:RadioButton>
+            </div>
+            <div class="lbl"></div>
+            <div>
+                <asp:RadioButton runat="server" ID="rdbDepartment" GroupName="AssignTo" Text="<%$ resources: rdlDepartment.Text %>" Value="1" CssClass="radio"></asp:RadioButton>
+            </div>
+            <div class="lbl"></div>
+            <div>
+                <asp:RadioButton runat="server" ID="rdbContact" GroupName="AssignTo" Text="<%$ resources: rdlContact.Text %>" Value="2" CssClass="radio"></asp:RadioButton>
+            </div>
+            <div class="lbl"></div>
+            <div>
+                <asp:RadioButton runat="server" ID="rdbOther" GroupName="AssignTo" Text="<%$ resources: rdlOther.Text %>" Value="3" CssClass="radio"></asp:RadioButton>
+            </div>
+            <div class="lbl"></div>
+            <div>
+                <asp:RadioButton runat="server" ID="rdbNone" GroupName="AssignTo" Text="<%$ resources: rdlNone.Text %>" Value="4" CssClass="radio"></asp:RadioButton>
             </div>
         </td>
         <td valign="top" style="margin-top:0px">
@@ -176,31 +185,31 @@
                             <SalesLogix:OwnerControl runat="server" ID="slxOwner"></SalesLogix:OwnerControl>
                         </div>
                         <div id="opt1" style="display:none" class="textcontrol lookup" runat="server">
-                            <asp:DropDownList ID="ddlDepartments" runat="server" AutoPostBack="false"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlDepartments" data-dojo-type="Sage.UI.Controls.Select" CssClass="select-control" runat="server" AutoPostBack="false"></asp:DropDownList>
                         </div>
                         <div id="opt2" style="display:none" class="textcontrol lookup" runat="server">
                             <SalesLogix:LookupControl runat="server" ID="luContact" LookupDisplayMode="Dialog" LookupEntityName="Contact" 
                                 LookupBindingMode="String" ReturnPrimaryKey="true" LookupEntityTypeName="Sage.Entity.Interfaces.IContact, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"  >
                                 <LookupProperties>
                                     <SalesLogix:LookupProperty PropertyHeader="<%$ resources: luLastName.PropertyHeader %>" PropertyName="LastName"
-                                        PropertyFormat="None"  UseAsResult="True"></SalesLogix:LookupProperty>
+                                        PropertyType="System.String" PropertyFormat="None"  UseAsResult="True"></SalesLogix:LookupProperty>
                                     <SalesLogix:LookupProperty PropertyHeader="<%$ resources: luFirstName.PropertyHeader %>" PropertyName="FirstName"
-                                        PropertyFormat="None"  UseAsResult="True"></SalesLogix:LookupProperty>
+                                        PropertyType="System.String" PropertyFormat="None"  UseAsResult="True"></SalesLogix:LookupProperty>
                                     <SalesLogix:LookupProperty PropertyHeader="<%$ resources: luType.PropertyHeader %>" PropertyName="Type"
-                                        PropertyFormat="None"  UseAsResult="True"></SalesLogix:LookupProperty>
+                                        PropertyType="System.String" PropertyFormat="None"  UseAsResult="True"></SalesLogix:LookupProperty>
                                     <SalesLogix:LookupProperty PropertyHeader="<%$ resources: luAccountName.PropertyHeader %>" PropertyName="AccountName"
-                                        PropertyFormat="None"  UseAsResult="True"></SalesLogix:LookupProperty>
+                                        PropertyType="System.String" PropertyFormat="None"  UseAsResult="True"></SalesLogix:LookupProperty>
                                     <SalesLogix:LookupProperty PropertyHeader="<%$ resources: luWorkPhone.PropertyHeader %>" PropertyName="WorkPhone"
-                                        PropertyFormat="None"  UseAsResult="True"></SalesLogix:LookupProperty>
+                                        PropertyType="System.String" PropertyFormat="None"  UseAsResult="True"></SalesLogix:LookupProperty>
                                 </LookupProperties>
                                 <LookupPreFilters></LookupPreFilters>
                             </SalesLogix:LookupControl>
                         </div>
                         <div id="opt3" style="display:none" runat="server" class="textcontrol">
-                            <asp:TextBox runat="server" ID="txtOther" />
+                            <asp:TextBox runat="server" ID="txtOther" dojoType="Sage.UI.Controls.TextBox"></asp:TextBox>
                         </div>
                         <div id="opt4" style="display:none" runat="server" class="textcontrol">
-                            <asp:TextBox runat="server" ID="txtNone" Text="<%$ resources: txtNone.NoneValue %>" ReadOnly="true" />
+                            <asp:TextBox runat="server" ID="txtNone" Text="<%$ resources: txtNone.NoneValue %>" ReadOnly="true" dojoType="Sage.UI.Controls.TextBox"></asp:TextBox>
                         </div>
                     </td>
                 </tr>
@@ -217,26 +226,13 @@
             </table>
         </td>
     </tr>
-</table>
-
-<table id="tblButtons" border="0" cellpadding="1" cellspacing="2" class="formtable">
-    <col width="99%" /><col width="1" /><col width="1" />
-    <tr>
-        <td colspan="3">
-            <hr />
-        </td>
-    </tr>
     <tr>
         <td></td>
-            <td align="right">
-                <div class="slxButton">
-                    <asp:Button ID="cmdSave" Text="<%$ resources: cmdSave.Text %>" width="100px" runat="server" OnClick="cmdSave_OnClick" CssClass="slxbutton" />
-                </div>
-            </td>
-        <td align="right">
-            <div class="slxButton" style="padding-right:5px">
-                <asp:Button ID="cmdCancel" Text="<%$ resources: cmdCancel.Text %>" runat="server" width="100px" OnClick="cmdCancel_OnClick" CssClass="slxbutton" />
-            </div>
+        <td>
+            <asp:Panel runat="server" ID="ctrlstButtons" CssClass="controlslist qfActionContainer">
+                <asp:Button runat="server" ID="cmdSave" Text="<%$ resources: cmdSave.Caption %>" CssClass="slxbutton" />
+                <asp:Button runat="server" ID="cmdCancel" Text="<%$ resources: cmdCancel.Caption %>" CssClass="slxbutton" />
+            </asp:Panel>
         </td>
     </tr>
 </table>

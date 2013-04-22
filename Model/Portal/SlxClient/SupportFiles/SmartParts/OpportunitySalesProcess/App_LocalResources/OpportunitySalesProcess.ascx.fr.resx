@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="lueOppContact_Influence" xml:space="preserve">
+    <value>Influence</value>
+  </data>
+  <data name="SalesProcessGrid_Completed.HeaderText" xml:space="preserve">
+    <value>Terminé</value>
+  </data>
+  <data name="MSG_ActivityScheduled" xml:space="preserve">
+    <value>Activité planifiée pour le contact {0} {1}.</value>
+  </data>
+  <data name="lblEstClose.Text" xml:space="preserve">
+    <value>Clôture approx.</value>
+  </data>
+  <data name="ProcessingAction" xml:space="preserve">
+    <value>Traitement de l'action, veuillez patienter...</value>
+  </data>
+  <data name="lblSalesProcessSnapShot.Text" xml:space="preserve">
+    <value>Résumé du processus de vente</value>
+  </data>
+  <data name="Error_LitRequestNotScheduled" xml:space="preserve">
+    <value>Demande de documentation non planifiée.</value>
+  </data>
+  <data name="InitMailMerge" xml:space="preserve">
+    <value>Initialisation du publipostage, veuillez patienter...</value>
+  </data>
+  <data name="ToDo" xml:space="preserve">
+    <value>Tâche à faire</value>
+  </data>
+  <data name="CanceledOrContactNotFound" xml:space="preserve">
+    <value>Vous avez annulé ou aucun contact n'est sélectionné pour cette action.</value>
+  </data>
+  <data name="lblEstDays.Text" xml:space="preserve">
+    <value>Jours estimés</value>
+  </data>
+  <data name="InitLitRequest" xml:space="preserve">
+    <value>Initialisation de la demande de documentation, veuillez patienter...</value>
+  </data>
+  <data name="lblSalesProcess.Text" xml:space="preserve">
+    <value>Processus de vente :</value>
+  </data>
+  <data name="InitContactProc" xml:space="preserve">
+    <value>Initialisation du processus de contact, veuillez patienter...</value>
+  </data>
+  <data name="MSG_ContactProcessScheduled" xml:space="preserve">
+    <value>Le processus de contact a été affecté pour {0} {1}.</value>
+  </data>
+  <data name="lblSelectContact.Text" xml:space="preserve">
+    <value>Sélectionner un contact d'opportunité :</value>
+  </data>
+  <data name="GettingOppContact" xml:space="preserve">
+    <value>Obtention du contact de l'opportunité...</value>
+  </data>
+  <data name="Plugin_None" xml:space="preserve">
+    <value>Aucun</value>
+  </data>
+  <data name="SalesProcessGrid_CompletedOn.HeaderText" xml:space="preserve">
+    <value>Date d'achèvement</value>
+  </data>
+  <data name="Error_AuthorNotFound" xml:space="preserve">
+    <value>Auteur non trouvé.</value>
+  </data>
+  <data name="cmdSelectContactNext.Text" xml:space="preserve">
+    <value>Suivant</value>
+  </data>
+  <data name="PerformingContactProc" xml:space="preserve">
+    <value>Exécution de l'action processus de contact en cours.</value>
+  </data>
+  <data name="Error_LeaderNotFound" xml:space="preserve">
+    <value>Responsable non trouvé.</value>
+  </data>
+  <data name="RequiresActiveMail" xml:space="preserve">
+    <value>Cette étape nécessite l'activation d'Active Mail lorsque vous vous connectez. Impossible d'exécuter cette action.</value>
+  </data>
+  <data name="SalesProcess_None" xml:space="preserve">
+    <value>Aucun</value>
+  </data>
+  <data name="ERR_InvalidXmlData" xml:space="preserve">
+    <value>Les données renvoyées par le serveur ne sont pas valides.</value>
+  </data>
+  <data name="GettingAcctMgr" xml:space="preserve">
+    <value>Obtention du responsable de compte ...</value>
+  </data>
+  <data name="RequestFor" xml:space="preserve">
+    <value>Demande de...</value>
+  </data>
+  <data name="PhoneCall" xml:space="preserve">
+    <value>Appel</value>
+  </data>
+  <data name="lueOppContact_Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="ProcessingMailMerge" xml:space="preserve">
+    <value>Traitement du publipostage, veuillez patienter...</value>
+  </data>
+  <data name="InitActivity" xml:space="preserve">
+    <value>Initialisation de l'activité, veuillez patienter...</value>
+  </data>
+  <data name="NoContactAssociated" xml:space="preserve">
+    <value>Aucun contact n'est associé à l'opportunité.</value>
+  </data>
+  <data name="lblProbability.Text" xml:space="preserve">
+    <value>Probabilité</value>
+  </data>
+  <data name="MustSelectUser" xml:space="preserve">
+    <value>Vous devez sélectionner un utilisateur pour pouvoir continuer.</value>
+  </data>
+  <data name="MSG_WebFromsNotSupported" xml:space="preserve">
+    <value>Les formulaires Web ne sont plus pris en charge.</value>
+  </data>
+  <data name="SalesProcessGrid_StartedOn.HeaderText" xml:space="preserve">
+    <value>Démarré le</value>
+  </data>
+  <data name="cmdSelectUserNext.Text" xml:space="preserve">
+    <value>Suivant</value>
+  </data>
+  <data name="MSG_MailMergeCompleted" xml:space="preserve">
+    <value>Publipostage réussi.</value>
+  </data>
+  <data name="ChangeSalesProcess" xml:space="preserve">
+    <value>Des étapes du processus de vente '${0}' ont déjà été exécutées. Voulez-vous poursuivre la modification en processus de vente '${1}' ?</value>
+  </data>
+  <data name="MailMergeFailed" xml:space="preserve">
+    <value>Le publipostage a été annulé ou a échoué.</value>
+  </data>
+  <data name="SalesProcessGrid_Step.HeaderText" xml:space="preserve">
+    <value>Etape</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="ActvityNotePadNotSupported" xml:space="preserve">
+    <value>Le bloc-notes d'activités n'est pas disponible en version Web.</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Oui</value>
+  </data>
+  <data name="linkManageStages.ToolTip" xml:space="preserve">
+    <value>Gérer les phases</value>
+  </data>
+  <data name="MustSelectContact" xml:space="preserve">
+    <value>Vous devez sélectionner un contact avant de pouvoir continuer.</value>
+  </data>
+  <data name="MailMergeCompleted" xml:space="preserve">
+    <value>Le publipostage est terminé ...</value>
+  </data>
+  <data name="SelectEMailAddr" xml:space="preserve">
+    <value>Sélection des adresses électroniques en cours...</value>
+  </data>
+  <data name="MustBeAtLeastOne" xml:space="preserve">
+    <value>Il doit y avoir au moins un nom dans la zone A.</value>
+  </data>
+  <data name="PleaseWait" xml:space="preserve">
+    <value>Veuillez patienter...</value>
+  </data>
+  <data name="PerformingActivity" xml:space="preserve">
+    <value>Exécution de l'activité d'action ${0}.</value>
+  </data>
+  <data name="lblCurrentStage.Text" xml:space="preserve">
+    <value>Phase actuelle</value>
+  </data>
+  <data name="Error_DesktopIntegration" xml:space="preserve">
+    <value>L'étape de processus de vente n'a pas pu être achevée car le service de publipostage n'a pas pu être chargé. Cela peut se produire si l'intégration de bureau Sage SalesLogix n'est pas installée ou est installée de manière incorrecte.</value>
+  </data>
+  <data name="lueOppContact_Primary" xml:space="preserve">
+    <value>Principal</value>
+  </data>
+  <data name="SelectFolderTitle" xml:space="preserve">
+    <value>Dossier</value>
+  </data>
+  <data name="MailMergeSuccess" xml:space="preserve">
+    <value>Le publipostage s'est terminé avec succès.</value>
+  </data>
+  <data name="SelectActLeader" xml:space="preserve">
+    <value>Responsable d'activité...</value>
+  </data>
+  <data name="SalesProcessGrid_Description.HeaderText" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="WordTemplateNotFound" xml:space="preserve">
+    <value>Le modèle MS Word ${0} : ${1} est introuvable.</value>
+  </data>
+  <data name="lblSelectUser.Text" xml:space="preserve">
+    <value>Sélectionner un utilisateur :</value>
+  </data>
+  <data name="MSG_WebFormsNotSupported" xml:space="preserve">
+    <value>Les formulaires Web ne sont pas pris en charge.</value>
+  </data>
+  <data name="SelectAuthor" xml:space="preserve">
+    <value>Auteur de ...</value>
+  </data>
+  <data name="LabelTemplateNotFound" xml:space="preserve">
+    <value>Le modèle d'étiquettes ${0} : ${1} est introuvable.</value>
+  </data>
+  <data name="InvalidPath" xml:space="preserve">
+    <value>Chemin d'accès non valide.</value>
+  </data>
+  <data name="ScheduleForUser" xml:space="preserve">
+    <value>Planification pour l'utilisateur :</value>
+  </data>
+  <data name="MergeWith" xml:space="preserve">
+    <value>Fusionner avec...</value>
+  </data>
+  <data name="MSG_ProcessActionResult" xml:space="preserve">
+    <value>Pour l'étape |B|{0}|/B| :
+{1}</value>
+  </data>
+  <data name="ScheduleWithContact" xml:space="preserve">
+    <value>Planification avec le Contact :</value>
+  </data>
+  <data name="lueOppContact_Role" xml:space="preserve">
+    <value>Rôle</value>
+  </data>
+  <data name="PerformingLitReq" xml:space="preserve">
+    <value>Exécution de l'action demande de documentation en cours.</value>
+  </data>
+  <data name="SelectFolder" xml:space="preserve">
+    <value>Sélectionner le dossier à utilitser pour la fusion</value>
+  </data>
+  <data name="Error_ContactNotFound" xml:space="preserve">
+    <value>Contact non trouvé.</value>
+  </data>
+  <data name="MSG_WebActionNotSupported" xml:space="preserve">
+    <value>Les actions Web ne sont plus prises en charge.</value>
+  </data>
+  <data name="GettingCurrentUser" xml:space="preserve">
+    <value>Obtention de l'utilisateur actuel...</value>
+  </data>
+  <data name="Stage" xml:space="preserve">
+    <value>Phase</value>
+  </data>
+  <data name="PerformingMailMerge" xml:space="preserve">
+    <value>Exécution de l'action publipostage en cours.</value>
+  </data>
+  <data name="Error_ContactProcessNotAssigned" xml:space="preserve">
+    <value>Processus de contact non affecté.</value>
+  </data>
+  <data name="lblDaysInStage.Text" xml:space="preserve">
+    <value>Jours dans la phase</value>
+  </data>
+  <data name="InitAction" xml:space="preserve">
+    <value>Initialisation de l'action.</value>
+  </data>
+  <data name="lueOppContact_Account" xml:space="preserve">
+    <value>Compte</value>
+  </data>
+  <data name="Meeting" xml:space="preserve">
+    <value>Rendez-vous</value>
+  </data>
+  <data name="linkManageStages.Text" xml:space="preserve">
+    <value>Phases :</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirmer</value>
+  </data>
+</root>

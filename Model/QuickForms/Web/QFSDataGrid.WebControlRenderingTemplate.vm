@@ -119,8 +119,13 @@ $pagegenerator.addToFormLoadCode(" } ")
     <div class="mainContentHeader" style="text-align:${qfcontrol.CaptionAlignment};#if($qfcontrol.Visible == "False")visibility:hidden;#end "><asp:Label ID="${pagegenerator.FormName}${qfcontrol.ControlId}_lbl" runat="server" Text="<%$ resources: ${qfcontrol.ControlId}.Caption %>" ></asp:Label></div>
 	#end
 ## Editable Grid container
-<div id="${pagegenerator.FormName}${qfcontrol.ControlId}" style="width:100%;#if($qfcontrol.Visible == "False")visibility:hidden;#end" class="${qfcontrol.StyleScheme}">
-    <div id="${pagegenerator.FormName}${qfcontrol.ControlId}_Grid" style="width:100%;height:75px;"></div>
+<div id="${pagegenerator.FormName}${qfcontrol.ControlId}_Container" style="width:100%;height:100%;#if($qfcontrol.Visible == "False")visibility:hidden;#end" class="${qfcontrol.StyleScheme}">
+    <div id="${pagegenerator.FormName}${qfcontrol.ControlId}_Grid" style="width:100%;height:100%;"
+## If there is a previewfield make sure the grid is tall enough   
+#if ($qfcontrol.PreviewField == "")    
+     data-dojo-type="dijit.layout.BorderContainer"
+#end    
+></div>
 </div>
 
 

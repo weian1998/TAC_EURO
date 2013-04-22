@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<AspNetPortal xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="af7942e3-7496-4296-b77f-b408457464f6">
+  <PortalAlias>slxwebrpt</PortalAlias>
+  <PortalReferences />
+  <DeploymentActions>
+    <ActionType TypeName="Sage.SalesLogix.Web.AdminModule.SLXClientConnectionStringDeploymentAction, Sage.SalesLogix.Web.AdminModule">
+      <Properties />
+    </ActionType>
+    <ActionType TypeName="Sage.Platform.Deployment.AdminModule.AspNetDeploymentAction, Sage.Platform.Deployment.AdminModule">
+      <Properties />
+    </ActionType>
+  </DeploymentActions>
+  <TemplateUrl></TemplateUrl>
+  <AuthenticationProvider></AuthenticationProvider>
+</AspNetPortal>

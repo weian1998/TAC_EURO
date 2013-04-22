@@ -6,29 +6,28 @@
 <%@ Register Assembly="Sage.Platform.WebPortal" Namespace="Sage.Platform.WebPortal.SmartParts"
     TagPrefix="SalesLogix" %>
 <%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.Lookup" TagPrefix="SalesLogix" %>    
-<p>&nbsp;</p>
 <div>
     <asp:Literal ID="litDialogInfo" runat="server" Text="<%$ resources: dialogInfo %>"></asp:Literal>
 </div>
-<p>&nbsp;</p>
+<br />
 <div>
     <asp:Literal ID="litSourceLabel" runat="server" Text="<%$ resources: sourceLabel %>"></asp:Literal>
     <asp:RadioButton GroupName="UserTypeRadioGroup" runat="server" ID="userOption" 
-        onclick='$("#ctl00_DialogWorkspace_CopyUserProfile_copyProfileParameter_userListContainer").css("display","inline"); 
-        $("#ctl00_DialogWorkspace_CopyUserProfile_copyProfileParameter_templateListContainer").css("display","none"); 
-        $("#ctl00_DialogWorkspace_CopyUserProfile_copyProfileParameter_lblMessage").css("display", "none");' 
+        onclick="javascript:SwitchLookup(true)" 
         Text="<%$ resources: SourceSelectionContainer_item0.Text %>" />
     <asp:RadioButton GroupName="UserTypeRadioGroup" runat="server" ID="templateOption" 
-    onclick='$("#ctl00_DialogWorkspace_CopyUserProfile_copyProfileParameter_userListContainer").css("display","none"); 
-    $("#ctl00_DialogWorkspace_CopyUserProfile_copyProfileParameter_templateListContainer").css("display","inline"); 
-    $("#ctl00_DialogWorkspace_CopyUserProfile_copyProfileParameter_lblMessage").css("display", "none");' 
+    onclick="javascript:SwitchLookup(false)" 
     Text="<%$ resources: SourceSelectionContainer_item1.Text %>" />
  </div>
-<p>&nbsp;</p>
+<br />
 <div id="sourceTypeContainer">
     <div id="userListContainer" runat="server" style="display: inline">
-        <asp:Literal ID="Literal3" runat="server" Text="<%$ resources: SourceUserList.Caption %>"></asp:Literal>&nbsp;
-           <SalesLogix:LookupControl runat="server" ID="lueUser" LookupEntityName="User" LookupEntityTypeName="Sage.Entity.Interfaces.IUser, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" LookupDisplayMode="Dialog" AutoPostBack="true" AddEmptyListItem="false" DialogTitle="<%$ resources:LookupUserDialogTitle %>"  >
+        <table><tr>
+            <td style="padding-right:5px">
+            <asp:Literal ID="Literal3" runat="server" Text="<%$ resources: SourceUserList.Caption %>"></asp:Literal>
+            </td>
+            <td style="width: 100%">
+                <SalesLogix:LookupControl runat="server" ID="lueUser" Width="100%"  LookupEntityName="User" LookupEntityTypeName="Sage.Entity.Interfaces.IUser, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" LookupDisplayMode="Dialog" AutoPostBack="true" AddEmptyListItem="false" DialogTitle="<%$ resources:LookupUserDialogTitle %>"  >
                 <LookupProperties>
                 <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueUser.LookupProperties.UserInfo.UserName.PropertyHeader %>" PropertyName="UserInfo.UserName" PropertyType="System.String" PropertyFormat="None"  UseAsResult="True" ExcludeFromFilters="False"></SalesLogix:LookupProperty>
                 <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueUser.LookupProperties.UserInfo.Title.PropertyHeader %>" PropertyName="UserInfo.Title" PropertyType="System.String" PropertyFormat="None"  UseAsResult="True" ExcludeFromFilters="False"></SalesLogix:LookupProperty>
@@ -36,27 +35,36 @@
                 <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueUser.LookupProperties.UserInfo.Region.PropertyHeader %>" PropertyName="UserInfo.Region" PropertyType="System.String" PropertyFormat="None"  UseAsResult="True" ExcludeFromFilters="False"></SalesLogix:LookupProperty>
                 </LookupProperties>
                 <LookupPreFilters>
-                    <SalesLogix:LookupPreFilter PropertyName="Type" PropertyType="Sage.Entity.Interfaces.UserType" OperatorCode="!=" FilterValue="'P'"></SalesLogix:LookupPreFilter>
-                    <SalesLogix:LookupPreFilter PropertyName="Type" PropertyType="Sage.Entity.Interfaces.UserType" OperatorCode="!=" FilterValue="'R'"></SalesLogix:LookupPreFilter>
-                    <SalesLogix:LookupPreFilter PropertyName="Id" OperatorCode="!=" FilterValue="'ADMIN       '"></SalesLogix:LookupPreFilter>
+                    <SalesLogix:LookupPreFilter PropertyName="Type" PropertyType="Sage.Entity.Interfaces.UserType" OperatorCode="!=" FilterValue="6"></SalesLogix:LookupPreFilter>
+                    <SalesLogix:LookupPreFilter PropertyName="Type" PropertyType="Sage.Entity.Interfaces.UserType" OperatorCode="!=" FilterValue="5"></SalesLogix:LookupPreFilter>
+                    <SalesLogix:LookupPreFilter PropertyName="Type" PropertyType="Sage.Entity.Interfaces.UserType" OperatorCode="!=" FilterValue="8"></SalesLogix:LookupPreFilter>
                 </LookupPreFilters>
             </SalesLogix:LookupControl>
+            </td>
+        </tr></table>
     </div>
-    <div id="templateListContainer" runat="server" style="display: none">
-        <asp:Literal ID="Literal4" runat="server" Text="<%$ resources: SourceTemplateList.Caption %>"></asp:Literal>&nbsp;
-            <SalesLogix:LookupControl runat="server" ID="lueTemplate" LookupEntityName="User" LookupEntityTypeName="Sage.Entity.Interfaces.IUser, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" LookupDisplayMode="Dialog" AutoPostBack="true" AddEmptyListItem="false" DialogTitle="<%$ resources:LookupTemplateDialogTitle %>"  >
-                <LookupProperties>
-                    <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueUser.LookupProperties.UserInfo.UserName.PropertyHeader %>" PropertyName="UserInfo.UserName" PropertyType="System.String" PropertyFormat="None"  UseAsResult="True" ExcludeFromFilters="False"></SalesLogix:LookupProperty>
-                </LookupProperties>
-                <LookupPreFilters>
-                    <SalesLogix:LookupPreFilter PropertyName="Type" PropertyType="Sage.Entity.Interfaces.UserType" OperatorCode="="
-                     FilterValue="'P'"></SalesLogix:LookupPreFilter>
-                </LookupPreFilters>
-            </SalesLogix:LookupControl>
+    <div id="templateListContainer" runat="server" style="display: none">  
+        <table><tr>
+            <td style="padding-right:5px">
+            <asp:Literal ID="Literal1" runat="server" Text="<%$ resources: SourceTemplateList.Caption %>"></asp:Literal>
+            </td>
+            <td style="width: 100%">
+                <SalesLogix:LookupControl runat="server" ID="lueTemplate" Width="100%" LookupEntityName="User" LookupEntityTypeName="Sage.Entity.Interfaces.IUser, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" LookupDisplayMode="Dialog" AutoPostBack="true" AddEmptyListItem="false" DialogTitle="<%$ resources:LookupTemplateDialogTitle %>"  >
+                    <LookupProperties>
+                        <SalesLogix:LookupProperty PropertyHeader="<%$ resources: lueUser.LookupProperties.UserInfo.UserName.PropertyHeader %>" PropertyName="UserInfo.UserName" PropertyType="System.String" PropertyFormat="None"  UseAsResult="True" ExcludeFromFilters="False"></SalesLogix:LookupProperty>
+                    </LookupProperties>
+                    <LookupPreFilters>
+                        <SalesLogix:LookupPreFilter PropertyName="Type" PropertyType="Sage.Entity.Interfaces.UserType" OperatorCode="=" FilterValue="6"></SalesLogix:LookupPreFilter>
+                    </LookupPreFilters>
+                </SalesLogix:LookupControl>
+            </td>
+        </tr></table>
+       
+            
     </div>
-    &nbsp;<asp:Label ID="lblMessage" runat="server" style="color: #E32F0B; display: none;" Text="<%$ resources: ValidationMsgNoSource %>"></asp:Label>
+    &nbsp;<asp:Label ID="lblMessage" runat="server" style="color: #E32F0B; display: none; padding-left: 300px;" Text="<%$ resources: ValidationMsgNoSource %>"></asp:Label>
 </div>
-<p>&nbsp;</p>
+<br />
 <div>
     <table>
         <colgroup>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0"?>
+<entityFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="OrmRangeEntityFilter" id="cbe49524-3c98-408d-baff-3d60462a24b6" lastModifiedUtc="2012-06-27T22:22:40.3496344Z" filterName="Unconfirmed" propertyName="Status" characters="0">
+  <extendedMetaData />
+  <ExtendedPropertiesCollection>
+    <extendee type="Sage.Platform.Orm.Entities.OrmRangeEntityFilter" />
+  </ExtendedPropertiesCollection>
+  <ranges id="d01be467-2faf-4206-b2fc-183853015a9d" rangeName="True" lower="asUnconfirmed" upper="asUnconfirmed" />
+  <ranges id="2f61ee27-32e1-4458-b420-410dcf913ebe" rangeName="False" lower="asAccepted" upper="asAccepted" />
+</entityFilter>

@@ -1,0 +1,20 @@
+<script type="text/javascript" src="~/jscript/Silverlight.js"></script>
+<div id="silverlightControlHost">
+#if($qfcontrol.Visible)  
+<object data="data:application/x-silverlight-2," type="application/x-silverlight-2"
+    width="${qfcontrol.Width}" height="${qfcontrol.Height}">
+    <param name="source" value="ClientBin/${qfcontrol.XapFileName}.xap" />
+    <param name="onError" value="onSilverlightError" />
+  #if ($qfcontrol.BackgroundColor != "")
+    <param name="background" value="${qfcontrol.BackgroundColor}" />
+  #end
+    <param name="minRuntimeVersion" value="${qfcontrol.MinVersion}" />
+    <param name="autoUpgrade" value="true" />
+    <a href="http://go.microsoft.com/fwlink/?LinkID=149156&v=${qfcontrol.MinVersion}" style="text-decoration: none">
+      <img src="http://go.microsoft.com/fwlink/?LinkId=161376" alt="Get Microsoft Silverlight"
+        style="border-style: none" />
+    </a>
+  </object>
+#end
+</div>
+

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<mashup id="5ad93d4e-1c18-4b4a-a1d1-3597bfa28d72" name="LiteratureRequests">
+  <processors>
+    <processor type="Sage.Platform.Mashups.Processors.QueryProcessor, Sage.Platform.Mashups">
+      <queryProcessor id="b82873ae-08b4-4c9c-a5e6-8be23f051c2c" name="LitFulfillmentDetails_query" location="20, 20" expanded="true" continueOnError="false" query="select litRequestItem_.id as id, litRequestItem_.LitRequest.id as whereclauseid, litRequestItem_.LiteratureItem.Itemname as literatureitem_itemname, litRequestItem_.LiteratureItem.Itemfamily as literatureitem_itemfamily, litRequestItem_.Qty as qty from LitRequest mainentity left join mainentity.LitRequestItems litRequestItem_ where mainentity.id in ({ids})">
+        <parameters />
+      </queryProcessor>
+    </processor>
+  </processors>
+  <parameters />
+  <links />
+</mashup>

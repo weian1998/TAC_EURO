@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Description.Caption" xml:space="preserve">
     <value>Description</value>
@@ -126,16 +126,7 @@
   <data name="grdTicketSolutionTypes.056fefa0-0ddc-437b-b5da-62693ab60637.ColumnHeading" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="grdTicketSolutionTypes.410c314a-286f-4d40-aa77-40251272ac7d.ColumnHeading" xml:space="preserve">
-    <value>Notes</value>
-  </data>
-  <data name="grdTicketSolutionTypes.a6dc9b14-08d0-4a5f-93a7-83d19995ceb1.ColumnHeading" xml:space="preserve">
-    <value />
-  </data>
-  <data name="grdTicketSolutionTypes.a6dc9b14-08d0-4a5f-93a7-83d19995ceb1.ConfirmationMessage" xml:space="preserve">
-    <value>Are you want to remove the associated resolution?</value>
-  </data>
-  <data name="grdTicketSolutionTypes.a6dc9b14-08d0-4a5f-93a7-83d19995ceb1.Text" xml:space="preserve">
+  <data name="grdResolutions.Delete.ToolTip" xml:space="preserve">
     <value>Remove</value>
   </data>
   <data name="06faadb1-3c6f-4342-b046-2232f4039308.DialogTitleOverride" xml:space="preserve">
@@ -150,25 +141,34 @@
   <data name="a8ebf90c-7d73-4497-a6c6-bd9812cfb3a9.DialogTitleOverride" xml:space="preserve">
     <value>Edit Standard Solution</value>
   </data>
-  <data name="grdTicketSolutionTypes.404a957e-8f18-41ec-945a-2b71bd665b63.ColumnHeading" xml:space="preserve">
-    <value>Description</value>
-  </data>
   <data name="btnAddSolution.ToolTip" xml:space="preserve">
     <value>Associate a standard problem to a resolution</value>
   </data>
-  <data name="lueAddStandardResolution.ButtonToolTip" xml:space="preserve">
-    <value>Associate resolution.</value>
-  </data>
-  <data name="lueAddStandardResolution.LookupProperties.Description.PropertyHeader" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="lueAddStandardResolution.LookupProperties.Notes.PropertyHeader" xml:space="preserve">
-    <value>Notes</value>
+  <data name="grdResolutions_AddRelationTool.DialogButtonText" xml:space="preserve">
+    <value>Add Selected</value>
   </data>
   <data name="b45115b1-c364-4d44-be4b-c17c12e526a4.DuplicateAssociationMessage" xml:space="preserve">
     <value>This item has already been associated.</value>
   </data>
   <data name="lueAddStandardResolution.LookupDialogTitle" xml:space="preserve">
     <value>Find Standard Resolution</value>
+  </data>
+  <data name="grdResolutions.de8ad268-5d40-4cea-8f91-d13ca741b72e.ColumnHeading" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="grdResolutions.030a57a3-a7fd-417c-9651-f11d8eb509d2.ColumnHeading" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="grdResolutions_AddRelationTool.LookupProperties.Description.PropertyHeader" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="grdResolutions_AddRelationTool.ButtonToolTip" xml:space="preserve">
+    <value>Associate Resolution</value>
+  </data>
+  <data name="grdResolutions_AddRelationTool.LookupProperties.Notes.PropertyHeader" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="grdResolutions_AddRelationTool.LookupDialogTitle" xml:space="preserve">
+    <value>Lookup Standard Resolution</value>
   </data>
 </root>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<SmartPartMapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="e89cf2ed-a3ca-4577-9878-e63ab59c6c08">
+  <SmartPartId>actmgrSDataListViewer</SmartPartId>
+  <ReferencedModelId>00000000-0000-0000-0000-000000000000</ReferencedModelId>
+  <SmartPart>SmartParts\General\SDataListViewer.ascx</SmartPart>
+  <TargetWorkspace>MainContent</TargetWorkspace>
+   <ShowInMode></ShowInMode>
+  <Properties>
+    <Property Name="MainViewDefinition" TypeConverter="">Sage.MainView.ActivityManager</Property>
+    <Property Name="ListContextMenu" TypeConverter="">ActivityManagerListContextMenu</Property> 
+    <Property Name="HelpTopicName" TypeConverter="">activitymgrlistview</Property>   
+  </Properties>
+  <AllowRoles />
+</SmartPartMapping>

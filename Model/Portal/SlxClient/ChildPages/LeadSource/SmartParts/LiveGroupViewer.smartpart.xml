@@ -6,6 +6,7 @@
   <TargetWorkspace>MainContent</TargetWorkspace>
   <ShowInMode>List</ShowInMode>
   <Properties>
+    <Property Name="ListContextMenu" TypeConverter="">GroupListContextMenu</Property>
     <Property Name="HelpTopic" TypeConverter="">leadsourcelistview</Property>
   </Properties>
   <AllowRoles />

@@ -3,5 +3,7 @@
   <InstanceId>43e55b71480a46fe84249a411b6ebd96</InstanceId>
   <ServiceType>Sage.SalesLogix.SystemOptionsService, Sage.SalesLogix.System</ServiceType>
   <RegisterAs>Sage.SalesLogix.Services.ISystemOptionsService, Sage.SalesLogix</RegisterAs>
+  <AddOnDemand>false</AddOnDemand>
   <Properties />
+  <Scope>Application</Scope>
 </PortalService>

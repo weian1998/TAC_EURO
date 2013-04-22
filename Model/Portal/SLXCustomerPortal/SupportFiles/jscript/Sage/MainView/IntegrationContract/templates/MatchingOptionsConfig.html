@@ -1,0 +1,33 @@
+﻿[
+'<div>',
+    '<div id="{%= $.id %}-Context-container">',
+        '<label class="wizardsectiontitle boldText padBottom">{%= $.matchingHeader %}',
+            '<span class="boldtext">{%= $.resourceDisplayName %}</span>',
+        '</label>',
+        '<br /><br />',
+    '</div>',
+    '<div>',
+        '<label class="wizardsectiontext padBottom" style="padding-left:20px">{%= $.matchingDescription %}</label>',
+    '</div>',
+    '<div>',
+        '<br />',
+        '<label class="slxlabel" style="padding-left:20px">{%= $.propertyText %}</label>',
+        '<label class="slxlabel" style="padding-left:240px">{%= $.operatorText %}</label>',
+    '</div>',
+    '<div id="{%= $.id %}-Loading-container">',
+        '<br />',
+        '<label class="wizardsectiontitle boldText padBottom" style="padding-left:20px">{%= $.loadingText %}</label>',
+    '</div>',
+//conditions
+    '<div style="padding:10px;" id="{%= $.id %}-Condition-container"></div>',
+//buttons
+    '<div class="button-bar alignright">',
+        '<button dojoType="dijit.form.Button" type="submit" onClick="dijit.byId(\'{%= $.id %}-Dialog\').matchingObject.updateMatchProperties();">',
+            '{%= $.okText %}',
+        '</button>',
+        '<button dojoType="dijit.form.Button" type="button" onClick="dijit.byId(\'{%= $.id %}-Dialog\').destroy();">',
+            '{%= $.cancelText %}',
+        '</button>',
+    '</div>',
+'</div>'
+]

@@ -1,50 +1,58 @@
-dojo.provide('Sage.Data.WritableSDataStore');
-dojo.require('Sage.Data.BaseSDataStore');
-dojo.require('Sage.Utility');
-(function() {
-    dojo.declare('Sage.Data.WritableSDataStore', Sage.Data.BaseSDataStore, {
+/*globals Sage, dojo, dojox, dijit, Simplate, window, Sys, define */
+define([
+        'Sage/Data/BaseSDataStore',
+        'Sage/Utility',
+        'dojo/_base/declare',
+        'dojo/_base/array',
+        'dojo/_base/lang'
+],
+function (BaseSDataStore, Utility, declare, array, lang) {
+    var writableSDataStore = declare('Sage.Data.WritableSDataStore', BaseSDataStore, {
         newItemParentReferenceProperty: false,
-        constructor: function(o) {
-            //dojo.mixin(this, o);
-            
+        constructor: function (o) {
             //dojo.data.api.Identity Implemented on BaseSDataStore...
-	    //dojo.data.api.Read Implemented on BaseSDataStore...
-  		    this.features['dojo.data.api.Write'] = true;
-		    this.features['dojo.data.api.Notification'] = true;
+            //dojo.data.api.Read Implemented on BaseSDataStore...
+            this.features['dojo.data.api.Write'] = true;
+            this.features['dojo.data.api.Notification'] = true;
             this.dirtyDataCache = { isDirty: false };
             this.singleResourceRequest = null;
+            dojo.connect(this, "clearCache", this, this._clearCache);
+            this.onComplete = o.onComplete;
         },
-        getSingleResourceRequest: function(key) {
+        getSingleResourceRequest: function (key) {
             this.verifyService();
             if (this.singleResourceRequest === null) {
                 this.singleResourceRequest = new Sage.SData.Client.SDataSingleResourceRequest(this.service);
                 this.singleResourceRequest.setResourceKind(this.resourceKind);
-                if (this.select.length > 0) {
-                    this.singleResourceRequest.setQueryArg('select', this.select.join(',') );
+                if (this.select && this.select.length > 0) {
+                    this.singleResourceRequest.setQueryArg('select', this.select.join(','));
                 }
-                if (this.include.length > 0) {
+                if (this.include && this.include.length > 0) {
                     this.singleResourceRequest.setQueryArg('include', this.include.join(','));
                 }
             }
             if (key) {
-                this.singleResourceRequest.setResourceSelector(String.format("'{0}'", key));
+                this.singleResourceRequest.setResourceSelector("'" + key + "'");
             }
             return this.singleResourceRequest;
         },
-        onSuccess: function(context, feed)
-        {
+        onSuccess: function (context, feed) {
             //console.log('success: %o, %o', context, feed);
-            if (context.onBegin) { context.onBegin.call(context.scope || this, feed.$totalResults, context) };
-            if (context.onComplete) { context.onComplete.call(context.scope || this, feed.$resources, context) };
-            this.clearCache();
+            if (context.onBegin) {
+                context.onBegin.call(context.scope || this, feed.$totalResults, context);
+            }
+            if (this.onComplete) {
+                this.onComplete.call(context.scope || this, feed.$resources, context);
+            }
+            if (context.onComplete) {
+                context.onComplete.call(context.scope || this, feed.$resources, context);
+            }
             this.addToCache(context, feed);
         },
-        clearCache: function() {
-            // Inherits from BaseSDataStore
-            this.inherited(arguments);
+        _clearCache: function () {
             this.clearDirtyDataCache();
         },
-        clearDirtyDataCache: function() {
+        clearDirtyDataCache: function () {
             for (var key in this.dirtyDataCache) {
                 if (key !== 'isDirty') {
                     delete this.dirtyDataCache[key];
@@ -53,49 +61,48 @@ dojo.require('Sage.Utility');
             this.dirtyDataCache.isDirty = false;
             //this.dirtyDataCache = { isDirty: false };
         },
-        isItem: function(something) {
+        isItem: function (something) {
             var id = this.getIdentity(something);
             if (id && id !== '') {
                 return this.dataCache.hasOwnProperty(id);
             }
             return false;
         },
-        isItemLoaded: function(/* anything */ something){
-		    return this.isItem(something); //boolean
+        isItemLoaded: function (/* anything */something) {
+            return this.isItem(something); //boolean
         },
-        loadItem: function(/* object */ keywordArgs){
-		    if (!this.isItem(keywordArgs.item)) throw new Error('Unable to load ' + keywordArgs.item);
-	    },
-        getValues: function(item, attributename) {
+        loadItem: function (/* object */keywordArgs) {
+            if (!this.isItem(keywordArgs.item)) throw new Error('Unable to load ' + keywordArgs.item);
+        },
+        getValues: function (item, attributename) {
             if (this.isItem(item) && (typeof attributename === "string")) {
                 return (item[attributename] || []).slice(0);
             }
             return [];
         },
-        hasAttribute: function(item, attributename) {
+        hasAttribute: function (item, attributename) {
             if (this.isItem(item) && (typeof attributename === "string")) {
                 return attributename in item;
             }
             return false;
         },
-        close: function() {
+        close: function () {
             this.clearCache();
         },
-//dojo.data.api.Write implementations...
-        deleteItem: function(item, scope) {
+        //dojo.data.api.Write implementations...
+        deleteItem: function (item, scope) {
             var options = {};
             options.scope = scope || this;
             options.ignoreETag = true;
-            request = this.getSingleResourceRequest(this.getIdentity(item));
+            var request = this.getSingleResourceRequest(this.getIdentity(item));
             if (scope && typeof scope.onResponse === 'function') {
                 options.success = scope.onResponse;
                 options.aborted = scope.onResponse;
-                options.failure = scope.onResponse;    
-            }            
+                options.failure = scope.onResponse;
+            }
             request['delete'](item, options);
         },
-        isDirty: function(item) {
-            //alert('not implemented - isDirty');
+        isDirty: function (item) {
             //item could be null - if so, it means is any item dirty...
             if (item) {
                 var id = this.getIdentity(item);
@@ -105,20 +112,18 @@ dojo.require('Sage.Utility');
             }
             return this.dirtyDataCache.isDirty;
         },
-        _checkPageExitWarningMessage: function() {
+        _checkPageExitWarningMessage: function () {
             var response = true;
-            if  (this.dirtyDataCache.isDirty) {
+            if (this.dirtyDataCache.isDirty) {
                 var service = Sage.Services.getService("ClientBindingManagerService");
                 response = confirm(service._PageExitWarningMessage);
             }
             return response;
         },
-        newItem: function(args /*, parentInfo */) {
-        
-          if(!this._checkPageExitWarningMessage()) {
-            return;          
-          }
-
+        newItem: function (args /*, parentInfo */) {
+            if (!this._checkPageExitWarningMessage()) {
+                return;
+            }
             var request = this.createTemplateRequest();
             if (request) {
                 request.read({
@@ -131,15 +136,13 @@ dojo.require('Sage.Utility');
                 });
             }
         },
-        _newItemCreated: function(options, entity) {
-            //debugger;
+        _newItemCreated: function (options, entity) {
             if (this.newItemParentReferenceProperty) {
                 var currentId = Sage.Utility.getCurrentEntityId();
                 if (entity.hasOwnProperty(this.newItemParentReferenceProperty) && currentId) {
-                    entity[this.newItemParentReferenceProperty] = { '$key' : currentId };
+                    entity[this.newItemParentReferenceProperty] = { '$key': currentId };
                 }
             }
-            
             if ((options) && (options.onComplete) && (typeof options.onComplete === 'function')) {
                 options.onComplete.call(options.scope || this, entity);
             }
@@ -155,23 +158,26 @@ dojo.require('Sage.Utility');
         requestTemplateFailure: function () {
             //alert('Template not received.');
         },
-        saveNewEntity : function(entity, success, failure, scope) {
+        saveNewEntity: function (entity, success, failure, scope) {
             var request = new Sage.SData.Client.SDataSingleResourceRequest(this.service);
             if (request) {
                 if ((this.resourceKind) && (this.resourceKind !== '')) {
                     request.setResourceKind(this.resourceKind);
                 }
-
                 request.create(entity, {
                     success: success || function (created) {
-                        if (typeof console !== 'undefined') { console.log('created item: ' + created.$key) };
+                        if (typeof console !== 'undefined') {
+                            console.log('created item: ' + created.$key);
+                        };
                     },
                     failure: failure || function (response, o) {
-                        if (typeof console !== 'undefined') { console.log('Item not created: ' + entity.$key) };
+                        if (typeof console !== 'undefined') {
+                            console.log('Item not created: ' + entity.$key);
+                        };
                     },
                     scope: scope || this
                 });
-            }    
+            }
         },
         createItem: function (item, scope) {
             var request = new Sage.SData.Client.SDataSingleResourceRequest(this.service);
@@ -189,32 +195,38 @@ dojo.require('Sage.Utility');
                     if (typeof this.onResponse === 'function') {
                         this.onResponse.call(this, created);
                     }
-                }
+                };
                 options.success = fnSuccess;
                 var fnFailure = function (response, o) {
-                    if (typeof this.onResponse === 'function') {                        
+                    if (typeof this.onResponse === 'function') {
                         this.onResponse.call(this, response, o);
                     }
                     else {
                         if (typeof console !== 'undefined' && response && typeof response !== 'undefined' && response.status) {
                             // Note: item may not have scope here.
-                            console.log('createItem() creation failed for an item. Response: status = %o; statusText = %o', response.status, response.statusText); 
+                            console.log('createItem() creation failed for an item. Response: status = %o; statusText = %o', response.status, response.statusText);
                         }
                     }
-                }
+                };
                 options.failure = fnFailure;
                 options.aborted = fnFailure;
                 request.create(item, options);
             }
         },
-        revert: function() {
+        revert: function () {
             // return success
             // we don't really need to do much - the grid calls fetch again and gets the data...
             this.clearDirtyDataCache();
             this.onDataReset();
         },
-        save: function(scope) {
+        save: function (scope) {
             var entity, request;
+            if (!this.dirtyDataCache.isDirty) {
+                if (scope && typeof scope.onComplete === 'function') {
+                    scope.onComplete.call(scope);
+                }
+                return;
+            }
             for (var key in this.dirtyDataCache) {
                 if (key !== 'isDirty') {
                     entity = this.dirtyDataCache[key];
@@ -226,14 +238,18 @@ dojo.require('Sage.Utility');
                         // per the spec, the 'If-Match' header MUST be present for PUT requests.
                         // however, we are breaking with the spec, on the consumer, to allow it to be OPTIONAL so
                         // that the provider can decide if it wishes to break with the spec or not.
-                        options.ignoreETag = true;
+                        if (!this.isSecurityManager) {
+                            options.ignoreETag = true;
+                        }
                         var fnSuccess = function (updated) {
                             //Get the current $etag from the response so we can continue to update the item via sdata.
-                            this.store.dataCache[updated.$key].$etag = updated.$etag;
+                            if (this.store.dataCache[updated.$key]) {
+                                this.store.dataCache[updated.$key].$etag = updated.$etag;
+                            }
                             if (typeof this.onResponse === 'function') {
                                 this.onResponse.call(this, updated);
                             }
-                        }
+                        };
                         options.success = fnSuccess;
                         var fnFailure = function (response, o) {
                             //TODO: Update the store's $etag if we get a new one during a failure?
@@ -247,14 +263,14 @@ dojo.require('Sage.Utility');
                                         var obj = this.store.dataCache[oResponse.$key];
                                         if (obj && obj.$etag) {
                                             console.log('save() store $etag: %o', obj.$etag);
-                                        }                                                        
+                                        }
                                     }
                                 }
                             }
                             if (typeof this.onResponse === 'function') {
                                 this.onResponse.call(this, response, o);
                             }
-                        }
+                        };
                         options.failure = fnFailure;
                         options.aborted = fnFailure;
                         request.update(entity, options);
@@ -265,51 +281,53 @@ dojo.require('Sage.Utility');
             this.dirtyDataCache.isDirty = false;
             // If scope.onResponse is undefined but scope.onComplete is defined.
             if (scope && typeof scope.onResponse !== 'function' && typeof scope.onComplete === 'function') {
-                scope.onComplete.call(scope || dojo.global);
+                scope.onComplete.call(scope);
             }
         },
-        setValue: function(item, attribute, value) {
-            //if (typeof console !== 'undefined') { console.log('setValue - %o %o %o', item, attribute, value) }; 
-            //alert('not implemented - setValue');
+        setValue: function (item, attribute, value) {
+            //if (typeof console !== 'undefined') { console.log('setValue - %o %o %o', item, attribute, value) };
             var oldValue = this.getValue(item, attribute, '');
-            Sage.Utility.setValue(item, attribute, value);
-
+            Utility.setValue(item, attribute, value);
             this.onSet(item, attribute, oldValue, value);
-            this.dirtyDataCache[this.getIdentity(item)] = item;
-            this.dirtyDataCache.isDirty = true;
+            if (oldValue != value) {
+                this.dirtyDataCache[this.getIdentity(item)] = item;
+                this.dirtyDataCache.isDirty = true;
+            }
             return true;
         },
-        setValues: function(item, attribute, values) {
-            alert('not implemented - setValues');
-            //use where values is an array
+        setValues: function (item, attribute, values) {
+            array.forEach(values, lang.hitch(this, function(val) {
+                this.setValue(item, attribute, val);
+            }));
         },
-        unsetAttribute: function(item, attribute) {
+        unsetAttribute: function (item, attribute) {
             alert('not implemented - unsetAttribute');
             //delete all values of an attribute on the item...
         },
         //dojo.data.api.Notification
-	    onSet: function(/* item */ item,
-					    /*attribute-name-string*/ attribute,
-					    /*object | array*/ oldValue,
-					    /*object | array*/ newValue){
-		    // summary: See dojo.data.api.Notification.onSet()
+        onSet: function (/* item */item,
+        /*attribute-name-string*/attribute,
+        /*object | array*/oldValue,
+        /*object | array*/newValue) {
+            // summary: See dojo.data.api.Notification.onSet()
 
-		    // No need to do anything. This method is here just so that the
-		    // client code can connect observers to it.
-	    },
-        onNew: function(newItem) {
+            // No need to do anything. This method is here just so that the
+            // client code can connect observers to it.
+        },
+        onNew: function (newItem) {
             //nothing to do here - client code connects observers to this
         },
-        onDelete: function(deletedItem) {
+        onDelete: function (deletedItem) {
             //nothing to do here - client code connects observers to this
         },
-        onDataReset: function() {
+        onDataReset: function () {
         },
-        onDataSaved: function() {
+        onDataSaved: function () {
         },
-        onItemSaved: function(savedItem, parentInfo) {
+        onItemSaved: function (savedItem, parentInfo) {
         },
-        onItemNotSaved: function(notSavedItem, error) {
+        onItemNotSaved: function (notSavedItem, error) {
         }
     });
-})();
+    return writableSDataStore;
+});

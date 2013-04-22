@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<MenuDropDownItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="305671a7-2cbe-411f-b790-edcea3d3ef4c">
+  <ItemId>gtcDelete</ItemId>
+  <NavUrl>javascript:Sage.Groups.GroupManager.DeleteGroup('${groupId}','${groupName}')</NavUrl>
+  <LargeImageUrl />
+  <SmallImageUrl />
+  <ContextMenuId />
+  <Target />
+  <AppliedSecurity />
+</MenuDropDownItem>

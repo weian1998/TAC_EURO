@@ -1,30 +1,17 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using Sage.Platform.Application.Services;
 using Sage.Platform.WebPortal.Services;
 using Sage.Platform.Application.UI;
 using Sage.Platform.Application;
 using Sage.Platform.WebPortal.SmartParts;
-using log4net;
 using Sage.SalesLogix.Services.Import.Actions;
 using Sage.SalesLogix.Services.Import;
 using Sage.Entity.Interfaces;
-using Sage.SalesLogix;
 
 public partial class ImportActionScheduleActivity : EntityBoundSmartPartInfoProvider 
 {
-
-    private ActionScheduleActivity _action;
     private string _actionName;
-    
 
     #region Public Methods
 
@@ -41,11 +28,7 @@ public partial class ImportActionScheduleActivity : EntityBoundSmartPartInfoProv
     /// Gets or sets the action.
     /// </summary>
     /// <value>The action.</value>
-    public ActionScheduleActivity Action
-    {
-        get {return _action; }
-        set { _action = value; }
-    }
+    public ActionScheduleActivity Action { get; set; }
 
     /// <summary>
     /// Gets or sets the name of the action.
@@ -77,21 +60,21 @@ public partial class ImportActionScheduleActivity : EntityBoundSmartPartInfoProv
     /// <returns></returns>
     override public ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
     {
-        ToolsSmartPartInfo tinfo = new ToolsSmartPartInfo();
+        ToolsSmartPartInfo activityToolbar = new ToolsSmartPartInfo();
 
-        foreach (Control c in this.Form_LTools.Controls)
+        foreach (Control c in ImportActionScheduleActivity_LTools.Controls)
         {
-            tinfo.LeftTools.Add(c);
+            activityToolbar.LeftTools.Add(c);
         }
-        foreach (Control c in this.Form_CTools.Controls)
+        foreach (Control c in ImportActionScheduleActivity_CTools.Controls)
         {
-            tinfo.CenterTools.Add(c);
+            activityToolbar.CenterTools.Add(c);
         }
-        foreach (Control c in this.Form_RTools.Controls)
+        foreach (Control c in ImportActionScheduleActivity_RTools.Controls)
         {
-            tinfo.RightTools.Add(c);
+            activityToolbar.RightTools.Add(c);
         }
-        
+
         ImportManager importManager = GetImportManager();
         if(importManager != null)
         {
@@ -100,19 +83,19 @@ public partial class ImportActionScheduleActivity : EntityBoundSmartPartInfoProv
             {
                 if (Action.Activity.Type == ActivityType.atPhoneCall)
                 {
-                    tinfo.Title = GetLocalResourceObject("Const_SchedulePhoneCall_Title").ToString();
+                    activityToolbar.Title = GetLocalResourceObject("Const_SchedulePhoneCall_Title").ToString();
                 }
                 if (Action.Activity.Type == ActivityType.atAppointment)
                 {
-                    tinfo.Title = GetLocalResourceObject("Const_ScheduleMeeting_Title").ToString();
+                    activityToolbar.Title = GetLocalResourceObject("Const_ScheduleMeeting_Title").ToString();
                 }
                 if (Action.Activity.Type == ActivityType.atToDo)
                 {
-                    tinfo.Title = GetLocalResourceObject("Const_ScheduleToDo_Title").ToString();
+                    activityToolbar.Title = GetLocalResourceObject("Const_ScheduleToDo_Title").ToString();
                 }
             }
         }
-        return tinfo;
+        return activityToolbar;
     }
 
     #endregion
@@ -145,6 +128,7 @@ public partial class ImportActionScheduleActivity : EntityBoundSmartPartInfoProv
             ClientBindingMgr.RegisterBoundControl(pklDescription);
             ClientBindingMgr.RegisterBoundControl(pklPriority);
             ClientBindingMgr.RegisterBoundControl(pklCategory);
+            ClientBindingMgr.RegisterDialogCancelButton(btnCancel);
         }
         SetActionState();
     }
@@ -186,6 +170,11 @@ public partial class ImportActionScheduleActivity : EntityBoundSmartPartInfoProv
         SaveActionState(false);
     }
 
+    protected override void OnClosing()
+    {
+        DialogService.DialogParameters.Remove("ActionName");
+        base.OnClosing();
+    }
 
     /// <summary>
     /// Sets the state of the action.
@@ -329,10 +318,7 @@ public partial class ImportActionScheduleActivity : EntityBoundSmartPartInfoProv
     private ImportManager GetImportManager()
     {
         ImportManager importManager = Page.Session["importManager"] as ImportManager;
-        if (importManager != null)
-        {
-        }
-        else
+        if (importManager == null)
         {
             DialogService.ShowMessage("error_ImportManager_NotFound");
         }

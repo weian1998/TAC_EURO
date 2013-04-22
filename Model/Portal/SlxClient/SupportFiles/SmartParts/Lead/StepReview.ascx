@@ -1,8 +1,8 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeFile="StepReview.ascx.cs" Inherits="StepReview" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.Web.Controls" Namespace="Sage.SalesLogix.Web.Controls.Lookup" TagPrefix="SalesLogix" %>
-<%@ Register Assembly="Sage.SalesLogix.HighLevelTypes" Namespace="Sage.SalesLogix.HighLevelTypes" TagPrefix="SalesLogix" %>
 
+<div style="display:none">
+    <asp:Button runat="server" ID="cmdStartImportProcess" OnClick="cmdStartProcess_Click" Visible="True" />
+</div>
 <table border="0" cellpadding="1" cellspacing="0" class="formtable" style="width:100%">
     <col width="1%" /><col width="35%" /><col width="64%" />
     <tr>
@@ -10,11 +10,18 @@
             <span class="slxlabel">
                 <asp:Label ID="lblHeader" runat="server" Text="<%$ resources:lblHeader.Caption %>"></asp:Label>
             </span>
-            <br />
-            <br />
-            <br />
         </td>
     </tr>
+        <td colspan="3">
+            <span class="slxlabel">
+                <asp:Label ID="lblImportNumber" runat="server" Text="<%$ resources:lblImportNumber.Caption %>" Visible="False"></asp:Label>
+            </span>
+            <span>
+                <a runat="server" id="lnkImportHistory"><asp:Localize ID="lnkImportHistoryCaption" runat="server" /></a>
+            </span>
+            <br/>
+            <br/>
+        </td>
     <tr>
         <td></td>
         <td>
@@ -62,7 +69,7 @@
             </span>
         </td>
         <td>
-            <span class="textcontrol>
+            <span class="textcontrol">
                 <asp:Label ID="lblAddToGroupValue" runat="server"></asp:Label>
             </span>
         </td>
@@ -75,7 +82,7 @@
             </span>
         </td>
         <td>
-            <span class="textcontrol>
+            <span class="textcontrol">
                 <asp:Label ID="lblLeadsGroupValue" runat="server"></asp:Label>
             </span>
         </td>
@@ -98,13 +105,21 @@
                 <asp:Label ID="lblGroupAction" runat="server" Text="<%$ resources:lblGroupAction.Caption %>"></asp:Label>
             </span>
         </td>
-        <td >
-          
+        <td>
             <span class="textcontrol">
                <asp:BulletedList ID="blActions" runat="server" BulletStyle="Circle" ></asp:BulletedList>
             </span>
-          
         </td>
     </tr>
-
+    <tr>
+        <td colspan="2"></td>
+        <td style="text-align: right;padding-right: 20px">
+            <br/>
+            <span>
+                <a runat="server" id="lnkImportLeadsWizard" href="..\\..\\ImportLead.aspx">
+                    <asp:Localize ID="lblImportLeadsWizard" Text="<%$ resources:lblImportLeadsWizard.Caption %>" runat="server" Visible="False" />
+                </a>
+            </span>
+        </td>
+    </tr>
 </table>

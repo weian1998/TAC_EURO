@@ -112,78 +112,51 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="txtAccount.Caption" xml:space="preserve">
+  <data name="lnkAccountName.Caption" xml:space="preserve">
     <value>Account:</value>
   </data>
-  <data name="txtAlarm.Caption" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtContactId.Caption" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtContactName.Caption" xml:space="preserve">
+  <data name="linkContactName.Caption" xml:space="preserve">
     <value>Contact:</value>
   </data>
-  <data name="txtDescription.Caption" xml:space="preserve">
-    <value />
-  </data>
   <data name="txtDuration.Caption" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtLeadName.Caption" xml:space="preserve">
-    <value>Name:</value>
+    <value>Duration:</value>
   </data>
   <data name="txtDuration.Text" xml:space="preserve">
-    <value>{[formatDurationLong(values)]}</value>
+    <value>{%= Sage.Utility.Activity.formatDuration($.entity.duration, $.entity.timeless)%}</value>
   </data>
-  <data name="txtOpportunityName.Caption" xml:space="preserve">
+  <data name="linkOpportunityName.Caption" xml:space="preserve">
     <value>Opportunity:</value>
   </data>
-  <data name="txtPhone.Caption" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtPriority.Caption" xml:space="preserve">
-    <value>Priority:</value>
-  </data>
-  <data name="txtRecurring.Caption" xml:space="preserve">
-    <value />
-  </data>
   <data name="txtStartTime.Caption" xml:space="preserve">
-    <value />
+    <value>Start Time:</value>
   </data>
-  <data name="txtTicketNumber.Caption" xml:space="preserve">
-    <value>Ticket:</value>
+  <data name="txtPhone.Caption" xml:space="preserve">
+    <value>Phone:</value>
   </data>
-  <data name="txtTimeless.Caption" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtType.Caption" xml:space="preserve">
+  <data name="lblHeader.Caption" xml:space="preserve">
     <value />
   </data>
   <data name="txtLeader.Caption" xml:space="preserve">
     <value>Leader:</value>
   </data>
   <data name="lblHeader.Text" xml:space="preserve">
-    <value>{[buildHeader(values)]}</value>
-  </data>
-  <data name="lblPostRenderScript.Text" xml:space="preserve">
-    <value>{[PostRenderScript(values)]}</value>
-  </data>
-  <data name="txtLeadCompany.Caption" xml:space="preserve">
-    <value>Company:</value>
+    <value>{%= Sage.Utility.Activity.getActivityListSummaryHeaderHtml($.entity)%}</value>
   </data>
   <data name="txtStartTime.Text" xml:space="preserve">
-    <value>{[formatDateTimeSummary(values)]}</value>
+    <value>{%= Sage.Utility.Activity.formatActivityStartDate($.entity.startdate, $.entity.timeless)%}</value>
   </data>
-  <data name="hdnAttachment.Caption" xml:space="preserve">
-    <value />
+  <data name="lnkTicketNumber.Caption" xml:space="preserve">
+    <value>Ticket</value>
   </data>
-  <data name="hdnAttachment.Text" xml:space="preserve">
-    <value />
+  <data name="txtNotes.Caption" xml:space="preserve">
+    <value>Notes:</value>
+  </data>
+  <data name="txtLocation.Caption" xml:space="preserve">
+    <value>Location:</value>
   </data>
 </root>

@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Web;
 using Microsoft.Win32;
 using Sage.Entity.Interfaces;
 using Sage.Platform;
 using Sage.Platform.Application;
-using Sage.Platform.Application.Services;
-using Sage.SalesLogix;
 using Sage.SalesLogix.LegacyBridge.FileSync;
 using System.Text.RegularExpressions;
 
@@ -51,7 +50,7 @@ public partial class ViewAttachment : System.Web.UI.Page
     /// The default type of attachment file name to create when the user clicks the attachment hyperlink.
     /// This value can be set here.
     /// </summary>
-    private AttachmentLink _attachmentLinkType = AttachmentLink.alDescription; // AttachmentLink.alFileName;
+    private const AttachmentLink AttachmentLinkType = AttachmentLink.alDescription;
 
     /// <summary>
     /// Handles the Load event of the Page control.
@@ -117,9 +116,9 @@ public partial class ViewAttachment : System.Web.UI.Page
         if (IsRemote())
         {
             string DataType = GetAttachmentType(Request.QueryString["DataType"]);
+            var fileId = Request.QueryString["fileId"];
             if (DataType == "Library")
             {
-                var fileId = Request.QueryString["fileId"];
                 //set status
                 var libraryDoc = EntityFactory.GetById<ILibraryDocs>(fileId);
                 if ((libraryDoc.Status != null) && ((libraryDoc.Status == LibraryDocsStatus.Ordered) || (libraryDoc.Status == LibraryDocsStatus.RevisionOrdered)))
@@ -138,15 +137,24 @@ public partial class ViewAttachment : System.Web.UI.Page
                     libraryDoc.Save();
                 }
                 //log sync request...
-                var synclogger = new FileSyncRequest();
-                synclogger.LogLibraryFileRequest(fileId);
-
+                FileSyncRequest.LogLibraryFileRequest(fileId);
                 WriteFileSyncRequested();
                 return;
             }
+            if (DataType == "Attachment")
+            {
+                var attachment = EntityFactory.GetById<IAttachment>(fileId);
+                if (attachment != null)
+                {
+                    bool result;
+                    Sage.SalesLogix.Attachment.Rules.RequestAttachment(attachment, out result);
+                    WriteFileSyncRequested();
+                }
+            }
         }
-        WriteErrorMessage(string.Empty);        
+        WriteErrorMessage(string.Empty);      
     }
+
     private void WriteErrorMessage(string message)
     {
         Response.ContentType = "text/html";
@@ -155,21 +163,13 @@ public partial class ViewAttachment : System.Web.UI.Page
 
     private void WriteFileNotFound(string filename, string fileid)
     {
-        string DataType = GetAttachmentType(Request.QueryString["DataType"]);
-        if (!IsRemote() || (DataType != "Library"))
+        if (!IsRemote())
         {
             WriteErrorMessage(string.Format(GetLocalResourceObject("Error_RequestedFileNotFoundFmt").ToString(), filename));
             return;
         }
 
-        var libraryDoc = EntityFactory.GetById<ILibraryDocs>(fileid);
-        if ((libraryDoc.Status != null) && ((libraryDoc.Status == LibraryDocsStatus.Ordered) || (libraryDoc.Status == LibraryDocsStatus.RevisionOrdered)))
-        {
-            WriteFileSyncRequested();
-            return;
-        }
-
-        //let them request the sync of the Library file...
+        //let them request the sync of the file...
         const string htmlFmt =
             @"
     <form id=""RequestFile"" action=""ViewAttachment.aspx?requestfilesync=true&filename={1}&fileid={2}&DataType={3}"" method=""POST"">
@@ -203,7 +203,6 @@ public partial class ViewAttachment : System.Web.UI.Page
         Response.Write(string.Format(commonHtmlFmt, htmlBody));
     }
 
-
     /// <summary>
     /// Opens the attachment.
     /// </summary>
@@ -211,12 +210,12 @@ public partial class ViewAttachment : System.Web.UI.Page
     {
         try
         {
+            var fileId = String.Empty;
             Response.Buffer = true;
             Response.Clear();
             Response.ClearContent();
             Response.ClearHeaders();
             string fileName = Request.QueryString["Filename"];
-            //string fileDesc = Request.QueryString["Description"];
             string historyid = Request.QueryString["historyid"];
             if (string.IsNullOrEmpty(fileName) && string.IsNullOrEmpty(historyid))
             {
@@ -238,41 +237,41 @@ public partial class ViewAttachment : System.Web.UI.Page
             else if (!string.IsNullOrEmpty(historyid))
             {
                 var history = EntityFactory.GetById<IHistory>(historyid);
-                    if (history != null)
+                if (history != null)
+                {
+                    IList<IAttachment> attachments =
+                        Sage.SalesLogix.Attachment.Rules.GetAttachmentsFor(typeof(IHistory), history.Id.ToString());
+                    if (attachments != null)
                     {
-                        IList<IAttachment> attachments =
-                            Sage.SalesLogix.Attachment.Rules.GetAttachmentsFor(typeof(IHistory), history.HistoryId);
-                        if (attachments != null)
+                        IAttachment attachment = null;
+                        foreach (IAttachment att in attachments)
                         {
-                            IAttachment attachment = null;
-                            foreach (IAttachment att in attachments)
+                            if (att.FileName.ToUpper().EndsWith(".MSG"))
                             {
-                                if (att.FileName.ToUpper().EndsWith(".MSG"))
-                                {
-                                    fileName = att.FileName;
-                                    attachment = att;
-                                    break;
-                                }
-                            }
-                            if (attachment == null)
-                            {
-                            WriteErrorMessage(GetLocalResourceObject("Error_EmailMsgAttachment").ToString());
-                                return;
+                                fileName = att.FileName;
+                                attachment = att;
+                                break;
                             }
                         }
-                        else
+                        if (attachment == null)
                         {
-                        WriteErrorMessage(GetLocalResourceObject("Error_EmailMsgAttachment").ToString());
+                            WriteErrorMessage(GetLocalResourceObject("Error_EmailMsgAttachment").ToString());
                             return;
                         }
                     }
+                    else
+                    {
+                        WriteErrorMessage(GetLocalResourceObject("Error_EmailMsgAttachment").ToString());
+                        return;
+                    }
                 }
+            }
 
             string filePath = String.Empty;
             string DataType = GetAttachmentType(Request.QueryString["DataType"]);
             if (DataType.Equals("Library"))
             {
-                object fileId = Request.QueryString["fileId"];
+                fileId = Request.QueryString["FileId"];
                 //can't use query string to get library directory as Whats New attachment/documents won't contain that property
                 string libraryPath = Sage.SalesLogix.Attachment.Rules.GetLibraryPath();
                 ILibraryDocs libraryDoc = EntityFactory.GetRepository<ILibraryDocs>().Get(fileId);
@@ -283,25 +282,24 @@ public partial class ViewAttachment : System.Web.UI.Page
                     {
                         if (File.Exists(filePath + fileName))
                         {
-                            //Do we check for Revised and ask if they want to request the revised version?
-                            //if ((libraryDoc.Status == null) || (libraryDoc.Status == LibraryDocsStatus.Delivered))
-                            //{
-                                libraryDoc.Status = LibraryDocsStatus.DeliveredRead;
-                                libraryDoc.Save();
-                            //}
+                            libraryDoc.Status = LibraryDocsStatus.DeliveredRead;
+                            libraryDoc.Save();
                         }
                     }
                 }
             }
             else
+            {
+                fileId = Request.QueryString["Id"];
                 filePath = Sage.SalesLogix.Attachment.Rules.GetAttachmentPath();
-            
+            }
+
             if (DataType.Equals("Template"))
                 filePath += "Word Templates/";
 
             string tempPath = Sage.SalesLogix.Attachment.Rules.GetTempAttachmentPath();
             if (File.Exists(tempPath + fileName))
-                    filePath = tempPath;
+                filePath = tempPath;
 
             if (File.Exists(filePath + fileName))
             {
@@ -320,29 +318,9 @@ public partial class ViewAttachment : System.Web.UI.Page
                         Response.ClearHeaders();
 
                         string strFilePart = string.Empty;
-                        switch (_attachmentLinkType)
-                        {
-                            case AttachmentLink.alDescription:
-                                strFilePart = MakeValidFileName(fileName);
-                                if (string.IsNullOrEmpty(strFilePart))
-                                    strFilePart = GetLocalResourceObject("DefaultUnknownFileName").ToString();
-                                break;
-                            case AttachmentLink.alFileName:
-                                strFilePart = Path.GetFileNameWithoutExtension(filePath + fileName);
-                                if (string.IsNullOrEmpty(strFilePart))
-                                    strFilePart = GetLocalResourceObject("DefaultUnknownFileName").ToString();
-                                const int ATTACHMENTID_LENGTH = 13;
-                                if (strFilePart.StartsWith("!") && (strFilePart.Length > ATTACHMENTID_LENGTH))
-                                    // Grab everything after the Attachment ID.
-                                    strFilePart = strFilePart.Substring(ATTACHMENTID_LENGTH);
-                                else
-                                {
-                                    // If it's not a regular attachment then check to see if it's a mail merge attachment... 
-                                    if (!fileName.ToUpper().StartsWith("MAIL MERGE\\"))
-                                        strFilePart = GetLocalResourceObject("DefaultUnknownFileName").ToString();
-                                }
-                                break;
-                        }
+                        strFilePart = MakeValidFileName(fileName);
+                        if (string.IsNullOrEmpty(strFilePart))
+                            strFilePart = GetLocalResourceObject("DefaultUnknownFileName").ToString();
 
                         if (string.IsNullOrEmpty(strFilePart))
                             strFilePart = GetLocalResourceObject("DefaultUnknownFileName").ToString();
@@ -389,7 +367,6 @@ public partial class ViewAttachment : System.Web.UI.Page
                         }
 
                         fileName = strFilePart.Replace("+", "%20");
-
                         Response.Clear();
                         Response.Charset = String.Empty;
                         Encoding headerEncoding = Encoding.GetEncoding(1252);
@@ -420,8 +397,7 @@ public partial class ViewAttachment : System.Web.UI.Page
             }
             else
             {
-                WriteFileNotFound(fileName, Request.QueryString["fileId"]);
-                return;
+                WriteFileNotFound(fileName, fileId);
             }
         }
         catch (Exception ex)
@@ -454,14 +430,10 @@ public partial class ViewAttachment : System.Web.UI.Page
             bool bModified = false;
             foreach (char chName in nameChars)
             {
-                foreach (char chBad in badChars)
+                if (badChars.Any(chBad => chName.Equals(chBad)))
                 {
-                    if (chName.Equals(chBad))
-                    {
-                        nameChars[i] = '_';
-                        bModified = true;
-                        break;
-                    }
+                    nameChars[i] = '_';
+                    bModified = true;
                 }
                 i++;
             }

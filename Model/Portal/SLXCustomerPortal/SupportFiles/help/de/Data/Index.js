@@ -1,0 +1,521 @@
+CMCXmlParser._FilePathToXmlStringMap.Add(
+	'Index',
+	'<?xml version=\"1.0\" encoding=\"utf-8\"?>' +
+	'<CatapultTargetIndex Count=\"64\">' +
+	'    <IndexEntry>' +
+	'        <Entries>' +
+	'            <IndexEntry Term=\"Anlagen\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"Bearbeiten\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Bearbeiten von Anlageninformationen\" Link=\"/Content/Common Tabs/editattach.htm#kanchor34\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"hinzufügen\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Hinzufügen von Anlagen\" Link=\"/Content/Common Tabs/addattachment.htm#kanchor29\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"Löschen\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Löschen von Anlagen\" Link=\"/Content/Common Tabs/deleteattach.htm#kanchor32\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"Registerkarte\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Registerkarte &quot;Anlagen&quot;\" Link=\"/Content/Common Tabs/attachmentstab.htm#kanchor30\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Anmelden\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Anmelden bei Sage SalesLogix\" Link=\"/Content/Getting Started/slxlogin.htm#kanchor7\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Arbeitsbereich\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"Schaltflächen\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Grundlegendes zu den verfügbaren Schaltflächen\" Link=\"/Content/Getting Started/webbuttons.htm#kanchor38\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Grundlegendes zum Arbeitsbereich\" Link=\"/Content/Getting Started/Your_Workspace.htm#kanchor9\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Auswählen\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"Zeitzone\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Auswählen einer Zeitzone\" Link=\"/Content/Client/Select_TimeZone.htm#kanchor27\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Auswahlliste\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Grundlegendes zum Arbeitsbereich\" Link=\"/Content/Getting Started/Your_Workspace.htm#kanchor14\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Detailansicht\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"Benutzerdefinierter Bereich\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Grundlegendes zum Arbeitsbereich\" Link=\"/Content/Getting Started/Your_Workspace.htm#kanchor19\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"Registerkarten\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Grundlegendes zum Arbeitsbereich\" Link=\"/Content/Getting Started/Your_Workspace.htm#kanchor20\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Grundlegendes zum Arbeitsbereich\" Link=\"/Content/Getting Started/Your_Workspace.htm#kanchor18\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Fehlerbehebung\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"Hilfe in Firefox\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Beheben gängiger Fehler\" Link=\"/Content/Common/slxtroubleshooting.htm#kanchor26\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"Löschen des Caches\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Beheben gängiger Fehler\" Link=\"/Content/Common/slxtroubleshooting.htm#kanchor26\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Beheben gängiger Fehler\" Link=\"/Content/Common/slxtroubleshooting.htm#kanchor26\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Firefox\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Beheben gängiger Fehler\" Link=\"/Content/Common/slxtroubleshooting.htm#kanchor26\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Gruppe\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"Manager\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Gruppen-Manager\" Link=\"/Content/Groups/Group_Manager.htm#kanchor39\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Gruppen\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Grundlegendes zum Arbeitsbereich\" Link=\"/Content/Getting Started/Your_Workspace.htm#kanchor17\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Hilfe\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Verwenden des Hilfesystems\" Link=\"/Content/Common/Using_the_Help_System.htm#kanchor4\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Internet Explorer\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Beheben gängiger Fehler\" Link=\"/Content/Common/slxtroubleshooting.htm#kanchor26\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Kontaktaufnahme mit Sage Software\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Kontaktaufnahme zu Sage\" Link=\"/Content/Common/contacting_sage_software.htm#kanchor2\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Konventionen\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Voraussetzungen und Konventionen\" Link=\"/Content/Common/slxconventions.htm#kanchor5\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Listansicht\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"Raster\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Arbeiten mit Rastern in Listenansichten und Registerkarten\" Link=\"/Content/General/gridfeatures.htm#kanchor37\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Listenansichten\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Grundlegendes zum Arbeitsbereich\" Link=\"/Content/Getting Started/Your_Workspace.htm#kanchor16\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Löschen\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"Cache\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Beheben gängiger Fehler\" Link=\"/Content/Common/slxtroubleshooting.htm#kanchor26\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Marken\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Software von Drittanbietern, Marken und registrierte Marken\" Link=\"/Content/Common/slxthirdparty.htm#kanchor1\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Menüleiste\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Grundlegendes zum Arbeitsbereich\" Link=\"/Content/Getting Started/Your_Workspace.htm#kanchor11\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Navigationsleiste\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Grundlegendes zum Arbeitsbereich\" Link=\"/Content/Getting Started/Your_Workspace.htm#kanchor12\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Öffnen von SpeedSearch\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"SpeedSearch\" Link=\"/Content/SpeedSearch/SpeedSearch_Client.htm#kanchor24\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Passwort\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Anmelden bei Sage SalesLogix\" Link=\"/Content/Getting Started/slxlogin.htm#kanchor8\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Registerkarten\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"Detailansicht\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Grundlegendes zum Arbeitsbereich\" Link=\"/Content/Getting Started/Your_Workspace.htm#kanchor20\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"Raster\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Arbeiten mit Rastern in Listenansichten und Registerkarten\" Link=\"/Content/General/gridfeatures.htm#kanchor37\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Grundlegendes zum Arbeitsbereich\" Link=\"/Content/Getting Started/Your_Workspace.htm#kanchor13\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"SpeedSearch\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"Ergebnisse\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Anzeigen von SpeedSearch-Ergebnissen\" Link=\"/Content/SpeedSearch/Speedsearch_Results.htm#kanchor44\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"Filter\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Verwenden der SpeedSearch-Optionen zum &quot;Filtern nach&quot;\" Link=\"/Content/SpeedSearch/Filter_By_Options.htm#kanchor41\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"Suchen nach Informationen\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Suchen nach Informationen\" Link=\"/Content/SpeedSearch/Searching_for_Information.htm#kanchor25\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"Übersicht\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"SpeedSearch\" Link=\"/Content/SpeedSearch/SpeedSearch_Client.htm#kanchor24\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"Vorschau eines Eintrags\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Anzeigen von SpeedSearch-Suchergebnissen in der Vorschau\" Link=\"/Content/SpeedSearch/Previewing_an_Item.htm#kanchor43\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Statusleiste\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Grundlegendes zum Arbeitsbereich\" Link=\"/Content/Getting Started/Your_Workspace.htm#kanchor15\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Suchen\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"Optionen zum &quot;Filtern nach&quot;\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Verwenden der SpeedSearch-Optionen zum &quot;Filtern nach&quot;\" Link=\"/Content/SpeedSearch/Filter_By_Options.htm#kanchor42\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Suchen von Datensätzen\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Suchen von Datensätzen\" Link=\"/Content/Lookups/findlookup.htm#kanchor40\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Support\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Kontaktaufnahme zu Sage\" Link=\"/Content/Common/contacting_sage_software.htm#kanchor3\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Tickets\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"Detailansicht\">' +
+	'                        <Entries>' +
+	'                            <IndexEntry Term=\"Registerkarten\">' +
+	'                                <Entries />' +
+	'                                <Links>' +
+	'                                    <IndexLink Title=\"Registerkarte &quot;Anlagen&quot;\" Link=\"/Content/Common Tabs/attachmentstab.htm#kanchor31\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                                    <IndexLink Title=\"Registerkarte &quot;Kommentare&quot;\" Link=\"/Content/Customer Portal/custtickactframes.htm#kanchor36\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                                </Links>' +
+	'                                <SeeAlsoLinks />' +
+	'                                <IndexControlLinks />' +
+	'                            </IndexEntry>' +
+	'                        </Entries>' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Verwenden der Ansicht &quot;Ticket-Detail&quot;\" Link=\"/Content/Customer Portal/custticketinfo.htm#kanchor22\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"Druckvorschau\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Anzeigen von Ticket-Details vor dem Drucken\" Link=\"/Content/Customer Portal/csrticketprint.htm#kanchor35\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"Hinzufügen\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Hinzufügen eines Tickets\" Link=\"/Content/Customer Portal/custaddticket.htm#kanchor21\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                    <IndexEntry Term=\"Listenansicht\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Verwenden der Listenansicht für Tickets\" Link=\"/Content/Customer Portal/custticktick.htm#kanchor23\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Tipps für Benutzer\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Tipps für neue Benutzer\" Link=\"/Content/Common/slxusertips.htm#kanchor6\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Titelleiste\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Grundlegendes zum Arbeitsbereich\" Link=\"/Content/Getting Started/Your_Workspace.htm#kanchor10\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Voraussetzungen\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Voraussetzungen und Konventionen\" Link=\"/Content/Common/slxconventions.htm#kanchor5\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Vorschau\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"SpeedSearch-Ergebnisse\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Anzeigen von SpeedSearch-Suchergebnissen in der Vorschau\" Link=\"/Content/SpeedSearch/Previewing_an_Item.htm#kanchor43\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Zeitzone\">' +
+	'                <Entries>' +
+	'                    <IndexEntry Term=\"Auswahl\">' +
+	'                        <Entries />' +
+	'                        <Links>' +
+	'                            <IndexLink Title=\"Auswählen einer Zeitzone\" Link=\"/Content/Client/Select_TimeZone.htm#kanchor27\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                        </Links>' +
+	'                        <SeeAlsoLinks />' +
+	'                        <IndexControlLinks />' +
+	'                    </IndexEntry>' +
+	'                </Entries>' +
+	'                <Links />' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Ziehen und Ablegen\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Ziehen und Ablegen mit Drag &amp; Drop\" Link=\"/Content/Common Tabs/dragdrop.htm#kanchor33\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'            <IndexEntry Term=\"Zuletzt angezeigt\">' +
+	'                <Entries />' +
+	'                <Links>' +
+	'                    <IndexLink Title=\"Zuletzt angezeigt\" Link=\"/Content/Common/recentlyviewed.htm#kanchor28\" UsedConditions=\"\" LocalConditions=\"\" />' +
+	'                </Links>' +
+	'                <SeeAlsoLinks />' +
+	'                <IndexControlLinks />' +
+	'            </IndexEntry>' +
+	'        </Entries>' +
+	'        <Links />' +
+	'        <SeeAlsoLinks />' +
+	'        <IndexControlLinks />' +
+	'    </IndexEntry>' +
+	'</CatapultTargetIndex>'
+);

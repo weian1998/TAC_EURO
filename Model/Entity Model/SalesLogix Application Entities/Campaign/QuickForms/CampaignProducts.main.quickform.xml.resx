@@ -112,28 +112,28 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="grdCampaignProducts.eb8ccfb4-6f7f-45e4-b620-db8a6c6af05c.ColumnHeading" xml:space="preserve">
+  <data name="grdProducts_AddRelationTool.LookupProperties.ActualId.PropertyHeader" xml:space="preserve">
     <value>SKU</value>
   </data>
-  <data name="grdCampaignProducts.402da2cc-7e29-4ae7-9296-7854e9218589.ColumnHeading" xml:space="preserve">
+  <data name="grdProducts.d1452578-605c-4279-a847-b5d0c34e2074.ColumnHeading" xml:space="preserve">
     <value>Family</value>
   </data>
-  <data name="grdCampaignProducts.a99089bd-05f8-42f2-af3a-65e7bb0fc751.ColumnHeading" xml:space="preserve">
+  <data name="grdProducts_AddRelationTool.LookupProperties.Family.PropertyHeader" xml:space="preserve">
+    <value>Family</value>
+  </data>
+  <data name="grdProducts.68440dbf-604e-46b0-ab44-c195f213b66b.ColumnHeading" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="grdCampaignProducts.72a9ff11-6930-4b5a-9ace-0515c3eafc8d.ConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to delete the selected Campaign Product?</value>
+  <data name="grdProducts.53fc90dc-0eee-4f3c-a007-8e280e660e76.ColumnHeading" xml:space="preserve">
+    <value>SKU</value>
   </data>
-  <data name="grdCampaignProducts.72a9ff11-6930-4b5a-9ace-0515c3eafc8d.Text" xml:space="preserve">
-    <value>Remove</value>
-  </data>
-  <data name="grdCampaignProducts.EmptyTableRowText" xml:space="preserve">
-    <value>No records match the selection criteria.</value>
+  <data name="grdProducts_AddRelationTool.LookupProperties.Name.PropertyHeader" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="lueAssociateProducts.ToolTip" xml:space="preserve">
     <value>Associate Product</value>
@@ -146,5 +146,17 @@
   </data>
   <data name="lueAssociateProducts.LookupProperties.Family.PropertyHeader" xml:space="preserve">
     <value>Family</value>
+  </data>
+  <data name="grdProducts.Delete.ToolTip" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="grdProducts_AddRelationTool.ButtonToolTip" xml:space="preserve">
+    <value>Associate Products</value>
+  </data>
+  <data name="grdProducts_AddRelationTool.DialogButtonText" xml:space="preserve">
+    <value>Add Selected</value>
+  </data>
+  <data name="grdProducts_AddRelationTool.LookupDialogTitle" xml:space="preserve">
+    <value>Lookup Product</value>
   </data>
 </root>

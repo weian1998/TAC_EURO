@@ -18,7 +18,7 @@
 
 <SalesLogix:SlxGridView runat="server" ID="grdDuplicates" GridLines="None" AutoGenerateColumns="true" CellPadding="4" CssClass="datagrid" 
     DataKeyNames="Id" ShowEmptyTable="true" PagerStyle-CssClass="gridPager" AlternatingRowStyle-CssClass="rowdk" AllowPaging="true"
-    PageSize="15" RowStyle-CssClass="rowlt" SelectedRowStyle-CssClass="rowSelected" EnableViewState="false" ExpandableRows="true" 
+    PageSize="15" RowStyle-CssClass="rowlt" SelectedRowStyle-CssClass="rowSelected" EnableViewState="false" ExpandableRows="false" 
     ResizableColumns="true" Width="100%" OnRowEditing="grdDuplicates_OnRowEditing" OnRowCommand="grdDuplicates_OnRowCommand" 
     EmptyTableRowText="<%$ resources: grdDuplicates.EmptyTableRowText %>" OnPageIndexChanging="grdDuplicates_OnPageIndexChanging" 
     OnRowDataBound="grdDuplicates_OnRowDataBound">

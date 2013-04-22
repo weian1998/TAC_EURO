@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <codeTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="b9ab7051-97ec-4b2d-9932-77ac29099ac7" name="Default-Mapping-SalesLogix" templateType="Mapping" templateEngineType="T4">
   <template>
-    <![CDATA[<#@ template language="C#v3.5" #>
+    <![CDATA[<#@ template language="C#v4.0" #>
 <#@ assembly name="System.Core.dll" #>
 <#@ assembly name="System.Xml.dll" #>
 <#@ assembly name="Microsoft.Unity.dll" #>
@@ -22,8 +22,8 @@ var @namespace = (string) Context["namespace"];
 var assembly = (string) Context["assembly"];
 var generator = (HbmGenerator) Context["generator"];
 
-var parents = entity.ParentEntities.Where(relation => relation.ChildProperty.Include && IsEntityIncluded(relation.ParentEntity)).ToList();
-var children = entity.ChildEntities.Where(relation => relation.ParentProperty.Include && IsEntityIncluded(relation.ChildEntity)).ToList();
+var parents = entity.ParentEntities.Where(relation => !relation.IsDynamic && relation.ChildProperty.Include && IsEntityIncluded(relation.ParentEntity)).ToList();
+var children = entity.ChildEntities.Where(relation => !relation.IsDynamic && relation.ParentProperty.Include && IsEntityIncluded(relation.ChildEntity)).ToList();
 var extenders = entity.ExtensionEntities.Where(extender => IsEntityIncluded(extender)).ToList();
 var properties = OrmEntity.GetIncludedProperties(entity).OfType<OrmFieldProperty>().ToList();
 var customProperties = generator.GetIncludedCustomProperties(entity).ToList();
@@ -35,10 +35,10 @@ var customProperties = generator.GetIncludedCustomProperties(entity).ToList();
 <?xml version="1.0" encoding="utf-8" ?>
 <# if (useAlternate) { #>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-  <class name="<#= generator.GetMetaData(entity.ExtendedMetaData, "NHibernate.Mapping.AlternateConcreteClass") #>" table="<#= entity.TableName #>" dynamic-insert="true" dynamic-update="true" batch-size="10" lazy="true" persister="Sage.Platform.Orm.DynamicEntityPersister, Sage.Platform">
+  <class name="<#= generator.GetMetaData(entity.ExtendedMetaData, "NHibernate.Mapping.AlternateConcreteClass") #>" table="<#= entity.TableName #>" optimistic-lock="dirty" dynamic-insert="true" dynamic-update="true" batch-size="10" lazy="true" persister="Sage.SalesLogix.Orm.SlxDynamicEntityPersister, Sage.SalesLogix">
 <# } else { #>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="<#= assembly #>" namespace="<#= @namespace #>">
-  <class name="<#= entity.Name #>" table="<#= entity.TableName #>" dynamic-insert="true" dynamic-update="true" batch-size="10" lazy="true" persister="Sage.Platform.Orm.DynamicEntityPersister, Sage.Platform">
+  <class name="<#= entity.Name #>" table="<#= entity.TableName #>" optimistic-lock="dirty" dynamic-insert="true" dynamic-update="true" batch-size="10" lazy="true" persister="Sage.SalesLogix.Orm.SlxDynamicEntityPersister, Sage.SalesLogix">
 <# } #>
 <# if (entity.HasCompositeKey) { #>
 <#  if (ck_useRelationships) { #>
@@ -85,11 +85,22 @@ var customProperties = generator.GetIncludedCustomProperties(entity).ToList();
 <# //columns is all the Columns in entity, minus any KeyColumns #>
 <# foreach (var property in properties) { #>
 <#  if (!property.IsKeyProperty || ck_useRelationships) { #>
-    <property name="<#= property.PropertyName #>" column="<#= property.ColumnName #>" type="<#= generator.ToNHibernateType(property) #>" access=<# if (property.DataType.SqlType == SqlTypeFactory.DateTime) { #> "Sage.SalesLogix.Orm.SlxDateTimePropertyAccessor, Sage.SalesLogix" <# } else { #> "field.pascalcase-underscore" <# } #> <#= Addlength(property) #> <# if (property.IsReadOnly || property.IsKeyProperty) { #> update="false" insert="false" <# } #> />
+<#   var typeParams = property.DataType.HbmDataTypeParameters; #>
+<#   if (typeParams != null && typeParams.Count > 0) { #>
+    <property name="<#= property.PropertyName #>" column="<#= property.ColumnName #>" access=<# if (property.DataType.SqlType == SqlTypeFactory.DateTime) { #> "Sage.SalesLogix.Orm.SlxDateTimePropertyAccessor, Sage.SalesLogix" <# } else { #> "field.pascalcase-underscore" <# } #> <#= Addlength(property) #> <# if (property.IsReadOnly || property.IsKeyProperty) { #> update="false" insert="false" <# } #><#= DisableOptimistic(property) #>>
+      <type name="<#= generator.ToNHibernateType(property) #>">
+<#    foreach (var param in typeParams) { #>
+        <param name="<#= param.Key #>"><#= param.Value #></param>
+<#    } #>
+      </type>
+    </property>
+<#   } else { #>
+    <property name="<#= property.PropertyName #>" column="<#= property.ColumnName #>" type="<#= generator.ToNHibernateType(property) #>" access=<# if (property.DataType.SqlType == SqlTypeFactory.DateTime) { #> "Sage.SalesLogix.Orm.SlxDateTimePropertyAccessor, Sage.SalesLogix" <# } else { #> "field.pascalcase-underscore" <# } #> <#= Addlength(property) #> <# if (property.IsReadOnly || property.IsKeyProperty) { #> update="false" insert="false" <# } #> <#= DisableOptimistic(property) #> />
+<#   } #>
 <#  } #>
 <# } #>
 <# if (children.Count > 0) { #>
-    <!-- Relationships -->
+    <!-- 1:M Relationships -->
 <#  foreach (var relation in children) { #>
 <#   if (relation.Cardinality == "1:M") { #>
     <set name="<#= relation.ParentProperty.PropertyName #>" cascade="<#= generator.ToCascadeString(relation) #>" lazy="true" batch-size="10" inverse="true" access="Sage.Platform.Collections.GenericAccessor, Sage.Platform">
@@ -102,10 +113,12 @@ var customProperties = generator.GetIncludedCustomProperties(entity).ToList();
 <#  } #>
 <# } #>
 <# if (parents.Count > 0) { #>
-    <!-- Relationships -->
+    <!-- M:1 Relationships -->
 <#  foreach (var relation in parents) { #>
 <#   if (relation.Cardinality == "1:M") { #>
     <many-to-one name="<#= relation.ChildProperty.PropertyName #>" class="<#= generator.GetFullyQualifiedClassName(relation.ParentEntity) #>" access="field.pascalcase-underscore" column="<#= relation.Columns[0].ChildProperty.ColumnName #>" not-null=<# if (relation.ChildProperty.IsNullable) { #> "false" <# } else { #> "true" <# } #> <# if (entity.HasCompositeKey && relation.Columns[0].ParentProperty.IsKeyProperty) { #> update="false" insert="false" <# } #> />
+<#   } else if (relation.Cardinality == "M:1") { #>
+    <many-to-one name="<#= relation.ChildProperty.PropertyName #>" class="<#= generator.GetFullyQualifiedClassName(relation.ParentEntity) #>" column="<#= relation.Columns[0].ChildProperty.ColumnName #>" property-ref="<#= relation.ParentProperty.PropertyName #>" optimistic-lock="false" />
 <#   } #>
 <#  } #>
 <# } #>
@@ -125,11 +138,24 @@ public IDictionary Context { get; set; }
 #>
 <#+
 private static string Addlength(OrmEntityProperty property) {
-    if (property.DataType is TextDataType) {
+    if (property.DataType is LongTextDataType || property.DataType is LongUnicodeTextDataType) {
+        return "";
+    }
+    else if (property.DataType is TextDataType) {
         return "length=\"" + ((TextDataType) property.DataType).Length + "\"";
     }
     else if (property.DataType is UnicodeTextDataType) {
         return "length=\"" + ((UnicodeTextDataType) property.DataType).Length + "\"";
+    }
+    else {
+        return "";
+    }
+}
+#>
+<#+
+private static string DisableOptimistic(OrmFieldProperty property) {
+    if (property.IsReadOnly || property.ColumnName == "MODIFYDATE" || property.ColumnName == "MODIFYUSER" || property.DataType is LongTextDataType || property.DataType is LongUnicodeTextDataType || property.DataType is BinaryDataType) {
+        return "optimistic-lock=\"false\"";
     }
     else {
         return "";

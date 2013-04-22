@@ -1,158 +1,665 @@
-﻿using System;
+﻿#define EnableDynamicFormSupport
+//#define EnableNHibernateProfiler
+
+using System;
+using System.Globalization;
+using System.IO;
+using System.Net;
+using System.Reflection;
+using System.Threading;
 using System.Web;
-using Sage.Platform.Data;
+using System.Web.Configuration;
+using System.Web.Security;
+using Dropthings.Web.Util;
+using Sage.Integration.Messaging;
+using Sage.Platform.Application;
+using Sage.Platform.Application.Diagnostics;
+using Sage.Platform.Application.UI.Web;
+using Sage.Platform.Diagnostics;
+using Sage.Platform.Utility;
 using Sage.SalesLogix;
-using Sage.SalesLogix.Web;
+using log4net;
+using log4net.Config;
+
+#if EnableDynamicFormSupport
+    using System.Web.Hosting;
+    using Sage.Platform.QuickForms.WebFormGen.Web;
+#endif
 
 public class Global : HttpApplication
 {
-    static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+    private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-    void Application_Start(object sender, EventArgs e)
+    #region Application
+
+    // ReSharper disable UnusedMember.Local
+    // ReSharper disable UnusedParameter.Local
+
+    /// <summary>
+    /// Handles the BeginRequest event of the Application control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+    private void Application_BeginRequest(object sender, EventArgs e)
     {
-        string path = Server.MapPath("~/log4net.config");
-        log4net.Config.XmlConfigurator.Configure(new System.IO.FileInfo(path));
-
-        Log.Info("SalesLogix Web Client initializing.");
-
-        InitializeSalesLogix();
-
-        // NOTE: To use NHibernate Profiler ( http://nhprof.com )
-        // 1. Add a reference to HibernatingRhinos.NHibernate.Profiler.Appender.dll assembly
-        //    (Do not overwrite log4net.dll if prompted.)
-        // 2. Uncomment following line:
-        //HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
-
-        Log.Info("SalesLogix Web Client started.");
-    }
-
-    private void InitializeSalesLogix()
-    {
-        string connectionConfigPath = Server.MapPath("~/connection.config");
-        if (System.IO.File.Exists(connectionConfigPath))
+        // NOTE: Do [not] add structured exception handling here...as this method is called for every request (performance).
+        if (Request.HttpMethod == "GET")
         {
-            var connectionInfo = SLXConnectionInfo.ReadFromFile(connectionConfigPath);
-
-            int connectionPort;
-            int.TryParse(connectionInfo.Port, out connectionPort);
-            SLXSystemPool.Initialize(connectionInfo.Server, connectionPort);
+            AddScriptDeferResponseFilter();
         }
     }
 
-    void Application_End(object sender, EventArgs e)
+    /// <summary>
+    /// Handles the EndRequest event of the Application control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+    private void Application_EndRequest(object sender, EventArgs e)
     {
-        Log.Info("SalesLogix Web Client ended.");
-    }
+        // The code below checks for an Ajax 302 (HttpStatusCode.Redirect) to the Forms login page, which can occur when
+        // Microsoft Forms Authentication attempts to redirect to the login page after encountering a 401 (HttpStatusCode.Unauthorized).
+        // If a redirect to the login page is taking place, for an Ajax request, cancel it and send a 575 instead...which will cause
+        // ErrorHandler.js to load Login.aspx via window.location = "Login.aspx".
+        // See the FormsAuthenticationModule's OnLeave() implementation in the .NET Framework 4 source:
+        // \Source\.Net\4.0\DEVDIV_TFS\Dev10\Releases\RTMRel\ndp\fx\src\xsp\System\Web\Security\FormsAuthenticationModule.cs\1305376\FormsAuthenticationModule.cs
 
-    void Application_Error(object sender, EventArgs e)
-    {
-        Exception ex = Server.GetLastError();
+        // NOTE: Microsoft has provided a workaround for this in .NET 4.5 by using the HttpResponse.SuppressFormsAuthenticationRedirect
+        // property: http://msdn.microsoft.com/en-us/library/system.web.httpresponse.suppressformsauthenticationredirect.aspx
+        // Quote: "By default, forms authentication converts HTTP 401 status codes to 302 in order to redirect to the login page.
+        // This isn't appropriate for certain classes of errors, such as when authentication succeeds but authorization fails,
+        // or when the current request is an AJAX or web service request. This property provides a way to suppress the redirect
+        // behavior and send the original status code to the client."
+        // TODO: Use workaround when when go to .NET 4.5.
 
-        if (Request.FilePath.EndsWith(".aspx"))
+        // NOTE: The HttpSessionState is unavailable in Application_EndRequest (i.e. you cannot call Session.Abandon()).       
+
+        // This fix is only for Forms authentication
+        if (FormsAuthentication.IsEnabled == false) return;
+
+        var application = (HttpApplication) sender;
+        var context = application.Context;
+        
+        // Is the HttpResponse set to 302?
+        if (context.Response.IsRequestBeingRedirected == false || context.Response.StatusCode != (int) HttpStatusCode.Redirect) return;
+
+        // If we don't have an Ajax request then return.
+        if (ErrorHelper.LooksLikeAjaxRequest(context.Request) == false) return;
+
+        // At this point we know we have a redirect to a page for an Ajax request, which is pointless (i.e. issue in the .NET Framework for Forms authentication).
+
+        if (string.IsNullOrEmpty(FormsAuthentication.LoginUrl)) return;
+
+        // Redirecting to the LoginUrl?
+        if (context.Response.RedirectLocation == null || context.Response.RedirectLocation.IndexOf(FormsAuthentication.LoginUrl, StringComparison.InvariantCultureIgnoreCase) == -1) return;        
+
+        var redirect = ErrorHelper.GetLoginRedirectUrl();
+        if (string.IsNullOrEmpty(redirect)) return;
+
+        if (Log.IsWarnEnabled && ErrorHelper.LogAuthenticationRedirects())
         {
-            Log.Error("Unhandled exception.", ex);
-            Server.ClearError();
-            Response.Write(GetErrorPageHtml(ex));
+            Log.WarnEx("The user is either not authenticated yet or their authentication has been revoked (e.g. the ASP.NET Session may have ended).", EventIds.AdHocEvents.WarnAuthenticationRedirect);
         }
-    }
 
-    void Session_Start(object sender, EventArgs e)
-    {
-        // Code that runs when a new session is started
-    }
+        // SignOut of FormsAuthentication
+        SignOut();
 
-    void Session_End(object sender, EventArgs e)
-    {
-        // Code that runs when a session ends. 
-        // Note: The Session_End event is raised only when the sessionstate mode
-        // is set to InProc in the Web.config file. If session mode is set to StateServer 
-        // or SQLServer, the event is not raised.
-        ProcessSessionEnd();
-    }
-    void ProcessSessionEnd()
-    {
-        if (Session[0] != null)
+        // Save the auth cookie since all cookies will be cleared in ClearHeaders().
+        // .SLXAUTH=; expires=Tue, 12-Oct-1999 05:00:00 GMT; path=/; HttpOnly  
+        var authCookie = context.Response.Cookies[FormsAuthentication.FormsCookieName];
+
+        context.Response.ClearHeaders();
+        context.Response.ClearContent();
+        context.Response.Clear();
+        context.Response.StatusCode = (int) ErrorHelper.MitigationType.AjaxLoginRedirect;
+        context.Response.StatusDescription = ErrorHelper.MitigationType.AjaxLoginRedirect.ToString();
+        context.Response.TrySkipIisCustomErrors = true;
+        // NOTE: AppendHeader() must be used for IIS6 instead of Response.Headers.Add()
+        context.Response.AppendHeader(ErrorHelper.ExceptionRedirectHttpHeader, redirect);
+        context.Response.AppendHeader(ErrorHelper.ExceptionRedirectFromHttpHeader, "Global Application_EndRequest"); //DNL
+        context.Response.ContentType = "text/plain";
+
+        if (authCookie != null)
         {
-            // assumes the work item is the first entry added to the session
-            Sage.Platform.Application.WorkItem workItem = Session[0] as Sage.Platform.Application.WorkItem;
-            if (workItem != null)
+            // Set .SLXAUTH cookie to an empty value
+            // .SLXAUTH=; expires=Tue, 12-Oct-1999 05:00:00 GMT; path=/; HttpOnly
+            context.Response.Cookies.Add(authCookie);
+        }
+
+        context.Response.Write(Resources.SalesLogix.AuthTokenNullExceptionMsg);
+
+        application.CompleteRequest();
+    }
+
+    /// <summary>
+    /// Handles the Start event of the Application control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+    private void Application_Start(object sender, EventArgs e)
+    {
+        try
+        {
+            string path = Server.MapPath("~/log4net.config");
+            XmlConfigurator.Configure(new FileInfo(path));
+
+            MessagingService.UnhandledException += MessagingServiceOnUnhandledException;
+
+            if (Log.IsInfoEnabled)
             {
-                IDataService wds = workItem.Services.Get<IDataService>();
-                if (wds != null)
+                Log.Info("SalesLogix Web Client initializing.");
+            }
+
+            InitializeSalesLogix();
+
+            // NOTE: To use NHibernate Profiler ( http://nhprof.com )
+            // 1. Add a reference to HibernatingRhinos.NHibernate.Profiler.Appender.dll assembly
+            //    (Do not overwrite log4net.dll if prompted.)
+            // 2. Uncomment the #define EnableNHibernateProfiler at the top of this Visual C# source file.
+#if EnableNHibernateProfiler
+        HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
+#endif
+
+            // WFG comment the #define EnableDynamicFormSupport at the top of this Visual C# source file to disable dynamic form support.
+#if EnableDynamicFormSupport
+        HostingEnvironment.RegisterVirtualPathProvider(new IFileSystemVirtualPathProvider());
+#endif
+
+            HierarchicalRuntime.Instance.Initialize();
+
+            if (Log.IsInfoEnabled)
+            {
+                Log.InfoEx("SalesLogix Web Client started.", EventIds.AdHocEvents.InfoApplicationStart);
+            }
+
+        }
+        catch (Exception ex)
+        {
+            Log.ErrorEx("There was an error in Application_Start()", EventIds.AdHocEvents.ErrApplicationStart, ex);
+            throw; // Re-throw
+        }
+    }
+
+    /// <summary>
+    /// Handles the End event of the Application control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+    private void Application_End(object sender, EventArgs e)
+    {
+        try
+        {
+            MessagingService.UnhandledException -= MessagingServiceOnUnhandledException;
+        }
+        catch (Exception ex)
+        {
+            Log.WarnEx("There was an error in Application_End()", EventIds.AdHocEvents.WarnApplicationEnd, ex);
+        }
+
+        if (Log.IsInfoEnabled)
+        {
+            Log.InfoEx("SalesLogix Web Client ended.", EventIds.AdHocEvents.InfoApplicationEnd);
+        }
+    }
+
+    /// <summary>
+    /// Handles the Error event of the Application control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+    private void Application_Error(object sender, EventArgs e)
+    {
+        Exception fullException = null;
+        var logged = false;
+        string sSlxErrorId = null;
+
+        try
+        {
+            var exception = Server.GetLastError();
+            if (exception == null) return;
+
+            fullException = exception;
+
+            var eKind = ErrorHelper.GetTargetedException(fullException, out exception);
+            var eMitigationType = ErrorHelper.GetMitigationType(eKind, Request);
+            sSlxErrorId = ErrorHelper.GetNewLoggingId();
+
+            ErrorHelper.LogException(fullException, Request, Log, "SalesLogix Web Client unhandled exception",
+                                     sSlxErrorId);
+            logged = true;
+
+            Server.ClearError();
+
+            var oErrorMessage = ErrorHelper.GetErrorMessage(exception, Request, eKind, sSlxErrorId, true, true,
+                                                            Resources.SalesLogix.MailDetailsLink, Request.Url.ToString(),
+                                                            true, ErrorHelper.LogMode.Client, true,
+                                                            Resources.SalesLogix.ReturnLink, true);
+
+            var redirectUrl = ErrorHelper.GetLoginRedirectUrl();
+
+            // Note: Just the act of accessing the Session object (e.g. Session.*) can throw an
+            // HttpException in certain scenarios with the message "Session state is not available in this context."
+            // IsAuthenticated() relies on access to the current Session.
+            var session = ErrorHelper.GetCurrentHttpSessionState(this);
+            if (session != null && IsAuthenticated() == false)
+            {
+                var path = Request.Path;
+                var isLoginPage = !string.IsNullOrEmpty(path) && path.IndexOf(redirectUrl, StringComparison.InvariantCultureIgnoreCase) != -1;
+                // If the Exception came from the login page, go to error page instead; otherwise, the user could get into an unrecoverable loop.)
+                if (isLoginPage == false || ErrorHelper.LooksLikeAjaxRequest(Request))
                 {
-                    ((SLXWebDataService)wds).CleanupSession();
+                    var eLoginMitigationType = ErrorHelper.LooksLikeAjaxRequest(Request)
+                                                   ? ErrorHelper.MitigationType.AjaxLoginRedirect
+                                                   : ErrorHelper.MitigationType.LoginRedirect;
+                    if (eMitigationType != eLoginMitigationType)
+                    {
+                        Log.WarnFormat(
+                            "The current user is not authenticated. Switching from a mitigation of {0} ({1}) to {2} ({3}).",
+                            eMitigationType, (int) eMitigationType, eLoginMitigationType, (int) eLoginMitigationType);
+                        eMitigationType = eLoginMitigationType;
+                    }
                 }
             }
+
+            // Mitigate the scenario
+            switch (eMitigationType)
+            {
+                case ErrorHelper.MitigationType.AjaxLoginRedirect:
+                    /* Send an Ajax HTTP response status of 575 (handled in Sage.Utility.ErrorHandler.js)
+                     * with the response header named "Sage-SalesLogix-Exception-Redirect" with a value of "Login.aspx". */
+
+                    // Abandon the Session and SignOut of FormsAuthentication (if applicable).
+                    // SignOut() will also set the FormsAuthentication cookie value to an empty string.
+                    SignOut();
+
+                    HttpCookie authCookie = null;
+                    if (FormsAuthentication.IsEnabled)
+                    {
+                        // Save the auth cookie since all cookies will be cleared in ClearHeaders().
+                        // .SLXAUTH=; expires=Tue, 12-Oct-1999 05:00:00 GMT; path=/; HttpOnly
+                        authCookie = Response.Cookies[FormsAuthentication.FormsCookieName];
+                    }
+
+                    if (Log.IsDebugEnabled)
+                    {
+                        Log.Debug("Redirect to Login.aspx (Ajax AuthTokenNullException)");
+                    }                    
+
+                    Response.ClearHeaders();
+                    Response.ClearContent();
+                    Response.Clear();
+                    Response.StatusCode = (int) eMitigationType;
+                    Response.StatusDescription = eMitigationType.ToString();
+                    Response.TrySkipIisCustomErrors = true;
+                    // NOTE: AppendHeader() must be used for IIS6 instead of Response.Headers.Add()
+                    Response.AppendHeader(ErrorHelper.ExceptionRedirectHttpHeader, redirectUrl);
+                    Response.AppendHeader(ErrorHelper.ExceptionRedirectFromHttpHeader, "Global Application_Error"); //DNL
+                    Response.AppendHeader(ErrorHelper.ErrorIdHttpHeader, sSlxErrorId);
+                    Response.ContentType = "text/plain";
+
+                    if (authCookie != null)
+                    {
+                        // Set .SLXAUTH cookie to an empty value
+                        // .SLXAUTH=; expires=Tue, 12-Oct-1999 05:00:00 GMT; path=/; HttpOnly
+                        Response.Cookies.Add(authCookie);
+                    }
+
+                    Response.Write(exception.Message);
+                    break;
+
+                case ErrorHelper.MitigationType.LoginRedirect:
+                    /* Send a Response.Redirect("Login.aspx"). */
+
+                    // Abandon the Session and SignOut of FormsAuthentication (if applicable).
+                    SignOut();
+
+                    if (Log.IsDebugEnabled)
+                    {
+                        Log.Debug("Redirect to Login.aspx (AuthTokenNullException)");
+                    }
+
+                    // Redirect
+                    if (redirectUrl.EndsWith(".aspx", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        // Server.Transfer is being used to avoid ASP.NET errors caused by a reload of the current page
+                        // that occurs during Response.Redirect().
+                        Server.Transfer(redirectUrl);
+                    }
+                    else
+                    {
+                        Response.Redirect(redirectUrl, false);
+                    }
+                    break;
+
+                case ErrorHelper.MitigationType.ErrorContent:
+                    /* Send error content in the form of raw HTML. */
+
+                    if (Log.IsDebugEnabled)
+                    {
+                        Log.DebugFormat("Write the error page back to the response. URL: {0}. Referrer: {1}",
+                                        Request.Url,
+                                        Request.UrlReferrer);
+                    }
+
+                    Response.ClearHeaders();
+                    Response.ClearContent();
+                    Response.Clear();
+                    Response.StatusCode = (int) ErrorHelper.MitigationType.ErrorResponse;
+                    Response.StatusDescription = ErrorHelper.InternalServerError;
+                    Response.TrySkipIisCustomErrors = true;
+                    // NOTE: AppendHeader() must be used for IIS6 instead of Response.Headers.Add()
+                    Response.AppendHeader(ErrorHelper.ErrorIdHttpHeader, sSlxErrorId);
+
+                    if (ErrorHelper.IsRuntimeErrorPostTooLargeException(fullException) &&
+                        StringUtility.IsTrueValueString(Request.Params["iframe"]))
+                    {
+                        /* This special HTTP response is designed to work in conjunction with the
+                         * Sage.Utility.File.FallbackFilePicker during a file upload. The FallbackFilePicker
+                         * uses an IFrame for the upload and an IFrame cannot process the HTTP status, 
+                         * but it can process the content of the HTTP response...which will be the literal
+                         * string "RuntimeErrorPostTooLarge". If the corresponding Exception occurs by another
+                         * upload means, a 583 (text/html) or a 576 (Ajax/json) error will be returned. Note that
+                         * sending an HTTP status of 500 into an IFrame can lead to an "access is denied" error
+                         * because IE will attempt to load a resource into the IFrame (i.e. res://ieframe.dll/http_500.htm);
+                         * using a custom HTTP status does [not] lead to the same issue. In addition, sending the
+                         * error page HTML will cause the IFrame to incorrectly navigate the page leading to other errors. */
+                        Response.Write("RuntimeErrorPostTooLarge"); //DNL
+                        Response.ContentType = "text/plain";
+
+                    }
+                    else
+                    {
+                        Response.Write(GetErrorPageHtml(oErrorMessage));
+                        Response.ContentType = "text/html";
+                    }
+                    break;
+
+                default:
+                    /* Send an Ajax HTTP response status of 57x-58x with exception content (handled in Sage.Utility.ErrorHandler.js). */
+                    if (Log.IsDebugEnabled)
+                    {
+                        Log.DebugFormat(
+                            "Write the response back to the XMLHttpRequest object with a StatusCode of {0} ({1})",
+                            (int) eMitigationType, eMitigationType);
+                    }
+
+                    Response.ClearHeaders();
+                    Response.ClearContent();
+                    Response.Clear();
+                    Response.StatusCode = (int) eMitigationType;
+                    Response.StatusDescription = eMitigationType.ToString();
+                    Response.TrySkipIisCustomErrors = true;
+                    // NOTE: AppendHeader() must be used for IIS6 instead of Response.Headers.Add()
+                    Response.AppendHeader(ErrorHelper.ErrorIdHttpHeader, sSlxErrorId);
+
+                    string sLogData;
+                    if (ErrorHelper.GetExceptionLogData(Request, exception, fullException, sSlxErrorId,
+                                                        ErrorHelper.LogMode.Client,
+                                                        eMitigationType, out sLogData))
+                    {
+                        // JSON
+                        Response.ContentType = "application/json";
+                        Response.Write(sLogData);
+                    }
+                    else
+                    {
+                        // Plain text
+                        Response.ContentType = "text/plain";
+                        Response.Write(oErrorMessage.ToString(MessageProperty.FormatType.Text));
+                    }
+                    break;
+            }
+
+            CompleteRequest();
+        }
+        catch (Exception ex)
+        {
+            Log.ErrorEx("There was an error in Application_Error()", EventIds.AdHocEvents.ErrApplicationError, ex);
+
+            if (logged || fullException == null) return;
+
+            if (sSlxErrorId == null)
+            {
+                sSlxErrorId = ErrorHelper.GetNewLoggingId();
+            }
+
+            Log.Error(ErrorHelper.AppendSlxErrorId("SalesLogix Web Client unhandled exception", sSlxErrorId),
+                      fullException);
         }
     }
 
-    void Application_BeginRequest(object sender, EventArgs e)
+    // ReSharper restore UnusedParameter.Local
+    // ReSharper restore UnusedMember.Local
+
+    #endregion
+
+    #region Session
+
+    // ReSharper disable UnusedMember.Local
+    // ReSharper disable UnusedParameter.Local
+
+    /// <summary>
+    /// Handles the Start event of the Session control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+    private void Session_Start(object sender, EventArgs e)
     {
-        if (Request.HttpMethod == "GET")
-            AddScriptDeferResponseFilter();
+        try
+        {
+            Session["SessionStartTime"] = DateTime.Now;
+
+            if (Log.IsInfoEnabled)
+            {
+                Log.InfoEx(
+                    string.Format("SalesLogix Web Client session start for user '{0}'.",
+                                  Thread.CurrentPrincipal.Identity.Name),
+                    EventIds.AdHocEvents.InfoSessionStart);
+            }
+
+            HierarchicalRuntime.Instance.EnsureSessionWorkItem();
+        }
+        catch (Exception ex)
+        {
+            Log.ErrorEx("There was an error in Session_Start()", EventIds.AdHocEvents.ErrSessionStart, ex);
+            throw; // Re-throw
+        }
     }
 
+    /// <summary>
+    /// Handles the End event of the Session control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+    private void Session_End(object sender, EventArgs e)
+    {
+        try
+        {
+            HierarchicalRuntime.Instance.TerminateSessionWorkItem(Session);
+        }
+        catch (Exception ex)
+        {
+            Log.WarnEx("There was an error in Session_End()", EventIds.AdHocEvents.WarnSessionEnd, ex);
+        }
+
+        if (Log.IsInfoEnabled)
+        {
+            Log.InfoEx(
+                string.Format("SalesLogix Web Client session end for user '{0}'.",
+                              Thread.CurrentPrincipal.Identity.Name),
+                EventIds.AdHocEvents.InfoSessionEnd);
+        }
+    }
+
+    // ReSharper restore UnusedParameter.Local
+    // ReSharper restore UnusedMember.Local
+
+    #endregion
+
+    #region Private
+
+    private const string ErrorPageHtmlFmt =
+        @"<html xmlns=""http://www.w3.org/1999/xhtml"">
+<head runat=""server"">
+    <title>{0}</title>
+    <link rel=""stylesheet"" type=""text/css"" href=""css/sageStyles.css"" />
+    <style type=""text/css"">
+        .msg {{ padding: 50px 50px; width: 800px; }}
+        .header {{ font-size : 150%; color: #01795E; }}
+    </style>
+</head>
+<body>
+  <div class=""msg"">
+    <p class=""header"">{1}</p>
+    <p>{2}</p>
+  </div>
+</body>
+</html>";
+
+    /// <summary>
+    /// Adds the ScriptDeferFilter.
+    /// </summary>
     private void AddScriptDeferResponseFilter()
     {
         string path = Request.AppRelativeCurrentExecutionFilePath;
+        if (path == null) return;
         if (!path.EndsWith(".aspx", StringComparison.OrdinalIgnoreCase)) return;
 
         // skip these pages - no other pages are named the same, can just check end
         if (path.EndsWith("ViewAttachment.aspx", StringComparison.OrdinalIgnoreCase)
             || path.EndsWith("ViewDocument.aspx", StringComparison.OrdinalIgnoreCase)) return;
 
-        Response.Filter = new Dropthings.Web.Util.ScriptDeferFilter(Response);
+        Response.Filter = new ScriptDeferFilter(Response);
     }
 
-    private string GetErrorPageHtml(Exception e)
+    /// <summary>
+    /// Gets the error page HTML.
+    /// </summary>
+    /// <param name="errorMessage">The error message.</param>
+    /// <returns></returns>
+    private static string GetErrorPageHtml(ErrorMessage errorMessage)
     {
         return string.Format(ErrorPageHtmlFmt,
-            Resources.SalesLogix.ExceptionPageTitle,
-            Resources.SalesLogix.CannotCompleteRequest,
-            e.GetBaseException().Message,
-            Resources.SalesLogix.Actions,
-            Resources.SalesLogix.ReturnLink,
-            Resources.SalesLogix.EmailSubject,
-            Request.Url,
-            e.GetBaseException().Message,
-            e.GetBaseException().StackTrace,
-            Resources.SalesLogix.MailDetailsLink,
-            Resources.SalesLogix.ShowDetails);
+                             Resources.SalesLogix.ExceptionPageTitle,
+                             Resources.SalesLogix.CannotCompleteRequest,
+                             errorMessage.ToString(MessageProperty.FormatType.HtmlEncoded));
     }
 
-    private const string ErrorPageHtmlFmt = @"<html xmlns=""http://www.w3.org/1999/xhtml"">
-<head runat=""server"">
-    <title>{0}</title>
-    <link rel=""stylesheet"" type=""text/css"" href=""css/SlxBase.css"" />
-    <style type=""text/css"">
-    .msg {{ padding: 50px 50px; width: 800px; }}
-    .header {{ font-size : 150%; color: #01795E; }}
-    .globalerrormsg {{ }}
-    .action {{ font-size : 100%; color: #01795E; padding: 30px 0px 0px 0px; border-bottom: solid 1px #01795E; }}
-    .actionitem {{ padding-bottom:10px; }}
-    .exceptionDetails {{ display : none; border: solid 1px #01795E; font-family:Courier; font-size:80%; padding:5px; overflow:scroll; height:250px; width:600px; }}
-    </style>
-    <script type=""text/javascript"">
-    var open = false;
-    function toggleDetails() {{
-        var elem = document.getElementById('details');
-        elem.style.display = (open) ? 'none' : 'block';
-        open = !open;
-    }}
-    </script>
-</head>
-<body>
-  <div class=""msg"">
-    <p class=""header"">{1}</p>
-    <p class=""globalerrormsg"">{2}</p>
-    <p class=""action"">{3}</p>
-    <ul>
-      <li class=""actionitem""><a href=""Default.aspx"">{4}</a></li>
-      <li class=""actionitem""><a href=""mailto:?subject={5}&body={6} {7} {8}"">{9}</a></li>
-      <li class=""actionitem""><a href=""javascript:toggleDetails()"">{10}</a></li>
-    </ul>
-    <div class=""exceptionDetails"" id=""details"">{6} {7} {8}</div>
-  </div>
-</body>
-</html>";
+    /// <summary>
+    /// Initializes SalesLogix
+    /// </summary>
+    private void InitializeSalesLogix()
+    {
+        string connectionConfigPath = Server.MapPath("~/connection.config");
+        if (!File.Exists(connectionConfigPath)) return;
+        var connectionInfo = SLXConnectionInfo.ReadFromFile(connectionConfigPath);
+        int connectionPort;
+        int.TryParse(connectionInfo.Port, out connectionPort);
+        SLXSystemPool.Initialize(connectionInfo.Server, connectionPort);
+    }
+
+    /// <summary>
+    /// Determines whether the current user is authenticated.
+    /// </summary>
+    /// <returns>
+    ///   <c>true</c> if the current user is authenticated; otherwise, <c>false</c>.
+    /// </returns>
+    private static bool IsAuthenticated()
+    {
+        try
+        {
+            if (ApplicationContext.Current != null && ApplicationContext.Current.Services != null)
+            {
+                var authProvider = ApplicationContext.Current.Services.Get<IAuthenticationProvider>();
+                return authProvider != null && authProvider.IsAuthenticated;
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Warn("The call to IsAuthenticated() failed.", ex);
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Handles the MessagingService.UnhandledException event.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The <see cref="Sage.Integration.Messaging.DiagnosesExceptionEventArgs"/> instance containing the event data.</param>
+    private static void MessagingServiceOnUnhandledException(object sender, DiagnosesExceptionEventArgs e)
+    {
+        if (e == null) return;
+        if (e.Exception == null) return;
+
+        try
+        {
+            ErrorHelper.LogMessagingServiceException(e.Exception, ErrorHelper.GetCurrentHttpRequest(), Log);
+        }
+        catch (Exception ex)
+        {
+            Log.Error("There was an error in MessagingServiceOnUnhandledException()", ex);
+        }
+    }
+
+    /// <summary>
+    /// Abandon's the Session and signs out of Forms authentication (if Forms authentication is enabled).
+    /// </summary>
+    private void SignOut()
+    {
+        try
+        {
+            // Note: Just the act of accessing the Session object (e.g. Session.*) can throw an
+            // HttpException in certain scenarios with the message "Session state is not available in this context."
+            var session = ErrorHelper.GetCurrentHttpSessionState(this);
+            if (session != null)
+            {
+                session.Abandon();
+            }
+            if (FormsAuthentication.IsEnabled)
+            {
+                // Nulls the .SLXAUTH cookie.
+                FormsAuthentication.SignOut();
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Warn("There was an error in SignOut()", ex);
+        }
+    }
+
+    #endregion
+
+    #region Public
+
+    /// <summary>
+    /// Gets the locale.
+    /// </summary>
+    public static string Locale
+    {
+        get
+        {
+            var cultureInfo = CultureInfo.CurrentUICulture;
+            var culture = cultureInfo.ToString();
+            return culture.ToLower();
+        }
+    }
+
+    // ReSharper disable UnusedMember.Global
+
+    /// <summary>
+    /// Gets the alarm poll interval.
+    /// </summary>
+    public static int AlarmPollInterval
+    {
+        get
+        {
+            int pollInterval;
+            return int.TryParse(WebConfigurationManager.AppSettings["AlarmPollInterval"], out pollInterval)
+                       ? pollInterval
+                       : 1;
+        }
+    }
+
+    // ReSharper restore UnusedMember.Global
+
+    #endregion
 }

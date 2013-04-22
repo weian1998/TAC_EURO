@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lueContact.Caption" xml:space="preserve">
     <value>Contact:</value>
@@ -159,28 +159,28 @@
   <data name="txtNotes2.Caption" xml:space="preserve">
     <value>Notes:</value>
   </data>
-  <data name="lueAccountProduct.LookupProperties.ProductName.PropertyHeader" xml:space="preserve">
-    <value>Product Name</value>
-  </data>
-  <data name="lueAccountProduct.LookupProperties.ActualId.PropertyHeader" xml:space="preserve">
-    <value>SKU</value>
-  </data>
-  <data name="lueAccountProduct.LookupProperties.SerialNumber.PropertyHeader" xml:space="preserve">
-    <value>Serial Number</value>
-  </data>
-  <data name="lueAccountProduct.LookupProperties.Account.AccountName.PropertyHeader" xml:space="preserve">
-    <value>Account Name</value>
-  </data>
   <data name="grdProductReturns.1c98dfdd-133e-4613-b655-b5a8f9f337dd.Text" xml:space="preserve">
     <value>Disassociate</value>
-  </data>
-  <data name="lueAccountProduct.ToolTip" xml:space="preserve">
-    <value>Associate Asset</value>
   </data>
   <data name="lueContact.ButtonToolTip" xml:space="preserve">
     <value>Find</value>
   </data>
   <data name="emlEmail.ButtonToolTip" xml:space="preserve">
     <value>E-mail</value>
+  </data>
+  <data name="lueAccountProduct.LookupProperties.ProductName.PropertyHeader" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
+  <data name="lueAccountProduct.LookupProperties.Account.AccountName.PropertyHeader" xml:space="preserve">
+    <value>Account Name</value>
+  </data>
+  <data name="lueAccountProduct.LookupProperties.SerialNumber.PropertyHeader" xml:space="preserve">
+    <value>Serial Number</value>
+  </data>
+  <data name="lueAccountProduct.ButtonToolTip" xml:space="preserve">
+    <value>Associate Asset</value>
+  </data>
+  <data name="lueAccountProduct.LookupProperties.ActualId.PropertyHeader" xml:space="preserve">
+    <value>SKU </value>
   </data>
 </root>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<PortalService xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="1eec55d7-67d8-4756-b6cf-86020bb25c5a">
+  <InstanceId>dfc8444dd6d949f2967305102f3c49c9</InstanceId>
+  <ServiceType>Sage.Integration.Entity.AtomEntryToEntityTransformationService, Sage.Integration.Entity.Feeds</ServiceType>
+  <RegisterAs>Sage.Platform.SData.IAtomEntryToEntityTransformationService, Sage.Platform</RegisterAs>
+  <Properties />
+  <Scope>Application</Scope>
+</PortalService>

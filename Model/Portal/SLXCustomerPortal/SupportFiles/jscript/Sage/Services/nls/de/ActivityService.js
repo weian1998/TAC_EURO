@@ -1,0 +1,32 @@
+﻿define(
+        ({
+            txtErrorActionMsg:'Die Aktion war leider nicht erfolgreich, da ein Fehler auftrat.',
+            txtActivity:'Aktivität',
+            txtActivities:'Aktivitäten',
+            txtActionDeleteActivites: 'Aktivitäten löschen',
+            txtActionDeleteActivitiesQuestion: 'Es werden nur Aktivitäten gelöscht, für die Sie löschberechtigt sind. <P> Möchten Sie die {0} ausgewählten {1} wirklich löschen?',
+            txtAlarm:'Alarm',
+            txtAlarms:'Alarme',
+            txtActionSnoozeAlarm:'Alarm für die Wiedervorlage',
+            txtActionSnoozeQuestion: 'Möchten Sie wirklich die {0} ausgewählten {1} nach {2} wieder vorlegen?',
+            txtActionSnoozeAllQuestion:'Möchten Sie wirklich alle {0} nach {1} wieder vorlegen?',
+            txtActionDismissAlarms:'Alarme ablehnen',
+            txtActionDismissAlarmsQuestion:'Möchten Sie die {0} ausgewählten {1} wirklich ablehnen?',
+            txtEvent:'Ereignis',
+            txtEvents:'Ereignisse',
+            txtActionDeleteEvents: 'Ereignisse löschen',
+            txtActionDeleteEventsQuestion:'Es werden nur Ereignisse gelöscht, für die Sie löschberechtigt sind. <P> Möchten Sie die {0} ausgewählten {1} wirklich löschen?',
+            txtConfirmation:'Bestätigung',
+            txtConfirmations:'Bestätigungen',
+            txtActionAcceptConfirmations:'Bestätigungen akzeptieren',
+            txtActionAcceptConfirmQuestion:'Möchten Sie die {0} ausgewählten {1} wirklich akzeptieren? Diese Aktion kann nur für neue Bestätigungen durchgeführt werden. Alle anderen Bestätigungen werden ignoriert. ',
+            txtDeclineConfirmations:'Bestätigungen ablehnen',
+            txtActionDeclineConfrimQuestion:'Möchten Sie die {0} ausgewählten {1} wirklich ablehnen? Diese Aktion kann nur für neue Bestätigungen durchgeführt werden. Alle anderen werden ignoriert. ',
+            txtActionRemoveConfirmations:'Bestätigungen entfernen',
+            txtActionRemoveConfirmationsQuestion:'Möchten Sie die {0} ausgewählten {1} wirklich entfernen? Diese Aktion ist kann für neue Bestätigungen nicht durchgeführt werden. Alle anderen werden entfernt. ',
+            txtLiteratureRequest:'Literaturanfrage',
+            txtLiteratureRequests:'Literaturanfragen',
+            txtActionDeleteLiteratureRequests:'Literaturanfragen löschen',
+            txtActionDeleteLiteratureRequestsQuestion:'Es werden nur Literaturanfragen gelöscht, für die Sie löschberechtigt sind. <P> Möchten Sie die {0} ausgewählten {1} wirklich löschen?'
+         })
+);

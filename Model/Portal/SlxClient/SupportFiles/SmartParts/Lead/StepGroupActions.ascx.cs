@@ -1,13 +1,6 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using Sage.Platform.WebPortal.Services;
 using Sage.Platform.Application.UI;
 using Sage.Platform.Application;
@@ -19,7 +12,6 @@ using Sage.Entity.Interfaces;
 
 public partial class StepGroupActions : UserControl, ISmartPartInfoProvider
 {
-    private IWebDialogService _DialogService;
     static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodInfo.GetCurrentMethod().DeclaringType);
 
     #region Public Methods
@@ -40,17 +32,15 @@ public partial class StepGroupActions : UserControl, ISmartPartInfoProvider
     /// </summary>
     /// <value>The dialog service.</value>
     [ServiceDependency]
-    public IWebDialogService DialogService
-    {
-        set
-        {
-            _DialogService = value;
-        }
-        get
-        {
-            return _DialogService;
-        }
-    }
+    public IWebDialogService DialogService { get; set; }
+
+    /// <summary>
+    /// Gets or sets the entity context.
+    /// </summary>
+    /// <value>The entity context.</value>
+    /// <returns>The specified <see cref="T:System.Web.HttpContext"></see> object associated with the current request.</returns>
+    [ServiceDependency]
+    public IContextService ContextService { get; set; }
 
     /// <summary>
     /// Sets the state of the action.
@@ -76,14 +66,7 @@ public partial class StepGroupActions : UserControl, ISmartPartInfoProvider
             foreach (IAction action in im.ActionManager.GetActions())
             {
                 string active = Request.Form["chkActionActive_" + action.Name];
-                if (active != null)
-                {
-                    action.Active = true;
-                }
-                else
-                {
-                    action.Active = false;
-                }
+                action.Active = active != null;
             }
             Page.Session["importManager"] = im;
         }
@@ -108,20 +91,6 @@ public partial class StepGroupActions : UserControl, ISmartPartInfoProvider
     {
         SetActionsState();
         base.OnPreRender(e);
-    }
-
-    /// <summary>
-    /// Handles the OnRowCommandx event of the grdActions control.
-    /// </summary>
-    /// <param name="sender">The source of the event.</param>
-    /// <param name="e">The <see cref="System.Web.UI.WebControls.GridViewCommandEventArgs"/> instance containing the event data.</param>
-    protected void grdActions_OnRowCommandx(object sender, GridViewCommandEventArgs e)
-    {
-        if (e.CommandName.Equals("Edit"))
-        {
-            int rowIndex = Convert.ToInt32(e.CommandArgument);
-            string actionId = grdActions.DataKeys[rowIndex].Values[0].ToString();
-        }
     }
 
     /// <summary>
@@ -178,7 +147,7 @@ public partial class StepGroupActions : UserControl, ISmartPartInfoProvider
     {
         if (DialogService != null)
         {
-            DialogService.SetSpecs(0, 0, 275, 600, "ImportActionAddNote", "", true);
+            DialogService.SetSpecs(0, 0, 275, 600, "ImportActionAddNote", String.Empty, true);
             DialogService.EntityType = typeof(IImportHistory);
             DialogService.ShowDialog();
         }
@@ -191,7 +160,7 @@ public partial class StepGroupActions : UserControl, ISmartPartInfoProvider
     {
         if (DialogService != null)
         {
-            DialogService.SetSpecs(0, 0, 150, 300, "ImportActionAddTarget", "", true);
+            DialogService.SetSpecs(0, 0, 150, 400, "ImportActionAddTarget", String.Empty, true);
             DialogService.EntityType = typeof(IImportHistory);
             DialogService.ShowDialog();
         }
@@ -204,7 +173,7 @@ public partial class StepGroupActions : UserControl, ISmartPartInfoProvider
     {
         if (DialogService != null)
         {
-            DialogService.SetSpecs(0, 0, 400, 450, "ImportActionAddResponse", "", true);
+            DialogService.SetSpecs(0, 0, 450, 450, "ImportActionAddResponse", String.Empty, true);
             DialogService.EntityType = typeof(IImportHistory);
             DialogService.ShowDialog();
         }
@@ -218,8 +187,9 @@ public partial class StepGroupActions : UserControl, ISmartPartInfoProvider
     {
         if (DialogService != null)
         {
-            DialogService.SetSpecs(0, 0, 275, 750, "ImportActionScheduleActivity", "", true);
+            DialogService.SetSpecs(0, 0, 290, 750, "ImportActionScheduleActivity", String.Empty, true);
             DialogService.EntityType = typeof(IImportHistory);
+            DialogService.DialogParameters.Remove("ActionName");
             DialogService.DialogParameters.Add("ActionName", actionName);
             DialogService.ShowDialog();
         }
@@ -232,19 +202,27 @@ public partial class StepGroupActions : UserControl, ISmartPartInfoProvider
     private ImportManager GetImportManager()
     {
         ImportManager importManager = Page.Session["importManager"] as ImportManager;
-        if (importManager != null)
+        if (importManager != null && importManager.ActionManager == null)
         {
-            if (importManager.ActionManager == null)
-            {
-                ActionManager actionManager = new ActionManager();
-                actionManager.AddAction(new ActionAddNote("AddNote", GetLocalResourceObject("Action_AddNote.Caption").ToString(), false));
-                actionManager.AddAction(new ActionAddResponse("AddResponse", GetLocalResourceObject("Action_AddResponse.Caption").ToString(), false));
-                actionManager.AddAction(new ActionAddTarget("AddTarget", GetLocalResourceObject("Action_AddTarget.Caption").ToString(), false));
-                actionManager.AddAction(new ActionScheduleActivity("SchedulePhoneCall", GetLocalResourceObject("SchedulePhoneCall.Caption").ToString(), false, ActivityType.atPhoneCall));
-                actionManager.AddAction(new ActionScheduleActivity("ScheduleMeeting", GetLocalResourceObject("ScheduleMeeting.Caption").ToString(), false, ActivityType.atAppointment));
-                actionManager.AddAction(new ActionScheduleActivity("ScheduleToDo", GetLocalResourceObject("ScheduleToDo.Caption").ToString(), false, ActivityType.atToDo));
-                importManager.ActionManager = actionManager;
-            }
+            ActionManager actionManager = new ActionManager();
+            actionManager.AddAction(new ActionAddNote("AddNote",
+                                                      GetLocalResourceObject("Action_AddNote.Caption").ToString(), false));
+            actionManager.AddAction(new ActionAddResponse("AddResponse",
+                                                          GetLocalResourceObject("Action_AddResponse.Caption").ToString(),
+                                                          false));
+            actionManager.AddAction(new ActionAddTarget("AddTarget",
+                                                        GetLocalResourceObject("Action_AddTarget.Caption").ToString(),
+                                                        false));
+            actionManager.AddAction(new ActionScheduleActivity("SchedulePhoneCall",
+                                                               GetLocalResourceObject("SchedulePhoneCall.Caption").
+                                                                   ToString(), false, ActivityType.atPhoneCall));
+            actionManager.AddAction(new ActionScheduleActivity("ScheduleMeeting",
+                                                               GetLocalResourceObject("ScheduleMeeting.Caption").
+                                                                   ToString(), false, ActivityType.atAppointment));
+            actionManager.AddAction(new ActionScheduleActivity("ScheduleToDo",
+                                                               GetLocalResourceObject("ScheduleToDo.Caption").ToString(),
+                                                               false, ActivityType.atToDo));
+            importManager.ActionManager = actionManager;
         }
         return importManager;
     }
@@ -287,14 +265,7 @@ public partial class StepGroupActions : UserControl, ISmartPartInfoProvider
         if (data != null)
         {
             IAction action = data as IAction;
-            if (action.Initialized)
-            {
-                commandText = "Edit";
-            }
-            else 
-            {
-                commandText = "Define";
-            }   
+            commandText = action.Initialized ? "Edit" : "Define";
         }
         return commandText;
     }

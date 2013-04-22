@@ -1,0 +1,30 @@
+﻿define(
+        ({
+            ToDo: 'Tâche à faire',
+            PhoneCall: 'Appel',
+            Meeting: 'Rendez-vous',
+            Personal: 'Personnel',
+            Literature: 'Documentation',
+            Fax: 'Fax',
+            Letter: 'Lettre',
+            Note: 'Note',
+            Email: 'Envoyer par e-mail',
+            Document: 'Document',
+            DatabaseChange: 'Modification de la base de données',
+            Event: 'Evénement',
+            ScheduledEvent: 'Evénement planifié',
+            Contact: 'Contact',
+            Lead: 'Lead',
+            New: 'Nouveau',
+            Change: 'Modifier',
+            Deleted: 'Supprimé',
+            Confirm: 'Confirmer',
+            Decline: 'Refuser',
+            Unknown: 'Inconnu',
+            Leader: 'Responsable',
+            Complete: 'Terminer',
+            confirmTypeChanged: 'Modifié',
+            confirmTypeConfirmed: 'Confirmé',
+            confirmTypeDeleted: 'Supprimé'
+        })
+);
