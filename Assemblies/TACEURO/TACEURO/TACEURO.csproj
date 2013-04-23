@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TACEURO</RootNamespace>
     <AssemblyName>TACEURO</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -31,6 +31,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -72,8 +73,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Program Files\SalesLogix\ReferenceAssemblies\Sage.Platform.Application.dll</HintPath>
     </Reference>
-    <Reference Include="Sage.Platform.WebPortal">
-      <HintPath>..\..\..\Model\Portal\SlxClient\SupportFiles\Bin\Sage.Platform.WebPortal.dll</HintPath>
+    <Reference Include="Sage.Platform.WebPortal, Version=7.5.4.7066, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\SalesLogix\ReferenceAssemblies\Sage.Platform.WebPortal.dll</HintPath>
     </Reference>
     <Reference Include="Sage.SalesLogix, Version=7.5.3.4343, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

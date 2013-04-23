@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="750a7f26-3604-467b-94fe-249370231df4" lastModifiedUtc="2012-07-25T15:10:41.9951798Z" manageSchema="true" tableName="CONTACT" name="Contact" displayPropertyId="7ab202e0-eb6a-4f20-8eba-5811e4fb33ca" isExtension="false" cacheUsage="ReadWrite" audited="true" smallImage="[Localization!Global_Images:Contacts_16x16]" largeImage="[Localization!Global_Images:Contacts_24x24]" onBeforeInsertMethodId="06f72747-48db-432d-b44e-afc540f76cf8" onAfterInsertMethodId="4306e365-1341-442c-b9e1-9301add5cd27" onBeforeUpdateMethodId="e86abc22-7ea6-45c1-85ee-e73999edae78" onAfterUpdateMethodId="e1a1c913-f802-4c0f-930a-1b8bb4edb474" onBeforeDeleteMethodId="11e41f9b-d01c-4a9d-9b6f-e3c582d44dc5" onAfterDeleteMethodId="22bd3a60-d9f3-438e-98fc-50d0609342a1" onCreateId="96e8c2b2-9c25-417d-94a6-a32b904923aa">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="750a7f26-3604-467b-94fe-249370231df4" lastModifiedUtc="2013-04-22T22:40:37.0192468Z" manageSchema="true" tableName="CONTACT" name="Contact" displayPropertyId="7ab202e0-eb6a-4f20-8eba-5811e4fb33ca" isExtension="false" cacheUsage="ReadWrite" audited="true" smallImage="[Localization!Global_Images:Contacts_16x16]" largeImage="[Localization!Global_Images:Contacts_24x24]" onBeforeInsertMethodId="06f72747-48db-432d-b44e-afc540f76cf8" onAfterInsertMethodId="4306e365-1341-442c-b9e1-9301add5cd27" onBeforeUpdateMethodId="e86abc22-7ea6-45c1-85ee-e73999edae78" onAfterUpdateMethodId="e1a1c913-f802-4c0f-930a-1b8bb4edb474" onBeforeDeleteMethodId="11e41f9b-d01c-4a9d-9b6f-e3c582d44dc5" onAfterDeleteMethodId="22bd3a60-d9f3-438e-98fc-50d0609342a1" onCreateId="96e8c2b2-9c25-417d-94a6-a32b904923aa">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
@@ -733,7 +733,7 @@
         </TextDataType>
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="0d9cf160-ea47-42bf-a5d7-b2116a4b94e6" lastModifiedUtc="0001-01-01T00:00:00" name="SeccodeId" audited="false" isNullable="false" include="false" columnName="SECCODEID" maxLength="12" precision="0" scale="0" ordinal="35" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="0d9cf160-ea47-42bf-a5d7-b2116a4b94e6" lastModifiedUtc="2013-04-22T22:40:37.0192468Z" name="SeccodeId" audited="false" isNullable="false" columnName="SECCODEID" maxLength="12" precision="0" scale="0" ordinal="35" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
           <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">

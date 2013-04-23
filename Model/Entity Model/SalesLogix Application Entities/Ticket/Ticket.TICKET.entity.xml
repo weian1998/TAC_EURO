@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="e7a70408-03cb-4667-890b-39de33fb739b" lastModifiedUtc="2013-04-22T17:00:20.7575034Z" manageSchema="true" tableName="TICKET" name="Ticket" displayPropertyId="656a9297-abdb-4730-b98f-2a9143d58904" isExtension="false" cacheUsage="ReadWrite" audited="true" smallImage="[Localization!Global_Images:ticket_16x16]" largeImage="[Localization!Global_Images:ticket_24x24]" onBeforeInsertMethodId="428fe69b-8841-47ef-aadd-d29d10b16756" onAfterInsertMethodId="3c27d0ab-0687-4235-b78e-ca4f459af3cb" onBeforeUpdateMethodId="33696838-ee6b-402b-a1a6-92868cc45e63" onAfterUpdateMethodId="94702c7c-ac62-4066-adfc-672ebcdb686c" onBeforeDeleteMethodId="ef563cce-b15e-4290-a509-208d23f3d241" onAfterDeleteMethodId="b5ad55e9-4240-48d7-861c-cda88f65e219" onCreateId="0e8c7ea1-fe3c-459b-aa27-d6aa693f6118">
+<entity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="e7a70408-03cb-4667-890b-39de33fb739b" lastModifiedUtc="2013-04-22T22:41:11.1752004Z" manageSchema="true" tableName="TICKET" name="Ticket" displayPropertyId="656a9297-abdb-4730-b98f-2a9143d58904" isExtension="false" cacheUsage="ReadWrite" audited="true" smallImage="[Localization!Global_Images:ticket_16x16]" largeImage="[Localization!Global_Images:ticket_24x24]" onBeforeInsertMethodId="428fe69b-8841-47ef-aadd-d29d10b16756" onAfterInsertMethodId="3c27d0ab-0687-4235-b78e-ca4f459af3cb" onBeforeUpdateMethodId="33696838-ee6b-402b-a1a6-92868cc45e63" onAfterUpdateMethodId="94702c7c-ac62-4066-adfc-672ebcdb686c" onBeforeDeleteMethodId="ef563cce-b15e-4290-a509-208d23f3d241" onAfterDeleteMethodId="b5ad55e9-4240-48d7-861c-cda88f65e219" onCreateId="0e8c7ea1-fe3c-459b-aa27-d6aa693f6118">
   <extendedMetaData />
   <ExtendedPropertiesCollection>
     <extendee type="Sage.Platform.Orm.Entities.OrmEntity">
@@ -419,7 +419,7 @@
         <DateTimeDataType />
       </SystemDataType>
     </property>
-    <property xsi:type="OrmFieldProperty" id="e10ba9b3-c722-4a1a-8b6d-71854fb6293d" lastModifiedUtc="0001-01-01T00:00:00" name="SeccodeId" audited="false" isNullable="false" include="false" columnName="SECCODEID" maxLength="12" precision="0" scale="0" ordinal="44" isReadOnly="false">
+    <property xsi:type="OrmFieldProperty" id="e10ba9b3-c722-4a1a-8b6d-71854fb6293d" lastModifiedUtc="2013-04-22T22:41:11.1742003Z" name="SeccodeId" audited="false" isNullable="false" columnName="SECCODEID" maxLength="12" precision="0" scale="0" ordinal="44" isReadOnly="false">
       <ExtendedPropertiesCollection>
         <extendee type="Sage.Platform.Orm.Entities.OrmFieldProperty">
           <extender guid="ae60621d-9d91-3d9a-b9fb-eb6c8be12131">

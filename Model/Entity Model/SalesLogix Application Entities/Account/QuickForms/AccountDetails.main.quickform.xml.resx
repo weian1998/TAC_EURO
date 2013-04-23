@@ -144,9 +144,6 @@
   <data name="Address.Caption" xml:space="preserve">
     <value>Address:</value>
   </data>
-  <data name="Owner.Caption" xml:space="preserve">
-    <value>Owner:</value>
-  </data>
   <data name="MainPhone.Caption" xml:space="preserve">
     <value>Main:</value>
   </data>
@@ -180,9 +177,6 @@
   <data name="cmdCopyAccount.ToolTip" xml:space="preserve">
     <value>Copy Account Information to Clipboard</value>
   </data>
-  <data name="Owner.ButtonToolTip" xml:space="preserve">
-    <value>Find</value>
-  </data>
   <data name="AccManager.ButtonToolTip" xml:space="preserve">
     <value>Find</value>
   </data>
@@ -200,5 +194,32 @@
   </data>
   <data name="cmdReset.ToolTip" xml:space="preserve">
     <value>Reset</value>
+  </data>
+  <data name="txtClientNotes.Caption" xml:space="preserve">
+    <value>ClientNotes</value>
+  </data>
+  <data name="TaxID.Caption" xml:space="preserve">
+    <value>TaxID</value>
+  </data>
+  <data name="TaxExempt.Caption" xml:space="preserve">
+    <value>TaxExempt</value>
+  </data>
+  <data name="NumDesigners.Caption" xml:space="preserve">
+    <value>NumDesigners</value>
+  </data>
+  <data name="Specialty.Caption" xml:space="preserve">
+    <value>Specialty</value>
+  </data>
+  <data name="Rating.Caption" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="lueOwner2.LookupProperties.Myseccodeid.PropertyHeader" xml:space="preserve">
+    <value>Myseccodeid</value>
+  </data>
+  <data name="lueOwner2.LookupProperties.Teamname.PropertyHeader" xml:space="preserve">
+    <value>Teamname</value>
+  </data>
+  <data name="lueOwner2.Caption" xml:space="preserve">
+    <value>Owner:</value>
   </data>
 </root>
