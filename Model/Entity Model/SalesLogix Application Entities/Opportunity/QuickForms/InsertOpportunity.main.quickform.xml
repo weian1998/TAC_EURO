@@ -161,6 +161,31 @@ else
       <AppliedSecurity />
       <RefreshData>False</RefreshData>
     </FormActionDefinition>
+    <FormActionDefinition>
+      <ResourceKey>f53591a8-5a2a-47a1-835d-85f6e764a21b</ResourceKey>
+      <Action typeName="Sage.Platform.QuickForms.ActionItems.CSharpSnippetActionItem, Sage.Platform.QuickForms">
+        <CSharpSnippetActionItem>
+          <MethodName />
+          <CSharpCodeSnippet>// TAC Cutom code here
+chkAddtoForecast.Checked = true;
+Sage.Entity.Interfaces.IOpportunity entity = (Sage.Entity.Interfaces.IOpportunity)this.BindingSource.Current;
+entity.AddToForecast = true;
+
+entity.Description = "";
+
+//Get Current user
+Sage.SalesLogix.Security.SLXUserService usersvc = (Sage.SalesLogix.Security.SLXUserService)Sage.Platform.Application.ApplicationContext.Current.Services.Get&lt;Sage.Platform.Security.IUserService&gt;();
+Sage.Entity.Interfaces.IUser currentuser = usersvc.GetUser();
+entity.AccountManager = currentuser;</CSharpCodeSnippet>
+        </CSharpSnippetActionItem>
+      </Action>
+      <IsDialogCloseAction>False</IsDialogCloseAction>
+      <RunOnEveryRePaint>False</RunOnEveryRePaint>
+      <DialogActionResult>NoResult</DialogActionResult>
+      <PerformsUpdate>False</PerformsUpdate>
+      <AppliedSecurity />
+      <RefreshData>False</RefreshData>
+    </FormActionDefinition>
   </LoadActions>
   <Name>InsertOpportunity</Name>
   <ClientScriptIncludes />
@@ -346,6 +371,7 @@ else
         <SeedValue />
         <DropDownDisplayProperty />
         <AllowClearingResult>false</AllowClearingResult>
+        <AppendStringValues>false</AppendStringValues>
         <OverrideSeedOnSearch>false</OverrideSeedOnSearch>
         <LookupEntityName>Account</LookupEntityName>
         <LookupEntityTypeName>Sage.SalesLogix.Entities.Account, Sage.SalesLogix.Entities</LookupEntityTypeName>
@@ -541,6 +567,7 @@ else
         <SeedValue />
         <DropDownDisplayProperty />
         <AllowClearingResult>false</AllowClearingResult>
+        <AppendStringValues>false</AppendStringValues>
         <OverrideSeedOnSearch>false</OverrideSeedOnSearch>
         <LookupEntityName>Account</LookupEntityName>
         <LookupEntityTypeName>Sage.Entity.Interfaces.IAccount, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</LookupEntityTypeName>
@@ -763,6 +790,7 @@ luePriceList.Enabled = (opportunity.OperatingCompany != null);</CSharpCodeSnippe
                 <SeedValue />
                 <DropDownDisplayProperty>Name</DropDownDisplayProperty>
                 <AllowClearingResult>false</AllowClearingResult>
+                <AppendStringValues>false</AppendStringValues>
                 <OverrideSeedOnSearch>false</OverrideSeedOnSearch>
                 <LookupEntityName>AppIdMapping</LookupEntityName>
                 <LookupEntityTypeName>Sage.Entity.Interfaces.IAppIdMapping, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</LookupEntityTypeName>
@@ -855,6 +883,7 @@ luePriceList.Enabled = (opportunity.OperatingCompany != null);</CSharpCodeSnippe
                 <SeedValue />
                 <DropDownDisplayProperty>Name</DropDownDisplayProperty>
                 <AllowClearingResult>false</AllowClearingResult>
+                <AppendStringValues>false</AppendStringValues>
                 <OverrideSeedOnSearch>false</OverrideSeedOnSearch>
                 <LookupEntityName>SlxPriceList</LookupEntityName>
                 <LookupEntityTypeName>Sage.Entity.Interfaces.ISlxPriceList, Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</LookupEntityTypeName>
@@ -1028,6 +1057,7 @@ luePriceList.Enabled = (opportunity.OperatingCompany != null);</CSharpCodeSnippe
         <SeedValue />
         <DropDownDisplayProperty />
         <AllowClearingResult>false</AllowClearingResult>
+        <AppendStringValues>false</AppendStringValues>
         <OverrideSeedOnSearch>false</OverrideSeedOnSearch>
         <LookupEntityName>LeadSource</LookupEntityName>
         <LookupEntityTypeName>Sage.SalesLogix.Entities.LeadSource, Sage.SalesLogix.Entities</LookupEntityTypeName>
@@ -1139,6 +1169,43 @@ luePriceList.Enabled = (opportunity.OperatingCompany != null);</CSharpCodeSnippe
         <PickListId>kSYST0000355</PickListId>
         <ValueStoredAsText>true</ValueStoredAsText>
       </QFSLXPickList>
+    </Control>
+    <Control typeName="Sage.Platform.QuickForms.QFControls.QFCheckBox, Sage.Platform.QuickForms.QFControls">
+      <QFCheckBox>
+        <Column>1</Column>
+        <Row>4</Row>
+        <HotKey>0</HotKey>
+        <TabIndex>0</TabIndex>
+        <ControlId>chkAddtoForecast</ControlId>
+        <DataBindings>
+          <QuickFormPropertyDataBindingDefinition>
+            <DataSourceID>MainEntity</DataSourceID>
+            <DataItemName>AddToForecast</DataItemName>
+            <ControlItemName>Checked</ControlItemName>
+            <FormatString />
+            <NullValueString />
+          </QuickFormPropertyDataBindingDefinition>
+        </DataBindings>
+        <ControlLabelPlacement>left</ControlLabelPlacement>
+        <ExtendedProperties />
+        <CaptionAlignment>left</CaptionAlignment>
+        <StyleScheme />
+        <Checked>false</Checked>
+        <OnChangeAction>
+          <ResourceKey>chkAddtoForecast</ResourceKey>
+          <Action typeName="Sage.Platform.QuickForms.ActionItems.NoActionActionItem, Sage.Platform.QuickForms">
+            <NoActionActionItem>
+              <MethodName />
+            </NoActionActionItem>
+          </Action>
+          <IsDialogCloseAction>False</IsDialogCloseAction>
+          <RunOnEveryRePaint>False</RunOnEveryRePaint>
+          <DialogActionResult>NoResult</DialogActionResult>
+          <PerformsUpdate>False</PerformsUpdate>
+          <AppliedSecurity />
+          <RefreshData>False</RefreshData>
+        </OnChangeAction>
+      </QFCheckBox>
     </Control>
   </Controls>
   <ToolControls>
