@@ -1,0 +1,254 @@
+<?xml version="1.0"?>
+<BundleManifest id="c1c0a817-fea1-44d2-8b42-5a0fc5c4e9e5">
+  <bundleProperties>
+    <name>SalesLogix v800 VFS Website Widget v100</name>
+    <description><![CDATA[SalesLogix v8.0]]></description>
+    <address><![CDATA[8800 N. Gainey Center Drive, Suite 200
+Scottsdale, AZ 85258]]></address>
+    <company>Sage Software, Inc.</company>
+    <copyright><![CDATA[]]></copyright>
+    <majorVersion>1</majorVersion>
+    <minorVersion>0</minorVersion>
+    <revision>0</revision>
+    <build>4</build>
+    <autoIncrement>false</autoIncrement>
+    <installDate>2013-04-23T21:42:39.8775374Z</installDate>
+    <installPassword />
+    <formatVersion>8.0.0.8480</formatVersion>
+  </bundleProperties>
+  <bundleItemHierarchy>
+    <bundleItem modelId="af988c91-97c8-4527-b072-e021c9e2cb1a" itemTypeName="Sage.Platform.BundleModel.BundleManifestItem, Sage.Platform.BundleModel">
+      <BundleManifestItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <ItemId>c1c0a817-fea1-44d2-8b42-5a0fc5c4e9e5</ItemId>
+        <Url>\</Url>
+        <BundleItemType>Container</BundleItemType>
+        <Caption>SalesLogix v800 VFS Website Widget v100</Caption>
+      </BundleManifestItem>
+      <children>
+        <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.ManagerBundleItem, Sage.Platform.WebPortal.Design">
+          <ManagerBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <ItemId>\Portal</ItemId>
+            <Url>\Portal</Url>
+            <BundleItemType>Container</BundleItemType>
+            <Caption>Portals</Caption>
+          </ManagerBundleItem>
+          <children>
+            <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.ModelItemBundleItem, Sage.Platform.WebPortal.Design">
+              <ModelItemBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                <ItemId>861ac5fe-b571-4015-a55d-bf63e400e1e7</ItemId>
+                <Url>\Portal\SlxClient\SlxClient.cabapp.ptl.xml</Url>
+                <BundleItemType>Context</BundleItemType>
+                <Caption>Sage SalesLogix</Caption>
+              </ModelItemBundleItem>
+              <children>
+                <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.LinkedFolderBundleItem, Sage.Platform.WebPortal.Design">
+                  <LinkedFolderBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                    <ItemId>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles</ItemId>
+                    <Url>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles</Url>
+                    <BundleItemType>Context</BundleItemType>
+                    <Caption>SupportFiles</Caption>
+                    <InstallOptions>SkipItemAndChildren</InstallOptions>
+                  </LinkedFolderBundleItem>
+                  <children>
+                    <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.LinkedFolderBundleItem, Sage.Platform.WebPortal.Design">
+                      <LinkedFolderBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                        <ItemId>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles\jscript</ItemId>
+                        <Url>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles\jscript</Url>
+                        <BundleItemType>Context</BundleItemType>
+                        <Caption>jscript</Caption>
+                        <InstallOptions>SkipItemAndChildren</InstallOptions>
+                      </LinkedFolderBundleItem>
+                      <children>
+                        <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.LinkedFolderBundleItem, Sage.Platform.WebPortal.Design">
+                          <LinkedFolderBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                            <ItemId>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles\jscript\Sage</ItemId>
+                            <Url>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles\jscript\Sage</Url>
+                            <BundleItemType>Context</BundleItemType>
+                            <Caption>Sage</Caption>
+                            <InstallOptions>SkipItemAndChildren</InstallOptions>
+                          </LinkedFolderBundleItem>
+                          <children>
+                            <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.LinkedFolderBundleItem, Sage.Platform.WebPortal.Design">
+                              <LinkedFolderBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                                <ItemId>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles\jscript\Sage\UI</ItemId>
+                                <Url>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles\jscript\Sage\UI</Url>
+                                <BundleItemType>Context</BundleItemType>
+                                <Caption>UI</Caption>
+                                <InstallOptions>SkipItemAndChildren</InstallOptions>
+                              </LinkedFolderBundleItem>
+                              <children>
+                                <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.LinkedFolderBundleItem, Sage.Platform.WebPortal.Design">
+                                  <LinkedFolderBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                                    <ItemId>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles\jscript\Sage\UI\nls</ItemId>
+                                    <Url>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles\jscript\Sage\UI\nls</Url>
+                                    <BundleItemType>Context</BundleItemType>
+                                    <Caption>nls</Caption>
+                                    <InstallOptions>SkipItemAndChildren</InstallOptions>
+                                  </LinkedFolderBundleItem>
+                                  <children>
+                                    <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.LinkedFileBundleItem, Sage.Platform.WebPortal.Design">
+                                      <LinkedFileBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                                        <ItemId>\Portal\SlxClient\SupportFiles\jscript\Sage\UI\nls\WebSiteWidget.js</ItemId>
+                                        <Url>\Portal\SlxClient\SupportFiles\jscript\Sage\UI\nls\WebSiteWidget.js</Url>
+                                        <BundleItemType>Other</BundleItemType>
+                                        <Caption>WebSiteWidget.js</Caption>
+                                        <InstallOptions>SkipItemAndChildren</InstallOptions>
+                                        <IsLinkedFile>false</IsLinkedFile>
+                                        <SourcePath>C:\Users\tjohnson\tfs\Slx8.0HotFix\Model\Portal\SlxClient\SupportFiles\jscript\Sage\UI\nls\WebSiteWidget.js</SourcePath>
+                                        <ParentModelItemUrl>\Portal\SlxClient\SlxClient.cabapp.ptl.xml</ParentModelItemUrl>
+                                        <ProjectPath>SupportFiles\jscript\Sage\UI\nls\WebSiteWidget.js</ProjectPath>
+                                      </LinkedFileBundleItem>
+                                    </bundleItem>
+                                    <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.LinkedFolderBundleItem, Sage.Platform.WebPortal.Design">
+                                      <LinkedFolderBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                                        <ItemId>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles\jscript\Sage\UI\nls\de</ItemId>
+                                        <Url>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles\jscript\Sage\UI\nls\de</Url>
+                                        <BundleItemType>Context</BundleItemType>
+                                        <Caption>de</Caption>
+                                        <InstallOptions>SkipItemAndChildren</InstallOptions>
+                                      </LinkedFolderBundleItem>
+                                      <children>
+                                        <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.LinkedFileBundleItem, Sage.Platform.WebPortal.Design">
+                                          <LinkedFileBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                                            <ItemId>\Portal\SlxClient\SupportFiles\jscript\Sage\UI\nls\de\WebSiteWidget.js</ItemId>
+                                            <Url>\Portal\SlxClient\SupportFiles\jscript\Sage\UI\nls\de\WebSiteWidget.js</Url>
+                                            <BundleItemType>Other</BundleItemType>
+                                            <Caption>WebSiteWidget.js</Caption>
+                                            <InstallOptions>SkipItemAndChildren</InstallOptions>
+                                            <IsLinkedFile>false</IsLinkedFile>
+                                            <SourcePath>C:\Users\tjohnson\tfs\Slx8.0HotFix\Model\Portal\SlxClient\SupportFiles\jscript\Sage\UI\nls\de\WebSiteWidget.js</SourcePath>
+                                            <ParentModelItemUrl>\Portal\SlxClient\SlxClient.cabapp.ptl.xml</ParentModelItemUrl>
+                                            <ProjectPath>SupportFiles\jscript\Sage\UI\nls\de\WebSiteWidget.js</ProjectPath>
+                                          </LinkedFileBundleItem>
+                                        </bundleItem>
+                                      </children>
+                                    </bundleItem>
+                                    <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.LinkedFolderBundleItem, Sage.Platform.WebPortal.Design">
+                                      <LinkedFolderBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                                        <ItemId>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles\jscript\Sage\UI\nls\en</ItemId>
+                                        <Url>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles\jscript\Sage\UI\nls\en</Url>
+                                        <BundleItemType>Context</BundleItemType>
+                                        <Caption>en</Caption>
+                                        <InstallOptions>SkipItemAndChildren</InstallOptions>
+                                      </LinkedFolderBundleItem>
+                                      <children>
+                                        <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.LinkedFileBundleItem, Sage.Platform.WebPortal.Design">
+                                          <LinkedFileBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                                            <ItemId>\Portal\SlxClient\SupportFiles\jscript\Sage\UI\nls\en\WebSiteWidget.js</ItemId>
+                                            <Url>\Portal\SlxClient\SupportFiles\jscript\Sage\UI\nls\en\WebSiteWidget.js</Url>
+                                            <BundleItemType>Other</BundleItemType>
+                                            <Caption>WebSiteWidget.js</Caption>
+                                            <InstallOptions>SkipItemAndChildren</InstallOptions>
+                                            <IsLinkedFile>false</IsLinkedFile>
+                                            <SourcePath>C:\Users\tjohnson\tfs\Slx8.0HotFix\Model\Portal\SlxClient\SupportFiles\jscript\Sage\UI\nls\en\WebSiteWidget.js</SourcePath>
+                                            <ParentModelItemUrl>\Portal\SlxClient\SlxClient.cabapp.ptl.xml</ParentModelItemUrl>
+                                            <ProjectPath>SupportFiles\jscript\Sage\UI\nls\en\WebSiteWidget.js</ProjectPath>
+                                          </LinkedFileBundleItem>
+                                        </bundleItem>
+                                      </children>
+                                    </bundleItem>
+                                  </children>
+                                </bundleItem>
+                              </children>
+                            </bundleItem>
+                          </children>
+                        </bundleItem>
+                      </children>
+                    </bundleItem>
+                    <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.LinkedFolderBundleItem, Sage.Platform.WebPortal.Design">
+                      <LinkedFolderBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                        <ItemId>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles\help</ItemId>
+                        <Url>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles\help</Url>
+                        <BundleItemType>Context</BundleItemType>
+                        <Caption>help</Caption>
+                        <InstallOptions>SkipItemAndChildren</InstallOptions>
+                      </LinkedFolderBundleItem>
+                      <children>
+                        <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.LinkedFolderBundleItem, Sage.Platform.WebPortal.Design">
+                          <LinkedFolderBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                            <ItemId>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles\help\Content</ItemId>
+                            <Url>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles\help\Content</Url>
+                            <BundleItemType>Context</BundleItemType>
+                            <Caption>Content</Caption>
+                            <InstallOptions>SkipItemAndChildren</InstallOptions>
+                          </LinkedFolderBundleItem>
+                          <children>
+                            <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.LinkedFolderBundleItem, Sage.Platform.WebPortal.Design">
+                              <LinkedFolderBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                                <ItemId>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles\help\Content\Dashboards</ItemId>
+                                <Url>\Portal\SlxClient\SlxClient.cabapp.ptl.xml\SupportFiles\help\Content\Dashboards</Url>
+                                <BundleItemType>Context</BundleItemType>
+                                <Caption>Dashboards</Caption>
+                                <InstallOptions>SkipItemAndChildren</InstallOptions>
+                              </LinkedFolderBundleItem>
+                              <children>
+                                <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.LinkedFileBundleItem, Sage.Platform.WebPortal.Design">
+                                  <LinkedFileBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                                    <ItemId>\Portal\SlxClient\SupportFiles\help\Content\Dashboards\Introducing Widgets.htm</ItemId>
+                                    <Url>\Portal\SlxClient\SupportFiles\help\Content\Dashboards\Introducing Widgets.htm</Url>
+                                    <BundleItemType>Other</BundleItemType>
+                                    <Caption>Introducing Widgets.htm</Caption>
+                                    <InstallOptions>SkipItemAndChildren</InstallOptions>
+                                    <IsLinkedFile>false</IsLinkedFile>
+                                    <SourcePath>C:\Users\tjohnson\tfs\Slx8.0HotFix\Model\Portal\SlxClient\SupportFiles\help\Content\Dashboards\Introducing Widgets.htm</SourcePath>
+                                    <ParentModelItemUrl>\Portal\SlxClient\SlxClient.cabapp.ptl.xml</ParentModelItemUrl>
+                                    <ProjectPath>SupportFiles\help\Content\Dashboards\Introducing Widgets.htm</ProjectPath>
+                                  </LinkedFileBundleItem>
+                                </bundleItem>
+                                <bundleItem modelId="73d4e7d0-a7fa-40ae-8b45-1ad7ed954154" itemTypeName="Sage.Platform.WebPortal.Design.BundleSupport.LinkedFileBundleItem, Sage.Platform.WebPortal.Design">
+                                  <LinkedFileBundleItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                                    <ItemId>\Portal\SlxClient\SupportFiles\help\Content\Dashboards\Using Widgets.htm</ItemId>
+                                    <Url>\Portal\SlxClient\SupportFiles\help\Content\Dashboards\Using Widgets.htm</Url>
+                                    <BundleItemType>Other</BundleItemType>
+                                    <Caption>Using Widgets.htm</Caption>
+                                    <InstallOptions>SkipItemAndChildren</InstallOptions>
+                                    <IsLinkedFile>false</IsLinkedFile>
+                                    <SourcePath>C:\Users\tjohnson\tfs\Slx8.0HotFix\Model\Portal\SlxClient\SupportFiles\help\Content\Dashboards\Using Widgets.htm</SourcePath>
+                                    <ParentModelItemUrl>\Portal\SlxClient\SlxClient.cabapp.ptl.xml</ParentModelItemUrl>
+                                    <ProjectPath>SupportFiles\help\Content\Dashboards\Using Widgets.htm</ProjectPath>
+                                  </LinkedFileBundleItem>
+                                </bundleItem>
+                              </children>
+                            </bundleItem>
+                          </children>
+                        </bundleItem>
+                      </children>
+                    </bundleItem>
+                  </children>
+                </bundleItem>
+              </children>
+            </bundleItem>
+          </children>
+        </bundleItem>
+      </children>
+    </bundleItem>
+  </bundleItemHierarchy>
+  <bundleActionHierarchy>
+    <bundleItem modelId="af988c91-97c8-4527-b072-e021c9e2cb1a" itemTypeName="Sage.Platform.BundleModel.RootBundleAction, Sage.Platform.BundleModel">
+      <RootBundleAction xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <ItemId>\Actions</ItemId>
+        <Url>\Actions</Url>
+        <BundleItemType>Container</BundleItemType>
+        <Caption>Bundle Actions</Caption>
+      </RootBundleAction>
+      <children>
+        <bundleItem modelId="af988c91-97c8-4527-b072-e021c9e2cb1a" itemTypeName="Sage.SalesLogix.BundleModel.BundleActions.PluginAction, Sage.SalesLogix.BundleModel.BundleActions">
+          <PluginAction xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <ItemId>\Actions\InstallPlugin\pEUROA000102.xml</ItemId>
+            <Url>\Actions\InstallPlugin\pEUROA000102.xml</Url>
+            <BundleItemType>Action</BundleItemType>
+            <Caption>InstallPlugin [DashboardWidget] System:Website (Evaluation 1)</Caption>
+            <PluginId>pEUROA000102</PluginId>
+            <Name>Website</Name>
+            <Family>System</Family>
+            <PluginType>DashboardWidget</PluginType>
+            <Company>Evaluation</Company>
+            <CompanyVersion>1</CompanyVersion>
+          </PluginAction>
+        </bundleItem>
+      </children>
+    </bundleItem>
+  </bundleActionHierarchy>
+  <itemsToDelete />
+  <globalResources />
+</BundleManifest>
